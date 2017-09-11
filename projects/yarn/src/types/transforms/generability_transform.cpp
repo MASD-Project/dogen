@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -26,7 +27,17 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
+
+namespace {
+
+const std::string id("yarn.transforms.generability_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(id));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -38,43 +49,43 @@ bool generability_transform::is_generatable(const meta_model::element& e) {
 }
 
 bool generability_transform::
-has_generatable_types(const meta_model::endomodel& im) {
+has_generatable_types(const meta_model::endomodel& em) {
     /*
      * Note: we are deliberately excluding modules since we do not
      * want to generate an empty model with just a module because its
      * documented.
      */
-    for (const auto pair : im.objects()) {
+    for (const auto pair : em.objects()) {
         if (is_generatable(*pair.second))
             return true;
     }
 
-    for (const auto pair : im.enumerations()) {
+    for (const auto pair : em.enumerations()) {
         if (is_generatable(*pair.second))
             return true;
     }
 
-    for (const auto pair : im.enumerations()) {
+    for (const auto pair : em.enumerations()) {
         if (is_generatable(*pair.second))
             return true;
     }
 
-    for (const auto pair : im.exceptions()) {
+    for (const auto pair : em.exceptions()) {
         if (is_generatable(*pair.second))
             return true;
     }
 
-    for (const auto pair : im.builtins()) {
+    for (const auto pair : em.builtins()) {
         if (is_generatable(*pair.second))
             return true;
     }
 
-    for (const auto pair : im.object_templates()) {
+    for (const auto pair : em.object_templates()) {
         if (is_generatable(*pair.second))
             return true;
     }
 
-    for (const auto pair : im.primitives()) {
+    for (const auto pair : em.primitives()) {
         if (is_generatable(*pair.second))
             return true;
     }
@@ -82,8 +93,11 @@ has_generatable_types(const meta_model::endomodel& im) {
     return false;
 }
 
-void generability_transform::transform(meta_model::endomodel& im) {
-    im.has_generatable_types(has_generatable_types(im));
+void generability_transform::
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+    em.has_generatable_types(has_generatable_types(em));
+    ctx.prober().end_transform(em);
 }
 
 } } }

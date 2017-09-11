@@ -51,7 +51,7 @@ const mock_endomodel_factory::flags flags(
 const mock_endomodel_factory factory(flags);
 
 }
-
+/*
 using dogen::utility::test::contains_checker;
 using dogen::utility::test::asserter;
 using dogen::yarn::meta_model::origin_types;
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_associations");
 
     auto m(factory.object_with_group_of_attributes_of_different_types(
-            origin_types::target, true/*repeat_group*/));
+            origin_types::target, truerepeat_group));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::transform(m);
@@ -529,3 +529,4 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

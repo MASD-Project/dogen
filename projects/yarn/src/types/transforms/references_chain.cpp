@@ -89,7 +89,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Convert the internal representation of the exogenous model into
          * an endogenous model, ready for further processing.
          */
-        auto m(exomodel_to_endomodel_transform::transform(em));
+        auto m(exomodel_to_endomodel_transform::transform(ctx, em));
 
         /*
          * Apply all of the pre-processing transforms to the reference

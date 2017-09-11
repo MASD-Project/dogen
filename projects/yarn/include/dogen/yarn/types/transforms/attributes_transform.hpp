@@ -28,6 +28,7 @@
 #include <string>
 #include <unordered_set>
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -109,45 +110,45 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     static meta_model::object& find_object(const meta_model::name& n,
-        meta_model::endomodel& im);
+        meta_model::endomodel& em);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
     static meta_model::object_template&
-    find_object_template(const meta_model::name& n, meta_model::endomodel& im);
+    find_object_template(const meta_model::name& n, meta_model::endomodel& em);
 
 private:
     /**
      * @brief Expands a specific object.
      */
     static void expand_object(meta_model::object& o,
-        meta_model::endomodel& im,
+        meta_model::endomodel& em,
         std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(meta_model::endomodel& im);
+    static void expand_objects(meta_model::endomodel& em);
 
     /**
      * @brief Expands a specific object template
      */
     static void expand_object_template(meta_model::object_template& ot,
-        meta_model::endomodel& im,
+        meta_model::endomodel& em,
         std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Expands all object templates in the model.
      */
-    static void expand_object_templates(meta_model::endomodel& im);
+    static void expand_object_templates(meta_model::endomodel& em);
 
 public:
     /**
      * @brief Indexes the supplied model.
      */
-    static void transform(meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

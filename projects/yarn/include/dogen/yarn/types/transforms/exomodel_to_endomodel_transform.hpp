@@ -27,6 +27,7 @@
 
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -35,7 +36,7 @@ namespace transforms {
 class exomodel_to_endomodel_transform final {
 public:
     static meta_model::endomodel
-    transform(const meta_model::exomodel& em);
+    transform(const context& ctx, const meta_model::exomodel& em);
 };
 
 } } }

@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
@@ -54,7 +55,7 @@ initial_target_chain::transform(const context& ctx) {
      * Then we convert the internal representation of the exogenous
      * model into an endogenous model, ready for further processing.
      */
-    auto r(exomodel_to_endomodel_transform::transform(em));
+    auto r(exomodel_to_endomodel_transform::transform(ctx, em));
 
     /*
      * Next, we set the origin of the target model to target so that
@@ -67,9 +68,9 @@ initial_target_chain::transform(const context& ctx) {
      * target.
      */
     pre_processing_chain::transform(ctx, r);
-    ctx.prober().end_chain();
 
     BOOST_LOG_SEV(lg, debug) << "Initial target chain executed.";
+    ctx.prober().end_chain(r);
     return r;
 }
 

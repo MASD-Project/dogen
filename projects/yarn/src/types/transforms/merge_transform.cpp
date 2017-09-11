@@ -21,12 +21,15 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.merge_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.merge_transform"));
+auto lg(logger_factory(id));
 
 /**
  * @brief Copies the associative container across.
@@ -91,8 +94,10 @@ void merge_transform::merge(const meta_model::endomodel& src,
 }
 
 meta_model::endomodel
-merge_transform::transform(const meta_model::endomodel& target,
+merge_transform::transform(const context& ctx,
+    const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
+    ctx.prober().start_transform(id);
     BOOST_LOG_SEV(lg, debug) << "Executing the merge transform.";
 
     /*
@@ -109,6 +114,7 @@ merge_transform::transform(const meta_model::endomodel& target,
         merge(ref, r);
 
     BOOST_LOG_SEV(lg, debug) << "Executed the merge transform.";
+    ctx.prober().end_transform(r);
     return r;
 }
 

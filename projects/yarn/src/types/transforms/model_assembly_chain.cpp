@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
@@ -27,8 +28,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.model_assembly_chain");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.model_assembly_chain"));
+static logger lg(logger_factory(id));
 
 }
 
@@ -67,12 +70,14 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
     /*
      * Merge the mapped models.
      */
-    return merge_transform::transform(mapped_target, mapped_refs);
+    return merge_transform::transform(ctx, mapped_target, mapped_refs);
 }
 
 meta_model::endomodel model_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
+
+    ctx.prober().start_chain(id);
 
     /*
      * First we obtain the merged (and mapped) model.
@@ -84,7 +89,7 @@ meta_model::endomodel model_assembly_chain::transform(const context& ctx,
      * merged model.
      */
     post_processing_chain::transform(ctx, r);
-
+    ctx.prober().end_chain(r);
     return r;
 }
 

@@ -33,14 +33,17 @@
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.origin_transform");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.origin_transform"));
+static logger lg(logger_factory(id));
 
 const std::string target_cannot_be_proxy(
     "Model has origin set to target but is also a proxy: ");
@@ -88,27 +91,27 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 bool origin_transform::
-is_proxy_model(const type_group& tg, const meta_model::endomodel& im) {
-    const auto& o(im.root_module()->annotation());
+is_proxy_model(const type_group& tg, const meta_model::endomodel& em) {
+    const auto& o(em.root_module()->annotation());
     const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
     BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
-                             << " for model: " << im.name().id();
+                             << " for model: " << em.name().id();
     return r;
 }
 
 meta_model::origin_types
-origin_transform::compute_origin_types(const meta_model::endomodel& im,
+origin_transform::compute_origin_types(const meta_model::endomodel& em,
     const bool is_proxy_model) {
     using meta_model::origin_types;
-    if (is_proxy_model && im.origin_type() == origin_types::target) {
-        const auto& id(im.name().id());
+    if (is_proxy_model && em.origin_type() == origin_types::target) {
+        const auto& id(em.name().id());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(target_cannot_be_proxy + id));
     }
 
-    if (im.origin_type() == origin_types::target)
+    if (em.origin_type() == origin_types::target)
         return origin_types::target;
     else if (is_proxy_model)
         return origin_types::proxy_reference;
@@ -117,14 +120,18 @@ origin_transform::compute_origin_types(const meta_model::endomodel& im,
 }
 
 void origin_transform::
-transform(const context& ctx, meta_model::endomodel& im) {
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+
     const auto tg(make_type_group(ctx.type_repository()));
-    const auto ipm(is_proxy_model(tg, im));
-    const auto ot(compute_origin_types(im, ipm));
-    im.origin_type(ot);
+    const auto ipm(is_proxy_model(tg, em));
+    const auto ot(compute_origin_types(em, ipm));
+    em.origin_type(ot);
 
     updater g(ot);
-    meta_model::elements_traversal(im, g);
+    meta_model::elements_traversal(em, g);
+
+    ctx.prober().end_transform(em);
 }
 
 } } }

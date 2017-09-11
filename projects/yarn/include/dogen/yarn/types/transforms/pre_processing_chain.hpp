@@ -42,28 +42,28 @@ private:
      */
     static bool is_language_relevant(
         const std::unordered_set<meta_model::languages>& relevant_languages,
-        const meta_model::endomodel& im);
+        const meta_model::endomodel& em);
 
 private:
     /**
      * @brief Applies the first part of the pre-processing transforms.
      */
     static void apply_first_set_of_transforms(
-        const context& ctx, meta_model::endomodel& im);
+        const context& ctx, meta_model::endomodel& em);
 
     /**
      * @brief Applies the second part of the pre-processing transforms.
      */
     static void apply_second_set_of_transforms(
-        const context& ctx, meta_model::endomodel& im);
+        const context& ctx, meta_model::endomodel& em);
 
 public:
     /**
      * @brief Unconditionally applies all of the pre-processing
-     * transforms to the supplied intermediate model.
+     * transforms to the supplied endomodel.
      */
     static void transform(const context& ctx,
-        meta_model::endomodel& im);
+        meta_model::endomodel& em);
 
     /**
      * @brief Only pre-processes the model if its language is in the
@@ -77,7 +77,7 @@ public:
      */
     static bool try_transform(const context& ctx,
         const std::unordered_set<meta_model::languages>& relevant_languages,
-        meta_model::endomodel& im);
+        meta_model::endomodel& em);
 };
 
 } } }

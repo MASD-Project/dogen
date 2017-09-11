@@ -26,6 +26,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
@@ -38,8 +39,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.enumerations_transform");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.enumerations_transform"));
+static logger lg(logger_factory(id));
 
 const std::string csharp_invalid("Invalid");
 const std::string cpp_invalid("invalid");
@@ -177,13 +180,13 @@ void enumerations_transform::populate_from_annotations(
 
 meta_model::name
 enumerations_transform::obtain_enumeration_default_underlying_element_name(
-    const meta_model::endomodel& im) {
+    const meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
-                             << "element name for model: " << im.name().id();
+                             << "element name for model: " << em.name().id();
 
     meta_model::name r;
     bool found(false);
-    for (const auto& pair : im.builtins()) {
+    for (const auto& pair : em.builtins()) {
         const auto b(*pair.second);
         const auto id(b.name().id());
         if (b.is_default_enumeration_type()) {
@@ -201,7 +204,7 @@ enumerations_transform::obtain_enumeration_default_underlying_element_name(
     }
 
     if (!found) {
-        const auto id(im.name().id());
+        const auto id(em.name().id());
         BOOST_LOG_SEV(lg, error) << missing_default << id;
         BOOST_THROW_EXCEPTION(transformation_error(missing_default + id));
     }
@@ -301,9 +304,9 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 }
 
 void enumerations_transform::transform(const context& ctx,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming enumerations for model: "
-                             << im.name().id();
+                             << em.name().id();
 
     /*
      * If no enumerations exist, we can just exit. This means we can
@@ -311,14 +314,15 @@ void enumerations_transform::transform(const context& ctx,
      * do not use enumerations. Otherwise, we'd fail when searching
      * for the default underlying element name.
      */
-    if (im.enumerations().empty())
+    ctx.prober().start_transform(id, em);
+    if (em.enumerations().empty())
         return;
 
-    const auto l(im.input_language());
+    const auto l(em.input_language());
     const auto tg(make_type_group(ctx.type_repository()));
-    const auto duen(obtain_enumeration_default_underlying_element_name(im));
+    const auto duen(obtain_enumeration_default_underlying_element_name(em));
 
-    for (auto& pair : im.enumerations()) {
+    for (auto& pair : em.enumerations()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
@@ -329,6 +333,7 @@ void enumerations_transform::transform(const context& ctx,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming enumerations for model.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

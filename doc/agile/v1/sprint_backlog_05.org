@@ -14,29 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-11 Mon 20:41]
+#+CAPTION: Clock summary at [2017-09-11 Mon 22:54]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *32:04* |       |      | 100.0 |
+| *Total time*                                                                | *34:16* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 32:04   |       |      | 100.0 |
-| Active                                                                      |         | 32:04 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   4.8 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   2.7 |
-| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   3.9 |
-| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.5 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   7.6 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   5.7 |
-| COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.1 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  24.4 |
-| COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.3 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.0 |
-| COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.6 |
-| COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   0.8 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  21.0 |
-| STARTED Improve dumping of models                                           |         |       | 6:34 |  20.5 |
+| Stories                                                                     | 34:16   |       |      | 100.0 |
+| Active                                                                      |         | 34:16 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   4.5 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   2.5 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   3.6 |
+| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.4 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   7.1 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   5.3 |
+| COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.0 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  22.8 |
+| COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.2 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   2.8 |
+| COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.5 |
+| COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   0.7 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  19.7 |
+| STARTED Improve dumping of models                                           |         |       | 8:46 |  25.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -664,6 +664,7 @@ Tasks:
 - make is_enabled private in dependencies builder and see what breaks.
 
 *** STARTED Improve dumping of models                                 :story:
+    CLOCK: [2017-09-11 Mon 20:42]--[2017-09-11 Mon 22:54] =>  2:12
     CLOCK: [2017-09-11 Mon 19:20]--[2017-09-11 Mon 20:41] =>  1:21
     CLOCK: [2017-09-10 Sun 18:58]--[2017-09-10 Sun 19:33] =>  0:35
     CLOCK: [2017-09-10 Sun 18:31]--[2017-09-10 Sun 18:57] =>  0:26
@@ -766,6 +767,15 @@ Once probing is in place, we need to remove all the dumps we are doing
 of models at present. These just add size to the log files for no
 reason.
 
+*** Move model sorter from helpers                                    :story:
+
+This is really just a sorting transform, not a helper.
+
+*** Create yarn options                                               :story:
+
+We need to replace the dependency on the options model and create a
+stand alone yarn options class.
+
 *** Run "changed" tests only                                          :story:
 
 Random idea: can we have a target that just runs "changed" tests? That
@@ -866,11 +876,6 @@ convert them to element id's instead and see what breaks.
 We can't do this for:
 
 - visitor: we use the name in the formatter.
-
-*** Create yarn options                                               :story:
-
-We need to replace the dependency on the options model and create a
-stand alone yarn options class.
 
 *** Code-generate annotations type templates                          :story:
 

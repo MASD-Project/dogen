@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -65,7 +66,8 @@ private:
         meta_model::endomodel& dst);
 
 public:
-    static meta_model::endomodel transform(const meta_model::endomodel& target,
+    static meta_model::endomodel transform(const context& ctx,
+        const meta_model::endomodel& target,
         const std::list<meta_model::endomodel>& refs);
 };
 

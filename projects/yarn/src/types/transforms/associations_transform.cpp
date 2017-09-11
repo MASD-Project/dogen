@@ -26,13 +26,16 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.associations_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.associations_transform"));
+auto lg(logger_factory(id));
 
 }
 
@@ -64,7 +67,7 @@ void associations_transform::remove_duplicates(
 }
 
 void associations_transform::
-walk_name_tree(const meta_model::endomodel& im, meta_model::object& o,
+walk_name_tree(const meta_model::endomodel& em, meta_model::object& o,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
@@ -85,26 +88,26 @@ walk_name_tree(const meta_model::endomodel& im, meta_model::object& o,
      * properties to set (see above).
      */
     bool is_first(true);
-    const auto i(im.objects().find(n.id()));
-    const auto is_associative_container(i != im.objects().end() &&
+    const auto i(em.objects().find(n.id()));
+    const auto is_associative_container(i != em.objects().end() &&
         i->second->is_associative_container());
 
     for (const auto c : nt.children()) {
         if (is_first && is_associative_container)
             o.associative_container_keys().push_back(c.current());
 
-        walk_name_tree(im, o, c, nt.are_children_opaque());
+        walk_name_tree(em, o, c, nt.are_children_opaque());
         is_first = false;
     }
 }
 
 void associations_transform::
-expand_object(const meta_model::endomodel& im, meta_model::object& o) {
+expand_object(const meta_model::endomodel& em, meta_model::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
         const auto& nt(p.parsed_type());
-        walk_name_tree(im, o, nt, false/*inherit_opaqueness_from_parent*/);
+        walk_name_tree(em, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
 
     std::unordered_set<meta_model::name> transparent_associations;
@@ -126,15 +129,18 @@ expand_object(const meta_model::endomodel& im, meta_model::object& o) {
         remove_duplicates(o.associative_container_keys());
 }
 
-void associations_transform::transform(meta_model::endomodel& im) {
+void associations_transform::
+transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects. Total objects: "
-                             << im.objects().size();
+                             << em.objects().size();
 
-    for (auto& pair : im.objects()) {
+    ctx.prober().start_transform(id, em);
+    for (auto& pair : em.objects()) {
         auto& o(pair.second);
-        expand_object(im, *o);
+        expand_object(em, *o);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished expanding objects.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

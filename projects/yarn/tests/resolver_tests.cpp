@@ -69,7 +69,7 @@ const std::string undefined_type("Object has attribute with undefined type");
 const std::string missing_parent("Object's parent could not be located");
 
 }
-
+/*
 using dogen::utility::test::contains_checker;
 using dogen::yarn::helpers::resolution_error;
 using dogen::yarn::helpers::indexer;
@@ -323,3 +323,4 @@ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

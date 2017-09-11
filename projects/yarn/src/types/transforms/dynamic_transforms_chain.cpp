@@ -23,13 +23,16 @@
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.dynamic_transforms_chain");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.dynamic_transforms_chain"));
+auto lg(logger_factory(id));
 
 }
 
@@ -57,19 +60,22 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 }
 
 void dynamic_transforms_chain::
-transform(const context& ctx, meta_model::endomodel& im) {
-    const auto id(im.name().id());
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id ,em);
+
+    const auto id(em.name().id());
     BOOST_LOG_SEV(lg, debug) << "Performing external transforms on: " << id;
 
     auto& rg(registrar());
     rg.validate();
 
-    const auto& ra(im.root_module()->annotation());
+    const auto& ra(em.root_module()->annotation());
     const auto dpf(create_decoration_properties_factory(ctx, ra));
     for (const auto& dt : rg.dynamic_transforms())
-        dt->transform(ctx, dpf, im);
+        dt->transform(ctx, dpf, em);
 
     BOOST_LOG_SEV(lg, debug) << "Finished performing external transforms.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

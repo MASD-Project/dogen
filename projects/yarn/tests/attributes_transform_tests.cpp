@@ -88,7 +88,7 @@ bool has_duplicate_attribute_names(const Stateful& s,
 }
 
 }
-
+/*
 using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
@@ -387,7 +387,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_instantia
     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_instantiate_object_templates_but_has_attributes_results_in_expected_attributes");
 
     auto m(factory.object_with_third_degree_parent_in_same_model(
-            origin_types::target, true/*has_attribute*/));
+            origin_types::target, truehas_attribute));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 4);
@@ -562,3 +562,4 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_instantiates_object_template_with_mi
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

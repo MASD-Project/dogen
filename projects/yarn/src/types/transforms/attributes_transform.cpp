@@ -28,14 +28,17 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.attributes_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.attributes_transform"));
+auto lg(logger_factory(id));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -50,10 +53,10 @@ namespace yarn {
 namespace transforms {
 
 meta_model::object& attributes_transform::
-find_object(const meta_model::name& n, meta_model::endomodel& im) {
+find_object(const meta_model::name& n, meta_model::endomodel& em) {
     const auto id(n.id());
-    auto i(im.objects().find(id));
-    if (i == im.objects().end()) {
+    auto i(em.objects().find(id));
+    if (i == em.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << id;
         BOOST_THROW_EXCEPTION(transformation_error(object_not_found + id));
     }
@@ -61,10 +64,10 @@ find_object(const meta_model::name& n, meta_model::endomodel& im) {
 }
 
 meta_model::object_template& attributes_transform::
-find_object_template(const meta_model::name& n, meta_model::endomodel& im) {
+find_object_template(const meta_model::name& n, meta_model::endomodel& em) {
     const auto& id(n.id());
-    auto i(im.object_templates().find(id));
-    if (i == im.object_templates().end()) {
+    auto i(em.object_templates().find(id));
+    if (i == em.object_templates().end()) {
         BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
         BOOST_THROW_EXCEPTION(
             transformation_error(object_template_not_found + id));
@@ -73,8 +76,7 @@ find_object_template(const meta_model::name& n, meta_model::endomodel& im) {
 }
 
 void attributes_transform::expand_object(meta_model::object& o,
-    meta_model::endomodel& im,
-    std::unordered_set<std::string>& processed_ids) {
+    meta_model::endomodel& em, std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
 
@@ -101,7 +103,7 @@ void attributes_transform::expand_object(meta_model::object& o,
      */
     std::list<meta_model::attribute> object_template_attributes;
     for (const auto& otn : o.object_templates()) {
-        auto& ot(find_object_template(otn, im));
+        auto& ot(find_object_template(otn, em));
         const auto& p(ot.local_attributes());
         object_template_attributes.insert(object_template_attributes.end(),
             p.begin(), p.end());
@@ -145,8 +147,8 @@ void attributes_transform::expand_object(meta_model::object& o,
      * new properties are added to the descendant.
      */
     for (const auto& pn : o.parents()) {
-        auto& parent(find_object(pn, im));
-        expand_object(parent, im, processed_ids);
+        auto& parent(find_object(pn, em));
+        expand_object(parent, em, processed_ids);
 
         /*
          * Note that we insert the parent and its attributes
@@ -168,18 +170,18 @@ void attributes_transform::expand_object(meta_model::object& o,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_objects(meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
+void attributes_transform::expand_objects(meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << em.objects().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : im.objects()) {
+    for (auto& pair : em.objects()) {
         auto& o(*pair.second);
-        expand_object(o, im, processed_ids);
+        expand_object(o, em, processed_ids);
     }
 }
 
 void attributes_transform::expand_object_template(
-    meta_model::object_template& ot, meta_model::endomodel& im,
+    meta_model::object_template& ot, meta_model::endomodel& em,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(ot.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
@@ -206,8 +208,8 @@ void attributes_transform::expand_object_template(
         ot.local_attributes().begin(), ot.local_attributes().end());
 
     for (const auto& n : ot.parents()) {
-        auto& parent(find_object_template(n, im));
-        expand_object_template(parent, im, processed_ids);
+        auto& parent(find_object_template(n, em));
+        expand_object_template(parent, em, processed_ids);
 
         ot.inherited_attributes().insert(
             std::make_pair(parent.name(), parent.local_attributes()));
@@ -218,20 +220,23 @@ void attributes_transform::expand_object_template(
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_object_templates(meta_model::endomodel& im) {
+void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
-                             << im.object_templates().size();
+                             << em.object_templates().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : im.object_templates()) {
+    for (auto& pair : em.object_templates()) {
         auto& otp(*pair.second);
-        expand_object_template(otp, im, processed_ids);
+        expand_object_template(otp, em, processed_ids);
     }
 }
 
-void attributes_transform::transform(meta_model::endomodel& im) {
-    expand_object_templates(im);
-    expand_objects(im);
+void attributes_transform::
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+    expand_object_templates(em);
+    expand_objects(em);
+    ctx.prober().end_transform(em);
 }
 
 } } }

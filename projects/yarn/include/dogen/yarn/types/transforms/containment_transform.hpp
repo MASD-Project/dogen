@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -55,7 +56,7 @@ public:
      *
      * @param m Yarn model to operate on.
      */
-    static void transform(meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& im);
 };
 
 } } }

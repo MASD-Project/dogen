@@ -26,15 +26,17 @@
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.language_transform"));
+const std::string id("yarn.transforms.language_transform");
 
+using namespace dogen::utility::log;
+auto lg(logger_factory(id));
 
 const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
@@ -98,23 +100,26 @@ language_transform::make_output_languages(const type_group& tg,
 }
 
 void language_transform::
-transform(const context& ctx, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding language. Model: " << im.name().id();
+transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Applying language transform. Model: "
+                             << em.name().id();
+    ctx.prober().start_transform(id, em);
+
 
     const auto tg(make_type_group(ctx.type_repository()));
-    const auto ra(im.root_module()->annotation());
+    const auto ra(em.root_module()->annotation());
     using meta_model::languages;
-    const bool has_input_language(im.input_language() != languages::invalid);
+    const bool has_input_language(em.input_language() != languages::invalid);
     if (!has_input_language) {
         const auto il(make_input_language(tg, ra));
-        im.input_language(il);
+        em.input_language(il);
         BOOST_LOG_SEV(lg, debug) << "Expanded input language to: " << il;
     } else {
         BOOST_LOG_SEV(lg, debug) << "Model already has an input language: "
-                                 << im.input_language();
+                                 << em.input_language();
     }
 
-    if (im.output_languages().empty()) {
+    if (em.output_languages().empty()) {
         const auto ol(make_output_languages(tg, ra));
 
         /*
@@ -123,23 +128,24 @@ transform(const context& ctx, meta_model::endomodel& im) {
          * outputtable.
          */
         if (ol.empty()) {
-            im.output_languages().push_back(im.input_language());
+            em.output_languages().push_back(em.input_language());
 
             BOOST_LOG_SEV(lg, debug) << "No output language overrides found. "
                                      << "Defaulting to input languae: "
-                                     << im.output_languages();
+                                     << em.output_languages();
         } else {
-            im.output_languages(ol);
+            em.output_languages(ol);
 
             BOOST_LOG_SEV(lg, debug) << "Expanded output languages to: "
-                                     << im.output_languages();
+                                     << em.output_languages();
         }
     } else {
         BOOST_LOG_SEV(lg, debug) << "Model already has output languages: "
-                                 << im.output_languages();
+                                 << em.output_languages();
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Expanded language.";
+    BOOST_LOG_SEV(lg, debug) << "Applied language transform.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

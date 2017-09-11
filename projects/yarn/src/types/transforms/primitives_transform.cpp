@@ -24,14 +24,17 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.primitives_transform");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.primitives_transform"));
+static logger lg(logger_factory(id));
 
 }
 
@@ -77,20 +80,22 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 }
 
 void primitives_transform::
-transform(const context& ctx, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started expanding primitives for model: "
-                             << im.name().id();
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+    BOOST_LOG_SEV(lg, debug) << "Applying primitives transform. Model: "
+                             << em.name().id();
 
     const auto tg(make_type_group(ctx.type_repository()));
-    for (auto& pair : im.primitives()) {
+    for (auto& pair : em.primitives()) {
         const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
+        BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 
         auto& p(*pair.second);
         populate_from_annotations(tg, p);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished expanding primitives for model.";
+    BOOST_LOG_SEV(lg, debug) << "Finished applying primitives transform.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

@@ -37,6 +37,7 @@
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
@@ -49,8 +50,10 @@ errmsg_parsing_owner;
 
 namespace {
 
+const std::string id("yarn.transforms.parsing_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.parsing_transform"));
+auto lg(logger_factory(id));
 
 const std::string csharp_value("Value");
 const std::string cpp_value("value");
@@ -242,11 +245,13 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 }
 
 void parsing_transform::
-transform(const context& ctx, meta_model::endomodel& m) {
-    const auto tg(make_type_group(ctx.type_repository()));
-    const auto l(m.input_language());
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
 
-    for (auto& pair : m.objects()) {
+    const auto tg(make_type_group(ctx.type_repository()));
+    const auto l(em.input_language());
+
+    for (auto& pair : em.objects()) {
         auto& o(*pair.second);
         const auto id(o.name().id());
 
@@ -259,7 +264,7 @@ transform(const context& ctx, meta_model::endomodel& m) {
         }
     }
 
-    for (auto& pair : m.object_templates()) {
+    for (auto& pair : em.object_templates()) {
         auto& c(*pair.second);
         const auto id(c.name().id());
 
@@ -271,7 +276,7 @@ transform(const context& ctx, meta_model::endomodel& m) {
         }
     }
 
-    for (auto& pair : m.enumerations()) {
+    for (auto& pair : em.enumerations()) {
         auto& e(*pair.second);
         const auto id(e.name().id());
 
@@ -283,7 +288,7 @@ transform(const context& ctx, meta_model::endomodel& m) {
         }
     }
 
-    for (auto& pair : m.primitives()) {
+    for (auto& pair : em.primitives()) {
         auto& p(*pair.second);
         const auto id(p.name().id());
 
@@ -294,6 +299,8 @@ transform(const context& ctx, meta_model::endomodel& m) {
             throw;
         }
     }
+
+    ctx.prober().end_transform(em);
 }
 
 } } }

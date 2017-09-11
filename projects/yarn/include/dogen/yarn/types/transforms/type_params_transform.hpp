@@ -54,7 +54,7 @@ private:
         meta_model::object& o);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

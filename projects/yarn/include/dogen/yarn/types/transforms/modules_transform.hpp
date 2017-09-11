@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -36,11 +37,11 @@ namespace transforms {
  */
 class modules_transform final {
 private:
-    static void create_missing_modules(meta_model::endomodel& im);
-    static void expand_containing_module(meta_model::endomodel& im);
+    static void create_missing_modules(meta_model::endomodel& em);
+    static void expand_containing_module(meta_model::endomodel& em);
 
 public:
-    static void transform(meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

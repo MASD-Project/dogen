@@ -56,7 +56,7 @@ const mock_endomodel_factory::flags flags(false/*tagged*/,
 const mock_endomodel_factory factory(flags);
 
 }
-
+/*
 using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
@@ -613,3 +613,4 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

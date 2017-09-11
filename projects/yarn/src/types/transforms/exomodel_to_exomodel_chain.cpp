@@ -97,7 +97,7 @@ transform(const transforms::context& ctx,
      * ensure all the meta-types have been populated or else they will
      * come out blank on the generated file.
      */
-    meta_naming_transform::transform(src);
+    meta_naming_transform::transform(ctx, src);
 
     /*
      * Perform a sorting transform to ensure we output the elements in

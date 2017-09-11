@@ -36,6 +36,8 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.transform_prober"));
 
+const char zero('0');
+const unsigned int leading_zeros(3);
 const std::string delimiter("-");
 const std::string extension(".json");
 
@@ -119,8 +121,8 @@ void transform_prober::handle_current_directory() const {
 
     const auto id(builder_.current().id());
     std::ostringstream s;
-    s << std::setfill('0') << std::setw(2) << transform_position_.top()
-      << delimiter << id;
+    s << std::setfill(zero) << std::setw(leading_zeros)
+      << transform_position_.top() << delimiter << id;
     current_directory_ /= s.str();
 
     if (boost::filesystem::exists(current_directory_)) {
@@ -151,8 +153,8 @@ full_path_for_writing(const std::string& id, const std::string& type) const {
     ensure_transform_position_not_empty();
 
     std::ostringstream s;
-    s << std::setfill('0') << std::setw(2) << transform_position_.top()
-      << delimiter << id << delimiter
+    s << std::setfill(zero) << std::setw(leading_zeros)
+      << transform_position_.top() << delimiter << id << delimiter
       << builder_.current().guid() << delimiter << type << extension;
 
     return current_directory_ / s.str();
@@ -165,15 +167,15 @@ void transform_prober::write_initial_inputs(
 
     BOOST_LOG_SEV(lg, debug) << "Writing initial inputs.";
 
-    auto path(current_directory_ / "01-archetype_location_repository.json");
+    auto path(current_directory_ / "001-archetype_location_repository.json");
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
     write(path, alrp);
 
-    path = current_directory_ / "01-type_repository.json";
+    path = current_directory_ / "001-type_repository.json";
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
     write(path, atrp);
 
-    path = current_directory_ / "01-mapping_set_repository.json";
+    path = current_directory_ / "001-mapping_set_repository.json";
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
     write(path, msrp);
 

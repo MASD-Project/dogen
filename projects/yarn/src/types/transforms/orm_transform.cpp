@@ -38,14 +38,17 @@
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.orm_transform");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.orm_transform"));
+static logger lg(logger_factory(id));
 
 const std::string mysql("mysql");
 const std::string postgresql("postgresql");
@@ -313,14 +316,14 @@ orm_transform::make_module_properties(const type_group& tg,
 }
 
 void orm_transform::
-transform_objects(const type_group& tg, meta_model::endomodel& im) {
+transform_objects(const type_group& tg, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
     boost::optional<meta_model::letter_cases> lc;
-    if (im.orm_properties())
-        lc = im.orm_properties()->letter_case();
+    if (em.orm_properties())
+        lc = em.orm_properties()->letter_case();
 
-    for (auto& pair : im.objects()) {
+    for (auto& pair : em.objects()) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this object. Configurations are setup during
@@ -367,10 +370,10 @@ transform_objects(const type_group& tg, meta_model::endomodel& im) {
 }
 
 void orm_transform::
-transform_object_templates(const type_group& tg, meta_model::endomodel& im) {
+transform_object_templates(const type_group& tg, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
 
-    for (auto& pair : im.object_templates()) {
+    for (auto& pair : em.object_templates()) {
         auto& c(*pair.second);
         for (auto& attr : c.local_attributes()) {
             const auto& a(attr.annotation());
@@ -382,15 +385,15 @@ transform_object_templates(const type_group& tg, meta_model::endomodel& im) {
 }
 
 void orm_transform::transform_primitives(
-    const type_group& tg, meta_model::endomodel& im) {
+    const type_group& tg, meta_model::endomodel& em) {
 
     BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
     boost::optional<meta_model::letter_cases> lc;
-    if (im.orm_properties())
-        lc = im.orm_properties()->letter_case();
+    if (em.orm_properties())
+        lc = em.orm_properties()->letter_case();
 
-    for (auto& pair : im.primitives()) {
+    for (auto& pair : em.primitives()) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this primitive. Configurations are setup during
@@ -422,10 +425,10 @@ void orm_transform::transform_primitives(
 }
 
 void orm_transform::
-transform_modules(const type_group& tg, meta_model::endomodel& im) {
+transform_modules(const type_group& tg, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
-    for (auto& pair : im.modules()) {
+    for (auto& pair : em.modules()) {
         auto& m(*pair.second);
         const auto& a(m.annotation());
         auto cfg(make_module_properties(tg, a));
@@ -452,8 +455,8 @@ transform_modules(const type_group& tg, meta_model::endomodel& im) {
         for (const auto& id : m.members()) {
             BOOST_LOG_SEV(lg, debug) << "Processing member: " << id;
 
-            const auto i(im.objects().find(id));
-            if (i != im.objects().end()) {
+            const auto i(em.objects().find(id));
+            if (i != em.objects().end()) {
                 auto& o(*i->second);
                 auto& cfg(o.orm_properties());
                 const bool update_schema_name(cfg && cfg->schema_name().empty()
@@ -466,8 +469,8 @@ transform_modules(const type_group& tg, meta_model::endomodel& im) {
                                          << " to: " << sn;
                 cfg->schema_name(sn);
             } else {
-                const auto j(im.primitives().find(id));
-                if (j == im.primitives().end())
+                const auto j(em.primitives().find(id));
+                if (j == em.primitives().end())
                     continue;
 
                 auto& p(*j->second);
@@ -489,19 +492,21 @@ transform_modules(const type_group& tg, meta_model::endomodel& im) {
 }
 
 void orm_transform::
-transform(const context& ctx, meta_model::endomodel& im) {
+transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transform.";
 
+    ctx.prober().start_transform(id, em);
     const auto tg(make_type_group(ctx.type_repository()));
-    const auto& rm(*im.root_module());
-    im.orm_properties(make_model_properties(tg, rm.annotation()));
+    const auto& rm(*em.root_module());
+    em.orm_properties(make_model_properties(tg, rm.annotation()));
 
-    transform_objects(tg, im);
-    transform_object_templates(tg, im);
-    transform_primitives(tg, im);
-    transform_modules(tg, im);
+    transform_objects(tg, em);
+    transform_object_templates(tg, em);
+    transform_primitives(tg, em);
+    transform_modules(tg, em);
 
     BOOST_LOG_SEV(lg, debug) << "Finished transform.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

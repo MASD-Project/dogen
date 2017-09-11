@@ -43,13 +43,13 @@ private:
     static type_group make_type_group(const annotations::type_repository& atrp);
 
     static bool is_proxy_model(const type_group& tg,
-        const meta_model::endomodel& im);
+        const meta_model::endomodel& em);
 
     static meta_model::origin_types compute_origin_types(
-        const meta_model::endomodel& im, const bool is_proxy_model);
+        const meta_model::endomodel& em, const bool is_proxy_model);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

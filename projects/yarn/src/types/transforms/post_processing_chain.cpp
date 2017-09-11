@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/indexer.hpp"
 #include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -40,8 +41,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.post_processing_chain");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.post_processing_chain"));
+auto lg(logger_factory(id));
 
 }
 
@@ -50,7 +53,7 @@ namespace yarn {
 namespace transforms {
 
 void post_processing_chain::
-transform(const context& ctx, meta_model::endomodel& im) {
+transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Executing post-processing chain.";
 
     /*
@@ -58,7 +61,8 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * built-in types; these are required in order to find the default
      * enumeration underlying element.
      */
-    enumerations_transform::transform(ctx, im);
+    ctx.prober().start_chain(id, em);
+    enumerations_transform::transform(ctx, em);
 
     /*
      * Create all indices first as its needed by generalisation. Note
@@ -66,7 +70,7 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * part of indices, which is not ideal - but for now, its not a
      * major problem.
      */
-    const auto idx(helpers::indexer::index(im));
+    const auto idx(helpers::indexer::index(em));
 
     /*
      * We must expand generalisation relationships before we apply the
@@ -75,16 +79,16 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * must be expanded after merging models because we may inherit
      * across models.
      */
-    generalization_transform::transform(ctx, idx, im);
+    generalization_transform::transform(ctx, idx, em);
 
     /*
      * Stereotypes transform must be done before object templates
      * because we obtain object template information from the
      * stereotypes.
      */
-    stereotypes_transform::transform(im);
-    object_templates_transform::transform(im);
-    containment_transform::transform(im);
+    stereotypes_transform::transform(ctx, em);
+    object_templates_transform::transform(ctx, em);
+    containment_transform::transform(ctx, em);
 
     /*
      * Meta-name transform must be applied after all transforms that
@@ -92,13 +96,13 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * is stereotypes and containment transforms. This is also why we
      * cannot apply this transform at the exomodel level.
      */
-    meta_naming_transform::transform(im);
+    meta_naming_transform::transform(ctx, em);
 
     /*
      * ORM properties must be expanded after stereotypes and
      * containment.
      */
-    orm_transform::transform(ctx, im);
+    orm_transform::transform(ctx, em);
 
     /*
      * Resolution must be done after system elements have been
@@ -106,7 +110,7 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * any references to those elements. This is done in stereotype
      * expansion.
      */
-    resolver_transform::transform(idx, im);
+    resolver_transform::transform(ctx, idx, em);
 
     /*
      * We can only expand attributes after we've expanded:
@@ -117,42 +121,43 @@ transform(const context& ctx, meta_model::endomodel& im) {
      *   fluency to be populated.
      *  - resolution, else we will copy unresolved attributes.
      */
-    attributes_transform::transform(im);
+    attributes_transform::transform(ctx, em);
 
     /*
      * We must expand associations after attributes have been expanded
      * as it relies on the various attribute containers being
      * populated.
      */
-    associations_transform::transform(im);
-    generability_transform::transform(im);
+    associations_transform::transform(ctx, em);
+    generability_transform::transform(ctx, em);
 
     /*
      * We can perform dynamic expansion last as no one should be
      * relying on these expansions. These are kernel specific.
      */
-    dynamic_transforms_chain::transform(ctx, im);
+    dynamic_transforms_chain::transform(ctx, em);
 
     /*
      * Expand the artefact properties against the suitable archetype
      * locations. Must be done before enablement transform and any
      * other transform that populates these properties.
      */
-    artefact_properties_transform::transform(ctx, im);
+    artefact_properties_transform::transform(ctx, em);
 
     /*
      * Enablement transform must be applied after the external
      * transform chain as it needs to compute enablement for any
      * kernel specific types that might have been added.
      */
-    enablement_transform::transform(ctx, im);
+    enablement_transform::transform(ctx, em);
 
     /*
      * Ensure the model is valid.
      */
-    helpers::post_processing_validator::validate(idx, im);
+    helpers::post_processing_validator::validate(idx, em);
 
     BOOST_LOG_SEV(lg, debug) << "Executed post-processing chain.";
+    ctx.prober().end_chain(em);
 }
 
 } } }

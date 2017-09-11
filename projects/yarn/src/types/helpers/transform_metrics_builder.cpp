@@ -91,7 +91,6 @@ void transform_metrics_builder::end() {
 }
 
 const transform_metrics& transform_metrics_builder::current() const {
-
     return *stack_.top();
 }
 

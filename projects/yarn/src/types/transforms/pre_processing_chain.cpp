@@ -20,7 +20,9 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
@@ -31,8 +33,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.pre_processing_chain");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.pre_processing_chain"));
+static logger lg(logger_factory(id));
 
 }
 
@@ -42,80 +46,86 @@ namespace transforms {
 
 bool pre_processing_chain::is_language_relevant(
     const std::unordered_set<meta_model::languages>& relevant_languages,
-    const meta_model::endomodel& im) {
-    const auto l(im.input_language());
+    const meta_model::endomodel& em) {
+    const auto l(em.input_language());
     const auto i(relevant_languages.find(l));
     if (i == relevant_languages.end()) {
         BOOST_LOG_SEV(lg, warn) << "Reference model language does not"
                                 << " match target model language."
-                                << " Model: " << im.name().id()
+                                << " Model: " << em.name().id()
                                 << " Language: " << l
                                 << " Aborting expansion.";
         return false;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Reference model language is compatible."
-                             << " Model: " << im.name().id()
+                             << " Model: " << em.name().id()
                              << " Language: " << l;
     return true;
 }
 
 void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
      * modules.
      */
-    modules_transform::transform(im);
-    language_transform::transform(ctx, im);
+    modules_transform::transform(ctx, em);
+    language_transform::transform(ctx, em);
 }
 
 void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
     /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
-    origin_transform::transform(ctx, im);
-    type_params_transform::transform(ctx, im);
-    parsing_transform::transform(ctx, im);
+    origin_transform::transform(ctx, em);
+    type_params_transform::transform(ctx, em);
+    parsing_transform::transform(ctx, em);
 
     /*
      * Primitive expansion requires parsing expansion to populate the
      * underlying elements.
      */
-    primitives_transform::transform(ctx, im);
+    primitives_transform::transform(ctx, em);
 
     /*
      * Ensure the model is valid.
      */
-    helpers::pre_processing_validator::validate(im);
+    helpers::pre_processing_validator::validate(em);
 }
 
 void pre_processing_chain::
-transform(const context& ctx, meta_model::endomodel& im) {
-    apply_first_set_of_transforms(ctx, im);
-    apply_second_set_of_transforms(ctx, im);
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_chain(id, em);
+    apply_first_set_of_transforms(ctx, em);
+    apply_second_set_of_transforms(ctx, em);
+    ctx.prober().end_chain(em);
 }
 
 bool pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
     /*
      * We must apply the first set of transforms because language
      * expansion is required.
      */
-    apply_first_set_of_transforms(ctx, im);
+    ctx.prober().start_chain(id, em);
+    apply_first_set_of_transforms(ctx, em);
 
     /*
      * Now we can check the predicate: we only want to process those
      * types which are of the same language as target.
      */
-    if (!is_language_relevant(relevant_languages, im))
+    if (!is_language_relevant(relevant_languages, em)) {
+        ctx.prober().end_chain(em);
         return false;
+    }
 
-    apply_second_set_of_transforms(ctx, im);
+    apply_second_set_of_transforms(ctx, em);
+    ctx.prober().end_chain(em);
     return true;
 }
 

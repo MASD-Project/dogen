@@ -23,14 +23,18 @@
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.meta_naming_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.meta_naming_transform"));
+auto lg(logger_factory(id));
 
 }
 
@@ -90,10 +94,12 @@ public:
     }
 };
 
-void meta_naming_transform::transform(meta_model::exomodel& em) {
+void meta_naming_transform::
+transform(const context& ctx, meta_model::exomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
                              << em.name().id();
 
+    ctx.prober().start_transform(id, em);
     em.meta_name(meta_name_factory::make_exomodel_name());
 
     updater u;
@@ -121,14 +127,16 @@ void meta_naming_transform::transform(meta_model::exomodel& em) {
     u(*em.root_module().second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
-
+    ctx.prober().end_transform(em);
 }
 
-void meta_naming_transform::transform(meta_model::endomodel& im) {
+void meta_naming_transform::
+transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
-                             << im.name().id();
+                             << em.name().id();
 
-    im.meta_name(meta_name_factory::make_endomodel_name());
+    ctx.prober().start_transform(id, em);
+    em.meta_name(meta_name_factory::make_endomodel_name());
 
     /*
      * We are setting include_injected_elements to false by design as
@@ -137,9 +145,10 @@ void meta_naming_transform::transform(meta_model::endomodel& im) {
      * are in the pre-processing chain. But you get the idea.
      */
     updater u;
-    meta_model::elements_traversal(im, u);
+    meta_model::elements_traversal(em, u);
 
     BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
+    ctx.prober().start_transform(id, em);
 }
 
 } } }

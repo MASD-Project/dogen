@@ -18,16 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
+
+namespace {
+
+const std::string id("yarn.transforms.resolver_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(id));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void resolver_transform::
-transform(const helpers::indices& idx, meta_model::endomodel& im) {
-    helpers::resolver::resolve(idx, im);
+void resolver_transform::transform(const context& ctx,
+    const helpers::indices& idx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+    helpers::resolver::resolve(idx, em);
+    ctx.prober().end_transform(em);
 }
 
 } } }

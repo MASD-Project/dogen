@@ -18,12 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
+
+namespace {
+
+const std::string id("yarn.type_params_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(id));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -71,12 +82,14 @@ expand_type_parameters(const type_group& tg, meta_model::object& o) {
 }
 
 void type_params_transform::
-transform(const context& ctx, meta_model::endomodel& im) {
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
     const auto tg(make_type_group(ctx.type_repository()));
-    for (auto& pair : im.objects()) {
+    for (auto& pair : em.objects()) {
         auto& o(*pair.second);
         expand_type_parameters(tg, o);
     }
+    ctx.prober().end_transform(em);
 }
 
 } } }

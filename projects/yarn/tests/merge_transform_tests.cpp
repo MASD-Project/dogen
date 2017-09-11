@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
-
+/*
 namespace {
 
 const std::string test_module("yarn");
@@ -141,3 +141,4 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

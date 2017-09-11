@@ -27,6 +27,7 @@
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -34,8 +35,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.generalization_transforms");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.generalization_transforms"));
+auto lg(logger_factory(id));
 
 const std::string parent_not_found("Could not find parent: ");
 const std::string incompatible_is_final(
@@ -78,12 +81,12 @@ generalization_transform::make_is_final(const type_group& tg,
 
 std::unordered_set<std::string>
 generalization_transform::update_and_collect_parent_ids(
-    const helpers::indices& idx, meta_model::endomodel& im) {
+    const helpers::indices& idx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
     std::unordered_set<std::string> r;
-    for (auto& pair : im.objects()) {
+    for (auto& pair : em.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
@@ -102,7 +105,7 @@ generalization_transform::update_and_collect_parent_ids(
          */
         std::list<meta_model::name> resolved_parents;
         for (const auto& pn : o.parents()) {
-            const auto resolved_pn(resolver::resolve(im, idx, o.name(), pn));
+            const auto resolved_pn(resolver::resolve(em, idx, o.name(), pn));
             r.insert(resolved_pn.id());
             resolved_parents.push_back(resolved_pn);
         }
@@ -116,7 +119,7 @@ generalization_transform::update_and_collect_parent_ids(
 
 void generalization_transform::populate_properties_up_the_generalization_tree(
     const type_group& tg, const meta_model::name& leaf,
-    meta_model::endomodel& im, meta_model::object& o) {
+    meta_model::endomodel& em, meta_model::object& o) {
 
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
@@ -135,23 +138,23 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
          * the model's list of leaves. Ignore non-target leaves.
          */
         const auto& ll(leaf.location());
-        const auto& ml(im.name().location());
+        const auto& ml(em.name().location());
         if (ll.model_modules() == ml.model_modules())
-            im.leaves().insert(leaf);
+            em.leaves().insert(leaf);
 
         return;
     }
 
     for (const auto& pn : o.parents()) {
-        auto i(im.objects().find(pn.id()));
-        if (i == im.objects().end()) {
+        auto i(em.objects().find(pn.id()));
+        if (i == em.objects().end()) {
             BOOST_LOG_SEV(lg, error) << parent_not_found << pn.id();
             BOOST_THROW_EXCEPTION(
                 transformation_error(parent_not_found + pn.id()));
         }
 
         auto& parent(*i->second);
-        populate_properties_up_the_generalization_tree(tg, leaf, im, parent);
+        populate_properties_up_the_generalization_tree(tg, leaf, em, parent);
 
         if (parent.parents().empty()) {
             /*
@@ -174,9 +177,9 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
 void generalization_transform::
 populate_generalizable_properties(const type_group& tg,
     const std::unordered_set<std::string>& parent_ids,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
 
-    for (auto& pair : im.objects()) {
+    for (auto& pair : em.objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
@@ -231,24 +234,25 @@ populate_generalizable_properties(const type_group& tg,
          if (!o.is_leaf())
              continue;
 
-         populate_properties_up_the_generalization_tree(tg, o.name(), im, o);
+         populate_properties_up_the_generalization_tree(tg, o.name(), em, o);
     }
 }
 
-void generalization_transform::sort_leaves(meta_model::endomodel& im) {
-    for (auto& pair : im.objects()) {
+void generalization_transform::sort_leaves(meta_model::endomodel& em) {
+    for (auto& pair : em.objects()) {
         auto& o(*pair.second);
         o.leaves().sort();
     }
 }
 
 void generalization_transform::transform(const context& ctx,
-    const helpers::indices& idx, meta_model::endomodel& im) {
-    const auto parent_ids(update_and_collect_parent_ids(idx, im));
-
+    const helpers::indices& idx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+    const auto parent_ids(update_and_collect_parent_ids(idx, em));
     const auto tg(make_type_group(ctx.type_repository()));
-    populate_generalizable_properties(tg, parent_ids, im);
-    sort_leaves(im);
+    populate_generalizable_properties(tg, parent_ids, em);
+    sort_leaves(em);
+    ctx.prober().end_transform(em);
 }
 
 } } }

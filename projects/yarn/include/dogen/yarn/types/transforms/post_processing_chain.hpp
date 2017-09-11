@@ -34,7 +34,7 @@ namespace transforms {
 
 class post_processing_chain final {
 public:
-    static void transform(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

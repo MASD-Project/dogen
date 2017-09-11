@@ -54,7 +54,7 @@ public:
     static dynamic_transform_registrar& registrar();
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 
 private:
     static std::shared_ptr<dynamic_transform_registrar> registrar_;

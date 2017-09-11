@@ -25,15 +25,19 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.modules_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.modules_transform"));
+auto lg(logger_factory(id));
 
 const std::string separator(".");
 const std::string missing_module("Could not find module: ");
@@ -220,9 +224,12 @@ expand_containing_module(meta_model::endomodel& im) {
     meta_model::elements_traversal(im, u);
 }
 
-void modules_transform::transform(meta_model::endomodel& im) {
-    create_missing_modules(im);
-    expand_containing_module(im);
+void modules_transform::
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
+    create_missing_modules(em);
+    expand_containing_module(em);
+    ctx.prober().end_transform(em);
 }
 
 } } }

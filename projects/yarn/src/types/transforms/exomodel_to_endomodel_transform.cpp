@@ -29,13 +29,18 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.exomodel_to_endomodel_transform");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.dia.builder"));
+static logger lg(logger_factory(id));
 
 const std::string duplicate_element("Element id already exists: ");
 
@@ -70,11 +75,12 @@ to_element_map(const std::list<std::pair<annotations::scribble_group,
     return r;
 }
 
-meta_model::endomodel
-exomodel_to_endomodel_transform::transform(const meta_model::exomodel& em) {
+meta_model::endomodel exomodel_to_endomodel_transform::
+transform(const context& ctx, const meta_model::exomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exomodel to endomodel: "
                              << em.name().id();
 
+    ctx.prober().start_transform(id, em);
     meta_model::endomodel r;
     r.name(em.name());
     r.modules(to_element_map(em.modules()));
@@ -95,6 +101,7 @@ exomodel_to_endomodel_transform::transform(const meta_model::exomodel& em) {
     r.root_module(em.root_module().second);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exomodel to endomodel.";
+    ctx.prober().end_transform(r);
     return r;
 }
 

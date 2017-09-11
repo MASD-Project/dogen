@@ -27,15 +27,17 @@
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_primitive_properties.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.stereotypes_transform");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.stereotypes_transform"));
+auto lg(logger_factory(id));
 
 const std::string stereotype_visitor("yarn::visitable");
 const std::string stereotype_fluent("yarn::fluent");
@@ -146,12 +148,12 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
 
 void stereotypes_transform::
 add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
     const auto id(v->name().id());
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
 
     const auto pair(std::make_pair(id, v));
-    const auto i(im.visitors().insert(pair));
+    const auto i(em.visitors().insert(pair));
     if (!i.second) {
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
         BOOST_THROW_EXCEPTION(transformation_error(duplicate_name + id));
@@ -160,7 +162,7 @@ add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
 }
 
 void stereotypes_transform::
-expand_visitable(meta_model::object& o, meta_model::endomodel& im) {
+expand_visitable(meta_model::object& o, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << o.name().id();
 
     /*
@@ -225,8 +227,8 @@ expand_visitable(meta_model::object& o, meta_model::endomodel& im) {
     const auto bvn(bv->name());
     o.is_visitation_root(true);
     o.base_visitor(bvn);
-    update_visited_leaves(bvl, visitor_details(bvn), im);
-    add_visitor_to_model(bv, im);
+    update_visited_leaves(bvl, visitor_details(bvn), em);
+    add_visitor_to_model(bv, em);
 
     /*
      * If there is only one bucket of leaves then that refers to
@@ -259,11 +261,10 @@ expand_visitable(meta_model::object& o, meta_model::endomodel& im) {
          * proxy models do not contribute visitable types.
          */
         const auto& dv_location(pair.first);
-        const auto immm(im.name().location().model_modules());
-        const bool in_target_model(immm == dv_location.model_modules());
+        const auto emmm(em.name().location().model_modules());
+        const bool in_target_model(emmm == dv_location.model_modules());
         const auto ot(in_target_model ?
-            meta_model::origin_types::target :
-            o.origin_type());
+            meta_model::origin_types::target : o.origin_type());
 
         /*
          * Generate the derived visitor and update its leaves.
@@ -272,18 +273,18 @@ expand_visitable(meta_model::object& o, meta_model::endomodel& im) {
         auto dv(create_visitor(o, dv_location, ot, bl));
         const auto dvn(dv->name());
         dv->parent(bvn);
-        update_visited_leaves(bl, visitor_details(bvn, dvn), im);
-        add_visitor_to_model(dv, im);
+        update_visited_leaves(bl, visitor_details(bvn, dvn), em);
+        add_visitor_to_model(dv, em);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
 bool stereotypes_transform::try_expand_object_template(const std::string& s,
-    meta_model::object& o, const meta_model::endomodel& im) {
+    meta_model::object& o, const meta_model::endomodel& em) {
 
     using helpers::resolver;
-    const auto oot(resolver::try_resolve_object_template_name(o.name(), s, im));
+    const auto oot(resolver::try_resolve_object_template_name(o.name(), s, em));
     if (!oot)
         return false;
 
@@ -292,7 +293,7 @@ bool stereotypes_transform::try_expand_object_template(const std::string& s,
 }
 
 void stereotypes_transform::expand(meta_model::object& o,
-    meta_model::endomodel& im) {
+    meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
     if (o.stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
@@ -307,7 +308,7 @@ void stereotypes_transform::expand(meta_model::object& o,
             external_stereotypes.push_back(s);
             continue;
         } else if (s == stereotype_visitor)
-            expand_visitable(o, im);
+            expand_visitable(o, em);
         else if (s == stereotype_fluent)
             o.is_fluent(true);
         else if (s == stereotype_immutable)
@@ -322,7 +323,7 @@ void stereotypes_transform::expand(meta_model::object& o,
             cfg.is_value(true);
             o.orm_properties(cfg);
         } else {
-            const bool is_object_template(try_expand_object_template(s, o, im));
+            const bool is_object_template(try_expand_object_template(s, o, em));
             if (!is_object_template)
                 unknown_stereotypes.push_back(s);
         }
@@ -382,16 +383,20 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
     BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();
 }
 
-void stereotypes_transform::transform(meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
+void stereotypes_transform::
+transform(const context& ctx, meta_model::endomodel& em) {
+    ctx.prober().start_transform(id, em);
 
-    for (auto& pair : im.objects())
-        expand(*pair.second, im);
+    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << em.name().id();
 
-    for (auto& pair : im.primitives())
+    for (auto& pair : em.objects())
+        expand(*pair.second, em);
+
+    for (auto& pair : em.primitives())
         expand(*pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes.";
+    ctx.prober().end_transform(em);
 }
 
 } } }

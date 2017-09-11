@@ -80,7 +80,7 @@ private:
 
 private:
     static meta_model::name obtain_enumeration_default_underlying_element_name(
-        const meta_model::endomodel& im);
+        const meta_model::endomodel& em);
     static std::string obtain_invalid_enumerator_simple_name(
         const meta_model::languages l);
     static meta_model::enumerator make_invalid_enumerator(
@@ -93,7 +93,7 @@ private:
         const meta_model::languages l, meta_model::enumeration& e);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }
