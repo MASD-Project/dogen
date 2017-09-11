@@ -739,6 +739,127 @@
     },
     {
       "name": {
+        "simple": "transform_metrics",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "id"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "guid"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "start"
+          },
+          "unparsed_type": "unsigned long"
+        },
+        {
+          "name": {
+            "simple": "end"
+          },
+          "unparsed_type": "unsigned long"
+        },
+        {
+          "name": {
+            "simple": "children"
+          },
+          "unparsed_type": "std::list<boost::shared_ptr<transform_metrics>>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "transform_metrics_builder",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "transform_metrics_printer",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "transform_prober",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "builder_"
+          },
+          "unparsed_type": "transform_metrics_builder"
+        },
+        {
+          "name": {
+            "simple": "probe_data_"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "probe_stats_"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "probe_stats_graph_"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "probe_data_directory_"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "artefact_properties",
         "internal_modules": "meta_model"
       },
@@ -924,6 +1045,32 @@
     },
     {
       "name": {
+        "simple": "element_archetype",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "element"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "archetype"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "element_properties",
         "internal_modules": "meta_model"
       },
@@ -1096,6 +1243,12 @@
             "simple": "facet_properties"
           },
           "unparsed_type": "std::unordered_map<std::string, facet_properties>"
+        },
+        {
+          "name": {
+            "simple": "enabled_archetype_for_element"
+          },
+          "unparsed_type": "std::unordered_set<element_archetype>"
         }
       ]
     },
@@ -1411,6 +1564,12 @@
             "simple": "facet_properties"
           },
           "unparsed_type": "std::unordered_map<std::string, facet_properties>"
+        },
+        {
+          "name": {
+            "simple": "enabled_archetype_for_element"
+          },
+          "unparsed_type": "std::unordered_set<element_archetype>"
         }
       ]
     },
@@ -2214,6 +2373,12 @@
             "simple": "formatters_repository"
           },
           "unparsed_type": "dogen::formatters::repository"
+        },
+        {
+          "name": {
+            "simple": "prober"
+          },
+          "unparsed_type": "helpers::transform_prober"
         }
       ]
     },
@@ -3726,6 +3891,19 @@
         "internal_modules": "meta_model"
       },
       "documentation": "An error occurred whilst pretty printing.\n"
+    },
+    {
+      "name": {
+        "simple": "probing_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred when trying to generate probing data.\n"
     },
     {
       "name": {

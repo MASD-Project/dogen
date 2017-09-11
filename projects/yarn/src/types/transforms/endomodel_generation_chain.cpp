@@ -36,8 +36,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.endomodel_generation_chain");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.endomodel_generation_chain"));
+static logger lg(logger_factory(id));
 
 }
 
@@ -56,6 +58,7 @@ endomodel_generation_chain::transform(const context& ctx) {
      * same; or it is a Platform Independent Model (PIM), making use
      * of LAM types (the Language Agnostic Model).
      */
+    ctx.prober().start_chain(id);
     const auto target(initial_target_chain::transform(ctx));
 
     /*
@@ -84,6 +87,7 @@ endomodel_generation_chain::transform(const context& ctx) {
         r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
 
     BOOST_LOG_SEV(lg, info) << "Executed the model generation chain.";
+    ctx.prober().end_chain(r);
 
     return r;
 }

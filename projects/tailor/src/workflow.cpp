@@ -25,9 +25,12 @@
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/options/types/tailoring_options.hpp"
+#include "dogen/options/types/knitting_options.hpp" // FIXME
 #include "dogen/yarn.json/types/initializer.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_exomodel_chain.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
 #include "dogen/tailor/workflow_error.hpp"
@@ -111,8 +114,15 @@ void workflow::tailor(const options::tailoring_options& o) const {
     yarn::json::initializer::initialize();
     yarn::dia::initializer::initialize();
 
+    // FIXME
+    options::knitting_options ko;
+    ko.target(o.target());
+
+    yarn::transforms::kernel_registrar rg;
+    const auto ctx(yarn::transforms::context_factory::make(rg, ko));
+
     using yarn::transforms::exomodel_to_exomodel_chain;
-    exomodel_to_exomodel_chain::transform(o.target(), o.output());
+    exomodel_to_exomodel_chain::transform(ctx, o.target(), o.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
 }

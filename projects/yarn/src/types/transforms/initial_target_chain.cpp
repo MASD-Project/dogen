@@ -28,8 +28,9 @@
 
 namespace {
 
+const std::string id("yarn.transforms.initial_target_chain");
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.initial_target_chain"));
+static logger lg(logger_factory(id));
 
 }
 
@@ -46,6 +47,7 @@ initial_target_chain::transform(const context& ctx) {
      * of the exogenous model.
      */
     const auto tp(ctx.options().target());
+    ctx.prober().start_chain(id);
     const auto em(exomodel_generation_chain::transform(ctx, tp));
 
     /*
@@ -65,6 +67,7 @@ initial_target_chain::transform(const context& ctx) {
      * target.
      */
     pre_processing_chain::transform(ctx, r);
+    ctx.prober().end_chain();
 
     BOOST_LOG_SEV(lg, debug) << "Initial target chain executed.";
     return r;

@@ -79,7 +79,8 @@ exomodel_to_exomodel_chain::obtain_transforms(
 }
 
 void exomodel_to_exomodel_chain::
-transform(const boost::filesystem::path& src_path,
+transform(const transforms::context& ctx,
+    const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
     BOOST_LOG_SEV(lg, info) << "Transforming: " << src_path.generic_string()
                             << " to: " << dst_path.generic_string();
@@ -89,7 +90,7 @@ transform(const boost::filesystem::path& src_path,
      * transforms.
      */
     auto tuple(obtain_transforms(src_path, dst_path));
-    auto src(tuple.get<0>().transform(src_path));
+    auto src(tuple.get<0>().transform(ctx, src_path));
 
     /*
      * Perform the meta-naming transform to the model. We need this to
@@ -108,7 +109,7 @@ transform(const boost::filesystem::path& src_path,
     /*
      * Finally, transform the exomodel to text.
      */
-    tuple.get<1>().transform(src, dst_path);
+    tuple.get<1>().transform(ctx, src, dst_path);
 
     BOOST_LOG_SEV(lg, info) << "Transformation done.";
 }

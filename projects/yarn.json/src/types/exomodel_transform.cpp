@@ -21,6 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/exomodel_transform.hpp"
@@ -55,15 +57,22 @@ std::list<std::string> exomodel_transform::supported_extensions() const {
     return extensions;
 }
 
-meta_model::exomodel
-exomodel_transform::transform(const boost::filesystem::path& p) {
+meta_model::exomodel exomodel_transform::
+transform(const transforms::context& ctx, const boost::filesystem::path& p) {
+    ctx.prober().start_transform(::id);
+
     hydrator h;
-    return h.hydrate(p);
+    const auto r(h.hydrate(p));
+
+    ctx.prober().end_transform(r);
+    return r;
 }
 
-void exomodel_transform::transform(const meta_model::exomodel& em,
-    const boost::filesystem::path& p) {
-     return dehydrator::dehydrate(em, p);
+void exomodel_transform::transform(const transforms::context& ctx,
+    const meta_model::exomodel& em, const boost::filesystem::path& p) {
+    ctx.prober().start_transform(::id, em);
+    dehydrator::dehydrate(em, p);
+    ctx.prober().end_transform();
 }
 
 } } }

@@ -33,16 +33,20 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
+transform_metrics::transform_metrics()
+    : start_(static_cast<unsigned long>(0)),
+      end_(static_cast<unsigned long>(0)) { }
+
 transform_metrics::transform_metrics(
     const std::string& id,
     const std::string& guid,
-    const boost::posix_time::ptime& start,
-    const boost::posix_time::ptime& finish,
+    const unsigned long start,
+    const unsigned long end,
     const std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> >& children)
     : id_(id),
       guid_(guid),
       start_(start),
-      finish_(finish),
+      end_(end),
       children_(children) { }
 
 void transform_metrics::swap(transform_metrics& other) noexcept {
@@ -50,7 +54,7 @@ void transform_metrics::swap(transform_metrics& other) noexcept {
     swap(id_, other.id_);
     swap(guid_, other.guid_);
     swap(start_, other.start_);
-    swap(finish_, other.finish_);
+    swap(end_, other.end_);
     swap(children_, other.children_);
 }
 
@@ -58,7 +62,7 @@ bool transform_metrics::operator==(const transform_metrics& rhs) const {
     return id_ == rhs.id_ &&
         guid_ == rhs.guid_ &&
         start_ == rhs.start_ &&
-        finish_ == rhs.finish_ &&
+        end_ == rhs.end_ &&
         children_ == rhs.children_;
 }
 
@@ -100,36 +104,20 @@ void transform_metrics::guid(const std::string&& v) {
     guid_ = std::move(v);
 }
 
-const boost::posix_time::ptime& transform_metrics::start() const {
+unsigned long transform_metrics::start() const {
     return start_;
 }
 
-boost::posix_time::ptime& transform_metrics::start() {
-    return start_;
-}
-
-void transform_metrics::start(const boost::posix_time::ptime& v) {
+void transform_metrics::start(const unsigned long v) {
     start_ = v;
 }
 
-void transform_metrics::start(const boost::posix_time::ptime&& v) {
-    start_ = std::move(v);
+unsigned long transform_metrics::end() const {
+    return end_;
 }
 
-const boost::posix_time::ptime& transform_metrics::finish() const {
-    return finish_;
-}
-
-boost::posix_time::ptime& transform_metrics::finish() {
-    return finish_;
-}
-
-void transform_metrics::finish(const boost::posix_time::ptime& v) {
-    finish_ = v;
-}
-
-void transform_metrics::finish(const boost::posix_time::ptime&& v) {
-    finish_ = std::move(v);
+void transform_metrics::end(const unsigned long v) {
+    end_ = v;
 }
 
 const std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> >& transform_metrics::children() const {

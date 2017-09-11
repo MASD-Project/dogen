@@ -18,15 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <chrono>
+#include <boost/uuid/uuid.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/uuid/uuid_io.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics_builder.hpp"
 
-namespace boost {
+namespace {
 
-inline bool operator==(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& lhs,
-const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.transform_metrics_builder"));
+
+const std::string root_id("root");
+const std::string unexpected_empty(
+    "Logic error, no transforms started at present");
+const std::string unmatch_start_end(
+    "Expected the same number of start and end calls");
 
 }
 
@@ -34,59 +46,63 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-transform_metrics_builder::transform_metrics_builder(
-    const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& root,
-    const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& current_)
-    : root_(root),
-      current__(current_) { }
-
-void transform_metrics_builder::swap(transform_metrics_builder& other) noexcept {
-    using std::swap;
-    swap(root_, other.root_);
-    swap(current__, other.current__);
+transform_metrics_builder::transform_metrics_builder() {
+    stack_.push(create_metrics(root_id));
 }
 
-bool transform_metrics_builder::operator==(const transform_metrics_builder& rhs) const {
-    return root_ == rhs.root_ &&
-        current__ == rhs.current__;
+void transform_metrics_builder::ensure_stack_not_empty() const {
+    if (stack_.empty()) {
+        BOOST_LOG_SEV(lg, error) << unexpected_empty;
+        BOOST_THROW_EXCEPTION(building_error(unexpected_empty));
+    }
 }
 
-transform_metrics_builder& transform_metrics_builder::operator=(transform_metrics_builder other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+boost::shared_ptr<transform_metrics>
+transform_metrics_builder::create_metrics(const std::string& id) const {
+    auto r(boost::make_shared<transform_metrics>());
+    r->id(id);
+
+    auto uuid = boost::uuids::random_generator()();
+    r->guid(boost::uuids::to_string(uuid));
+
+    using namespace std::chrono;
+    auto now(time_point_cast<milliseconds>(system_clock::now()));
+    r->start(now.time_since_epoch().count());
+    return r;
 }
 
-const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& transform_metrics_builder::root() const {
-    return root_;
+void transform_metrics_builder::update_end() {
+    using namespace std::chrono;
+    auto now(time_point_cast<milliseconds>(system_clock::now()));
+    stack_.top()->end(now.time_since_epoch().count());
 }
 
-boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& transform_metrics_builder::root() {
-    return root_;
+void transform_metrics_builder::start(const std::string& id) {
+    ensure_stack_not_empty();
+    auto next(create_metrics(id));
+    stack_.top()->children().push_back(next);
+    stack_.push(next);
 }
 
-void transform_metrics_builder::root(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& v) {
-    root_ = v;
+void transform_metrics_builder::end() {
+    ensure_stack_not_empty();
+    update_end();
+    stack_.pop();
 }
 
-void transform_metrics_builder::root(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>&& v) {
-    root_ = std::move(v);
+const transform_metrics& transform_metrics_builder::current() const {
+
+    return *stack_.top();
 }
 
-const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& transform_metrics_builder::current_() const {
-    return current__;
-}
+boost::shared_ptr<transform_metrics> transform_metrics_builder::build() {
+    if (stack_.size() != 1) {
+        BOOST_LOG_SEV(lg, error) << unmatch_start_end;
+        BOOST_THROW_EXCEPTION(building_error(unmatch_start_end));
+    }
 
-boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& transform_metrics_builder::current_() {
-    return current__;
-}
-
-void transform_metrics_builder::current_(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& v) {
-    current__ = v;
-}
-
-void transform_metrics_builder::current_(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>&& v) {
-    current__ = std::move(v);
+    update_end();
+    return stack_.top();
 }
 
 } } }

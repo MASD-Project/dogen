@@ -18,8 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
@@ -28,8 +30,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.references_chain");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.initial_target_chain"));
+static logger lg(logger_factory(id));
 
 const std::string non_absolute_target("Target path is not absolute: ");
 
@@ -58,6 +62,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
      * Obtain the absolute paths to all reference models - system and
      * user.
      */
+    ctx.prober().start_chain(id, target);
     const auto rps(helpers::reference_paths_extractor::extract(ctx, target));
 
     /*
@@ -109,6 +114,8 @@ transform(const context& ctx, const meta_model::endomodel& target) {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Reference models chain executed.";
+    ctx.prober().end_chain(r);
+
     return r;
 }
 

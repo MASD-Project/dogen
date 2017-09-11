@@ -23,6 +23,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/dia/types/persister.hpp"
+#include "dogen/dia/io/diagram_io.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/exomodel_transform.hpp"
@@ -60,23 +63,26 @@ std::list<std::string> exomodel_transform::supported_extensions() const {
     return extensions;
 }
 
-meta_model::exomodel
-exomodel_transform::transform(const boost::filesystem::path& p) {
+meta_model::exomodel exomodel_transform::
+transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
 
     dogen::dia::hydrator h;
     const auto diagram(h.hydrate(p));
-    BOOST_LOG_SEV(lg, debug) << "read Dia diagram.";
+
+    ctx.prober().start_transform(::id, diagram);
+    BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     const auto r(yarn::dia::workflow::execute(diagram));
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
+    ctx.prober().end_transform(r);
 
     return r;
 }
 
-void exomodel_transform::transform(const meta_model::exomodel& /*em*/,
-    const boost::filesystem::path& /*p*/) {
+void exomodel_transform::transform(const transforms::context& /*ctx*/,
+    const meta_model::exomodel& /*em*/, const boost::filesystem::path& /*p*/) {
     BOOST_LOG_SEV(lg, error) << to_dia_support_unavailable;
 
     using yarn::transforms::transformation_error;

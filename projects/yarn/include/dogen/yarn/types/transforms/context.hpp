@@ -34,7 +34,6 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
-#include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
 namespace dogen {

@@ -29,15 +29,8 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-boost::posix_time::ptime
-create_boost_posix_time_ptime(const unsigned int position) {
-    unsigned int day(1 + (position % 27));
-    using boost::gregorian::date;
-    using boost::posix_time::ptime;
-    using boost::posix_time::time_duration;
-    date d(2002, 2, day);
-    ptime r(d, time_duration(1,2,3));
-    return r;
+unsigned long create_unsigned_long(const unsigned int position) {
+    return static_cast<unsigned long>(position);
 }
 
 dogen::yarn::helpers::transform_metrics*
@@ -72,8 +65,8 @@ void transform_metrics_generator::
 populate(const unsigned int position, result_type& v) {
     v.id(create_std_string(position + 0));
     v.guid(create_std_string(position + 1));
-    v.start(create_boost_posix_time_ptime(position + 2));
-    v.finish(create_boost_posix_time_ptime(position + 3));
+    v.start(create_unsigned_long(position + 2));
+    v.end(create_unsigned_long(position + 3));
     v.children(create_std_list_boost_shared_ptr_dogen_yarn_helpers_transform_metrics(position + 4));
 }
 

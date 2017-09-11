@@ -28,14 +28,6 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_posix_time_ptime(const boost::posix_time::ptime& v) {
-    std::size_t seed(0);
-    const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
-    boost::posix_time::time_duration d(v - epoch);
-    seed = static_cast<std::size_t>(d.total_seconds());
-    return seed;
-}
-
 inline std::size_t hash_boost_shared_ptr_dogen_yarn_helpers_transform_metrics(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& v) {
     std::size_t seed(0);
     combine(seed, *v);
@@ -61,8 +53,8 @@ std::size_t transform_metrics_hasher::hash(const transform_metrics& v) {
 
     combine(seed, v.id());
     combine(seed, v.guid());
-    combine(seed, hash_boost_posix_time_ptime(v.start()));
-    combine(seed, hash_boost_posix_time_ptime(v.finish()));
+    combine(seed, v.start());
+    combine(seed, v.end());
     combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_helpers_transform_metrics(v.children()));
 
     return seed;

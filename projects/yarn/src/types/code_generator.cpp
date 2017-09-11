@@ -23,12 +23,15 @@
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
+#include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
 
 namespace {
 
+const std::string id("dogen.yarn.code_generator");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("dogen.yarn.code_generator"));
+auto lg(logger_factory(id));
 
 }
 
@@ -56,6 +59,7 @@ code_generator::generate(const options::knitting_options& o) {
     /*
      * Now we generate the endomodels.
      */
+    ctx.prober().start_chain(id);
     const auto endomodels(endomodel_generation_chain::transform(ctx));
 
     /*
@@ -67,6 +71,7 @@ code_generator::generate(const options::knitting_options& o) {
      * Finally we run the model to text transforms.
      */
     const auto r(code_generation_chain::transform(ctx, models));
+    ctx.prober().end_chain(r);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
     return r;

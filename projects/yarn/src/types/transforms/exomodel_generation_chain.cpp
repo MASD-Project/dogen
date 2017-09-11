@@ -20,14 +20,16 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 
 namespace {
 
+const std::string id("yarn.transforms.exomodel_generation_chain");
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.exomodel_generation_chain"));
+static logger lg(logger_factory(id));
 
 }
 
@@ -65,8 +67,9 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * representation it may be in, Dia, JSON, etc - into the internal
      * representation of an exogenous model.
      */
+    ctx.prober().start_chain(id);
     auto& t(transform_for_model(p));
-    auto r(t.transform(p));
+    auto r(t.transform(ctx, p));
 
     /*
      * Now transform the annotations. This must be done at this point
@@ -81,6 +84,7 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * meta-data.
      */
     naming_transform::transform(ctx, r);
+    ctx.prober().end_chain(r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
     return r;

@@ -67,10 +67,9 @@ make(const kernel_registrar& rg, const options::knitting_options& o) {
 
     bool probe_data(o.probe_all());
     bool probe_stats(o.probe_all() || o.probe_stats());
-    bool probe_stats_graph(o.probe_all() || o.probe_stats_graph());
     o.probe_directory();
 
-    helpers::transform_prober prober(probe_data, probe_stats, probe_stats_graph,
+    helpers::transform_prober prober(probe_data, probe_stats,
         o.probe_directory(), alrp, atrp, msrp);
 
     formatters::repository_factory frpf;

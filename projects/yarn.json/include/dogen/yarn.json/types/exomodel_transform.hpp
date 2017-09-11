@@ -42,8 +42,10 @@ public:
     yarn::transforms::exomodel_transform_types transform_types() const override;
     std::list<std::string> supported_extensions() const override;
     meta_model::exomodel
-    transform(const boost::filesystem::path& p) override;
-    void transform(const meta_model::exomodel& em,
+    transform(const transforms::context& ctx,
+        const boost::filesystem::path& p) override;
+    void transform(const transforms::context& ctx,
+        const meta_model::exomodel& em,
         const boost::filesystem::path& p) override;
 };
 

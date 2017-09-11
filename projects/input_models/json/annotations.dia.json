@@ -176,7 +176,7 @@
           "name": {
             "simple": "archetype_locations_by_meta_name"
           },
-          "unparsed_type": "std::unordered_map<std::string, std::list<archetype_location>>"
+          "unparsed_type": "std::unordered_map<std::string, archetype_locations_group>"
         }
       ]
     },
@@ -192,6 +192,33 @@
       },
       "stereotypes": [
         "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "archetype_locations_group"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "archetype_locations"
+          },
+          "unparsed_type": "std::list<archetype_location>",
+          "documentation": "All archetype locations that belong to this group.\n"
+        },
+        {
+          "name": {
+            "simple": "canonical_archetype_locations"
+          },
+          "unparsed_type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
+        }
       ]
     },
     {

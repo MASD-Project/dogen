@@ -30,8 +30,6 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <boost/date_time/posix_time/time_serialize.hpp>
 #include "dogen/yarn/serialization/helpers/transform_metrics_ser.hpp"
 
 namespace boost {
@@ -44,7 +42,7 @@ void save(Archive& ar,
     ar << make_nvp("id", v.id_);
     ar << make_nvp("guid", v.guid_);
     ar << make_nvp("start", v.start_);
-    ar << make_nvp("finish", v.finish_);
+    ar << make_nvp("end", v.end_);
     ar << make_nvp("children", v.children_);
 }
 
@@ -55,7 +53,7 @@ void load(Archive& ar,
     ar >> make_nvp("id", v.id_);
     ar >> make_nvp("guid", v.guid_);
     ar >> make_nvp("start", v.start_);
-    ar >> make_nvp("finish", v.finish_);
+    ar >> make_nvp("end", v.end_);
     ar >> make_nvp("children", v.children_);
 }
 

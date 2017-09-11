@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include <boost/date_time/posix_time/posix_time_types.hpp>
 #include "dogen/yarn/types/helpers/transform_metrics_fwd.hpp"
 #include "dogen/yarn/serialization/helpers/transform_metrics_fwd_ser.hpp"
 
@@ -39,17 +38,19 @@ namespace helpers {
 
 class transform_metrics final {
 public:
-    transform_metrics() = default;
     transform_metrics(const transform_metrics&) = default;
     transform_metrics(transform_metrics&&) = default;
     ~transform_metrics() = default;
 
 public:
+    transform_metrics();
+
+public:
     transform_metrics(
         const std::string& id,
         const std::string& guid,
-        const boost::posix_time::ptime& start,
-        const boost::posix_time::ptime& finish,
+        const unsigned long start,
+        const unsigned long end,
         const std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> >& children);
 
 private:
@@ -70,15 +71,11 @@ public:
     void guid(const std::string& v);
     void guid(const std::string&& v);
 
-    const boost::posix_time::ptime& start() const;
-    boost::posix_time::ptime& start();
-    void start(const boost::posix_time::ptime& v);
-    void start(const boost::posix_time::ptime&& v);
+    unsigned long start() const;
+    void start(const unsigned long v);
 
-    const boost::posix_time::ptime& finish() const;
-    boost::posix_time::ptime& finish();
-    void finish(const boost::posix_time::ptime& v);
-    void finish(const boost::posix_time::ptime&& v);
+    unsigned long end() const;
+    void end(const unsigned long v);
 
     const std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> >& children() const;
     std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> >& children();
@@ -98,8 +95,8 @@ public:
 private:
     std::string id_;
     std::string guid_;
-    boost::posix_time::ptime start_;
-    boost::posix_time::ptime finish_;
+    unsigned long start_;
+    unsigned long end_;
     std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> > children_;
 };
 

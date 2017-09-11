@@ -76,6 +76,13 @@
       "attributes": [
         {
           "name": {
+            "simple": "log_file"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the log file.\n"
+        },
+        {
+          "name": {
             "simple": "log_level"
           },
           "unparsed_type": "std::string",
@@ -86,7 +93,7 @@
             "simple": "target"
           },
           "unparsed_type": "boost::filesystem::path",
-          "documentation": "Path to the Dia diagram that contains the model to generate.\n"
+          "documentation": "Full path to the model to generate.\n"
         },
         {
           "name": {
@@ -125,16 +132,38 @@
         },
         {
           "name": {
-            "simple": "log_directory"
-          },
-          "unparsed_type": "boost::filesystem::path"
-        },
-        {
-          "name": {
             "simple": "compatibility_mode"
           },
           "unparsed_type": "bool",
           "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_stats"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Enable probing for statistics around transforms.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_stats_graph"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Enable probing for statistics around transforms and generate a graph.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_all"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Enable all probing.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_directory"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the directory in which to place probe information.\n"
         }
       ]
     },

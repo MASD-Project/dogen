@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/yarn/io/helpers/transform_metrics_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -70,8 +69,8 @@ std::ostream& operator<<(std::ostream& s, const transform_metrics& v) {
       << "\"__type__\": " << "\"dogen::yarn::helpers::transform_metrics\"" << ", "
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "
-      << "\"start\": " << "\"" << v.start() << "\"" << ", "
-      << "\"finish\": " << "\"" << v.finish() << "\"" << ", "
+      << "\"start\": " << v.start() << ", "
+      << "\"end\": " << v.end() << ", "
       << "\"children\": " << v.children()
       << " }";
     return(s);

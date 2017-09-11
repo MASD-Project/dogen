@@ -28,6 +28,7 @@
 #include <utility>
 #include <boost/tuple/tuple.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_interface.hpp"
 
 namespace dogen {
@@ -38,11 +39,13 @@ class exomodel_to_exomodel_chain final {
 public:
     static boost::tuple<exomodel_transform_interface&,
                         exomodel_transform_interface&>
-    obtain_transforms(const boost::filesystem::path& src_path,
+    obtain_transforms(
+        const boost::filesystem::path& src_path,
         const boost::filesystem::path& dst_path);
 
 public:
-    static void transform(const boost::filesystem::path& src_path,
+    static void transform(const transforms::context& ctx,
+        const boost::filesystem::path& src_path,
         const boost::filesystem::path& dst_path);
 };
 

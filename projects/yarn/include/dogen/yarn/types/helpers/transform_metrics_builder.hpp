@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <stack>
+#include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/helpers/transform_metrics_fwd.hpp"
 
@@ -35,53 +36,29 @@ namespace helpers {
 
 class transform_metrics_builder final {
 public:
-    transform_metrics_builder() = default;
-    transform_metrics_builder(const transform_metrics_builder&) = default;
-    transform_metrics_builder(transform_metrics_builder&&) = default;
-    ~transform_metrics_builder() = default;
-
-public:
-    transform_metrics_builder(
-        const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& root,
-        const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& current_);
-
-public:
-    const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& root() const;
-    boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& root();
-    void root(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& v);
-    void root(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>&& v);
-
-    const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& current_() const;
-    boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& current_();
-    void current_(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>& v);
-    void current_(const boost::shared_ptr<dogen::yarn::helpers::transform_metrics>&& v);
-
-public:
-    bool operator==(const transform_metrics_builder& rhs) const;
-    bool operator!=(const transform_metrics_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(transform_metrics_builder& other) noexcept;
-    transform_metrics_builder& operator=(transform_metrics_builder other);
+    transform_metrics_builder();
 
 private:
-    boost::shared_ptr<dogen::yarn::helpers::transform_metrics> root_;
-    boost::shared_ptr<dogen::yarn::helpers::transform_metrics> current__;
+    void ensure_stack_not_empty() const;
+    boost::shared_ptr<transform_metrics>
+    create_metrics(const std::string& id) const;
+    void update_end();
+
+public:
+    void start(const std::string& id);
+    void end();
+
+public:
+    const transform_metrics& current() const;
+
+public:
+    boost::shared_ptr<transform_metrics> build();
+
+private:
+    std::stack<boost::shared_ptr<transform_metrics>> stack_;
 };
 
 } } }
 
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::helpers::transform_metrics_builder& lhs,
-    dogen::yarn::helpers::transform_metrics_builder& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

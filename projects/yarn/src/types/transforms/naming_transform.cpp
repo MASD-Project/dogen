@@ -34,6 +34,7 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -42,8 +43,10 @@
 
 namespace {
 
+const std::string id("yarn.transforms.naming_transform");
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.naming_transform"));
+static logger lg(logger_factory(id));
 
 const std::string missing_model_modules("Must supply model modules.");
 
@@ -176,6 +179,8 @@ naming_transform::compute_model_name(const meta_model::location& l) {
 
 void naming_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
+    ctx.prober().start_transform(id, em);
+
     const auto& ra(em.root_module().second->annotation());
     const auto tg(make_type_group(ctx.type_repository()));
     const auto cfg(make_naming_configuration(tg, ra));
@@ -183,6 +188,8 @@ transform(const context& ctx, meta_model::exomodel& em) {
     em.name(compute_model_name(l));
     em.root_module().second->name(em.name());
     update_names(l, em);
+
+    ctx.prober().end_transform(em);
 }
 
 } } }

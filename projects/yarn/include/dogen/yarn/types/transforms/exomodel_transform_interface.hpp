@@ -28,6 +28,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_types.hpp"
 
 namespace dogen {
@@ -68,7 +69,7 @@ public:
      * transforms it into an internal representation of an exogenous
      * model.
      *
-     * @param s Path to an exogenous model.
+     * @param p Path to an exogenous model.
      *
      * @pre Model must conform to the format supported by the
      * transform, as validated by @e can_transform.
@@ -82,13 +83,13 @@ public:
      * processing. In the future this will change to a string.
      */
     virtual meta_model::exomodel
-    transform(const boost::filesystem::path& p) = 0;
+    transform(const context& ctx, const boost::filesystem::path& p) = 0;
 
     /**
      * @brief Transforms the exogenous model into a representation of
      * the native format supported by the exogneous transformer.
      *
-     * @param im Exogenous model to transform.
+     * @param em Exogenous model to transform.
      *
      * @note Method is non-const by design at the moment as some
      * exogenous transformers have state.
@@ -98,7 +99,7 @@ public:
      * exogenous transformers cannot cope with string processing. In
      * the future this will change to returning a string.
      */
-    virtual void transform(const meta_model::exomodel& em,
+    virtual void transform(const context& ctx, const meta_model::exomodel& em,
         const boost::filesystem::path& p) = 0;
 };
 
