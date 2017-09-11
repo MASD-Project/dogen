@@ -11,6 +11,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for boost UUID                                        :story:
+
+It seems boost has a proper UUID type. We should use this instead of
+strings.
+
+Links:
+
+- [[http://www.boost.org/doc/libs/1_65_1/libs/uuid/uuid.html][Uuid docs]]
+
 *** =Nameable= concept moved position on code generation              :story:
 
 During the exogenous model work, yarn's =Nameable= concept moved
