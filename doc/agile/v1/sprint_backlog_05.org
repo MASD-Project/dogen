@@ -761,6 +761,10 @@ Notes:
   - log level
   - if dump data is enabled
 
+Links:
+
+= [[http://www.randygaul.net/2015/06/15/printing-pretty-ascii-trees/][Printing Pretty Ascii Trees]]
+
 *** Remove dumping of models from log                                 :story:
 
 Once probing is in place, we need to remove all the dumps we are doing
