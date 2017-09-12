@@ -47,6 +47,7 @@ namespace yarn {
 namespace helpers {
 
 transform_metrics_builder::transform_metrics_builder() {
+    BOOST_LOG_SEV(lg, debug) << "Initialising. ";
     stack_.push(create_metrics(root_id));
 }
 
@@ -59,6 +60,7 @@ void transform_metrics_builder::ensure_stack_not_empty() const {
 
 boost::shared_ptr<transform_metrics>
 transform_metrics_builder::create_metrics(const std::string& id) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating metrics for id: " << id;
     auto r(boost::make_shared<transform_metrics>());
     r->id(id);
 
@@ -78,6 +80,8 @@ void transform_metrics_builder::update_end() {
 }
 
 void transform_metrics_builder::start(const std::string& id) {
+    BOOST_LOG_SEV(lg, debug) << "Starting id: " << id;
+
     ensure_stack_not_empty();
     auto next(create_metrics(id));
     stack_.top()->children().push_back(next);
@@ -85,6 +89,8 @@ void transform_metrics_builder::start(const std::string& id) {
 }
 
 void transform_metrics_builder::end() {
+    BOOST_LOG_SEV(lg, debug) << "Ending id: " << current().id();
+
     ensure_stack_not_empty();
     update_end();
     stack_.pop();
@@ -95,6 +101,8 @@ const transform_metrics& transform_metrics_builder::current() const {
 }
 
 boost::shared_ptr<transform_metrics> transform_metrics_builder::build() {
+    BOOST_LOG_SEV(lg, debug) << "Building.";
+
     if (stack_.size() != 1) {
         BOOST_LOG_SEV(lg, error) << unmatch_start_end;
         BOOST_THROW_EXCEPTION(building_error(unmatch_start_end));

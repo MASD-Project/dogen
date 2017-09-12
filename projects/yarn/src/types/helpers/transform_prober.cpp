@@ -94,6 +94,8 @@ bool transform_prober::probing_enabled() const {
 }
 
 void transform_prober::handle_probe_directory() const {
+    BOOST_LOG_SEV(lg, debug) << "Handling probe directory.";
+
     if (boost::filesystem::exists(probe_directory_)) {
         BOOST_LOG_SEV(lg, debug) << "Prober data already exists: "
                                  << probe_directory_.generic_string();
@@ -113,10 +115,13 @@ void transform_prober::handle_probe_directory() const {
         BOOST_LOG_SEV(lg, error) << failed_create;
         BOOST_THROW_EXCEPTION(probing_error(failed_create));
     }
-    BOOST_LOG_SEV(lg, debug) << "Created prober data directory.";
+    BOOST_LOG_SEV(lg, debug) << "Created prober data directory: "
+                             << probe_directory_.generic_string();
 }
 
 void transform_prober::handle_current_directory() const {
+    BOOST_LOG_SEV(lg, debug) << "Handling current directory change.";
+
     ensure_transform_position_not_empty();
 
     const auto id(builder_.current().id());
@@ -186,9 +191,11 @@ void transform_prober::start_chain(const std::string& id) const {
     if (!probing_enabled())
         return;
 
-    builder_.start(id);
     BOOST_LOG_SEV(lg, debug) << "Starting: " << id
-                             << "(" << builder_.current().guid() << ")";
+                             << " (" << builder_.current().guid() << ")";
+    BOOST_LOG_SEV(lg, debug) << "Current directory: "
+                             << current_directory_.generic_string();
+    builder_.start(id);
 
     if (!probe_data_)
         return;
@@ -202,9 +209,9 @@ void transform_prober::start_transform(const std::string& id) const {
     if (!probing_enabled())
         return;
 
-    builder_.start(id);
     BOOST_LOG_SEV(lg, debug) << "Starting: " << id
-                             << "(" << builder_.current().guid() << ")";
+                             << " (" << builder_.current().guid() << ")";
+    builder_.start(id);
 }
 
 void transform_prober::end_chain() const {
@@ -213,6 +220,9 @@ void transform_prober::end_chain() const {
 
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current().id()
                              << " (" << builder_.current().guid() << ")";
+    BOOST_LOG_SEV(lg, debug) << "Current directory: "
+                             << current_directory_.generic_string();
+
     builder_.end();
 
     if (!probe_data_)

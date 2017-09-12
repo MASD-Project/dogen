@@ -148,7 +148,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     meta_model::elements_traversal(em, u);
 
     BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
-    ctx.prober().start_transform(id, em);
+    ctx.prober().end_transform(em);
 }
 
 } } }
