@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_KNITTING_OPTIONS_HPP
-#define DOGEN_OPTIONS_TYPES_KNITTING_OPTIONS_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_OPTIONS_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,27 +29,25 @@
 #include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/serialization/knitting_options_fwd_ser.hpp"
+#include "dogen/yarn/serialization/transforms/options_fwd_ser.hpp"
 
 namespace dogen {
-namespace options {
+namespace yarn {
+namespace transforms {
 
-/**
- * @brief Configuration options related to the knit library.
- */
-class knitting_options final {
+class options final {
 public:
-    knitting_options(const knitting_options&) = default;
-    ~knitting_options() = default;
+    options(const options&) = default;
+    ~options() = default;
 
 public:
-    knitting_options();
+    options();
 
 public:
-    knitting_options(knitting_options&& rhs);
+    options(options&& rhs);
 
 public:
-    knitting_options(
+    options(
         const boost::filesystem::path& log_file,
         const std::string& log_level,
         const boost::filesystem::path& target,
@@ -66,10 +64,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::options::knitting_options& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::transforms::options& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::options::knitting_options& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::options& v, unsigned int version);
 
 public:
     /**
@@ -194,14 +192,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const knitting_options& rhs) const;
-    bool operator!=(const knitting_options& rhs) const {
+    bool operator==(const options& rhs) const;
+    bool operator!=(const options& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(knitting_options& other) noexcept;
-    knitting_options& operator=(knitting_options other);
+    void swap(options& other) noexcept;
+    options& operator=(options other);
 
 private:
     boost::filesystem::path log_file_;
@@ -219,14 +217,14 @@ private:
     boost::filesystem::path probe_directory_;
 };
 
-} }
+} } }
 
 namespace std {
 
 template<>
 inline void swap(
-    dogen::options::knitting_options& lhs,
-    dogen::options::knitting_options& rhs) {
+    dogen::yarn::transforms::options& lhs,
+    dogen::yarn::transforms::options& rhs) {
     lhs.swap(rhs);
 }
 

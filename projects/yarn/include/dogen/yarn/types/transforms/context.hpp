@@ -28,11 +28,11 @@
 #include <vector>
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
@@ -56,7 +56,7 @@ class context final {
 public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
-        const options::knitting_options& options,
+        const options& options,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
@@ -73,7 +73,7 @@ public:
     /**
      * @brief User supplied parameters.
      */
-    const options::knitting_options& options() const;
+    const options& options() const;
 
     /**
      * @brief All of the available archetype locations.
@@ -109,7 +109,7 @@ public:
 
 private:
     const std::vector<boost::filesystem::path> data_directories_;
-    const dogen::options::knitting_options options_;
+    const transforms::options options_;
     const annotations::archetype_location_repository
     archetype_location_repository_;
     const annotations::type_repository type_repository_;

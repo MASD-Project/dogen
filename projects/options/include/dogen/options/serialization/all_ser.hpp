@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/options/serialization/darting_options_ser.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
 #include "dogen/options/serialization/stitching_options_ser.hpp"
 #include "dogen/options/serialization/tailoring_options_ser.hpp"
 

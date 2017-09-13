@@ -18,25 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_CODE_GENERATOR_HPP
-#define DOGEN_YARN_TYPES_CODE_GENERATOR_HPP
+#ifndef DOGEN_YARN_TEST_DATA_TRANSFORMS_OPTIONS_TD_HPP
+#define DOGEN_YARN_TEST_DATA_TRANSFORMS_OPTIONS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace transforms {
 
-class code_generator final {
+class options_generator {
 public:
-    static transforms::code_generation_output
-    generate(const transforms::options& o);
+    options_generator();
+
+public:
+    typedef dogen::yarn::transforms::options result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
-} }
+} } }
 
 #endif

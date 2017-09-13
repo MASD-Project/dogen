@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 
 namespace dogen {
-namespace options {
+namespace yarn {
+namespace transforms {
 
-knitting_options::knitting_options()
+options::options()
     : delete_extra_files_(static_cast<bool>(0)),
       force_write_(static_cast<bool>(0)),
       compatibility_mode_(static_cast<bool>(0)),
@@ -31,7 +32,7 @@ knitting_options::knitting_options()
       probe_stats_disable_guids_(static_cast<bool>(0)),
       probe_all_(static_cast<bool>(0)) { }
 
-knitting_options::knitting_options(knitting_options&& rhs)
+options::options(options&& rhs)
     : log_file_(std::move(rhs.log_file_)),
       log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
@@ -46,7 +47,7 @@ knitting_options::knitting_options(knitting_options&& rhs)
       probe_all_(std::move(rhs.probe_all_)),
       probe_directory_(std::move(rhs.probe_directory_)) { }
 
-knitting_options::knitting_options(
+options::options(
     const boost::filesystem::path& log_file,
     const std::string& log_level,
     const boost::filesystem::path& target,
@@ -74,7 +75,7 @@ knitting_options::knitting_options(
       probe_all_(probe_all),
       probe_directory_(probe_directory) { }
 
-void knitting_options::swap(knitting_options& other) noexcept {
+void options::swap(options& other) noexcept {
     using std::swap;
     swap(log_file_, other.log_file_);
     swap(log_level_, other.log_level_);
@@ -91,7 +92,7 @@ void knitting_options::swap(knitting_options& other) noexcept {
     swap(probe_directory_, other.probe_directory_);
 }
 
-bool knitting_options::operator==(const knitting_options& rhs) const {
+bool options::operator==(const options& rhs) const {
     return log_file_ == rhs.log_file_ &&
         log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
@@ -107,170 +108,170 @@ bool knitting_options::operator==(const knitting_options& rhs) const {
         probe_directory_ == rhs.probe_directory_;
 }
 
-knitting_options& knitting_options::operator=(knitting_options other) {
+options& options::operator=(options other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::filesystem::path& knitting_options::log_file() const {
+const boost::filesystem::path& options::log_file() const {
     return log_file_;
 }
 
-boost::filesystem::path& knitting_options::log_file() {
+boost::filesystem::path& options::log_file() {
     return log_file_;
 }
 
-void knitting_options::log_file(const boost::filesystem::path& v) {
+void options::log_file(const boost::filesystem::path& v) {
     log_file_ = v;
 }
 
-void knitting_options::log_file(const boost::filesystem::path&& v) {
+void options::log_file(const boost::filesystem::path&& v) {
     log_file_ = std::move(v);
 }
 
-const std::string& knitting_options::log_level() const {
+const std::string& options::log_level() const {
     return log_level_;
 }
 
-std::string& knitting_options::log_level() {
+std::string& options::log_level() {
     return log_level_;
 }
 
-void knitting_options::log_level(const std::string& v) {
+void options::log_level(const std::string& v) {
     log_level_ = v;
 }
 
-void knitting_options::log_level(const std::string&& v) {
+void options::log_level(const std::string&& v) {
     log_level_ = std::move(v);
 }
 
-const boost::filesystem::path& knitting_options::target() const {
+const boost::filesystem::path& options::target() const {
     return target_;
 }
 
-boost::filesystem::path& knitting_options::target() {
+boost::filesystem::path& options::target() {
     return target_;
 }
 
-void knitting_options::target(const boost::filesystem::path& v) {
+void options::target(const boost::filesystem::path& v) {
     target_ = v;
 }
 
-void knitting_options::target(const boost::filesystem::path&& v) {
+void options::target(const boost::filesystem::path&& v) {
     target_ = std::move(v);
 }
 
-bool knitting_options::delete_extra_files() const {
+bool options::delete_extra_files() const {
     return delete_extra_files_;
 }
 
-void knitting_options::delete_extra_files(const bool v) {
+void options::delete_extra_files(const bool v) {
     delete_extra_files_ = v;
 }
 
-bool knitting_options::force_write() const {
+bool options::force_write() const {
     return force_write_;
 }
 
-void knitting_options::force_write(const bool v) {
+void options::force_write(const bool v) {
     force_write_ = v;
 }
 
-const std::vector<std::string>& knitting_options::ignore_patterns() const {
+const std::vector<std::string>& options::ignore_patterns() const {
     return ignore_patterns_;
 }
 
-std::vector<std::string>& knitting_options::ignore_patterns() {
+std::vector<std::string>& options::ignore_patterns() {
     return ignore_patterns_;
 }
 
-void knitting_options::ignore_patterns(const std::vector<std::string>& v) {
+void options::ignore_patterns(const std::vector<std::string>& v) {
     ignore_patterns_ = v;
 }
 
-void knitting_options::ignore_patterns(const std::vector<std::string>&& v) {
+void options::ignore_patterns(const std::vector<std::string>&& v) {
     ignore_patterns_ = std::move(v);
 }
 
-const boost::filesystem::path& knitting_options::output_directory_path() const {
+const boost::filesystem::path& options::output_directory_path() const {
     return output_directory_path_;
 }
 
-boost::filesystem::path& knitting_options::output_directory_path() {
+boost::filesystem::path& options::output_directory_path() {
     return output_directory_path_;
 }
 
-void knitting_options::output_directory_path(const boost::filesystem::path& v) {
+void options::output_directory_path(const boost::filesystem::path& v) {
     output_directory_path_ = v;
 }
 
-void knitting_options::output_directory_path(const boost::filesystem::path&& v) {
+void options::output_directory_path(const boost::filesystem::path&& v) {
     output_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& knitting_options::cpp_headers_output_directory_path() const {
+const boost::filesystem::path& options::cpp_headers_output_directory_path() const {
     return cpp_headers_output_directory_path_;
 }
 
-boost::filesystem::path& knitting_options::cpp_headers_output_directory_path() {
+boost::filesystem::path& options::cpp_headers_output_directory_path() {
     return cpp_headers_output_directory_path_;
 }
 
-void knitting_options::cpp_headers_output_directory_path(const boost::filesystem::path& v) {
+void options::cpp_headers_output_directory_path(const boost::filesystem::path& v) {
     cpp_headers_output_directory_path_ = v;
 }
 
-void knitting_options::cpp_headers_output_directory_path(const boost::filesystem::path&& v) {
+void options::cpp_headers_output_directory_path(const boost::filesystem::path&& v) {
     cpp_headers_output_directory_path_ = std::move(v);
 }
 
-bool knitting_options::compatibility_mode() const {
+bool options::compatibility_mode() const {
     return compatibility_mode_;
 }
 
-void knitting_options::compatibility_mode(const bool v) {
+void options::compatibility_mode(const bool v) {
     compatibility_mode_ = v;
 }
 
-bool knitting_options::probe_stats() const {
+bool options::probe_stats() const {
     return probe_stats_;
 }
 
-void knitting_options::probe_stats(const bool v) {
+void options::probe_stats(const bool v) {
     probe_stats_ = v;
 }
 
-bool knitting_options::probe_stats_disable_guids() const {
+bool options::probe_stats_disable_guids() const {
     return probe_stats_disable_guids_;
 }
 
-void knitting_options::probe_stats_disable_guids(const bool v) {
+void options::probe_stats_disable_guids(const bool v) {
     probe_stats_disable_guids_ = v;
 }
 
-bool knitting_options::probe_all() const {
+bool options::probe_all() const {
     return probe_all_;
 }
 
-void knitting_options::probe_all(const bool v) {
+void options::probe_all(const bool v) {
     probe_all_ = v;
 }
 
-const boost::filesystem::path& knitting_options::probe_directory() const {
+const boost::filesystem::path& options::probe_directory() const {
     return probe_directory_;
 }
 
-boost::filesystem::path& knitting_options::probe_directory() {
+boost::filesystem::path& options::probe_directory() {
     return probe_directory_;
 }
 
-void knitting_options::probe_directory(const boost::filesystem::path& v) {
+void options::probe_directory(const boost::filesystem::path& v) {
     probe_directory_ = v;
 }
 
-void knitting_options::probe_directory(const boost::filesystem::path&& v) {
+void options::probe_directory(const boost::filesystem::path&& v) {
     probe_directory_ = std::move(v);
 }
 
-} }
+} } }

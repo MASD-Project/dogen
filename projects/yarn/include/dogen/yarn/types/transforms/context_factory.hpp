@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
@@ -43,7 +44,7 @@ private:
 
 public:
     static context
-    make(const kernel_registrar& rg, const options::knitting_options& o);
+    make(const kernel_registrar& rg, const options& o);
 };
 
 } } }

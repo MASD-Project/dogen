@@ -27,9 +27,9 @@ namespace yarn {
 namespace test {
 
 transforms::context mock_context_factory::make() {
-    dogen::options::knitting_options ko;
+    dogen::yarn::transforms::options o;
     dogen::yarn::transforms::kernel_registrar rg;
-    const auto r(dogen::yarn::transforms::context_factory::make(rg, ko));
+    const auto r(dogen::yarn::transforms::context_factory::make(rg, o));
     return r;
 }
 

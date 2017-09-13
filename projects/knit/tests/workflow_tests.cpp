@@ -33,8 +33,8 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
-#include "dogen/options/test/mock_options_factory.hpp"
-#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/test/mock_options_factory.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
@@ -70,7 +70,7 @@ const std::string dia_invalid_name("Dia object name is empty");
 struct test_configuration {
     boost::filesystem::path expected;
     boost::filesystem::path actual;
-    dogen::options::knitting_options options;
+    dogen::yarn::transforms::options options;
 };
 
 test_configuration make_test_configuration(const std::string& model_name,
@@ -82,7 +82,7 @@ test_configuration make_test_configuration(const std::string& model_name,
     r.expected = validating_resolver::resolve(model_name + ::expected);
     r.actual = validating_resolver::resolve(model_name + actual_dir);
 
-    using dogen::options::test::mock_options_factory;
+    using dogen::yarn::test::mock_options_factory;
     r.options = mock_options_factory::make_knitting_options(target, r.actual);
 
     return r;

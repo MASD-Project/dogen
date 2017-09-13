@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/transforms/options_validator.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
@@ -40,12 +41,18 @@ namespace dogen {
 namespace yarn {
 
 transforms::code_generation_output
-code_generator::generate(const options::knitting_options& o) {
+code_generator::generate(const transforms::options& o) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
 
     /*
-     * First we obtain the kernel registrar and ensure it has been
-     * setup.
+     * Before anything else, lets make sure the transform options make
+     * sense. No point in proceeding otherwise.
+     */
+    transforms::options_validator v;
+    v.validate(o);
+
+    /*
+     * Obtain the kernel registrar and ensure it has been setup.
      */
     using namespace transforms;
     const auto& rg(code_generation_chain::registrar());

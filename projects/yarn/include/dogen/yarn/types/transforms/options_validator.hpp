@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/test/mock_options_factory.hpp"
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_OPTIONS_VALIDATOR_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_OPTIONS_VALIDATOR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn/types/transforms/options.hpp"
 
 namespace dogen {
-namespace options {
-namespace test {
+namespace yarn {
+namespace transforms {
 
-knitting_options mock_options_factory::make_knitting_options(
-    const boost::filesystem::path& target,
-    const boost::filesystem::path project_dir,
-    const std::string log_level) {
-
-    knitting_options r;
-    r.log_level(log_level);
-    r.target(target);
-    r.delete_extra_files(true);
-    r.force_write(false);
-    r.output_directory_path(project_dir);
-    return r;
-}
+class options_validator final {
+public:
+    static void validate(const options& s);
+};
 
 } } }
+
+#endif

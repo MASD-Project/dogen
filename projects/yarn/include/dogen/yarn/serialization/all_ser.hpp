@@ -36,6 +36,7 @@
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
+#include "dogen/yarn/serialization/transforms/options_ser.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_set_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/location_ser.hpp"

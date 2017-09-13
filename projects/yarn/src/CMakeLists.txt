@@ -33,7 +33,6 @@ target_link_libraries(${name}
     utility
     annotations
     formatters
-    options
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 

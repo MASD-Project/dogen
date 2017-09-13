@@ -36,6 +36,7 @@
 #include "dogen/yarn/io/meta_model/builtin_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/visitor_io.hpp"
+#include "dogen/yarn/io/transforms/options_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"

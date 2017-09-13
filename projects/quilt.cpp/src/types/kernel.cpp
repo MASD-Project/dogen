@@ -59,14 +59,14 @@ formattables::model kernel::create_formattables_model(
     return fw.execute(atrp, ra, l, frp, m);
 }
 
-formattables::locator kernel::make_locator(const options::knitting_options& ko,
+formattables::locator kernel::make_locator(const yarn::transforms::options& o,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const formatters::repository& frp, const bool enable_kernel_directories,
     const yarn::meta_model::model& m) const {
 
     const auto& mn(m.name());
-    const auto odp(ko.output_directory_path());
-    const auto chodp(ko.cpp_headers_output_directory_path());
+    const auto odp(o.output_directory_path());
+    const auto chodp(o.cpp_headers_output_directory_path());
     const auto ekd(enable_kernel_directories);
     const auto ids(m.module_ids());
     const formattables::locator r(odp, chodp, atrp, frp, ra, mn, ids, ekd);

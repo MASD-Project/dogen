@@ -23,7 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/options/io/knitting_options_io.hpp"
+#include "dogen/yarn/io/transforms/options_io.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 
@@ -126,7 +126,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     BOOST_CHECK(!version);
 }
 
-dogen::options::knitting_options
+dogen::yarn::transforms::options
 check_valid_arguments(std::vector<std::string> options) {
     bool help(false);
     bool version(false);

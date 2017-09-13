@@ -30,7 +30,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 
 namespace dogen {
 namespace knitter {
@@ -69,7 +69,7 @@ private:
     make_variables_map(const options_description& od) const;
 
 private:
-    options::knitting_options
+    yarn::transforms::options
     make_knitting_options(const variables_map& vm) const;
 
 public:
@@ -77,7 +77,7 @@ public:
     void version_function(std::function<void()> value);
 
 public:
-    boost::optional<options::knitting_options> parse();
+    boost::optional<yarn::transforms::options> parse();
 
 private:
     const std::vector<std::string> arguments_;

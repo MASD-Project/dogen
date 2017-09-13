@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/options/io/knitting_options_io.hpp"
+#include "dogen/yarn/io/transforms/options_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,9 +46,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 }
 
 namespace dogen {
-namespace options {
+namespace yarn {
+namespace transforms {
 
-std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
+std::ostream& operator<<(std::ostream& s, const options& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -56,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::options::knitting_options\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::transforms::options\"" << ", "
       << "\"log_file\": " << "\"" << v.log_file().generic_string() << "\"" << ", "
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
@@ -74,4 +75,4 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
     return(s);
 }
 
-} }
+} } }

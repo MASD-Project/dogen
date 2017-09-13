@@ -27,7 +27,6 @@
 
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"

@@ -18,17 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_VALIDATION_ERROR_FWD_HPP
-#define DOGEN_OPTIONS_TYPES_VALIDATION_ERROR_FWD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_TRANSFORMS_OPTIONS_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_TRANSFORMS_OPTIONS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace options {
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/transforms/options.hpp"
 
-class validation_error;
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::transforms::options)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::transforms::options& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::transforms::options& v, unsigned int version);
 
 } }
 

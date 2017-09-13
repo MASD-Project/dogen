@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/options/serialization/knitting_options_ser.hpp"
+#include "dogen/yarn/serialization/transforms/options_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -60,7 +60,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::options::knitting_options& v,
+    const dogen::yarn::transforms::options& v,
     const unsigned int /*version*/) {
     ar << make_nvp("log_file", v.log_file_);
     ar << make_nvp("log_level", v.log_level_);
@@ -79,7 +79,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::options::knitting_options& v,
+    dogen::yarn::transforms::options& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("log_file", v.log_file_);
     ar >> make_nvp("log_level", v.log_level_);
@@ -101,16 +101,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::options::knitting_options& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::options::knitting_options& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::transforms::options& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::transforms::options& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::options::knitting_options& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::options::knitting_options& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::transforms::options& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::transforms::options& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::options::knitting_options& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::options::knitting_options& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::transforms::options& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::transforms::options& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::options::knitting_options& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::options::knitting_options& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::transforms::options& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::transforms::options& v, unsigned int version);
 
 } }

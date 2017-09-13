@@ -26,7 +26,7 @@ namespace transforms {
 
 context::context(
         const std::vector<boost::filesystem::path>& data_directories,
-        const options::knitting_options& options,
+        const transforms::options& options,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
@@ -42,7 +42,7 @@ const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
 }
 
-const options::knitting_options& context::options() const {
+const options& context::options() const {
     return options_;
 }
 

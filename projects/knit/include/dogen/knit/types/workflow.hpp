@@ -34,7 +34,7 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/artefact_writer_interface.hpp"
 
@@ -79,7 +79,7 @@ public:
 
 public:
     workflow(workflow&& rhs);
-    explicit workflow(const options::knitting_options& s);
+    explicit workflow(const yarn::transforms::options& o);
 
 public: // public section for testing purposes only
     /**
@@ -116,7 +116,7 @@ public:
     void execute() const;
 
 private:
-    const options::knitting_options knitting_options_;
+    const yarn::transforms::options options_;
 };
 
 } }

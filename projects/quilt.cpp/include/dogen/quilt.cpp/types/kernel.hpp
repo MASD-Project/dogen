@@ -74,7 +74,7 @@ private:
     /**
      * @brief Creates a file locator.
      */
-    formattables::locator make_locator(const options::knitting_options& ko,
+    formattables::locator make_locator(const yarn::transforms::options& o,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra, const formatters::repository& frp,
         const bool enable_kernel_directories,

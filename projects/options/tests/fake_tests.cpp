@@ -18,18 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_KNITTING_OPTIONS_FWD_HPP
-#define DOGEN_OPTIONS_TYPES_KNITTING_OPTIONS_FWD_HPP
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-namespace dogen {
-namespace options {
+const std::string empty;
+const std::string test_module("options");
+const std::string test_suite("fake_tests");
 
-class knitting_options;
+}
 
-} }
+BOOST_AUTO_TEST_SUITE(fake_tests)
 
-#endif
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()

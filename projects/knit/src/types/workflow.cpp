@@ -25,8 +25,6 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
-#include "dogen/options/types/knitting_options_validator.hpp"
-#include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -57,16 +55,13 @@ namespace dogen {
 namespace knit {
 
 workflow::workflow(workflow&& rhs)
-    : knitting_options_(std::move(rhs.knitting_options_)) { }
+    : options_(std::move(rhs.options_)) { }
 
 workflow::
-workflow(const options::knitting_options& o) : knitting_options_(o) {
-    options::knitting_options_validator v;
-    v.validate(knitting_options_);
-}
+workflow(const yarn::transforms::options& o) : options_(o) {}
 
 bool workflow::housekeeping_required() const {
-    return knitting_options_.delete_extra_files();
+    return options_.delete_extra_files();
 }
 
 void workflow::perform_housekeeping(
@@ -80,7 +75,7 @@ void workflow::perform_housekeeping(
             expected_files.insert(d.generic_string());
     }
 
-    const auto& ip(knitting_options_.ignore_patterns());
+    const auto& ip(options_.ignore_patterns());
     std::list<std::string> ignore_patterns(ip.begin(), ip.end());
     housekeeper hk(ignore_patterns, dirs, expected_files);
     hk.tidy_up();
@@ -88,7 +83,7 @@ void workflow::perform_housekeeping(
 
 std::shared_ptr<dogen::formatters::artefact_writer_interface>
 workflow::obtain_file_writer() const {
-    const auto fw(knitting_options_.force_write());
+    const auto fw(options_.force_write());
 
     using dogen::formatters::filesystem_writer;
     return std::make_shared<filesystem_writer>(fw);
@@ -108,13 +103,12 @@ void workflow::write_files(
 
 void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Starting.";
-    BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
         /*
          * Generate all files.
          */
-        const auto cdo(yarn::code_generator::generate(knitting_options_));
+        const auto cdo(yarn::code_generator::generate(options_));
         if (cdo.artefacts().empty()) {
             BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
             return;

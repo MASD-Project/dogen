@@ -27,10 +27,10 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 
 namespace dogen {
-namespace options {
+namespace yarn {
 namespace test {
 
 /**
@@ -49,7 +49,7 @@ public:
      * @brief Returns the knitting options with target set and
      * optionally project directory and module path.
      */
-    static knitting_options make_knitting_options(
+    static transforms::options make_knitting_options(
         const boost::filesystem::path& target,
         const boost::filesystem::path project_dir = boost::filesystem::path(),
         const std::string log_level = std::string("info"));

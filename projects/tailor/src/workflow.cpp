@@ -25,7 +25,7 @@
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/options/types/tailoring_options.hpp"
-#include "dogen/options/types/knitting_options.hpp" // FIXME
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn.json/types/initializer.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_exomodel_chain.hpp"
@@ -97,9 +97,9 @@ generate_tailoring_options(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::initialise_logging(const options::tailoring_options& o) {
-    const auto dir(o.log_directory());
-    const auto sev(utility::log::to_severity_level(o.log_level()));
+void workflow::initialise_logging(const options::tailoring_options& to) {
+    const auto dir(to.log_directory());
+    const auto sev(utility::log::to_severity_level(to.log_level()));
     const std::string log_file_name(log_file_prefix + model_name_ + ".log");
     log_path_ = dir / log_file_name;
 
@@ -108,21 +108,20 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
     can_log_ = true;
 }
 
-void workflow::tailor(const options::tailoring_options& o) const {
+void workflow::tailor(const options::tailoring_options& to) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
     yarn::json::initializer::initialize();
     yarn::dia::initializer::initialize();
 
-    // FIXME
-    options::knitting_options ko;
-    ko.target(o.target());
+    yarn::transforms::options o;
+    o.target(to.target());
 
     yarn::transforms::kernel_registrar rg;
-    const auto ctx(yarn::transforms::context_factory::make(rg, ko));
+    const auto ctx(yarn::transforms::context_factory::make(rg, o));
 
     using yarn::transforms::exomodel_to_exomodel_chain;
-    exomodel_to_exomodel_chain::transform(ctx, o.target(), o.output());
+    exomodel_to_exomodel_chain::transform(ctx, o.target(), to.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
 }

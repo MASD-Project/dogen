@@ -18,23 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_IO_KNITTING_OPTIONS_IO_HPP
-#define DOGEN_OPTIONS_IO_KNITTING_OPTIONS_IO_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_OPTIONS_VALIDATOR_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_OPTIONS_VALIDATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/options/types/knitting_options.hpp"
-
 namespace dogen {
-namespace options {
+namespace yarn {
+namespace transforms {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::options::knitting_options& v);
+class options_validator;
 
-} }
+} } }
 
 #endif

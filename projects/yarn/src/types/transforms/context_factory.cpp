@@ -52,7 +52,7 @@ create_archetype_location_repository(const kernel_registrar& rg) {
 }
 
 context context_factory::
-make(const kernel_registrar& rg, const options::knitting_options& o) {
+make(const kernel_registrar& rg, const options& o) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     const auto data_dir(utility::filesystem::data_files_directory());

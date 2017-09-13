@@ -24,8 +24,7 @@
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/options/types/knitting_options.hpp"
-#include "dogen/options/types/knitting_options_validator.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/knit/types/initializer.hpp"
 #include "dogen/knit/types/workflow.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
@@ -76,27 +75,25 @@ namespace knitter {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const dogen::options::knitting_options& o) {
+initialise_model_name(const yarn::transforms::options& o) {
     const boost::filesystem::path p(o.target());
     model_name_ = p.stem().filename().string();
 }
 
-boost::optional<options::knitting_options> workflow::
-generate_knitting_options(const int argc, const char* argv[]) const {
+boost::optional<yarn::transforms::options>
+workflow::generate_options(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
 
-    boost::optional<options::knitting_options> r(p.parse());
+    auto r(p.parse());
     if (!r)
         return r;
-
-    options::knitting_options_validator::validate(*r);
 
     return r;
 }
 
-void workflow::initialise_logging(const options::knitting_options& o) {
+void workflow::initialise_logging(const yarn::transforms::options& o) {
     log_path_ = o.log_file();
 
     life_cycle_manager lcm;
@@ -105,7 +102,7 @@ void workflow::initialise_logging(const options::knitting_options& o) {
     can_log_ = true;
 }
 
-void workflow::knit(const options::knitting_options& o) const {
+void workflow::knit(const yarn::transforms::options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
 
     knit::initializer::initialize();
@@ -153,7 +150,7 @@ void workflow::report_exception() const {
 
 int workflow::execute(const int argc, const char* argv[]) {
     try {
-        const auto o(generate_knitting_options(argc, argv));
+        const auto o(generate_options(argc, argv));
 
         /*
          * Can only happen if the options are valid but do not

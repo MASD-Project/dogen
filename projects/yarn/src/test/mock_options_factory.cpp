@@ -18,37 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_VALIDATION_ERROR_HPP
-#define DOGEN_OPTIONS_TYPES_VALIDATION_ERROR_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include <boost/exception/info.hpp>
+#include "dogen/yarn/test/mock_options_factory.hpp"
 
 namespace dogen {
-namespace options {
+namespace yarn {
+namespace test {
 
-/**
- * @brief An error occurred when validating options.
- */
-class validation_error : public virtual std::exception, public virtual boost::exception {
-public:
-    validation_error() = default;
-    ~validation_error() noexcept = default;
+transforms::options mock_options_factory::make_knitting_options(
+    const boost::filesystem::path& target,
+    const boost::filesystem::path project_dir,
+    const std::string log_level) {
 
-public:
-    explicit validation_error(const std::string& message) : message_(message) { }
+    transforms::options r;
+    r.log_level(log_level);
+    r.target(target);
+    r.delete_extra_files(true);
+    r.force_write(false);
+    r.output_directory_path(project_dir);
+    return r;
+}
 
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
-
-} }
-
-#endif
+} } }

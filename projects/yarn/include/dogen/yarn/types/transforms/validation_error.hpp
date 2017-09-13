@@ -18,24 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_KNITTING_OPTIONS_VALIDATOR_HPP
-#define DOGEN_OPTIONS_TYPES_KNITTING_OPTIONS_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_VALIDATION_ERROR_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/types/knitting_options.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
-namespace options {
+namespace yarn {
+namespace transforms {
 
-class knitting_options_validator {
+/**
+ * @brief An error occurred when validating options.
+ */
+class validation_error : public virtual std::exception, public virtual boost::exception {
 public:
+    validation_error() = default;
+    ~validation_error() noexcept = default;
+
 public:
-    static void validate(const knitting_options& s);
+    explicit validation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
-} }
+} } }
 
 #endif

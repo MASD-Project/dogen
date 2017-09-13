@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_KNITTING_OPTIONS_FWD_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_KNITTING_OPTIONS_FWD_SER_HPP
+#ifndef DOGEN_YARN_IO_TRANSFORMS_OPTIONS_IO_HPP
+#define DOGEN_YARN_IO_TRANSFORMS_OPTIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/types/knitting_options_fwd.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/transforms/options.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace yarn {
+namespace transforms {
 
-template<class Archive>
-void save(Archive& ar, const dogen::options::knitting_options& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::transforms::options& v);
 
-template<class Archive>
-void load(Archive& ar, dogen::options::knitting_options& v, unsigned int version);
-
-} }
+} } }
 
 #endif

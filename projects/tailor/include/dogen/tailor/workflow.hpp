@@ -55,13 +55,13 @@ private:
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging(const dogen::options::tailoring_options& o);
+    void initialise_logging(const dogen::options::tailoring_options& to);
 
     /**
      * @brief Executes the workflow for the given the application
      * options.
      */
-    void tailor(const dogen::options::tailoring_options& o) const;
+    void tailor(const dogen::options::tailoring_options& to) const;
 
 private:
      /**
