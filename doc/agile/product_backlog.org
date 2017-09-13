@@ -11,6 +11,21 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Run "changed" tests only                                          :story:
+
+Random idea: can we have a target that just runs "changed" tests? That
+is, tests that are impacted by the files that were changed since we
+last executed the tests.
+
+For this to work we need to create a file with every execution of
+tests and then use that as a dependency. There must be some prior art
+for this with CMake.
+
+*** Transform probe coordinates                                       :story:
+
+Allow users to supply coordinates to transforms in some form so that
+we only dump a subset of the transform data.
+
 *** Add support for boost UUID                                        :story:
 
 It seems boost has a proper UUID type. We should use this instead of

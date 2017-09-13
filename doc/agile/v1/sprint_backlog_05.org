@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-13 Wed 23:23]
+#+CAPTION: Clock summary at [2017-09-13 Wed 23:32]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:02* |       |       | 100.0 |
+| *Total time*                                                                | *40:09* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:02   |       |       | 100.0 |
-| Active                                                                      |         | 40:02 |       | 100.0 |
+| Stories                                                                     | 40:09   |       |       | 100.0 |
+| Active                                                                      |         | 40:09 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.8 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.9 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   2.2 |
@@ -35,10 +35,10 @@
 | COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.4 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.5 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.6 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  32.4 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  32.3 |
 | COMPLETED Create yarn options                                               |         |       |  1:06 |   2.7 |
-| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  16.9 |
-| STARTED Merge knit with yarn                                                |         |       |  0:27 |   1.1 |
+| COMPLETED Merge knit with yarn                                              |         |       |  0:34 |   1.4 |
+| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  16.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -681,6 +681,18 @@ Links:
 We need to replace the dependency on the options model and create a
 stand alone yarn options class.
 
+*** COMPLETED Merge knit with yarn                                    :story:
+    CLOSED: [2017-09-13 Wed 23:31]
+    CLOCK: [2017-09-13 Wed 23:24]--[2017-09-13 Wed 23:31] =>  0:07
+    CLOCK: [2017-09-13 Wed 23:17]--[2017-09-13 Wed 23:23] =>  0:06
+    CLOCK: [2017-09-13 Wed 23:06]--[2017-09-13 Wed 23:16] =>  0:10
+    CLOCK: [2017-09-13 Wed 22:54]--[2017-09-13 Wed 23:05] =>  0:11
+
+There isn't a lot of reason to have a knit model, really, now that
+yarn has taken over the model to text transforms. We should just move
+housekeeper and the rest of knit into helpers and update the
+code-generator to perform the complete workflow.
+
 *** STARTED Add canonical archetype support to yarn                   :story:
     CLOCK: [2017-09-10 Sun 00:08]--[2017-09-10 Sun 00:18] =>  0:10
     CLOCK: [2017-09-09 Sat 23:40]--[2017-09-10 Sun 00:07] =>  0:27
@@ -782,41 +794,25 @@ Notes:
 
 - make is_enabled private in dependencies builder and see what breaks.
 
-*** STARTED Merge knit with yarn                                      :story:
-    CLOCK: [2017-09-13 Wed 23:17]--[2017-09-13 Wed 23:23] =>  0:06
-    CLOCK: [2017-09-13 Wed 23:06]--[2017-09-13 Wed 23:16] =>  0:10
-    CLOCK: [2017-09-13 Wed 22:54]--[2017-09-13 Wed 23:05] =>  0:11
-
-There isn't a lot of reason to have a knit model, really, now that
-yarn has taken over the model to text transforms. We should just move
-housekeeper and the rest of knit into helpers and update the
-code-generator to perform the complete workflow.
-
-*** Transform probe coordinates                                       :story:
-
-Allow users to supply coordinates to transforms in some form so that
-we only dump a subset of the transform data.
-
 *** Remove dumping of models from log                                 :story:
 
 Once probing is in place, we need to remove all the dumps we are doing
 of models at present. These just add size to the log files for no
 reason.
 
+*** Drop the original extension in tailor                             :story:
+
+Filenames in tailor look weird:
+
+: dart.dia.json
+
+it should just be:
+
+: dart.json
 
 *** Move model sorter from helpers                                    :story:
 
 This is really just a sorting transform, not a helper.
-
-*** Run "changed" tests only                                          :story:
-
-Random idea: can we have a target that just runs "changed" tests? That
-is, tests that are impacted by the files that were changed since we
-last executed the tests.
-
-For this to work we need to create a file with every execution of
-tests and then use that as a dependency. There must be some prior art
-for this with CMake.
 
 *** Move enablement into yarn                                         :story:
 
@@ -968,11 +964,11 @@ The heuristic for concept resolution is then:
   module(s). We try this for all names in M-2, e.g. first two names
   are model modules and M-3 names are internal modules and so forth.
 
-*** Add support for cross-model concept refinement                    :story:
+*** Add support for object templates that work cross-model            :story:
 
 We've implemented support for cross-model inheritance in sprint 87 but
-we did not cover concepts. Most of the approach is the same, but
-unfortunately we can't just reuse it.
+we did not cover object templates. Most of the approach is the same,
+but unfortunately we can't just reuse it.
 
 Tasks:
 
