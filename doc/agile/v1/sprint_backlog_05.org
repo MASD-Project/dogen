@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-13 Wed 23:16]
+#+CAPTION: Clock summary at [2017-09-13 Wed 23:23]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *39:56* |       |       | 100.0 |
+| *Total time*                                                                | *40:02* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 39:56   |       |       | 100.0 |
-| Active                                                                      |         | 39:56 |       | 100.0 |
+| Stories                                                                     | 40:02   |       |       | 100.0 |
+| Active                                                                      |         | 40:02 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.8 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.9 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   2.2 |
@@ -30,15 +30,15 @@
 | COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   6.1 |
 | COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   4.5 |
 | COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.9 |
-| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  19.6 |
+| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  19.5 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.2 |
 | COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.4 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.5 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.6 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  32.5 |
-| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.8 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  32.4 |
+| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.7 |
 | STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  16.9 |
-| STARTED Merge knit with yarn                                                |         |       |  0:21 |   0.9 |
+| STARTED Merge knit with yarn                                                |         |       |  0:27 |   1.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -783,6 +783,7 @@ Notes:
 - make is_enabled private in dependencies builder and see what breaks.
 
 *** STARTED Merge knit with yarn                                      :story:
+    CLOCK: [2017-09-13 Wed 23:17]--[2017-09-13 Wed 23:23] =>  0:06
     CLOCK: [2017-09-13 Wed 23:06]--[2017-09-13 Wed 23:16] =>  0:10
     CLOCK: [2017-09-13 Wed 22:54]--[2017-09-13 Wed 23:05] =>  0:11
 

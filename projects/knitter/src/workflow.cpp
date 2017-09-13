@@ -19,17 +19,22 @@
  *
  */
 #include <iostream>
+#include <boost/throw_exception.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/version.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/knit/types/initializer.hpp"
-#include "dogen/knit/types/workflow.hpp"
+#include "dogen/yarn/types/code_generator.hpp"
+#include "dogen/knitter/initializer.hpp"
+#include "dogen/knitter/workflow_error.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
 #include "dogen/knitter/workflow.hpp"
+
+typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
 
 namespace {
 
@@ -41,6 +46,7 @@ const std::string more_information(
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
+const std::string code_generation_failure("Code generation failure.");
 const std::string log_file_msg("See the log file for details: ");
 const std::string errors_msg(" finished with errors.");
 
@@ -105,10 +111,16 @@ void workflow::initialise_logging(const yarn::transforms::options& o) {
 void workflow::knit(const yarn::transforms::options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
 
-    knit::initializer::initialize();
-    knit::workflow w(o);
-    w.execute();
+    initializer::initialize();
 
+    try {
+        yarn::code_generator::generate(o);
+    } catch(const dogen::formatters::formatting_error& e) {
+        BOOST_THROW_EXCEPTION(workflow_error(e.what()));
+    } catch (boost::exception& e) {
+        e << errmsg_workflow(code_generation_failure);
+        throw;
+    }
     BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
 }
 

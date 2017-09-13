@@ -28,11 +28,13 @@ add_executable(${name} ${files})
 set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${name}
-    knit
     utility
     options
     dia
+    formatters
     yarn
+    yarn.dia
+    yarn.json
     quilt.cpp
     quilt.csharp
     ${LIBXML2_LIBRARIES}
