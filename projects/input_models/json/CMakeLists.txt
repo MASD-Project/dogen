@@ -104,15 +104,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
         --ignore-files-matching-regex .*-odb.*)
     add_dependencies(knit_all_json knit_${target}_${frontend})
 
-    set(target knit)
-    add_custom_target(knit_${target}_${frontend}
-        COMMENT "Knitting knit model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all_json knit_${target}_${frontend})
-
     set(target yarn.dia)
     add_custom_target(knit_${target}_${frontend}
         COMMENT "Knitting Yarn Dia model" VERBATIM
@@ -124,7 +115,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
 
     set(target formatters)
     add_custom_target(knit_${target}_${frontend}
-        COMMENT "Knitting the Formatters Model" VERBATIM
+        COMMENT "Knitting Formatters Model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.${frontend}

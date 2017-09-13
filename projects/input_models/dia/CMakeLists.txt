@@ -104,15 +104,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
         --ignore-files-matching-regex .*-odb.*)
     add_dependencies(knit_all knit_${target})
 
-    set(target knit)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting knit model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
     set(target yarn.dia)
     add_custom_target(knit_${target}
         COMMENT "Knitting Yarn Dia model" VERBATIM
@@ -241,16 +232,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
             ${ignore_regexes}
             --ignore-files-matching-regex .*sql
             --ignore-files-matching-regex .*-odb.*)
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target knit)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting knit model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
         set(target yarn.dia)
