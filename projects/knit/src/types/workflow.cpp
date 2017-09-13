@@ -81,26 +81,6 @@ void workflow::perform_housekeeping(
     hk.tidy_up();
 }
 
-std::shared_ptr<dogen::formatters::artefact_writer_interface>
-workflow::obtain_file_writer() const {
-    const auto fw(options_.force_write());
-
-    using dogen::formatters::filesystem_writer;
-    return std::make_shared<filesystem_writer>(fw);
-}
-
-void workflow::write_files(
-    std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
-    const std::list<formatters::artefact>& artefacts) const {
-
-    if (artefacts.empty()) {
-        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
-        return;
-    }
-
-    writer->write(artefacts);
-}
-
 void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Starting.";
 
@@ -109,16 +89,6 @@ void workflow::execute() const {
          * Generate all files.
          */
         const auto cdo(yarn::code_generator::generate(options_));
-        if (cdo.artefacts().empty()) {
-            BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
-            return;
-        }
-
-        /*
-         * Write them to the filesystem.
-         */
-        const auto writer(obtain_file_writer());
-        write_files(writer, cdo.artefacts());
 
         /*
          * Perform any housekeeping if need be.

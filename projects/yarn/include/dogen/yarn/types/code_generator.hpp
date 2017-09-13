@@ -31,7 +31,37 @@
 namespace dogen {
 namespace yarn {
 
+/**
+ * @brief Responsible for transforming a high-level representation of
+ * a domain into code, in one or more programming languages.
+ *
+ * The model which one intends to transform is known as the @e target
+ * model. The workflow starts by invoking the correct front-end to
+ * read in the target model and all of its dependencies. There are two
+ * types of dependencies:
+ *
+ * @li @e explicit: specified by the options passed in; these are
+ * models created by the user and any models that they, in turn,
+ * depend on.
+ *
+ * @li @e implicit: these are known as the @e system models. They are
+ * added automatically. Examples are built-ins, boost, std, etc.
+ *
+ * Collectively, all implicit and explicit models are referred to as
+ * the @e input models. The input models read the front-end are
+ * converted into the middle end representation - endomodels. They are
+ * then merged it into a single, unified Yarn model, called the @e
+ * merged model; all dependencies are resolved and validated.
+ *
+ * The workflow then instantiates all backends requested by the
+ * options passed in. They use the merged model to generate source
+ * code, and then outputted it to the desired destination.
+ */
 class code_generator final {
+private:
+    static void write_files(const transforms::options& o,
+        const transforms::code_generation_output& cgo);
+
 public:
     static transforms::code_generation_output
     generate(const transforms::options& o);

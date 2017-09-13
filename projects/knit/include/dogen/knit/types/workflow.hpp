@@ -41,33 +41,6 @@
 namespace dogen {
 namespace knit {
 
-/**
- * @brief Main workflow of the Knit library. Responsible for
- * transforming a high-level representation of a domain into code, in
- * one or more programming languages.
- *
- * The model which one intends to transform is known as the @e target
- * model. The workflow starts by invoking the correct front-end to
- * read in the target model and all of its dependencies. There are two
- * types of dependencies:
- *
- * @li @e explicit: specified by the options passed in; these are
- * models created by the user and any models that they, in turn,
- * depend on.
- *
- * @li @e implicit: these are known as the @e system models. They are
- * added automatically. Examples are built-ins, boost, std, etc.
- *
- * Collectively, all implicit and explicit models are referred to as
- * the @e input models. The input models read the front-end are
- * converted into the middle end representation - Yarn. They are then
- * merged it into a single, unified Yarn model, called the @e merged
- * model; all dependencies are resolved and validated.
- *
- * The workflow then instantiates all backends requested by the
- * options passed in. They use the merged model to generate source
- * code, and then outputted it to the desired destination.
- */
 class workflow {
 public:
     workflow() = delete;
@@ -95,19 +68,6 @@ private:
     void perform_housekeeping(
         const std::list<formatters::artefact>& artefacts,
         const std::list<boost::filesystem::path>& dirs) const;
-
-    /**
-     * @brief Obtains the file writer, according to configuration.
-     */
-    std::shared_ptr<dogen::formatters::artefact_writer_interface>
-    obtain_file_writer() const;
-
-    /**
-     * @brief Outputs the artefacts to its output destination.
-     */
-    void write_files(
-        std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
-        const std::list<formatters::artefact>& artefacts) const;
 
 public:
     /**

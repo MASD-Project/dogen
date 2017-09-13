@@ -19,6 +19,9 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/filesystem/path.hpp"
+#include "dogen/utility/filesystem/file.hpp"
+#include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
@@ -39,6 +42,19 @@ auto lg(logger_factory(id));
 
 namespace dogen {
 namespace yarn {
+
+void code_generator::write_files(const transforms::options& o,
+    const transforms::code_generation_output& cgo) {
+    using dogen::formatters::filesystem_writer;
+    auto w(std::make_shared<filesystem_writer>(o.force_write()));
+
+    if (cgo.artefacts().empty()) {
+        BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
+        return;
+    }
+
+    w->write(cgo.artefacts());
+}
 
 transforms::code_generation_output
 code_generator::generate(const transforms::options& o) {
@@ -77,11 +93,16 @@ code_generator::generate(const transforms::options& o) {
     const auto models(endomodel_to_model_transform::transform(endomodels));
 
     /*
-     * Finally we run the model to text transforms.
+     * Now run the model to text transforms.
      */
     const auto r(code_generation_chain::transform(ctx, models));
     ctx.prober().end_chain(r);
     ctx.prober().end_probing();
+
+    /*
+     * Finally write the files.
+     */
+    write_files(o, r);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
     return r;
