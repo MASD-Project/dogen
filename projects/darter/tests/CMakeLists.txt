@@ -49,7 +49,6 @@ add_executable(${tests_name} ${tests_files} ${executable_files})
 set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${tests_name}
-    knit
     utility
     options
     ${LIBXML2_LIBRARIES}

@@ -40870,5 +40870,93 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
       <dia:attribute name="templates"/>
       <dia:childnode parent="O160"/>
     </dia:object>
+    <dia:object type="UML - Note" version="0" id="O298">
+      <dia:attribute name="obj_pos">
+        <dia:point val="71,122"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="70.95,121.95;89.66,124.55"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="71,122"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="18.610000000000003"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="2.5"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#ffffff"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#Manages the deletion of files and folders that
+are no longer required.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="71.35,123.245"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:childnode parent="O160"/>
+    </dia:object>
+    <dia:object type="UML - Message" version="0" id="O299">
+      <dia:attribute name="obj_pos">
+        <dia:point val="71,123.25"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="63.2924,123.198;71.0525,124.144"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="conn_endpoints">
+        <dia:point val="71,123.25"/>
+        <dia:point val="63.3626,123.637"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="type">
+        <dia:enum val="0"/>
+      </dia:attribute>
+      <dia:attribute name="text_pos">
+        <dia:point val="67.1813,123.944"/>
+      </dia:attribute>
+      <dia:connections>
+        <dia:connection handle="0" to="O298" connection="3"/>
+        <dia:connection handle="1" to="O297" connection="10"/>
+      </dia:connections>
+      <dia:childnode parent="O160"/>
+    </dia:object>
   </dia:layer>
 </dia:diagram>

@@ -33,6 +33,11 @@ target_link_libraries(${tests_name}
     utility
     annotations
     options
+    formatters
+    yarn.dia
+    yarn.json
+    quilt.cpp
+    quilt.csharp
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${Boost_LIBRARIES})

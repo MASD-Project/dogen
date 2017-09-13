@@ -49,9 +49,12 @@ add_executable(${tests_name} ${tests_files} ${executable_files})
 set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${tests_name}
-    knit
     utility
     options
+    yarn.dia
+    yarn.json
+    quilt.cpp
+    quilt.csharp
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

@@ -189,7 +189,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/quilt.csharp/include
     ${CMAKE_SOURCE_DIR}/projects/formatters/include
     ${CMAKE_SOURCE_DIR}/projects/utility/include
-    ${CMAKE_SOURCE_DIR}/projects/knit/include
     ${CMAKE_SOURCE_DIR}/projects/knitter/include
     ${CMAKE_SOURCE_DIR}/projects/tailor/include
     ${CMAKE_SOURCE_DIR}/projects/darter/include
@@ -214,7 +213,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt.cpp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt.csharp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knit)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tailor)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/darter)
