@@ -67,7 +67,8 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * representation it may be in, Dia, JSON, etc - into the internal
      * representation of an exogenous model.
      */
-    ctx.prober().start_chain(id);
+    const auto model_name(p.filename().string());
+    ctx.prober().start_chain(id, model_name);
     auto& t(transform_for_model(p));
     auto r(t.transform(ctx, p));
 

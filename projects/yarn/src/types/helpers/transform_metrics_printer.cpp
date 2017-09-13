@@ -26,10 +26,10 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.transform_prober"));
+auto lg(logger_factory("yarn.helpers.transform_metrics_printer"));
 
-const char space(' ');
-const unsigned int indentation_size(4);
+const char filler(' ');
+const unsigned int fill_size(4);
 
 }
 
@@ -37,24 +37,37 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-void transform_metrics_printer::print(std::ostream& o, unsigned int indentation,
+void transform_metrics_printer::print(std::ostream& o, unsigned int fill_level,
+    const bool disable_guids_in_stats,
     const boost::shared_ptr<const transform_metrics> tm) {
 
+    BOOST_LOG_SEV(lg, debug) << "Fill level: " << fill_level;
     auto elapsed (tm->end() - tm->start());
-    o << std::setfill(space) << std::setw(indentation_size * indentation)
-      << tm->id() << "(" << elapsed  << ")" << std::endl;
+    o << std::string(fill_size * fill_level, filler)
+      << tm->transform_id() << " (" << elapsed  << " ms)"
+      << " [" << tm->model_id() << "]";
 
-    ++indentation;
+    if (!disable_guids_in_stats)
+        o << " [" << tm->guid() << "]";
+
+    o << std::endl;
+
+    ++fill_level;
     for(auto child : tm->children())
-        print(o, indentation, child);
+        print(o, fill_level, disable_guids_in_stats, child);
 }
 
-std::string transform_metrics_printer::
-print_graph(const boost::shared_ptr<const transform_metrics> tm) {
-    unsigned int indentation(0);
+std::string transform_metrics_printer::print(const bool disable_guids_in_stats,
+    const boost::shared_ptr<const transform_metrics> tm) {
+    BOOST_LOG_SEV(lg, debug) << "Printing graph.";
+
+    unsigned int fill_level(0);
     std::ostringstream s;
-    print(s, indentation, tm);
-    return s.str();
+    print(s, fill_level, disable_guids_in_stats, tm);
+    const auto r(s.str());
+
+    BOOST_LOG_SEV(lg, debug) << "Finished printing graph.";
+    return r;
 }
 
 } } }

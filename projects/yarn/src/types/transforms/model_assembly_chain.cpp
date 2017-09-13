@@ -77,7 +77,7 @@ meta_model::endomodel model_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
 
-    ctx.prober().start_chain(id);
+    ctx.prober().start_chain(id, target.name().id());
 
     /*
      * First we obtain the merged (and mapped) model.

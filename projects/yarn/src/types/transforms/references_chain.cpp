@@ -62,7 +62,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
      * Obtain the absolute paths to all reference models - system and
      * user.
      */
-    ctx.prober().start_chain(id, target);
+    ctx.prober().start_chain(id, target.name().id(), target);
     const auto rps(helpers::reference_paths_extractor::extract(ctx, target));
 
     /*

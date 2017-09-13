@@ -122,7 +122,7 @@ void annotations_transform::process(const annotations::annotation_group& ag,
 
 void annotations_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
 
     process(ctx, em.modules());
     process(ctx, em.object_templates());

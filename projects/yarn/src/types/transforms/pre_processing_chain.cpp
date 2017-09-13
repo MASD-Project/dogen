@@ -99,7 +99,7 @@ void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
 
 void pre_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_chain(id, em);
+    ctx.prober().start_chain(id, em.name().id(), em);
     apply_first_set_of_transforms(ctx, em);
     apply_second_set_of_transforms(ctx, em);
     ctx.prober().end_chain(em);
@@ -112,7 +112,7 @@ bool pre_processing_chain::try_transform(const context& ctx,
      * We must apply the first set of transforms because language
      * expansion is required.
      */
-    ctx.prober().start_chain(id, em);
+    ctx.prober().start_chain(id, em.name().id(), em);
     apply_first_set_of_transforms(ctx, em);
 
     /*

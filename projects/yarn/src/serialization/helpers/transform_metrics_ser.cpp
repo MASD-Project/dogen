@@ -39,7 +39,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::helpers::transform_metrics& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("id", v.id_);
+    ar << make_nvp("transform_id", v.transform_id_);
+    ar << make_nvp("model_id", v.model_id_);
     ar << make_nvp("guid", v.guid_);
     ar << make_nvp("start", v.start_);
     ar << make_nvp("end", v.end_);
@@ -50,7 +51,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::helpers::transform_metrics& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("id", v.id_);
+    ar >> make_nvp("transform_id", v.transform_id_);
+    ar >> make_nvp("model_id", v.model_id_);
     ar >> make_nvp("guid", v.guid_);
     ar >> make_nvp("start", v.start_);
     ar >> make_nvp("end", v.end_);

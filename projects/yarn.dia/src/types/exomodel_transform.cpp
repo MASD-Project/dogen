@@ -70,7 +70,8 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     dogen::dia::hydrator h;
     const auto diagram(h.hydrate(p));
 
-    ctx.prober().start_transform(::id, diagram);
+    const auto model_name(p.filename().string());
+    ctx.prober().start_transform(::id, model_name, diagram);
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";

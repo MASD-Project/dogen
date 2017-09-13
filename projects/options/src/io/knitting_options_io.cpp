@@ -67,7 +67,7 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
       << "\"cpp_headers_output_directory_path\": " << "\"" << v.cpp_headers_output_directory_path().generic_string() << "\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"probe_stats\": " << v.probe_stats() << ", "
-      << "\"probe_stats_graph\": " << v.probe_stats_graph() << ", "
+      << "\"probe_stats_disable_guids\": " << v.probe_stats_disable_guids() << ", "
       << "\"probe_all\": " << v.probe_all() << ", "
       << "\"probe_directory\": " << "\"" << v.probe_directory().generic_string() << "\""
       << " }";

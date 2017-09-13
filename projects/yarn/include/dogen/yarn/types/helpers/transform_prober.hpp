@@ -50,7 +50,8 @@ private:
     }
 
 public:
-    transform_prober(const bool probe_data, const bool probe_stats,
+    transform_prober(const std::string& log_level, const bool probe_data,
+        const bool probe_stats, const bool disable_guids_in_stats,
         const boost::filesystem::path& probe_directory,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
@@ -69,35 +70,44 @@ private:
         const helpers::mapping_set_repository& msrp) const;
 
     boost::filesystem::path
-    full_path_for_writing(const std::string& id, const std::string& type) const;
+    full_path_for_writing(const std::string& transform_id,
+        const std::string& type) const;
 
 
 public:
-    void start_chain(const std::string& id) const;
+    void start_chain(const std::string& transform_id,
+        const std::string& model_id) const;
 
     template<typename Ioable>
-    void start_chain(const std::string& id, const Ioable& input) const {
-        start_chain(id);
+    void start_chain(const std::string& transform_id,
+        const std::string& model_id,
+        const Ioable& input) const {
+        start_chain(transform_id, model_id);
+
         if (!probe_data_)
             return;
 
         ensure_transform_position_not_empty();
         ++transform_position_.top();
-        const auto path(full_path_for_writing(id, "input"));
+        const auto path(full_path_for_writing(transform_id, "input"));
         write(path, input);
     }
 
-    void start_transform(const std::string& id) const;
+    void start_transform(const std::string& transform_id,
+        const std::string& model_id) const;
 
     template<typename Ioable>
-    void start_transform(const std::string& id, const Ioable& input) const {
+    void start_transform(const std::string& transform_id,
+        const std::string& model_id,
+        const Ioable& input) const {
+        start_transform(transform_id, model_id);
+
         if (probe_data_) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
-            const auto path(full_path_for_writing(id, "input"));
+            const auto path(full_path_for_writing(transform_id, "input"));
             write(path, input);
         }
-        start_transform(id);
     }
 
     void end_chain() const;
@@ -107,7 +117,7 @@ public:
         if (probe_data_) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
-            const auto id(builder_.current()->id());
+            const auto id(builder_.current()->transform_id());
             const auto path(full_path_for_writing(id, "output"));
             write(path, output);
         }
@@ -121,7 +131,7 @@ public:
         if (probe_data_) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
-            const auto id(builder_.current()->id());
+            const auto id(builder_.current()->transform_id());
             const auto path(full_path_for_writing(id, "output"));
             write(path, output);
         }
@@ -136,6 +146,7 @@ private:
     mutable boost::filesystem::path current_directory_;
     const bool probe_data_;
     const bool probe_stats_;
+    const bool disable_guids_in_stats_;
     const boost::filesystem::path probe_directory_;
 };
 

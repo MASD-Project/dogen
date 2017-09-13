@@ -548,7 +548,7 @@ void enablement_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started enablement transform.";
 
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     const auto& atrp(ctx.type_repository());
     const auto& ra(em.root_module()->annotation());
     const auto& als(ctx.archetype_location_repository().archetype_locations());

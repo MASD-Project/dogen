@@ -51,7 +51,8 @@ namespace helpers {
 std::size_t transform_metrics_hasher::hash(const transform_metrics& v) {
     std::size_t seed(0);
 
-    combine(seed, v.id());
+    combine(seed, v.transform_id());
+    combine(seed, v.model_id());
     combine(seed, v.guid());
     combine(seed, v.start());
     combine(seed, v.end());

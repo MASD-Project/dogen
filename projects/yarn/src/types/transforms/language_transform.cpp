@@ -103,7 +103,7 @@ void language_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Applying language transform. Model: "
                              << em.name().id();
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
 
 
     const auto tg(make_type_group(ctx.type_repository()));

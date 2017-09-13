@@ -102,7 +102,7 @@ inject_global_module(meta_model::endomodel& em) {
 
 void containment_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     BOOST_LOG_SEV(lg, debug) << "Applying containment transform. Model: "
                              << em.name().id();
     inject_global_module(em);

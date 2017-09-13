@@ -61,7 +61,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * built-in types; these are required in order to find the default
      * enumeration underlying element.
      */
-    ctx.prober().start_chain(id, em);
+    ctx.prober().start_chain(id, em.name().id(), em);
     enumerations_transform::transform(ctx, em);
 
     /*

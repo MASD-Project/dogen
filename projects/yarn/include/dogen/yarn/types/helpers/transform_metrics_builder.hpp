@@ -36,16 +36,18 @@ namespace helpers {
 
 class transform_metrics_builder final {
 public:
-    transform_metrics_builder();
+    transform_metrics_builder(const std::string& log_level,
+        const bool writing_probe_data);
 
 private:
     void ensure_stack_not_empty() const;
     boost::shared_ptr<transform_metrics>
-    create_metrics(const std::string& id) const;
+    create_metrics(const std::string& transform_id,
+        const std::string& model_id) const;
     void update_end();
 
 public:
-    void start(const std::string& id);
+    void start(const std::string& transform_id, const std::string& model_id);
     void end();
 
 public:

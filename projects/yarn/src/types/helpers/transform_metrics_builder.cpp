@@ -19,11 +19,13 @@
  *
  */
 #include <chrono>
+#include <sstream>
 #include <boost/uuid/uuid.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/uuid/uuid_generators.hpp>
+#include "dogen/version.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
@@ -46,9 +48,17 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-transform_metrics_builder::transform_metrics_builder() {
+transform_metrics_builder::transform_metrics_builder(
+    const std::string& log_level, const bool writing_probe_data) {
     BOOST_LOG_SEV(lg, debug) << "Initialising. ";
-    stack_.push(create_metrics(root_id));
+    std::ostringstream s;
+    s << "v" << DOGEN_VERSION << ", " << log_level;
+    if (writing_probe_data)
+        s << ", probing";
+    else
+        s << ", not probing";
+
+    stack_.push(create_metrics(root_id, s.str()));
 }
 
 void transform_metrics_builder::ensure_stack_not_empty() const {
@@ -59,13 +69,16 @@ void transform_metrics_builder::ensure_stack_not_empty() const {
 }
 
 boost::shared_ptr<transform_metrics>
-transform_metrics_builder::create_metrics(const std::string& id) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating metrics for id: " << id;
-    auto r(boost::make_shared<transform_metrics>());
-    r->id(id);
+transform_metrics_builder::create_metrics(const std::string& transform_id,
+    const std::string& model_id) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating metrics for transform: "
+                             << transform_id;
 
     auto uuid = boost::uuids::random_generator()();
+    auto r(boost::make_shared<transform_metrics>());
     r->guid(boost::uuids::to_string(uuid));
+    r->transform_id(transform_id);
+    r->model_id(model_id);
 
     using namespace std::chrono;
     auto now(time_point_cast<milliseconds>(system_clock::now()));
@@ -79,17 +92,19 @@ void transform_metrics_builder::update_end() {
     stack_.top()->end(now.time_since_epoch().count());
 }
 
-void transform_metrics_builder::start(const std::string& id) {
-    BOOST_LOG_SEV(lg, debug) << "Starting id: " << id;
+void transform_metrics_builder::start(const std::string& transform_id,
+    const std::string& model_id) {
+    BOOST_LOG_SEV(lg, debug) << "Starting transform: " << transform_id;
 
     ensure_stack_not_empty();
-    auto next(create_metrics(id));
+    auto next(create_metrics(transform_id, model_id));
     stack_.top()->children().push_back(next);
     stack_.push(next);
 }
 
 void transform_metrics_builder::end() {
-    BOOST_LOG_SEV(lg, debug) << "Ending id: " << current()->id();
+    BOOST_LOG_SEV(lg, debug) << "Ending transform: "
+                             << current()->transform_id();
 
     ensure_stack_not_empty();
     update_end();

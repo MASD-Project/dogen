@@ -65,7 +65,7 @@ const std::string info_level("info");
 const std::string default_log_directory("log");
 
 const std::string probe_stats_arg("probe-stats");
-const std::string probe_stats_graph_arg("probe-stats-graph");
+const std::string probe_stats_disable_guids_arg("probe-stats-disable-guids");
 const std::string probe_all_arg("probe-all");
 const std::string probe_directory_arg("probe-directory");
 const std::string default_probe_directory("probe");
@@ -157,8 +157,8 @@ program_options_parser::make_transforms_options_description() const {
         ("compatibility-mode,m", "Attempt to process inputs, "
             "ignoring certain types of errors.")
         ("probe-stats", "Generate stats about executed transforms.")
-        ("probe-stats-graph", "Generate a graph with stats about "
-            "executed transforms.")
+        ("probe-stats-disable-guids", "Disable guids in probe stats, "
+            "to make comparisons easier.")
         ("probe-all", "Dump all available probing information "
             "about transforms.")
         ("probe-directory", "Directory in which to dump probe data. "
@@ -271,7 +271,7 @@ make_knitting_options(const variables_map& vm) const {
 
     r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
     r.probe_stats(vm.count(probe_stats_arg) != 0);
-    r.probe_stats_graph(vm.count(probe_stats_graph_arg)  != 0);
+    r.probe_stats_disable_guids(vm.count(probe_stats_disable_guids_arg) != 0);
     r.probe_all(vm.count(probe_all_arg) != 0);
 
     boost::filesystem::path probe_path;

@@ -59,7 +59,8 @@ std::list<std::string> exomodel_transform::supported_extensions() const {
 
 meta_model::exomodel exomodel_transform::
 transform(const transforms::context& ctx, const boost::filesystem::path& p) {
-    ctx.prober().start_transform(::id);
+    const auto model_name(p.filename().string());
+    ctx.prober().start_transform(::id, model_name);
 
     hydrator h;
     const auto r(h.hydrate(p));
@@ -70,7 +71,8 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
 
 void exomodel_transform::transform(const transforms::context& ctx,
     const meta_model::exomodel& em, const boost::filesystem::path& p) {
-    ctx.prober().start_transform(::id, em);
+    const auto model_name(p.filename().string());
+    ctx.prober().start_transform(::id, model_name, em);
     dehydrator::dehydrate(em, p);
     ctx.prober().end_transform();
 }

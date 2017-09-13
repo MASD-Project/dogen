@@ -67,7 +67,8 @@ namespace helpers {
 std::ostream& operator<<(std::ostream& s, const transform_metrics& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::helpers::transform_metrics\"" << ", "
-      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
+      << "\"transform_id\": " << "\"" << tidy_up_string(v.transform_id()) << "\"" << ", "
+      << "\"model_id\": " << "\"" << tidy_up_string(v.model_id()) << "\"" << ", "
       << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "
       << "\"start\": " << v.start() << ", "
       << "\"end\": " << v.end() << ", "

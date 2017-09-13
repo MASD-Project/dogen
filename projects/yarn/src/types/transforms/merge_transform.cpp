@@ -97,7 +97,7 @@ meta_model::endomodel
 merge_transform::transform(const context& ctx,
     const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-    ctx.prober().start_transform(id);
+    ctx.prober().start_transform(id, target.name().id());
     BOOST_LOG_SEV(lg, debug) << "Executing the merge transform.";
 
     /*

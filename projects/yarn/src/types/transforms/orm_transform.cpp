@@ -495,7 +495,7 @@ void orm_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transform.";
 
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     const auto tg(make_type_group(ctx.type_repository()));
     const auto& rm(*em.root_module());
     em.orm_properties(make_model_properties(tg, rm.annotation()));

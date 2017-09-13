@@ -83,7 +83,7 @@ expand_type_parameters(const type_group& tg, meta_model::object& o) {
 
 void type_params_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     const auto tg(make_type_group(ctx.type_repository()));
     for (auto& pair : em.objects()) {
         auto& o(*pair.second);

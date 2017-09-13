@@ -63,11 +63,12 @@ transform_metrics_generator::transform_metrics_generator() : position_(0) { }
 
 void transform_metrics_generator::
 populate(const unsigned int position, result_type& v) {
-    v.id(create_std_string(position + 0));
-    v.guid(create_std_string(position + 1));
-    v.start(create_unsigned_long(position + 2));
-    v.end(create_unsigned_long(position + 3));
-    v.children(create_std_list_boost_shared_ptr_dogen_yarn_helpers_transform_metrics(position + 4));
+    v.transform_id(create_std_string(position + 0));
+    v.model_id(create_std_string(position + 1));
+    v.guid(create_std_string(position + 2));
+    v.start(create_unsigned_long(position + 3));
+    v.end(create_unsigned_long(position + 4));
+    v.children(create_std_list_boost_shared_ptr_dogen_yarn_helpers_transform_metrics(position + 5));
 }
 
 transform_metrics_generator::result_type

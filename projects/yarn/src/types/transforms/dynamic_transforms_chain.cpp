@@ -61,7 +61,7 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 
 void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id ,em);
+    ctx.prober().start_transform(id ,em.name().id(), em);
 
     const auto id(em.name().id());
     BOOST_LOG_SEV(lg, debug) << "Performing external transforms on: " << id;

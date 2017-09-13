@@ -67,10 +67,8 @@ make(const kernel_registrar& rg, const options::knitting_options& o) {
 
     bool probe_data(o.probe_all());
     bool probe_stats(o.probe_all() || o.probe_stats());
-    o.probe_directory();
-
-    helpers::transform_prober prober(probe_data, probe_stats,
-        o.probe_directory(), alrp, atrp, msrp);
+    helpers::transform_prober prober(o.log_level(), probe_data, probe_stats,
+        o.probe_stats_disable_guids(), o.probe_directory(), alrp, atrp, msrp);
 
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));

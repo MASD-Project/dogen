@@ -134,7 +134,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects. Total objects: "
                              << em.objects().size();
 
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     for (auto& pair : em.objects()) {
         auto& o(pair.second);
         expand_object(em, *o);

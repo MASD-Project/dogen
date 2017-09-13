@@ -60,7 +60,8 @@ code_generator::generate(const options::knitting_options& o) {
     /*
      * Now we generate the endomodels.
      */
-    ctx.prober().start_chain(id);
+    const auto model_name(o.target().filename().string());
+    ctx.prober().start_chain(id, model_name);
     const auto endomodels(endomodel_generation_chain::transform(ctx));
 
     /*

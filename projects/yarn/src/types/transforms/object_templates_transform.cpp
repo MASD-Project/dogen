@@ -35,7 +35,7 @@
 
 namespace {
 
-const std::string id("yarn.object_templates_transform");
+const std::string id("yarn.transforms.object_templates_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(id));
@@ -268,7 +268,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * We must expand object templates before we expand objects as we
      * rely on the expanded attributes.
      */
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     expand_object_templates(em);
     expand_objects(em);
     ctx.prober().end_transform(em);

@@ -385,7 +385,7 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
 
 void stereotypes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
 
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << em.name().id();
 

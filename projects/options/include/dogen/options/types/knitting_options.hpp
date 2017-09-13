@@ -60,7 +60,7 @@ public:
         const boost::filesystem::path& cpp_headers_output_directory_path,
         const bool compatibility_mode,
         const bool probe_stats,
-        const bool probe_stats_graph,
+        const bool probe_stats_disable_guids,
         const bool probe_all,
         const boost::filesystem::path& probe_directory);
 
@@ -168,11 +168,11 @@ public:
     /**@}*/
 
     /**
-     * @brief Enable probing for statistics around transforms and generate a graph.
+     * @brief Disable guids in probe stats, to make comparisons easier.
      */
     /**@{*/
-    bool probe_stats_graph() const;
-    void probe_stats_graph(const bool v);
+    bool probe_stats_disable_guids() const;
+    void probe_stats_disable_guids(const bool v);
     /**@}*/
 
     /**
@@ -214,7 +214,7 @@ private:
     boost::filesystem::path cpp_headers_output_directory_path_;
     bool compatibility_mode_;
     bool probe_stats_;
-    bool probe_stats_graph_;
+    bool probe_stats_disable_guids_;
     bool probe_all_;
     boost::filesystem::path probe_directory_;
 };

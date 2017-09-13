@@ -314,7 +314,7 @@ void enumerations_transform::transform(const context& ctx,
      * do not use enumerations. Otherwise, we'd fail when searching
      * for the default underlying element name.
      */
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     if (em.enumerations().empty())
         return;
 

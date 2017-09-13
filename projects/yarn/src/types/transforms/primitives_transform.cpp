@@ -81,7 +81,7 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 
 void primitives_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     BOOST_LOG_SEV(lg, debug) << "Applying primitives transform. Model: "
                              << em.name().id();
 

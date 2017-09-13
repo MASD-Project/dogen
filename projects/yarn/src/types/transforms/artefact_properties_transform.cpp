@@ -93,7 +93,7 @@ update_element(const context& ctx, meta_model::element& e) {
 void artefact_properties_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started artefact properties transform.";
-    ctx.prober().start_transform(id ,em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     using namespace std::placeholders;
     const auto f(artefact_properties_transform::update_element);
     const auto v(std::bind(f, ctx, _1));

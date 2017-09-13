@@ -38,12 +38,14 @@ transform_metrics::transform_metrics()
       end_(static_cast<unsigned long>(0)) { }
 
 transform_metrics::transform_metrics(
-    const std::string& id,
+    const std::string& transform_id,
+    const std::string& model_id,
     const std::string& guid,
     const unsigned long start,
     const unsigned long end,
     const std::list<boost::shared_ptr<dogen::yarn::helpers::transform_metrics> >& children)
-    : id_(id),
+    : transform_id_(transform_id),
+      model_id_(model_id),
       guid_(guid),
       start_(start),
       end_(end),
@@ -51,7 +53,8 @@ transform_metrics::transform_metrics(
 
 void transform_metrics::swap(transform_metrics& other) noexcept {
     using std::swap;
-    swap(id_, other.id_);
+    swap(transform_id_, other.transform_id_);
+    swap(model_id_, other.model_id_);
     swap(guid_, other.guid_);
     swap(start_, other.start_);
     swap(end_, other.end_);
@@ -59,7 +62,8 @@ void transform_metrics::swap(transform_metrics& other) noexcept {
 }
 
 bool transform_metrics::operator==(const transform_metrics& rhs) const {
-    return id_ == rhs.id_ &&
+    return transform_id_ == rhs.transform_id_ &&
+        model_id_ == rhs.model_id_ &&
         guid_ == rhs.guid_ &&
         start_ == rhs.start_ &&
         end_ == rhs.end_ &&
@@ -72,20 +76,36 @@ transform_metrics& transform_metrics::operator=(transform_metrics other) {
     return *this;
 }
 
-const std::string& transform_metrics::id() const {
-    return id_;
+const std::string& transform_metrics::transform_id() const {
+    return transform_id_;
 }
 
-std::string& transform_metrics::id() {
-    return id_;
+std::string& transform_metrics::transform_id() {
+    return transform_id_;
 }
 
-void transform_metrics::id(const std::string& v) {
-    id_ = v;
+void transform_metrics::transform_id(const std::string& v) {
+    transform_id_ = v;
 }
 
-void transform_metrics::id(const std::string&& v) {
-    id_ = std::move(v);
+void transform_metrics::transform_id(const std::string&& v) {
+    transform_id_ = std::move(v);
+}
+
+const std::string& transform_metrics::model_id() const {
+    return model_id_;
+}
+
+std::string& transform_metrics::model_id() {
+    return model_id_;
+}
+
+void transform_metrics::model_id(const std::string& v) {
+    model_id_ = v;
+}
+
+void transform_metrics::model_id(const std::string&& v) {
+    model_id_ = std::move(v);
 }
 
 const std::string& transform_metrics::guid() const {

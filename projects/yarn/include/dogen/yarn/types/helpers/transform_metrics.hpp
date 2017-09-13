@@ -47,7 +47,8 @@ public:
 
 public:
     transform_metrics(
-        const std::string& id,
+        const std::string& transform_id,
+        const std::string& model_id,
         const std::string& guid,
         const unsigned long start,
         const unsigned long end,
@@ -61,10 +62,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::helpers::transform_metrics& v, unsigned int version);
 
 public:
-    const std::string& id() const;
-    std::string& id();
-    void id(const std::string& v);
-    void id(const std::string&& v);
+    const std::string& transform_id() const;
+    std::string& transform_id();
+    void transform_id(const std::string& v);
+    void transform_id(const std::string&& v);
+
+    const std::string& model_id() const;
+    std::string& model_id();
+    void model_id(const std::string& v);
+    void model_id(const std::string&& v);
 
     const std::string& guid() const;
     std::string& guid();
@@ -93,7 +99,8 @@ public:
     transform_metrics& operator=(transform_metrics other);
 
 private:
-    std::string id_;
+    std::string transform_id_;
+    std::string model_id_;
     std::string guid_;
     unsigned long start_;
     unsigned long end_;

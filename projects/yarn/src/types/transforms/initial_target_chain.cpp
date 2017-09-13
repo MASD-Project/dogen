@@ -48,7 +48,8 @@ initial_target_chain::transform(const context& ctx) {
      * of the exogenous model.
      */
     const auto tp(ctx.options().target());
-    ctx.prober().start_chain(id);
+    const auto model_name(tp.filename().string());
+    ctx.prober().start_chain(id, model_name);
     const auto em(exomodel_generation_chain::transform(ctx, tp));
 
     /*

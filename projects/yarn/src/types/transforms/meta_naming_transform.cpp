@@ -99,7 +99,7 @@ transform(const context& ctx, meta_model::exomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
                              << em.name().id();
 
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     em.meta_name(meta_name_factory::make_exomodel_name());
 
     updater u;
@@ -135,7 +135,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
                              << em.name().id();
 
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     em.meta_name(meta_name_factory::make_endomodel_name());
 
     /*

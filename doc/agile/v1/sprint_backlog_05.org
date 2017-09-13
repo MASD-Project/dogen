@@ -14,29 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-13 Wed 08:34]
+#+CAPTION: Clock summary at [2017-09-13 Wed 21:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:13* |       |       | 100.0 |
+| *Total time*                                                                | *38:29* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:13   |       |       | 100.0 |
-| Active                                                                      |         | 36:13 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   2.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   4.3 |
-| COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   2.4 |
-| COMPLETED Clean-up readme                                                   |         |       |  1:15 |   3.5 |
-| COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   1.3 |
-| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   6.7 |
-| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   5.0 |
-| COMPLETED Tailor dogen models                                               |         |       |  0:21 |   1.0 |
-| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  21.6 |
+| Stories                                                                     | 38:29   |       |       | 100.0 |
+| Active                                                                      |         | 38:29 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   4.0 |
+| COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   2.3 |
+| COMPLETED Clean-up readme                                                   |         |       |  1:15 |   3.2 |
+| COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   1.2 |
+| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   6.3 |
+| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   4.7 |
+| COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.9 |
+| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  20.3 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.2 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.6 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.5 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.5 |
-| COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.7 |
-| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  18.6 |
-| STARTED Improve dumping of models                                           |         |       | 10:43 |  29.6 |
+| COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.6 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  33.7 |
+| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  17.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -565,105 +565,9 @@ correctly at present.
 Actually, we need way to figure out which types to generate, and which
 types are references. So we still need this flag.
 
-*** STARTED Add canonical archetype support to yarn                   :story:
-    CLOCK: [2017-09-10 Sun 00:08]--[2017-09-10 Sun 00:18] =>  0:10
-    CLOCK: [2017-09-09 Sat 23:40]--[2017-09-10 Sun 00:07] =>  0:27
-    CLOCK: [2017-09-09 Sat 23:28]--[2017-09-09 Sat 23:39] =>  0:11
-    CLOCK: [2017-09-09 Sat 22:50]--[2017-09-09 Sat 23:27] =>  0:37
-    CLOCK: [2017-09-09 Sat 22:05]--[2017-09-09 Sat 22:49] =>  0:44
-    CLOCK: [2017-09-09 Sat 21:02]--[2017-09-09 Sat 21:29] =>  0:27
-    CLOCK: [2017-09-09 Sat 19:52]--[2017-09-09 Sat 20:15] =>  0:23
-    CLOCK: [2017-09-09 Sat 19:12]--[2017-09-09 Sat 19:51] =>  0:39
-    CLOCK: [2017-09-09 Sat 15:40]--[2017-09-09 Sat 16:08] =>  0:28
-    CLOCK: [2017-09-09 Sat 13:49]--[2017-09-09 Sat 15:39] =>  1:50
-    CLOCK: [2017-09-09 Sat 08:55]--[2017-09-09 Sat 09:27] =>  0:32
-    CLOCK: [2017-09-08 Fri 22:51]--[2017-09-08 Fri 23:08] =>  0:17
-
-We need to add a new attribute in context which captures the canonical
-archetypes.
-
-Notes:
-
-- kernel must also return canonical archetype by element type
-  index. Perhaps we should have a struct that aggregates both:
-  archetype locations for meta-type? Or kernel can just return a
-  =std::pair=.
-- at present we have placed the canonical archetype resolution as part
-  of the element properties. However, we do not need to have this at
-  the element level since its a meta-type property and can be
-  determined up-front. We do need to resolve a name into a meta-type
-  before we can resolve a meta-type into a concrete archetype.
-- we need to unpick the notion of whether a formatter is "includible"
-  or not from the notion of canonical archetypes. Canonical archetypes
-  is meta-model concept: given a facet and a meta-model type, which
-  archetype represents the "key" definition of the element. It just so
-  happens that this function has a use in identifying the files to
-  include.
-- before we focus too much on adding canonical archetype support to
-  yarn, its important to understand just exactly how it gets used. We
-  are doing far too many look-ups at present, given the information
-  that is known. Canonical archetypes are a way to refer to a type for
-  a given formatter without knowing who exactly that formatter
-  is. This is useful for example when we need to include the
-  definition of a type but we do not know if its an enum, object
-  etc. So, at present, we proceed as follows:
-  - for a given name, we first resolve the archetype; if its not
-    canonical nothing happens. If its canonical, it gets resolved into
-    a concrete archetype.
-  - we then find the element associated with the name and get its
-    properties. If the archetype is not enabled, there is nothing to
-    do.
-  - if its enabled, we then need to look for its directives group. If
-    none exist, then there is nothing to do.
-
-  The gist of this exercise is that we could get away with a single
-  look-up; for this we would need to map the canonical directives
-  group as well. Actually this will not work because an archetype can
-  be disabled on one element but enabled on another, so we need to
-  separate enablement from the directives group. But we certainly can
-  map all the model elements to the meta-model elements and those to
-  the canonical archetypes. So we can have an "enablement manager" of
-  some kind, who consumes a model and the context, and creates a map
-  of element and archetype to bool. Steps:
-  - directive group repository factory needs to insert against the
-    canonical artefact too.
-  - dependencies builder needs to use the original (non-resolved)
-    artefact name.
-  - create a "enablement manager" in yarn that pre-processes the model
-    and creates the da+ta structures as described above (for element
-    id + archetype returns enabled flag)
-  - supply the "enablement manager" to the kernel and from there to
-    the dependencies builder.
-  - at this point, all C++ specific enablement infrastructure can be
-    deleted.
-
-  An even simpler way of looking at this is to generate a set of pairs
-  of strings during enablement transform for all elements + artefacts
-  that are enabled; put that in the endomodel; merge the sets as part
-  of the merger (throwing if duplicates are found). Then supply the
-  set to the dependencies builder somehow (or create a helper in yarn
-  that acts as the enablement manager but is just doing a look-up on
-  the set).
-
-Tasks:
-
-- add class in annotations to generate the canonical form from a
-  archetype location.
-- update kernels to return archetype location groups, with canonical
-  archetypes populated.
-- add a set of pairs of strings to endomodel: enabled archetypes for
-  element. Populate it during enablement transform. Add canonical
-  archetype there too.
-- in directive group repository factory, for each archetype that is
-  the canonical archetype, populate its entry too. Remove use of the
-  canonical resolver in dependencies builder.
-- create a class to query the set: "enablement manager"? Instantiate
-  it in C++ kernel and supply it to dependencies builder factory.
-- remove all references of formattables and element properties in
-  dependencies builder.
-- make is_enabled private in dependencies builder and see what breaks.
-
-*** STARTED Improve dumping of models                                 :story:
+*** COMPLETED Improve dumping of models                               :story:
+    CLOSED: [2017-09-13 Wed 21:41]
+    CLOCK: [2017-09-13 Wed 19:25]--[2017-09-13 Wed 21:41] =>  2:16
     CLOCK: [2017-09-12 Tue 20:25]--[2017-09-12 Tue 21:40] =>  1:15
     CLOCK: [2017-09-12 Tue 07:35]--[2017-09-12 Tue 08:17] =>  0:42
     CLOCK: [2017-09-11 Mon 20:42]--[2017-09-11 Mon 22:54] =>  2:12
@@ -767,12 +671,108 @@ Links:
 
 - [[http://www.randygaul.net/2015/06/15/printing-pretty-ascii-trees/][Printing Pretty Ascii Trees]]
 
+*** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-09-10 Sun 00:08]--[2017-09-10 Sun 00:18] =>  0:10
+    CLOCK: [2017-09-09 Sat 23:40]--[2017-09-10 Sun 00:07] =>  0:27
+    CLOCK: [2017-09-09 Sat 23:28]--[2017-09-09 Sat 23:39] =>  0:11
+    CLOCK: [2017-09-09 Sat 22:50]--[2017-09-09 Sat 23:27] =>  0:37
+    CLOCK: [2017-09-09 Sat 22:05]--[2017-09-09 Sat 22:49] =>  0:44
+    CLOCK: [2017-09-09 Sat 21:02]--[2017-09-09 Sat 21:29] =>  0:27
+    CLOCK: [2017-09-09 Sat 19:52]--[2017-09-09 Sat 20:15] =>  0:23
+    CLOCK: [2017-09-09 Sat 19:12]--[2017-09-09 Sat 19:51] =>  0:39
+    CLOCK: [2017-09-09 Sat 15:40]--[2017-09-09 Sat 16:08] =>  0:28
+    CLOCK: [2017-09-09 Sat 13:49]--[2017-09-09 Sat 15:39] =>  1:50
+    CLOCK: [2017-09-09 Sat 08:55]--[2017-09-09 Sat 09:27] =>  0:32
+    CLOCK: [2017-09-08 Fri 22:51]--[2017-09-08 Fri 23:08] =>  0:17
 
-FIXME: website should store content on git, and monitor it. We should
-allow users to update their git repos and see changes immediately;
-browse git revisions/tags and change production.
+We need to add a new attribute in context which captures the canonical
+archetypes.
 
-*** Transform probe coordinates
+Notes:
+
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+- at present we have placed the canonical archetype resolution as part
+  of the element properties. However, we do not need to have this at
+  the element level since its a meta-type property and can be
+  determined up-front. We do need to resolve a name into a meta-type
+  before we can resolve a meta-type into a concrete archetype.
+- we need to unpick the notion of whether a formatter is "includible"
+  or not from the notion of canonical archetypes. Canonical archetypes
+  is meta-model concept: given a facet and a meta-model type, which
+  archetype represents the "key" definition of the element. It just so
+  happens that this function has a use in identifying the files to
+  include.
+- before we focus too much on adding canonical archetype support to
+  yarn, its important to understand just exactly how it gets used. We
+  are doing far too many look-ups at present, given the information
+  that is known. Canonical archetypes are a way to refer to a type for
+  a given formatter without knowing who exactly that formatter
+  is. This is useful for example when we need to include the
+  definition of a type but we do not know if its an enum, object
+  etc. So, at present, we proceed as follows:
+  - for a given name, we first resolve the archetype; if its not
+    canonical nothing happens. If its canonical, it gets resolved into
+    a concrete archetype.
+  - we then find the element associated with the name and get its
+    properties. If the archetype is not enabled, there is nothing to
+    do.
+  - if its enabled, we then need to look for its directives group. If
+    none exist, then there is nothing to do.
+
+  The gist of this exercise is that we could get away with a single
+  look-up; for this we would need to map the canonical directives
+  group as well. Actually this will not work because an archetype can
+  be disabled on one element but enabled on another, so we need to
+  separate enablement from the directives group. But we certainly can
+  map all the model elements to the meta-model elements and those to
+  the canonical archetypes. So we can have an "enablement manager" of
+  some kind, who consumes a model and the context, and creates a map
+  of element and archetype to bool. Steps:
+  - directive group repository factory needs to insert against the
+    canonical artefact too.
+  - dependencies builder needs to use the original (non-resolved)
+    artefact name.
+  - create a "enablement manager" in yarn that pre-processes the model
+    and creates the da+ta structures as described above (for element
+    id + archetype returns enabled flag)
+  - supply the "enablement manager" to the kernel and from there to
+    the dependencies builder.
+  - at this point, all C++ specific enablement infrastructure can be
+    deleted.
+
+  An even simpler way of looking at this is to generate a set of pairs
+  of strings during enablement transform for all elements + artefacts
+  that are enabled; put that in the endomodel; merge the sets as part
+  of the merger (throwing if duplicates are found). Then supply the
+  set to the dependencies builder somehow (or create a helper in yarn
+  that acts as the enablement manager but is just doing a look-up on
+  the set).
+
+Tasks:
+
+- add class in annotations to generate the canonical form from a
+  archetype location.
+- update kernels to return archetype location groups, with canonical
+  archetypes populated.
+- add a set of pairs of strings to endomodel: enabled archetypes for
+  element. Populate it during enablement transform. Add canonical
+  archetype there too.
+- in directive group repository factory, for each archetype that is
+  the canonical archetype, populate its entry too. Remove use of the
+  canonical resolver in dependencies builder.
+- create a class to query the set: "enablement manager"? Instantiate
+  it in C++ kernel and supply it to dependencies builder factory.
+- remove all references of formattables and element properties in
+  dependencies builder.
+
+Notes:
+
+- make is_enabled private in dependencies builder and see what breaks.
+
+*** Transform probe coordinates                                       :story:
 
 Allow users to supply coordinates to transforms in some form so that
 we only dump a subset of the transform data.

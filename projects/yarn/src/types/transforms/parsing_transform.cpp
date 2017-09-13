@@ -246,7 +246,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 
 void parsing_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto l(em.input_language());

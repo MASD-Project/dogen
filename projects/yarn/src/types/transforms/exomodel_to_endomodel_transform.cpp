@@ -80,7 +80,7 @@ transform(const context& ctx, const meta_model::exomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exomodel to endomodel: "
                              << em.name().id();
 
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     meta_model::endomodel r;
     r.name(em.name());
     r.modules(to_element_map(em.modules()));

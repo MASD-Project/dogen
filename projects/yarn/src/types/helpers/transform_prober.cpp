@@ -54,21 +54,28 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-transform_prober::transform_prober(
+transform_prober::transform_prober(const std::string& log_level,
     const bool probe_data, const bool probe_stats,
+    const bool disable_guids_in_stats,
     const boost::filesystem::path& probe_directory,
     const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
     const helpers::mapping_set_repository& msrp)
-    : current_directory_(probe_directory),
+    : builder_(log_level, probe_data), current_directory_(probe_directory),
       probe_data_(probe_data), probe_stats_(probe_stats),
+      disable_guids_in_stats_(disable_guids_in_stats),
       probe_directory_(probe_directory) {
 
     validate();
-    if (!probe_data_)
+
+    if (!probing_enabled())
         return;
 
     handle_probe_directory();
+
+    if (!probe_data_)
+        return;
+
     write_initial_inputs(alrp, atrp, msrp);
     transform_position_.push(1);
 }
@@ -125,7 +132,7 @@ void transform_prober::handle_current_directory() const {
 
     ensure_transform_position_not_empty();
 
-    const auto id(builder_.current()->id());
+    const auto id(builder_.current()->transform_id());
     std::ostringstream s;
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top() << delimiter << id;
@@ -154,13 +161,13 @@ void transform_prober::ensure_transform_position_not_empty() const {
     }
 }
 
-boost::filesystem::path transform_prober::
-full_path_for_writing(const std::string& id, const std::string& type) const {
+boost::filesystem::path transform_prober::full_path_for_writing(
+    const std::string& transform_id, const std::string& type) const {
     ensure_transform_position_not_empty();
 
     std::ostringstream s;
     s << std::setfill(zero) << std::setw(leading_zeros)
-      << transform_position_.top() << delimiter << id << delimiter
+      << transform_position_.top() << delimiter << transform_id << delimiter
       << builder_.current()->guid() << delimiter << type << extension;
 
     return current_directory_ / s.str();
@@ -188,15 +195,16 @@ void transform_prober::write_initial_inputs(
     BOOST_LOG_SEV(lg, debug) << "Finish writing initial inputs.";
 }
 
-void transform_prober::start_chain(const std::string& id) const {
+void transform_prober::start_chain(const std::string& transform_id,
+    const std::string& model_id) const {
     if (!probing_enabled())
         return;
 
-    BOOST_LOG_SEV(lg, debug) << "Starting: " << id
+    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
                              << " (" << builder_.current()->guid() << ")";
     BOOST_LOG_SEV(lg, debug) << "Current directory: "
                              << current_directory_.generic_string();
-    builder_.start(id);
+    builder_.start(transform_id, model_id);
 
     if (!probe_data_)
         return;
@@ -206,20 +214,21 @@ void transform_prober::start_chain(const std::string& id) const {
     transform_position_.push(0);
 }
 
-void transform_prober::start_transform(const std::string& id) const {
+void transform_prober::start_transform(const std::string& transform_id,
+    const std::string& model_id) const {
     if (!probing_enabled())
         return;
 
-    BOOST_LOG_SEV(lg, debug) << "Starting: " << id
+    builder_.start(transform_id, model_id);
+    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
                              << " (" << builder_.current()->guid() << ")";
-    builder_.start(id);
 }
 
 void transform_prober::end_chain() const {
     if (!probing_enabled())
         return;
 
-    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->id()
+    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
     BOOST_LOG_SEV(lg, debug) << "Current directory: "
                              << current_directory_.generic_string();
@@ -238,7 +247,7 @@ void transform_prober::end_transform() const {
     if (!probing_enabled())
         return;
 
-    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->id()
+    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
     builder_.end();
 }
@@ -250,8 +259,8 @@ void transform_prober::end_probing() const {
         return;
 
     const auto tm(builder_.build());
-    const auto stats(transform_metrics_printer::print_graph(tm));
-    write(probe_directory_ / "transform_stats.txt", stats);
+    const auto s(transform_metrics_printer::print(disable_guids_in_stats_, tm));
+    write(probe_directory_ / "transform_stats.txt", s);
 }
 
 } } }

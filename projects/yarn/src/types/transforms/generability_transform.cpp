@@ -95,7 +95,7 @@ has_generatable_types(const meta_model::endomodel& em) {
 
 void generability_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     em.has_generatable_types(has_generatable_types(em));
     ctx.prober().end_transform(em);
 }

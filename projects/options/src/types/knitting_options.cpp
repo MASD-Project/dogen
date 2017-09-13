@@ -28,7 +28,7 @@ knitting_options::knitting_options()
       force_write_(static_cast<bool>(0)),
       compatibility_mode_(static_cast<bool>(0)),
       probe_stats_(static_cast<bool>(0)),
-      probe_stats_graph_(static_cast<bool>(0)),
+      probe_stats_disable_guids_(static_cast<bool>(0)),
       probe_all_(static_cast<bool>(0)) { }
 
 knitting_options::knitting_options(knitting_options&& rhs)
@@ -42,7 +42,7 @@ knitting_options::knitting_options(knitting_options&& rhs)
       cpp_headers_output_directory_path_(std::move(rhs.cpp_headers_output_directory_path_)),
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
       probe_stats_(std::move(rhs.probe_stats_)),
-      probe_stats_graph_(std::move(rhs.probe_stats_graph_)),
+      probe_stats_disable_guids_(std::move(rhs.probe_stats_disable_guids_)),
       probe_all_(std::move(rhs.probe_all_)),
       probe_directory_(std::move(rhs.probe_directory_)) { }
 
@@ -57,7 +57,7 @@ knitting_options::knitting_options(
     const boost::filesystem::path& cpp_headers_output_directory_path,
     const bool compatibility_mode,
     const bool probe_stats,
-    const bool probe_stats_graph,
+    const bool probe_stats_disable_guids,
     const bool probe_all,
     const boost::filesystem::path& probe_directory)
     : log_file_(log_file),
@@ -70,7 +70,7 @@ knitting_options::knitting_options(
       cpp_headers_output_directory_path_(cpp_headers_output_directory_path),
       compatibility_mode_(compatibility_mode),
       probe_stats_(probe_stats),
-      probe_stats_graph_(probe_stats_graph),
+      probe_stats_disable_guids_(probe_stats_disable_guids),
       probe_all_(probe_all),
       probe_directory_(probe_directory) { }
 
@@ -86,7 +86,7 @@ void knitting_options::swap(knitting_options& other) noexcept {
     swap(cpp_headers_output_directory_path_, other.cpp_headers_output_directory_path_);
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(probe_stats_, other.probe_stats_);
-    swap(probe_stats_graph_, other.probe_stats_graph_);
+    swap(probe_stats_disable_guids_, other.probe_stats_disable_guids_);
     swap(probe_all_, other.probe_all_);
     swap(probe_directory_, other.probe_directory_);
 }
@@ -102,7 +102,7 @@ bool knitting_options::operator==(const knitting_options& rhs) const {
         cpp_headers_output_directory_path_ == rhs.cpp_headers_output_directory_path_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
         probe_stats_ == rhs.probe_stats_ &&
-        probe_stats_graph_ == rhs.probe_stats_graph_ &&
+        probe_stats_disable_guids_ == rhs.probe_stats_disable_guids_ &&
         probe_all_ == rhs.probe_all_ &&
         probe_directory_ == rhs.probe_directory_;
 }
@@ -241,12 +241,12 @@ void knitting_options::probe_stats(const bool v) {
     probe_stats_ = v;
 }
 
-bool knitting_options::probe_stats_graph() const {
-    return probe_stats_graph_;
+bool knitting_options::probe_stats_disable_guids() const {
+    return probe_stats_disable_guids_;
 }
 
-void knitting_options::probe_stats_graph(const bool v) {
-    probe_stats_graph_ = v;
+void knitting_options::probe_stats_disable_guids(const bool v) {
+    probe_stats_disable_guids_ = v;
 }
 
 bool knitting_options::probe_all() const {

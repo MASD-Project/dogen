@@ -179,7 +179,7 @@ naming_transform::compute_model_name(const meta_model::location& l) {
 
 void naming_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
 
     const auto& ra(em.root_module().second->annotation());
     const auto tg(make_type_group(ctx.type_repository()));

@@ -233,7 +233,7 @@ void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
 
 void attributes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em);
+    ctx.prober().start_transform(id, em.name().id(), em);
     expand_object_templates(em);
     expand_objects(em);
     ctx.prober().end_transform(em);
