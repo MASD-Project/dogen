@@ -7929,6 +7929,52 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Build dogen docker images from travis                             :story:
+
+We should build docker images with each commit into master.
+
+Links:
+
+- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
+- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
+- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
+- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
+- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
+- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
+- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
+
+*** Charts in site                                                    :story:
+
+When we have a dogen site with code-generation functionality, we could
+allow users to produce transform probe data. This could be stored in
+redis. We could then have a json diff in the site. We could also have
+a visualisation like baobab with a tree on one side and a graph
+breaking down the time. And even more ideal would be if we could see
+all log lines from the start and end transform.
+
+Links:
+
+- [[https://github.com/nlohmann/json][JSON]]: C++ JSON library that supports the json diff spec.
+- [[https://wiki.gnome.org/Apps/Baobab][baobab screenshot]]
+
+*** Travis builds and binaries for users                              :story:
+
+It would be nice if when a user code-generates a model in the site, we
+could do a travis build with the generated code. The build would then
+produce static/shared libraries, assemblies, etc so that the model is
+ready to use. We could even generate a debian package.
+
+Darter would produce all the required plumbing (CMake, msbuild, etc).
+
+We could even get away with having a single project in github/travis,
+and doing a single commit that erases all previous state and instates
+the new model. We would also need a queue telling users where they
+are, so that all builds are serialised. For C#, it would be even
+cooler if we could directly upload the model into nuget after the
+build and supply the user with the nuget commands required to get the
+model. However, the only problem may be that we'd end up with a lot of
+dodgy code in nuget, so maybe this is not ideal.
+
 *** Consider generating program options code                          :story:
 
 If there was a syntax to describe boost program options, we should be
