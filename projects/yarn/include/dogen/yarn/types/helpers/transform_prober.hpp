@@ -107,7 +107,7 @@ public:
         if (probe_data_) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
-            const auto id(builder_.current().id());
+            const auto id(builder_.current()->id());
             const auto path(full_path_for_writing(id, "output"));
             write(path, output);
         }
@@ -121,12 +121,14 @@ public:
         if (probe_data_) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
-            const auto id(builder_.current().id());
+            const auto id(builder_.current()->id());
             const auto path(full_path_for_writing(id, "output"));
             write(path, output);
         }
         end_transform();
     }
+
+    void end_probing() const;
 
 private:
     mutable transform_metrics_builder builder_;

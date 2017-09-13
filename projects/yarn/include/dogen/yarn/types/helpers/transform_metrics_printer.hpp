@@ -1,7 +1,7 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
  * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
- *
+ *,
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
@@ -25,26 +25,22 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <ostream>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/helpers/transform_metrics.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
 class transform_metrics_printer final {
-public:
-    transform_metrics_printer() = default;
-    transform_metrics_printer(const transform_metrics_printer&) = default;
-    transform_metrics_printer(transform_metrics_printer&&) = default;
-    ~transform_metrics_printer() = default;
-    transform_metrics_printer& operator=(const transform_metrics_printer&) = default;
+private:
+    static void print(std::ostream& o, unsigned int indentation,
+        const boost::shared_ptr<const transform_metrics> tm);
 
 public:
-    bool operator==(const transform_metrics_printer& rhs) const;
-    bool operator!=(const transform_metrics_printer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string
+    print_graph(const boost::shared_ptr<const transform_metrics> tm);
 };
 
 } } }

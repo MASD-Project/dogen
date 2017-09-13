@@ -89,15 +89,16 @@ void transform_metrics_builder::start(const std::string& id) {
 }
 
 void transform_metrics_builder::end() {
-    BOOST_LOG_SEV(lg, debug) << "Ending id: " << current().id();
+    BOOST_LOG_SEV(lg, debug) << "Ending id: " << current()->id();
 
     ensure_stack_not_empty();
     update_end();
     stack_.pop();
 }
 
-const transform_metrics& transform_metrics_builder::current() const {
-    return *stack_.top();
+const boost::shared_ptr<const transform_metrics>
+transform_metrics_builder::current() const {
+    return stack_.top();
 }
 
 boost::shared_ptr<transform_metrics> transform_metrics_builder::build() {

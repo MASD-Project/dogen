@@ -49,7 +49,7 @@ public:
     void end();
 
 public:
-    const transform_metrics& current() const;
+    const boost::shared_ptr<const transform_metrics> current() const;
 
 public:
     boost::shared_ptr<transform_metrics> build();

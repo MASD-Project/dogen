@@ -18,14 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <iomanip>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics_printer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.transform_prober"));
+
+const char space(' ');
+const unsigned int indentation_size(4);
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-bool transform_metrics_printer::operator==(const transform_metrics_printer& /*rhs*/) const {
-    return true;
+void transform_metrics_printer::print(std::ostream& o, unsigned int indentation,
+    const boost::shared_ptr<const transform_metrics> tm) {
+
+    auto elapsed (tm->end() - tm->start());
+    o << std::setfill(space) << std::setw(indentation_size * indentation)
+      << tm->id() << "(" << elapsed  << ")" << std::endl;
+
+    ++indentation;
+    for(auto child : tm->children())
+        print(o, indentation, child);
+}
+
+std::string transform_metrics_printer::
+print_graph(const boost::shared_ptr<const transform_metrics> tm) {
+    unsigned int indentation(0);
+    std::ostringstream s;
+    print(s, indentation, tm);
+    return s.str();
 }
 
 } } }
