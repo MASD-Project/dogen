@@ -43,7 +43,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.${frontend}
-        --probe-all
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
 
