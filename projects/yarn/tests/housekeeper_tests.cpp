@@ -24,12 +24,12 @@
 #include "dogen/utility/test_data/validating_resolver.hpp"
 #include "dogen/utility/test_data/tds_test_good.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/knit/types/housekeeper.hpp"
+#include "dogen/yarn/types/helpers/housekeeper.hpp"
 
 namespace  {
 
 const std::string test_suite("housekeeper_tests");
-const std::string test_module("knit");
+const std::string test_module("yarn");
 const std::string hk_tds_expected("housekeeper/expected");
 const std::string hk_tds_actual_f1("housekeeper/actual/file_1.txt");
 const std::string hk_tds_actual_f2("housekeeper/actual/file_2.txt");
@@ -63,7 +63,7 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_housekeeper_does_not_find_extra_
             called = true;
         });
 
-    using dogen::knit::housekeeper;
+    using dogen::yarn::helpers::housekeeper;
     housekeeper hk(ignored_files, managed_directories(), e, lambda);
     hk.tidy_up();
     BOOST_CHECK(!called);
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_housekeeper_finds_the_extra_fi
             called = true;
         });
 
-    using dogen::knit::housekeeper;
+    using dogen::yarn::helpers::housekeeper;
     housekeeper hk(ignored_files, managed_directories(), e, lambda);
     hk.tidy_up();
     BOOST_CHECK(called);
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(housekeeper_deletes_extra_files_and_only_extra_files) {
     f.insert(validating_resolver::resolve(hk_tds_actual_f1));
     f.insert(validating_resolver::resolve(hk_tds_actual_f2));
 
-    using dogen::knit::housekeeper;
+    using dogen::yarn::helpers::housekeeper;
     housekeeper hk(ignored_files, v, f);
     hk.tidy_up();
 
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
                     called = true;
         });
 
-    using dogen::knit::housekeeper;
+    using dogen::yarn::helpers::housekeeper;
     housekeeper hk(ignores, managed_directories(), e, lambda);
     hk.tidy_up();
     BOOST_CHECK(!called);

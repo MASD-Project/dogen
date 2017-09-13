@@ -39,14 +39,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("knit.workflow"));
 
-const std::string xml_extension(".xml");
-const std::string text_extension(".txt");
-const std::string binary_extension(".bin");
-const std::string target_postfix("_target");
-const std::string merged("merged_");
-const std::string invalid_archive_type("Invalid or unexpected archive type");
-const std::string incorrect_stdout_options(
-    "Configuration for output to stdout is incorrect");
 const std::string code_generation_failure("Code generation failure.");
 
 }
@@ -60,27 +52,6 @@ workflow::workflow(workflow&& rhs)
 workflow::
 workflow(const yarn::transforms::options& o) : options_(o) {}
 
-bool workflow::housekeeping_required() const {
-    return options_.delete_extra_files();
-}
-
-void workflow::perform_housekeeping(
-    const std::list<formatters::artefact>& artefacts,
-    const std::list<boost::filesystem::path>& dirs) const {
-
-    std::set<boost::filesystem::path> expected_files;
-    for (const auto a : artefacts) {
-        expected_files.insert(a.path().generic_string());
-        for (const auto& d : a.dependencies())
-            expected_files.insert(d.generic_string());
-    }
-
-    const auto& ip(options_.ignore_patterns());
-    std::list<std::string> ignore_patterns(ip.begin(), ip.end());
-    housekeeper hk(ignore_patterns, dirs, expected_files);
-    hk.tidy_up();
-}
-
 void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Starting.";
 
@@ -88,15 +59,7 @@ void workflow::execute() const {
         /*
          * Generate all files.
          */
-        const auto cdo(yarn::code_generator::generate(options_));
-
-        /*
-         * Perform any housekeeping if need be.
-         */
-        if (housekeeping_required()) {
-            const auto& md(cdo.managed_directories());
-            perform_housekeeping(cdo.artefacts(), md);
-        }
+        yarn::code_generator::generate(options_);
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));
     } catch (boost::exception& e) {

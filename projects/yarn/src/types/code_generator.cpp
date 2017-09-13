@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
+#include "dogen/yarn/types/helpers/housekeeper.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
 
@@ -56,8 +57,24 @@ void code_generator::write_files(const transforms::options& o,
     w->write(cgo.artefacts());
 }
 
-transforms::code_generation_output
-code_generator::generate(const transforms::options& o) {
+void code_generator::perform_housekeeping(const transforms::options& o,
+    const std::list<formatters::artefact>& artefacts,
+    const std::list<boost::filesystem::path>& dirs) {
+
+    std::set<boost::filesystem::path> expected_files;
+    for (const auto a : artefacts) {
+        expected_files.insert(a.path().generic_string());
+        for (const auto& d : a.dependencies())
+            expected_files.insert(d.generic_string());
+    }
+
+    const auto& ip(o.ignore_patterns());
+    std::list<std::string> ignore_patterns(ip.begin(), ip.end());
+    helpers::housekeeper hk(ignore_patterns, dirs, expected_files);
+    hk.tidy_up();
+}
+
+void code_generator::generate(const transforms::options& o) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
 
     /*
@@ -95,17 +112,22 @@ code_generator::generate(const transforms::options& o) {
     /*
      * Now run the model to text transforms.
      */
-    const auto r(code_generation_chain::transform(ctx, models));
-    ctx.prober().end_chain(r);
+    const auto cgo(code_generation_chain::transform(ctx, models));
+    ctx.prober().end_chain(cgo);
     ctx.prober().end_probing();
 
     /*
-     * Finally write the files.
+     * Write the files.
      */
-    write_files(o, r);
+    write_files(o, cgo);
+
+    /*
+     * Perform any housekeeping if need be.
+     */
+    if (o.delete_extra_files())
+        perform_housekeeping(o, cgo.artefacts(), cgo.managed_directories());
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
-    return r;
 }
 
 } }

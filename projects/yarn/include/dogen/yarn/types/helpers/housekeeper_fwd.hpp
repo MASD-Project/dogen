@@ -18,52 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNIT_TYPES_WORKFLOW_HPP
-#define DOGEN_KNIT_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_HOUSEKEEPER_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_HOUSEKEEPER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <map>
-#include <list>
-#include <vector>
-#include <string>
-#include <ostream>
-#include <functional>
-#include <forward_list>
-#include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/formatters/types/artefact.hpp"
-#include "dogen/formatters/types/artefact_writer_interface.hpp"
-
 namespace dogen {
-namespace knit {
+namespace yarn {
+namespace helpers {
 
-class workflow {
-public:
-    workflow() = delete;
-    workflow& operator=(const workflow&) = default;
-    workflow(const workflow&) = default;
+class housekeeper;
 
-public:
-    typedef std::function<std::ostream& ()> output_fn;
-
-public:
-    workflow(workflow&& rhs);
-    explicit workflow(const yarn::transforms::options& o);
-
-public:
-    /**
-     * @brief Perform the entire code generation workflow.
-     */
-    void execute() const;
-
-private:
-    const yarn::transforms::options options_;
-};
-
-} }
+} } }
 
 #endif

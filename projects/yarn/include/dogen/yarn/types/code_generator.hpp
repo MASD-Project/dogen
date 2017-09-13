@@ -62,9 +62,16 @@ private:
     static void write_files(const transforms::options& o,
         const transforms::code_generation_output& cgo);
 
+private:
+    /**
+     * @brief Performs a housekeeping run for the supplied directories.
+     */
+    static void perform_housekeeping(const transforms::options& o,
+        const std::list<formatters::artefact>& artefacts,
+        const std::list<boost::filesystem::path>& dirs);
+
 public:
-    static transforms::code_generation_output
-    generate(const transforms::options& o);
+    static void generate(const transforms::options& o);
 };
 
 } }
