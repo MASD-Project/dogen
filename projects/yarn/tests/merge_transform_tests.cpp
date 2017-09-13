@@ -30,9 +30,10 @@
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/test/mock_context_factory.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
-/*
+
 namespace {
 
 const std::string test_module("yarn");
@@ -57,6 +58,7 @@ using dogen::utility::test::contains_checker;
 using dogen::yarn::meta_model::origin_types;
 using dogen::yarn::meta_model::endomodel;
 using dogen::yarn::transforms::merge_transform;
+using dogen::yarn::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(merge_transform_tests)
 
@@ -74,7 +76,8 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
         ims.push_back(m);
     }
 
-    const auto combined(merge_transform::transform(target, ims));
+    const auto ctx(mock_context_factory::make());
+    const auto combined(merge_transform::transform(ctx, target, ims));
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
@@ -131,7 +134,8 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     const auto m(factory.make_empty_model(tg));
 
     const std::list<endomodel> ims;
-    const auto combined(merge_transform::transform(m, ims));
+    const auto ctx(mock_context_factory::make());
+    const auto combined(merge_transform::transform(ctx, m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
     BOOST_CHECK(combined.objects().empty());
@@ -141,4 +145,3 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-*/

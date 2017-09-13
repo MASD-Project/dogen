@@ -29,9 +29,10 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/test/mock_context_factory.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
-/*
+
 namespace {
 
 using dogen::yarn::test::mock_endomodel_factory;
@@ -50,6 +51,7 @@ using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using dogen::yarn::transforms::stereotypes_transform;
+using dogen::yarn::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(stereotypes_transform_tests)
 
@@ -65,7 +67,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_REQUIRE(a.object_templates().empty());
     BOOST_REQUIRE(a.visitors().empty());
 
-    stereotypes_transform::transform(a);
+    stereotypes_transform::transform(mock_context_factory::make(), a);
 
     BOOST_CHECK(a.objects().size() == 1);
     BOOST_CHECK(a.visitors().empty());
@@ -86,9 +88,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
+    const auto ctx(mock_context_factory::make());
     contains_checker<transformation_error> c(no_leaves);
     BOOST_CHECK_EXCEPTION(
-        stereotypes_transform::transform(m), transformation_error, c);
+        stereotypes_transform::transform(ctx, m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
@@ -107,7 +110,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;
 
-    stereotypes_transform::transform(m);
+    const auto ctx(mock_context_factory::make());
+    stereotypes_transform::transform(ctx, m);
     BOOST_LOG_SEV(lg, debug) << "after: " << m;
 
     BOOST_CHECK(m.objects().size() == 2);
@@ -130,4 +134,3 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-*/

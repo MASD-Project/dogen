@@ -30,6 +30,7 @@
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/test/mock_context_factory.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 
@@ -88,7 +89,7 @@ bool has_duplicate_attribute_names(const Stateful& s,
 }
 
 }
-/*
+
 using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
@@ -98,6 +99,7 @@ using object_types = dogen::yarn::test::mock_endomodel_factory::
 object_types;
 using attribute_types = dogen::yarn::test::mock_endomodel_factory::
 attribute_types;
+using dogen::yarn::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(attributes_transform_tests)
 
@@ -108,7 +110,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_attributes_transform) {
     const auto e(factory.make_empty_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    attributes_transform::transform(a);
+    attributes_transform::transform(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -120,7 +122,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_at
     const auto e(factory.make_single_type_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    attributes_transform::transform(a);
+    attributes_transform::transform(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -134,7 +136,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_attribut
     auto m(factory.object_with_attribute(ot, objt, at));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
@@ -150,7 +152,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_object_template_results_in_expected_attri
     auto m(factory.make_single_object_template_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.object_templates().size() == 1);
@@ -173,7 +175,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_object_templates_inheritance_result
     auto m(factory.make_first_degree_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.object_templates()) {
@@ -223,7 +225,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_object_templates_inheritance_resul
     auto m(factory.make_second_degree_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_REQUIRE(m.object_templates().size() == 3);
@@ -288,7 +290,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_object_template_inheritance_results_in_e
     auto m(factory.make_diamond_inheritance_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     BOOST_CHECK(m.object_templates().size() == 4);
     for (const auto& pair : m.object_templates()) {
@@ -355,7 +357,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_instantiate_object_t
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.object_templates().empty());
 
-    attributes_transform::transform(a);
+    attributes_transform::transform(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -378,7 +380,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_obj
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.object_templates().empty());
 
-    attributes_transform::transform(a);
+    attributes_transform::transform(mock_context_factory::make(), a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -387,13 +389,13 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_instantia
     SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_instantiate_object_templates_but_has_attributes_results_in_expected_attributes");
 
     auto m(factory.object_with_third_degree_parent_in_same_model(
-            origin_types::target, truehas_attribute));
+            origin_types::target, true/*has_attribute*/));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 4);
     BOOST_REQUIRE(m.object_templates().empty());
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     BOOST_REQUIRE(m.objects().size() == 4);
     for (const auto& pair : m.objects()) {
@@ -438,7 +440,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_instantiates_objec
     auto m(factory.make_object_with_parent_that_instantiates_object_template());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_CHECK(m.object_templates().size() == 1);
@@ -481,7 +483,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_instantiates_
     auto m(factory.make_object_with_parent_that_instantiates_a_child_object_template());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    attributes_transform::transform(m);
+    attributes_transform::transform(mock_context_factory::make(), m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_CHECK(m.object_templates().size() == 2);
@@ -535,8 +537,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_template_that_inhertis_missing_object_tem
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     contains_checker<transformation_error> c(object_template_not_found);
-    BOOST_CHECK_EXCEPTION(
-        attributes_transform::transform(m), transformation_error, c);
+    BOOST_CHECK_EXCEPTION(attributes_transform::transform(
+            mock_context_factory::make(), m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_that_instantiates_missing_object_template_throws) {
@@ -546,8 +548,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_instantiates_missing_object_template
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     contains_checker<transformation_error> c(object_template_not_found);
-    BOOST_CHECK_EXCEPTION(
-        attributes_transform::transform(m), transformation_error, c);
+    BOOST_CHECK_EXCEPTION(attributes_transform::transform(
+            mock_context_factory::make(), m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_that_instantiates_object_template_with_missing_parent_throws) {
@@ -557,9 +559,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_instantiates_object_template_with_mi
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     contains_checker<transformation_error> c(object_not_found);
-    BOOST_CHECK_EXCEPTION(
-        attributes_transform::transform(m), transformation_error, c);
+    BOOST_CHECK_EXCEPTION(attributes_transform::transform(
+            mock_context_factory::make(), m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
-*/
