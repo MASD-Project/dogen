@@ -512,7 +512,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#probe_stats_graph#</dia:string>
+            <dia:string>#probe_stats_disable_guids#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -521,7 +521,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Enable probing for statistics around transforms and generate a graph.#</dia:string>
+            <dia:string>#Disable guids in probe stats, to make comparisons easier.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
