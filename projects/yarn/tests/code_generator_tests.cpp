@@ -74,7 +74,7 @@ struct test_configuration {
 
 test_configuration make_test_configuration(const std::string& model_name,
     const boost::filesystem::path& target,
-    const std::string& actual_dir) {
+    const std::string& actual_dir, bool enable_probing = false) {
     test_configuration r;
 
     using dogen::utility::test_data::validating_resolver;
@@ -83,6 +83,14 @@ test_configuration make_test_configuration(const std::string& model_name,
 
     using dogen::yarn::test::mock_options_factory;
     r.options = mock_options_factory::make_knitting_options(target, r.actual);
+
+    if (enable_probing) {
+        boost::filesystem::path pd("probe");
+        pd /= test_module;
+        pd /= test_suite;
+        r.options.probe_directory(pd);
+        r.options.probe_all(true);
+    }
 
     return r;
 }
@@ -132,15 +140,16 @@ bool execute_test(const test_configuration& tc) {
 
 bool test_code_generator(const std::string& model_name,
     const boost::filesystem::path& target,
-    const std::string& actual_dir) {
-    const auto tc(make_test_configuration(model_name, target, actual_dir));
+    const std::string& actual_dir, bool enable_probing) {
+    const auto tc(make_test_configuration(model_name, target, actual_dir,
+            enable_probing));
     return execute_test(tc);
 }
 
 bool test_code_generator(const boost::filesystem::path& target,
-    const std::string& actual_dir) {
+    const std::string& actual_dir, bool enable_probing = false) {
     const auto name(target.stem().string());
-    return test_code_generator(name, target, actual_dir);
+    return test_code_generator(name, target, actual_dir, enable_probing);
 }
 
 }

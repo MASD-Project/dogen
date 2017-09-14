@@ -696,6 +696,14 @@ yarn has taken over the model to text transforms. We should just move
 housekeeper and the rest of knit into helpers and update the
 code-generator to perform the complete workflow.
 
+*** STARTED Add probing support to code generation tests              :story:
+    CLOCK: [2017-09-14 Thu 23:13]--[2017-09-14 Thu 23:43] =>  0:30
+
+When we added probing support, we did it only for the knitter
+binary. Where it is actually useful is with the unit tests so that we
+can try to figure out what broke. Add probing support to yarn code
+generation tests.
+
 *** STARTED Add canonical archetype support to yarn                   :story:
     CLOCK: [2017-09-10 Sun 00:08]--[2017-09-10 Sun 00:18] =>  0:10
     CLOCK: [2017-09-09 Sat 23:40]--[2017-09-10 Sun 00:07] =>  0:27
@@ -796,6 +804,13 @@ Tasks:
 Notes:
 
 - make is_enabled private in dependencies builder and see what breaks.
+
+*** Catch directory generation errors in probe                        :story:
+
+Our paths are too deeply nested for windows machines, where there is a
+limitation on the maximum path size. When that happens we throw a ios
+error, which is not particularly informative. We should catch the
+exception and add a message asking the user to disable probing data.
 
 *** Remove dumping of models from log                                 :story:
 
