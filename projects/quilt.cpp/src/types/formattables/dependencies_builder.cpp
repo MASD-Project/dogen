@@ -58,9 +58,14 @@ dependencies_builder::dependencies_builder(
     const directive_group_repository& dgrp,
     const std::unordered_map<std::string, formattable>& formattables,
     const std::unordered_set<yarn::meta_model::element_archetype>&
-    /*enabled_archetype_for_element*/)
-    : repository_(dgrp), formattables_(formattables)/*,
-      enabled_archetype_for_element_(enabled_archetype_for_element)*/ {}
+#ifdef USE_NEW_ENABLEMENT
+    enabled_archetype_for_element
+#endif
+    ) : repository_(dgrp), formattables_(formattables)
+#ifdef USE_NEW_ENABLEMENT
+      , enabled_archetype_for_element_(enabled_archetype_for_element)
+#endif
+{}
 
 boost::optional<directive_group>
 dependencies_builder::get_directive_group(
@@ -79,12 +84,12 @@ dependencies_builder::get_directive_group(
 
 bool dependencies_builder::is_enabled(const yarn::meta_model::name& n,
     const std::string& archetype) const {
-    /*
+#ifdef USE_NEW_ENABLEMENT
     yarn::meta_model::element_archetype ea(n.id(), archetype);
     const auto i(enabled_archetype_for_element_.find(ea));
     const bool is_disabled(i == enabled_archetype_for_element_.end());
     return !is_disabled;
-    */
+#else
     const auto i(formattables_.find(n.id()));
     if (i == formattables_.end()) {
         BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
@@ -108,6 +113,7 @@ bool dependencies_builder::is_enabled(const yarn::meta_model::name& n,
                                  << archetype << " on type: " << n.id() << "'";
     }
     return r;
+#endif
 }
 
 void dependencies_builder::
@@ -130,8 +136,15 @@ add(const std::list<std::string>& inclusion_directives) {
 void dependencies_builder::
 add(const yarn::meta_model::name& n, const std::string& archetype) {
     BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
-
     canonical_archetype_resolver res(formattables_);
+
+#ifdef USE_NEW_ENABLEMENT
+    if (!is_enabled(n, archetype)) {
+        BOOST_LOG_SEV(lg, trace) << "Archetype not enabled: " << archetype;
+        return;
+    }
+
+#else
     const auto resolved_arch(res.resolve(n.id(), archetype));
 
     if (!is_enabled(n, resolved_arch)) {
@@ -139,11 +152,7 @@ add(const yarn::meta_model::name& n, const std::string& archetype) {
                                  << resolved_arch;
         return;
     }
-
-    // if (!is_enabled(n, archetype)) {
-    //     BOOST_LOG_SEV(lg, trace) << "Archetype not enabled: " << archetype;
-    //     return;
-    // }
+#endif
 
     const auto dg(get_directive_group(n, archetype));
     if (dg) {

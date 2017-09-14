@@ -37,6 +37,8 @@
 #include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
+// #define USE_NEW_ENABLEMENT
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -109,9 +111,11 @@ public:
 private:
     const directive_group_repository& repository_;
     const std::unordered_map<std::string, formattable>& formattables_;
-    // const std::unordered_set<yarn::meta_model::element_archetype>&
-    // enabled_archetype_for_element_;
     std::list<std::string> dependencies_;
+#ifdef USE_NEW_ENABLEMENT
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element_;
+#endif
 };
 
 } } } }
