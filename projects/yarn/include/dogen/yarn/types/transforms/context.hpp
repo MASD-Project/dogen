@@ -72,8 +72,10 @@ public:
 
     /**
      * @brief User supplied parameters.
+     *
+     * @note Added prefix "transform_" to keep gcc happy.
      */
-    const options& options() const;
+    const options& transform_options() const;
 
     /**
      * @brief All of the available archetype locations.

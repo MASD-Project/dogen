@@ -42,7 +42,7 @@ const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
 }
 
-const options& context::options() const {
+const options& context::transform_options() const {
     return options_;
 }
 

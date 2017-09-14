@@ -58,7 +58,7 @@ endomodel_generation_chain::transform(const context& ctx) {
      * same; or it is a Platform Independent Model (PIM), making use
      * of LAM types (the Language Agnostic Model).
      */
-    const auto model_name(ctx.options().target().filename().string());
+    const auto model_name(ctx.transform_options().target().filename().string());
     ctx.prober().start_chain(id, model_name);
     const auto target(initial_target_chain::transform(ctx));
 
