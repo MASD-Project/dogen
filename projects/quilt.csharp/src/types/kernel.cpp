@@ -94,7 +94,7 @@ kernel::generate(const yarn::transforms::context& ctx,
     const auto mn(m.name());
     const auto& ra(m.root_module()->annotation());
     const auto& atrp(ctx.type_repository());
-    const auto odp(ctx.options().output_directory_path());
+    const auto odp(ctx.transform_options().output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_kernel_directories);
     const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);

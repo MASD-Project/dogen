@@ -122,11 +122,11 @@ kernel::generate(const yarn::transforms::context& ctx,
     /*
      * Create the locator.
      */
-    const auto& ko(ctx.options());
+    const auto& o(ctx.transform_options());
     const auto& atrp(ctx.type_repository());
     const auto& ra(m.root_module()->annotation());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(ko, atrp, ra, frp, enable_kernel_directories, m));
+    const auto l(make_locator(o, atrp, ra, frp, enable_kernel_directories, m));
 
     /*
      * Generate the formattables model.

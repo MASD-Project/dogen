@@ -56,7 +56,7 @@ namespace  {
 
 const std::string empty;
 const std::string empty_module_path;
-const std::string test_module("knit");
+const std::string test_module("yarn");
 const std::string test_suite("code_generator_tests");
 
 const std::string expected("/expected");
