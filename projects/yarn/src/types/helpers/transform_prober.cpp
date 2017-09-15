@@ -183,15 +183,15 @@ void transform_prober::write_initial_inputs(
 
     auto path(current_directory_ / "001-archetype_location_repository.json");
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
-    write(path, alrp);
+    utility::filesystem::write(path, alrp);
 
     path = current_directory_ / "001-type_repository.json";
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
-    write(path, atrp);
+    utility::filesystem::write(path, atrp);
 
     path = current_directory_ / "001-mapping_set_repository.json";
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
-    write(path, msrp);
+    utility::filesystem::write(path, msrp);
 
     BOOST_LOG_SEV(lg, debug) << "Finish writing initial inputs.";
 }
@@ -272,7 +272,7 @@ void transform_prober::end_probing() const {
 
     const auto tm(builder_.build());
     const auto s(transform_metrics_printer::print(disable_guids_in_stats_, tm));
-    write(probe_directory_ / "transform_stats.txt", s);
+    utility::filesystem::write(probe_directory_ / "transform_stats.txt", s);
 }
 
 } } }

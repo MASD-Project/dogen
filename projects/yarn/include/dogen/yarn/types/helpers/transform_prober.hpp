@@ -28,7 +28,7 @@
 #include <stack>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include <boost/filesystem/fstream.hpp>
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
@@ -40,15 +40,6 @@ namespace yarn {
 namespace helpers {
 
 class transform_prober final {
-private:
-    template<typename Ioable>
-    inline void write(const boost::filesystem::path& path,
-        const Ioable& target) const {
-        boost::filesystem::ofstream stream(path);
-        stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        stream << target;
-    }
-
 public:
     transform_prober(const std::string& log_level, const bool probe_data,
         const bool probe_stats, const bool disable_guids_in_stats,
@@ -90,8 +81,8 @@ public:
 
         ensure_transform_position_not_empty();
         ++transform_position_.top();
-        const auto path(full_path_for_writing(transform_id, "input"));
-        write(path, input);
+        const auto p(full_path_for_writing(transform_id, "input"));
+        utility::filesystem::write(p, input);
     }
 
     void start_transform(const std::string& transform_id) const;
@@ -108,8 +99,8 @@ public:
         if (probe_data_) {
             ensure_transform_position_not_empty();
             ++transform_position_.top();
-            const auto path(full_path_for_writing(transform_id, "input"));
-            write(path, input);
+            const auto p(full_path_for_writing(transform_id, "input"));
+            utility::filesystem::write(p, input);
         }
     }
 
@@ -121,8 +112,8 @@ public:
             ensure_transform_position_not_empty();
             ++transform_position_.top();
             const auto id(builder_.current()->transform_id());
-            const auto path(full_path_for_writing(id, "output"));
-            write(path, output);
+            const auto p(full_path_for_writing(id, "output"));
+            utility::filesystem::write(p, output);
         }
         end_chain();
     }
@@ -135,8 +126,8 @@ public:
             ensure_transform_position_not_empty();
             ++transform_position_.top();
             const auto id(builder_.current()->transform_id());
-            const auto path(full_path_for_writing(id, "output"));
-            write(path, output);
+            const auto p(full_path_for_writing(id, "output"));
+            utility::filesystem::write(p, output);
         }
         end_transform();
     }

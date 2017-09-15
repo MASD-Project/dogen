@@ -28,8 +28,12 @@
 #include <set>
 #include <list>
 #include <string>
+#include <sstream>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include "dogen/utility/filesystem/io_error.hpp"
+
 
 namespace dogen {
 namespace utility {
@@ -50,6 +54,24 @@ std::string read_file_content(const boost::filesystem::path& path);
  */
 void write_file_content(const boost::filesystem::path& path,
     const std::string& content);
+
+/**
+ * @brief Dump the object as a stream to the file.
+ */
+template<typename Ioable>
+inline void write(const boost::filesystem::path& path,
+    const Ioable& target) {
+    try {
+        boost::filesystem::ofstream stream(path);
+        stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        stream << target;
+    } catch (const std::exception& e) {
+        std::ostringstream s;
+        s << "An error occurred whilst trying to write a file. Path: '"
+          << path.generic_string() << "'. Error: " << e.what();
+        throw io_error(s.str());
+    }
+}
 
 /**
  * @brief Returns all files available in directory, recursively.

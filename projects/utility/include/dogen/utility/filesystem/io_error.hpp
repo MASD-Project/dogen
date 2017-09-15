@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_FILESYSTEM_FILE_NOT_FOUND_HPP
-#define DOGEN_UTILITY_FILESYSTEM_FILE_NOT_FOUND_HPP
+#ifndef DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
+#define DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,18 +32,18 @@ namespace utility {
 namespace filesystem {
 
 /**
- * @brief A file requested by the user could not be located.
+ * @brief An error occurred whilst reading or writing.
  *
  */
-class file_not_found : public dogen::utility::exception::exception {
+class io_error : public dogen::utility::exception::exception {
 public:
     /**
      * @param message Error message. Must be a string literal.
      */
-    file_not_found(std::string message);
-    file_not_found() { }
+    io_error(std::string message);
+    io_error() { }
 
-    virtual ~file_not_found() throw() {}
+    virtual ~io_error() throw() {}
 };
 
 } } }
