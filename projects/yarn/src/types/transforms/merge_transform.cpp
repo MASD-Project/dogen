@@ -97,8 +97,8 @@ meta_model::endomodel
 merge_transform::transform(const context& ctx,
     const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
+    BOOST_LOG_SEV(lg, debug) << "Started merge transform.";
     ctx.prober().start_transform(id, target.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Executing the merge transform.";
 
     /*
      * We start by making a complete copy of the target model, which
@@ -113,8 +113,8 @@ merge_transform::transform(const context& ctx,
     for (const auto& ref : refs)
         merge(ref, r);
 
-    BOOST_LOG_SEV(lg, debug) << "Executed the merge transform.";
     ctx.prober().end_transform(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished merge transform.";
     return r;
 }
 

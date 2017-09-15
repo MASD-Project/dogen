@@ -28,8 +28,9 @@
 
 namespace {
 
+const std::string id("yarn.transforms.exomodel_to_exomodel_chain");
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.exomodel_to_exomodel_chain"));
+auto lg(logger_factory(id));
 
 const std::string transform_not_supported("Cannot transform into: ");
 
@@ -82,8 +83,10 @@ void exomodel_to_exomodel_chain::
 transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
-    BOOST_LOG_SEV(lg, info) << "Transforming: " << src_path.generic_string()
+    BOOST_LOG_SEV(lg, info) << "Started exomodel to exomodel chain."
+                            << " Transforming: " << src_path.generic_string()
                             << " to: " << dst_path.generic_string();
+    ctx.prober().start_transform(id);
 
     /*
      * Obtain a tuple containing the source and destination
@@ -111,7 +114,8 @@ transform(const transforms::context& ctx,
      */
     tuple.get<1>().transform(ctx, src, dst_path);
 
-    BOOST_LOG_SEV(lg, info) << "Transformation done.";
+    ctx.prober().end_transform();
+    BOOST_LOG_SEV(lg, info) << "Finished exomodel to exomodel chain.";
 }
 
 } } }

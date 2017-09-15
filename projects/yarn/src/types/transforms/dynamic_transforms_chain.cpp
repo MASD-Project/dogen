@@ -61,10 +61,10 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 
 void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id ,em.name().id(), em);
-
-    const auto id(em.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Performing external transforms on: " << id;
+    const auto model_id(em.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Started dynamic transforms chain. Model: "
+                             << model_id;
+    ctx.prober().start_transform(id, model_id, em);
 
     auto& rg(registrar());
     rg.validate();
@@ -74,8 +74,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
     for (const auto& dt : rg.dynamic_transforms())
         dt->transform(ctx, dpf, em);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished performing external transforms.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished dynamic transforms chain.";
 }
 
 } } }

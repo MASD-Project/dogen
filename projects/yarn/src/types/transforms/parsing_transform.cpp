@@ -246,6 +246,8 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 
 void parsing_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started parsing transform. Model: "
+                             << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
@@ -301,6 +303,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     }
 
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished parsing transform.";
 }
 
 } } }

@@ -107,7 +107,7 @@ void code_generator::generate(const transforms::options& o) {
     /*
      * Then we convert the endomodels to the final representation.
      */
-    const auto models(endomodel_to_model_transform::transform(endomodels));
+    const auto models(endomodel_to_model_transform::transform(ctx, endomodels));
 
     /*
      * Now run the model to text transforms.

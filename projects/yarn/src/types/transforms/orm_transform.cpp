@@ -493,9 +493,10 @@ transform_modules(const type_group& tg, meta_model::endomodel& em) {
 
 void orm_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started transform.";
-
+    BOOST_LOG_SEV(lg, debug) << "Started orm transform. Model: "
+                             << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
+
     const auto tg(make_type_group(ctx.type_repository()));
     const auto& rm(*em.root_module());
     em.orm_properties(make_model_properties(tg, rm.annotation()));
@@ -505,8 +506,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
     transform_primitives(tg, em);
     transform_modules(tg, em);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished transform.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished orm transform.";
 }
 
 } } }

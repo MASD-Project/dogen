@@ -131,16 +131,18 @@ expand_object(const meta_model::endomodel& em, meta_model::object& o) {
 
 void associations_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding objects. Total objects: "
+    BOOST_LOG_SEV(lg, debug) << "Starting associations transform. Model: "
+                             << em.name().id() << ". Total objects: "
                              << em.objects().size();
-
     ctx.prober().start_transform(id, em.name().id(), em);
+
     for (auto& pair : em.objects()) {
-        auto& o(pair.second);
-        expand_object(em, *o);
+        auto& o(*pair.second);
+        expand_object(em, o);
     }
-    BOOST_LOG_SEV(lg, debug) << "Finished expanding objects.";
+
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished associations transform.";
 }
 
 } } }

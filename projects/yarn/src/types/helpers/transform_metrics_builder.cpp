@@ -59,6 +59,7 @@ transform_metrics_builder::transform_metrics_builder(
         s << ", not probing";
 
     stack_.push(create_metrics(root_id, s.str()));
+    BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
 }
 
 void transform_metrics_builder::ensure_stack_not_empty() const {
@@ -100,6 +101,7 @@ void transform_metrics_builder::start(const std::string& transform_id,
     auto next(create_metrics(transform_id, model_id));
     stack_.top()->children().push_back(next);
     stack_.push(next);
+    BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
 }
 
 void transform_metrics_builder::end() {
@@ -109,6 +111,7 @@ void transform_metrics_builder::end() {
     ensure_stack_not_empty();
     update_end();
     stack_.pop();
+    BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
 }
 
 const boost::shared_ptr<const transform_metrics>
@@ -118,6 +121,7 @@ transform_metrics_builder::current() const {
 
 boost::shared_ptr<transform_metrics> transform_metrics_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Building.";
+    BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
 
     if (stack_.size() != 1) {
         BOOST_LOG_SEV(lg, error) << unmatch_start_end;

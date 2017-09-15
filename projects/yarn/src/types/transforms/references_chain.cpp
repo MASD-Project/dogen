@@ -56,13 +56,14 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
 
 std::list<meta_model::endomodel> references_chain::
 transform(const context& ctx, const meta_model::endomodel& target) {
-    BOOST_LOG_SEV(lg, debug) << "Executing the reference models chain.";
+    BOOST_LOG_SEV(lg, debug) << "Started references chain. Model: "
+                             << target.name().id();
+    ctx.prober().start_chain(id, target.name().id(), target);
 
     /*
      * Obtain the absolute paths to all reference models - system and
      * user.
      */
-    ctx.prober().start_chain(id, target.name().id(), target);
     const auto rps(helpers::reference_paths_extractor::extract(ctx, target));
 
     /*
@@ -113,9 +114,8 @@ transform(const context& ctx, const meta_model::endomodel& target) {
             r.push_back(m);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Reference models chain executed.";
     ctx.prober().end_chain(r);
-
+    BOOST_LOG_SEV(lg, debug) << "Finished references chain.";
     return r;
 }
 

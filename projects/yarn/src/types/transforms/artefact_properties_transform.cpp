@@ -94,14 +94,15 @@ void artefact_properties_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started artefact properties transform.";
     ctx.prober().start_transform(id, em.name().id(), em);
+
     using namespace std::placeholders;
     const auto f(artefact_properties_transform::update_element);
     const auto v(std::bind(f, ctx, _1));
     const bool include_injected_elements(true);
     meta_model::elements_traversal(em, v, include_injected_elements);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished artefact properties transform.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished artefact properties transform.";
 }
 
 } } }

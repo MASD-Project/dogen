@@ -75,6 +75,7 @@ private:
 
 
 public:
+    void start_chain(const std::string& transform_id) const;
     void start_chain(const std::string& transform_id,
         const std::string& model_id) const;
 
@@ -92,6 +93,8 @@ public:
         const auto path(full_path_for_writing(transform_id, "input"));
         write(path, input);
     }
+
+    void start_transform(const std::string& transform_id) const;
 
     void start_transform(const std::string& transform_id,
         const std::string& model_id) const;

@@ -122,6 +122,8 @@ void annotations_transform::process(const annotations::annotation_group& ag,
 
 void annotations_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started annotations transform. Model: "
+                             << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
 
     process(ctx, em.modules());
@@ -134,6 +136,7 @@ transform(const context& ctx, meta_model::exomodel& em) {
     process(ctx, em.root_module());
 
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished annotations transform.";
 }
 
 } } }

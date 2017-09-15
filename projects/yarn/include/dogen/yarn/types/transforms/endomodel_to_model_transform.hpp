@@ -27,6 +27,7 @@
 
 #include <list>
 #include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
@@ -40,7 +41,7 @@ private:
 
 public:
     static std::list<meta_model::model>
-    transform(const std::list<meta_model::endomodel>& ems);
+    transform(const context& ctx, const std::list<meta_model::endomodel>& ems);
 };
 
 } } }

@@ -226,10 +226,14 @@ expand_containing_module(meta_model::endomodel& im) {
 
 void modules_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started modules transform.";
     ctx.prober().start_transform(id, em.name().id(), em);
+
     create_missing_modules(em);
     expand_containing_module(em);
+
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished modules transform.";
 }
 
 } } }

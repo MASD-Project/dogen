@@ -99,20 +99,29 @@ void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
 
 void pre_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started pre-processing chain. Model: "
+                             << em.name().id();
     ctx.prober().start_chain(id, em.name().id(), em);
+
     apply_first_set_of_transforms(ctx, em);
     apply_second_set_of_transforms(ctx, em);
+
     ctx.prober().end_chain(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished pre-processing chain.";
 }
 
 bool pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
     meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started pre-processing chain. Model: "
+                             << em.name().id();
+    ctx.prober().start_chain(id, em.name().id(), em);
+
     /*
      * We must apply the first set of transforms because language
      * expansion is required.
      */
-    ctx.prober().start_chain(id, em.name().id(), em);
+
     apply_first_set_of_transforms(ctx, em);
 
     /*
@@ -121,11 +130,14 @@ bool pre_processing_chain::try_transform(const context& ctx,
      */
     if (!is_language_relevant(relevant_languages, em)) {
         ctx.prober().end_chain(em);
+        BOOST_LOG_SEV(lg, debug) << "Finished pre-processing chain.";
         return false;
     }
 
     apply_second_set_of_transforms(ctx, em);
+
     ctx.prober().end_chain(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished pre-processing chain.";
     return true;
 }
 

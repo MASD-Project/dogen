@@ -233,10 +233,15 @@ void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
 
 void attributes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started attributes transform. Model: "
+                             << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
+
     expand_object_templates(em);
     expand_objects(em);
+
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished attributes transform.";
 }
 
 } } }

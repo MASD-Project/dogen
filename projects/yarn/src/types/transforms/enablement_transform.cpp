@@ -546,7 +546,8 @@ void enablement_transform::compute_enablement_for_element(
 
 void enablement_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started enablement transform.";
+    BOOST_LOG_SEV(lg, debug) << "Started enablement transform. Model: "
+                             << em.name().id();
 
     ctx.prober().start_transform(id, em.name().id(), em);
     const auto& atrp(ctx.type_repository());
@@ -590,8 +591,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
     meta_model::elements_traversal(em, v, include_injected_elements);
     em.enabled_archetype_for_element(eafe);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished enablement transform.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished enablement transform.";
 }
 
 } } }

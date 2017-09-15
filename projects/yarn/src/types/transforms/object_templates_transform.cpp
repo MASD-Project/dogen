@@ -264,14 +264,19 @@ object_templates_transform::expand_object_templates(meta_model::endomodel& em) {
 
 void object_templates_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started object templates transform. Model: "
+                             << em.name().id();
+    ctx.prober().start_transform(id, em.name().id(), em);
+
     /*
      * We must expand object templates before we expand objects as we
      * rely on the expanded attributes.
      */
-    ctx.prober().start_transform(id, em.name().id(), em);
     expand_object_templates(em);
     expand_objects(em);
+
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished object templates transform.";
 }
 
 } } }

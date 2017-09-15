@@ -179,6 +179,9 @@ naming_transform::compute_model_name(const meta_model::location& l) {
 
 void naming_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started naming transform. Model: "
+                             << em.name().id();
+
     ctx.prober().start_transform(id, em.name().id(), em);
 
     const auto& ra(em.root_module().second->annotation());
@@ -190,6 +193,7 @@ transform(const context& ctx, meta_model::exomodel& em) {
     update_names(l, em);
 
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished naming transform.";
 }
 
 } } }

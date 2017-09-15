@@ -38,6 +38,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.transform_prober"));
 
 const char zero('0');
+const std::string empty;
 const unsigned int leading_zeros(3);
 const std::string delimiter("-");
 const std::string extension(".json");
@@ -193,6 +194,20 @@ void transform_prober::write_initial_inputs(
     write(path, msrp);
 
     BOOST_LOG_SEV(lg, debug) << "Finish writing initial inputs.";
+}
+
+void transform_prober::start_transform(const std::string& transform_id) const {
+    if (!probing_enabled())
+        return;
+
+    start_transform(transform_id, empty);
+}
+
+void transform_prober::start_chain(const std::string& transform_id) const {
+    if (!probing_enabled())
+        return;
+
+    start_chain(transform_id, empty);
 }
 
 void transform_prober::start_chain(const std::string& transform_id,

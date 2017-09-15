@@ -385,9 +385,9 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
 
 void stereotypes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started stereotypes transform. Model: "
+                             << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
-
-    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << em.name().id();
 
     for (auto& pair : em.objects())
         expand(*pair.second, em);
@@ -395,8 +395,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
     for (auto& pair : em.primitives())
         expand(*pair.second);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished stereotypes transform.";
 }
 
 } } }

@@ -41,7 +41,7 @@ namespace transforms {
 
 meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {
-    BOOST_LOG_SEV(lg, debug) << "Executing the initial target chain.";
+    BOOST_LOG_SEV(lg, debug) << "Started initial target chain.";
 
     /*
      * First we obtain the target model in the internal representation
@@ -70,8 +70,8 @@ initial_target_chain::transform(const context& ctx) {
      */
     pre_processing_chain::transform(ctx, r);
 
-    BOOST_LOG_SEV(lg, debug) << "Initial target chain executed.";
     ctx.prober().end_chain(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished initial target chain.";
     return r;
 }
 

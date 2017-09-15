@@ -101,7 +101,7 @@ language_transform::make_output_languages(const type_group& tg,
 
 void language_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Applying language transform. Model: "
+    BOOST_LOG_SEV(lg, debug) << "Started language transform. Model: "
                              << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
 
@@ -144,8 +144,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
                                  << em.output_languages();
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Applied language transform.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished language transform.";
 }
 
 } } }

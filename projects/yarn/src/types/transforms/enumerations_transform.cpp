@@ -305,8 +305,9 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 
 void enumerations_transform::transform(const context& ctx,
     meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started transforming enumerations for model: "
+    BOOST_LOG_SEV(lg, debug) << "Started enumerations transform. Model: "
                              << em.name().id();
+    ctx.prober().start_transform(id, em.name().id(), em);
 
     /*
      * If no enumerations exist, we can just exit. This means we can
@@ -314,9 +315,11 @@ void enumerations_transform::transform(const context& ctx,
      * do not use enumerations. Otherwise, we'd fail when searching
      * for the default underlying element name.
      */
-    ctx.prober().start_transform(id, em.name().id(), em);
-    if (em.enumerations().empty())
+    if (em.enumerations().empty()) {
+        ctx.prober().end_transform();
+        BOOST_LOG_SEV(lg, debug) << "Finished enumerations transform.";
         return;
+    }
 
     const auto l(em.input_language());
     const auto tg(make_type_group(ctx.type_repository()));
@@ -332,8 +335,8 @@ void enumerations_transform::transform(const context& ctx,
         expand_enumerators(tg.enumerator, l, e);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming enumerations for model.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished enumerations transform.";
 }
 
 } } }

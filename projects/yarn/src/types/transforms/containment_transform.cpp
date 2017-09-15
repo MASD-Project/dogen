@@ -102,12 +102,12 @@ inject_global_module(meta_model::endomodel& em) {
 
 void containment_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em.name().id(), em);
-    BOOST_LOG_SEV(lg, debug) << "Applying containment transform. Model: "
+    BOOST_LOG_SEV(lg, debug) << "Started containment transform. Model: "
                              << em.name().id();
+    ctx.prober().start_transform(id, em.name().id(), em);
     inject_global_module(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished applying containment transform.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished containment transform.";
 }
 
 } } }

@@ -32,6 +32,8 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
@@ -40,10 +42,11 @@
 
 namespace {
 
+const std::string id("yarn.transforms.endomodel_to_model_transform");
 using namespace dogen::utility::log;
-static logger
-lg(logger_factory("yarn.transforms.endomodel_to_model_transform"));
+static logger lg(logger_factory(id));
 
+const std::string empty;
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 const std::string expected_one_output_language(
     "Expected exactly one output language.");
@@ -169,11 +172,16 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
 }
 
 std::list<meta_model::model> endomodel_to_model_transform::
-transform(const std::list<meta_model::endomodel>& ems) {
+transform(const context& ctx, const std::list<meta_model::endomodel>& ems) {
+    BOOST_LOG_SEV(lg, debug) << "Started endomodel to model transform.";
+    ctx.prober().start_transform(id, empty, ems);
+
     std::list<meta_model::model> r;
     for(const auto& em : ems)
         r.push_back(transform(em));
 
+    ctx.prober().end_transform(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished endomodel to model transform.";
     return r;
 }
 

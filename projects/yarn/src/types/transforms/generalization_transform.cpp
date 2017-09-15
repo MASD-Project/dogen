@@ -247,12 +247,17 @@ void generalization_transform::sort_leaves(meta_model::endomodel& em) {
 
 void generalization_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started generalization transform.";
     ctx.prober().start_transform(id, em.name().id(), em);
+
     const auto parent_ids(update_and_collect_parent_ids(idx, em));
     const auto tg(make_type_group(ctx.type_repository()));
     populate_generalizable_properties(tg, parent_ids, em);
     sort_leaves(em);
+
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished generalization transform.";
+
 }
 
 } } }

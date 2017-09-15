@@ -76,7 +76,7 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
 meta_model::endomodel model_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-
+    BOOST_LOG_SEV(lg, debug) << "Started model assembly chain.";
     ctx.prober().start_chain(id, target.name().id());
 
     /*
@@ -89,7 +89,9 @@ meta_model::endomodel model_assembly_chain::transform(const context& ctx,
      * merged model.
      */
     post_processing_chain::transform(ctx, r);
+
     ctx.prober().end_chain(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished model assembly chain.";
     return r;
 }
 

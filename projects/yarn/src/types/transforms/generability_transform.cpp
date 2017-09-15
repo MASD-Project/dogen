@@ -95,9 +95,11 @@ has_generatable_types(const meta_model::endomodel& em) {
 
 void generability_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started generability transform.";
     ctx.prober().start_transform(id, em.name().id(), em);
     em.has_generatable_types(has_generatable_types(em));
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished generability transform.";
 }
 
 } } }

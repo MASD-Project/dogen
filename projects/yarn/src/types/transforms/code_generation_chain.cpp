@@ -31,8 +31,9 @@
 
 namespace {
 
+const std::string id("yarn.transforms.code_generation_chain");
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.code_generation_chain"));
+static logger lg(logger_factory(id));
 
 const std::string unsupported_language(
     "Could not find kernel for language: ");
@@ -185,13 +186,17 @@ transform(const context& ctx, const meta_model::model& m) {
 
 code_generation_output code_generation_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
+    BOOST_LOG_SEV(lg, debug) << "Started code generation chain.";
+    ctx.prober().start_chain(id);
+
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 
     code_generation_output r;
     for (const auto& m : models)
         merge(transform(ctx, m), r);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed models.";
+    ctx.prober().end_chain();
+    BOOST_LOG_SEV(lg, debug) << "Finished code generation chain.";
     return r;
 }
 

@@ -59,16 +59,16 @@ exomodel_transform_registrar& exomodel_generation_chain::registrar() {
 
 meta_model::exomodel exomodel_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
+    BOOST_LOG_SEV(lg, debug) << "Started exomodel generation chain. Path: "
                              << p.generic_string();
+    const auto model_name(p.filename().string());
+    ctx.prober().start_chain(id, model_name);
 
     /*
      * Transform the exogenous model - in whatever supported exogenous
      * representation it may be in, Dia, JSON, etc - into the internal
      * representation of an exogenous model.
      */
-    const auto model_name(p.filename().string());
-    ctx.prober().start_chain(id, model_name);
     auto& t(transform_for_model(p));
     auto r(t.transform(ctx, p));
 
@@ -85,9 +85,9 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * meta-data.
      */
     naming_transform::transform(ctx, r);
-    ctx.prober().end_chain(r);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
+    ctx.prober().end_chain(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished exomodel generation chain.";
     return r;
 }
 

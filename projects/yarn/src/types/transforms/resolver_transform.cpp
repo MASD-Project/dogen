@@ -38,9 +38,12 @@ namespace transforms {
 
 void resolver_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started resolver transform. Model: "
+                             << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
     helpers::resolver::resolve(idx, em);
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished resolver transform.";
 }
 
 } } }

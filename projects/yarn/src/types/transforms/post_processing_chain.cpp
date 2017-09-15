@@ -54,7 +54,8 @@ namespace transforms {
 
 void post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Executing post-processing chain.";
+    BOOST_LOG_SEV(lg, debug) << "Started post-processing chain. Model: "
+                             << em.name().id();
 
     /*
      * Enumeration transform must be done after merging as we need the
@@ -156,8 +157,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
      */
     helpers::post_processing_validator::validate(idx, em);
 
-    BOOST_LOG_SEV(lg, debug) << "Executed post-processing chain.";
     ctx.prober().end_chain(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished post-processing chain.";
 }
 
 } } }

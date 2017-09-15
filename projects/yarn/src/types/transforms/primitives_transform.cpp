@@ -82,7 +82,7 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 void primitives_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     ctx.prober().start_transform(id, em.name().id(), em);
-    BOOST_LOG_SEV(lg, debug) << "Applying primitives transform. Model: "
+    BOOST_LOG_SEV(lg, debug) << "Started primitives transform. Model: "
                              << em.name().id();
 
     const auto tg(make_type_group(ctx.type_repository()));
@@ -94,8 +94,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
         populate_from_annotations(tg, p);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished applying primitives transform.";
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished primitives transform.";
 }
 
 } } }

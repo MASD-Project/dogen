@@ -77,10 +77,10 @@ to_element_map(const std::list<std::pair<annotations::scribble_group,
 
 meta_model::endomodel exomodel_to_endomodel_transform::
 transform(const context& ctx, const meta_model::exomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming exomodel to endomodel: "
-                             << em.name().id();
-
+    BOOST_LOG_SEV(lg, debug) << "Started exomodel to endomodel transform."
+                             << " Model: " << em.name().id();
     ctx.prober().start_transform(id, em.name().id(), em);
+
     meta_model::endomodel r;
     r.name(em.name());
     r.modules(to_element_map(em.modules()));
@@ -100,8 +100,8 @@ transform(const context& ctx, const meta_model::exomodel& em) {
     insert(em.root_module(), r.modules());
     r.root_module(em.root_module().second);
 
-    BOOST_LOG_SEV(lg, debug) << "Transformed exomodel to endomodel.";
     ctx.prober().end_transform(r);
+    BOOST_LOG_SEV(lg, debug) << "Finished exomodel to endomodel transform.";
     return r;
 }
 

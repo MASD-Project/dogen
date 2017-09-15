@@ -49,7 +49,7 @@ namespace transforms {
 
 std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {
-    BOOST_LOG_SEV(lg, info) << "Executing the model generation chain.";
+    BOOST_LOG_SEV(lg, info) << "Started endomodel generation chain.";
 
     /*
      * Obtain the initial target, given the user options. The initial
@@ -87,9 +87,8 @@ endomodel_generation_chain::transform(const context& ctx) {
     for (const auto ol : target.output_languages())
         r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
 
-    BOOST_LOG_SEV(lg, info) << "Executed the model generation chain.";
     ctx.prober().end_chain(r);
-
+    BOOST_LOG_SEV(lg, info) << "Finished endomodel generation chain.";
     return r;
 }
 

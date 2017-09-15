@@ -121,6 +121,9 @@ origin_transform::compute_origin_types(const meta_model::endomodel& em,
 
 void origin_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Started origin transform. Model: "
+                             << em.name().id();
+
     ctx.prober().start_transform(id, em.name().id(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
@@ -132,6 +135,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
     meta_model::elements_traversal(em, g);
 
     ctx.prober().end_transform(em);
+    BOOST_LOG_SEV(lg, debug) << "Finished origin transform.";
+
 }
 
 } } }
