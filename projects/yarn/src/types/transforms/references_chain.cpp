@@ -23,6 +23,7 @@
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
@@ -30,10 +31,10 @@
 
 namespace {
 
-const std::string id("yarn.transforms.references_chain");
+const std::string transform_id("yarn.transforms.references_chain");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string non_absolute_target("Target path is not absolute: ");
 
@@ -56,9 +57,8 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
 
 std::list<meta_model::endomodel> references_chain::
 transform(const context& ctx, const meta_model::endomodel& target) {
-    BOOST_LOG_SEV(lg, debug) << "Started references chain. Model: "
-                             << target.name().id();
-    ctx.prober().start_chain(id, target.name().id(), target);
+    helpers::scoped_chain_probing stp(lg, "references chain",
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * Obtain the absolute paths to all reference models - system and
@@ -114,7 +114,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
             r.push_back(m);
     }
 
-    ctx.prober().end_chain(r);
+    stp.end_chain(r);
     BOOST_LOG_SEV(lg, debug) << "Finished references chain.";
     return r;
 }

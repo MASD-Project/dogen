@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/indexer.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
@@ -41,10 +42,10 @@
 
 namespace {
 
-const std::string id("yarn.transforms.post_processing_chain");
+const std::string transform_id("yarn.transforms.post_processing_chain");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 }
 
@@ -54,15 +55,14 @@ namespace transforms {
 
 void post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started post-processing chain. Model: "
-                             << em.name().id();
+    helpers::scoped_chain_probing stp(lg, "post-processing chain",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * Enumeration transform must be done after merging as we need the
      * built-in types; these are required in order to find the default
      * enumeration underlying element.
      */
-    ctx.prober().start_chain(id, em.name().id(), em);
     enumerations_transform::transform(ctx, em);
 
     /*
@@ -157,7 +157,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
      */
     helpers::post_processing_validator::validate(idx, em);
 
-    ctx.prober().end_chain(em);
+    stp.end_chain(em);
     BOOST_LOG_SEV(lg, debug) << "Finished post-processing chain.";
 }
 

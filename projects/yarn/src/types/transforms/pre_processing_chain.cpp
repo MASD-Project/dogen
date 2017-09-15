@@ -22,6 +22,7 @@
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
@@ -33,10 +34,10 @@
 
 namespace {
 
-const std::string id("yarn.transforms.pre_processing_chain");
+const std::string transform_id("yarn.transforms.pre_processing_chain");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -99,23 +100,20 @@ void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
 
 void pre_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started pre-processing chain. Model: "
-                             << em.name().id();
-    ctx.prober().start_chain(id, em.name().id(), em);
+    helpers::scoped_chain_probing stp(lg, "pre-processing chain",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     apply_first_set_of_transforms(ctx, em);
     apply_second_set_of_transforms(ctx, em);
 
-    ctx.prober().end_chain(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished pre-processing chain.";
+    stp.end_chain(em);
 }
 
 bool pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
     meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started pre-processing chain. Model: "
-                             << em.name().id();
-    ctx.prober().start_chain(id, em.name().id(), em);
+    helpers::scoped_chain_probing stp(lg, "pre-processing chain",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * We must apply the first set of transforms because language
@@ -129,14 +127,13 @@ bool pre_processing_chain::try_transform(const context& ctx,
      * types which are of the same language as target.
      */
     if (!is_language_relevant(relevant_languages, em)) {
-        ctx.prober().end_chain(em);
         BOOST_LOG_SEV(lg, debug) << "Finished pre-processing chain.";
         return false;
     }
 
     apply_second_set_of_transforms(ctx, em);
 
-    ctx.prober().end_chain(em);
+    stp.end_chain(em);
     BOOST_LOG_SEV(lg, debug) << "Finished pre-processing chain.";
     return true;
 }

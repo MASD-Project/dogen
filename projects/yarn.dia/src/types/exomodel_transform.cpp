@@ -27,14 +27,15 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/exomodel_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-const std::string id("yarn.dia.exomodel_transform");
-auto lg(logger_factory(id));
+const std::string transform_id("yarn.dia.exomodel_transform");
+auto lg(logger_factory(transform_id));
 
 const std::string extension(".dia");
 
@@ -50,7 +51,7 @@ namespace dia {
 exomodel_transform::~exomodel_transform() noexcept {}
 
 std::string exomodel_transform::id() const {
-    return ::id;
+    return transform_id;
 }
 
 yarn::transforms::exomodel_transform_types
@@ -71,14 +72,16 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     const auto diagram(h.hydrate(p));
 
     const auto model_name(p.filename().string());
-    ctx.prober().start_transform(::id, model_name, diagram);
+    helpers::scoped_transform_probing stp(lg, "dia exomodel transform",
+        transform_id, model_name, ctx.prober(), diagram);
+
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     const auto r(yarn::dia::workflow::execute(diagram));
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
-    ctx.prober().end_transform(r);
 
+    stp.end_transform(r);
     return r;
 }
 

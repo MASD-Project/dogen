@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/exomodel_transform.hpp"
@@ -30,8 +31,8 @@
 namespace {
 
 using namespace dogen::utility::log;
-const std::string id("yarn.json.exomodel_transform");
-auto lg(logger_factory(id));
+const std::string transform_id("yarn.json.exomodel_transform");
+auto lg(logger_factory(transform_id));
 
 const std::string extension(".json");
 
@@ -44,7 +45,7 @@ namespace json {
 exomodel_transform::~exomodel_transform() noexcept {}
 
 std::string exomodel_transform::id() const {
-    return ::id;
+    return transform_id;
 }
 
 yarn::transforms::exomodel_transform_types
@@ -60,21 +61,22 @@ std::list<std::string> exomodel_transform::supported_extensions() const {
 meta_model::exomodel exomodel_transform::
 transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    ctx.prober().start_transform(::id, model_name);
+    helpers::scoped_transform_probing stp(lg, "annotations transform",
+        transform_id, model_name, ctx.prober());
 
     hydrator h;
     const auto r(h.hydrate(p));
 
-    ctx.prober().end_transform(r);
+    stp.end_transform(r);
     return r;
 }
 
 void exomodel_transform::transform(const transforms::context& ctx,
     const meta_model::exomodel& em, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    ctx.prober().start_transform(::id, model_name, em);
+    helpers::scoped_transform_probing stp(lg, "annotations transform",
+        transform_id, model_name, ctx.prober());
     dehydrator::dehydrate(em, p);
-    ctx.prober().end_transform();
 }
 
 } } }

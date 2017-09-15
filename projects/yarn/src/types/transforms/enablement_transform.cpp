@@ -46,15 +46,16 @@
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/transforms/global_enablement_configuration_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.enablement_transform");
+const std::string transform_id("yarn.transforms.enablement_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
@@ -546,10 +547,9 @@ void enablement_transform::compute_enablement_for_element(
 
 void enablement_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started enablement transform. Model: "
-                             << em.name().id();
+    helpers::scoped_transform_probing stp(lg, "enablement transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
-    ctx.prober().start_transform(id, em.name().id(), em);
     const auto& atrp(ctx.type_repository());
     const auto& ra(em.root_module()->annotation());
     const auto& als(ctx.archetype_location_repository().archetype_locations());
@@ -591,8 +591,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     meta_model::elements_traversal(em, v, include_injected_elements);
     em.enabled_archetype_for_element(eafe);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished enablement transform.";
+    stp.end_transform(em);
 }
 
 } } }

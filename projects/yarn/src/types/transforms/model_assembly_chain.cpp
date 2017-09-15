@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
@@ -28,10 +29,10 @@
 
 namespace {
 
-const std::string id("yarn.transforms.model_assembly_chain");
+const std::string transform_id("yarn.transforms.model_assembly_chain");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -76,8 +77,8 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
 meta_model::endomodel model_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-    BOOST_LOG_SEV(lg, debug) << "Started model assembly chain.";
-    ctx.prober().start_chain(id, target.name().id());
+    helpers::scoped_chain_probing stp(lg, "model assembly chain",
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * First we obtain the merged (and mapped) model.
@@ -90,8 +91,7 @@ meta_model::endomodel model_assembly_chain::transform(const context& ctx,
      */
     post_processing_chain::transform(ctx, r);
 
-    ctx.prober().end_chain(r);
-    BOOST_LOG_SEV(lg, debug) << "Finished model assembly chain.";
+    stp.end_chain(r);
     return r;
 }
 

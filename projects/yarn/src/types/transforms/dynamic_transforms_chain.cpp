@@ -24,15 +24,16 @@
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.dynamic_transforms_chain");
+const std::string transform_id("yarn.transforms.dynamic_transforms_chain");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 }
 
@@ -61,10 +62,8 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 
 void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    const auto model_id(em.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Started dynamic transforms chain. Model: "
-                             << model_id;
-    ctx.prober().start_transform(id, model_id, em);
+    helpers::scoped_chain_probing stp(lg, "dynamic transforms chain",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     auto& rg(registrar());
     rg.validate();
@@ -74,8 +73,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     for (const auto& dt : rg.dynamic_transforms())
         dt->transform(ctx, dpf, em);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished dynamic transforms chain.";
+    stp.end_chain(em);
 }
 
 } } }

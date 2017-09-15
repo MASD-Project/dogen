@@ -30,15 +30,16 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.attributes_transform");
+const std::string transform_id("yarn.transforms.attributes_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -233,15 +234,13 @@ void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
 
 void attributes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started attributes transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "attributes transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     expand_object_templates(em);
     expand_objects(em);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished attributes transform.";
+    stp.end_transform(em);
 }
 
 } } }

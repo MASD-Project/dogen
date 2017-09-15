@@ -39,16 +39,17 @@
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.orm_transform");
+const std::string transform_id("yarn.transforms.orm_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string mysql("mysql");
 const std::string postgresql("postgresql");
@@ -493,9 +494,8 @@ transform_modules(const type_group& tg, meta_model::endomodel& em) {
 
 void orm_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started orm transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "orm transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto& rm(*em.root_module());
@@ -506,8 +506,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     transform_primitives(tg, em);
     transform_modules(tg, em);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished orm transform.";
+    stp.end_transform(em);
 }
 
 } } }

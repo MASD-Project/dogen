@@ -26,15 +26,16 @@
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.meta_naming_transform");
+const std::string transform_id("yarn.transforms.meta_naming_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 }
 
@@ -96,10 +97,9 @@ public:
 
 void meta_naming_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
-                             << em.name().id();
+    helpers::scoped_transform_probing stp(lg, "meta-naming transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
-    ctx.prober().start_transform(id, em.name().id(), em);
     em.meta_name(meta_name_factory::make_exomodel_name());
 
     updater u;
@@ -126,16 +126,14 @@ transform(const context& ctx, meta_model::exomodel& em) {
 
     u(*em.root_module().second);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
-    ctx.prober().end_transform(em);
+    stp.end_transform(em);
 }
 
 void meta_naming_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started meta-naming transform. Model: "
-                             << em.name().id();
+    helpers::scoped_transform_probing stp(lg, "meta-naming transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
-    ctx.prober().start_transform(id, em.name().id(), em);
     em.meta_name(meta_name_factory::make_endomodel_name());
 
     /*
@@ -147,8 +145,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     updater u;
     meta_model::elements_traversal(em, u);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
+    stp.end_transform(em);
 }
 
 } } }

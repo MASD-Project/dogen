@@ -217,8 +217,6 @@ void transform_prober::start_chain(const std::string& transform_id,
 
     BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
                              << " (" << builder_.current()->guid() << ")";
-    BOOST_LOG_SEV(lg, debug) << "Current directory: "
-                             << current_directory_.generic_string();
     builder_.start(transform_id, model_id);
 
     if (!probe_data_)
@@ -245,9 +243,6 @@ void transform_prober::end_chain() const {
 
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
-    BOOST_LOG_SEV(lg, debug) << "Current directory: "
-                             << current_directory_.generic_string();
-
     builder_.end();
 
     if (!probe_data_)
@@ -256,6 +251,8 @@ void transform_prober::end_chain() const {
     ensure_transform_position_not_empty();
     transform_position_.pop();
     current_directory_ = current_directory_.parent_path();
+    BOOST_LOG_SEV(lg, debug) << "Current directory is now: "
+                             << current_directory_.generic_string();
 }
 
 void transform_prober::end_transform() const {

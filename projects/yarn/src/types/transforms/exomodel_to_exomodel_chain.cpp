@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/helpers/model_sorter.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
@@ -28,9 +29,9 @@
 
 namespace {
 
-const std::string id("yarn.transforms.exomodel_to_exomodel_chain");
+const std::string transform_id("yarn.transforms.exomodel_to_exomodel_chain");
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 const std::string transform_not_supported("Cannot transform into: ");
 
@@ -83,15 +84,15 @@ void exomodel_to_exomodel_chain::
 transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
-    BOOST_LOG_SEV(lg, info) << "Started exomodel to exomodel chain."
-                            << " Transforming: " << src_path.generic_string()
-                            << " to: " << dst_path.generic_string();
-    ctx.prober().start_transform(id);
+    helpers::scoped_chain_probing stp(lg, "exomodel to exomodel chain",
+        transform_id, ctx.prober());
 
     /*
      * Obtain a tuple containing the source and destination
      * transforms.
      */
+    BOOST_LOG_SEV(lg, info) << " Transforming: " << src_path.generic_string()
+                            << " to: " << dst_path.generic_string();
     auto tuple(obtain_transforms(src_path, dst_path));
     auto src(tuple.get<0>().transform(ctx, src_path));
 
@@ -113,9 +114,6 @@ transform(const transforms::context& ctx,
      * Finally, transform the exomodel to text.
      */
     tuple.get<1>().transform(ctx, src, dst_path);
-
-    ctx.prober().end_transform();
-    BOOST_LOG_SEV(lg, info) << "Finished exomodel to exomodel chain.";
 }
 
 } } }

@@ -127,6 +127,7 @@
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/meta_model/orm_module_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"

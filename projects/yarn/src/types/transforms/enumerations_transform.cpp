@@ -34,15 +34,16 @@
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.enumerations_transform");
+const std::string transform_id("yarn.transforms.enumerations_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string csharp_invalid("Invalid");
 const std::string cpp_invalid("invalid");
@@ -305,9 +306,8 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 
 void enumerations_transform::transform(const context& ctx,
     meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started enumerations transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "enumerations transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * If no enumerations exist, we can just exit. This means we can
@@ -315,11 +315,8 @@ void enumerations_transform::transform(const context& ctx,
      * do not use enumerations. Otherwise, we'd fail when searching
      * for the default underlying element name.
      */
-    if (em.enumerations().empty()) {
-        ctx.prober().end_transform();
-        BOOST_LOG_SEV(lg, debug) << "Finished enumerations transform.";
+    if (em.enumerations().empty())
         return;
-    }
 
     const auto l(em.input_language());
     const auto tg(make_type_group(ctx.type_repository()));
@@ -335,8 +332,7 @@ void enumerations_transform::transform(const context& ctx,
         expand_enumerators(tg.enumerator, l, e);
     }
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished enumerations transform.";
+    stp.end_transform(em);
 }
 
 } } }

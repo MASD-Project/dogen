@@ -37,16 +37,17 @@
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.naming_transform");
+const std::string transform_id("yarn.transforms.naming_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string missing_model_modules("Must supply model modules.");
 
@@ -179,10 +180,8 @@ naming_transform::compute_model_name(const meta_model::location& l) {
 
 void naming_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started naming transform. Model: "
-                             << em.name().id();
-
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "naming transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto& ra(em.root_module().second->annotation());
     const auto tg(make_type_group(ctx.type_repository()));
@@ -192,8 +191,7 @@ transform(const context& ctx, meta_model::exomodel& em) {
     em.root_module().second->name(em.name());
     update_names(l, em);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished naming transform.";
+    stp.end_transform(em);
 }
 
 } } }

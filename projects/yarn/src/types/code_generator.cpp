@@ -30,14 +30,15 @@
 #include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
 #include "dogen/yarn/types/helpers/housekeeper.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
 
 namespace {
 
-const std::string id("dogen.yarn.code_generator");
+const std::string transform_id("dogen.yarn.code_generator");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 }
 
@@ -101,7 +102,9 @@ void code_generator::generate(const transforms::options& o) {
      * Now we generate the endomodels.
      */
     const auto model_name(o.target().filename().string());
-    ctx.prober().start_chain(id, model_name);
+    helpers::scoped_chain_probing stp(lg, "code generator",
+        transform_id, model_name, ctx.prober());
+
     const auto endomodels(endomodel_generation_chain::transform(ctx));
 
     /*
@@ -113,7 +116,7 @@ void code_generator::generate(const transforms::options& o) {
      * Now run the model to text transforms.
      */
     const auto cgo(code_generation_chain::transform(ctx, models));
-    ctx.prober().end_chain(cgo);
+    stp.end_chain(cgo);
     ctx.prober().end_probing();
 
     /*

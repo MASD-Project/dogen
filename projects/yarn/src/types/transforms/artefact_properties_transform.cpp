@@ -32,16 +32,16 @@
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.artefact_properties_transform");
+const std::string transform_id("yarn.transforms.artefact_properties_transform");
 
 using namespace dogen::utility::log;
-static logger
-lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_archetype("Duplicate archetype: ");
 
@@ -92,8 +92,8 @@ update_element(const context& ctx, meta_model::element& e) {
 
 void artefact_properties_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started artefact properties transform.";
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "artefact properties transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     using namespace std::placeholders;
     const auto f(artefact_properties_transform::update_element);
@@ -101,8 +101,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     const bool include_injected_elements(true);
     meta_model::elements_traversal(em, v, include_injected_elements);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished artefact properties transform.";
+    stp.end_transform(em);
 }
 
 } } }

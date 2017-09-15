@@ -27,15 +27,16 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.associations_transform");
+const std::string transform_id("yarn.transforms.associations_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 }
 
@@ -131,18 +132,17 @@ expand_object(const meta_model::endomodel& em, meta_model::object& o) {
 
 void associations_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Starting associations transform. Model: "
-                             << em.name().id() << ". Total objects: "
-                             << em.objects().size();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "associations transform",
+        transform_id, em.name().id(), ctx.prober(), em);
+
+    BOOST_LOG_SEV(lg, debug) << "Total objects: " << em.objects().size();
 
     for (auto& pair : em.objects()) {
         auto& o(*pair.second);
         expand_object(em, o);
     }
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished associations transform.";
+    stp.end_transform(em);
 }
 
 } } }

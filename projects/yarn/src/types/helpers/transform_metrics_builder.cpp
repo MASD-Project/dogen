@@ -72,8 +72,7 @@ void transform_metrics_builder::ensure_stack_not_empty() const {
 boost::shared_ptr<transform_metrics>
 transform_metrics_builder::create_metrics(const std::string& transform_id,
     const std::string& model_id) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating metrics for transform: "
-                             << transform_id;
+    BOOST_LOG_SEV(lg, debug) << "Creating metrics for: " << transform_id;
 
     auto uuid = boost::uuids::random_generator()();
     auto r(boost::make_shared<transform_metrics>());
@@ -88,6 +87,7 @@ transform_metrics_builder::create_metrics(const std::string& transform_id,
 }
 
 void transform_metrics_builder::update_end() {
+    ensure_stack_not_empty();
     using namespace std::chrono;
     auto now(time_point_cast<milliseconds>(system_clock::now()));
     stack_.top()->end(now.time_since_epoch().count());
@@ -95,7 +95,7 @@ void transform_metrics_builder::update_end() {
 
 void transform_metrics_builder::start(const std::string& transform_id,
     const std::string& model_id) {
-    BOOST_LOG_SEV(lg, debug) << "Starting transform: " << transform_id;
+    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id;
 
     ensure_stack_not_empty();
     auto next(create_metrics(transform_id, model_id));
@@ -105,8 +105,7 @@ void transform_metrics_builder::start(const std::string& transform_id,
 }
 
 void transform_metrics_builder::end() {
-    BOOST_LOG_SEV(lg, debug) << "Ending transform: "
-                             << current()->transform_id();
+    BOOST_LOG_SEV(lg, debug) << "Ending: " << current()->transform_id();
 
     ensure_stack_not_empty();
     update_end();
@@ -116,6 +115,7 @@ void transform_metrics_builder::end() {
 
 const boost::shared_ptr<const transform_metrics>
 transform_metrics_builder::current() const {
+    ensure_stack_not_empty();
     return stack_.top();
 }
 

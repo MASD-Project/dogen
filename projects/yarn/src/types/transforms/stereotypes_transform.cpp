@@ -28,16 +28,17 @@
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_primitive_properties.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.stereotypes_transform");
+const std::string transform_id("yarn.transforms.stereotypes_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 const std::string stereotype_visitor("yarn::visitable");
 const std::string stereotype_fluent("yarn::fluent");
@@ -385,9 +386,8 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
 
 void stereotypes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started stereotypes transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "stereotypes transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     for (auto& pair : em.objects())
         expand(*pair.second, em);
@@ -395,8 +395,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     for (auto& pair : em.primitives())
         expand(*pair.second);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished stereotypes transform.";
+    stp.end_transform(em);
 }
 
 } } }

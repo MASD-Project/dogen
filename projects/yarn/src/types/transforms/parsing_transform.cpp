@@ -41,6 +41,7 @@
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
@@ -50,10 +51,10 @@ errmsg_parsing_owner;
 
 namespace {
 
-const std::string id("yarn.transforms.parsing_transform");
+const std::string transform_id("yarn.transforms.parsing_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 const std::string csharp_value("Value");
 const std::string cpp_value("value");
@@ -246,9 +247,8 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 
 void parsing_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started parsing transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "parsing transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto l(em.input_language());
@@ -302,8 +302,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
         }
     }
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished parsing transform.";
+    stp.end_transform(em);
 }
 
 } } }

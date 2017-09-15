@@ -27,16 +27,17 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.language_transform");
+const std::string transform_id("yarn.transforms.language_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
@@ -101,10 +102,8 @@ language_transform::make_output_languages(const type_group& tg,
 
 void language_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started language transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
-
+    helpers::scoped_transform_probing stp(lg, "language transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ra(em.root_module()->annotation());
@@ -144,8 +143,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
                                  << em.output_languages();
     }
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished language transform.";
+    stp.end_transform(em);
 }
 
 } } }

@@ -23,14 +23,15 @@
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.annotations_transform");
+const std::string transform_id("yarn.transforms.annotations_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.annotations_transform"));
+auto lg(logger_factory(transform_id));
 
 }
 
@@ -122,9 +123,8 @@ void annotations_transform::process(const annotations::annotation_group& ag,
 
 void annotations_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started annotations transform. Model: "
-                             << em.name().id();
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "annotations transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     process(ctx, em.modules());
     process(ctx, em.object_templates());
@@ -135,8 +135,7 @@ transform(const context& ctx, meta_model::exomodel& em) {
     process(ctx, em.exceptions());
     process(ctx, em.root_module());
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished annotations transform.";
+    stp.end_transform(em);
 }
 
 } } }

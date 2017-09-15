@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
@@ -27,9 +28,9 @@
 
 namespace {
 
-const std::string id("yarn.transforms.exomodel_generation_chain");
+const std::string transform_id("yarn.transforms.exomodel_generation_chain");
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -59,10 +60,11 @@ exomodel_transform_registrar& exomodel_generation_chain::registrar() {
 
 meta_model::exomodel exomodel_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
-    BOOST_LOG_SEV(lg, debug) << "Started exomodel generation chain. Path: "
-                             << p.generic_string();
     const auto model_name(p.filename().string());
-    ctx.prober().start_chain(id, model_name);
+    helpers::scoped_chain_probing stp(lg, "exomodel generation chain",
+        transform_id, model_name, ctx.prober());
+
+    BOOST_LOG_SEV(lg, debug) << "Path: " << p.generic_string();
 
     /*
      * Transform the exogenous model - in whatever supported exogenous
@@ -86,8 +88,7 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      */
     naming_transform::transform(ctx, r);
 
-    ctx.prober().end_chain(r);
-    BOOST_LOG_SEV(lg, debug) << "Finished exomodel generation chain.";
+    stp.end_chain(r);
     return r;
 }
 

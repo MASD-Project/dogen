@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
@@ -29,9 +30,9 @@
 
 namespace {
 
-const std::string id("yarn.transforms.initial_target_chain");
+const std::string transform_id("yarn.transforms.initial_target_chain");
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -41,15 +42,15 @@ namespace transforms {
 
 meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {
-    BOOST_LOG_SEV(lg, debug) << "Started initial target chain.";
+    const auto tp(ctx.transform_options().target());
+    const auto model_name(tp.filename().string());
+    helpers::scoped_chain_probing stp(lg, "initial target chain",
+        transform_id, model_name, ctx.prober());
 
     /*
      * First we obtain the target model in the internal representation
      * of the exogenous model.
      */
-    const auto tp(ctx.transform_options().target());
-    const auto model_name(tp.filename().string());
-    ctx.prober().start_chain(id, model_name);
     const auto em(exomodel_generation_chain::transform(ctx, tp));
 
     /*
@@ -70,8 +71,7 @@ initial_target_chain::transform(const context& ctx) {
      */
     pre_processing_chain::transform(ctx, r);
 
-    ctx.prober().end_chain(r);
-    BOOST_LOG_SEV(lg, debug) << "Finished initial target chain.";
+    stp.end_chain(r);
     return r;
 }
 

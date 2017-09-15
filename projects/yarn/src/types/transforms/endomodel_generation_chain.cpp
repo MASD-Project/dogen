@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
@@ -36,10 +37,10 @@
 
 namespace {
 
-const std::string id("yarn.transforms.endomodel_generation_chain");
+const std::string transform_id("yarn.transforms.endomodel_generation_chain");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -49,7 +50,9 @@ namespace transforms {
 
 std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {
-    BOOST_LOG_SEV(lg, info) << "Started endomodel generation chain.";
+    const auto model_name(ctx.transform_options().target().filename().string());
+    helpers::scoped_chain_probing stp(lg, "endomodel generation chain",
+        transform_id, model_name, ctx.prober());
 
     /*
      * Obtain the initial target, given the user options. The initial
@@ -58,8 +61,7 @@ endomodel_generation_chain::transform(const context& ctx) {
      * same; or it is a Platform Independent Model (PIM), making use
      * of LAM types (the Language Agnostic Model).
      */
-    const auto model_name(ctx.transform_options().target().filename().string());
-    ctx.prober().start_chain(id, model_name);
+
     const auto target(initial_target_chain::transform(ctx));
 
     /*
@@ -87,8 +89,7 @@ endomodel_generation_chain::transform(const context& ctx) {
     for (const auto ol : target.output_languages())
         r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
 
-    ctx.prober().end_chain(r);
-    BOOST_LOG_SEV(lg, info) << "Finished endomodel generation chain.";
+    stp.end_chain(r);
     return r;
 }
 

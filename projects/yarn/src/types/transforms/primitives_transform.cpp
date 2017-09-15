@@ -25,16 +25,17 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.primitives_transform");
+const std::string transform_id("yarn.transforms.primitives_transform");
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -81,9 +82,8 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 
 void primitives_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    ctx.prober().start_transform(id, em.name().id(), em);
-    BOOST_LOG_SEV(lg, debug) << "Started primitives transform. Model: "
-                             << em.name().id();
+    helpers::scoped_transform_probing stp(lg, "primitives transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     for (auto& pair : em.primitives()) {
@@ -94,8 +94,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
         populate_from_annotations(tg, p);
     }
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished primitives transform.";
+    stp.end_transform(em);
 }
 
 } } }

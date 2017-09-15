@@ -21,14 +21,15 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/mapper.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.mapping_transform");
+const std::string transform_id("yarn.transforms.mapping_transform");
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -43,14 +44,13 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
 
 meta_model::endomodel mapping_transform::transform(const context& ctx,
     const meta_model::endomodel& src, const meta_model::languages to) {
-    BOOST_LOG_SEV(lg, debug) << "Started mapping transform.";
-    ctx.prober().start_transform(id, src.name().id(), src);
+    helpers::scoped_transform_probing stp(lg, "mapping transform",
+        transform_id, src.name().id(), ctx.prober(), src);
 
     const helpers::mapper mp(ctx.mapping_repository());
     auto r(mp.map(src.input_language(), to, src));
 
-    ctx.prober().end_transform(r);
-    BOOST_LOG_SEV(lg, debug) << "Finished mapping transform.";
+    stp.end_transform(r);
     return r;
 }
 

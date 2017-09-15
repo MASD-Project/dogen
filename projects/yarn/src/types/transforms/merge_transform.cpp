@@ -22,14 +22,15 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.merge_transform");
+const std::string transform_id("yarn.transforms.merge_transform");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 /**
  * @brief Copies the associative container across.
@@ -97,8 +98,8 @@ meta_model::endomodel
 merge_transform::transform(const context& ctx,
     const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-    BOOST_LOG_SEV(lg, debug) << "Started merge transform.";
-    ctx.prober().start_transform(id, target.name().id());
+    helpers::scoped_transform_probing stp(lg, "merge transform",
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * We start by making a complete copy of the target model, which
@@ -113,8 +114,7 @@ merge_transform::transform(const context& ctx,
     for (const auto& ref : refs)
         merge(ref, r);
 
-    ctx.prober().end_transform(r);
-    BOOST_LOG_SEV(lg, debug) << "Finished merge transform.";
+    stp.end_transform(r);
     return r;
 }
 

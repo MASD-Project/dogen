@@ -36,15 +36,16 @@
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.endomodel_to_model_transform");
+const std::string transform_id("yarn.transforms.endomodel_to_model_transform");
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
@@ -173,15 +174,14 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
 
 std::list<meta_model::model> endomodel_to_model_transform::
 transform(const context& ctx, const std::list<meta_model::endomodel>& ems) {
-    BOOST_LOG_SEV(lg, debug) << "Started endomodel to model transform.";
-    ctx.prober().start_transform(id, empty, ems);
+    helpers::scoped_transform_probing stp(lg, "endomodel to model transform",
+        transform_id, ctx.prober(), ems);
 
     std::list<meta_model::model> r;
     for(const auto& em : ems)
         r.push_back(transform(em));
 
-    ctx.prober().end_transform(r);
-    BOOST_LOG_SEV(lg, debug) << "Finished endomodel to model transform.";
+    stp.end_transform(r);
     return r;
 }
 

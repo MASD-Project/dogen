@@ -29,16 +29,17 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 
 namespace {
 
-const std::string id("yarn.transforms.generalization_transforms");
+const std::string transform_id("yarn.transforms.generalization_transforms");
 
 using namespace dogen::utility::log;
-auto lg(logger_factory(id));
+auto lg(logger_factory(transform_id));
 
 const std::string parent_not_found("Could not find parent: ");
 const std::string incompatible_is_final(
@@ -247,17 +248,15 @@ void generalization_transform::sort_leaves(meta_model::endomodel& em) {
 
 void generalization_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
-    BOOST_LOG_SEV(lg, debug) << "Started generalization transform.";
-    ctx.prober().start_transform(id, em.name().id(), em);
+    helpers::scoped_transform_probing stp(lg, "generalization transform",
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto parent_ids(update_and_collect_parent_ids(idx, em));
     const auto tg(make_type_group(ctx.type_repository()));
     populate_generalizable_properties(tg, parent_ids, em);
     sort_leaves(em);
 
-    ctx.prober().end_transform(em);
-    BOOST_LOG_SEV(lg, debug) << "Finished generalization transform.";
-
+    stp.end_transform(em);
 }
 
 } } }
