@@ -20,8 +20,8 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
-#include "dogen/yarn/types/helpers/model_sorter.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/sorting_transform.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
@@ -108,7 +108,7 @@ transform(const transforms::context& ctx,
      * a known order, or else we'll start generating spurious
      * differences.
      */
-    helpers::model_sorter::sort(src);
+    sorting_transform::transform(ctx, src);
 
     /*
      * Finally, transform the exomodel to text.

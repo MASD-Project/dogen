@@ -14,35 +14,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-15 Fri 15:53]
+#+CAPTION: Clock summary at [2017-09-15 Fri 17:28]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *47:50* |       |       | 100.0 |
+| *Total time*                                                                | *48:22* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 47:50   |       |       | 100.0 |
-| Active                                                                      |         | 47:50 |       | 100.0 |
+| Stories                                                                     | 48:22   |       |       | 100.0 |
+| Active                                                                      |         | 48:22 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.5 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.2 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   1.8 |
 | COMPLETED Clean-up readme                                                   |         |       |  1:15 |   2.6 |
 | COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   1.0 |
-| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   5.1 |
+| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   5.0 |
 | COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   3.8 |
 | COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.7 |
-| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  16.3 |
+| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  16.2 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.2 |
 | COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.0 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.4 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.5 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  27.1 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  26.8 |
 | COMPLETED Create yarn options                                               |         |       |  1:06 |   2.3 |
 | COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.5 |
 | COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   5.7 |
-| COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   6.5 |
-| COMPLETED Catch directory generation errors in probe                        |         |       |  1:05 |   2.3 |
+| COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   6.4 |
+| COMPLETED Catch directory generation errors in probe                        |         |       |  1:05 |   2.2 |
 | COMPLETED Remove dumping of models from log                                 |         |       |  0:06 |   0.2 |
-| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  14.1 |
+| COMPLETED Move model sorter from helpers                                    |         |       |  0:32 |   1.1 |
+| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  14.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -766,6 +767,14 @@ Once probing is in place, we need to remove all the dumps we are doing
 of models at present. These just add size to the log files for no
 reason.
 
+*** COMPLETED Move model sorter from helpers                          :story:
+    CLOSED: [2017-09-15 Fri 17:22]
+    CLOCK: [2017-09-15 Fri 17:12]--[2017-09-15 Fri 17:29] =>  0:17
+    CLOCK: [2017-09-15 Fri 16:04]--[2017-09-15 Fri 16:10] =>  0:06
+    CLOCK: [2017-09-15 Fri 15:54]--[2017-09-15 Fri 16:03] =>  0:09
+
+This is really just a sorting transform, not a helper.
+
 *** STARTED Add canonical archetype support to yarn                   :story:
     CLOCK: [2017-09-10 Sun 00:08]--[2017-09-10 Sun 00:18] =>  0:10
     CLOCK: [2017-09-09 Sat 23:40]--[2017-09-10 Sun 00:07] =>  0:27
@@ -876,10 +885,6 @@ Filenames in tailor look weird:
 it should just be:
 
 : dart.json
-
-*** Move model sorter from helpers                                    :story:
-
-This is really just a sorting transform, not a helper.
 
 *** Move enablement into yarn                                         :story:
 

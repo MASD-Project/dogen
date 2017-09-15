@@ -18,22 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_MODEL_SORTER_HPP
-#define DOGEN_YARN_TYPES_HELPERS_MODEL_SORTER_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_SORTING_TRANSFORM_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_SORTING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace helpers {
+namespace transforms {
 
-class model_sorter final {
+class sorting_transform final {
 public:
-    static void sort(meta_model::exomodel& em);
+    static void transform(const transforms::context& ctx,
+        meta_model::exomodel& em);
 };
 
 } } }

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -26,11 +27,23 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/types/helpers/model_sorter.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/sorting_transform.hpp"
+
+
+namespace {
+
+const std::string transform_id("yarn.transforms.sorting_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen {
 namespace yarn {
-namespace helpers {
+namespace transforms {
 
 template<typename Element> bool
 comparer(const std::pair<annotations::scribble_group,
@@ -40,7 +53,11 @@ comparer(const std::pair<annotations::scribble_group,
     return lhs.second->name().id() < rhs.second->name().id();
 }
 
-void model_sorter::sort(meta_model::exomodel& em) {
+void sorting_transform::
+transform(const transforms::context& ctx, meta_model::exomodel& em) {
+    helpers::scoped_transform_probing stp(lg, "sorting transform",
+        transform_id, em.name().id(), ctx.prober(), em);
+
     em.modules().sort(comparer<meta_model::module>);
     em.object_templates().sort(comparer<meta_model::object_template>);
     em.builtins().sort(comparer<meta_model::builtin>);
@@ -48,6 +65,8 @@ void model_sorter::sort(meta_model::exomodel& em) {
     em.primitives().sort(comparer<meta_model::primitive>);
     em.objects().sort(comparer<meta_model::object>);
     em.exceptions().sort(comparer<meta_model::exception>);
+
+    stp.end_transform(em);
 }
 
 } } }

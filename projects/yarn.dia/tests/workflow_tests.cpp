@@ -28,9 +28,10 @@
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
-#include "dogen/yarn/types/helpers/model_sorter.hpp"
+#include "dogen/yarn/types/transforms/sorting_transform.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_ser.hpp"
+#include "dogen/yarn/test/mock_context_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
@@ -43,6 +44,7 @@ template<typename Archive> void register_types(Archive& ar) {
 
 using namespace dogen::yarn::dia;
 using dogen::utility::test::asserter;
+using dogen::yarn::test::mock_context_factory;
 
 namespace  {
 
@@ -62,7 +64,8 @@ bool test_workflow(
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     auto actual(workflow::execute(i));
-    dogen::yarn::helpers::model_sorter::sort(actual);
+    const dogen::yarn::transforms::context ctx(mock_context_factory::make());
+    dogen::yarn::transforms::sorting_transform::transform(ctx, actual);
 
     /*
      * Set to true to rebase. Note that you still need to run the
