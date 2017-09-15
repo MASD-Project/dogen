@@ -73,6 +73,7 @@
 #include "dogen/yarn/io/meta_model/orm_attribute_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/io/transforms/exomodel_transform_types_io.hpp"
+#include "dogen/yarn/io/transforms/formatting_configuration_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/transforms/global_enablement_configuration_io.hpp"
 

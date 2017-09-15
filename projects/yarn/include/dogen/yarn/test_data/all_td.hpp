@@ -73,6 +73,7 @@
 #include "dogen/yarn/test_data/meta_model/orm_attribute_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_primitive_properties_td.hpp"
 #include "dogen/yarn/test_data/transforms/exomodel_transform_types_td.hpp"
+#include "dogen/yarn/test_data/transforms/formatting_configuration_td.hpp"
 #include "dogen/yarn/test_data/transforms/local_enablement_configuration_td.hpp"
 #include "dogen/yarn/test_data/transforms/global_enablement_configuration_td.hpp"
 

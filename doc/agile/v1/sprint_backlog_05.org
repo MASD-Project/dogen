@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-16 Sat 00:24]
+#+CAPTION: Clock summary at [2017-09-16 Sat 00:28]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *49:11* |       |       | 100.0 |
+| *Total time*                                                                | *49:14* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 49:11   |       |       | 100.0 |
-| Active                                                                      |         | 49:11 |       | 100.0 |
+| Stories                                                                     | 49:14   |       |       | 100.0 |
+| Active                                                                      |         | 49:14 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.2 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.1 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   1.8 |
 | COMPLETED Clean-up readme                                                   |         |       |  1:15 |   2.5 |
 | COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   0.9 |
@@ -44,7 +44,7 @@
 | COMPLETED Remove dumping of models from log                                 |         |       |  0:06 |   0.2 |
 | COMPLETED Move model sorter from helpers                                    |         |       |  0:32 |   1.1 |
 | COMPLETED Add canonical archetype support to yarn                           |         |       |  7:18 |  14.8 |
-| STARTED Move enablement into yarn                                           |         |       |  0:16 |   0.5 |
+| STARTED Move enablement into yarn                                           |         |       |  0:19 |   0.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -880,6 +880,7 @@ Notes:
 - make is_enabled private in dependencies builder and see what breaks.
 
 *** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-09-16 Sat 00:25]--[2017-09-16 Sat 00:28] =>  0:03
     CLOCK: [2017-09-16 Sat 00:08]--[2017-09-16 Sat 00:24] =>  0:16
 
 It seems that the concepts around enablement are actually not kernel
