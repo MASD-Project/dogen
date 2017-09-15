@@ -14,31 +14,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-14 Thu 06:30]
+#+CAPTION: Clock summary at [2017-09-15 Fri 10:36]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:48* |       |       | 100.0 |
+| *Total time*                                                                | *43:33* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:48   |       |       | 100.0 |
-| Active                                                                      |         | 40:48 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.8 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.8 |
-| COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   2.1 |
-| COMPLETED Clean-up readme                                                   |         |       |  1:15 |   3.1 |
+| Stories                                                                     | 43:33   |       |       | 100.0 |
+| Active                                                                      |         | 43:33 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.7 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.6 |
+| COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   2.0 |
+| COMPLETED Clean-up readme                                                   |         |       |  1:15 |   2.9 |
 | COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   1.1 |
-| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   6.0 |
-| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   4.5 |
-| COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.9 |
-| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  19.2 |
+| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   5.6 |
+| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   4.2 |
+| COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.8 |
+| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  17.9 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.2 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.3 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.2 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.4 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.6 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  31.8 |
-| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.7 |
-| COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   3.0 |
-| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  16.5 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  29.8 |
+| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.5 |
+| COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.8 |
+| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   6.3 |
+| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  15.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -696,7 +697,9 @@ yarn has taken over the model to text transforms. We should just move
 housekeeper and the rest of knit into helpers and update the
 code-generator to perform the complete workflow.
 
-*** STARTED Add probing support to code generation tests              :story:
+*** COMPLETED Add probing support to code generation tests            :story:
+    CLOSED: [2017-09-15 Fri 10:36]
+    CLOCK: [2017-09-15 Fri 08:21]--[2017-09-15 Fri 10:36] =>  2:15
     CLOCK: [2017-09-14 Thu 23:13]--[2017-09-14 Thu 23:43] =>  0:30
 
 When we added probing support, we did it only for the knitter
@@ -811,6 +814,37 @@ Our paths are too deeply nested for windows machines, where there is a
 limitation on the maximum path size. When that happens we throw a ios
 error, which is not particularly informative. We should catch the
 exception and add a message asking the user to disable probing data.
+
+We could also perhaps have a mode with only directory numbers for
+windows so that we can at least use probing.
+
+*** Find some way of scoping transform probing                        :story:
+
+At present we are manually calling start/end transform. This is not
+ideal because:
+
+- we may forget to call it;
+- we may not look carefully at all the code paths; an early return
+  will cause mismatches;
+- we don't cope with exceptions.
+
+Scope guard/RAII was designed exactly for this. However, the problem
+we have is that we have a number of different APIs for start/end
+transform and it will be difficult to create a scope guard that can
+cater for all the permutations. We should classify the permutations
+and see if this is doable, even if we need several scope guards.
+
+We need:
+
+- transform description
+- transform id
+- model id (optional)
+- input (optional)
+- output (optional); triggers dismissal
+
+If output is not set we simply call end.
+
+We need a scope for chains and another for transforms.
 
 *** Remove dumping of models from log                                 :story:
 

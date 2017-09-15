@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include <sstream>
-#include <boost/test/results_collector.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/log/scoped_life_cycle_manager.hpp"
 
@@ -34,28 +32,15 @@ namespace dogen {
 namespace utility {
 namespace test {
 
-inline void log_if_test_has_failed() {
-    using namespace dogen::utility::log;
-    logger lg(logger_factory("utility.test"));
+void log_if_test_has_failed();
 
-    namespace ut = boost::unit_test;
-    auto test_id(ut::framework::current_test_case().p_id);
-    if (!ut::results_collector.results(test_id).passed())
-        BOOST_LOG_SEV(lg, error) << "test failed.";
-}
-
-inline dogen::utility::log::scoped_life_cycle_manager
+dogen::utility::log::scoped_life_cycle_manager
 scoped_life_cycle_manager_factory(std::string test_module,
     std::string test_suite,
-    std::string function_name) {
-    std::ostringstream stream;
+    std::string function_name);
 
-    stream << "log/" << test_module << "/" << test_suite
-           << "/" << function_name;
-
-    using namespace dogen::utility::log;
-    return scoped_life_cycle_manager(stream.str());
-}
+boost::filesystem::path probing_directory_path(std::string test_module,
+    std::string test_suite, std::string function_name);
 
 } } }
 
@@ -65,6 +50,8 @@ scoped_life_cycle_manager_factory(std::string test_module,
 #define SETUP_TEST_LOG(function_name)                                   \
     BOOST_TEST_CHECKPOINT(function_name);                               \
     auto sl(dogen::utility::test::scoped_life_cycle_manager_factory(    \
+            test_module, test_suite, function_name));                   \
+    const auto pd(dogen::utility::test::probing_directory_path(         \
             test_module, test_suite, function_name));
 
 #ifdef SETUP_TEST_LOG_SOURCE
