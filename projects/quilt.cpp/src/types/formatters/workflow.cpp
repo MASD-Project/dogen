@@ -18,12 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
+// #define USE_NEW_ENABLEMENT
+
 #include <iterator>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
+#ifdef USE_NEW_ENABLEMENT
+#include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
+#else
 #include "dogen/quilt.cpp/io/formattables/formatting_styles_io.hpp"
+#endif
 #include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
@@ -107,28 +113,29 @@ workflow::format(const formattables::model& fm,
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
+
+#ifdef USE_NEW_ENABLEMENT
+        const auto& aps(e.element_properties().artefact_properties());
+        const auto& art_props(get_artefact_properties(aps, arch));
+#else
         const auto& aps(ep.artefact_properties());
         const auto& art_props(get_artefact_properties(aps, arch));
+#endif
 
-        // {
-        //     // FIXME: whilst we are moving enablement to yarn
-        //     const auto& aps(e.element_properties().artefact_properties());
-        //     const auto& art_props(get_artefact_properties(aps, arch));
-            if (!art_props.enabled()) {
-                BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
-                continue;
-             }
-        // }
-
-        // FIXME: whilst we are moving enablement to yarn
-        // const auto& aps(ep.artefact_properties());
-        // const auto& art_props(get_artefact_properties(aps, arch));
+        if (!art_props.enabled()) {
+            BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
+            continue;
+        }
 
         using formattables::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(ep, fm, frp.helper_formatters());
         const auto fs(art_props.formatting_style());
+#ifdef USE_NEW_ENABLEMENT
+        if (fs == yarn::meta_model::formatting_styles::stock) {
+#else
         if (fs == formatting_styles::stock) {
+#endif
             const auto fmtn(fmt.formatter_name());
             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << fmtn;
 
@@ -137,7 +144,11 @@ workflow::format(const formattables::model& fm,
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_front(artefact);
+#ifdef USE_NEW_ENABLEMENT
+        } else if (fs == yarn::meta_model::formatting_styles::wale) {
+#else
         } else if (fs == formatting_styles::wale) {
+#endif
             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
 
             wale_formatter f;
@@ -146,7 +157,11 @@ workflow::format(const formattables::model& fm,
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_front(artefact);
+#ifdef USE_NEW_ENABLEMENT
+        } else if (fs == yarn::meta_model::formatting_styles::stitch) {
+#else
         } else if (fs == formatting_styles::stitch) {
+#endif
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
             const auto artefact(stitch_formatter_.format(fmt, ctx, e));
