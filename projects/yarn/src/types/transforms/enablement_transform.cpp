@@ -455,8 +455,7 @@ void enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
     annotations::archetype_locations_group>& archetype_locations_by_meta_name,
     std::unordered_set<meta_model::element_archetype>&
-    enabled_archetype_for_element,
-    meta_model::element& e) {
+    enabled_archetype_for_element, meta_model::element& e) {
 
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;
@@ -506,11 +505,17 @@ void enablement_transform::compute_enablement_for_element(
     auto& eafe(enabled_archetype_for_element);
     for (auto& pair : e.element_properties().artefact_properties()) {
         const auto arch(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << arch;
+
         auto& art_props(pair.second);
         compute_enablement_for_artefact_properties(gcs, lcs, arch, art_props);
 
-        if (!art_props.enabled())
+        if (!art_props.enabled()) {
+            BOOST_LOG_SEV(lg, debug) << "Archetype not enabled.";
             continue;
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Archetype is enabled.";
 
         /*
          * If we are enabled, we need to update the enablement
@@ -586,7 +591,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
 
     using namespace std::placeholders;
     const auto f(enablement_transform::compute_enablement_for_element);
-    auto v(std::bind(f, gcs, ltgmn, albmn, eafe, _1));
+    auto v(std::bind(f, std::ref(gcs), std::ref(ltgmn),
+            std::ref(albmn), std::ref(eafe), _1));
     const bool include_injected_elements(true);
     meta_model::elements_traversal(em, v, include_injected_elements);
     em.enabled_archetype_for_element(eafe);

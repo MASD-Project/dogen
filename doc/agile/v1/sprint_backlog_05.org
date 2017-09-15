@@ -14,36 +14,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-15 Fri 17:28]
+#+CAPTION: Clock summary at [2017-09-16 Sat 00:24]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *48:22* |       |       | 100.0 |
+| *Total time*                                                                | *49:11* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 48:22   |       |       | 100.0 |
-| Active                                                                      |         | 48:22 |       | 100.0 |
+| Stories                                                                     | 49:11   |       |       | 100.0 |
+| Active                                                                      |         | 49:11 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.5 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:33 |   3.2 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   1.8 |
-| COMPLETED Clean-up readme                                                   |         |       |  1:15 |   2.6 |
-| COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   1.0 |
-| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   5.0 |
-| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   3.8 |
+| COMPLETED Clean-up readme                                                   |         |       |  1:15 |   2.5 |
+| COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   0.9 |
+| COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   4.9 |
+| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   3.7 |
 | COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.7 |
-| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  16.2 |
+| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  15.9 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.2 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   2.0 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   1.9 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.4 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.5 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  26.8 |
-| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.3 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  26.4 |
+| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.2 |
 | COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.5 |
-| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   5.7 |
-| COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   6.4 |
+| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   5.6 |
+| COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   6.3 |
 | COMPLETED Catch directory generation errors in probe                        |         |       |  1:05 |   2.2 |
 | COMPLETED Remove dumping of models from log                                 |         |       |  0:06 |   0.2 |
 | COMPLETED Move model sorter from helpers                                    |         |       |  0:32 |   1.1 |
-| STARTED Add canonical archetype support to yarn                             |         |       |  6:45 |  14.0 |
+| COMPLETED Add canonical archetype support to yarn                           |         |       |  7:18 |  14.8 |
+| STARTED Move enablement into yarn                                           |         |       |  0:16 |   0.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -775,7 +776,9 @@ reason.
 
 This is really just a sorting transform, not a helper.
 
-*** STARTED Add canonical archetype support to yarn                   :story:
+*** COMPLETED Add canonical archetype support to yarn                 :story:
+    CLOSED: [2017-09-16 Sat 00:24]
+    CLOCK: [2017-09-15 Fri 23:34]--[2017-09-16 Sat 00:07] =>  0:33
     CLOCK: [2017-09-10 Sun 00:08]--[2017-09-10 Sun 00:18] =>  0:10
     CLOCK: [2017-09-09 Sat 23:40]--[2017-09-10 Sun 00:07] =>  0:27
     CLOCK: [2017-09-09 Sat 23:28]--[2017-09-09 Sat 23:39] =>  0:11
@@ -876,17 +879,8 @@ Notes:
 
 - make is_enabled private in dependencies builder and see what breaks.
 
-*** Drop the original extension in tailor                             :story:
-
-Filenames in tailor look weird:
-
-: dart.dia.json
-
-it should just be:
-
-: dart.json
-
-*** Move enablement into yarn                                         :story:
+*** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-09-16 Sat 00:08]--[2017-09-16 Sat 00:24] =>  0:16
 
 It seems that the concepts around enablement are actually not kernel
 specific but instead can be generalised at the meta-model level. We
@@ -935,6 +929,16 @@ We need to make use of the exact same logic as implemented in
 =quilt.cpp= for enablement. Perhaps all of the enablement related
 functionality can be lifted and grafted onto quilt without any major
 changes.
+
+*** Drop the original extension in tailor                             :story:
+
+Filenames in tailor look weird:
+
+: dart.dia.json
+
+it should just be:
+
+: dart.json
 
 *** Move dependencies into yarn                                       :story:
 
