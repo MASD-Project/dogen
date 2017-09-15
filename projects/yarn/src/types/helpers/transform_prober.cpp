@@ -56,7 +56,7 @@ namespace yarn {
 namespace helpers {
 
 transform_prober::transform_prober(const std::string& log_level,
-    const bool probe_data, const bool probe_stats,
+    const bool probe_data, const bool probe_stats, const bool use_short_names,
     const bool disable_guids_in_stats,
     const boost::filesystem::path& probe_directory,
     const annotations::archetype_location_repository& alrp,
@@ -65,6 +65,7 @@ transform_prober::transform_prober(const std::string& log_level,
     : builder_(log_level, probe_data), current_directory_(probe_directory),
       probe_data_(probe_data), probe_stats_(probe_stats),
       disable_guids_in_stats_(disable_guids_in_stats),
+      use_short_names_(use_short_names),
       probe_directory_(probe_directory) {
 
     validate();
@@ -77,8 +78,8 @@ transform_prober::transform_prober(const std::string& log_level,
     if (!probe_data_)
         return;
 
+    transform_position_.push(0);
     write_initial_inputs(alrp, atrp, msrp);
-    transform_position_.push(1);
 }
 
 void transform_prober::validate() const {
@@ -136,7 +137,11 @@ void transform_prober::handle_current_directory() const {
     const auto id(builder_.current()->transform_id());
     std::ostringstream s;
     s << std::setfill(zero) << std::setw(leading_zeros)
-      << transform_position_.top() << delimiter << id;
+      << transform_position_.top();
+
+    if (!use_short_names_)
+        s << delimiter << id;
+
     current_directory_ /= s.str();
 
     if (boost::filesystem::exists(current_directory_)) {
@@ -162,14 +167,34 @@ void transform_prober::ensure_transform_position_not_empty() const {
     }
 }
 
+boost::filesystem::path
+transform_prober::full_path_for_writing(const std::string& filename) const {
+    std::ostringstream s;
+    s << std::setfill(zero) << std::setw(leading_zeros)
+      << transform_position_.top();
+
+    if (!use_short_names_)
+        s << delimiter << filename;
+
+    s << extension;
+
+    return current_directory_ / s.str();
+}
+
 boost::filesystem::path transform_prober::full_path_for_writing(
     const std::string& transform_id, const std::string& type) const {
     ensure_transform_position_not_empty();
 
     std::ostringstream s;
     s << std::setfill(zero) << std::setw(leading_zeros)
-      << transform_position_.top() << delimiter << transform_id << delimiter
-      << builder_.current()->guid() << delimiter << type << extension;
+      << transform_position_.top();
+
+    if (!use_short_names_) {
+        s << delimiter << transform_id << delimiter
+          << builder_.current()->guid();
+    }
+
+    s << delimiter << type << extension;
 
     return current_directory_ / s.str();
 }
@@ -181,15 +206,18 @@ void transform_prober::write_initial_inputs(
 
     BOOST_LOG_SEV(lg, debug) << "Writing initial inputs.";
 
-    auto path(current_directory_ / "001-archetype_location_repository.json");
+    ensure_transform_position_not_empty();
+    auto path(full_path_for_writing("archetype_location_repository"));
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
     utility::filesystem::write(path, alrp);
 
-    path = current_directory_ / "001-type_repository.json";
+    ++transform_position_.top();
+    path = full_path_for_writing("type_repository");
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
     utility::filesystem::write(path, atrp);
 
-    path = current_directory_ / "001-mapping_set_repository.json";
+    ++transform_position_.top();
+    path = full_path_for_writing("mapping_set_repository");
     BOOST_LOG_SEV(lg, debug) << "Writing: " << path.generic_string();
     utility::filesystem::write(path, msrp);
 

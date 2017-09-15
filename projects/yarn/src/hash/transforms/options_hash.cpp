@@ -64,6 +64,7 @@ std::size_t options_hasher::hash(const options& v) {
     combine(seed, v.probe_stats_disable_guids());
     combine(seed, v.probe_all());
     combine(seed, hash_boost_filesystem_path(v.probe_directory()));
+    combine(seed, v.probe_use_short_names());
 
     return seed;
 }

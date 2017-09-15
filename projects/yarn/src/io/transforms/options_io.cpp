@@ -70,7 +70,8 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"probe_stats\": " << v.probe_stats() << ", "
       << "\"probe_stats_disable_guids\": " << v.probe_stats_disable_guids() << ", "
       << "\"probe_all\": " << v.probe_all() << ", "
-      << "\"probe_directory\": " << "\"" << v.probe_directory().generic_string() << "\""
+      << "\"probe_directory\": " << "\"" << v.probe_directory().generic_string() << "\"" << ", "
+      << "\"probe_use_short_names\": " << v.probe_use_short_names()
       << " }";
     return(s);
 }

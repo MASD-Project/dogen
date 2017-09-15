@@ -71,6 +71,7 @@ populate(const unsigned int position, result_type& v) {
     v.probe_stats_disable_guids(create_bool(position + 10));
     v.probe_all(create_bool(position + 11));
     v.probe_directory(create_boost_filesystem_path(position + 12));
+    v.probe_use_short_names(create_bool(position + 13));
 }
 
 options_generator::result_type

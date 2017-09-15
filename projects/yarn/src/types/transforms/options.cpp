@@ -30,7 +30,8 @@ options::options()
       compatibility_mode_(static_cast<bool>(0)),
       probe_stats_(static_cast<bool>(0)),
       probe_stats_disable_guids_(static_cast<bool>(0)),
-      probe_all_(static_cast<bool>(0)) { }
+      probe_all_(static_cast<bool>(0)),
+      probe_use_short_names_(static_cast<bool>(0)) { }
 
 options::options(options&& rhs)
     : log_file_(std::move(rhs.log_file_)),
@@ -45,7 +46,8 @@ options::options(options&& rhs)
       probe_stats_(std::move(rhs.probe_stats_)),
       probe_stats_disable_guids_(std::move(rhs.probe_stats_disable_guids_)),
       probe_all_(std::move(rhs.probe_all_)),
-      probe_directory_(std::move(rhs.probe_directory_)) { }
+      probe_directory_(std::move(rhs.probe_directory_)),
+      probe_use_short_names_(std::move(rhs.probe_use_short_names_)) { }
 
 options::options(
     const boost::filesystem::path& log_file,
@@ -60,7 +62,8 @@ options::options(
     const bool probe_stats,
     const bool probe_stats_disable_guids,
     const bool probe_all,
-    const boost::filesystem::path& probe_directory)
+    const boost::filesystem::path& probe_directory,
+    const bool probe_use_short_names)
     : log_file_(log_file),
       log_level_(log_level),
       target_(target),
@@ -73,7 +76,8 @@ options::options(
       probe_stats_(probe_stats),
       probe_stats_disable_guids_(probe_stats_disable_guids),
       probe_all_(probe_all),
-      probe_directory_(probe_directory) { }
+      probe_directory_(probe_directory),
+      probe_use_short_names_(probe_use_short_names) { }
 
 void options::swap(options& other) noexcept {
     using std::swap;
@@ -90,6 +94,7 @@ void options::swap(options& other) noexcept {
     swap(probe_stats_disable_guids_, other.probe_stats_disable_guids_);
     swap(probe_all_, other.probe_all_);
     swap(probe_directory_, other.probe_directory_);
+    swap(probe_use_short_names_, other.probe_use_short_names_);
 }
 
 bool options::operator==(const options& rhs) const {
@@ -105,7 +110,8 @@ bool options::operator==(const options& rhs) const {
         probe_stats_ == rhs.probe_stats_ &&
         probe_stats_disable_guids_ == rhs.probe_stats_disable_guids_ &&
         probe_all_ == rhs.probe_all_ &&
-        probe_directory_ == rhs.probe_directory_;
+        probe_directory_ == rhs.probe_directory_ &&
+        probe_use_short_names_ == rhs.probe_use_short_names_;
 }
 
 options& options::operator=(options other) {
@@ -272,6 +278,14 @@ void options::probe_directory(const boost::filesystem::path& v) {
 
 void options::probe_directory(const boost::filesystem::path&& v) {
     probe_directory_ = std::move(v);
+}
+
+bool options::probe_use_short_names() const {
+    return probe_use_short_names_;
+}
+
+void options::probe_use_short_names(const bool v) {
+    probe_use_short_names_ = v;
 }
 
 } } }

@@ -60,7 +60,8 @@ public:
         const bool probe_stats,
         const bool probe_stats_disable_guids,
         const bool probe_all,
-        const boost::filesystem::path& probe_directory);
+        const boost::filesystem::path& probe_directory,
+        const bool probe_use_short_names);
 
 private:
     template<typename Archive>
@@ -191,6 +192,15 @@ public:
     void probe_directory(const boost::filesystem::path&& v);
     /**@}*/
 
+    /**
+     * @brief Use short directory and file names. Useful mainly on windows due to path
+     * size limitations.
+     */
+    /**@{*/
+    bool probe_use_short_names() const;
+    void probe_use_short_names(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const options& rhs) const;
     bool operator!=(const options& rhs) const {
@@ -215,6 +225,7 @@ private:
     bool probe_stats_disable_guids_;
     bool probe_all_;
     boost::filesystem::path probe_directory_;
+    bool probe_use_short_names_;
 };
 
 } } }

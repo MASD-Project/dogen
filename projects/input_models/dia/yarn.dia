@@ -39760,7 +39760,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-193,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-193.05,53.95;-169.735,66.45"/>
+        <dia:rectangle val="-193.05,53.95;-169.735,67.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-193,54"/>
@@ -39769,7 +39769,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.400000000000002"/>
+        <dia:real val="13.200000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#options#</dia:string>
@@ -40150,6 +40150,30 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Full path to the directory in which to place probe information.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#probe_use_short_names#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Use short directory and file names. Useful mainly on windows due to path
+size limitations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41110,7 +41134,7 @@ are no longer required.#</dia:string>
         <dia:point val="129.241,117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="128.491,112.95;143.2,118.6"/>
+        <dia:rectangle val="128.491,112.2;143.2,117.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

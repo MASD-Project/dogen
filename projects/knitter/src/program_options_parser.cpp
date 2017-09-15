@@ -68,6 +68,7 @@ const std::string probe_stats_arg("probe-stats");
 const std::string probe_stats_disable_guids_arg("probe-stats-disable-guids");
 const std::string probe_all_arg("probe-all");
 const std::string probe_directory_arg("probe-directory");
+const std::string probe_use_short_names_arg("probe-use-short-names");
 const std::string default_probe_directory("probe");
 
 }
@@ -162,7 +163,9 @@ program_options_parser::make_transforms_options_description() const {
         ("probe-all", "Dump all available probing information "
             "about transforms.")
         ("probe-directory", "Directory in which to dump probe data. "
-            "Only used if transforms probing is enabled.");
+            "Only used if transforms probing is enabled.")
+        ("probe-use-short-names", "Use short names for directories and files. "
+            "Useful for Windows where long paths are not supported.");
 
     return r;
 }
@@ -273,6 +276,7 @@ make_knitting_options(const variables_map& vm) const {
     r.probe_stats(vm.count(probe_stats_arg) != 0);
     r.probe_stats_disable_guids(vm.count(probe_stats_disable_guids_arg) != 0);
     r.probe_all(vm.count(probe_all_arg) != 0);
+    r.probe_use_short_names(vm.count(probe_use_short_names_arg) != 0);
 
     boost::filesystem::path probe_path;
     if (vm.count(probe_directory_arg) == 0)
