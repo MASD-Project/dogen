@@ -36,7 +36,6 @@
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
@@ -222,17 +221,13 @@ const formattables::element_properties& assistant::obtain_element_properties(
 const formattables::artefact_properties& assistant::obtain_artefact_properties(
     const std::string& element_id, const std::string& archetype) const {
 
-    const auto& formattables(context_.model().formattables());
-    formattables::canonical_archetype_resolver res(formattables);
-    const auto resolved_arch(res.resolve(element_id, archetype));
-
     const auto& eprops(obtain_element_properties(element_id));
-    const auto i(eprops.artefact_properties().find(resolved_arch));
+    const auto i(eprops.artefact_properties().find(archetype));
     if (i == eprops.artefact_properties().end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing
-                                 << resolved_arch;
+                                 << archetype;
         BOOST_THROW_EXCEPTION(
-            formatting_error(artefact_properties_missing + resolved_arch));
+            formatting_error(artefact_properties_missing + archetype));
     }
     return i->second;
 }
