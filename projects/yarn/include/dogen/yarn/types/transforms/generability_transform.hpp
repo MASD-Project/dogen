@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {

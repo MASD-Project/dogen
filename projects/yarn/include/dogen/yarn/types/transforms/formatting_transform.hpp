@@ -25,26 +25,44 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/formatting_styles.hpp"
+#include "dogen/yarn/types/transforms/formatting_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class formatting_transform final {
-public:
-    formatting_transform() = default;
-    formatting_transform(const formatting_transform&) = default;
-    formatting_transform(formatting_transform&&) = default;
-    ~formatting_transform() = default;
-    formatting_transform& operator=(const formatting_transform&) = default;
+private:
+    static meta_model::formatting_styles
+    to_formatting_style(const std::string& s);
+
+private:
+    struct type_group {
+        annotations::type formatting_style;
+        annotations::type formatting_input;
+    };
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    static std::unordered_map<std::string, type_group>
+    make_type_groups(const annotations::type_repository& atrp,
+        const std::list<annotations::archetype_location>& als);
+
+    static std::unordered_map<std::string, formatting_configuration>
+    make_formatting_configuration(
+        const std::unordered_map<std::string, type_group>& tgs,
+        const annotations::annotation& a);
+
+    static void transform_element(
+        const std::unordered_map<std::string, type_group> tgs,
+        meta_model::element& e);
 
 public:
-    bool operator==(const formatting_transform& rhs) const;
-    bool operator!=(const formatting_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code_dia) {
 
 BOOST_AUTO_TEST_CASE(enable_facet_types_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_types_generates_expected_code_dia");
-    const bool ep(false/*enable probing locally*/);
+    const bool ep(true/*enable probing locally*/);
     const auto dia(yarn_dia::input_enable_facet_types_dia());
     BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
 }
