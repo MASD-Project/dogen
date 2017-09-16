@@ -95,7 +95,7 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
 dogen::formatters::artefact enum_implementation_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ye(a.as<yarn::meta_model::enumeration>(static_artefact(), e));
+    const auto& ye(a.as<yarn::meta_model::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

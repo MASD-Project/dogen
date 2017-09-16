@@ -78,7 +78,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const yarn::meta_model::element& e) const {
 
     using yarn::meta_model::object;
-    const auto& o(assistant::as<object>(static_artefact(), e));
+    const auto& o(assistant::as<object>(e));
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype());
 
@@ -97,7 +97,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
 dogen::formatters::artefact class_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<yarn::meta_model::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::meta_model::object>(e));
 
     {
         const auto qn(a.get_qualified_name(o.name()));

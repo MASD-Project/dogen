@@ -49,8 +49,7 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const yarn::meta_model::element& e) const {
     const auto fct(archetype_location_.facet());
-    const auto arch(archetype_location_.archetype());
-    const auto& mh(assistant::as<fabric::master_header>(arch, e));
+    const auto& mh(assistant::as<fabric::master_header>(e));
 
     const auto i(mh.inclusion_by_facet().find(fct));
     if (i == mh.inclusion_by_facet().end())

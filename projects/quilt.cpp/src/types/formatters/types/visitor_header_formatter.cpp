@@ -78,7 +78,7 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const yarn::meta_model::element& e) const {
     using yarn::meta_model::visitor;
-    const auto& v(assistant::as<visitor>(static_artefact(), e));
+    const auto& v(assistant::as<visitor>(e));
     auto builder(f.make());
     builder.add(v.visits(), traits::forward_declarations_archetype());
 
@@ -91,7 +91,7 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
 dogen::formatters::artefact visitor_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& v(a.as<yarn::meta_model::visitor>(static_artefact(), e));
+    const auto& v(a.as<yarn::meta_model::visitor>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

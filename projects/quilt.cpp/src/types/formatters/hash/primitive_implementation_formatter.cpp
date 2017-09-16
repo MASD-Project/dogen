@@ -89,7 +89,7 @@ primitive_implementation_formatter::inclusion_dependencies(
     const yarn::meta_model::element& e) const {
 
     using yarn::meta_model::primitive;
-    const auto& p(assistant::as<primitive>(static_artefact(), e));
+    const auto& p(assistant::as<primitive>(e));
     const auto carch(traits::canonical_archetype());
     auto builder(f.make());
     builder.add(p.name(), carch);
@@ -100,7 +100,7 @@ primitive_implementation_formatter::inclusion_dependencies(
 dogen::formatters::artefact primitive_implementation_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::meta_model::primitive>(e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

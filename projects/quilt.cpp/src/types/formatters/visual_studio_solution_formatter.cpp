@@ -93,7 +93,7 @@ std::list<std::string> visual_studio_solution_formatter::inclusion_dependencies(
 dogen::formatters::artefact visual_studio_solution_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& vsl(a.as<fabric::visual_studio_solution>(static_artefact(), e));
+    const auto& vsl(a.as<fabric::visual_studio_solution>(e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;
 a.stream() << "Project(\"{" << vsl.project_solution_guid() << "}\") = \"" << vsl.project_name() << "\", \"" << vsl.project_name() << ".csproj\", \"{" << vsl.project_guid() << "}\"" << std::endl;

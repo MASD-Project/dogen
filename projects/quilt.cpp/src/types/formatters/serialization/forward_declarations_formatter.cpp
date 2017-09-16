@@ -92,8 +92,7 @@ dogen::formatters::artefact forward_declarations_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
 
-    const auto arch(static_artefact());
-    const auto& fd(a.as<fabric::forward_declarations>(arch, e));
+    const auto& fd(a.as<fabric::forward_declarations>(e));
 
     // FIXME: hack: legacy formatters do not support serialisation
     // forward declarations for some types.

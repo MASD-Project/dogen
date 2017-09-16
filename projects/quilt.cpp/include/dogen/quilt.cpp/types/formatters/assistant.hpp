@@ -69,7 +69,7 @@ private:
 public:
     template<typename T>
     static const T&
-    as(const std::string& /*archetype*/, const yarn::meta_model::element& e) {
+    as(const yarn::meta_model::element& e) {
         return dynamic_cast<const T&>(e);
     }
 

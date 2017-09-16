@@ -87,7 +87,7 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const formattables::dependencies_builder_factory& f,
     const yarn::meta_model::element& e) const {
 
-    const auto& p(assistant::as<yarn::meta_model::primitive>(static_artefact(), e));
+    const auto& p(assistant::as<yarn::meta_model::primitive>(e));
     auto builder(f.make());
     builder.add(p.name(), traits::primitive_header_archetype());
 
@@ -100,7 +100,7 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 dogen::formatters::artefact primitive_implementation_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::meta_model::primitive>(e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

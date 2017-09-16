@@ -92,7 +92,7 @@ std::list<std::string> visual_studio_project_formatter::inclusion_dependencies(
 dogen::formatters::artefact visual_studio_project_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& vsp(a.as<fabric::visual_studio_project>(static_artefact(), e));
+    const auto& vsp(a.as<fabric::visual_studio_project>(e));
 
 a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 a.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;

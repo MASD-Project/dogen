@@ -80,7 +80,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const yarn::meta_model::element& e) const {
 
     using yarn::meta_model::object;
-    const auto& o(assistant::as<object>(static_artefact(), e));
+    const auto& o(assistant::as<object>(e));
     auto builder(f.make());
 
     // algorithm: domain headers need it for the swap function.
@@ -128,7 +128,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
 dogen::formatters::artefact class_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<yarn::meta_model::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::meta_model::object>(e));
 
     {
         const auto sn(o.name().simple());

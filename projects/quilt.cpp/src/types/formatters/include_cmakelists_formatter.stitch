@@ -71,7 +71,7 @@ std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(
 dogen::formatters::artefact include_cmakelists_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& c(a.as<fabric::cmakelists>(static_artefact(), e));
+    const auto& c(a.as<fabric::cmakelists>(e));
 
     {
         const auto cs(dogen::formatters::comment_styles::shell_style);

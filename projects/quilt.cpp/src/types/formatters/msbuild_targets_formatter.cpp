@@ -91,7 +91,7 @@ std::list<std::string> msbuild_targets_formatter::inclusion_dependencies(
 dogen::formatters::artefact msbuild_targets_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& c(a.as<fabric::msbuild_targets>(static_artefact(), e));
+    const auto& c(a.as<fabric::msbuild_targets>(e));
 
     {
         const auto cs(dogen::formatters::comment_styles::xml_style);

@@ -85,7 +85,7 @@ boost::filesystem::path class_implementation_formatter::full_path(
 std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const yarn::meta_model::element& e) const {
-    const auto& o(assistant::as<yarn::meta_model::object>(static_artefact(), e));
+    const auto& o(assistant::as<yarn::meta_model::object>(e));
     auto builder(f.make());
 
     const auto ch_fn(traits::class_header_archetype());
@@ -116,7 +116,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 dogen::formatters::artefact class_implementation_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<yarn::meta_model::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::meta_model::object>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

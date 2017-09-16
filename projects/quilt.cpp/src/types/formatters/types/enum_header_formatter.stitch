@@ -24,7 +24,7 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const yarn::meta_model::element& e) const {
 
     using yarn::meta_model::enumeration;
-    const auto& en(assistant::as<enumeration>(static_artefact(), e));
+    const auto& en(assistant::as<enumeration>(e));
     auto builder(f.make());
     const auto arch(traits::canonical_archetype());
     builder.add(en.underlying_element(), arch);
@@ -34,7 +34,7 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
 dogen::formatters::artefact enum_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& ye(a.as<yarn::meta_model::enumeration>(static_artefact(), e));
+    const auto& ye(a.as<yarn::meta_model::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
