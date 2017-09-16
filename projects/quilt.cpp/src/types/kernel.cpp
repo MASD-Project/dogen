@@ -78,12 +78,14 @@ std::string kernel::id() const {
 }
 
 std::list<dogen::formatters::artefact>
-kernel::format(const annotations::type_repository& atrp,
+kernel::format(const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element,
+    const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
     const formattables::model& fm) const {
     formatters::workflow wf(atrp, agf, drp);
-    return wf.execute(fm);
+    return wf.execute(enabled_archetype_for_element, fm);
 }
 
 std::list<boost::filesystem::path> kernel::
@@ -139,8 +141,9 @@ kernel::generate(const yarn::transforms::context& ctx,
     yarn::transforms::code_generation_output r;
     const auto& drp(ctx.formatters_repository());
     const auto& agf(ctx.groups_factory());
+    const auto& eafe(m.enabled_archetype_for_element());
 
-    r.artefacts(format(atrp, agf, drp, fm));
+    r.artefacts(format(eafe, atrp, agf, drp, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished kernel.";

@@ -91,7 +91,8 @@ yarn::meta_model::artefact_properties workflow::get_artefact_properties(
 }
 
 std::list<dogen::formatters::artefact>
-workflow::format(const formattables::model& fm,
+workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element, const formattables::model& fm,
     const yarn::meta_model::element& e,
     const formattables::element_properties& ep) const {
 
@@ -129,7 +130,9 @@ workflow::format(const formattables::model& fm,
 
         using formattables::formatting_styles;
         const auto& frp(registrar().formatter_repository());
-        context ctx(ep, fm, frp.helper_formatters());
+        context ctx(enabled_archetype_for_element, ep, fm,
+            frp.helper_formatters());
+
         const auto fs(art_props.formatting_style());
 #ifdef USE_NEW_ENABLEMENT
         if (fs == yarn::meta_model::formatting_styles::stock) {
@@ -177,8 +180,9 @@ workflow::format(const formattables::model& fm,
     return r;
 }
 
-std::list<dogen::formatters::artefact>
-workflow::execute(const formattables::model& fm) const {
+std::list<dogen::formatters::artefact> workflow::
+execute(const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element, const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
     std::list<dogen::formatters::artefact> r;
     for (const auto& pair : fm.formattables()) {
@@ -186,7 +190,8 @@ workflow::execute(const formattables::model& fm) const {
         const auto& eprops(formattable.element_properties());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
-            r.splice(r.end(), format(fm, e, eprops));
+            r.splice(r.end(),
+                format(enabled_archetype_for_element, fm, e, eprops));
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";

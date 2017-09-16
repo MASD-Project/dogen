@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <memory>
+#include <unordered_set>
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
@@ -36,6 +37,7 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
@@ -71,12 +73,15 @@ private:
 
 private:
     std::list<dogen::formatters::artefact>
-    format(const formattables::model& fm, const yarn::meta_model::element& e,
+    format(const std::unordered_set<yarn::meta_model::element_archetype>&
+        enabled_archetype_for_element, const formattables::model& fm,
+        const yarn::meta_model::element& e,
         const formattables::element_properties& ep) const;
 
 public:
     std::list<dogen::formatters::artefact>
-    execute(const formattables::model& fm) const;
+    execute(const std::unordered_set<yarn::meta_model::element_archetype>&
+        enabled_archetype_for_element, const formattables::model& fm) const;
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;

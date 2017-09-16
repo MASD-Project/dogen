@@ -28,7 +28,9 @@
 #include <memory>
 #include <string>
 #include <algorithm>
+#include <unordered_set>
 #include <unordered_map>
+#include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
@@ -43,12 +45,17 @@ namespace formatters {
  */
 class context final {
 public:
-    context(const formattables::element_properties& element_properties,
+    context(const std::unordered_set<yarn::meta_model::element_archetype>&
+        enabled_archetype_for_element,
+        const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
         std::unordered_map<std::string, std::list<std::shared_ptr<
         helper_formatter_interface>>>>& helpers);
 
 public:
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element() const;
+
     const formattables::element_properties& element_properties() const;
 
     const formattables::model& model() const;
@@ -61,6 +68,8 @@ public:
         helpers() const;
 
 private:
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element_;
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;
     const std::unordered_map<

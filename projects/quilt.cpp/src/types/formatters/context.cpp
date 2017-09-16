@@ -26,12 +26,20 @@ namespace cpp {
 namespace formatters {
 
 context::context(
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element,
     const formattables::element_properties& element_properties,
     const formattables::model& fm,
     const std::unordered_map<std::string, std::unordered_map<std::string,
     std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
-    : element_properties_(element_properties), model_(fm),
+    : enabled_archetype_for_element_(enabled_archetype_for_element),
+      element_properties_(element_properties), model_(fm),
       helpers_(helpers) { }
+
+const std::unordered_set<yarn::meta_model::element_archetype>&
+context::enabled_archetype_for_element() const {
+    return enabled_archetype_for_element_;
+}
 
 const formattables::element_properties&
 context::element_properties() const {
