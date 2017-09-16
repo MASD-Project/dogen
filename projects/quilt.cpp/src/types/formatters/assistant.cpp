@@ -102,15 +102,14 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 assistant::
-assistant(const context& ctx, const annotations::archetype_location& al,
-    const bool requires_header_guard, const std::string& id) :
-    element_id_(id),
-    context_(ctx),
+assistant(const context& ctx, const yarn::meta_model::element& e,
+    const annotations::archetype_location& al, const bool requires_header_guard)
+    : element_(e), context_(ctx),
     artefact_properties_(
-        obtain_artefact_properties(element_id_, al.archetype())),
+        obtain_artefact_properties(element_.name().id(), al.archetype())),
     archetype_location_(al), requires_header_guard_(requires_header_guard) {
 
-    BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_.name().id()
                              << " for archetype: " << al.archetype();
 
     dogen::formatters::indent_filter::push(filtering_stream_, 4);
@@ -204,7 +203,7 @@ std::string assistant::get_product_name(const yarn::meta_model::name& n) const {
 const formattables::element_properties& assistant::obtain_element_properties(
     const std::string& element_id) const {
 
-    if (element_id == element_id_)
+    if (element_id == element_.name().id())
         return context_.element_properties();
 
     const auto& formattables(context_.model().formattables());
@@ -260,7 +259,7 @@ assistant::make_namespaces(const yarn::meta_model::name& n) const {
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    yarn::meta_model::element_archetype ea(element_id_, archetype);
+    yarn::meta_model::element_archetype ea(element_.name().id(), archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());

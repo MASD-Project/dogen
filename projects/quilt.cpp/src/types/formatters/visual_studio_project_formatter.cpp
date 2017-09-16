@@ -91,8 +91,7 @@ std::list<std::string> visual_studio_project_formatter::inclusion_dependencies(
 
 dogen::formatters::artefact visual_studio_project_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
-    const auto id(e.name().id());
-    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& vsp(a.as<fabric::visual_studio_project>(static_artefact(), e));
 
 a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;

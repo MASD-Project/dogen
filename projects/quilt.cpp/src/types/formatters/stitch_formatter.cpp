@@ -57,9 +57,8 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     const yarn::meta_model::element& e) const {
     const auto al(stock_formatter.archetype_location());
     const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
-    const auto id(e.name().id());
 
-    assistant a(ctx, al, needs_guard, id);
+    assistant a(ctx, e, al, needs_guard);
     const auto& fp(a.artefact_properties().file_path());
     auto stitch_template(fp);
     stitch_template.replace_extension(stitch_extension);

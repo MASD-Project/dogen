@@ -55,8 +55,9 @@ namespace formatters {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const annotations::archetype_location& al,
-        const bool requires_header_guard, const std::string& id);
+    assistant(const context& ctx, const yarn::meta_model::element& e,
+        const annotations::archetype_location& al,
+        const bool requires_header_guard);
 
 private:
     /**
@@ -386,7 +387,7 @@ public:
 private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
-    const std::string element_id_;
+    const yarn::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     const annotations::archetype_location archetype_location_;

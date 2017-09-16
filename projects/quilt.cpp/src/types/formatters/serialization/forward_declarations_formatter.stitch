@@ -37,8 +37,7 @@ std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
 
 dogen::formatters::artefact forward_declarations_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
-    const auto id(e.name().id());
-    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
 
     const auto arch(static_artefact());
     const auto& fd(a.as<fabric::forward_declarations>(arch, e));

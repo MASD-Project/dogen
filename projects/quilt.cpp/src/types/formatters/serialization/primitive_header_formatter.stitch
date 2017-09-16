@@ -37,8 +37,7 @@ std::list<std::string> primitive_header_formatter::inclusion_dependencies(
 
 dogen::formatters::artefact primitive_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
-    const auto id(e.name().id());
-    assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
 
     const auto sn(p.name().simple());

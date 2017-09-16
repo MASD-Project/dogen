@@ -90,8 +90,7 @@ std::list<std::string> msbuild_targets_formatter::inclusion_dependencies(
 
 dogen::formatters::artefact msbuild_targets_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
-    const auto id(e.name().id());
-    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& c(a.as<fabric::msbuild_targets>(static_artefact(), e));
 
     {

@@ -90,8 +90,7 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
 
 dogen::formatters::artefact master_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
-    const auto id(e.name().id());
-    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
