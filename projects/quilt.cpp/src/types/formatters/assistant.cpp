@@ -674,7 +674,16 @@ dogen::formatters::artefact assistant::make_artefact() const {
     dogen::formatters::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
-    r.overwrite(artefact_properties_.overwrite());
+
+    const auto& ap(element_.element_properties().artefact_properties());
+    const auto arch(archetype_location_.archetype());
+    const auto i(ap.find(arch));
+    if (i == ap.end()) {
+        BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(artefact_properties_missing + arch));
+    }
+    r.overwrite(i->second.overwrite());
 
     return r;
 }

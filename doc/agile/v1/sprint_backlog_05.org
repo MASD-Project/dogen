@@ -14,28 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-16 Sat 18:43]
+#+CAPTION: Clock summary at [2017-09-16 Sat 21:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *54:08* |       |       | 100.0 |
+| *Total time*                                                                | *54:19* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 54:08   |       |       | 100.0 |
-| Active                                                                      |         | 54:08 |       | 100.0 |
+| Stories                                                                     | 54:19   |       |       | 100.0 |
+| Active                                                                      |         | 54:19 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.4 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:43 |   3.2 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   1.6 |
 | COMPLETED Clean-up readme                                                   |         |       |  1:15 |   2.3 |
 | COMPLETED Rename transformers to adapters                                   |         |       |  0:28 |   0.9 |
 | COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   4.5 |
-| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   3.4 |
+| COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   3.3 |
 | COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.6 |
 | COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  14.4 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.2 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   1.8 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   1.7 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.3 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.5 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  24.0 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  23.9 |
 | COMPLETED Create yarn options                                               |         |       |  1:06 |   2.0 |
 | COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.2 |
 | COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   5.1 |
@@ -43,10 +43,10 @@
 | COMPLETED Catch directory generation errors in probe                        |         |       |  1:05 |   2.0 |
 | COMPLETED Remove dumping of models from log                                 |         |       |  0:06 |   0.2 |
 | COMPLETED Move model sorter from helpers                                    |         |       |  0:32 |   1.0 |
-| COMPLETED Add canonical archetype support to yarn                           |         |       |  7:18 |  13.5 |
+| COMPLETED Add canonical archetype support to yarn                           |         |       |  7:18 |  13.4 |
 | COMPLETED Remove artefact from assistant casting                            |         |       |  0:20 |   0.6 |
 | COMPLETED Untabify windows templates                                        |         |       |  0:04 |   0.1 |
-| STARTED Move enablement into yarn                                           |         |       |  4:39 |   8.6 |
+| STARTED Move enablement into yarn                                           |         |       |  4:50 |   8.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -898,6 +898,7 @@ It seems we have a lot of tabs on Visual Studio solutions, projects
 etc. Untabify the templates and regenerate all.
 
 *** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-09-16 Sat 20:50]--[2017-09-16 Sat 21:01] =>  0:11
     CLOCK: [2017-09-16 Sat 17:43]--[2017-09-16 Sat 18:17] =>  0:34
     CLOCK: [2017-09-16 Sat 15:42]--[2017-09-16 Sat 16:53] =>  1:11
     CLOCK: [2017-09-16 Sat 15:25]--[2017-09-16 Sat 15:32] =>  0:07
@@ -948,6 +949,8 @@ To do:
 - kernel registrar type index map - done.
 - assistant to latch on to element; use new element properties where
   possible.
+- facet properties must be handled, and assistant must use the yarn
+  version.
 - c# formatter registrar type index map - done.
 - bug in template instantiating: artefact expansions do not seem to
   take kernel into account - done.
