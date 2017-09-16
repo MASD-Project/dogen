@@ -23,5 +23,27 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": false
+  },
+  {
+    "name": {
+      "simple": "formatting_style"
+    },
+    "archetype_location": {
+      "family": "quilt"
+    },
+    "value_type": "text",
+    "template_kind": "archetype_template",
+    "scope": "any"
+  },
+  {
+    "name": {
+      "simple": "formatting_input"
+    },
+    "archetype_location": {
+      "family": "quilt"
+    },
+    "value_type": "text",
+    "template_kind": "archetype_template",
+    "scope": "any"
   }
 ]

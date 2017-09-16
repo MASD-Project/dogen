@@ -53,30 +53,6 @@
   },
   {
     "name": {
-      "simple": "formatting_style"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp"
-    },
-    "value_type": "text",
-    "template_kind": "archetype_template",
-    "scope": "any"
-  },
-  {
-    "name": {
-      "simple": "formatting_input"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp"
-    },
-    "value_type": "text",
-    "template_kind": "archetype_template",
-    "scope": "any"
-  },
-  {
-    "name": {
       "simple": "profile",
       "qualified": "quilt.cpp.profile"
     },
