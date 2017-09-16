@@ -26,7 +26,6 @@
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
 #include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
 #include "dogen/quilt.cpp/types/formattables/dependencies_builder.hpp"
 
 namespace {
@@ -56,16 +55,10 @@ namespace formattables {
 
 dependencies_builder::dependencies_builder(
     const directive_group_repository& dgrp,
-    const std::unordered_map<std::string, formattable>& formattables,
     const std::unordered_set<yarn::meta_model::element_archetype>&
-#ifdef USE_NEW_ENABLEMENT
-    enabled_archetype_for_element
-#endif
-    ) : repository_(dgrp), formattables_(formattables)
-#ifdef USE_NEW_ENABLEMENT
-      , enabled_archetype_for_element_(enabled_archetype_for_element)
-#endif
-{}
+    enabled_archetype_for_element)
+    : repository_(dgrp),
+      enabled_archetype_for_element_(enabled_archetype_for_element) {}
 
 boost::optional<directive_group>
 dependencies_builder::get_directive_group(
@@ -84,36 +77,10 @@ dependencies_builder::get_directive_group(
 
 bool dependencies_builder::is_enabled(const yarn::meta_model::name& n,
     const std::string& archetype) const {
-#ifdef USE_NEW_ENABLEMENT
     yarn::meta_model::element_archetype ea(n.id(), archetype);
     const auto i(enabled_archetype_for_element_.find(ea));
     const bool is_disabled(i == enabled_archetype_for_element_.end());
     return !is_disabled;
-#else
-    const auto i(formattables_.find(n.id()));
-    if (i == formattables_.end()) {
-        BOOST_LOG_SEV(lg, error) << name_not_found << n.id();
-        BOOST_THROW_EXCEPTION(building_error(name_not_found + n.id()));
-    }
-
-    const auto& formattable(i->second);
-    const auto& eprops(formattable.element_properties());
-    const auto& art_props(eprops.artefact_properties());
-    const auto j(art_props.find(archetype));
-    if (j == art_props.end()) {
-        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype
-                                 << " element id: " << n.id();
-        BOOST_THROW_EXCEPTION(
-            building_error(archetype_not_found + archetype));
-    }
-
-    const bool r(j->second.enabled());
-    if (!r) {
-        BOOST_LOG_SEV(lg, trace) << "Archetype disabled. Archetype: "
-                                 << archetype << " on type: " << n.id() << "'";
-    }
-    return r;
-#endif
 }
 
 void dependencies_builder::
@@ -136,23 +103,11 @@ add(const std::list<std::string>& inclusion_directives) {
 void dependencies_builder::
 add(const yarn::meta_model::name& n, const std::string& archetype) {
     BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
-    canonical_archetype_resolver res(formattables_);
 
-#ifdef USE_NEW_ENABLEMENT
     if (!is_enabled(n, archetype)) {
         BOOST_LOG_SEV(lg, trace) << "Archetype not enabled: " << archetype;
         return;
     }
-
-#else
-    const auto resolved_arch(res.resolve(n.id(), archetype));
-
-    if (!is_enabled(n, resolved_arch)) {
-        BOOST_LOG_SEV(lg, trace) << "Resolved archetype not enabled: "
-                                 << resolved_arch;
-        return;
-    }
-#endif
 
     const auto dg(get_directive_group(n, archetype));
     if (dg) {

@@ -18,8 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#define USE_NEW_ENABLEMENT
-
 #include <sstream>
 #include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
@@ -262,16 +260,11 @@ assistant::make_namespaces(const yarn::meta_model::name& n) const {
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-#ifdef USE_NEW_ENABLEMENT
     yarn::meta_model::element_archetype ea(element_id_, archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
     return !is_disabled;
-#else
-    const auto& art_props(obtain_artefact_properties(element_id_, archetype));
-    return art_props.enabled();
-#endif
 }
 
 bool assistant::is_facet_enabled(const std::string& facet) const {
@@ -657,18 +650,12 @@ names_with_enabled_archetype(const std::string& archetype,
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
 
-#ifdef USE_NEW_ENABLEMENT
         yarn::meta_model::element_archetype ea(id, archetype);
         const auto& eafe(context_.enabled_archetype_for_element());
         const auto i(eafe.find(ea));
         const bool is_disabled(i == eafe.end());
         if (is_disabled)
             continue;
-#else
-        const auto& art_props(obtain_artefact_properties(id, archetype));
-        if (!art_props.enabled())
-            continue;
-#endif
 
         r.push_back(n);
     }

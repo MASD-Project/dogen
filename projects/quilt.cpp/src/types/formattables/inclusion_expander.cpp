@@ -249,7 +249,7 @@ void inclusion_expander::expand(const annotations::type_repository& atrp,
 
     auto& fbls(fm.formattables());
     const auto dgrp(create_directive_groups(atrp, frp, l, fbls));
-    dependencies_builder_factory df(dgrp, fbls, enabled_archetype_for_element);
+    dependencies_builder_factory df(dgrp, enabled_archetype_for_element);
     populate_inclusion_dependencies(frp, df, fbls);
 }
 

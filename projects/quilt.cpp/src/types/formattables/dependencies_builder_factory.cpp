@@ -27,14 +27,13 @@ namespace formattables {
 
 dependencies_builder_factory::dependencies_builder_factory(
     const directive_group_repository& dgrp,
-    const std::unordered_map<std::string, formattable>& formattables,
     const std::unordered_set<yarn::meta_model::element_archetype>&
     enabled_archetype_for_element)
-    : inclusion_directives_(dgrp), formattables_(formattables),
+    : inclusion_directives_(dgrp),
       enabled_archetype_for_element_(enabled_archetype_for_element) {}
 
 dependencies_builder dependencies_builder_factory::make() const {
-    return dependencies_builder(inclusion_directives_, formattables_,
+    return dependencies_builder(inclusion_directives_,
         enabled_archetype_for_element_);
 }
 

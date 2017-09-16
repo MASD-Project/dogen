@@ -55,7 +55,6 @@ class dependencies_builder_factory final {
 public:
     dependencies_builder_factory(
         const directive_group_repository& dgrp,
-        const std::unordered_map<std::string, formattable>& formattables,
         const std::unordered_set<yarn::meta_model::element_archetype>&
         enabled_archetype_for_element);
 
@@ -67,8 +66,7 @@ public:
 
 private:
     const directive_group_repository& inclusion_directives_;
-    const std::unordered_map<std::string, formattable>& formattables_;
-    const std::unordered_set<yarn::meta_model::element_archetype>&
+        const std::unordered_set<yarn::meta_model::element_archetype>&
     enabled_archetype_for_element_;
 };
 
