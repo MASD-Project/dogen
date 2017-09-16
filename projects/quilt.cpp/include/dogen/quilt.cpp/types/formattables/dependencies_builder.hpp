@@ -37,7 +37,7 @@
 #include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
-// #define USE_NEW_ENABLEMENT
+#define USE_NEW_ENABLEMENT
 
 namespace dogen {
 namespace quilt {

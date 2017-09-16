@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-// #define USE_NEW_ENABLEMENT
+#define USE_NEW_ENABLEMENT
 
 #include <iterator>
 #include <boost/throw_exception.hpp>
