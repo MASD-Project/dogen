@@ -3023,6 +3023,9 @@ Links:
 - [[https://github.com/Martinsos/edlib][edlib]]: Lightweight, super fast C/C++ (& Python) library for sequence
   alignment using edit (Levenshtein) distance.
 - [[https://github.com/cschanaj/levenshtein-distance][levenshtein-distance]]: C++ Functions for Levenshtein Distance
+- https://gist.github.com/TheRayTracer/2644387: A simple C++
+  implementation of the Levenshtein distance algorithm to measure the
+  amount of difference between two strings.
   Computation with Generic Types
 - [[https://github.com/schuyler/levenshtein][levenshtein]]: Fast string edit distance computation, using the
   Damerau-Levenshtein algorithm.
@@ -9242,6 +9245,8 @@ several implementations available.
 We could compute the Levenshtein distance as part of resolution, in
 cases where we fail to resolve - e.g. second pass after all has
 failed.
+
+We should also do this for command line options.
 
 *** Consider using a graph in yarn for indexing and other tasks        :story:
 
