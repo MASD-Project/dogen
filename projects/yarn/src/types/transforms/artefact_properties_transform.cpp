@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <functional>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
@@ -30,8 +29,7 @@
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
-#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
@@ -91,17 +89,14 @@ update_element(const context& ctx, meta_model::element& e) {
 }
 
 void artefact_properties_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_transform_probing stp(lg, "artefact properties transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+        transform_id, m.name().id(), ctx.prober(), m);
 
-    using namespace std::placeholders;
-    const auto f(artefact_properties_transform::update_element);
-    const auto v(std::bind(f, ctx, _1));
-    const bool include_injected_elements(true);
-    meta_model::elements_traversal(em, v, include_injected_elements);
+    for(auto& ptr : m.elements())
+        update_element(ctx, *ptr);
 
-    stp.end_transform(em);
+    stp.end_transform(m);
 }
 
 } } }

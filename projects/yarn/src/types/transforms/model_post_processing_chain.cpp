@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/formatting_transform.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
@@ -45,7 +46,14 @@ transform(const context& ctx, meta_model::model& m) {
         transform_id, m.name().id(), ctx.prober(), m);
 
     /*
-     * Enablement transform must be applied after the external
+     * Expand the artefact properties against the suitable archetype
+     * locations. Must be done before enablement transform and any
+     * other transform that populates these properties.
+     */
+    artefact_properties_transform::transform(ctx, m);
+
+    /*
+     * Enablement transform must be applied after the dynamic
      * transform chain as it needs to compute enablement for any
      * kernel specific types that might have been added.
      */

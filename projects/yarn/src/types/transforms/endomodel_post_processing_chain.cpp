@@ -35,7 +35,6 @@
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
-#include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 
@@ -137,13 +136,6 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * relying on these expansions. These are kernel specific.
      */
     dynamic_transforms_chain::transform(ctx, em);
-
-    /*
-     * Expand the artefact properties against the suitable archetype
-     * locations. Must be done before enablement transform and any
-     * other transform that populates these properties.
-     */
-    artefact_properties_transform::transform(ctx, em);
 
     /*
      * Ensure the model is valid.

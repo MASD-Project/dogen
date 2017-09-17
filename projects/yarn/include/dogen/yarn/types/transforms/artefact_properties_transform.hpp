@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
@@ -42,7 +42,7 @@ private:
     static void update_element(const context& ctx, meta_model::element& e);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& em);
 };
 
 } } }
