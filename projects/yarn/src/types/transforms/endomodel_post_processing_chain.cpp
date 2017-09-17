@@ -35,7 +35,6 @@
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
-#include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
@@ -145,13 +144,6 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * other transform that populates these properties.
      */
     artefact_properties_transform::transform(ctx, em);
-
-    /*
-     * Enablement transform must be applied after the external
-     * transform chain as it needs to compute enablement for any
-     * kernel specific types that might have been added.
-     */
-    enablement_transform::transform(ctx, em);
 
     /*
      * Ensure the model is valid.

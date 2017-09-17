@@ -914,6 +914,7 @@ Also, we need to state that "debug" pertains to debug logging, not a
 debug build. Add labels, e.g.: =log:debug=, etc.
 
 *** STARTED Split out transforms from post-processing chain           :story:
+    CLOCK: [2017-09-17 Sun 16:36]--[2017-09-17 Sun 16:41] =>  0:05
     CLOCK: [2017-09-17 Sun 16:23]--[2017-09-17 Sun 16:35] =>  0:12
     CLOCK: [2017-09-17 Sun 15:20]--[2017-09-17 Sun 15:39] =>  0:19
     CLOCK: [2017-09-17 Sun 15:00]--[2017-09-17 Sun 15:19] =>  0:19

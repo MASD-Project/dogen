@@ -18633,8 +18633,8 @@ space.#</dia:string>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-171,106"/>
-        <dia:point val="-171,103"/>
-        <dia:point val="-195.28,103"/>
+        <dia:point val="-171,101"/>
+        <dia:point val="-195.28,101"/>
         <dia:point val="-195.28,96.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -32762,13 +32762,13 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="-184,93"/>
+        <dia:point val="-83,128"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-184.05,92.95;-166.895,96.65"/>
+        <dia:rectangle val="-83.05,127.95;-65.895,131.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-184,93"/>
+        <dia:point val="-83,128"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -32975,19 +32975,19 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-159.97,106"/>
+        <dia:point val="-44.7775,119.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-175.523,96.55;-159.22,106.8"/>
+        <dia:rectangle val="-74.5225,118.85;-44.0275,128.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-159.97,106"/>
-        <dia:point val="-159.97,101"/>
-        <dia:point val="-175.472,101"/>
-        <dia:point val="-175.472,96.6"/>
+        <dia:point val="-44.7775,119.6"/>
+        <dia:point val="-44.7775,124"/>
+        <dia:point val="-74.4725,124"/>
+        <dia:point val="-74.4725,128"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -33004,20 +33004,20 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O104" connection="1"/>
-        <dia:connection handle="1" to="O242" connection="6"/>
+        <dia:connection handle="0" to="O310" connection="6"/>
+        <dia:connection handle="1" to="O242" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O87"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="-204,79"/>
+        <dia:point val="-102,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-204.05,78.95;-186.895,85.85"/>
+        <dia:rectangle val="-102.05,140.95;-84.895,147.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-204,79"/>
+        <dia:point val="-102,141"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -33297,19 +33297,19 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-184,93"/>
+        <dia:point val="-83,131.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-195.523,85.75;-183.25,93.8"/>
+        <dia:rectangle val="-93.5225,130.85;-82.25,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-184,93"/>
-        <dia:point val="-184,89.0595"/>
-        <dia:point val="-195.472,89.0595"/>
-        <dia:point val="-195.472,85.8"/>
+        <dia:point val="-83,131.6"/>
+        <dia:point val="-83,137"/>
+        <dia:point val="-93.4725,137"/>
+        <dia:point val="-93.4725,141"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -33326,20 +33326,20 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O242" connection="0"/>
-        <dia:connection handle="1" to="O244" connection="6"/>
+        <dia:connection handle="0" to="O242" connection="5"/>
+        <dia:connection handle="1" to="O244" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O87"/>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O246">
       <dia:attribute name="obj_pos">
-        <dia:point val="-182,79"/>
+        <dia:point val="-80,141"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-182.05,78.95;-164.895,85.05"/>
+        <dia:rectangle val="-80.05,140.95;-62.895,147.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-182,79"/>
+        <dia:point val="-80,141"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -33596,19 +33596,19 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-166.945,93"/>
+        <dia:point val="-65.945,131.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.523,84.95;-166.195,93.8"/>
+        <dia:rectangle val="-71.5225,130.85;-65.195,141.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-166.945,93"/>
-        <dia:point val="-166.945,89.0595"/>
-        <dia:point val="-173.472,89.0595"/>
-        <dia:point val="-173.472,85"/>
+        <dia:point val="-65.945,131.6"/>
+        <dia:point val="-65.945,137"/>
+        <dia:point val="-71.4725,137"/>
+        <dia:point val="-71.4725,141"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -33625,8 +33625,8 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O242" connection="2"/>
-        <dia:connection handle="1" to="O246" connection="6"/>
+        <dia:connection handle="0" to="O242" connection="7"/>
+        <dia:connection handle="1" to="O246" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O87"/>
     </dia:object>

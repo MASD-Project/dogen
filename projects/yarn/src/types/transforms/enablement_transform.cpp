@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <functional>
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/throw_exception.hpp>
@@ -41,9 +40,8 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/transforms/global_enablement_configuration_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
@@ -168,7 +166,7 @@ enablement_transform::obtain_global_configurations(
 void enablement_transform::update_facet_enablement(
     const std::list<annotations::archetype_location>& als,
     const global_enablement_configurations_type& gcs,
-    meta_model::endomodel& im) {
+    meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating facet enablement.";
 
     /*
@@ -201,11 +199,11 @@ void enablement_transform::update_facet_enablement(
 
         const auto& fct(i->second);
         const auto& gc(pair.second);
-        im.facet_properties()[fct].enabled(gc.facet_enabled());
+        m.facet_properties()[fct].enabled(gc.facet_enabled());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."
-                             << "Result: " << im.facet_properties();
+                             << "Result: " << m.facet_properties();
 }
 
 enablement_transform::local_type_group_type enablement_transform::
@@ -551,12 +549,12 @@ void enablement_transform::compute_enablement_for_element(
 }
 
 void enablement_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_transform_probing stp(lg, "enablement transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& atrp(ctx.type_repository());
-    const auto& ra(em.root_module()->annotation());
+    const auto& ra(m.root_module()->annotation());
     const auto& als(ctx.archetype_location_repository().archetype_locations());
 
     /*
@@ -571,7 +569,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * and update the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gtg, ra));
-    update_facet_enablement(als, gcs, em);
+    update_facet_enablement(als, gcs, m);
 
     /*
      * Create the fields for the local types. These are generated
@@ -588,16 +586,11 @@ transform(const context& ctx, meta_model::endomodel& em) {
     const auto& albmn(alrp.archetype_locations_by_meta_name());
     const auto ltgmn(bucket_local_type_group_by_meta_name(ltg, albmn));
     std::unordered_set<meta_model::element_archetype> eafe;
+    for(auto& ptr : m.elements())
+        compute_enablement_for_element(gcs, ltgmn, albmn, eafe, *ptr);
 
-    using namespace std::placeholders;
-    const auto f(enablement_transform::compute_enablement_for_element);
-    auto v(std::bind(f, std::ref(gcs), std::ref(ltgmn),
-            std::ref(albmn), std::ref(eafe), _1));
-    const bool include_injected_elements(true);
-    meta_model::elements_traversal(em, v, include_injected_elements);
-    em.enabled_archetype_for_element(eafe);
-
-    stp.end_transform(em);
+    m.enabled_archetype_for_element(eafe);
+    stp.end_transform(m);
 }
 
 } } }

@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/formatting_transform.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
 
@@ -42,6 +43,13 @@ void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_chain_probing stp(lg, "model post-processing chain",
         transform_id, m.name().id(), ctx.prober(), m);
+
+    /*
+     * Enablement transform must be applied after the external
+     * transform chain as it needs to compute enablement for any
+     * kernel specific types that might have been added.
+     */
+    enablement_transform::transform(ctx, m);
 
     /*
      * The formatting transform has no dependencies in the
