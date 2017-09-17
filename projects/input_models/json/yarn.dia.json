@@ -14,7 +14,7 @@
       "yarn.dia.comment": "true",
       "yarn.model_modules": "yarn",
       "yarn.external_modules": "dogen",
-      "yarn.reference": "options.dia",
+      "yarn.reference": "formatters.dia",
       "yarn.input_language": "cpp",
       "quilt.cpp.enabled": "true",
       "quilt.cpp.msbuild.enabled": "false",
@@ -90,6 +90,51 @@
           },
           "unparsed_type": "std::list<std::pair<std::string, meta_model::name>>"
         }
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel_post_processing_validator",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel_pre_processing_validator",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "housekeeper",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
       ]
     },
     {
@@ -468,21 +513,6 @@
     },
     {
       "name": {
-        "simple": "model_sorter",
-        "internal_modules": "helpers"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
         "simple": "name_builder",
         "internal_modules": "helpers"
       },
@@ -649,36 +679,6 @@
     },
     {
       "name": {
-        "simple": "post_processing_validator",
-        "internal_modules": "helpers"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "pre_processing_validator",
-        "internal_modules": "helpers"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
         "simple": "pretty_printer",
         "internal_modules": "helpers"
       },
@@ -724,6 +724,21 @@
     },
     {
       "name": {
+        "simple": "scoped_transform_probing",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
         "simple": "string_processor",
         "internal_modules": "helpers"
       },
@@ -751,7 +766,13 @@
       "attributes": [
         {
           "name": {
-            "simple": "id"
+            "simple": "transform_id"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "model_id"
           },
           "unparsed_type": "std::string"
         },
@@ -1200,20 +1221,6 @@
         },
         {
           "name": {
-            "simple": "injected_elements"
-          },
-          "unparsed_type": "std::list<boost::shared_ptr<element>>",
-          "documentation": "Elements injected externally.\n"
-        },
-        {
-          "name": {
-            "simple": "has_generatable_types"
-          },
-          "unparsed_type": "bool",
-          "documentation": "If true the endomodel has at least one generable type, false otherwise.\n"
-        },
-        {
-          "name": {
             "simple": "root_module"
           },
           "unparsed_type": "boost::shared_ptr<module>"
@@ -1237,18 +1244,6 @@
             "simple": "orm_properties"
           },
           "unparsed_type": "boost::optional<orm_model_properties>"
-        },
-        {
-          "name": {
-            "simple": "facet_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, facet_properties>"
-        },
-        {
-          "name": {
-            "simple": "enabled_archetype_for_element"
-          },
-          "unparsed_type": "std::unordered_set<element_archetype>"
         }
       ]
     },
@@ -1512,6 +1507,20 @@
         "MetaNameable"
       ],
       "attributes": [
+        {
+          "name": {
+            "simple": "references"
+          },
+          "unparsed_type": "std::unordered_map<name,origin_types>",
+          "documentation": "All other models that this model depends on, mapped to their origin.\n"
+        },
+        {
+          "name": {
+            "simple": "leaves"
+          },
+          "unparsed_type": "std::unordered_set<name>",
+          "documentation": "All leaf types in this endomodel.\n\nLeaves are types concrete types which have a parent.\n"
+        },
         {
           "name": {
             "simple": "elements"
@@ -2237,47 +2246,6 @@
     },
     {
       "name": {
-        "simple": "code_generation_chain",
-        "internal_modules": "transforms"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "code_generation_output",
-        "internal_modules": "transforms"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "artefacts"
-          },
-          "unparsed_type": "std::list<formatters::artefact>"
-        },
-        {
-          "name": {
-            "simple": "managed_directories"
-          },
-          "unparsed_type": "std::list<boost::filesystem::path>"
-        }
-      ]
-    },
-    {
-      "name": {
         "simple": "configuration",
         "internal_modules": "transforms"
       },
@@ -2342,7 +2310,7 @@
           "name": {
             "simple": "options"
           },
-          "unparsed_type": "options::knitting_options"
+          "unparsed_type": "options"
         },
         {
           "name": {
@@ -2459,7 +2427,52 @@
     },
     {
       "name": {
+        "simple": "endomodel_assembly_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
         "simple": "endomodel_generation_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel_post_processing_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel_pre_processing_chain",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -2565,6 +2578,47 @@
     {
       "name": {
         "simple": "exomodel_transform_registrar",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatting_configuration",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "style"
+          },
+          "unparsed_type": "meta_model::formatting_styles"
+        },
+        {
+          "name": {
+            "simple": "input"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatting_transform",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -2816,7 +2870,37 @@
     },
     {
       "name": {
-        "simple": "model_assembly_chain",
+        "simple": "model_generation_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_post_processing_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_to_text_chain",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -2902,6 +2986,140 @@
     },
     {
       "name": {
+        "simple": "options",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "log_file"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the log file.\n"
+        },
+        {
+          "name": {
+            "simple": "log_level"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "What level of logging to log at.\n"
+        },
+        {
+          "name": {
+            "simple": "target"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the model to generate.\n"
+        },
+        {
+          "name": {
+            "simple": "delete_extra_files"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Delete any extra files found in managed directories.\n"
+        },
+        {
+          "name": {
+            "simple": "force_write"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Always generate files even if there are no differences with existing file.\n"
+        },
+        {
+          "name": {
+            "simple": "ignore_patterns"
+          },
+          "unparsed_type": "std::vector<std::string>",
+          "documentation": "List of regular expressions to filter out files to ignore.\n"
+        },
+        {
+          "name": {
+            "simple": "output_directory_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the directory in which to place the generated code.\n"
+        },
+        {
+          "name": {
+            "simple": "cpp_headers_output_directory_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "If set, all c++ include files will be placed at this location.\n"
+        },
+        {
+          "name": {
+            "simple": "compatibility_mode"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_stats"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Enable probing for statistics around transforms.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_stats_disable_guids"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Disable guids in probe stats, to make comparisons easier.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_stats_org_mode"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Output the stats as an org-mode document.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_all"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Enable all probing.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_directory"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the directory in which to place probe information.\n"
+        },
+        {
+          "name": {
+            "simple": "probe_use_short_names"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Use short directory and file names. Useful mainly on windows due to path\nsize limitations.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "options_validator",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
         "simple": "origin_transform",
         "internal_modules": "transforms"
       },
@@ -2933,36 +3151,6 @@
     {
       "name": {
         "simple": "parsing_transform",
-        "internal_modules": "transforms"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "post_processing_chain",
-        "internal_modules": "transforms"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "pre_processing_chain",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -3022,6 +3210,21 @@
     },
     {
       "name": {
+        "simple": "sorting_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
         "simple": "stereotypes_transform",
         "internal_modules": "transforms"
       },
@@ -3033,6 +3236,32 @@
       },
       "stereotypes": [
         "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "textual_model",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "artefacts"
+          },
+          "unparsed_type": "std::list<formatters::artefact>"
+        },
+        {
+          "name": {
+            "simple": "managed_directories"
+          },
+          "unparsed_type": "std::list<boost::filesystem::path>"
+        }
       ]
     },
     {
@@ -3955,6 +4184,19 @@
         "internal_modules": "meta_model"
       },
       "documentation": "An error occurred whilst applying a transformation.\n"
+    },
+    {
+      "name": {
+        "simple": "validation_error",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred when validating options.\n"
     }
   ]
 }
