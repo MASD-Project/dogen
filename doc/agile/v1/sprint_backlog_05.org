@@ -899,6 +899,7 @@ It seems we have a lot of tabs on Visual Studio solutions, projects
 etc. Untabify the templates and regenerate all.
 
 *** STARTED Split out transforms from post-processing chain           :story:
+    CLOCK: [2017-09-17 Sun 15:20]--[2017-09-17 Sun 15:39] =>  0:19
     CLOCK: [2017-09-17 Sun 15:00]--[2017-09-17 Sun 15:19] =>  0:19
     CLOCK: [2017-09-17 Sun 14:42]--[2017-09-17 Sun 14:59] =>  0:17
     CLOCK: [2017-09-17 Sun 14:31]--[2017-09-17 Sun 14:41] =>  0:10
@@ -929,6 +930,16 @@ Tasks:
   transform and the model post-processing pipeline.
 - delete all the endomodel members that are no longer required; update
   adapter. Update yarn diagram.
+
+*** Output stats in org-mode format                                   :story:
+
+It would be nice to be able to collapse the stats sometimes, so one
+can inspect the transform graph. However, we do not need this all the
+time - the flat TXT format is useful too. We need a probing option to
+output stats in org-mode format.
+
+Also, we need to state that "debug" pertains to debug logging, not a
+debug build. Add labels, e.g.: =log:debug=, etc.
 
 *** STARTED Move enablement into yarn                                 :story:
     CLOCK: [2017-09-16 Sat 20:50]--[2017-09-16 Sat 21:01] =>  0:11

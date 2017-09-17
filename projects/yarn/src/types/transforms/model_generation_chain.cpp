@@ -24,6 +24,7 @@
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
+#include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -44,14 +45,21 @@ model_generation_chain::transform(const context& ctx) {
         transform_id, ctx.prober());
 
     /*
-     * Generate the endomodels.
+     * First we generate the endomodels.
      */
     const auto endomodels(endomodel_generation_chain::transform(ctx));
 
     /*
-     * Convert them to the final representation.
+     * We then we convert them to their final representation.
      */
-    const auto r(endomodel_to_model_transform::transform(ctx, endomodels));
+    auto r(endomodel_to_model_transform::transform(ctx, endomodels));
+
+    /*
+     * Finally, we apply all of the post-processing transforms to the
+     * model.
+     */
+    for (auto& m : r)
+        model_post_processing_chain::transform(ctx, m);
 
     stp.end_chain(r);
     return r;

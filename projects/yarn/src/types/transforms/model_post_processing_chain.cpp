@@ -18,14 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "yarn.transforms.model_post_processing_chain");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool model_post_processing_chain::operator==(const model_post_processing_chain& /*rhs*/) const {
-    return true;
+void model_post_processing_chain::
+transform(const context& ctx, meta_model::model& m) {
+    helpers::scoped_chain_probing stp(lg, "model post-processing chain",
+        transform_id, m.name().id(), ctx.prober(), m);
+
+    stp.end_chain(m);
 }
 
 } } }
