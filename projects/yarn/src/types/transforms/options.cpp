@@ -30,6 +30,7 @@ options::options()
       compatibility_mode_(static_cast<bool>(0)),
       probe_stats_(static_cast<bool>(0)),
       probe_stats_disable_guids_(static_cast<bool>(0)),
+      probe_stats_org_mode_(static_cast<bool>(0)),
       probe_all_(static_cast<bool>(0)),
       probe_use_short_names_(static_cast<bool>(0)) { }
 
@@ -45,6 +46,7 @@ options::options(options&& rhs)
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
       probe_stats_(std::move(rhs.probe_stats_)),
       probe_stats_disable_guids_(std::move(rhs.probe_stats_disable_guids_)),
+      probe_stats_org_mode_(std::move(rhs.probe_stats_org_mode_)),
       probe_all_(std::move(rhs.probe_all_)),
       probe_directory_(std::move(rhs.probe_directory_)),
       probe_use_short_names_(std::move(rhs.probe_use_short_names_)) { }
@@ -61,6 +63,7 @@ options::options(
     const bool compatibility_mode,
     const bool probe_stats,
     const bool probe_stats_disable_guids,
+    const bool probe_stats_org_mode,
     const bool probe_all,
     const boost::filesystem::path& probe_directory,
     const bool probe_use_short_names)
@@ -75,6 +78,7 @@ options::options(
       compatibility_mode_(compatibility_mode),
       probe_stats_(probe_stats),
       probe_stats_disable_guids_(probe_stats_disable_guids),
+      probe_stats_org_mode_(probe_stats_org_mode),
       probe_all_(probe_all),
       probe_directory_(probe_directory),
       probe_use_short_names_(probe_use_short_names) { }
@@ -92,6 +96,7 @@ void options::swap(options& other) noexcept {
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(probe_stats_, other.probe_stats_);
     swap(probe_stats_disable_guids_, other.probe_stats_disable_guids_);
+    swap(probe_stats_org_mode_, other.probe_stats_org_mode_);
     swap(probe_all_, other.probe_all_);
     swap(probe_directory_, other.probe_directory_);
     swap(probe_use_short_names_, other.probe_use_short_names_);
@@ -109,6 +114,7 @@ bool options::operator==(const options& rhs) const {
         compatibility_mode_ == rhs.compatibility_mode_ &&
         probe_stats_ == rhs.probe_stats_ &&
         probe_stats_disable_guids_ == rhs.probe_stats_disable_guids_ &&
+        probe_stats_org_mode_ == rhs.probe_stats_org_mode_ &&
         probe_all_ == rhs.probe_all_ &&
         probe_directory_ == rhs.probe_directory_ &&
         probe_use_short_names_ == rhs.probe_use_short_names_;
@@ -254,6 +260,14 @@ bool options::probe_stats_disable_guids() const {
 
 void options::probe_stats_disable_guids(const bool v) {
     probe_stats_disable_guids_ = v;
+}
+
+bool options::probe_stats_org_mode() const {
+    return probe_stats_org_mode_;
+}
+
+void options::probe_stats_org_mode(const bool v) {
+    probe_stats_org_mode_ = v;
 }
 
 bool options::probe_all() const {

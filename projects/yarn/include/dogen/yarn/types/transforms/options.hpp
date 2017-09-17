@@ -59,6 +59,7 @@ public:
         const bool compatibility_mode,
         const bool probe_stats,
         const bool probe_stats_disable_guids,
+        const bool probe_stats_org_mode,
         const bool probe_all,
         const boost::filesystem::path& probe_directory,
         const bool probe_use_short_names);
@@ -175,6 +176,14 @@ public:
     /**@}*/
 
     /**
+     * @brief Output the stats as an org-mode document.
+     */
+    /**@{*/
+    bool probe_stats_org_mode() const;
+    void probe_stats_org_mode(const bool v);
+    /**@}*/
+
+    /**
      * @brief Enable all probing.
      */
     /**@{*/
@@ -223,6 +232,7 @@ private:
     bool compatibility_mode_;
     bool probe_stats_;
     bool probe_stats_disable_guids_;
+    bool probe_stats_org_mode_;
     bool probe_all_;
     boost::filesystem::path probe_directory_;
     bool probe_use_short_names_;

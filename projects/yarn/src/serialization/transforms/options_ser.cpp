@@ -73,6 +73,7 @@ void save(Archive& ar,
     ar << make_nvp("compatibility_mode", v.compatibility_mode_);
     ar << make_nvp("probe_stats", v.probe_stats_);
     ar << make_nvp("probe_stats_disable_guids", v.probe_stats_disable_guids_);
+    ar << make_nvp("probe_stats_org_mode", v.probe_stats_org_mode_);
     ar << make_nvp("probe_all", v.probe_all_);
     ar << make_nvp("probe_directory", v.probe_directory_);
     ar << make_nvp("probe_use_short_names", v.probe_use_short_names_);
@@ -93,6 +94,7 @@ void load(Archive& ar,
     ar >> make_nvp("compatibility_mode", v.compatibility_mode_);
     ar >> make_nvp("probe_stats", v.probe_stats_);
     ar >> make_nvp("probe_stats_disable_guids", v.probe_stats_disable_guids_);
+    ar >> make_nvp("probe_stats_org_mode", v.probe_stats_org_mode_);
     ar >> make_nvp("probe_all", v.probe_all_);
     ar >> make_nvp("probe_directory", v.probe_directory_);
     ar >> make_nvp("probe_use_short_names", v.probe_use_short_names_);

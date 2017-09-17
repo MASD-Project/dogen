@@ -69,6 +69,7 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"probe_stats\": " << v.probe_stats() << ", "
       << "\"probe_stats_disable_guids\": " << v.probe_stats_disable_guids() << ", "
+      << "\"probe_stats_org_mode\": " << v.probe_stats_org_mode() << ", "
       << "\"probe_all\": " << v.probe_all() << ", "
       << "\"probe_directory\": " << "\"" << v.probe_directory().generic_string() << "\"" << ", "
       << "\"probe_use_short_names\": " << v.probe_use_short_names()

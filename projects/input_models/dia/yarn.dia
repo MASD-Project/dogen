@@ -39528,7 +39528,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-193,54"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-193.05,53.95;-169.735,67.25"/>
+        <dia:rectangle val="-193.05,53.95;-169.735,68.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-193,54"/>
@@ -39537,7 +39537,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000003"/>
+        <dia:real val="14.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#options#</dia:string>
@@ -39872,6 +39872,29 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Disable guids in probe stats, to make comparisons easier.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#probe_stats_org_mode#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Output the stats as an org-mode document.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
