@@ -129,11 +129,11 @@ const decomposition_result& decomposer::result() const {
 }
 
 decomposition_result
-decomposer::decompose(const meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
+decomposer::decompose(const meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << em.name().id();
 
     decomposer dc;
-    meta_model::elements_traversal(im, dc, true/*include_injected_elements*/);
+    meta_model::elements_traversal(em, dc);
 
     BOOST_LOG_SEV(lg, debug) << "Finished decomposing model. Result: "
                              << dc.result();;

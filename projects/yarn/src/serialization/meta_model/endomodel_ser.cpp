@@ -37,7 +37,6 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/endomodel_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
@@ -68,7 +67,6 @@ void save(Archive& ar,
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("visitors", v.visitors_);
-    ar << make_nvp("injected_elements", v.injected_elements_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("input_language", v.input_language_);
@@ -93,7 +91,6 @@ void load(Archive& ar,
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("visitors", v.visitors_);
-    ar >> make_nvp("injected_elements", v.injected_elements_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("input_language", v.input_language_);

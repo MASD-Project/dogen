@@ -85,7 +85,7 @@ private:
 
 public:
     static decomposition_result
-    decompose(const meta_model::endomodel& im);
+    decompose(const meta_model::endomodel& em);
 
 private:
     decomposition_result result_;

@@ -131,7 +131,6 @@ compute_total_size(const meta_model::endomodel& em) {
     r += em.objects().size();
     r += em.exceptions().size();
     r += em.visitors().size();
-    r += em.injected_elements().size();
     return r;
 }
 
@@ -163,11 +162,6 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
 
     model_populator mp(r);
     meta_model::shared_elements_traversal(em, mp);
-
-    // FIXME: not using:
-    // shared_elements_traversal(im, mp, true/*include_injected_elements*/);
-    // as its causing issues at present.
-    mp.add(em.injected_elements());
 
     return r;
 }

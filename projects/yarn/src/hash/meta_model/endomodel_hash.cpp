@@ -22,7 +22,6 @@
 #include "dogen/yarn/hash/meta_model/module_hash.hpp"
 #include "dogen/yarn/hash/meta_model/object_hash.hpp"
 #include "dogen/yarn/hash/meta_model/builtin_hash.hpp"
-#include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/visitor_hash.hpp"
 #include "dogen/yarn/hash/meta_model/endomodel_hash.hpp"
 #include "dogen/yarn/hash/meta_model/exception_hash.hpp"
@@ -178,20 +177,6 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_element(const boost::shared_ptr<dogen::yarn::meta_model::element>& v) {
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
-}
-
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_meta_model_element(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_element(i));
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_list_dogen_yarn_meta_model_languages(const std::list<dogen::yarn::meta_model::languages>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -232,7 +217,6 @@ std::size_t endomodel_hasher::hash(const endomodel& v) {
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object(v.objects()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_exception(v.exceptions()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_visitor(v.visitors()));
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_meta_model_element(v.injected_elements()));
     combine(seed, v.has_generatable_types());
     combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_module(v.root_module()));
     combine(seed, v.input_language());

@@ -46,7 +46,7 @@ namespace meta_model {
 /**@{*/
 template<typename TraversalVisitor>
 inline void elements_traversal(const meta_model::endomodel& m,
-    const TraversalVisitor& v, const bool include_injected_elements = false) {
+    const TraversalVisitor& v) {
     for (const auto& pair : m.modules())
         v(*pair.second);
 
@@ -70,16 +70,11 @@ inline void elements_traversal(const meta_model::endomodel& m,
 
     for (const auto& pair : m.visitors())
         v(*pair.second);
-
-    if (include_injected_elements) {
-        for (const auto ptr : m.injected_elements())
-            v(*ptr);
-    }
 }
 
 template<typename TraversalVisitor>
 inline void elements_traversal(const meta_model::endomodel& m,
-    TraversalVisitor& v, const bool include_injected_elements = false) {
+    TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(*pair.second);
 
@@ -103,16 +98,11 @@ inline void elements_traversal(const meta_model::endomodel& m,
 
     for (auto& pair : m.visitors())
         v(*pair.second);
-
-    if (include_injected_elements) {
-        for (auto ptr : m.injected_elements())
-            v(*ptr);
-    }
 }
 
 template<typename TraversalVisitor>
 inline void elements_traversal(meta_model::endomodel& m,
-    TraversalVisitor& v, const bool include_injected_elements = false) {
+    TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(*pair.second);
 
@@ -136,11 +126,6 @@ inline void elements_traversal(meta_model::endomodel& m,
 
     for (auto& pair : m.visitors())
         v(*pair.second);
-
-    if (include_injected_elements) {
-        for (auto ptr : m.injected_elements())
-            v(*ptr);
-    }
 }
 /**@}*/
 
@@ -151,7 +136,7 @@ inline void elements_traversal(meta_model::endomodel& m,
 /**@{*/
 template<typename TraversalVisitor>
 inline void shared_elements_traversal(const meta_model::endomodel& m,
-    const TraversalVisitor& v, const bool include_injected_elements = false) {
+    const TraversalVisitor& v) {
     for (const auto& pair : m.modules())
         v(pair.second);
 
@@ -175,16 +160,11 @@ inline void shared_elements_traversal(const meta_model::endomodel& m,
 
     for (const auto& pair : m.visitors())
         v(pair.second);
-
-    if (include_injected_elements) {
-        for (const auto ptr : m.injected_elements())
-            v(ptr);
-    }
 }
 
 template<typename TraversalVisitor>
 inline void shared_elements_traversal(const meta_model::endomodel& m,
-    TraversalVisitor& v, const bool include_injected_elements = false) {
+    TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
 
@@ -208,16 +188,11 @@ inline void shared_elements_traversal(const meta_model::endomodel& m,
 
     for (auto& pair : m.visitors())
         v(pair.second);
-
-    if (include_injected_elements) {
-        for (auto ptr : m.injected_elements())
-            v(ptr);
-    }
 }
 
 template<typename TraversalVisitor>
 inline void shared_elements_traversal(meta_model::endomodel& m,
-    TraversalVisitor& v, const bool include_injected_elements = false) {
+    TraversalVisitor& v) {
     for (auto& pair : m.modules())
         v(pair.second);
 
@@ -241,11 +216,6 @@ inline void shared_elements_traversal(meta_model::endomodel& m,
 
     for (auto& pair : m.visitors())
         v(pair.second);
-
-    if (include_injected_elements) {
-        for (auto ptr : m.injected_elements())
-            v(ptr);
-    }
 }
 /**@}*/
 

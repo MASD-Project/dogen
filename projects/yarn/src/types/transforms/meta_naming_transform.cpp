@@ -136,12 +136,6 @@ transform(const context& ctx, meta_model::endomodel& em) {
 
     em.meta_name(meta_name_factory::make_endomodel_name());
 
-    /*
-     * We are setting include_injected_elements to false by design as
-     * we cannot known the correct meta-names for those types - even
-     * if the types were in the model, which they aren't yet since we
-     * are in the pre-processing chain. But you get the idea.
-     */
     updater u;
     meta_model::elements_traversal(em, u);
 

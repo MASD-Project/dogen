@@ -38,7 +38,6 @@
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/object_fwd.hpp"
 #include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
-#include "dogen/yarn/types/meta_model/element_fwd.hpp"
 #include "dogen/yarn/types/meta_model/visitor_fwd.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/meta_model/exception_fwd.hpp"
@@ -81,7 +80,6 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors,
-        const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& injected_elements,
         const bool has_generatable_types,
         const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
         const dogen::yarn::meta_model::languages input_language,
@@ -228,16 +226,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Elements injected externally.
-     */
-    /**@{*/
-    const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& injected_elements() const;
-    std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& injected_elements();
-    void injected_elements(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v);
-    void injected_elements(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >&& v);
-    /**@}*/
-
-    /**
      * @brief If true the endomodel has at least one generable type, false otherwise.
      */
     /**@{*/
@@ -297,7 +285,6 @@ private:
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> > objects_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> > exceptions_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> > visitors_;
-    std::list<boost::shared_ptr<dogen::yarn::meta_model::element> > injected_elements_;
     bool has_generatable_types_;
     boost::shared_ptr<dogen::yarn::meta_model::module> root_module_;
     dogen::yarn::meta_model::languages input_language_;

@@ -25,7 +25,6 @@
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/io/meta_model/builtin_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/visitor_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/exception_io.hpp"
@@ -348,36 +347,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::meta_model::element>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::languages>& v) {
@@ -433,7 +402,6 @@ std::ostream& operator<<(std::ostream& s, const endomodel& v) {
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"visitors\": " << v.visitors() << ", "
-      << "\"injected_elements\": " << v.injected_elements() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_language\": " << v.input_language() << ", "
