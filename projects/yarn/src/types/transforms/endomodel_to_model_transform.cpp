@@ -155,8 +155,6 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
     r.root_module(em.root_module());
     r.has_generatable_types(em.has_generatable_types());
     r.orm_properties(em.orm_properties());
-    r.facet_properties(em.facet_properties());
-    r.enabled_archetype_for_element(em.enabled_archetype_for_element());
 
     const auto size(compute_total_size(em));
     r.elements().reserve(size);

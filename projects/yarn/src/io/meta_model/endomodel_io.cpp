@@ -34,8 +34,6 @@
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/yarn/io/meta_model/object_template_io.hpp"
-#include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 
 namespace std {
@@ -409,38 +407,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::yarn::meta_model::element_archetype>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 namespace meta_model {
@@ -472,9 +438,7 @@ std::ostream& operator<<(std::ostream& s, const endomodel& v) {
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_language\": " << v.input_language() << ", "
       << "\"output_languages\": " << v.output_languages() << ", "
-      << "\"orm_properties\": " << v.orm_properties() << ", "
-      << "\"facet_properties\": " << v.facet_properties() << ", "
-      << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element()
+      << "\"orm_properties\": " << v.orm_properties()
       << " }";
     return(s);
 }
