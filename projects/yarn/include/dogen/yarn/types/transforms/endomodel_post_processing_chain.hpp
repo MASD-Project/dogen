@@ -18,18 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_POST_PROCESSING_CHAIN_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_POST_PROCESSING_CHAIN_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_POST_PROCESSING_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_POST_PROCESSING_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class post_processing_chain;
+class endomodel_post_processing_chain final {
+public:
+    static void transform(const context& ctx, meta_model::endomodel& em);
+};
 
 } } }
 

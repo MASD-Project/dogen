@@ -1,6 +1,6 @@
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
  *
- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+`` * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,12 +24,12 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
-#include "dogen/yarn/types/transforms/post_processing_chain.hpp"
-#include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_assembly_chain.hpp"
 
 namespace {
 
-const std::string transform_id("yarn.transforms.model_assembly_chain");
+const std::string transform_id("yarn.transforms.endomodel_assembly_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -41,7 +41,7 @@ namespace yarn {
 namespace transforms {
 
 meta_model::endomodel
-model_assembly_chain::obtain_merged_model(const context& ctx,
+endomodel_assembly_chain::obtain_merged_model(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
 
@@ -74,7 +74,7 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
     return merge_transform::transform(ctx, mapped_target, mapped_refs);
 }
 
-meta_model::endomodel model_assembly_chain::transform(const context& ctx,
+meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
     helpers::scoped_chain_probing stp(lg, "model assembly chain",
@@ -89,7 +89,7 @@ meta_model::endomodel model_assembly_chain::transform(const context& ctx,
      * Then we apply all of the post-processing transforms to the
      * merged model.
      */
-    post_processing_chain::transform(ctx, r);
+    endomodel_post_processing_chain::transform(ctx, r);
 
     stp.end_chain(r);
     return r;

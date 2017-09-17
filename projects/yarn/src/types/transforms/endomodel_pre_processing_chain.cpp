@@ -30,11 +30,12 @@
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
-#include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
 
 namespace {
 
-const std::string transform_id("yarn.transforms.pre_processing_chain");
+const std::string transform_id(
+    "yarn.transforms.endomodel_pre_processing_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -45,7 +46,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool pre_processing_chain::is_language_relevant(
+bool endomodel_pre_processing_chain::is_language_relevant(
     const std::unordered_set<meta_model::languages>& relevant_languages,
     const meta_model::endomodel& em) {
     const auto l(em.input_language());
@@ -65,8 +66,8 @@ bool pre_processing_chain::is_language_relevant(
     return true;
 }
 
-void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
-    meta_model::endomodel& em) {
+void endomodel_pre_processing_chain::
+apply_first_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
@@ -76,8 +77,8 @@ void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
     language_transform::transform(ctx, em);
 }
 
-void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
-    meta_model::endomodel& em) {
+void endomodel_pre_processing_chain::
+apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
     /*
      * There are no particular dependencies on the next set of
      * transforms.
@@ -98,7 +99,7 @@ void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
     helpers::pre_processing_validator::validate(em);
 }
 
-void pre_processing_chain::
+void endomodel_pre_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
     helpers::scoped_chain_probing stp(lg, "pre-processing chain",
         transform_id, em.name().id(), ctx.prober(), em);
@@ -109,7 +110,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_chain(em);
 }
 
-bool pre_processing_chain::try_transform(const context& ctx,
+bool endomodel_pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
     meta_model::endomodel& em) {
     helpers::scoped_chain_probing stp(lg, "pre-processing chain",

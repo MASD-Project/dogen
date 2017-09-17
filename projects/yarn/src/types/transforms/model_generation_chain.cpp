@@ -18,39 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_ASSEMBLY_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_ASSEMBLY_CHAIN_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <list>
-#include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
-#include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-/**
- * @brief Merges target and references and post-processes the result.
- */
-class model_assembly_chain final {
-private:
-    static meta_model::endomodel
-    obtain_merged_model(const context& ctx, const meta_model::languages l,
-        const meta_model::endomodel& target,
-        const std::list<meta_model::endomodel>& refs);
-
-public:
-    static meta_model::endomodel transform(const context& ctx,
-        const meta_model::languages l,
-        const meta_model::endomodel& target,
-        const std::list<meta_model::endomodel>& refs);
-};
+bool model_generation_chain::operator==(const model_generation_chain& /*rhs*/) const {
+    return true;
+}
 
 } } }
-
-#endif

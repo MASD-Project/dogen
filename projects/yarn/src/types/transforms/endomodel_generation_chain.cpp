@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
-#include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_assembly_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 
 namespace {
@@ -87,7 +87,7 @@ endomodel_generation_chain::transform(const context& ctx) {
      */
     std::list<meta_model::endomodel> r;
     for (const auto ol : target.output_languages())
-        r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
+        r.push_back(endomodel_assembly_chain::transform(ctx, ol, target, refs));
 
     stp.end_chain(r);
     return r;

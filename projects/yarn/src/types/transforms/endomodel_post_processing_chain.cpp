@@ -39,11 +39,12 @@
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/formatting_transform.hpp"
-#include "dogen/yarn/types/transforms/post_processing_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 
 namespace {
 
-const std::string transform_id("yarn.transforms.post_processing_chain");
+const std::string transform_id(
+    "yarn.transforms.endomodel_post_processing_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -54,7 +55,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void post_processing_chain::
+void endomodel_post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
     helpers::scoped_chain_probing stp(lg, "post-processing chain",
         transform_id, em.name().id(), ctx.prober(), em);

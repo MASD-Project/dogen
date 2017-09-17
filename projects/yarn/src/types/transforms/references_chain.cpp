@@ -26,7 +26,7 @@
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 
 namespace {
@@ -94,7 +94,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
 
         /*
          * Apply all of the pre-processing transforms to the reference
-         * model if its language is part of our set of relevant
+         * endmodel if its language is part of our set of relevant
          * languages. If not, its no use to us so drop it. Note that
          * this is not ideal for two reasons:
          *
@@ -110,7 +110,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Given that the list of system models is very small at
          * present, we are ignoring these problems.
          */
-        if (pre_processing_chain::try_transform(ctx, rl, m))
+        if (endomodel_pre_processing_chain::try_transform(ctx, rl, m))
             r.push_back(m);
     }
 

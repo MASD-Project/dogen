@@ -25,7 +25,7 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 
 namespace {
@@ -69,7 +69,7 @@ initial_target_chain::transform(const context& ctx) {
      * Finally, we apply all of the pre-processing transforms to the
      * target.
      */
-    pre_processing_chain::transform(ctx, r);
+    endomodel_pre_processing_chain::transform(ctx, r);
 
     stp.end_chain(r);
     return r;

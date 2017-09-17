@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_PRE_PROCESSING_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_PRE_PROCESSING_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_PRE_PROCESSING_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_PRE_PROCESSING_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class pre_processing_chain final {
+class endomodel_pre_processing_chain final {
 private:
     /**
      * @brief Returns true if the model language is in the relevant
