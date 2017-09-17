@@ -18,14 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+
+namespace {
+
+const std::string transform_id("yarn.transforms.model_generation_chain");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool model_generation_chain::operator==(const model_generation_chain& /*rhs*/) const {
-    return true;
+std::list<meta_model::model>
+model_generation_chain::transform(const context& ctx) {
+    helpers::scoped_chain_probing stp(lg, "model generation chain",
+        transform_id, ctx.prober());
+
+    /*
+     * Generate the endomodels.
+     */
+    const auto endomodels(endomodel_generation_chain::transform(ctx));
+
+    /*
+     * Convert them to the final representation.
+     */
+    const auto r(endomodel_to_model_transform::transform(ctx, endomodels));
+
+    stp.end_chain(r);
+    return r;
 }
 
 } } }

@@ -41826,7 +41826,7 @@ are no longer required.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="direction">
-        <dia:enum val="1"/>
+        <dia:enum val="2"/>
       </dia:attribute>
       <dia:attribute name="show_direction">
         <dia:boolean val="false"/>
@@ -41862,7 +41862,7 @@ are no longer required.#</dia:string>
         <dia:point val="-108.02,96.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-108.77,95.85;-95.8,107.6"/>
+        <dia:rectangle val="-108.07,96.55;-95.25,107.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

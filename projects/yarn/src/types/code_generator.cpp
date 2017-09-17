@@ -24,10 +24,10 @@
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
+#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/housekeeper.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
@@ -98,22 +98,17 @@ void code_generator::generate(const transforms::options& o) {
      */
     const auto ctx(context_factory::make(rg, o));
 
-    /*
-     * Now we generate the endomodels.
-     */
     const auto model_name(o.target().filename().string());
     helpers::scoped_chain_probing stp(lg, "code generator",
         transform_id, model_name, ctx.prober());
 
-    const auto endomodels(endomodel_generation_chain::transform(ctx));
-
     /*
-     * Then we convert the endomodels to the final representation.
+     * Obtain the models.
      */
-    const auto models(endomodel_to_model_transform::transform(ctx, endomodels));
+    const auto models(model_generation_chain::transform(ctx));
 
     /*
-     * Now run the model to text transforms.
+     * Run the model to text transforms.
      */
     const auto cgo(code_generation_chain::transform(ctx, models));
     stp.end_chain(cgo);
