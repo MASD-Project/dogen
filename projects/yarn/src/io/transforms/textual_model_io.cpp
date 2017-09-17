@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/formatters/io/artefact_io.hpp"
-#include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
+#include "dogen/yarn/io/transforms/textual_model_io.hpp"
 
 namespace std {
 
@@ -54,9 +54,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::ostream& operator<<(std::ostream& s, const code_generation_output& v) {
+std::ostream& operator<<(std::ostream& s, const textual_model& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::transforms::code_generation_output\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::transforms::textual_model\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories()
       << " }";

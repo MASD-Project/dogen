@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_OUTPUT_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_OUTPUT_FWD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_TRANSFORMS_TEXTUAL_MODEL_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_TRANSFORMS_TEXTUAL_MODEL_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
-namespace transforms {
+#include "dogen/yarn/types/transforms/textual_model_fwd.hpp"
 
-class code_generation_output;
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::transforms::textual_model& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::transforms::textual_model& v, unsigned int version);
+
+} }
 
 #endif

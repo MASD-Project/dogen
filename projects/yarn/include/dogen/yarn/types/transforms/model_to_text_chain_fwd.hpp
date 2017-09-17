@@ -18,36 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_TRANSFORMS_CODE_GENERATION_OUTPUT_TD_HPP
-#define DOGEN_YARN_TEST_DATA_TRANSFORMS_CODE_GENERATION_OUTPUT_TD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_CHAIN_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_CHAIN_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generation_output_generator {
-public:
-    code_generation_output_generator();
-
-public:
-    typedef dogen::yarn::transforms::code_generation_output result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+class model_to_text_chain;
 
 } } }
 

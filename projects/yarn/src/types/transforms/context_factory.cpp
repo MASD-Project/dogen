@@ -25,7 +25,6 @@
 #include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"

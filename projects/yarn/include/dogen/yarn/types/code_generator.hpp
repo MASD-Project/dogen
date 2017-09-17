@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
+#include "dogen/yarn/types/transforms/textual_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -60,7 +60,7 @@ namespace yarn {
 class code_generator final {
 private:
     static void write_files(const transforms::options& o,
-        const transforms::code_generation_output& cgo);
+        const transforms::textual_model& tm);
 
 private:
     /**

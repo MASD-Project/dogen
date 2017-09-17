@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_OUTPUT_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_OUTPUT_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_TEXTUAL_MODEL_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_TEXTUAL_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,30 +29,30 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/yarn/serialization/transforms/code_generation_output_fwd_ser.hpp"
+#include "dogen/yarn/serialization/transforms/textual_model_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generation_output final {
+class textual_model final {
 public:
-    code_generation_output() = default;
-    code_generation_output(const code_generation_output&) = default;
-    code_generation_output(code_generation_output&&) = default;
-    ~code_generation_output() = default;
+    textual_model() = default;
+    textual_model(const textual_model&) = default;
+    textual_model(textual_model&&) = default;
+    ~textual_model() = default;
 
 public:
-    code_generation_output(
+    textual_model(
         const std::list<dogen::formatters::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::transforms::code_generation_output& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::transforms::textual_model& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::code_generation_output& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::textual_model& v, unsigned int version);
 
 public:
     const std::list<dogen::formatters::artefact>& artefacts() const;
@@ -66,14 +66,14 @@ public:
     void managed_directories(const std::list<boost::filesystem::path>&& v);
 
 public:
-    bool operator==(const code_generation_output& rhs) const;
-    bool operator!=(const code_generation_output& rhs) const {
+    bool operator==(const textual_model& rhs) const;
+    bool operator!=(const textual_model& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(code_generation_output& other) noexcept;
-    code_generation_output& operator=(code_generation_output other);
+    void swap(textual_model& other) noexcept;
+    textual_model& operator=(textual_model other);
 
 private:
     std::list<dogen::formatters::artefact> artefacts_;
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::transforms::code_generation_output& lhs,
-    dogen::yarn::transforms::code_generation_output& rhs) {
+    dogen::yarn::transforms::textual_model& lhs,
+    dogen::yarn::transforms::textual_model& rhs) {
     lhs.swap(rhs);
 }
 

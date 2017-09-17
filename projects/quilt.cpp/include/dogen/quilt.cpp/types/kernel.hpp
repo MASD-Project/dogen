@@ -108,7 +108,7 @@ public:
 
     yarn::meta_model::languages language() const override;
 
-    yarn::transforms::code_generation_output
+    yarn::transforms::textual_model
     generate(const yarn::transforms::context& ctx,
         const bool enable_kernel_directories,
         const yarn::meta_model::model& m) const override;

@@ -18,64 +18,64 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
+#include "dogen/yarn/types/transforms/textual_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-code_generation_output::code_generation_output(
+textual_model::textual_model(
     const std::list<dogen::formatters::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories)
     : artefacts_(artefacts),
       managed_directories_(managed_directories) { }
 
-void code_generation_output::swap(code_generation_output& other) noexcept {
+void textual_model::swap(textual_model& other) noexcept {
     using std::swap;
     swap(artefacts_, other.artefacts_);
     swap(managed_directories_, other.managed_directories_);
 }
 
-bool code_generation_output::operator==(const code_generation_output& rhs) const {
+bool textual_model::operator==(const textual_model& rhs) const {
     return artefacts_ == rhs.artefacts_ &&
         managed_directories_ == rhs.managed_directories_;
 }
 
-code_generation_output& code_generation_output::operator=(code_generation_output other) {
+textual_model& textual_model::operator=(textual_model other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::formatters::artefact>& code_generation_output::artefacts() const {
+const std::list<dogen::formatters::artefact>& textual_model::artefacts() const {
     return artefacts_;
 }
 
-std::list<dogen::formatters::artefact>& code_generation_output::artefacts() {
+std::list<dogen::formatters::artefact>& textual_model::artefacts() {
     return artefacts_;
 }
 
-void code_generation_output::artefacts(const std::list<dogen::formatters::artefact>& v) {
+void textual_model::artefacts(const std::list<dogen::formatters::artefact>& v) {
     artefacts_ = v;
 }
 
-void code_generation_output::artefacts(const std::list<dogen::formatters::artefact>&& v) {
+void textual_model::artefacts(const std::list<dogen::formatters::artefact>&& v) {
     artefacts_ = std::move(v);
 }
 
-const std::list<boost::filesystem::path>& code_generation_output::managed_directories() const {
+const std::list<boost::filesystem::path>& textual_model::managed_directories() const {
     return managed_directories_;
 }
 
-std::list<boost::filesystem::path>& code_generation_output::managed_directories() {
+std::list<boost::filesystem::path>& textual_model::managed_directories() {
     return managed_directories_;
 }
 
-void code_generation_output::managed_directories(const std::list<boost::filesystem::path>& v) {
+void textual_model::managed_directories(const std::list<boost::filesystem::path>& v) {
     managed_directories_ = v;
 }
 
-void code_generation_output::managed_directories(const std::list<boost::filesystem::path>&& v) {
+void textual_model::managed_directories(const std::list<boost::filesystem::path>&& v) {
     managed_directories_ = std::move(v);
 }
 

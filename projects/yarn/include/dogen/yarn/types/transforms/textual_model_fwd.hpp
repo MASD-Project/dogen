@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_TRANSFORMS_CODE_GENERATION_OUTPUT_HASH_HPP
-#define DOGEN_YARN_HASH_TRANSFORMS_CODE_GENERATION_OUTPUT_HASH_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_TEXTUAL_MODEL_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_TEXTUAL_MODEL_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-struct code_generation_output_hasher {
-public:
-    static std::size_t hash(const code_generation_output& v);
-};
+class textual_model;
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::transforms::code_generation_output> {
-public:
-    size_t operator()(const dogen::yarn::transforms::code_generation_output& v) const {
-        return dogen::yarn::transforms::code_generation_output_hasher::hash(v);
-    }
-};
-
-}
 #endif

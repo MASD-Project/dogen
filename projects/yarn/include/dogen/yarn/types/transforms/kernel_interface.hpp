@@ -35,7 +35,7 @@
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
+#include "dogen/yarn/types/transforms/textual_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -80,7 +80,7 @@ public:
     /**
      * @brief Generates the source code for the kernel.
      */
-    virtual code_generation_output
+    virtual textual_model
     generate(const context& ctx, const bool requires_kernel_directory,
         const meta_model::model& m) const = 0;
 };

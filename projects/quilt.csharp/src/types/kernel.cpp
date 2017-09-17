@@ -82,7 +82,7 @@ yarn::meta_model::languages kernel::language() const {
     return yarn::meta_model::languages::csharp;
 }
 
-yarn::transforms::code_generation_output
+yarn::transforms::textual_model
 kernel::generate(const yarn::transforms::context& ctx,
     const bool enable_kernel_directories,
     const yarn::meta_model::model& m) const {
@@ -107,7 +107,7 @@ kernel::generate(const yarn::transforms::context& ctx,
     /*
      * Code-generate all artefacts.
      */
-    yarn::transforms::code_generation_output r;
+    yarn::transforms::textual_model r;
     const auto& drp(ctx.formatters_repository());
     const auto& agf(ctx.groups_factory());
     r.artefacts(format(atrp, agf, drp, fm));

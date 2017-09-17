@@ -24,9 +24,9 @@
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
-#include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
+#include "dogen/yarn/io/transforms/textual_model_io.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/housekeeper.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
@@ -46,16 +46,16 @@ namespace dogen {
 namespace yarn {
 
 void code_generator::write_files(const transforms::options& o,
-    const transforms::code_generation_output& cgo) {
+    const transforms::textual_model& tm) {
     using dogen::formatters::filesystem_writer;
     auto w(std::make_shared<filesystem_writer>(o.force_write()));
 
-    if (cgo.artefacts().empty()) {
+    if (tm.artefacts().empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
         return;
     }
 
-    w->write(cgo.artefacts());
+    w->write(tm.artefacts());
 }
 
 void code_generator::perform_housekeeping(const transforms::options& o,
@@ -89,7 +89,7 @@ void code_generator::generate(const transforms::options& o) {
      * Obtain the kernel registrar and ensure it has been setup.
      */
     using namespace transforms;
-    const auto& rg(code_generation_chain::registrar());
+    const auto& rg(model_to_text_chain::registrar());
     rg.validate();
 
     /*
@@ -110,20 +110,20 @@ void code_generator::generate(const transforms::options& o) {
     /*
      * Run the model to text transforms.
      */
-    const auto cgo(code_generation_chain::transform(ctx, models));
-    stp.end_chain(cgo);
+    const auto tm(model_to_text_chain::transform(ctx, models));
+    stp.end_chain(tm);
     ctx.prober().end_probing();
 
     /*
      * Write the files.
      */
-    write_files(o, cgo);
+    write_files(o, tm);
 
     /*
      * Perform any housekeeping if need be.
      */
     if (o.delete_extra_files())
-        perform_housekeeping(o, cgo.artefacts(), cgo.managed_directories());
+        perform_housekeeping(o, tm.artefacts(), tm.managed_directories());
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

@@ -18,18 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_FWD_HPP
+#ifndef DOGEN_YARN_IO_TRANSFORMS_TEXTUAL_MODEL_IO_HPP
+#define DOGEN_YARN_IO_TRANSFORMS_TEXTUAL_MODEL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/yarn/types/transforms/textual_model.hpp"
+
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generation_chain;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::transforms::textual_model& v);
 
 } } }
 

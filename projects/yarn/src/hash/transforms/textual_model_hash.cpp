@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/artefact_hash.hpp"
-#include "dogen/yarn/hash/transforms/code_generation_output_hash.hpp"
+#include "dogen/yarn/hash/transforms/textual_model_hash.hpp"
 
 namespace {
 
@@ -57,7 +57,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::size_t code_generation_output_hasher::hash(const code_generation_output& v) {
+std::size_t textual_model_hasher::hash(const textual_model& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_formatters_artefact(v.artefacts()));

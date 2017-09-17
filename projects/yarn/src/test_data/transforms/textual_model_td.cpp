@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/formatters/test_data/artefact_td.hpp"
-#include "dogen/yarn/test_data/transforms/code_generation_output_td.hpp"
+#include "dogen/yarn/test_data/transforms/textual_model_td.hpp"
 
 namespace {
 
@@ -58,30 +58,30 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-code_generation_output_generator::code_generation_output_generator() : position_(0) { }
+textual_model_generator::textual_model_generator() : position_(0) { }
 
-void code_generation_output_generator::
+void textual_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.artefacts(create_std_list_dogen_formatters_artefact(position + 0));
     v.managed_directories(create_std_list_boost_filesystem_path(position + 1));
 }
 
-code_generation_output_generator::result_type
-code_generation_output_generator::create(const unsigned int position) {
-    code_generation_output r;
-    code_generation_output_generator::populate(position, r);
+textual_model_generator::result_type
+textual_model_generator::create(const unsigned int position) {
+    textual_model r;
+    textual_model_generator::populate(position, r);
     return r;
 }
 
-code_generation_output_generator::result_type*
-code_generation_output_generator::create_ptr(const unsigned int position) {
-    code_generation_output* p = new code_generation_output();
-    code_generation_output_generator::populate(position, *p);
+textual_model_generator::result_type*
+textual_model_generator::create_ptr(const unsigned int position) {
+    textual_model* p = new textual_model();
+    textual_model_generator::populate(position, *p);
     return p;
 }
 
-code_generation_output_generator::result_type
-code_generation_output_generator::operator()() {
+textual_model_generator::result_type
+textual_model_generator::operator()() {
     return create(position_++);
 }
 

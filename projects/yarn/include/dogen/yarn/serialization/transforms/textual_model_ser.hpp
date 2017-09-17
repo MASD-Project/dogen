@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_TRANSFORMS_CODE_GENERATION_OUTPUT_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_TRANSFORMS_CODE_GENERATION_OUTPUT_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_TRANSFORMS_TEXTUAL_MODEL_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_TRANSFORMS_TEXTUAL_MODEL_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
+#include "dogen/yarn/types/transforms/textual_model.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::transforms::code_generation_output)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::transforms::textual_model)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::yarn::transforms::code_generation_output& v, unsigned int version);
+void save(Archive& ar, const dogen::yarn::transforms::textual_model& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::yarn::transforms::code_generation_output& v, unsigned int version);
+void load(Archive& ar, dogen::yarn::transforms::textual_model& v, unsigned int version);
 
 } }
 

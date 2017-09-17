@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,13 +35,13 @@
 #include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 #include "dogen/yarn/types/transforms/configuration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/transforms/code_generation_output.hpp"
+#include "dogen/yarn/types/transforms/textual_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generation_chain final {
+class model_to_text_chain final {
 private:
     struct type_group {
         annotations::type enable_kernel_directories;
@@ -72,12 +72,12 @@ private:
      * Merges source into destination.
      */
     static void
-    merge(code_generation_output&& src, code_generation_output& dst);
+    merge(textual_model&& src, textual_model& dst);
 
 public:
-    static code_generation_output
+    static textual_model
     transform(const context& ctx, const meta_model::model& m);
-    static code_generation_output
+    static textual_model
     transform(const context& ctx, const std::list<meta_model::model>& models);
 
 private:
@@ -90,7 +90,7 @@ private:
 template<typename Kernel>
 inline void register_kernel() {
     auto k(std::make_shared<Kernel>());
-    auto& rg(code_generation_chain::registrar());
+    auto& rg(model_to_text_chain::registrar());
     rg.register_kernel(k);
 }
 
