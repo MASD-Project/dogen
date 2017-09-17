@@ -28,8 +28,10 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.transform_metrics_printer"));
 
-const char filler(' ');
-const unsigned int fill_size(4);
+const char org_mode_filler('*');
+const char txt_filler(' ');
+const unsigned int org_mode_fill_size(1);
+const unsigned int txt_fill_size(4);
 
 }
 
@@ -38,13 +40,19 @@ namespace yarn {
 namespace helpers {
 
 void transform_metrics_printer::print(std::ostream& o, unsigned int fill_level,
-    const bool disable_guids_in_stats,
+    const bool disable_guids_in_stats, const bool use_org_mode,
     const boost::shared_ptr<const transform_metrics> tm) {
 
     BOOST_LOG_SEV(lg, debug) << "Fill level: " << fill_level;
     auto elapsed (tm->end() - tm->start());
-    o << std::string(fill_size * fill_level, filler)
-      << tm->transform_id() << " (" << elapsed  << " ms)"
+
+    if (use_org_mode) {
+        o << std::string(org_mode_fill_size * fill_level, org_mode_filler)
+          << " ";
+    } else
+        o << std::string(txt_fill_size * fill_level, txt_filler);
+
+    o << tm->transform_id() << " (" << elapsed  << " ms)"
       << " [" << tm->model_id() << "]";
 
     if (!disable_guids_in_stats)
@@ -54,16 +62,17 @@ void transform_metrics_printer::print(std::ostream& o, unsigned int fill_level,
 
     ++fill_level;
     for(auto child : tm->children())
-        print(o, fill_level, disable_guids_in_stats, child);
+        print(o, fill_level, disable_guids_in_stats, use_org_mode, child);
 }
 
-std::string transform_metrics_printer::print(const bool disable_guids_in_stats,
+std::string transform_metrics_printer::
+print(const bool disable_guids_in_stats, const bool use_org_mode,
     const boost::shared_ptr<const transform_metrics> tm) {
     BOOST_LOG_SEV(lg, debug) << "Printing graph.";
 
-    unsigned int fill_level(0);
+    unsigned int fill_level(use_org_mode ? 1 : 0);
     std::ostringstream s;
-    print(s, fill_level, disable_guids_in_stats, tm);
+    print(s, fill_level, disable_guids_in_stats, use_org_mode, tm);
     const auto r(s.str());
 
     BOOST_LOG_SEV(lg, debug) << "Finished printing graph.";

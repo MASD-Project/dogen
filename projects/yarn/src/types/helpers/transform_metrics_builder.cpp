@@ -52,11 +52,12 @@ transform_metrics_builder::transform_metrics_builder(
     const std::string& log_level, const bool writing_probe_data) {
     BOOST_LOG_SEV(lg, debug) << "Initialising. ";
     std::ostringstream s;
-    s << "v" << DOGEN_VERSION << ", " << log_level;
+    s << "version: v" << DOGEN_VERSION << ", "
+      << "log: " << log_level;
     if (writing_probe_data)
-        s << ", probing";
+        s << ", probing: on";
     else
-        s << ", not probing";
+        s << ", probing: off";
 
     stack_.push(create_metrics(root_id, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();

@@ -66,6 +66,7 @@ const std::string default_log_directory("log");
 
 const std::string probe_stats_arg("probe-stats");
 const std::string probe_stats_disable_guids_arg("probe-stats-disable-guids");
+const std::string probe_stats_org_mode_arg("probe-stats-org-mode");
 const std::string probe_all_arg("probe-all");
 const std::string probe_directory_arg("probe-directory");
 const std::string probe_use_short_names_arg("probe-use-short-names");
@@ -160,6 +161,8 @@ program_options_parser::make_transforms_options_description() const {
         ("probe-stats", "Generate stats about executed transforms.")
         ("probe-stats-disable-guids", "Disable guids in probe stats, "
             "to make comparisons easier.")
+        ("probe-stats-org-mode", "Use org-mode format for stats."
+            " Requires enabling stats.")
         ("probe-all", "Dump all available probing information "
             "about transforms.")
         ("probe-directory", "Directory in which to dump probe data. "
@@ -275,6 +278,7 @@ make_knitting_options(const variables_map& vm) const {
     r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
     r.probe_stats(vm.count(probe_stats_arg) != 0);
     r.probe_stats_disable_guids(vm.count(probe_stats_disable_guids_arg) != 0);
+    r.probe_stats_org_mode(vm.count(probe_stats_org_mode_arg) != 0);
     r.probe_all(vm.count(probe_all_arg) != 0);
     r.probe_use_short_names(vm.count(probe_use_short_names_arg) != 0);
 

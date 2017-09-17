@@ -36,12 +36,12 @@ namespace helpers {
 class transform_metrics_printer final {
 private:
     static void print(std::ostream& o, unsigned int fill_level,
-        const bool disable_guids_in_stats,
+        const bool disable_guids_in_stats, const bool use_org_mode,
         const boost::shared_ptr<const transform_metrics> tm);
 
 public:
     static std::string
-    print(const bool disable_guids_in_stats,
+    print(const bool disable_guids_in_stats, const bool use_org_mode,
         const boost::shared_ptr<const transform_metrics> tm);
 };
 

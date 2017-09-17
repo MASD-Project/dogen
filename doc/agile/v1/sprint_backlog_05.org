@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-17 Sun 15:42]
+#+CAPTION: Clock summary at [2017-09-17 Sun 16:23]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *56:20* |       |       | 100.0 |
+| *Total time*                                                                | *56:58* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 56:20   |       |       | 100.0 |
-| Active                                                                      |         | 56:20 |       | 100.0 |
+| Stories                                                                     | 56:58   |       |       | 100.0 |
+| Active                                                                      |         | 56:58 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.3 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:43 |   3.0 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   1.5 |
@@ -30,25 +30,25 @@
 | COMPLETED Analysis on annotations and profiles                              |         |       |  2:26 |   4.3 |
 | COMPLETED Use namespaced stereotypes                                        |         |       |  1:49 |   3.2 |
 | COMPLETED Tailor dogen models                                               |         |       |  0:21 |   0.6 |
-| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  13.9 |
+| COMPLETED Rename yarn concepts                                              |         |       |  7:49 |  13.7 |
 | COMPLETED Remove extra copying in mapper                                    |         |       |  0:05 |   0.1 |
 | COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   1.7 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.3 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.4 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  23.0 |
-| COMPLETED Create yarn options                                               |         |       |  1:06 |   2.0 |
-| COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.2 |
-| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   4.9 |
-| COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   5.5 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  22.8 |
+| COMPLETED Create yarn options                                               |         |       |  1:06 |   1.9 |
+| COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.1 |
+| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   4.8 |
+| COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   5.4 |
 | COMPLETED Catch directory generation errors in probe                        |         |       |  1:05 |   1.9 |
 | COMPLETED Remove dumping of models from log                                 |         |       |  0:06 |   0.2 |
 | COMPLETED Move model sorter from helpers                                    |         |       |  0:32 |   0.9 |
-| COMPLETED Add canonical archetype support to yarn                           |         |       |  7:18 |  13.0 |
+| COMPLETED Add canonical archetype support to yarn                           |         |       |  7:18 |  12.8 |
 | COMPLETED Remove artefact from assistant casting                            |         |       |  0:20 |   0.6 |
 | COMPLETED Untabify windows templates                                        |         |       |  0:04 |   0.1 |
-| STARTED Output stats in org-mode format                                     |         |       |  0:02 |   0.1 |
+| COMPLETED Output stats in org-mode format                                   |         |       |  0:40 |   1.2 |
 | STARTED Split out transforms from post-processing chain                     |         |       |  1:59 |   3.5 |
-| STARTED Move enablement into yarn                                           |         |       |  4:50 |   8.6 |
+| STARTED Move enablement into yarn                                           |         |       |  4:50 |   8.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -899,7 +899,10 @@ it.
 It seems we have a lot of tabs on Visual Studio solutions, projects
 etc. Untabify the templates and regenerate all.
 
-*** STARTED Output stats in org-mode format                           :story:
+*** COMPLETED Output stats in org-mode format                         :story:
+    CLOSED: [2017-09-17 Sun 16:23]
+    CLOCK: [2017-09-17 Sun 16:01]--[2017-09-17 Sun 16:22] =>  0:21
+    CLOCK: [2017-09-17 Sun 15:43]--[2017-09-17 Sun 16:00] =>  0:17
     CLOCK: [2017-09-17 Sun 15:40]--[2017-09-17 Sun 15:42] =>  0:02
 
 It would be nice to be able to collapse the stats sometimes, so one

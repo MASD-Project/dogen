@@ -56,15 +56,16 @@ namespace yarn {
 namespace helpers {
 
 transform_prober::transform_prober(const std::string& log_level,
-    const bool probe_data, const bool probe_stats, const bool use_short_names,
-    const bool disable_guids_in_stats,
-    const boost::filesystem::path& probe_directory,
+    const bool probe_data, const bool probe_stats,
+    const bool disable_guids_in_stats, const bool use_org_mode,
+    const bool use_short_names, const boost::filesystem::path& probe_directory,
     const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
     const helpers::mapping_set_repository& msrp)
     : builder_(log_level, probe_data), current_directory_(probe_directory),
       probe_data_(probe_data), probe_stats_(probe_stats),
       disable_guids_in_stats_(disable_guids_in_stats),
+      use_org_mode_(use_org_mode),
       use_short_names_(use_short_names),
       probe_directory_(probe_directory) {
 
@@ -299,8 +300,11 @@ void transform_prober::end_probing() const {
         return;
 
     const auto tm(builder_.build());
-    const auto s(transform_metrics_printer::print(disable_guids_in_stats_, tm));
-    utility::filesystem::write(probe_directory_ / "transform_stats.txt", s);
+    const bool uom(use_org_mode_);
+    const bool dgis(disable_guids_in_stats_);
+    const auto s(transform_metrics_printer::print(dgis, uom, tm));
+    const auto fn(uom ? "transform_stats.org" : "transform_stats.txt");
+    utility::filesystem::write(probe_directory_ / fn, s);
 }
 
 } } }

@@ -43,7 +43,7 @@ class transform_prober final {
 public:
     transform_prober(const std::string& log_level, const bool probe_data,
         const bool probe_stats, const bool disable_guids_in_stats,
-        const bool use_short_names,
+        const bool use_org_mode, const bool use_short_names,
         const boost::filesystem::path& probe_directory,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
@@ -144,6 +144,7 @@ private:
     const bool probe_data_;
     const bool probe_stats_;
     const bool disable_guids_in_stats_;
+    const bool use_org_mode_;
     const bool use_short_names_;
     const boost::filesystem::path probe_directory_;
 };

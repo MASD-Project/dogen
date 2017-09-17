@@ -68,8 +68,8 @@ make(const kernel_registrar& rg, const options& o) {
     bool probe_data(o.probe_all());
     bool probe_stats(o.probe_all() || o.probe_stats());
     helpers::transform_prober prober(o.log_level(), probe_data, probe_stats,
-        o.probe_use_short_names(), o.probe_stats_disable_guids(),
-        o.probe_directory(), alrp, atrp, msrp);
+        o.probe_stats_disable_guids(), o.probe_stats_org_mode(),
+        o.probe_use_short_names(), o.probe_directory(), alrp, atrp, msrp);
 
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
