@@ -27,7 +27,7 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 
@@ -50,44 +50,9 @@ bool generability_transform::is_generatable(const meta_model::element& e) {
 }
 
 bool generability_transform::
-has_generatable_types(const meta_model::endomodel& em) {
-    /*
-     * Note: we are deliberately excluding modules since we do not
-     * want to generate an empty model with just a module because its
-     * documented.
-     */
-    for (const auto pair : em.objects()) {
-        if (is_generatable(*pair.second))
-            return true;
-    }
-
-    for (const auto pair : em.enumerations()) {
-        if (is_generatable(*pair.second))
-            return true;
-    }
-
-    for (const auto pair : em.enumerations()) {
-        if (is_generatable(*pair.second))
-            return true;
-    }
-
-    for (const auto pair : em.exceptions()) {
-        if (is_generatable(*pair.second))
-            return true;
-    }
-
-    for (const auto pair : em.builtins()) {
-        if (is_generatable(*pair.second))
-            return true;
-    }
-
-    for (const auto pair : em.object_templates()) {
-        if (is_generatable(*pair.second))
-            return true;
-    }
-
-    for (const auto pair : em.primitives()) {
-        if (is_generatable(*pair.second))
+has_generatable_types(const meta_model::model& m) {
+    for (const auto ptr : m.elements()) {
+        if (is_generatable(*ptr))
             return true;
     }
 
@@ -95,11 +60,11 @@ has_generatable_types(const meta_model::endomodel& em) {
 }
 
 void generability_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_transform_probing stp(lg, "generability transform",
-        transform_id, em.name().id(), ctx.prober(), em);
-    em.has_generatable_types(has_generatable_types(em));
-    stp.end_transform(em);
+        transform_id, m.name().id(), ctx.prober(), m);
+    m.has_generatable_types(has_generatable_types(m));
+    stp.end_transform(m);
 }
 
 } } }

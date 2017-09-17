@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -35,10 +35,10 @@ namespace transforms {
 class generability_transform final {
 private:
     static bool is_generatable(const meta_model::element& e);
-    static bool has_generatable_types(const meta_model::endomodel& em);
+    static bool has_generatable_types(const meta_model::model& m);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 } } }

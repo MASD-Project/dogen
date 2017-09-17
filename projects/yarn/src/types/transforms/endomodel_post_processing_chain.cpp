@@ -33,7 +33,6 @@
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
-#include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 
@@ -128,7 +127,6 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * populated.
      */
     associations_transform::transform(ctx, em);
-    generability_transform::transform(ctx, em);
 
     /*
      * Ensure the model is valid.

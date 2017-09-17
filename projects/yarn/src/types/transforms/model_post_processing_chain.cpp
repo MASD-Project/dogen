@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
@@ -45,6 +46,11 @@ void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_chain_probing stp(lg, "model post-processing chain",
         transform_id, m.name().id(), ctx.prober(), m);
+
+    /*
+     * We update generability first, for no particular reason.
+     */
+    generability_transform::transform(ctx, m);
 
     /*
      * Perform dynamic expansion first. These are kernel specific.
