@@ -62,6 +62,7 @@ public:
     result() { return result_; }
 
 public:
+    using yarn::meta_model::element_visitor::visit;
     void visit(yarn::meta_model::visitor& v) {
         result_.push_back(create(v));
     }

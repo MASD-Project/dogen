@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-17 Sun 19:15]
+#+CAPTION: Clock summary at [2017-09-17 Sun 20:52]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *59:07* |       |       | 100.0 |
+| *Total time*                                                                | *59:18* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 59:07   |       |       | 100.0 |
-| Active                                                                      |         | 59:07 |       | 100.0 |
+| Stories                                                                     | 59:18   |       |       | 100.0 |
+| Active                                                                      |         | 59:18 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:44 |   1.2 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:43 |   2.9 |
 | COMPLETED Remove object types in yarn                                       |         |       |  0:52 |   1.5 |
@@ -35,10 +35,10 @@
 | COMPLETED Investigate the JSON break on Northwind model                     |         |       |  0:57 |   1.6 |
 | COMPLETED Rename ODB parameters                                             |         |       |  0:11 |   0.3 |
 | COMPLETED Investigate usage of origin type                                  |         |       |  0:15 |   0.4 |
-| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  22.0 |
+| COMPLETED Improve dumping of models                                         |         |       | 12:59 |  21.9 |
 | COMPLETED Create yarn options                                               |         |       |  1:06 |   1.9 |
 | COMPLETED Merge knit with yarn                                              |         |       |  1:13 |   2.1 |
-| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   4.7 |
+| COMPLETED Add probing support to code generation tests                      |         |       |  2:45 |   4.6 |
 | COMPLETED Find some way of scoping transform probing                        |         |       |  3:06 |   5.2 |
 | COMPLETED Catch directory generation errors in probe                        |         |       |  1:05 |   1.8 |
 | COMPLETED Remove dumping of models from log                                 |         |       |  0:06 |   0.2 |
@@ -47,7 +47,7 @@
 | COMPLETED Remove artefact from assistant casting                            |         |       |  0:20 |   0.6 |
 | COMPLETED Untabify windows templates                                        |         |       |  0:04 |   0.1 |
 | COMPLETED Output stats in org-mode format                                   |         |       |  0:40 |   1.1 |
-| COMPLETED Split out transforms from post-processing chain                   |         |       |  4:08 |   7.0 |
+| COMPLETED Split out transforms from post-processing chain                   |         |       |  4:19 |   7.3 |
 | STARTED Move enablement into yarn                                           |         |       |  4:50 |   8.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -915,6 +915,7 @@ debug build. Add labels, e.g.: =log:debug=, etc.
 
 *** COMPLETED Split out transforms from post-processing chain         :story:
     CLOSED: [2017-09-17 Sun 18:36]
+    CLOCK: [2017-09-17 Sun 20:39]--[2017-09-17 Sun 20:50] =>  0:11
     CLOCK: [2017-09-17 Sun 19:11]--[2017-09-17 Sun 19:15] =>  0:04
     CLOCK: [2017-09-17 Sun 18:27]--[2017-09-17 Sun 18:35] =>  0:08
     CLOCK: [2017-09-17 Sun 18:15]--[2017-09-17 Sun 18:26] =>  0:11

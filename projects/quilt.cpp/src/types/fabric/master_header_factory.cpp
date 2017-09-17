@@ -82,6 +82,7 @@ private:
     void process_element(const yarn::meta_model::element& e);
 
 public:
+    using yarn::meta_model::element_visitor::visit;
     void visit(const yarn::meta_model::visitor& v) { process_element(v); }
     void visit(const yarn::meta_model::enumeration& e) {
         process_element(e);
