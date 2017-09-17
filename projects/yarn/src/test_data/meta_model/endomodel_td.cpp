@@ -227,10 +227,6 @@ std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visit
     return r;
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) != 0;
-}
-
 dogen::yarn::meta_model::languages
 create_dogen_yarn_meta_model_languages(const unsigned int position) {
     return dogen::yarn::meta_model::languages_generator::create(position);
@@ -279,11 +275,10 @@ populate(const unsigned int position, result_type& v) {
     v.objects(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object(position + 10));
     v.exceptions(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 11));
     v.visitors(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_visitor(position + 12));
-    v.has_generatable_types(create_bool(position + 13));
-    v.root_module(create_boost_shared_ptr_dogen_yarn_meta_model_module(position + 14));
-    v.input_language(create_dogen_yarn_meta_model_languages(position + 15));
-    v.output_languages(create_std_list_dogen_yarn_meta_model_languages(position + 16));
-    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 17));
+    v.root_module(create_boost_shared_ptr_dogen_yarn_meta_model_module(position + 13));
+    v.input_language(create_dogen_yarn_meta_model_languages(position + 14));
+    v.output_languages(create_std_list_dogen_yarn_meta_model_languages(position + 15));
+    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 16));
 }
 
 endomodel_generator::result_type

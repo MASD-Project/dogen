@@ -80,7 +80,6 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors,
-        const bool has_generatable_types,
         const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
         const dogen::yarn::meta_model::languages input_language,
         const std::list<dogen::yarn::meta_model::languages>& output_languages,
@@ -225,14 +224,6 @@ public:
     void visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >&& v);
     /**@}*/
 
-    /**
-     * @brief If true the endomodel has at least one generable type, false otherwise.
-     */
-    /**@{*/
-    bool has_generatable_types() const;
-    void has_generatable_types(const bool v);
-    /**@}*/
-
     const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module() const;
     boost::shared_ptr<dogen::yarn::meta_model::module>& root_module();
     void root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v);
@@ -285,7 +276,6 @@ private:
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> > objects_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> > exceptions_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> > visitors_;
-    bool has_generatable_types_;
     boost::shared_ptr<dogen::yarn::meta_model::module> root_module_;
     dogen::yarn::meta_model::languages input_language_;
     std::list<dogen::yarn::meta_model::languages> output_languages_;

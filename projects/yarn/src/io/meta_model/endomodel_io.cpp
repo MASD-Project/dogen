@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/module_io.hpp"
@@ -381,12 +380,6 @@ namespace yarn {
 namespace meta_model {
 
 std::ostream& operator<<(std::ostream& s, const endomodel& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::endomodel\"" << ", "
       << "\"name\": " << v.name() << ", "
@@ -402,7 +395,6 @@ std::ostream& operator<<(std::ostream& s, const endomodel& v) {
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"visitors\": " << v.visitors() << ", "
-      << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_language\": " << v.input_language() << ", "
       << "\"output_languages\": " << v.output_languages() << ", "

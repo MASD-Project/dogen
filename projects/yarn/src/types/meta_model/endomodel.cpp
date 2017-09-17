@@ -106,7 +106,6 @@ namespace meta_model {
 
 endomodel::endomodel()
     : origin_type_(static_cast<dogen::yarn::meta_model::origin_types>(0)),
-      has_generatable_types_(static_cast<bool>(0)),
       input_language_(static_cast<dogen::yarn::meta_model::languages>(0)) { }
 
 endomodel::endomodel(endomodel&& rhs)
@@ -123,7 +122,6 @@ endomodel::endomodel(endomodel&& rhs)
       objects_(std::move(rhs.objects_)),
       exceptions_(std::move(rhs.exceptions_)),
       visitors_(std::move(rhs.visitors_)),
-      has_generatable_types_(std::move(rhs.has_generatable_types_)),
       root_module_(std::move(rhs.root_module_)),
       input_language_(std::move(rhs.input_language_)),
       output_languages_(std::move(rhs.output_languages_)),
@@ -143,7 +141,6 @@ endomodel::endomodel(
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors,
-    const bool has_generatable_types,
     const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
     const dogen::yarn::meta_model::languages input_language,
     const std::list<dogen::yarn::meta_model::languages>& output_languages,
@@ -161,7 +158,6 @@ endomodel::endomodel(
       objects_(objects),
       exceptions_(exceptions),
       visitors_(visitors),
-      has_generatable_types_(has_generatable_types),
       root_module_(root_module),
       input_language_(input_language),
       output_languages_(output_languages),
@@ -182,7 +178,6 @@ void endomodel::swap(endomodel& other) noexcept {
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
-    swap(has_generatable_types_, other.has_generatable_types_);
     swap(root_module_, other.root_module_);
     swap(input_language_, other.input_language_);
     swap(output_languages_, other.output_languages_);
@@ -203,7 +198,6 @@ bool endomodel::operator==(const endomodel& rhs) const {
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
-        has_generatable_types_ == rhs.has_generatable_types_ &&
         root_module_ == rhs.root_module_ &&
         input_language_ == rhs.input_language_ &&
         output_languages_ == rhs.output_languages_ &&
@@ -414,14 +408,6 @@ void endomodel::visitors(const std::unordered_map<std::string, boost::shared_ptr
 
 void endomodel::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >&& v) {
     visitors_ = std::move(v);
-}
-
-bool endomodel::has_generatable_types() const {
-    return has_generatable_types_;
-}
-
-void endomodel::has_generatable_types(const bool v) {
-    has_generatable_types_ = v;
 }
 
 const boost::shared_ptr<dogen::yarn::meta_model::module>& endomodel::root_module() const {

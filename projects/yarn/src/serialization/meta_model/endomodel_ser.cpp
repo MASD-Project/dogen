@@ -67,7 +67,6 @@ void save(Archive& ar,
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("visitors", v.visitors_);
-    ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("input_language", v.input_language_);
     ar << make_nvp("output_languages", v.output_languages_);
@@ -91,7 +90,6 @@ void load(Archive& ar,
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("visitors", v.visitors_);
-    ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("input_language", v.input_language_);
     ar >> make_nvp("output_languages", v.output_languages_);

@@ -217,7 +217,6 @@ std::size_t endomodel_hasher::hash(const endomodel& v) {
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object(v.objects()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_exception(v.exceptions()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_visitor(v.visitors()));
-    combine(seed, v.has_generatable_types());
     combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_module(v.root_module()));
     combine(seed, v.input_language());
     combine(seed, hash_std_list_dogen_yarn_meta_model_languages(v.output_languages()));
