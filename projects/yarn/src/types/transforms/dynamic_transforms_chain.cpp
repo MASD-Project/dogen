@@ -23,7 +23,7 @@
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
@@ -61,19 +61,19 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 }
 
 void dynamic_transforms_chain::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_chain_probing stp(lg, "dynamic transforms chain",
-        transform_id, em.name().id(), ctx.prober(), em);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     auto& rg(registrar());
     rg.validate();
 
-    const auto& ra(em.root_module()->annotation());
+    const auto& ra(m.root_module()->annotation());
     const auto dpf(create_decoration_properties_factory(ctx, ra));
     for (const auto& dt : rg.dynamic_transforms())
-        dt->transform(ctx, dpf, em);
+        dt->transform(ctx, dpf, m);
 
-    stp.end_chain(em);
+    stp.end_chain(m);
 }
 
 } } }

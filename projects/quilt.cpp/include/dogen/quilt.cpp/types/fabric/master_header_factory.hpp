@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
@@ -39,7 +39,7 @@ class master_header_factory final {
 public:
     boost::shared_ptr<yarn::meta_model::element>
     make(const formatters::repository& rp,
-        const yarn::meta_model::endomodel& im) const;
+        const yarn::meta_model::model& m) const;
 };
 
 } } } }

@@ -30,7 +30,7 @@
 #include <utility>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
@@ -41,14 +41,14 @@ namespace fabric {
 class build_files_factory final {
 private:
     boost::shared_ptr<yarn::meta_model::element>
-    make_cmakelists(const yarn::meta_model::endomodel& im) const;
+    make_cmakelists(const yarn::meta_model::model& m) const;
 
     boost::shared_ptr<yarn::meta_model::element>
-    make_msbuild_targets(const yarn::meta_model::endomodel& im) const;
+    make_msbuild_targets(const yarn::meta_model::model& m) const;
 
 public:
     std::list<boost::shared_ptr<yarn::meta_model::element>>
-    make(const yarn::meta_model::endomodel& im) const;
+    make(const yarn::meta_model::model& m) const;
 };
 
 } } } }

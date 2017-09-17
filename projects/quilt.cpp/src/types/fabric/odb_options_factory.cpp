@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
@@ -44,16 +45,25 @@ namespace cpp {
 namespace fabric {
 
 std::list<boost::shared_ptr<yarn::meta_model::element>> odb_options_factory::
-make(const yarn::meta_model::endomodel& im) const {
+make(const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
+    using yarn::meta_model::object;
+    using yarn::meta_model::origin_types;
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;
-    for (const auto& pair : im.objects()) {
-        const auto& o(*pair.second);
+    for (const auto& ptr : m.elements()) {
+        /*
+         * If we're not an object or if we do not belong to the target
+         * model, there is nothing to do.
+         */
+        const auto optr(boost::dynamic_pointer_cast<object>(ptr));
+        if (!optr || optr->origin_type() != origin_types::target)
+            continue;
 
         /*
          * We only care about objects which have ORM enabled.
          */
+        const auto& o(*optr);
         if (!o.orm_properties())
             continue;
 
@@ -77,12 +87,12 @@ make(const yarn::meta_model::endomodel& im) const {
         return r;
 
     yarn::helpers::name_factory nf;
-    const auto n(nf.build_element_in_model(im.name(), common_odb_options_name));
+    const auto n(nf.build_element_in_model(m.name(), common_odb_options_name));
 
     auto coo(boost::make_shared<common_odb_options>());
     coo->name(n);
     coo->meta_name(meta_name_factory::make_common_odb_options_name());
-    coo->origin_type(im.origin_type());
+    coo->origin_type(origin_types::target);
     r.push_back(coo);
 
     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";

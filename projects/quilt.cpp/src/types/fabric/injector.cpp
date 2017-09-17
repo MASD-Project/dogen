@@ -48,69 +48,69 @@ injector::~injector() noexcept {}
 
 void injector::
 add_element(const boost::shared_ptr<yarn::meta_model::element>& e,
-    yarn::meta_model::endomodel& im) const {
-    im.injected_elements().push_back(e);
+    yarn::meta_model::model& m) const {
+    m.elements().push_back(e);
 }
 
 void injector::add_elements(
     const std::list<boost::shared_ptr<yarn::meta_model::element>>& elements,
-    yarn::meta_model::endomodel& im) const {
+    yarn::meta_model::model& m) const {
     for (auto& e : elements)
-        add_element(e, im);
+        add_element(e, m);
 }
 
 void injector::
-inject_registrar(yarn::meta_model::endomodel& im) const {
+inject_registrar(yarn::meta_model::model& m) const {
     registrar_factory f;
-    const auto elements(f.make(im));
-    add_elements(elements, im);
+    const auto elements(f.make(m));
+    add_elements(elements, m);
 }
 
 void injector::
-inject_build_files(yarn::meta_model::endomodel& im) const {
+inject_build_files(yarn::meta_model::model& m) const {
     build_files_factory f;
-    const auto elements(f.make(im));
-    add_elements(elements, im);
+    const auto elements(f.make(m));
+    add_elements(elements, m);
 }
 
 void injector::
-inject_odb_options(yarn::meta_model::endomodel& im) const {
+inject_odb_options(yarn::meta_model::model& m) const {
     odb_options_factory f;
-    const auto elements(f.make(im));
-    add_elements(elements, im);
+    const auto elements(f.make(m));
+    add_elements(elements, m);
 }
 
 void injector::
-inject_master_headers(yarn::meta_model::endomodel& im) const {
+inject_master_headers(yarn::meta_model::model& m) const {
     const auto& rg(formatters::workflow::registrar());
     const auto& frp(rg.formatter_repository());
     master_header_factory f;
-    const auto e(f.make(frp, im));
-    add_element(e, im);
+    const auto e(f.make(frp, m));
+    add_element(e, m);
 }
 
 void injector::inject_visual_studio(const annotations::type_repository& atrp,
-    yarn::meta_model::endomodel& im) const {
+    yarn::meta_model::model& m) const {
     visual_studio_factory f;
-    const auto e(f.make(atrp, im));
-    add_elements(e, im);
+    const auto e(f.make(atrp, m));
+    add_elements(e, m);
 }
 
 void injector::
-inject_forward_declarations(yarn::meta_model::endomodel& im) const {
+inject_forward_declarations(yarn::meta_model::model& m) const {
     forward_declarations_factory f;
-    const auto e(f.make(im));
-    add_elements(e, im);
+    const auto e(f.make(m));
+    add_elements(e, m);
 }
 
 void injector::inject(const annotations::type_repository& atrp,
-    yarn::meta_model::endomodel& im) const {
-    inject_registrar(im);
-    inject_build_files(im);
-    inject_odb_options(im);
-    inject_master_headers(im);
-    inject_visual_studio(atrp, im);
-    inject_forward_declarations(im);
+    yarn::meta_model::model& m) const {
+    inject_registrar(m);
+    inject_build_files(m);
+    inject_odb_options(m);
+    inject_master_headers(m);
+    inject_visual_studio(atrp, m);
+    inject_forward_declarations(m);
 }
 
 } } } }

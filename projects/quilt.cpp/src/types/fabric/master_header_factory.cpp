@@ -30,6 +30,7 @@
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/types/meta_model/element_visitor.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
@@ -55,7 +56,7 @@ namespace fabric {
 
 namespace {
 
-class generator final {
+class generator final : public yarn::meta_model::element_visitor {
 public:
     generator(const yarn::meta_model::name& model_name,
         const formatters::repository& rp)
@@ -81,21 +82,18 @@ private:
     void process_element(const yarn::meta_model::element& e);
 
 public:
-    void operator()(yarn::meta_model::element&) { }
-    void operator()(const yarn::meta_model::object_template&) {}
-    void operator()(const yarn::meta_model::builtin&) {}
-    void operator()(const yarn::meta_model::visitor& v) { process_element(v); }
-    void operator()(const yarn::meta_model::enumeration& e) {
+    void visit(const yarn::meta_model::visitor& v) { process_element(v); }
+    void visit(const yarn::meta_model::enumeration& e) {
         process_element(e);
     }
-    void operator()(const yarn::meta_model::primitive& p) {
+    void visit(const yarn::meta_model::primitive& p) {
         process_element(p);
     }
-    void operator()(const yarn::meta_model::object& o) { process_element(o); }
-    void operator()(const yarn::meta_model::exception& e) {
+    void visit(const yarn::meta_model::object& o) { process_element(o); }
+    void visit(const yarn::meta_model::exception& e) {
         process_element(e);
     }
-    void operator()(const yarn::meta_model::module& m) { process_element(m); }
+    void visit(const yarn::meta_model::module& m) { process_element(m); }
 
 public:
     boost::shared_ptr<master_header> result() { return result_; }
@@ -162,6 +160,7 @@ void generator::process_element(const yarn::meta_model::element& e) {
     if (e.origin_type() != yarn::meta_model::origin_types::target)
         return;
 
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
     const auto mt(e.meta_name().id());
     const auto i(file_formatters_by_meta_name_.find(mt));
     if (i == file_formatters_by_meta_name_.end()) {
@@ -175,8 +174,8 @@ void generator::process_element(const yarn::meta_model::element& e) {
         const auto fct(fmt->archetype_location().facet());
         const auto arch(fmt->archetype_location().archetype());
         result_->inclusion_by_facet()[fct][arch].push_back(e.name());
-        BOOST_LOG_SEV(lg, debug) << "Added name. Id: " << e.name()
-                                 << " Facet: " << fct << " Archetype: " << arch;
+        BOOST_LOG_SEV(lg, debug) << "Added name. Facet: "
+                                 << fct << " Archetype: " << arch;
     }
 }
 
@@ -184,11 +183,14 @@ void generator::process_element(const yarn::meta_model::element& e) {
 
 boost::shared_ptr<yarn::meta_model::element>
 master_header_factory::make(const formatters::repository& frp,
-    const yarn::meta_model::endomodel& im) const {
+    const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
 
-    generator g(im.name(), frp);
-    yarn::meta_model::elements_traversal(im, g);
+    generator g(m.name(), frp);
+    for(auto& ptr : m.elements()) {
+        const auto& e(*ptr);
+        e.accept(g);
+    }
     const auto r(g.result());
 
     BOOST_LOG_SEV(lg, debug) << "Generated the master header.";

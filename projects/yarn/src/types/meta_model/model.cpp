@@ -52,6 +52,8 @@ model::model()
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
       meta_name_(std::move(rhs.meta_name_)),
+      references_(std::move(rhs.references_)),
+      leaves_(std::move(rhs.leaves_)),
       elements_(std::move(rhs.elements_)),
       root_module_(std::move(rhs.root_module_)),
       module_ids_(std::move(rhs.module_ids_)),
@@ -65,6 +67,8 @@ model::model(model&& rhs)
 model::model(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
+    const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
+    const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
     const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements,
     const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
@@ -76,6 +80,8 @@ model::model(
     const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element)
     : name_(name),
       meta_name_(meta_name),
+      references_(references),
+      leaves_(leaves),
       elements_(elements),
       root_module_(root_module),
       module_ids_(module_ids),
@@ -90,6 +96,8 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
+    swap(references_, other.references_);
+    swap(leaves_, other.leaves_);
     swap(elements_, other.elements_);
     swap(root_module_, other.root_module_);
     swap(module_ids_, other.module_ids_);
@@ -104,6 +112,8 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
+        references_ == rhs.references_ &&
+        leaves_ == rhs.leaves_ &&
         elements_ == rhs.elements_ &&
         root_module_ == rhs.root_module_ &&
         module_ids_ == rhs.module_ids_ &&
@@ -151,6 +161,38 @@ void model::meta_name(const dogen::yarn::meta_model::name& v) {
 
 void model::meta_name(const dogen::yarn::meta_model::name&& v) {
     meta_name_ = std::move(v);
+}
+
+const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& model::references() const {
+    return references_;
+}
+
+std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& model::references() {
+    return references_;
+}
+
+void model::references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& v) {
+    references_ = v;
+}
+
+void model::references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>&& v) {
+    references_ = std::move(v);
+}
+
+const std::unordered_set<dogen::yarn::meta_model::name>& model::leaves() const {
+    return leaves_;
+}
+
+std::unordered_set<dogen::yarn::meta_model::name>& model::leaves() {
+    return leaves_;
+}
+
+void model::leaves(const std::unordered_set<dogen::yarn::meta_model::name>& v) {
+    leaves_ = v;
+}
+
+void model::leaves(const std::unordered_set<dogen::yarn::meta_model::name>&& v) {
+    leaves_ = std::move(v);
 }
 
 const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& model::elements() const {

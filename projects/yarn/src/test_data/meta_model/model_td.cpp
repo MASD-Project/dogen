@@ -24,6 +24,7 @@
 #include "dogen/yarn/test_data/meta_model/module_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/languages_td.hpp"
+#include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
@@ -33,6 +34,27 @@ namespace {
 dogen::yarn::meta_model::name
 create_dogen_yarn_meta_model_name(const unsigned int position) {
     return dogen::yarn::meta_model::name_generator::create(position);
+}
+
+dogen::yarn::meta_model::origin_types
+create_dogen_yarn_meta_model_origin_types(const unsigned int position) {
+    return dogen::yarn::meta_model::origin_types_generator::create(position);
+}
+
+std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types> create_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(unsigned int position) {
+    std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_dogen_yarn_meta_model_name(position + i), create_dogen_yarn_meta_model_origin_types(position + i)));
+    }
+    return r;
+}
+
+std::unordered_set<dogen::yarn::meta_model::name> create_std_unordered_set_dogen_yarn_meta_model_name(unsigned int position) {
+    std::unordered_set<dogen::yarn::meta_model::name> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_dogen_yarn_meta_model_name(position + i));
+    }
+    return r;
 }
 
 dogen::yarn::meta_model::element*
@@ -140,15 +162,17 @@ void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
-    v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(position + 2));
-    v.root_module(create_boost_shared_ptr_dogen_yarn_meta_model_module(position + 3));
-    v.module_ids(create_std_unordered_set_std_string(position + 4));
-    v.has_generatable_types(create_bool(position + 5));
-    v.input_language(create_dogen_yarn_meta_model_languages(position + 6));
-    v.output_language(create_dogen_yarn_meta_model_languages(position + 7));
-    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 8));
-    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 9));
-    v.enabled_archetype_for_element(create_std_unordered_set_dogen_yarn_meta_model_element_archetype(position + 10));
+    v.references(create_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(position + 2));
+    v.leaves(create_std_unordered_set_dogen_yarn_meta_model_name(position + 3));
+    v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(position + 4));
+    v.root_module(create_boost_shared_ptr_dogen_yarn_meta_model_module(position + 5));
+    v.module_ids(create_std_unordered_set_std_string(position + 6));
+    v.has_generatable_types(create_bool(position + 7));
+    v.input_language(create_dogen_yarn_meta_model_languages(position + 8));
+    v.output_language(create_dogen_yarn_meta_model_languages(position + 9));
+    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 10));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 11));
+    v.enabled_archetype_for_element(create_std_unordered_set_dogen_yarn_meta_model_element_archetype(position + 12));
 }
 
 model_generator::result_type

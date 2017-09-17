@@ -33,9 +33,11 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
+#include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
@@ -64,6 +66,8 @@ public:
     model(
         const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::name& meta_name,
+        const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
+        const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
         const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements,
         const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
@@ -100,6 +104,28 @@ public:
     dogen::yarn::meta_model::name& meta_name();
     void meta_name(const dogen::yarn::meta_model::name& v);
     void meta_name(const dogen::yarn::meta_model::name&& v);
+    /**@}*/
+
+    /**
+     * @brief All other models that this model depends on, mapped to their origin.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references() const;
+    std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references();
+    void references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& v);
+    void references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>&& v);
+    /**@}*/
+
+    /**
+     * @brief All leaf types in this endomodel.
+     *
+     * Leaves are types concrete types which have a parent.
+     */
+    /**@{*/
+    const std::unordered_set<dogen::yarn::meta_model::name>& leaves() const;
+    std::unordered_set<dogen::yarn::meta_model::name>& leaves();
+    void leaves(const std::unordered_set<dogen::yarn::meta_model::name>& v);
+    void leaves(const std::unordered_set<dogen::yarn::meta_model::name>&& v);
     /**@}*/
 
     const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements() const;
@@ -179,6 +205,8 @@ public:
 private:
     dogen::yarn::meta_model::name name_;
     dogen::yarn::meta_model::name meta_name_;
+    std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types> references_;
+    std::unordered_set<dogen::yarn::meta_model::name> leaves_;
     std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> > elements_;
     boost::shared_ptr<dogen::yarn::meta_model::module> root_module_;
     std::unordered_set<std::string> module_ids_;

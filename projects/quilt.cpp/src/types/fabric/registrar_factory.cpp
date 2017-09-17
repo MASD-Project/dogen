@@ -51,14 +51,15 @@ make(const yarn::meta_model::name& model_name) const {
 }
 
 std::list<boost::shared_ptr<yarn::meta_model::element>>
-registrar_factory::make(const yarn::meta_model::endomodel& im) const {
+registrar_factory::make(const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;
 
-    auto rg(make(im.name()));
-    rg->origin_type(im.origin_type());
-    for (const auto& l : im.leaves())
+    auto rg(make(m.name()));
+    using yarn::meta_model::origin_types;
+    rg->origin_type(origin_types::target);
+    for (const auto& l : m.leaves())
         rg->leaves().push_back(l);
 
     const auto lambda([](const yarn::meta_model::name& a,
@@ -67,9 +68,9 @@ registrar_factory::make(const yarn::meta_model::endomodel& im) const {
         });
     rg->leaves().sort(lambda);
 
-    for (const auto& pair : im.references()) {
+    for (const auto& pair : m.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == yarn::meta_model::origin_types::proxy_reference)
+        if (origin_type == origin_types::proxy_reference)
             continue;
 
         const auto ref(pair.first);

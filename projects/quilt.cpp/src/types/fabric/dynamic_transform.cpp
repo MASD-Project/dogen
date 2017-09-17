@@ -34,9 +34,6 @@ const std::string id("quilt.cpp.fabric.dynamic_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
-const std::string too_many_output_languages(
-    "Expected only one output language");
-
 }
 
 namespace dogen {
@@ -45,34 +42,28 @@ namespace cpp {
 namespace fabric {
 
 bool dynamic_transform::
-requires_expansion(const yarn::meta_model::endomodel& im) const {
-    if (im.output_languages().size() != 1) {
-        BOOST_LOG_SEV(lg, error) << too_many_output_languages;
-        BOOST_THROW_EXCEPTION(
-            yarn::transforms::transformation_error(too_many_output_languages));
-    }
-
-    const auto l(im.output_languages().front());
+requires_expansion(const yarn::meta_model::model& m) const {
+    const auto l(m.output_language());
     const auto r(l == yarn::meta_model::languages::cpp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
-                                 << im.name().id() << " for language: " << l;
+                                 << m.name().id() << " for language: " << l;
     }
     return r;
 }
 
 void dynamic_transform::expand_injection(
     const annotations::type_repository& atrp,
-    yarn::meta_model::endomodel& im) const {
+    yarn::meta_model::model& m) const {
     injector i;
-    i.inject(atrp, im);
+    i.inject(atrp, m);
 }
 
 void dynamic_transform::expand_decoration(
     const dogen::formatters::decoration_properties_factory& dpf,
-    yarn::meta_model::endomodel& im) const {
+    yarn::meta_model::model& m) const {
     decoration_expander de;
-    de.expand(dpf, im);
+    de.expand(dpf, m);
 }
 
 std::string dynamic_transform::id() const {
@@ -81,13 +72,13 @@ std::string dynamic_transform::id() const {
 
 void dynamic_transform::transform(const yarn::transforms::context& ctx,
     const dogen::formatters::decoration_properties_factory& dpf,
-    yarn::meta_model::endomodel& im) const {
+    yarn::meta_model::model& m) const {
 
-    if (!requires_expansion(im))
+    if (!requires_expansion(m))
         return;
 
-    expand_injection(ctx.type_repository(), im);
-    expand_decoration(dpf, im);
+    expand_injection(ctx.type_repository(), m);
+    expand_decoration(dpf, m);
 }
 
 } } } }

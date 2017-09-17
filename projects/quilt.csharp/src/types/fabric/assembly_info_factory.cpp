@@ -41,17 +41,17 @@ namespace csharp {
 namespace fabric {
 
 boost::shared_ptr<yarn::meta_model::element> assembly_info_factory::
-make(const yarn::meta_model::endomodel& im) const {
+make(const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
 
     yarn::helpers::name_factory nf;
-    auto n(nf.build_element_in_model(im.name(), simple_name));
+    auto n(nf.build_element_in_model(m.name(), simple_name));
     n.location().internal_modules().push_back(module_name);
 
     auto r(boost::make_shared<assembly_info>());
     r->name(n);
     r->meta_name(meta_name_factory::make_assembly_info_name());
-    r->origin_type(im.origin_type());
+    r->origin_type(yarn::meta_model::origin_types::target);
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";
     return r;

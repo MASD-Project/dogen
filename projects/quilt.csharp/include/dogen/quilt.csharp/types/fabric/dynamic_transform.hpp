@@ -37,20 +37,20 @@ class dynamic_transform final :
         public yarn::transforms::dynamic_transform_interface {
 private:
     bool requires_expansion(
-        const yarn::meta_model::endomodel& im) const;
+        const yarn::meta_model::model& m) const;
 
     void expand_injection(const annotations::type_repository& atrp,
-        yarn::meta_model::endomodel& im) const;
+        yarn::meta_model::model& m) const;
 
     void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::meta_model::endomodel& im) const;
+        yarn::meta_model::model& m) const;
 
 public:
     std::string id() const override;
     void transform(const yarn::transforms::context& ctx,
         const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::meta_model::endomodel& im) const override;
+        yarn::meta_model::model& m) const override;
 };
 
 } } } }

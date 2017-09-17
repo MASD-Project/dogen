@@ -23,6 +23,7 @@
 #include "dogen/yarn/hash/meta_model/module_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/languages_hash.hpp"
+#include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
 #include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
@@ -33,6 +34,23 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_set_dogen_yarn_meta_model_name(const std::unordered_set<dogen::yarn::meta_model::name>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
 }
 
 inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_element(const boost::shared_ptr<dogen::yarn::meta_model::element>& v) {
@@ -101,6 +119,8 @@ std::size_t model_hasher::hash(const model& v) {
 
     combine(seed, v.name());
     combine(seed, v.meta_name());
+    combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(v.references()));
+    combine(seed, hash_std_unordered_set_dogen_yarn_meta_model_name(v.leaves()));
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(v.elements()));
     combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_module(v.root_module()));
     combine(seed, hash_std_unordered_set_std_string(v.module_ids()));

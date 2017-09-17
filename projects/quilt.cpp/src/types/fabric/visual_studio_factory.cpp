@@ -91,9 +91,9 @@ make_configuration(const annotations::type_repository& atrp,
 }
 
 std::string visual_studio_factory::
-obtain_project_name(const yarn::meta_model::endomodel& im) const {
+obtain_project_name(const yarn::meta_model::model& m) const {
     yarn::helpers::name_flattener nfl(false/*detect_model_name*/);
-    const auto ns(nfl.flatten(im.name()));
+    const auto ns(nfl.flatten(m.name()));
 
     using boost::algorithm::join;
     const auto r(join(ns, dot));
@@ -103,17 +103,17 @@ obtain_project_name(const yarn::meta_model::endomodel& im) const {
 boost::shared_ptr<yarn::meta_model::element>
 visual_studio_factory::make_solution(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const yarn::meta_model::endomodel& im) const {
+    const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
     yarn::helpers::name_factory nf;
     const auto sn(project_name + "-vc" + sln_extension);
-    const auto n(nf.build_element_in_model(im.name(), sn));
+    const auto n(nf.build_element_in_model(m.name(), sn));
 
     auto r(boost::make_shared<visual_studio_solution>());
     r->name(n);
     r->meta_name(meta_name_factory::make_visual_studio_solution_name());
-    r->origin_type(im.origin_type());
+    r->origin_type(yarn::meta_model::origin_types::target);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
     r->project_solution_guid(cfg.project_solution_guid());
@@ -126,17 +126,17 @@ visual_studio_factory::make_solution(const visual_studio_configuration cfg,
 boost::shared_ptr<yarn::meta_model::element>
 visual_studio_factory::make_project(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const yarn::meta_model::endomodel& im) const {
+    const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
     yarn::helpers::name_factory nf;
     const auto sn(project_name + proj_extension);
-    const auto n(nf.build_element_in_model(im.name(), sn));
+    const auto n(nf.build_element_in_model(m.name(), sn));
 
     auto r(boost::make_shared<visual_studio_project>());
     r->name(n);
     r->meta_name(meta_name_factory::make_visual_studio_project_name());
-    r->origin_type(im.origin_type());
+    r->origin_type(yarn::meta_model::origin_types::target);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
 
@@ -147,15 +147,15 @@ visual_studio_factory::make_project(const visual_studio_configuration cfg,
 
 std::list<boost::shared_ptr<yarn::meta_model::element>> visual_studio_factory::
 make(const annotations::type_repository& atrp,
-    const yarn::meta_model::endomodel& im) const {
+    const yarn::meta_model::model& m) const {
 
-    const auto pn(obtain_project_name(im));
-    const auto ra(im.root_module()->annotation());
+    const auto pn(obtain_project_name(m));
+    const auto ra(m.root_module()->annotation());
     const auto cfg(make_configuration(atrp, ra));
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;
-    r.push_back(make_solution(cfg, pn, im));
-    r.push_back(make_project(cfg, pn, im));
+    r.push_back(make_solution(cfg, pn, m));
+    r.push_back(make_project(cfg, pn, m));
 
     return r;
 }

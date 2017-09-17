@@ -27,7 +27,7 @@
 
 #include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -37,7 +37,7 @@ namespace fabric {
 class decoration_expander final {
 public:
     void expand(const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::meta_model::endomodel& im) const;
+        yarn::meta_model::model& m) const;
 };
 
 } } } }

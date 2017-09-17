@@ -152,6 +152,8 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
     const auto ol(em.output_languages().front());
     r.output_language(ol);
 
+    r.leaves(em.leaves());
+    r.references(em.references());
     r.root_module(em.root_module());
     r.has_generatable_types(em.has_generatable_types());
     r.orm_properties(em.orm_properties());

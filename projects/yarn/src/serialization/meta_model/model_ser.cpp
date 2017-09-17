@@ -38,6 +38,7 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/languages_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
@@ -51,6 +52,8 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("meta_name", v.meta_name_);
+    ar << make_nvp("references", v.references_);
+    ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("module_ids", v.module_ids_);
@@ -68,6 +71,8 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("meta_name", v.meta_name_);
+    ar >> make_nvp("references", v.references_);
+    ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("module_ids", v.module_ids_);

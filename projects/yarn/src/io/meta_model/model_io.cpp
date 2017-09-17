@@ -26,9 +26,42 @@
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::yarn::meta_model::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace boost {
 
@@ -160,6 +193,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::yarn::meta_model::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
+      << "\"references\": " << v.references() << ", "
+      << "\"leaves\": " << v.leaves() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"module_ids\": " << v.module_ids() << ", "

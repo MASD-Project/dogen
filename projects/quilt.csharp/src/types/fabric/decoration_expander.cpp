@@ -22,7 +22,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
@@ -57,18 +63,16 @@ private:
     }
 
 public:
-    void operator()(yarn::meta_model::element& e) { e.accept(*this); }
-    void operator()(yarn::meta_model::module& m) { update(m); }
-    void operator()(yarn::meta_model::object_template& ot) { update(ot); }
-    void operator()(yarn::meta_model::builtin& b) { update(b); }
-    void operator()(yarn::meta_model::enumeration& e) { update(e); }
-    void operator()(yarn::meta_model::primitive& p) { update(p); }
-    void operator()(yarn::meta_model::object& o) { update(o); }
-    void operator()(yarn::meta_model::exception& e) { update(e); }
-    void operator()(yarn::meta_model::visitor& v) { update(v); }
-
-public:
     using element_visitor::visit;
+    void visit(yarn::meta_model::element& e) { e.accept(*this); }
+    void visit(yarn::meta_model::module& m) { update(m); }
+    void visit(yarn::meta_model::object_template& ot) { update(ot); }
+    void visit(yarn::meta_model::builtin& b) { update(b); }
+    void visit(yarn::meta_model::enumeration& e) { update(e); }
+    void visit(yarn::meta_model::primitive& p) { update(p); }
+    void visit(yarn::meta_model::object& o) { update(o); }
+    void visit(yarn::meta_model::exception& e) { update(e); }
+    void visit(yarn::meta_model::visitor& v) { update(v); }
     void visit(assistant& a) { update(a); }
 
 private:
@@ -77,13 +81,13 @@ private:
 
 void decoration_expander::
 expand(const dogen::formatters::decoration_properties_factory& dpf,
-    yarn::meta_model::endomodel& im) const {
+    yarn::meta_model::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";
 
     decoration_updater du(dpf);
-    const bool include_injected_elements(true);
-    yarn::meta_model::elements_traversal(im, du, include_injected_elements);
+    for(auto& ptr : m.elements())
+        ptr->accept(du);
 
     BOOST_LOG_SEV(lg, debug) << "Finished populating decoration properties.";
 }
