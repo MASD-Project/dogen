@@ -10,7 +10,7 @@
 
 * Stories
 
-* Active
+** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
 #+CAPTION: Clock summary at [2017-08-01 Tue 20:39]
@@ -111,10 +111,11 @@ Checklist:
 - close current sprint.
 - sign tag with key. Push tag separately so we build the correct
   windows version.
-- open new sprint, updating CMake version and appveyor version. This
-  should all be in one commit.
+- open new sprint, updating CMake version, README and appveyor
+  version. This should all be in one commit.
 - write up release notes, publish them in github.
-- when tag build is finished, announce on twitter and linked in.
+- when tag build is finished, announce on gitter, twitter and linked
+  in.
 - update bintray with the correct release notes.
 
 *** COMPLETED Tidy-up post-processing validation                      :story:
