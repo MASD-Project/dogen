@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_PRE_PROCESSING_VALIDATOR_FWD_HPP
-#define DOGEN_YARN_TYPES_HELPERS_PRE_PROCESSING_VALIDATOR_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_ENDOMODEL_PRE_PROCESSING_VALIDATOR_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_ENDOMODEL_PRE_PROCESSING_VALIDATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-class pre_processing_validator;
+class endomodel_pre_processing_validator;
 
 } } }
 

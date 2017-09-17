@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
+#include "dogen/yarn/types/helpers/endomodel_pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
@@ -96,7 +96,7 @@ apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
     /*
      * Ensure the model is valid.
      */
-    helpers::pre_processing_validator::validate(em);
+    helpers::endomodel_pre_processing_validator::validate(em);
 }
 
 void endomodel_pre_processing_chain::

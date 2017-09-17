@@ -22,7 +22,7 @@
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/indexer.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
-#include "dogen/yarn/types/helpers/post_processing_validator.hpp"
+#include "dogen/yarn/types/helpers/endomodel_post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
@@ -163,7 +163,7 @@ transform(const context& ctx, meta_model::endomodel& em) {
     /*
      * Ensure the model is valid.
      */
-    helpers::post_processing_validator::validate(idx, em);
+    helpers::endomodel_post_processing_validator::validate(idx, em);
 
     stp.end_chain(em);
     BOOST_LOG_SEV(lg, debug) << "Finished post-processing chain.";

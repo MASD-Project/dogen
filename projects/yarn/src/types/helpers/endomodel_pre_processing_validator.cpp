@@ -28,12 +28,12 @@
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
-#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
+#include "dogen/yarn/types/helpers/endomodel_pre_processing_validator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.helpers.pre_processing_validator"));
+auto lg(logger_factory("yarn.helpers.endomodel_pre_processing_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");
@@ -202,7 +202,7 @@ validate(const std::string& id, const meta_model::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 
-void pre_processing_validator::
+void endomodel_pre_processing_validator::
 validate(const meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 

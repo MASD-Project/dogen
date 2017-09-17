@@ -29,14 +29,14 @@
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
+#include "dogen/yarn/types/helpers/endomodel_pre_processing_validator.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
-const std::string test_suite("validator_tests");
+const std::string test_suite("endomodel_pre_processing_validator_tests");
 
 using dogen::yarn::test::mock_endomodel_factory;
 const mock_endomodel_factory::flags flags;
@@ -54,7 +54,7 @@ using dogen::utility::test::contains_checker;
 using dogen::yarn::helpers::validation_error;
 using dogen::yarn::meta_model::origin_types;
 using dogen::yarn::meta_model::languages;
-using dogen::yarn::helpers::pre_processing_validator;
+using dogen::yarn::helpers::endomodel_pre_processing_validator;
 
 
 BOOST_AUTO_TEST_SUITE(merger_tests)
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 
     contains_checker<validation_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(
-        pre_processing_validator::validate(m), validation_error, c);
+        endomodel_pre_processing_validator::validate(m), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     contains_checker<validation_error> c(inconsistent_kvp);
     BOOST_CHECK_EXCEPTION(
-        pre_processing_validator::validate(m), validation_error, c);
+        endomodel_pre_processing_validator::validate(m), validation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

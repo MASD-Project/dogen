@@ -125,7 +125,6 @@
 #include "dogen/yarn/types/transforms/naming_configuration.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/meta_model/orm_module_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
@@ -135,7 +134,6 @@
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
-#include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics_builder.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics_printer.hpp"
@@ -164,9 +162,11 @@
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
+#include "dogen/yarn/types/helpers/endomodel_pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
+#include "dogen/yarn/types/helpers/endomodel_post_processing_validator.hpp"
 
 #endif

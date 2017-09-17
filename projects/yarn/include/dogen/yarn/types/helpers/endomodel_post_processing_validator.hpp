@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_POST_PROCESSING_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_HELPERS_POST_PROCESSING_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_ENDOMODEL_POST_PROCESSING_VALIDATOR_HPP
+#define DOGEN_YARN_TYPES_HELPERS_ENDOMODEL_POST_PROCESSING_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,7 +40,7 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-class post_processing_validator final {
+class endomodel_post_processing_validator final {
 private:
     static bool allow_spaces_in_built_in_types(const meta_model::languages l);
 
