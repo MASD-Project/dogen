@@ -33,6 +33,7 @@
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_assembly_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 
 namespace {
@@ -79,15 +80,22 @@ endomodel_generation_chain::transform(const context& ctx) {
      * - the target model is a PSM and the reference model is also a
      *   PSM, and they share the same language.
      */
-    const auto refs(references_chain::transform(ctx, target));
-
-    /*
-     * Execute the assembly chain for each of the requested output
-     * languages.
-     */
     std::list<meta_model::endomodel> r;
-    for (const auto ol : target.output_languages())
-        r.push_back(endomodel_assembly_chain::transform(ctx, ol, target, refs));
+    const auto refs(references_chain::transform(ctx, target));
+    for (const auto ol : target.output_languages()) {
+        /*
+         * Execute the assembly chain for each of the requested output
+         * languages.
+         */
+        auto em(endomodel_assembly_chain::transform(ctx, ol, target, refs));
+
+        /*
+         * Then apply all of the post-processing transforms to the
+         * assembled model.
+         */
+        endomodel_post_processing_chain::transform(ctx, em);
+        r.push_back(em);
+    }
 
     stp.end_chain(r);
     return r;

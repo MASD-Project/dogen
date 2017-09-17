@@ -24,7 +24,6 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
-#include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_assembly_chain.hpp"
 
 namespace {
@@ -40,10 +39,11 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-meta_model::endomodel
-endomodel_assembly_chain::obtain_merged_model(const context& ctx,
+meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
+    helpers::scoped_chain_probing stp(lg, "model assembly chain",
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * Perform all the language mapping required for target and
@@ -51,6 +51,9 @@ endomodel_assembly_chain::obtain_merged_model(const context& ctx,
      */
     const auto mapped_target(mapping_transform::transform(ctx, target, l));
 
+    /*
+     * Now do the same for the references.
+     */
     std::list<meta_model::endomodel> mapped_refs;
     for (const auto& ref : refs) {
         /*
@@ -71,25 +74,7 @@ endomodel_assembly_chain::obtain_merged_model(const context& ctx,
     /*
      * Merge the mapped models.
      */
-    return merge_transform::transform(ctx, mapped_target, mapped_refs);
-}
-
-meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
-    const meta_model::languages l, const meta_model::endomodel& target,
-    const std::list<meta_model::endomodel>& refs) {
-    helpers::scoped_chain_probing stp(lg, "model assembly chain",
-        transform_id, target.name().id(), ctx.prober());
-
-    /*
-     * First we obtain the merged (and mapped) model.
-     */
-    auto r(obtain_merged_model(ctx, l , target, refs));
-
-    /*
-     * Then we apply all of the post-processing transforms to the
-     * merged model.
-     */
-    endomodel_post_processing_chain::transform(ctx, r);
+    const auto r(merge_transform::transform(ctx, mapped_target, mapped_refs));
 
     stp.end_chain(r);
     return r;

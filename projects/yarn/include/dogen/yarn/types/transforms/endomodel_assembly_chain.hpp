@@ -38,12 +38,6 @@ namespace transforms {
  * @brief Merges target and references and post-processes the result.
  */
 class endomodel_assembly_chain final {
-private:
-    static meta_model::endomodel
-    obtain_merged_model(const context& ctx, const meta_model::languages l,
-        const meta_model::endomodel& target,
-        const std::list<meta_model::endomodel>& refs);
-
 public:
     static meta_model::endomodel transform(const context& ctx,
         const meta_model::languages l,
