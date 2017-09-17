@@ -38,7 +38,6 @@
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
-#include "dogen/yarn/types/transforms/formatting_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_post_processing_chain.hpp"
 
 namespace {
@@ -153,12 +152,6 @@ transform(const context& ctx, meta_model::endomodel& em) {
      * kernel specific types that might have been added.
      */
     enablement_transform::transform(ctx, em);
-
-    /*
-     * The formatting transform has no dependencies in the
-     * post-processing chain.
-     */
-    formatting_transform::transform(ctx, em);
 
     /*
      * Ensure the model is valid.

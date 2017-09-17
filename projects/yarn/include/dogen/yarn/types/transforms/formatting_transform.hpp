@@ -28,7 +28,7 @@
 #include <string>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/formatting_styles.hpp"
 #include "dogen/yarn/types/transforms/formatting_configuration.hpp"
 
@@ -62,7 +62,7 @@ private:
         meta_model::element& e);
 
 public:
-    static void transform(const context& ctx, meta_model::endomodel& em);
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 } } }

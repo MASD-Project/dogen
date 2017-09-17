@@ -41190,13 +41190,13 @@ are no longer required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="-229,106"/>
+        <dia:point val="-41,106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-229.05,105.95;-206.89,109.65"/>
+        <dia:rectangle val="-41.05,105.95;-18.89,109.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-229,106"/>
+        <dia:point val="-41,106"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.059999999999999"/>
@@ -41367,13 +41367,13 @@ are no longer required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O303">
       <dia:attribute name="obj_pos">
-        <dia:point val="-228,116"/>
+        <dia:point val="-23,93"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-228.05,115.95;-213.205,119.65"/>
+        <dia:rectangle val="-23.05,92.95;-8.205,96.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-228,116"/>
+        <dia:point val="-23,93"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -41561,19 +41561,19 @@ are no longer required.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-171,106"/>
+        <dia:point val="-29.97,109.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-218.02,102.2;-170.25,106.8"/>
+        <dia:rectangle val="-33.605,108.85;-29.22,116.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-171,106"/>
-        <dia:point val="-171,103"/>
-        <dia:point val="-217.97,103"/>
-        <dia:point val="-217.97,106"/>
+        <dia:point val="-29.97,109.6"/>
+        <dia:point val="-29.97,114"/>
+        <dia:point val="-33.555,114"/>
+        <dia:point val="-33.555,116"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -41590,8 +41590,8 @@ are no longer required.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O104" connection="0"/>
-        <dia:connection handle="1" to="O302" connection="1"/>
+        <dia:connection handle="0" to="O302" connection="6"/>
+        <dia:connection handle="1" to="O310" connection="2"/>
       </dia:connections>
       <dia:childnode parent="O87"/>
     </dia:object>
@@ -41633,19 +41633,19 @@ are no longer required.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-217.97,109.6"/>
+        <dia:point val="-29.97,106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.678,108.85;-217.22,116.8"/>
+        <dia:rectangle val="-30.72,96.55;-15.4275,106.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-217.97,109.6"/>
-        <dia:point val="-217.97,113"/>
-        <dia:point val="-220.627,113"/>
-        <dia:point val="-220.627,116"/>
+        <dia:point val="-29.97,106"/>
+        <dia:point val="-29.97,101"/>
+        <dia:point val="-15.6275,101"/>
+        <dia:point val="-15.6275,96.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -41662,8 +41662,8 @@ are no longer required.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O302" connection="6"/>
-        <dia:connection handle="1" to="O303" connection="1"/>
+        <dia:connection handle="0" to="O302" connection="1"/>
+        <dia:connection handle="1" to="O303" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O87"/>
     </dia:object>
@@ -42278,7 +42278,7 @@ are no longer required.#</dia:string>
         <dia:point val="-64.4675,109.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.2175,108.85;-44.5775,117.6"/>
+        <dia:rectangle val="-65.2175,108.85;-55.8,117.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42286,8 +42286,8 @@ are no longer required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-64.4675,109.6"/>
         <dia:point val="-64.4675,114"/>
-        <dia:point val="-44.7775,114"/>
-        <dia:point val="-44.7775,116"/>
+        <dia:point val="-56,114"/>
+        <dia:point val="-56,116"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -42305,7 +42305,7 @@ are no longer required.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O306" connection="6"/>
-        <dia:connection handle="1" to="O310" connection="1"/>
+        <dia:connection handle="1" to="O310" connection="0"/>
       </dia:connections>
       <dia:childnode parent="O87"/>
     </dia:object>

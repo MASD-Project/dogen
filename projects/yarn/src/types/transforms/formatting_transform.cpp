@@ -18,15 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include <functional>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -135,8 +134,7 @@ formatting_transform::make_formatting_configuration(
 }
 
 void formatting_transform::
-transform_element(
-    const std::unordered_map<std::string, type_group> tgs,
+transform_element(const std::unordered_map<std::string, type_group> tgs,
     meta_model::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Transforming element: " << e.name().id();
 
@@ -159,20 +157,18 @@ transform_element(
 }
 
 void formatting_transform::
-transform(const context& ctx, meta_model::endomodel& em) {
+transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_transform_probing stp(lg, "formatting transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& atrp(ctx.type_repository());
     const auto& als(ctx.archetype_location_repository().archetype_locations());
     const auto tgs(make_type_groups(atrp, als));
-    using namespace std::placeholders;
-    const auto f(formatting_transform::transform_element);
-    auto v(std::bind(f, std::ref(tgs), _1));
 
-    const bool include_injected_elements(true);
-    meta_model::elements_traversal(em, v, include_injected_elements);
-    stp.end_transform(em);
+    for(auto& ptr : m.elements())
+        transform_element(tgs, *ptr);
+
+    stp.end_transform(m);
 }
 
 } } }

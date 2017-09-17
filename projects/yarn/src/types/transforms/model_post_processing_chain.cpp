@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/formatting_transform.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
@@ -41,6 +42,12 @@ void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_chain_probing stp(lg, "model post-processing chain",
         transform_id, m.name().id(), ctx.prober(), m);
+
+    /*
+     * The formatting transform has no dependencies in the
+     * post-processing chain.
+     */
+    formatting_transform::transform(ctx, m);
 
     stp.end_chain(m);
 }
