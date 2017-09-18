@@ -175,6 +175,26 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6315644420331053056][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
+*** COMPLETED Add logging to all top-level workflow activities        :story:
+    CLOSED: [2017-09-18 Mon 21:43]
+
+*Rationale*: probing has addressed this problem.
+
+We need to make sure the log file is narrating a story. For this we
+need to add logging to all start and end of activities by the
+workflows. This means that when we filter by workflow name we should
+be able to quickly figure out where things went wrong.
+
+*** COMPLETED Add logging to test suite                               :story:
+    CLOSED: [2017-09-18 Mon 21:42]
+
+*Rationale*: initialisation of logging in tests has addressed this
+problem.
+
+At present its not possible to figure out where a test suite starts or
+ends in the log file. We should also move the asserts from =DEBUG= to
+=TRACE=, unless there is an error.
+
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2017-09-18 Mon 21:32]--[2017-09-18 Mon 21:39] =>  0:07
     CLOCK: [2017-09-18 Mon 00:01]--[2017-09-18 Mon 00:08] =>  0:07
@@ -619,15 +639,3 @@ Random notes:
 - some support neither (cmakelists, etc).
 
 ** Deprecated
-*** Add logging to all top-level workflow activities                  :story:
-
-We need to make sure the log file is narrating a story. For this we
-need to add logging to all start and end of activities by the
-workflows. This means that when we filter by workflow name we should
-be able to quickly figure out where things went wrong.
-
-*** Add logging to test suite                                         :story:
-
-At present its not possible to figure out where a test suite starts or
-ends in the log file. We should also move the asserts from =DEBUG= to
-=TRACE=, unless there is an error.
