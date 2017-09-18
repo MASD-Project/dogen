@@ -34,7 +34,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/yarn/test/mock_options_factory.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/code_generator.hpp"
+#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/model_ser.hpp"
@@ -66,7 +66,7 @@ const bool enable_probing_globally(false);
 const std::string empty;
 const std::string empty_module_path;
 const std::string test_module("yarn");
-const std::string test_suite("code_generator_tests");
+const std::string test_suite("code_generation_tests");
 
 const std::string expected("/expected");
 const std::string actual_dia_dir("/actual.dia");
@@ -142,13 +142,13 @@ bool execute_test(const test_configuration& tc) {
      */
     // boost::filesystem::remove_all(tc.actual);
     // boost::filesystem::create_directory(tc.actual);
-    dogen::yarn::code_generator::generate(tc.options);
+    dogen::yarn::transforms::code_generation_chain::transform(tc.options);
 
     using dogen::utility::test::asserter;
     return asserter::assert_directory(tc.expected, tc.actual);
 }
 
-bool test_code_generator(const std::string& model_name,
+bool test_code_generation(const std::string& model_name,
     const boost::filesystem::path& target,
     const std::string& actual_dir, bool enable_probing,
     const boost::filesystem::path& probing_directory_path) {
@@ -157,11 +157,11 @@ bool test_code_generator(const std::string& model_name,
     return execute_test(tc);
 }
 
-bool test_code_generator(const boost::filesystem::path& target,
+bool test_code_generation(const boost::filesystem::path& target,
     const std::string& actual_dir, bool enable_probing,
     const boost::filesystem::path& probing_directory_path) {
     const auto name(target.stem().string());
-    return test_code_generator(name, target, actual_dir,
+    return test_code_generation(name, target, actual_dir,
         enable_probing, probing_directory_path);
 }
 
@@ -177,49 +177,49 @@ BOOST_AUTO_TEST_CASE(cpp_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("cpp_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_cpp_model_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code_dia) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_disable_facet_folders_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code_dia) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_disable_cmakelists_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_types_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_types_generates_expected_code_dia");
     const bool ep(true/*enable probing locally*/);
     const auto dia(yarn_dia::input_enable_facet_types_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_cod_diae");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_enable_facet_hash_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_enable_facet_serialization_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_enable_facet_io_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
@@ -227,7 +227,7 @@ BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
     const bool ep(false/*enable probing locally*/);
     const auto target(yarn_dia::input_class_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
-    BOOST_CHECK_EXCEPTION(test_code_generator(target, actual_dia_dir, ep, pd),
+    BOOST_CHECK_EXCEPTION(test_code_generation(target, actual_dia_dir, ep, pd),
         std::exception, c);
 }
 
@@ -235,28 +235,28 @@ BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_compressed_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_two_layers_with_objects_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("std_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_std_model_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("boost_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_boost_model_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
@@ -264,7 +264,7 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_package_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
-    BOOST_CHECK_EXCEPTION(test_code_generator(dia, actual_dia_dir, ep, pd),
+    BOOST_CHECK_EXCEPTION(test_code_generation(dia, actual_dia_dir, ep, pd),
         std::exception, c);
 }
 
@@ -272,7 +272,7 @@ BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_dia
     SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_all_path_and_directory_settings_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_dia) {
@@ -286,14 +286,14 @@ BOOST_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("cpp_98_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_cpp_98_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(lam_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("lam_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_lam_model_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 #ifdef ENABLE_CSHARP_TESTS
@@ -302,7 +302,7 @@ BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
     const auto dia(yarn_dia::input_csharp_model_dia());
-    BOOST_CHECK(test_code_generator(dia, actual_dia_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 #endif // ENABLE_CSHARP_TESTS
@@ -315,77 +315,77 @@ BOOST_AUTO_TEST_CASE(cpp_model_generates_expected_code_json) {
     SETUP_TEST_LOG("cpp_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_cpp_model_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code_json) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_disable_facet_folders_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code_json) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_disable_cmakelists_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_types_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_types_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_enable_facet_types_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_enable_facet_hash_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_enable_facet_serialization_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_enable_facet_io_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code_json) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_compressed_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code_json) {
     SETUP_TEST_LOG("std_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_std_model_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code_json) {
     SETUP_TEST_LOG("boost_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_boost_model_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_json) {
     SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_all_path_and_directory_settings_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_json) {
@@ -399,14 +399,14 @@ BOOST_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_json) {
     SETUP_TEST_LOG("cpp_98_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_cpp_98_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_AUTO_TEST_CASE(lam_model_generates_expected_code_json) {
     SETUP_TEST_LOG("lam_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_lam_model_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 #ifdef ENABLE_CSHARP_TESTS
@@ -415,7 +415,7 @@ BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
     const auto json(yarn_json::input_csharp_model_json());
-    BOOST_CHECK(test_code_generator(json, actual_json_dir, ep, pd));
+    BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 #endif // ENABLE_CSHARP_TESTS

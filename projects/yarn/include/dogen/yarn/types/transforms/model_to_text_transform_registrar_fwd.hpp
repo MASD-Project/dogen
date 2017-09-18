@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_KERNEL_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_KERNEL_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_TRANSFORM_REGISTRAR_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_TRANSFORM_REGISTRAR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace quilt {
-namespace cpp {
+namespace yarn {
+namespace transforms {
 
-class kernel;
+class model_to_text_transform_registrar;
 
 } } }
 

@@ -27,7 +27,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/code_generator.hpp"
+#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/knitter/initializer.hpp"
 #include "dogen/knitter/workflow_error.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
@@ -114,7 +114,7 @@ void workflow::knit(const yarn::transforms::options& o) const {
     initializer::initialize();
 
     try {
-        yarn::code_generator::generate(o);
+        yarn::transforms::code_generation_chain::transform(o);
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));
     } catch (boost::exception& e) {

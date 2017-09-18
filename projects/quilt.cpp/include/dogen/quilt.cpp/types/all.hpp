@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/quilt.cpp/types/cpp.hpp"
-#include "dogen/quilt.cpp/types/kernel.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
@@ -56,6 +55,7 @@
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.cpp/types/model_to_text_transform.hpp"
 #include "dogen/quilt.cpp/types/fabric/dynamic_transform.hpp"
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"

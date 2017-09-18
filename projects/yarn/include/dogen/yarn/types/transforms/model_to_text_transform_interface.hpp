@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_KERNEL_INTERFACE_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_KERNEL_INTERFACE_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_TRANSFORM_INTERFACE_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,8 +34,9 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/text_model.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/textual_model.hpp"
+
 
 namespace dogen {
 namespace yarn {
@@ -45,12 +46,14 @@ namespace transforms {
  * @brief Performs a model to text transformation of a meta-model,
  * into its supported language.
  */
-class kernel_interface {
+class model_to_text_transform_interface {
 public:
-    kernel_interface() = default;
-    kernel_interface(const kernel_interface&) = delete;
-    kernel_interface(kernel_interface&&) = default;
-    virtual ~kernel_interface() noexcept = 0;
+    model_to_text_transform_interface() = default;
+    model_to_text_transform_interface(
+        const model_to_text_transform_interface&) = delete;
+    model_to_text_transform_interface(
+        model_to_text_transform_interface&&) = default;
+    virtual ~model_to_text_transform_interface() noexcept = 0;
 
 public:
     /**
@@ -80,8 +83,8 @@ public:
     /**
      * @brief Generates the source code for the kernel.
      */
-    virtual textual_model
-    generate(const context& ctx, const bool requires_kernel_directory,
+    virtual meta_model::text_model
+    transform(const context& ctx, const bool requires_kernel_directory,
         const meta_model::model& m) const = 0;
 };
 

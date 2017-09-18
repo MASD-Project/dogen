@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_KERNEL_HPP
-#define DOGEN_QUILT_CPP_TYPES_KERNEL_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_MODEL_TO_TEXT_TRANSFORM_HPP
+#define DOGEN_QUILT_CPP_TYPES_MODEL_TO_TEXT_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/transforms/kernel_interface.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_transform_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -45,16 +45,17 @@ namespace quilt {
 namespace cpp {
 
 /**
- * @brief Manages the c++ kernel kernel.
+ * @brief Implements a C++ model to text transform.
  */
-class kernel final : public yarn::transforms::kernel_interface {
+class model_to_text_transform final :
+        public yarn::transforms::model_to_text_transform_interface {
 public:
-    kernel() = default;
-    kernel(const kernel&) = delete;
-    kernel(kernel&&) = default;
+    model_to_text_transform() = default;
+    model_to_text_transform(const model_to_text_transform&) = delete;
+    model_to_text_transform(model_to_text_transform&&) = default;
 
 public:
-    ~kernel() noexcept;
+    ~model_to_text_transform() noexcept;
 
 private:
     /**
@@ -108,8 +109,8 @@ public:
 
     yarn::meta_model::languages language() const override;
 
-    yarn::transforms::textual_model
-    generate(const yarn::transforms::context& ctx,
+    yarn::meta_model::text_model
+    transform(const yarn::transforms::context& ctx,
         const bool enable_kernel_directories,
         const yarn::meta_model::model& m) const override;
 };

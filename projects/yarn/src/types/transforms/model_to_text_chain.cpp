@@ -37,9 +37,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string unsupported_language(
-    "Could not find kernel for language: ");
-const std::string disabled_kernel(
-    "Kernel for requested language is disabled: ");
+    "Could not find transform for language: ");
+const std::string disabled_transform(
+    "Transform for requested language is disabled: ");
 
 }
 
@@ -47,7 +47,8 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::shared_ptr<kernel_registrar> model_to_text_chain::registrar_;
+std::shared_ptr<model_to_text_transform_registrar>
+model_to_text_chain::registrar_;
 
 model_to_text_chain::type_group model_to_text_chain::
 make_type_group(const annotations::type_repository& atrp,
@@ -109,21 +110,21 @@ configuration model_to_text_chain::make_configuration(
     return r;
 }
 
-kernel_registrar& model_to_text_chain::registrar() {
+model_to_text_transform_registrar& model_to_text_chain::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<kernel_registrar>();
+        registrar_ = std::make_shared<model_to_text_transform_registrar>();
 
     return *registrar_;
 }
 
 void model_to_text_chain::
-merge(textual_model&& src, textual_model& dst) {
+merge(meta_model::text_model&& src, meta_model::text_model& dst) {
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
     dst.managed_directories().splice(dst.managed_directories().end(),
         src.managed_directories());
 }
 
-textual_model model_to_text_chain::
+meta_model::text_model model_to_text_chain::
 transform(const context& ctx, const meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().id();
 
@@ -133,32 +134,32 @@ transform(const context& ctx, const meta_model::model& m) {
      */
     if (!m.has_generatable_types()) {
         BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-        return textual_model();
+        return meta_model::text_model();
     }
 
     /*
-     * Look for the kernel to perform this transformation. If none
-     * is available, throw to let the user know it requested an
+     * Look for the required model to text transfrom. If none is
+     * available, throw to let the user know it requested an
      * unsupported transformation.
      */
     const auto ol(m.output_language());
-    BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << ol;
-    const auto ptr(registrar().kernel_for_language(ol));
+    BOOST_LOG_SEV(lg, debug) << "Looking for a transform for language: " << ol;
+    const auto ptr(registrar().transform_for_language(ol));
     if (!ptr) {
         const auto s(boost::lexical_cast<std::string>(ol));
         BOOST_LOG_SEV(lg, error) << unsupported_language << s;
         BOOST_THROW_EXCEPTION(transformation_error(unsupported_language + s));
     }
 
-    const auto& k(*ptr);
-    const auto id(k.id());
-    BOOST_LOG_SEV(lg, debug) << "Found kernel: " << id;
+    const auto& t(*ptr);
+    const auto id(t.id());
+    BOOST_LOG_SEV(lg, debug) << "Found transform: " << id;
 
     /*
-     * Ensure the kernel for the requested language is marked as
-     * enabled. If it is disabled, the user has requested
-     * conflicting options - output on language X but disable
-     * kernel for language X - so we need to throw to let it know.
+     * Ensure the transform for the requested language is marked as
+     * enabled. If it is disabled, the user has requested conflicting
+     * options - output on language X but disable kernel for language
+     * X - so we need to throw to let it know.
      */
     const auto& ra(m.root_module()->annotation());
     const auto& alrp(ctx.archetype_location_repository());
@@ -167,15 +168,15 @@ transform(const context& ctx, const meta_model::model& m) {
     const auto& ek(cfg.enabled_kernels());
     const auto is_enabled(ek.find(id) != ek.end());
     if (!is_enabled) {
-        BOOST_LOG_SEV(lg, error) << disabled_kernel << k.id();
-        BOOST_THROW_EXCEPTION(transformation_error(disabled_kernel + id));
+        BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
+        BOOST_THROW_EXCEPTION(transformation_error(disabled_transform + id));
     }
 
     /*
      * Generate artefacts for all elements in model.
      */
     const bool ekd(cfg.enable_kernel_directories());
-    auto r(k.generate(ctx, ekd, m));
+    auto r(t.transform(ctx, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
                              << ". Total files: "
                              << std::distance(r.artefacts().begin(),
@@ -185,14 +186,14 @@ transform(const context& ctx, const meta_model::model& m) {
     return r;
 }
 
-textual_model model_to_text_chain::
+meta_model::text_model model_to_text_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
     helpers::scoped_chain_probing stp(lg, "code generation chain",
         transform_id, ctx.prober());
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 
-    textual_model r;
+    meta_model::text_model r;
     for (const auto& m : models)
         merge(transform(ctx, m), r);
 

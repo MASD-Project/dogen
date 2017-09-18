@@ -18,64 +18,64 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/textual_model.hpp"
+#include "dogen/yarn/types/meta_model/text_model.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-textual_model::textual_model(
+text_model::text_model(
     const std::list<dogen::formatters::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories)
     : artefacts_(artefacts),
       managed_directories_(managed_directories) { }
 
-void textual_model::swap(textual_model& other) noexcept {
+void text_model::swap(text_model& other) noexcept {
     using std::swap;
     swap(artefacts_, other.artefacts_);
     swap(managed_directories_, other.managed_directories_);
 }
 
-bool textual_model::operator==(const textual_model& rhs) const {
+bool text_model::operator==(const text_model& rhs) const {
     return artefacts_ == rhs.artefacts_ &&
         managed_directories_ == rhs.managed_directories_;
 }
 
-textual_model& textual_model::operator=(textual_model other) {
+text_model& text_model::operator=(text_model other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::formatters::artefact>& textual_model::artefacts() const {
+const std::list<dogen::formatters::artefact>& text_model::artefacts() const {
     return artefacts_;
 }
 
-std::list<dogen::formatters::artefact>& textual_model::artefacts() {
+std::list<dogen::formatters::artefact>& text_model::artefacts() {
     return artefacts_;
 }
 
-void textual_model::artefacts(const std::list<dogen::formatters::artefact>& v) {
+void text_model::artefacts(const std::list<dogen::formatters::artefact>& v) {
     artefacts_ = v;
 }
 
-void textual_model::artefacts(const std::list<dogen::formatters::artefact>&& v) {
+void text_model::artefacts(const std::list<dogen::formatters::artefact>&& v) {
     artefacts_ = std::move(v);
 }
 
-const std::list<boost::filesystem::path>& textual_model::managed_directories() const {
+const std::list<boost::filesystem::path>& text_model::managed_directories() const {
     return managed_directories_;
 }
 
-std::list<boost::filesystem::path>& textual_model::managed_directories() {
+std::list<boost::filesystem::path>& text_model::managed_directories() {
     return managed_directories_;
 }
 
-void textual_model::managed_directories(const std::list<boost::filesystem::path>& v) {
+void text_model::managed_directories(const std::list<boost::filesystem::path>& v) {
     managed_directories_ = v;
 }
 
-void textual_model::managed_directories(const std::list<boost::filesystem::path>&& v) {
+void text_model::managed_directories(const std::list<boost::filesystem::path>&& v) {
     managed_directories_ = std::move(v);
 }
 

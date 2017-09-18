@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_TRANSFORMS_TEXTUAL_MODEL_HASH_HPP
-#define DOGEN_YARN_HASH_TRANSFORMS_TEXTUAL_MODEL_HASH_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_TEXT_MODEL_FWD_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_TEXT_MODEL_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/transforms/textual_model.hpp"
-
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-struct textual_model_hasher {
-public:
-    static std::size_t hash(const textual_model& v);
-};
+class text_model;
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::transforms::textual_model> {
-public:
-    size_t operator()(const dogen::yarn::transforms::textual_model& v) const {
-        return dogen::yarn::transforms::textual_model_hasher::hash(v);
-    }
-};
-
-}
 #endif

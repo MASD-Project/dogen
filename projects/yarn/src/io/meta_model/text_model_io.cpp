@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen/formatters/io/artefact_io.hpp"
-#include "dogen/yarn/io/transforms/textual_model_io.hpp"
+#include "dogen/yarn/io/meta_model/text_model_io.hpp"
 
 namespace std {
 
@@ -52,11 +52,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const textual_model& v) {
+std::ostream& operator<<(std::ostream& s, const text_model& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::transforms::textual_model\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::text_model\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories()
       << " }";

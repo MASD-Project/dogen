@@ -32,10 +32,10 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/transforms/kernel_registrar.hpp"
+#include "dogen/yarn/types/meta_model/text_model.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/configuration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/transforms/textual_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -63,35 +63,35 @@ private:
 
 public:
     /**
-     * @brief Registrar that keeps track of the available kernels.
+     * @brief Registrar that keeps track of the available transforms.
      */
-    static kernel_registrar& registrar();
+    static model_to_text_transform_registrar& registrar();
 
 private:
     /*
      * Merges source into destination.
      */
-    static void
-    merge(textual_model&& src, textual_model& dst);
+    static void merge(meta_model::text_model&& src,
+        meta_model::text_model& dst);
 
 public:
-    static textual_model
+    static meta_model::text_model
     transform(const context& ctx, const meta_model::model& m);
-    static textual_model
+    static meta_model::text_model
     transform(const context& ctx, const std::list<meta_model::model>& models);
 
 private:
-    static std::shared_ptr<kernel_registrar> registrar_;
+    static std::shared_ptr<model_to_text_transform_registrar> registrar_;
 };
 
 /*
- * Helper method to register kernels.
+ * Helper method to register transforms.
  */
-template<typename Kernel>
-inline void register_kernel() {
-    auto k(std::make_shared<Kernel>());
+template<typename Transform>
+inline void register_transform() {
+    auto t(std::make_shared<Transform>());
     auto& rg(model_to_text_chain::registrar());
-    rg.register_kernel(k);
+    rg.register_transform(t);
 }
 
 } } }

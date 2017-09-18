@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/quilt.csharp/types/csharp.hpp"
-#include "dogen/quilt.csharp/types/kernel.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/initializer.hpp"
 #include "dogen/quilt.csharp/types/fabric/traits.hpp"
@@ -50,6 +49,7 @@
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
+#include "dogen/quilt.csharp/types/model_to_text_transform.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/dynamic_transform.hpp"
 #include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"

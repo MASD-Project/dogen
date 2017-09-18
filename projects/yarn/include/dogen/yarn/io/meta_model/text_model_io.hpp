@@ -18,18 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_KERNEL_REGISTRAR_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_KERNEL_REGISTRAR_FWD_HPP
+#ifndef DOGEN_YARN_IO_META_MODEL_TEXT_MODEL_IO_HPP
+#define DOGEN_YARN_IO_META_MODEL_TEXT_MODEL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/yarn/types/meta_model/text_model.hpp"
+
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-class kernel_registrar;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::meta_model::text_model& v);
 
 } } }
 

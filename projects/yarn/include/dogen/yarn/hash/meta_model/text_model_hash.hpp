@@ -18,19 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_KERNEL_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_KERNEL_FWD_HPP
+#ifndef DOGEN_YARN_HASH_META_MODEL_TEXT_MODEL_HASH_HPP
+#define DOGEN_YARN_HASH_META_MODEL_TEXT_MODEL_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace quilt {
-namespace csharp {
+#include <functional>
+#include "dogen/yarn/types/meta_model/text_model.hpp"
 
-class kernel;
+namespace dogen {
+namespace yarn {
+namespace meta_model {
+
+struct text_model_hasher {
+public:
+    static std::size_t hash(const text_model& v);
+};
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::meta_model::text_model> {
+public:
+    size_t operator()(const dogen::yarn::meta_model::text_model& v) const {
+        return dogen::yarn::meta_model::text_model_hasher::hash(v);
+    }
+};
+
+}
 #endif

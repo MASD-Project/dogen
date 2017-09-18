@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/formatters/hash/artefact_hash.hpp"
-#include "dogen/yarn/hash/transforms/textual_model_hash.hpp"
+#include "dogen/yarn/hash/meta_model/text_model_hash.hpp"
 
 namespace {
 
@@ -55,9 +55,9 @@ inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::fi
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-std::size_t textual_model_hasher::hash(const textual_model& v) {
+std::size_t text_model_hasher::hash(const text_model& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_formatters_artefact(v.artefacts()));

@@ -21,16 +21,19 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
-#include "dogen/quilt.csharp/types/kernel.hpp"
+#include "dogen/quilt.csharp/types/model_to_text_transform.hpp"
 
 namespace {
 
+const std::string transform_id(dogen::quilt::csharp::traits::kernel());
+
 using namespace dogen::utility::log;
-static logger lg(logger_factory(dogen::quilt::csharp::traits::kernel()));
+static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string dot(".");
@@ -41,9 +44,9 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 
-kernel::~kernel() noexcept { }
+model_to_text_transform::~model_to_text_transform() noexcept { }
 
-formattables::model kernel::create_formattables_model(
+formattables::model model_to_text_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
@@ -52,12 +55,12 @@ formattables::model kernel::create_formattables_model(
     return fw.execute(atrp, ra, frp, l, m);
 }
 
-std::string kernel::id() const {
+std::string model_to_text_transform::id() const {
     return traits::kernel();
 }
 
 std::list<dogen::formatters::artefact>
-kernel::format(const annotations::type_repository& /*atrp*/,
+model_to_text_transform::format(const annotations::type_repository& /*atrp*/,
     const annotations::annotation_groups_factory& /*agf*/,
     const dogen::formatters::repository& /*drp*/,
     const formattables::model& fm) const {
@@ -66,26 +69,30 @@ kernel::format(const annotations::type_repository& /*atrp*/,
 }
 
 std::forward_list<annotations::archetype_location>
-kernel::archetype_locations() const {
+model_to_text_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
                          annotations::archetype_locations_group>&
-kernel::archetype_locations_by_meta_name() const {
+model_to_text_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
-yarn::meta_model::languages kernel::language() const {
+yarn::meta_model::languages model_to_text_transform::language() const {
     return yarn::meta_model::languages::csharp;
 }
 
-yarn::transforms::textual_model
-kernel::generate(const yarn::transforms::context& ctx,
+yarn::meta_model::text_model
+model_to_text_transform::transform(const yarn::transforms::context& ctx,
     const bool enable_kernel_directories,
     const yarn::meta_model::model& m) const {
+    yarn::helpers::scoped_transform_probing stp(lg,
+        "C# model to text transform",
+        transform_id, m.name().id(), ctx.prober());
+
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";
 
     /*
@@ -107,7 +114,7 @@ kernel::generate(const yarn::transforms::context& ctx,
     /*
      * Code-generate all artefacts.
      */
-    yarn::transforms::textual_model r;
+    yarn::meta_model::text_model r;
     const auto& drp(ctx.formatters_repository());
     const auto& agf(ctx.groups_factory());
     r.artefacts(format(atrp, agf, drp, fm));

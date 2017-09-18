@@ -13,16 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-18 Mon 21:38]
+#+CAPTION: Clock summary at [2017-09-18 Mon 22:10]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:26* |      |      | 100.0 |
+| *Total time*                                                                | *3:03* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:26   |      |      | 100.0 |
-| Active                                                                      |        | 2:26 |      | 100.0 |
-| STARTED Edit release notes for previous sprint                              |        |      | 2:19 |  95.2 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:07 |   4.8 |
+| Stories                                                                     | 3:03   |      |      | 100.0 |
+| Active                                                                      |        | 3:03 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 2:19 |  76.0 |
+| COMPLETED Rename top-level transformations                                  |        |      | 0:30 |  16.4 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:14 |   7.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -156,6 +157,8 @@ transform_stats.txt
 
 It is difficult to overstate the importance of probing in Dogen development. It was already used during this sprint to quickly get to the bottom of issues in enablement, and it was found to greatly simply this task. In the future, when we have rapid JSON support, one can conceive of a feature to read the dumped data into a test to replicate some particular bug very quickly.
 
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_05.org).
+
 Next Sprint
 ===========
 Next sprint we'll resume the work on moving kernel-agnostic transformations from the kernels into yarn.
@@ -194,6 +197,16 @@ problem.
 At present its not possible to figure out where a test suite starts or
 ends in the log file. We should also move the asserts from =DEBUG= to
 =TRACE=, unless there is an error.
+
+*** COMPLETED Rename top-level transformations                        :story:
+    CLOSED: [2017-09-18 Mon 22:10]
+    CLOCK: [2017-09-18 Mon 21:40]--[2017-09-18 Mon 22:10] =>  0:30
+
+Tasks:
+
+- rename kernel related transforms to "model to text" as this is what
+  they are doing.
+- remove code-generation, create a transform for it.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2017-09-18 Mon 21:32]--[2017-09-18 Mon 21:39] =>  0:07

@@ -30,7 +30,7 @@
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_exomodel_chain.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/types/transforms/kernel_registrar.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
 #include "dogen/tailor/workflow_error.hpp"
@@ -117,7 +117,7 @@ void workflow::tailor(const options::tailoring_options& to) const {
     yarn::transforms::options o;
     o.target(to.target());
 
-    yarn::transforms::kernel_registrar rg;
+    yarn::transforms::model_to_text_transform_registrar rg;
     const auto ctx(yarn::transforms::context_factory::make(rg, o));
 
     using yarn::transforms::exomodel_to_exomodel_chain;

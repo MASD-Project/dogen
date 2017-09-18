@@ -18,23 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_TRANSFORMS_TEXTUAL_MODEL_IO_HPP
-#define DOGEN_YARN_IO_TRANSFORMS_TEXTUAL_MODEL_IO_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_MODEL_TO_TEXT_TRANSFORM_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_MODEL_TO_TEXT_TRANSFORM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/transforms/textual_model.hpp"
-
 namespace dogen {
-namespace yarn {
-namespace transforms {
+namespace quilt {
+namespace cpp {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::transforms::textual_model& v);
+class model_to_text_transform;
 
 } } }
 

@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/kernel_interface.hpp"
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-kernel_interface::~kernel_interface() noexcept {}
+class code_generation_chain;
 
 } } }
+
+#endif

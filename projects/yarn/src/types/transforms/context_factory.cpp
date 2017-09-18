@@ -40,18 +40,19 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-annotations::archetype_location_repository context_factory::
-create_archetype_location_repository(const kernel_registrar& rg) {
+annotations::archetype_location_repository
+context_factory::create_archetype_location_repository(
+    const model_to_text_transform_registrar& rg) {
     annotations::archetype_location_repository_builder b;
-    for (const auto& pair : rg.kernels_by_language()) {
-        const auto& k(*pair.second);
-        b.add(k.archetype_locations_by_meta_name());
+    for (const auto& pair : rg.transforms_by_language()) {
+        const auto& t(*pair.second);
+        b.add(t.archetype_locations_by_meta_name());
     }
     return b.build();
 }
 
 context context_factory::
-make(const kernel_registrar& rg, const options& o) {
+make(const model_to_text_transform_registrar& rg, const options& o) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     const auto data_dir(utility::filesystem::data_files_directory());

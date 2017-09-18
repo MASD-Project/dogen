@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_TEXTUAL_MODEL_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_TEXTUAL_MODEL_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_TEXT_MODEL_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_TEXT_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,30 +29,30 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/yarn/serialization/transforms/textual_model_fwd_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/text_model_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-class textual_model final {
+class text_model final {
 public:
-    textual_model() = default;
-    textual_model(const textual_model&) = default;
-    textual_model(textual_model&&) = default;
-    ~textual_model() = default;
+    text_model() = default;
+    text_model(const text_model&) = default;
+    text_model(text_model&&) = default;
+    ~text_model() = default;
 
 public:
-    textual_model(
+    text_model(
         const std::list<dogen::formatters::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::transforms::textual_model& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::text_model& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::textual_model& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::text_model& v, unsigned int version);
 
 public:
     const std::list<dogen::formatters::artefact>& artefacts() const;
@@ -66,14 +66,14 @@ public:
     void managed_directories(const std::list<boost::filesystem::path>&& v);
 
 public:
-    bool operator==(const textual_model& rhs) const;
-    bool operator!=(const textual_model& rhs) const {
+    bool operator==(const text_model& rhs) const;
+    bool operator!=(const text_model& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(textual_model& other) noexcept;
-    textual_model& operator=(textual_model other);
+    void swap(text_model& other) noexcept;
+    text_model& operator=(text_model other);
 
 private:
     std::list<dogen::formatters::artefact> artefacts_;
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::transforms::textual_model& lhs,
-    dogen::yarn::transforms::textual_model& rhs) {
+    dogen::yarn::meta_model::text_model& lhs,
+    dogen::yarn::meta_model::text_model& rhs) {
     lhs.swap(rhs);
 }
 

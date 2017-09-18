@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
-#include "dogen/quilt.cpp/types/kernel.hpp"
+#include "dogen/quilt.cpp/types/model_to_text_transform.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 
 namespace dogen {
@@ -33,7 +33,7 @@ namespace cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize();
-    yarn::transforms::register_kernel<kernel>();
+    yarn::transforms::register_transform<model_to_text_transform>();
 }
 
 } } }

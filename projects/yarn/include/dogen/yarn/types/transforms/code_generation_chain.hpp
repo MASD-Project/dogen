@@ -18,25 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_CODE_GENERATOR_HPP
-#define DOGEN_YARN_TYPES_CODE_GENERATOR_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/transforms/textual_model.hpp"
+#include "dogen/yarn/types/meta_model/text_model.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace transforms {
 
 /**
  * @brief Responsible for transforming a high-level representation of
  * a domain into code, in one or more programming languages.
  *
  * The model which one intends to transform is known as the @e target
- * model. The workflow starts by invoking the correct front-end to
+ * model. The transform starts by invoking the correct front-end to
  * read in the target model and all of its dependencies. There are two
  * types of dependencies:
  *
@@ -53,27 +54,26 @@ namespace yarn {
  * then merged it into a single, unified Yarn model, called the @e
  * merged model; all dependencies are resolved and validated.
  *
- * The workflow then instantiates all backends requested by the
+ * The transform then instantiates all backends requested by the
  * options passed in. They use the merged model to generate source
  * code, and then outputted it to the desired destination.
  */
-class code_generator final {
+class code_generation_chain final {
 private:
     static void write_files(const transforms::options& o,
-        const transforms::textual_model& tm);
+        const meta_model::text_model& tm);
 
 private:
     /**
      * @brief Performs a housekeeping run for the supplied directories.
      */
     static void perform_housekeeping(const transforms::options& o,
-        const std::list<formatters::artefact>& artefacts,
-        const std::list<boost::filesystem::path>& dirs);
+        const meta_model::text_model& tm);
 
 public:
-    static void generate(const transforms::options& o);
+    static void transform(const transforms::options& o);
 };
 
-} }
+} } }
 
 #endif
