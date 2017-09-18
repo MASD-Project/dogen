@@ -13,70 +13,159 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-18 Mon 00:08]
+#+CAPTION: Clock summary at [2017-09-18 Mon 21:30]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:07* |      |      | 100.0 |
+| *Total time*                                                                | *2:26* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:07   |      |      | 100.0 |
-| Active                                                                      |        | 0:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:07 | 100.0 |
+| Stories                                                                     | 2:26   |      |      | 100.0 |
+| Active                                                                      |        | 2:26 |      | 100.0 |
+| STARTED Edit release notes for previous sprint                              |        |      | 2:19 |  95.2 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:07 |   4.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** STARTED Edit release notes for previous sprint                    :story:
+    CLOCK: [2017-09-18 Mon 20:32]--[2017-09-18 Mon 21:30] =>  0:58
+    CLOCK: [2017-09-18 Mon 19:10]--[2017-09-18 Mon 20:31] =>  1:21
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.04, "Zona dos Riscos"
+Title: Dogen v1.0.05, "Tribunal"
 
 #+begin_src markdown
-![Zona dos Riscos](http://www.almadeviajante.com/wp-content/uploads/deserto-do-namibe.jpg)
-_Zona dos Riscos, Namibe, Angola. (C) Alma de Viajante, 2017._
+![Tribunal](https://lh4.googleusercontent.com/-jGPjhmZ1ZU8/TeI_Gc1PFtI/AAAAAAAAIwQ/UBPUpWaRuHA/s894/IMG_2594.JPG)
+_Tribunal, Namibe, Angola. (C) SkyScrapperCity, 2011._
 
 Overview
 =======
-As usual, yarn internal refactoring is the bulk of the work in this sprint. The refactoring work had three major themes:
+The bulk of this sprint was focused on three refactoring tasks:
 
-- **Use shared pointers across the board** for yarn elements, from frontend to the backend. This was done as a requirement for the exogenous models changes described below; as it happens, it has the nice side-effect of reducing the number of copies of model elements.
-- **Finish exogenous models support**: frontends now have a special purpose model type, designed only for the kind of operations supported at the frontend level. This cleaned up transformations quite a bit, making it obvious which ones apply at which stage. The conceptual model is now somewhat cleaner, with the introduction of _exomodels_ (previously "exogenous models") and _endomodels_ (previously "intermediate models"), which specific purposes.
-- **Name processing now done in core**: as part of the exogenous models change, we also moved the external and model module processing away from the frontends and into the core. This means less code duplication across frontends.
+- **Renaming Concepts to Object Templates**: This is a long-standing clean-up that needed doing. One of the key principles in Yarn is to avoid binding to language specific terms when those terms don't cleanly map across to several programming languages. Since inception, "Concepts" has been a flagrant violation, as it alludes to a C++ feature which it isn't even a proper implementation of, nor does it map to generics. With the work on profiles looming, this clean-up became ever more pressing. Granted, "object templates"  is rather more verbose - but we decided to make the change in the interest of cleaning up Yarn vocabulary. It is, at least, a more accurate reflection of this meta-model element's responsibilities.
+- **Probing support**: Historically, Dogen has always had good logging, allowing us to troubleshoot most issues quickly. However, with Yarn's transition towards a transformation-based architecture, it has become increasingly difficult to figure out what each transformation is doing. The linear nature of the log does not help, given that one is trying to visualise a graph. Thus, troubleshooting of issues has slowed down noticeably, so something had to be done. Probing is the proposed solution for this problem, and it has already made  troubleshooting orders of magnitude faster. This feature is described in depth below.
+- **Work on moving kernel specific transforms**: we continued our long road on moving all of the "kernel-specific" transforms which aren't actually kernel-specific into Yarn. Enablement is almost done, but it remains elusive.
 
-In addition to these, there were a couple of additional stories that had user facing impact, described in the next section.
+In addition to this, there were other minor (but still significant) strands of work:
+
+- we continued work on the theme "everything is a transform", adding more transform chains and cleaning up more terminology as we went along. This work is now more or less complete, with the core of Yarn providing a set of primitives that are in keeping with the literature on code generation - in particular [Model-Driven Software Engineering in Practice](https://www.amazon.co.uk/Model-Driven-Software-Engineering-Practice-Synthesis/dp/1608458822). This has greatly simplified Yarn's conceptual model and vocabulary since we can now rely on "standard" terms.
+- in a similar vein, we continued to merge more functionality into Yarn, deprecating the Knit model and moving its contents as transforms into Yarn.
 
 User visible changes
 ================
-This sprint introduced a number of user visible changes, all related to the internal clean-up work:
+The most important user visible changes introduced with this sprint are related to stereotypes:
 
-- Upsilon support was considered deprecated, since the customer for which we developed it no longer requires it. Since it was a custom-made frontend with no real application outside of this specific use case, all code related to upsilon has been removed.
-- Continuing the meta-name work, JSON now represents these as regular yarn names. Sadly this makes the JSON more verbose, but at least it's more consistent now. This change breaks backwards compatibility, so users with JSON models need to update them. Sample change:
-```
--    "meta_type": "module",
-+    "meta_name": {
-+      "simple": "module",
-+      "external_modules": "dogen",
-+      "model_modules": "yarn",
-+      "internal_modules": "meta_model"
-+    }
-```
-- A new command line flag was introduced: ```--compatibility-mode```. The objective of this flag is to disable some of the model validation code, where the errors are known to be caused by a forwards or backwards incompatible change. However: a) this is an experimental flag, very incomplete at present; and b) even when finished, the generated code may just be invalid.
+- all meta-model types must now be prefixed: where you had ```object``` you must now put ```yarn::object```. This change was done in preparation for both the generalisation of profiles, and for adding the ability to refer to object templates (née concepts) across models.
+- as explained in the previous section, ```concept``` has been renamed to ```object_template```, so where you had ```concept``` you must now put ```yarn::object_template```.
 
-For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_04.org).
+In addition, there was also a ORM related change that brings it in line with all other tagged values: the low-level ODB parameter was renamed from ```odb_pragma``` to ```quilt.cpp.odb.pragma```. So, in your models, where you had:
+
+```
+#DOGEN odb_pragma=no_id
+```
+
+You must replace it with:
+
+```
+#DOGEN quilt.cpp.odb.pragma=no_id
+```
+
+The final user visible change is the most significant in terms of time spent: transform probing. As it happens, it is not really aimed at end-users, but its worth describing the feature as it may still prove to be useful.
+
+A new set of command line options have been added to ```dogen.knitter```:
+
+```
+  --probe-stats                         Generate stats about executed
+                                        transforms.
+  --probe-stats-disable-guids           Disable guids in probe stats, to make
+                                        comparisons easier.
+  --probe-stats-org-mode                Use org-mode format for stats. Requires
+                                        enabling stats.
+  --probe-all                           Dump all available probing information
+                                        about transforms.
+  --probe-directory                     Directory in which to dump probe data.
+                                        Only used if transforms probing is
+                                        enabled.
+  --probe-use-short-names               Use short names for directories and
+                                        files. Useful for Windows where long
+                                        paths are not supported.
+```
+
+We'll start with ```--probe-stats``` and related options, since it is the most likely to be of use to end users. It is now possible to dump statistics about the transform graph, allowing simple benchmarkings. When a user selects this option, a file is generated under the probing directory (configurable via ```--probe-directory```), with the name ```transform_stats.txt```. As an example, here is the ```head``` of the generation of the ```yarn``` model:
+
+```
+root (1574 ms) [version: v1.0.06, log: debug, probing: off] [4423093f-eb3e-40af-a370-b879684f7950]
+    dogen.yarn.code_generation_chain (1527 ms) [yarn.dia] [c6d812e9-9e97-4084-a1e1-afd804929dc0]
+        yarn.transforms.model_generation_chain (1075 ms) [] [9778eeab-107a-4c0f-a633-87ffd06fcd5c]
+            yarn.transforms.endomodel_generation_chain (890 ms) [yarn.dia] [3425b8d7-7ab2-4f95-a53a-b8c4bf7e0485]
+                yarn.transforms.initial_target_chain (398 ms) [yarn.dia] [229a572e-70c1-4934-be79-db7e481de5bc]
+                    yarn.transforms.exomodel_generation_chain (333 ms) [yarn.dia] [240ea71b-778a-4601-8682-153ad8b78d51]
+                        yarn.dia.exomodel_transform (58 ms) [yarn.dia] [5e599d88-9676-41e9-aa9a-aaf4ebb134f8]
+                        yarn.transforms.annotations_transform (12 ms) [] [7d95b799-72d0-471f-a50c-bb29a0d70709]
+                        yarn.transforms.naming_transform (10 ms) [] [5c768d15-7964-4d54-a9c1-f32acc452161]
+                    yarn.transforms.exomodel_to_endomodel_transform (0 ms) [<dogen><yarn>] [e8ec0c9f-92f1-4b03-a755-a335beda1c44]
+```
+
+As you can see, each node has the total elapsed time it took the transform to execute. In addition, the root node of the graph contains information about the configuration, so that we can compare like with like. This includes the Dogen version, the type of logging and whether detailed probing was enabled or not. You will also not fail to notice the GUIDs next to each node in the graph. These are correlation IDs, enabling one to find the logging for each of the transforms in the log file:
+
+```
+2017-09-18 11:22:11.618837 [DEBUG] [yarn.helpers.transform_prober] Starting: yarn.transforms.endomodel_pre_processing_chain (229a572e-70c1-4934-be79-db7e481de5bc)
+```
+
+If instead one just wants to diff two transformation graphs - perhaps looking for performance changes, or changes in the composition of the grap - one can disable the GUIDs via ```--probe-stats-disable-guids```.
+
+```
+root (1530 ms) [version: v1.0.06, log: debug, probing: off]
+    dogen.yarn.code_generation_chain (1522 ms) [yarn.dia]
+        yarn.transforms.model_generation_chain (1066 ms) []
+            yarn.transforms.endomodel_generation_chain (880 ms) [yarn.dia]
+                yarn.transforms.initial_target_chain (393 ms) [yarn.dia]
+                    yarn.transforms.exomodel_generation_chain (328 ms) [yarn.dia]
+                        yarn.dia.exomodel_transform (58 ms) [yarn.dia]
+                        yarn.transforms.annotations_transform (12 ms) []
+                        yarn.transforms.naming_transform (9 ms) []
+                    yarn.transforms.exomodel_to_endomodel_transform (1 ms) [<dogen><yarn>]
+```
+
+For Vi and Emacs users, there is an additional way of interacting with the transform graph: we've added an org-mode compatible dump of the graph via ```--probe-stats-org-mode```. This feature is extremely useful because it allows collapsing and expanding the graph interactively from within the editor:
+
+![org-mode](https://github.com/DomainDrivenConsulting/dogen/raw/master/doc/blog/images/emacs_org_mode_stats.png)
+
+The second aspect of probing is the ability to dig deep into each transform, in order to understand what it was doing. For this we can use ```--probe-all```. Once enabled, a dump is generated for each transform in the transform graph of its inputs and outputs - where applicable. These are also stored in the probe directory. The directory structure follows the graph:
+
+```
+000-archetype_location_repository.json
+001-type_repository.json
+002-mapping_set_repository.json
+003-dogen.yarn.code_generation_chain
+transform_stats.txt
+```
+
+Each transform chain becomes a directory, and each transform has files with inputs and outputs, in JSON. It is trivial to indent the JSON files and diff input with output to figure out what the transform did - or, more likely, didn't do.
+
+As always, there were complications with Windows. Since this operative system does not support long paths, we found that probing often failed with errors because our transform graph is deeply nested and the transforms have very long names. To allow one to use this feature under Windows, we've added ```--probe-use-short-names```. This makes the files and directories a lot less meaningful, but at least it still works:
+
+```
+000.json
+001.json
+002.json
+003
+transform_stats.txt
+```
+
+It is difficult to overstate the importance of probing in Dogen development. It was already used during this sprint to quickly get to the bottom of issues in enablement, and it was found to greatly simply this task. In the future, when we have rapid JSON support, one can conceive of a feature to read the dumped data into a test to replicate some particular bug very quickly.
 
 Next Sprint
 ===========
-Next sprint we'll resume the work on moving kernel-agnostic transformations from the kernels into yarn, and start looking at the meta-data/concepts clean-up.
+Next sprint we'll resume the work on moving kernel-agnostic transformations from the kernels into yarn.
 
 Binaries
 ======
 You can download binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.04_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.04/dogen_1.0.04_amd64-applications.deb)
-- [dogen-1.0.04-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.04/dogen-1.0.04-Darwin-x86_64.dmg)
-- [dogen-1.0.04-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.04-Windows-AMD64.msi)
-
-**Note**: They are produced by CI so they may not yet be ready.
+- [dogen_1.0.05_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.05/dogen_1.0.05_amd64-applications.deb)
+- [dogen-1.0.05-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.05/dogen-1.0.05-Darwin-x86_64.dmg)
+- [dogen-1.0.05-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.05-Windows-AMD64.msi)
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
@@ -517,3 +606,15 @@ Random notes:
 - some support neither (cmakelists, etc).
 
 ** Deprecated
+*** Add logging to all top-level workflow activities                  :story:
+
+We need to make sure the log file is narrating a story. For this we
+need to add logging to all start and end of activities by the
+workflows. This means that when we filter by workflow name we should
+be able to quickly figure out where things went wrong.
+
+*** Add logging to test suite                                         :story:
+
+At present its not possible to figure out where a test suite starts or
+ends in the log file. We should also move the asserts from =DEBUG= to
+=TRACE=, unless there is an error.
