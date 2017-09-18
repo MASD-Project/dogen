@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-18 Mon 21:30]
+#+CAPTION: Clock summary at [2017-09-18 Mon 21:38]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
@@ -26,7 +26,8 @@
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-09-18 Mon 21:39]
     CLOCK: [2017-09-18 Mon 20:32]--[2017-09-18 Mon 21:30] =>  0:58
     CLOCK: [2017-09-18 Mon 19:10]--[2017-09-18 Mon 20:31] =>  1:21
 
@@ -170,14 +171,26 @@ You can download binaries from [Bintray](https://bintray.com/domaindrivenconsult
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/903140257218088960][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6308906359798657024/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/909878261852835843][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6315644420331053056][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-09-18 Mon 21:32]--[2017-09-18 Mon 21:39] =>  0:07
     CLOCK: [2017-09-18 Mon 00:01]--[2017-09-18 Mon 00:08] =>  0:07
 
 Updates to sprint and product backlog.
+
+*** Add an "at" field to transform stats                              :story:
+
+At present we cannot tell when the transform stats were dumped. We
+could of course look at timestamps but to make life easier for the
+user we could add a field with a date in local time - or perhaps UTC?
+
+*** Create a code generation chain                                    :story:
+
+We no longer need the code-generator outside of transforms; we can now
+have a code-generation chain.
 
 *** Move enablement into yarn                                         :story:
 

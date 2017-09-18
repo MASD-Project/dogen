@@ -11,20 +11,43 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Run "changed" tests only                                          :story:
+*** Add additional reference directories                              :story:
 
-Random idea: can we have a target that just runs "changed" tests? That
-is, tests that are impacted by the files that were changed since we
-last executed the tests.
+At present we expect the reference models to be either on the data
+directory (for system models) or on the same directory as the
+target. Presumably, users may also want to have models on other
+directories. For example, if one were to extend Dogen with a different
+project, it would be required to load models from the dogen
+directory.
 
-For this to work we need to create a file with every execution of
-tests and then use that as a dependency. There must be some prior art
-for this with CMake.
+We could simply add a command line argument for reference directories;
+if the reference is not found in the target model directory, we would
+then try all available reference directories.
 
-*** Transform probe coordinates                                       :story:
+*** Dump transforms as serialisable data                              :story:
 
-Allow users to supply coordinates to transforms in some form so that
-we only dump a subset of the transform data.
+Now we have detailed transform information, it would be great if we
+could also load the serialised data. At present this is not possible
+because we are using IO output so that it is easily diffable. However,
+we could either:
+
+- add rapid JSON support, so its both readable and serialisable;
+- add command-line options to determine the output format, so that we
+  can dump data as boost serialisation instead.
+
+The second is low-hanging fruit.
+
+Once we have this, we can then write simple tests that read the
+serialised data and use it to reproduce bugs, narrowed to a specific
+transform. This would be extremely useful once we have
+code-generationa as a service.
+
+*** Add support for units                                             :story:
+
+It would be good to add support for the different units libraries:
+
+- [[https://github.com/nholthaus/units][units]]
+- [[http://www.boost.org/doc/libs/1_65_1/doc/html/boost_units.html][boost units]]
 
 *** Add support for boost UUID                                        :story:
 
@@ -78,32 +101,17 @@ In the long run, we should use proper names for these namespaces:
 - fabric is meta-model;
 - formattables houses transformations.
 
+Unfortunately this will cause problems with the yarn names.
+
 *** Assorted problems to look at                                      :story:
 
 These need to be put into stories:
 
-- No flat mode: we need to be able to generate no folders at all.
 - Registrar coming out even when there is no inheritance.
 - No setting to add include for precompiled headers: stdafx.h
 - No vcxproj for c++ and no way to add code-generated files. Ideally
   one should be able to include a code-generated file into project
   with list of items
-- sort out traits.
-
-*** Add support for field renaming in annotations                     :story:
-
-At present if a field changes its name between dogen releases,
-diagrams stop working. For example, we renamed:
-
-: yarn.dia.external_modules
-
-to
-
-: yarn.external_modules
-
-With this change, dogen stopped working. We need some way to
-"remember" the previous name before a rename so that previous versions
-still work.
 
 *** Start documenting the theoretical aspects of Dogen                :story:
 
@@ -2907,11 +2915,13 @@ We need a test for composition / recursion.
   =-Wall=
 - =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 - =-Wdocumentation=: clang doxygen warning.
+- =-WExtra=
 
 See also:
 
 - [[http://releases.llvm.org/5.0.0/tools/clang/docs/ReleaseNotes.html][Clang 5.0.0 Release Notes]], section "Improvements to Clang’s
   diagnostics".
+- [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
 
 *** Create utility methods for =__type__= etc                         :story:
 
@@ -2975,19 +2985,6 @@ JSON:
 
 This implies we are not calling =tidy_up_string=. This can be tested
 by creating a container of =filesystem::path=.
-
-*** Add logging to all top-level workflow activities                  :story:
-
-We need to make sure the log file is narrating a story. For this we
-need to add logging to all start and end of activities by the
-workflows. This means that when we filter by workflow name we should
-be able to quickly figure out where things went wrong.
-
-*** Add logging to test suite                                         :story:
-
-At present its not possible to figure out where a test suite starts or
-ends in the log file. We should also move the asserts from =DEBUG= to
-=TRACE=, unless there is an error.
 
 *** Fix cmake emacs variable for tab width                            :story:
 
@@ -7947,6 +7944,36 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add support for field renaming in annotations                     :story:
+
+At present if a field changes its name between dogen releases,
+diagrams stop working. For example, we renamed:
+
+: yarn.dia.external_modules
+
+to
+
+: yarn.external_modules
+
+With this change, dogen stopped working. We need some way to
+"remember" the previous name before a rename so that previous versions
+still work.
+
+*** Transform probe coordinates                                       :story:
+
+Allow users to supply coordinates to transforms in some form so that
+we only dump a subset of the transform data.
+
+*** Run "changed" tests only                                          :story:
+
+Random idea: can we have a target that just runs "changed" tests? That
+is, tests that are impacted by the files that were changed since we
+last executed the tests.
+
+For this to work we need to create a file with every execution of
+tests and then use that as a dependency. There must be some prior art
+for this with CMake.
+
 *** Build dogen docker images from travis                             :story:
 
 We should build docker images with each commit into master.
@@ -9089,6 +9116,10 @@ C++.
 
 We should have a separate tool to do this work.
 
+Links:
+
+- [[http://blog.quicktype.io/debut/][quicktype's big debut]]
+
 *** Investigate GDB visualisers for generated models                  :epic:
 
 #+begin_quote
@@ -9818,6 +9849,11 @@ Links:
 
 - [[http://codeplanet.io/principles-good-restful-api-design/][REST API Design]]
 - [[http://www.drdobbs.com/tools/json-and-the-microsoft-c-rest-sdk/240164821][Using Microsoft REST SDK]]
+- [[https://git.gnome.org/browse/dia/tree/doc/diagram.dtd][Dia DTD]]: make sure all dia diagrams are valid according to DTD. Same
+  for JSON documents. Make sure there are size limits for names,
+  locations, documents, etc. See also [[https://security.stackexchange.com/questions/416/if-an-xml-document-is-not-validated-as-well-formed-or-checked-against-a-schema][If an XML document is not
+  validated as “Well Formed” or checked against a schema, what are the
+  risks?]]
 
 *** Automatic generation of C interfaces for C++ code                  :epic:
 
