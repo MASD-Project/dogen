@@ -5,11 +5,17 @@
 [![Build Status](https://img.shields.io/appveyor/ci/mcraveiro/dogen.svg?label=windows)](https://ci.appveyor.com/project/mcraveiro/dogen)
 [![Coverage Status](https://img.shields.io/coveralls/DomainDrivenConsulting/dogen.svg)](https://coveralls.io/r/DomainDrivenConsulting/dogen)
 [![Issues](https://img.shields.io/github/issues/domaindrivenconsulting/dogen.svg)](https://github.com/DomainDrivenConsulting/dogen/issues)
-[![Releases](https://badge.fury.io/gh/domaindrivenconsulting%2fdogen.svg)](https://github.com/domaindrivenconsulting/dogen/releases)
+[![Releases](https://img.shields.io/github/release/domaindrivenconsulting/dogen.svg)](https://github.com/DomainDrivenConsulting/dogen/releases)
+[![GitHub commits](https://img.shields.io/github/commits-since/domaindrivenconsulting/dogen/v1.0.05.svg)]
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/domaindrivenconsulting/dogen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Coverity](https://img.shields.io/coverity/scan/9268.svg)](https://scan.coverity.com/projects/domaindrivenconsulting-dogen)
 [![Download](https://api.bintray.com/packages/domaindrivenconsulting/Dogen/Dogen/images/download.svg?version=1.0.05) ](https://bintray.com/domaindrivenconsulting/Dogen/Dogen/1.0.05/link)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5d7fca8ac9a64ea8b8d35bc8b0d534b5)](https://www.codacy.com/app/marco-craveiro/dogen?utm_source=github.com&utm_medium=referral&utm_content=DomainDrivenConsulting/dogen&utm_campaign=badger)
+![language](https://img.shields.io/badge/language-c++-blue.svg)
+![C++](https://img.shields.io/badge/std-c++14-blue.svg)
+![msvc2015](https://img.shields.io/badge/MSVC-2015-ff69b4.svg)
+![gcc-6.3.0](https://img.shields.io/badge/GCC-6.3.0-ff69b4.svg)
+![clang-3.7](https://img.shields.io/badge/CLANG-3.7-ff69b4.svg)
 
 # Overview
 
