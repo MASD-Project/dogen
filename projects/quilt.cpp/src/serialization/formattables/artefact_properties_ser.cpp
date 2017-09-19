@@ -30,7 +30,6 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/formatting_styles_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/artefact_properties_ser.hpp"
 
 namespace boost {
@@ -63,26 +62,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::artefact_properties& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("enabled", v.enabled_);
-    ar << make_nvp("overwrite", v.overwrite_);
     ar << make_nvp("file_path", v.file_path_);
     ar << make_nvp("header_guard", v.header_guard_);
     ar << make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
-    ar << make_nvp("formatting_style", v.formatting_style_);
-    ar << make_nvp("formatting_input", v.formatting_input_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::artefact_properties& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("enabled", v.enabled_);
-    ar >> make_nvp("overwrite", v.overwrite_);
     ar >> make_nvp("file_path", v.file_path_);
     ar >> make_nvp("header_guard", v.header_guard_);
     ar >> make_nvp("inclusion_dependencies", v.inclusion_dependencies_);
-    ar >> make_nvp("formatting_style", v.formatting_style_);
-    ar >> make_nvp("formatting_input", v.formatting_input_);
 }
 
 } }

@@ -19,9 +19,7 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/formatting_styles_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -52,21 +50,11 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::artefact_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"header_guard\": " << "\"" << tidy_up_string(v.header_guard()) << "\"" << ", "
-      << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "
-      << "\"formatting_style\": " << v.formatting_style() << ", "
-      << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\""
+      << "\"inclusion_dependencies\": " << v.inclusion_dependencies()
       << " }";
     return(s);
 }

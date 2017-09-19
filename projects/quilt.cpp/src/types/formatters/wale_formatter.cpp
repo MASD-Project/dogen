@@ -66,7 +66,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
             const auto ns(a.make_namespaces(n));
             auto snf(a.make_scoped_namespace_formatter(ns));
 
-            const auto fi(a.artefact_properties().formatting_input());
+            const auto fi(a.new_artefact_properties().formatting_input());
             if (fi.empty()) {
                 BOOST_LOG_SEV(lg, error) << missing_input;
                 BOOST_THROW_EXCEPTION(formatting_error(missing_input));

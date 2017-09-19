@@ -105,8 +105,10 @@ assistant::
 assistant(const context& ctx, const yarn::meta_model::element& e,
     const annotations::archetype_location& al, const bool requires_header_guard)
     : element_(e), context_(ctx),
-    artefact_properties_(
+      artefact_properties_(
         obtain_artefact_properties(element_.name().id(), al.archetype())),
+      new_artefact_properties_(
+          obtain_new_artefact_properties(e, al.archetype())),
     archetype_location_(al), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_.name().id()
@@ -223,6 +225,19 @@ const formattables::artefact_properties& assistant::obtain_artefact_properties(
     if (i == eprops.artefact_properties().end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing
                                  << archetype;
+        BOOST_THROW_EXCEPTION(
+            formatting_error(artefact_properties_missing + archetype));
+    }
+    return i->second;
+}
+
+const yarn::meta_model::artefact_properties&
+assistant::obtain_new_artefact_properties(
+    const yarn::meta_model::element& e, const std::string& archetype) const {
+    const auto& ap(e.element_properties().artefact_properties());
+    const auto i(ap.find(archetype));
+    if (i == ap.end()) {
+        BOOST_LOG_SEV(lg, error) << artefact_properties_missing << archetype;
         BOOST_THROW_EXCEPTION(
             formatting_error(artefact_properties_missing + archetype));
     }
@@ -664,6 +679,11 @@ names_with_enabled_archetype(const std::string& archetype,
 const formattables::artefact_properties&
 assistant::artefact_properties() const {
     return artefact_properties_;
+}
+
+const yarn::meta_model::artefact_properties&
+assistant::new_artefact_properties() const {
+    return new_artefact_properties_;
 }
 
 std::ostream& assistant::stream() {

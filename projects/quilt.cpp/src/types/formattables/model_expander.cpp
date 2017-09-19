@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/quilt.cpp/types/formattables/streaming_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
@@ -28,7 +27,6 @@
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatting_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/build_files_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/cpp_standard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
@@ -42,13 +40,6 @@ void model_expander::
 expand_streaming(const annotations::type_repository& atrp, model& fm) const {
     streaming_expander ex;
     ex.expand(atrp, fm);
-}
-
-void model_expander::expand_enablement(const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
-    const formatters::repository& frp, model& fm) const {
-    enablement_expander ex;
-    ex.expand(atrp, ra, frp, fm);
 }
 
 void model_expander::expand_canonical_archetypes(
@@ -101,13 +92,6 @@ expand_facet_directories(const locator& l,model& fm) const {
     ex.expand(l, fm);
 }
 
-void model_expander::expand_formatting_properties(
-    const annotations::type_repository& atrp, const formatters::repository& frp,
-    model& fm) const {
-    formatting_expander ex;
-    ex.expand(atrp, frp, fm);
-}
-
 void model_expander::expand_build_files(const locator& l, model& fm) const {
     build_files_expander ex;
     ex.expand(l, fm);
@@ -140,12 +124,6 @@ void model_expander::expand(
     expand_cpp_standard(atrp, ra, fm);
 
     /*
-     * Enablement expansion must be done before inclusion because
-     * inclusion relies on it to know which formatters are enabled.
-     */
-    expand_enablement(atrp, ra, frp, fm);
-
-    /*
      * Canonical formatter expansion must be done before inclusion
      * because we use the canonical formatter notation to find
      * inclusion directives.
@@ -165,7 +143,6 @@ void model_expander::expand(
     expand_file_paths_and_guards(frp, l, fm);
     expand_odb(atrp, l, fm);
     expand_facet_directories(l, fm);
-    expand_formatting_properties(atrp, frp, fm);
     expand_build_files(l, fm);
 }
 

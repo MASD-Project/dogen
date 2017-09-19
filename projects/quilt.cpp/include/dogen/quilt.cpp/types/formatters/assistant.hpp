@@ -142,6 +142,9 @@ private:
     const formattables::artefact_properties& obtain_artefact_properties(
         const std::string& element_id, const std::string& archetype) const;
 
+    const yarn::meta_model::artefact_properties& obtain_new_artefact_properties(
+        const yarn::meta_model::element& e, const std::string& archetype) const;
+
     /**
      * @brief Obtains the facet configuration for the facet
      * identified by facet name.
@@ -371,6 +374,8 @@ public:
 
 public:
     const formattables::artefact_properties& artefact_properties() const;
+    const yarn::meta_model::artefact_properties&
+    new_artefact_properties() const;
 
 public:
     /**
@@ -390,6 +395,7 @@ private:
     const yarn::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
+    yarn::meta_model::artefact_properties new_artefact_properties_;
     const annotations::archetype_location archetype_location_;
     const bool requires_header_guard_;
 };

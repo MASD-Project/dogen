@@ -75,7 +75,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
                                  << fp.generic_string();
 
         dogen::formatters::artefact r;
-        r.overwrite(a.artefact_properties().overwrite());
+        r.overwrite(a.new_artefact_properties().overwrite());
         return r;
     }
 
@@ -83,7 +83,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
      * Since the template exists, we can instantiate it.
      */
     auto r(instantiator_.instantiate(stitch_template));
-    r.overwrite(a.artefact_properties().overwrite());
+    r.overwrite(a.new_artefact_properties().overwrite());
     r.dependencies().push_back(stitch_template);
     return r;
 }
