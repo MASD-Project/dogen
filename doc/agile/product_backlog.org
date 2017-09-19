@@ -495,83 +495,6 @@ We probably need some way of knowing if the underlying type supports
 comparisons. A meta-data flag used to annotate proxy models would be
 sufficient.
 
-*** Handling of visual studio projects and solutions is incorrect     :story:
-
-At present we added the extension of the solution/project to the
-element name, e.g.:
-
-: all_path_and_directory_settings.csproj
-
-This happens to work for the simpler cases, but if we try to add a
-postfix we then have a problem:
-
-: dogen.test_models.all_path_and_directory_settings.csproj_vc15_
-
-Projects and solutions do not seem to fit our conceptual model for the
-element space. We need to somehow have distinct element IDs but yet
-not associate the extension with the name directly. Up to now we never
-had two distinct elements with the exact same name but generating two
-different artefacts with different extensions.
-
-This is a problem because we will need to have the ability to generate
-multiple project files for different versions of visual studio.
-
-For now we removed the project and solution postfixes:
-
-: #DOGEN quilt.csharp.visual_studio.solution.postfix=_vs15_
-: #DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
-
-In order to fit our conceptual model, we need to make some adjustments
-to our implementation of projects and solutions. First, there is only
-one meta-model element for *both* projects and solutions. This is
-derived from the fact that they both share a common name. The
-conceptual model does not involve file extensions - or file paths for
-that matter; archetypes exist only in archetype space, and their
-"paths" in this space are only related to the facets they belong
-to. The physical location is a property of files, which are
-expressions of archetypes in "file space". Thus, there is only one
-single element, provisionally called "visual studio", which has
-multiple archetypes (and their associated formatters):
-
-- solution
-- project
-
-Second, a solution and project may be instantiated multiple times,
-depending on the version of visual studio and the associated
-compiler. Externally users supply a visual studio version and that
-internally will map to different instances of the formatters. We must
-instantiate the formatters for each supported version because we may
-need to create multiple versions simultaneously: his is the use case
-where users want to generate projects and solutions for multiple
-versions of VS at the same time.
-
-THe good news is that we already have something similar: master
-includes. We can adapt a lot of the logic we have for master
-includes. There are some differences though:
-
-- we will have multiple instances on the same facet.
-- we need some external mechanism to determine if a given version is
-  enabled. We could force users to enter the "enabled" property for
-  each version in the meta-data, but that would get really messy since
-  there are only a few valid combinations of solution and project
-  version. Its better if users supply the Visual Studio versions and
-  we infer the solution and projects to enable. But we do not have a
-  mechanism for this at present. We could add a "is enabled" to
-  formatters like we did for helpers, supplying the element; we would
-  then check the Visual Studio version in the element and return false
-  if it didn't match the formatters version. Or we could change the
-  formatter's interface to return optional artefact. Whilst this is a
-  bit more painful - we'd have to change all formatters - it fits the
-  code structure slightly better.
-- we need to have different file names depending on the
-  version. Worse: if there is just a single version we do not need to
-  have a "version prefix". If there are multiple versions we need to
-  add the prefix. The fist use case is easy: we already have archetype
-  prefixes; we just need to add a prefix for each version. The second
-  part requires some hacking. We could have an option in locator:
-  "apply archetype postfix" supplied as an argument. Since we have the
-  Visual Studio element we have visibility of all enabled versions.
-
 *** Introduce dogen projects                                          :story:
 
 At present we are manually configuring each dogen target, adding each
@@ -586,35 +509,6 @@ product. We could possibly run with “all” or “specific” whereby the
 user would supply one or more projects to code generate. For all
 properties that are common, we’d defined them only once somehow
 (common regexes, log level, etc).
-
-*** Split out the file extension from the formatter                   :story:
-
-At present we have handled file extensions in one of two ways:
-
-- we baked them in into locator, dynamically: this is the case for
-  =hpp= and =cpp=, where locator is responsible for retrieving the
-  meta-data related to extensions.
-- we hacked them in into locator, statically: this is the case for
-  CMakeLists, where the =txt= is hard-coded in.
-- we hacked them in into the elements: this is the case for Visual
-  Studio solutions and projects.
-
-In reality, what we need is to create a separation between the
-archetype, the extension "kind" and the actual extension. All
-archetypes have a fixed "extension kind". For example, C++ headers
-will always have a C++ header extension even though the actual header
-extension used is not known. In other cases the extension kind has a
-fixed extension (CMakeLists, Visual Studio projects, solutions). At
-present this mapping is done via the multiple functions locator
-supplies.
-
-We could conceivably have an enumeration for extension kind and then
-have a single function for full paths, that just takes in the
-extension kind, archetype etc. This would replace the proliferation of
-"full path for XYZ".
-
-We also have the concept of inclusion paths. We should generalise this
-to just "relative paths" and have a "add project directory?" flag.
 
 *** Add a top-level "Visual Studio" knob                              :story:
 
@@ -914,19 +808,6 @@ associated with that class.
 
 Ideally we should also have a log initialisation class that uses those
 common options.
-
-*** Name all project paths according to a scheme                      :story:
-
-The locator API looks really confusing due to the various kinds of
-paths. We need to catalogue them all and name them properly.
-
-- output directory: directory into which knitter will write all files,
-  unless "c++ headers output directory" is set, in which case it will
-  write all files except for the headers.
-- c++ headers output directory: directory in which knitter will write
-  the headers. Only applicable to c++.
-- include directory: aka inclusion directory; directory to place in
-  the include path.
 
 *** Not setting output language results in weird errors               :story:
 

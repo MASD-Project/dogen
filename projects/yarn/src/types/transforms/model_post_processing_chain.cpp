@@ -48,14 +48,16 @@ transform(const context& ctx, meta_model::model& m) {
         transform_id, m.name().id(), ctx.prober(), m);
 
     /*
-     * We update generability first, for no particular reason.
-     */
-    generability_transform::transform(ctx, m);
-
-    /*
      * Perform dynamic expansion first. These are kernel specific.
      */
     dynamic_transforms_chain::transform(ctx, m);
+
+    /*
+     * Next we apply the generability transform. We do this after
+     * dynamic transforms to cater for any new elements they may have
+     * inserted.
+     */
+    generability_transform::transform(ctx, m);
 
     /*
      * Expand the artefact properties against the suitable archetype
