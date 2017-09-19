@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 05
+#+title: Sprint Backlog 06
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) }
@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-18 Mon 22:56]
+#+CAPTION: Clock summary at [2017-09-19 Tue 07:40]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:58* |      |      | 100.0 |
+| *Total time*                                                                | *4:18* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:58   |      |      | 100.0 |
-| Active                                                                      |        | 3:58 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 2:19 |  58.4 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:14 |   5.9 |
-| COMPLETED Rename top-level transformations                                  |        |      | 0:30 |  12.6 |
-| CANCELLED Add an "at" field to transform stats                              |        |      | 0:10 |   4.2 |
-| STARTED Consider revamping the project logo                                 |        |      | 0:45 |  18.9 |
+| Stories                                                                     | 4:18   |      |      | 100.0 |
+| Active                                                                      |        | 4:18 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 2:19 |  53.9 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:14 |   5.4 |
+| COMPLETED Rename top-level transformations                                  |        |      | 0:30 |  11.6 |
+| CANCELLED Add an "at" field to transform stats                              |        |      | 0:10 |   3.9 |
+| STARTED Consider revamping the project logo                                 |        |      | 0:45 |  17.4 |
+| STARTED Move enablement into yarn                                           |        |      | 0:20 |   7.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -210,6 +211,9 @@ ends in the log file. We should also move the asserts from =DEBUG= to
     CLOSED: [2017-09-18 Mon 22:10]
     CLOCK: [2017-09-18 Mon 21:40]--[2017-09-18 Mon 22:10] =>  0:30
 
+We no longer need the code-generator outside of transforms; we can now
+have a code-generation chain.
+
 Tasks:
 
 - rename kernel related transforms to "model to text" as this is what
@@ -232,12 +236,8 @@ user we could add a field with a date in local time - or perhaps UTC?
 
 Try doing something slightly less "street".
 
-*** Create a code generation chain                                    :story:
-
-We no longer need the code-generator outside of transforms; we can now
-have a code-generation chain.
-
-*** Move enablement into yarn                                         :story:
+*** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-09-19 Tue 07:20]--[2017-09-19 Tue 07:40] =>  0:20
 
 It seems that the concepts around enablement are actually not kernel
 specific but instead can be generalised at the meta-model level. We
@@ -290,6 +290,43 @@ We need to make use of the exact same logic as implemented in
 =quilt.cpp= for enablement. Perhaps all of the enablement related
 functionality can be lifted and grafted onto quilt without any major
 changes.
+
+*** Add facet validation against language standard                    :story:
+
+With the move of enablement to yarn, we can no longer validate facets
+against the language standard. For example, we should not allow
+hashing on C++ 98. The code was as follows:
+
+#+begin_src c++
+void enablement_expander::validate_enabled_facets(
+    const global_enablement_configurations_type& gcs,
+    const formattables::cpp_standards cs) const {
+    BOOST_LOG_SEV(lg, debug) << "Validating enabled facets.";
+
+    if (cs == formattables::cpp_standards::cpp_98) {
+        using formatters::hash::traits;
+        const auto arch(traits::class_header_archetype());
+
+        const auto i(gcs.find(arch));
+        if (i == gcs.end()) {
+            BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
+            BOOST_THROW_EXCEPTION(expansion_error(archetype_not_found + arch));
+        }
+
+        const auto& gc(i->second);
+        if (gc.facet_enabled()) {
+            const auto fctn(gc.facet_name());
+            BOOST_LOG_SEV(lg, error) << incompatible_facet << fctn;
+            BOOST_THROW_EXCEPTION(expansion_error(incompatible_facet + fctn));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Validated enabled facets.";
+}
+#+end_src
+
+It was called from the main transform method in enablement transform,
+prior to uptading facet enablement.
 
 *** Tidy-up assistant API                                             :story:
 

@@ -483,8 +483,8 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
      * and update the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gtg, ra));
-    validate_enabled_facets(gcs, fm.cpp_standard());
-    update_facet_enablement(frp, gcs, fm);
+    // validate_enabled_facets(gcs, fm.cpp_standard());
+    // update_facet_enablement(frp, gcs, fm);
 
     /*
      * Create the fields for the local types. These are generated
