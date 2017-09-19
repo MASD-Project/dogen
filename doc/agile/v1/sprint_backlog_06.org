@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-19 Tue 08:36]
+#+CAPTION: Clock summary at [2017-09-19 Tue 20:43]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:38* |      |      | 100.0 |
+| *Total time*                                                                | *5:30* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:38   |      |      | 100.0 |
-| Active                                                                      |        | 4:38 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 2:19 |  50.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:14 |   5.0 |
-| COMPLETED Rename top-level transformations                                  |        |      | 0:30 |  10.8 |
-| CANCELLED Add an "at" field to transform stats                              |        |      | 0:10 |   3.6 |
-| STARTED Consider revamping the project logo                                 |        |      | 0:45 |  16.2 |
-| STARTED Move enablement into yarn                                           |        |      | 0:40 |  14.4 |
+| Stories                                                                     | 5:30   |      |      | 100.0 |
+| Active                                                                      |        | 5:30 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 2:19 |  42.1 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:14 |   4.2 |
+| COMPLETED Rename top-level transformations                                  |        |      | 0:30 |   9.1 |
+| CANCELLED Add an "at" field to transform stats                              |        |      | 0:10 |   3.0 |
+| COMPLETED Move enablement into yarn                                         |        |      | 0:40 |  12.1 |
+| STARTED Consider revamping the project logo                                 |        |      | 0:45 |  13.6 |
+| STARTED Generate file paths as a transform                                  |        |      | 0:52 |  15.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -292,6 +293,99 @@ changes.
     CLOCK: [2017-09-18 Mon 22:11]--[2017-09-18 Mon 22:56] =>  0:45
 
 Try doing something slightly less "street".
+
+*** STARTED Generate file paths as a transform                        :story:
+    CLOCK: [2017-09-19 Tue 17:51]--[2017-09-19 Tue 18:43] =>  0:52
+
+Add a yarn transform for file path generation.
+
+In order to solve this problem, we need to create a generic
+architecture that compute file paths. We have two key
+responsibilities:
+
+- computing the full path, used for writing the artefact.
+- computing a relative path, used for:
+  - includes;
+  - header guards;
+  - visual studio C# projects at present, and in the future, c++ projects;
+  - paths in ODB files, which requires the relative path to both the
+    odb and types facets.
+  - paths in CMakeLists for ODB files.
+  - paths in msbuild for ODB files.
+
+*Computing the full path*
+
+At present we are computing the full path by having a kernel-specific
+locator who loads its information as follows:
+
+- output directory path, cpp headers output directory path; can be
+  sourced from options.
+- type repository: can be sourced from context.
+- enable kernel directories: read from meta-data.
+- module ids: already available in model.
+- formatters repository: part of this can be replaced by sourcing the
+  archetype location from context. However, we also use the formatter
+  to generate the path.
+
+In addition, we read data from meta-data:
+
+- include, source directory name
+- header, implementation file extension
+- disable facet directories
+- kernel directory name
+- for each facet, facet directory name, facet postfix, archetype
+  postfix
+
+This information can all be read up front from the root annotation.
+
+We then compute different kinds of paths:
+
+- project path: full path to the project directory. Starts with the
+  supplied output directory, skips external modules, adds model
+  modules, skips internal modules. Includes_ kernel directory, if
+  enabled.
+- facet path: includes facet directory, internal modules, model
+  modules. Handles module names differently from all other
+  names. Includes file name and extension (supplied as paramters).
+
+Finally, formatters call specific functions to obtain the full path or
+include path. However, each formatter is then responsible for
+supplying things such as is header file/implementation file, is
+CMakeLists etc.
+
+*Towards a more general locator architecture*
+
+Locator needs to be able to load all of the meta-data related to:
+
+- kernels: kernel directory, is kernel enabled
+- facets: directory, postfix, archetype postfix
+
+The biggest problem we have is that, given an element and an
+archetype, we are not able to determine:
+
+- the full path: what is the extension? is the archetype in a facet or
+  not? e.g. top-level CMakeLists. Is it in a directory that lives
+  outside of the project directory and outside of facet directories?
+  e.g. src CMakeLists. Is it in a facet? e.g. ODB files.
+- the relative paths: relative to what? how many to compute.
+
+However, some things do have a functional relationship:
+
+- given archetype location, you can only have one extension. One
+  extension can have many archetype locations. This includes
+  separating headers from implementation, etc. Formatters know the
+  extension.
+
+We could introduce two concepts:
+
+- directory groups: project, kernel, facet, other: include,
+  implementation. Directory groups contain directory groups. Directory
+  groups have settings: a name; whether to add external modules,
+  internal modules, model modules;
+
+- file groups: include, implementation.
+
+
 
 *** Add facet validation against language standard                    :story:
 
@@ -627,10 +721,6 @@ all languages if supplied suitable configuration data. To generalise:
   concept of inclusion path which is not language specific; "relative
   path" and "requires relative path" perhaps? These could be a
   function of archetype location.
-
-*** Generate file paths as a transform                                :story:
-
-Add a fabric transform for file path generation.
 
 *** Add a modeline to stitch                                          :story:
 
