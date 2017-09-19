@@ -112,7 +112,6 @@ model adapter::adapt(const formatters::repository& frp,
     for (const auto& pair : m.facet_properties()) {
         facet_properties fp;
         fp.enabled(pair.second.enabled());
-        fp.overwrite(pair.second.overwrite());
         r.facet_properties().insert(std::make_pair(pair.first, fp));
     }
 

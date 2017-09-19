@@ -45,9 +45,8 @@ std::ostream& operator<<(std::ostream& s, const facet_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::facet_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"overwrite\": " << v.overwrite() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
+      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
+      << "\"enabled\": " << v.enabled()
       << " }";
     return(s);
 }

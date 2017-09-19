@@ -105,7 +105,6 @@
 #include "dogen/quilt.cpp/types/formattables/resolution_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/optional_helper.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
-#include "dogen/quilt.cpp/types/formattables/formatting_styles.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_descriptor.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/variant_helper.hpp"

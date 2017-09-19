@@ -26,50 +26,29 @@ namespace cpp {
 namespace formattables {
 
 facet_properties::facet_properties()
-    : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)) { }
 
 facet_properties::facet_properties(
-    const bool enabled,
-    const bool overwrite,
-    const std::string& directory)
-    : enabled_(enabled),
-      overwrite_(overwrite),
-      directory_(directory) { }
+    const std::string& directory,
+    const bool enabled)
+    : directory_(directory),
+      enabled_(enabled) { }
 
 void facet_properties::swap(facet_properties& other) noexcept {
     using std::swap;
-    swap(enabled_, other.enabled_);
-    swap(overwrite_, other.overwrite_);
     swap(directory_, other.directory_);
+    swap(enabled_, other.enabled_);
 }
 
 bool facet_properties::operator==(const facet_properties& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        overwrite_ == rhs.overwrite_ &&
-        directory_ == rhs.directory_;
+    return directory_ == rhs.directory_ &&
+        enabled_ == rhs.enabled_;
 }
 
 facet_properties& facet_properties::operator=(facet_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-bool facet_properties::enabled() const {
-    return enabled_;
-}
-
-void facet_properties::enabled(const bool v) {
-    enabled_ = v;
-}
-
-bool facet_properties::overwrite() const {
-    return overwrite_;
-}
-
-void facet_properties::overwrite(const bool v) {
-    overwrite_ = v;
 }
 
 const std::string& facet_properties::directory() const {
@@ -86,6 +65,14 @@ void facet_properties::directory(const std::string& v) {
 
 void facet_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
+}
+
+bool facet_properties::enabled() const {
+    return enabled_;
+}
+
+void facet_properties::enabled(const bool v) {
+    enabled_ = v;
 }
 
 } } } }

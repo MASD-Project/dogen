@@ -45,9 +45,8 @@ public:
 
 public:
     facet_properties(
-        const bool enabled,
-        const bool overwrite,
-        const std::string& directory);
+        const std::string& directory,
+        const bool enabled);
 
 private:
     template<typename Archive>
@@ -57,16 +56,13 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::facet_properties& v, unsigned int version);
 
 public:
-    bool enabled() const;
-    void enabled(const bool v);
-
-    bool overwrite() const;
-    void overwrite(const bool v);
-
     const std::string& directory() const;
     std::string& directory();
     void directory(const std::string& v);
     void directory(const std::string&& v);
+
+    bool enabled() const;
+    void enabled(const bool v);
 
 public:
     bool operator==(const facet_properties& rhs) const;
@@ -79,9 +75,8 @@ public:
     facet_properties& operator=(facet_properties other);
 
 private:
-    bool enabled_;
-    bool overwrite_;
     std::string directory_;
+    bool enabled_;
 };
 
 } } } }

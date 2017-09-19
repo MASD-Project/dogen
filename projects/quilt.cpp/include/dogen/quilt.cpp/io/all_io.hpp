@@ -44,7 +44,6 @@
 #include "dogen/quilt.cpp/io/fabric/visual_studio_solution_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/formatting_styles_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_descriptor_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/element_properties_io.hpp"
