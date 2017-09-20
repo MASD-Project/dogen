@@ -37,25 +37,23 @@ The generated code contains most of the functionality required from a
 typical C++ domain object such as serialisation, hashing, streaming
 and so on. Whilst we intend for the suite to be useful out of the box
 for most use cases, our end goal is to enable users to extend Dogen,
-adapting it to the vagaries of their specific use cases.
+adapting it to the vagaries of their specific needs.
 
-Dogen also has experimental C# support, but it is not in feature
-parity with the C++ support.
+Note that Dogen has experimental C# support, but it is not in feature
+parity with C++ support.
 
 # Binary Packages
 
-We provide binary packages
-on [BinTray](https://bintray.com/domaindrivenconsulting/Dogen). At
-present we support Debian Linux, OSX and Windows, all in 64-bit. The
-packages are generated at the end of each sprint - with the exception
-of Windows, where we generate packages on each commit due to
-a
-[problem with AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag).
+Binary packages are available on
+[BinTray](https://bintray.com/domaindrivenconsulting/Dogen), for
+Debian Linux, OSX and Windows - all in 64-bit. Packages are generated
+at the end of each sprint - with the exception of Windows, where we
+generate them on each commit due to a [problem with
+AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag).
 
 # Building From Source
 
-The Dogen build has the following dependencies, across all operative
-systems:
+Dogen has the following dependencies, across all operative systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
@@ -64,13 +62,13 @@ systems:
 | Boost  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | ODB    | Optional  | Any recent.    | If you want to build the ORM examples, you need ODB. You will also need a backend such as Oracle, Postgres, etc.|
 
-In addition to these dependencies, you will also need a build
-toolchain. On Linux and OSX, you need a recent compiler - such as GCC
-6 or Clang 3.8 - and Ninja or GNU Make. On Windows you will need
-Visual Studio 2015 or later.
+In addition, you will also need a build toolchain. On Linux and OSX,
+you'll need a moderately recent compiler - such as GCC 6 or Clang
+3.7 - and Ninja or GNU Make. On Windows you'll need Visual Studio 2015
+or later.
 
-Once you have all dependencies installed and setup, you can then clone
-the repository and setup the build directory, using the shell of your
+Once you have all dependencies installed and set up, you can then clone
+the repository and create the build directory, using the shell of your
 choice (ours is Bash):
 
 ```
@@ -87,7 +85,7 @@ cmake ../..
 make -j5 # number of cores available
 ```
 
-We personally prefer Ninja:
+Alternatively, you can use Ninja:
 
 ```
 cmake ../.. -G Ninja
