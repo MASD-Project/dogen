@@ -918,27 +918,6 @@ At present we do:
 
 The "c++-" seems a bit redundant.
 
-*** Add a "flat directory" mode                                       :story:
-
-It would be nice to have a mode in which all files get placed in a
-single-directory: no src, include, etc – just one big folder with all
-files.
-
-Actually we can already achieve this:
-
-- set =quilt.cpp.disable_facet_directories= to true
-- set =quilt.cpp.include_directory_name= to empty
-- set =quilt.cpp.source_directory_name= to empty
-
-It is however a bit painful. It would be nice to have a shorthand for
-this, which could be the "flat directory" mode. It is also compatible
-with split project mode (we just have flat directories in two
-different top-level directories), which is nice.
-
-We should check that =enable_unique_file_names= is set to true.
-
-Key: =quilt.cpp.flat_directory_mode.enabled=.
-
 *** "Assistant" type found in test model                              :story:
 
 We seem to be generating an "Assistant" type on the =primitve= test model:

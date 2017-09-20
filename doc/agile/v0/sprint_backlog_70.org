@@ -1205,6 +1205,7 @@ name is detected, a model named "unnamed_model" is created.
 The correct solution for this is to have a flag (or flags) at the SML
 level which state whether to use the model name for folders, packages,
 etc. The view model generation will then take this into account.
+
 *** CANCELLED All model items traversal should resolve types          :story:
     CLOSED: [2015-07-10 Fri 15:37]
 
