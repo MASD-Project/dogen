@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-21 Thu 10:14]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:08* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:08   |      |      | 100.0 |
-| Active                                                                      |        | 9:08 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 2:19 |  25.4 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:14 |   2.6 |
-| COMPLETED Rename top-level transformations                                  |        |      | 0:30 |   5.5 |
-| CANCELLED Add an "at" field to transform stats                              |        |      | 0:10 |   1.8 |
-| COMPLETED Move enablement into yarn                                         |        |      | 1:01 |  11.1 |
-| COMPLETED Consider revamping the project logo                               |        |      | 2:02 |  22.3 |
-| STARTED Generate file paths as a transform                                  |        |      | 2:52 |  31.4 |
+#+CAPTION: Clock summary at [2017-09-21 Thu 18:31]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *11:00* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 11:00   |       |      | 100.0 |
+| Active                                                                      |         | 11:00 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  21.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:14 |   2.1 |
+| COMPLETED Rename top-level transformations                                  |         |       | 0:30 |   4.5 |
+| CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.5 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   9.2 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  18.5 |
+| STARTED Generate file paths as a transform                                  |         |       | 4:44 |  43.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -299,6 +299,10 @@ changes.
 Try doing something slightly less "street".
 
 *** STARTED Generate file paths as a transform                        :story:
+    CLOCK: [2017-09-21 Thu 14:20]--[2017-09-21 Thu 14:55] =>  0:35
+    CLOCK: [2017-09-21 Thu 12:21]--[2017-09-21 Thu 12:31] =>  0:10
+    CLOCK: [2017-09-21 Thu 11:55]--[2017-09-21 Thu 12:20] =>  0:25
+    CLOCK: [2017-09-21 Thu 10:50]--[2017-09-21 Thu 11:32] =>  0:42
     CLOCK: [2017-09-20 Wed 20:12]--[2017-09-20 Wed 21:46] =>  1:34
     CLOCK: [2017-09-19 Tue 21:42]--[2017-09-19 Tue 21:47] =>  0:05
     CLOCK: [2017-09-19 Tue 21:20]--[2017-09-19 Tue 21:41] =>  0:21
@@ -385,12 +389,101 @@ However, some things do have a functional relationship:
 
 We could introduce two concepts:
 
-- directory groups: project, kernel, facet, other: include,
+- directory groups: project, kernel, other: include,
   implementation. Directory groups contain directory groups. Directory
   groups have settings: a name; whether to add external modules,
   internal modules, model modules;
 
 - file groups: include, implementation.
+
+Each group has an associated configuration:
+
+- directory configuration:
+  - id: yarn, quilt.cpp/quilt.csharp, include/source/
+  - name
+  - type: model, kernel, intra-kernel. Not actually modeled in code.
+  - external modules: as path components, as folders, does not
+    contribute (none). Enum: path contribution type. Not available for
+    kernel configuration.
+  - model modules: as path components, as folders, does not
+    contribute. Not available for kernel configuration.
+  - internal modules: as path components, as folders, does not
+    contribute. Not available for model directory configuration or
+    kernel configuration.
+  - facets: as path components, as folders, does not
+    contribute.
+  - enabled:
+- file configuration:
+  - name: C++ header files, C++ implementation files, CMakeFiles, MSBuild
+    files, C# files.
+  - extension: .cpp, etc.
+
+A path is composed of segments, which are sets of path components. The
+following segments exist:
+
+- output segment: supplied by the command line, as it references full paths.
+- output override segment: supplied by the command line, as it
+  references full paths. Must have a intra-kernel segment name.
+- model segment
+- kernel segment
+- intra-kernel segment: needs to know if the parent has been
+  overriden. Else, defaults to output + model + kernel.
+- facet segment: Composed of the facet directory name (configurable,
+  enabled or disabled) and the facet postfix (configurable, enabled or
+  disabled)
+
+Examples:
+
+- =yarn.directory_configuration.flat_mode=: if true, no other
+  directory configuration options may be specified. No directories
+  will be generated at all. However we will still use the facet and
+  archetype post-fixes (these then become mandatory). We need to also
+  worry about CMakeLists: we can't have include/src files because they
+  have the same name. We need to disable the include CMakeLists.txt
+  and add the install for headers into source CMakeLists.txt.
+- =yarn.directory_configuration.directory_name=: defaults to model
+  name. If user supplied, the rest is ignored. If not supplied, and
+  all other path contribution types are set to none, there will be no
+  contribution from model directory configuration.
+- =yarn.directory_configuration.separator=: defaults to dot.
+- =yarn.directory_configuration.external_modules=: none.
+- =yarn.directory_configuration.model_modules=: path_components.
+
+
+
+- =quilt.cpp.directory_configuration.directory_name=: each kernel
+  provides a default (e.g. =cpp=, =cs=).
+- =quilt.cpp..directory_configuration.external_modules=: none.
+
+
+- =quilt.cpp.directory_configuration.model_modules=: path_components.
+
+
+- =yarn.directory_configuration.internal_modules=: path_components.
+
+
+
+
+Note: it should be possible to assign a different intra-kernel
+directory configuration for a given (element, archetype) pair. For
+example, if it is public vs internal. The trouble with this is that we
+want the directory configurations to be supplied by the kernel at
+context construction time, but we do not know of the overrides until
+we start processing the elements. Thus we need an element level
+configuration "directory group override" that is read during
+processing, that takes precedence over the kernel level default.
+
+Dogen style:
+
+
+Creates the directory structure as follows:
+
+- the model segment is composed of just the model directory; the model
+  directory is composed of the model modules, separated by dots.
+- the kernel segment is composed of just the kernel directory - but only if
+  there is more than one kernel enabled.
+- followed by the intra-kernel
+enabled
 
 **** Merged Stories
 ***** Split out the file extension from the formatter
