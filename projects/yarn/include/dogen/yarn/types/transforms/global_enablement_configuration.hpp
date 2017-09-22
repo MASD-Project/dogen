@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/yarn/serialization/transforms/global_enablement_configuration_fwd_ser.hpp"
@@ -49,7 +48,6 @@ public:
     global_enablement_configuration(
         const bool kernel_enabled,
         const bool facet_enabled,
-        const std::string& facet_name,
         const bool archetype_enabled,
         const bool facet_overwrite,
         const boost::optional<bool>& archetype_overwrite);
@@ -67,11 +65,6 @@ public:
 
     bool facet_enabled() const;
     void facet_enabled(const bool v);
-
-    const std::string& facet_name() const;
-    std::string& facet_name();
-    void facet_name(const std::string& v);
-    void facet_name(const std::string&& v);
 
     bool archetype_enabled() const;
     void archetype_enabled(const bool v);
@@ -97,7 +90,6 @@ public:
 private:
     bool kernel_enabled_;
     bool facet_enabled_;
-    std::string facet_name_;
     bool archetype_enabled_;
     bool facet_overwrite_;
     boost::optional<bool> archetype_overwrite_;

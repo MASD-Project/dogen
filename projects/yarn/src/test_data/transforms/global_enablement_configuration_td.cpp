@@ -18,19 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/yarn/test_data/transforms/global_enablement_configuration_td.hpp"
 
 namespace {
 
 bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
-}
-
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
 }
 
 boost::optional<bool>
@@ -52,10 +45,9 @@ void global_enablement_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.kernel_enabled(create_bool(position + 0));
     v.facet_enabled(create_bool(position + 1));
-    v.facet_name(create_std_string(position + 2));
-    v.archetype_enabled(create_bool(position + 3));
-    v.facet_overwrite(create_bool(position + 4));
-    v.archetype_overwrite(create_boost_optional_bool(position + 5));
+    v.archetype_enabled(create_bool(position + 2));
+    v.facet_overwrite(create_bool(position + 3));
+    v.archetype_overwrite(create_boost_optional_bool(position + 4));
 }
 
 global_enablement_configuration_generator::result_type

@@ -32461,7 +32461,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-123,137"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-123.05,136.95;-105.895,143.85"/>
+        <dia:rectangle val="-123.05,136.95;-105.895,143.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-123,137"/>
@@ -32470,7 +32470,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="17.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_enablement_configuration#</dia:string>
@@ -32589,29 +32589,6 @@ Temporary data structure used to build trees of names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#facet_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

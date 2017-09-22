@@ -119,8 +119,6 @@ make_global_type_group(const annotations::type_repository& atrp,
         gtg.facet_overwrite = s.select_type_by_name(al.facet(), ow);
         gtg.archetype_overwrite = s.select_type_by_name(al.archetype(), ow);
 
-        gtg.facet_name = al.facet();
-
         r[al.archetype()] = gtg;
     }
 
@@ -144,7 +142,6 @@ enablement_transform::obtain_global_configurations(
         global_enablement_configuration gec;
         gec.kernel_enabled(s.get_boolean_content_or_default(t.kernel_enabled));
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
-        gec.facet_name(t.facet_name);
         gec.archetype_enabled(
             s.get_boolean_content_or_default(t.archetype_enabled));
         gec.facet_overwrite(

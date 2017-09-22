@@ -49,7 +49,6 @@ std::size_t global_enablement_configuration_hasher::hash(const global_enablement
 
     combine(seed, v.kernel_enabled());
     combine(seed, v.facet_enabled());
-    combine(seed, v.facet_name());
     combine(seed, v.archetype_enabled());
     combine(seed, v.facet_overwrite());
     combine(seed, hash_boost_optional_bool(v.archetype_overwrite()));

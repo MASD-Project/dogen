@@ -20,16 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/transforms/global_enablement_configuration_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
 
 namespace boost {
 
@@ -61,7 +52,6 @@ std::ostream& operator<<(std::ostream& s, const global_enablement_configuration&
       << "\"__type__\": " << "\"dogen::yarn::transforms::global_enablement_configuration\"" << ", "
       << "\"kernel_enabled\": " << v.kernel_enabled() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
-      << "\"facet_name\": " << "\"" << tidy_up_string(v.facet_name()) << "\"" << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
       << "\"archetype_overwrite\": " << v.archetype_overwrite()

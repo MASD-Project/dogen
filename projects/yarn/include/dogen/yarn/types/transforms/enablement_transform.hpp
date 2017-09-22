@@ -39,14 +39,12 @@ namespace transforms {
 
 class enablement_transform final {
 private:
-        struct global_type_group {
+    struct global_type_group {
         annotations::type kernel_enabled;
         annotations::type facet_enabled;
         annotations::type archetype_enabled;
         annotations::type facet_overwrite;
         annotations::type archetype_overwrite;
-
-        std::string facet_name;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
