@@ -165,6 +165,7 @@
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/locator_properties_transform.hpp"
 #include "dogen/yarn/types/meta_model/archetype_location_properties.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
@@ -178,5 +179,6 @@
 #include "dogen/yarn/types/helpers/endomodel_post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/archetype_location_properties_transform.hpp"
 
 #endif
