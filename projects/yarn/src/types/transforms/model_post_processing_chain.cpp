@@ -26,6 +26,8 @@
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/formatting_transform.hpp"
+#include "dogen/yarn/types/transforms/archetype_location_properties_transform.hpp"
+#include "dogen/yarn/types/transforms/locator_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
@@ -67,6 +69,12 @@ transform(const context& ctx, meta_model::model& m) {
     artefact_properties_transform::transform(ctx, m);
 
     /*
+     * The archetype location properties transform must be executed
+     * before the enablement transform.
+     */
+    archetype_location_properties_transform::transform(ctx, m);
+
+    /*
      * Enablement transform must be applied after the dynamic
      * transform chain as it needs to compute enablement for any
      * kernel specific types that might have been added.
@@ -74,10 +82,11 @@ transform(const context& ctx, meta_model::model& m) {
     enablement_transform::transform(ctx, m);
 
     /*
-     * The formatting transform has no dependencies in the
-     * post-processing chain.
+     * The formatting transform and the locator properties transform
+     * have no dependencies in the post-processing chain.
      */
     formatting_transform::transform(ctx, m);
+    locator_properties_transform::transform(ctx, m);
 
     stp.end_chain(m);
 }

@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +35,7 @@ namespace transforms {
 
 class locator_properties_transform final {
 public:
-    locator_properties_transform() = default;
-    locator_properties_transform(const locator_properties_transform&) = default;
-    locator_properties_transform(locator_properties_transform&&) = default;
-    ~locator_properties_transform() = default;
-    locator_properties_transform& operator=(const locator_properties_transform&) = default;
-
-public:
-    bool operator==(const locator_properties_transform& rhs) const;
-    bool operator!=(const locator_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 } } }

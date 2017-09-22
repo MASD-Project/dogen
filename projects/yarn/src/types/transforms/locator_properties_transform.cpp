@@ -18,14 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/locator_properties_transform.hpp"
+
+namespace {
+
+const std::string transform_id("yarn.transforms.locator_properties_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool locator_properties_transform::operator==(const locator_properties_transform& /*rhs*/) const {
-    return true;
+void locator_properties_transform::
+transform(const context& ctx, meta_model::model& m) {
+    helpers::scoped_transform_probing stp(lg, "locator properties transform",
+        transform_id, m.name().id(), ctx.prober(), m);
 }
 
 } } }

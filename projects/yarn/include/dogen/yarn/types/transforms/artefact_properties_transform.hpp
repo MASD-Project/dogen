@@ -42,7 +42,7 @@ private:
     static void update_element(const context& ctx, meta_model::element& e);
 
 public:
-    static void transform(const context& ctx, meta_model::model& em);
+    static void transform(const context& ctx, meta_model::model& m);
 };
 
 } } }
