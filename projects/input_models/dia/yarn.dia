@@ -4685,7 +4685,7 @@ meta-types (object templates) and non-types (modules and kernel specific entitie
         <dia:point val="-65,-76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.05,-76.05;-37.885,-62.75"/>
+        <dia:rectangle val="-65.05,-76.05;-37.885,-63.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-65,-76"/>
@@ -4694,7 +4694,7 @@ meta-types (object templates) and non-types (modules and kernel specific entitie
         <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -4995,29 +4995,6 @@ Leaves are types concrete types which have a parent.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#facet_properties#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, facet_properties&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#enabled_archetype_for_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -5131,16 +5108,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-65,-62.8"/>
+        <dia:point val="-65,-63.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-91.05,-63.55;-64.25,-45.2"/>
+        <dia:rectangle val="-91.05,-64.35;-64.25,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-65,-62.8"/>
+        <dia:point val="-65,-63.6"/>
         <dia:point val="-65,-55"/>
         <dia:point val="-91,-55"/>
         <dia:point val="-91,-46"/>
@@ -10918,16 +10895,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-37.935,-62.8"/>
+        <dia:point val="-37.935,-63.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-38.685,-63.55;-30.8,-50.2"/>
+        <dia:rectangle val="-38.685,-64.35;-30.8,-50.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-37.935,-62.8"/>
+        <dia:point val="-37.935,-63.6"/>
         <dia:point val="-37.935,-55"/>
         <dia:point val="-31,-55"/>
         <dia:point val="-31,-51"/>
@@ -44326,16 +44303,16 @@ model directory.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-51.4675,-62.8"/>
+        <dia:point val="-51.4675,-63.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-52.2175,-63.55;-47.1225,-49.4"/>
+        <dia:rectangle val="-52.2175,-64.35;-47.1225,-49.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-51.4675,-62.8"/>
+        <dia:point val="-51.4675,-63.6"/>
         <dia:point val="-51.4675,-55"/>
         <dia:point val="-47.3225,-55"/>
         <dia:point val="-47.3225,-51"/>

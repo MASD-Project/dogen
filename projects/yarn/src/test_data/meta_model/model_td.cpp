@@ -25,7 +25,6 @@
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/languages_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
-#include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen/yarn/test_data/meta_model/locator_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
@@ -126,19 +125,6 @@ create_boost_optional_dogen_yarn_meta_model_orm_model_properties(unsigned int po
     return r;
 }
 
-dogen::yarn::meta_model::facet_properties
-create_dogen_yarn_meta_model_facet_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::facet_properties_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_facet_properties(position + i)));
-    }
-    return r;
-}
-
 dogen::yarn::meta_model::element_archetype
 create_dogen_yarn_meta_model_element_archetype(const unsigned int position) {
     return dogen::yarn::meta_model::element_archetype_generator::create(position);
@@ -183,10 +169,9 @@ populate(const unsigned int position, result_type& v) {
     v.input_language(create_dogen_yarn_meta_model_languages(position + 8));
     v.output_language(create_dogen_yarn_meta_model_languages(position + 9));
     v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 10));
-    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 11));
-    v.enabled_archetype_for_element(create_std_unordered_set_dogen_yarn_meta_model_element_archetype(position + 12));
-    v.locator_properties(create_dogen_yarn_meta_model_locator_properties(position + 13));
-    v.archetype_location_properties(create_dogen_yarn_meta_model_archetype_location_properties(position + 14));
+    v.enabled_archetype_for_element(create_std_unordered_set_dogen_yarn_meta_model_element_archetype(position + 11));
+    v.locator_properties(create_dogen_yarn_meta_model_locator_properties(position + 12));
+    v.archetype_location_properties(create_dogen_yarn_meta_model_archetype_location_properties(position + 13));
 }
 
 model_generator::result_type

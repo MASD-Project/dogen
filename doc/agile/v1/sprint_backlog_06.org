@@ -300,6 +300,7 @@ changes.
 Try doing something slightly less "street".
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-09-22 Fri 13:08]--[2017-09-22 Fri 13:17] =>  0:09
     CLOCK: [2017-09-22 Fri 11:31]--[2017-09-22 Fri 12:02] =>  0:31
     CLOCK: [2017-09-22 Fri 11:26]--[2017-09-22 Fri 11:30] =>  0:04
 

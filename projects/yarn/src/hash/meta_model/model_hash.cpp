@@ -24,7 +24,6 @@
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/languages_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
-#include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/hash/meta_model/locator_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
@@ -93,15 +92,6 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_orm_model_propertie
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_unordered_set_dogen_yarn_meta_model_element_archetype(const std::unordered_set<dogen::yarn::meta_model::element_archetype>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -130,7 +120,6 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.input_language());
     combine(seed, v.output_language());
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_orm_model_properties(v.orm_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(v.facet_properties()));
     combine(seed, hash_std_unordered_set_dogen_yarn_meta_model_element_archetype(v.enabled_archetype_for_element()));
     combine(seed, v.locator_properties());
     combine(seed, v.archetype_location_properties());

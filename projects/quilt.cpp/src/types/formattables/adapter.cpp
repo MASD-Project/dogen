@@ -109,7 +109,8 @@ model adapter::adapt(const formatters::repository& frp,
     model r;
     r.name(m.name());
 
-    for (const auto& pair : m.facet_properties()) {
+    const auto& fp(m.archetype_location_properties().facet_properties());
+    for (const auto& pair : fp) {
         facet_properties fp;
         fp.enabled(pair.second.enabled());
         r.facet_properties().insert(std::make_pair(pair.first, fp));

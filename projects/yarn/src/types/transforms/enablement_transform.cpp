@@ -181,6 +181,7 @@ void enablement_transform::update_facet_enablement(
      *
      * FIXME: read facet fields here instead of reusing configuration.
      */
+    auto& fp(m.archetype_location_properties().facet_properties());
     const auto archetype_to_facet([&]() {
             std::unordered_map<std::string, std::string> r;
             for (const auto& al : als)
@@ -199,11 +200,11 @@ void enablement_transform::update_facet_enablement(
 
         const auto& fct(i->second);
         const auto& gc(pair.second);
-        m.facet_properties()[fct].enabled(gc.facet_enabled());
+        fp[fct].enabled(gc.facet_enabled());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating facet enablement."
-                             << "Result: " << m.facet_properties();
+                             << "Result: " << fp;
 }
 
 enablement_transform::local_type_group_type enablement_transform::
