@@ -38,8 +38,8 @@ void save(Archive& ar,
     const dogen::yarn::meta_model::facet_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
-    ar << make_nvp("overwrite", v.overwrite_);
     ar << make_nvp("directory", v.directory_);
+    ar << make_nvp("postfix", v.postfix_);
 }
 
 template<typename Archive>
@@ -47,8 +47,8 @@ void load(Archive& ar,
     dogen::yarn::meta_model::facet_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
-    ar >> make_nvp("overwrite", v.overwrite_);
     ar >> make_nvp("directory", v.directory_);
+    ar >> make_nvp("postfix", v.postfix_);
 }
 
 } }

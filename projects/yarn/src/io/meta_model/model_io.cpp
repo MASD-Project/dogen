@@ -29,7 +29,9 @@
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
+#include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/archetype_location_properties_io.hpp"
 
 namespace std {
 
@@ -203,7 +205,9 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"output_language\": " << v.output_language() << ", "
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
-      << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element()
+      << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
+      << "\"locator_properties\": " << v.locator_properties() << ", "
+      << "\"archetype_location_properties\": " << v.archetype_location_properties()
       << " }";
     return(s);
 }

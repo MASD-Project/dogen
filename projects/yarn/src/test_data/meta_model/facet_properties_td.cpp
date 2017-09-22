@@ -44,8 +44,8 @@ facet_properties_generator::facet_properties_generator() : position_(0) { }
 void facet_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.overwrite(create_bool(position + 1));
-    v.directory(create_std_string(position + 2));
+    v.directory(create_std_string(position + 1));
+    v.postfix(create_std_string(position + 2));
 }
 
 facet_properties_generator::result_type

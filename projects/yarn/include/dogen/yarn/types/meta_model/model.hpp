@@ -40,9 +40,11 @@
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"
+#include "dogen/yarn/types/meta_model/locator_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/serialization/meta_model/model_fwd_ser.hpp"
+#include "dogen/yarn/types/meta_model/archetype_location_properties.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -76,7 +78,9 @@ public:
         const dogen::yarn::meta_model::languages output_language,
         const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
-        const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element);
+        const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element,
+        const dogen::yarn::meta_model::locator_properties& locator_properties,
+        const dogen::yarn::meta_model::archetype_location_properties& archetype_location_properties);
 
 private:
     template<typename Archive>
@@ -192,6 +196,16 @@ public:
     void enabled_archetype_for_element(const std::unordered_set<dogen::yarn::meta_model::element_archetype>& v);
     void enabled_archetype_for_element(const std::unordered_set<dogen::yarn::meta_model::element_archetype>&& v);
 
+    const dogen::yarn::meta_model::locator_properties& locator_properties() const;
+    dogen::yarn::meta_model::locator_properties& locator_properties();
+    void locator_properties(const dogen::yarn::meta_model::locator_properties& v);
+    void locator_properties(const dogen::yarn::meta_model::locator_properties&& v);
+
+    const dogen::yarn::meta_model::archetype_location_properties& archetype_location_properties() const;
+    dogen::yarn::meta_model::archetype_location_properties& archetype_location_properties();
+    void archetype_location_properties(const dogen::yarn::meta_model::archetype_location_properties& v);
+    void archetype_location_properties(const dogen::yarn::meta_model::archetype_location_properties&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -216,6 +230,8 @@ private:
     boost::optional<dogen::yarn::meta_model::orm_model_properties> orm_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
     std::unordered_set<dogen::yarn::meta_model::element_archetype> enabled_archetype_for_element_;
+    dogen::yarn::meta_model::locator_properties locator_properties_;
+    dogen::yarn::meta_model::archetype_location_properties archetype_location_properties_;
 };
 
 } } }

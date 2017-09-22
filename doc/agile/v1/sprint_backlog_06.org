@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-21 Thu 18:31]
+#+CAPTION: Clock summary at [2017-09-22 Fri 12:03]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:00* |       |      | 100.0 |
+| *Total time*                                                                | *13:20* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:00   |       |      | 100.0 |
-| Active                                                                      |         | 11:00 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  21.1 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:14 |   2.1 |
-| COMPLETED Rename top-level transformations                                  |         |       | 0:30 |   4.5 |
-| CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.5 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   9.2 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  18.5 |
-| STARTED Generate file paths as a transform                                  |         |       | 4:44 |  43.0 |
+| Stories                                                                     | 13:20   |       |      | 100.0 |
+| Active                                                                      |         | 13:20 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  17.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:14 |   1.8 |
+| COMPLETED Rename top-level transformations                                  |         |       | 0:30 |   3.8 |
+| CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.2 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   7.6 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  15.2 |
+| STARTED Create the archetype location properties                            |         |       | 0:35 |   4.4 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  48.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -298,7 +299,26 @@ changes.
 
 Try doing something slightly less "street".
 
+*** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-09-22 Fri 11:31]--[2017-09-22 Fri 12:02] =>  0:31
+    CLOCK: [2017-09-22 Fri 11:26]--[2017-09-22 Fri 11:30] =>  0:04
+
+We have a number of properties scattered around the model that need to
+be treated as a unit. We don't really have a good name for it, but as
+they are all related to archetype location stuff,
+=archetype_location_properties= seems like a good name.
+
+Tasks:
+
+- create the =archetype_location_properties=.
+- update enablement to use new properties, drop legacy ones.
+- create a transform that reads in all the meta-data related to
+  them. Place it prior to enablement.
+- update enablement to use the =archetype_location_properties= to
+  populate its global and local caches.
+
 *** STARTED Generate file paths as a transform                        :story:
+    CLOCK: [2017-09-22 Fri 09:41]--[2017-09-22 Fri 11:26] =>  1:45
     CLOCK: [2017-09-21 Thu 14:20]--[2017-09-21 Thu 14:55] =>  0:35
     CLOCK: [2017-09-21 Thu 12:21]--[2017-09-21 Thu 12:31] =>  0:10
     CLOCK: [2017-09-21 Thu 11:55]--[2017-09-21 Thu 12:20] =>  0:25
@@ -448,21 +468,11 @@ Examples:
 - =yarn.directory_configuration.separator=: defaults to dot.
 - =yarn.directory_configuration.external_modules=: none.
 - =yarn.directory_configuration.model_modules=: path_components.
-
-
-
 - =quilt.cpp.directory_configuration.directory_name=: each kernel
   provides a default (e.g. =cpp=, =cs=).
 - =quilt.cpp..directory_configuration.external_modules=: none.
-
-
 - =quilt.cpp.directory_configuration.model_modules=: path_components.
-
-
 - =yarn.directory_configuration.internal_modules=: path_components.
-
-
-
 
 Note: it should be possible to assign a different intra-kernel
 directory configuration for a given (element, archetype) pair. For
@@ -473,8 +483,7 @@ we start processing the elements. Thus we need an element level
 configuration "directory group override" that is read during
 processing, that takes precedence over the kernel level default.
 
-Dogen style:
-
+Styles: dogen style, vs flat style. Dogen style:
 
 Creates the directory structure as follows:
 
@@ -625,6 +634,19 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
+
+*** Detect unqualified stereotypes                                    :story:
+
+If a user enters say =enumeration= instead of =yarn::enumeration= we
+are providing an unhelpful error message:
+
+: Error: Attribute type is empty: structured
+
+This is because we validate the class as if it was an object and then
+figure out that there are no types against the attributes. One easy
+way to make things more useful is to detect unqualified stereotypes
+and error straight away with a more useful message such as "did you
+mean yarn::xyz?".
 
 *** Tidy-up fabric                                                    :story:
 

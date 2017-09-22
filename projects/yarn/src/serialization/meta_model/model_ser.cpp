@@ -41,7 +41,9 @@
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_archetype_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/locator_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/archetype_location_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -63,6 +65,8 @@ void save(Archive& ar,
     ar << make_nvp("orm_properties", v.orm_properties_);
     ar << make_nvp("facet_properties", v.facet_properties_);
     ar << make_nvp("enabled_archetype_for_element", v.enabled_archetype_for_element_);
+    ar << make_nvp("locator_properties", v.locator_properties_);
+    ar << make_nvp("archetype_location_properties", v.archetype_location_properties_);
 }
 
 template<typename Archive>
@@ -82,6 +86,8 @@ void load(Archive& ar,
     ar >> make_nvp("orm_properties", v.orm_properties_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
     ar >> make_nvp("enabled_archetype_for_element", v.enabled_archetype_for_element_);
+    ar >> make_nvp("locator_properties", v.locator_properties_);
+    ar >> make_nvp("archetype_location_properties", v.archetype_location_properties_);
 }
 
 } }
