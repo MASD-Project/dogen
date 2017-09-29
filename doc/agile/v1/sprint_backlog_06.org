@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-29 Fri 15:48]
+#+CAPTION: Clock summary at [2017-09-29 Fri 16:38]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *19:01* |       |      | 100.0 |
+| *Total time*                                                                | *19:29* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 19:01   |       |      | 100.0 |
-| Active                                                                      |         | 19:01 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  12.2 |
+| Stories                                                                     | 19:29   |       |      | 100.0 |
+| Active                                                                      |         | 19:29 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  11.9 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   3.3 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.9 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   5.3 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  10.7 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   8.2 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   5.2 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  10.4 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   8.0 |
 | COMPLETED Clean-up context usage                                            |         |       | 0:38 |   3.3 |
-| STARTED Housekeeper should know of text models                              |         |       | 1:34 |   8.2 |
-| STARTED Create the archetype location properties                            |         |       | 2:37 |  13.8 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  34.1 |
+| STARTED Housekeeper should know of text models                              |         |       | 2:02 |  10.4 |
+| STARTED Create the archetype location properties                            |         |       | 2:37 |  13.4 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  33.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -324,6 +324,8 @@ transform. This is not ideal. It should be the responsibility of the
 client to create the context.
 
 *** STARTED Housekeeper should know of text models                    :story:
+    CLOCK: [2017-09-29 Fri 16:22]--[2017-09-29 Fri 16:38] =>  0:16
+    CLOCK: [2017-09-29 Fri 15:49]--[2017-09-29 Fri 16:01] =>  0:12
     CLOCK: [2017-09-29 Fri 15:30]--[2017-09-29 Fri 15:48] =>  0:18
     CLOCK: [2017-09-29 Fri 14:13]--[2017-09-29 Fri 15:29] =>  1:16
 
