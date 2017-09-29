@@ -27,20 +27,6 @@
   "elements": [
     {
       "name": {
-        "simple": "code_generator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
         "simple": "decomposer",
         "internal_modules": "helpers"
       },
@@ -881,6 +867,96 @@
     },
     {
       "name": {
+        "simple": "archetype_group_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Properties pertaining to groupings of archetypes, related to the path computation.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "extension"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Extension to use for files of this group. Includes the leading dot.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "archetype_location_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "facet_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, facet_properties>"
+        },
+        {
+          "name": {
+            "simple": "archetype_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, archetype_properties>"
+        },
+        {
+          "name": {
+            "simple": "kernel_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, kernel_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "archetype_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "enabled"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If false, will disable all instances of this archetype.\n"
+        },
+        {
+          "name": {
+            "simple": "facet_directory"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Directory name for the facet of this archetype.\n"
+        },
+        {
+          "name": {
+            "simple": "postfix"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Postfix to use for artefacts of this archetype.\n"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "artefact_properties",
         "internal_modules": "meta_model"
       },
@@ -1431,19 +1507,114 @@
           "name": {
             "simple": "enabled"
           },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "overwrite"
-          },
-          "unparsed_type": "bool"
+          "unparsed_type": "bool",
+          "documentation": "If true, this facet is enabled.\n"
         },
         {
           "name": {
             "simple": "directory"
           },
-          "unparsed_type": "std::string"
+          "unparsed_type": "std::string",
+          "documentation": "Directory in which to place artefacts that belong to this facet.\n"
+        },
+        {
+          "name": {
+            "simple": "postfix"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Postfix to use in file names of artefacts that belong to this facet.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "intra_kernel_segment_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "override_parent_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "If supplied, this path is used as the parent path instead of the output path.\n\nThis is useful for example when you want to place the include files outside of the\nmodel directory.\n"
+        },
+        {
+          "name": {
+            "simple": "path_segment"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Path segment to use for this intra-kernel segment.\n"
+        },
+        {
+          "name": {
+            "simple": "external_modules"
+          },
+          "unparsed_type": "path_contribution_types",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": {
+            "simple": "model_modules"
+          },
+          "unparsed_type": "path_contribution_types",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
+        },
+        {
+          "name": {
+            "simple": "internal_modules"
+          },
+          "unparsed_type": "path_contribution_types",
+          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
+        },
+        {
+          "name": {
+            "simple": "facet"
+          },
+          "unparsed_type": "path_contribution_types",
+          "documentation": "What kind of contribution does the facet make to the final path.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "kernel_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Properties related to the kernel.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "enabled"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this kernel is enabled.\n"
+        },
+        {
+          "name": {
+            "simple": "directory"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Kernel specific directory name, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "force_kernel_directory"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the kernel directory will be expressed, even when there is only one kernel\nenabled.\n"
         }
       ]
     },
@@ -1487,6 +1658,51 @@
           },
           "unparsed_type": "std::string",
           "documentation": "Name of the owning element, if any.\n\nFor modeling elements which are located within other modeling elements that\nare not modules, such as attributes, inner classes, etc.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "locator_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "directory_structure_style"
+          },
+          "unparsed_type": "directory_structure_styles"
+        },
+        {
+          "name": {
+            "simple": "name_separator"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Separator to use when concatenating sub-components of a path component.\n"
+        },
+        {
+          "name": {
+            "simple": "model_segment_properties"
+          },
+          "unparsed_type": "model_segment_properties"
+        },
+        {
+          "name": {
+            "simple": "intra_kernel_segment_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, intra_kernel_segment_properties>"
+        },
+        {
+          "name": {
+            "simple": "archetype_group_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, archetype_group_properties>"
         }
       ]
     },
@@ -1570,15 +1786,57 @@
         },
         {
           "name": {
-            "simple": "facet_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, facet_properties>"
-        },
-        {
-          "name": {
             "simple": "enabled_archetype_for_element"
           },
           "unparsed_type": "std::unordered_set<element_archetype>"
+        },
+        {
+          "name": {
+            "simple": "locator_properties"
+          },
+          "unparsed_type": "locator_properties"
+        },
+        {
+          "name": {
+            "simple": "archetype_location_properties"
+          },
+          "unparsed_type": "archetype_location_properties"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_segment_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Properties related to the model segment of the path.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "directory"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "If supplied, the override directory name will take precedence and all other\nsettings will be ignored.\n\nIf not supplied the model path segment is computed from the remaining settings.\n"
+        },
+        {
+          "name": {
+            "simple": "external_modules"
+          },
+          "unparsed_type": "path_contribution_types",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": {
+            "simple": "model_modules"
+          },
+          "unparsed_type": "path_contribution_types",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
         }
       ]
     },
@@ -2106,6 +2364,32 @@
     },
     {
       "name": {
+        "simple": "text_model",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "artefacts"
+          },
+          "unparsed_type": "std::list<formatters::artefact>"
+        },
+        {
+          "name": {
+            "simple": "managed_directories"
+          },
+          "unparsed_type": "std::list<boost::filesystem::path>"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "type_parameters",
         "internal_modules": "meta_model"
       },
@@ -2201,6 +2485,21 @@
     },
     {
       "name": {
+        "simple": "archetype_location_properties_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
         "simple": "artefact_properties_transform",
         "internal_modules": "transforms"
       },
@@ -2232,6 +2531,21 @@
     {
       "name": {
         "simple": "attributes_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "code_generation_chain",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -2308,7 +2622,7 @@
         },
         {
           "name": {
-            "simple": "options"
+            "simple": "transform_options"
           },
           "unparsed_type": "options"
         },
@@ -2687,12 +3001,6 @@
         },
         {
           "name": {
-            "simple": "facet_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
             "simple": "archetype_enabled"
           },
           "unparsed_type": "bool"
@@ -2724,44 +3032,6 @@
       },
       "stereotypes": [
         "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "kernel_interface",
-        "internal_modules": "transforms"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "kernel_registrar",
-        "internal_modules": "transforms"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "kernels_by_language_"
-          },
-          "unparsed_type": "std::unordered_map<yarn::meta_model::languages, std::shared_ptr<kernel_interface>>"
-        }
       ]
     },
     {
@@ -2821,6 +3091,21 @@
           },
           "unparsed_type": "boost::optional<bool>"
         }
+      ]
+    },
+    {
+      "name": {
+        "simple": "locator_properties_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
       ]
     },
     {
@@ -2911,6 +3196,44 @@
       },
       "stereotypes": [
         "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_to_text_transform_interface",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_to_text_transform_registrar",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "transforms_by_language_"
+          },
+          "unparsed_type": "std::unordered_map<yarn::meta_model::languages, std::shared_ptr<model_to_text_transform_interface>>"
+        }
       ]
     },
     {
@@ -3240,7 +3563,7 @@
     },
     {
       "name": {
-        "simple": "textual_model",
+        "simple": "text_model_generation_chain",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -3249,19 +3572,8 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "attributes": [
-        {
-          "name": {
-            "simple": "artefacts"
-          },
-          "unparsed_type": "std::list<formatters::artefact>"
-        },
-        {
-          "name": {
-            "simple": "managed_directories"
-          },
-          "unparsed_type": "std::list<boost::filesystem::path>"
-        }
+      "stereotypes": [
+        "handcrafted"
       ]
     },
     {
@@ -3833,6 +4145,38 @@
     },
     {
       "name": {
+        "simple": "directory_structure_styles",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "structured"
+          },
+          "documentation": "Create the standard directory structure.\n"
+        },
+        {
+          "name": {
+            "simple": "completely_flat"
+          },
+          "documentation": "Suppress the generation of all directories.\n"
+        },
+        {
+          "name": {
+            "simple": "flatten_facets"
+          },
+          "documentation": "Flatten only the facets but preserve remaining structure.\n"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "formatting_styles",
         "internal_modules": "meta_model"
       },
@@ -3998,6 +4342,36 @@
         {
           "name": {
             "simple": "sqllite"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "path_contribution_types",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "none"
+          }
+        },
+        {
+          "name": {
+            "simple": "as_folders"
+          }
+        },
+        {
+          "name": {
+            "simple": "as_path_components"
           }
         }
       ]

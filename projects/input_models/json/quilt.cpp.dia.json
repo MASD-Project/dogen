@@ -635,18 +635,6 @@
       "attributes": [
         {
           "name": {
-            "simple": "enabled"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "overwrite"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
             "simple": "file_path"
           },
           "unparsed_type": "boost::filesystem::path"
@@ -662,18 +650,6 @@
             "simple": "inclusion_dependencies"
           },
           "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "formatting_style"
-          },
-          "unparsed_type": "formattables::formatting_styles"
-        },
-        {
-          "name": {
-            "simple": "formatting_input"
-          },
-          "unparsed_type": "std::string"
         }
       ]
     },
@@ -931,21 +907,6 @@
     },
     {
       "name": {
-        "simple": "enablement_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
         "simple": "facet_directory_expander",
         "internal_modules": "formattables"
       },
@@ -973,21 +934,15 @@
       "attributes": [
         {
           "name": {
-            "simple": "enabled"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "overwrite"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
             "simple": "directory"
           },
           "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "enabled"
+          },
+          "unparsed_type": "bool"
         }
       ]
     },
@@ -1035,97 +990,6 @@
             "simple": "element_properties"
           },
           "unparsed_type": "formattables::element_properties"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "formatting_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "style"
-          },
-          "unparsed_type": "formattables::formatting_styles"
-        },
-        {
-          "name": {
-            "simple": "input"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "formatting_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "global_enablement_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "kernel_enabled"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "facet_enabled"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "facet_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "archetype_enabled"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "facet_overwrite"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "archetype_overwrite"
-          },
-          "unparsed_type": "boost::optional<bool>"
         }
       ]
     },
@@ -1310,50 +1174,6 @@
       },
       "stereotypes": [
         "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "local_enablement_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "facet_enabled"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        },
-        {
-          "name": {
-            "simple": "archetype_enabled"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        },
-        {
-          "name": {
-            "simple": "facet_supported"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        },
-        {
-          "name": {
-            "simple": "facet_overwrite"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        },
-        {
-          "name": {
-            "simple": "archetype_overwrite"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        }
       ]
     },
     {
@@ -3602,7 +3422,7 @@
     },
     {
       "name": {
-        "simple": "kernel"
+        "simple": "model_to_text_transform"
       },
       "meta_name": {
         "simple": "object",
@@ -3770,35 +3590,6 @@
         {
           "name": {
             "simple": "cpp_14"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "formatting_styles",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "stock"
-          }
-        },
-        {
-          "name": {
-            "simple": "wale"
-          }
-        },
-        {
-          "name": {
-            "simple": "stitch"
           }
         }
       ]

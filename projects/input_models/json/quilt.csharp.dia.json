@@ -1530,7 +1530,7 @@
     },
     {
       "name": {
-        "simple": "kernel"
+        "simple": "model_to_text_transform"
       },
       "meta_name": {
         "simple": "object",

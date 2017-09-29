@@ -115,9 +115,8 @@ void workflow::tailor(const options::tailoring_options& to) const {
 
     yarn::transforms::options o;
     o.target(to.target());
-    const auto ctx(yarn::transforms::context_factory::make(o));
-
-    using yarn::transforms::exomodel_to_exomodel_chain;
+    using namespace yarn::transforms;
+    const auto ctx(context_factory::make(o, false/*enable_validation*/));
     exomodel_to_exomodel_chain::transform(ctx, o.target(), to.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
