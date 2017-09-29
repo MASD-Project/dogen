@@ -510,6 +510,15 @@ user would supply one or more projects to code generate. For all
 properties that are common, we’d defined them only once somehow
 (common regexes, log level, etc).
 
+One interesting thing is that once we have support for projects we can
+make things slightly more efficient:
+
+- cache all system models and other data from filesystem;
+- load exomodels only once for all references; first check to see if
+  there is a cached version and if not execute the exomodel chain
+  again. Actually we may even be able to go up the endomodel chain all
+  the way up to merging.
+
 *** Add a top-level "Visual Studio" knob                              :story:
 
 We have a number of features that only make sense when on Windows and
@@ -2173,6 +2182,17 @@ part of =knit_and_stitch= that converts to tailor and then runs
 knitter on the models, so that we keep track of tailor breaks outside
 of JSON test models.
 
+*** Add tailor support for Dia                                        :story:
+
+It would be nice if one could take a JSON model and generate a dia
+diagram for it. This is non-trivial because it would require computing
+all of the sizes and locations for all UML elements. But if we did
+manage to do this, we could then allow users to submit models in say
+JSON, eCore etc and produce a PNG of the model so they could visualise
+it. We could also try to consume dia as a shared library instead of
+running the full program - e.g. create a service that takes in a dia
+diagram and returns the PNG.
+
 *** Do not include algorithm if swap is disabled                      :story:
 
 At present we always include =algorithm= in types' class header - both
@@ -3331,6 +3351,14 @@ expected to be modified by the user. Example:
 : /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
 
 There must be a vi equivalent.
+
+It would be even better if we could make parts of a file read only, so
+that only the protected regions could be written on.
+
+Links:
+
+- [[https://stackoverflow.com/questions/20023363/emacs-remove-region-read-only][emacs remove region read-only]]
+- [[https://www.emacswiki.org/emacs/FoldingMode][Folding mode]]
 
 *** Using default value with text collection throws                   :story:
 
@@ -7804,6 +7832,17 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add support for MetaStuff
+
+Interesting serialisation library:
+
+- https://github.com/eliasdaler/MetaStuff.
+
+Links:
+
+- [[https://eliasdaler.github.io/meta-stuff/][How my little C++ meta-serialization library works and how I wrote
+  it]]
+
 *** Add support for field renaming in annotations                     :story:
 
 At present if a field changes its name between dogen releases,
@@ -9587,6 +9626,9 @@ It would be nice to support PlantUML as a frontend:
 
 http://plantuml.com/
 
+It would also be nice to be able to export models into PlantUML for
+visualisation. This would make JSON models more compelling.
+
 *** Code generation as a service                                       :epic:
 
 *Latest Understanding*
@@ -9595,7 +9637,11 @@ http://plantuml.com/
   upload files or edit/paste JSON input; command line options
   available as text boxes.
 - create a service that receives requests for code generation and
-  returns a tarball/zip with the generated code: =jersey=.
+  returns a tarball/zip with the generated code: =jersey=. Archiving
+  libraries:
+  - https://github.com/libarchive/libarchive
+  - https://github.com/saboorian/moor
+  - https://github.com/do-m-en/libarchive_cpp_wrapper/
 - consider creating a simple HTTP wrapper around =jersey= just to see
   how it works. =hem=.
 - two modes of operation: 1) upload a set of files, marking one as the

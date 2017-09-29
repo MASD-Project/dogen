@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-22 Fri 14:07]
+#+CAPTION: Clock summary at [2017-09-29 Fri 10:56]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:15* |       |      | 100.0 |
+| *Total time*                                                                | *15:09* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:15   |       |      | 100.0 |
-| Active                                                                      |         | 14:15 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  16.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:14 |   1.6 |
-| COMPLETED Rename top-level transformations                                  |         |       | 0:30 |   3.5 |
-| CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.2 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   7.1 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  14.3 |
-| STARTED Create the archetype location properties                            |         |       | 1:30 |  10.5 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  45.5 |
+| Stories                                                                     | 15:09   |       |      | 100.0 |
+| Active                                                                      |         | 15:09 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  15.3 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   4.2 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:00 |   6.6 |
+| CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.1 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   6.7 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  13.4 |
+| STARTED Create the archetype location properties                            |         |       | 1:30 |   9.9 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  42.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -184,6 +184,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-09-29 Fri 10:01]--[2017-09-29 Fri 10:25] =>  0:24
     CLOCK: [2017-09-18 Mon 21:32]--[2017-09-18 Mon 21:39] =>  0:07
     CLOCK: [2017-09-18 Mon 00:01]--[2017-09-18 Mon 00:08] =>  0:07
 
@@ -211,10 +212,19 @@ ends in the log file. We should also move the asserts from =DEBUG= to
 
 *** COMPLETED Rename top-level transformations                        :story:
     CLOSED: [2017-09-18 Mon 22:10]
+    CLOCK: [2017-09-29 Fri 10:26]--[2017-09-29 Fri 10:56] =>  0:30
     CLOCK: [2017-09-18 Mon 21:40]--[2017-09-18 Mon 22:10] =>  0:30
 
 We no longer need the code-generator outside of transforms; we can now
 have a code-generation chain.
+
+Actually in addition, we need two top-level transforms:
+
+- a text model generation chain, which produces the text model, and is
+  useful for services;
+- a code genration chain, which uses the text model generation chain
+  and then writes it to the file system. In the future we could have
+  an archive generation chain which produces a tarball, zip etc.
 
 Tasks:
 
@@ -298,6 +308,13 @@ changes.
     CLOCK: [2017-09-18 Mon 22:11]--[2017-09-18 Mon 22:56] =>  0:45
 
 Try doing something slightly less "street".
+
+*** Clean-up context usage                                            :story:
+
+We've included context generation in the code generation
+transform. This is not ideal. It should be the responsibility of the
+client to create the context.
+
 
 *** STARTED Create the archetype location properties                  :story:
     CLOCK: [2017-09-22 Fri 13:58]--[2017-09-22 Fri 14:07] =>  0:09
@@ -639,6 +656,40 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
+
+*** Rename options to transformation request                          :story:
+
+These are not really "options"; it is a request made into yarn to
+code-generate a model. We haven't yet got a proper name but it has to
+somehow involve the word "request". The best way is to visualise this
+as part of some API where may such requests can be made (and handled
+concurrently).
+
+This also means we need to split out the request from the context. We
+should have an initialisation phase where we construct the context and
+then we should be able to reuse the pipeline for many requests. This
+also means that the right place to put the transform metrics is in the
+request - not the context - given that these are request specific.
+
+The best way to go about it may be to have two contexts:
+
+- transformation context: const; loaded at start-up.
+- request context: request specific context, including probing and the
+  request itself.
+
+Then:
+
+- clients are responsible for setting up the transformation
+  context. This ensures we do it only once.
+- clients are also responsible for setting up the request context, but
+  they then do it for each request.
+
+Note also that a request should support multiple target models.
+
+*** Housekeeper should know of text models                            :story:
+
+It should be the responsibility of the house keeper to collect the
+expected files and extract managed directories.
 
 *** Detect unqualified stereotypes                                    :story:
 
