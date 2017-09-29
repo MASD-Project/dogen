@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-29 Fri 10:56]
+#+CAPTION: Clock summary at [2017-09-29 Fri 11:39]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:09* |       |      | 100.0 |
+| *Total time*                                                                | *15:49* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:09   |       |      | 100.0 |
-| Active                                                                      |         | 15:09 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  15.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   4.2 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:00 |   6.6 |
+| Stories                                                                     | 15:49   |       |      | 100.0 |
+| Active                                                                      |         | 15:49 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  14.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   4.0 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.1 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   6.7 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  13.4 |
-| STARTED Create the archetype location properties                            |         |       | 1:30 |   9.9 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  42.8 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   6.4 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  12.9 |
+| STARTED Rename top-level transformations                                    |         |       | 1:17 |   8.1 |
+| STARTED Create the archetype location properties                            |         |       | 1:53 |  11.9 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  41.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -210,28 +210,6 @@ At present its not possible to figure out where a test suite starts or
 ends in the log file. We should also move the asserts from =DEBUG= to
 =TRACE=, unless there is an error.
 
-*** COMPLETED Rename top-level transformations                        :story:
-    CLOSED: [2017-09-18 Mon 22:10]
-    CLOCK: [2017-09-29 Fri 10:26]--[2017-09-29 Fri 10:56] =>  0:30
-    CLOCK: [2017-09-18 Mon 21:40]--[2017-09-18 Mon 22:10] =>  0:30
-
-We no longer need the code-generator outside of transforms; we can now
-have a code-generation chain.
-
-Actually in addition, we need two top-level transforms:
-
-- a text model generation chain, which produces the text model, and is
-  useful for services;
-- a code genration chain, which uses the text model generation chain
-  and then writes it to the file system. In the future we could have
-  an archive generation chain which produces a tarball, zip etc.
-
-Tasks:
-
-- rename kernel related transforms to "model to text" as this is what
-  they are doing.
-- remove code-generation, create a transform for it.
-
 *** CANCELLED Add an "at" field to transform stats                    :story:
     CLOSED: [2017-09-18 Mon 22:21]
     CLOCK: [2017-09-18 Mon 22:11]--[2017-09-18 Mon 22:21] =>  0:10
@@ -309,14 +287,31 @@ changes.
 
 Try doing something slightly less "street".
 
-*** Clean-up context usage                                            :story:
+*** STARTED Rename top-level transformations                          :story:
+    CLOCK: [2017-09-29 Fri 10:57]--[2017-09-29 Fri 11:14] =>  0:17
+    CLOCK: [2017-09-29 Fri 10:26]--[2017-09-29 Fri 10:56] =>  0:30
+    CLOCK: [2017-09-18 Mon 21:40]--[2017-09-18 Mon 22:10] =>  0:30
 
-We've included context generation in the code generation
-transform. This is not ideal. It should be the responsibility of the
-client to create the context.
+We no longer need the code-generator outside of transforms; we can now
+have a code-generation chain.
 
+Actually in addition, we need two top-level transforms:
+
+- a text model generation chain, which produces the text model, and is
+  useful for services;
+- a code genration chain, which uses the text model generation chain
+  and then writes it to the file system. In the future we could have
+  an archive generation chain which produces a tarball, zip etc.
+
+Tasks:
+
+- rename kernel related transforms to "model to text" as this is what
+  they are doing.
+- remove code-generation, create a transform for it.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-09-29 Fri 11:17]--[2017-09-29 Fri 11:39] =>  0:22
+    CLOCK: [2017-09-29 Fri 11:15]--[2017-09-29 Fri 11:16] =>  0:01
     CLOCK: [2017-09-22 Fri 13:58]--[2017-09-22 Fri 14:07] =>  0:09
     CLOCK: [2017-09-22 Fri 13:43]--[2017-09-22 Fri 13:57] =>  0:14
     CLOCK: [2017-09-22 Fri 13:35]--[2017-09-22 Fri 13:42] =>  0:07
@@ -657,6 +652,12 @@ We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
+*** Clean-up context usage                                            :story:
+
+We've included context generation in the code generation
+transform. This is not ideal. It should be the responsibility of the
+client to create the context.
+
 *** Rename options to transformation request                          :story:
 
 These are not really "options"; it is a request made into yarn to
@@ -703,6 +704,9 @@ figure out that there are no types against the attributes. One easy
 way to make things more useful is to detect unqualified stereotypes
 and error straight away with a more useful message such as "did you
 mean yarn::xyz?".
+
+We could also do the same if the stereotype is blank ("did you mean
+enumeration?").
 
 *** Tidy-up fabric                                                    :story:
 
