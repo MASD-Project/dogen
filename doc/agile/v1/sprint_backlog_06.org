@@ -287,7 +287,9 @@ changes.
 
 Try doing something slightly less "street".
 
-*** STARTED Rename top-level transformations                          :story:
+*** COMPLETED Rename top-level transformations                        :story:
+    CLOSED: [2017-09-29 Fri 12:31]
+    CLOCK: [2017-09-29 Fri 12:18]--[2017-09-29 Fri 12:31] =>  0:13
     CLOCK: [2017-09-29 Fri 12:14]--[2017-09-29 Fri 12:17] =>  0:03
     CLOCK: [2017-09-29 Fri 10:57]--[2017-09-29 Fri 11:14] =>  0:17
     CLOCK: [2017-09-29 Fri 10:26]--[2017-09-29 Fri 10:56] =>  0:30

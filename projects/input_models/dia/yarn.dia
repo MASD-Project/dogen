@@ -11829,7 +11829,7 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#options#</dia:string>
+            <dia:string>#transform_options#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#options#</dia:string>

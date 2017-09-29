@@ -67,11 +67,11 @@ private:
     /**
      * @brief Performs a housekeeping run for the supplied directories.
      */
-    static void perform_housekeeping(const transforms::options& o,
+    static void perform_housekeeping(const options& o,
         const meta_model::text_model& tm);
 
 public:
-    static void transform(const transforms::options& o);
+    static void transform(const options& o);
 };
 
 } } }

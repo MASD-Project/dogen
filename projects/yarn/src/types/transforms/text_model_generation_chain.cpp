@@ -18,14 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/text_model_io.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
+#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/helpers/transform_metrics.hpp"
+#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
+
+namespace {
+
+const std::string transform_id("dogen.yarn.text_model_generation_chain");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool text_model_generation_chain::operator==(const text_model_generation_chain& /*rhs*/) const {
-    return true;
+meta_model::text_model
+text_model_generation_chain::transform(const context& ctx) {
+    const auto model_name(ctx.transform_options().target().filename().string());
+    helpers::scoped_chain_probing stp(lg, "text model generation chain",
+        transform_id, model_name, ctx.prober());
+
+    /*
+     * Obtain the models.
+     */
+    const auto models(model_generation_chain::transform(ctx));
+
+    /*
+     * Run the model to text transforms.
+     */
+    const auto r(model_to_text_chain::transform(ctx, models));
+    stp.end_chain(r);
+
+    return r;
 }
 
 } } }

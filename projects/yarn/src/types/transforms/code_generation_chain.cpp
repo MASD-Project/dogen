@@ -22,12 +22,10 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
-#include "dogen/yarn/io/meta_model/text_model_io.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
-#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
-#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/housekeeper.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
@@ -89,7 +87,6 @@ void code_generation_chain::transform(const transforms::options& o) {
     /*
      * Obtain the kernel registrar and ensure it has been setup.
      */
-    using namespace transforms;
     const auto& rg(model_to_text_chain::registrar());
     rg.validate();
 
@@ -99,32 +96,29 @@ void code_generation_chain::transform(const transforms::options& o) {
      */
     const auto ctx(context_factory::make(rg, o));
 
-    const auto model_name(o.target().filename().string());
-    helpers::scoped_chain_probing stp(lg, "code generation chain",
-        transform_id, model_name, ctx.prober());
+    {
+        const auto model_name(o.target().filename().string());
+        helpers::scoped_chain_probing stp(lg, "code generation chain",
+            transform_id, model_name, ctx.prober());
 
-    /*
-     * Obtain the models.
-     */
-    const auto models(model_generation_chain::transform(ctx));
+        /*
+         * Obtain the text models.
+         */
+        const auto tm(text_model_generation_chain::transform(ctx));
 
-    /*
-     * Run the model to text transforms.
-     */
-    const auto tm(model_to_text_chain::transform(ctx, models));
-    stp.end_chain(tm);
+        /*
+         * Write the files.
+         */
+        write_files(o, tm);
+
+        /*
+         * Perform any housekeeping if need be.
+         */
+        if (o.delete_extra_files())
+            perform_housekeeping(o, tm);
+    }
+
     ctx.prober().end_probing();
-
-    /*
-     * Write the files.
-     */
-    write_files(o, tm);
-
-    /*
-     * Perform any housekeeping if need be.
-     */
-    if (o.delete_extra_files())
-        perform_housekeeping(o, tm);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

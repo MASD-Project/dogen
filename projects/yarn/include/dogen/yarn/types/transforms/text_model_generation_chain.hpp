@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/meta_model/text_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +34,7 @@ namespace transforms {
 
 class text_model_generation_chain final {
 public:
-    text_model_generation_chain() = default;
-    text_model_generation_chain(const text_model_generation_chain&) = default;
-    text_model_generation_chain(text_model_generation_chain&&) = default;
-    ~text_model_generation_chain() = default;
-    text_model_generation_chain& operator=(const text_model_generation_chain&) = default;
-
-public:
-    bool operator==(const text_model_generation_chain& rhs) const;
-    bool operator!=(const text_model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static meta_model::text_model transform(const context& ctx);
 };
 
 } } }
