@@ -104,6 +104,18 @@ find_files(const std::vector<boost::filesystem::path>& dirs) {
     return r;
 }
 
+std::set<boost::filesystem::path>
+find_files(const std::list<boost::filesystem::path>& dirs) {
+    std::set<boost::filesystem::path> r;
+
+    for (const auto& d : dirs) {
+        const auto files(find_files(d));
+        r.insert(files.begin(), files.end());
+    }
+
+    return r;
+}
+
 boost::filesystem::path find_file_recursively_upwards(
     boost::filesystem::path starting_directory,
     const boost::filesystem::path& relative_file_path) {
@@ -147,6 +159,13 @@ boost::filesystem::path find_file_recursively_upwards(
     const auto gs(relative_file_path.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Could not find file: " << gs;
     return path();
+}
+
+void remove(const std::list<boost::filesystem::path>& files) {
+    for (const auto f : files) {
+        BOOST_LOG_SEV(lg, debug) << "Removing file: " << f.generic_string();
+        boost::filesystem::remove(f);
+    }
 }
 
 } } }

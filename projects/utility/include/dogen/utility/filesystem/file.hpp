@@ -87,8 +87,12 @@ std::set<boost::filesystem::path> find_files(const boost::filesystem::path& d);
  * multiple times, the files will be read multiple times but returned
  * on once in the set.
  */
+/**@{*/
 std::set<boost::filesystem::path>
 find_files(const std::vector<boost::filesystem::path>& dirs);
+std::set<boost::filesystem::path>
+find_files(const std::list<boost::filesystem::path>& dirs);
+/**@}*/
 
 /**
  * @brief Finds the relative path, by searching recursively upwards
@@ -99,5 +103,10 @@ boost::filesystem::path find_file_recursively_upwards(
     const boost::filesystem::path& relative_file_path);
 
 } } }
+
+/**
+ * @brief Deletes all files in the supplied list.
+ */
+void remove(const std::list<boost::filesystem::path>& files);
 
 #endif
