@@ -69,8 +69,8 @@ private:
 
 public:
     static std::list<boost::filesystem::path>
-    lint(const meta_model::text_model& tm,
-        const std::vector<std::string> patterns);
+    lint(const std::vector<std::string> patterns,
+        const meta_model::text_model& tm);
 };
 
 } } }

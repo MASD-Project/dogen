@@ -65,10 +65,9 @@ private:
 
 private:
     /**
-     * @brief Performs a housekeeping run for the supplied directories.
+     * @brief Handles any extraneous files which should be removed.
      */
-    static void perform_housekeeping(const options& o,
-        const meta_model::text_model& tm);
+    static void handle_lint(const options& o, const meta_model::text_model& tm);
 
 public:
     static void transform(const context& ctx);

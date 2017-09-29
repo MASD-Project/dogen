@@ -102,11 +102,11 @@ boost::filesystem::path find_file_recursively_upwards(
     boost::filesystem::path starting_directory,
     const boost::filesystem::path& relative_file_path);
 
-} } }
-
 /**
  * @brief Deletes all files in the supplied list.
  */
 void remove(const std::list<boost::filesystem::path>& files);
+
+} } }
 
 #endif

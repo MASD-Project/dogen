@@ -96,12 +96,12 @@ file_linter::filter(const std::vector<std::string> patterns,
             if (std::regex_match(gs, regexes[i])) {
                 BOOST_LOG_SEV(lg, debug) << "Regex matches, ignoring file.";
                 ignore = true;
-                continue;
+                break;
             }
         }
 
         if (ignore) {
-            BOOST_LOG_SEV(lg, warn) << "Ignoring file: " << gs;
+            BOOST_LOG_SEV(lg, debug) << "Ignoring file: " << gs;
             continue;
         }
 
@@ -114,8 +114,8 @@ file_linter::filter(const std::vector<std::string> patterns,
 }
 
 std::list<boost::filesystem::path> file_linter::
-lint(const meta_model::text_model& tm,
-    const std::vector<std::string> patterns) {
+lint(const std::vector<std::string> patterns,
+    const meta_model::text_model& tm) {
     BOOST_LOG_SEV(lg, info) << "Started linting text model.";
 
     /*

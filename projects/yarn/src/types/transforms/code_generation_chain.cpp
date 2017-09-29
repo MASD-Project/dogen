@@ -23,7 +23,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
-#include "dogen/yarn/types/helpers/housekeeper.hpp"
+#include "dogen/yarn/types/helpers/file_linter.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
@@ -54,21 +54,13 @@ void code_generation_chain::write_files(const transforms::options& o,
     w->write(tm.artefacts());
 }
 
-void code_generation_chain::perform_housekeeping(const transforms::options& o,
+void code_generation_chain::handle_lint(const transforms::options& o,
     const meta_model::text_model& tm) {
+    if (!o.delete_extra_files())
+        return;
 
-    std::set<boost::filesystem::path> expected_files;
-    for (const auto a : tm.artefacts()) {
-        expected_files.insert(a.path().generic_string());
-        for (const auto& d : a.dependencies())
-            expected_files.insert(d.generic_string());
-    }
-
-    const auto& ip(o.ignore_patterns());
-    const std::list<std::string> ignore_patterns(ip.begin(), ip.end());
-    const auto& dirs(tm.managed_directories());
-    helpers::housekeeper hk(ignore_patterns, dirs, expected_files);
-    hk.tidy_up();
+    const auto lint(helpers::file_linter::lint(o.ignore_patterns(), tm));
+    utility::filesystem::remove(lint);
 }
 
 void code_generation_chain::transform(const context& ctx) {
@@ -92,8 +84,7 @@ void code_generation_chain::transform(const context& ctx) {
     /*
      * Perform any housekeeping if need be.
      */
-    if (o.delete_extra_files())
-        perform_housekeeping(o, tm);
+    handle_lint(o, tm);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }
