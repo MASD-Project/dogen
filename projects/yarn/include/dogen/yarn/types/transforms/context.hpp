@@ -62,6 +62,7 @@ public:
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
         const helpers::transform_prober prober);
+    ~context();
 
 public:
     /**

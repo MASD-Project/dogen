@@ -34,6 +34,7 @@
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/yarn/test/mock_options_factory.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/dia/serialization/diagram_ser.hpp"
@@ -142,7 +143,8 @@ bool execute_test(const test_configuration& tc) {
      */
     // boost::filesystem::remove_all(tc.actual);
     // boost::filesystem::create_directory(tc.actual);
-    dogen::yarn::transforms::code_generation_chain::transform(tc.options);
+    const auto ctx(dogen::yarn::transforms::context_factory::make(tc.options));
+    dogen::yarn::transforms::code_generation_chain::transform(ctx);
 
     using dogen::utility::test::asserter;
     return asserter::assert_directory(tc.expected, tc.actual);

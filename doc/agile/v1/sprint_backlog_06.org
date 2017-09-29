@@ -13,22 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-29 Fri 12:17]
+#+CAPTION: Clock summary at [2017-09-29 Fri 12:57]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:25* |       |      | 100.0 |
+| *Total time*                                                                | *17:03* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:25   |       |      | 100.0 |
-| Active                                                                      |         | 16:25 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  14.1 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   3.9 |
+| Stories                                                                     | 17:03   |       |      | 100.0 |
+| Active                                                                      |         | 17:03 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  13.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   3.7 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.0 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   6.2 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  12.4 |
-| STARTED Rename top-level transformations                                    |         |       | 1:20 |   8.1 |
-| STARTED Create the archetype location properties                            |         |       | 2:26 |  14.8 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  39.5 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   6.0 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  11.9 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   9.1 |
+| COMPLETED Clean-up context usage                                            |         |       | 0:25 |   2.4 |
+| STARTED Create the archetype location properties                            |         |       | 2:26 |  14.3 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  38.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -311,6 +312,14 @@ Tasks:
 - rename kernel related transforms to "model to text" as this is what
   they are doing.
 - remove code-generation, create a transform for it.
+
+*** COMPLETED Clean-up context usage                                  :story:
+    CLOSED: [2017-09-29 Fri 12:57]
+    CLOCK: [2017-09-29 Fri 12:32]--[2017-09-29 Fri 12:57] =>  0:25
+
+We've included context generation in the code generation
+transform. This is not ideal. It should be the responsibility of the
+client to create the context.
 
 *** STARTED Create the archetype location properties                  :story:
     CLOCK: [2017-09-29 Fri 11:40]--[2017-09-29 Fri 12:13] =>  0:33
@@ -655,12 +664,6 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
-
-*** Clean-up context usage                                            :story:
-
-We've included context generation in the code generation
-transform. This is not ideal. It should be the responsibility of the
-client to create the context.
 
 *** Rename options to transformation request                          :story:
 

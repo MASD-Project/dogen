@@ -45,7 +45,7 @@ private:
 
 public:
     static context
-    make(const model_to_text_transform_registrar& rg, const options& o);
+    make(const options& o, const bool enable_validation = true);
 };
 
 } } }

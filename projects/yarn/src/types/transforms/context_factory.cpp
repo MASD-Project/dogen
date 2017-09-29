@@ -24,9 +24,10 @@
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
-#include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
+#include "dogen/yarn/types/transforms/options_validator.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 
 namespace {
@@ -51,10 +52,29 @@ context_factory::create_archetype_location_repository(
     return b.build();
 }
 
-context context_factory::
-make(const model_to_text_transform_registrar& rg, const options& o) {
+context context_factory::make(const options& o, const bool enable_validation) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
+    if (enable_validation) {
+        /*
+         * Before anything else, lets make sure the transform options make
+         * sense. No point in proceeding otherwise.
+         */
+        transforms::options_validator v;
+        v.validate(o);
+    }
+
+    /*
+     * Obtain the kernel registrar and ensure it has been setup.
+     */
+    const auto& rg(model_to_text_chain::registrar());
+    if (enable_validation)
+        rg.validate();
+
+    /*
+     * Obtain all the data structures required to make a context, and
+     * create the context.
+     */
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 

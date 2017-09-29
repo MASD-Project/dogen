@@ -38,6 +38,10 @@ context::context(
         type_repository_, options.compatibility_mode()),
     mapping_repository_(msrp), formatters_repository_(frp), prober_(prober) {}
 
+context::~context() {
+    prober_.end_probing();
+}
+
 const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
 }

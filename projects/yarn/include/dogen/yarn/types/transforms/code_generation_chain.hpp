@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/transforms/options.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/meta_model/text_model.hpp"
 
 namespace dogen {
@@ -71,7 +71,7 @@ private:
         const meta_model::text_model& tm);
 
 public:
-    static void transform(const options& o);
+    static void transform(const context& ctx);
 };
 
 } } }

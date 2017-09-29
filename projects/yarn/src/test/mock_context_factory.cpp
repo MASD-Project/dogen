@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
 #include "dogen/yarn/test/mock_context_factory.hpp"
 
 namespace dogen {
@@ -28,8 +27,8 @@ namespace test {
 
 transforms::context mock_context_factory::make() {
     dogen::yarn::transforms::options o;
-    dogen::yarn::transforms::model_to_text_transform_registrar rg;
-    const auto r(dogen::yarn::transforms::context_factory::make(rg, o));
+    using dogen::yarn::transforms::context_factory;
+    const auto r(context_factory::make(o, false/*enable_validation*/));
     return r;
 }
 
