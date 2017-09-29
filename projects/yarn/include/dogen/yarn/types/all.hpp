@@ -162,6 +162,7 @@
 #include "dogen/yarn/types/transforms/dynamic_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
+#include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_registrar.hpp"

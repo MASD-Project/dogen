@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-29 Fri 12:13]
+#+CAPTION: Clock summary at [2017-09-29 Fri 12:17]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:22* |       |      | 100.0 |
+| *Total time*                                                                | *16:25* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:22   |       |      | 100.0 |
-| Active                                                                      |         | 16:22 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  14.2 |
+| Stories                                                                     | 16:25   |       |      | 100.0 |
+| Active                                                                      |         | 16:25 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  14.1 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   3.9 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   1.0 |
 | COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   6.2 |
 | COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  12.4 |
-| STARTED Rename top-level transformations                                    |         |       | 1:17 |   7.8 |
-| STARTED Create the archetype location properties                            |         |       | 2:26 |  14.9 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  39.6 |
+| STARTED Rename top-level transformations                                    |         |       | 1:20 |   8.1 |
+| STARTED Create the archetype location properties                            |         |       | 2:26 |  14.8 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  39.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -288,6 +288,7 @@ changes.
 Try doing something slightly less "street".
 
 *** STARTED Rename top-level transformations                          :story:
+    CLOCK: [2017-09-29 Fri 12:14]--[2017-09-29 Fri 12:17] =>  0:03
     CLOCK: [2017-09-29 Fri 10:57]--[2017-09-29 Fri 11:14] =>  0:17
     CLOCK: [2017-09-29 Fri 10:26]--[2017-09-29 Fri 10:56] =>  0:30
     CLOCK: [2017-09-18 Mon 21:40]--[2017-09-18 Mon 22:10] =>  0:30
