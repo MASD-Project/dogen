@@ -46,7 +46,6 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"
-#include "dogen/yarn/types/helpers/housekeeper.hpp"
 #include "dogen/yarn/types/helpers/mapping_set.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
