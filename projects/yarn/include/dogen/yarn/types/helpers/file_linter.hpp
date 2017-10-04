@@ -47,7 +47,7 @@ private:
      * @brief Returns all files in all managed directories.
      */
     static std::set<boost::filesystem::path> obtain_actual_files(
-        const std::list<boost::filesystem::path> managed_directories);
+        const std::list<boost::filesystem::path>& managed_directories);
 
 
     /**
@@ -64,12 +64,12 @@ private:
      * @pre Ignore patterns must be valid regular expressions.
      */
     static std::list<boost::filesystem::path>
-    filter(const std::vector<std::string> patterns,
+    filter(const std::vector<std::string>& patterns,
         const std::list<boost::filesystem::path>& files);
 
 public:
     static std::list<boost::filesystem::path>
-    lint(const std::vector<std::string> patterns,
+    lint(const std::vector<std::string>& patterns,
         const meta_model::text_model& tm);
 };
 

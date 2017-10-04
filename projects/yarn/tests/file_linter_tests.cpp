@@ -51,7 +51,7 @@ to_artefact(const boost::filesystem::path& p) {
 }
 
 const dogen::yarn::meta_model::text_model
-create_model(const std::list<boost::filesystem::path> files) {
+create_model(const std::list<boost::filesystem::path>& files) {
     dogen::yarn::meta_model::text_model r;
     r.managed_directories(managed_directories());
     for(const auto& f : files)

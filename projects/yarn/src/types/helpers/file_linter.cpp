@@ -58,7 +58,7 @@ obtain_expected_files(const meta_model::text_model& tm) {
 }
 
 std::set<boost::filesystem::path> file_linter::obtain_actual_files(
-    const std::list<boost::filesystem::path> managed_directories) {
+    const std::list<boost::filesystem::path>& managed_directories) {
     using utility::filesystem::find_files;
     const auto r(find_files(managed_directories));
     BOOST_LOG_SEV(lg, debug) << "Actual files: " << r;
@@ -75,7 +75,7 @@ std::list<boost::filesystem::path> file_linter::diff_expected_with_actual(
 }
 
 std::list<boost::filesystem::path>
-file_linter::filter(const std::vector<std::string> patterns,
+file_linter::filter(const std::vector<std::string>& patterns,
     const std::list<boost::filesystem::path>& files) {
 
     std::vector<std::regex> regexes;
@@ -114,7 +114,7 @@ file_linter::filter(const std::vector<std::string> patterns,
 }
 
 std::list<boost::filesystem::path> file_linter::
-lint(const std::vector<std::string> patterns,
+lint(const std::vector<std::string>& patterns,
     const meta_model::text_model& tm) {
     BOOST_LOG_SEV(lg, info) << "Started linting text model.";
 
