@@ -20,7 +20,7 @@
 
 # user includes
 include_directories(
-    ${CMAKE_SOURCE_DIR}/projects/test_models/all_path_and_directory_settings/cpp_kernel/some_include_dir
+    ${CMAKE_SOURCE_DIR}/projects/test_models/all_path_and_directory_settings/cpp_backend/some_include_dir
     ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/compressed/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_facet_folders/include
@@ -61,7 +61,7 @@ add_custom_target(test_models)
 #
 # add projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_path_and_directory_settings/cpp_kernel)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_path_and_directory_settings/cpp_backend)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders)
@@ -121,8 +121,8 @@ foreach(dia_model ${all_dia_test_models})
             file(REMOVE_RECURSE "${expected_dir}/CSharpModel/bin")
             file(REMOVE_RECURSE "${expected_dir}/CSharpModel/obj")
         elseif("${model_name}" STREQUAL "all_path_and_directory_settings")
-            file(REMOVE_RECURSE "${expected_dir}/all_path_and_directory_settings/csharp_kernel/bin")
-            file(REMOVE_RECURSE "${expected_dir}/all_path_and_directory_settings/csharp_kernel/obj")
+            file(REMOVE_RECURSE "${expected_dir}/all_path_and_directory_settings/csharp_backend/bin")
+            file(REMOVE_RECURSE "${expected_dir}/all_path_and_directory_settings/csharp_backend/obj")
         elseif("${model_name}" STREQUAL "lam_model")
             file(REMOVE_RECURSE "${expected_dir}/lam_model/cs/bin")
             file(REMOVE_RECURSE "${expected_dir}/lam_model/cs/obj")

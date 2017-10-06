@@ -281,7 +281,7 @@
 #DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.cpp.directory=cpp_kernel
+#DOGEN quilt.cpp.directory=cpp_backend
 #DOGEN quilt.cpp.source_directory_name=some_source_dir
 #DOGEN quilt.cpp.include_directory_name=some_include_dir
 #DOGEN quilt.cpp.header_file_extension=hh
@@ -342,7 +342,7 @@
 #DOGEN quilt.cpp.types.primitive_implementation.postfix=0_5_5
 #DOGEN quilt.cpp.types.master_header.postfix=0_5_6
 #DOGEN quilt.cpp.types.forward_declarations.postfix=0_5_7
-#DOGEN quilt.csharp.directory=csharp_kernel
+#DOGEN quilt.csharp.directory=csharp_backend
 #DOGEN quilt.csharp.test_data.directory=test_data_dir
 #DOGEN quilt.csharp.test_data.postfix=the_test_data
 #DOGEN quilt.csharp.test_data.class.postfix=1_0_0
