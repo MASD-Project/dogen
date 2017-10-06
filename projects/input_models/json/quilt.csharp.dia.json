@@ -763,7 +763,7 @@
         },
         {
           "name": {
-            "simple": "kernel_directory_name"
+            "simple": "backend_directory_name"
           },
           "unparsed_type": "std::string"
         }
@@ -1530,7 +1530,7 @@
     },
     {
       "name": {
-        "simple": "model_to_text_transform"
+        "simple": "model_to_text_model_transform"
       },
       "meta_name": {
         "simple": "object",

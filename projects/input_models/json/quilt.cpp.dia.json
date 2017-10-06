@@ -9,7 +9,7 @@
       "model_modules": "yarn",
       "internal_modules": "meta_model"
     },
-    "documentation": "CPP is the C++ model in the quilt kernel.\n",
+    "documentation": "CPP is the C++ backend in the quilt kernel.\n",
     "annotation": {
       "yarn.dia.comment": "true",
       "yarn.model_modules": "quilt.cpp",
@@ -1279,7 +1279,7 @@
         },
         {
           "name": {
-            "simple": "kernel_directory_name"
+            "simple": "backend_directory_name"
           },
           "unparsed_type": "std::string"
         }
@@ -3422,7 +3422,7 @@
     },
     {
       "name": {
-        "simple": "model_to_text_transform"
+        "simple": "model_to_text_model_transform"
       },
       "meta_name": {
         "simple": "object",

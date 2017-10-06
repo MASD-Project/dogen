@@ -111,7 +111,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\n\nThese must be populated in order, e.g. in order to have a kernel we must have a\nfamily; in order to have a facet we must have a kernel and in order to have a\nformatter we must have a facet. We may not have any.\n",
+      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\n\nThese must be populated in order, e.g. in order to have a backend we must have a\nfamily; in order to have a facet we must have a backend and in order to have a\nformatter we must have a facet. We may not have any.\n",
       "attributes": [
         {
           "name": {
@@ -122,10 +122,10 @@
         },
         {
           "name": {
-            "simple": "kernel"
+            "simple": "backend"
           },
           "unparsed_type": "std::string",
-          "documentation": "Name of the kernel that owns this field, if any.\n"
+          "documentation": "Name of the backend that owns this field, if any.\n"
         },
         {
           "name": {
@@ -162,13 +162,13 @@
         },
         {
           "name": {
-            "simple": "facet_names_by_kernel_name"
+            "simple": "facet_names_by_backend_name"
           },
           "unparsed_type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
         },
         {
           "name": {
-            "simple": "formatter_names_by_kernel_name"
+            "simple": "formatter_names_by_backend_name"
           },
           "unparsed_type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
         },
@@ -740,10 +740,10 @@
         },
         {
           "name": {
-            "simple": "types_by_kernel_name"
+            "simple": "types_by_backend_name"
           },
           "unparsed_type": "std::unordered_map<std::string, std::list<type>>",
-          "documentation": "Types by kernel name.\n"
+          "documentation": "Types by backend name.\n"
         },
         {
           "name": {
@@ -969,9 +969,9 @@
         },
         {
           "name": {
-            "simple": "kernel_template"
+            "simple": "backend_template"
           },
-          "documentation": "This field applies to all kernels.\n"
+          "documentation": "This field applies to all backends.\n"
         },
         {
           "name": {

@@ -110,7 +110,7 @@
     },
     {
       "name": {
-        "simple": "housekeeper",
+        "simple": "file_linter",
         "internal_modules": "helpers"
       },
       "meta_name": {
@@ -913,9 +913,9 @@
         },
         {
           "name": {
-            "simple": "kernel_properties"
+            "simple": "backend_properties"
           },
-          "unparsed_type": "std::unordered_map<std::string, kernel_properties>"
+          "unparsed_type": "std::unordered_map<std::string, backend_properties>"
         }
       ]
     },
@@ -1061,6 +1061,42 @@
     },
     {
       "name": {
+        "simple": "backend_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Properties related to the backend.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "enabled"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this backend is enabled.\n"
+        },
+        {
+          "name": {
+            "simple": "directory"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Backend specific directory name, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "force_backend_directory"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the backend directory will be expressed, even when there is only one\nbackend enabled.\n"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "builtin",
         "internal_modules": "meta_model"
       },
@@ -1119,7 +1155,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Represents a generic modeling construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and kernel specific entities).\n",
+      "documentation": "Represents a generic modeling construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
       "stereotypes": [
         "yarn::visitable",
         "Element"
@@ -1528,7 +1564,7 @@
     },
     {
       "name": {
-        "simple": "intra_kernel_segment_properties",
+        "simple": "intra_backend_segment_properties",
         "internal_modules": "meta_model"
       },
       "meta_name": {
@@ -1550,7 +1586,7 @@
             "simple": "path_segment"
           },
           "unparsed_type": "boost::filesystem::path",
-          "documentation": "Path segment to use for this intra-kernel segment.\n"
+          "documentation": "Path segment to use for this intra-backend segment.\n"
         },
         {
           "name": {
@@ -1579,42 +1615,6 @@
           },
           "unparsed_type": "path_contribution_types",
           "documentation": "What kind of contribution does the facet make to the final path.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "kernel_properties",
-        "internal_modules": "meta_model"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Properties related to the kernel.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "enabled"
-          },
-          "unparsed_type": "bool",
-          "documentation": "If true, this kernel is enabled.\n"
-        },
-        {
-          "name": {
-            "simple": "directory"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Kernel specific directory name, if any.\n"
-        },
-        {
-          "name": {
-            "simple": "force_kernel_directory"
-          },
-          "unparsed_type": "bool",
-          "documentation": "If true, the kernel directory will be expressed, even when there is only one kernel\nenabled.\n"
         }
       ]
     },
@@ -1694,9 +1694,9 @@
         },
         {
           "name": {
-            "simple": "intra_kernel_segment_properties"
+            "simple": "intra_backend_segment_properties"
           },
-          "unparsed_type": "std::unordered_map<std::string, intra_kernel_segment_properties>"
+          "unparsed_type": "std::unordered_map<std::string, intra_backend_segment_properties>"
         },
         {
           "name": {
@@ -2572,13 +2572,13 @@
       "attributes": [
         {
           "name": {
-            "simple": "enabled_kernels"
+            "simple": "enabled_backends"
           },
           "unparsed_type": "std::unordered_set<std::string>"
         },
         {
           "name": {
-            "simple": "enable_kernel_directories"
+            "simple": "enable_backend_directories"
           },
           "unparsed_type": "bool"
         }
@@ -2989,7 +2989,7 @@
       "attributes": [
         {
           "name": {
-            "simple": "kernel_enabled"
+            "simple": "backend_enabled"
           },
           "unparsed_type": "bool"
         },
@@ -3185,7 +3185,7 @@
     },
     {
       "name": {
-        "simple": "model_to_text_chain",
+        "simple": "model_to_text_model_chain",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -3200,7 +3200,7 @@
     },
     {
       "name": {
-        "simple": "model_to_text_transform_interface",
+        "simple": "model_to_text_model_transform_interface",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -3215,7 +3215,7 @@
     },
     {
       "name": {
-        "simple": "model_to_text_transform_registrar",
+        "simple": "model_to_text_model_transform_registrar",
         "internal_modules": "transforms"
       },
       "meta_name": {
@@ -3232,7 +3232,7 @@
           "name": {
             "simple": "transforms_by_language_"
           },
-          "unparsed_type": "std::unordered_map<yarn::meta_model::languages, std::shared_ptr<model_to_text_transform_interface>>"
+          "unparsed_type": "std::unordered_map<yarn::meta_model::languages, std::shared_ptr<model_to_text_model_transform_interface>>"
         }
       ]
     },
