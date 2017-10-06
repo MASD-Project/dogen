@@ -29,7 +29,7 @@ namespace dogen {
 namespace quilt {
 
 /**
- * @brief CPP is the C++ model in the quilt kernel.
+ * @brief CPP is the C++ backend in the quilt kernel.
  */
 namespace cpp {
 }
