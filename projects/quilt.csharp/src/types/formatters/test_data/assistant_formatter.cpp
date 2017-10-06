@@ -43,7 +43,7 @@ std::string assistant_formatter::formatter_name() const {
 
 annotations::archetype_location assistant_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(csharp::traits::family(), csharp::traits::kernel(),
+        r(csharp::traits::family(), csharp::traits::backend(),
           traits::facet(),
           assistant_formatter::static_artefact());
     return r;

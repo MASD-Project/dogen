@@ -32,25 +32,25 @@ locator_configuration::locator_configuration(
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& facet_configurations,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& archetype_configurations,
     const bool disable_facet_directories,
-    const std::string& kernel_directory_name)
+    const std::string& backend_directory_name)
     : facet_configurations_(facet_configurations),
       archetype_configurations_(archetype_configurations),
       disable_facet_directories_(disable_facet_directories),
-      kernel_directory_name_(kernel_directory_name) { }
+      backend_directory_name_(backend_directory_name) { }
 
 void locator_configuration::swap(locator_configuration& other) noexcept {
     using std::swap;
     swap(facet_configurations_, other.facet_configurations_);
     swap(archetype_configurations_, other.archetype_configurations_);
     swap(disable_facet_directories_, other.disable_facet_directories_);
-    swap(kernel_directory_name_, other.kernel_directory_name_);
+    swap(backend_directory_name_, other.backend_directory_name_);
 }
 
 bool locator_configuration::operator==(const locator_configuration& rhs) const {
     return facet_configurations_ == rhs.facet_configurations_ &&
         archetype_configurations_ == rhs.archetype_configurations_ &&
         disable_facet_directories_ == rhs.disable_facet_directories_ &&
-        kernel_directory_name_ == rhs.kernel_directory_name_;
+        backend_directory_name_ == rhs.backend_directory_name_;
 }
 
 locator_configuration& locator_configuration::operator=(locator_configuration other) {
@@ -99,20 +99,20 @@ void locator_configuration::disable_facet_directories(const bool v) {
     disable_facet_directories_ = v;
 }
 
-const std::string& locator_configuration::kernel_directory_name() const {
-    return kernel_directory_name_;
+const std::string& locator_configuration::backend_directory_name() const {
+    return backend_directory_name_;
 }
 
-std::string& locator_configuration::kernel_directory_name() {
-    return kernel_directory_name_;
+std::string& locator_configuration::backend_directory_name() {
+    return backend_directory_name_;
 }
 
-void locator_configuration::kernel_directory_name(const std::string& v) {
-    kernel_directory_name_ = v;
+void locator_configuration::backend_directory_name(const std::string& v) {
+    backend_directory_name_ = v;
 }
 
-void locator_configuration::kernel_directory_name(const std::string&& v) {
-    kernel_directory_name_ = std::move(v);
+void locator_configuration::backend_directory_name(const std::string&& v) {
+    backend_directory_name_ = std::move(v);
 }
 
 } } } }

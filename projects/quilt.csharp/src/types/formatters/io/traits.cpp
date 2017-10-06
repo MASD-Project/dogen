@@ -28,7 +28,7 @@ namespace formatters {
 namespace io {
 
 std::string traits::facet() {
-    static std::string r(csharp::traits::kernel() + ".io");
+    static std::string r(csharp::traits::backend() + ".io");
     return r;
 }
 

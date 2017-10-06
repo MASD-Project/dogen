@@ -29,7 +29,7 @@ std::string traits::family() {
     return r;
 }
 
-std::string traits::kernel() {
+std::string traits::backend() {
     static std::string r("quilt.csharp");
     return r;
 }
@@ -54,7 +54,7 @@ std::string traits::postfix() {
     return r;
 }
 
-std::string traits::kernel_directory_name() {
+std::string traits::backend_directory_name() {
     static std::string r("quilt.csharp.directory");
     return r;
 }

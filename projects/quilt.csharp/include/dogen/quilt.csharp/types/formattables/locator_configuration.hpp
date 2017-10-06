@@ -51,7 +51,7 @@ public:
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration>& facet_configurations,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration>& archetype_configurations,
         const bool disable_facet_directories,
-        const std::string& kernel_directory_name);
+        const std::string& backend_directory_name);
 
 private:
     template<typename Archive>
@@ -74,10 +74,10 @@ public:
     bool disable_facet_directories() const;
     void disable_facet_directories(const bool v);
 
-    const std::string& kernel_directory_name() const;
-    std::string& kernel_directory_name();
-    void kernel_directory_name(const std::string& v);
-    void kernel_directory_name(const std::string&& v);
+    const std::string& backend_directory_name() const;
+    std::string& backend_directory_name();
+    void backend_directory_name(const std::string& v);
+    void backend_directory_name(const std::string&& v);
 
 public:
     bool operator==(const locator_configuration& rhs) const;
@@ -93,7 +93,7 @@ private:
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_facet_configuration> facet_configurations_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::locator_archetype_configuration> archetype_configurations_;
     bool disable_facet_directories_;
-    std::string kernel_directory_name_;
+    std::string backend_directory_name_;
 };
 
 } } } }

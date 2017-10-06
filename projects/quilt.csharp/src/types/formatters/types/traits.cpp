@@ -28,7 +28,7 @@ namespace formatters {
 namespace types {
 
 std::string traits::facet() {
-    static std::string r(csharp::traits::kernel() + ".types");
+    static std::string r(csharp::traits::backend() + ".types");
     return r;
 }
 

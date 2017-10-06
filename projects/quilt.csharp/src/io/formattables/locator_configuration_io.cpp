@@ -86,7 +86,7 @@ std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
       << "\"facet_configurations\": " << v.facet_configurations() << ", "
       << "\"archetype_configurations\": " << v.archetype_configurations() << ", "
       << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "
-      << "\"kernel_directory_name\": " << "\"" << tidy_up_string(v.kernel_directory_name()) << "\""
+      << "\"backend_directory_name\": " << "\"" << tidy_up_string(v.backend_directory_name()) << "\""
       << " }";
     return(s);
 }

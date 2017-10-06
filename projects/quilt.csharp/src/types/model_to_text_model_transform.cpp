@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string transform_id(dogen::quilt::csharp::traits::kernel());
+const std::string transform_id(dogen::quilt::csharp::traits::backend());
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -56,7 +56,7 @@ formattables::model model_to_text_model_transform::create_formattables_model(
 }
 
 std::string model_to_text_model_transform::id() const {
-    return traits::kernel();
+    return traits::backend();
 }
 
 std::list<dogen::formatters::artefact> model_to_text_model_transform::
@@ -87,13 +87,13 @@ yarn::meta_model::languages model_to_text_model_transform::language() const {
 
 yarn::meta_model::text_model
 model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
-    const bool enable_kernel_directories,
+    const bool enable_backend_directories,
     const yarn::meta_model::model& m) const {
     yarn::helpers::scoped_transform_probing stp(lg,
         "C# model to text transform",
         transform_id, m.name().id(), ctx.prober());
 
-    BOOST_LOG_SEV(lg, debug) << "Started kernel.";
+    BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
     /*
      * Create the locator.
@@ -103,7 +103,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     const auto& atrp(ctx.type_repository());
     const auto odp(ctx.transform_options().output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
-    const bool ekd(enable_kernel_directories);
+    const bool ekd(enable_backend_directories);
     const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);
 
     /*
@@ -120,7 +120,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     r.artefacts(format(atrp, agf, drp, fm));
     r.managed_directories().push_back(l.project_path());
 
-    BOOST_LOG_SEV(lg, debug) << "Finished kernel.";
+    BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;
 }
 

@@ -28,7 +28,7 @@ namespace formatters {
 namespace test_data {
 
 std::string traits::facet() {
-    static std::string r(csharp::traits::kernel() + ".test_data");
+    static std::string r(csharp::traits::backend() + ".test_data");
     return r;
 }
 

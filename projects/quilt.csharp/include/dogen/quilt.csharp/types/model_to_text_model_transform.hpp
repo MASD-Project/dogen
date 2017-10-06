@@ -47,7 +47,7 @@ namespace quilt {
 namespace csharp {
 
 /**
- * @brief Manages the c# kernel kernel.
+ * @brief Manages the c# backend.
  */
 class model_to_text_model_transform final
     : public yarn::transforms::model_to_text_model_transform_interface {
@@ -88,7 +88,7 @@ public:
 
     yarn::meta_model::text_model
     transform(const yarn::transforms::context& ctx,
-        const bool enable_kernel_directories,
+        const bool enable_backend_directories,
         const yarn::meta_model::model& m) const override;
 };
 
