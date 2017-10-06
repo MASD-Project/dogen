@@ -18,23 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_IO_HPP
-#define DOGEN_YARN_IO_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_IO_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_FAMILY_PROPERTIES_FWD_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_FAMILY_PROPERTIES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::meta_model::archetype_group_properties& v);
+class archetype_family_properties;
 
 } } }
 

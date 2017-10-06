@@ -41669,10 +41669,10 @@ size limitations.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_group_properties#</dia:string>
+            <dia:string>#archetype_family_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, archetype_group_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, archetype_family_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -43043,25 +43043,25 @@ model directory.#</dia:string>
         <dia:point val="-112,-59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-112.05,-59.05;-98.745,-56.15"/>
+        <dia:rectangle val="-112.05,-59.05;-98.6125,-56.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-112,-59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.205"/>
+        <dia:real val="13.3375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_group_properties#</dia:string>
+        <dia:string>#archetype_family_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Properties pertaining to groupings of archetypes, related to the path computation.#</dia:string>
+        <dia:string>#Properties pertaining to families of archetypes, related to the path computation.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -43935,7 +43935,7 @@ model directory.#</dia:string>
         <dia:point val="-110,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-110.75,-67.75;-105.197,-58.2"/>
+        <dia:rectangle val="-110.75,-67.75;-105.131,-58.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43943,8 +43943,8 @@ model directory.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-110,-67"/>
         <dia:point val="-110,-63"/>
-        <dia:point val="-105.397,-63"/>
-        <dia:point val="-105.397,-59"/>
+        <dia:point val="-105.331,-63"/>
+        <dia:point val="-105.331,-59"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

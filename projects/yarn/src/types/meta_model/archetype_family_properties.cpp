@@ -18,43 +18,43 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
+#include "dogen/yarn/types/meta_model/archetype_family_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-archetype_group_properties::archetype_group_properties(const std::string& extension)
+archetype_family_properties::archetype_family_properties(const std::string& extension)
     : extension_(extension) { }
 
-void archetype_group_properties::swap(archetype_group_properties& other) noexcept {
+void archetype_family_properties::swap(archetype_family_properties& other) noexcept {
     using std::swap;
     swap(extension_, other.extension_);
 }
 
-bool archetype_group_properties::operator==(const archetype_group_properties& rhs) const {
+bool archetype_family_properties::operator==(const archetype_family_properties& rhs) const {
     return extension_ == rhs.extension_;
 }
 
-archetype_group_properties& archetype_group_properties::operator=(archetype_group_properties other) {
+archetype_family_properties& archetype_family_properties::operator=(archetype_family_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& archetype_group_properties::extension() const {
+const std::string& archetype_family_properties::extension() const {
     return extension_;
 }
 
-std::string& archetype_group_properties::extension() {
+std::string& archetype_family_properties::extension() {
     return extension_;
 }
 
-void archetype_group_properties::extension(const std::string& v) {
+void archetype_family_properties::extension(const std::string& v) {
     extension_ = v;
 }
 
-void archetype_group_properties::extension(const std::string&& v) {
+void archetype_family_properties::extension(const std::string&& v) {
     extension_ = std::move(v);
 }
 

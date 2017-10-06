@@ -18,19 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_FWD_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_FWD_HPP
+#include "dogen/yarn/hash/meta_model/archetype_family_properties_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class archetype_group_properties;
+std::size_t archetype_family_properties_hasher::hash(const archetype_family_properties& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.extension());
+    return seed;
+}
 
 } } }
-
-#endif

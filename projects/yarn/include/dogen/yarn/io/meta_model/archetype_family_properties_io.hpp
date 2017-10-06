@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_FWD_SER_HPP
+#ifndef DOGEN_YARN_IO_META_MODEL_ARCHETYPE_FAMILY_PROPERTIES_IO_HPP
+#define DOGEN_YARN_IO_META_MODEL_ARCHETYPE_FAMILY_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/archetype_group_properties_fwd.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/meta_model/archetype_family_properties.hpp"
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace yarn {
+namespace meta_model {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::meta_model::archetype_group_properties& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::meta_model::archetype_family_properties& v);
 
-template<class Archive>
-void load(Archive& ar, dogen::yarn::meta_model::archetype_group_properties& v, unsigned int version);
-
-} }
+} } }
 
 #endif

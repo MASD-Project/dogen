@@ -29,8 +29,8 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/yarn/types/meta_model/model_segment_properties.hpp"
-#include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
 #include "dogen/yarn/types/meta_model/directory_structure_styles.hpp"
+#include "dogen/yarn/types/meta_model/archetype_family_properties.hpp"
 #include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/locator_properties_fwd_ser.hpp"
 
@@ -53,7 +53,7 @@ public:
         const std::string& name_separator,
         const dogen::yarn::meta_model::model_segment_properties& model_segment_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties);
 
 private:
     template<typename Archive>
@@ -86,10 +86,10 @@ public:
     void intra_backend_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& v);
     void intra_backend_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties();
-    void archetype_group_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& v);
-    void archetype_group_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>&& v);
+    const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties();
+    void archetype_family_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& v);
+    void archetype_family_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>&& v);
 
 public:
     bool operator==(const locator_properties& rhs) const;
@@ -106,7 +106,7 @@ private:
     std::string name_separator_;
     dogen::yarn::meta_model::model_segment_properties model_segment_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties> archetype_group_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties> archetype_family_properties_;
 };
 
 } } }

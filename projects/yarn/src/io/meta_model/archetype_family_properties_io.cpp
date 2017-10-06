@@ -18,26 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_SER_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/meta_model/archetype_family_properties_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
+namespace dogen {
+namespace yarn {
+namespace meta_model {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::meta_model::archetype_group_properties)
-namespace boost {
-namespace serialization {
+std::ostream& operator<<(std::ostream& s, const archetype_family_properties& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::archetype_family_properties\"" << ", "
+      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\""
+      << " }";
+    return(s);
+}
 
-template<typename Archive>
-void save(Archive& ar, const dogen::yarn::meta_model::archetype_group_properties& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::yarn::meta_model::archetype_group_properties& v, unsigned int version);
-
-} }
-
-#endif
+} } }

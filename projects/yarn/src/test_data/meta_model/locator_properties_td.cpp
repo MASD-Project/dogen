@@ -21,8 +21,8 @@
 #include <sstream>
 #include "dogen/yarn/test_data/meta_model/locator_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/model_segment_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/archetype_group_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/directory_structure_styles_td.hpp"
+#include "dogen/yarn/test_data/meta_model/archetype_family_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
 
 namespace {
@@ -56,15 +56,15 @@ std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_p
     return r;
 }
 
-dogen::yarn::meta_model::archetype_group_properties
-create_dogen_yarn_meta_model_archetype_group_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::archetype_group_properties_generator::create(position);
+dogen::yarn::meta_model::archetype_family_properties
+create_dogen_yarn_meta_model_archetype_family_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::archetype_family_properties_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_group_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties> r;
+std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_family_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_archetype_group_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_archetype_family_properties(position + i)));
     }
     return r;
 }
@@ -83,7 +83,7 @@ populate(const unsigned int position, result_type& v) {
     v.name_separator(create_std_string(position + 1));
     v.model_segment_properties(create_dogen_yarn_meta_model_model_segment_properties(position + 2));
     v.intra_backend_segment_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_intra_backend_segment_properties(position + 3));
-    v.archetype_group_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_group_properties(position + 4));
+    v.archetype_family_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_family_properties(position + 4));
 }
 
 locator_properties_generator::result_type

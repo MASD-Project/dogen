@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-06 Fri 14:05]
+#+CAPTION: Clock summary at [2017-10-06 Fri 14:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:36* |       |      | 100.0 |
+| *Total time*                                                                | *23:40* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:36   |       |      | 100.0 |
-| Active                                                                      |         | 23:36 |      | 100.0 |
+| Stories                                                                     | 23:40   |       |      | 100.0 |
+| Active                                                                      |         | 23:40 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   9.8 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.2 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.7 |
 | COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   4.3 |
 | COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   8.6 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   6.6 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   6.5 |
 | COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.7 |
 | COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   8.8 |
 | COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   2.0 |
-| STARTED Create the archetype location properties                            |         |       | 3:25 |  14.5 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  27.5 |
-| STARTED Rename kernel and family                                            |         |       | 2:40 |  11.3 |
+| COMPLETED Rename kernel and family                                          |         |       | 2:44 |  11.5 |
+| STARTED Create the archetype location properties                            |         |       | 3:25 |  14.4 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  27.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -352,6 +352,31 @@ files. Its name should be: =file_linter=.
 
 We originally called the transforms "model to text" but actually they
 are "model to text model" transforms.
+
+*** COMPLETED Rename kernel and family                                :story:
+    CLOSED: [2017-10-06 Fri 14:07]
+    CLOCK: [2017-10-06 Fri 14:06]--[2017-10-06 Fri 14:10] =>  0:04
+    CLOCK: [2017-10-06 Fri 13:19]--[2017-10-06 Fri 14:05] =>  0:46
+    CLOCK: [2017-10-06 Fri 13:12]--[2017-10-06 Fri 13:18] =>  0:06
+    CLOCK: [2017-10-06 Fri 13:01]--[2017-10-06 Fri 13:11] =>  0:10
+    CLOCK: [2017-10-06 Fri 12:57]--[2017-10-06 Fri 13:00] =>  0:03
+    CLOCK: [2017-10-06 Fri 12:49]--[2017-10-06 Fri 12:56] =>  0:07
+    CLOCK: [2017-10-06 Fri 12:19]--[2017-10-06 Fri 12:25] =>  0:06
+    CLOCK: [2017-10-06 Fri 12:04]--[2017-10-06 Fri 12:18] =>  0:14
+    CLOCK: [2017-10-06 Fri 11:57]--[2017-10-06 Fri 12:03] =>  0:06
+    CLOCK: [2017-10-06 Fri 11:32]--[2017-10-06 Fri 11:56] =>  0:24
+    CLOCK: [2017-10-06 Fri 10:53]--[2017-10-06 Fri 11:31] =>  0:38
+
+We need to use the term "family" to signify a group of archetypes such
+as "c++ headers", "c++ implementations", "c# implementations"
+etc. However, we have already used this term in the archetype
+location. So we need to:
+
+- rename kernel to backend. This clarifies things since we keep
+  calling kernels backends anyway.
+- rename family to kernel. So quilt becomes a kernel, implemented by a
+  number of backends: quilt.cpp, quilt.csharp and so forth.
+- rename archetype location group to archetype location family.
 
 *** STARTED Create the archetype location properties                  :story:
     CLOCK: [2017-10-06 Fri 10:09]--[2017-10-06 Fri 10:52] =>  0:43
@@ -699,29 +724,6 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
-
-*** STARTED Rename kernel and family                                  :story:
-    CLOCK: [2017-10-06 Fri 13:19]--[2017-10-06 Fri 14:05] =>  0:46
-    CLOCK: [2017-10-06 Fri 13:12]--[2017-10-06 Fri 13:18] =>  0:06
-    CLOCK: [2017-10-06 Fri 13:01]--[2017-10-06 Fri 13:11] =>  0:10
-    CLOCK: [2017-10-06 Fri 12:57]--[2017-10-06 Fri 13:00] =>  0:03
-    CLOCK: [2017-10-06 Fri 12:49]--[2017-10-06 Fri 12:56] =>  0:07
-    CLOCK: [2017-10-06 Fri 12:19]--[2017-10-06 Fri 12:25] =>  0:06
-    CLOCK: [2017-10-06 Fri 12:04]--[2017-10-06 Fri 12:18] =>  0:14
-    CLOCK: [2017-10-06 Fri 11:57]--[2017-10-06 Fri 12:03] =>  0:06
-    CLOCK: [2017-10-06 Fri 11:32]--[2017-10-06 Fri 11:56] =>  0:24
-    CLOCK: [2017-10-06 Fri 10:53]--[2017-10-06 Fri 11:31] =>  0:38
-
-We need to use the term "family" to signify a group of archetypes such
-as "c++ headers", "c++ implementations", "c# implementations"
-etc. However, we have already used this term in the archetype
-location. So we need to:
-
-- rename kernel to backend. This clarifies things since we keep
-  calling kernels backends anyway.
-- rename family to kernel. So quilt becomes a kernel, implemented by a
-  number of backends: quilt.cpp, quilt.csharp and so forth.
-- rename archetype location group to archetype location family.
 
 *** Create a text model post-processing chain                         :story:
 

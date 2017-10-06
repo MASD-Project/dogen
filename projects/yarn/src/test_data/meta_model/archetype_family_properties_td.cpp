@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/archetype_group_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/archetype_family_properties_td.hpp"
 
 namespace {
 
@@ -35,29 +35,29 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-archetype_group_properties_generator::archetype_group_properties_generator() : position_(0) { }
+archetype_family_properties_generator::archetype_family_properties_generator() : position_(0) { }
 
-void archetype_group_properties_generator::
+void archetype_family_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.extension(create_std_string(position + 0));
 }
 
-archetype_group_properties_generator::result_type
-archetype_group_properties_generator::create(const unsigned int position) {
-    archetype_group_properties r;
-    archetype_group_properties_generator::populate(position, r);
+archetype_family_properties_generator::result_type
+archetype_family_properties_generator::create(const unsigned int position) {
+    archetype_family_properties r;
+    archetype_family_properties_generator::populate(position, r);
     return r;
 }
 
-archetype_group_properties_generator::result_type*
-archetype_group_properties_generator::create_ptr(const unsigned int position) {
-    archetype_group_properties* p = new archetype_group_properties();
-    archetype_group_properties_generator::populate(position, *p);
+archetype_family_properties_generator::result_type*
+archetype_family_properties_generator::create_ptr(const unsigned int position) {
+    archetype_family_properties* p = new archetype_family_properties();
+    archetype_family_properties_generator::populate(position, *p);
     return p;
 }
 
-archetype_group_properties_generator::result_type
-archetype_group_properties_generator::operator()() {
+archetype_family_properties_generator::result_type
+archetype_family_properties_generator::operator()() {
     return create(position_++);
 }
 

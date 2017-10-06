@@ -22,8 +22,8 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/model_segment_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/archetype_group_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/directory_structure_styles_io.hpp"
+#include "dogen/yarn/io/meta_model/archetype_family_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -54,7 +54,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -81,7 +81,7 @@ std::ostream& operator<<(std::ostream& s, const locator_properties& v) {
       << "\"name_separator\": " << "\"" << tidy_up_string(v.name_separator()) << "\"" << ", "
       << "\"model_segment_properties\": " << v.model_segment_properties() << ", "
       << "\"intra_backend_segment_properties\": " << v.intra_backend_segment_properties() << ", "
-      << "\"archetype_group_properties\": " << v.archetype_group_properties()
+      << "\"archetype_family_properties\": " << v.archetype_family_properties()
       << " }";
     return(s);
 }

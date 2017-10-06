@@ -20,8 +20,8 @@
  */
 #include "dogen/yarn/hash/meta_model/locator_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/model_segment_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/archetype_group_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/directory_structure_styles_hash.hpp"
+#include "dogen/yarn/hash/meta_model/archetype_family_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/intra_backend_segment_properties_hash.hpp"
 
 namespace {
@@ -41,7 +41,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_intra
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_group_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_family_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -63,7 +63,7 @@ std::size_t locator_properties_hasher::hash(const locator_properties& v) {
     combine(seed, v.name_separator());
     combine(seed, v.model_segment_properties());
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_intra_backend_segment_properties(v.intra_backend_segment_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_group_properties(v.archetype_group_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_family_properties(v.archetype_family_properties()));
 
     return seed;
 }

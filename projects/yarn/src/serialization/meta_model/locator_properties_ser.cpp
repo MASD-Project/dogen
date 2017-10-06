@@ -31,8 +31,8 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/locator_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/model_segment_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/archetype_group_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
 
 namespace boost {
@@ -46,7 +46,7 @@ void save(Archive& ar,
     ar << make_nvp("name_separator", v.name_separator_);
     ar << make_nvp("model_segment_properties", v.model_segment_properties_);
     ar << make_nvp("intra_backend_segment_properties", v.intra_backend_segment_properties_);
-    ar << make_nvp("archetype_group_properties", v.archetype_group_properties_);
+    ar << make_nvp("archetype_family_properties", v.archetype_family_properties_);
 }
 
 template<typename Archive>
@@ -57,7 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("name_separator", v.name_separator_);
     ar >> make_nvp("model_segment_properties", v.model_segment_properties_);
     ar >> make_nvp("intra_backend_segment_properties", v.intra_backend_segment_properties_);
-    ar >> make_nvp("archetype_group_properties", v.archetype_group_properties_);
+    ar >> make_nvp("archetype_family_properties", v.archetype_family_properties_);
 }
 
 } }

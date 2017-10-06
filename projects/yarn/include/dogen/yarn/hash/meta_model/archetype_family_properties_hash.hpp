@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_HASH_HPP
-#define DOGEN_YARN_HASH_META_MODEL_ARCHETYPE_GROUP_PROPERTIES_HASH_HPP
+#ifndef DOGEN_YARN_HASH_META_MODEL_ARCHETYPE_FAMILY_PROPERTIES_HASH_HPP
+#define DOGEN_YARN_HASH_META_MODEL_ARCHETYPE_FAMILY_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
+#include "dogen/yarn/types/meta_model/archetype_family_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-struct archetype_group_properties_hasher {
+struct archetype_family_properties_hasher {
 public:
-    static std::size_t hash(const archetype_group_properties& v);
+    static std::size_t hash(const archetype_family_properties& v);
 };
 
 } } }
@@ -42,10 +42,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::yarn::meta_model::archetype_group_properties> {
+struct hash<dogen::yarn::meta_model::archetype_family_properties> {
 public:
-    size_t operator()(const dogen::yarn::meta_model::archetype_group_properties& v) const {
-        return dogen::yarn::meta_model::archetype_group_properties_hasher::hash(v);
+    size_t operator()(const dogen::yarn::meta_model::archetype_family_properties& v) const {
+        return dogen::yarn::meta_model::archetype_family_properties_hasher::hash(v);
     }
 };
 
