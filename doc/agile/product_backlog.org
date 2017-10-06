@@ -9275,6 +9275,12 @@ The c++ frontend would also open some interesting possibilities:
   for this.
 - *update existing diagrams*. See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#investigate-support-for-automatic-diagram-updates][this story]].
 
+It would be important to be able to filter the classes. This could be
+achieved by either having to supply the header files to read or
+probably better by supplying a list of class names one is interested
+in. We will probably need a compilation database to instantiate clang
+so this would mean we'd have visibility of the entire project.
+
 Links:
 
 - For clang source code transforms, see [[https://github.com/flexferrum/flex_lib][flex_lib]] and this
