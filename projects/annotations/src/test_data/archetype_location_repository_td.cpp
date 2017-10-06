@@ -83,8 +83,8 @@ archetype_location_repository_generator::archetype_location_repository_generator
 void archetype_location_repository_generator::
 populate(const unsigned int position, result_type& v) {
     v.archetype_locations(create_std_list_dogen_annotations_archetype_location(position + 0));
-    v.facet_names_by_kernel_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
-    v.formatter_names_by_kernel_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
+    v.facet_names_by_backend_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
+    v.formatter_names_by_backend_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
     v.archetype_locations_by_meta_name(create_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(position + 3));
 }
 

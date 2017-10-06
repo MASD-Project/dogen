@@ -249,7 +249,7 @@ instantiate_recursive_template(const type_template& tt) const {
      * result in expanding the template for all backends and all facets
      * across all families.
      */
-    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+    for (const auto pair : repository_.facet_names_by_backend_name()) {
         const auto backend_name(pair.first);
         if (!is_match(ttal.backend(), backend_name))
             continue;
@@ -294,7 +294,7 @@ instantiate_recursive_template(const type_template& tt) const {
 std::list<type> template_instantiator::
 instantiate_facet_template(const type_template& tt) const {
     std::list<type> r;
-    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+    for (const auto pair : repository_.facet_names_by_backend_name()) {
         const auto backend_name(pair.first);
         if (!is_match(tt.archetype_location().backend(), backend_name))
             continue;
@@ -328,7 +328,7 @@ template_instantiator::instantiate_recursive_template(
 
     const auto etal(et.archetype_location());
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
-    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+    for (const auto pair : repository_.facet_names_by_backend_name()) {
         const auto backend_name(pair.first);
         if (!is_match(etal.backend(), backend_name))
             continue;
@@ -366,7 +366,7 @@ template_instantiator::instantiate_facet_template(
 
     const auto etal(et.archetype_location());
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
-    for (const auto pair : repository_.facet_names_by_kernel_name()) {
+    for (const auto pair : repository_.facet_names_by_backend_name()) {
         const auto backend_name(pair.first);
         if (!is_match(etal.backend(), backend_name))
             continue;

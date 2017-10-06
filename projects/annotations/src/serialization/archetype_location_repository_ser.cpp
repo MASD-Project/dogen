@@ -43,8 +43,8 @@ void save(Archive& ar,
     const dogen::annotations::archetype_location_repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("archetype_locations", v.archetype_locations_);
-    ar << make_nvp("facet_names_by_kernel_name", v.facet_names_by_kernel_name_);
-    ar << make_nvp("formatter_names_by_kernel_name", v.formatter_names_by_kernel_name_);
+    ar << make_nvp("facet_names_by_backend_name", v.facet_names_by_backend_name_);
+    ar << make_nvp("formatter_names_by_backend_name", v.formatter_names_by_backend_name_);
     ar << make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
 }
 
@@ -53,8 +53,8 @@ void load(Archive& ar,
     dogen::annotations::archetype_location_repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("archetype_locations", v.archetype_locations_);
-    ar >> make_nvp("facet_names_by_kernel_name", v.facet_names_by_kernel_name_);
-    ar >> make_nvp("formatter_names_by_kernel_name", v.formatter_names_by_kernel_name_);
+    ar >> make_nvp("facet_names_by_backend_name", v.facet_names_by_backend_name_);
+    ar >> make_nvp("formatter_names_by_backend_name", v.formatter_names_by_backend_name_);
     ar >> make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
 }
 

@@ -75,14 +75,14 @@ populate_locations(const std::list<archetype_location>& als) {
 
 void archetype_location_repository_builder::
 populate_facet_names_by_backend_name() {
-    auto& fnbkn(repository_.facet_names_by_kernel_name());
+    auto& fnbkn(repository_.facet_names_by_backend_name());
     for (const auto& al : repository_.archetype_locations())
         fnbkn[al.backend()].insert(al.facet());
 }
 
 void archetype_location_repository_builder::
 populate_formatter_names_by_backend_name() {
-    auto& fnbkn(repository_.formatter_names_by_kernel_name());
+    auto& fnbkn(repository_.formatter_names_by_backend_name());
     for (const auto& al : repository_.archetype_locations())
         fnbkn[al.backend()].insert(al.archetype());
 }
