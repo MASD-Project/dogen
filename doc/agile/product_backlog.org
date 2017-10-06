@@ -2803,6 +2803,25 @@ See also:
   diagnostics".
 - [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
 
+Merged stories:
+
+*Consider enabling =-Wshadow=*
+
+We make use of shadowing on occasion so maybe this is why we disabled
+this warning. Enable it and check to see what breaks.
+
+:    # definition shadows another
+:    # FIXME: causes too many problems.
+:    # set(warning_flags "${warning_flags} -Wshadow")
+
+*Enable =maybe-uninitialized= warning*
+
+This warning caused build breaks. The main problem seems to come from
+boost variants using model types, which then rely on the variant's
+swap function. This uses the move constructor. For some reason, the
+compiler does not think the default move constructor is initialising
+the member variables correctly. Not obvious why that would be.
+
 *** Create utility methods for =__type__= etc                         :story:
 
 At present we've hard-coded the field name for =__type__= and so forth
@@ -4481,23 +4500,6 @@ We should be able to set a model-wide property that tells dogen to
 generate inline methods for properties. We could be more flexible and
 allow inlining at class level or just for a single property. We don't
 have any use cases for these at present.
-
-*** Consider enabling =-Wshadow=                                      :story:
-
-We make use of shadowing on occasion so maybe this is why we disabled
-this warning. Enable it and check to see what breaks.
-
-:    # definition shadows another
-:    # FIXME: causes too many problems.
-:    # set(warning_flags "${warning_flags} -Wshadow")
-
-*** Enable =maybe-uninitialized= warning                              :story:
-
-This warning caused build breaks. The main problem seems to come from
-boost variants using model types, which then rely on the variant's
-swap function. This uses the move constructor. For some reason, the
-compiler does not think the default move constructor is initialising
-the member variables correctly. Not obvious why that would be.
 
 *** Improving use of exceptions                                        :epic:
 
