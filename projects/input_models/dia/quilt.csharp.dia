@@ -410,7 +410,7 @@
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#enable_kernel_directories#</dia:string>
+                <dia:string>#enable_backend_directories#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string># const bool#</dia:string>
@@ -3901,7 +3901,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Implements the kernel interface.#</dia:string>
+            <dia:string>#Implements the transform interface.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -5508,7 +5508,7 @@
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#enable_kernel_directories#</dia:string>
+                <dia:string>#enable_backend_directories#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const bool#</dia:string>
@@ -6293,7 +6293,7 @@
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#enable_kernel_directories#</dia:string>
+                <dia:string>#enable_backend_directories#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const bool#</dia:string>
