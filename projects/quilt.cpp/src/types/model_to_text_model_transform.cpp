@@ -31,7 +31,7 @@
 
 namespace {
 
-const std::string transform_id(dogen::quilt::cpp::traits::kernel());
+const std::string transform_id(dogen::quilt::cpp::traits::backend());
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -66,20 +66,20 @@ formattables::model model_to_text_model_transform::create_formattables_model(
 formattables::locator model_to_text_model_transform::make_locator(
     const yarn::transforms::options& o,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
-    const formatters::repository& frp, const bool enable_kernel_directories,
+    const formatters::repository& frp, const bool enable_backend_directories,
     const yarn::meta_model::model& m) const {
 
     const auto& mn(m.name());
     const auto odp(o.output_directory_path());
     const auto chodp(o.cpp_headers_output_directory_path());
-    const auto ekd(enable_kernel_directories);
+    const auto ekd(enable_backend_directories);
     const auto ids(m.module_ids());
     const formattables::locator r(odp, chodp, atrp, frp, ra, mn, ids, ekd);
     return r;
 }
 
 std::string model_to_text_model_transform::id() const {
-    return traits::kernel();
+    return traits::backend();
 }
 
 std::list<dogen::formatters::artefact> model_to_text_model_transform::
@@ -122,13 +122,13 @@ yarn::meta_model::languages model_to_text_model_transform::language() const {
 
 yarn::meta_model::text_model
 model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
-    const bool enable_kernel_directories,
+    const bool enable_backend_directories,
     const yarn::meta_model::model& m) const {
     yarn::helpers::scoped_transform_probing stp(lg,
         "C++ model to text transform",
         transform_id, m.name().id(), ctx.prober());
 
-    BOOST_LOG_SEV(lg, debug) << "Started kernel.";
+    BOOST_LOG_SEV(lg, debug) << "Started backend.";
 
     /*
      * Create the locator.
@@ -137,7 +137,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     const auto& atrp(ctx.type_repository());
     const auto& ra(m.root_module()->annotation());
     const auto& frp(formatters_repository());
-    const auto l(make_locator(o, atrp, ra, frp, enable_kernel_directories, m));
+    const auto l(make_locator(o, atrp, ra, frp, enable_backend_directories, m));
 
     /*
      * Generate the formattables model.
@@ -155,7 +155,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     r.artefacts(format(eafe, atrp, agf, drp, fm));
     r.managed_directories(managed_directories(l));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished kernel.";
+    BOOST_LOG_SEV(lg, debug) << "Finished backend.";
     return r;
 }
 

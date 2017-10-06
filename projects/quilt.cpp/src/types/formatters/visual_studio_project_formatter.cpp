@@ -47,7 +47,7 @@ std::string visual_studio_project_formatter::formatter_name() const {
 annotations::archetype_location
 visual_studio_project_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(cpp::traits::family(), cpp::traits::kernel(),
+        r(cpp::traits::family(), cpp::traits::backend(),
           traits::visual_studio_facet(),
           visual_studio_project_formatter::static_artefact());
     return r;
@@ -66,7 +66,7 @@ visual_studio_project_formatter::inclusion_support_type() const {
 
 boost::filesystem::path visual_studio_project_formatter::inclusion_path(
     const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
-    
+
     using namespace dogen::utility::log;
     using namespace dogen::quilt::cpp::formatters;
     static logger lg(logger_factory(static_artefact()));

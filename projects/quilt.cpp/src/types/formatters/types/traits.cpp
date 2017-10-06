@@ -29,7 +29,7 @@ namespace formatters {
 namespace types {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::kernel() + ".types");
+    static std::string r(cpp::traits::backend() + ".types");
     return r;
 }
 

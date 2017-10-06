@@ -42,9 +42,9 @@ struct traits {
     static std::string family();
 
     /**
-     * @brief Name of this kernel.
+     * @brief Name of this backend.
      */
-    static std::string kernel();
+    static std::string backend();
 
     /**
      * @brief If set to false, no generation will occur.
@@ -139,9 +139,9 @@ struct traits {
         static std::string source_directory_name();
 
         /**
-         * @brief Name of the directory housing the kernel.
+         * @brief Name of the directory housing the backend.
          */
-        static std::string kernel_directory_name();
+        static std::string backend_directory_name();
 
         /**
          * @brief If true, facet directories will be ignored.

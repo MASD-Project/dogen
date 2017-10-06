@@ -29,7 +29,7 @@ namespace formatters {
 namespace test_data {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::kernel() + ".test_data");
+    static std::string r(cpp::traits::backend() + ".test_data");
     return r;
 }
 

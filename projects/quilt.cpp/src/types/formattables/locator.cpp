@@ -45,8 +45,8 @@ const std::string missing_facet_configuration(
     "Could not find configuration for facet: ");
 const std::string missing_archetype_configuration(
     "Could not find configuration for archetype: ");
-const std::string missing_kernel_directory(
-    "Enable kernel directory is on but kernel directory is empty.");
+const std::string missing_backend_directory(
+    "Enable backend directory is on but backend directory is empty.");
 
 }
 
@@ -62,12 +62,12 @@ locator::locator(
     const annotations::annotation& root,
     const yarn::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
-    const bool enable_kernel_directories)
+    const bool enable_backend_directories)
     : model_name_(model_name),
       configuration_(make_configuration(atrp, frp, root)),
       module_ids_(module_ids),
       project_path_(make_project_path(output_directory_path, model_name,
-              configuration_, enable_kernel_directories)),
+              configuration_, enable_backend_directories)),
       headers_project_path_(
           cpp_headers_output_directory_path.empty() ?
           project_path_ : cpp_headers_output_directory_path),
@@ -128,8 +128,8 @@ locator::make_type_group(const annotations::type_repository& atrp,
     const auto& dt(traits::cpp::disable_facet_directories());
     r.disable_facet_directories = s.select_type_by_name(dt);
 
-    const auto& kdn(traits::cpp::kernel_directory_name());
-    r.kernel_directory_name = s.select_type_by_name(kdn);
+    const auto& kdn(traits::cpp::backend_directory_name());
+    r.backend_directory_name = s.select_type_by_name(kdn);
 
     return r;
 }
@@ -186,8 +186,8 @@ locator_configuration locator::make_configuration(
     const auto& dt(tg.disable_facet_directories);
     r.disable_facet_directories(s.get_boolean_content_or_default(dt));
 
-    const auto& kdn(tg.kernel_directory_name);
-    r.kernel_directory_name(s.get_text_content_or_default(kdn));
+    const auto& kdn(tg.backend_directory_name);
+    r.backend_directory_name(s.get_text_content_or_default(kdn));
 
     return r;
 }
@@ -241,18 +241,18 @@ std::string locator::postfix_for_facet(const std::string& facet) const {
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
     const yarn::meta_model::name& model_name, const locator_configuration& lc,
-    const bool enable_kernel_directories) const {
+    const bool enable_backend_directories) const {
 
     boost::filesystem::path r(output_directory_path);
     const auto& mmp(model_name.location().model_modules());
     r /= boost::algorithm::join(mmp, dot);
-    if (enable_kernel_directories) {
-        if (lc.kernel_directory_name().empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_kernel_directory;
-            BOOST_THROW_EXCEPTION(location_error(missing_kernel_directory));
+    if (enable_backend_directories) {
+        if (lc.backend_directory_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_backend_directory;
+            BOOST_THROW_EXCEPTION(location_error(missing_backend_directory));
         }
 
-        r /= lc.kernel_directory_name();
+        r /= lc.backend_directory_name();
     }
 
     return r;

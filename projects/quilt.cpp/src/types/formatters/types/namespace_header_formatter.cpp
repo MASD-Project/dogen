@@ -44,7 +44,7 @@ std::string namespace_header_formatter::formatter_name() const {
 annotations::archetype_location
 namespace_header_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(cpp::traits::family(), cpp::traits::kernel(),
+        r(cpp::traits::family(), cpp::traits::backend(),
           traits::facet(),
           namespace_header_formatter::static_artefact());
     return r;

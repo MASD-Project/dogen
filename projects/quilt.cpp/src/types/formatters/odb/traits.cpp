@@ -29,7 +29,7 @@ namespace formatters {
 namespace odb {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::kernel() + ".odb");
+    static std::string r(cpp::traits::backend() + ".odb");
     return r;
 }
 

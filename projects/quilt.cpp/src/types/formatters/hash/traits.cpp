@@ -29,7 +29,7 @@ namespace formatters {
 namespace hash {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::kernel() + ".hash");
+    static std::string r(cpp::traits::backend() + ".hash");
     return r;
 }
 

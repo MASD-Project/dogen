@@ -10,7 +10,7 @@ std::string {{class.simple_name}}::formatter_name() const {
 
 annotations::archetype_location {{class.simple_name}}::archetype_location() const {
     static annotations::archetype_location
-        r(csharp::traits::family(), csharp::traits::kernel(),
+        r(csharp::traits::family(), csharp::traits::backend(),
           traits::facet(),
           {{class.simple_name}}::static_artefact());
     return r;

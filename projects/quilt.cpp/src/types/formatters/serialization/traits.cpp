@@ -29,7 +29,7 @@ namespace formatters {
 namespace serialization {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::kernel() + ".serialization");
+    static std::string r(cpp::traits::backend() + ".serialization");
     return r;
 }
 

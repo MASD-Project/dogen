@@ -29,7 +29,7 @@ std::string traits::family() {
     return r;
 }
 
-std::string traits::kernel() {
+std::string traits::backend() {
     static std::string r("quilt.cpp");
     return r;
 }
@@ -124,7 +124,7 @@ std::string traits::cpp::source_directory_name() {
     return r;
 }
 
-std::string traits::cpp::kernel_directory_name() {
+std::string traits::cpp::backend_directory_name() {
     static std::string r("quilt.cpp.directory");
     return r;
 }

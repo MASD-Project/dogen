@@ -79,7 +79,7 @@ private:
     formattables::locator make_locator(const yarn::transforms::options& o,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra, const formatters::repository& frp,
-        const bool enable_kernel_directories,
+        const bool enable_backend_directories,
         const yarn::meta_model::model& m) const;
 
     /**
@@ -112,7 +112,7 @@ public:
 
     yarn::meta_model::text_model
     transform(const yarn::transforms::context& ctx,
-        const bool enable_kernel_directories,
+        const bool enable_backend_directories,
         const yarn::meta_model::model& m) const override;
 };
 

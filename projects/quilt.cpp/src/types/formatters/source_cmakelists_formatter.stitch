@@ -25,7 +25,7 @@ std::string source_cmakelists_formatter::formatter_name() const {
 annotations::archetype_location source_cmakelists_formatter::
 archetype_location() const {
     static annotations::archetype_location
-        r(cpp::traits::family(), cpp::traits::kernel(),
+        r(cpp::traits::family(), cpp::traits::backend(),
           traits::cmake_facet(),
           source_cmakelists_formatter::static_artefact());
     return r;

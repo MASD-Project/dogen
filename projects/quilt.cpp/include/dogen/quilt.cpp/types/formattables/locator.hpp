@@ -54,7 +54,7 @@ public:
         const formatters::repository& frp, const annotations::annotation& root,
         const yarn::meta_model::name& model_name,
         const std::unordered_set<std::string>& module_ids,
-        const bool enable_kernel_directories);
+        const bool enable_backend_directories);
 
 private:
     struct facet_type_group {
@@ -78,7 +78,7 @@ private:
         annotations::type include_directory_name;
         annotations::type source_directory_name;
         annotations::type disable_facet_directories;
-        annotations::type kernel_directory_name;
+        annotations::type backend_directory_name;
     };
 
     type_group make_type_group(const annotations::type_repository& atrp,
@@ -132,7 +132,7 @@ private:
         const boost::filesystem::path& output_directory_path,
         const yarn::meta_model::name& model_name,
         const locator_configuration& lc,
-        const bool enable_kernel_directories) const;
+        const bool enable_backend_directories) const;
 
     /**
      * @brief Generates the facet path segment of a file path.

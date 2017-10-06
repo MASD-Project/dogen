@@ -47,7 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("disable_facet_directories", v.disable_facet_directories_);
     ar << make_nvp("header_file_extension", v.header_file_extension_);
     ar << make_nvp("implementation_file_extension", v.implementation_file_extension_);
-    ar << make_nvp("kernel_directory_name", v.kernel_directory_name_);
+    ar << make_nvp("backend_directory_name", v.backend_directory_name_);
 }
 
 template<typename Archive>
@@ -61,7 +61,7 @@ void load(Archive& ar,
     ar >> make_nvp("disable_facet_directories", v.disable_facet_directories_);
     ar >> make_nvp("header_file_extension", v.header_file_extension_);
     ar >> make_nvp("implementation_file_extension", v.implementation_file_extension_);
-    ar >> make_nvp("kernel_directory_name", v.kernel_directory_name_);
+    ar >> make_nvp("backend_directory_name", v.backend_directory_name_);
 }
 
 } }

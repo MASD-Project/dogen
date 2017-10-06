@@ -36,7 +36,7 @@ locator_configuration::locator_configuration(
     const bool disable_facet_directories,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
-    const std::string& kernel_directory_name)
+    const std::string& backend_directory_name)
     : facet_configurations_(facet_configurations),
       archetype_configurations_(archetype_configurations),
       include_directory_name_(include_directory_name),
@@ -44,7 +44,7 @@ locator_configuration::locator_configuration(
       disable_facet_directories_(disable_facet_directories),
       header_file_extension_(header_file_extension),
       implementation_file_extension_(implementation_file_extension),
-      kernel_directory_name_(kernel_directory_name) { }
+      backend_directory_name_(backend_directory_name) { }
 
 void locator_configuration::swap(locator_configuration& other) noexcept {
     using std::swap;
@@ -55,7 +55,7 @@ void locator_configuration::swap(locator_configuration& other) noexcept {
     swap(disable_facet_directories_, other.disable_facet_directories_);
     swap(header_file_extension_, other.header_file_extension_);
     swap(implementation_file_extension_, other.implementation_file_extension_);
-    swap(kernel_directory_name_, other.kernel_directory_name_);
+    swap(backend_directory_name_, other.backend_directory_name_);
 }
 
 bool locator_configuration::operator==(const locator_configuration& rhs) const {
@@ -66,7 +66,7 @@ bool locator_configuration::operator==(const locator_configuration& rhs) const {
         disable_facet_directories_ == rhs.disable_facet_directories_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
         implementation_file_extension_ == rhs.implementation_file_extension_ &&
-        kernel_directory_name_ == rhs.kernel_directory_name_;
+        backend_directory_name_ == rhs.backend_directory_name_;
 }
 
 locator_configuration& locator_configuration::operator=(locator_configuration other) {
@@ -179,20 +179,20 @@ void locator_configuration::implementation_file_extension(const std::string&& v)
     implementation_file_extension_ = std::move(v);
 }
 
-const std::string& locator_configuration::kernel_directory_name() const {
-    return kernel_directory_name_;
+const std::string& locator_configuration::backend_directory_name() const {
+    return backend_directory_name_;
 }
 
-std::string& locator_configuration::kernel_directory_name() {
-    return kernel_directory_name_;
+std::string& locator_configuration::backend_directory_name() {
+    return backend_directory_name_;
 }
 
-void locator_configuration::kernel_directory_name(const std::string& v) {
-    kernel_directory_name_ = v;
+void locator_configuration::backend_directory_name(const std::string& v) {
+    backend_directory_name_ = v;
 }
 
-void locator_configuration::kernel_directory_name(const std::string&& v) {
-    kernel_directory_name_ = std::move(v);
+void locator_configuration::backend_directory_name(const std::string&& v) {
+    backend_directory_name_ = std::move(v);
 }
 
 } } } }

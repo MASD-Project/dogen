@@ -132,7 +132,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#CPP is the C++ model in the quilt kernel.
+            <dia:string>#CPP is the C++ backend in the quilt kernel.
 
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=quilt.cpp
@@ -22314,7 +22314,7 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel_directory_name#</dia:string>
+            <dia:string>#backend_directory_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>

@@ -47,7 +47,7 @@ std::string msbuild_targets_formatter::formatter_name() const {
 annotations::archetype_location
 msbuild_targets_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(cpp::traits::family(), cpp::traits::kernel(),
+        r(cpp::traits::family(), cpp::traits::backend(),
           traits::msbuild_facet(),
           msbuild_targets_formatter::static_artefact());
     return r;
@@ -65,7 +65,7 @@ msbuild_targets_formatter::inclusion_support_type() const {
 
 boost::filesystem::path msbuild_targets_formatter::inclusion_path(
     const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
-    
+
     using namespace dogen::utility::log;
     using namespace dogen::quilt::cpp::formatters;
     static logger lg(logger_factory(static_artefact()));
@@ -129,7 +129,7 @@ a.stream() << "        <Message Importance=\"high\" Text=\"ODB " << model_name <
 a.stream() << "    </Target>" << std::endl;
 a.stream() << std::endl;
             for (const auto& target : targets.targets()) {
-                
+
 a.stream() << "    <Target Name=\"" << target.name() << "\">" << std::endl;
 a.stream() << "        <Message Importance=\"high\" Text=\"" << target.comment() << "\"/>" << std::endl;
 a.stream() << "        <Exec WorkingDirectory=\"$(OutputDirectory)\" Command=\"&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)" << targets.common_odb_options() << " --options-file $(MSBuildThisFileDirectory)" << target.object_odb_options() << " --output-dir $(MSBuildThisFileDirectory)" << target.output_directory() << " $(MSBuildThisFileDirectory)" << target.types_file() << "\" />" << std::endl;
