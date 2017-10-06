@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-06 Fri 10:00]
+#+CAPTION: Clock summary at [2017-10-06 Fri 10:08]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:06* |       |      | 100.0 |
+| *Total time*                                                                | *20:13* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:06   |       |      | 100.0 |
-| Active                                                                      |         | 20:06 |      | 100.0 |
+| Stories                                                                     | 20:13   |       |      | 100.0 |
+| Active                                                                      |         | 20:13 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  11.5 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.7 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.8 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   5.1 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   5.0 |
 | COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  10.1 |
 | COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   7.7 |
-| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   3.2 |
-| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |  10.4 |
+| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   3.1 |
+| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |  10.3 |
+| COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   2.4 |
 | STARTED Create the archetype location properties                            |         |       | 2:42 |  13.4 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  32.3 |
-| STARTED Rename the model to text transforms                                 |         |       | 0:22 |   1.8 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  32.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -342,6 +342,15 @@ deletion.
 
 The job of the "housekeeper" is to compute a list of unexpected
 files. Its name should be: =file_linter=.
+
+*** COMPLETED Rename the model to text transforms                     :story:
+    CLOSED: [2017-10-06 Fri 10:08]
+    CLOCK: [2017-10-06 Fri 10:01]--[2017-10-06 Fri 10:08] =>  0:07
+    CLOCK: [2017-10-06 Fri 09:47]--[2017-10-06 Fri 10:00] =>  0:13
+    CLOCK: [2017-10-05 Thu 07:21]--[2017-10-05 Thu 07:30] =>  0:09
+
+We originally called the transforms "model to text" but actually they
+are "model to text model" transforms.
 
 *** STARTED Create the archetype location properties                  :story:
     CLOCK: [2017-10-05 Thu 07:15]--[2017-10-05 Thu 07:20] =>  0:05
@@ -688,13 +697,6 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
-
-*** STARTED Rename the model to text transforms                       :story:
-    CLOCK: [2017-10-06 Fri 09:47]--[2017-10-06 Fri 10:00] =>  0:13
-    CLOCK: [2017-10-05 Thu 07:21]--[2017-10-05 Thu 07:30] =>  0:09
-
-We originally called the transforms "model to text" but actually they
-are "model to text model" transforms.
 
 *** Rename options to transformation request                          :story:
 

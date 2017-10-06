@@ -22,7 +22,7 @@
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 #include "dogen/quilt.csharp/types/fabric/initializer.hpp"
-#include "dogen/quilt.csharp/types/model_to_text_transform.hpp"
+#include "dogen/quilt.csharp/types/model_to_text_model_transform.hpp"
 #include "dogen/quilt.csharp/types/initializer.hpp"
 
 namespace dogen {
@@ -32,7 +32,7 @@ namespace csharp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize();
-    yarn::transforms::register_transform<model_to_text_transform>();
+    yarn::transforms::register_transform<model_to_text_model_transform>();
 }
 
 } } }

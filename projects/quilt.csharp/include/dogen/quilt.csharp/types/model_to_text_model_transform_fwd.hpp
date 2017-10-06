@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_TRANSFORM_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_TRANSFORM_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 
-class model_to_text_transform;
+class model_to_text_model_transform;
 
 } } }
 

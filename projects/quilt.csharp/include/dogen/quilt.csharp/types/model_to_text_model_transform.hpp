@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_TRANSFORM_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_TRANSFORM_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -49,15 +49,16 @@ namespace csharp {
 /**
  * @brief Manages the c# kernel kernel.
  */
-class model_to_text_transform final
+class model_to_text_model_transform final
     : public yarn::transforms::model_to_text_model_transform_interface {
 public:
-    model_to_text_transform() = default;
-    model_to_text_transform(const model_to_text_transform&) = delete;
-    model_to_text_transform(model_to_text_transform&&) = default;
+    model_to_text_model_transform() = default;
+    model_to_text_model_transform(
+        const model_to_text_model_transform&) = delete;
+    model_to_text_model_transform(model_to_text_model_transform&&) = default;
 
 public:
-    ~model_to_text_transform() noexcept;
+    ~model_to_text_model_transform() noexcept;
 
 private:
     formattables::model create_formattables_model(
