@@ -8,7 +8,7 @@
       },
       "archetype_location": {
         "family": "quilt",
-        "kernel": "quilt.cpp"
+        "backend": "quilt.cpp"
       },
       "template_kind": "facet_template",
       "untyped_value": [

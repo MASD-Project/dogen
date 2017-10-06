@@ -12,7 +12,7 @@
       },
       "archetype_location": {
         "family": "quilt",
-        "kernel": "quilt.cpp"
+        "backend": "quilt.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -26,7 +26,7 @@
       },
       "archetype_location": {
         "family": "quilt",
-        "kernel": "quilt.cpp"
+        "backend": "quilt.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -40,7 +40,7 @@
       },
       "archetype_location": {
         "family": "quilt",
-        "kernel": "quilt.cpp"
+        "backend": "quilt.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -54,7 +54,7 @@
       },
       "archetype_location": {
         "family": "quilt",
-        "kernel": "quilt.cpp"
+        "backend": "quilt.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [

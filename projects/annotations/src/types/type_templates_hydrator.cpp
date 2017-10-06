@@ -41,7 +41,7 @@ const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
 const std::string archetype_location_key("archetype_location");
 const std::string archetype_location_family_key("family");
-const std::string archetype_location_kernel_key("kernel");
+const std::string archetype_location_backend_key("backend");
 const std::string archetype_location_facet_key("facet");
 const std::string archetype_location_archetype_key("archetype");
 const std::string value_type_key("value_type");
@@ -65,7 +65,7 @@ const std::string value_type_kvp("key_value_pair");
 
 const std::string template_kind_instance("instance");
 const std::string template_kind_recursive_template("recursive_template");
-const std::string template_kind_kernel_template("kernel_template");
+const std::string template_kind_backend_template("backend_template");
 const std::string template_kind_facet_template("facet_template");
 const std::string template_kind_archetype_template("archetype_template");
 
@@ -128,8 +128,8 @@ type_templates_hydrator::to_template_kind(const std::string& s) const {
         return template_kinds::instance;
     if (s == template_kind_recursive_template)
         return template_kinds::recursive_template;
-    if (s == template_kind_kernel_template)
-        return template_kinds::kernel_template;
+    if (s == template_kind_backend_template)
+        return template_kinds::backend_template;
     if (s == template_kind_facet_template)
         return template_kinds::facet_template;
     if (s == template_kind_archetype_template)
@@ -171,7 +171,7 @@ archetype_location type_templates_hydrator::
 read_archetype_location(const boost::property_tree::ptree& pt) const {
     archetype_location r;
     r.family(pt.get<std::string>(archetype_location_family_key, empty));
-    r.backend(pt.get<std::string>(archetype_location_kernel_key, empty));
+    r.backend(pt.get<std::string>(archetype_location_backend_key, empty));
     r.facet(pt.get<std::string>(archetype_location_facet_key, empty));
     r.archetype(pt.get<std::string>(archetype_location_archetype_key, empty));
     return r;

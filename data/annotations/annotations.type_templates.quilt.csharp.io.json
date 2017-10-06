@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io"
     },
     "value_type": "text",
@@ -21,7 +21,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io"
     },
     "value_type": "text",
@@ -36,7 +36,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.class"
     },
@@ -52,7 +52,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.builtin"
     },
@@ -68,7 +68,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.assistant"
     },
@@ -84,7 +84,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.enum"
     },
@@ -100,7 +100,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.primitive"
     },

@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data"
     },
     "value_type": "text",
@@ -21,7 +21,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data"
     },
     "value_type": "text",
@@ -36,7 +36,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.class_header"
     },
@@ -52,7 +52,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.class_implementation"
     },
@@ -68,7 +68,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.enum_header"
     },
@@ -84,7 +84,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.enum_implementation"
     },
@@ -100,7 +100,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.primitive_header"
     },
@@ -116,7 +116,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.primitive_implementation"
     },
@@ -132,7 +132,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.master_header"
     },
@@ -148,7 +148,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.test_data",
       "archetype": "quilt.cpp.test_data.builtin_header"
     },

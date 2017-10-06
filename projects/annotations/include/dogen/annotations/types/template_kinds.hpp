@@ -32,7 +32,7 @@ enum class template_kinds : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     instance = 1,
     recursive_template = 2, ///< This field applies recursively, from the current level to all below.///<///< The starting point of the recursion is the level supplied by an archetype location.
-    kernel_template = 3, ///< This field applies to all kernels.
+    backend_template = 3, ///< This field applies to all backends.
     facet_template = 4, ///< This field applies to all facets.
     archetype_template = 5 ///< This field applies to all archetypes.
 };

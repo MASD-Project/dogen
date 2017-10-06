@@ -40,8 +40,8 @@ std::ostream& operator<<(std::ostream& s, const template_kinds& v) {
     case template_kinds::recursive_template:
         attr = "\"recursive_template\"";
         break;
-    case template_kinds::kernel_template:
-        attr = "\"kernel_template\"";
+    case template_kinds::backend_template:
+        attr = "\"backend_template\"";
         break;
     case template_kinds::facet_template:
         attr = "\"facet_template\"";

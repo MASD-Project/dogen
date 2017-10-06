@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb"
     },
     "value_type": "text",
@@ -21,7 +21,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb"
     },
     "value_type": "text",
@@ -36,7 +36,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.class_header"
     },
@@ -52,7 +52,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.enum_header"
     },
@@ -68,7 +68,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.primitive_header"
     },
@@ -84,7 +84,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.common_odb_options"
     },
@@ -100,7 +100,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.object_odb_options"
     },
@@ -116,7 +116,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.master_header"
     },
@@ -132,7 +132,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb"
     },
     "value_type": "text_collection",
@@ -146,7 +146,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.odb",
       "archetype": "quilt.cpp.odb.builtin_header"
     },

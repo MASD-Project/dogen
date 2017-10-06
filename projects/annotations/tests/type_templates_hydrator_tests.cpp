@@ -46,7 +46,7 @@ const std::string trivial_type_template(R"([
             "qualified" : "a qualified name"
         },
         "archetype_location" : {
-            "kernel" : "a backend",
+            "backend" : "a backend",
             "archetype" : "an archetype",
             "facet" : "a facet"
         },

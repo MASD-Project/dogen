@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -19,7 +19,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -32,7 +32,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -45,7 +45,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "boolean",
     "template_kind": "archetype_template",
@@ -58,7 +58,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -72,7 +72,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.visual_studio"
     },
     "value_type": "text",
@@ -87,7 +87,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.visual_studio"
     },
     "value_type": "text",
@@ -102,7 +102,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.visual_studio",
       "archetype": "quilt.csharp.visual_studio.solution.postfix"
     },
@@ -118,7 +118,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.visual_studio",
       "archetype": "quilt.csharp.visual_studio.project.postfix"
     },
@@ -134,7 +134,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -148,7 +148,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -162,7 +162,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp"
+      "backend": "quilt.csharp"
     },
     "value_type": "text",
     "template_kind": "instance",

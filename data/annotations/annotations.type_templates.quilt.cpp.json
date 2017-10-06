@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -19,7 +19,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -32,7 +32,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -45,7 +45,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "archetype_template",
@@ -58,7 +58,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -72,7 +72,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -86,7 +86,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "archetype_template",
@@ -99,7 +99,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text_collection",
     "template_kind": "archetype_template",
@@ -112,7 +112,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -126,7 +126,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -140,7 +140,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -154,7 +154,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -168,7 +168,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -182,7 +182,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -196,7 +196,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -210,7 +210,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -224,7 +224,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -238,7 +238,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -252,7 +252,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -266,7 +266,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -280,7 +280,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -294,7 +294,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp"
+      "backend": "quilt.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -308,7 +308,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.cmake",
       "archetype": "quilt.cpp.cmake.source_cmakelists.postfix"
     },
@@ -324,7 +324,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.cmake",
       "archetype": "quilt.cpp.cmake.include_cmakelists.postfix"
     },
@@ -340,7 +340,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.cmake",
       "archetype": "quilt.cpp.msbuild.targets.postfix"
     },
@@ -356,7 +356,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.visual_studio"
     },
     "value_type": "text",
@@ -371,7 +371,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.visual_studio"
     },
     "value_type": "text",
@@ -386,7 +386,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.visual_studio",
       "archetype": "quilt.cpp.visual_studio.solution.postfix"
     },
@@ -402,7 +402,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.visual_studio",
       "archetype": "quilt.cpp.visual_studio.project.postfix"
     },

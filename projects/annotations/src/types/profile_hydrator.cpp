@@ -41,14 +41,14 @@ const std::string template_kind_key("template_kind");
 const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
 const std::string archetype_location_key("archetype_location");
-const std::string archetype_location_backend_key("kernel");
+const std::string archetype_location_backend_key("backend");
 const std::string archetype_location_facet_key("facet");
 const std::string archetype_location_archetype_key("archetype");
 const std::string untyped_value_key("untyped_value");
 
 const std::string template_kind_instance("instance");
 const std::string template_kind_recursive_template("recursive_template");
-const std::string template_kind_backend_template("kernel_template");
+const std::string template_kind_backend_template("backend_template");
 const std::string template_kind_facet_template("facet_template");
 const std::string template_kind_archetype_template("archetype_template");
 
@@ -76,7 +76,7 @@ template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
     if (s == template_kind_recursive_template)
         return template_kinds::recursive_template;
     if (s == template_kind_backend_template)
-        return template_kinds::kernel_template;
+        return template_kinds::backend_template;
     if (s == template_kind_facet_template)
         return template_kinds::facet_template;
     if (s == template_kind_archetype_template)

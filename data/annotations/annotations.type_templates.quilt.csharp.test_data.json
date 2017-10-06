@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.test_data"
     },
     "value_type": "text",
@@ -21,7 +21,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.test_data"
     },
     "value_type": "text",
@@ -36,7 +36,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.test_data",
       "archetype": "quilt.csharp.test_data.class"
     },
@@ -52,7 +52,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.test_data",
       "archetype": "quilt.csharp.assistant.class"
     },
@@ -68,7 +68,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.test_data",
       "archetype": "quilt.csharp.assistant.enum"
     },
@@ -84,7 +84,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.csharp",
+      "backend": "quilt.csharp",
       "facet": "quilt.csharp.test_data",
       "archetype": "quilt.csharp.assistant.primitive"
     },

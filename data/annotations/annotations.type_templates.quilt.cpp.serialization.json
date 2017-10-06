@@ -6,7 +6,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization"
     },
     "value_type": "text",
@@ -21,7 +21,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization"
     },
     "value_type": "text",
@@ -36,7 +36,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.class_header"
     },
@@ -52,7 +52,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.class_implementation"
     },
@@ -68,7 +68,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.enum_header"
     },
@@ -84,7 +84,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.primitive_header"
     },
@@ -100,7 +100,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.primitive_implementation"
     },
@@ -116,7 +116,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.registrar_header"
     },
@@ -132,7 +132,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.registrar_implementation"
     },
@@ -148,7 +148,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.forward_declarations"
     },
@@ -164,7 +164,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.master_header"
     },
@@ -180,7 +180,7 @@
     },
     "archetype_location": {
       "family": "quilt",
-      "kernel": "quilt.cpp",
+      "backend": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
       "archetype": "quilt.cpp.serialization.builtin_header"
     },

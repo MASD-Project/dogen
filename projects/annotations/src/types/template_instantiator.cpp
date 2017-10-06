@@ -67,7 +67,7 @@ template_instantiator(const archetype_location_repository& alrp)
 bool template_instantiator::is_instantiable(const template_kinds tk) const {
     return
         tk == template_kinds::recursive_template ||
-        tk == template_kinds::kernel_template ||
+        tk == template_kinds::backend_template ||
         tk == template_kinds::facet_template ||
         tk == template_kinds::archetype_template;
 }
