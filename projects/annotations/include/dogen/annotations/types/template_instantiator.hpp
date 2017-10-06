@@ -62,7 +62,7 @@ public:
 
 private:
     void instantiate_facet_template(const type_template& tt,
-        const std::string& kernel_name,
+        const std::string& backend_name,
         const std::unordered_set<std::string>& facet_names,
         std::list<type>& types) const;
     std::list<type>

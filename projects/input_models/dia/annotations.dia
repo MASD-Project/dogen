@@ -3184,7 +3184,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#types_by_kernel_name#</dia:string>
+            <dia:string>#types_by_backend_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, std::list&lt;type&gt;&gt;#</dia:string>
@@ -3193,7 +3193,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Types by kernel name.#</dia:string>
+            <dia:string>#Types by backend name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6256,7 +6256,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#select_type_by_kernel_name#</dia:string>
+            <dia:string>#select_type_by_backend_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>

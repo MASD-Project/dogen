@@ -122,7 +122,7 @@ create_repository(const std::list<type>& ts) const {
                 .push_back(t);
 
         if (!al.backend().empty())
-            r.types_by_kernel_name()[al.backend()]
+            r.types_by_backend_name()[al.backend()]
                 .push_back(t);
 
         if (t.is_partially_matchable())

@@ -48,7 +48,7 @@ public:
         const std::unordered_map<std::string, dogen::annotations::type>& types_by_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_kernel_name,
+        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name,
         const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types);
 
 private:
@@ -100,13 +100,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Types by kernel name.
+     * @brief Types by backend name.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_kernel_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_kernel_name();
-    void types_by_kernel_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
-    void types_by_kernel_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
+    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name() const;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name();
+    void types_by_backend_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
+    void types_by_backend_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
     /**@}*/
 
     /**
@@ -134,7 +134,7 @@ private:
     std::unordered_map<std::string, dogen::annotations::type> types_by_name_;
     std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_facet_name_;
     std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_formatter_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_kernel_name_;
+    std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_backend_name_;
     std::unordered_map<std::string, dogen::annotations::type> partially_matchable_types_;
 };
 

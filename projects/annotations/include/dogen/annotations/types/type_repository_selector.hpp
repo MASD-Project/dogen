@@ -112,12 +112,12 @@ public:
 
     /**
      * @brief Returns the field definitions corresponding to the
-     * supplied kernel name.
+     * supplied backend name.
      *
-     * @pre kernel name must exist.
+     * @pre backend name must exist.
      */
     const std::list<type>&
-    select_type_by_kernel_name(const std::string& n) const;
+    select_type_by_backend_name(const std::string& n) const;
 
 private:
     const type_repository& repository_;
