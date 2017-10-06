@@ -27,7 +27,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
-#include "dogen/quilt.cpp/types/model_to_text_transform.hpp"
+#include "dogen/quilt.cpp/types/model_to_text_model_transform.hpp"
 
 namespace {
 
@@ -45,16 +45,16 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 
-model_to_text_transform::~model_to_text_transform() noexcept { }
+model_to_text_model_transform::~model_to_text_model_transform() noexcept { }
 
 const formatters::repository&
-model_to_text_transform::formatters_repository() const {
+model_to_text_model_transform::formatters_repository() const {
     const auto& rg(formatters::workflow::registrar());
     rg.validate();
     return rg.formatter_repository();
 }
 
-formattables::model model_to_text_transform::create_formattables_model(
+formattables::model model_to_text_model_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
@@ -63,7 +63,7 @@ formattables::model model_to_text_transform::create_formattables_model(
     return fw.execute(atrp, ra, l, frp, m);
 }
 
-formattables::locator model_to_text_transform::make_locator(
+formattables::locator model_to_text_model_transform::make_locator(
     const yarn::transforms::options& o,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const formatters::repository& frp, const bool enable_kernel_directories,
@@ -78,12 +78,12 @@ formattables::locator model_to_text_transform::make_locator(
     return r;
 }
 
-std::string model_to_text_transform::id() const {
+std::string model_to_text_model_transform::id() const {
     return traits::kernel();
 }
 
-std::list<dogen::formatters::artefact>
-model_to_text_transform::format(const std::unordered_set<yarn::meta_model::element_archetype>&
+std::list<dogen::formatters::artefact> model_to_text_model_transform::
+format(const std::unordered_set<yarn::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
@@ -93,7 +93,7 @@ model_to_text_transform::format(const std::unordered_set<yarn::meta_model::eleme
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
-std::list<boost::filesystem::path> model_to_text_transform::
+std::list<boost::filesystem::path> model_to_text_model_transform::
 managed_directories(const formattables::locator& l) const {
     std::list<boost::filesystem::path> r;
     r.push_back(l.project_path());
@@ -104,24 +104,24 @@ managed_directories(const formattables::locator& l) const {
 }
 
 std::forward_list<annotations::archetype_location>
-model_to_text_transform::archetype_locations() const {
+model_to_text_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
                          annotations::archetype_locations_group>&
-model_to_text_transform::archetype_locations_by_meta_name() const {
+model_to_text_model_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
-yarn::meta_model::languages model_to_text_transform::language() const {
+yarn::meta_model::languages model_to_text_model_transform::language() const {
     return yarn::meta_model::languages::cpp;
 }
 
 yarn::meta_model::text_model
-model_to_text_transform::transform(const yarn::transforms::context& ctx,
+model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     const bool enable_kernel_directories,
     const yarn::meta_model::model& m) const {
     yarn::helpers::scoped_transform_probing stp(lg,
