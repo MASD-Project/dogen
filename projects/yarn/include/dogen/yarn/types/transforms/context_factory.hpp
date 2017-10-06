@@ -27,7 +27,7 @@
 
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
@@ -41,7 +41,7 @@ class context_factory final {
 private:
     static annotations::archetype_location_repository
     create_archetype_location_repository(
-        const model_to_text_transform_registrar& rg);
+        const model_to_text_model_transform_registrar& rg);
 
 public:
     static context

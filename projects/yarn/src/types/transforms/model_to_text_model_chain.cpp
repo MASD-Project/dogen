@@ -28,11 +28,11 @@
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
 
 namespace {
 
-const std::string transform_id("yarn.transforms.model_to_text_chain");
+const std::string transform_id("yarn.transforms.model_to_text_model_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -47,10 +47,10 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::shared_ptr<model_to_text_transform_registrar>
-model_to_text_chain::registrar_;
+std::shared_ptr<model_to_text_model_transform_registrar>
+model_to_text_model_chain::registrar_;
 
-model_to_text_chain::type_group model_to_text_chain::
+model_to_text_model_chain::type_group model_to_text_model_chain::
 make_type_group(const annotations::type_repository& atrp,
     const std::list<annotations::archetype_location>& als) {
     type_group r;
@@ -70,7 +70,7 @@ make_type_group(const annotations::type_repository& atrp,
 }
 
 std::unordered_set<std::string>
-model_to_text_chain::obtain_enabled_kernels(const type_group& tg,
+model_to_text_model_chain::obtain_enabled_kernels(const type_group& tg,
     const annotations::annotation& ra) {
 
     std::unordered_set<std::string> r;
@@ -86,13 +86,13 @@ model_to_text_chain::obtain_enabled_kernels(const type_group& tg,
     return r;
 }
 
-bool model_to_text_chain::obtain_enable_kernel_directories(
+bool model_to_text_model_chain::obtain_enable_kernel_directories(
     const type_group& tg, const annotations::annotation& ra) {
     const annotations::entry_selector s(ra);
     return s.get_boolean_content_or_default(tg.enable_kernel_directories);
 }
 
-configuration model_to_text_chain::make_configuration(
+configuration model_to_text_model_chain::make_configuration(
     const context& ctx, const std::list<annotations::archetype_location>& als,
     const annotations::annotation& ra) {
 
@@ -110,21 +110,24 @@ configuration model_to_text_chain::make_configuration(
     return r;
 }
 
-model_to_text_transform_registrar& model_to_text_chain::registrar() {
-    if (!registrar_)
-        registrar_ = std::make_shared<model_to_text_transform_registrar>();
+model_to_text_model_transform_registrar&
+model_to_text_model_chain::registrar() {
+    if (!registrar_) {
+        registrar_ = std::make_shared<
+            model_to_text_model_transform_registrar>();
+    }
 
     return *registrar_;
 }
 
-void model_to_text_chain::
+void model_to_text_model_chain::
 merge(meta_model::text_model&& src, meta_model::text_model& dst) {
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
     dst.managed_directories().splice(dst.managed_directories().end(),
         src.managed_directories());
 }
 
-meta_model::text_model model_to_text_chain::
+meta_model::text_model model_to_text_model_chain::
 transform(const context& ctx, const meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().id();
 
@@ -186,7 +189,7 @@ transform(const context& ctx, const meta_model::model& m) {
     return r;
 }
 
-meta_model::text_model model_to_text_chain::
+meta_model::text_model model_to_text_model_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
     helpers::scoped_chain_probing stp(lg, "code generation chain",
         transform_id, ctx.prober());

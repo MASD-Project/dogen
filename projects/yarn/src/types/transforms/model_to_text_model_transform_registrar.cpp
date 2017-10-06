@@ -23,13 +23,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/registrar_error.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "yarn.meta_model.model_to_text_transform_registrar"));
+        "yarn.meta_model.model_to_text_model_transform_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
 const std::string null_transform("Transform supplied is null");
@@ -41,8 +41,8 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void model_to_text_transform_registrar::
-register_transform(std::shared_ptr<model_to_text_transform_interface> t) {
+void model_to_text_model_transform_registrar::
+register_transform(std::shared_ptr<model_to_text_model_transform_interface> t) {
     if (!t) {
         BOOST_LOG_SEV(lg, error) << null_transform;
         BOOST_THROW_EXCEPTION(registrar_error(null_transform));
@@ -62,7 +62,7 @@ register_transform(std::shared_ptr<model_to_text_transform_interface> t) {
     BOOST_LOG_SEV(lg, debug) << "Registrered transform: " << t->id();
 }
 
-void model_to_text_transform_registrar::validate() const {
+void model_to_text_model_transform_registrar::validate() const {
     if (transforms_by_language_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_transforms;
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
@@ -70,19 +70,19 @@ void model_to_text_transform_registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-std::shared_ptr<model_to_text_transform_interface>
-model_to_text_transform_registrar::
+std::shared_ptr<model_to_text_model_transform_interface>
+model_to_text_model_transform_registrar::
 transform_for_language(const yarn::meta_model::languages l) const {
     const auto i(transforms_by_language_.find(l));
     if (i == transforms_by_language_.end())
-        return std::shared_ptr<model_to_text_transform_interface>();
+        return std::shared_ptr<model_to_text_model_transform_interface>();
 
     return i->second;
 }
 
 const std::unordered_map<yarn::meta_model::languages, std::
-                         shared_ptr<model_to_text_transform_interface>>&
-model_to_text_transform_registrar::transforms_by_language() const {
+                         shared_ptr<model_to_text_model_transform_interface>>&
+model_to_text_model_transform_registrar::transforms_by_language() const {
     return transforms_by_language_;
 }
 

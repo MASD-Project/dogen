@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_TRANSFORM_REGISTRAR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_TRANSFORM_REGISTRAR_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_interface.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -41,13 +41,13 @@ namespace transforms {
 /**
  * @brief Keeps track of all the available kernels.
  */
-class model_to_text_transform_registrar {
+class model_to_text_model_transform_registrar {
 public:
     /**
      * @brief Registers a model to text transform.
      */
     void register_transform(
-        std::shared_ptr<model_to_text_transform_interface> t);
+        std::shared_ptr<model_to_text_model_transform_interface> t);
 
 public:
     /**
@@ -60,7 +60,7 @@ public:
      * @brief Returns the kernel for the supplied language, if any
      * exists. Otherwise returns a null shared pointer.
      */
-    std::shared_ptr<model_to_text_transform_interface>
+    std::shared_ptr<model_to_text_model_transform_interface>
     transform_for_language(const yarn::meta_model::languages l) const;
 
     /**
@@ -68,13 +68,13 @@ public:
      */
     const std::unordered_map<
         yarn::meta_model::languages,
-        std::shared_ptr<model_to_text_transform_interface>>&
+        std::shared_ptr<model_to_text_model_transform_interface>>&
     transforms_by_language() const;
 
 private:
-    std::unordered_map<
-    yarn::meta_model::languages,
-    std::shared_ptr<model_to_text_transform_interface>> transforms_by_language_;
+    std::unordered_map<yarn::meta_model::languages,
+    std::shared_ptr<model_to_text_model_transform_interface>>
+    transforms_by_language_;
 };
 
 } } }

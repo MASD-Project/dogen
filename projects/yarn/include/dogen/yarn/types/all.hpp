@@ -115,7 +115,6 @@
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen/yarn/types/meta_model/archetype_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_database_systems.hpp"
@@ -153,6 +152,7 @@
 #include "dogen/yarn/types/transforms/formatting_configuration.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
 #include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
 #include "dogen/yarn/types/meta_model/directory_structure_styles.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
@@ -178,8 +178,8 @@
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
 #include "dogen/yarn/types/helpers/endomodel_post_processing_validator.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_interface.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/archetype_location_properties_transform.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 #endif

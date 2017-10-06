@@ -37,7 +37,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_interface.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
@@ -50,7 +50,7 @@ namespace csharp {
  * @brief Manages the c# kernel kernel.
  */
 class model_to_text_transform final
-    : public yarn::transforms::model_to_text_transform_interface {
+    : public yarn::transforms::model_to_text_model_transform_interface {
 public:
     model_to_text_transform() = default;
     model_to_text_transform(const model_to_text_transform&) = delete;

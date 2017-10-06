@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/text_model.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/configuration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
@@ -41,7 +41,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class model_to_text_chain final {
+class model_to_text_model_chain final {
 private:
     struct type_group {
         annotations::type enable_kernel_directories;
@@ -65,7 +65,7 @@ public:
     /**
      * @brief Registrar that keeps track of the available transforms.
      */
-    static model_to_text_transform_registrar& registrar();
+    static model_to_text_model_transform_registrar& registrar();
 
 private:
     /*
@@ -81,7 +81,7 @@ public:
     transform(const context& ctx, const std::list<meta_model::model>& models);
 
 private:
-    static std::shared_ptr<model_to_text_transform_registrar> registrar_;
+    static std::shared_ptr<model_to_text_model_transform_registrar> registrar_;
 };
 
 /*
@@ -90,7 +90,7 @@ private:
 template<typename Transform>
 inline void register_transform() {
     auto t(std::make_shared<Transform>());
-    auto& rg(model_to_text_chain::registrar());
+    auto& rg(model_to_text_model_chain::registrar());
     rg.register_transform(t);
 }
 

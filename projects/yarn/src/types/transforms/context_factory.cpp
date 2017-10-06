@@ -27,7 +27,7 @@
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_chain.hpp"
+#include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 
 namespace {
@@ -43,7 +43,7 @@ namespace transforms {
 
 annotations::archetype_location_repository
 context_factory::create_archetype_location_repository(
-    const model_to_text_transform_registrar& rg) {
+    const model_to_text_model_transform_registrar& rg) {
     annotations::archetype_location_repository_builder b;
     for (const auto& pair : rg.transforms_by_language()) {
         const auto& t(*pair.second);
@@ -67,7 +67,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     /*
      * Obtain the kernel registrar and ensure it has been setup.
      */
-    const auto& rg(model_to_text_chain::registrar());
+    const auto& rg(model_to_text_model_chain::registrar());
     if (enable_validation)
         rg.validate();
 
