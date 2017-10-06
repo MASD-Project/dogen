@@ -24,7 +24,7 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 
-std::string traits::family() {
+std::string traits::kernel() {
     static std::string r("quilt");
     return r;
 }

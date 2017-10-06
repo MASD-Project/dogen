@@ -14,7 +14,7 @@
         "qualified": "yarn.generalization.parent"
       },
       "archetype_location": {
-        "family": "yarn"
+        "kernel": "yarn"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -27,7 +27,7 @@
         "qualified": "quilt.cpp.types.class_header.formatting_style"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -41,7 +41,7 @@
         "qualified": "quilt.cpp.types.class_header.formatting_input"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -55,7 +55,7 @@
         "qualified": "quilt.cpp.types.class_header.overwrite"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -69,7 +69,7 @@
         "qualified": "quilt.cpp.types.class_implementation.formatting_style"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -83,7 +83,7 @@
         "qualified": "quilt.cpp.types.class_implementation.overwrite"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",

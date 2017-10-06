@@ -53,7 +53,7 @@ const std::string archetype_name_not_empty(
 const std::string unsupported_template_kind(
     "Template is not supported: ");
 const std::string missing_type("Type not found: ");
-const std::string missing_family("Recursive templates must supply the family.");
+const std::string missing_kernel("Recursive templates must supply the kernel.");
 
 }
 
@@ -113,7 +113,7 @@ void template_instantiator::validate(const archetype_location& al,
     if (tk == template_kinds::recursive_template) {
         /*
          * At present our recursive templates are limited to starting
-         * at the family or backend backend level. Ensure the user is
+         * at the kernel or backend backend level. Ensure the user is
          * not trying to start at the facet or archetype level.
          */
         if (!al.facet().empty()) {
@@ -228,14 +228,14 @@ instantiate_recursive_template(const type_template& tt) const {
     std::list<type> r;
 
     /*
-     * Global templates are expected to always supply a family. This
+     * Global templates are expected to always supply a kernel. This
      * is because at present we do not support instantiating templates
      * across families as there is no use case for this.
      */
     const auto ttal(tt.archetype_location());
-    if (ttal.family().empty()) {
-        BOOST_LOG_SEV(lg, error) << missing_family;
-        BOOST_THROW_EXCEPTION(instantiation_error(missing_family));
+    if (ttal.kernel().empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_kernel;
+        BOOST_THROW_EXCEPTION(instantiation_error(missing_kernel));
     }
 
     /*

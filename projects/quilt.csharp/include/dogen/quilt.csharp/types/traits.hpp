@@ -42,9 +42,9 @@ struct traits {
     static std::string enabled();
 
     /**
-     * @brief Name of this family.
+     * @brief Name of this kernel.
      */
-    static std::string family();
+    static std::string kernel();
 
     /**
      * @brief Name of this backend.

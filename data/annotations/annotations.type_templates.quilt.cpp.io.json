@@ -5,7 +5,7 @@
       "qualified": "quilt.cpp.io.directory"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io"
     },
@@ -20,7 +20,7 @@
       "qualified": "quilt.cpp.io.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io"
     },
@@ -35,7 +35,7 @@
       "qualified": "quilt.cpp.io.class_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.class_header"
@@ -51,7 +51,7 @@
       "qualified": "quilt.cpp.io.class_implementation.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.class_implementation"
@@ -67,7 +67,7 @@
       "qualified": "quilt.cpp.io.enum_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.enum_header"
@@ -83,7 +83,7 @@
       "qualified": "quilt.cpp.io.enum_implementation.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.enum_implementation"
@@ -99,7 +99,7 @@
       "qualified": "quilt.cpp.io.primitive_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.primitive_header"
@@ -115,7 +115,7 @@
       "qualified": "quilt.cpp.io.primitive_implementation.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.primitive_implementation"
@@ -131,7 +131,7 @@
       "qualified": "quilt.cpp.io.master_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.master_header"
@@ -147,7 +147,7 @@
       "qualified": "quilt.cpp.io.builtin_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.io",
       "archetype": "quilt.cpp.io.builtin_header"

@@ -5,7 +5,7 @@
       "qualified": "yarn.external_modules"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,7 +17,7 @@
       "qualified": "yarn.model_modules"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -29,7 +29,7 @@
       "qualified": "yarn.type_parameters.variable_number_of_parameters"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -42,7 +42,7 @@
       "qualified": "yarn.type_parameters.count"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "number",
     "template_kind": "instance",
@@ -55,7 +55,7 @@
       "qualified": "yarn.type_parameters.always_in_heap"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -68,7 +68,7 @@
       "qualified": "yarn.enumeration.use_implementation_defined_underlying_element"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -81,7 +81,7 @@
       "qualified": "yarn.enumeration.underlying_element"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -93,7 +93,7 @@
       "qualified": "yarn.enumeration.use_implementation_defined_enumerator_values"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -106,7 +106,7 @@
       "qualified": "yarn.enumeration.add_invalid_enumerator"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -119,7 +119,7 @@
       "qualified": "yarn.enumerator.value"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -131,7 +131,7 @@
       "qualified": "yarn.generalization.is_final"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -143,7 +143,7 @@
       "qualified": "yarn.generalization.parent"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -155,7 +155,7 @@
       "qualified": "yarn.is_proxy_model"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -168,7 +168,7 @@
       "qualified": "yarn.reference"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -180,7 +180,7 @@
       "qualified": "yarn.input_language"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -193,7 +193,7 @@
       "qualified": "yarn.output_language"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -205,7 +205,7 @@
       "qualified": "yarn.primitive.underlying_element"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -217,7 +217,7 @@
       "qualified": "yarn.primitive.is_nullable"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -230,7 +230,7 @@
       "qualified": "yarn.primitive.use_type_aliasing"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -243,7 +243,7 @@
       "qualified": "yarn.orm.database_system"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -255,7 +255,7 @@
       "qualified": "yarn.orm.table_name"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -267,7 +267,7 @@
       "qualified": "yarn.orm.schema_name"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -279,7 +279,7 @@
       "qualified": "yarn.orm.is_primary_key"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -291,7 +291,7 @@
       "qualified": "yarn.orm.column_name"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -303,7 +303,7 @@
       "qualified": "yarn.orm.is_nullable"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -315,7 +315,7 @@
       "qualified": "yarn.orm.is_composite"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -327,7 +327,7 @@
       "qualified": "yarn.orm.letter_case"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -339,7 +339,7 @@
       "qualified": "yarn.orm.type_override"
     },
     "archetype_location": {
-      "family": "yarn"
+      "kernel": "yarn"
     },
     "value_type": "text_collection",
     "template_kind": "instance",

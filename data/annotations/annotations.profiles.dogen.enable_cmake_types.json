@@ -11,7 +11,7 @@
         "qualified": "quilt.cpp.types.enabled"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",

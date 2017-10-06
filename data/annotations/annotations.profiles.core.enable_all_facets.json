@@ -10,7 +10,7 @@
         "simple": "enabled"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "facet_template",

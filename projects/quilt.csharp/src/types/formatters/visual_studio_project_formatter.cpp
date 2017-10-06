@@ -45,7 +45,7 @@ std::string visual_studio_project_formatter::formatter_name() const {
 annotations::archetype_location
 visual_studio_project_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(csharp::traits::family(), csharp::traits::backend(),
+        r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::visual_studio_facet(),
           visual_studio_project_formatter::static_artefact());
     return r;

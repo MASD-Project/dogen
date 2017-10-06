@@ -11,7 +11,7 @@
         "qualified": "quilt.cpp.cmake.enabled"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -25,7 +25,7 @@
         "qualified": "quilt.cpp.odb.enabled"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -39,7 +39,7 @@
         "qualified": "quilt.cpp.hash.enabled"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",
@@ -53,7 +53,7 @@
         "qualified": "quilt.cpp.test_data.enabled"
       },
       "archetype_location": {
-        "family": "quilt",
+        "kernel": "quilt",
         "backend": "quilt.cpp"
       },
       "template_kind": "instance",

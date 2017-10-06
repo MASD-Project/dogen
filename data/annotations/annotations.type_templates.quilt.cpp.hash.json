@@ -5,7 +5,7 @@
       "qualified": "quilt.cpp.hash.directory"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash"
     },
@@ -20,7 +20,7 @@
       "qualified": "quilt.cpp.hash.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash"
     },
@@ -35,7 +35,7 @@
       "qualified": "quilt.cpp.hash.class_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.class_header"
@@ -51,7 +51,7 @@
       "qualified": "quilt.cpp.hash.class_implementation.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.class_implementation"
@@ -67,7 +67,7 @@
       "qualified": "quilt.cpp.hash.enum_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.enum_header"
@@ -83,7 +83,7 @@
       "qualified": "quilt.cpp.hash.enum_implementation.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.enum_implementation"
@@ -99,7 +99,7 @@
       "qualified": "quilt.cpp.hash.primitive_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.primitive_header"
@@ -115,7 +115,7 @@
       "qualified": "quilt.cpp.hash.primitive_implementation.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.primitive_implementation"
@@ -131,7 +131,7 @@
       "qualified": "quilt.cpp.hash.master_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.master_header"
@@ -147,7 +147,7 @@
       "qualified": "quilt.cpp.hash.builtin_header.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.cpp",
       "facet": "quilt.cpp.hash",
       "archetype": "quilt.cpp.hash.builtin_header"

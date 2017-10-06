@@ -43,7 +43,7 @@ std::string exception_formatter::formatter_name() const {
 
 annotations::archetype_location exception_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(csharp::traits::family(), csharp::traits::backend(),
+        r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           exception_formatter::static_artefact());
     return r;

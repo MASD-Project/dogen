@@ -75,7 +75,7 @@ const std::string facet_properties_missing(
     "Could not find facet configuration for formatter: ");
 const std::string facet_directory_missing(
     "Facet directory is missing for facet: ");
-const std::string family_not_found("Family not found: ");
+const std::string kernel_not_found("Kernel not found: ");
 const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");

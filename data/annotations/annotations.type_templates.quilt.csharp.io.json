@@ -5,7 +5,7 @@
       "qualified": "quilt.csharp.io.directory"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io"
     },
@@ -20,7 +20,7 @@
       "qualified": "quilt.csharp.io.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io"
     },
@@ -35,7 +35,7 @@
       "qualified": "quilt.csharp.io.class.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.class"
@@ -51,7 +51,7 @@
       "qualified": "quilt.csharp.io.builtin.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.builtin"
@@ -67,7 +67,7 @@
       "qualified": "quilt.csharp.io.assistant.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.assistant"
@@ -83,7 +83,7 @@
       "qualified": "quilt.csharp.io.enum.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.enum"
@@ -99,7 +99,7 @@
       "qualified": "quilt.csharp.io.primitive.postfix"
     },
     "archetype_location": {
-      "family": "quilt",
+      "kernel": "quilt",
       "backend": "quilt.csharp",
       "facet": "quilt.csharp.io",
       "archetype": "quilt.csharp.io.primitive"

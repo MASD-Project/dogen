@@ -47,7 +47,7 @@ std::string msbuild_targets_formatter::formatter_name() const {
 annotations::archetype_location
 msbuild_targets_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(cpp::traits::family(), cpp::traits::backend(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::msbuild_facet(),
           msbuild_targets_formatter::static_artefact());
     return r;

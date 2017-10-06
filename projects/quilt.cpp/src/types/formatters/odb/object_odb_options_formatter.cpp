@@ -53,7 +53,7 @@ std::string object_odb_options_formatter::formatter_name() const {
 annotations::archetype_location
 object_odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
-        r(cpp::traits::family(), cpp::traits::backend(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(), object_odb_options_formatter::static_artefact());
     return r;
 }

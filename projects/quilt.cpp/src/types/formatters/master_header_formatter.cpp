@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)
-    : archetype_location_(cpp::traits::family(), cpp::traits::backend(),
+    : archetype_location_(cpp::traits::kernel(), cpp::traits::backend(),
           facet_name, traits::master_header_archetype(facet_name)) { }
 
 std::string master_header_formatter::formatter_name() const {

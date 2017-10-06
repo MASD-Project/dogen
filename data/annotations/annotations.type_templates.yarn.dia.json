@@ -5,7 +5,7 @@
       "qualified": "yarn.dia.comment"
     },
     "archetype_location": {
-      "family": "yarn.dia"
+      "kernel": "yarn.dia"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -17,7 +17,7 @@
       "qualified": "yarn.dia.external_modules"
     },
     "archetype_location": {
-      "family": "yarn.dia"
+      "kernel": "yarn.dia"
     },
     "value_type": "text",
     "template_kind": "instance",
