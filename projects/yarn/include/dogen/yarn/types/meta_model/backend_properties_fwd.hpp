@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_HASH_HPP
-#define DOGEN_YARN_HASH_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_HASH_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_BACKEND_PROPERTIES_FWD_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_BACKEND_PROPERTIES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/meta_model/intra_kernel_segment_properties.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-struct intra_kernel_segment_properties_hasher {
-public:
-    static std::size_t hash(const intra_kernel_segment_properties& v);
-};
+class backend_properties;
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::meta_model::intra_kernel_segment_properties> {
-public:
-    size_t operator()(const dogen::yarn::meta_model::intra_kernel_segment_properties& v) const {
-        return dogen::yarn::meta_model::intra_kernel_segment_properties_hasher::hash(v);
-    }
-};
-
-}
 #endif

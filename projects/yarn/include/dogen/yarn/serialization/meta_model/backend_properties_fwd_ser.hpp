@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_FWD_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_FWD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_BACKEND_PROPERTIES_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_BACKEND_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
-namespace meta_model {
+#include "dogen/yarn/types/meta_model/backend_properties_fwd.hpp"
 
-class intra_kernel_segment_properties;
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::meta_model::backend_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::meta_model::backend_properties& v, unsigned int version);
+
+} }
 
 #endif

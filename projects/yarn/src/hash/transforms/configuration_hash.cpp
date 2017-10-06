@@ -45,8 +45,8 @@ namespace transforms {
 std::size_t configuration_hasher::hash(const configuration& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_set_std_string(v.enabled_kernels()));
-    combine(seed, v.enable_kernel_directories());
+    combine(seed, hash_std_unordered_set_std_string(v.enabled_backends()));
+    combine(seed, v.enable_backend_directories());
 
     return seed;
 }

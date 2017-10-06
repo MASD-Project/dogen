@@ -46,7 +46,7 @@ public:
 
 public:
     global_enablement_configuration(
-        const bool kernel_enabled,
+        const bool backend_enabled,
         const bool facet_enabled,
         const bool archetype_enabled,
         const bool facet_overwrite,
@@ -60,8 +60,8 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::global_enablement_configuration& v, unsigned int version);
 
 public:
-    bool kernel_enabled() const;
-    void kernel_enabled(const bool v);
+    bool backend_enabled() const;
+    void backend_enabled(const bool v);
 
     bool facet_enabled() const;
     void facet_enabled(const bool v);
@@ -88,7 +88,7 @@ public:
     global_enablement_configuration& operator=(global_enablement_configuration other);
 
 private:
-    bool kernel_enabled_;
+    bool backend_enabled_;
     bool facet_enabled_;
     bool archetype_enabled_;
     bool facet_overwrite_;

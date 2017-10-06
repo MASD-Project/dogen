@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-06 Fri 10:08]
+#+CAPTION: Clock summary at [2017-10-06 Fri 11:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:13* |       |      | 100.0 |
+| *Total time*                                                                | *21:34* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:13   |       |      | 100.0 |
-| Active                                                                      |         | 20:13 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  11.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.7 |
+| Stories                                                                     | 21:34   |       |      | 100.0 |
+| Active                                                                      |         | 21:34 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  10.7 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.5 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.8 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   5.0 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |  10.1 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   7.7 |
-| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   3.1 |
-| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |  10.3 |
-| COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   2.4 |
-| STARTED Create the archetype location properties                            |         |       | 2:42 |  13.4 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  32.1 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   4.7 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   9.4 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   7.2 |
+| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.9 |
+| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   9.7 |
+| COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   2.2 |
+| STARTED Create the archetype location properties                            |         |       | 3:25 |  15.8 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  30.1 |
+| STARTED Rename kernel and family                                            |         |       | 0:38 |   2.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -353,6 +354,7 @@ We originally called the transforms "model to text" but actually they
 are "model to text model" transforms.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-06 Fri 10:09]--[2017-10-06 Fri 10:52] =>  0:43
     CLOCK: [2017-10-05 Thu 07:15]--[2017-10-05 Thu 07:20] =>  0:05
     CLOCK: [2017-09-29 Fri 14:02]--[2017-09-29 Fri 14:13] =>  0:11
     CLOCK: [2017-09-29 Fri 11:40]--[2017-09-29 Fri 12:13] =>  0:33
@@ -697,6 +699,40 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
+
+*** STARTED Rename kernel and family                                  :story:
+    CLOCK: [2017-10-06 Fri 10:53]--[2017-10-06 Fri 11:31] =>  0:38
+
+We need to use the term "family" to signify a group of archetypes such
+as "c++ headers", "c++ implementations", "c# implementations"
+etc. However, we have already used this term in the archetype
+location. So we need to:
+
+- rename kernel to backend. This clarifies things since we keep
+  calling kernels backends anyway.
+- rename family to kernel. So quilt becomes a kernel, implemented by a
+  number of backends: quilt.cpp, quilt.csharp and so forth.
+- rename archetype location group to archetype location family.
+
+*** Create a text model post-processing chain                         :story:
+
+The following transforms can be done after generation of the text model:
+
+- clang format
+- protected regions: read the file on disk, replace contents of the
+  protected region with the data read from disk.
+
+These can be contained in a post-processing chain for the text model.
+
+Note that we need artefacts to have an associated language so that we
+can use the correct clang format configuration. If a language is not
+supported by clang format (e.g. c#) we should just skip the files. The
+text model could group files by language.
+
+*** Postfix and directory fields in annotations look weird            :story:
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates?
 
 *** Rename options to transformation request                          :story:
 

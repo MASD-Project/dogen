@@ -31,12 +31,12 @@ locator_properties::locator_properties(
     const dogen::yarn::meta_model::directory_structure_styles directory_structure_style,
     const std::string& name_separator,
     const dogen::yarn::meta_model::model_segment_properties& model_segment_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& intra_kernel_segment_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties)
     : directory_structure_style_(directory_structure_style),
       name_separator_(name_separator),
       model_segment_properties_(model_segment_properties),
-      intra_kernel_segment_properties_(intra_kernel_segment_properties),
+      intra_backend_segment_properties_(intra_backend_segment_properties),
       archetype_group_properties_(archetype_group_properties) { }
 
 void locator_properties::swap(locator_properties& other) noexcept {
@@ -44,7 +44,7 @@ void locator_properties::swap(locator_properties& other) noexcept {
     swap(directory_structure_style_, other.directory_structure_style_);
     swap(name_separator_, other.name_separator_);
     swap(model_segment_properties_, other.model_segment_properties_);
-    swap(intra_kernel_segment_properties_, other.intra_kernel_segment_properties_);
+    swap(intra_backend_segment_properties_, other.intra_backend_segment_properties_);
     swap(archetype_group_properties_, other.archetype_group_properties_);
 }
 
@@ -52,7 +52,7 @@ bool locator_properties::operator==(const locator_properties& rhs) const {
     return directory_structure_style_ == rhs.directory_structure_style_ &&
         name_separator_ == rhs.name_separator_ &&
         model_segment_properties_ == rhs.model_segment_properties_ &&
-        intra_kernel_segment_properties_ == rhs.intra_kernel_segment_properties_ &&
+        intra_backend_segment_properties_ == rhs.intra_backend_segment_properties_ &&
         archetype_group_properties_ == rhs.archetype_group_properties_;
 }
 
@@ -102,20 +102,20 @@ void locator_properties::model_segment_properties(const dogen::yarn::meta_model:
     model_segment_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& locator_properties::intra_kernel_segment_properties() const {
-    return intra_kernel_segment_properties_;
+const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& locator_properties::intra_backend_segment_properties() const {
+    return intra_backend_segment_properties_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& locator_properties::intra_kernel_segment_properties() {
-    return intra_kernel_segment_properties_;
+std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& locator_properties::intra_backend_segment_properties() {
+    return intra_backend_segment_properties_;
 }
 
-void locator_properties::intra_kernel_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& v) {
-    intra_kernel_segment_properties_ = v;
+void locator_properties::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& v) {
+    intra_backend_segment_properties_ = v;
 }
 
-void locator_properties::intra_kernel_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>&& v) {
-    intra_kernel_segment_properties_ = std::move(v);
+void locator_properties::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>&& v) {
+    intra_backend_segment_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& locator_properties::archetype_group_properties() const {

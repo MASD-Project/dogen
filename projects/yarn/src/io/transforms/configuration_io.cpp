@@ -58,8 +58,8 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::transforms::configuration\"" << ", "
-      << "\"enabled_kernels\": " << v.enabled_kernels() << ", "
-      << "\"enable_kernel_directories\": " << v.enable_kernel_directories()
+      << "\"enabled_backends\": " << v.enabled_backends() << ", "
+      << "\"enable_backend_directories\": " << v.enable_backend_directories()
       << " }";
     return(s);
 }

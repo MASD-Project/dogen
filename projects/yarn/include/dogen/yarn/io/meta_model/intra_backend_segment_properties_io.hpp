@@ -18,30 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/kernel_properties_hash.hpp"
+#ifndef DOGEN_YARN_IO_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_IO_HPP
+#define DOGEN_YARN_IO_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <iosfwd>
+#include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::size_t kernel_properties_hasher::hash(const kernel_properties& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.enabled());
-    combine(seed, v.directory());
-    combine(seed, v.force_kernel_directory());
-
-    return seed;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::meta_model::intra_backend_segment_properties& v);
 
 } } }
+
+#endif

@@ -33,7 +33,7 @@
 #include "dogen/yarn/serialization/meta_model/model_segment_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_group_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/intra_kernel_segment_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -45,7 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("directory_structure_style", v.directory_structure_style_);
     ar << make_nvp("name_separator", v.name_separator_);
     ar << make_nvp("model_segment_properties", v.model_segment_properties_);
-    ar << make_nvp("intra_kernel_segment_properties", v.intra_kernel_segment_properties_);
+    ar << make_nvp("intra_backend_segment_properties", v.intra_backend_segment_properties_);
     ar << make_nvp("archetype_group_properties", v.archetype_group_properties_);
 }
 
@@ -56,7 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("directory_structure_style", v.directory_structure_style_);
     ar >> make_nvp("name_separator", v.name_separator_);
     ar >> make_nvp("model_segment_properties", v.model_segment_properties_);
-    ar >> make_nvp("intra_kernel_segment_properties", v.intra_kernel_segment_properties_);
+    ar >> make_nvp("intra_backend_segment_properties", v.intra_backend_segment_properties_);
     ar >> make_nvp("archetype_group_properties", v.archetype_group_properties_);
 }
 

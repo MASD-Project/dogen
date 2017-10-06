@@ -51,8 +51,8 @@ configuration_generator::configuration_generator() : position_(0) { }
 
 void configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.enabled_kernels(create_std_unordered_set_std_string(position + 0));
-    v.enable_kernel_directories(create_bool(position + 1));
+    v.enabled_backends(create_std_unordered_set_std_string(position + 0));
+    v.enable_backend_directories(create_bool(position + 1));
 }
 
 configuration_generator::result_type

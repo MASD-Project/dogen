@@ -18,7 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/transforms/global_enablement_configuration_hash.hpp"
+#include "dogen/yarn/hash/meta_model/path_contribution_types_hash.hpp"
+#include "dogen/yarn/hash/meta_model/intra_backend_segment_properties_hash.hpp"
 
 namespace {
 
@@ -28,13 +29,9 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
     std::size_t seed(0);
-
-    if (!v)
-        return seed;
-
-    combine(seed, *v);
+    combine(seed, v.generic_string());
     return seed;
 }
 
@@ -42,16 +39,17 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace meta_model {
 
-std::size_t global_enablement_configuration_hasher::hash(const global_enablement_configuration& v) {
+std::size_t intra_backend_segment_properties_hasher::hash(const intra_backend_segment_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, v.backend_enabled());
-    combine(seed, v.facet_enabled());
-    combine(seed, v.archetype_enabled());
-    combine(seed, v.facet_overwrite());
-    combine(seed, hash_boost_optional_bool(v.archetype_overwrite()));
+    combine(seed, hash_boost_filesystem_path(v.override_parent_path()));
+    combine(seed, hash_boost_filesystem_path(v.path_segment()));
+    combine(seed, v.external_modules());
+    combine(seed, v.model_modules());
+    combine(seed, v.internal_modules());
+    combine(seed, v.facet());
 
     return seed;
 }

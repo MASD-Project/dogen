@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_IO_HPP
-#define DOGEN_YARN_IO_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_IO_HPP
+#ifndef DOGEN_YARN_IO_META_MODEL_BACKEND_PROPERTIES_IO_HPP
+#define DOGEN_YARN_IO_META_MODEL_BACKEND_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/yarn/types/meta_model/intra_kernel_segment_properties.hpp"
+#include "dogen/yarn/types/meta_model/backend_properties.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -34,7 +34,7 @@ namespace meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::yarn::meta_model::intra_kernel_segment_properties& v);
+     const dogen::yarn::meta_model::backend_properties& v);
 
 } } }
 

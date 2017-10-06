@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/meta_model/intra_kernel_segment_properties.hpp"
+#include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-intra_kernel_segment_properties::intra_kernel_segment_properties()
+intra_backend_segment_properties::intra_backend_segment_properties()
     : external_modules_(static_cast<dogen::yarn::meta_model::path_contribution_types>(0)),
       model_modules_(static_cast<dogen::yarn::meta_model::path_contribution_types>(0)),
       internal_modules_(static_cast<dogen::yarn::meta_model::path_contribution_types>(0)),
       facet_(static_cast<dogen::yarn::meta_model::path_contribution_types>(0)) { }
 
-intra_kernel_segment_properties::intra_kernel_segment_properties(intra_kernel_segment_properties&& rhs)
+intra_backend_segment_properties::intra_backend_segment_properties(intra_backend_segment_properties&& rhs)
     : override_parent_path_(std::move(rhs.override_parent_path_)),
       path_segment_(std::move(rhs.path_segment_)),
       external_modules_(std::move(rhs.external_modules_)),
@@ -38,7 +38,7 @@ intra_kernel_segment_properties::intra_kernel_segment_properties(intra_kernel_se
       internal_modules_(std::move(rhs.internal_modules_)),
       facet_(std::move(rhs.facet_)) { }
 
-intra_kernel_segment_properties::intra_kernel_segment_properties(
+intra_backend_segment_properties::intra_backend_segment_properties(
     const boost::filesystem::path& override_parent_path,
     const boost::filesystem::path& path_segment,
     const dogen::yarn::meta_model::path_contribution_types external_modules,
@@ -52,7 +52,7 @@ intra_kernel_segment_properties::intra_kernel_segment_properties(
       internal_modules_(internal_modules),
       facet_(facet) { }
 
-void intra_kernel_segment_properties::swap(intra_kernel_segment_properties& other) noexcept {
+void intra_backend_segment_properties::swap(intra_backend_segment_properties& other) noexcept {
     using std::swap;
     swap(override_parent_path_, other.override_parent_path_);
     swap(path_segment_, other.path_segment_);
@@ -62,7 +62,7 @@ void intra_kernel_segment_properties::swap(intra_kernel_segment_properties& othe
     swap(facet_, other.facet_);
 }
 
-bool intra_kernel_segment_properties::operator==(const intra_kernel_segment_properties& rhs) const {
+bool intra_backend_segment_properties::operator==(const intra_backend_segment_properties& rhs) const {
     return override_parent_path_ == rhs.override_parent_path_ &&
         path_segment_ == rhs.path_segment_ &&
         external_modules_ == rhs.external_modules_ &&
@@ -71,73 +71,73 @@ bool intra_kernel_segment_properties::operator==(const intra_kernel_segment_prop
         facet_ == rhs.facet_;
 }
 
-intra_kernel_segment_properties& intra_kernel_segment_properties::operator=(intra_kernel_segment_properties other) {
+intra_backend_segment_properties& intra_backend_segment_properties::operator=(intra_backend_segment_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::filesystem::path& intra_kernel_segment_properties::override_parent_path() const {
+const boost::filesystem::path& intra_backend_segment_properties::override_parent_path() const {
     return override_parent_path_;
 }
 
-boost::filesystem::path& intra_kernel_segment_properties::override_parent_path() {
+boost::filesystem::path& intra_backend_segment_properties::override_parent_path() {
     return override_parent_path_;
 }
 
-void intra_kernel_segment_properties::override_parent_path(const boost::filesystem::path& v) {
+void intra_backend_segment_properties::override_parent_path(const boost::filesystem::path& v) {
     override_parent_path_ = v;
 }
 
-void intra_kernel_segment_properties::override_parent_path(const boost::filesystem::path&& v) {
+void intra_backend_segment_properties::override_parent_path(const boost::filesystem::path&& v) {
     override_parent_path_ = std::move(v);
 }
 
-const boost::filesystem::path& intra_kernel_segment_properties::path_segment() const {
+const boost::filesystem::path& intra_backend_segment_properties::path_segment() const {
     return path_segment_;
 }
 
-boost::filesystem::path& intra_kernel_segment_properties::path_segment() {
+boost::filesystem::path& intra_backend_segment_properties::path_segment() {
     return path_segment_;
 }
 
-void intra_kernel_segment_properties::path_segment(const boost::filesystem::path& v) {
+void intra_backend_segment_properties::path_segment(const boost::filesystem::path& v) {
     path_segment_ = v;
 }
 
-void intra_kernel_segment_properties::path_segment(const boost::filesystem::path&& v) {
+void intra_backend_segment_properties::path_segment(const boost::filesystem::path&& v) {
     path_segment_ = std::move(v);
 }
 
-dogen::yarn::meta_model::path_contribution_types intra_kernel_segment_properties::external_modules() const {
+dogen::yarn::meta_model::path_contribution_types intra_backend_segment_properties::external_modules() const {
     return external_modules_;
 }
 
-void intra_kernel_segment_properties::external_modules(const dogen::yarn::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::external_modules(const dogen::yarn::meta_model::path_contribution_types v) {
     external_modules_ = v;
 }
 
-dogen::yarn::meta_model::path_contribution_types intra_kernel_segment_properties::model_modules() const {
+dogen::yarn::meta_model::path_contribution_types intra_backend_segment_properties::model_modules() const {
     return model_modules_;
 }
 
-void intra_kernel_segment_properties::model_modules(const dogen::yarn::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::model_modules(const dogen::yarn::meta_model::path_contribution_types v) {
     model_modules_ = v;
 }
 
-dogen::yarn::meta_model::path_contribution_types intra_kernel_segment_properties::internal_modules() const {
+dogen::yarn::meta_model::path_contribution_types intra_backend_segment_properties::internal_modules() const {
     return internal_modules_;
 }
 
-void intra_kernel_segment_properties::internal_modules(const dogen::yarn::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::internal_modules(const dogen::yarn::meta_model::path_contribution_types v) {
     internal_modules_ = v;
 }
 
-dogen::yarn::meta_model::path_contribution_types intra_kernel_segment_properties::facet() const {
+dogen::yarn::meta_model::path_contribution_types intra_backend_segment_properties::facet() const {
     return facet_;
 }
 
-void intra_kernel_segment_properties::facet(const dogen::yarn::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::facet(const dogen::yarn::meta_model::path_contribution_types v) {
     facet_ = v;
 }
 

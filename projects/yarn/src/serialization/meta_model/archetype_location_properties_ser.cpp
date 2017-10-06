@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/kernel_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_location_properties_ser.hpp"
 
@@ -43,7 +43,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("facet_properties", v.facet_properties_);
     ar << make_nvp("archetype_properties", v.archetype_properties_);
-    ar << make_nvp("kernel_properties", v.kernel_properties_);
+    ar << make_nvp("backend_properties", v.backend_properties_);
 }
 
 template<typename Archive>
@@ -52,7 +52,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("facet_properties", v.facet_properties_);
     ar >> make_nvp("archetype_properties", v.archetype_properties_);
-    ar >> make_nvp("kernel_properties", v.kernel_properties_);
+    ar >> make_nvp("backend_properties", v.backend_properties_);
 }
 
 } }

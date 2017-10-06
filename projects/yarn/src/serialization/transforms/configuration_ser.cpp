@@ -38,16 +38,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::transforms::configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("enabled_kernels", v.enabled_kernels_);
-    ar << make_nvp("enable_kernel_directories", v.enable_kernel_directories_);
+    ar << make_nvp("enabled_backends", v.enabled_backends_);
+    ar << make_nvp("enable_backend_directories", v.enable_backend_directories_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::transforms::configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("enabled_kernels", v.enabled_kernels_);
-    ar >> make_nvp("enable_kernel_directories", v.enable_kernel_directories_);
+    ar >> make_nvp("enabled_backends", v.enabled_backends_);
+    ar >> make_nvp("enable_backend_directories", v.enable_backend_directories_);
 }
 
 } }

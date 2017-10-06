@@ -18,73 +18,73 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/meta_model/kernel_properties.hpp"
+#include "dogen/yarn/types/meta_model/backend_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-kernel_properties::kernel_properties()
+backend_properties::backend_properties()
     : enabled_(static_cast<bool>(0)),
-      force_kernel_directory_(static_cast<bool>(0)) { }
+      force_backend_directory_(static_cast<bool>(0)) { }
 
-kernel_properties::kernel_properties(
+backend_properties::backend_properties(
     const bool enabled,
     const std::string& directory,
-    const bool force_kernel_directory)
+    const bool force_backend_directory)
     : enabled_(enabled),
       directory_(directory),
-      force_kernel_directory_(force_kernel_directory) { }
+      force_backend_directory_(force_backend_directory) { }
 
-void kernel_properties::swap(kernel_properties& other) noexcept {
+void backend_properties::swap(backend_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(directory_, other.directory_);
-    swap(force_kernel_directory_, other.force_kernel_directory_);
+    swap(force_backend_directory_, other.force_backend_directory_);
 }
 
-bool kernel_properties::operator==(const kernel_properties& rhs) const {
+bool backend_properties::operator==(const backend_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         directory_ == rhs.directory_ &&
-        force_kernel_directory_ == rhs.force_kernel_directory_;
+        force_backend_directory_ == rhs.force_backend_directory_;
 }
 
-kernel_properties& kernel_properties::operator=(kernel_properties other) {
+backend_properties& backend_properties::operator=(backend_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-bool kernel_properties::enabled() const {
+bool backend_properties::enabled() const {
     return enabled_;
 }
 
-void kernel_properties::enabled(const bool v) {
+void backend_properties::enabled(const bool v) {
     enabled_ = v;
 }
 
-const std::string& kernel_properties::directory() const {
+const std::string& backend_properties::directory() const {
     return directory_;
 }
 
-std::string& kernel_properties::directory() {
+std::string& backend_properties::directory() {
     return directory_;
 }
 
-void kernel_properties::directory(const std::string& v) {
+void backend_properties::directory(const std::string& v) {
     directory_ = v;
 }
 
-void kernel_properties::directory(const std::string&& v) {
+void backend_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
 }
 
-bool kernel_properties::force_kernel_directory() const {
-    return force_kernel_directory_;
+bool backend_properties::force_backend_directory() const {
+    return force_backend_directory_;
 }
 
-void kernel_properties::force_kernel_directory(const bool v) {
-    force_kernel_directory_ = v;
+void backend_properties::force_backend_directory(const bool v) {
+    force_backend_directory_ = v;
 }
 
 } } }

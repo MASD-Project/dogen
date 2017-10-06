@@ -31,7 +31,7 @@
 #include "dogen/yarn/types/meta_model/model_segment_properties.hpp"
 #include "dogen/yarn/types/meta_model/archetype_group_properties.hpp"
 #include "dogen/yarn/types/meta_model/directory_structure_styles.hpp"
-#include "dogen/yarn/types/meta_model/intra_kernel_segment_properties.hpp"
+#include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/locator_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -52,7 +52,7 @@ public:
         const dogen::yarn::meta_model::directory_structure_styles directory_structure_style,
         const std::string& name_separator,
         const dogen::yarn::meta_model::model_segment_properties& model_segment_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& intra_kernel_segment_properties,
+        const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties);
 
 private:
@@ -81,10 +81,10 @@ public:
     void model_segment_properties(const dogen::yarn::meta_model::model_segment_properties& v);
     void model_segment_properties(const dogen::yarn::meta_model::model_segment_properties&& v);
 
-    const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& intra_kernel_segment_properties() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& intra_kernel_segment_properties();
-    void intra_kernel_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>& v);
-    void intra_kernel_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties>&& v);
+    const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties();
+    void intra_backend_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& v);
+    void intra_backend_segment_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>&& v);
 
     const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties() const;
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties>& archetype_group_properties();
@@ -105,7 +105,7 @@ private:
     dogen::yarn::meta_model::directory_structure_styles directory_structure_style_;
     std::string name_separator_;
     dogen::yarn::meta_model::model_segment_properties model_segment_properties_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties> intra_kernel_segment_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_group_properties> archetype_group_properties_;
 };
 

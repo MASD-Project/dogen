@@ -40,7 +40,7 @@ struct traits {
     static std::string reference();
     static std::string external_modules();
     static std::string model_modules();
-    static std::string enable_kernel_directories();
+    static std::string enable_backend_directories();
 
     struct type_parameters {
         static std::string variable_number_of_parameters();

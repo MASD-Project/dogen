@@ -18,8 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/path_contribution_types_hash.hpp"
-#include "dogen/yarn/hash/meta_model/intra_kernel_segment_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
 
 namespace {
 
@@ -29,27 +28,18 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
-    std::size_t seed(0);
-    combine(seed, v.generic_string());
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::size_t intra_kernel_segment_properties_hasher::hash(const intra_kernel_segment_properties& v) {
+std::size_t backend_properties_hasher::hash(const backend_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_filesystem_path(v.override_parent_path()));
-    combine(seed, hash_boost_filesystem_path(v.path_segment()));
-    combine(seed, v.external_modules());
-    combine(seed, v.model_modules());
-    combine(seed, v.internal_modules());
-    combine(seed, v.facet());
+    combine(seed, v.enabled());
+    combine(seed, v.directory());
+    combine(seed, v.force_backend_directory());
 
     return seed;
 }

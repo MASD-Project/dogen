@@ -57,13 +57,14 @@ public:
 
 public:
     /**
-     * @brief Returns the identity of this kernel.
+     * @brief Returns the identity of this transform.
      */
     virtual std::string id() const = 0;
 
     /**
      * @brief All archetype locations for the archetypes owned by this
-     * kernel, listing all available kernels, facets and archetypes.
+     * transform, listing all available backends, facets and
+     * archetypes.
      */
     virtual std::forward_list<annotations::archetype_location>
     archetype_locations() const = 0;
@@ -76,15 +77,16 @@ public:
     archetype_locations_by_meta_name() const = 0;
 
     /**
-     * @brief Language supported by this kernel.
+     * @brief Language supported by this transform.
      */
     virtual yarn::meta_model::languages language() const = 0;
 
     /**
-     * @brief Generates the source code for the kernel.
+     * @brief Generates the text model representation for this
+     * transform.
      */
     virtual meta_model::text_model
-    transform(const context& ctx, const bool requires_kernel_directory,
+    transform(const context& ctx, const bool requires_backend_directory,
         const meta_model::model& m) const = 0;
 };
 

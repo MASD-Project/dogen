@@ -50,7 +50,7 @@ std::ostream& operator<<(std::ostream& s, const global_enablement_configuration&
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::transforms::global_enablement_configuration\"" << ", "
-      << "\"kernel_enabled\": " << v.kernel_enabled() << ", "
+      << "\"backend_enabled\": " << v.backend_enabled() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "

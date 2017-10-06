@@ -23,7 +23,7 @@
 #include "dogen/yarn/test_data/meta_model/model_segment_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/archetype_group_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/directory_structure_styles_td.hpp"
-#include "dogen/yarn/test_data/meta_model/intra_kernel_segment_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
 
 namespace {
 
@@ -43,15 +43,15 @@ create_dogen_yarn_meta_model_model_segment_properties(const unsigned int positio
     return dogen::yarn::meta_model::model_segment_properties_generator::create(position);
 }
 
-dogen::yarn::meta_model::intra_kernel_segment_properties
-create_dogen_yarn_meta_model_intra_kernel_segment_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::intra_kernel_segment_properties_generator::create(position);
+dogen::yarn::meta_model::intra_backend_segment_properties
+create_dogen_yarn_meta_model_intra_backend_segment_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::intra_backend_segment_properties_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_intra_kernel_segment_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::meta_model::intra_kernel_segment_properties> r;
+std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_intra_backend_segment_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_intra_kernel_segment_properties(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_intra_backend_segment_properties(position + i)));
     }
     return r;
 }
@@ -82,7 +82,7 @@ populate(const unsigned int position, result_type& v) {
     v.directory_structure_style(create_dogen_yarn_meta_model_directory_structure_styles(position + 0));
     v.name_separator(create_std_string(position + 1));
     v.model_segment_properties(create_dogen_yarn_meta_model_model_segment_properties(position + 2));
-    v.intra_kernel_segment_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_intra_kernel_segment_properties(position + 3));
+    v.intra_backend_segment_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_intra_backend_segment_properties(position + 3));
     v.archetype_group_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_group_properties(position + 4));
 }
 

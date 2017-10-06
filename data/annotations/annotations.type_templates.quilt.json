@@ -13,8 +13,8 @@
   },
   {
     "name": {
-      "simple": "enable_kernel_directories",
-      "qualified": "quilt.enable_kernel_directories"
+      "simple": "enable_backend_directories",
+      "qualified": "quilt.enable_backend_directories"
     },
     "archetype_location": {
       "family": "quilt"

@@ -62,7 +62,7 @@
 #include "dogen/yarn/hash/helpers/decomposition_result_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/hash/meta_model/formatting_styles_hash.hpp"
-#include "dogen/yarn/hash/meta_model/kernel_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/locator_properties_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_set_repository_hash.hpp"
@@ -83,7 +83,7 @@
 #include "dogen/yarn/hash/meta_model/directory_structure_styles_hash.hpp"
 #include "dogen/yarn/hash/meta_model/archetype_location_properties_hash.hpp"
 #include "dogen/yarn/hash/transforms/local_enablement_configuration_hash.hpp"
-#include "dogen/yarn/hash/meta_model/intra_kernel_segment_properties_hash.hpp"
 #include "dogen/yarn/hash/transforms/global_enablement_configuration_hash.hpp"
+#include "dogen/yarn/hash/meta_model/intra_backend_segment_properties_hash.hpp"
 
 #endif

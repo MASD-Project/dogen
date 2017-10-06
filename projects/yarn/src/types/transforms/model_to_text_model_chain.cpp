@@ -56,21 +56,21 @@ make_type_group(const annotations::type_repository& atrp,
     type_group r;
 
     const annotations::type_repository_selector rs(atrp);
-    const auto ekd(traits::enable_kernel_directories());
-    r.enable_kernel_directories = rs.select_type_by_name(ekd);
+    const auto ekd(traits::enable_backend_directories());
+    r.enable_backend_directories = rs.select_type_by_name(ekd);
 
     const auto en(traits::enabled());
     for (const auto al : als) {
         type_group tg;
-        const auto kernel(al.kernel());
-        r.enabled.push_back(rs.select_type_by_name(kernel, en));
+        const auto backend(al.kernel());
+        r.enabled.push_back(rs.select_type_by_name(backend, en));
     }
 
     return r;
 }
 
 std::unordered_set<std::string>
-model_to_text_model_chain::obtain_enabled_kernels(const type_group& tg,
+model_to_text_model_chain::obtain_enabled_backends(const type_group& tg,
     const annotations::annotation& ra) {
 
     std::unordered_set<std::string> r;
@@ -86,10 +86,10 @@ model_to_text_model_chain::obtain_enabled_kernels(const type_group& tg,
     return r;
 }
 
-bool model_to_text_model_chain::obtain_enable_kernel_directories(
+bool model_to_text_model_chain::obtain_enable_backend_directories(
     const type_group& tg, const annotations::annotation& ra) {
     const annotations::entry_selector s(ra);
-    return s.get_boolean_content_or_default(tg.enable_kernel_directories);
+    return s.get_boolean_content_or_default(tg.enable_backend_directories);
 }
 
 configuration model_to_text_model_chain::make_configuration(
@@ -98,14 +98,14 @@ configuration model_to_text_model_chain::make_configuration(
 
     configuration r;
     const auto tg(make_type_group(ctx.type_repository(), als));
-    r.enabled_kernels(obtain_enabled_kernels(tg, ra));
-    if (r.enabled_kernels().size() > 1) {
-        BOOST_LOG_SEV(lg, warn) << "More than one kernel is enabled: "
-                                << r.enabled_kernels().size()
-                                << ". Forcing enable_kernel_directories.";
-        r.enable_kernel_directories(true);
+    r.enabled_backends(obtain_enabled_backends(tg, ra));
+    if (r.enabled_backends().size() > 1) {
+        BOOST_LOG_SEV(lg, warn) << "More than one backend is enabled: "
+                                << r.enabled_backends().size()
+                                << ". Forcing enable_backend_directories.";
+        r.enable_backend_directories(true);
     } else
-        r.enable_kernel_directories(obtain_enable_kernel_directories(tg, ra));
+        r.enable_backend_directories(obtain_enable_backend_directories(tg, ra));
 
     return r;
 }
@@ -161,14 +161,14 @@ transform(const context& ctx, const meta_model::model& m) {
     /*
      * Ensure the transform for the requested language is marked as
      * enabled. If it is disabled, the user has requested conflicting
-     * options - output on language X but disable kernel for language
+     * options - output on language X but disable backend for language
      * X - so we need to throw to let it know.
      */
     const auto& ra(m.root_module()->annotation());
     const auto& alrp(ctx.archetype_location_repository());
     const auto& als(alrp.archetype_locations());
     const auto cfg(make_configuration(ctx, als, ra));
-    const auto& ek(cfg.enabled_kernels());
+    const auto& ek(cfg.enabled_backends());
     const auto is_enabled(ek.find(id) != ek.end());
     if (!is_enabled) {
         BOOST_LOG_SEV(lg, error) << disabled_transform << t.id();
@@ -178,7 +178,7 @@ transform(const context& ctx, const meta_model::model& m) {
     /*
      * Generate artefacts for all elements in model.
      */
-    const bool ekd(cfg.enable_kernel_directories());
+    const bool ekd(cfg.enable_backend_directories());
     auto r(t.transform(ctx, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
                              << ". Total files: "

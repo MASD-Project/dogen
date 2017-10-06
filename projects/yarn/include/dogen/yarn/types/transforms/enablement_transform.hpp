@@ -40,7 +40,7 @@ namespace transforms {
 class enablement_transform final {
 private:
     struct global_type_group {
-        annotations::type kernel_enabled;
+        annotations::type backend_enabled;
         annotations::type facet_enabled;
         annotations::type archetype_enabled;
         annotations::type facet_overwrite;

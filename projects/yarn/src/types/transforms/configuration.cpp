@@ -25,23 +25,23 @@ namespace yarn {
 namespace transforms {
 
 configuration::configuration()
-    : enable_kernel_directories_(static_cast<bool>(0)) { }
+    : enable_backend_directories_(static_cast<bool>(0)) { }
 
 configuration::configuration(
-    const std::unordered_set<std::string>& enabled_kernels,
-    const bool enable_kernel_directories)
-    : enabled_kernels_(enabled_kernels),
-      enable_kernel_directories_(enable_kernel_directories) { }
+    const std::unordered_set<std::string>& enabled_backends,
+    const bool enable_backend_directories)
+    : enabled_backends_(enabled_backends),
+      enable_backend_directories_(enable_backend_directories) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
-    swap(enabled_kernels_, other.enabled_kernels_);
-    swap(enable_kernel_directories_, other.enable_kernel_directories_);
+    swap(enabled_backends_, other.enabled_backends_);
+    swap(enable_backend_directories_, other.enable_backend_directories_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
-    return enabled_kernels_ == rhs.enabled_kernels_ &&
-        enable_kernel_directories_ == rhs.enable_kernel_directories_;
+    return enabled_backends_ == rhs.enabled_backends_ &&
+        enable_backend_directories_ == rhs.enable_backend_directories_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -50,28 +50,28 @@ configuration& configuration::operator=(configuration other) {
     return *this;
 }
 
-const std::unordered_set<std::string>& configuration::enabled_kernels() const {
-    return enabled_kernels_;
+const std::unordered_set<std::string>& configuration::enabled_backends() const {
+    return enabled_backends_;
 }
 
-std::unordered_set<std::string>& configuration::enabled_kernels() {
-    return enabled_kernels_;
+std::unordered_set<std::string>& configuration::enabled_backends() {
+    return enabled_backends_;
 }
 
-void configuration::enabled_kernels(const std::unordered_set<std::string>& v) {
-    enabled_kernels_ = v;
+void configuration::enabled_backends(const std::unordered_set<std::string>& v) {
+    enabled_backends_ = v;
 }
 
-void configuration::enabled_kernels(const std::unordered_set<std::string>&& v) {
-    enabled_kernels_ = std::move(v);
+void configuration::enabled_backends(const std::unordered_set<std::string>&& v) {
+    enabled_backends_ = std::move(v);
 }
 
-bool configuration::enable_kernel_directories() const {
-    return enable_kernel_directories_;
+bool configuration::enable_backend_directories() const {
+    return enable_backend_directories_;
 }
 
-void configuration::enable_kernel_directories(const bool v) {
-    enable_kernel_directories_ = v;
+void configuration::enable_backend_directories(const bool v) {
+    enable_backend_directories_ = v;
 }
 
 } } }

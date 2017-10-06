@@ -65,7 +65,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     }
 
     /*
-     * Obtain the kernel registrar and ensure it has been setup.
+     * Obtain the transform registrar and ensure it has been setup.
      */
     const auto& rg(model_to_text_model_chain::registrar());
     if (enable_validation)

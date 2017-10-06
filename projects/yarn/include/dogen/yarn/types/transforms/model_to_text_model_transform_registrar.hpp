@@ -39,7 +39,8 @@ namespace yarn {
 namespace transforms {
 
 /**
- * @brief Keeps track of all the available kernels.
+ * @brief Keeps track of all the available model to text model
+ * transforms. These are implemented by language-specific backends.
  */
 class model_to_text_model_transform_registrar {
 public:
@@ -57,14 +58,14 @@ public:
 
 public:
     /**
-     * @brief Returns the kernel for the supplied language, if any
+     * @brief Returns the transform for the supplied language, if any
      * exists. Otherwise returns a null shared pointer.
      */
     std::shared_ptr<model_to_text_model_transform_interface>
     transform_for_language(const yarn::meta_model::languages l) const;
 
     /**
-     * @brief Returns all available kernels, by language.
+     * @brief Returns all available transforms, by language.
      */
     const std::unordered_map<
         yarn::meta_model::languages,

@@ -78,7 +78,7 @@ inline std::ostream& operator<<(std::ostream& s,
     s << " { "
       << "\"__type__\": " << "\"yarn::transform::"
       << "enablement_transform::global_type_group\"" << ", "
-      << "\"kernel_enabled\": " << v.kernel_enabled << ", "
+      << "\"backend_enabled\": " << v.backend_enabled << ", "
       << "\"facet_enabled\": " << v.facet_enabled << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled
       << " }";
@@ -111,7 +111,7 @@ make_global_type_group(const annotations::type_repository& atrp,
     for (const auto& al : als) {
         global_type_group gtg;
         const auto ebl(traits::enabled());
-        gtg.kernel_enabled = s.select_type_by_name(al.kernel(), ebl);
+        gtg.backend_enabled = s.select_type_by_name(al.kernel(), ebl);
         gtg.facet_enabled = s.select_type_by_name(al.facet(), ebl);
         gtg.archetype_enabled = s.select_type_by_name(al.archetype(), ebl);
 
@@ -140,7 +140,7 @@ enablement_transform::obtain_global_configurations(
         const auto& t(pair.second);
 
         global_enablement_configuration gec;
-        gec.kernel_enabled(s.get_boolean_content_or_default(t.kernel_enabled));
+        gec.backend_enabled(s.get_boolean_content_or_default(t.backend_enabled));
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
         gec.archetype_enabled(
             s.get_boolean_content_or_default(t.archetype_enabled));
@@ -408,10 +408,10 @@ void enablement_transform::compute_enablement_for_artefact_properties(
         ap.overwrite(gc.facet_overwrite());
 
     /*
-     * If either the entire kernel or facet have been disabled
+     * If either the entire backend or facet have been disabled
      * globally, the formatter will be disabled too.
      */
-    if (!gc.kernel_enabled() || !gc.facet_enabled()) {
+    if (!gc.backend_enabled() || !gc.facet_enabled()) {
         ap.enabled(false);
         return;
     }

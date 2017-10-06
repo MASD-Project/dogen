@@ -19,34 +19,22 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/kernel_properties_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen/yarn/io/meta_model/path_contribution_types_io.hpp"
+#include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const kernel_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const intra_backend_segment_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::kernel_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
-      << "\"force_kernel_directory\": " << v.force_kernel_directory()
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::intra_backend_segment_properties\"" << ", "
+      << "\"override_parent_path\": " << "\"" << v.override_parent_path().generic_string() << "\"" << ", "
+      << "\"path_segment\": " << "\"" << v.path_segment().generic_string() << "\"" << ", "
+      << "\"external_modules\": " << v.external_modules() << ", "
+      << "\"model_modules\": " << v.model_modules() << ", "
+      << "\"internal_modules\": " << v.internal_modules() << ", "
+      << "\"facet\": " << v.facet()
       << " }";
     return(s);
 }

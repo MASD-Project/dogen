@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_KERNEL_PROPERTIES_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_KERNEL_PROPERTIES_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_BACKEND_PROPERTIES_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_BACKEND_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,40 +27,40 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/serialization/meta_model/kernel_properties_fwd_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/backend_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
 /**
- * @brief Properties related to the kernel.
+ * @brief Properties related to the backend.
  */
-class kernel_properties final {
+class backend_properties final {
 public:
-    kernel_properties(const kernel_properties&) = default;
-    kernel_properties(kernel_properties&&) = default;
-    ~kernel_properties() = default;
+    backend_properties(const backend_properties&) = default;
+    backend_properties(backend_properties&&) = default;
+    ~backend_properties() = default;
 
 public:
-    kernel_properties();
+    backend_properties();
 
 public:
-    kernel_properties(
+    backend_properties(
         const bool enabled,
         const std::string& directory,
-        const bool force_kernel_directory);
+        const bool force_backend_directory);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::kernel_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::backend_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::kernel_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::backend_properties& v, unsigned int version);
 
 public:
     /**
-     * @brief If true, this kernel is enabled.
+     * @brief If true, this backend is enabled.
      */
     /**@{*/
     bool enabled() const;
@@ -68,7 +68,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Kernel specific directory name, if any.
+     * @brief Backend specific directory name, if any.
      */
     /**@{*/
     const std::string& directory() const;
@@ -78,28 +78,28 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the kernel directory will be expressed, even when there is only one kernel
-     * enabled.
+     * @brief If true, the backend directory will be expressed, even when there is only one
+     * backend enabled.
      */
     /**@{*/
-    bool force_kernel_directory() const;
-    void force_kernel_directory(const bool v);
+    bool force_backend_directory() const;
+    void force_backend_directory(const bool v);
     /**@}*/
 
 public:
-    bool operator==(const kernel_properties& rhs) const;
-    bool operator!=(const kernel_properties& rhs) const {
+    bool operator==(const backend_properties& rhs) const;
+    bool operator!=(const backend_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(kernel_properties& other) noexcept;
-    kernel_properties& operator=(kernel_properties other);
+    void swap(backend_properties& other) noexcept;
+    backend_properties& operator=(backend_properties other);
 
 private:
     bool enabled_;
     std::string directory_;
-    bool force_kernel_directory_;
+    bool force_backend_directory_;
 };
 
 } } }
@@ -108,8 +108,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::meta_model::kernel_properties& lhs,
-    dogen::yarn::meta_model::kernel_properties& rhs) {
+    dogen::yarn::meta_model::backend_properties& lhs,
+    dogen::yarn::meta_model::backend_properties& rhs) {
     lhs.swap(rhs);
 }
 

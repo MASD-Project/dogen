@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,25 +28,25 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/meta_model/path_contribution_types.hpp"
-#include "dogen/yarn/serialization/meta_model/intra_kernel_segment_properties_fwd_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class intra_kernel_segment_properties final {
+class intra_backend_segment_properties final {
 public:
-    intra_kernel_segment_properties(const intra_kernel_segment_properties&) = default;
-    ~intra_kernel_segment_properties() = default;
+    intra_backend_segment_properties(const intra_backend_segment_properties&) = default;
+    ~intra_backend_segment_properties() = default;
 
 public:
-    intra_kernel_segment_properties();
+    intra_backend_segment_properties();
 
 public:
-    intra_kernel_segment_properties(intra_kernel_segment_properties&& rhs);
+    intra_backend_segment_properties(intra_backend_segment_properties&& rhs);
 
 public:
-    intra_kernel_segment_properties(
+    intra_backend_segment_properties(
         const boost::filesystem::path& override_parent_path,
         const boost::filesystem::path& path_segment,
         const dogen::yarn::meta_model::path_contribution_types external_modules,
@@ -56,10 +56,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::intra_kernel_segment_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::intra_backend_segment_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::intra_kernel_segment_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::intra_backend_segment_properties& v, unsigned int version);
 
 public:
     /**
@@ -76,7 +76,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Path segment to use for this intra-kernel segment.
+     * @brief Path segment to use for this intra-backend segment.
      */
     /**@{*/
     const boost::filesystem::path& path_segment() const;
@@ -118,14 +118,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const intra_kernel_segment_properties& rhs) const;
-    bool operator!=(const intra_kernel_segment_properties& rhs) const {
+    bool operator==(const intra_backend_segment_properties& rhs) const;
+    bool operator!=(const intra_backend_segment_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(intra_kernel_segment_properties& other) noexcept;
-    intra_kernel_segment_properties& operator=(intra_kernel_segment_properties other);
+    void swap(intra_backend_segment_properties& other) noexcept;
+    intra_backend_segment_properties& operator=(intra_backend_segment_properties other);
 
 private:
     boost::filesystem::path override_parent_path_;
@@ -142,8 +142,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::meta_model::intra_kernel_segment_properties& lhs,
-    dogen::yarn::meta_model::intra_kernel_segment_properties& rhs) {
+    dogen::yarn::meta_model::intra_backend_segment_properties& lhs,
+    dogen::yarn::meta_model::intra_backend_segment_properties& rhs) {
     lhs.swap(rhs);
 }
 

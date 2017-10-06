@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/meta_model/path_contribution_types_td.hpp"
-#include "dogen/yarn/test_data/meta_model/intra_kernel_segment_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
 
 namespace {
 
@@ -42,9 +42,9 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-intra_kernel_segment_properties_generator::intra_kernel_segment_properties_generator() : position_(0) { }
+intra_backend_segment_properties_generator::intra_backend_segment_properties_generator() : position_(0) { }
 
-void intra_kernel_segment_properties_generator::
+void intra_backend_segment_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.override_parent_path(create_boost_filesystem_path(position + 0));
     v.path_segment(create_boost_filesystem_path(position + 1));
@@ -54,22 +54,22 @@ populate(const unsigned int position, result_type& v) {
     v.facet(create_dogen_yarn_meta_model_path_contribution_types(position + 5));
 }
 
-intra_kernel_segment_properties_generator::result_type
-intra_kernel_segment_properties_generator::create(const unsigned int position) {
-    intra_kernel_segment_properties r;
-    intra_kernel_segment_properties_generator::populate(position, r);
+intra_backend_segment_properties_generator::result_type
+intra_backend_segment_properties_generator::create(const unsigned int position) {
+    intra_backend_segment_properties r;
+    intra_backend_segment_properties_generator::populate(position, r);
     return r;
 }
 
-intra_kernel_segment_properties_generator::result_type*
-intra_kernel_segment_properties_generator::create_ptr(const unsigned int position) {
-    intra_kernel_segment_properties* p = new intra_kernel_segment_properties();
-    intra_kernel_segment_properties_generator::populate(position, *p);
+intra_backend_segment_properties_generator::result_type*
+intra_backend_segment_properties_generator::create_ptr(const unsigned int position) {
+    intra_backend_segment_properties* p = new intra_backend_segment_properties();
+    intra_backend_segment_properties_generator::populate(position, *p);
     return p;
 }
 
-intra_kernel_segment_properties_generator::result_type
-intra_kernel_segment_properties_generator::operator()() {
+intra_backend_segment_properties_generator::result_type
+intra_backend_segment_properties_generator::operator()() {
     return create(position_++);
 }
 

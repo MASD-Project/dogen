@@ -25,25 +25,25 @@ namespace yarn {
 namespace transforms {
 
 global_enablement_configuration::global_enablement_configuration()
-    : kernel_enabled_(static_cast<bool>(0)),
+    : backend_enabled_(static_cast<bool>(0)),
       facet_enabled_(static_cast<bool>(0)),
       archetype_enabled_(static_cast<bool>(0)),
       facet_overwrite_(static_cast<bool>(0)) { }
 
 global_enablement_configuration::global_enablement_configuration(global_enablement_configuration&& rhs)
-    : kernel_enabled_(std::move(rhs.kernel_enabled_)),
+    : backend_enabled_(std::move(rhs.backend_enabled_)),
       facet_enabled_(std::move(rhs.facet_enabled_)),
       archetype_enabled_(std::move(rhs.archetype_enabled_)),
       facet_overwrite_(std::move(rhs.facet_overwrite_)),
       archetype_overwrite_(std::move(rhs.archetype_overwrite_)) { }
 
 global_enablement_configuration::global_enablement_configuration(
-    const bool kernel_enabled,
+    const bool backend_enabled,
     const bool facet_enabled,
     const bool archetype_enabled,
     const bool facet_overwrite,
     const boost::optional<bool>& archetype_overwrite)
-    : kernel_enabled_(kernel_enabled),
+    : backend_enabled_(backend_enabled),
       facet_enabled_(facet_enabled),
       archetype_enabled_(archetype_enabled),
       facet_overwrite_(facet_overwrite),
@@ -51,7 +51,7 @@ global_enablement_configuration::global_enablement_configuration(
 
 void global_enablement_configuration::swap(global_enablement_configuration& other) noexcept {
     using std::swap;
-    swap(kernel_enabled_, other.kernel_enabled_);
+    swap(backend_enabled_, other.backend_enabled_);
     swap(facet_enabled_, other.facet_enabled_);
     swap(archetype_enabled_, other.archetype_enabled_);
     swap(facet_overwrite_, other.facet_overwrite_);
@@ -59,7 +59,7 @@ void global_enablement_configuration::swap(global_enablement_configuration& othe
 }
 
 bool global_enablement_configuration::operator==(const global_enablement_configuration& rhs) const {
-    return kernel_enabled_ == rhs.kernel_enabled_ &&
+    return backend_enabled_ == rhs.backend_enabled_ &&
         facet_enabled_ == rhs.facet_enabled_ &&
         archetype_enabled_ == rhs.archetype_enabled_ &&
         facet_overwrite_ == rhs.facet_overwrite_ &&
@@ -72,12 +72,12 @@ global_enablement_configuration& global_enablement_configuration::operator=(glob
     return *this;
 }
 
-bool global_enablement_configuration::kernel_enabled() const {
-    return kernel_enabled_;
+bool global_enablement_configuration::backend_enabled() const {
+    return backend_enabled_;
 }
 
-void global_enablement_configuration::kernel_enabled(const bool v) {
-    kernel_enabled_ = v;
+void global_enablement_configuration::backend_enabled(const bool v) {
+    backend_enabled_ = v;
 }
 
 bool global_enablement_configuration::facet_enabled() const {

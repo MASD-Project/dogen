@@ -44,17 +44,17 @@ namespace transforms {
 class model_to_text_model_chain final {
 private:
     struct type_group {
-        annotations::type enable_kernel_directories;
+        annotations::type enable_backend_directories;
         std::list<annotations::type> enabled;
     };
 
     static type_group make_type_group(const annotations::type_repository& atrp,
         const std::list<annotations::archetype_location>& als);
 
-    static std::unordered_set<std::string> obtain_enabled_kernels(
+    static std::unordered_set<std::string> obtain_enabled_backends(
         const type_group& tg, const annotations::annotation& ra);
 
-    static bool obtain_enable_kernel_directories(const type_group& tg,
+    static bool obtain_enable_backend_directories(const type_group& tg,
         const annotations::annotation& ra);
 
     static configuration make_configuration(const context& ctx,

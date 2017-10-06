@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_INTRA_KERNEL_SEGMENT_PROPERTIES_FWD_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/intra_kernel_segment_properties_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::meta_model::intra_backend_segment_properties)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::yarn::meta_model::intra_kernel_segment_properties& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::meta_model::intra_backend_segment_properties& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::yarn::meta_model::intra_kernel_segment_properties& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::meta_model::intra_backend_segment_properties& v, unsigned int version);
 
 } }
 

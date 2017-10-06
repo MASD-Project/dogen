@@ -62,7 +62,7 @@
 #include "dogen/yarn/serialization/helpers/decomposition_result_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/formatting_styles_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/kernel_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/locator_properties_ser.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_set_repository_ser.hpp"
@@ -83,7 +83,7 @@
 #include "dogen/yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_location_properties_ser.hpp"
 #include "dogen/yarn/serialization/transforms/local_enablement_configuration_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/intra_kernel_segment_properties_ser.hpp"
 #include "dogen/yarn/serialization/transforms/global_enablement_configuration_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
 
 #endif

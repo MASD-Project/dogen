@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/kernel_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/backend_properties_td.hpp"
 
 namespace {
 
@@ -39,31 +39,31 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-kernel_properties_generator::kernel_properties_generator() : position_(0) { }
+backend_properties_generator::backend_properties_generator() : position_(0) { }
 
-void kernel_properties_generator::
+void backend_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.directory(create_std_string(position + 1));
-    v.force_kernel_directory(create_bool(position + 2));
+    v.force_backend_directory(create_bool(position + 2));
 }
 
-kernel_properties_generator::result_type
-kernel_properties_generator::create(const unsigned int position) {
-    kernel_properties r;
-    kernel_properties_generator::populate(position, r);
+backend_properties_generator::result_type
+backend_properties_generator::create(const unsigned int position) {
+    backend_properties r;
+    backend_properties_generator::populate(position, r);
     return r;
 }
 
-kernel_properties_generator::result_type*
-kernel_properties_generator::create_ptr(const unsigned int position) {
-    kernel_properties* p = new kernel_properties();
-    kernel_properties_generator::populate(position, *p);
+backend_properties_generator::result_type*
+backend_properties_generator::create_ptr(const unsigned int position) {
+    backend_properties* p = new backend_properties();
+    backend_properties_generator::populate(position, *p);
     return p;
 }
 
-kernel_properties_generator::result_type
-kernel_properties_generator::operator()() {
+backend_properties_generator::result_type
+backend_properties_generator::operator()() {
     return create(position_++);
 }
 

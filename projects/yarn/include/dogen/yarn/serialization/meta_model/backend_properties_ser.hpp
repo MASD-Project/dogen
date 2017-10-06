@@ -18,37 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_META_MODEL_KERNEL_PROPERTIES_TD_HPP
-#define DOGEN_YARN_TEST_DATA_META_MODEL_KERNEL_PROPERTIES_TD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_BACKEND_PROPERTIES_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_BACKEND_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/kernel_properties.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/meta_model/backend_properties.hpp"
 
-namespace dogen {
-namespace yarn {
-namespace meta_model {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::meta_model::backend_properties)
+namespace boost {
+namespace serialization {
 
-class kernel_properties_generator {
-public:
-    kernel_properties_generator();
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::meta_model::backend_properties& v, unsigned int version);
 
-public:
-    typedef dogen::yarn::meta_model::kernel_properties result_type;
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::meta_model::backend_properties& v, unsigned int version);
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} } }
+} }
 
 #endif

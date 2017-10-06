@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/kernel_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/archetype_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/archetype_location_properties_io.hpp"
 
@@ -71,7 +71,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -96,7 +96,7 @@ std::ostream& operator<<(std::ostream& s, const archetype_location_properties& v
       << "\"__type__\": " << "\"dogen::yarn::meta_model::archetype_location_properties\"" << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"archetype_properties\": " << v.archetype_properties() << ", "
-      << "\"kernel_properties\": " << v.kernel_properties()
+      << "\"backend_properties\": " << v.backend_properties()
       << " }";
     return(s);
 }

@@ -45,8 +45,8 @@ public:
 
 public:
     configuration(
-        const std::unordered_set<std::string>& enabled_kernels,
-        const bool enable_kernel_directories);
+        const std::unordered_set<std::string>& enabled_backends,
+        const bool enable_backend_directories);
 
 private:
     template<typename Archive>
@@ -56,13 +56,13 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::configuration& v, unsigned int version);
 
 public:
-    const std::unordered_set<std::string>& enabled_kernels() const;
-    std::unordered_set<std::string>& enabled_kernels();
-    void enabled_kernels(const std::unordered_set<std::string>& v);
-    void enabled_kernels(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<std::string>& enabled_backends() const;
+    std::unordered_set<std::string>& enabled_backends();
+    void enabled_backends(const std::unordered_set<std::string>& v);
+    void enabled_backends(const std::unordered_set<std::string>&& v);
 
-    bool enable_kernel_directories() const;
-    void enable_kernel_directories(const bool v);
+    bool enable_backend_directories() const;
+    void enable_backend_directories(const bool v);
 
 public:
     bool operator==(const configuration& rhs) const;
@@ -75,8 +75,8 @@ public:
     configuration& operator=(configuration other);
 
 private:
-    std::unordered_set<std::string> enabled_kernels_;
-    bool enable_kernel_directories_;
+    std::unordered_set<std::string> enabled_backends_;
+    bool enable_backend_directories_;
 };
 
 } } }

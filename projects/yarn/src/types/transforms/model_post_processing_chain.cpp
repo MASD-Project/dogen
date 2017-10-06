@@ -50,7 +50,7 @@ transform(const context& ctx, meta_model::model& m) {
         transform_id, m.name().id(), ctx.prober(), m);
 
     /*
-     * Perform dynamic expansion first. These are kernel specific.
+     * Perform dynamic expansion first. These are backend specific.
      */
     dynamic_transforms_chain::transform(ctx, m);
 
@@ -77,7 +77,7 @@ transform(const context& ctx, meta_model::model& m) {
     /*
      * Enablement transform must be applied after the dynamic
      * transform chain as it needs to compute enablement for any
-     * kernel specific types that might have been added.
+     * backend specific types that might have been added.
      */
     enablement_transform::transform(ctx, m);
 

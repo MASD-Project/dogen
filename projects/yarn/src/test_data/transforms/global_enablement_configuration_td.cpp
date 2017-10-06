@@ -43,7 +43,7 @@ global_enablement_configuration_generator::global_enablement_configuration_gener
 
 void global_enablement_configuration_generator::
 populate(const unsigned int position, result_type& v) {
-    v.kernel_enabled(create_bool(position + 0));
+    v.backend_enabled(create_bool(position + 0));
     v.facet_enabled(create_bool(position + 1));
     v.archetype_enabled(create_bool(position + 2));
     v.facet_overwrite(create_bool(position + 3));

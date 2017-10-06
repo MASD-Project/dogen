@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
-#include "dogen/yarn/types/meta_model/kernel_properties.hpp"
+#include "dogen/yarn/types/meta_model/backend_properties.hpp"
 #include "dogen/yarn/types/meta_model/archetype_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_location_properties_fwd_ser.hpp"
 
@@ -48,7 +48,7 @@ public:
     archetype_location_properties(
         const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties>& kernel_properties);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties);
 
 private:
     template<typename Archive>
@@ -68,10 +68,10 @@ public:
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& v);
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties>& kernel_properties() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties>& kernel_properties();
-    void kernel_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties>& v);
-    void kernel_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties>&& v);
+    const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties();
+    void backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v);
+    void backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>&& v);
 
 public:
     bool operator==(const archetype_location_properties& rhs) const;
@@ -86,7 +86,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties> archetype_properties_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::kernel_properties> kernel_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> backend_properties_;
 };
 
 } } }

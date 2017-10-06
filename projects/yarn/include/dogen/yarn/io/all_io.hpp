@@ -62,7 +62,7 @@
 #include "dogen/yarn/io/helpers/decomposition_result_io.hpp"
 #include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
-#include "dogen/yarn/io/meta_model/kernel_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/element_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_repository_io.hpp"
@@ -83,7 +83,7 @@
 #include "dogen/yarn/io/meta_model/directory_structure_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/archetype_location_properties_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
-#include "dogen/yarn/io/meta_model/intra_kernel_segment_properties_io.hpp"
 #include "dogen/yarn/io/transforms/global_enablement_configuration_io.hpp"
+#include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
 
 #endif

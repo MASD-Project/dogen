@@ -37,7 +37,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::transforms::global_enablement_configuration& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("kernel_enabled", v.kernel_enabled_);
+    ar << make_nvp("backend_enabled", v.backend_enabled_);
     ar << make_nvp("facet_enabled", v.facet_enabled_);
     ar << make_nvp("archetype_enabled", v.archetype_enabled_);
     ar << make_nvp("facet_overwrite", v.facet_overwrite_);
@@ -48,7 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::transforms::global_enablement_configuration& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("kernel_enabled", v.kernel_enabled_);
+    ar >> make_nvp("backend_enabled", v.backend_enabled_);
     ar >> make_nvp("facet_enabled", v.facet_enabled_);
     ar >> make_nvp("archetype_enabled", v.archetype_enabled_);
     ar >> make_nvp("facet_overwrite", v.facet_overwrite_);
