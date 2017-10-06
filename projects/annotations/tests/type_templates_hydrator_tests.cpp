@@ -35,7 +35,7 @@ const std::string test_suite("type_templates_hydrator_tests");
 
 const std::string simple_name("a simple name");
 const std::string qualified_name("a qualified name");
-const std::string kernel("a kernel");
+const std::string backend("a backend");
 const std::string archetype("an archetype");
 const std::string facet("a facet");
 
@@ -46,7 +46,7 @@ const std::string trivial_type_template(R"([
             "qualified" : "a qualified name"
         },
         "archetype_location" : {
-            "kernel" : "a kernel",
+            "kernel" : "a backend",
             "archetype" : "an archetype",
             "facet" : "a facet"
         },
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
 
     BOOST_CHECK(tt.name().simple() == simple_name);
     BOOST_CHECK(tt.name().qualified() == qualified_name);
-    BOOST_CHECK(tt.archetype_location().kernel() == kernel);
+    BOOST_CHECK(tt.archetype_location().backend() == backend);
     BOOST_CHECK(tt.archetype_location().facet() == facet);
     BOOST_CHECK(tt.archetype_location().archetype() == archetype);
 

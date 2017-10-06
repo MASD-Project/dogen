@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-06 Fri 11:32]
+#+CAPTION: Clock summary at [2017-10-06 Fri 11:56]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:34* |       |      | 100.0 |
+| *Total time*                                                                | *21:58* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:34   |       |      | 100.0 |
-| Active                                                                      |         | 21:34 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  10.7 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.5 |
+| Stories                                                                     | 21:58   |       |      | 100.0 |
+| Active                                                                      |         | 21:58 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |  10.5 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.4 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.8 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   4.7 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   9.4 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   7.2 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   4.6 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   9.3 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   7.1 |
 | COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.9 |
-| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   9.7 |
+| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   9.5 |
 | COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   2.2 |
-| STARTED Create the archetype location properties                            |         |       | 3:25 |  15.8 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  30.1 |
-| STARTED Rename kernel and family                                            |         |       | 0:38 |   2.9 |
+| STARTED Create the archetype location properties                            |         |       | 3:25 |  15.6 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  29.5 |
+| STARTED Rename kernel and family                                            |         |       | 1:02 |   4.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -701,6 +701,7 @@ We should check that =enable_unique_file_names= is set to true.
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
 *** STARTED Rename kernel and family                                  :story:
+    CLOCK: [2017-10-06 Fri 11:32]--[2017-10-06 Fri 11:56] =>  0:24
     CLOCK: [2017-10-06 Fri 10:53]--[2017-10-06 Fri 11:31] =>  0:38
 
 We need to use the term "family" to signify a group of archetypes such

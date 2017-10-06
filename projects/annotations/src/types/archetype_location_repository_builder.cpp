@@ -29,7 +29,7 @@ using namespace dogen::utility::log;
 static logger
 lg(logger_factory("annotations.archetype_location_repository_builder"));
 
-const std::string empty_kernel("Kernel name cannot be empty. Archetype: ");
+const std::string empty_backend("Backend name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
 const std::string empty_archetype("Archetype name cannot be empty.");
 const std::string duplicate_archetype("Archetype name already inserted: ");
@@ -53,10 +53,10 @@ validate(const std::list<archetype_location>& als) const {
             BOOST_THROW_EXCEPTION(building_error(empty_archetype));
         }
 
-        if (al.kernel().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_kernel << al.archetype();
+        if (al.backend().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_backend << al.archetype();
             BOOST_THROW_EXCEPTION(
-                building_error(empty_kernel + al.archetype()));
+                building_error(empty_backend + al.archetype()));
         }
 
         if (al.facet().empty()) {
@@ -74,17 +74,17 @@ populate_locations(const std::list<archetype_location>& als) {
 }
 
 void archetype_location_repository_builder::
-populate_facet_names_by_kernel_name() {
+populate_facet_names_by_backend_name() {
     auto& fnbkn(repository_.facet_names_by_kernel_name());
     for (const auto& al : repository_.archetype_locations())
-        fnbkn[al.kernel()].insert(al.facet());
+        fnbkn[al.backend()].insert(al.facet());
 }
 
 void archetype_location_repository_builder::
-populate_formatter_names_by_kernel_name() {
+populate_formatter_names_by_backend_name() {
     auto& fnbkn(repository_.formatter_names_by_kernel_name());
     for (const auto& al : repository_.archetype_locations())
-        fnbkn[al.kernel()].insert(al.archetype());
+        fnbkn[al.backend()].insert(al.archetype());
 }
 
 void archetype_location_repository_builder::
@@ -105,7 +105,7 @@ add(const std::unordered_map<std::string, archetype_locations_group>&
         /*
          * We start by inserting the archetype locations into the
          * overall container with all archetype locations across all
-         * kernels.
+         * backends.
          */
         const auto& src(pair.second);
         add(src.archetype_locations());
@@ -118,7 +118,7 @@ add(const std::unordered_map<std::string, archetype_locations_group>&
 
         /*
          * We need to merge the archetype locations at the meta-type
-         * level because each kernel is reusing the same yarn
+         * level because each backend is reusing the same yarn
          * meta-types.
          */
         for (const auto& al : src.archetype_locations())
@@ -145,8 +145,8 @@ add(const std::unordered_map<std::string, archetype_locations_group>&
 
 const archetype_location_repository&
 archetype_location_repository_builder::build() {
-    populate_facet_names_by_kernel_name();
-    populate_formatter_names_by_kernel_name();
+    populate_facet_names_by_backend_name();
+    populate_formatter_names_by_backend_name();
 
     BOOST_LOG_SEV(lg, debug) << "Repository built: " << repository_;
     return repository_;

@@ -35,8 +35,8 @@ namespace annotations {
 /**
  * @brief Location of an archetype or set of archetypes in the hierarchical artchetype space.
  *
- * These must be populated in order, e.g. in order to have a kernel we must have a
- * family; in order to have a facet we must have a kernel and in order to have a
+ * These must be populated in order, e.g. in order to have a backend we must have a
+ * family; in order to have a facet we must have a backend and in order to have a
  * formatter we must have a facet. We may not have any.
  */
 class archetype_location final {
@@ -49,7 +49,7 @@ public:
 public:
     archetype_location(
         const std::string& family,
-        const std::string& kernel,
+        const std::string& backend,
         const std::string& facet,
         const std::string& archetype);
 
@@ -72,13 +72,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the kernel that owns this field, if any.
+     * @brief Name of the backend that owns this field, if any.
      */
     /**@{*/
-    const std::string& kernel() const;
-    std::string& kernel();
-    void kernel(const std::string& v);
-    void kernel(const std::string&& v);
+    const std::string& backend() const;
+    std::string& backend();
+    void backend(const std::string& v);
+    void backend(const std::string&& v);
     /**@}*/
 
     /**
@@ -113,7 +113,7 @@ public:
 
 private:
     std::string family_;
-    std::string kernel_;
+    std::string backend_;
     std::string facet_;
     std::string archetype_;
 };

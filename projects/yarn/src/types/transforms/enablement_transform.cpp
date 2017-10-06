@@ -111,7 +111,7 @@ make_global_type_group(const annotations::type_repository& atrp,
     for (const auto& al : als) {
         global_type_group gtg;
         const auto ebl(traits::enabled());
-        gtg.backend_enabled = s.select_type_by_name(al.kernel(), ebl);
+        gtg.backend_enabled = s.select_type_by_name(al.backend(), ebl);
         gtg.facet_enabled = s.select_type_by_name(al.facet(), ebl);
         gtg.archetype_enabled = s.select_type_by_name(al.archetype(), ebl);
 

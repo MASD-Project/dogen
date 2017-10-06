@@ -39,7 +39,7 @@ archetype_location_generator::archetype_location_generator() : position_(0) { }
 void archetype_location_generator::
 populate(const unsigned int position, result_type& v) {
     v.family(create_std_string(position + 0));
-    v.kernel(create_std_string(position + 1));
+    v.backend(create_std_string(position + 1));
     v.facet(create_std_string(position + 2));
     v.archetype(create_std_string(position + 3));
 }

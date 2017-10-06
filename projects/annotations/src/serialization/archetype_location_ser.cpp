@@ -38,7 +38,7 @@ void save(Archive& ar,
     const dogen::annotations::archetype_location& v,
     const unsigned int /*version*/) {
     ar << make_nvp("family", v.family_);
-    ar << make_nvp("kernel", v.kernel_);
+    ar << make_nvp("backend", v.backend_);
     ar << make_nvp("facet", v.facet_);
     ar << make_nvp("archetype", v.archetype_);
 }
@@ -48,7 +48,7 @@ void load(Archive& ar,
     dogen::annotations::archetype_location& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("family", v.family_);
-    ar >> make_nvp("kernel", v.kernel_);
+    ar >> make_nvp("backend", v.backend_);
     ar >> make_nvp("facet", v.facet_);
     ar >> make_nvp("archetype", v.archetype_);
 }

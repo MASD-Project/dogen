@@ -78,7 +78,7 @@ validate(std::shared_ptr<artefact_formatter_interface> f) const {
         BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
     }
 
-    if (al.kernel().empty()) {
+    if (al.backend().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
     }

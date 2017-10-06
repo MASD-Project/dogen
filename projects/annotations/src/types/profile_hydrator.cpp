@@ -41,14 +41,14 @@ const std::string template_kind_key("template_kind");
 const std::string name_simple_key("simple");
 const std::string name_qualified_key("qualified");
 const std::string archetype_location_key("archetype_location");
-const std::string archetype_location_kernel_key("kernel");
+const std::string archetype_location_backend_key("kernel");
 const std::string archetype_location_facet_key("facet");
 const std::string archetype_location_archetype_key("archetype");
 const std::string untyped_value_key("untyped_value");
 
 const std::string template_kind_instance("instance");
 const std::string template_kind_recursive_template("recursive_template");
-const std::string template_kind_kernel_template("kernel_template");
+const std::string template_kind_backend_template("kernel_template");
 const std::string template_kind_facet_template("facet_template");
 const std::string template_kind_archetype_template("archetype_template");
 
@@ -75,7 +75,7 @@ template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
         return template_kinds::instance;
     if (s == template_kind_recursive_template)
         return template_kinds::recursive_template;
-    if (s == template_kind_kernel_template)
+    if (s == template_kind_backend_template)
         return template_kinds::kernel_template;
     if (s == template_kind_facet_template)
         return template_kinds::facet_template;
@@ -101,7 +101,7 @@ archetype_location profile_hydrator::
 read_archetype_location(const boost::property_tree::ptree& pt) const {
     archetype_location r;
 
-    r.kernel(pt.get<std::string>(archetype_location_kernel_key, empty));
+    r.backend(pt.get<std::string>(archetype_location_backend_key, empty));
     r.facet(pt.get<std::string>(archetype_location_facet_key, empty));
     r.archetype(pt.get<std::string>(archetype_location_archetype_key, empty));
 

@@ -25,25 +25,25 @@ namespace annotations {
 
 archetype_location::archetype_location(
     const std::string& family,
-    const std::string& kernel,
+    const std::string& backend,
     const std::string& facet,
     const std::string& archetype)
     : family_(family),
-      kernel_(kernel),
+      backend_(backend),
       facet_(facet),
       archetype_(archetype) { }
 
 void archetype_location::swap(archetype_location& other) noexcept {
     using std::swap;
     swap(family_, other.family_);
-    swap(kernel_, other.kernel_);
+    swap(backend_, other.backend_);
     swap(facet_, other.facet_);
     swap(archetype_, other.archetype_);
 }
 
 bool archetype_location::operator==(const archetype_location& rhs) const {
     return family_ == rhs.family_ &&
-        kernel_ == rhs.kernel_ &&
+        backend_ == rhs.backend_ &&
         facet_ == rhs.facet_ &&
         archetype_ == rhs.archetype_;
 }
@@ -70,20 +70,20 @@ void archetype_location::family(const std::string&& v) {
     family_ = std::move(v);
 }
 
-const std::string& archetype_location::kernel() const {
-    return kernel_;
+const std::string& archetype_location::backend() const {
+    return backend_;
 }
 
-std::string& archetype_location::kernel() {
-    return kernel_;
+std::string& archetype_location::backend() {
+    return backend_;
 }
 
-void archetype_location::kernel(const std::string& v) {
-    kernel_ = v;
+void archetype_location::backend(const std::string& v) {
+    backend_ = v;
 }
 
-void archetype_location::kernel(const std::string&& v) {
-    kernel_ = std::move(v);
+void archetype_location::backend(const std::string&& v) {
+    backend_ = std::move(v);
 }
 
 const std::string& archetype_location::facet() const {

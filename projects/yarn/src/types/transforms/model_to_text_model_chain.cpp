@@ -62,7 +62,7 @@ make_type_group(const annotations::type_repository& atrp,
     const auto en(traits::enabled());
     for (const auto al : als) {
         type_group tg;
-        const auto backend(al.kernel());
+        const auto backend(al.backend());
         r.enabled.push_back(rs.select_type_by_name(backend, en));
     }
 
@@ -80,7 +80,7 @@ model_to_text_model_chain::obtain_enabled_backends(const type_group& tg,
         if (!enabled)
             continue;
 
-        r.insert(t.archetype_location().kernel());
+        r.insert(t.archetype_location().backend());
     }
 
     return r;

@@ -553,7 +553,7 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="153.907,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.058,-60.05;163.995,-49.95"/>
+        <dia:rectangle val="153.057,-60.05;163.995,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2501,8 +2501,8 @@ content of entries.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Location of an archetype or set of archetypes in the hierarchical artchetype space.
 
-These must be populated in order, e.g. in order to have a kernel we must have a
-family; in order to have a facet we must have a kernel and in order to have a
+These must be populated in order, e.g. in order to have a backend we must have a
+family; in order to have a facet we must have a backend and in order to have a
 formatter we must have a facet. We may not have any.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -2609,7 +2609,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#kernel#</dia:string>
+            <dia:string>#backend#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -2618,7 +2618,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Name of the kernel that owns this field, if any.#</dia:string>
+            <dia:string>#Name of the backend that owns this field, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8721,7 +8721,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.9946,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.128,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8729,8 +8729,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.046,-50"/>
-        <dia:point val="22.1786,-45.0502"/>
+        <dia:point val="22.1786,-50"/>
+        <dia:point val="22.2399,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9644,7 +9644,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="68.23,-38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.48,-41.3999;100.578,-31.95"/>
+        <dia:rectangle val="67.48,-41.3999;100.577,-31.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11679,7 +11679,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="153.907,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.058,-60.05;180.695,-49.95"/>
+        <dia:rectangle val="153.057,-60.05;180.695,-49.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

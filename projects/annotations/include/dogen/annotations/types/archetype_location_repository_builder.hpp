@@ -37,8 +37,8 @@ class archetype_location_repository_builder final {
 private:
     void validate(const std::list<archetype_location>& als) const;
     void populate_locations(const std::list<archetype_location>& als);
-    void populate_facet_names_by_kernel_name();
-    void populate_formatter_names_by_kernel_name();
+    void populate_facet_names_by_backend_name();
+    void populate_formatter_names_by_backend_name();
 
 public:
     void add(const std::list<archetype_location>& als);

@@ -113,7 +113,7 @@ void template_instantiator::validate(const archetype_location& al,
     if (tk == template_kinds::recursive_template) {
         /*
          * At present our recursive templates are limited to starting
-         * at the family or kernel kernel level. Ensure the user is
+         * at the family or backend backend level. Ensure the user is
          * not trying to start at the facet or archetype level.
          */
         if (!al.facet().empty()) {
@@ -190,11 +190,11 @@ template_instantiator::to_value(const type_repository& trp,
 bool template_instantiator::
 is_match(const std::string& lhs, const std::string& rhs) const {
     /*
-     * We match at the kernel or facet level for one of two possible
+     * We match at the backend or facet level for one of two possible
      * cases: either the template has specifically requested a
-     * kernel/facet - in which case we just want the items for that
-     * kernel/facet, and all others can be ignored - or the template
-     * requested an expansion across all kernels/facets.
+     * backend/facet - in which case we just want the items for that
+     * backend/facet, and all others can be ignored - or the template
+     * requested an expansion across all backends/facets.
      */
     if (lhs.empty())
         return true;
@@ -203,7 +203,7 @@ is_match(const std::string& lhs, const std::string& rhs) const {
 }
 
 void template_instantiator::instantiate_facet_template(
-    const type_template& tt, const std::string& kernel_name,
+    const type_template& tt, const std::string& backend_name,
     const std::unordered_set<std::string>& facet_names,
     std::list<type>& types) const {
 
@@ -216,7 +216,7 @@ void template_instantiator::instantiate_facet_template(
          * reconstruct the type's qualified name.
          */
         t.name().qualified(facet_name + "." + sn);
-        t.archetype_location().kernel(kernel_name);
+        t.archetype_location().backend(backend_name);
         t.archetype_location().facet(facet_name);
         t.archetype_location().archetype(empty);
         types.push_back(t);
@@ -239,32 +239,32 @@ instantiate_recursive_template(const type_template& tt) const {
     }
 
     /*
-     * Handle kernels and facets first. We obtain a list of facets by
-     * kernel name and use it for two purposes: a) to validate if the
-     * requested kernel is supported or not, filtering out kernels
+     * Handle backends and facets first. We obtain a list of facets by
+     * backend name and use it for two purposes: a) to validate if the
+     * requested backend is supported or not, filtering out backends
      * without facets; b) to figure out what all the available facets
      * are, so we can instantiate them.
      *
-     * If the template did not request a specific kernel, this will
-     * result in expanding the template for all kernels and all facets
+     * If the template did not request a specific backend, this will
+     * result in expanding the template for all backends and all facets
      * across all families.
      */
     for (const auto pair : repository_.facet_names_by_kernel_name()) {
-        const auto kernel_name(pair.first);
-        if (!is_match(ttal.kernel(), kernel_name))
+        const auto backend_name(pair.first);
+        if (!is_match(ttal.backend(), backend_name))
             continue;
 
         /*
-         * Expand the type for the kernel first.
+         * Expand the type for the backend first.
          */
         auto t(to_type(tt));
 
         /*
-         * The kernel name is qualified, so we can use it to
+         * The backend name is qualified, so we can use it to
          * reconstruct the type's qualified name.
          */
-        t.name().qualified(kernel_name + "." + tt.name().simple());
-        t.archetype_location().kernel(kernel_name);
+        t.name().qualified(backend_name + "." + tt.name().simple());
+        t.archetype_location().backend(backend_name);
         t.archetype_location().facet(empty);
         t.archetype_location().archetype(empty);
         r.push_back(t);
@@ -273,14 +273,14 @@ instantiate_recursive_template(const type_template& tt) const {
          * Now, perform a template expansion for each supported facet.
          */
         const auto& facet_names(pair.second);
-        instantiate_facet_template(tt, kernel_name, facet_names, r);
+        instantiate_facet_template(tt, backend_name, facet_names, r);
     }
 
     /*
      * Finally, handle expansion at the archetype level.
      */
     for (const auto al : repository_.archetype_locations()) {
-        if (!is_match(ttal.kernel(), al.kernel()))
+        if (!is_match(ttal.backend(), al.backend()))
             continue;
 
         auto t(to_type(tt));
@@ -295,12 +295,12 @@ std::list<type> template_instantiator::
 instantiate_facet_template(const type_template& tt) const {
     std::list<type> r;
     for (const auto pair : repository_.facet_names_by_kernel_name()) {
-        const auto kernel_name(pair.first);
-        if (!is_match(tt.archetype_location().kernel(), kernel_name))
+        const auto backend_name(pair.first);
+        if (!is_match(tt.archetype_location().backend(), backend_name))
             continue;
 
         const auto& facet_names(pair.second);
-        instantiate_facet_template(tt, kernel_name, facet_names, r);
+        instantiate_facet_template(tt, backend_name, facet_names, r);
     }
     return r;
 }
@@ -310,7 +310,7 @@ instantiate_archetype_template(const type_template& tt) const {
     std::list<type> r;
     const auto ttal(tt.archetype_location());
     for (const auto al : repository_.archetype_locations()) {
-        if (!is_match(ttal.kernel(), al.kernel()) ||
+        if (!is_match(ttal.backend(), al.backend()) ||
             !is_match(ttal.facet(), al.facet()))
             continue;
 
@@ -329,12 +329,12 @@ template_instantiator::instantiate_recursive_template(
     const auto etal(et.archetype_location());
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
     for (const auto pair : repository_.facet_names_by_kernel_name()) {
-        const auto kernel_name(pair.first);
-        if (!is_match(etal.kernel(), kernel_name))
+        const auto backend_name(pair.first);
+        if (!is_match(etal.backend(), backend_name))
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
-        entry.first = kernel_name + "." + et.name().simple();
+        entry.first = backend_name + "." + et.name().simple();
         entry.second = to_value(trp, entry.first, et);
         r.push_back(entry);
 
@@ -348,7 +348,7 @@ template_instantiator::instantiate_recursive_template(
     }
 
     for (const auto al : repository_.archetype_locations()) {
-        if (!is_match(etal.kernel(), al.kernel()))
+        if (!is_match(etal.backend(), al.backend()))
             continue;
 
         std::pair<std::string, boost::shared_ptr<value>> entry;
@@ -367,8 +367,8 @@ template_instantiator::instantiate_facet_template(
     const auto etal(et.archetype_location());
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
     for (const auto pair : repository_.facet_names_by_kernel_name()) {
-        const auto kernel_name(pair.first);
-        if (!is_match(etal.kernel(), kernel_name))
+        const auto backend_name(pair.first);
+        if (!is_match(etal.backend(), backend_name))
             continue;
 
         const auto& facet_names(pair.second);
@@ -391,7 +391,7 @@ template_instantiator::instantiate_archetype_template(
     const auto etal(et.archetype_location());
 
     for (const auto al : repository_.archetype_locations()) {
-        if (!is_match(etal.kernel(), al.kernel()) ||
+        if (!is_match(etal.backend(), al.backend()) ||
             !is_match(etal.facet(), al.facet()))
             continue;
 

@@ -89,7 +89,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
     }
 
-    if (al.kernel().empty()) {
+    if (al.backend().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
     }
@@ -98,7 +98,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
 
     /*
      * Add the formatter to the archetype location stores. Note that
-     * we need not worry about canonical archetypes since this kernel
+     * we need not worry about canonical archetypes since this backend
      * does not have them.
      */
     archetype_locations_.push_front(al);
