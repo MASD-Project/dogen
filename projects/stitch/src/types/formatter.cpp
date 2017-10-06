@@ -37,10 +37,10 @@ const std::string empty_header_guard;
 /*
  * FIXME: humongous hackery just to get annotations to let us
  * through. It reality, we should just have a family and no facet or
- * kernel.
+ * backend.
  */
 const std::string family_name("stitch");
-const std::string kernel_name("stitch");
+const std::string backend_name("stitch");
 const std::string facet_name("types");
 const std::string archetype_name("stitch.formatter");
 
@@ -149,7 +149,7 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
 annotations::archetype_location formatter::archetype_location() const {
     using annotations::archetype_location;
     static archetype_location
-        r(family_name, kernel_name, facet_name, archetype_name);
+        r(family_name, backend_name, facet_name, archetype_name);
     return r;
 }
 
