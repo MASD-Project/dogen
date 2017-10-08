@@ -30,7 +30,7 @@ namespace csharp {
 namespace formatters {
 namespace types {
 
-std::string floating_point_number_helper::formatter_name() const {
+std::string floating_point_number_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;

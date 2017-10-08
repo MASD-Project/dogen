@@ -279,8 +279,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
                 stream() << "        #region Helpers" << std::endl;
             }
 
-            const auto fmtn(hlp->formatter_name());
-            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << fmtn;
+            BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << hlp->id();
             hlp->format(*this, hlp_props);
         }
     }

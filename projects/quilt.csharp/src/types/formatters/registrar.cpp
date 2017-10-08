@@ -37,10 +37,10 @@ const std::string no_file_formatters_by_meta_name(
 
 const std::string null_formatter_helper("Formatter helper supplied is null");
 const std::string null_formatter("Formatter supplied is null.");
-const std::string empty_formatter_name("Formatter name is empty.");
+const std::string empty_archetype("Formatter name is empty.");
 const std::string empty_facet_name("Facet name is empty.");
 const std::string empty_model_name("Model name is empty.");
-const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string duplicate_archetype("Duplicate formatter name: ");
 const std::string empty_family("Family cannot be empty.");
 
 }
@@ -80,8 +80,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
 
     const auto& al(f->archetype_location());
     if (al.archetype().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+        BOOST_LOG_SEV(lg, error) << empty_archetype;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));
     }
 
     if (al.facet().empty()) {
@@ -125,8 +125,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
+        BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + arch));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->id()
