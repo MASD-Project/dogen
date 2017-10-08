@@ -66,7 +66,7 @@ public:
      * transform, listing all available backends, facets and
      * archetypes.
      */
-    virtual std::forward_list<annotations::archetype_location>
+    virtual const std::forward_list<annotations::archetype_location>&
     archetype_locations() const = 0;
 
     /**

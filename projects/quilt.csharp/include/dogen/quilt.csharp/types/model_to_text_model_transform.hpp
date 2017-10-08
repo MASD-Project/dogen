@@ -76,7 +76,7 @@ private:
 public:
     std::string id() const override;
 
-    std::forward_list<annotations::archetype_location>
+    const std::forward_list<annotations::archetype_location>&
         archetype_locations() const override;
 
     const std::unordered_map<std::string,

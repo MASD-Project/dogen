@@ -103,7 +103,7 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
-std::forward_list<annotations::archetype_location>
+const std::forward_list<annotations::archetype_location>&
 model_to_text_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
