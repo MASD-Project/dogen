@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-08 Sun 17:12]
+#+CAPTION: Clock summary at [2017-10-08 Sun 17:23]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:35* |       |      | 100.0 |
+| *Total time*                                                                | *26:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:35   |       |      | 100.0 |
-| Active                                                                      |         | 26:35 |      | 100.0 |
+| Stories                                                                     | 26:45   |       |      | 100.0 |
+| Active                                                                      |         | 26:45 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   8.7 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   2.8 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.6 |
@@ -30,10 +30,10 @@
 | COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.4 |
 | COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   7.8 |
 | COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   1.8 |
-| COMPLETED Rename kernel and family                                          |         |       | 2:44 |  10.3 |
-| COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.8 |
-| STARTED Create the archetype location properties                            |         |       | 5:20 |  20.1 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  24.4 |
+| COMPLETED Rename kernel and family                                          |         |       | 2:44 |  10.2 |
+| COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.7 |
+| STARTED Create the archetype location properties                            |         |       | 5:30 |  20.6 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  24.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -396,6 +396,7 @@ that the "id" is in effect "archetype" in archetype location, but its
 slightly less confusing.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-08 Sun 17:13]--[2017-10-08 Sun 17:23] =>  0:10
     CLOCK: [2017-10-08 Sun 16:42]--[2017-10-08 Sun 17:12] =>  0:30
     CLOCK: [2017-10-08 Sun 14:52]--[2017-10-08 Sun 15:38] =>  0:46
     CLOCK: [2017-10-08 Sun 14:12]--[2017-10-08 Sun 14:51] =>  0:39

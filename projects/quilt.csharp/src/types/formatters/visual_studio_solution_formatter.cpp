@@ -58,6 +58,10 @@ visual_studio_solution_formatter::meta_name() const {
     return r;
 }
 
+std::string visual_studio_solution_formatter::family() const {
+    return csharp::traits::visual_studio_solution_family();
+}
+
 boost::filesystem::path visual_studio_solution_formatter::
 full_path(const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_solution(n, static_id());

@@ -54,6 +54,21 @@ std::string traits::postfix() {
     return r;
 }
 
+std::string traits::csharp_family() {
+    static std::string r("csharp_family");
+    return r;
+}
+
+std::string traits::visual_studio_solution_family() {
+    static std::string r("visual_studio_solution_family");
+    return r;
+}
+
+std::string traits::visual_studio_project_family() {
+    static std::string r("visual_studio_project_family");
+    return r;
+}
+
 std::string traits::backend_directory_name() {
     static std::string r("quilt.csharp.directory");
     return r;

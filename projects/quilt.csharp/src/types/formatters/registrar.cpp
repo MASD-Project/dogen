@@ -105,9 +105,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     const auto mn(f->meta_name().id());
     auto& alg(archetype_locations_by_meta_name_[mn]);
     alg.archetype_locations().push_back(al);
-    // FIXME: implement family in formatters
-    // auto& albf(archetype_locations_by_family_[f->family()]);
-    // albf.push_back(al);
+    auto& albf(archetype_locations_by_family_[f->family()]);
+    albf.push_back(al);
 
     /*
      * Add the formatter to the index by meta-name.

@@ -54,6 +54,10 @@ const yarn::meta_model::name& assistant_formatter::meta_name() const {
     return r;
 }
 
+std::string assistant_formatter::family() const {
+    return csharp::traits::csharp_family();
+}
+
 boost::filesystem::path assistant_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
