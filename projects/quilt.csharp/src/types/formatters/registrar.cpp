@@ -105,9 +105,12 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     const auto mn(f->meta_name().id());
     auto& alg(archetype_locations_by_meta_name_[mn]);
     alg.archetype_locations().push_back(al);
+    // FIXME: implement family in formatters
+    // auto& albf(archetype_locations_by_family_[f->family()]);
+    // albf.push_back(al);
 
     /*
-     * Add the formatter to the index by element type index.
+     * Add the formatter to the index by meta-name.
      */
     auto& safmt(formatter_repository_.stock_artefact_formatters_by_meta_name());
     safmt[mn].push_front(f);
@@ -165,6 +168,12 @@ const std::unordered_map<std::string,
                          annotations::archetype_locations_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
+}
+
+const std::unordered_map<std::string,
+                         std::list<annotations::archetype_location>>&
+registrar::archetype_locations_by_family() const {
+    return archetype_locations_by_family_;
 }
 
 } } } }

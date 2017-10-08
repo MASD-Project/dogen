@@ -116,6 +116,13 @@ model_to_text_model_transform::archetype_locations_by_meta_name() const {
     return rg.archetype_locations_by_meta_name();
 }
 
+const std::unordered_map<std::string,
+                         std::list<annotations::archetype_location>>&
+model_to_text_model_transform::archetype_locations_by_family() const {
+    const auto& rg(formatters::workflow::registrar());
+    return rg.archetype_locations_by_family();
+}
+
 yarn::meta_model::languages model_to_text_model_transform::language() const {
     return yarn::meta_model::languages::cpp;
 }

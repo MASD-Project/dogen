@@ -20255,15 +20255,15 @@ space.#</dia:string>
         <dia:point val="-212.59,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-213.34,22.2;-187.305,32.8"/>
+        <dia:rectangle val="-213.34,27.2;-187.305,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-212.59,32"/>
-        <dia:point val="-212.59,23"/>
-        <dia:point val="-187.505,23"/>
+        <dia:point val="-212.59,28"/>
+        <dia:point val="-187.505,28"/>
         <dia:point val="-187.505,32"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -20445,8 +20445,8 @@ space.#</dia:string>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-154.542,32"/>
-        <dia:point val="-154.542,28.0595"/>
-        <dia:point val="-151.093,28.0595"/>
+        <dia:point val="-154.542,28"/>
+        <dia:point val="-151.093,28"/>
         <dia:point val="-151.093,24.8571"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">

@@ -93,6 +93,13 @@ public:
     archetype_locations_by_meta_name() const;
 
     /**
+     * @brief Returns the archetype locations for each family.
+     */
+    const std::unordered_map<std::string,
+                             std::list<annotations::archetype_location>>&
+    archetype_locations_by_family() const;
+
+    /**
      * @brief Returns all of the available helper formatters.
      */
     const std::unordered_map<
@@ -108,6 +115,9 @@ private:
     std::unordered_map<std::string,
                        annotations::archetype_locations_group>
     archetype_locations_by_meta_name_;
+    std::unordered_map<std::string,
+                       std::list<annotations::archetype_location>>
+    archetype_locations_by_family_;
 };
 
 template<typename Formatter>

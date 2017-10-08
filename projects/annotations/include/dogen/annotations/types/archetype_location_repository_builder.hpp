@@ -44,6 +44,8 @@ public:
     void add(const std::list<archetype_location>& als);
     void add(const std::unordered_map<std::string, archetype_locations_group>&
         archetype_locations_by_meta_name);
+    void add(const std::unordered_map<std::string,
+        std::list<archetype_location>>& archetype_locations_by_family);
 
 public:
     const archetype_location_repository& build();

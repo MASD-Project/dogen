@@ -271,6 +271,12 @@ registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
+const std::unordered_map<std::string,
+                         std::list<annotations::archetype_location>>&
+registrar::archetype_locations_by_family() const {
+    return archetype_locations_by_family_;
+}
+
 const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,

@@ -77,6 +77,14 @@ public:
     archetype_locations_by_meta_name() const = 0;
 
     /**
+     * @brief Returns the archetype locations for each family.
+     */
+    virtual const std::unordered_map<std::string,
+                                     std::list<annotations::archetype_location>
+                                     >&
+    archetype_locations_by_family() const = 0;
+
+    /**
      * @brief Language supported by this transform.
      */
     virtual yarn::meta_model::languages language() const = 0;

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/io/archetype_location_repository_io.hpp"
@@ -32,6 +33,7 @@ lg(logger_factory("annotations.archetype_location_repository_builder"));
 const std::string empty_backend("Backend name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
 const std::string empty_archetype("Archetype name cannot be empty.");
+const std::string duplicate_family("Duplicate family: ");
 const std::string duplicate_archetype("Archetype name already inserted: ");
 
 }
@@ -140,6 +142,40 @@ add(const std::unordered_map<std::string, archetype_locations_group>&
                     building_error(duplicate_archetype + pair.first));
             }
         }
+    }
+}
+
+void archetype_location_repository_builder::
+add(const std::unordered_map<std::string,
+    std::list<archetype_location>>& archetype_locations_by_family) {
+    auto& albf(repository_.archetype_locations_by_family());
+    for (const auto& pair : archetype_locations_by_family) {
+        const auto& family(pair.first);
+        const auto src(pair.second);
+
+        /*
+         * Note that we impose families to be unique across all
+         * backends and all kernels, so that we can safely merge them
+         * all into one big container. If they were not unique this
+         * would mean users could set conflicting properties at the
+         * family level per kernel; to fix this we'd ended up having
+         * separate collections of families per kernel.
+         *
+         * This is not an ideal limitation, but its not a problem for
+         * now since families are quite distinct on a per backend
+         * basis - e.g. c++ include files, c# implementation files,
+         * etc.
+         *
+         * Thus here, we just ensure that they are indeed unique.
+         */
+        auto& dst(albf[family]);
+        if (!dst.empty()) {
+            BOOST_LOG_SEV(lg, error) << duplicate_family << family;
+            BOOST_THROW_EXCEPTION(building_error(duplicate_family + family));
+        }
+
+        for (const auto& al : src)
+            dst.push_back(al);
     }
 }
 

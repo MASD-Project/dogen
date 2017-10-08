@@ -48,6 +48,7 @@ context_factory::create_archetype_location_repository(
     for (const auto& pair : rg.transforms_by_language()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
+        b.add(t.archetype_locations_by_family());
     }
     return b.build();
 }
