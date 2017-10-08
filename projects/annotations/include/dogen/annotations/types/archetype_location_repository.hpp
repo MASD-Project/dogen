@@ -49,7 +49,8 @@ public:
         const std::list<dogen::annotations::archetype_location>& archetype_locations,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-        const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name);
+        const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
+        const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family);
 
 private:
     template<typename Archive>
@@ -79,6 +80,19 @@ public:
     void archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v);
     void archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>&& v);
 
+    /**
+     * @brief All archetype locations for a given family.
+     *
+     * Families are backend specific sets of archetype locations, with associated
+     * properties such as file extensions.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family() const;
+    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family();
+    void archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v);
+    void archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype_location_repository& rhs) const;
     bool operator!=(const archetype_location_repository& rhs) const {
@@ -94,6 +108,7 @@ private:
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
     std::unordered_map<std::string, dogen::annotations::archetype_locations_group> archetype_locations_by_meta_name_;
+    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > archetype_locations_by_family_;
 };
 
 } }

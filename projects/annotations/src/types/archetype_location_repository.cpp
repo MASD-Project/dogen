@@ -27,11 +27,13 @@ archetype_location_repository::archetype_location_repository(
     const std::list<dogen::annotations::archetype_location>& archetype_locations,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-    const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name)
+    const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
+    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family)
     : archetype_locations_(archetype_locations),
       facet_names_by_backend_name_(facet_names_by_backend_name),
       formatter_names_by_backend_name_(formatter_names_by_backend_name),
-      archetype_locations_by_meta_name_(archetype_locations_by_meta_name) { }
+      archetype_locations_by_meta_name_(archetype_locations_by_meta_name),
+      archetype_locations_by_family_(archetype_locations_by_family) { }
 
 void archetype_location_repository::swap(archetype_location_repository& other) noexcept {
     using std::swap;
@@ -39,13 +41,15 @@ void archetype_location_repository::swap(archetype_location_repository& other) n
     swap(facet_names_by_backend_name_, other.facet_names_by_backend_name_);
     swap(formatter_names_by_backend_name_, other.formatter_names_by_backend_name_);
     swap(archetype_locations_by_meta_name_, other.archetype_locations_by_meta_name_);
+    swap(archetype_locations_by_family_, other.archetype_locations_by_family_);
 }
 
 bool archetype_location_repository::operator==(const archetype_location_repository& rhs) const {
     return archetype_locations_ == rhs.archetype_locations_ &&
         facet_names_by_backend_name_ == rhs.facet_names_by_backend_name_ &&
         formatter_names_by_backend_name_ == rhs.formatter_names_by_backend_name_ &&
-        archetype_locations_by_meta_name_ == rhs.archetype_locations_by_meta_name_;
+        archetype_locations_by_meta_name_ == rhs.archetype_locations_by_meta_name_ &&
+        archetype_locations_by_family_ == rhs.archetype_locations_by_family_;
 }
 
 archetype_location_repository& archetype_location_repository::operator=(archetype_location_repository other) {
@@ -116,6 +120,22 @@ void archetype_location_repository::archetype_locations_by_meta_name(const std::
 
 void archetype_location_repository::archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>&& v) {
     archetype_locations_by_meta_name_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository::archetype_locations_by_family() const {
+    return archetype_locations_by_family_;
+}
+
+std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository::archetype_locations_by_family() {
+    return archetype_locations_by_family_;
+}
+
+void archetype_location_repository::archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+    archetype_locations_by_family_ = v;
+}
+
+void archetype_location_repository::archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v) {
+    archetype_locations_by_family_ = std::move(v);
 }
 
 } }

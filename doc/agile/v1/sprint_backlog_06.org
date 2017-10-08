@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-06 Fri 14:10]
+#+CAPTION: Clock summary at [2017-10-08 Sun 14:51]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:40* |       |      | 100.0 |
+| *Total time*                                                                | *24:19* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:40   |       |      | 100.0 |
-| Active                                                                      |         | 23:40 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   9.8 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.2 |
+| Stories                                                                     | 24:19   |       |      | 100.0 |
+| Active                                                                      |         | 24:19 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   9.5 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   3.1 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.7 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   4.3 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   8.6 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   6.5 |
-| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.7 |
-| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   8.8 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   4.2 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   8.4 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   6.4 |
+| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.6 |
+| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   8.6 |
 | COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   2.0 |
-| COMPLETED Rename kernel and family                                          |         |       | 2:44 |  11.5 |
-| STARTED Create the archetype location properties                            |         |       | 3:25 |  14.4 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  27.4 |
+| COMPLETED Rename kernel and family                                          |         |       | 2:44 |  11.2 |
+| STARTED Create the archetype location properties                            |         |       | 4:04 |  16.7 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  26.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -379,6 +379,7 @@ location. So we need to:
 - rename archetype location group to archetype location family.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-08 Sun 14:12]--[2017-10-08 Sun 14:51] =>  0:39
     CLOCK: [2017-10-06 Fri 10:09]--[2017-10-06 Fri 10:52] =>  0:43
     CLOCK: [2017-10-05 Thu 07:15]--[2017-10-05 Thu 07:20] =>  0:05
     CLOCK: [2017-09-29 Fri 14:02]--[2017-09-29 Fri 14:13] =>  0:11

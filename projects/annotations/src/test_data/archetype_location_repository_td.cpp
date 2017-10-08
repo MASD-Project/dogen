@@ -73,6 +73,14 @@ std::unordered_map<std::string, dogen::annotations::archetype_locations_group> c
     return r;
 }
 
+std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(unsigned int position) {
+    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_annotations_archetype_location(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -86,6 +94,7 @@ populate(const unsigned int position, result_type& v) {
     v.facet_names_by_backend_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
     v.formatter_names_by_backend_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
     v.archetype_locations_by_meta_name(create_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(position + 3));
+    v.archetype_locations_by_family(create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(position + 4));
 }
 
 archetype_location_repository_generator::result_type

@@ -96,6 +96,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace annotations {
 
@@ -105,7 +123,8 @@ std::ostream& operator<<(std::ostream& s, const archetype_location_repository& v
       << "\"archetype_locations\": " << v.archetype_locations() << ", "
       << "\"facet_names_by_backend_name\": " << v.facet_names_by_backend_name() << ", "
       << "\"formatter_names_by_backend_name\": " << v.formatter_names_by_backend_name() << ", "
-      << "\"archetype_locations_by_meta_name\": " << v.archetype_locations_by_meta_name()
+      << "\"archetype_locations_by_meta_name\": " << v.archetype_locations_by_meta_name() << ", "
+      << "\"archetype_locations_by_family\": " << v.archetype_locations_by_family()
       << " }";
     return(s);
 }
