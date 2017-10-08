@@ -36,7 +36,7 @@ namespace serialization {
 
 class path_helper : public helper_formatter_interface {
 public:
-    std::string formatter_name() const override;
+    std::string id() const override;
     std::string family() const override;
     std::list<std::string> owning_formatters() const override;
     std::list<std::string> owning_facets() const override;

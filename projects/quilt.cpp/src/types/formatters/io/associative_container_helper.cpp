@@ -31,7 +31,7 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-std::string associative_container_helper::formatter_name() const {
+std::string associative_container_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;

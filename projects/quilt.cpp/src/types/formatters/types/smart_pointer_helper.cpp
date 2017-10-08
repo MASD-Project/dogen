@@ -29,7 +29,7 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-std::string smart_pointer_helper::formatter_name() const {
+std::string smart_pointer_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;

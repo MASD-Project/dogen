@@ -38,8 +38,6 @@ struct traits {
      */
     static std::string master_header_archetype(const std::string& facet);
 
-    static std::string to_formatter_name(const std::string& archetype);
-
     static std::string cmake_facet();
     static std::string include_cmakelists_archetype();
     static std::string source_cmakelists_archetype();

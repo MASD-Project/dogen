@@ -24,7 +24,6 @@ namespace {
 
 const std::string master_header_postfix(".master_header");
 const std::string canonical_archetype_postfix(".canonical_archetype");
-const std::string formatter_name_postfix(".formatter_name");
 
 }
 
@@ -36,10 +35,6 @@ namespace formatters {
 std::string traits::
 master_header_archetype(const std::string& facet) {
     return facet + master_header_postfix;
-}
-
-std::string traits::to_formatter_name(const std::string& archetype) {
-    return archetype + formatter_name_postfix;
 }
 
 std::string traits::cmake_facet() {

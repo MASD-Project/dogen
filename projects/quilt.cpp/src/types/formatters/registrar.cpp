@@ -46,10 +46,10 @@ const std::string facets_missing_canonical_archetype(
     "One or more facets have been declared without a canonical archetype");
 const std::string more_than_one_canonical_archetype(
     "Found more than one canonical formatter for a facet: ");
-const std::string empty_formatter_name("Formatter name is empty.");
+const std::string empty_archetype("Archetype is empty.");
 const std::string empty_facet_name("Facet name is empty.");
 const std::string empty_model_name("Model name is empty.");
-const std::string duplicate_formatter_name("Duplicate formatter name: ");
+const std::string duplicate_archetype("Duplicate formatter id: ");
 const std::string empty_family("Family cannot be empty.");
 const std::string null_helper_formatter("Formatter helper supplied is null");
 
@@ -69,8 +69,8 @@ validate(std::shared_ptr<artefact_formatter_interface> f) const {
 
     const auto& al(f->archetype_location());
     if (al.archetype().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+        BOOST_LOG_SEV(lg, error) << empty_archetype;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));
     }
 
     if (al.facet().empty()) {
@@ -212,9 +212,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         const auto carch(formatters::traits::canonical_archetype(fct));
         const auto inserted(cal.insert(std::make_pair(arch, carch)).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
-            BOOST_THROW_EXCEPTION(
-                registrar_error(duplicate_formatter_name + arch));
+            BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
+            BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + arch));
         }
         BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << arch;
     }
@@ -236,8 +235,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
-        BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
+        BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
+        BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + arch));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->id()
