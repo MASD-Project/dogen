@@ -64,6 +64,10 @@ const yarn::meta_model::name& class_implementation_formatter::meta_name() const 
     return r;
 }
 
+std::string class_implementation_formatter::family() const {
+    return cpp::traits::implementation_family();
+}
+
 inclusion_support_types class_implementation_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }

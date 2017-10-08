@@ -63,6 +63,10 @@ const yarn::meta_model::name& object_odb_options_formatter::meta_name() const {
     return r;
 }
 
+std::string object_odb_options_formatter::family() const {
+    return cpp::traits::odb_family();
+}
+
 inclusion_support_types
 object_odb_options_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

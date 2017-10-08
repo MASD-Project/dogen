@@ -6,6 +6,7 @@ public:
     std::string id() const override;
     annotations::archetype_location archetype_location() const override;
     const yarn::meta_model::name& meta_name() const override;
+    std::string family() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(

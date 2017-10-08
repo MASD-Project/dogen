@@ -60,6 +60,10 @@ visual_studio_solution_formatter::meta_name() const {
     return r;
 }
 
+std::string visual_studio_solution_formatter::family() const {
+    return cpp::traits::visual_studio_project_family();
+}
+
 inclusion_support_types
 visual_studio_solution_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

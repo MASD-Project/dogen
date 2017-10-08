@@ -65,6 +65,11 @@ public:
      */
     virtual const yarn::meta_model::name& meta_name() const = 0;
 
+    /**
+     * @brief Family to which this formatter belongs.
+     */
+    virtual std::string family() const = 0;
+
 public:
     /**
      * @brief Returns the level of support of inclusions by this

@@ -56,6 +56,10 @@ const yarn::meta_model::name& builtin_header_formatter::meta_name() const {
     return r;
 }
 
+std::string builtin_header_formatter::family() const {
+    return cpp::traits::header_family();
+}
+
 inclusion_support_types builtin_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }

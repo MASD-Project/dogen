@@ -59,6 +59,10 @@ const yarn::meta_model::name& include_cmakelists_formatter::meta_name() const {
     return r;
 }
 
+std::string include_cmakelists_formatter::family() const {
+    return cpp::traits::cmake_family();
+}
+
 inclusion_support_types include_cmakelists_formatter::
 inclusion_support_type() const {
     return inclusion_support_types::not_supported;

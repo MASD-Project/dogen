@@ -59,6 +59,10 @@ const yarn::meta_model::name& forward_declarations_formatter::meta_name() const 
     return r;
 }
 
+std::string forward_declarations_formatter::family() const {
+    return cpp::traits::header_family();
+}
+
 inclusion_support_types forward_declarations_formatter::inclusion_support_type() const {
     return inclusion_support_types::regular_support;
 }

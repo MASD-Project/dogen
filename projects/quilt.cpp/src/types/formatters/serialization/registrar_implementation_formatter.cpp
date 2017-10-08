@@ -63,6 +63,10 @@ const yarn::meta_model::name& registrar_implementation_formatter::meta_name() co
     return r;
 }
 
+std::string registrar_implementation_formatter::family() const {
+    return cpp::traits::implementation_family();
+}
+
 inclusion_support_types registrar_implementation_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }

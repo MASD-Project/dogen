@@ -58,6 +58,10 @@ const yarn::meta_model::name& msbuild_targets_formatter::meta_name() const {
     return r;
 }
 
+std::string msbuild_targets_formatter::family() const {
+    return cpp::traits::msbuild_family();
+}
+
 inclusion_support_types
 msbuild_targets_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
