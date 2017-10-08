@@ -1,18 +1,17 @@
 
-std::string {{class.simple_name}}::static_artefact() {
+std::string {{class.simple_name}}::static_id() {
     return traits::{{archetype.simple_name}}_archetype();
 }
 
-std::string {{class.simple_name}}::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string {{class.simple_name}}::id() const {
+    return static_id();
 }
 
 annotations::archetype_location {{class.simple_name}}::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
-          {{class.simple_name}}::static_artefact());
+          {{class.simple_name}}::static_id());
     return r;
 }
 
@@ -24,7 +23,7 @@ const yarn::meta_model::name& {{class.simple_name}}::meta_name() const {
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path(n, static_artefact());
+    return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> {{class.simple_name}}::

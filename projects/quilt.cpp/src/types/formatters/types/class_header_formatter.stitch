@@ -52,7 +52,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     const auto fwd_arch(traits::forward_declarations_archetype());
     builder.add(o.opaque_associations(), fwd_arch);
 
-    const auto self_arch(class_header_formatter::static_artefact());
+    const auto self_arch(class_header_formatter::static_id());
     builder.add(o.parents(), self_arch);
 
     using hash = formatters::hash::traits;

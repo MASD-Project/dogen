@@ -37,13 +37,12 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-std::string include_cmakelists_formatter::static_artefact() {
+std::string include_cmakelists_formatter::static_id() {
     return traits::include_cmakelists_archetype();
 }
 
-std::string include_cmakelists_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string include_cmakelists_formatter::id() const {
+    return static_id();
 }
 
 annotations::archetype_location include_cmakelists_formatter::
@@ -51,7 +50,7 @@ archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::cmake_facet(),
-          include_cmakelists_formatter::static_artefact());
+          include_cmakelists_formatter::static_id());
     return r;
 }
 
@@ -70,8 +69,7 @@ boost::filesystem::path include_cmakelists_formatter::inclusion_path(
 
     using namespace dogen::utility::log;
     using namespace dogen::quilt::cpp::formatters;
-    static logger lg(
-        logger_factory(include_cmakelists_formatter::static_artefact()));
+    static logger lg(logger_factory(include_cmakelists_formatter::static_id()));
 
     static const std::string not_supported("Inclusion path is not supported: ");
 
@@ -81,7 +79,7 @@ boost::filesystem::path include_cmakelists_formatter::inclusion_path(
 
 boost::filesystem::path include_cmakelists_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_include_cmakelists(n, static_artefact());
+    return l.make_full_path_for_include_cmakelists(n, static_id());
 }
 
 std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(

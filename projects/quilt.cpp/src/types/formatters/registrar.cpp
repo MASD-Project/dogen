@@ -240,7 +240,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->formatter_name()
+    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->id()
                              << " against meta name: " << mn;
 }
 

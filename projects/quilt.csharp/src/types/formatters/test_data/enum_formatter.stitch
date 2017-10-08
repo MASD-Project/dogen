@@ -20,7 +20,7 @@ dogen::formatters::artefact enum_formatter::format(
     const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& ye(a.as<yarn::meta_model::enumeration>(static_artefact(), e));
+    const auto& ye(a.as<yarn::meta_model::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

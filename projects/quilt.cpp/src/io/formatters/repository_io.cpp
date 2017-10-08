@@ -37,7 +37,7 @@ inline std::ostream& to_stream(std::ostream& s, const std::string& key,
 
     for(auto i(value.begin()); i != value.end(); ++i) {
         if (i != value.begin()) s << ", ";
-        s <<  "\"" << (*i)->formatter_name() << "\"";
+        s <<  "\"" << (*i)->id() << "\"";
     }
     s << " ], ";
     return s;
@@ -77,7 +77,7 @@ inline std::ostream& to_stream(std::ostream& s,
         s <<  "{ \"" << i->first << "\":" << "[ ";
         for(auto j(i->second.begin()); j != i->second.end(); ++j) {
             if (j != i->second.begin()) s << ", ";
-                s <<  "\"" << (*j)->formatter_name() << "\"";
+                s <<  "\"" << (*j)->id() << "\"";
         }
             s << "] }";
     }

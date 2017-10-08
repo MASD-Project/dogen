@@ -32,20 +32,19 @@ namespace csharp {
 namespace formatters {
 namespace io {
 
-std::string class_formatter::static_artefact() {
+std::string class_formatter::static_id() {
     return traits::class_archetype();
 }
 
-std::string class_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string class_formatter::id() const {
+    return static_id();
 }
 
 annotations::archetype_location class_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
-          class_formatter::static_artefact());
+          class_formatter::static_id());
     return r;
 }
 
@@ -57,7 +56,7 @@ const yarn::meta_model::name& class_formatter::meta_name() const {
 
 boost::filesystem::path class_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path(n, static_artefact());
+    return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> class_formatter::
@@ -70,7 +69,7 @@ dogen::formatters::artefact class_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& o(a.as<yarn::meta_model::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::meta_model::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

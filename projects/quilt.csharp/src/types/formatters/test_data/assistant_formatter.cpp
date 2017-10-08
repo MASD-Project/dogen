@@ -32,20 +32,19 @@ namespace csharp {
 namespace formatters {
 namespace test_data {
 
-std::string assistant_formatter::static_artefact() {
+std::string assistant_formatter::static_id() {
     return traits::assistant_archetype();
 }
 
-std::string assistant_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string assistant_formatter::id() const {
+    return static_id();
 }
 
 annotations::archetype_location assistant_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
-          assistant_formatter::static_artefact());
+          assistant_formatter::static_id());
     return r;
 }
 
@@ -57,7 +56,7 @@ const yarn::meta_model::name& assistant_formatter::meta_name() const {
 
 boost::filesystem::path assistant_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path(n, static_artefact());
+    return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> assistant_formatter::

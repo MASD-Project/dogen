@@ -1,11 +1,10 @@
 
-std::string {{class.simple_name}}::static_artefact() {
+std::string {{class.simple_name}}::static_id() {
     return traits::{{archetype.simple_name}}_archetype();
 }
 
-std::string {{class.simple_name}}::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string {{class.simple_name}}::id() const {
+    return static_id();
 }
 
 annotations::archetype_location
@@ -13,7 +12,7 @@ annotations::archetype_location
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          {{class.simple_name}}::static_artefact());
+          {{class.simple_name}}::static_id());
     return r;
 }
 
@@ -29,10 +28,10 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
+    return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_artefact());
+    return l.make_full_path_for_cpp_header(n, static_id());
 }

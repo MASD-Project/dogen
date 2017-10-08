@@ -52,7 +52,7 @@ public:
     /**
      * @brief Unique identifier for the formatter in formatter space.
      */
-    virtual std::string formatter_name() const = 0;
+    virtual std::string id() const = 0;
 
     /**
      * @brief Ownership hierarchy for this formatter

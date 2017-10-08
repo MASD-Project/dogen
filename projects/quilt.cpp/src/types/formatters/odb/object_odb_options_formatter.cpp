@@ -41,11 +41,11 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-std::string object_odb_options_formatter::static_artefact() {
+std::string object_odb_options_formatter::static_id() {
     return traits::object_odb_options_archetype();
 }
 
-std::string object_odb_options_formatter::formatter_name() const {
+std::string object_odb_options_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
@@ -54,7 +54,7 @@ annotations::archetype_location
 object_odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(), object_odb_options_formatter::static_artefact());
+          traits::facet(), object_odb_options_formatter::static_id());
     return r;
 }
 
@@ -82,7 +82,7 @@ boost::filesystem::path object_odb_options_formatter::inclusion_path(
 
 boost::filesystem::path object_odb_options_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_odb_options(n, static_artefact());
+    return l.make_full_path_for_odb_options(n, static_id());
 }
 
 std::list<std::string> object_odb_options_formatter::inclusion_dependencies(

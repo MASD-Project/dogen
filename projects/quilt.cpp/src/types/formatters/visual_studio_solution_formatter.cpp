@@ -35,11 +35,11 @@ namespace quilt {
 namespace cpp {
 namespace formatters {
 
-std::string visual_studio_solution_formatter::static_artefact() {
+std::string visual_studio_solution_formatter::static_id() {
     return traits::visual_studio_solution_archetype();
 }
 
-std::string visual_studio_solution_formatter::formatter_name() const {
+std::string visual_studio_solution_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
@@ -49,7 +49,7 @@ visual_studio_solution_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::visual_studio_facet(),
-          visual_studio_solution_formatter::static_artefact());
+          visual_studio_solution_formatter::static_id());
     return r;
 }
 
@@ -70,7 +70,7 @@ boost::filesystem::path visual_studio_solution_formatter::inclusion_path(
 
     using namespace dogen::utility::log;
     using namespace dogen::quilt::cpp::formatters;
-    static logger lg(logger_factory(static_artefact()));
+    static logger lg(logger_factory(static_id()));
 
     static const std::string not_supported("Inclusion path is not supported: ");
 
@@ -80,7 +80,7 @@ boost::filesystem::path visual_studio_solution_formatter::inclusion_path(
 
 boost::filesystem::path visual_studio_solution_formatter::
 full_path(const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_solution(n, static_artefact());
+    return l.make_full_path_for_solution(n, static_id());
 }
 
 std::list<std::string> visual_studio_solution_formatter::inclusion_dependencies(

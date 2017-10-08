@@ -124,8 +124,8 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
 
         const auto fs(art_props.formatting_style());
         if (fs == formatting_styles::stock) {
-            const auto fmtn(fmt.formatter_name());
-            BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << fmtn;
+            const auto id(fmt.id());
+            BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
 
             const auto artefact(fmt.format(ctx, e));
             const auto& p(artefact.path());

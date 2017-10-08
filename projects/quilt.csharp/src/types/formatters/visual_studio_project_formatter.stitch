@@ -11,11 +11,11 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp" #>
 <#+
 
-std::string visual_studio_project_formatter::static_artefact() {
+std::string visual_studio_project_formatter::static_id() {
     return traits::visual_studio_project_archetype();
 }
 
-std::string visual_studio_project_formatter::formatter_name() const {
+std::string visual_studio_project_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
@@ -25,7 +25,7 @@ visual_studio_project_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::visual_studio_facet(),
-          visual_studio_project_formatter::static_artefact());
+          visual_studio_project_formatter::static_id());
     return r;
 }
 
@@ -37,7 +37,7 @@ visual_studio_project_formatter::meta_name() const {
 
 boost::filesystem::path visual_studio_project_formatter::
 full_path(const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_project(n, static_artefact());
+    return l.make_full_path_for_project(n, static_id());
 }
 
 std::list<std::string> visual_studio_project_formatter::
@@ -50,7 +50,7 @@ dogen::formatters::artefact visual_studio_project_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& vsp(a.as<fabric::visual_studio_project>(static_artefact(), e));
+    const auto& vsp(a.as<fabric::visual_studio_project>(static_id(), e));
 
 #>
 <?xml version="1.0" encoding="utf-8"?>

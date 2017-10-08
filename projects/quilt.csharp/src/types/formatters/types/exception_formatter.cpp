@@ -32,20 +32,19 @@ namespace csharp {
 namespace formatters {
 namespace types {
 
-std::string exception_formatter::static_artefact() {
+std::string exception_formatter::static_id() {
     return traits::exception_archetype();
 }
 
-std::string exception_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string exception_formatter::id() const {
+    return static_id();
 }
 
 annotations::archetype_location exception_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
-          exception_formatter::static_artefact());
+          exception_formatter::static_id());
     return r;
 }
 
@@ -57,7 +56,7 @@ const yarn::meta_model::name& exception_formatter::meta_name() const {
 
 boost::filesystem::path exception_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path(n, static_artefact());
+    return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> exception_formatter::

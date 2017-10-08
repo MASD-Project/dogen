@@ -33,11 +33,11 @@ namespace quilt {
 namespace csharp {
 namespace formatters {
 
-std::string visual_studio_solution_formatter::static_artefact() {
+std::string visual_studio_solution_formatter::static_id() {
     return traits::visual_studio_solution_archetype();
 }
 
-std::string visual_studio_solution_formatter::formatter_name() const {
+std::string visual_studio_solution_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
@@ -47,7 +47,7 @@ visual_studio_solution_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::visual_studio_facet(),
-          visual_studio_solution_formatter::static_artefact());
+          visual_studio_solution_formatter::static_id());
     return r;
 }
 
@@ -60,7 +60,7 @@ visual_studio_solution_formatter::meta_name() const {
 
 boost::filesystem::path visual_studio_solution_formatter::
 full_path(const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_solution(n, static_artefact());
+    return l.make_full_path_for_solution(n, static_id());
 }
 
 std::list<std::string> visual_studio_solution_formatter::
@@ -73,7 +73,7 @@ dogen::formatters::artefact visual_studio_solution_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& vsl(a.as<fabric::visual_studio_solution>(static_artefact(), e));
+    const auto& vsl(a.as<fabric::visual_studio_solution>(static_id(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;
 a.stream() << "Project(\"{" << vsl.project_solution_guid() << "}\") = \"" << vsl.project_name() << "\", \"" << vsl.project_name() << ".csproj\", \"{" << vsl.project_guid() << "}\"" << std::endl;

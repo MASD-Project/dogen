@@ -37,7 +37,7 @@ public:
     explicit master_header_formatter(const std::string& facet_name);
 
 public:
-    std::string formatter_name() const override;
+    std::string id() const override;
     annotations::archetype_location archetype_location() const override;
     const yarn::meta_model::name& meta_name() const override;
 

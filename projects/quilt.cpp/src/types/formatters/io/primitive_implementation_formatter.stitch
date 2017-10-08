@@ -37,7 +37,7 @@ primitive_implementation_formatter::inclusion_dependencies(
     builder.add(p.name(), ph_fn);
 
     const auto io_carch(formatters::io::traits::canonical_archetype());
-    const auto self_fn(primitive_implementation_formatter::static_artefact());
+    const auto self_fn(primitive_implementation_formatter::static_id());
     const bool io_enabled(builder.is_enabled(p.name(), self_fn));
 
     if (!io_enabled)

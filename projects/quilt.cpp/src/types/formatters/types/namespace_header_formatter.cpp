@@ -32,13 +32,12 @@ namespace cpp {
 namespace formatters {
 namespace types {
 
-std::string namespace_header_formatter::static_artefact() {
+std::string namespace_header_formatter::static_id() {
     return traits::namespace_header_archetype();
 }
 
-std::string namespace_header_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string namespace_header_formatter::id() const {
+    return static_id();
 }
 
 annotations::archetype_location
@@ -46,7 +45,7 @@ namespace_header_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          namespace_header_formatter::static_artefact());
+          namespace_header_formatter::static_id());
     return r;
 }
 
@@ -62,12 +61,12 @@ inclusion_support_types namespace_header_formatter::inclusion_support_type() con
 
 boost::filesystem::path namespace_header_formatter::inclusion_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_artefact());
+    return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path namespace_header_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_artefact());
+    return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> namespace_header_formatter::inclusion_dependencies(

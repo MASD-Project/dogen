@@ -41,13 +41,12 @@ namespace cpp {
 namespace formatters {
 namespace io {
 
-std::string primitive_implementation_formatter::static_artefact() {
+std::string primitive_implementation_formatter::static_id() {
     return traits::primitive_implementation_archetype();
 }
 
-std::string primitive_implementation_formatter::formatter_name() const {
-    static auto r(archetype_location().archetype());
-    return r;
+std::string primitive_implementation_formatter::id() const {
+    return static_id();
 }
 
 annotations::archetype_location
@@ -55,7 +54,7 @@ primitive_implementation_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
-          primitive_implementation_formatter::static_artefact());
+          primitive_implementation_formatter::static_id());
     return r;
 }
 
@@ -74,7 +73,7 @@ boost::filesystem::path primitive_implementation_formatter::inclusion_path(
 
     using namespace dogen::utility::log;
     static logger lg(
-        logger_factory(primitive_implementation_formatter::static_artefact()));
+        logger_factory(primitive_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.id();
@@ -83,7 +82,7 @@ boost::filesystem::path primitive_implementation_formatter::inclusion_path(
 
 boost::filesystem::path primitive_implementation_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_cpp_implementation(n, static_artefact());
+    return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string>
@@ -98,7 +97,7 @@ primitive_implementation_formatter::inclusion_dependencies(
     builder.add(p.name(), ph_fn);
 
     const auto io_carch(formatters::io::traits::canonical_archetype());
-    const auto self_fn(primitive_implementation_formatter::static_artefact());
+    const auto self_fn(primitive_implementation_formatter::static_id());
     const bool io_enabled(builder.is_enabled(p.name(), self_fn));
 
     if (!io_enabled)

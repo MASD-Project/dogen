@@ -36,10 +36,10 @@ namespace io {
 
 class class_formatter final : public artefact_formatter_interface {
 public:
-    static std::string static_artefact();
+    static std::string static_id();
 
 public:
-    std::string formatter_name() const override;
+    std::string id() const override;
     annotations::archetype_location archetype_location() const override;
     const yarn::meta_model::name& meta_name() const override;
 

@@ -139,9 +139,8 @@ inclusion_expander::compute_inclusion_dependencies(
 
     for (const auto fmt : i->second) {
         const auto arch(fmt->archetype_location().archetype());
-        const auto fmtn(fmt->formatter_name());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch
-                                 << " using formatter: " << fmtn;
+                                 << " using formatter: " << fmt->id();
 
         /*
          * Obtain the formatter's list of inclusion dependencies. If

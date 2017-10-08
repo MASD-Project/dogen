@@ -20,7 +20,7 @@ dogen::formatters::artefact primitive_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::meta_model::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

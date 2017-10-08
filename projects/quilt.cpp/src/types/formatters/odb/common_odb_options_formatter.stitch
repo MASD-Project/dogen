@@ -18,11 +18,11 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp" #>
 <#+
 
-std::string common_odb_options_formatter::static_artefact() {
+std::string common_odb_options_formatter::static_id() {
     return traits::common_odb_options_archetype();
 }
 
-std::string common_odb_options_formatter::formatter_name() const {
+std::string common_odb_options_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
@@ -31,7 +31,7 @@ annotations::archetype_location
 common_odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(), common_odb_options_formatter::static_artefact());
+          traits::facet(), common_odb_options_formatter::static_id());
     return r;
 }
 
@@ -59,7 +59,7 @@ boost::filesystem::path common_odb_options_formatter::inclusion_path(
 
 boost::filesystem::path common_odb_options_formatter::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
-    return l.make_full_path_for_odb_options(n, static_artefact());
+    return l.make_full_path_for_odb_options(n, static_id());
 }
 
 std::list<std::string> common_odb_options_formatter::inclusion_dependencies(

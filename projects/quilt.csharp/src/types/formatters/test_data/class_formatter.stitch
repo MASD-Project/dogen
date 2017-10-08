@@ -20,7 +20,7 @@ dogen::formatters::artefact class_formatter::format(
     const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& o(a.as<yarn::meta_model::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::meta_model::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));
