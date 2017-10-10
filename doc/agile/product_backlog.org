@@ -9877,6 +9877,8 @@ it in anger with dogen:
 - dia should have a UUID associated with each element so we can track
   those and know of renames.
 - dia should have an XMI export.
+- dia should allow selecting groups of objects based on some criteria:
+  stereotypes matching regex, class names, classes in namespace, etc.
 
 It seems like dia is also using GitHub these days:
 
