@@ -49,7 +49,6 @@ public:
     archetype_properties(
         const bool enabled,
         const bool overwrite,
-        const std::string& facet_directory,
         const std::string& postfix);
 
 private:
@@ -70,16 +69,6 @@ public:
 
     bool overwrite() const;
     void overwrite(const bool v);
-
-    /**
-     * @brief Directory name for the facet of this archetype.
-     */
-    /**@{*/
-    const std::string& facet_directory() const;
-    std::string& facet_directory();
-    void facet_directory(const std::string& v);
-    void facet_directory(const std::string&& v);
-    /**@}*/
 
     /**
      * @brief Postfix to use for artefacts of this archetype.
@@ -104,7 +93,6 @@ public:
 private:
     bool enabled_;
     bool overwrite_;
-    std::string facet_directory_;
     std::string postfix_;
 };
 

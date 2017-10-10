@@ -48,7 +48,6 @@ public:
 public:
     backend_properties(
         const bool enabled,
-        const bool overwrite,
         const std::string& directory,
         const bool force_backend_directory);
 
@@ -67,9 +66,6 @@ public:
     bool enabled() const;
     void enabled(const bool v);
     /**@}*/
-
-    bool overwrite() const;
-    void overwrite(const bool v);
 
     /**
      * @brief Backend specific directory name, if any.
@@ -102,7 +98,6 @@ public:
 
 private:
     bool enabled_;
-    bool overwrite_;
     std::string directory_;
     bool force_backend_directory_;
 };

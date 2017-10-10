@@ -39,7 +39,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("overwrite", v.overwrite_);
-    ar << make_nvp("facet_directory", v.facet_directory_);
     ar << make_nvp("postfix", v.postfix_);
 }
 
@@ -49,7 +48,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("overwrite", v.overwrite_);
-    ar >> make_nvp("facet_directory", v.facet_directory_);
     ar >> make_nvp("postfix", v.postfix_);
 }
 

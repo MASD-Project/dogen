@@ -38,7 +38,6 @@ std::size_t backend_properties_hasher::hash(const backend_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());
-    combine(seed, v.overwrite());
     combine(seed, v.directory());
     combine(seed, v.force_backend_directory());
 
