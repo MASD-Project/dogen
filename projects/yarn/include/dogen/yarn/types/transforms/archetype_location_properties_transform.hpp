@@ -25,8 +25,14 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/element.hpp"
+#include <string>
+#include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/element_archetype.hpp"
+#include "dogen/yarn/types/meta_model/backend_properties.hpp"
+#include "dogen/yarn/types/meta_model/facet_properties.hpp"
+#include "dogen/yarn/types/meta_model/archetype_properties.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
@@ -34,6 +40,63 @@ namespace yarn {
 namespace transforms {
 
 class archetype_location_properties_transform final {
+private:
+    struct backend_type_group {
+        annotations::type enabled;
+        annotations::type directory;
+        annotations::type force_backend_directory;
+    };
+
+    friend std::ostream&
+    operator<<(std::ostream& s, const backend_type_group& v);
+
+    struct facet_type_group {
+        annotations::type enabled;
+        annotations::type overwrite;
+        annotations::type directory;
+        annotations::type postfix;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const facet_type_group& v);
+
+    struct archetype_type_group {
+        annotations::type enabled;
+        annotations::type overwrite;
+        annotations::type postfix;
+    };
+
+    friend std::ostream&
+    operator<<(std::ostream& s, const archetype_type_group& v);
+
+private:
+    static std::unordered_map<std::string, backend_type_group>
+    make_backend_type_group(const annotations::type_repository& atrp,
+        const annotations::archetype_location_repository& alrp);
+
+    static std::unordered_map<std::string, backend_type_group>
+    make_facet_type_group(const annotations::type_repository& atrp,
+        const annotations::archetype_location_repository& alrp);
+
+    static std::unordered_map<std::string, backend_type_group>
+    make_archetype_type_group(const annotations::type_repository& atrp,
+        const annotations::archetype_location_repository& alrp);
+
+private:
+    static std::unordered_map<std::string, meta_model::backend_properties>
+    obtain_backend_properties(
+        const std::unordered_map<std::string, backend_type_group>& tgs,
+        const annotations::annotation& ra);
+
+    static std::unordered_map<std::string, meta_model::facet_properties>
+    obtain_facet_properties(
+        const std::unordered_map<std::string, facet_type_group>& tgs,
+        const annotations::annotation& ra);
+
+    static std::unordered_map<std::string, meta_model::archetype_properties>
+    obtain_archetype_properties(
+        const std::unordered_map<std::string, archetype_type_group>& tgs,
+        const annotations::annotation& ra);
+
 public:
     static void transform(const context& ctx, meta_model::model& m);
 };

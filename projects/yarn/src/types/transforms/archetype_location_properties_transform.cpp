@@ -18,6 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
@@ -36,6 +41,77 @@ static logger lg(logger_factory(transform_id));
 namespace dogen {
 namespace yarn {
 namespace transforms {
+
+inline std::ostream& operator<<(std::ostream& s,
+    const archetype_location_properties_transform::backend_type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"yarn::transform::"
+      << "archetype_location_properties_transform::backend_type_group\"" << ", "
+      << "\"enabled\": " << v.enabled << ", "
+      << "\"directory\": " << v.directory << ", "
+      << "\"force_backend_directory\": " << v.force_backend_directory
+      << " }";
+
+    return s;
+}
+
+inline std::ostream& operator<<(std::ostream& s,
+    const archetype_location_properties_transform::facet_type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"yarn::transform::"
+      << "archetype_location_properties_transform::facet_type_group\"" << ", "
+      << "\"enabled\": " << v.enabled << ", "
+      << "\"overwrite\": " << v.overwrite << ", "
+      << "\"directory\": " << v.directory << ", "
+      << "\"postfix\": " << v.postfix
+      << " }";
+
+    return s;
+}
+
+inline std::ostream& operator<<(std::ostream& s,
+    const archetype_location_properties_transform::archetype_type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"yarn::transform::"
+      << "archetype_location_properties_transform::archetype_type_group\""
+      << ", "
+      << "\"enabled\": " << v.enabled << ", "
+      << "\"overwrite\": " << v.overwrite << ", "
+      << "\"postfix\": " << v.postfix
+      << " }";
+
+    return s;
+}
+
+std::unordered_map<std::string,
+                   archetype_location_properties_transform::backend_type_group>
+archetype_location_properties_transform::
+make_backend_type_group(const annotations::type_repository& /*atrp*/,
+    const annotations::archetype_location_repository& /*alrp*/) {
+    std::unordered_map<std::string, backend_type_group> r;
+    return r;
+}
+
+std::unordered_map<std::string,
+                   archetype_location_properties_transform::backend_type_group>
+archetype_location_properties_transform::
+make_facet_type_group(const annotations::type_repository& /*atrp*/,
+    const annotations::archetype_location_repository& /*alrp*/) {
+    std::unordered_map<std::string, backend_type_group> r;
+    return r;
+}
+
+std::unordered_map<std::string,
+                   archetype_location_properties_transform::backend_type_group>
+archetype_location_properties_transform::
+make_archetype_type_group(const annotations::type_repository& /*atrp*/,
+    const annotations::archetype_location_repository& /*alrp*/) {
+    std::unordered_map<std::string, backend_type_group> r;
+    return r;
+}
 
 void archetype_location_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
