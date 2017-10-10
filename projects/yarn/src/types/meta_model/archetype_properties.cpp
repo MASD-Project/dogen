@@ -25,25 +25,30 @@ namespace yarn {
 namespace meta_model {
 
 archetype_properties::archetype_properties()
-    : enabled_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)),
+      overwrite_(static_cast<bool>(0)) { }
 
 archetype_properties::archetype_properties(
     const bool enabled,
+    const bool overwrite,
     const std::string& facet_directory,
     const std::string& postfix)
     : enabled_(enabled),
+      overwrite_(overwrite),
       facet_directory_(facet_directory),
       postfix_(postfix) { }
 
 void archetype_properties::swap(archetype_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
+    swap(overwrite_, other.overwrite_);
     swap(facet_directory_, other.facet_directory_);
     swap(postfix_, other.postfix_);
 }
 
 bool archetype_properties::operator==(const archetype_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
+        overwrite_ == rhs.overwrite_ &&
         facet_directory_ == rhs.facet_directory_ &&
         postfix_ == rhs.postfix_;
 }
@@ -60,6 +65,14 @@ bool archetype_properties::enabled() const {
 
 void archetype_properties::enabled(const bool v) {
     enabled_ = v;
+}
+
+bool archetype_properties::overwrite() const {
+    return overwrite_;
+}
+
+void archetype_properties::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 const std::string& archetype_properties::facet_directory() const {

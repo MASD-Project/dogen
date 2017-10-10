@@ -45,6 +45,7 @@ std::ostream& operator<<(std::ostream& s, const facet_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::facet_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";

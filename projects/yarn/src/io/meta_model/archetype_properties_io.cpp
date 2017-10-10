@@ -45,6 +45,7 @@ std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::archetype_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
       << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";

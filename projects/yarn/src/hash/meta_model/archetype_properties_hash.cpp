@@ -38,6 +38,7 @@ std::size_t archetype_properties_hasher::hash(const archetype_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());
+    combine(seed, v.overwrite());
     combine(seed, v.facet_directory());
     combine(seed, v.postfix());
 

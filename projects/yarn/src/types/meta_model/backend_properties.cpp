@@ -26,25 +26,30 @@ namespace meta_model {
 
 backend_properties::backend_properties()
     : enabled_(static_cast<bool>(0)),
+      overwrite_(static_cast<bool>(0)),
       force_backend_directory_(static_cast<bool>(0)) { }
 
 backend_properties::backend_properties(
     const bool enabled,
+    const bool overwrite,
     const std::string& directory,
     const bool force_backend_directory)
     : enabled_(enabled),
+      overwrite_(overwrite),
       directory_(directory),
       force_backend_directory_(force_backend_directory) { }
 
 void backend_properties::swap(backend_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
+    swap(overwrite_, other.overwrite_);
     swap(directory_, other.directory_);
     swap(force_backend_directory_, other.force_backend_directory_);
 }
 
 bool backend_properties::operator==(const backend_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
+        overwrite_ == rhs.overwrite_ &&
         directory_ == rhs.directory_ &&
         force_backend_directory_ == rhs.force_backend_directory_;
 }
@@ -61,6 +66,14 @@ bool backend_properties::enabled() const {
 
 void backend_properties::enabled(const bool v) {
     enabled_ = v;
+}
+
+bool backend_properties::overwrite() const {
+    return overwrite_;
+}
+
+void backend_properties::overwrite(const bool v) {
+    overwrite_ = v;
 }
 
 const std::string& backend_properties::directory() const {

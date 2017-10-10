@@ -396,6 +396,8 @@ that the "id" is in effect "archetype" in archetype location, but its
 slightly less confusing.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-10 Tue 18:20]--[2017-10-10 Tue 18:41] =>  0:21
+    CLOCK: [2017-10-10 Tue 07:11]--[2017-10-10 Tue 07:55] =>  0:44
     CLOCK: [2017-10-08 Sun 17:13]--[2017-10-08 Sun 17:23] =>  0:10
     CLOCK: [2017-10-08 Sun 16:42]--[2017-10-08 Sun 17:12] =>  0:30
     CLOCK: [2017-10-08 Sun 14:52]--[2017-10-08 Sun 15:38] =>  0:46
@@ -418,6 +420,16 @@ We have a number of properties scattered around the model that need to
 be treated as a unit. We don't really have a good name for it, but as
 they are all related to archetype location stuff,
 =archetype_location_properties= seems like a good name.
+
+The reading of the "global" properties is done in the new archetype
+location transform. Enablement takes these properties and uses it to
+populate its global configuration.
+
+Notes:
+
+- is there a need for a global overwrite flag? We already have the
+  force write command line option. We seem to have this at all levels
+  (backend, facet, archetype).
 
 Tasks:
 

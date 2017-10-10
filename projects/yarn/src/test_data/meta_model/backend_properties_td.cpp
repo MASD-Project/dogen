@@ -44,8 +44,9 @@ backend_properties_generator::backend_properties_generator() : position_(0) { }
 void backend_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.directory(create_std_string(position + 1));
-    v.force_backend_directory(create_bool(position + 2));
+    v.overwrite(create_bool(position + 1));
+    v.directory(create_std_string(position + 2));
+    v.force_backend_directory(create_bool(position + 3));
 }
 
 backend_properties_generator::result_type

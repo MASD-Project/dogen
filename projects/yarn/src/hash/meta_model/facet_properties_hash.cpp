@@ -38,6 +38,7 @@ std::size_t facet_properties_hasher::hash(const facet_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.enabled());
+    combine(seed, v.overwrite());
     combine(seed, v.directory());
     combine(seed, v.postfix());
 
