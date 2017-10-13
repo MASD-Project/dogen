@@ -20,6 +20,7 @@
  */
 #include "dogen/yarn/hash/meta_model/formatting_styles_hash.hpp"
 #include "dogen/yarn/hash/meta_model/artefact_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -58,6 +59,7 @@ std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     combine(seed, hash_std_list_std_string(v.dependencies()));
     combine(seed, v.formatting_style());
     combine(seed, v.formatting_input());
+    combine(seed, v.local_archetype_location_properties());
 
     return seed;
 }

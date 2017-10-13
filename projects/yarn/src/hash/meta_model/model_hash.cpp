@@ -27,7 +27,7 @@
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/hash/meta_model/locator_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/archetype_location_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -122,7 +122,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_orm_model_properties(v.orm_properties()));
     combine(seed, hash_std_unordered_set_dogen_yarn_meta_model_element_archetype(v.enabled_archetype_for_element()));
     combine(seed, v.locator_properties());
-    combine(seed, v.archetype_location_properties());
+    combine(seed, v.global_archetype_location_properties());
 
     return seed;
 }

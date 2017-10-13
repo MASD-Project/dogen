@@ -81,9 +81,10 @@
 #include "dogen/yarn/hash/transforms/formatting_configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/directory_structure_styles_hash.hpp"
 #include "dogen/yarn/hash/meta_model/archetype_family_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/archetype_location_properties_hash.hpp"
 #include "dogen/yarn/hash/transforms/local_enablement_configuration_hash.hpp"
 #include "dogen/yarn/hash/transforms/global_enablement_configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/intra_backend_segment_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 #endif

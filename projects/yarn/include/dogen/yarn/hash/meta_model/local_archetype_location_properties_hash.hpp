@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_TD_HPP
-#define DOGEN_YARN_TEST_DATA_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_TD_HPP
+#ifndef DOGEN_YARN_HASH_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HASH_HPP
+#define DOGEN_YARN_HASH_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/archetype_location_properties.hpp"
+#include <functional>
+#include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class archetype_location_properties_generator {
+struct local_archetype_location_properties_hasher {
 public:
-    archetype_location_properties_generator();
-
-public:
-    typedef dogen::yarn::meta_model::archetype_location_properties result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    static std::size_t hash(const local_archetype_location_properties& v);
 };
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::meta_model::local_archetype_location_properties> {
+public:
+    size_t operator()(const dogen::yarn::meta_model::local_archetype_location_properties& v) const {
+        return dogen::yarn::meta_model::local_archetype_location_properties_hasher::hash(v);
+    }
+};
+
+}
 #endif

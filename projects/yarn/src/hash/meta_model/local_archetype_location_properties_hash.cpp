@@ -18,36 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_HASH_HPP
-#define DOGEN_YARN_HASH_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_HASH_HPP
+#include "dogen/yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <functional>
-#include "dogen/yarn/types/meta_model/archetype_location_properties.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-struct archetype_location_properties_hasher {
-public:
-    static std::size_t hash(const archetype_location_properties& v);
-};
+std::size_t local_archetype_location_properties_hasher::hash(const local_archetype_location_properties& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_boost_optional_bool(v.facet_enabled()));
+    combine(seed, hash_boost_optional_bool(v.archetype_enabled()));
+    combine(seed, hash_boost_optional_bool(v.facet_overwrite()));
+    combine(seed, hash_boost_optional_bool(v.archetype_overwrite()));
+
+    return seed;
+}
 
 } } }
-
-namespace std {
-
-template<>
-struct hash<dogen::yarn::meta_model::archetype_location_properties> {
-public:
-    size_t operator()(const dogen::yarn::meta_model::archetype_location_properties& v) const {
-        return dogen::yarn::meta_model::archetype_location_properties_hasher::hash(v);
-    }
-};
-
-}
-#endif

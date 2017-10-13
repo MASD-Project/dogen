@@ -22,7 +22,7 @@
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/backend_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/archetype_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/archetype_location_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
 
 namespace {
 
@@ -77,31 +77,31 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-archetype_location_properties_generator::archetype_location_properties_generator() : position_(0) { }
+global_archetype_location_properties_generator::global_archetype_location_properties_generator() : position_(0) { }
 
-void archetype_location_properties_generator::
+void global_archetype_location_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.backend_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(position + 0));
     v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 1));
     v.archetype_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_properties(position + 2));
 }
 
-archetype_location_properties_generator::result_type
-archetype_location_properties_generator::create(const unsigned int position) {
-    archetype_location_properties r;
-    archetype_location_properties_generator::populate(position, r);
+global_archetype_location_properties_generator::result_type
+global_archetype_location_properties_generator::create(const unsigned int position) {
+    global_archetype_location_properties r;
+    global_archetype_location_properties_generator::populate(position, r);
     return r;
 }
 
-archetype_location_properties_generator::result_type*
-archetype_location_properties_generator::create_ptr(const unsigned int position) {
-    archetype_location_properties* p = new archetype_location_properties();
-    archetype_location_properties_generator::populate(position, *p);
+global_archetype_location_properties_generator::result_type*
+global_archetype_location_properties_generator::create_ptr(const unsigned int position) {
+    global_archetype_location_properties* p = new global_archetype_location_properties();
+    global_archetype_location_properties_generator::populate(position, *p);
     return p;
 }
 
-archetype_location_properties_generator::result_type
-archetype_location_properties_generator::operator()() {
+global_archetype_location_properties_generator::result_type
+global_archetype_location_properties_generator::operator()() {
     return create(position_++);
 }
 

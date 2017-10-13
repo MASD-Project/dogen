@@ -35,7 +35,8 @@ artefact_properties::artefact_properties(artefact_properties&& rhs)
       file_path_(std::move(rhs.file_path_)),
       dependencies_(std::move(rhs.dependencies_)),
       formatting_style_(std::move(rhs.formatting_style_)),
-      formatting_input_(std::move(rhs.formatting_input_)) { }
+      formatting_input_(std::move(rhs.formatting_input_)),
+      local_archetype_location_properties_(std::move(rhs.local_archetype_location_properties_)) { }
 
 artefact_properties::artefact_properties(
     const bool enabled,
@@ -43,13 +44,15 @@ artefact_properties::artefact_properties(
     const boost::filesystem::path& file_path,
     const std::list<std::string>& dependencies,
     const dogen::yarn::meta_model::formatting_styles formatting_style,
-    const std::string& formatting_input)
+    const std::string& formatting_input,
+    const dogen::yarn::meta_model::local_archetype_location_properties& local_archetype_location_properties)
     : enabled_(enabled),
       overwrite_(overwrite),
       file_path_(file_path),
       dependencies_(dependencies),
       formatting_style_(formatting_style),
-      formatting_input_(formatting_input) { }
+      formatting_input_(formatting_input),
+      local_archetype_location_properties_(local_archetype_location_properties) { }
 
 void artefact_properties::swap(artefact_properties& other) noexcept {
     using std::swap;
@@ -59,6 +62,7 @@ void artefact_properties::swap(artefact_properties& other) noexcept {
     swap(dependencies_, other.dependencies_);
     swap(formatting_style_, other.formatting_style_);
     swap(formatting_input_, other.formatting_input_);
+    swap(local_archetype_location_properties_, other.local_archetype_location_properties_);
 }
 
 bool artefact_properties::operator==(const artefact_properties& rhs) const {
@@ -67,7 +71,8 @@ bool artefact_properties::operator==(const artefact_properties& rhs) const {
         file_path_ == rhs.file_path_ &&
         dependencies_ == rhs.dependencies_ &&
         formatting_style_ == rhs.formatting_style_ &&
-        formatting_input_ == rhs.formatting_input_;
+        formatting_input_ == rhs.formatting_input_ &&
+        local_archetype_location_properties_ == rhs.local_archetype_location_properties_;
 }
 
 artefact_properties& artefact_properties::operator=(artefact_properties other) {
@@ -146,6 +151,22 @@ void artefact_properties::formatting_input(const std::string& v) {
 
 void artefact_properties::formatting_input(const std::string&& v) {
     formatting_input_ = std::move(v);
+}
+
+const dogen::yarn::meta_model::local_archetype_location_properties& artefact_properties::local_archetype_location_properties() const {
+    return local_archetype_location_properties_;
+}
+
+dogen::yarn::meta_model::local_archetype_location_properties& artefact_properties::local_archetype_location_properties() {
+    return local_archetype_location_properties_;
+}
+
+void artefact_properties::local_archetype_location_properties(const dogen::yarn::meta_model::local_archetype_location_properties& v) {
+    local_archetype_location_properties_ = v;
+}
+
+void artefact_properties::local_archetype_location_properties(const dogen::yarn::meta_model::local_archetype_location_properties&& v) {
+    local_archetype_location_properties_ = std::move(v);
 }
 
 } } }

@@ -23,6 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -64,7 +65,8 @@ std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"formatting_style\": " << v.formatting_style() << ", "
-      << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\""
+      << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\"" << ", "
+      << "\"local_archetype_location_properties\": " << v.local_archetype_location_properties()
       << " }";
     return(s);
 }

@@ -81,9 +81,10 @@
 #include "dogen/yarn/io/transforms/formatting_configuration_io.hpp"
 #include "dogen/yarn/io/meta_model/directory_structure_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/archetype_family_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/archetype_location_properties_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/transforms/global_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/global_archetype_location_properties_io.hpp"
 
 #endif

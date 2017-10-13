@@ -28,7 +28,7 @@
 #include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen/yarn/test_data/meta_model/locator_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/archetype_location_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
 
 namespace {
 
@@ -143,9 +143,9 @@ create_dogen_yarn_meta_model_locator_properties(const unsigned int position) {
     return dogen::yarn::meta_model::locator_properties_generator::create(position);
 }
 
-dogen::yarn::meta_model::archetype_location_properties
-create_dogen_yarn_meta_model_archetype_location_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::archetype_location_properties_generator::create(position);
+dogen::yarn::meta_model::global_archetype_location_properties
+create_dogen_yarn_meta_model_global_archetype_location_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::global_archetype_location_properties_generator::create(position);
 }
 
 }
@@ -171,7 +171,7 @@ populate(const unsigned int position, result_type& v) {
     v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 10));
     v.enabled_archetype_for_element(create_std_unordered_set_dogen_yarn_meta_model_element_archetype(position + 11));
     v.locator_properties(create_dogen_yarn_meta_model_locator_properties(position + 12));
-    v.archetype_location_properties(create_dogen_yarn_meta_model_archetype_location_properties(position + 13));
+    v.global_archetype_location_properties(create_dogen_yarn_meta_model_global_archetype_location_properties(position + 13));
 }
 
 model_generator::result_type

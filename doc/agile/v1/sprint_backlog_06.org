@@ -396,6 +396,7 @@ that the "id" is in effect "archetype" in archetype location, but its
 slightly less confusing.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-13 Fri 15:31]
     CLOCK: [2017-10-13 Fri 14:16]--[2017-10-13 Fri 14:26] =>  0:10
     CLOCK: [2017-10-13 Fri 11:51]--[2017-10-13 Fri 13:45] =>  1:54
     CLOCK: [2017-10-10 Tue 18:42]--[2017-10-10 Tue 19:13] =>  0:31
@@ -761,6 +762,23 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
+
+*** Properties vs configuration                                       :story:
+
+Originally we had defined properties to mean things which are computed
+and configuration to mean things which are read directly from the
+meta-data and not touched afterwards. This made life easier in
+determining how each class was used. However, this was not strictly
+enforced and now there are many cases where properties are used when
+configuration should have been (and probably vice-versa). In addition,
+we have cases where we should have used configuration but used nothing
+(type parameters springs to mind). We need to do a clean up of the
+meta-model.
+
+*** Consider collapsing element properties into element
+
+Do we really need element properties as a stand alone class? It seems
+all of its attributes should just be part of element.
 
 *** Create a text model post-processing chain                         :story:
 

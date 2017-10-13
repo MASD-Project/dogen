@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,31 +31,31 @@
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/backend_properties.hpp"
 #include "dogen/yarn/types/meta_model/archetype_properties.hpp"
-#include "dogen/yarn/serialization/meta_model/archetype_location_properties_fwd_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/global_archetype_location_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class archetype_location_properties final {
+class global_archetype_location_properties final {
 public:
-    archetype_location_properties() = default;
-    archetype_location_properties(const archetype_location_properties&) = default;
-    archetype_location_properties(archetype_location_properties&&) = default;
-    ~archetype_location_properties() = default;
+    global_archetype_location_properties() = default;
+    global_archetype_location_properties(const global_archetype_location_properties&) = default;
+    global_archetype_location_properties(global_archetype_location_properties&&) = default;
+    ~global_archetype_location_properties() = default;
 
 public:
-    archetype_location_properties(
+    global_archetype_location_properties(
         const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties() const;
@@ -74,14 +74,14 @@ public:
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>&& v);
 
 public:
-    bool operator==(const archetype_location_properties& rhs) const;
-    bool operator!=(const archetype_location_properties& rhs) const {
+    bool operator==(const global_archetype_location_properties& rhs) const;
+    bool operator!=(const global_archetype_location_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(archetype_location_properties& other) noexcept;
-    archetype_location_properties& operator=(archetype_location_properties other);
+    void swap(global_archetype_location_properties& other) noexcept;
+    global_archetype_location_properties& operator=(global_archetype_location_properties other);
 
 private:
     std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> backend_properties_;
@@ -95,8 +95,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::meta_model::archetype_location_properties& lhs,
-    dogen::yarn::meta_model::archetype_location_properties& rhs) {
+    dogen::yarn::meta_model::global_archetype_location_properties& lhs,
+    dogen::yarn::meta_model::global_archetype_location_properties& rhs) {
     lhs.swap(rhs);
 }
 

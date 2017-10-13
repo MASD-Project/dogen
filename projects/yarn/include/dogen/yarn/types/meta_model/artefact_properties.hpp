@@ -31,6 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/meta_model/formatting_styles.hpp"
 #include "dogen/yarn/serialization/meta_model/artefact_properties_fwd_ser.hpp"
+#include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -54,7 +55,8 @@ public:
         const boost::filesystem::path& file_path,
         const std::list<std::string>& dependencies,
         const dogen::yarn::meta_model::formatting_styles formatting_style,
-        const std::string& formatting_input);
+        const std::string& formatting_input,
+        const dogen::yarn::meta_model::local_archetype_location_properties& local_archetype_location_properties);
 
 private:
     template<typename Archive>
@@ -88,6 +90,11 @@ public:
     void formatting_input(const std::string& v);
     void formatting_input(const std::string&& v);
 
+    const dogen::yarn::meta_model::local_archetype_location_properties& local_archetype_location_properties() const;
+    dogen::yarn::meta_model::local_archetype_location_properties& local_archetype_location_properties();
+    void local_archetype_location_properties(const dogen::yarn::meta_model::local_archetype_location_properties& v);
+    void local_archetype_location_properties(const dogen::yarn::meta_model::local_archetype_location_properties&& v);
+
 public:
     bool operator==(const artefact_properties& rhs) const;
     bool operator!=(const artefact_properties& rhs) const {
@@ -105,6 +112,7 @@ private:
     std::list<std::string> dependencies_;
     dogen::yarn::meta_model::formatting_styles formatting_style_;
     std::string formatting_input_;
+    dogen::yarn::meta_model::local_archetype_location_properties local_archetype_location_properties_;
 };
 
 } } }

@@ -23,7 +23,7 @@
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/archetype_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/archetype_location_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/global_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -91,9 +91,9 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const archetype_location_properties& v) {
+std::ostream& operator<<(std::ostream& s, const global_archetype_location_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::archetype_location_properties\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::global_archetype_location_properties\"" << ", "
       << "\"backend_properties\": " << v.backend_properties() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"archetype_properties\": " << v.archetype_properties()

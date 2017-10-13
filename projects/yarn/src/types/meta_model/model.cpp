@@ -63,7 +63,7 @@ model::model(model&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
       locator_properties_(std::move(rhs.locator_properties_)),
-      archetype_location_properties_(std::move(rhs.archetype_location_properties_)) { }
+      global_archetype_location_properties_(std::move(rhs.global_archetype_location_properties_)) { }
 
 model::model(
     const dogen::yarn::meta_model::name& name,
@@ -79,7 +79,7 @@ model::model(
     const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
     const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element,
     const dogen::yarn::meta_model::locator_properties& locator_properties,
-    const dogen::yarn::meta_model::archetype_location_properties& archetype_location_properties)
+    const dogen::yarn::meta_model::global_archetype_location_properties& global_archetype_location_properties)
     : name_(name),
       meta_name_(meta_name),
       references_(references),
@@ -93,7 +93,7 @@ model::model(
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
       locator_properties_(locator_properties),
-      archetype_location_properties_(archetype_location_properties) { }
+      global_archetype_location_properties_(global_archetype_location_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -110,7 +110,7 @@ void model::swap(model& other) noexcept {
     swap(orm_properties_, other.orm_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
     swap(locator_properties_, other.locator_properties_);
-    swap(archetype_location_properties_, other.archetype_location_properties_);
+    swap(global_archetype_location_properties_, other.global_archetype_location_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -127,7 +127,7 @@ bool model::operator==(const model& rhs) const {
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
         locator_properties_ == rhs.locator_properties_ &&
-        archetype_location_properties_ == rhs.archetype_location_properties_;
+        global_archetype_location_properties_ == rhs.global_archetype_location_properties_;
 }
 
 model& model::operator=(model other) {
@@ -320,20 +320,20 @@ void model::locator_properties(const dogen::yarn::meta_model::locator_properties
     locator_properties_ = std::move(v);
 }
 
-const dogen::yarn::meta_model::archetype_location_properties& model::archetype_location_properties() const {
-    return archetype_location_properties_;
+const dogen::yarn::meta_model::global_archetype_location_properties& model::global_archetype_location_properties() const {
+    return global_archetype_location_properties_;
 }
 
-dogen::yarn::meta_model::archetype_location_properties& model::archetype_location_properties() {
-    return archetype_location_properties_;
+dogen::yarn::meta_model::global_archetype_location_properties& model::global_archetype_location_properties() {
+    return global_archetype_location_properties_;
 }
 
-void model::archetype_location_properties(const dogen::yarn::meta_model::archetype_location_properties& v) {
-    archetype_location_properties_ = v;
+void model::global_archetype_location_properties(const dogen::yarn::meta_model::global_archetype_location_properties& v) {
+    global_archetype_location_properties_ = v;
 }
 
-void model::archetype_location_properties(const dogen::yarn::meta_model::archetype_location_properties&& v) {
-    archetype_location_properties_ = std::move(v);
+void model::global_archetype_location_properties(const dogen::yarn::meta_model::global_archetype_location_properties&& v) {
+    global_archetype_location_properties_ = std::move(v);
 }
 
 } } }

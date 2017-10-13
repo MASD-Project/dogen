@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/meta_model/archetype_location_properties.hpp"
+#include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::meta_model::archetype_location_properties)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::meta_model::local_archetype_location_properties)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+void save(Archive& ar, const dogen::yarn::meta_model::local_archetype_location_properties& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+void load(Archive& ar, dogen::yarn::meta_model::local_archetype_location_properties& v, unsigned int version);
 
 } }
 

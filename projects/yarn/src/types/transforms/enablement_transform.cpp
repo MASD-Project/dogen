@@ -178,7 +178,7 @@ void enablement_transform::update_facet_enablement(
      *
      * FIXME: read facet fields here instead of reusing configuration.
      */
-    auto& fp(m.archetype_location_properties().facet_properties());
+    auto& fp(m.global_archetype_location_properties().facet_properties());
     const auto archetype_to_facet([&]() {
             std::unordered_map<std::string, std::string> r;
             for (const auto& al : als)

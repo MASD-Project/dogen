@@ -32,14 +32,14 @@
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/archetype_location_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/global_archetype_location_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::meta_model::archetype_location_properties& v,
+    const dogen::yarn::meta_model::global_archetype_location_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("backend_properties", v.backend_properties_);
     ar << make_nvp("facet_properties", v.facet_properties_);
@@ -48,7 +48,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::meta_model::archetype_location_properties& v,
+    dogen::yarn::meta_model::global_archetype_location_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("backend_properties", v.backend_properties_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
@@ -60,16 +60,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::meta_model::global_archetype_location_properties& v, unsigned int version);
 
 } }

@@ -259,11 +259,11 @@ transform(const context& ctx, meta_model::model& m) {
     const auto atg(make_archetype_type_group(atrp, alrp));
 
     const auto& ra(m.root_module()->annotation());
-    meta_model::archetype_location_properties alp;
-    alp.backend_properties(obtain_backend_properties(btg, ra));
-    alp.facet_properties(obtain_facet_properties(ftg, ra));
-    alp.archetype_properties(obtain_archetype_properties(atg, ra));
-    m.archetype_location_properties(alp);
+    meta_model::global_archetype_location_properties galp;
+    galp.backend_properties(obtain_backend_properties(btg, ra));
+    galp.facet_properties(obtain_facet_properties(ftg, ra));
+    galp.archetype_properties(obtain_archetype_properties(atg, ra));
+    m.global_archetype_location_properties(galp);
 }
 
 } } }

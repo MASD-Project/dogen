@@ -21,7 +21,7 @@
 #include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/archetype_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/archetype_location_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -64,7 +64,7 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::size_t archetype_location_properties_hasher::hash(const archetype_location_properties& v) {
+std::size_t global_archetype_location_properties_hasher::hash(const global_archetype_location_properties& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(v.backend_properties()));

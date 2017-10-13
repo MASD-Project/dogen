@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_FWD_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_ARCHETYPE_LOCATION_PROPERTIES_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_FWD_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class archetype_location_properties;
+class local_archetype_location_properties;
 
 } } }
 
