@@ -46,9 +46,9 @@ public:
 
 public:
     archetype_location_properties(
+        const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties);
 
 private:
     template<typename Archive>
@@ -58,6 +58,11 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::archetype_location_properties& v, unsigned int version);
 
 public:
+    const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties();
+    void backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v);
+    void backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>&& v);
+
     const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties() const;
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties();
     void facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v);
@@ -67,11 +72,6 @@ public:
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties();
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& v);
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>&& v);
-
-    const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties();
-    void backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v);
-    void backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>&& v);
 
 public:
     bool operator==(const archetype_location_properties& rhs) const;
@@ -84,9 +84,9 @@ public:
     archetype_location_properties& operator=(archetype_location_properties other);
 
 private:
+    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> backend_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties> archetype_properties_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> backend_properties_;
 };
 
 } } }

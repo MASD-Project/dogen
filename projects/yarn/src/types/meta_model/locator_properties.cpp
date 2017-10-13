@@ -25,19 +25,25 @@ namespace yarn {
 namespace meta_model {
 
 locator_properties::locator_properties()
-    : directory_structure_style_(static_cast<dogen::yarn::meta_model::directory_structure_styles>(0)) { }
+    : directory_structure_style_(static_cast<dogen::yarn::meta_model::directory_structure_styles>(0)),
+      force_backend_directory_(static_cast<bool>(0)),
+      disable_facet_directories_(static_cast<bool>(0)) { }
 
 locator_properties::locator_properties(
     const dogen::yarn::meta_model::directory_structure_styles directory_structure_style,
     const std::string& name_separator,
     const dogen::yarn::meta_model::model_segment_properties& model_segment_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties)
+    const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties,
+    const bool force_backend_directory,
+    const bool disable_facet_directories)
     : directory_structure_style_(directory_structure_style),
       name_separator_(name_separator),
       model_segment_properties_(model_segment_properties),
       intra_backend_segment_properties_(intra_backend_segment_properties),
-      archetype_family_properties_(archetype_family_properties) { }
+      archetype_family_properties_(archetype_family_properties),
+      force_backend_directory_(force_backend_directory),
+      disable_facet_directories_(disable_facet_directories) { }
 
 void locator_properties::swap(locator_properties& other) noexcept {
     using std::swap;
@@ -46,6 +52,8 @@ void locator_properties::swap(locator_properties& other) noexcept {
     swap(model_segment_properties_, other.model_segment_properties_);
     swap(intra_backend_segment_properties_, other.intra_backend_segment_properties_);
     swap(archetype_family_properties_, other.archetype_family_properties_);
+    swap(force_backend_directory_, other.force_backend_directory_);
+    swap(disable_facet_directories_, other.disable_facet_directories_);
 }
 
 bool locator_properties::operator==(const locator_properties& rhs) const {
@@ -53,7 +61,9 @@ bool locator_properties::operator==(const locator_properties& rhs) const {
         name_separator_ == rhs.name_separator_ &&
         model_segment_properties_ == rhs.model_segment_properties_ &&
         intra_backend_segment_properties_ == rhs.intra_backend_segment_properties_ &&
-        archetype_family_properties_ == rhs.archetype_family_properties_;
+        archetype_family_properties_ == rhs.archetype_family_properties_ &&
+        force_backend_directory_ == rhs.force_backend_directory_ &&
+        disable_facet_directories_ == rhs.disable_facet_directories_;
 }
 
 locator_properties& locator_properties::operator=(locator_properties other) {
@@ -132,6 +142,22 @@ void locator_properties::archetype_family_properties(const std::unordered_map<st
 
 void locator_properties::archetype_family_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>&& v) {
     archetype_family_properties_ = std::move(v);
+}
+
+bool locator_properties::force_backend_directory() const {
+    return force_backend_directory_;
+}
+
+void locator_properties::force_backend_directory(const bool v) {
+    force_backend_directory_ = v;
+}
+
+bool locator_properties::disable_facet_directories() const {
+    return disable_facet_directories_;
+}
+
+void locator_properties::disable_facet_directories(const bool v) {
+    disable_facet_directories_ = v;
 }
 
 } } }

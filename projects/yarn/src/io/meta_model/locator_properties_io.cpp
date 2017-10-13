@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/model_segment_properties_io.hpp"
@@ -75,13 +76,21 @@ namespace yarn {
 namespace meta_model {
 
 std::ostream& operator<<(std::ostream& s, const locator_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::locator_properties\"" << ", "
       << "\"directory_structure_style\": " << v.directory_structure_style() << ", "
       << "\"name_separator\": " << "\"" << tidy_up_string(v.name_separator()) << "\"" << ", "
       << "\"model_segment_properties\": " << v.model_segment_properties() << ", "
       << "\"intra_backend_segment_properties\": " << v.intra_backend_segment_properties() << ", "
-      << "\"archetype_family_properties\": " << v.archetype_family_properties()
+      << "\"archetype_family_properties\": " << v.archetype_family_properties() << ", "
+      << "\"force_backend_directory\": " << v.force_backend_directory() << ", "
+      << "\"disable_facet_directories\": " << v.disable_facet_directories()
       << " }";
     return(s);
 }

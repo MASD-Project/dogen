@@ -32,6 +32,19 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+dogen::yarn::meta_model::backend_properties
+create_dogen_yarn_meta_model_backend_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::backend_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_backend_properties(position + i)));
+    }
+    return r;
+}
+
 dogen::yarn::meta_model::facet_properties
 create_dogen_yarn_meta_model_facet_properties(const unsigned int position) {
     return dogen::yarn::meta_model::facet_properties_generator::create(position);
@@ -58,19 +71,6 @@ std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties> c
     return r;
 }
 
-dogen::yarn::meta_model::backend_properties
-create_dogen_yarn_meta_model_backend_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::backend_properties_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_backend_properties(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -81,9 +81,9 @@ archetype_location_properties_generator::archetype_location_properties_generator
 
 void archetype_location_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 0));
-    v.archetype_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_properties(position + 1));
-    v.backend_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(position + 2));
+    v.backend_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(position + 0));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 1));
+    v.archetype_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_properties(position + 2));
 }
 
 archetype_location_properties_generator::result_type

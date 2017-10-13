@@ -31,6 +31,15 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -49,15 +58,6 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_arche
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -67,9 +67,9 @@ namespace meta_model {
 std::size_t archetype_location_properties_hasher::hash(const archetype_location_properties& v) {
     std::size_t seed(0);
 
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(v.backend_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(v.facet_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_properties(v.archetype_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(v.backend_properties()));
 
     return seed;
 }

@@ -35,6 +35,24 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -69,24 +87,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 namespace meta_model {
@@ -94,9 +94,9 @@ namespace meta_model {
 std::ostream& operator<<(std::ostream& s, const archetype_location_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::archetype_location_properties\"" << ", "
+      << "\"backend_properties\": " << v.backend_properties() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
-      << "\"archetype_properties\": " << v.archetype_properties() << ", "
-      << "\"backend_properties\": " << v.backend_properties()
+      << "\"archetype_properties\": " << v.archetype_properties()
       << " }";
     return(s);
 }

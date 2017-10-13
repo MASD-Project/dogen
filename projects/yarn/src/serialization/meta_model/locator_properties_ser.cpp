@@ -47,6 +47,8 @@ void save(Archive& ar,
     ar << make_nvp("model_segment_properties", v.model_segment_properties_);
     ar << make_nvp("intra_backend_segment_properties", v.intra_backend_segment_properties_);
     ar << make_nvp("archetype_family_properties", v.archetype_family_properties_);
+    ar << make_nvp("force_backend_directory", v.force_backend_directory_);
+    ar << make_nvp("disable_facet_directories", v.disable_facet_directories_);
 }
 
 template<typename Archive>
@@ -58,6 +60,8 @@ void load(Archive& ar,
     ar >> make_nvp("model_segment_properties", v.model_segment_properties_);
     ar >> make_nvp("intra_backend_segment_properties", v.intra_backend_segment_properties_);
     ar >> make_nvp("archetype_family_properties", v.archetype_family_properties_);
+    ar >> make_nvp("force_backend_directory", v.force_backend_directory_);
+    ar >> make_nvp("disable_facet_directories", v.disable_facet_directories_);
 }
 
 } }

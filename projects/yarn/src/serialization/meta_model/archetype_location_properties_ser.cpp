@@ -41,18 +41,18 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::meta_model::archetype_location_properties& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("backend_properties", v.backend_properties_);
     ar << make_nvp("facet_properties", v.facet_properties_);
     ar << make_nvp("archetype_properties", v.archetype_properties_);
-    ar << make_nvp("backend_properties", v.backend_properties_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::meta_model::archetype_location_properties& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("backend_properties", v.backend_properties_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
     ar >> make_nvp("archetype_properties", v.archetype_properties_);
-    ar >> make_nvp("backend_properties", v.backend_properties_);
 }
 
 } }

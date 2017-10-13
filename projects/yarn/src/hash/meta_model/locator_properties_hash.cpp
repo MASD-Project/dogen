@@ -64,6 +64,8 @@ std::size_t locator_properties_hasher::hash(const locator_properties& v) {
     combine(seed, v.model_segment_properties());
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_intra_backend_segment_properties(v.intra_backend_segment_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_family_properties(v.archetype_family_properties()));
+    combine(seed, v.force_backend_directory());
+    combine(seed, v.disable_facet_directories());
 
     return seed;
 }

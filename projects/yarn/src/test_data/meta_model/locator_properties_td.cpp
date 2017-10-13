@@ -69,6 +69,10 @@ std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_proper
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
+}
+
 }
 
 namespace dogen {
@@ -84,6 +88,8 @@ populate(const unsigned int position, result_type& v) {
     v.model_segment_properties(create_dogen_yarn_meta_model_model_segment_properties(position + 2));
     v.intra_backend_segment_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_intra_backend_segment_properties(position + 3));
     v.archetype_family_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_family_properties(position + 4));
+    v.force_backend_directory(create_bool(position + 5));
+    v.disable_facet_directories(create_bool(position + 6));
 }
 
 locator_properties_generator::result_type

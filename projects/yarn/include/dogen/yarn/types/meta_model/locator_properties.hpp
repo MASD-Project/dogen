@@ -53,7 +53,9 @@ public:
         const std::string& name_separator,
         const dogen::yarn::meta_model::model_segment_properties& model_segment_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& archetype_family_properties,
+        const bool force_backend_directory,
+        const bool disable_facet_directories);
 
 private:
     template<typename Archive>
@@ -91,6 +93,23 @@ public:
     void archetype_family_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>& v);
     void archetype_family_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties>&& v);
 
+    /**
+     * @brief If true, the backend directory will be expressed, even when there is only one
+     * backend enabled.
+     */
+    /**@{*/
+    bool force_backend_directory() const;
+    void force_backend_directory(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, directories for facets are not generated.
+     */
+    /**@{*/
+    bool disable_facet_directories() const;
+    void disable_facet_directories(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const locator_properties& rhs) const;
     bool operator!=(const locator_properties& rhs) const {
@@ -107,6 +126,8 @@ private:
     dogen::yarn::meta_model::model_segment_properties model_segment_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_family_properties> archetype_family_properties_;
+    bool force_backend_directory_;
+    bool disable_facet_directories_;
 };
 
 } } }
