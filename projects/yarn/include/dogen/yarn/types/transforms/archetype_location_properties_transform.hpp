@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
@@ -44,7 +45,6 @@ private:
     struct backend_type_group {
         annotations::type enabled;
         annotations::type directory;
-        annotations::type force_backend_directory;
     };
 
     friend std::ostream&
@@ -53,8 +53,8 @@ private:
     struct facet_type_group {
         annotations::type enabled;
         annotations::type overwrite;
-        annotations::type directory;
-        annotations::type postfix;
+        boost::optional<annotations::type> directory;
+        boost::optional<annotations::type> postfix;
     };
 
     friend std::ostream& operator<<(std::ostream& s, const facet_type_group& v);
@@ -73,11 +73,11 @@ private:
     make_backend_type_group(const annotations::type_repository& atrp,
         const annotations::archetype_location_repository& alrp);
 
-    static std::unordered_map<std::string, backend_type_group>
+    static std::unordered_map<std::string, facet_type_group>
     make_facet_type_group(const annotations::type_repository& atrp,
         const annotations::archetype_location_repository& alrp);
 
-    static std::unordered_map<std::string, backend_type_group>
+    static std::unordered_map<std::string, archetype_type_group>
     make_archetype_type_group(const annotations::type_repository& atrp,
         const annotations::archetype_location_repository& alrp);
 

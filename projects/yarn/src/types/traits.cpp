@@ -28,6 +28,16 @@ std::string traits::enabled() {
     return r;
 }
 
+std::string traits::directory() {
+    static std::string r("directory");
+    return r;
+}
+
+std::string traits::postfix() {
+    static std::string r("postfix");
+    return r;
+}
+
 std::string traits::supported() {
     static std::string r("supported");
     return r;
@@ -71,6 +81,11 @@ std::string traits::model_modules() {
 std::string traits::enable_backend_directories() {
     // FIXME: rename to yarn
     static std::string r("quilt.enable_backend_directories");
+    return r;
+}
+
+std::string traits::force_backend_directory() {
+    static std::string r("yarn.force_backend_directory");
     return r;
 }
 

@@ -32,6 +32,8 @@ namespace yarn {
 
 struct traits {
     static std::string enabled();
+    static std::string directory();
+    static std::string postfix();
     static std::string supported();
     static std::string overwrite();
     static std::string input_language();
@@ -41,6 +43,7 @@ struct traits {
     static std::string external_modules();
     static std::string model_modules();
     static std::string enable_backend_directories();
+    static std::string force_backend_directory();
 
     struct type_parameters {
         static std::string variable_number_of_parameters();
