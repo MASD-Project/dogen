@@ -73,7 +73,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     set(warning_flags "-Wall -Wextra")
 
     if (CMAKE_COMPILER_IS_GNUCXX)
-        # FIXME: causing problems with variants and move constructors.
         set(warning_flags "${warning_flags} -Wno-maybe-uninitialized")
     endif()
 
@@ -81,6 +80,11 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
         # disable mismatched tags as there are STL inconsistencies that
         # make it a bit useless.
         set(warning_flags "${warning_flags} -Wno-mismatched-tags")
+        if(CCACHE_PROGRAM)
+            # CCache and Clang don't seem to play nice when it comes
+            # to unused arguments.
+            set(warning_flags "${warning_flags} -Qunused-arguments")
+        endif()
     endif()
 
     # issue all the warnings demanded by strict iso c and iso c++

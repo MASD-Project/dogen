@@ -31,7 +31,7 @@ if(CCACHE_PROGRAM)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
 
     execute_process(COMMAND ${CCACHE_PROGRAM} --max-size=2.5G
-        COMMAND ccache --show-stats
+        ${CCACHE_PROGRAM} --show-stats
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 else()
     message(STATUS "CCache NOT found.")
