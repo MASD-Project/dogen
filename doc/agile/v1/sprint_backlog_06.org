@@ -13,27 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-13 Fri 14:26]
+#+CAPTION: Clock summary at [2017-10-14 Sat 22:20]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *30:25* |       |      | 100.0 |
+| *Total time*                                                                | *31:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 30:25   |       |      | 100.0 |
-| Active                                                                      |         | 30:25 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   7.6 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   2.5 |
+| Stories                                                                     | 31:18   |       |      | 100.0 |
+| Active                                                                      |         | 31:18 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   7.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   2.4 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.5 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   3.3 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   6.7 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   5.1 |
-| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.1 |
-| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   6.8 |
-| COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   1.6 |
-| COMPLETED Rename kernel and family                                          |         |       | 2:44 |   9.0 |
-| COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.3 |
-| STARTED Create the archetype location properties                            |         |       | 9:10 |  30.1 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  21.3 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   3.2 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   6.5 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   5.0 |
+| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.0 |
+| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   6.7 |
+| COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   1.5 |
+| COMPLETED Rename kernel and family                                          |         |       | 2:44 |   8.7 |
+| COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.2 |
+| STARTED Create the archetype location properties                            |         |       | 9:29 |  30.3 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  20.7 |
+| STARTED Caching in travis                                                   |         |       | 0:34 |   1.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -396,7 +397,7 @@ that the "id" is in effect "archetype" in archetype location, but its
 slightly less confusing.
 
 *** STARTED Create the archetype location properties                  :story:
-    CLOCK: [2017-10-13 Fri 15:31]
+    CLOCK: [2017-10-13 Fri 15:31]--[2017-10-13 Fri 15:50] =>  0:19
     CLOCK: [2017-10-13 Fri 14:16]--[2017-10-13 Fri 14:26] =>  0:10
     CLOCK: [2017-10-13 Fri 11:51]--[2017-10-13 Fri 13:45] =>  1:54
     CLOCK: [2017-10-10 Tue 18:42]--[2017-10-10 Tue 19:13] =>  0:31
@@ -763,6 +764,20 @@ We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
+*** STARTED Caching in travis                                         :story:
+    CLOCK: [2017-10-14 Sat 21:45]--[2017-10-14 Sat 22:19] =>  0:34
+
+It seems it is possible to cache in travis. We should try to enable it
+for our builds and see if it improves build times.
+
+Links:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.travis.yml][QuantLib travis.yml]] with caching enabled
+- [[https://blog.travis-ci.com/2016-05-03-caches-are-coming-to-everyone][Caching now available for everyone]]
+- [[https://docs.travis-ci.com/user/caching/][Caching Dependencies and Directories]]
+- [[https://ccache.samba.org/][CCache]]
+- [[https://crascit.com/2016/04/09/using-ccache-with-cmake/][Using ccache with CMake]]
+
 *** Properties vs configuration                                       :story:
 
 Originally we had defined properties to mean things which are computed
@@ -775,7 +790,7 @@ we have cases where we should have used configuration but used nothing
 (type parameters springs to mind). We need to do a clean up of the
 meta-model.
 
-*** Consider collapsing element properties into element
+*** Consider collapsing element properties into element               :story:
 
 Do we really need element properties as a stand alone class? It seems
 all of its attributes should just be part of element.

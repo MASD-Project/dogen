@@ -20,6 +20,7 @@
 sudo: required
 dist: trusty
 language: cpp
+cache: ccache
 
 git:
   depth: 5

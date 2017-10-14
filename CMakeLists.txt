@@ -22,6 +22,21 @@ cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 # ctest support
 enable_testing()
 
+#
+# Setup CCache
+#
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+    message(STATUS "Found CCache (${CCACHE_PROGRAM})...")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
+
+    execute_process(COMMAND ${CCACHE_PROGRAM} --max-size=2.5G
+        COMMAND ccache --show-stats
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+else()
+    message(STATUS "CCache NOT found.")
+endif()
+
 project(dogen)
 
 # conan support
@@ -31,7 +46,7 @@ if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     CONAN_BASIC_SETUP()
 else()
-    message(STATUS "Conan build file not found, skipping include")
+    message(STATUS "Conan build file NOT found, skipping include.")
     set(FOUND_CONAN "false")
 endif()
 
