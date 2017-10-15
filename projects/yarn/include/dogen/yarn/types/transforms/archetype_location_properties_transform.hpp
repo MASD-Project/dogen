@@ -120,6 +120,7 @@ private:
                               meta_model::local_archetype_location_properties>
     obtain_local_archetype_location_properties(
         const std::unordered_map<std::string, local_archetype_type_group>& tgs,
+        const std::list<annotations::archetype_location>& als,
         const annotations::annotation& a);
 
     static void populate_local_archetype_location_properties(

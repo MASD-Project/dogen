@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/types/annotation.hpp"
@@ -35,6 +36,7 @@
 #include "dogen/yarn/io/meta_model/archetype_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/archetype_location_properties_transform.hpp"
 
 namespace {
@@ -44,6 +46,9 @@ const std::string transform_id(
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
+
+const std::string type_grouo_not_found(
+    "Could not find a type group for archetype: ");
 
 }
 
@@ -310,6 +315,7 @@ std::unordered_map<std::string,
 archetype_location_properties_transform::
 obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_type_group>& tgs,
+    const std::list<annotations::archetype_location>& als,
     const annotations::annotation& a) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
@@ -317,9 +323,15 @@ obtain_local_archetype_location_properties(
     std::unordered_map<std::string,
                        meta_model::local_archetype_location_properties> r;
     const annotations::entry_selector s(a);
-    for (const auto& pair : tgs) {
-        const auto& archetype(pair.first);
-        const auto& tg(pair.second);
+    for (const auto& al : als) {
+        const auto archetype(al.archetype());
+        const auto i(tgs.find(archetype));
+        if (i == tgs.end()) {
+            BOOST_LOG_SEV(lg, error) << type_grouo_not_found << archetype;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(type_grouo_not_found + archetype));
+        }
+        const auto tg(i->second);
 
         meta_model::local_archetype_location_properties lalp;
         if (s.has_entry(tg.facet_enabled)) {
@@ -353,12 +365,50 @@ populate_local_archetype_location_properties(
     const annotations::type_repository& atrp,
     const annotations::archetype_location_repository& alrp,
     meta_model::model& m) {
-
+    /*
+     * Computes all of the possible types for every archetype
+     * location. Not all of these will be of use to a given element,
+     * because they may not be expressed for that element.
+     */
     const auto tgs(make_local_archetype_type_group(atrp, alrp));
-    for (auto ptr : m.elements()) {
-        auto& e(*ptr);
-        e.archetype_location_properties(
-            obtain_local_archetype_location_properties(tgs, e.annotation()));
+
+    /*
+     * Bucket all elements by their meta-name.
+     */
+    std::unordered_map<std::string,
+                       std::list<boost::shared_ptr<meta_model::element>>>
+        bucketed_elements;
+    for (auto ptr : m.elements())
+        bucketed_elements[ptr->meta_name().id()].push_back(ptr);
+
+    for (auto& pair : bucketed_elements) {
+        /*
+         * Locate all of the archetype locations that make sense for
+         * the current meta-name. If none do, there nothing for us to
+         * do here. This can happen if the meta-model element is not
+         * expressed as an artefact at all. This is the case, for
+         * example, for object templates (at the time of this
+         * wwritting).
+         */
+        const auto mn_id(pair.first);
+        const auto& albmn(alrp.archetype_locations_by_meta_name());
+        const auto i(albmn.find(mn_id));
+        if (i == albmn.end())
+            continue;
+
+        const auto& als(i->second.archetype_locations());
+
+        /*
+         * Now process each of the elements of this meta-type, only
+         * taking into account the archetype locations relevant to the
+         * meta-type.
+         */
+        for (auto ptr : pair.second) {
+            auto& e(*ptr);
+            const auto& a(e.annotation());
+            e.archetype_location_properties(
+                obtain_local_archetype_location_properties(tgs, als, a));
+        }
     }
 }
 

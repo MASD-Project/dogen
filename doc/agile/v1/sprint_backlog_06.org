@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-15 Sun 19:19]
+#+CAPTION: Clock summary at [2017-10-15 Sun 19:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *33:35* |       |       | 100.0 |
+| *Total time*                                                                | *34:08* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 33:35   |       |       | 100.0 |
-| Active                                                                      |         | 33:35 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   6.9 |
+| Stories                                                                     | 34:08   |       |       | 100.0 |
+| Active                                                                      |         | 34:08 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   6.8 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.2 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.5 |
 | COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   3.0 |
-| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   6.1 |
-| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   4.6 |
+| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   6.0 |
+| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   4.5 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.9 |
-| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   6.2 |
+| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   6.1 |
 | COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   1.4 |
-| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   8.1 |
-| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   3.0 |
+| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   8.0 |
+| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.9 |
 | COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.9 |
-| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   3.4 |
-| STARTED Create the archetype location properties                            |         |       | 10:13 |  30.4 |
-| STARTED Generate file paths as a transform                                  |         |       |  6:29 |  19.3 |
+| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   3.3 |
+| STARTED Create the archetype location properties                            |         |       | 10:46 |  31.5 |
+| STARTED Generate file paths as a transform                                  |         |       |  6:29 |  19.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -426,6 +426,7 @@ Do we really need element properties as a stand alone class? It seems
 all of its attributes should just be part of element.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-15 Sun 19:20]--[2017-10-15 Sun 19:53] =>  0:33
     CLOCK: [2017-10-15 Sun 18:45]--[2017-10-15 Sun 19:19] =>  0:34
     CLOCK: [2017-10-15 Sun 17:28]--[2017-10-15 Sun 17:38] =>  0:10
     CLOCK: [2017-10-13 Fri 15:31]--[2017-10-13 Fri 15:50] =>  0:19
@@ -466,6 +467,7 @@ Notes:
 - is there a need for a global overwrite flag? We already have the
   force write command line option. We seem to have this at all levels
   (backend, facet, archetype).
+- we need to
 
 Tasks:
 
@@ -821,6 +823,24 @@ Note that we need artefacts to have an associated language so that we
 can use the correct clang format configuration. If a language is not
 supported by clang format (e.g. c#) we should just skip the files. The
 text model could group files by language.
+
+*** Consider bucketing elements by meta-type in model                 :story:
+
+At the moment we have a flat container of elements in the main
+model. However, it seems like its main use case will be to bucket the
+elements by meta-type before processing: formatters will want to
+locate all formatters for a given meta-type and apply them all. At
+present we are asking for the formatters for meta-name
+repeatedly. This makes no sense, we should just ask for them once and
+apply all formatters in one go.
+
+For this we could simply group elements by meta-name in the model
+itself and then use that container at formatting time. However, there
+may be cases where looping through the whole model is more convenient
+(during transforms) so this is not without its downsides.
+
+Alternatively we could consider just bucketing in the formatters'
+workflow itself.
 
 *** Postfix and directory fields in annotations look weird            :story:
 
