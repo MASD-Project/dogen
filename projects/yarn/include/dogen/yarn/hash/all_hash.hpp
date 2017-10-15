@@ -63,7 +63,6 @@
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/hash/meta_model/formatting_styles_hash.hpp"
 #include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/element_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/locator_properties_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_set_repository_hash.hpp"
 #include "dogen/yarn/hash/meta_model/artefact_properties_hash.hpp"

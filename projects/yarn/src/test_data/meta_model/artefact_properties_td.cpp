@@ -21,7 +21,6 @@
 #include <sstream>
 #include "dogen/yarn/test_data/meta_model/formatting_styles_td.hpp"
 #include "dogen/yarn/test_data/meta_model/artefact_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 namespace {
 
@@ -55,11 +54,6 @@ create_dogen_yarn_meta_model_formatting_styles(const unsigned int position) {
     return dogen::yarn::meta_model::formatting_styles_generator::create(position);
 }
 
-dogen::yarn::meta_model::local_archetype_location_properties
-create_dogen_yarn_meta_model_local_archetype_location_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::local_archetype_location_properties_generator::create(position);
-}
-
 }
 
 namespace dogen {
@@ -76,7 +70,6 @@ populate(const unsigned int position, result_type& v) {
     v.dependencies(create_std_list_std_string(position + 3));
     v.formatting_style(create_dogen_yarn_meta_model_formatting_styles(position + 4));
     v.formatting_input(create_std_string(position + 5));
-    v.local_archetype_location_properties(create_dogen_yarn_meta_model_local_archetype_location_properties(position + 6));
 }
 
 artefact_properties_generator::result_type

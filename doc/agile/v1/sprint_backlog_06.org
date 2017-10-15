@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-15 Sun 13:10]
+#+CAPTION: Clock summary at [2017-10-15 Sun 18:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *31:43* |       |      | 100.0 |
+| *Total time*                                                                | *32:47* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 31:43   |       |      | 100.0 |
-| Active                                                                      |         | 31:43 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   7.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   2.4 |
+| Stories                                                                     | 32:47   |       |      | 100.0 |
+| Active                                                                      |         | 32:47 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 2:19 |   7.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:45 |   2.3 |
 | CANCELLED Add an "at" field to transform stats                              |         |       | 0:10 |   0.5 |
-| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   3.2 |
-| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   6.4 |
-| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   4.9 |
-| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   2.0 |
-| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   6.6 |
+| COMPLETED Move enablement into yarn                                         |         |       | 1:01 |   3.1 |
+| COMPLETED Consider revamping the project logo                               |         |       | 2:02 |   6.2 |
+| COMPLETED Rename top-level transformations                                  |         |       | 1:33 |   4.7 |
+| COMPLETED Clean-up context usage                                            |         |       | 0:38 |   1.9 |
+| COMPLETED Housekeeper should know of text models                            |         |       | 2:05 |   6.4 |
 | COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   1.5 |
-| COMPLETED Rename kernel and family                                          |         |       | 2:44 |   8.6 |
-| COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.2 |
-| COMPLETED Caching in travis                                                 |         |       | 0:59 |   3.1 |
-| STARTED Create the archetype location properties                            |         |       | 9:29 |  29.9 |
-| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  20.4 |
+| COMPLETED Rename kernel and family                                          |         |       | 2:44 |   8.3 |
+| COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.1 |
+| COMPLETED Caching in travis                                                 |         |       | 0:59 |   3.0 |
+| COMPLETED Consider collapsing element properties into element               |         |       | 1:04 |   3.3 |
+| STARTED Create the archetype location properties                            |         |       | 9:29 |  28.9 |
+| STARTED Generate file paths as a transform                                  |         |       | 6:29 |  19.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -415,6 +416,14 @@ Links:
 - [[https://github.com/perl11/potion/issues/41][clang: error: argument unused during compilation: '-I core']]
 - [[https://bugzilla.samba.org/show_bug.cgi?id%3D8118][Bug 8118 - don't pass -D, -I, -U to compiler]]
 
+*** COMPLETED Consider collapsing element properties into element     :story:
+    CLOSED: [2017-10-15 Sun 18:44]
+    CLOCK: [2017-10-15 Sun 18:24]--[2017-10-15 Sun 18:44] =>  0:20
+    CLOCK: [2017-10-15 Sun 17:39]--[2017-10-15 Sun 18:23] =>  0:44
+
+Do we really need element properties as a stand alone class? It seems
+all of its attributes should just be part of element.
+
 *** STARTED Create the archetype location properties                  :story:
     CLOCK: [2017-10-13 Fri 15:31]--[2017-10-13 Fri 15:50] =>  0:19
     CLOCK: [2017-10-13 Fri 14:16]--[2017-10-13 Fri 14:26] =>  0:10
@@ -794,11 +803,6 @@ configuration should have been (and probably vice-versa). In addition,
 we have cases where we should have used configuration but used nothing
 (type parameters springs to mind). We need to do a clean up of the
 meta-model.
-
-*** Consider collapsing element properties into element               :story:
-
-Do we really need element properties as a stand alone class? It seems
-all of its attributes should just be part of element.
 
 *** Create a text model post-processing chain                         :story:
 

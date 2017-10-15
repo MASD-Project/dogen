@@ -109,10 +109,10 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
         const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
 
-        const auto& aps(e.element_properties().artefact_properties());
-        const auto& art_props(get_artefact_properties(aps, arch));
+        const auto& aps(e.artefact_properties());
+        const auto& ap(get_artefact_properties(aps, arch));
 
-        if (!art_props.enabled()) {
+        if (!ap.enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
             continue;
         }
@@ -122,7 +122,7 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
         context ctx(enabled_archetype_for_element, ep, fm,
             frp.helper_formatters());
 
-        const auto fs(art_props.formatting_style());
+        const auto fs(ap.formatting_style());
         if (fs == formatting_styles::stock) {
             const auto id(fmt.id());
             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;

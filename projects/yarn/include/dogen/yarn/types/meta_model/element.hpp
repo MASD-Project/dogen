@@ -29,13 +29,16 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
-#include "dogen/yarn/types/meta_model/element_properties.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/meta_model/element_fwd_ser.hpp"
+#include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -71,7 +74,9 @@ public:
         const std::vector<std::string>& stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::yarn::meta_model::element_properties& element_properties);
+        const dogen::formatters::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties);
 
 private:
     template<typename Archive>
@@ -173,10 +178,20 @@ public:
     void is_element_extension(const bool v);
     /**@}*/
 
-    const dogen::yarn::meta_model::element_properties& element_properties() const;
-    dogen::yarn::meta_model::element_properties& element_properties();
-    void element_properties(const dogen::yarn::meta_model::element_properties& v);
-    void element_properties(const dogen::yarn::meta_model::element_properties&& v);
+    const dogen::formatters::decoration_properties& decoration_properties() const;
+    dogen::formatters::decoration_properties& decoration_properties();
+    void decoration_properties(const dogen::formatters::decoration_properties& v);
+    void decoration_properties(const dogen::formatters::decoration_properties&& v);
+
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>&& v);
+
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties();
+    void archetype_location_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& v);
+    void archetype_location_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>&& v);
 
 protected:
     bool compare(const element& rhs) const;
@@ -196,7 +211,9 @@ private:
     std::vector<std::string> stereotypes_;
     dogen::yarn::meta_model::name meta_name_;
     bool is_element_extension_;
-    dogen::yarn::meta_model::element_properties element_properties_;
+    dogen::formatters::decoration_properties decoration_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties> artefact_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties> archetype_location_properties_;
 };
 
 inline element::~element() noexcept { }

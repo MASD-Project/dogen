@@ -58,8 +58,7 @@ private:
     void update(yarn::meta_model::element& e,
         const std::string & modeline_name = cs_modeline_name) {
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
-        auto& ep(e.element_properties());
-        ep.decoration_properties(factory_.make(modeline_name));
+        e.decoration_properties(factory_.make(modeline_name));
     }
 
 public:

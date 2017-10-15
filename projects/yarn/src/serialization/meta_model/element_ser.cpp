@@ -28,6 +28,7 @@
 #include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/name_ser.hpp"
@@ -42,7 +43,9 @@
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/element_properties_ser.hpp"
+#include "dogen/formatters/serialization/decoration_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/artefact_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/local_archetype_location_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::meta_model::element,
@@ -64,7 +67,9 @@ void save(Archive& ar,
     ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("is_element_extension", v.is_element_extension_);
-    ar << make_nvp("element_properties", v.element_properties_);
+    ar << make_nvp("decoration_properties", v.decoration_properties_);
+    ar << make_nvp("artefact_properties", v.artefact_properties_);
+    ar << make_nvp("archetype_location_properties", v.archetype_location_properties_);
 }
 
 template<typename Archive>
@@ -80,7 +85,9 @@ void load(Archive& ar,
     ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("is_element_extension", v.is_element_extension_);
-    ar >> make_nvp("element_properties", v.element_properties_);
+    ar >> make_nvp("decoration_properties", v.decoration_properties_);
+    ar >> make_nvp("artefact_properties", v.artefact_properties_);
+    ar >> make_nvp("archetype_location_properties", v.archetype_location_properties_);
 }
 
 } }

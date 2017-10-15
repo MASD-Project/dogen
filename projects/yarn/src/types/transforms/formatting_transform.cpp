@@ -139,8 +139,8 @@ transform_element(const std::unordered_map<std::string, type_group> tgs,
     BOOST_LOG_SEV(lg, debug) << "Transforming element: " << e.name().id();
 
     const auto cfgs(make_formatting_configuration(tgs, e.annotation()));
-    auto& art_props(e.element_properties().artefact_properties());
-    for (auto& pair : art_props) {
+    auto& ap(e.artefact_properties());
+    for (auto& pair : ap) {
         const auto arch(pair.first);
         auto& art_prop(pair.second);
         const auto i(cfgs.find(arch));

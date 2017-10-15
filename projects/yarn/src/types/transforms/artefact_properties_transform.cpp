@@ -73,7 +73,7 @@ update_element(const context& ctx, meta_model::element& e) {
      * locations available in the context. These were originally
      * sourced from the formatters available in each backend.
      */
-    auto& ap(e.element_properties().artefact_properties());
+    auto& ap(e.artefact_properties());
     for (const auto& al : i->second.archetype_locations()) {
         const auto a(al.archetype());
         const auto pair(std::make_pair(a, meta_model::artefact_properties()));

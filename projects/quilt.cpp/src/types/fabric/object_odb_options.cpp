@@ -61,7 +61,9 @@ object_odb_options::object_odb_options(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties,
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::string& epilogue,
     const std::list<std::string>& include_regexes,
     const std::string& header_guard_prefix)
@@ -75,7 +77,9 @@ object_odb_options::object_odb_options(
       stereotypes,
       meta_name,
       is_element_extension,
-      element_properties),
+      decoration_properties,
+      artefact_properties,
+      archetype_location_properties),
       epilogue_(epilogue),
       include_regexes_(include_regexes),
       header_guard_prefix_(header_guard_prefix) { }

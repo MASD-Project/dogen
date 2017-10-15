@@ -44,7 +44,9 @@ forward_declarations::forward_declarations(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties,
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const bool is_enum,
     const dogen::yarn::meta_model::name& underlying_element,
     const bool is_exception)
@@ -58,7 +60,9 @@ forward_declarations::forward_declarations(
       stereotypes,
       meta_name,
       is_element_extension,
-      element_properties),
+      decoration_properties,
+      artefact_properties,
+      archetype_location_properties),
       is_enum_(is_enum),
       underlying_element_(underlying_element),
       is_exception_(is_exception) { }

@@ -234,7 +234,7 @@ const formattables::artefact_properties& assistant::obtain_artefact_properties(
 const yarn::meta_model::artefact_properties&
 assistant::obtain_new_artefact_properties(
     const yarn::meta_model::element& e, const std::string& archetype) const {
-    const auto& ap(e.element_properties().artefact_properties());
+    const auto& ap(e.artefact_properties());
     const auto i(ap.find(archetype));
     if (i == ap.end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing << archetype;
@@ -356,12 +356,11 @@ bool assistant::is_odb_facet_enabled() const {
 
 const dogen::formatters::decoration_properties& assistant::
 get_decoration_properties(const yarn::meta_model::element& e) const {
-    const auto& ep(e.element_properties());
-    return ep.decoration_properties();
+    return e.decoration_properties();
 }
 
-dogen::formatters::cpp::scoped_boilerplate_formatter
-assistant::make_scoped_boilerplate_formatter(const yarn::meta_model::element& e) {
+dogen::formatters::cpp::scoped_boilerplate_formatter assistant::
+make_scoped_boilerplate_formatter(const yarn::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.inclusion_dependencies());
@@ -695,7 +694,7 @@ dogen::formatters::artefact assistant::make_artefact() const {
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
 
-    const auto& ap(element_.element_properties().artefact_properties());
+    const auto& ap(element_.artefact_properties());
     const auto arch(archetype_location_.archetype());
     const auto i(ap.find(arch));
     if (i == ap.end()) {

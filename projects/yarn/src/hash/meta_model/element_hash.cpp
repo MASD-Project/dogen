@@ -22,7 +22,9 @@
 #include "dogen/annotations/hash/annotation_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
-#include "dogen/yarn/hash/meta_model/element_properties_hash.hpp"
+#include "dogen/formatters/hash/decoration_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/artefact_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -50,6 +52,24 @@ inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v)
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_artefact_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_local_archetype_location_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -68,7 +88,9 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, hash_std_vector_std_string(v.stereotypes()));
     combine(seed, v.meta_name());
     combine(seed, v.is_element_extension());
-    combine(seed, v.element_properties());
+    combine(seed, v.decoration_properties());
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_artefact_properties(v.artefact_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_local_archetype_location_properties(v.archetype_location_properties()));
 
     return seed;
 }

@@ -63,7 +63,6 @@
 #include "dogen/yarn/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/formatting_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/element_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/locator_properties_ser.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_set_repository_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/artefact_properties_ser.hpp"

@@ -120,8 +120,7 @@ obtain_artefact_properties(const std::string& archetype) const {
 
 const dogen::formatters::decoration_properties& assistant::
 get_decoration_properties(const yarn::meta_model::element& e) const {
-    const auto& ep(e.element_properties());
-    return ep.decoration_properties();
+    return e.decoration_properties();
 }
 
 dogen::formatters::csharp::scoped_boilerplate_formatter assistant::

@@ -31,7 +31,9 @@
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
-#include "dogen/yarn/test_data/meta_model/element_properties_td.hpp"
+#include "dogen/formatters/test_data/decoration_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/artefact_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 namespace {
 
@@ -75,9 +77,35 @@ std::vector<std::string> create_std_vector_std_string(unsigned int position) {
     return r;
 }
 
-dogen::yarn::meta_model::element_properties
-create_dogen_yarn_meta_model_element_properties(const unsigned int position) {
-    return dogen::yarn::meta_model::element_properties_generator::create(position);
+dogen::formatters::decoration_properties
+create_dogen_formatters_decoration_properties(const unsigned int position) {
+    return dogen::formatters::decoration_properties_generator::create(position);
+}
+
+dogen::yarn::meta_model::artefact_properties
+create_dogen_yarn_meta_model_artefact_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::artefact_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_artefact_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_artefact_properties(position + i)));
+    }
+    return r;
+}
+
+dogen::yarn::meta_model::local_archetype_location_properties
+create_dogen_yarn_meta_model_local_archetype_location_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::local_archetype_location_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_local_archetype_location_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_local_archetype_location_properties(position + i)));
+    }
+    return r;
 }
 
 }
@@ -97,7 +125,9 @@ populate(const unsigned int position, result_type& v) {
     v.stereotypes(create_std_vector_std_string(position + 6));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 7));
     v.is_element_extension(create_bool(position + 8));
-    v.element_properties(create_dogen_yarn_meta_model_element_properties(position + 9));
+    v.decoration_properties(create_dogen_formatters_decoration_properties(position + 9));
+    v.artefact_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_artefact_properties(position + 10));
+    v.archetype_location_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_local_archetype_location_properties(position + 11));
 }
 
 element_generator::result_type*

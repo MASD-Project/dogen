@@ -150,23 +150,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties class_id="31" tracking_level="0" version="0">
-							<decoration_properties class_id="32" tracking_level="0" version="0">
-								<generate_decoration>0</generate_decoration>
-								<modeline class_id="33" tracking_level="0" version="0">
-									<initialized>0</initialized>
-								</modeline>
-								<licence class_id="34" tracking_level="0" version="0">
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties class_id="35" tracking_level="0" version="0">
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties class_id="31" tracking_level="0" version="0">
+							<generate_decoration>0</generate_decoration>
+							<modeline class_id="32" tracking_level="0" version="0">
+								<initialized>0</initialized>
+							</modeline>
+							<licence class_id="33" tracking_level="0" version="0">
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties class_id="34" tracking_level="0" version="0">
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties class_id="35" tracking_level="0" version="0">
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -277,23 +280,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -404,23 +410,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -531,23 +540,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -663,23 +675,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -796,23 +811,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -923,23 +941,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -1050,23 +1071,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -1177,23 +1201,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -1304,23 +1331,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -1431,23 +1461,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -1558,23 +1591,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<members>
 						<count>0</count>
@@ -1690,23 +1726,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes class_id="41" tracking_level="0" version="0">
 						<count>0</count>
@@ -1910,23 +1949,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -2130,23 +2172,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -2380,23 +2425,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -2632,23 +2680,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -2916,23 +2967,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -3168,23 +3222,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -3469,23 +3526,26 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -3698,23 +3758,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<underlying_element>
 						<id></id>
@@ -3955,23 +4018,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<underlying_element>
 						<id></id>
@@ -4346,23 +4412,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<underlying_element>
 						<id></id>
@@ -4676,23 +4745,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<underlying_element>
 						<id></id>
@@ -4973,23 +5045,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<underlying_element>
 						<id></id>
@@ -5206,23 +5281,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<underlying_element>
 						<id></id>
@@ -5437,23 +5515,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -5646,23 +5727,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -5855,23 +5939,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -6064,23 +6151,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -6274,23 +6364,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -6483,23 +6576,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -6692,23 +6788,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -6901,23 +7000,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -7110,23 +7212,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -7319,23 +7424,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -7528,23 +7636,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -7737,23 +7848,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
 					<value_attribute>
@@ -7945,23 +8059,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -8372,23 +8489,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -8559,23 +8679,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -8747,23 +8870,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -8935,23 +9061,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -9121,23 +9250,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -10347,23 +10479,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -10565,23 +10700,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -10867,23 +11005,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -11133,23 +11274,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -11431,23 +11575,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -11649,23 +11796,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -11835,23 +11985,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -12101,23 +12254,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -12367,23 +12523,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -12633,23 +12792,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -12819,23 +12981,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -13006,23 +13171,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -14072,23 +14240,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -14290,23 +14461,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -14588,23 +14762,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -14888,23 +15065,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -15076,23 +15256,26 @@ this is a long comment
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -15505,23 +15688,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -15725,23 +15911,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -16233,23 +16422,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -16501,23 +16693,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -16768,23 +16963,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -17116,23 +17314,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -17303,23 +17504,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -17571,23 +17775,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -17871,23 +18078,26 @@ of the object template instantiated by the base class.
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -18093,23 +18303,26 @@ third line with &quot;quote&quot;
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -18282,23 +18495,26 @@ third line with &quot;quote&quot;
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -18551,23 +18767,26 @@ third line with &quot;quote&quot;
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -18822,23 +19041,26 @@ third line with &quot;quote&quot;
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -19124,23 +19346,26 @@ third line with &quot;quote&quot;
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -19391,23 +19616,26 @@ third line with &quot;quote&quot;
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -19823,23 +20051,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -20010,23 +20241,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -20277,23 +20511,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -20544,23 +20781,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -20811,23 +21051,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -21078,23 +21321,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -21345,23 +21591,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -21612,23 +21861,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -21959,23 +22211,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -22263,23 +22518,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -22530,23 +22788,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -22797,23 +23058,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -23064,23 +23328,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -23368,23 +23635,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -23635,23 +23905,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -23938,23 +24211,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -24204,23 +24480,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -24470,23 +24749,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -24736,23 +25018,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -24922,23 +25207,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -25142,23 +25430,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -25411,23 +25702,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -25678,23 +25972,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -25866,23 +26163,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -26183,23 +26483,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -26449,23 +26752,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -26748,23 +27054,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 					<all_attributes>
 						<count>0</count>
@@ -27019,23 +27328,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 				</px>
 			</second>
@@ -27138,23 +27450,26 @@ a second line
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+						<artefact_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</artefact_properties>
+						<archetype_location_properties>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</archetype_location_properties>
 					</element>
 				</px>
 			</second>
@@ -27289,23 +27604,26 @@ a second line
 						<identifiable></identifiable>
 					</meta_name>
 					<is_element_extension>0</is_element_extension>
-					<element_properties>
-						<decoration_properties>
-							<generate_decoration>0</generate_decoration>
-							<modeline>
-								<initialized>0</initialized>
-							</modeline>
-							<licence>
-								<initialized>0</initialized>
-							</licence>
-							<code_generation_marker></code_generation_marker>
-						</decoration_properties>
-						<artefact_properties>
-							<count>0</count>
-							<bucket_count>1</bucket_count>
-							<item_version>0</item_version>
-						</artefact_properties>
-					</element_properties>
+					<decoration_properties>
+						<generate_decoration>0</generate_decoration>
+						<modeline>
+							<initialized>0</initialized>
+						</modeline>
+						<licence>
+							<initialized>0</initialized>
+						</licence>
+						<code_generation_marker></code_generation_marker>
+					</decoration_properties>
+					<artefact_properties>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</artefact_properties>
+					<archetype_location_properties>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</archetype_location_properties>
 				</element>
 				<members>
 					<count>0</count>

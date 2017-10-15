@@ -39,7 +39,9 @@ msbuild_targets::msbuild_targets(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties,
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const dogen::quilt::cpp::fabric::odb_targets& odb_targets)
     : dogen::yarn::meta_model::element(
       name,
@@ -51,7 +53,9 @@ msbuild_targets::msbuild_targets(
       stereotypes,
       meta_name,
       is_element_extension,
-      element_properties),
+      decoration_properties,
+      artefact_properties,
+      archetype_location_properties),
       odb_targets_(odb_targets) { }
 
 void msbuild_targets::accept(const dogen::yarn::meta_model::element_visitor& v) const {

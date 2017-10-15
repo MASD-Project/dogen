@@ -499,7 +499,7 @@ void enablement_transform::compute_enablement_for_element(
      * all the supported formatters.
      */
     auto& eafe(enabled_archetype_for_element);
-    for (auto& pair : e.element_properties().artefact_properties()) {
+    for (auto& pair : e.artefact_properties()) {
         const auto arch(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing archetype: " << arch;
 

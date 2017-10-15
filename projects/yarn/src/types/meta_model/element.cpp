@@ -25,7 +25,9 @@
 #include "dogen/annotations/io/annotation_io.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
-#include "dogen/yarn/io/meta_model/element_properties_io.hpp"
+#include "dogen/formatters/io/decoration_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -64,6 +66,42 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 namespace meta_model {
@@ -83,7 +121,9 @@ element::element(element&& rhs)
       stereotypes_(std::move(rhs.stereotypes_)),
       meta_name_(std::move(rhs.meta_name_)),
       is_element_extension_(std::move(rhs.is_element_extension_)),
-      element_properties_(std::move(rhs.element_properties_)) { }
+      decoration_properties_(std::move(rhs.decoration_properties_)),
+      artefact_properties_(std::move(rhs.artefact_properties_)),
+      archetype_location_properties_(std::move(rhs.archetype_location_properties_)) { }
 
 element::element(
     const dogen::yarn::meta_model::name& name,
@@ -95,7 +135,9 @@ element::element(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties)
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties)
     : name_(name),
       documentation_(documentation),
       annotation_(annotation),
@@ -105,7 +147,9 @@ element::element(
       stereotypes_(stereotypes),
       meta_name_(meta_name),
       is_element_extension_(is_element_extension),
-      element_properties_(element_properties) { }
+      decoration_properties_(decoration_properties),
+      artefact_properties_(artefact_properties),
+      archetype_location_properties_(archetype_location_properties) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -125,7 +169,9 @@ void element::to_stream(std::ostream& s) const {
       << "\"stereotypes\": " << stereotypes_ << ", "
       << "\"meta_name\": " << meta_name_ << ", "
       << "\"is_element_extension\": " << is_element_extension_ << ", "
-      << "\"element_properties\": " << element_properties_
+      << "\"decoration_properties\": " << decoration_properties_ << ", "
+      << "\"artefact_properties\": " << artefact_properties_ << ", "
+      << "\"archetype_location_properties\": " << archetype_location_properties_
       << " }";
 }
 
@@ -140,7 +186,9 @@ void element::swap(element& other) noexcept {
     swap(stereotypes_, other.stereotypes_);
     swap(meta_name_, other.meta_name_);
     swap(is_element_extension_, other.is_element_extension_);
-    swap(element_properties_, other.element_properties_);
+    swap(decoration_properties_, other.decoration_properties_);
+    swap(artefact_properties_, other.artefact_properties_);
+    swap(archetype_location_properties_, other.archetype_location_properties_);
 }
 
 bool element::compare(const element& rhs) const {
@@ -153,7 +201,9 @@ bool element::compare(const element& rhs) const {
         stereotypes_ == rhs.stereotypes_ &&
         meta_name_ == rhs.meta_name_ &&
         is_element_extension_ == rhs.is_element_extension_ &&
-        element_properties_ == rhs.element_properties_;
+        decoration_properties_ == rhs.decoration_properties_ &&
+        artefact_properties_ == rhs.artefact_properties_ &&
+        archetype_location_properties_ == rhs.archetype_location_properties_;
 }
 
 const dogen::yarn::meta_model::name& element::name() const {
@@ -276,20 +326,52 @@ void element::is_element_extension(const bool v) {
     is_element_extension_ = v;
 }
 
-const dogen::yarn::meta_model::element_properties& element::element_properties() const {
-    return element_properties_;
+const dogen::formatters::decoration_properties& element::decoration_properties() const {
+    return decoration_properties_;
 }
 
-dogen::yarn::meta_model::element_properties& element::element_properties() {
-    return element_properties_;
+dogen::formatters::decoration_properties& element::decoration_properties() {
+    return decoration_properties_;
 }
 
-void element::element_properties(const dogen::yarn::meta_model::element_properties& v) {
-    element_properties_ = v;
+void element::decoration_properties(const dogen::formatters::decoration_properties& v) {
+    decoration_properties_ = v;
 }
 
-void element::element_properties(const dogen::yarn::meta_model::element_properties&& v) {
-    element_properties_ = std::move(v);
+void element::decoration_properties(const dogen::formatters::decoration_properties&& v) {
+    decoration_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& element::artefact_properties() const {
+    return artefact_properties_;
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& element::artefact_properties() {
+    return artefact_properties_;
+}
+
+void element::artefact_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& v) {
+    artefact_properties_ = v;
+}
+
+void element::artefact_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>&& v) {
+    artefact_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& element::archetype_location_properties() const {
+    return archetype_location_properties_;
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& element::archetype_location_properties() {
+    return archetype_location_properties_;
+}
+
+void element::archetype_location_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& v) {
+    archetype_location_properties_ = v;
+}
+
+void element::archetype_location_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>&& v) {
+    archetype_location_properties_ = std::move(v);
 }
 
 } } }

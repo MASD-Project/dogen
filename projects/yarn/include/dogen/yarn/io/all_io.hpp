@@ -63,7 +63,6 @@
 #include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/element_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_repository_io.hpp"
 #include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"

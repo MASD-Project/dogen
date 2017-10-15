@@ -61,7 +61,9 @@ common_odb_options::common_odb_options(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties,
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::string& sql_name_case,
     const std::list<std::string>& databases)
     : dogen::yarn::meta_model::element(
@@ -74,7 +76,9 @@ common_odb_options::common_odb_options(
       stereotypes,
       meta_name,
       is_element_extension,
-      element_properties),
+      decoration_properties,
+      artefact_properties,
+      archetype_location_properties),
       sql_name_case_(sql_name_case),
       databases_(databases) { }
 

@@ -108,7 +108,6 @@
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/sorting_transform.hpp"
 #include "dogen/yarn/types/meta_model/backend_properties.hpp"
-#include "dogen/yarn/types/meta_model/element_properties.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/meta_model/locator_properties.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"

@@ -73,7 +73,9 @@ visitor::visitor(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties,
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::list<dogen::yarn::meta_model::name>& visits,
     const boost::optional<dogen::yarn::meta_model::name>& parent)
     : dogen::yarn::meta_model::element(
@@ -86,7 +88,9 @@ visitor::visitor(
       stereotypes,
       meta_name,
       is_element_extension,
-      element_properties),
+      decoration_properties,
+      artefact_properties,
+      archetype_location_properties),
       visits_(visits),
       parent_(parent) { }
 

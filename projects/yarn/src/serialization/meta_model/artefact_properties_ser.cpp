@@ -32,7 +32,6 @@
 #include "dogen/utility/serialization/path.hpp"
 #include "dogen/yarn/serialization/meta_model/formatting_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/artefact_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/local_archetype_location_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -70,7 +69,6 @@ void save(Archive& ar,
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("formatting_style", v.formatting_style_);
     ar << make_nvp("formatting_input", v.formatting_input_);
-    ar << make_nvp("local_archetype_location_properties", v.local_archetype_location_properties_);
 }
 
 template<typename Archive>
@@ -83,7 +81,6 @@ void load(Archive& ar,
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("formatting_style", v.formatting_style_);
     ar >> make_nvp("formatting_input", v.formatting_input_);
-    ar >> make_nvp("local_archetype_location_properties", v.local_archetype_location_properties_);
 }
 
 } }

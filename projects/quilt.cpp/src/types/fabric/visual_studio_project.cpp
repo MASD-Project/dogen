@@ -47,7 +47,9 @@ visual_studio_project::visual_studio_project(
     const std::vector<std::string>& stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::yarn::meta_model::element_properties& element_properties,
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::string& project_guid,
     const std::string& project_name,
     const std::string& tools_version)
@@ -61,7 +63,9 @@ visual_studio_project::visual_studio_project(
       stereotypes,
       meta_name,
       is_element_extension,
-      element_properties),
+      decoration_properties,
+      artefact_properties,
+      archetype_location_properties),
       project_guid_(project_guid),
       project_name_(project_name),
       tools_version_(tools_version) { }
