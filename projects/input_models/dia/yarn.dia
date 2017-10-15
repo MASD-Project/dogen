@@ -65,16 +65,16 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - LargePackage" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-247,-113"/>
+        <dia:point val="-247.071,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-247.05,-114.05;40.05,10.05"/>
+        <dia:rectangle val="-247.121,-114.05;39.9786,10.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-247,-113"/>
+        <dia:point val="-247.071,-113"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="287"/>

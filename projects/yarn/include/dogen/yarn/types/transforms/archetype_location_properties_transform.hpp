@@ -59,14 +59,24 @@ private:
 
     friend std::ostream& operator<<(std::ostream& s, const facet_type_group& v);
 
-    struct archetype_type_group {
+    struct global_archetype_type_group {
         annotations::type enabled;
         annotations::type overwrite;
         annotations::type postfix;
     };
 
     friend std::ostream&
-    operator<<(std::ostream& s, const archetype_type_group& v);
+    operator<<(std::ostream& s, const global_archetype_type_group& v);
+
+    struct local_archetype_type_group {
+        annotations::type facet_enabled;
+        annotations::type archetype_enabled;
+        annotations::type facet_overwrite;
+        annotations::type archetype_overwrite;
+    };
+
+    friend std::ostream&
+    operator<<(std::ostream& s, const local_archetype_type_group& v);
 
 private:
     static std::unordered_map<std::string, backend_type_group>
@@ -77,8 +87,12 @@ private:
     make_facet_type_group(const annotations::type_repository& atrp,
         const annotations::archetype_location_repository& alrp);
 
-    static std::unordered_map<std::string, archetype_type_group>
-    make_archetype_type_group(const annotations::type_repository& atrp,
+    static std::unordered_map<std::string, global_archetype_type_group>
+    make_global_archetype_type_group(const annotations::type_repository& atrp,
+        const annotations::archetype_location_repository& alrp);
+
+    static std::unordered_map<std::string, local_archetype_type_group>
+    make_local_archetype_type_group(const annotations::type_repository& atrp,
         const annotations::archetype_location_repository& alrp);
 
 private:
@@ -94,8 +108,24 @@ private:
 
     static std::unordered_map<std::string, meta_model::archetype_properties>
     obtain_archetype_properties(
-        const std::unordered_map<std::string, archetype_type_group>& tgs,
+        const std::unordered_map<std::string, global_archetype_type_group>& tgs,
         const annotations::annotation& ra);
+
+    static void populate_global_archetype_location_properties(
+        const annotations::type_repository& atrp,
+        const annotations::archetype_location_repository& alrp,
+        meta_model::model& m);
+
+    static std::unordered_map<std::string,
+                              meta_model::local_archetype_location_properties>
+    obtain_local_archetype_location_properties(
+        const std::unordered_map<std::string, local_archetype_type_group>& tgs,
+        const annotations::annotation& a);
+
+    static void populate_local_archetype_location_properties(
+        const annotations::type_repository& atrp,
+        const annotations::archetype_location_repository& alrp,
+        meta_model::model& m);
 
 public:
     static void transform(const context& ctx, meta_model::model& m);
