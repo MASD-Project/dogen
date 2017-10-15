@@ -59,25 +59,12 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-formattables::artefact_properties workflow::get_artefact_properties(
-    const std::unordered_map<std::string, formattables::artefact_properties>&
-    artefact_properties, const std::string& archetype) const {
+const yarn::meta_model::artefact_properties& workflow::get_artefact_properties(
+    const yarn::meta_model::element& e, const std::string& archetype) const {
 
-    const auto i(artefact_properties.find(archetype));
-    if (i == artefact_properties.end()) {
-        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
-        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
-    }
-    return i->second;
-}
-
-yarn::meta_model::artefact_properties workflow::get_artefact_properties(
-    const std::unordered_map<std::string,
-    yarn::meta_model::artefact_properties>& artefact_properties,
-    const std::string& archetype) const {
-
-    const auto i(artefact_properties.find(archetype));
-    if (i == artefact_properties.end()) {
+    const auto& ap(e.artefact_properties());
+    const auto i(ap.find(archetype));
+    if (i == ap.end()) {
         BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
         BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
     }
@@ -108,9 +95,7 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
-
-        const auto& aps(e.artefact_properties());
-        const auto& ap(get_artefact_properties(aps, arch));
+        const auto& ap(get_artefact_properties(e, arch));
 
         if (!ap.enabled()) {
             BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
@@ -123,7 +108,7 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
             frp.helper_formatters());
 
         const auto fs(ap.formatting_style());
-        if (fs == formatting_styles::stock) {
+         if (fs == formatting_styles::stock) {
             const auto id(fmt.id());
             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
 

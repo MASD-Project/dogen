@@ -64,12 +64,9 @@ public:
     static cpp::formatters::registrar& registrar();
 
 private:
-    yarn::meta_model::artefact_properties get_artefact_properties(const
-        std::unordered_map<std::string, yarn::meta_model::artefact_properties>&
-        artefact_properties, const std::string& archetype) const;
-    formattables::artefact_properties get_artefact_properties(const
-        std::unordered_map<std::string, formattables::artefact_properties>&
-        artefact_properties, const std::string& archetype) const;
+    const yarn::meta_model::artefact_properties&
+    get_artefact_properties(const yarn::meta_model::element& e,
+        const std::string& archetype) const;
 
 private:
     std::list<dogen::formatters::artefact>
