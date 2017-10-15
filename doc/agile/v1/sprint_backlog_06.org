@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-15 Sun 07:49]
+#+CAPTION: Clock summary at [2017-10-15 Sun 13:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
@@ -32,9 +32,9 @@
 | COMPLETED Rename the model to text transforms                               |         |       | 0:29 |   1.5 |
 | COMPLETED Rename kernel and family                                          |         |       | 2:44 |   8.6 |
 | COMPLETED Clean up formatter names                                          |         |       | 1:00 |   3.2 |
+| COMPLETED Caching in travis                                                 |         |       | 0:59 |   3.1 |
 | STARTED Create the archetype location properties                            |         |       | 9:29 |  29.9 |
 | STARTED Generate file paths as a transform                                  |         |       | 6:29 |  20.4 |
-| COMPLETED Caching in travis                                                 |         |       | 0:59 |   3.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -395,6 +395,25 @@ We should just standardise everything as "id's" which at least is
 consistent with how we deal with yarn names. Still not ideal given
 that the "id" is in effect "archetype" in archetype location, but its
 slightly less confusing.
+
+*** COMPLETED Caching in travis                                       :story:
+    CLOSED: [2017-10-15 Sun 07:49]
+    CLOCK: [2017-10-15 Sun 07:41]--[2017-10-15 Sun 07:49] =>  0:08
+    CLOCK: [2017-10-14 Sat 22:20]--[2017-10-14 Sat 22:37] =>  0:17
+    CLOCK: [2017-10-14 Sat 21:45]--[2017-10-14 Sat 22:19] =>  0:34
+
+It seems it is possible to cache in travis. We should try to enable it
+for our builds and see if it improves build times.
+
+Links:
+
+- [[https://github.com/lballabio/QuantLib/blob/master/.travis.yml][QuantLib travis.yml]] with caching enabled
+- [[https://blog.travis-ci.com/2016-05-03-caches-are-coming-to-everyone][Caching now available for everyone]]
+- [[https://docs.travis-ci.com/user/caching/][Caching Dependencies and Directories]]
+- [[https://ccache.samba.org/][CCache]]
+- [[https://crascit.com/2016/04/09/using-ccache-with-cmake/][Using ccache with CMake]]
+- [[https://github.com/perl11/potion/issues/41][clang: error: argument unused during compilation: '-I core']]
+- [[https://bugzilla.samba.org/show_bug.cgi?id%3D8118][Bug 8118 - don't pass -D, -I, -U to compiler]]
 
 *** STARTED Create the archetype location properties                  :story:
     CLOCK: [2017-10-13 Fri 15:31]--[2017-10-13 Fri 15:50] =>  0:19
@@ -763,25 +782,6 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
-
-*** COMPLETED Caching in travis                                       :story:
-    CLOSED: [2017-10-15 Sun 07:49]
-    CLOCK: [2017-10-15 Sun 07:41]--[2017-10-15 Sun 07:49] =>  0:08
-    CLOCK: [2017-10-14 Sat 22:20]--[2017-10-14 Sat 22:37] =>  0:17
-    CLOCK: [2017-10-14 Sat 21:45]--[2017-10-14 Sat 22:19] =>  0:34
-
-It seems it is possible to cache in travis. We should try to enable it
-for our builds and see if it improves build times.
-
-Links:
-
-- [[https://github.com/lballabio/QuantLib/blob/master/.travis.yml][QuantLib travis.yml]] with caching enabled
-- [[https://blog.travis-ci.com/2016-05-03-caches-are-coming-to-everyone][Caching now available for everyone]]
-- [[https://docs.travis-ci.com/user/caching/][Caching Dependencies and Directories]]
-- [[https://ccache.samba.org/][CCache]]
-- [[https://crascit.com/2016/04/09/using-ccache-with-cmake/][Using ccache with CMake]]
-- [[https://github.com/perl11/potion/issues/41][clang: error: argument unused during compilation: '-I core']]
-- [[https://bugzilla.samba.org/show_bug.cgi?id%3D8118][Bug 8118 - don't pass -D, -I, -U to compiler]]
 
 *** Properties vs configuration                                       :story:
 
