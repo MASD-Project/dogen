@@ -90,6 +90,13 @@ populate_formatter_names_by_backend_name() {
 }
 
 void archetype_location_repository_builder::
+populate_archetypes_by_facet_by_backend() {
+    auto& abbbf(repository_.archetypes_by_backend_by_facet());
+    for (const auto& al : repository_.archetype_locations())
+        abbbf[al.backend()][al.facet()].push_back(al.archetype());
+}
+
+void archetype_location_repository_builder::
 add(const std::list<archetype_location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Adding list of archetype location.";
 
@@ -183,6 +190,7 @@ const archetype_location_repository&
 archetype_location_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();
+    populate_archetypes_by_facet_by_backend();
 
     BOOST_LOG_SEV(lg, debug) << "Repository built: " << repository_;
     return repository_;
