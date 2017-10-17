@@ -81,6 +81,30 @@ std::unordered_map<std::string, std::list<dogen::annotations::archetype_location
     return r;
 }
 
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, std::list<std::string> > create_std_unordered_map_std_string_std_list_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::list<std::string> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_std_string(position + i)));
+    }
+    return r;
+}
+
+std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_std_string(unsigned int position) {
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_std_list_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -95,6 +119,7 @@ populate(const unsigned int position, result_type& v) {
     v.formatter_names_by_backend_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
     v.archetype_locations_by_meta_name(create_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(position + 3));
     v.archetype_locations_by_family(create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(position + 4));
+    v.archetypes_by_backend_by_facet(create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_std_string(position + 5));
 }
 
 archetype_location_repository_generator::result_type

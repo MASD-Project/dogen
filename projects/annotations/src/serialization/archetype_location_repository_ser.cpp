@@ -47,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("formatter_names_by_backend_name", v.formatter_names_by_backend_name_);
     ar << make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
     ar << make_nvp("archetype_locations_by_family", v.archetype_locations_by_family_);
+    ar << make_nvp("archetypes_by_backend_by_facet", v.archetypes_by_backend_by_facet_);
 }
 
 template<typename Archive>
@@ -58,6 +59,7 @@ void load(Archive& ar,
     ar >> make_nvp("formatter_names_by_backend_name", v.formatter_names_by_backend_name_);
     ar >> make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
     ar >> make_nvp("archetype_locations_by_family", v.archetype_locations_by_family_);
+    ar >> make_nvp("archetypes_by_backend_by_facet", v.archetypes_by_backend_by_facet_);
 }
 
 } }

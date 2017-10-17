@@ -50,7 +50,8 @@ public:
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
         const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family);
+        const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family,
+        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet);
 
 private:
     template<typename Archive>
@@ -93,6 +94,11 @@ public:
     void archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v);
     /**@}*/
 
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet();
+    void archetypes_by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v);
+    void archetypes_by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v);
+
 public:
     bool operator==(const archetype_location_repository& rhs) const;
     bool operator!=(const archetype_location_repository& rhs) const {
@@ -109,6 +115,7 @@ private:
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
     std::unordered_map<std::string, dogen::annotations::archetype_locations_group> archetype_locations_by_meta_name_;
     std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > archetype_locations_by_family_;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > archetypes_by_backend_by_facet_;
 };
 
 } }
