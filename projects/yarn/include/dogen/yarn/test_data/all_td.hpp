@@ -83,6 +83,7 @@
 #include "dogen/yarn/test_data/transforms/local_enablement_configuration_td.hpp"
 #include "dogen/yarn/test_data/transforms/global_enablement_configuration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/denormalised_archetype_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/local_archetype_location_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
 

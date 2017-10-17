@@ -21,6 +21,7 @@
 #include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/archetype_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/denormalised_archetype_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
@@ -58,6 +59,15 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_arche
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_denormalised_archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -70,6 +80,7 @@ std::size_t global_archetype_location_properties_hasher::hash(const global_arche
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(v.backend_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(v.facet_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_properties(v.archetype_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_denormalised_archetype_properties(v.denormalised_archetype_properties()));
 
     return seed;
 }

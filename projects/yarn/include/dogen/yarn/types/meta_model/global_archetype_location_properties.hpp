@@ -31,6 +31,7 @@
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/backend_properties.hpp"
 #include "dogen/yarn/types/meta_model/archetype_properties.hpp"
+#include "dogen/yarn/types/meta_model/denormalised_archetype_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/global_archetype_location_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -48,7 +49,8 @@ public:
     global_archetype_location_properties(
         const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties,
+        const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties);
 
 private:
     template<typename Archive>
@@ -73,6 +75,11 @@ public:
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& v);
     void archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>&& v);
 
+    const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties();
+    void denormalised_archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& v);
+    void denormalised_archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>&& v);
+
 public:
     bool operator==(const global_archetype_location_properties& rhs) const;
     bool operator!=(const global_archetype_location_properties& rhs) const {
@@ -87,6 +94,7 @@ private:
     std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties> backend_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties> archetype_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties> denormalised_archetype_properties_;
 };
 
 } } }

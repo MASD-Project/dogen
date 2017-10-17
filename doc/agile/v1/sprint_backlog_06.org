@@ -426,6 +426,8 @@ Do we really need element properties as a stand alone class? It seems
 all of its attributes should just be part of element.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-17 Tue 18:18]
+    CLOCK: [2017-10-17 Tue 07:09]--[2017-10-17 Tue 07:29] =>  0:20
     CLOCK: [2017-10-15 Sun 19:20]--[2017-10-15 Sun 19:53] =>  0:33
     CLOCK: [2017-10-15 Sun 18:45]--[2017-10-15 Sun 19:19] =>  0:34
     CLOCK: [2017-10-15 Sun 17:28]--[2017-10-15 Sun 17:38] =>  0:10
@@ -467,7 +469,6 @@ Notes:
 - is there a need for a global overwrite flag? We already have the
   force write command line option. We seem to have this at all levels
   (backend, facet, archetype).
-- we need to
 
 Tasks:
 
@@ -797,6 +798,27 @@ We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
+*** Consider bucketing elements by meta-type in model                 :story:
+
+At the moment we have a flat container of elements in the main
+model. However, it seems like one of its use cases will be to bucket
+the elements by meta-type before processing: formatters will want to
+locate all formatters for a given meta-type and apply them all. At
+present we are asking for the formatters for meta-name
+repeatedly. This makes no sense, we should just ask for them once and
+apply all formatters in one go.
+
+For this we could simply group elements by meta-name in the model
+itself and then use that container at formatting time. However, there
+may be cases where looping through the whole model is more convenient
+(during transforms) so this is not without its downsides.
+
+Alternatively we could consider just bucketing in the formatters'
+workflow itself.
+
+This work will only be useful once we get rid of the formattables
+model.
+
 *** Properties vs configuration                                       :story:
 
 Originally we had defined properties to mean things which are computed
@@ -823,24 +845,6 @@ Note that we need artefacts to have an associated language so that we
 can use the correct clang format configuration. If a language is not
 supported by clang format (e.g. c#) we should just skip the files. The
 text model could group files by language.
-
-*** Consider bucketing elements by meta-type in model                 :story:
-
-At the moment we have a flat container of elements in the main
-model. However, it seems like its main use case will be to bucket the
-elements by meta-type before processing: formatters will want to
-locate all formatters for a given meta-type and apply them all. At
-present we are asking for the formatters for meta-name
-repeatedly. This makes no sense, we should just ask for them once and
-apply all formatters in one go.
-
-For this we could simply group elements by meta-name in the model
-itself and then use that container at formatting time. However, there
-may be cases where looping through the whole model is more convenient
-(during transforms) so this is not without its downsides.
-
-Alternatively we could consider just bucketing in the formatters'
-workflow itself.
 
 *** Postfix and directory fields in annotations look weird            :story:
 

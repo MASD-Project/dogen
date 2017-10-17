@@ -18,36 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
+#include "dogen/yarn/hash/meta_model/denormalised_archetype_properties_hash.hpp"
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
 }
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+std::size_t denormalised_archetype_properties_hasher::hash(const denormalised_archetype_properties& v) {
+    std::size_t seed(0);
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::backend_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
-      << " }";
-    return(s);
+    combine(seed, v.backend_enabled());
+    combine(seed, v.backend_directory());
+    combine(seed, v.facet_enabled());
+    combine(seed, v.facet_overwrite());
+    combine(seed, v.facet_directory());
+    combine(seed, v.facet_postfix());
+    combine(seed, v.archetype_enabled());
+    combine(seed, v.archetype_overwrite());
+    combine(seed, v.archetype_postfix());
+
+    return seed;
 }
 
 } } }

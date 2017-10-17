@@ -48,8 +48,7 @@ public:
 public:
     backend_properties(
         const bool enabled,
-        const std::string& directory,
-        const bool force_backend_directory);
+        const std::string& directory);
 
 private:
     template<typename Archive>
@@ -77,15 +76,6 @@ public:
     void directory(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief If true, the backend directory will be expressed, even when there is only one
-     * backend enabled.
-     */
-    /**@{*/
-    bool force_backend_directory() const;
-    void force_backend_directory(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const backend_properties& rhs) const;
     bool operator!=(const backend_properties& rhs) const {
@@ -99,7 +89,6 @@ public:
 private:
     bool enabled_;
     std::string directory_;
-    bool force_backend_directory_;
 };
 
 } } }

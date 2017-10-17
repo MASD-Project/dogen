@@ -27,22 +27,26 @@ namespace meta_model {
 global_archetype_location_properties::global_archetype_location_properties(
     const std::unordered_map<std::string, dogen::yarn::meta_model::backend_properties>& backend_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties)
+    const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>& archetype_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties)
     : backend_properties_(backend_properties),
       facet_properties_(facet_properties),
-      archetype_properties_(archetype_properties) { }
+      archetype_properties_(archetype_properties),
+      denormalised_archetype_properties_(denormalised_archetype_properties) { }
 
 void global_archetype_location_properties::swap(global_archetype_location_properties& other) noexcept {
     using std::swap;
     swap(backend_properties_, other.backend_properties_);
     swap(facet_properties_, other.facet_properties_);
     swap(archetype_properties_, other.archetype_properties_);
+    swap(denormalised_archetype_properties_, other.denormalised_archetype_properties_);
 }
 
 bool global_archetype_location_properties::operator==(const global_archetype_location_properties& rhs) const {
     return backend_properties_ == rhs.backend_properties_ &&
         facet_properties_ == rhs.facet_properties_ &&
-        archetype_properties_ == rhs.archetype_properties_;
+        archetype_properties_ == rhs.archetype_properties_ &&
+        denormalised_archetype_properties_ == rhs.denormalised_archetype_properties_;
 }
 
 global_archetype_location_properties& global_archetype_location_properties::operator=(global_archetype_location_properties other) {
@@ -97,6 +101,22 @@ void global_archetype_location_properties::archetype_properties(const std::unord
 
 void global_archetype_location_properties::archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties>&& v) {
     archetype_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& global_archetype_location_properties::denormalised_archetype_properties() const {
+    return denormalised_archetype_properties_;
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& global_archetype_location_properties::denormalised_archetype_properties() {
+    return denormalised_archetype_properties_;
+}
+
+void global_archetype_location_properties::denormalised_archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>& v) {
+    denormalised_archetype_properties_ = v;
+}
+
+void global_archetype_location_properties::denormalised_archetype_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties>&& v) {
+    denormalised_archetype_properties_ = std::move(v);
 }
 
 } } }

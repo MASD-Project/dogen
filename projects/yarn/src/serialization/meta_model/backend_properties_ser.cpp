@@ -39,7 +39,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("enabled", v.enabled_);
     ar << make_nvp("directory", v.directory_);
-    ar << make_nvp("force_backend_directory", v.force_backend_directory_);
 }
 
 template<typename Archive>
@@ -48,7 +47,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("enabled", v.enabled_);
     ar >> make_nvp("directory", v.directory_);
-    ar >> make_nvp("force_backend_directory", v.force_backend_directory_);
 }
 
 } }

@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/denormalised_archetype_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
+std::ostream& operator<<(std::ostream& s, const denormalised_archetype_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -43,9 +43,16 @@ std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::backend_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::denormalised_archetype_properties\"" << ", "
+      << "\"backend_enabled\": " << v.backend_enabled() << ", "
+      << "\"backend_directory\": " << "\"" << tidy_up_string(v.backend_directory()) << "\"" << ", "
+      << "\"facet_enabled\": " << v.facet_enabled() << ", "
+      << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
+      << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
+      << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
+      << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
+      << "\"archetype_overwrite\": " << v.archetype_overwrite() << ", "
+      << "\"archetype_postfix\": " << "\"" << tidy_up_string(v.archetype_postfix()) << "\""
       << " }";
     return(s);
 }

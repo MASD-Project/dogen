@@ -32,6 +32,7 @@
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/denormalised_archetype_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/global_archetype_location_properties_ser.hpp"
 
 namespace boost {
@@ -44,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("backend_properties", v.backend_properties_);
     ar << make_nvp("facet_properties", v.facet_properties_);
     ar << make_nvp("archetype_properties", v.archetype_properties_);
+    ar << make_nvp("denormalised_archetype_properties", v.denormalised_archetype_properties_);
 }
 
 template<typename Archive>
@@ -53,6 +55,7 @@ void load(Archive& ar,
     ar >> make_nvp("backend_properties", v.backend_properties_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
     ar >> make_nvp("archetype_properties", v.archetype_properties_);
+    ar >> make_nvp("denormalised_archetype_properties", v.denormalised_archetype_properties_);
 }
 
 } }

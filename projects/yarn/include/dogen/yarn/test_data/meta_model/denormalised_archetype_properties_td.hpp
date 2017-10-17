@@ -18,36 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
+#ifndef DOGEN_YARN_TEST_DATA_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_TD_HPP
+#define DOGEN_YARN_TEST_DATA_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_TD_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn/types/meta_model/denormalised_archetype_properties.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const backend_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
+class denormalised_archetype_properties_generator {
+public:
+    denormalised_archetype_properties_generator();
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::backend_properties\"" << ", "
-      << "\"enabled\": " << v.enabled() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\""
-      << " }";
-    return(s);
-}
+public:
+    typedef dogen::yarn::meta_model::denormalised_archetype_properties result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif

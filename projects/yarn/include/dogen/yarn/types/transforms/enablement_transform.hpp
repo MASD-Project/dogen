@@ -65,6 +65,9 @@ private:
     obtain_global_configurations(const global_type_group_type& gtg,
         const annotations::annotation& ra);
 
+    static global_enablement_configurations_type
+    obtain_global_configurations(const meta_model::model m);
+
     static void update_facet_enablement(
         const std::list<annotations::archetype_location>& als,
         const global_enablement_configurations_type& gcs,
@@ -122,7 +125,12 @@ private:
         enabled_archetype_for_element, meta_model::element& e);
 
 public:
+    static void old_transform(const context& ctx, meta_model::model& m);
+    static void new_transform(const context& ctx, meta_model::model& m);
+
+public:
     static void transform(const context& ctx, meta_model::model& m);
+
 };
 
 } } }

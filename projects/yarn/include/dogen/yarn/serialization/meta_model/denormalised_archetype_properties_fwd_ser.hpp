@@ -18,29 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_FWD_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include "dogen/yarn/types/meta_model/denormalised_archetype_properties_fwd.hpp"
 
-}
+namespace boost {
+namespace serialization {
 
-namespace dogen {
-namespace yarn {
-namespace meta_model {
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::meta_model::denormalised_archetype_properties& v, unsigned int version);
 
-std::size_t backend_properties_hasher::hash(const backend_properties& v) {
-    std::size_t seed(0);
+template<class Archive>
+void load(Archive& ar, dogen::yarn::meta_model::denormalised_archetype_properties& v, unsigned int version);
 
-    combine(seed, v.enabled());
-    combine(seed, v.directory());
+} }
 
-    return seed;
-}
-
-} } }
+#endif

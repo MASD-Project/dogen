@@ -83,6 +83,7 @@
 #include "dogen/yarn/hash/transforms/local_enablement_configuration_hash.hpp"
 #include "dogen/yarn/hash/transforms/global_enablement_configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/intra_backend_segment_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/denormalised_archetype_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
 

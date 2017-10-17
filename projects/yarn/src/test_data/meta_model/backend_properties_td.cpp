@@ -45,7 +45,6 @@ void backend_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
     v.directory(create_std_string(position + 1));
-    v.force_backend_directory(create_bool(position + 2));
 }
 
 backend_properties_generator::result_type

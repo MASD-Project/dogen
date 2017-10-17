@@ -160,6 +160,16 @@ enablement_transform::obtain_global_configurations(
     return r;
 }
 
+enablement_transform::global_enablement_configurations_type
+enablement_transform::obtain_global_configurations(const meta_model::model /*m*/) {
+    BOOST_LOG_SEV(lg, debug) << "Creating global enablement configuration.";
+    global_enablement_configurations_type r;
+
+    BOOST_LOG_SEV(lg, debug) << "Created global enablement configuration. "
+                             << "Result: " << r;
+    return r;
+}
+
 void enablement_transform::update_facet_enablement(
     const std::list<annotations::archetype_location>& als,
     const global_enablement_configurations_type& gcs,
@@ -547,7 +557,7 @@ void enablement_transform::compute_enablement_for_element(
 }
 
 void enablement_transform::
-transform(const context& ctx, meta_model::model& m) {
+old_transform(const context& ctx, meta_model::model& m) {
     helpers::scoped_transform_probing stp(lg, "enablement transform",
         transform_id, m.name().id(), ctx.prober(), m);
 
@@ -589,6 +599,20 @@ transform(const context& ctx, meta_model::model& m) {
 
     m.enabled_archetype_for_element(eafe);
     stp.end_transform(m);
+}
+
+void enablement_transform::
+new_transform(const context& ctx, meta_model::model& m) {
+    helpers::scoped_transform_probing stp(lg, "enablement new_transform",
+        transform_id, m.name().id(), ctx.prober(), m);
+
+    const auto gcs(obtain_global_configurations(m));
+
+
+}
+
+void enablement_transform::transform(const context& ctx, meta_model::model& m) {
+    old_transform(ctx, m);
 }
 
 } } }

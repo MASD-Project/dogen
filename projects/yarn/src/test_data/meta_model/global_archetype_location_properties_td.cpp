@@ -22,6 +22,7 @@
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/backend_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/archetype_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/denormalised_archetype_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
 
 namespace {
@@ -71,6 +72,19 @@ std::unordered_map<std::string, dogen::yarn::meta_model::archetype_properties> c
     return r;
 }
 
+dogen::yarn::meta_model::denormalised_archetype_properties
+create_dogen_yarn_meta_model_denormalised_archetype_properties(const unsigned int position) {
+    return dogen::yarn::meta_model::denormalised_archetype_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties> create_std_unordered_map_std_string_dogen_yarn_meta_model_denormalised_archetype_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::denormalised_archetype_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_denormalised_archetype_properties(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -84,6 +98,7 @@ populate(const unsigned int position, result_type& v) {
     v.backend_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_backend_properties(position + 0));
     v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 1));
     v.archetype_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_archetype_properties(position + 2));
+    v.denormalised_archetype_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_denormalised_archetype_properties(position + 3));
 }
 
 global_archetype_location_properties_generator::result_type

@@ -176,6 +176,7 @@
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
 #include "dogen/yarn/types/helpers/endomodel_post_processing_validator.hpp"
 #include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
+#include "dogen/yarn/types/meta_model/denormalised_archetype_properties.hpp"
 #include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 #include "dogen/yarn/types/meta_model/global_archetype_location_properties.hpp"
 #include "dogen/yarn/types/transforms/archetype_location_properties_transform.hpp"
