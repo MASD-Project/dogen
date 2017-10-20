@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-20 Fri 10:50]
+#+CAPTION: Clock summary at [2017-10-20 Fri 10:55]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:16* |       |       | 100.0 |
+| *Total time*                                                                | *37:20* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:16   |       |       | 100.0 |
-| Active                                                                      |         | 37:16 |       | 100.0 |
+| Stories                                                                     | 37:20   |       |       | 100.0 |
+| Active                                                                      |         | 37:20 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   6.2 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.0 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.4 |
 | COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.7 |
-| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   5.5 |
+| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   5.4 |
 | COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   4.2 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.7 |
 | COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   5.6 |
@@ -34,7 +34,7 @@
 | COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.7 |
 | COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.6 |
 | COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   3.0 |
-| STARTED Create the archetype location properties                            |         |       | 13:54 |  37.3 |
+| STARTED Create the archetype location properties                            |         |       | 13:58 |  37.4 |
 | STARTED Generate file paths as a transform                                  |         |       |  6:29 |  17.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -426,6 +426,7 @@ Do we really need element properties as a stand alone class? It seems
 all of its attributes should just be part of element.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-20 Fri 10:51]--[2017-10-20 Fri 10:55] =>  0:04
     CLOCK: [2017-10-20 Fri 10:41]--[2017-10-20 Fri 10:50] =>  0:09
     CLOCK: [2017-10-20 Fri 10:35]--[2017-10-20 Fri 10:40] =>  0:05
     CLOCK: [2017-10-20 Fri 10:29]--[2017-10-20 Fri 10:34] =>  0:05

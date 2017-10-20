@@ -80,8 +80,6 @@
 #include "dogen/yarn/serialization/transforms/formatting_configuration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
-#include "dogen/yarn/serialization/transforms/local_enablement_configuration_ser.hpp"
-#include "dogen/yarn/serialization/transforms/global_enablement_configuration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/denormalised_archetype_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/local_archetype_location_properties_ser.hpp"
