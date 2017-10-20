@@ -26,11 +26,14 @@
 #endif
 
 #include <string>
+#include <unordered_map>
+#include "dogen/annotations/types/archetype_locations_group.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"
-#include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
-#include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
+#include "dogen/yarn/types/meta_model/artefact_properties.hpp"
+#include "dogen/yarn/types/meta_model/denormalised_archetype_properties.hpp"
+#include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
@@ -39,92 +42,8 @@ namespace transforms {
 
 class enablement_transform final {
 private:
-    struct global_type_group {
-        annotations::type backend_enabled;
-        annotations::type facet_enabled;
-        annotations::type archetype_enabled;
-        annotations::type facet_overwrite;
-        annotations::type archetype_overwrite;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s,
-        const global_type_group& v);
-
-    typedef std::unordered_map<std::string, global_type_group>
-    global_type_group_type;
-
-    static global_type_group_type make_global_type_group(
-        const annotations::type_repository& atrp,
-        const std::list<annotations::archetype_location>& als);
-
-private:
-    typedef std::unordered_map<std::string, global_enablement_configuration>
-    global_enablement_configurations_type;
-
-    static global_enablement_configurations_type
-    obtain_global_configurations(const global_type_group_type& gtg,
-        const annotations::annotation& ra);
-
-    static global_enablement_configurations_type
-    obtain_global_configurations(const meta_model::model m);
-
-    static void update_facet_enablement(
-        const std::list<annotations::archetype_location>& als,
-        const global_enablement_configurations_type& gcs,
-        meta_model::model& m);
-
-private:
-    struct local_type_group {
-        annotations::type facet_enabled;
-        annotations::type archetype_enabled;
-        annotations::type facet_supported;
-        annotations::type facet_overwrite;
-        annotations::type archetype_overwrite;
-    };
-
-    friend std::ostream& operator<<(std::ostream& s,
-        const local_type_group& v);
-
-    typedef std::unordered_map<std::string, local_type_group>
-    local_type_group_type;
-
-    static local_type_group_type
-    make_local_type_group(const annotations::type_repository& atrp,
-        const std::list<annotations::archetype_location>& als);
-
-    static std::unordered_map<std::string, local_type_group_type>
-    bucket_local_type_group_by_meta_name(
-        const local_type_group_type& unbucketed_ltgs, const std::unordered_map<
-        std::string, annotations::archetype_locations_group>&
-        archetype_locations_by_meta_name);
-
-private:
-    typedef std::unordered_map<std::string, local_enablement_configuration>
-    local_enablement_configurations_type;
-
-    static local_enablement_configurations_type
-    obtain_local_configurations(const local_type_group_type& ltg,
-        const annotations::annotation& o);
-
-private:
     static bool is_element_disabled(const meta_model::element& e);
 
-    static void compute_enablement_for_artefact_properties(
-        const global_enablement_configurations_type& gcs,
-        const local_enablement_configurations_type& lcs,
-        const std::string& archetype,
-        meta_model::artefact_properties& ap);
-
-    static void compute_enablement_for_element(
-        const global_enablement_configurations_type& gcs,
-        const std::unordered_map<std::string, local_type_group_type>& ltgmt,
-        const std::unordered_map<std::string,
-        annotations::archetype_locations_group>&
-        archetype_locations_by_meta_name,
-        std::unordered_set<meta_model::element_archetype>&
-        enabled_archetype_for_element, meta_model::element& e);
-
-private:
     static void compute_enablement_for_artefact_properties(
         const std::unordered_map<std::string,
         meta_model::denormalised_archetype_properties>&
@@ -146,12 +65,7 @@ private:
         enabled_archetype_for_element, meta_model::element& e);
 
 public:
-    static void old_transform(const context& ctx, meta_model::model& m);
-    static void new_transform(const context& ctx, meta_model::model& m);
-
-public:
     static void transform(const context& ctx, meta_model::model& m);
-
 };
 
 } } }
