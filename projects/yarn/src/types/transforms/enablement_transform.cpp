@@ -629,8 +629,8 @@ void enablement_transform::compute_enablement_for_artefact_properties(
         ap.overwrite(*lc.archetype_overwrite());
     else if (lc.facet_overwrite())
         ap.overwrite(*lc.facet_overwrite());
-    // else if (gc.archetype_overwrite())
-    // ap.overwrite(*gc.archetype_overwrite());
+    else if (gc.archetype_overwrite())
+        ap.overwrite(*gc.archetype_overwrite());
     else
         ap.overwrite(gc.facet_overwrite());
 
@@ -839,7 +839,7 @@ new_transform(const context& ctx, meta_model::model& m) {
 }
 
 void enablement_transform::transform(const context& ctx, meta_model::model& m) {
-    old_transform(ctx, m);
+    new_transform(ctx, m);
 }
 
 } } }

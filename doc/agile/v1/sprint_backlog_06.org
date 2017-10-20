@@ -426,6 +426,7 @@ Do we really need element properties as a stand alone class? It seems
 all of its attributes should just be part of element.
 
 *** STARTED Create the archetype location properties                  :story:
+    CLOCK: [2017-10-20 Fri 10:35]--[2017-10-20 Fri 10:40] =>  0:05
     CLOCK: [2017-10-20 Fri 10:29]--[2017-10-20 Fri 10:34] =>  0:05
     CLOCK: [2017-10-20 Fri 09:54]--[2017-10-20 Fri 10:28] =>  0:34
     CLOCK: [2017-10-20 Fri 08:45]--[2017-10-20 Fri 09:53] =>  1:08
