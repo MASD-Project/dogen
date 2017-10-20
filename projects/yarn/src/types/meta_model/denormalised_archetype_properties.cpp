@@ -28,8 +28,18 @@ denormalised_archetype_properties::denormalised_archetype_properties()
     : backend_enabled_(static_cast<bool>(0)),
       facet_enabled_(static_cast<bool>(0)),
       facet_overwrite_(static_cast<bool>(0)),
-      archetype_enabled_(static_cast<bool>(0)),
-      archetype_overwrite_(static_cast<bool>(0)) { }
+      archetype_enabled_(static_cast<bool>(0)) { }
+
+denormalised_archetype_properties::denormalised_archetype_properties(denormalised_archetype_properties&& rhs)
+    : backend_enabled_(std::move(rhs.backend_enabled_)),
+      backend_directory_(std::move(rhs.backend_directory_)),
+      facet_enabled_(std::move(rhs.facet_enabled_)),
+      facet_overwrite_(std::move(rhs.facet_overwrite_)),
+      facet_directory_(std::move(rhs.facet_directory_)),
+      facet_postfix_(std::move(rhs.facet_postfix_)),
+      archetype_enabled_(std::move(rhs.archetype_enabled_)),
+      archetype_overwrite_(std::move(rhs.archetype_overwrite_)),
+      archetype_postfix_(std::move(rhs.archetype_postfix_)) { }
 
 denormalised_archetype_properties::denormalised_archetype_properties(
     const bool backend_enabled,
@@ -39,7 +49,7 @@ denormalised_archetype_properties::denormalised_archetype_properties(
     const std::string& facet_directory,
     const std::string& facet_postfix,
     const bool archetype_enabled,
-    const bool archetype_overwrite,
+    const boost::optional<bool>& archetype_overwrite,
     const std::string& archetype_postfix)
     : backend_enabled_(backend_enabled),
       backend_directory_(backend_directory),
@@ -162,12 +172,20 @@ void denormalised_archetype_properties::archetype_enabled(const bool v) {
     archetype_enabled_ = v;
 }
 
-bool denormalised_archetype_properties::archetype_overwrite() const {
+const boost::optional<bool>& denormalised_archetype_properties::archetype_overwrite() const {
     return archetype_overwrite_;
 }
 
-void denormalised_archetype_properties::archetype_overwrite(const bool v) {
+boost::optional<bool>& denormalised_archetype_properties::archetype_overwrite() {
+    return archetype_overwrite_;
+}
+
+void denormalised_archetype_properties::archetype_overwrite(const boost::optional<bool>& v) {
     archetype_overwrite_ = v;
+}
+
+void denormalised_archetype_properties::archetype_overwrite(const boost::optional<bool>&& v) {
+    archetype_overwrite_ = std::move(v);
 }
 
 const std::string& denormalised_archetype_properties::archetype_postfix() const {

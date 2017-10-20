@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/serialization/meta_model/archetype_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -39,16 +40,18 @@ namespace meta_model {
 class archetype_properties final {
 public:
     archetype_properties(const archetype_properties&) = default;
-    archetype_properties(archetype_properties&&) = default;
     ~archetype_properties() = default;
 
 public:
     archetype_properties();
 
 public:
+    archetype_properties(archetype_properties&& rhs);
+
+public:
     archetype_properties(
         const bool enabled,
-        const bool overwrite,
+        const boost::optional<bool>& overwrite,
         const std::string& postfix);
 
 private:
@@ -67,8 +70,10 @@ public:
     void enabled(const bool v);
     /**@}*/
 
-    bool overwrite() const;
-    void overwrite(const bool v);
+    const boost::optional<bool>& overwrite() const;
+    boost::optional<bool>& overwrite();
+    void overwrite(const boost::optional<bool>& v);
+    void overwrite(const boost::optional<bool>&& v);
 
     /**
      * @brief Postfix to use for artefacts of this archetype.
@@ -92,7 +97,7 @@ public:
 
 private:
     bool enabled_;
-    bool overwrite_;
+    boost::optional<bool> overwrite_;
     std::string postfix_;
 };
 

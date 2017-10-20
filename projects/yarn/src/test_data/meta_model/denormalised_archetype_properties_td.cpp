@@ -33,6 +33,13 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+boost::optional<bool>
+create_boost_optional_bool(unsigned int position) {
+    boost::optional<bool> r(
+        create_bool(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -50,7 +57,7 @@ populate(const unsigned int position, result_type& v) {
     v.facet_directory(create_std_string(position + 4));
     v.facet_postfix(create_std_string(position + 5));
     v.archetype_enabled(create_bool(position + 6));
-    v.archetype_overwrite(create_bool(position + 7));
+    v.archetype_overwrite(create_boost_optional_bool(position + 7));
     v.archetype_postfix(create_std_string(position + 8));
 }
 

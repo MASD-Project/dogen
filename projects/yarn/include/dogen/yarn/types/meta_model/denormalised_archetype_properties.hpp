@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/serialization/meta_model/denormalised_archetype_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -36,11 +37,13 @@ namespace meta_model {
 class denormalised_archetype_properties final {
 public:
     denormalised_archetype_properties(const denormalised_archetype_properties&) = default;
-    denormalised_archetype_properties(denormalised_archetype_properties&&) = default;
     ~denormalised_archetype_properties() = default;
 
 public:
     denormalised_archetype_properties();
+
+public:
+    denormalised_archetype_properties(denormalised_archetype_properties&& rhs);
 
 public:
     denormalised_archetype_properties(
@@ -51,7 +54,7 @@ public:
         const std::string& facet_directory,
         const std::string& facet_postfix,
         const bool archetype_enabled,
-        const bool archetype_overwrite,
+        const boost::optional<bool>& archetype_overwrite,
         const std::string& archetype_postfix);
 
 private:
@@ -89,8 +92,10 @@ public:
     bool archetype_enabled() const;
     void archetype_enabled(const bool v);
 
-    bool archetype_overwrite() const;
-    void archetype_overwrite(const bool v);
+    const boost::optional<bool>& archetype_overwrite() const;
+    boost::optional<bool>& archetype_overwrite();
+    void archetype_overwrite(const boost::optional<bool>& v);
+    void archetype_overwrite(const boost::optional<bool>&& v);
 
     const std::string& archetype_postfix() const;
     std::string& archetype_postfix();
@@ -115,7 +120,7 @@ private:
     std::string facet_directory_;
     std::string facet_postfix_;
     bool archetype_enabled_;
-    bool archetype_overwrite_;
+    boost::optional<bool> archetype_overwrite_;
     std::string archetype_postfix_;
 };
 

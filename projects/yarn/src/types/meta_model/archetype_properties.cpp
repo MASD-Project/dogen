@@ -25,12 +25,16 @@ namespace yarn {
 namespace meta_model {
 
 archetype_properties::archetype_properties()
-    : enabled_(static_cast<bool>(0)),
-      overwrite_(static_cast<bool>(0)) { }
+    : enabled_(static_cast<bool>(0)) { }
+
+archetype_properties::archetype_properties(archetype_properties&& rhs)
+    : enabled_(std::move(rhs.enabled_)),
+      overwrite_(std::move(rhs.overwrite_)),
+      postfix_(std::move(rhs.postfix_)) { }
 
 archetype_properties::archetype_properties(
     const bool enabled,
-    const bool overwrite,
+    const boost::optional<bool>& overwrite,
     const std::string& postfix)
     : enabled_(enabled),
       overwrite_(overwrite),
@@ -63,12 +67,20 @@ void archetype_properties::enabled(const bool v) {
     enabled_ = v;
 }
 
-bool archetype_properties::overwrite() const {
+const boost::optional<bool>& archetype_properties::overwrite() const {
     return overwrite_;
 }
 
-void archetype_properties::overwrite(const bool v) {
+boost::optional<bool>& archetype_properties::overwrite() {
+    return overwrite_;
+}
+
+void archetype_properties::overwrite(const boost::optional<bool>& v) {
     overwrite_ = v;
+}
+
+void archetype_properties::overwrite(const boost::optional<bool>&& v) {
+    overwrite_ = std::move(v);
 }
 
 const std::string& archetype_properties::postfix() const {

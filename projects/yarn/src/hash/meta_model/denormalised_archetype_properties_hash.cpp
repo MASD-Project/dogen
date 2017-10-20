@@ -28,6 +28,16 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -44,7 +54,7 @@ std::size_t denormalised_archetype_properties_hasher::hash(const denormalised_ar
     combine(seed, v.facet_directory());
     combine(seed, v.facet_postfix());
     combine(seed, v.archetype_enabled());
-    combine(seed, v.archetype_overwrite());
+    combine(seed, hash_boost_optional_bool(v.archetype_overwrite()));
     combine(seed, v.archetype_postfix());
 
     return seed;

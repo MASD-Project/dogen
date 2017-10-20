@@ -27,6 +27,13 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
+boost::optional<bool>
+create_boost_optional_bool(unsigned int position) {
+    boost::optional<bool> r(
+        create_bool(position));
+    return r;
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -44,7 +51,7 @@ archetype_properties_generator::archetype_properties_generator() : position_(0) 
 void archetype_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.enabled(create_bool(position + 0));
-    v.overwrite(create_bool(position + 1));
+    v.overwrite(create_boost_optional_bool(position + 1));
     v.postfix(create_std_string(position + 2));
 }
 
