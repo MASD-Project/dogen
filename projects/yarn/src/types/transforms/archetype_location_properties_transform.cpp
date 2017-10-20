@@ -47,8 +47,11 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string type_grouo_not_found(
+const std::string type_group_not_found(
     "Could not find a type group for archetype: ");
+const std::string backend_not_found("Could not find backend: ");
+const std::string facet_not_found("Could not find facet: ");
+const std::string archetype_not_found("Could not find archetype: ");
 
 }
 
@@ -308,6 +311,66 @@ populate_global_archetype_location_properties(
     galp.backend_properties(obtain_backend_properties(btg, ra));
     galp.facet_properties(obtain_facet_properties(ftg, ra));
     galp.archetype_properties(obtain_archetype_properties(atg, ra));
+
+    /*
+     * Now populate the denormalised archetype properties by querying
+     * the containers we've already populated.
+     */
+    for (const auto& backend_pair : alrp.archetypes_by_backend_by_facet()) {
+        /*
+         * First we locate the backend for the current batch of
+         * artchetype locations.
+         */
+        const auto& bn(backend_pair.first);
+        const auto i(galp.backend_properties().find(bn));
+        if (i == galp.backend_properties().end()) {
+            BOOST_LOG_SEV(lg, error) << backend_not_found << bn;
+            BOOST_THROW_EXCEPTION(transformation_error(backend_not_found + bn));
+        }
+        const auto& backend(i->second);
+
+        /*
+         * Next we loop through all of its facets and locate each facet.
+         */
+        for (const auto& facet_pair : backend_pair.second) {
+            const auto& fn(facet_pair.first);
+            const auto j(galp.facet_properties().find(fn));
+            if (j == galp.facet_properties().end()) {
+                BOOST_LOG_SEV(lg, error) << facet_not_found << fn;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(facet_not_found + fn));
+            }
+            const auto& facet(j->second);
+
+            /*
+             * Finally we can loop through all of the archetype
+             * locations owned by both this backend and facet and
+             * populate the denormalised properties.
+             */
+            for (const auto& an : facet_pair.second) {
+                meta_model::denormalised_archetype_properties dap;
+                dap.backend_enabled(backend.enabled());
+                dap.backend_directory(backend.directory());
+                dap.facet_enabled(facet.enabled());
+                dap.facet_overwrite(facet.overwrite());
+                dap.facet_directory(facet.directory());
+                dap.facet_postfix(facet.postfix());
+
+                const auto k(galp.archetype_properties().find(an));
+                if (k == galp.archetype_properties().end()) {
+                    BOOST_LOG_SEV(lg, error) << archetype_not_found << an;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(archetype_not_found + an));
+                }
+                const auto& archetype(k->second);
+                dap.archetype_enabled(archetype.enabled());
+                dap.archetype_overwrite(archetype.overwrite());
+                dap.archetype_postfix(archetype.postfix());
+                galp.denormalised_archetype_properties()
+                    .insert(std::make_pair(an, dap));
+            }
+        }
+    }
 }
 
 std::unordered_map<std::string,
@@ -327,9 +390,9 @@ obtain_local_archetype_location_properties(
         const auto archetype(al.archetype());
         const auto i(tgs.find(archetype));
         if (i == tgs.end()) {
-            BOOST_LOG_SEV(lg, error) << type_grouo_not_found << archetype;
+            BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
             BOOST_THROW_EXCEPTION(
-                transformation_error(type_grouo_not_found + archetype));
+                transformation_error(type_group_not_found + archetype));
         }
         const auto tg(i->second);
 
