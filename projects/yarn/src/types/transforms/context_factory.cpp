@@ -92,9 +92,12 @@ context context_factory::make(const options& o, const bool enable_validation) {
         o.probe_stats_disable_guids(), o.probe_stats_org_mode(),
         o.probe_use_short_names(), o.probe_directory(), alrp, atrp, msrp);
 
+    std::unordered_map<std::string,
+                       meta_model::intra_backend_segment_properties> ibsp;
+
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober);
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober, ibsp);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

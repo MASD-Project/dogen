@@ -31,12 +31,16 @@ context::context(
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
-        const helpers::transform_prober prober) :
+        const helpers::transform_prober prober,
+        const std::unordered_map<std::string,
+        meta_model::intra_backend_segment_properties>&
+        intra_backend_segment_properties) :
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
-    mapping_repository_(msrp), formatters_repository_(frp), prober_(prober) {}
+    mapping_repository_(msrp), formatters_repository_(frp), prober_(prober),
+    intra_backend_segment_properties_(intra_backend_segment_properties) {}
 
 context::~context() {
     prober_.end_probing();
@@ -73,6 +77,12 @@ const dogen::formatters::repository& context::formatters_repository() const {
 
 const helpers::transform_prober& context::prober() const {
     return prober_;
+}
+
+const std::unordered_map<std::string,
+                         meta_model::intra_backend_segment_properties>&
+context::intra_backend_segment_properties() const {
+    return intra_backend_segment_properties_;
 }
 
 } } }

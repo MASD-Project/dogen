@@ -32,6 +32,7 @@
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
+#include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
@@ -61,7 +62,10 @@ public:
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
-        const helpers::transform_prober prober);
+        const helpers::transform_prober prober,
+        const std::unordered_map<std::string,
+        meta_model::intra_backend_segment_properties>&
+        intra_backend_segment_properties);
     ~context();
 
 public:
@@ -110,6 +114,13 @@ public:
      */
     const helpers::transform_prober& prober() const;
 
+    /**
+     * @brief Returns all intra-backend segment properties.
+     */
+    const std::unordered_map<std::string,
+                             meta_model::intra_backend_segment_properties>&
+    intra_backend_segment_properties() const;
+
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const transforms::options options_;
@@ -120,6 +131,9 @@ private:
     const helpers::mapping_set_repository mapping_repository_;
     const dogen::formatters::repository formatters_repository_;
     const helpers::transform_prober prober_;
+    const std::unordered_map<std::string,
+                             meta_model::intra_backend_segment_properties>
+    intra_backend_segment_properties_;
 };
 
 } } }
