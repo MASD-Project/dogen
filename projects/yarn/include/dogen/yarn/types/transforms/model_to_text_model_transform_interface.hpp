@@ -35,6 +35,7 @@
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/text_model.hpp"
+#include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
 
@@ -88,6 +89,14 @@ public:
      * @brief Language supported by this transform.
      */
     virtual yarn::meta_model::languages language() const = 0;
+
+    /**
+     * @brief Returns all intra-backend segment properties.
+     */
+    virtual const std::unordered_map<
+        std::string,
+        meta_model::intra_backend_segment_properties>&
+    intra_backend_segment_properties() const = 0;
 
     /**
      * @brief Generates the text model representation for this

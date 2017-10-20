@@ -50,12 +50,12 @@ namespace cpp {
 class model_to_text_model_transform final :
         public yarn::transforms::model_to_text_model_transform_interface {
 public:
-    model_to_text_model_transform() = default;
     model_to_text_model_transform(
         const model_to_text_model_transform&) = delete;
     model_to_text_model_transform(model_to_text_model_transform&&) = default;
 
 public:
+    model_to_text_model_transform();
     ~model_to_text_model_transform() noexcept;
 
 private:
@@ -98,6 +98,14 @@ private:
     std::list<boost::filesystem::path>
     managed_directories(const formattables::locator& l) const;
 
+    /**
+     * @brief Creates the intra-backend segment properties for this
+     * backend.
+     */
+    std::unordered_map<std::string,
+                       yarn::meta_model::intra_backend_segment_properties>
+    create_intra_backend_segment_properties() const;
+
 public:
     std::string id() const override;
 
@@ -114,10 +122,20 @@ public:
 
     yarn::meta_model::languages language() const override;
 
+    const std::unordered_map<
+        std::string,
+        yarn::meta_model::intra_backend_segment_properties>&
+    intra_backend_segment_properties() const override;
+
     yarn::meta_model::text_model
     transform(const yarn::transforms::context& ctx,
         const bool enable_backend_directories,
         const yarn::meta_model::model& m) const override;
+
+private:
+    const std::unordered_map<std::string,
+                             yarn::meta_model::intra_backend_segment_properties>
+    intra_backend_segment_properties_;
 };
 
 } } }

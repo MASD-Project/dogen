@@ -45,6 +45,10 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 
+model_to_text_model_transform::model_to_text_model_transform()
+    : intra_backend_segment_properties_(
+        create_intra_backend_segment_properties()) {}
+
 model_to_text_model_transform::~model_to_text_model_transform() noexcept { }
 
 const formatters::repository&
@@ -103,6 +107,14 @@ managed_directories(const formattables::locator& l) const {
     return r;
 }
 
+std::unordered_map<std::string,
+                   yarn::meta_model::intra_backend_segment_properties>
+model_to_text_model_transform::create_intra_backend_segment_properties() const {
+    std::unordered_map<std::string,
+                       yarn::meta_model::intra_backend_segment_properties> r;
+    return r;
+}
+
 const std::forward_list<annotations::archetype_location>&
 model_to_text_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
@@ -125,6 +137,13 @@ model_to_text_model_transform::archetype_locations_by_family() const {
 
 yarn::meta_model::languages model_to_text_model_transform::language() const {
     return yarn::meta_model::languages::cpp;
+}
+
+const std::unordered_map<
+    std::string,
+    yarn::meta_model::intra_backend_segment_properties>&
+model_to_text_model_transform::intra_backend_segment_properties() const {
+    return intra_backend_segment_properties_;
 }
 
 yarn::meta_model::text_model

@@ -18,40 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_BUILDING_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_BUILDING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/annotations/types/archetype_location_repository.hpp"
-#include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-/**
- * @brief Factory that creates transformation contexts.
- */
-class context_factory final {
-private:
-    static std::unordered_map<std::string,
-                              meta_model::intra_backend_segment_properties>
-    create_intra_backend_segment_properties(
-        const model_to_text_model_transform_registrar& rg);
-
-    static annotations::archetype_location_repository
-    create_archetype_location_repository(
-        const model_to_text_model_transform_registrar& rg);
-
-public:
-    static context
-    make(const options& o, const bool enable_validation = true);
-};
+class building_error;
 
 } } }
 
