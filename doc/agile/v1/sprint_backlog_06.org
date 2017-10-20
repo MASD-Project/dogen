@@ -13,29 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-20 Fri 11:55]
+#+CAPTION: Clock summary at [2017-10-20 Fri 13:42]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *38:18* |       |       | 100.0 |
+| *Total time*                                                                | *38:55* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 38:18   |       |       | 100.0 |
-| Active                                                                      |         | 38:18 |       | 100.0 |
+| Stories                                                                     | 38:55   |       |       | 100.0 |
+| Active                                                                      |         | 38:55 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   6.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   1.9 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.4 |
-| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.7 |
-| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   5.3 |
+| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.6 |
+| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   5.2 |
 | COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   4.0 |
-| COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.7 |
+| COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.6 |
 | COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   5.4 |
-| COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   1.3 |
-| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   7.1 |
+| COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   1.2 |
+| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   7.0 |
 | COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.6 |
-| COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.6 |
-| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   3.0 |
-| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  36.5 |
-| STARTED Generate file paths as a transform                                  |         |       |  7:27 |  19.5 |
+| COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.5 |
+| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.9 |
+| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  35.9 |
+| STARTED Generate file paths as a transform                                  |         |       |  8:04 |  20.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -490,6 +490,7 @@ Tasks:
 - add disable_facet_directories to locator properties?
 
 *** STARTED Generate file paths as a transform                        :story:
+    CLOCK: [2017-10-20 Fri 13:05]--[2017-10-20 Fri 13:42] =>  0:37
     CLOCK: [2017-10-20 Fri 11:33]--[2017-10-20 Fri 11:55] =>  0:22
     CLOCK: [2017-10-20 Fri 10:56]--[2017-10-20 Fri 11:32] =>  0:36
     CLOCK: [2017-09-22 Fri 09:41]--[2017-09-22 Fri 11:26] =>  1:45
@@ -588,7 +589,7 @@ We could introduce two concepts:
   groups have settings: a name; whether to add external modules,
   internal modules, model modules;
 
-- file groups: include, implementation.
+  - file groups: include, implementation.
 
 Each group has an associated configuration:
 

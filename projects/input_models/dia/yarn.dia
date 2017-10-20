@@ -68,7 +68,7 @@
         <dia:point val="-247.071,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-247.121,-114.05;39.9786,10.05"/>
+        <dia:rectangle val="-247.121,-114.05;39.979,10.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7113,7 +7113,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-209,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-209.85,-55.65;-199.887,-44.9996"/>
+        <dia:rectangle val="-209.85,-55.65;-199.888,-44.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7155,7 +7155,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-212.205,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-213.055,-67.05;-199.887,-44.95"/>
+        <dia:rectangle val="-213.055,-67.05;-199.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7197,7 +7197,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-223.665,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-224.515,-55.65;-199.887,-44.95"/>
+        <dia:rectangle val="-224.515,-55.65;-199.888,-44.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7239,7 +7239,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-234.243,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-235.093,-71.05;-199.887,-44.9996"/>
+        <dia:rectangle val="-235.093,-71.05;-199.888,-44.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7688,7 +7688,7 @@ space.#</dia:string>
         <dia:point val="-183.93,-96.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-184.001,-96.7706;-179.552,-92.6703"/>
+        <dia:rectangle val="-184.001,-96.7706;-179.551,-92.6703"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10041,7 +10041,7 @@ space.#</dia:string>
         <dia:point val="-231.091,-8.34995"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-231.841,-9.09995;-224.201,-1.2"/>
+        <dia:rectangle val="-231.841,-9.09998;-224.201,-1.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18958,13 +18958,13 @@ space.#</dia:string>
         <dia:point val="-3,93"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.05,92.95;28.735,104.65"/>
+        <dia:rectangle val="-3.05,92.95;29.89,104.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-3,93"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.685000000000002"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.6"/>
@@ -19318,7 +19318,25 @@ space.#</dia:string>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
           </dia:attribute>
-          <dia:attribute name="parameters"/>
+          <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#o#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const options&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+          </dia:attribute>
         </dia:composite>
       </dia:attribute>
       <dia:attribute name="template">
@@ -31352,7 +31370,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="36.935,81.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.635,80.65;37.685,93.8"/>
+        <dia:rectangle val="29.79,80.65;37.685,93.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31360,8 +31378,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="36.935,81.4"/>
         <dia:point val="36.935,89.2857"/>
-        <dia:point val="28.685,89.2857"/>
-        <dia:point val="28.685,93"/>
+        <dia:point val="29.84,89.2857"/>
+        <dia:point val="29.84,93"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -35440,7 +35458,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-29.48,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-36.5763,-52.35;-28.73,-44.2"/>
+        <dia:rectangle val="-36.5762,-52.35;-28.73,-44.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44703,7 +44721,7 @@ model directory.#</dia:string>
         <dia:point val="-188.5,-31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-189.25,-39.7999;-175.201,-29.4"/>
+        <dia:rectangle val="-189.25,-39.7999;-175.201,-30.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44775,7 +44793,7 @@ model directory.#</dia:string>
         <dia:point val="-156.866,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-169.05,-42.75;-156.116,-29.4"/>
+        <dia:rectangle val="-169.05,-42.75;-156.116,-30.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44847,7 +44865,7 @@ model directory.#</dia:string>
         <dia:point val="-126.659,-35.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-169.05,-36.55;-125.909,-28.3"/>
+        <dia:rectangle val="-169.05,-36.55;-125.909,-29.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44917,7 +44935,7 @@ model directory.#</dia:string>
         <dia:point val="-16.195,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-169.05,-63.75;-15.445,-25.1"/>
+        <dia:rectangle val="-169.05,-63.75;-15.445,-25.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44987,7 +45005,7 @@ model directory.#</dia:string>
         <dia:point val="-83,-64.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-169.05,-64.6707;-78.28,-26.7"/>
+        <dia:rectangle val="-169.05,-64.6707;-78.28,-27.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -45378,7 +45396,7 @@ model directory.#</dia:string>
         <dia:point val="-9.23,-87.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.98,-88.55;7.65607,-80.2"/>
+        <dia:rectangle val="-9.98,-88.55;7.65607,-80.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -45561,7 +45579,7 @@ model directory.#</dia:string>
         <dia:point val="-220,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.75,25.0004;-211.893,33.6"/>
+        <dia:rectangle val="-220.75,25.0004;-211.893,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

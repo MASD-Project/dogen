@@ -42,6 +42,7 @@ private:
     static std::unordered_map<std::string,
                               meta_model::intra_backend_segment_properties>
     create_intra_backend_segment_properties(
+        const options& o,
         const model_to_text_model_transform_registrar& rg);
 
     static annotations::archetype_location_repository

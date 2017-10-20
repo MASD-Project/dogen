@@ -48,16 +48,18 @@ namespace transforms {
 std::unordered_map<std::string,
                    meta_model::intra_backend_segment_properties>
 context_factory::create_intra_backend_segment_properties(
+    const options& o,
     const model_to_text_model_transform_registrar& rg) {
     std::unordered_map<std::string,
                        meta_model::intra_backend_segment_properties> r;
     for (const auto& pair : rg.transforms_by_language()) {
         const auto& t(*pair.second);
-        for (const auto& pair : t.intra_backend_segment_properties()) {
+        for (const auto& pair : t.intra_backend_segment_properties(o)) {
             const auto inserted(r.insert(pair).second);
             if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_segment << pair.first;
-                BOOST_THROW_EXCEPTION(building_error(duplicate_segment + pair.first));
+                BOOST_THROW_EXCEPTION(
+                    building_error(duplicate_segment + pair.first));
             }
         }
     }
@@ -108,7 +110,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     const auto alrp(create_archetype_location_repository(rg));
     annotations::type_repository_factory atrpf;
     const auto atrp(atrpf.make(alrp, data_dirs));
-    const auto ibsp(create_intra_backend_segment_properties(rg));
+    const auto ibsp(create_intra_backend_segment_properties(o, rg));
 
     bool probe_data(o.probe_all());
     bool probe_stats(o.probe_all() || o.probe_stats());

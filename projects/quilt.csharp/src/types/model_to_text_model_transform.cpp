@@ -44,10 +44,6 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 
-model_to_text_model_transform::model_to_text_model_transform()
-    : intra_backend_segment_properties_(
-        create_intra_backend_segment_properties()) {}
-
 model_to_text_model_transform::~model_to_text_model_transform() noexcept { }
 
 formattables::model model_to_text_model_transform::create_formattables_model(
@@ -70,14 +66,6 @@ format(const annotations::type_repository& /*atrp*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
-}
-
-std::unordered_map<std::string,
-                   yarn::meta_model::intra_backend_segment_properties>
-model_to_text_model_transform::create_intra_backend_segment_properties() const {
-    std::unordered_map<std::string,
-                       yarn::meta_model::intra_backend_segment_properties> r;
-    return r;
 }
 
 const std::forward_list<annotations::archetype_location>&
@@ -104,11 +92,13 @@ yarn::meta_model::languages model_to_text_model_transform::language() const {
     return yarn::meta_model::languages::csharp;
 }
 
-const std::unordered_map<
-    std::string,
-    yarn::meta_model::intra_backend_segment_properties>&
-model_to_text_model_transform::intra_backend_segment_properties() const {
-    return intra_backend_segment_properties_;
+std::unordered_map<std::string,
+                   yarn::meta_model::intra_backend_segment_properties>
+model_to_text_model_transform::
+intra_backend_segment_properties(const yarn::transforms::options& /*o*/) const {
+    std::unordered_map<std::string,
+                       yarn::meta_model::intra_backend_segment_properties> r;
+    return r;
 }
 
 yarn::meta_model::text_model
