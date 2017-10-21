@@ -82,7 +82,7 @@ if (!(Test-Path -Path $build_type_dir)) {
 
 cd ${build_type_dir}
 if ($build_type -eq "Release") {
-    conan install ${product_dir} --file=.conanfile.txt -s arch=x86_64
+    conan install ${product_dir} --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86_64
 } elseif ($build_type -eq "Debug") {
     conan install ${product_dir} --file=.conanfile.txt -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86_64 -s build_type=Debug -s compiler.runtime=MDd
 }
