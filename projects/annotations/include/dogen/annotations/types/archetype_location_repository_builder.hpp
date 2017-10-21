@@ -28,6 +28,7 @@
 #include <list>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/archetype_locations_group.hpp"
+#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 
 namespace dogen {
@@ -47,6 +48,9 @@ public:
         archetype_locations_by_meta_name);
     void add(const std::unordered_map<std::string,
         std::list<archetype_location>>& archetype_locations_by_family);
+
+public:
+    void add(const archetype_location_repository_parts& parts);
 
 public:
     const archetype_location_repository& build();

@@ -8721,7 +8721,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.2312,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.2373,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8729,8 +8729,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.2813,-50"/>
-        <dia:point val="22.2873,-45.0502"/>
+        <dia:point val="22.2873,-50"/>
+        <dia:point val="22.2901,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12221,7 +12221,7 @@ associated properties.#</dia:string>
         <dia:point val="81.595,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.1825,-105.85;82.345,-94.4"/>
+        <dia:rectangle val="67.1825,-105.85;82.345,-95.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12256,16 +12256,16 @@ associated properties.#</dia:string>
         <dia:point val="43,-124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,-124.05;71.27,-118.75"/>
+        <dia:rectangle val="42.95,-124.05;66.65,-117.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="43,-124"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000002"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_location_repository_parts_builder#</dia:string>
@@ -12387,23 +12387,6 @@ associated properties.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#al#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="type">
-                <dia:string>#const archetype_location&amp;#</dia:string>
-              </dia:attribute>
-              <dia:attribute name="value">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="comment">
-                <dia:string>##</dia:string>
-              </dia:attribute>
-              <dia:attribute name="kind">
-                <dia:enum val="0"/>
-              </dia:attribute>
-            </dia:composite>
-            <dia:composite type="umlparameter">
-              <dia:attribute name="name">
                 <dia:string>#meta_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
@@ -12442,6 +12425,40 @@ associated properties.#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const std::string&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#is_canonical#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#bool#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#al#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const archetype_location&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -12529,17 +12546,17 @@ associated properties.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="57.11,-118.8"/>
+        <dia:point val="54.8,-118"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.36,-119.55;67.4325,-109.4"/>
+        <dia:rectangle val="54.05,-118.75;67.4325,-110.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="57.11,-118.8"/>
-        <dia:point val="57.11,-115"/>
+        <dia:point val="54.8,-118"/>
+        <dia:point val="54.8,-115"/>
         <dia:point val="67.2325,-115"/>
         <dia:point val="67.2325,-111"/>
       </dia:attribute>

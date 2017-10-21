@@ -186,6 +186,14 @@ add(const std::unordered_map<std::string,
     }
 }
 
+void archetype_location_repository_builder::
+add(const archetype_location_repository_parts& parts) {
+    add(parts.archetype_locations());
+    add(parts.archetype_locations_by_meta_name());
+    add(parts.archetype_locations_by_family());
+    add(parts.archetype_locations_by_intra_backend_segment());
+}
+
 const archetype_location_repository&
 archetype_location_repository_builder::build() {
     populate_facet_names_by_backend_name();
