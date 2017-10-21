@@ -11,6 +11,30 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Upgrade to c++ 17                                                 :story:
+
+There are quite a few dependencies for this to happen:
+
+- on windows we need to somehow include =/std:c++latest=
+- we need to move to latest boost as it seems Boost 1.62 breaks on c++
+  17. We should wait until Beast is included in Boost before we do
+  this.
+- we need to install latest CMake, which is not available on nuget; so
+  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
+  unpack it. Only latest supports VS 2017. Then set the CMake
+  generator:
+
+:    $generator="Visual Studio 15 2017 Win64";
+
+- set the appveyor image:
+
+: image:
+:  - Visual Studio 2017
+
+- set the CMake version:
+
+:     set(CMAKE_CXX_STANDARD 14)
+
 *** Add additional reference directories                              :story:
 
 At present we expect the reference models to be either on the data
