@@ -120,6 +120,7 @@ populate(const unsigned int position, result_type& v) {
     v.archetype_locations_by_meta_name(create_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(position + 3));
     v.archetype_locations_by_family(create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(position + 4));
     v.archetypes_by_backend_by_facet(create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_std_string(position + 5));
+    v.archetype_locations_by_intra_backend_segment(create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(position + 6));
 }
 
 archetype_location_repository_generator::result_type

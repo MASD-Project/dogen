@@ -49,5 +49,6 @@
 #include "dogen/annotations/test_data/profiler_configuration_td.hpp"
 #include "dogen/annotations/test_data/archetype_locations_group_td.hpp"
 #include "dogen/annotations/test_data/archetype_location_repository_td.hpp"
+#include "dogen/annotations/test_data/archetype_location_repository_parts_td.hpp"
 
 #endif

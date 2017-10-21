@@ -29,13 +29,15 @@ archetype_location_repository::archetype_location_repository(
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
     const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family,
-    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet)
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet,
+    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment)
     : archetype_locations_(archetype_locations),
       facet_names_by_backend_name_(facet_names_by_backend_name),
       formatter_names_by_backend_name_(formatter_names_by_backend_name),
       archetype_locations_by_meta_name_(archetype_locations_by_meta_name),
       archetype_locations_by_family_(archetype_locations_by_family),
-      archetypes_by_backend_by_facet_(archetypes_by_backend_by_facet) { }
+      archetypes_by_backend_by_facet_(archetypes_by_backend_by_facet),
+      archetype_locations_by_intra_backend_segment_(archetype_locations_by_intra_backend_segment) { }
 
 void archetype_location_repository::swap(archetype_location_repository& other) noexcept {
     using std::swap;
@@ -45,6 +47,7 @@ void archetype_location_repository::swap(archetype_location_repository& other) n
     swap(archetype_locations_by_meta_name_, other.archetype_locations_by_meta_name_);
     swap(archetype_locations_by_family_, other.archetype_locations_by_family_);
     swap(archetypes_by_backend_by_facet_, other.archetypes_by_backend_by_facet_);
+    swap(archetype_locations_by_intra_backend_segment_, other.archetype_locations_by_intra_backend_segment_);
 }
 
 bool archetype_location_repository::operator==(const archetype_location_repository& rhs) const {
@@ -53,7 +56,8 @@ bool archetype_location_repository::operator==(const archetype_location_reposito
         formatter_names_by_backend_name_ == rhs.formatter_names_by_backend_name_ &&
         archetype_locations_by_meta_name_ == rhs.archetype_locations_by_meta_name_ &&
         archetype_locations_by_family_ == rhs.archetype_locations_by_family_ &&
-        archetypes_by_backend_by_facet_ == rhs.archetypes_by_backend_by_facet_;
+        archetypes_by_backend_by_facet_ == rhs.archetypes_by_backend_by_facet_ &&
+        archetype_locations_by_intra_backend_segment_ == rhs.archetype_locations_by_intra_backend_segment_;
 }
 
 archetype_location_repository& archetype_location_repository::operator=(archetype_location_repository other) {
@@ -156,6 +160,22 @@ void archetype_location_repository::archetypes_by_backend_by_facet(const std::un
 
 void archetype_location_repository::archetypes_by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v) {
     archetypes_by_backend_by_facet_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository::archetype_locations_by_intra_backend_segment() const {
+    return archetype_locations_by_intra_backend_segment_;
+}
+
+std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository::archetype_locations_by_intra_backend_segment() {
+    return archetype_locations_by_intra_backend_segment_;
+}
+
+void archetype_location_repository::archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+    archetype_locations_by_intra_backend_segment_ = v;
+}
+
+void archetype_location_repository::archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v) {
+    archetype_locations_by_intra_backend_segment_ = std::move(v);
 }
 
 } }

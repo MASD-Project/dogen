@@ -49,5 +49,6 @@
 #include "dogen/annotations/hash/profiler_configuration_hash.hpp"
 #include "dogen/annotations/hash/archetype_locations_group_hash.hpp"
 #include "dogen/annotations/hash/archetype_location_repository_hash.hpp"
+#include "dogen/annotations/hash/archetype_location_repository_parts_hash.hpp"
 
 #endif

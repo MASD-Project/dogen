@@ -66,6 +66,8 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_locations_group.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen/annotations/types/archetype_location_repository_builder.hpp"
+#include "dogen/annotations/types/archetype_location_repository_parts_builder.hpp"
 
 #endif

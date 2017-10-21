@@ -28,39 +28,32 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
-#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/annotations/serialization/archetype_location_ser.hpp"
 #include "dogen/annotations/serialization/archetype_locations_group_ser.hpp"
-#include "dogen/annotations/serialization/archetype_location_repository_ser.hpp"
+#include "dogen/annotations/serialization/archetype_location_repository_parts_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::annotations::archetype_location_repository& v,
+    const dogen::annotations::archetype_location_repository_parts& v,
     const unsigned int /*version*/) {
     ar << make_nvp("archetype_locations", v.archetype_locations_);
-    ar << make_nvp("facet_names_by_backend_name", v.facet_names_by_backend_name_);
-    ar << make_nvp("formatter_names_by_backend_name", v.formatter_names_by_backend_name_);
     ar << make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
     ar << make_nvp("archetype_locations_by_family", v.archetype_locations_by_family_);
-    ar << make_nvp("archetypes_by_backend_by_facet", v.archetypes_by_backend_by_facet_);
     ar << make_nvp("archetype_locations_by_intra_backend_segment", v.archetype_locations_by_intra_backend_segment_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::annotations::archetype_location_repository& v,
+    dogen::annotations::archetype_location_repository_parts& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("archetype_locations", v.archetype_locations_);
-    ar >> make_nvp("facet_names_by_backend_name", v.facet_names_by_backend_name_);
-    ar >> make_nvp("formatter_names_by_backend_name", v.formatter_names_by_backend_name_);
     ar >> make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
     ar >> make_nvp("archetype_locations_by_family", v.archetype_locations_by_family_);
-    ar >> make_nvp("archetypes_by_backend_by_facet", v.archetypes_by_backend_by_facet_);
     ar >> make_nvp("archetype_locations_by_intra_backend_segment", v.archetype_locations_by_intra_backend_segment_);
 }
 
@@ -69,16 +62,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::annotations::archetype_location_repository& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::annotations::archetype_location_repository& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
 
 } }

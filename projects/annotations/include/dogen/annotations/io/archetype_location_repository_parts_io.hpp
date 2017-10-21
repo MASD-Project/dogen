@@ -18,27 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_REPOSITORY_PARTS_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_REPOSITORY_PARTS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
+
 namespace dogen {
-namespace yarn {
-namespace meta_model {
+namespace annotations {
 
-/**
- * @brief Different kinds of contributions that can be made to the final path computation.
- */
-enum class path_contribution_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    none = 1, ///< The item does not contribute at all to the path.
-    as_folders = 2, ///< The itemcontributes folders to the path.
-    as_path_components = 3 ///< The item contributes a single folder to the path, as a delimited string.
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::archetype_location_repository_parts& v);
 
-} } }
+} }
 
 #endif

@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
+#ifndef DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_REPOSITORY_PARTS_HASH_HPP
+#define DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_REPOSITORY_PARTS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
-namespace meta_model {
+#include <functional>
+#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
 
-/**
- * @brief Different kinds of contributions that can be made to the final path computation.
- */
-enum class path_contribution_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    none = 1, ///< The item does not contribute at all to the path.
-    as_folders = 2, ///< The itemcontributes folders to the path.
-    as_path_components = 3 ///< The item contributes a single folder to the path, as a delimited string.
+namespace dogen {
+namespace annotations {
+
+struct archetype_location_repository_parts_hasher {
+public:
+    static std::size_t hash(const archetype_location_repository_parts& v);
 };
 
-} } }
+} }
 
+namespace std {
+
+template<>
+struct hash<dogen::annotations::archetype_location_repository_parts> {
+public:
+    size_t operator()(const dogen::annotations::archetype_location_repository_parts& v) const {
+        return dogen::annotations::archetype_location_repository_parts_hasher::hash(v);
+    }
+};
+
+}
 #endif
