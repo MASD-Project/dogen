@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-21 Sat 13:47]
+#+CAPTION: Clock summary at [2017-10-21 Sat 22:32]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *41:20* |       |       | 100.0 |
+| *Total time*                                                                | *41:40* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 41:20   |       |       | 100.0 |
-| Active                                                                      |         | 41:20 |       | 100.0 |
+| Stories                                                                     | 41:40   |       |       | 100.0 |
+| Active                                                                      |         | 41:40 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   5.6 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:05 |   2.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:25 |   3.4 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.4 |
-| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.5 |
+| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.4 |
 | COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   4.9 |
-| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.8 |
+| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.7 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.5 |
 | COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   5.0 |
 | COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   1.2 |
@@ -34,10 +34,10 @@
 | COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.4 |
 | COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.4 |
 | COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.7 |
-| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  33.8 |
+| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  33.5 |
 | COMPLETED Analysis work on moving to c++ 17                                 |         |       |  0:32 |   1.3 |
-| COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.5 |
-| STARTED Generate file paths as a transform                                  |         |       |  9:01 |  21.8 |
+| COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.4 |
+| STARTED Generate file paths as a transform                                  |         |       |  9:01 |  21.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -193,6 +193,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-10-21 Sat 22:11]--[2017-10-21 Sat 22:31] =>  0:20
     CLOCK: [2017-10-21 Sat 11:28]--[2017-10-21 Sat 11:48] =>  0:20
     CLOCK: [2017-10-05 Thu 07:08]--[2017-10-05 Thu 07:15] =>  0:07
     CLOCK: [2017-09-29 Fri 10:01]--[2017-09-29 Fri 10:25] =>  0:24
@@ -826,6 +827,29 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
+
+*** Split registrar into two classes                                  :story:
+
+At present we do not distinguish between the setting up of the
+registrar and the usage of the registrar. Up to know this is not a
+major issue, although its a bit of a smell that we have to call
+validate at some arbitrary point.
+
+However, with the new parts/builder setup, this becomes even more of a
+problem because we only want to build the parts once we have
+registered all of the formatters. The right thing would have been to
+have:
+
+- a registrar builder, used during registration;
+- a build step which returns the (validated) registrar. Once build is
+  called, we should throw if anyone attempts to add more formatters.
+
+This makes it hard to misuse the API.
+
+Notes:
+
+- how does this affect plugins? will it still be possible to register
+  formatters from a shared library?
 
 *** Supply the yarn options to prober                                 :story:
 
