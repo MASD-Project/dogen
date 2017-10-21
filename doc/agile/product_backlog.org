@@ -7834,6 +7834,40 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Make more use of stack instead of heap                            :story:
+
+We should do some analysis as to how the following classes are being
+used:
+
+- name
+- location
+- achetype location
+
+They are all making a lot of use of the heap. In reality they follow a
+very simple usage pattern: we construct them, update them slightly on
+resolution and then they remain constant for the rest of program
+execution.
+
+If we can spot some kind of constraints in terms of sizes, we could
+possibly eliminate the use of lists and strings and instead use
+=std::array=. For strings, these can be exposed as
+=std::string_view=. It seems we have a few code-generation patterns:
+
+- array of enumerations: we align the enumeration to fit the array
+  indices and provide some kind of getter that casts the enum into an
+  int and queries the array. This is the case with the qualified name
+  map.
+- stack based strings. This is just a case of receiving a string view
+  in the constructor, then ensuring we have enough space on the array
+  to copy across the string, then copying the string across. We could
+  easily have a setter that receives string views and a getter that
+  returns the string view based on the array. When a user sets a
+  property to string view, we automatically generate all the
+  boilerplate to read and write to the array. The user has to supply
+  the size of the array (we should offer a sensible default). We need
+  to look for the correct exception to throw if the string is not big
+  enough.
+
 *** Add support for MetaStuff
 
 Interesting serialisation library:
