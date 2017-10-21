@@ -88,6 +88,12 @@ model_to_text_model_transform::archetype_locations_by_family() const {
     return rg.archetype_locations_by_family();
 }
 
+const annotations::archetype_location_repository_parts&
+model_to_text_model_transform::archetype_location_repository_parts() const {
+    const auto& rg(formatters::workflow::registrar());
+    return rg.archetype_location_repository_parts();
+}
+
 yarn::meta_model::languages model_to_text_model_transform::language() const {
     return yarn::meta_model::languages::csharp;
 }

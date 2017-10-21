@@ -175,4 +175,9 @@ registrar::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
+const annotations::archetype_location_repository_parts&
+registrar::archetype_location_repository_parts() const {
+    return archetype_location_repository_parts_;
+}
+
 } } } }

@@ -113,6 +113,9 @@ public:
                              std::list<annotations::archetype_location>>&
     archetype_locations_by_family() const override;
 
+    const annotations::archetype_location_repository_parts&
+    archetype_location_repository_parts() const override;
+
     yarn::meta_model::languages language() const override;
 
     std::unordered_map<std::string,

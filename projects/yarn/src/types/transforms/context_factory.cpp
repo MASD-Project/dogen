@@ -74,6 +74,7 @@ context_factory::create_archetype_location_repository(
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_locations_by_family());
+        b.add(t.archetype_location_repository_parts());
     }
     return b.build();
 }

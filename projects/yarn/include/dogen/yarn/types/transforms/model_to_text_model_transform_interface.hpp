@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_locations_group.hpp"
+#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
@@ -85,6 +86,13 @@ public:
                                      std::list<annotations::archetype_location>
                                      >&
     archetype_locations_by_family() const = 0;
+
+    /**
+     * @brief Returns this backend's part of the repository of
+     * archetype locations.
+     */
+    virtual const annotations::archetype_location_repository_parts&
+    archetype_location_repository_parts() const = 0;
 
     /**
      * @brief Language supported by this transform.

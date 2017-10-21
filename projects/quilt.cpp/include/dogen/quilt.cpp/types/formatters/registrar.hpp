@@ -32,6 +32,7 @@
 #include <unordered_map>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/archetype_locations_group.hpp"
+#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -99,6 +100,9 @@ public:
                              std::list<annotations::archetype_location>>&
     archetype_locations_by_family() const;
 
+    const annotations::archetype_location_repository_parts&
+    archetype_location_repository_parts() const;
+
     /**
      * @brief Returns all of the available helper formatters.
      */
@@ -118,6 +122,8 @@ private:
     std::unordered_map<std::string,
                        std::list<annotations::archetype_location>>
     archetype_locations_by_family_;
+    annotations::archetype_location_repository_parts
+    archetype_location_repository_parts_;
 };
 
 template<typename Formatter>
