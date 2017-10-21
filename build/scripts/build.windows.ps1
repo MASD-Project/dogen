@@ -39,7 +39,7 @@ write-host "* Product directory: ${product_dir}";
 # Compiler
 #
 if ($compiler -eq "msvc") {
-    $generator="Visual Studio 14 2015 Win64";
+    $generator="Visual Studio 15 2017 Win64";
     write-host "* compiler: ${compiler}";
 } else {
     write-host "* Unrecognised compiler: ${compiler}";
