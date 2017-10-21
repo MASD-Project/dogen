@@ -1,5 +1,8 @@
 version: 2.2.{build}
 
+image:
+  - Visual Studio 2017
+
 branches:
     only:
         - master
