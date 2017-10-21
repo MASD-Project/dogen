@@ -96,8 +96,14 @@ std::unordered_map<std::string,
                    yarn::meta_model::intra_backend_segment_properties>
 model_to_text_model_transform::
 intra_backend_segment_properties(const yarn::transforms::options& /*o*/) const {
+    using namespace yarn::meta_model;
+    class intra_backend_segment_properties project;
+    project.internal_modules(path_contribution_types::as_folders);
+    project.facet(path_contribution_types::as_folders);
+
     std::unordered_map<std::string,
                        yarn::meta_model::intra_backend_segment_properties> r;
+    r["project"] = project;
     return r;
 }
 
