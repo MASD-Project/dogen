@@ -11,6 +11,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** C# inheritance requires ordering                                  :story:
+
+When we implement C# inheritance we must make sure we place the
+interfaces at the end after any base classes or else we will have
+compiler errors. This means we need to be able to distinguish
+interfaces from other types (e.g. =interface= stereotype).
+
 *** Upgrade to c++ 17                                                 :story:
 
 There are quite a few dependencies for this to happen:
@@ -2826,6 +2833,7 @@ See also:
 - [[http://releases.llvm.org/5.0.0/tools/clang/docs/ReleaseNotes.html][Clang 5.0.0 Release Notes]], section "Improvements to Clang’s
   diagnostics".
 - [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
+- [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
 
 Merged stories:
 
