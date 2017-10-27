@@ -191,7 +191,7 @@ etc.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f5fffa"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -420,7 +420,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f5fffa"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -646,7 +646,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f5fffa"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
