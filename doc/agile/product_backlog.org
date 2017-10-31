@@ -11,6 +11,10 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support to foreign keys in ORM                                :story:
+
+At present we are not generating foreign keys for ODB.
+
 *** C# inheritance requires ordering                                  :story:
 
 When we implement C# inheritance we must make sure we place the
