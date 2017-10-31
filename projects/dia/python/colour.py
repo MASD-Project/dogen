@@ -25,6 +25,12 @@ for object in dia.active_display().diagram.data.layers[0].objects:
     stereotype = object.properties["stereotype"].value
     if "yarn::enumeration" in stereotype:
         object.properties["fill_colour"] = "Papaya Whip"
+    elif "yarn::orm::object" in stereotype:
+        object.properties["fill_colour"] = "Pale Green"
+    elif "yarn::primitive" in stereotype:
+        object.properties["fill_colour"] = "Light Goldenrod Yellow"
+    elif "yarn::orm::value" in stereotype:
+        object.properties["fill_colour"] = "Plum"
     elif "yarn::exception" in stereotype:
         object.properties["fill_colour"] = "Peach Puff"
     elif "yarn::object_template" in stereotype:
