@@ -32,7 +32,7 @@ set_target_properties(${name}
 target_link_libraries(${name}
     utility
     annotations
-    formatters
+    yarn
     wale
     ${Boost_LIBRARIES})
 

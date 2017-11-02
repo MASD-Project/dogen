@@ -56,7 +56,7 @@ public:
         const yarn::meta_model::name& n) const override;
 
 public:
-    dogen::formatters::artefact format(const context& ctx,
+    yarn::meta_model::artefact format(const context& ctx,
         const yarn::meta_model::element& e) const override;
 
 private:

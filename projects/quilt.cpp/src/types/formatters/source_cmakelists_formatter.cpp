@@ -92,7 +92,7 @@ std::list<std::string> source_cmakelists_formatter::inclusion_dependencies(
     return r;
 }
 
-dogen::formatters::artefact source_cmakelists_formatter::
+yarn::meta_model::artefact source_cmakelists_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& c(a.as<fabric::cmakelists>(e));

@@ -97,7 +97,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-dogen::formatters::artefact class_header_formatter::
+yarn::meta_model::artefact class_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& o(a.as<yarn::meta_model::object>(e));

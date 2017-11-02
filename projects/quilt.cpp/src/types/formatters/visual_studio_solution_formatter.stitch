@@ -72,7 +72,7 @@ std::list<std::string> visual_studio_solution_formatter::inclusion_dependencies(
     return r;
 }
 
-dogen::formatters::artefact visual_studio_solution_formatter::
+yarn::meta_model::artefact visual_studio_solution_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& vsl(a.as<fabric::visual_studio_solution>(e));

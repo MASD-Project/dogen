@@ -82,7 +82,7 @@ std::list<std::string> registrar_header_formatter::inclusion_dependencies(
     return r;
 }
 
-dogen::formatters::artefact registrar_header_formatter::
+yarn::meta_model::artefact registrar_header_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<fabric::registrar>(e));

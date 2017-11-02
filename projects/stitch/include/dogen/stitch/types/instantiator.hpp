@@ -30,7 +30,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties_factory.hpp"
 #include "dogen/stitch/types/text_template.hpp"
@@ -78,10 +78,11 @@ private:
     /**
      * @brief Formats the supplied text template.
      */
-    formatters::artefact format_text_template(const text_template& tt) const;
+    yarn::meta_model::artefact
+    format_text_template(const text_template& tt) const;
 
 public:
-    formatters::artefact
+    yarn::meta_model::artefact
     instantiate(const boost::filesystem::path& input_path) const;
 
 private:

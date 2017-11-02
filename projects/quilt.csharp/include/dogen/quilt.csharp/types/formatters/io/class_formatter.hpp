@@ -52,8 +52,8 @@ public:
         const formattables::locator& l, const yarn::meta_model::name& n) const override;
 
 public:
-    dogen::formatters::artefact format(const context& ctx,
-    const yarn::meta_model::element& e) const override;
+    yarn::meta_model::artefact format(const context& ctx,
+        const yarn::meta_model::element& e) const override;
 };
 
 } } } } }

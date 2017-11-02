@@ -33,7 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/comment_styles.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
@@ -387,7 +387,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    dogen::formatters::artefact make_artefact() const;
+    yarn::meta_model::artefact make_artefact() const;
 
 private:
     std::ostringstream stream_;

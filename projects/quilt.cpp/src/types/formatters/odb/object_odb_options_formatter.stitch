@@ -73,7 +73,7 @@ std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
     return r;
 }
 
-dogen::formatters::artefact object_odb_options_formatter::
+yarn::meta_model::artefact object_odb_options_formatter::
 format(const context& ctx, const yarn::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& ooo(a.as<fabric::object_odb_options>(e));

@@ -26,9 +26,9 @@ std::list<std::string> builtin_header_formatter::inclusion_dependencies(
     return r;
 }
 
-dogen::formatters::artefact builtin_header_formatter::
+yarn::meta_model::artefact builtin_header_formatter::
 format(const context& /*ctx*/, const yarn::meta_model::element& /*e*/) const {
-    dogen::formatters::artefact r;
+    yarn::meta_model::artefact r;
     return r;
 }
 

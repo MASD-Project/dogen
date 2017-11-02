@@ -19,20 +19,20 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/artefact_td.hpp"
+#include "dogen/yarn/test_data/meta_model/artefact_td.hpp"
 #include "dogen/yarn/test_data/meta_model/text_model_td.hpp"
 
 namespace {
 
-dogen::formatters::artefact
-create_dogen_formatters_artefact(const unsigned int position) {
-    return dogen::formatters::artefact_generator::create(position);
+dogen::yarn::meta_model::artefact
+create_dogen_yarn_meta_model_artefact(const unsigned int position) {
+    return dogen::yarn::meta_model::artefact_generator::create(position);
 }
 
-std::list<dogen::formatters::artefact> create_std_list_dogen_formatters_artefact(unsigned int position) {
-    std::list<dogen::formatters::artefact> r;
+std::list<dogen::yarn::meta_model::artefact> create_std_list_dogen_yarn_meta_model_artefact(unsigned int position) {
+    std::list<dogen::yarn::meta_model::artefact> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_formatters_artefact(position + i));
+        r.push_back(create_dogen_yarn_meta_model_artefact(position + i));
     }
     return r;
 }
@@ -62,7 +62,7 @@ text_model_generator::text_model_generator() : position_(0) { }
 
 void text_model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.artefacts(create_std_list_dogen_formatters_artefact(position + 0));
+    v.artefacts(create_std_list_dogen_yarn_meta_model_artefact(position + 0));
     v.managed_directories(create_std_list_boost_filesystem_path(position + 1));
 }
 

@@ -34,7 +34,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"
@@ -69,14 +69,14 @@ private:
         const std::string& archetype) const;
 
 private:
-    std::list<dogen::formatters::artefact>
+    std::list<yarn::meta_model::artefact>
     format(const std::unordered_set<yarn::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
         const yarn::meta_model::element& e,
         const formattables::element_properties& ep) const;
 
 public:
-    std::list<dogen::formatters::artefact>
+    std::list<yarn::meta_model::artefact>
     execute(const std::unordered_set<yarn::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm) const;
 

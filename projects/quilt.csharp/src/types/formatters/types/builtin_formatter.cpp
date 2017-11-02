@@ -68,9 +68,9 @@ inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     return r;
 }
 
-dogen::formatters::artefact builtin_formatter::
+yarn::meta_model::artefact builtin_formatter::
 format(const context& /*ctx*/, const yarn::meta_model::element& /*e*/) const {
-    dogen::formatters::artefact r;
+    yarn::meta_model::artefact r;
     return r;
 }
 

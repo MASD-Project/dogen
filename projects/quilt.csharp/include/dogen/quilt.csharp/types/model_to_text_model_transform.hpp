@@ -67,7 +67,7 @@ private:
         const formatters::repository& frp, const formattables::locator & l,
         const yarn::meta_model::model& m) const;
 
-    std::list<dogen::formatters::artefact>
+    std::list<yarn::meta_model::artefact>
     format(const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,

@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "dogen/formatters/io/artefact_io.hpp"
+#include "dogen/yarn/io/meta_model/artefact_io.hpp"
 #include "dogen/yarn/io/meta_model/text_model_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::formatters::artefact>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::artefact>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

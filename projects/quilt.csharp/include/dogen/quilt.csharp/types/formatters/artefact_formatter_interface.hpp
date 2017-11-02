@@ -29,7 +29,7 @@
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
@@ -87,7 +87,7 @@ public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual dogen::formatters::artefact
+    virtual yarn::meta_model::artefact
     format(const context& ctx, const yarn::meta_model::element& e) const = 0;
 };
 

@@ -25,7 +25,7 @@ namespace yarn {
 namespace meta_model {
 
 text_model::text_model(
-    const std::list<dogen::formatters::artefact>& artefacts,
+    const std::list<dogen::yarn::meta_model::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories)
     : artefacts_(artefacts),
       managed_directories_(managed_directories) { }
@@ -47,19 +47,19 @@ text_model& text_model::operator=(text_model other) {
     return *this;
 }
 
-const std::list<dogen::formatters::artefact>& text_model::artefacts() const {
+const std::list<dogen::yarn::meta_model::artefact>& text_model::artefacts() const {
     return artefacts_;
 }
 
-std::list<dogen::formatters::artefact>& text_model::artefacts() {
+std::list<dogen::yarn::meta_model::artefact>& text_model::artefacts() {
     return artefacts_;
 }
 
-void text_model::artefacts(const std::list<dogen::formatters::artefact>& v) {
+void text_model::artefacts(const std::list<dogen::yarn::meta_model::artefact>& v) {
     artefacts_ = v;
 }
 
-void text_model::artefacts(const std::list<dogen::formatters::artefact>&& v) {
+void text_model::artefacts(const std::list<dogen::yarn::meta_model::artefact>&& v) {
     artefacts_ = std::move(v);
 }
 

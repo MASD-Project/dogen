@@ -27,7 +27,6 @@
 
 #include "dogen/formatters/serialization/editors_ser.hpp"
 #include "dogen/formatters/serialization/licence_ser.hpp"
-#include "dogen/formatters/serialization/artefact_ser.hpp"
 #include "dogen/formatters/serialization/modeline_ser.hpp"
 #include "dogen/formatters/serialization/repository_ser.hpp"
 #include "dogen/formatters/serialization/quote_types_ser.hpp"

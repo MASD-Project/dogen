@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
 #include "dogen/stitch/types/instantiator.hpp"
@@ -48,7 +48,7 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    dogen::formatters::artefact
+    yarn::meta_model::artefact
     format(const artefact_formatter_interface& stock_formatter,
         const context& ctx, const yarn::meta_model::element& e) const;
 

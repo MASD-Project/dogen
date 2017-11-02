@@ -689,8 +689,8 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-dogen::formatters::artefact assistant::make_artefact() const {
-    dogen::formatters::artefact r;
+yarn::meta_model::artefact assistant::make_artefact() const {
+    yarn::meta_model::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
 

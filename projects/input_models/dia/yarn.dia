@@ -40661,7 +40661,7 @@ size limitations.#</dia:string>
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;formatters::artefact&gt;#</dia:string>
+            <dia:string>#std::list&lt;artefact&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

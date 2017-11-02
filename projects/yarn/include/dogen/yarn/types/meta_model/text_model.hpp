@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/yarn/serialization/meta_model/text_model_fwd_ser.hpp"
 
 namespace dogen {
@@ -44,7 +44,7 @@ public:
 
 public:
     text_model(
-        const std::list<dogen::formatters::artefact>& artefacts,
+        const std::list<dogen::yarn::meta_model::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories);
 
 private:
@@ -55,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::text_model& v, unsigned int version);
 
 public:
-    const std::list<dogen::formatters::artefact>& artefacts() const;
-    std::list<dogen::formatters::artefact>& artefacts();
-    void artefacts(const std::list<dogen::formatters::artefact>& v);
-    void artefacts(const std::list<dogen::formatters::artefact>&& v);
+    const std::list<dogen::yarn::meta_model::artefact>& artefacts() const;
+    std::list<dogen::yarn::meta_model::artefact>& artefacts();
+    void artefacts(const std::list<dogen::yarn::meta_model::artefact>& v);
+    void artefacts(const std::list<dogen::yarn::meta_model::artefact>&& v);
 
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
@@ -76,7 +76,7 @@ public:
     text_model& operator=(text_model other);
 
 private:
-    std::list<dogen::formatters::artefact> artefacts_;
+    std::list<dogen::yarn::meta_model::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
 };
 

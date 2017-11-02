@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/formatters/types/filesystem_writer.hpp"
+#include "dogen/yarn/types/helpers/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
@@ -43,7 +43,7 @@ namespace transforms {
 
 void code_generation_chain::write_files(const transforms::options& o,
     const meta_model::text_model& tm) {
-    using dogen::formatters::filesystem_writer;
+    using helpers::filesystem_writer;
     auto w(std::make_shared<filesystem_writer>(o.force_write()));
 
     if (tm.artefacts().empty()) {

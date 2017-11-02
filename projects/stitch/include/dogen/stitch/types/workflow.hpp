@@ -34,7 +34,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"
 #include "dogen/stitch/types/text_template.hpp"
@@ -99,7 +99,7 @@ private:
     /**
      * @brief Creates the artefacts
      */
-    std::list<formatters::artefact>
+    std::list<yarn::meta_model::artefact>
     create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
@@ -110,7 +110,7 @@ private:
      * @brief Writes all of the artefacts to the filesystem.
      */
     void write_artefacts(
-        const std::list<formatters::artefact>& artefacts) const;
+        const std::list<yarn::meta_model::artefact>& artefacts) const;
 
 public:
     /**

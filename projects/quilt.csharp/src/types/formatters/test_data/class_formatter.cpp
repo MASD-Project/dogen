@@ -69,7 +69,7 @@ inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     return r;
 }
 
-dogen::formatters::artefact class_formatter::format(
+yarn::meta_model::artefact class_formatter::format(
     const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);

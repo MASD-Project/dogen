@@ -46,11 +46,11 @@ csharp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::list<dogen::formatters::artefact>
+std::list<yarn::meta_model::artefact>
 workflow::execute(const formattables::model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
-    std::list<dogen::formatters::artefact> r;
+    std::list<yarn::meta_model::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
 

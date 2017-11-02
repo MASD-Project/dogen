@@ -43,9 +43,9 @@ const std::list<boost::filesystem::path> managed_directories() {
     return r;
 }
 
-const dogen::formatters::artefact
+const dogen::yarn::meta_model::artefact
 to_artefact(const boost::filesystem::path& p) {
-    dogen::formatters::artefact r;
+    dogen::yarn::meta_model::artefact r;
     r.path(p);
     return r;
 }

@@ -59,7 +59,7 @@ std::string model_to_text_model_transform::id() const {
     return traits::backend();
 }
 
-std::list<dogen::formatters::artefact> model_to_text_model_transform::
+std::list<yarn::meta_model::artefact> model_to_text_model_transform::
 format(const annotations::type_repository& /*atrp*/,
     const annotations::annotation_groups_factory& /*agf*/,
     const dogen::formatters::repository& /*drp*/,

@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/stitch/types/line.hpp"
 #include "dogen/stitch/types/text_template.hpp"
@@ -88,7 +88,7 @@ public:
     /**
      * @brief Formats the template into an artefact.
      */
-    dogen::formatters::artefact format(const text_template& tt) const;
+    yarn::meta_model::artefact format(const text_template& tt) const;
 };
 
 } }

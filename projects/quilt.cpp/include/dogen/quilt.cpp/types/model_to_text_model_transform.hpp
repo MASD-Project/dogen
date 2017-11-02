@@ -86,7 +86,7 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<dogen::formatters::artefact>
+    std::list<yarn::meta_model::artefact>
     format(const std::unordered_set<yarn::meta_model::element_archetype>&
         enabled_archetype_for_element, const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
