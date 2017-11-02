@@ -25,15 +25,22 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include <algorithm>
+#include <iosfwd>
 #include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-class stream_writer final : public artefact_writer_interface {
+class stream_writer : public artefact_writer_interface {
+public:
+    explicit stream_writer(std::ostream& s);
+
+public:
+    void write(const std::list<meta_model::artefact>& files) const override;
+
+private:
+    std::ostream& stream_;
 };
 
 } } }

@@ -25,15 +25,26 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen/yarn/types/meta_model/artefact.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
+/**
+ * @brief Class with the ability to write files.
+ */
 class artefact_writer_interface {
 public:
     virtual ~artefact_writer_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Write the files.
+     */
+    virtual void
+    write(const std::list<meta_model::artefact>& artefacts) const = 0;
 };
 
 } } }
