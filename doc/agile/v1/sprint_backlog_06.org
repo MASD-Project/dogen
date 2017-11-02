@@ -13,32 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-10-31 Tue 19:33]
+#+CAPTION: Clock summary at [2017-11-02 Thu 08:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *46:11* |       |       | 100.0 |
+| *Total time*                                                                | *46:35* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 46:11   |       |       | 100.0 |
-| Active                                                                      |         | 46:11 |       | 100.0 |
+| Stories                                                                     | 46:35   |       |       | 100.0 |
+| Active                                                                      |         | 46:35 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   5.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:25 |   3.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:49 |   3.9 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.4 |
 | COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.2 |
 | COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   4.4 |
-| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.4 |
+| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.3 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.4 |
 | COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   4.5 |
 | COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   1.0 |
 | COMPLETED Rename kernel and family                                          |         |       |  2:44 |   5.9 |
-| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.2 |
+| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.1 |
 | COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.1 |
-| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.5 |
-| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  30.2 |
-| COMPLETED Analysis work on moving to c++ 17                                 |         |       |  0:32 |   1.2 |
+| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.4 |
+| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  30.0 |
+| COMPLETED Analysis work on moving to c++ 17                                 |         |       |  0:32 |   1.1 |
 | COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.3 |
 | COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   6.5 |
-| STARTED Generate file paths as a transform                                  |         |       |  9:01 |  19.5 |
+| STARTED Generate file paths as a transform                                  |         |       |  9:01 |  19.4 |
 | STARTED Experiment with a database model                                    |         |       |  1:20 |   2.9 |
 | STARTED Move artefact into yarn                                             |         |       |  0:10 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -196,6 +196,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-11-02 Thu 08:22]--[2017-11-02 Thu 08:46] =>  0:24
     CLOCK: [2017-10-21 Sat 22:11]--[2017-10-21 Sat 22:31] =>  0:20
     CLOCK: [2017-10-21 Sat 11:28]--[2017-10-21 Sat 11:48] =>  0:20
     CLOCK: [2017-10-05 Thu 07:08]--[2017-10-05 Thu 07:15] =>  0:07
@@ -868,6 +869,37 @@ Actions:
 
 Originally we had placed artefact in the formatters model, but now
 that we have text models, it makes more sense to have it in yarn.
+
+*** Improvements to dia model                                         :story:
+
+Assorted notes on cleaning-up the dia model:
+
+- create a base class such as =value= and make all values inherit from
+  it instead of using boost variant.
+- according to DTD, a composite can be made up of either composites or
+  attributes. We incorrectly modeled it as having just one inner
+  composite.
+- perhaps this is better thought of slightly differently: an attribute
+  has child nodes. The child nodes can either be leaf nodes, in which
+  case they are values, or non-leaf nodes in which case they are
+  composite nodes. Composite nodes themselves can have child nodes. If
+  they are leaf nodes they are values; if they are non-leaf nodes they
+  are either attributes or composites.
+- note that we do not need to use shared pointers in composite: we
+  could simply have an attribute by value. However, we still need to
+  handle the case where the children are either composite or
+  attributes. So if we somehow could get composite and attribute to
+  have a common base class, we could have a container of that base
+  class in composite. For this we would need a shared pointer.
+- consider adding the postfix =node= to class names and make it a real
+  tree, as per dia's implementation.
+- covert all vectors to lists since we do not know their sizes on
+  construction.
+- one thing to bear in mind is that if we fix the tree structure, we
+  will break the XML parsing code in hydrator, which took quite a
+  while to get right (and has hacks such as "inner composite").
+- its not obvious why we need to treat =dia::string= in a different
+  way from all other attribute values (except for =dia::font=).
 
 *** Split registrar into two classes                                  :story:
 
