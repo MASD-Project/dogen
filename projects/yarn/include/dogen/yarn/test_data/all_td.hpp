@@ -38,6 +38,7 @@
 #include "dogen/yarn/test_data/meta_model/visitor_td.hpp"
 #include "dogen/yarn/test_data/transforms/options_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_set_td.hpp"
+#include "dogen/yarn/test_data/meta_model/artefact_td.hpp"
 #include "dogen/yarn/test_data/meta_model/exomodel_td.hpp"
 #include "dogen/yarn/test_data/meta_model/location_td.hpp"
 #include "dogen/yarn/test_data/meta_model/attribute_td.hpp"

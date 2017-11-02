@@ -38,6 +38,7 @@
 #include "dogen/yarn/hash/meta_model/visitor_hash.hpp"
 #include "dogen/yarn/hash/transforms/options_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_set_hash.hpp"
+#include "dogen/yarn/hash/meta_model/artefact_hash.hpp"
 #include "dogen/yarn/hash/meta_model/exomodel_hash.hpp"
 #include "dogen/yarn/hash/meta_model/location_hash.hpp"
 #include "dogen/yarn/hash/meta_model/attribute_hash.hpp"

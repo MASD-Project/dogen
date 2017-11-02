@@ -38,6 +38,7 @@
 #include "dogen/yarn/io/meta_model/visitor_io.hpp"
 #include "dogen/yarn/io/transforms/options_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_io.hpp"
+#include "dogen/yarn/io/meta_model/artefact_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/io/meta_model/attribute_io.hpp"
