@@ -2043,6 +2043,15 @@ sorting. Change it to unordered and see what breaks.
 
 It seems we get errors in serialisation when using the map.
 
+*** Add a C++ version to types                                        :story:
+
+Not all system model types are available for all versions. This
+applies to the C++ standard (e.g. 98, 11, 14 etc) but also to
+boost. We need to be able to mark a type against a version; the user
+then declares which version it is using in the model. If the user
+attempts to use types that are not available for that version we
+should throw.
+
 *** Add support for Decimal numbers in C++                            :story:
 
 - try using ICU DecNumber library.
@@ -9629,6 +9638,8 @@ We should not return =shared_ptr= etc from factory methods; this
 forces the client to use a specific type of pointer. Instead we should
 return raw pointers and let the client handle RAII. A slightly better
 option may be to use the new observer pointer.
+
+We need to add this type to dogen.
 
 Links:
 
