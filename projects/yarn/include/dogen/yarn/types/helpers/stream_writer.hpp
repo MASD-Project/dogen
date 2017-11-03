@@ -32,6 +32,10 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
+/**
+ * @brief Writes the artefacts into a user-supplied stream,
+ * as text.
+ */
 class stream_writer : public artefact_writer_interface {
 public:
     explicit stream_writer(std::ostream& s);

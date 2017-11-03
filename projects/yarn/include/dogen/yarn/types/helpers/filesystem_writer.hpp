@@ -33,7 +33,7 @@ namespace yarn {
 namespace helpers {
 
 /**
- * @brief Writes files to the filesystem.
+ * @brief Writes artefacts as files into the filesystem.
  */
 class filesystem_writer : public artefact_writer_interface {
 public:
@@ -41,8 +41,8 @@ public:
 
 private:
     /**
-     * @brief Returns true if the file needs to be written to the
-     * file system, false otherwise.
+     * @brief Returns true if the artefact needs to be written to the
+     * filesystem, false otherwise.
      */
     bool requires_writing(const meta_model::artefact& a) const;
 
@@ -53,14 +53,14 @@ private:
     void create_directories(const boost::filesystem::path& file_path) const;
 
     /**
-     * @brief Handle the special case of writing empty files.
+     * @brief Handle the special case of writing empty artefacts.
      *
      * FIXME: this is a hack for now.
      */
     void write_empty_file(const meta_model::artefact& a) const;
 
     /**
-     * @brief Writes the file.
+     * @brief Writes the artefact.
      */
     void write(const meta_model::artefact& a) const;
 

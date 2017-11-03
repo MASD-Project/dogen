@@ -60,14 +60,13 @@ namespace transforms {
  */
 class code_generation_chain final {
 private:
-    static void write_files(const transforms::options& o,
-        const meta_model::text_model& tm);
+    static void write(const context& ctx, const meta_model::text_model& tm);
 
 private:
     /**
      * @brief Handles any extraneous files which should be removed.
      */
-    static void handle_lint(const options& o, const meta_model::text_model& tm);
+    static void lint(const options& o, const meta_model::text_model& tm);
 
 public:
     static void transform(const context& ctx);

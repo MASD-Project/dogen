@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
@@ -27,6 +29,8 @@
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
+#include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
+#include "dogen/yarn/types/helpers/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/building_error.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
@@ -119,10 +123,12 @@ context context_factory::make(const options& o, const bool enable_validation) {
         o.probe_stats_disable_guids(), o.probe_stats_org_mode(),
         o.probe_use_short_names(), o.probe_directory(), alrp, atrp, msrp);
 
-
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober, ibsp);
+
+    using helpers::filesystem_writer;
+    auto writer(boost::make_shared<filesystem_writer>(o.force_write()));
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober, ibsp, writer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

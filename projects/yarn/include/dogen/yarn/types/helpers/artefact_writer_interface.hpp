@@ -33,7 +33,8 @@ namespace yarn {
 namespace helpers {
 
 /**
- * @brief Class with the ability to write files.
+ * @brief Class with the ability to write artefacts into some storage
+ * medium.
  */
 class artefact_writer_interface {
 public:
@@ -41,7 +42,7 @@ public:
 
 public:
     /**
-     * @brief Write the files.
+     * @brief Write the artefacts.
      */
     virtual void
     write(const std::list<meta_model::artefact>& artefacts) const = 0;

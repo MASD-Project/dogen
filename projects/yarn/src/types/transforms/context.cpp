@@ -34,13 +34,15 @@ context::context(
         const helpers::transform_prober prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties) :
+        intra_backend_segment_properties,
+        const boost::shared_ptr<helpers::artefact_writer_interface> writer) :
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
     mapping_repository_(msrp), formatters_repository_(frp), prober_(prober),
-    intra_backend_segment_properties_(intra_backend_segment_properties) {}
+    intra_backend_segment_properties_(intra_backend_segment_properties),
+    writer_(writer) {}
 
 context::~context() {
     prober_.end_probing();
@@ -83,6 +85,10 @@ const std::unordered_map<std::string,
                          meta_model::intra_backend_segment_properties>&
 context::intra_backend_segment_properties() const {
     return intra_backend_segment_properties_;
+}
+
+const helpers::artefact_writer_interface& context::artefact_writer() const {
+    return *writer_;
 }
 
 } } }

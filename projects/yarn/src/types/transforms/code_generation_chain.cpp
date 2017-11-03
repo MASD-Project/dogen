@@ -21,7 +21,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/yarn/types/helpers/filesystem_writer.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
@@ -41,20 +40,19 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void code_generation_chain::write_files(const transforms::options& o,
-    const meta_model::text_model& tm) {
-    using helpers::filesystem_writer;
-    auto w(std::make_shared<filesystem_writer>(o.force_write()));
+void code_generation_chain::
+write(const context& ctx, const meta_model::text_model& tm) {
 
     if (tm.artefacts().empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
         return;
     }
 
-    w->write(tm.artefacts());
+    const auto& w(ctx.artefact_writer());
+    w.write(tm.artefacts());
 }
 
-void code_generation_chain::handle_lint(const transforms::options& o,
+void code_generation_chain::lint(const transforms::options& o,
     const meta_model::text_model& tm) {
     if (!o.delete_extra_files())
         return;
@@ -77,14 +75,14 @@ void code_generation_chain::transform(const context& ctx) {
     const auto tm(text_model_generation_chain::transform(ctx));
 
     /*
-     * Write the files.
+     * Write the artefacts.
      */
-    write_files(o, tm);
+    write(ctx, tm);
 
     /*
      * Perform any housekeeping if need be.
      */
-    handle_lint(o, tm);
+    lint(o, tm);
 
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }

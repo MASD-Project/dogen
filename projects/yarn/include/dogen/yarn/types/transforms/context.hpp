@@ -27,6 +27,7 @@
 
 #include <vector>
 #include <string>
+#include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
@@ -36,6 +37,8 @@
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
+#include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
+
 
 namespace dogen {
 namespace yarn {
@@ -65,7 +68,8 @@ public:
         const helpers::transform_prober prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
-        intra_backend_segment_properties);
+        intra_backend_segment_properties,
+        const boost::shared_ptr<helpers::artefact_writer_interface> writer);
     ~context();
 
 public:
@@ -121,6 +125,11 @@ public:
                              meta_model::intra_backend_segment_properties>&
     intra_backend_segment_properties() const;
 
+    /**
+     * @brief Writer for artefacts.
+     */
+    const helpers::artefact_writer_interface& artefact_writer() const;
+
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const transforms::options options_;
@@ -134,6 +143,7 @@ private:
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;
+    const boost::shared_ptr<helpers::artefact_writer_interface> writer_;
 };
 
 } } }
