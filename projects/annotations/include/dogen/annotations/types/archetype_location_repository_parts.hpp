@@ -58,15 +58,26 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
 
 public:
+    /**
+     * @brief All archetype locations for the archetypes owned by this transform,
+     * listing all available backends, facets and archetypes.
+     */
+    /**@{*/
     const std::list<dogen::annotations::archetype_location>& archetype_locations() const;
     std::list<dogen::annotations::archetype_location>& archetype_locations();
     void archetype_locations(const std::list<dogen::annotations::archetype_location>& v);
     void archetype_locations(const std::list<dogen::annotations::archetype_location>&& v);
+    /**@}*/
 
+    /**
+     * @brief Returns the archetype locations for each meta name.
+     */
+    /**@{*/
     const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name() const;
     std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name();
     void archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v);
     void archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>&& v);
+    /**@}*/
 
     /**
      * @brief All archetype locations for a given family.

@@ -52,10 +52,16 @@ namespace transforms {
 std::unordered_map<std::string,
                    meta_model::intra_backend_segment_properties>
 context_factory::create_intra_backend_segment_properties(
-    const options& o,
-    const model_to_text_model_transform_registrar& rg) {
+    const options& o, const model_to_text_model_transform_registrar& rg) {
     std::unordered_map<std::string,
                        meta_model::intra_backend_segment_properties> r;
+
+    /*
+     * Obtain the intra-backend segment properties of each registered
+     * model-to-text transform. Notice that the segment names must be
+     * unique globally. Then merge them all into a single container of
+     * segment properties.
+     */
     for (const auto& pair : rg.transforms_by_language()) {
         const auto& t(*pair.second);
         for (const auto& pair : t.intra_backend_segment_properties(o)) {

@@ -8721,7 +8721,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.2401,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.2414,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8729,8 +8729,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.2901,-50"/>
-        <dia:point val="22.2914,-45.0502"/>
+        <dia:point val="22.2914,-50"/>
+        <dia:point val="22.292,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12086,7 +12086,8 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#All archetype locations for the archetypes owned by this transform, 
+listing all available backends, facets and archetypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12109,7 +12110,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Returns the archetype locations for each meta name.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
