@@ -31,6 +31,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics_builder.hpp"
@@ -41,10 +42,7 @@ namespace helpers {
 
 class transform_prober final {
 public:
-    transform_prober(const std::string& log_level, const bool probe_data,
-        const bool probe_stats, const bool disable_guids_in_stats,
-        const bool use_org_mode, const bool use_short_names,
-        const boost::filesystem::path& probe_directory,
+    transform_prober(const transforms::options& o,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp);

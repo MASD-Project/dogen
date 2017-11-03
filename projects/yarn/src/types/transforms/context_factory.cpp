@@ -117,17 +117,13 @@ context context_factory::make(const options& o, const bool enable_validation) {
     const auto atrp(atrpf.make(alrp, data_dirs));
     const auto ibsp(create_intra_backend_segment_properties(o, rg));
 
-    bool probe_data(o.probe_all());
-    bool probe_stats(o.probe_all() || o.probe_stats());
-    helpers::transform_prober prober(o.log_level(), probe_data, probe_stats,
-        o.probe_stats_disable_guids(), o.probe_stats_org_mode(),
-        o.probe_use_short_names(), o.probe_directory(), alrp, atrp, msrp);
-
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
 
+    helpers::transform_prober prober(o, alrp, atrp, msrp);
     using helpers::filesystem_writer;
     auto writer(boost::make_shared<filesystem_writer>(o.force_write()));
+
     const context r(data_dirs, o, alrp, atrp, msrp, frp, prober, ibsp, writer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";

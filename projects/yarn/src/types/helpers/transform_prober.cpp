@@ -55,19 +55,18 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-transform_prober::transform_prober(const std::string& log_level,
-    const bool probe_data, const bool probe_stats,
-    const bool disable_guids_in_stats, const bool use_org_mode,
-    const bool use_short_names, const boost::filesystem::path& probe_directory,
+transform_prober::transform_prober(const transforms::options& o,
     const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
     const helpers::mapping_set_repository& msrp)
-    : builder_(log_level, probe_data), current_directory_(probe_directory),
-      probe_data_(probe_data), probe_stats_(probe_stats),
-      disable_guids_in_stats_(disable_guids_in_stats),
-      use_org_mode_(use_org_mode),
-      use_short_names_(use_short_names),
-      probe_directory_(probe_directory) {
+    : builder_(o.log_level(), o.probe_all()),
+      current_directory_(o.probe_directory()),
+      probe_data_(o.probe_all()),
+      probe_stats_(o.probe_all() || o.probe_stats()),
+      disable_guids_in_stats_(o.probe_stats_disable_guids()),
+      use_org_mode_(o.probe_stats_org_mode()),
+      use_short_names_(o.probe_use_short_names()),
+      probe_directory_(o.probe_directory()) {
 
     validate();
 
