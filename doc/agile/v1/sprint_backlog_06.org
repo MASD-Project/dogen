@@ -13,35 +13,36 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-03 Fri 10:01]
+#+CAPTION: Clock summary at [2017-11-03 Fri 11:33]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *49:09* |       |       | 100.0 |
+| *Total time*                                                                | *50:38* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 49:09   |       |       | 100.0 |
-| Active                                                                      |         | 49:09 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   4.7 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:49 |   3.7 |
+| Stories                                                                     | 50:38   |       |       | 100.0 |
+| Active                                                                      |         | 50:38 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   4.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.2 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.3 |
-| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.1 |
-| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   4.1 |
-| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.2 |
+| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.0 |
+| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   4.0 |
+| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.1 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.3 |
-| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   4.2 |
+| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   4.1 |
 | COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   1.0 |
-| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   5.6 |
+| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   5.4 |
 | COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.0 |
-| COMPLETED Caching in travis                                                 |         |       |  0:59 |   2.0 |
-| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.3 |
-| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  28.4 |
+| COMPLETED Caching in travis                                                 |         |       |  0:59 |   1.9 |
+| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.2 |
+| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  27.6 |
 | COMPLETED Analysis work on moving to c++ 17                                 |         |       |  0:32 |   1.1 |
 | COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.2 |
-| COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   6.1 |
-| COMPLETED Move artefact into yarn                                           |         |       |  2:21 |   4.8 |
+| COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   6.0 |
+| COMPLETED Move artefact into yarn                                           |         |       |  2:21 |   4.6 |
 | COMPLETED Supply the yarn options to prober                                 |         |       |  0:23 |   0.8 |
-| STARTED Generate file paths as a transform                                  |         |       |  9:01 |  18.3 |
-| STARTED Experiment with a database model                                    |         |       |  1:20 |   2.7 |
+| STARTED Experiment with a database model                                    |         |       |  1:20 |   2.6 |
+| STARTED Split registrar into two classes                                    |         |       |  0:50 |   1.6 |
+| STARTED Generate file paths as a transform                                  |         |       |  9:21 |  18.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -197,6 +198,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-11-03 Fri 11:14]--[2017-11-03 Fri 11:33] =>  0:19
     CLOCK: [2017-11-02 Thu 08:22]--[2017-11-02 Thu 08:46] =>  0:24
     CLOCK: [2017-10-21 Sat 22:11]--[2017-10-21 Sat 22:31] =>  0:20
     CLOCK: [2017-10-21 Sat 11:28]--[2017-10-21 Sat 11:48] =>  0:20
@@ -547,7 +549,54 @@ that we have text models, it makes more sense to have it in yarn.
 At present most of the arguments supplied to prober come from the
 options anyway - why not just supply the options to it?
 
+*** STARTED Experiment with a database model                          :story:
+    CLOCK: [2017-10-31 Tue 18:01]--[2017-10-31 Tue 18:45] =>  0:44
+    CLOCK: [2017-10-31 Tue 08:22]--[2017-10-31 Tue 08:58] =>  0:36
+
+Try to create a dogen model to store documents in a relational
+database in a de-normalised representation. We should also store the
+original representation supplied by the user as well as support
+versioning.
+
+Actions:
+
+- put workspace, delete workspace, get workspaces
+- put input, delete input, get inputs
+- put request for generating output, delete output, get outputs
+
+*** STARTED Split registrar into two classes                          :story:
+    CLOCK: [2017-11-03 Fri 10:23]--[2017-11-03 Fri 11:13] =>  0:50
+
+At present we do not distinguish between the setting up of the
+registrar and the usage of the registrar. Up to know this is not a
+major issue, although its a bit of a smell that we have to call
+validate at some arbitrary point.
+
+However, with the new parts/builder setup, this becomes even more of a
+problem because we only want to build the parts once we have
+registered all of the formatters. The right thing would have been to
+have:
+
+- a registrar builder, used during registration;
+- a build step which returns the (validated) registrar. Once build is
+  called, we should throw if anyone attempts to add more formatters.
+
+This makes it hard to misuse the API.
+
+Notes:
+
+- how does this affect plugins? will it still be possible to register
+  formatters from a shared library?
+
+Tasks:
+
+- create a registrar builder with most of the existing registrar
+  interface. On build it computes the parts, generates the repository,
+  etc and then supplies that to the registrar. The registrar itself is
+  no longer static, just a member of the workflow.
+
 *** STARTED Generate file paths as a transform                        :story:
+    CLOCK: [2017-11-03 Fri 10:02]--[2017-11-03 Fri 10:22] =>  0:20
     CLOCK: [2017-10-21 Sat 10:30]--[2017-10-21 Sat 11:27] =>  0:57
     CLOCK: [2017-10-20 Fri 13:05]--[2017-10-20 Fri 13:42] =>  0:37
     CLOCK: [2017-10-20 Fri 11:33]--[2017-10-20 Fri 11:55] =>  0:22
@@ -869,20 +918,51 @@ We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
-*** STARTED Experiment with a database model                          :story:
-    CLOCK: [2017-10-31 Tue 18:01]--[2017-10-31 Tue 18:45] =>  0:44
-    CLOCK: [2017-10-31 Tue 08:22]--[2017-10-31 Tue 08:58] =>  0:36
+*** Update backend shape to match yarn                                :story:
 
-Try to create a dogen model to store documents in a relational
-database in a de-normalised representation. We should also store the
-original representation supplied by the user as well as support
-versioning.
+In an ideal world, the backends should be made up of two components:
 
-Actions:
+- *meta-model*: a set of types that augment yarn with backend
+  specific elements. This is what we call fabric at present.
+- *transforms*: of these we have two kinds:
+  - the model-to-model transforms that involve either yarn meta-model
+    elements or backened specific meta-model elements. These live in
+    fabric at present.
+   - the model-to-text transforms that convert a meta-model element
+     (yarn or backend specific) into an artefact. These we call
+     formatters at present.
 
-- put workspace, delete workspace, get workspaces
-- put input, delete input, get inputs
-- put request for generating output, delete output, get outputs
+The ultimate destination for the backend is then to have a shape that
+reflects this:
+
+- rename formatters to transforms
+- move artefact formatter into yarn; with this it means we can also
+  move all of the top-level workflow formatting logic into
+  yarn. However, before we can do this we must make all of the backend
+  specific code in the formatter interface go away.
+- note that at this point we no longer need to know what formatters
+  belong to what backend other than perhaps to figure out if the
+  backend is enabled. This means yarn can now have the registrars for
+  formatters and organise them by backend. Which means the
+  model-to-text chain will own all of these. However, we still have
+  the managed directories to worry about; somehow, someone has to be
+  able to compute the managed directories per kernel. This could be
+  done at yarn level if the locator is clever enough.
+
+Of course, before we can contemplate this change, we must first get
+rid of formattables altogether.
+
+We must also somehow model canonical formatters in yarn. Take this
+into account when we do:
+
+:        /*
+:         * We must have one canonical formatter per type per facet.
+:         * FIXME: this check is broken at the moment because this is
+:         * only applicable to yarn types, not fabric types. It is also
+:         * not applicable to forward declarations. We need some
+:         * additional information from yarn to be able to figure out
+:         * which types must have a canonical archetype.
+:         */
 
 *** Improvements to dia model                                         :story:
 
@@ -914,29 +994,6 @@ Assorted notes on cleaning-up the dia model:
   while to get right (and has hacks such as "inner composite").
 - its not obvious why we need to treat =dia::string= in a different
   way from all other attribute values (except for =dia::font=).
-
-*** Split registrar into two classes                                  :story:
-
-At present we do not distinguish between the setting up of the
-registrar and the usage of the registrar. Up to know this is not a
-major issue, although its a bit of a smell that we have to call
-validate at some arbitrary point.
-
-However, with the new parts/builder setup, this becomes even more of a
-problem because we only want to build the parts once we have
-registered all of the formatters. The right thing would have been to
-have:
-
-- a registrar builder, used during registration;
-- a build step which returns the (validated) registrar. Once build is
-  called, we should throw if anyone attempts to add more formatters.
-
-This makes it hard to misuse the API.
-
-Notes:
-
-- how does this affect plugins? will it still be possible to register
-  formatters from a shared library?
 
 *** Consider bucketing elements by meta-type in model                 :story:
 

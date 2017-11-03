@@ -9593,6 +9593,47 @@ have access to all interfaces and their implementations so a lot of
 the clever logic done at run time by castle/guice etc could be done in
 the generated code.
 
+For this to work we need some kind of DI library with a generic
+interface; we can then do as we do in C# and have a number of
+"installers" per library which add classes to the container, against
+an interface. Dogen is basically responsible for:
+
+- creating a top-level installer in the executable which calls all of
+  the installers of all dependent libraries (internal and external to
+  the current product, but dogen generated). We could have a flag to
+  tell us if a model requires installers or not.
+- creating each library's installer. For this we need two things: mark
+  a type as an interface and split out registration code from the
+  hand-crafted class. Instead we should just have all of the classes
+  that need registering against an interface doing it in the
+  installer, which we code generate. We also need to mark the
+  interface as "dependency injectable" so we know we need to generate
+  DI code.
+- finally, from a consumption perspective, we can then call the DI
+  container and request all instances of the interface we require. We
+  should not use DI for all construction; just for the cases where an
+  interface is used. The binary creates the container and supplies it
+  to whomever needs to resolve an interface.
+
+Links:
+
+- [[https://github.com/boost-experimental/di][Boost.DI]]: not part of boost yet [[https://github.com/boost-experimental/di/issues/229][and not clear when it will be.]]
+- [[http://wallaroolib.sourceforge.net/][wallaroo]] (more run-time DI)
+- [[https://github.com/google/fruit][fruit]] (tutorial [[https://github.com/google/fruit/wiki/tutorial:-getting-started][here]])
+- [[https://gpfault.net/posts/dependency-injection-cpp.txt.html][Dependency Injection in C++ Using Variadic Templates]]
+- [[https://github.com/ybainier/hypodermic][hypodermic]] (more run-time DI)
+
+*** Use =observer_ptr= in factory methods                             :story:
+
+We should not return =shared_ptr= etc from factory methods; this
+forces the client to use a specific type of pointer. Instead we should
+return raw pointers and let the client handle RAII. A slightly better
+option may be to use the new observer pointer.
+
+Links:
+
+- [[http://en.cppreference.com/w/cpp/experimental/observer_ptr][observer_ptr]]
+
 *** Consider adding XML schema as a front-end                          :epic:
 
 Tools like =Xsd= and =ejc= use the XML schema to provide the input to
