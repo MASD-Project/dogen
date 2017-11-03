@@ -13,36 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-03 Fri 12:08]
+#+CAPTION: Clock summary at [2017-11-03 Fri 16:43]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *51:13* |       |       | 100.0 |
+| *Total time*                                                                | *52:55* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 51:13   |       |       | 100.0 |
-| Active                                                                      |         | 51:13 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   4.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.2 |
+| Stories                                                                     | 52:55   |       |       | 100.0 |
+| Active                                                                      |         | 52:55 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   4.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.0 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.3 |
-| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   2.0 |
-| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   4.0 |
-| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   3.0 |
+| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   1.9 |
+| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   3.8 |
+| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   2.9 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.2 |
-| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   4.1 |
+| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   3.9 |
 | COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   0.9 |
-| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   5.3 |
-| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   2.0 |
+| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   5.2 |
+| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   1.9 |
 | COMPLETED Caching in travis                                                 |         |       |  0:59 |   1.9 |
-| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.2 |
-| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  27.3 |
+| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.1 |
+| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  26.4 |
 | COMPLETED Analysis work on moving to c++ 17                                 |         |       |  0:32 |   1.0 |
-| COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.2 |
-| COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   5.9 |
-| COMPLETED Move artefact into yarn                                           |         |       |  2:21 |   4.6 |
+| COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.1 |
+| COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   5.7 |
+| COMPLETED Move artefact into yarn                                           |         |       |  2:21 |   4.4 |
 | COMPLETED Supply the yarn options to prober                                 |         |       |  0:23 |   0.7 |
-| STARTED Experiment with a database model                                    |         |       |  1:20 |   2.6 |
-| STARTED Split registrar into two classes                                    |         |       |  1:25 |   2.8 |
-| STARTED Generate file paths as a transform                                  |         |       |  9:21 |  18.3 |
+| STARTED Experiment with a database model                                    |         |       |  1:20 |   2.5 |
+| STARTED Split registrar into two classes                                    |         |       |  1:25 |   2.7 |
+| STARTED Generate file paths as a transform                                  |         |       |  9:21 |  17.7 |
+| STARTED Implement exomodel in terms of exoelements                          |         |       |  1:42 |   3.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -918,6 +919,204 @@ different top-level directories), which is nice.
 We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
+
+*** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-11-03 Fri 15:01]--[2017-11-03 Fri 16:43] =>  1:42
+
+We were going in the right direction by creating the exomodel, but we
+didn't go far enough. In reality we should have created an
+intermediate object type which is not an element but more of a
+"proto-element": it has the ability of storing all of the information
+retrieved from the original exomodel but doesn't yet map to the yarn
+element types. The rationale behind this approach is that we will move
+even more code from the frontends into yarn, making adding a frontend
+even easier.
+
+This means for example that we may be able keep all names as strings
+in the exoelement, and we could even potentially support KVPs directly
+so that the scribble processing is done in yarn too. In addition, we
+do not need to perform any stereotype processing - instead we should
+just propagate them up. We should perhaps have some default stereotype
+that maps exoelements that do not have the element stereotype to yarn
+objects.
+
+The layour of the exomodel then becomes:
+
+- exoelements
+- root exoelement
+
+Notes:
+
+- enumerators are mapped to exoattributes
+- JSON will have to be updated to reflect this change, removing types,
+  etc.
+- exoelement will have the superset of all properties we use across
+  all elements; this set is not huge, maybe some 5 or 6
+  properties. Validator will then make sure the user has not supplied
+  some invalid combination of these properties. Actually if these
+  properties are already being handled via annotations, we should
+  probably not handle them specifically at this level. We probably
+  have two code-paths already for this, one for Dia and one for JSON
+  (or if we don't its because we only support them in JSON). Handle
+  them all as annotations. Examples:
+  - is_default_enumeration_type
+  - is_floating_point
+  - can_be_enumeration_underlier
+  - etc.
+- one great advantage of this approach is that we no longer need to
+  have meta-names in JSON - simply use stereotypes. In addition, we
+  can make names just a simple string.
+- we can make this model very close to UML: call KVPs tagged values,
+  etc.
+- could we express parent names as annotations?
+- we could potentially drop the unparsed type from regular attributes,
+  since this is now modeled in exoattributes.
+- annotations transform and naming transform now become part of the
+  endomodel chain.
+- we can finally deprecate scribble groups and annotation groups with
+  this approach. The KVPs are simply stored with the
+  exoelements/exoattributes and processed in place during the
+  annotations transform. The reason why we ended up with groups was
+  that we didn't want to process annotations in the frontends but at
+  the same time it didn't make a lot of sense to polute the meta-model
+  with lots of intermediate structures. However, exoelements are
+  designed for this so they can carry the intermediate data
+  naturally. Once we're done we discard the exomodels.
+- actually taking this to its logical conclusion, we can then have an
+  exopackage that contains exoelements:
+
+Graph version:
+
+#+begin_src json
+{
+    "name" : "some_name",
+    "parent_names" : [],
+    "stereotypes" : [ "yarn::module" ],
+    "tagged_values" : [
+        {
+            "key" : "a_key",
+            "value" : "a_value"
+        }
+    ],
+    "children" : [
+        {
+            "name" : "another_name",
+            "parent_names" : ["some_name"],
+            "stereotypes" : [ "yarn::module" ],
+            "members" : [
+                {
+                    "name" : "a",
+                    "parent_names" : ["some_name::another_name"],
+                    "stereotypes" : "yarn::object",
+                    "tagged_values" : [
+                        {
+                            "key" : "a_key",
+                            "value" : "a_value"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name" : "b",
+            "parent_names" : ["some_name"],
+            "stereotypes" : "yarn::object",
+            "tagged_values" : [
+                {
+                    "key" : "a_key",
+                    "value" : "a_value"
+                }
+            ],
+            "attributes" : [
+                {
+                    "name" : "some_attr",
+                    "type" : "std::string",
+                    "tagged_values" : [
+                        {
+                            "key" : "a_key",
+                            "value" : "a_value"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+#+end_src
+
+Flat version:
+
+#+begin_src json
+{
+    "name" : "a_model",
+    "stereotypes" : [ "yarn::module" ],
+    "tagged_values" : [
+        {
+            "key" : "a_key",
+            "value" : "a_value"
+        }
+    ],
+    "elements" : [
+        {
+            "name" : "a_name",
+            "stereotypes" : [ "yarn::module" ],
+            "tagged_values" : [
+                {
+                    "key" : "yarn.generalization.parent",
+                    "value" : "yarn::meta_model::element"
+                },
+                {
+                    "key" : "a_key",
+                    "value" : "a_value"
+                }
+            ]
+        },
+        {
+            "name" : "a",
+            "stereotypes" : ["yarn::object"],
+            "contained_by" : "a_name",
+            "tagged_values" : [
+                {
+                    "key" : "yarn.generalization.parent",
+                    "value" : "some_name::a_name"
+                },
+                {
+                    "key" : "a_key",
+                    "value" : "a_value"
+                }
+            ]
+        },
+        {
+            "name" : "b",
+            "stereotypes" : "yarn::object",
+            "contained_by" : "",
+            "tagged_values" : [
+                {
+                    "key" : "yarn.generalization.parent",
+                    "value" : "some_name"
+                },
+                {
+                    "key" : "a_key",
+                    "value" : "a_value"
+                }
+            ],
+            "attributes" : [
+                {
+                    "name" : "some_attr",
+                    "stereotypes" : "yarn::object",
+                    "type" : "std::string",
+                    "tagged_values" : [
+                        {
+                            "key" : "a_key",
+                            "value" : "a_value"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+#+end_src
 
 *** Update backend shape to match yarn                                :story:
 
