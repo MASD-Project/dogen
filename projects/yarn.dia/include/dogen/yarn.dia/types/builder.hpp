@@ -31,6 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/exoelement.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -45,6 +46,18 @@ namespace dia {
  * Expects the objects to have been supplied in dependency order.
  */
 class builder {
+private:
+    /*
+     * @brief Responsible for tracking the qualified name of the
+     * exoelement for elements corresponding to Dia's UML large
+     * package, as well as an iterator to the element itself in the
+     * exomodel.
+     */
+    /*struct uml_large_package_properties {
+        std::string name;
+        std::list<yarn::meta_model::exoelement>::iterator exoelement;
+        };*/
+
 public:
     explicit builder(
         const std::unordered_map<std::string, std::list<std::string>>&
@@ -79,6 +92,10 @@ public:
 private:
     const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids_;
+    /*std::unordered_map<std::string, uml_large_package_properties>
+    dia_id_to_uml_large_package_properties;
+    std::unordered_map<std::string, std::list<std::string>>
+    child_dia_id_to_parent_names_;*/
     meta_model::exomodel model_;
     context context_;
 };

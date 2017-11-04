@@ -38,6 +38,7 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/types/meta_model/exoelement.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
@@ -189,6 +190,20 @@ public:
     std::pair<annotations::scribble_group,
               boost::shared_ptr<meta_model::object_template>>
     to_object_template(const processed_object& o) const;
+
+private:
+    /**
+     * @brief Adapts a processed attribute into a yarn exoattribute.
+     */
+    meta_model::exoattribute adapt(const processed_attribute& a) const;
+
+public:
+    /**
+     * @brief Adapts a processed object into a yarn exoelement.
+     */
+    meta_model::exoelement
+    adapt(const processed_object& o, const std::string& contained_by,
+        const std::list<std::string>& parents) const;
 
 private:
     const context& context_;
