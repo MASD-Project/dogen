@@ -45,7 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("name", v.name_);
-    ar << make_nvp("contained_by", v.contained_by_);
+    ar << make_nvp("parents", v.parents_);
     ar << make_nvp("attributes", v.attributes_);
 }
 
@@ -57,7 +57,7 @@ void load(Archive& ar,
     ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("contained_by", v.contained_by_);
+    ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("attributes", v.attributes_);
 }
 

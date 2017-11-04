@@ -47027,10 +47027,10 @@ only be written to the filesystem if it does not exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#contained_by#</dia:string>
+            <dia:string>#parents#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

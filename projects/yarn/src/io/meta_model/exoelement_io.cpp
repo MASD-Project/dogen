@@ -74,6 +74,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 namespace std {
 
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::exoattribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -97,7 +111,7 @@ std::ostream& operator<<(std::ostream& s, const exoelement& v) {
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"contained_by\": " << "\"" << tidy_up_string(v.contained_by()) << "\"" << ", "
+      << "\"parents\": " << v.parents() << ", "
       << "\"attributes\": " << v.attributes()
       << " }";
     return(s);

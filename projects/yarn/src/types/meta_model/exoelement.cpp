@@ -29,13 +29,13 @@ exoelement::exoelement(
     const std::vector<std::string>& stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::string& name,
-    const std::string& contained_by,
+    const std::list<std::string>& parents,
     const std::list<dogen::yarn::meta_model::exoattribute>& attributes)
     : documentation_(documentation),
       stereotypes_(stereotypes),
       tagged_values_(tagged_values),
       name_(name),
-      contained_by_(contained_by),
+      parents_(parents),
       attributes_(attributes) { }
 
 void exoelement::swap(exoelement& other) noexcept {
@@ -44,7 +44,7 @@ void exoelement::swap(exoelement& other) noexcept {
     swap(stereotypes_, other.stereotypes_);
     swap(tagged_values_, other.tagged_values_);
     swap(name_, other.name_);
-    swap(contained_by_, other.contained_by_);
+    swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
 }
 
@@ -53,7 +53,7 @@ bool exoelement::operator==(const exoelement& rhs) const {
         stereotypes_ == rhs.stereotypes_ &&
         tagged_values_ == rhs.tagged_values_ &&
         name_ == rhs.name_ &&
-        contained_by_ == rhs.contained_by_ &&
+        parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_;
 }
 
@@ -127,20 +127,20 @@ void exoelement::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::string& exoelement::contained_by() const {
-    return contained_by_;
+const std::list<std::string>& exoelement::parents() const {
+    return parents_;
 }
 
-std::string& exoelement::contained_by() {
-    return contained_by_;
+std::list<std::string>& exoelement::parents() {
+    return parents_;
 }
 
-void exoelement::contained_by(const std::string& v) {
-    contained_by_ = v;
+void exoelement::parents(const std::list<std::string>& v) {
+    parents_ = v;
 }
 
-void exoelement::contained_by(const std::string&& v) {
-    contained_by_ = std::move(v);
+void exoelement::parents(const std::list<std::string>&& v) {
+    parents_ = std::move(v);
 }
 
 const std::list<dogen::yarn::meta_model::exoattribute>& exoelement::attributes() const {

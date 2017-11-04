@@ -50,7 +50,7 @@ public:
         const std::vector<std::string>& stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
-        const std::string& contained_by,
+        const std::list<std::string>& parents,
         const std::list<dogen::yarn::meta_model::exoattribute>& attributes);
 
 private:
@@ -90,10 +90,10 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const std::string& contained_by() const;
-    std::string& contained_by();
-    void contained_by(const std::string& v);
-    void contained_by(const std::string&& v);
+    const std::list<std::string>& parents() const;
+    std::list<std::string>& parents();
+    void parents(const std::list<std::string>& v);
+    void parents(const std::list<std::string>&& v);
 
     const std::list<dogen::yarn::meta_model::exoattribute>& attributes() const;
     std::list<dogen::yarn::meta_model::exoattribute>& attributes();
@@ -115,7 +115,7 @@ private:
     std::vector<std::string> stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::string name_;
-    std::string contained_by_;
+    std::list<std::string> parents_;
     std::list<dogen::yarn::meta_model::exoattribute> attributes_;
 };
 

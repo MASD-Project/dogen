@@ -53,6 +53,14 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<
     return seed;
 }
 
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_list_dogen_yarn_meta_model_exoattribute(const std::list<dogen::yarn::meta_model::exoattribute>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -74,7 +82,7 @@ std::size_t exoelement_hasher::hash(const exoelement& v) {
     combine(seed, hash_std_vector_std_string(v.stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, v.name());
-    combine(seed, v.contained_by());
+    combine(seed, hash_std_list_std_string(v.parents()));
     combine(seed, hash_std_list_dogen_yarn_meta_model_exoattribute(v.attributes()));
 
     return seed;
