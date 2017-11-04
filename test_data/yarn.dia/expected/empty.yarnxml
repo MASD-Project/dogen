@@ -50,43 +50,52 @@
 		</location>
 		<identifiable></identifiable>
 	</meta_name>
-	<modules class_id="18" tracking_level="0" version="0">
+	<documentation></documentation>
+	<stereotypes class_id="18" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</stereotypes>
+	<tagged_values class_id="19" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</tagged_values>
+	<modules class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</modules>
-	<object_templates class_id="19" tracking_level="0" version="0">
+	<object_templates class_id="21" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</object_templates>
-	<builtins class_id="20" tracking_level="0" version="0">
+	<builtins class_id="22" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="21" tracking_level="0" version="0">
+	<enumerations class_id="23" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="22" tracking_level="0" version="0">
+	<primitives class_id="24" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="23" tracking_level="0" version="0">
+	<objects class_id="25" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</objects>
-	<exceptions class_id="24" tracking_level="0" version="0">
+	<exceptions class_id="26" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</exceptions>
-	<root_module class_id="25" tracking_level="0" version="0">
-		<first class_id="26" tracking_level="0" version="0">
-			<parent class_id="27" tracking_level="0" version="0">
-				<entries class_id="28" tracking_level="0" version="0">
+	<root_module class_id="27" tracking_level="0" version="0">
+		<first class_id="28" tracking_level="0" version="0">
+			<parent class_id="29" tracking_level="0" version="0">
+				<entries>
 					<count>0</count>
 					<item_version>0</item_version>
 				</entries>
 				<scope>0</scope>
-				<candidate_labels class_id="29" tracking_level="0" version="0">
+				<candidate_labels>
 					<count>0</count>
 					<item_version>0</item_version>
 				</candidate_labels>
@@ -200,6 +209,11 @@
 			</px>
 		</second>
 	</root_module>
+	<new_name></new_name>
+	<elements class_id="42" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</elements>
 </entity>
 </boost_serialization>
 

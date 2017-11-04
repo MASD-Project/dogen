@@ -97,6 +97,9 @@ namespace meta_model {
 exomodel::exomodel(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
+    const std::string& documentation,
+    const std::vector<std::string>& stereotypes,
+    const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
@@ -104,9 +107,14 @@ exomodel::exomodel(
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
-    const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module)
+    const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
+    const std::string& new_name,
+    const std::list<dogen::yarn::meta_model::exoelement>& elements)
     : name_(name),
       meta_name_(meta_name),
+      documentation_(documentation),
+      stereotypes_(stereotypes),
+      tagged_values_(tagged_values),
       modules_(modules),
       object_templates_(object_templates),
       builtins_(builtins),
@@ -114,12 +122,17 @@ exomodel::exomodel(
       primitives_(primitives),
       objects_(objects),
       exceptions_(exceptions),
-      root_module_(root_module) { }
+      root_module_(root_module),
+      new_name_(new_name),
+      elements_(elements) { }
 
 void exomodel::swap(exomodel& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
+    swap(documentation_, other.documentation_);
+    swap(stereotypes_, other.stereotypes_);
+    swap(tagged_values_, other.tagged_values_);
     swap(modules_, other.modules_);
     swap(object_templates_, other.object_templates_);
     swap(builtins_, other.builtins_);
@@ -128,11 +141,16 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
     swap(root_module_, other.root_module_);
+    swap(new_name_, other.new_name_);
+    swap(elements_, other.elements_);
 }
 
 bool exomodel::operator==(const exomodel& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
+        documentation_ == rhs.documentation_ &&
+        stereotypes_ == rhs.stereotypes_ &&
+        tagged_values_ == rhs.tagged_values_ &&
         modules_ == rhs.modules_ &&
         object_templates_ == rhs.object_templates_ &&
         builtins_ == rhs.builtins_ &&
@@ -140,7 +158,9 @@ bool exomodel::operator==(const exomodel& rhs) const {
         primitives_ == rhs.primitives_ &&
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
-        root_module_ == rhs.root_module_;
+        root_module_ == rhs.root_module_ &&
+        new_name_ == rhs.new_name_ &&
+        elements_ == rhs.elements_;
 }
 
 exomodel& exomodel::operator=(exomodel other) {
@@ -179,6 +199,54 @@ void exomodel::meta_name(const dogen::yarn::meta_model::name& v) {
 
 void exomodel::meta_name(const dogen::yarn::meta_model::name&& v) {
     meta_name_ = std::move(v);
+}
+
+const std::string& exomodel::documentation() const {
+    return documentation_;
+}
+
+std::string& exomodel::documentation() {
+    return documentation_;
+}
+
+void exomodel::documentation(const std::string& v) {
+    documentation_ = v;
+}
+
+void exomodel::documentation(const std::string&& v) {
+    documentation_ = std::move(v);
+}
+
+const std::vector<std::string>& exomodel::stereotypes() const {
+    return stereotypes_;
+}
+
+std::vector<std::string>& exomodel::stereotypes() {
+    return stereotypes_;
+}
+
+void exomodel::stereotypes(const std::vector<std::string>& v) {
+    stereotypes_ = v;
+}
+
+void exomodel::stereotypes(const std::vector<std::string>&& v) {
+    stereotypes_ = std::move(v);
+}
+
+const std::list<std::pair<std::string, std::string> >& exomodel::tagged_values() const {
+    return tagged_values_;
+}
+
+std::list<std::pair<std::string, std::string> >& exomodel::tagged_values() {
+    return tagged_values_;
+}
+
+void exomodel::tagged_values(const std::list<std::pair<std::string, std::string> >& v) {
+    tagged_values_ = v;
+}
+
+void exomodel::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
+    tagged_values_ = std::move(v);
 }
 
 const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& exomodel::modules() const {
@@ -307,6 +375,38 @@ void exomodel::root_module(const std::pair<dogen::annotations::scribble_group, b
 
 void exomodel::root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
     root_module_ = std::move(v);
+}
+
+const std::string& exomodel::new_name() const {
+    return new_name_;
+}
+
+std::string& exomodel::new_name() {
+    return new_name_;
+}
+
+void exomodel::new_name(const std::string& v) {
+    new_name_ = v;
+}
+
+void exomodel::new_name(const std::string&& v) {
+    new_name_ = std::move(v);
+}
+
+const std::list<dogen::yarn::meta_model::exoelement>& exomodel::elements() const {
+    return elements_;
+}
+
+std::list<dogen::yarn::meta_model::exoelement>& exomodel::elements() {
+    return elements_;
+}
+
+void exomodel::elements(const std::list<dogen::yarn::meta_model::exoelement>& v) {
+    elements_ = v;
+}
+
+void exomodel::elements(const std::list<dogen::yarn::meta_model::exoelement>&& v) {
+    elements_ = std::move(v);
 }
 
 } } }

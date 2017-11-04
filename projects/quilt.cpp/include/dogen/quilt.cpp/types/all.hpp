@@ -103,6 +103,7 @@
 #include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/resolution_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/optional_helper.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository_factory.hpp"
 #include "dogen/quilt.cpp/types/model_to_text_model_transform.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_descriptor.hpp"

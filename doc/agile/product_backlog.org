@@ -11,6 +11,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider renaming =yarn::name=                                    :story:
+
+Now that we are using the name "name" to mean a plain string (exomodel
+related classes), it raises a question as to whether name (and
+nametree) are named correctly. If we had a better name for name we
+could then make "name" the "simple" property and make =Nameable= a
+concept that is used by both exomodel entities and the "new name"
+class. However, we never managed to find a good name for this class.
+
 *** Add support to foreign keys in ORM                                :story:
 
 At present we are not generating foreign keys for ODB.

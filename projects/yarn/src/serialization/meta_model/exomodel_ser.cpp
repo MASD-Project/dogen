@@ -22,6 +22,8 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/utility.hpp>
@@ -38,6 +40,7 @@
 #include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/exoelement_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 
@@ -50,6 +53,9 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("meta_name", v.meta_name_);
+    ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("stereotypes", v.stereotypes_);
+    ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("modules", v.modules_);
     ar << make_nvp("object_templates", v.object_templates_);
     ar << make_nvp("builtins", v.builtins_);
@@ -58,6 +64,8 @@ void save(Archive& ar,
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("root_module", v.root_module_);
+    ar << make_nvp("new_name", v.new_name_);
+    ar << make_nvp("elements", v.elements_);
 }
 
 template<typename Archive>
@@ -66,6 +74,9 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("meta_name", v.meta_name_);
+    ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("stereotypes", v.stereotypes_);
+    ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("modules", v.modules_);
     ar >> make_nvp("object_templates", v.object_templates_);
     ar >> make_nvp("builtins", v.builtins_);
@@ -74,6 +85,8 @@ void load(Archive& ar,
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("root_module", v.root_module_);
+    ar >> make_nvp("new_name", v.new_name_);
+    ar >> make_nvp("elements", v.elements_);
 }
 
 } }

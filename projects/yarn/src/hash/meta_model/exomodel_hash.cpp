@@ -26,6 +26,7 @@
 #include "dogen/yarn/hash/meta_model/exception_hash.hpp"
 #include "dogen/yarn/hash/meta_model/primitive_hash.hpp"
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
+#include "dogen/yarn/hash/meta_model/exoelement_hash.hpp"
 #include "dogen/yarn/hash/meta_model/enumeration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/object_template_hash.hpp"
 
@@ -35,6 +36,30 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, v.second);
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<std::pair<std::string, std::string> >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, hash_std_pair_std_string_std_string(i));
+    }
+    return seed;
 }
 
 inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
@@ -191,6 +216,14 @@ inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost
     return seed;
 }
 
+inline std::size_t hash_std_list_dogen_yarn_meta_model_exoelement(const std::list<dogen::yarn::meta_model::exoelement>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -202,6 +235,9 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
 
     combine(seed, v.name());
     combine(seed, v.meta_name());
+    combine(seed, v.documentation());
+    combine(seed, hash_std_vector_std_string(v.stereotypes()));
+    combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(v.object_templates()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(v.builtins()));
@@ -210,6 +246,8 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(v.objects()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(v.exceptions()));
     combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.root_module()));
+    combine(seed, v.new_name());
+    combine(seed, hash_std_list_dogen_yarn_meta_model_exoelement(v.elements()));
 
     return seed;
 }

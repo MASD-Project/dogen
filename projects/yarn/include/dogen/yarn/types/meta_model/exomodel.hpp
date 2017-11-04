@@ -26,11 +26,14 @@
 #endif
 
 #include <list>
+#include <string>
+#include <vector>
 #include <utility>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
+#include "dogen/yarn/types/meta_model/exoelement.hpp"
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/object_fwd.hpp"
 #include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
@@ -55,6 +58,9 @@ public:
     exomodel(
         const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::name& meta_name,
+        const std::string& documentation,
+        const std::vector<std::string>& stereotypes,
+        const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
@@ -62,7 +68,9 @@ public:
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
-        const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module);
+        const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
+        const std::string& new_name,
+        const std::list<dogen::yarn::meta_model::exoelement>& elements);
 
 private:
     template<typename Archive>
@@ -91,6 +99,30 @@ public:
     void meta_name(const dogen::yarn::meta_model::name& v);
     void meta_name(const dogen::yarn::meta_model::name&& v);
     /**@}*/
+
+    /**
+     * @brief Code comments.
+     *
+     * These are expected to follow the grammar of the comment processing tools
+     * of the programming language in question, e.g. Doxygen for C++, JavaDoc
+     * for Java, etc.
+     */
+    /**@{*/
+    const std::string& documentation() const;
+    std::string& documentation();
+    void documentation(const std::string& v);
+    void documentation(const std::string&& v);
+    /**@}*/
+
+    const std::vector<std::string>& stereotypes() const;
+    std::vector<std::string>& stereotypes();
+    void stereotypes(const std::vector<std::string>& v);
+    void stereotypes(const std::vector<std::string>&& v);
+
+    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
+    std::list<std::pair<std::string, std::string> >& tagged_values();
+    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
+    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
 
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules() const;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules();
@@ -132,6 +164,16 @@ public:
     void root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& v);
     void root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v);
 
+    const std::string& new_name() const;
+    std::string& new_name();
+    void new_name(const std::string& v);
+    void new_name(const std::string&& v);
+
+    const std::list<dogen::yarn::meta_model::exoelement>& elements() const;
+    std::list<dogen::yarn::meta_model::exoelement>& elements();
+    void elements(const std::list<dogen::yarn::meta_model::exoelement>& v);
+    void elements(const std::list<dogen::yarn::meta_model::exoelement>&& v);
+
 public:
     bool operator==(const exomodel& rhs) const;
     bool operator!=(const exomodel& rhs) const {
@@ -145,6 +187,9 @@ public:
 private:
     dogen::yarn::meta_model::name name_;
     dogen::yarn::meta_model::name meta_name_;
+    std::string documentation_;
+    std::vector<std::string> stereotypes_;
+    std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > modules_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > > object_templates_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > > builtins_;
@@ -153,6 +198,8 @@ private:
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > > objects_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > > exceptions_;
     std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > root_module_;
+    std::string new_name_;
+    std::list<dogen::yarn::meta_model::exoelement> elements_;
 };
 
 } } }

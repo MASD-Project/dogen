@@ -50,18 +50,27 @@
 		</location>
 		<identifiable></identifiable>
 	</meta_name>
-	<modules class_id="18" tracking_level="0" version="0">
+	<documentation></documentation>
+	<stereotypes class_id="18" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</stereotypes>
+	<tagged_values class_id="19" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</tagged_values>
+	<modules class_id="20" tracking_level="0" version="0">
 		<count>12</count>
 		<item_version>0</item_version>
-		<item class_id="19" tracking_level="0" version="0">
-			<first class_id="20" tracking_level="0" version="0">
-				<parent class_id="21" tracking_level="0" version="0">
-					<entries class_id="22" tracking_level="0" version="0">
+		<item class_id="21" tracking_level="0" version="0">
+			<first class_id="22" tracking_level="0" version="0">
+				<parent class_id="23" tracking_level="0" version="0">
+					<entries>
 						<count>0</count>
 						<item_version>0</item_version>
 					</entries>
 					<scope>0</scope>
-					<candidate_labels class_id="23" tracking_level="0" version="0">
+					<candidate_labels>
 						<count>0</count>
 						<item_version>0</item_version>
 					</candidate_labels>
@@ -27637,6 +27646,11 @@ a second line
 			</px>
 		</second>
 	</root_module>
+	<new_name></new_name>
+	<elements class_id="67" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</elements>
 </entity>
 </boost_serialization>
 
