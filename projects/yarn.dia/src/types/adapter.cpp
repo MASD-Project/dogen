@@ -270,36 +270,4 @@ adapter::to_object_template(const processed_object& po) const {
     return std::make_pair(sg, c);
 }
 
-meta_model::exoattribute adapter::adapt(const processed_attribute& a) const {
-    validate_dia_object_name(a.name());
-
-    meta_model::exoattribute r;
-    r.name(a.name());
-    r.type(a.type());
-    r.documentation(a.comment().documentation());
-    r.tagged_values(a.comment().key_value_pairs());
-
-    return r;
-}
-
-meta_model::exoelement adapter::
-adapt(const processed_object& po, const std::string& contained_by,
-    const std::list<std::string>& parents) const {
-    validate_dia_object_name(po.name());
-
-    meta_model::exoelement r;
-    r.name(contained_by + po.name());
-    r.parents(parents);
-    r.documentation(po.comment().documentation());
-
-    r.stereotypes().reserve(po.stereotypes().size());
-    for (const auto st : po.stereotypes())
-        r.stereotypes().push_back(st);
-
-    for (const auto& attr : po.attributes())
-        r.attributes().push_back(adapt(attr));
-
-    return r;
-}
-
 } } }

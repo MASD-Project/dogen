@@ -5809,7 +5809,10 @@ add any classes etc to that namespace. For example, it may make sense
 to add some constants at the namespace level. This is not possible
 with the current setup.
 
-This is related to merging multiple types in a single formatter.
+This could be easily implemented by adding a flag that determines if a
+type is at the namespace level.
+
+This is also related to merging multiple types in a single formatter.
 
 *** Add support for inner classes                                     :story:
 
@@ -6133,31 +6136,6 @@ pattern.
 
 We should also look for some support in clang format, although it
 seems very unlikely.
-
-*** Add support for qualified class names in dia                      :story:
-
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to define packages in
-certain cases.
-#+end_quote
-
-It has become apparent that creating large packages in dia and placing
-all classes in a large package is cumbersome:
-
-- there are issues with the large package implementation in dia,
-  making copying and pasting a dark art; its not very obvious how one
-  copies into a package (e.g. populating the child node id correctly).
-- models do not always have a neat division between packages; in
-  dogen, where packages would be useful, there are all sorts of
-  connections (e.g. inheritance, association) between the package and
-  the model "package" or other packages. Thus is very difficult to
-  produce a representative diagram.
-
-A solution to this problem would be to support qualified names in
-class names; these would be interpreted as being part of the current
-model. One would still have to define a large package, but it could be
-empty, or contain only the types which only have connections inside
-the package, plus comments for the package, etc.
 
 *** Add support for boost concept                                     :story:
 

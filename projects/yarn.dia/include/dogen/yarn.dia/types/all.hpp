@@ -35,6 +35,8 @@
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
+#include "dogen/yarn.dia/types/new_adapter.hpp"
+#include "dogen/yarn.dia/types/new_builder.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
 #include "dogen/yarn.dia/types/adaptation_error.hpp"

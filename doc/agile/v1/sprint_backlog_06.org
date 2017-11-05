@@ -13,37 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-04 Sat 16:59]
+#+CAPTION: Clock summary at [2017-11-05 Sun 17:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *56:20* |       |       | 100.0 |
+| *Total time*                                                                | *58:30* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 56:20   |       |       | 100.0 |
-| Active                                                                      |         | 56:20 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   4.1 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   3.8 |
+| Stories                                                                     | 58:30   |       |       | 100.0 |
+| Active                                                                      |         | 58:30 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  2:19 |   4.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   3.6 |
 | CANCELLED Add an "at" field to transform stats                              |         |       |  0:10 |   0.3 |
-| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   1.8 |
-| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   3.6 |
-| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   2.8 |
+| COMPLETED Move enablement into yarn                                         |         |       |  1:01 |   1.7 |
+| COMPLETED Consider revamping the project logo                               |         |       |  2:02 |   3.5 |
+| COMPLETED Rename top-level transformations                                  |         |       |  1:33 |   2.6 |
 | COMPLETED Clean-up context usage                                            |         |       |  0:38 |   1.1 |
-| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   3.7 |
-| COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   0.9 |
-| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   4.9 |
-| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   1.8 |
+| COMPLETED Housekeeper should know of text models                            |         |       |  2:05 |   3.6 |
+| COMPLETED Rename the model to text transforms                               |         |       |  0:29 |   0.8 |
+| COMPLETED Rename kernel and family                                          |         |       |  2:44 |   4.7 |
+| COMPLETED Clean up formatter names                                          |         |       |  1:00 |   1.7 |
 | COMPLETED Caching in travis                                                 |         |       |  0:59 |   1.7 |
-| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   2.0 |
-| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  24.8 |
+| COMPLETED Consider collapsing element properties into element               |         |       |  1:08 |   1.9 |
+| COMPLETED Create the archetype location properties                          |         |       | 13:58 |  23.9 |
 | COMPLETED Analysis work on moving to c++ 17                                 |         |       |  0:32 |   0.9 |
-| COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.1 |
-| COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   5.4 |
-| COMPLETED Move artefact into yarn                                           |         |       |  2:21 |   4.2 |
+| COMPLETED Upgrade rtags to latest                                           |         |       |  0:36 |   1.0 |
+| COMPLETED Experiment with adding colour to dia diagrams                     |         |       |  3:01 |   5.2 |
+| COMPLETED Move artefact into yarn                                           |         |       |  2:21 |   4.0 |
 | COMPLETED Supply the yarn options to prober                                 |         |       |  0:23 |   0.7 |
-| STARTED Experiment with a database model                                    |         |       |  1:20 |   2.4 |
-| STARTED Split registrar into two classes                                    |         |       |  1:25 |   2.5 |
-| STARTED Generate file paths as a transform                                  |         |       |  9:21 |  16.6 |
-| STARTED Implement exomodel in terms of exoelements                          |         |       |  5:07 |   9.1 |
+| COMPLETED Experiment with a database model                                  |         |       |  1:20 |   2.3 |
+| STARTED Split registrar into two classes                                    |         |       |  1:25 |   2.4 |
+| STARTED Generate file paths as a transform                                  |         |       |  9:21 |  16.0 |
+| STARTED Implement exomodel in terms of exoelements                          |         |       |  7:17 |  12.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -550,7 +550,8 @@ that we have text models, it makes more sense to have it in yarn.
 At present most of the arguments supplied to prober come from the
 options anyway - why not just supply the options to it?
 
-*** STARTED Experiment with a database model                          :story:
+*** COMPLETED Experiment with a database model                        :story:
+    CLOSED: [2017-11-05 Sun 17:26]
     CLOCK: [2017-10-31 Tue 18:01]--[2017-10-31 Tue 18:45] =>  0:44
     CLOCK: [2017-10-31 Tue 08:22]--[2017-10-31 Tue 08:58] =>  0:36
 
@@ -921,6 +922,8 @@ We should check that =enable_unique_file_names= is set to true.
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
 *** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-11-05 Sun 16:24]--[2017-11-05 Sun 17:26] =>  1:02
+    CLOCK: [2017-11-05 Sun 15:12]--[2017-11-05 Sun 16:20] =>  1:08
     CLOCK: [2017-11-04 Sat 16:39]--[2017-11-04 Sat 16:59] =>  0:20
     CLOCK: [2017-11-04 Sat 14:56]--[2017-11-04 Sat 16:38] =>  1:42
     CLOCK: [2017-11-04 Sat 14:10]--[2017-11-04 Sat 14:55] =>  0:45
@@ -1057,7 +1060,7 @@ Flat version:
 #+begin_src json
 {
     "name" : "a_model",
-    "stereotypes" : [ "yarn::module" ],
+    "stereotypes" : [ ],
     "tagged_values" : [
         {
             "key" : "a_key",
@@ -1741,5 +1744,30 @@ Random notes:
 - some types support both (headers)
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
+
+*** Add support for qualified class names in dia                      :story:
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to define packages in
+certain cases.
+#+end_quote
+
+It has become apparent that creating large packages in dia and placing
+all classes in a large package is cumbersome:
+
+- there are issues with the large package implementation in dia,
+  making copying and pasting a dark art; its not very obvious how one
+  copies into a package (e.g. populating the child node id correctly).
+- models do not always have a neat division between packages; in
+  dogen, where packages would be useful, there are all sorts of
+  connections (e.g. inheritance, association) between the package and
+  the model "package" or other packages. Thus is very difficult to
+  produce a representative diagram.
+
+A solution to this problem would be to support qualified names in
+class names; these would be interpreted as being part of the current
+model. One would still have to define a large package, but it could be
+empty, or contain only the types which only have connections inside
+the package, plus comments for the package, etc.
 
 ** Deprecated

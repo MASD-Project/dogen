@@ -36,6 +36,8 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.builder"));
 
+const std::string empty_contained_by;
+const std::list<std::string> empty_parents;
 const std::string empty_package_id("Supplied package id is empty");
 const std::string missing_name_for_id("Missing name for dia object ID: ");
 const std::string duplicate_element_id("Element id already exists: ");

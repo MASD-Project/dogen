@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_BUILDER_HPP
-#define DOGEN_YARN_DIA_TYPES_BUILDER_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_NEW_BUILDER_HPP
+#define DOGEN_YARN_DIA_TYPES_NEW_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,12 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include <boost/shared_ptr.hpp>
-#include "dogen/annotations/types/scribble.hpp"
-#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/exoelement.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
-#include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {
@@ -45,7 +41,7 @@ namespace dia {
  *
  * Expects the objects to have been supplied in dependency order.
  */
-class builder {
+class new_builder final {
 private:
     /*
      * @brief Responsible for tracking the qualified name of the
@@ -59,31 +55,40 @@ private:
     };
 
 public:
-    explicit builder(
+    explicit new_builder(
         const std::unordered_map<std::string, std::list<std::string>>&
         parent_id_to_child_ids);
 
 private:
     /**
-     * @brief Adds the supplied module into the context, slotting it
-     * against its dia ID.
-     */
-    void add_module_to_context(const std::string& dia_id,
-        boost::shared_ptr<meta_model::module> m);
-
-    /**
      * @brief Updates the parenting information for the given object
      * identified by the dia ID.
      */
-    void update_parentage(const std::string& dia_id, const meta_model::name& n);
+    void update_parentage(const std::string& id, const std::string& n);
 
     /**
-     * @brief Updates the module documentation and scribbles, given
-     * the processed object.
-     *
-     * @pre po must be a UML note.
+     * @brief Returns the list of names of parents for a given dia
+     * object id. If none exist, the list is empty.
      */
-    void update_module(const processed_object& po);
+    const std::list<std::string>&
+    parents_for_object(const std::string& id) const;
+
+    /**
+     * @brief Returns the qualified name of the containing object, or
+     * an empty string.
+     */
+    std::string contained_by(const std::string& id) const;
+
+private:
+    /**
+     * @brief Handles the processing of UML large packages.
+     */
+    void handle_uml_large_package(const processed_object& po);
+
+    /**
+     * @brief Handles the processing of UML notes.
+     */
+    void handle_uml_note(const processed_object& po);
 
 public:
     void add(const processed_object& po);
@@ -93,11 +98,10 @@ private:
     const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids_;
     std::unordered_map<std::string, uml_large_package_properties>
-    dia_id_to_uml_large_package_properties_;
+    id_to_uml_large_package_properties_;
     std::unordered_map<std::string, std::list<std::string>>
-    child_dia_id_to_parent_names_;
+    child_id_to_parent_names_;
     meta_model::exomodel model_;
-    context context_;
 };
 
 } } }
