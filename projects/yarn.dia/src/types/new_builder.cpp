@@ -41,6 +41,10 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
+new_builder::
+new_builder(const std::unordered_map<std::string, std::list<std::string>>&
+    parent_id_to_child_ids) : parent_id_to_child_ids_(parent_id_to_child_ids) {}
+
 void
 new_builder::update_parentage(const std::string& id, const std::string& n) {
     const auto i(parent_id_to_child_ids_.find(id));
@@ -188,6 +192,10 @@ void new_builder::add(const processed_object& po) {
      * above).
      */
     update_parentage(id, po.name());
+}
+
+meta_model::exomodel new_builder::build() {
+    return model_;
 }
 
 } } }

@@ -26,6 +26,8 @@
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
+#include "dogen/yarn.dia/types/builder.hpp"
+#include "dogen/yarn.dia/types/new_builder.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
@@ -68,9 +70,16 @@ workflow::generate_model(const std::list<processed_object>& pos) {
      * it.
      */
     builder b(g.parent_id_to_child_ids());
-    visitor v(b);
+    new_builder nb(g.parent_id_to_child_ids());
+    visitor v(b, nb);
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    return b.build();
+    auto r(b.build());
+    const auto em2(nb.build());
+    r.new_name(em2.new_name());
+    r.tagged_values(em2.tagged_values());
+    r.documentation(em2.documentation());
+    r.elements(em2.elements());
+    return r;
 }
 
 meta_model::exomodel workflow::execute(const dogen::dia::diagram& d) {

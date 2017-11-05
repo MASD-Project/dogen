@@ -91,7 +91,14 @@ private:
     void handle_uml_note(const processed_object& po);
 
 public:
+    /**
+     * @brief Adds a processed object to the builder.
+     */
     void add(const processed_object& po);
+
+    /**
+     * @brief Generates the exomodel.
+     */
     meta_model::exomodel build();
 
 private:

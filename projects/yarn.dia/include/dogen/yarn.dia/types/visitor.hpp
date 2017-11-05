@@ -29,6 +29,7 @@
 #include <functional>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/yarn.dia/types/grapher.hpp"
+#include "dogen/yarn.dia/types/new_builder.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 
 namespace dogen {
@@ -43,18 +44,21 @@ public:
     visitor(visitor&&) = default;
 
 public:
-    explicit visitor(builder& builder);
+    /*explicit*/visitor(builder& builder, new_builder& new_builder);
 
 public:
     template<typename Vertex, typename Graph>
     void finish_vertex(const Vertex& u, const Graph& g) {
         const auto& o(g[u]);
-        if (o.id() != grapher::root_id())
+        if (o.id() != grapher::root_id()) {
             builder_.add(o);
+            new_builder_.add(o);
+        }
     }
 
 private:
     builder& builder_;
+    new_builder& new_builder_;
 };
 
 } } }

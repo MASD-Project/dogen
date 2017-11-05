@@ -30,7 +30,6 @@
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
-#include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 
