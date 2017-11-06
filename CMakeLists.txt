@@ -340,6 +340,29 @@ else()
 endif()
 
 #
+# Analysis and formatting tools
+#
+find_package(ClangTools)
+if (CLANG_FORMAT_FOUND)
+    message(STATUS "Found clang-format (${CLANG_FORMAT_BIN}).")
+else()
+    message(STATUS "Could not find clang-format.")
+endif()
+
+if (CLANG_TIDY_FOUND)
+    message(STATUS "Found clang-tidy (${CLANG_FORMAT_BIN}).")
+else()
+    message(STATUS "Could not find clang-tidy.")
+endif()
+
+find_package(cppcheck)
+if (CPPCHECK_FOUND)
+    message(STATUS "Found cppcheck (${CPPCHECK_EXECUTABLE}).")
+else()
+    message(STATUS "Could not find cppcheck.")
+endif()
+
+#
 # Log level to use for all Dogen tools
 #
 set(DOGEN_LOG_LEVEL "debug")
