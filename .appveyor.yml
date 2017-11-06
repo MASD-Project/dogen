@@ -34,7 +34,7 @@ build_script:
         }
 
 artifacts:
-  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.06-Windows-AMD64.msi
+  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.07-Windows-AMD64.msi
     name: x86_64 MSI
 
 notifications:
@@ -58,7 +58,7 @@ deploy:
     subject: domaindrivenconsulting
     repo: Dogen
     package: Dogen
-    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.06-Windows-AMD64.msi
-    version: 1.0.06
+    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.07-Windows-AMD64.msi
+    version: 1.0.07
     publish: true
     override: true
