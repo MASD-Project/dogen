@@ -6428,6 +6428,35 @@ We should also add a validate method which checks to see if a string
 is a valid value according to the string table. We could have a "case
 insensitive" validate too.
 
+Actually, we don't even need a new stereotype for this; we could just
+use =enumeration= and detect when the underlying type is
+string. However, as we can have many types of strings, this needs to
+be configurable at the meta-model level:
+
+- char*
+- char[]
+- string view
+- std::string
+- QString and other toolkit specific strings
+- etc.
+
+Presumably the families we have already set up could be useful for
+this:
+
+: "quilt.cpp.helper.family": "String",
+
+We just need to promote these from backend helper families to
+something at the meta-model level (type families?). However, the user
+should still be able to configure how the "enumeration" comes out
+(e.g. string, string view etc), but the defaults should be best we can
+given the user options (version of C++ standard, etc).
+
+The other interesting aspect is whether there should be an enumeration
+connected to the string table (perhaps optionally) such that users
+could =switch= and so forth. These could all be options whenever you
+choose a type of the string family (create enumeration, create
+converter for container of string, etc).
+
 Validation rules:
 
 - string table cannot have duplicate entries.
