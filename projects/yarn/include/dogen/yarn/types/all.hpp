@@ -73,6 +73,7 @@
 #include "dogen/yarn/types/helpers/pretty_printer.hpp"
 #include "dogen/yarn/types/helpers/printing_error.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/stereotypes.hpp"
 #include "dogen/yarn/types/helpers/hydration_error.hpp"
 #include "dogen/yarn/types/helpers/mapping_actions.hpp"
 #include "dogen/yarn/types/helpers/mapping_context.hpp"
