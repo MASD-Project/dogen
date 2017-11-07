@@ -29,28 +29,23 @@ mapping_value::mapping_value()
 
 mapping_value::mapping_value(mapping_value&& rhs)
     : mapping_action_(std::move(rhs.mapping_action_)),
-      default_name_(std::move(rhs.default_name_)),
-      aliases_(std::move(rhs.aliases_)) { }
+      default_name_(std::move(rhs.default_name_)) { }
 
 mapping_value::mapping_value(
     const dogen::yarn::helpers::mapping_actions mapping_action,
-    const boost::optional<dogen::yarn::meta_model::name>& default_name,
-    const std::list<dogen::yarn::meta_model::name>& aliases)
+    const boost::optional<dogen::yarn::meta_model::name>& default_name)
     : mapping_action_(mapping_action),
-      default_name_(default_name),
-      aliases_(aliases) { }
+      default_name_(default_name) { }
 
 void mapping_value::swap(mapping_value& other) noexcept {
     using std::swap;
     swap(mapping_action_, other.mapping_action_);
     swap(default_name_, other.default_name_);
-    swap(aliases_, other.aliases_);
 }
 
 bool mapping_value::operator==(const mapping_value& rhs) const {
     return mapping_action_ == rhs.mapping_action_ &&
-        default_name_ == rhs.default_name_ &&
-        aliases_ == rhs.aliases_;
+        default_name_ == rhs.default_name_;
 }
 
 mapping_value& mapping_value::operator=(mapping_value other) {
@@ -81,22 +76,6 @@ void mapping_value::default_name(const boost::optional<dogen::yarn::meta_model::
 
 void mapping_value::default_name(const boost::optional<dogen::yarn::meta_model::name>&& v) {
     default_name_ = std::move(v);
-}
-
-const std::list<dogen::yarn::meta_model::name>& mapping_value::aliases() const {
-    return aliases_;
-}
-
-std::list<dogen::yarn::meta_model::name>& mapping_value::aliases() {
-    return aliases_;
-}
-
-void mapping_value::aliases(const std::list<dogen::yarn::meta_model::name>& v) {
-    aliases_ = v;
-}
-
-void mapping_value::aliases(const std::list<dogen::yarn::meta_model::name>&& v) {
-    aliases_ = std::move(v);
 }
 
 } } }

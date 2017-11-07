@@ -96,7 +96,6 @@ std::array<std::string, 64> csharp_reserved = { {
  * FIXME: we've removed the following builtins for now, because they
  * are being used by the following models:
  *
- * - "decimal": yarn.upsilon
  * - "object": yarn
  * - "string": std
  */

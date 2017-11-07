@@ -42,7 +42,6 @@ auto lg(logger_factory(transform_id));
 const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
 const std::string la_language("language_agnostic");
-const std::string upsilon_language("upsilon");
 
 const std::string unsupported_lanugage("Language is not supported: ");
 
@@ -60,8 +59,6 @@ meta_model::languages language_transform::to_language(const std::string& s) {
         return languages::csharp;
     else if (s == la_language)
         return languages::language_agnostic;
-    else if (s == upsilon_language)
-        return languages::upsilon;
 
     BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
     BOOST_THROW_EXCEPTION(transformation_error(unsupported_lanugage + s));

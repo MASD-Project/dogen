@@ -72,17 +72,10 @@ clone(const meta_model::endomodel& im) const {
 const std::unordered_map<std::string, meta_model::name>&
 mapper::translations_for_language(const mapping_set& ms,
     const meta_model::languages from, const meta_model::languages to) const {
-    if (from == meta_model::languages::upsilon) {
-        const auto i(ms.by_upsilon_id().find(to));
-        if (i != ms.by_upsilon_id().end())
-            return i->second;
-
-        const auto s(boost::lexical_cast<std::string>(to));
-        BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
-        BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
-    } else if (from == meta_model::languages::language_agnostic) {
-        const auto i(ms.by_language_agnostic_id().find(to));
-        if (i != ms.by_upsilon_id().end())
+    if (from == meta_model::languages::language_agnostic) {
+        const auto& blai(ms.by_language_agnostic_id());
+        const auto i(blai.find(to));
+        if (i != blai.end())
             return i->second;
 
         const auto s(boost::lexical_cast<std::string>(to));
@@ -105,8 +98,9 @@ mapper::injections_for_language(const mapping_set& ms,
     if (l != cpp)
         return r;
 
-    const auto i(ms.by_language_agnostic_id().find(cpp));
-    if (i == ms.by_upsilon_id().end()) {
+    const auto& blai(ms.by_language_agnostic_id());
+    const auto i(blai.find(cpp));
+    if (i == blai.end()) {
         const auto s(boost::lexical_cast<std::string>(cpp));
         BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
         BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
@@ -216,9 +210,7 @@ void mapper::map_attributes(const mapping_context& mc,
 
 bool mapper::
 is_mappable(const meta_model::languages from, const meta_model::languages to) {
-    return from == to ||
-        from == meta_model::languages::upsilon ||
-        from == meta_model::languages::language_agnostic;
+    return from == to || from == meta_model::languages::language_agnostic;
 }
 
 meta_model::endomodel

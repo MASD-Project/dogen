@@ -124,7 +124,6 @@ obtain_value_attribute_simple_name(const meta_model::languages l) {
     switch(l) {
     case languages::csharp: return csharp_value;
     case languages::cpp: return cpp_value;
-    case languages::upsilon: return csharp_value;
     default: {
         const auto s(boost::lexical_cast<std::string>(l));
         BOOST_LOG_SEV(lg, error) << unsupported_language << s;

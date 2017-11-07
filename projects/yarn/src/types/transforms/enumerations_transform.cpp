@@ -220,7 +220,6 @@ obtain_invalid_enumerator_simple_name(const meta_model::languages l) {
     switch(l) {
     case meta_model::languages::csharp: return csharp_invalid;
     case meta_model::languages::cpp: return cpp_invalid;
-    case meta_model::languages::upsilon: return csharp_invalid;
     default: {
         const auto s(boost::lexical_cast<std::string>(l));
         BOOST_LOG_SEV(lg, error) << unsupported_language << s;

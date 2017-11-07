@@ -40,7 +40,6 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.mapping_set_repository_factory"));
 
 const std::string duplicate_lam_id("Duplicate language agnostic id: ");
-const std::string duplicate_upsilon_id("Duplicate upsilon id: ");
 const std::string default_mapping_set_name("default.mapping_set");
 const std::string duplicate_mapping_set(
     "Found more than one mapping set with name: ");
@@ -97,22 +96,6 @@ void mapping_set_repository_factory::validate_mappings(
 }
 
 void mapping_set_repository_factory::
-insert(const std::string& upsilon_id, const std::string& lam_id,
-    std::unordered_map<std::string, std::string>& map) const {
-
-    const auto pair(std::make_pair(upsilon_id, lam_id));
-    const auto inserted(map.insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_upsilon_id << upsilon_id;
-        BOOST_THROW_EXCEPTION(
-            building_error(duplicate_upsilon_id + upsilon_id));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Mapped: '" << upsilon_id
-                             << "' to '" << lam_id << "'";
-}
-
-void mapping_set_repository_factory::
 insert(const std::string& lam_id, const meta_model::name& n,
     const meta_model::languages l, std::unordered_map<meta_model::languages,
     std::unordered_map<std::string, meta_model::name>>& by_languages) const {
@@ -127,58 +110,6 @@ insert(const std::string& lam_id, const meta_model::name& n,
 
     BOOST_LOG_SEV(lg, debug) << "Mapped: '" << lam_id << "' to '"
                              << n.id() << "'";
-}
-
-void mapping_set_repository_factory::populate_upsilon_data(
-    const std::string& lam_id, const mapping& mapping,
-    const mapping_value& upsilon_mv, mapping_set& ms) const {
-    /*
-     * A given LAM ID may map to zero, one or many upsilon names. We
-     * are only interested in creating a map between the upsilon ID
-     * and all other IDs: the concrete programming languages and LAM
-     * itself. We need the concrete programming languages because the
-     * key use case is to code-generate a upsilon model as a concrete
-     * programming language model. We also need LAM because we may
-     * want to generate a JSON representation of upsilon, translated
-     * to LAM.
-     *
-     * First we map the default upsilon ID to all available
-     * programming languages. We only care about non-upsilon -
-     * identity mapping is not useful - and we only care about the
-     * default type - we don't expect aliases for other languages
-     * (validated above us).
-     */
-    const auto default_upsilon_id(upsilon_mv.default_name()->id());
-    for (const auto& pair : mapping.by_language()) {
-        const auto l(pair.first);
-        if (l == meta_model::languages::upsilon)
-            continue;
-
-        const auto& n(*(pair.second.default_name()));
-        insert(default_upsilon_id, n, l, ms.by_upsilon_id());
-    }
-
-    /*
-     * Map the default upsilon ID to the LAM ID.
-     */
-    auto& utl(ms.upsilon_id_to_lam_id());
-    insert(default_upsilon_id, lam_id, utl);
-
-    /*
-     * Now we repeat the exercise for the aliases.
-     */
-    for (const auto& un : upsilon_mv.aliases()) {
-        for (const auto& pair : mapping.by_language()) {
-            const auto l(pair.first);
-            if (l == meta_model::languages::upsilon)
-                continue;
-
-            const auto& n(*(pair.second.default_name()));
-            insert(un.id(), n, l, ms.by_upsilon_id());
-        }
-
-        insert(un.id(), lam_id, utl);
-    }
 }
 
 void mapping_set_repository_factory::populate_mapping_set(
@@ -199,22 +130,8 @@ void mapping_set_repository_factory::populate_mapping_set(
                 continue;
             }
 
-            if (l == meta_model::languages::upsilon) {
-                /*
-                 * For upsilon we need to perform additional (complex)
-                 * processing.
-                 */
-                populate_upsilon_data(lam_id, mapping, mv, ms);
-            } else {
-                /*
-                 * Note that we only process the default name, and
-                 * ignore aliases. This is because we don't expect
-                 * aliases for languages other than upsilon (validated
-                 * above us).
-                 */
-                const auto n(*mv.default_name());
-                insert(lam_id, n, l, ms.by_language_agnostic_id());
-            }
+            const auto n(*mv.default_name());
+            insert(lam_id, n, l, ms.by_language_agnostic_id());
         }
     }
 }

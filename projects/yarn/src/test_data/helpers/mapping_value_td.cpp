@@ -41,14 +41,6 @@ create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
     return r;
 }
 
-std::list<dogen::yarn::meta_model::name> create_std_list_dogen_yarn_meta_model_name(unsigned int position) {
-    std::list<dogen::yarn::meta_model::name> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_meta_model_name(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -61,7 +53,6 @@ void mapping_value_generator::
 populate(const unsigned int position, result_type& v) {
     v.mapping_action(create_dogen_yarn_helpers_mapping_actions(position + 0));
     v.default_name(create_boost_optional_dogen_yarn_meta_model_name(position + 1));
-    v.aliases(create_std_list_dogen_yarn_meta_model_name(position + 2));
 }
 
 mapping_value_generator::result_type

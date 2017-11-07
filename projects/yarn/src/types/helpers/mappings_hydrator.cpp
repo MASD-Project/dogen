@@ -38,7 +38,6 @@ auto lg(logger_factory("yarn.helpers.mapping_hydrator"));
 const std::string empty;
 const std::string lam_id_key("lam_id");
 const std::string language_key("language");
-const std::string aliases_key("aliases");
 const std::string names_by_language_key("names_by_language");
 const std::string default_name_key("default_name");
 const std::string mapping_action_key("mapping_action");
@@ -53,7 +52,6 @@ const std::string erase_mapping_action("erase");
 const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
 const std::string la_language("language_agnostic");
-const std::string upsilon_language("upsilon");
 
 const std::string invalid_json_file("Failed to parse JSON file");
 const std::string invalid_option_in_json_file(
@@ -90,8 +88,6 @@ meta_model::languages mappings_hydrator::to_language(const std::string& s) const
         return meta_model::languages::csharp;
     else if (s == la_language)
         return meta_model::languages::language_agnostic;
-    else if (s == upsilon_language)
-        return meta_model::languages::upsilon;
 
     BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
     BOOST_THROW_EXCEPTION(hydration_error(unsupported_lanugage + s));
@@ -132,12 +128,6 @@ read_mapping_values(const boost::property_tree::ptree& pt) const {
         auto j = apt.find(default_name_key);
         if (j != apt.not_found())
             mv.default_name(read_name(j->second));
-
-        j = apt.find(aliases_key);
-        if (j != apt.not_found()) {
-            for (auto k(j->second.begin()); k != j->second.end(); ++k)
-                mv.aliases().push_back(read_name(k->second));
-        }
 
         const auto pair(std::make_pair(l, mv));
         const auto inserted(r.insert(pair).second);

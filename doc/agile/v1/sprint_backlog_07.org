@@ -13,15 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-06 Mon 22:00]
+#+CAPTION: Clock summary at [2017-11-07 Tue 09:00]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:03* |      |      | 100.0 |
+| *Total time*                                                                | *1:38* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:03   |      |      | 100.0 |
-| Active                                                                      |        | 1:03 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 1:03 | 100.0 |
+| Stories                                                                     | 1:38   |      |      | 100.0 |
+| Active                                                                      |        | 1:38 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 1:03 |  64.3 |
+| COMPLETED Remove remnants of upsilon                                        |        |      | 0:35 |  35.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -88,7 +89,15 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 Updates to sprint and product backlog.
 
-*** Implement exomodel in terms of exoelements                        :story:
+*** COMPLETED Remove remnants of upsilon                              :story:
+    CLOSED: [2017-11-07 Tue 09:00]
+    CLOCK: [2017-11-07 Tue 08:39]--[2017-11-07 Tue 09:00] =>  0:21
+    CLOCK: [2017-11-07 Tue 08:25]--[2017-11-07 Tue 08:39] =>  0:14
+
+Originally we had removed upsilon as a frontend but it seems there are
+still some remnants around yarn. Delete them.
+
+*** STARTED Implement exomodel in terms of exoelements                :story:
 
 For details on the analysis, see the comments in the previous sprint.
 
@@ -125,7 +134,6 @@ Problems:
   the exoelements. Use this method in the stereotypes transforms in
   yarn.
 - name does not have the module (e.g. contained by is not working).
-- remove upsilon language
 
 *** Generate file paths as a transform                                :story:
 

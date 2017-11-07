@@ -285,7 +285,6 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
         switch (l) {
         case dogen::yarn::meta_model::languages::csharp:  return ".";
         case dogen::yarn::meta_model::languages::cpp:     return "::";
-        case dogen::yarn::meta_model::languages::upsilon: return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(l));
             BOOST_LOG_SEV(lg, error) << unsupported_language << s;

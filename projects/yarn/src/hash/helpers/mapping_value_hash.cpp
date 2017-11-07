@@ -40,14 +40,6 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::o
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_yarn_meta_model_name(const std::list<dogen::yarn::meta_model::name>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -59,7 +51,6 @@ std::size_t mapping_value_hasher::hash(const mapping_value& v) {
 
     combine(seed, v.mapping_action());
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.default_name()));
-    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.aliases()));
 
     return seed;
 }

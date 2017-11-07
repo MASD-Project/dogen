@@ -122,12 +122,6 @@
                 "default_name" : {
                     "simple": "int"
                 }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "Integer"
-                }
             }
         ]
     },
@@ -162,12 +156,6 @@
                 "default_name" : {
                     "simple": "double"
                 }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "Double"
-                }
             }
         ]
     },
@@ -184,12 +172,6 @@
                 "language" : "csharp",
                 "default_name" : {
                     "simple": "bool"
-                }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "Boolean"
                 }
             }
         ]
@@ -209,20 +191,6 @@
                 "default_name" : {
                     "simple": "string"
                 }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "string"
-                },
-                "aliases" : [
-                    {
-                        "simple": "Binary"
-                    },
-                    {
-                        "simple": "Guid"
-                    }
-                ]
             }
         ]
     },
@@ -242,12 +210,6 @@
                 "default_name" : {
                     "simple": "DateTime",
                     "model_modules": "System"
-                }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "Date"
                 }
             }
         ]
@@ -269,12 +231,6 @@
                     "simple": "TimeSpan",
                     "model_modules": "System"
                 }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "UtcTime"
-                }
             }
         ]
     },
@@ -295,12 +251,6 @@
                     "simple": "DateTime",
                     "model_modules": "boost"
                 }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "UtcDateTime"
-                }
             }
         ]
     },
@@ -320,12 +270,6 @@
                     "simple": "Decimal",
                     "model_modules": "System"
                 }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "Decimal"
-                }
             }
         ]
     },
@@ -344,12 +288,6 @@
                 "default_name" : {
                     "simple": "Array",
                     "model_modules": "System.Collections.Generic"
-                }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "Collection"
                 }
             }
         ]
@@ -514,12 +452,6 @@
                 "default_name" : {
                     "simple": "string",
                     "model_modules": "std"
-                }
-            },
-            {
-                "language" : "upsilon",
-                "default_name" : {
-                    "simple": "ModelValue"
                 }
             },
             {

@@ -116,7 +116,6 @@ struct grammar : qi::grammar<Iterator> {
         switch (l) {
         case dogen::yarn::meta_model::languages::csharp: return ".";
         case dogen::yarn::meta_model::languages::cpp:
-        case dogen::yarn::meta_model::languages::upsilon:
         case dogen::yarn::meta_model::languages::language_agnostic: return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(l));

@@ -53,7 +53,7 @@ namespace helpers {
 
 class validator {
 public:
-    validator(const meta_model::name& model_name, const bool check_names,
+    validator(const meta_model::name& model_name,
         const bool is_proxy_reference);
 
 private:
@@ -73,14 +73,12 @@ public:
 
 private:
     const meta_model::name model_name_;
-    const bool check_names_;
     const bool is_proxy_reference_;
 };
 
-validator::validator(const meta_model::name& model_name, const bool check_names,
-    const bool is_proxy_reference) : model_name_(model_name),
-                                     check_names_(check_names),
-                                     is_proxy_reference_(is_proxy_reference) {}
+validator::
+validator(const meta_model::name& model_name, const bool is_proxy_reference)
+    : model_name_(model_name), is_proxy_reference_(is_proxy_reference) {}
 
 void validator::
 validate_name(const std::string& id, const bool in_global_module,
@@ -92,7 +90,7 @@ validate_name(const std::string& id, const bool in_global_module,
      * FIXME: however we should check that types in global namespace
      * do not have anything filled in location.
      */
-    if (!check_names_ || in_global_module)
+    if (in_global_module)
         return;
 
     const auto nl(n.location());
@@ -210,8 +208,7 @@ validate(const meta_model::endomodel& im) {
     const bool ipr(im.origin_type() == origin_types::proxy_reference);
 
     using meta_model::languages;
-    const bool check_names(im.input_language() != languages::upsilon);
-    validator v(im.name(), check_names, ipr/*is_proxy_reference*/);
+    validator v(im.name(), ipr);
 
     for (const auto& pair : im.modules())
         v.validate(pair.first, *pair.second);

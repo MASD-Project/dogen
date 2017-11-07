@@ -53,8 +53,6 @@ public:
     mapping_set(
         const std::string& name,
         const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_language_agnostic_id,
-        const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_upsilon_id,
-        const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id,
         const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language);
 
 private:
@@ -75,21 +73,6 @@ public:
     void by_language_agnostic_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& v);
     void by_language_agnostic_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >&& v);
 
-    const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_upsilon_id() const;
-    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_upsilon_id();
-    void by_upsilon_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& v);
-    void by_upsilon_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >&& v);
-
-    /**
-     * @brief Map to resolve upsilon ID's into LAM IDs.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id() const;
-    std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id();
-    void upsilon_id_to_lam_id(const std::unordered_map<std::string, std::string>& v);
-    void upsilon_id_to_lam_id(const std::unordered_map<std::string, std::string>&& v);
-    /**@}*/
-
     const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language() const;
     std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language();
     void erasures_by_language(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& v);
@@ -108,8 +91,6 @@ public:
 private:
     std::string name_;
     std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> > by_language_agnostic_id_;
-    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> > by_upsilon_id_;
-    std::unordered_map<std::string, std::string> upsilon_id_to_lam_id_;
     std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> > erasures_by_language_;
 };
 

@@ -48,15 +48,6 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_meta_model_languages_std_un
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -85,8 +76,6 @@ std::size_t mapping_set_hasher::hash(const mapping_set& v) {
 
     combine(seed, v.name());
     combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_map_std_string_dogen_yarn_meta_model_name(v.by_language_agnostic_id()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_map_std_string_dogen_yarn_meta_model_name(v.by_upsilon_id()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.upsilon_id_to_lam_id()));
     combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_set_std_string(v.erasures_by_language()));
 
     return seed;

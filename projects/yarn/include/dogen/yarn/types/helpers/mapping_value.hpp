@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
@@ -53,8 +52,7 @@ public:
 public:
     mapping_value(
         const dogen::yarn::helpers::mapping_actions mapping_action,
-        const boost::optional<dogen::yarn::meta_model::name>& default_name,
-        const std::list<dogen::yarn::meta_model::name>& aliases);
+        const boost::optional<dogen::yarn::meta_model::name>& default_name);
 
 private:
     template<typename Archive>
@@ -72,11 +70,6 @@ public:
     void default_name(const boost::optional<dogen::yarn::meta_model::name>& v);
     void default_name(const boost::optional<dogen::yarn::meta_model::name>&& v);
 
-    const std::list<dogen::yarn::meta_model::name>& aliases() const;
-    std::list<dogen::yarn::meta_model::name>& aliases();
-    void aliases(const std::list<dogen::yarn::meta_model::name>& v);
-    void aliases(const std::list<dogen::yarn::meta_model::name>&& v);
-
 public:
     bool operator==(const mapping_value& rhs) const;
     bool operator!=(const mapping_value& rhs) const {
@@ -90,7 +83,6 @@ public:
 private:
     dogen::yarn::helpers::mapping_actions mapping_action_;
     boost::optional<dogen::yarn::meta_model::name> default_name_;
-    std::list<dogen::yarn::meta_model::name> aliases_;
 };
 
 } } }

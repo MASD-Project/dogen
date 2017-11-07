@@ -70,24 +70,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -127,8 +109,6 @@ std::ostream& operator<<(std::ostream& s, const mapping_set& v) {
       << "\"__type__\": " << "\"dogen::yarn::helpers::mapping_set\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"by_language_agnostic_id\": " << v.by_language_agnostic_id() << ", "
-      << "\"by_upsilon_id\": " << v.by_upsilon_id() << ", "
-      << "\"upsilon_id_to_lam_id\": " << v.upsilon_id_to_lam_id() << ", "
       << "\"erasures_by_language\": " << v.erasures_by_language()
       << " }";
     return(s);

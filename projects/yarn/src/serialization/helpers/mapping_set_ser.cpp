@@ -43,8 +43,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("by_language_agnostic_id", v.by_language_agnostic_id_);
-    ar << make_nvp("by_upsilon_id", v.by_upsilon_id_);
-    ar << make_nvp("upsilon_id_to_lam_id", v.upsilon_id_to_lam_id_);
     ar << make_nvp("erasures_by_language", v.erasures_by_language_);
 }
 
@@ -54,8 +52,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("by_language_agnostic_id", v.by_language_agnostic_id_);
-    ar >> make_nvp("by_upsilon_id", v.by_upsilon_id_);
-    ar >> make_nvp("upsilon_id_to_lam_id", v.upsilon_id_to_lam_id_);
     ar >> make_nvp("erasures_by_language", v.erasures_by_language_);
 }
 

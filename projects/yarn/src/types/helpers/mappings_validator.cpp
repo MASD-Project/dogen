@@ -37,8 +37,6 @@ const std::string empty_mapping_set("Mapping set has no entries: ");
 const std::string missing_default_mapping_set(
     "Could not find the default mapping set: " + default_mapping_set_name);
 const std::string invalid_language("Cannot map language agnostic to itself.");
-const std::string aliases_not_supported(
-    "Aliases are only supported for upsilon");
 const std::string missing_default_value(
     "Default value must be supplied when translating.");
 const std::string unexpected_default_value(
@@ -58,14 +56,6 @@ validate(const meta_model::languages l, const mapping_value& mv) const {
     if (l == meta_model::languages::language_agnostic) {
         BOOST_LOG_SEV(lg, error) << invalid_language;
         BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id));
-    }
-
-    /*
-     * Aliases can only be used for upsilon.
-     */
-    if (l != meta_model::languages::upsilon && !mv.aliases().empty()) {
-        BOOST_LOG_SEV(lg, error) << aliases_not_supported;
-        BOOST_THROW_EXCEPTION(validation_error(aliases_not_supported));
     }
 
     /*

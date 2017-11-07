@@ -55,16 +55,9 @@ private:
         std::list<mapping>>& mappings) const;
 
 private:
-    void insert(const std::string& upsilon_id, const std::string& lam_id,
-        std::unordered_map<std::string, std::string>& map) const;
-
     void insert(const std::string& lam_id, const meta_model::name& n,
         const meta_model::languages l, std::unordered_map<meta_model::languages,
         std::unordered_map<std::string, meta_model::name>>& map) const;
-
-    void populate_upsilon_data(const std::string& lam_id,
-        const mapping& mapping, const mapping_value& upsilon_mv,
-        mapping_set& ms) const;
 
     void populate_mapping_set(const std::list<mapping>& mappings,
         mapping_set& ms) const;

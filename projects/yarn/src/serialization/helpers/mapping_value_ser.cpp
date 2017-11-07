@@ -19,7 +19,6 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -42,7 +41,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("mapping_action", v.mapping_action_);
     ar << make_nvp("default_name", v.default_name_);
-    ar << make_nvp("aliases", v.aliases_);
 }
 
 template<typename Archive>
@@ -51,7 +49,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("mapping_action", v.mapping_action_);
     ar >> make_nvp("default_name", v.default_name_);
-    ar >> make_nvp("aliases", v.aliases_);
 }
 
 } }

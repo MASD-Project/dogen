@@ -38,20 +38,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 namespace helpers {
@@ -60,8 +46,7 @@ std::ostream& operator<<(std::ostream& s, const mapping_value& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::helpers::mapping_value\"" << ", "
       << "\"mapping_action\": " << v.mapping_action() << ", "
-      << "\"default_name\": " << v.default_name() << ", "
-      << "\"aliases\": " << v.aliases()
+      << "\"default_name\": " << v.default_name()
       << " }";
     return(s);
 }
