@@ -75,6 +75,7 @@
 #include "dogen/yarn/io/transforms/naming_configuration_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_module_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
 #include "dogen/yarn/io/meta_model/path_contribution_types_io.hpp"
 #include "dogen/yarn/io/meta_model/model_segment_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_attribute_properties_io.hpp"

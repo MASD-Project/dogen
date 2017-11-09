@@ -18,25 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/annotations/io/annotation_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/origin_types_io.hpp"
-#include "dogen/formatters/io/decoration_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
-#include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
+#ifndef DOGEN_YARN_TYPES_HELPERS_WELL_KNOWN_STEREOTYPES_CONVERTER_HPP
+#define DOGEN_YARN_TYPES_HELPERS_WELL_KNOWN_STEREOTYPES_CONVERTER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 
 namespace dogen {
 namespace yarn {
-namespace meta_model {
+namespace helpers {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
-}
+class well_known_stereotypes_converter final {
+public:
+    well_known_stereotypes_converter() = default;
+    well_known_stereotypes_converter(const well_known_stereotypes_converter&) = default;
+    well_known_stereotypes_converter(well_known_stereotypes_converter&&) = default;
+    ~well_known_stereotypes_converter() = default;
+    well_known_stereotypes_converter& operator=(const well_known_stereotypes_converter&) = default;
+
+public:
+    bool operator==(const well_known_stereotypes_converter& rhs) const;
+    bool operator!=(const well_known_stereotypes_converter& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 } } }
+
+#endif

@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/meta_model/exoattribute_td.hpp"
+#include "dogen/yarn/test_data/meta_model/well_known_stereotypes_td.hpp"
 
 namespace {
 
@@ -27,6 +28,19 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+dogen::yarn::meta_model::well_known_stereotypes
+create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position) {
+    return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
+}
+
+std::vector<dogen::yarn::meta_model::well_known_stereotypes> create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
+    }
+    return r;
 }
 
 std::vector<std::string> create_std_vector_std_string(unsigned int position) {
@@ -64,10 +78,11 @@ exoattribute_generator::exoattribute_generator() : position_(0) { }
 void exoattribute_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.stereotypes(create_std_vector_std_string(position + 1));
-    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 2));
-    v.name(create_std_string(position + 3));
-    v.type(create_std_string(position + 4));
+    v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 1));
+    v.stereotypes(create_std_vector_std_string(position + 2));
+    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 3));
+    v.name(create_std_string(position + 4));
+    v.type(create_std_string(position + 5));
 }
 
 exoattribute_generator::result_type

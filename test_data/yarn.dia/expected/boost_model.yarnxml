@@ -51,14 +51,18 @@
 		<identifiable></identifiable>
 	</meta_name>
 	<documentation></documentation>
-	<stereotypes class_id="18" tracking_level="0" version="0">
+	<well_known_stereotypes class_id="18" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</well_known_stereotypes>
+	<stereotypes class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</stereotypes>
-	<tagged_values class_id="19" tracking_level="0" version="0">
+	<tagged_values class_id="20" tracking_level="0" version="0">
 		<count>10</count>
 		<item_version>0</item_version>
-		<item class_id="20" tracking_level="0" version="0">
+		<item class_id="21" tracking_level="0" version="0">
 			<first>yarn.dia.comment</first>
 			<second>true</second>
 		</item>
@@ -99,12 +103,12 @@
 			<second>dogen</second>
 		</item>
 	</tagged_values>
-	<modules class_id="21" tracking_level="0" version="0">
+	<modules class_id="22" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
-		<item class_id="22" tracking_level="0" version="0">
-			<first class_id="23" tracking_level="0" version="0">
-				<parent class_id="24" tracking_level="0" version="0">
+		<item class_id="23" tracking_level="0" version="0">
+			<first class_id="24" tracking_level="0" version="0">
+				<parent class_id="25" tracking_level="0" version="0">
 					<entries>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -115,22 +119,22 @@
 						<item_version>0</item_version>
 					</candidate_labels>
 				</parent>
-				<children class_id="25" tracking_level="0" version="0">
+				<children class_id="26" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
 				</children>
 			</first>
-			<second class_id="26" tracking_level="0" version="1">
+			<second class_id="27" tracking_level="0" version="1">
 				<px class_id="8" tracking_level="1" version="0" object_id="_0">
-					<element class_id="27" tracking_level="0" version="0">
+					<element class_id="28" tracking_level="0" version="0">
 						<name>
 							<id>&lt;pkg1&gt;</id>
 							<simple>pkg1</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
-								<item class_id="28" tracking_level="0" version="0">
+								<item class_id="29" tracking_level="0" version="0">
 									<first>1</first>
 									<second>pkg1</second>
 								</item>
@@ -157,8 +161,8 @@
 							<identifiable>pkg1</identifiable>
 						</name>
 						<documentation></documentation>
-						<annotation class_id="29" tracking_level="0" version="0">
-							<entries class_id="30" tracking_level="0" version="0">
+						<annotation class_id="30" tracking_level="0" version="0">
+							<entries class_id="31" tracking_level="0" version="0">
 								<count>0</count>
 								<bucket_count>1</bucket_count>
 								<item_version>0</item_version>
@@ -166,10 +170,14 @@
 							<scope>0</scope>
 						</annotation>
 						<origin_type>4</origin_type>
-						<contained_by class_id="31" tracking_level="0" version="0">
+						<contained_by class_id="32" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -199,22 +207,22 @@
 							<identifiable></identifiable>
 						</meta_name>
 						<is_element_extension>0</is_element_extension>
-						<decoration_properties class_id="32" tracking_level="0" version="0">
+						<decoration_properties class_id="33" tracking_level="0" version="0">
 							<generate_decoration>0</generate_decoration>
-							<modeline class_id="33" tracking_level="0" version="0">
+							<modeline class_id="34" tracking_level="0" version="0">
 								<initialized>0</initialized>
 							</modeline>
-							<licence class_id="34" tracking_level="0" version="0">
+							<licence class_id="35" tracking_level="0" version="0">
 								<initialized>0</initialized>
 							</licence>
 							<code_generation_marker></code_generation_marker>
 						</decoration_properties>
-						<artefact_properties class_id="35" tracking_level="0" version="0">
+						<artefact_properties class_id="36" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
 						</artefact_properties>
-						<archetype_location_properties class_id="36" tracking_level="0" version="0">
+						<archetype_location_properties class_id="37" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -226,29 +234,29 @@
 					</members>
 					<is_root>0</is_root>
 					<is_global_module>0</is_global_module>
-					<orm_properties class_id="37" tracking_level="0" version="0">
+					<orm_properties class_id="38" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</orm_properties>
 				</px>
 			</second>
 		</item>
 	</modules>
-	<object_templates class_id="38" tracking_level="0" version="0">
+	<object_templates class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</object_templates>
-	<builtins class_id="39" tracking_level="0" version="0">
+	<builtins class_id="40" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="40" tracking_level="0" version="0">
+	<enumerations class_id="41" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="41" tracking_level="0" version="0">
+	<primitives class_id="42" tracking_level="0" version="0">
 		<count>3</count>
 		<item_version>0</item_version>
-		<item class_id="42" tracking_level="0" version="0">
+		<item class_id="43" tracking_level="0" version="0">
 			<first>
 				<parent>
 					<entries>
@@ -271,7 +279,7 @@
 					<item_version>0</item_version>
 				</children>
 			</first>
-			<second class_id="43" tracking_level="0" version="1">
+			<second class_id="44" tracking_level="0" version="1">
 				<px class_id="11" tracking_level="1" version="0" object_id="_1">
 					<element>
 						<name>
@@ -321,6 +329,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -372,7 +384,7 @@
 						</archetype_location_properties>
 					</element>
 					<is_nullable>0</is_nullable>
-					<value_attribute class_id="44" tracking_level="0" version="0">
+					<value_attribute class_id="45" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
 							<entries>
@@ -407,7 +419,7 @@
 							<identifiable></identifiable>
 						</name>
 						<unparsed_type></unparsed_type>
-						<parsed_type class_id="45" tracking_level="0" version="0">
+						<parsed_type class_id="46" tracking_level="0" version="0">
 							<current>
 								<id></id>
 								<simple></simple>
@@ -432,7 +444,7 @@
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="46" tracking_level="0" version="0">
+							<children class_id="47" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -448,13 +460,13 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_properties class_id="47" tracking_level="0" version="0">
+						<orm_properties class_id="48" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</orm_properties>
 					</value_attribute>
 					<use_type_aliasing>0</use_type_aliasing>
 					<is_immutable>0</is_immutable>
-					<orm_properties class_id="48" tracking_level="0" version="0">
+					<orm_properties class_id="49" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</orm_properties>
 				</px>
@@ -533,6 +545,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -745,6 +761,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -885,10 +905,10 @@
 			</second>
 		</item>
 	</primitives>
-	<objects class_id="49" tracking_level="0" version="0">
+	<objects class_id="50" tracking_level="0" version="0">
 		<count>12</count>
 		<item_version>0</item_version>
-		<item class_id="50" tracking_level="0" version="0">
+		<item class_id="51" tracking_level="0" version="0">
 			<first>
 				<parent>
 					<entries>
@@ -907,7 +927,7 @@
 					<item_version>0</item_version>
 				</children>
 			</first>
-			<second class_id="51" tracking_level="0" version="1">
+			<second class_id="52" tracking_level="0" version="1">
 				<px class_id="9" tracking_level="1" version="0" object_id="_4">
 					<element>
 						<name>
@@ -956,6 +976,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -1006,7 +1030,7 @@
 							<item_version>0</item_version>
 						</archetype_location_properties>
 					</element>
-					<all_attributes class_id="52" tracking_level="0" version="0">
+					<all_attributes class_id="53" tracking_level="0" version="0">
 						<count>0</count>
 						<item_version>0</item_version>
 					</all_attributes>
@@ -1094,7 +1118,7 @@
 							</orm_properties>
 						</item>
 					</local_attributes>
-					<inherited_attributes class_id="53" tracking_level="0" version="0">
+					<inherited_attributes class_id="54" tracking_level="0" version="0">
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
@@ -1109,7 +1133,7 @@
 					</derived_visitor>
 					<is_visitation_root>0</is_visitation_root>
 					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations class_id="54" tracking_level="0" version="0">
+					<transparent_associations class_id="55" tracking_level="0" version="0">
 						<count>0</count>
 						<item_version>0</item_version>
 					</transparent_associations>
@@ -1135,7 +1159,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<type_parameters class_id="55" tracking_level="0" version="0">
+					<type_parameters class_id="56" tracking_level="0" version="0">
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
 						<always_in_heap>0</always_in_heap>
@@ -1151,7 +1175,7 @@
 					</associative_container_keys>
 					<provides_opaqueness>0</provides_opaqueness>
 					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties class_id="56" tracking_level="0" version="0">
+					<orm_properties class_id="57" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</orm_properties>
 				</px>
@@ -1225,6 +1249,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -1974,6 +2002,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -2243,6 +2275,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -2752,6 +2788,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -3053,6 +3093,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -3562,6 +3606,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -4231,6 +4279,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -4580,6 +4632,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -4849,6 +4905,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -5279,6 +5339,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
@@ -5628,6 +5692,10 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
+						<well_known_stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</well_known_stereotypes>
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
@@ -5831,7 +5899,7 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="57" tracking_level="0" version="0">
+	<exceptions class_id="58" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</exceptions>
@@ -5935,6 +6003,10 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -5998,11 +6070,15 @@
 		</second>
 	</root_module>
 	<new_name></new_name>
-	<elements class_id="58" tracking_level="0" version="0">
+	<elements class_id="59" tracking_level="0" version="0">
 		<count>16</count>
 		<item_version>0</item_version>
-		<item class_id="59" tracking_level="0" version="0">
+		<item class_id="60" tracking_level="0" version="0">
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6016,11 +6092,15 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</parents>
-			<attributes class_id="60" tracking_level="0" version="0">
+			<attributes class_id="61" tracking_level="0" version="0">
 				<count>7</count>
 				<item_version>0</item_version>
-				<item class_id="61" tracking_level="0" version="0">
+				<item class_id="62" tracking_level="0" version="0">
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6034,6 +6114,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6047,6 +6131,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6060,6 +6148,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6073,6 +6165,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6086,6 +6182,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6099,6 +6199,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6114,6 +6218,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6132,6 +6240,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6147,6 +6259,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6167,6 +6283,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6185,6 +6305,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6198,6 +6322,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6213,6 +6341,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6231,6 +6363,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6246,6 +6382,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6265,6 +6405,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6280,6 +6424,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6298,6 +6446,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6311,6 +6463,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6324,6 +6480,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6337,6 +6497,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6352,6 +6516,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
@@ -6371,6 +6539,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6386,6 +6558,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6404,6 +6580,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6417,6 +6597,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6430,6 +6614,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6443,6 +6631,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6458,6 +6650,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6476,6 +6672,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6489,6 +6689,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6502,6 +6706,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6515,6 +6723,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6528,6 +6740,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6541,6 +6757,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6556,6 +6776,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6574,6 +6798,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6587,6 +6815,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6602,6 +6834,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6620,6 +6856,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6636,6 +6876,10 @@
 		<item>
 			<documentation>Test a primitive with an underlying ptime.
 </documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6657,6 +6901,10 @@
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
 </documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6678,6 +6926,10 @@
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
 </documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6698,6 +6950,10 @@
 		</item>
 		<item>
 			<documentation></documentation>
+			<well_known_stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</well_known_stereotypes>
 			<stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6716,6 +6972,10 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6729,6 +6989,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6742,6 +7006,10 @@
 				</item>
 				<item>
 					<documentation></documentation>
+					<well_known_stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</well_known_stereotypes>
 					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>

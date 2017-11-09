@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/exoattribute_io.hpp"
+#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -28,6 +29,20 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
 }
 
 namespace std {
@@ -79,6 +94,7 @@ std::ostream& operator<<(std::ostream& s, const exoattribute& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exoattribute\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
+      << "\"well_known_stereotypes\": " << v.well_known_stereotypes() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "

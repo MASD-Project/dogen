@@ -33,6 +33,7 @@
 #include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
 #include "dogen/formatters/test_data/decoration_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/artefact_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/well_known_stereotypes_td.hpp"
 #include "dogen/yarn/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 namespace {
@@ -67,6 +68,19 @@ create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
 
 bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
+}
+
+dogen::yarn::meta_model::well_known_stereotypes
+create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position) {
+    return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
+}
+
+std::vector<dogen::yarn::meta_model::well_known_stereotypes> create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
+    }
+    return r;
 }
 
 std::vector<std::string> create_std_vector_std_string(unsigned int position) {
@@ -122,12 +136,13 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 3));
     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
     v.in_global_module(create_bool(position + 5));
-    v.stereotypes(create_std_vector_std_string(position + 6));
-    v.meta_name(create_dogen_yarn_meta_model_name(position + 7));
-    v.is_element_extension(create_bool(position + 8));
-    v.decoration_properties(create_dogen_formatters_decoration_properties(position + 9));
-    v.artefact_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_artefact_properties(position + 10));
-    v.archetype_location_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_local_archetype_location_properties(position + 11));
+    v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 6));
+    v.stereotypes(create_std_vector_std_string(position + 7));
+    v.meta_name(create_dogen_yarn_meta_model_name(position + 8));
+    v.is_element_extension(create_bool(position + 9));
+    v.decoration_properties(create_dogen_formatters_decoration_properties(position + 10));
+    v.artefact_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_artefact_properties(position + 11));
+    v.archetype_location_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_local_archetype_location_properties(position + 12));
 }
 
 element_generator::result_type*

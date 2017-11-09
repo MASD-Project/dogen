@@ -18,25 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/annotations/io/annotation_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/origin_types_io.hpp"
-#include "dogen/formatters/io/decoration_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
-#include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen/yarn/test_data/meta_model/well_known_stereotypes_td.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
+well_known_stereotypes_generator::well_known_stereotypes_generator() : position_(0) { }
+void well_known_stereotypes_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<well_known_stereotypes>(position % 13);
+}
+
+well_known_stereotypes_generator::result_type
+well_known_stereotypes_generator::create(const unsigned int  position) {
+    result_type r;
+    well_known_stereotypes_generator::populate(position, r);
+    return r;
+}
+
+well_known_stereotypes_generator::result_type
+well_known_stereotypes_generator::operator()() {
+    return create(position_++);
 }
 
 } } }

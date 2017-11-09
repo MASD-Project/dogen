@@ -31,6 +31,7 @@
 #include <utility>
 #include <algorithm>
 #include "dogen/yarn/types/meta_model/exoattribute.hpp"
+#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 #include "dogen/yarn/serialization/meta_model/exoelement_fwd_ser.hpp"
 
 namespace dogen {
@@ -47,6 +48,7 @@ public:
 public:
     exoelement(
         const std::string& documentation,
+        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
         const std::vector<std::string>& stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
@@ -75,10 +77,27 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Stereotypes that are part of the yarn UML profile, and so are well-known to the
+     * model.
+     */
+    /**@{*/
+    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
+    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
+    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    /**@}*/
+
+    /**
+     * @brief Stereotypes that are not part of the yarn UML profile, and so are handled
+     * externally.
+     */
+    /**@{*/
     const std::vector<std::string>& stereotypes() const;
     std::vector<std::string>& stereotypes();
     void stereotypes(const std::vector<std::string>& v);
     void stereotypes(const std::vector<std::string>&& v);
+    /**@}*/
 
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
     std::list<std::pair<std::string, std::string> >& tagged_values();
@@ -112,6 +131,7 @@ public:
 
 private:
     std::string documentation_;
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
     std::vector<std::string> stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::string name_;

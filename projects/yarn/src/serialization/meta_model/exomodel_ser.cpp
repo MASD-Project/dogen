@@ -43,6 +43,7 @@
 #include "dogen/yarn/serialization/meta_model/exoelement_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/well_known_stereotypes_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -54,6 +55,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("documentation", v.documentation_);
+    ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
     ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("modules", v.modules_);
@@ -75,6 +77,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("documentation", v.documentation_);
+    ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
     ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("modules", v.modules_);

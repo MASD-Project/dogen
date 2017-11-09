@@ -37,6 +37,7 @@
 #include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor_fwd.hpp"
+#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 #include "dogen/yarn/serialization/meta_model/element_fwd_ser.hpp"
 #include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 
@@ -71,6 +72,7 @@ public:
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
+        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
         const std::vector<std::string>& stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
@@ -155,10 +157,27 @@ public:
     void in_global_module(const bool v);
     /**@}*/
 
+    /**
+     * @brief Stereotypes that are part of the yarn UML profile, and so are well-known to the
+     * model.
+     */
+    /**@{*/
+    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
+    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
+    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    /**@}*/
+
+    /**
+     * @brief Stereotypes that are not part of the yarn UML profile, and so are handled
+     * externally.
+     */
+    /**@{*/
     const std::vector<std::string>& stereotypes() const;
     std::vector<std::string>& stereotypes();
     void stereotypes(const std::vector<std::string>& v);
     void stereotypes(const std::vector<std::string>&& v);
+    /**@}*/
 
     /**
      * @brief Name of the element in the meta-model that this instance conforms to.
@@ -208,6 +227,7 @@ private:
     dogen::yarn::meta_model::origin_types origin_type_;
     boost::optional<dogen::yarn::meta_model::name> contained_by_;
     bool in_global_module_;
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
     std::vector<std::string> stereotypes_;
     dogen::yarn::meta_model::name meta_name_;
     bool is_element_extension_;

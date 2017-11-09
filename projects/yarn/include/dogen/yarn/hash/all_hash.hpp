@@ -75,6 +75,7 @@
 #include "dogen/yarn/hash/transforms/naming_configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_module_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_object_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/well_known_stereotypes_hash.hpp"
 #include "dogen/yarn/hash/meta_model/path_contribution_types_hash.hpp"
 #include "dogen/yarn/hash/meta_model/model_segment_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_attribute_properties_hash.hpp"

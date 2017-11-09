@@ -54,6 +54,7 @@ public:
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
+        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
         const std::vector<std::string>& stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,

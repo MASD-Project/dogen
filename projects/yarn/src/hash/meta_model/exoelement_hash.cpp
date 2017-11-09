@@ -20,6 +20,7 @@
  */
 #include "dogen/yarn/hash/meta_model/exoelement_hash.hpp"
 #include "dogen/yarn/hash/meta_model/exoattribute_hash.hpp"
+#include "dogen/yarn/hash/meta_model/well_known_stereotypes_hash.hpp"
 
 namespace {
 
@@ -27,6 +28,14 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
 }
 
 inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
@@ -79,6 +88,7 @@ std::size_t exoelement_hasher::hash(const exoelement& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
+    combine(seed, hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
     combine(seed, hash_std_vector_std_string(v.stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, v.name());

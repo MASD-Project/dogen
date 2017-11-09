@@ -18,10 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/meta_model/stereotypes.hpp"
+#include "dogen/yarn/types/helpers/well_known_stereotypes_converter.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace meta_model {
+namespace helpers {
+
+bool well_known_stereotypes_converter::operator==(const well_known_stereotypes_converter& /*rhs*/) const {
+    return true;
+}
 
 } } }
