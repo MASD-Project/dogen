@@ -1,0 +1,238 @@
+{
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
+    "documentation": "Pleat provides relational database support for models.\n",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "annotations",
+      "yarn.external_modules": "dogen",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen.disable_odb_cmake"
+    }
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "input"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "input_id"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "workspace_id"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "file_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "content"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "is_compressed"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "version"
+          },
+          "unparsed_type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "output"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "output_id"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "workspace_id"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "input_id"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "input_version"
+          },
+          "unparsed_type": "unsigned int"
+        },
+        {
+          "name": {
+            "simple": "dogen_version"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "file_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "content"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "is_compressed"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "workspace"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "workspace_id"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "description"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "input_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "std::string"
+      }
+    },
+    {
+      "name": {
+        "simple": "output_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "std::string"
+      }
+    },
+    {
+      "name": {
+        "simple": "workspace_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "std::string"
+      }
+    }
+  ]
+}

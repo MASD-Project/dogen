@@ -2488,14 +2488,6 @@
       },
       "stereotypes": [
         "handcrafted"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "formatter_repository_"
-          },
-          "unparsed_type": "formatters::repository"
-        }
       ]
     },
     {
@@ -2541,6 +2533,21 @@
           },
           "unparsed_type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
         }
+      ]
+    },
+    {
+      "name": {
+        "simple": "repository_factory",
+        "internal_modules": "formatters"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
       ]
     },
     {

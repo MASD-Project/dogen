@@ -26,62 +26,6 @@
   "elements": [
     {
       "name": {
-        "simple": "artefact"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Artefact produced by a formatter.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "path"
-          },
-          "unparsed_type": "boost::filesystem::path",
-          "documentation": "Absolute path to the file, indicating the location in the filesystem where it will be written.\n"
-        },
-        {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Content of the file.\n"
-        },
-        {
-          "name": {
-            "simple": "overwrite"
-          },
-          "unparsed_type": "bool",
-          "documentation": "Determines when to write the file.\n\nIf true, the file will always be written to the filesystem; if false, the file will\nonly be written to the filesystem if it does not exist.\n"
-        },
-        {
-          "name": {
-            "simple": "dependencies"
-          },
-          "unparsed_type": "std::vector<boost::filesystem::path>",
-          "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "artefact_writer_interface"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
         "simple": "code_generation_marker_factory"
       },
       "meta_name": {
@@ -440,33 +384,6 @@
     },
     {
       "name": {
-        "simple": "filesystem_writer"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "parents": [
-        {
-          "simple": "artefact_writer_interface"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "force_write_"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
         "simple": "indent_filter"
       },
       "meta_name": {
@@ -760,33 +677,6 @@
     },
     {
       "name": {
-        "simple": "stream_writer"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "parents": [
-        {
-          "simple": "artefact_writer_interface"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "stream_"
-          },
-          "unparsed_type": "std::ostream"
-        }
-      ]
-    },
-    {
-      "name": {
         "simple": "traits"
       },
       "meta_name": {
@@ -1047,18 +937,6 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       }
-    },
-    {
-      "name": {
-        "simple": "writing_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error ocrurred whilst writing.\n"
     }
   ]
 }
