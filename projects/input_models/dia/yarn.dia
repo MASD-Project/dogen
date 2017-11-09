@@ -47632,7 +47632,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#ffefd5"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -48092,7 +48092,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#fffacd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

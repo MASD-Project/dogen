@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <utility>
+#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +36,11 @@ namespace helpers {
 
 class well_known_stereotypes_converter final {
 public:
-    well_known_stereotypes_converter() = default;
-    well_known_stereotypes_converter(const well_known_stereotypes_converter&) = default;
-    well_known_stereotypes_converter(well_known_stereotypes_converter&&) = default;
-    ~well_known_stereotypes_converter() = default;
-    well_known_stereotypes_converter& operator=(const well_known_stereotypes_converter&) = default;
-
-public:
-    bool operator==(const well_known_stereotypes_converter& rhs) const;
-    bool operator!=(const well_known_stereotypes_converter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::pair<
+        std::list<meta_model::well_known_stereotypes>,
+        std::list<std::string>
+    > from_csv_string(const std::string& s);
+    static std::string to_string(const meta_model::well_known_stereotypes st); 
 };
 
 } } }
