@@ -35,6 +35,7 @@
 #include "dogen/yarn.dia/types/processed_comment.hpp"
 #include "dogen/yarn.dia/types/yarn_element_types.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
+#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_fwd_ser.hpp"
 
 namespace dogen {
@@ -61,6 +62,7 @@ public:
         const std::string& name,
         const dogen::yarn::dia::dia_object_types dia_object_type,
         const dogen::yarn::dia::yarn_element_types yarn_element_type,
+        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
         const std::vector<std::string>& stereotypes,
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
@@ -105,6 +107,11 @@ public:
 
     dogen::yarn::dia::yarn_element_types yarn_element_type() const;
     void yarn_element_type(const dogen::yarn::dia::yarn_element_types v);
+
+    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
+    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
+    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
 
     /**
      * @brief Stereotypes for this object that were not consumed by yarn.dia.
@@ -173,6 +180,7 @@ private:
     std::string name_;
     dogen::yarn::dia::dia_object_types dia_object_type_;
     dogen::yarn::dia::yarn_element_types yarn_element_type_;
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
     std::vector<std::string> stereotypes_;
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;
