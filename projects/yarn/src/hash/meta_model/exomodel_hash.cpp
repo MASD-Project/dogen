@@ -29,7 +29,7 @@
 #include "dogen/yarn/hash/meta_model/exoelement_hash.hpp"
 #include "dogen/yarn/hash/meta_model/enumeration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/object_template_hash.hpp"
-#include "dogen/yarn/hash/meta_model/well_known_stereotypes_hash.hpp"
+#include "dogen/yarn/hash/meta_model/static_stereotypes_hash.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::size_t hash_std_list_dogen_yarn_meta_model_static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -245,8 +245,8 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
     combine(seed, v.name());
     combine(seed, v.meta_name());
     combine(seed, v.documentation());
-    combine(seed, hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_static_stereotypes(v.static_stereotypes()));
+    combine(seed, hash_std_list_std_string(v.dynamic_stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(v.object_templates()));

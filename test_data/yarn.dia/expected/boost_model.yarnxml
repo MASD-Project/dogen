@@ -51,18 +51,18 @@
 		<identifiable></identifiable>
 	</meta_name>
 	<documentation></documentation>
-	<well_known_stereotypes class_id="18" tracking_level="0" version="0">
+	<static_stereotypes class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</well_known_stereotypes>
-	<unknown_stereotypes class_id="19" tracking_level="0" version="0">
+	</static_stereotypes>
+	<dynamic_stereotypes>
 		<count>0</count>
 		<item_version>0</item_version>
-	</unknown_stereotypes>
-	<tagged_values class_id="20" tracking_level="0" version="0">
+	</dynamic_stereotypes>
+	<tagged_values class_id="19" tracking_level="0" version="0">
 		<count>10</count>
 		<item_version>0</item_version>
-		<item class_id="21" tracking_level="0" version="0">
+		<item class_id="20" tracking_level="0" version="0">
 			<first>yarn.dia.comment</first>
 			<second>true</second>
 		</item>
@@ -103,18 +103,18 @@
 			<second>dogen</second>
 		</item>
 	</tagged_values>
-	<modules class_id="22" tracking_level="0" version="0">
+	<modules class_id="21" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>
-		<item class_id="23" tracking_level="0" version="0">
-			<first class_id="24" tracking_level="0" version="0">
-				<parent class_id="25" tracking_level="0" version="0">
+		<item class_id="22" tracking_level="0" version="0">
+			<first class_id="23" tracking_level="0" version="0">
+				<parent class_id="24" tracking_level="0" version="0">
 					<entries>
 						<count>0</count>
 						<item_version>0</item_version>
 					</entries>
 					<scope>0</scope>
-					<candidate_labels>
+					<candidate_labels class_id="25" tracking_level="0" version="0">
 						<count>0</count>
 						<item_version>0</item_version>
 					</candidate_labels>
@@ -174,15 +174,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>6</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -330,15 +330,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>4</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -547,15 +547,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>4</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -764,15 +764,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>4</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -980,15 +980,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -1254,15 +1254,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -2008,15 +2008,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -2282,15 +2282,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -2796,15 +2796,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -3102,15 +3102,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -3616,15 +3616,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -4290,15 +4290,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -4644,15 +4644,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -4918,15 +4918,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -5353,15 +5353,15 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -5707,16 +5707,16 @@
 							<initialized>0</initialized>
 						</contained_by>
 						<in_global_module>0</in_global_module>
-						<well_known_stereotypes>
+						<static_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>1</item>
-						</well_known_stereotypes>
-						<unknown_stereotypes>
+						</static_stereotypes>
+						<dynamic_stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
 							<item>handcrafted</item>
-						</unknown_stereotypes>
+						</dynamic_stereotypes>
 						<meta_name>
 							<id></id>
 							<simple></simple>
@@ -6019,14 +6019,14 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<meta_name>
 						<id></id>
 						<simple></simple>
@@ -6091,15 +6091,15 @@
 		<item_version>0</item_version>
 		<item class_id="60" tracking_level="0" version="0">
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6114,14 +6114,14 @@
 				<item_version>0</item_version>
 				<item class_id="62" tracking_level="0" version="0">
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6131,14 +6131,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6148,14 +6148,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6165,14 +6165,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6182,14 +6182,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6199,14 +6199,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6216,14 +6216,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6235,15 +6235,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6258,14 +6258,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6277,15 +6277,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>6</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6302,15 +6302,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6325,14 +6325,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6342,14 +6342,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6361,15 +6361,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6384,14 +6384,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6403,15 +6403,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6427,14 +6427,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6446,15 +6446,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6469,14 +6469,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6486,14 +6486,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6503,14 +6503,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6520,14 +6520,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6539,16 +6539,16 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>handcrafted</item>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6563,14 +6563,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6582,15 +6582,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6605,14 +6605,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6622,14 +6622,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6639,14 +6639,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6656,14 +6656,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6675,15 +6675,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6698,14 +6698,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6715,14 +6715,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6732,14 +6732,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6749,14 +6749,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6766,14 +6766,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6783,14 +6783,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6802,15 +6802,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6825,14 +6825,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6842,14 +6842,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6861,15 +6861,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6884,14 +6884,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6904,15 +6904,15 @@
 		<item>
 			<documentation>Test a primitive with an underlying ptime.
 </documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>4</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6930,15 +6930,15 @@
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
 </documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>4</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6956,15 +6956,15 @@
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
 </documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>4</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6981,15 +6981,15 @@
 		</item>
 		<item>
 			<documentation></documentation>
-			<well_known_stereotypes>
+			<static_stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>1</item>
-			</well_known_stereotypes>
-			<unknown_stereotypes>
+			</static_stereotypes>
+			<dynamic_stereotypes>
 				<count>0</count>
 				<item_version>0</item_version>
-			</unknown_stereotypes>
+			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -7004,14 +7004,14 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -7021,14 +7021,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -7038,14 +7038,14 @@
 				</item>
 				<item>
 					<documentation></documentation>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>

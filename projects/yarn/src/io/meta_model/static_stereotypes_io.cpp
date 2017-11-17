@@ -21,58 +21,58 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const well_known_stereotypes& v) {
-    s << "{ " << "\"__type__\": " << "\"well_known_stereotypes\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
+    s << "{ " << "\"__type__\": " << "\"static_stereotypes\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case well_known_stereotypes::invalid:
+    case static_stereotypes::invalid:
         attr = "\"invalid\"";
         break;
-    case well_known_stereotypes::object:
+    case static_stereotypes::object:
         attr = "\"object\"";
         break;
-    case well_known_stereotypes::object_template:
+    case static_stereotypes::object_template:
         attr = "\"object_template\"";
         break;
-    case well_known_stereotypes::exception:
+    case static_stereotypes::exception:
         attr = "\"exception\"";
         break;
-    case well_known_stereotypes::primitive:
+    case static_stereotypes::primitive:
         attr = "\"primitive\"";
         break;
-    case well_known_stereotypes::enumeration:
+    case static_stereotypes::enumeration:
         attr = "\"enumeration\"";
         break;
-    case well_known_stereotypes::module:
+    case static_stereotypes::module:
         attr = "\"module\"";
         break;
-    case well_known_stereotypes::builtin:
+    case static_stereotypes::builtin:
         attr = "\"builtin\"";
         break;
-    case well_known_stereotypes::visitable:
+    case static_stereotypes::visitable:
         attr = "\"visitable\"";
         break;
-    case well_known_stereotypes::fluent:
+    case static_stereotypes::fluent:
         attr = "\"fluent\"";
         break;
-    case well_known_stereotypes::immutable:
+    case static_stereotypes::immutable:
         attr = "\"immutable\"";
         break;
-    case well_known_stereotypes::orm_object:
+    case static_stereotypes::orm_object:
         attr = "\"orm_object\"";
         break;
-    case well_known_stereotypes::orm_value:
+    case static_stereotypes::orm_value:
         attr = "\"orm_value\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for well_known_stereotypes");
+        throw std::invalid_argument("Invalid value for static_stereotypes");
     }
     s << attr << " }";
     return s;

@@ -18,20 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_WELL_KNOWN_STEREOTYPES_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_WELL_KNOWN_STEREOTYPES_SER_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_STATIC_STEREOTYPES_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_STATIC_STEREOTYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
+namespace dogen {
+namespace yarn {
+namespace meta_model {
 
-template<class Archive>
-void serialize(Archive& ar, dogen::yarn::meta_model::well_known_stereotypes& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("well_known_stereotypes", v);
-}
+/**
+ * @brief Lists all stereotypes defined in the yarn UML profile.
+ */
+enum class static_stereotypes : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    object = 1,
+    object_template = 2,
+    exception = 3,
+    primitive = 4,
+    enumeration = 5,
+    module = 6,
+    builtin = 7,
+    visitable = 8,
+    fluent = 9,
+    immutable = 10,
+    orm_object = 11,
+    orm_value = 12
+};
+
+} } }
 
 #endif

@@ -25,7 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -293,48 +293,48 @@ void stereotypes_transform::expand(meta_model::object& o,
      * If there are no stereotypes of either type, then there is no
      * point in proceeding.
      */
-    if (o.well_known_stereotypes().empty() && o.unknown_stereotypes().empty()) {
+    if (o.static_stereotypes().empty() && o.dynamic_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Well-known stereotypes: "
-                             << o.well_known_stereotypes();
+                             << o.static_stereotypes();
     BOOST_LOG_SEV(lg, debug) << "Unknown stereotypes: "
-                             << o.unknown_stereotypes();
+                             << o.dynamic_stereotypes();
 
     /*
      * First we process all of the well-known stereotypes, collecting
      * any invalid ones as we go along.
      */
     helpers::stereotypes_helper h;
-    using meta_model::well_known_stereotypes;
-    std::list<well_known_stereotypes> invalid;
-    for (const auto wks : o.well_known_stereotypes()) {
-        if (h.is_element_type(wks)) {
+    using meta_model::static_stereotypes;
+    std::list<static_stereotypes> invalid;
+    for (const auto ss : o.static_stereotypes()) {
+        if (h.is_element_type(ss)) {
             /*
              * We can safely ignore any element type information as
              * that has already been used to instantiate the
              * appropriate meta-model elements.
              */
             continue;
-        } else if (wks == well_known_stereotypes::visitable)
+        } else if (ss == static_stereotypes::visitable)
             expand_visitable(o, em);
-        else if (wks == well_known_stereotypes::fluent)
+        else if (ss == static_stereotypes::fluent)
             o.is_fluent(true);
-        else if (wks == well_known_stereotypes::immutable)
+        else if (ss == static_stereotypes::immutable)
             o.is_immutable(true);
-        else if (wks == well_known_stereotypes::orm_object) {
+        else if (ss == static_stereotypes::orm_object) {
             meta_model::orm_object_properties cfg;
             cfg.generate_mapping(true);
             o.orm_properties(cfg);
-        } else if (wks == well_known_stereotypes::orm_value) {
+        } else if (ss == static_stereotypes::orm_value) {
             meta_model::orm_object_properties cfg;
             cfg.generate_mapping(true);
             cfg.is_value(true);
             o.orm_properties(cfg);
         } else
-            invalid.push_back(wks);
+            invalid.push_back(ss);
     }
 
     /*
@@ -353,7 +353,7 @@ void stereotypes_transform::expand(meta_model::object& o,
      */
     std::list<std::string> invalid_unknown;
     std::list<std::string> external_stereotypes;
-    for (const auto us : o.unknown_stereotypes()) {
+    for (const auto us : o.dynamic_stereotypes()) {
         /*
          * Exclude all stereotypes that are handled externally -
          * i.e. profiles.
@@ -393,7 +393,7 @@ void stereotypes_transform::expand(meta_model::object& o,
      * that are handled externally - e.g. consume the stereotypes
      * which we've already dealt with here.
      */
-    o.unknown_stereotypes(external_stereotypes);
+    o.dynamic_stereotypes(external_stereotypes);
 }
 
 void stereotypes_transform::expand(meta_model::primitive& p) {
@@ -403,8 +403,8 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
     /*
      * Primitives do not support any unknown stereotypes.
      */
-    if (!p.unknown_stereotypes().empty()) {
-        const auto s(boost::lexical_cast<std::string>(p.unknown_stereotypes()));
+    if (!p.dynamic_stereotypes().empty()) {
+        const auto s(boost::lexical_cast<std::string>(p.dynamic_stereotypes()));
         BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
@@ -413,7 +413,7 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
      * If there are no well-known stereotypes, then there is no point
      * in proceeding.
      */
-    if (p.well_known_stereotypes().empty()) {
+    if (p.static_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
     }
@@ -423,24 +423,24 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
      * invalid ones as we go along.
      */
     helpers::stereotypes_helper h;
-    using meta_model::well_known_stereotypes;
-    std::list<well_known_stereotypes> invalid;
-    for (const auto wks : p.well_known_stereotypes()) {
-        if (h.is_element_type(wks)) {
+    using meta_model::static_stereotypes;
+    std::list<static_stereotypes> invalid;
+    for (const auto st : p.static_stereotypes()) {
+        if (h.is_element_type(st)) {
             /*
              * We can safely ignore any element type information as
              * that has already been used to instantiate the
              * appropriate meta-model elements.
              */
             continue;
-        } else if (wks == well_known_stereotypes::immutable)
+        } else if (st == static_stereotypes::immutable)
             p.is_immutable(true);
-        else if (wks == well_known_stereotypes::orm_value) {
+        else if (st == static_stereotypes::orm_value) {
             meta_model::orm_primitive_properties cfg;
             cfg.generate_mapping(true);
             p.orm_properties(cfg);
         } else
-            invalid.push_back(wks);
+            invalid.push_back(st);
     }
 
     /*

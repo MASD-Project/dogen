@@ -55,10 +55,10 @@ void validator::validate_yarn(const processed_object& po) {
      * Stereotypes - other than type-related ones - can only be used
      * by yarn objects and primitives.
      */
-    if (!po.unknown_stereotypes().empty()) {
+    if (!po.dynamic_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, error) << invalid_use_of_stereotypes
                                  << " Stereotypes used: "
-                                 << po.unknown_stereotypes();
+                                 << po.dynamic_stereotypes();
         BOOST_THROW_EXCEPTION(
             validation_error(invalid_use_of_stereotypes));
     }

@@ -31,7 +31,7 @@
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.dia/io/dia_object_types_io.hpp"
@@ -302,11 +302,11 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
     const auto st(h.from_csv_string(s));
 
     BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
-    po.well_known_stereotypes(st.well_known_stereotypes());
-    po.unknown_stereotypes(st.unknown_stereotypes());
+    po.static_stereotypes(st.static_stereotypes());
+    po.dynamic_stereotypes(st.dynamic_stereotypes());
 
-    using wks = meta_model::well_known_stereotypes;
-    auto et(h.extract_element_types(po.well_known_stereotypes()));
+    using meta_model::static_stereotypes;
+    auto et(h.extract_element_types(po.static_stereotypes()));
     if (et.size() > 1) {
         /*
          * We can only have zero or one yarn element types set.
@@ -316,34 +316,34 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
     } else if (et.size() == 0) {
         using dot = dia_object_types;
         if (po.dia_object_type() == dot::uml_class) {
-            po.well_known_stereotypes().push_back(wks::object);
-            et.push_back(wks::object);
+            po.static_stereotypes().push_back(static_stereotypes::object);
+            et.push_back(static_stereotypes::object);
         } else if (po.dia_object_type() == dot::uml_large_package) {
-            po.well_known_stereotypes().push_back(wks::module);
-            et.push_back(wks::module);
+            po.static_stereotypes().push_back(static_stereotypes::module);
+            et.push_back(static_stereotypes::module);
         }
     }
 
     switch (et.front()) {
-    case wks::object:
+    case static_stereotypes::object:
         po.yarn_element_type(yarn_element_types::object);
         break;
-    case wks::object_template:
+    case static_stereotypes::object_template:
         po.yarn_element_type(yarn_element_types::object_template);
         break;
-    case wks::exception:
+    case static_stereotypes::exception:
         po.yarn_element_type(yarn_element_types::exception);
         break;
-    case wks::primitive:
+    case static_stereotypes::primitive:
         po.yarn_element_type(yarn_element_types::primitive);
         break;
-    case wks::enumeration:
+    case static_stereotypes::enumeration:
         po.yarn_element_type(yarn_element_types::enumeration);
         break;
-    case wks::module:
+    case static_stereotypes::module:
         po.yarn_element_type(yarn_element_types::builtin);
         break;
-    case wks::builtin:
+    case static_stereotypes::builtin:
         po.yarn_element_type(yarn_element_types::builtin);
         break;
     default: {

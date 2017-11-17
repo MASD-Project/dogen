@@ -36,7 +36,7 @@
 #include "dogen/yarn.dia/serialization/processed_comment_ser.hpp"
 #include "dogen/yarn.dia/serialization/yarn_element_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_attribute_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/well_known_stereotypes_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -49,8 +49,8 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("dia_object_type", v.dia_object_type_);
     ar << make_nvp("yarn_element_type", v.yarn_element_type_);
-    ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar << make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar << make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("child_node_id", v.child_node_id_);
     ar << make_nvp("connection", v.connection_);
@@ -65,8 +65,8 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("dia_object_type", v.dia_object_type_);
     ar >> make_nvp("yarn_element_type", v.yarn_element_type_);
-    ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar >> make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar >> make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("child_node_id", v.child_node_id_);
     ar >> make_nvp("connection", v.connection_);

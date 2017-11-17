@@ -28,7 +28,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
@@ -303,8 +303,8 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
     const auto st(h.from_string(st_str));
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes: '" << st << "'";
 
-    e.well_known_stereotypes(st.well_known_stereotypes());
-    e.unknown_stereotypes(st.unknown_stereotypes());
+    e.static_stereotypes(st.static_stereotypes());
+    e.dynamic_stereotypes(st.dynamic_stereotypes());
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>

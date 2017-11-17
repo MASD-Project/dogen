@@ -32,8 +32,8 @@
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
 #include "dogen/formatters/test_data/decoration_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
 #include "dogen/yarn/test_data/meta_model/artefact_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/well_known_stereotypes_td.hpp"
 #include "dogen/yarn/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 namespace {
@@ -70,15 +70,15 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-dogen::yarn::meta_model::well_known_stereotypes
-create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position) {
-    return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
+dogen::yarn::meta_model::static_stereotypes
+create_dogen_yarn_meta_model_static_stereotypes(const unsigned int position) {
+    return dogen::yarn::meta_model::static_stereotypes_generator::create(position);
 }
 
-std::list<dogen::yarn::meta_model::well_known_stereotypes> create_std_list_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
-    std::list<dogen::yarn::meta_model::well_known_stereotypes> r;
+std::list<dogen::yarn::meta_model::static_stereotypes> create_std_list_dogen_yarn_meta_model_static_stereotypes(unsigned int position) {
+    std::list<dogen::yarn::meta_model::static_stereotypes> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
+        r.push_back(create_dogen_yarn_meta_model_static_stereotypes(position + i));
     }
     return r;
 }
@@ -136,8 +136,8 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 3));
     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
     v.in_global_module(create_bool(position + 5));
-    v.well_known_stereotypes(create_std_list_dogen_yarn_meta_model_well_known_stereotypes(position + 6));
-    v.unknown_stereotypes(create_std_list_std_string(position + 7));
+    v.static_stereotypes(create_std_list_dogen_yarn_meta_model_static_stereotypes(position + 6));
+    v.dynamic_stereotypes(create_std_list_std_string(position + 7));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 8));
     v.is_element_extension(create_bool(position + 9));
     v.decoration_properties(create_dogen_formatters_decoration_properties(position + 10));

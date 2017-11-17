@@ -32,7 +32,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/exoelement_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exoattribute_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/well_known_stereotypes_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -42,8 +42,8 @@ void save(Archive& ar,
     const dogen::yarn::meta_model::exoelement& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar << make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar << make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
@@ -55,8 +55,8 @@ void load(Archive& ar,
     dogen::yarn::meta_model::exoelement& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar >> make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar >> make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);

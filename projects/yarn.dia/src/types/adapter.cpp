@@ -133,8 +133,8 @@ populate_element(const processed_object& po, meta_model::element& e) const {
     }
 
     e.documentation(po.comment().documentation());
-    e.well_known_stereotypes(po.well_known_stereotypes());
-    e.unknown_stereotypes(po.unknown_stereotypes());
+    e.static_stereotypes(po.static_stereotypes());
+    e.dynamic_stereotypes(po.dynamic_stereotypes());
 }
 
 annotations::scribble_group adapter::

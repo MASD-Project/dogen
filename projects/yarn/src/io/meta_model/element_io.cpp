@@ -26,8 +26,8 @@
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/formatters/io/decoration_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
 #include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
 
 namespace dogen {

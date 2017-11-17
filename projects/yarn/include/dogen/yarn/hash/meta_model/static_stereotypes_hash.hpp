@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_META_MODEL_WELL_KNOWN_STEREOTYPES_HASH_HPP
-#define DOGEN_YARN_HASH_META_MODEL_WELL_KNOWN_STEREOTYPES_HASH_HPP
+#ifndef DOGEN_YARN_HASH_META_MODEL_STATIC_STEREOTYPES_HASH_HPP
+#define DOGEN_YARN_HASH_META_MODEL_STATIC_STEREOTYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
+#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 
 namespace std {
 
 template<>
-struct hash<dogen::yarn::meta_model::well_known_stereotypes> {
+struct hash<dogen::yarn::meta_model::static_stereotypes> {
 public:
-    size_t operator()(const dogen::yarn::meta_model::well_known_stereotypes& v) const {
+    size_t operator()(const dogen::yarn::meta_model::static_stereotypes& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

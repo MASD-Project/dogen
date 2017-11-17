@@ -18,27 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/meta_model/well_known_stereotypes_td.hpp"
+#include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-well_known_stereotypes_generator::well_known_stereotypes_generator() : position_(0) { }
-void well_known_stereotypes_generator::
+static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
+void static_stereotypes_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<well_known_stereotypes>(position % 13);
+    v = static_cast<static_stereotypes>(position % 13);
 }
 
-well_known_stereotypes_generator::result_type
-well_known_stereotypes_generator::create(const unsigned int  position) {
+static_stereotypes_generator::result_type
+static_stereotypes_generator::create(const unsigned int  position) {
     result_type r;
-    well_known_stereotypes_generator::populate(position, r);
+    static_stereotypes_generator::populate(position, r);
     return r;
 }
 
-well_known_stereotypes_generator::result_type
-well_known_stereotypes_generator::operator()() {
+static_stereotypes_generator::result_type
+static_stereotypes_generator::operator()() {
     return create(position_++);
 }
 

@@ -26,15 +26,15 @@ namespace meta_model {
 
 exoelement::exoelement(
     const std::string& documentation,
-    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::list<std::string>& unknown_stereotypes,
+    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<std::string>& dynamic_stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::string& name,
     const std::list<std::string>& parents,
     const std::list<dogen::yarn::meta_model::exoattribute>& attributes)
     : documentation_(documentation),
-      well_known_stereotypes_(well_known_stereotypes),
-      unknown_stereotypes_(unknown_stereotypes),
+      static_stereotypes_(static_stereotypes),
+      dynamic_stereotypes_(dynamic_stereotypes),
       tagged_values_(tagged_values),
       name_(name),
       parents_(parents),
@@ -43,8 +43,8 @@ exoelement::exoelement(
 void exoelement::swap(exoelement& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(well_known_stereotypes_, other.well_known_stereotypes_);
-    swap(unknown_stereotypes_, other.unknown_stereotypes_);
+    swap(static_stereotypes_, other.static_stereotypes_);
+    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(tagged_values_, other.tagged_values_);
     swap(name_, other.name_);
     swap(parents_, other.parents_);
@@ -53,8 +53,8 @@ void exoelement::swap(exoelement& other) noexcept {
 
 bool exoelement::operator==(const exoelement& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        well_known_stereotypes_ == rhs.well_known_stereotypes_ &&
-        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
+        static_stereotypes_ == rhs.static_stereotypes_ &&
+        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         tagged_values_ == rhs.tagged_values_ &&
         name_ == rhs.name_ &&
         parents_ == rhs.parents_ &&
@@ -83,36 +83,36 @@ void exoelement::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::list<dogen::yarn::meta_model::well_known_stereotypes>& exoelement::well_known_stereotypes() const {
-    return well_known_stereotypes_;
+const std::list<dogen::yarn::meta_model::static_stereotypes>& exoelement::static_stereotypes() const {
+    return static_stereotypes_;
 }
 
-std::list<dogen::yarn::meta_model::well_known_stereotypes>& exoelement::well_known_stereotypes() {
-    return well_known_stereotypes_;
+std::list<dogen::yarn::meta_model::static_stereotypes>& exoelement::static_stereotypes() {
+    return static_stereotypes_;
 }
 
-void exoelement::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
-    well_known_stereotypes_ = v;
+void exoelement::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
+    static_stereotypes_ = v;
 }
 
-void exoelement::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
-    well_known_stereotypes_ = std::move(v);
+void exoelement::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v) {
+    static_stereotypes_ = std::move(v);
 }
 
-const std::list<std::string>& exoelement::unknown_stereotypes() const {
-    return unknown_stereotypes_;
+const std::list<std::string>& exoelement::dynamic_stereotypes() const {
+    return dynamic_stereotypes_;
 }
 
-std::list<std::string>& exoelement::unknown_stereotypes() {
-    return unknown_stereotypes_;
+std::list<std::string>& exoelement::dynamic_stereotypes() {
+    return dynamic_stereotypes_;
 }
 
-void exoelement::unknown_stereotypes(const std::list<std::string>& v) {
-    unknown_stereotypes_ = v;
+void exoelement::dynamic_stereotypes(const std::list<std::string>& v) {
+    dynamic_stereotypes_ = v;
 }
 
-void exoelement::unknown_stereotypes(const std::list<std::string>&& v) {
-    unknown_stereotypes_ = std::move(v);
+void exoelement::dynamic_stereotypes(const std::list<std::string>&& v) {
+    dynamic_stereotypes_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& exoelement::tagged_values() const {

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_META_MODEL_WELL_KNOWN_STEREOTYPES_IO_HPP
-#define DOGEN_YARN_IO_META_MODEL_WELL_KNOWN_STEREOTYPES_IO_HPP
+#ifndef DOGEN_YARN_IO_META_MODEL_STATIC_STEREOTYPES_IO_HPP
+#define DOGEN_YARN_IO_META_MODEL_STATIC_STEREOTYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
+#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const well_known_stereotypes& v);
+std::ostream& operator<<(std::ostream& s, const static_stereotypes& v);
 
 } } }
 

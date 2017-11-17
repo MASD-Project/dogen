@@ -23,8 +23,8 @@
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
 #include "dogen/formatters/hash/decoration_properties_hash.hpp"
+#include "dogen/yarn/hash/meta_model/static_stereotypes_hash.hpp"
 #include "dogen/yarn/hash/meta_model/artefact_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/well_known_stereotypes_hash.hpp"
 #include "dogen/yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
@@ -45,7 +45,7 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::o
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::size_t hash_std_list_dogen_yarn_meta_model_static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -94,8 +94,8 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.contained_by()));
     combine(seed, v.in_global_module());
-    combine(seed, hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_static_stereotypes(v.static_stereotypes()));
+    combine(seed, hash_std_list_std_string(v.dynamic_stereotypes()));
     combine(seed, v.meta_name());
     combine(seed, v.is_element_extension());
     combine(seed, v.decoration_properties());

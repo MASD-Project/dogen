@@ -29,7 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
+#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn/serialization/meta_model/exoattribute_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,8 +46,8 @@ public:
 public:
     exoattribute(
         const std::string& documentation,
-        const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::list<std::string>& unknown_stereotypes,
+        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<std::string>& dynamic_stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
         const std::string& type);
@@ -79,20 +79,20 @@ public:
      * model.
      */
     /**@{*/
-    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
-    std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
-    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v);
-    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes() const;
+    std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes();
+    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v);
+    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v);
     /**@}*/
 
     /**
-     * @brief Stereotypes that are not part of the yarn UML profile.
+     * @brief Stereotypes that are not part of the yarn UML profile. These are user defined.
      */
     /**@{*/
-    const std::list<std::string>& unknown_stereotypes() const;
-    std::list<std::string>& unknown_stereotypes();
-    void unknown_stereotypes(const std::list<std::string>& v);
-    void unknown_stereotypes(const std::list<std::string>&& v);
+    const std::list<std::string>& dynamic_stereotypes() const;
+    std::list<std::string>& dynamic_stereotypes();
+    void dynamic_stereotypes(const std::list<std::string>& v);
+    void dynamic_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -122,8 +122,8 @@ public:
 
 private:
     std::string documentation_;
-    std::list<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::list<std::string> unknown_stereotypes_;
+    std::list<dogen::yarn::meta_model::static_stereotypes> static_stereotypes_;
+    std::list<std::string> dynamic_stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::string name_;
     std::string type_;

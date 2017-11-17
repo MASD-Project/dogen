@@ -166,7 +166,7 @@ make_uml_note_with_marker_inside_large_package(unsigned int n) {
 processed_object mock_processed_object_factory::
 make_class(const unsigned int n, const std::string& st) {
     auto r(create_named_object(dia_object_types::uml_class, n));
-    r.unknown_stereotypes().push_back(st);
+    r.dynamic_stereotypes().push_back(st);
     r.comment().documentation(doxygen_comment);
     r.comment().original_content(doxygen_comment);
     return r;

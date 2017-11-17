@@ -35,9 +35,9 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor_fwd.hpp"
-#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 #include "dogen/yarn/serialization/meta_model/element_fwd_ser.hpp"
 #include "dogen/yarn/types/meta_model/local_archetype_location_properties.hpp"
 
@@ -72,8 +72,8 @@ public:
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::list<std::string>& unknown_stereotypes,
+        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<std::string>& dynamic_stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::formatters::decoration_properties& decoration_properties,
@@ -162,20 +162,20 @@ public:
      * model.
      */
     /**@{*/
-    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
-    std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
-    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v);
-    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes() const;
+    std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes();
+    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v);
+    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v);
     /**@}*/
 
     /**
-     * @brief Stereotypes that are not part of the yarn UML profile.
+     * @brief Stereotypes that are not part of the yarn UML profile. These are user defined.
      */
     /**@{*/
-    const std::list<std::string>& unknown_stereotypes() const;
-    std::list<std::string>& unknown_stereotypes();
-    void unknown_stereotypes(const std::list<std::string>& v);
-    void unknown_stereotypes(const std::list<std::string>&& v);
+    const std::list<std::string>& dynamic_stereotypes() const;
+    std::list<std::string>& dynamic_stereotypes();
+    void dynamic_stereotypes(const std::list<std::string>& v);
+    void dynamic_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -226,8 +226,8 @@ private:
     dogen::yarn::meta_model::origin_types origin_type_;
     boost::optional<dogen::yarn::meta_model::name> contained_by_;
     bool in_global_module_;
-    std::list<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::list<std::string> unknown_stereotypes_;
+    std::list<dogen::yarn::meta_model::static_stereotypes> static_stereotypes_;
+    std::list<std::string> dynamic_stereotypes_;
     dogen::yarn::meta_model::name meta_name_;
     bool is_element_extension_;
     dogen::formatters::decoration_properties decoration_properties_;

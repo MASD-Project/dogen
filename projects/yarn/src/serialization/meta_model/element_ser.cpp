@@ -44,8 +44,8 @@
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 #include "dogen/formatters/serialization/decoration_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/artefact_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/well_known_stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/local_archetype_location_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -65,8 +65,8 @@ void save(Archive& ar,
     ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("contained_by", v.contained_by_);
     ar << make_nvp("in_global_module", v.in_global_module_);
-    ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar << make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar << make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("is_element_extension", v.is_element_extension_);
     ar << make_nvp("decoration_properties", v.decoration_properties_);
@@ -84,8 +84,8 @@ void load(Archive& ar,
     ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("contained_by", v.contained_by_);
     ar >> make_nvp("in_global_module", v.in_global_module_);
-    ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar >> make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar >> make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("is_element_extension", v.is_element_extension_);
     ar >> make_nvp("decoration_properties", v.decoration_properties_);

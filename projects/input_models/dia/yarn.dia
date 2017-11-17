@@ -8372,13 +8372,13 @@ space.#</dia:string>
         <dia:point val="-188,-77.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.05,-77.121;-165.12,-72.621"/>
+        <dia:rectangle val="-188.05,-77.121;-168.2,-72.621"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-188,-77.071"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.830000000000002"/>
+        <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -8473,10 +8473,10 @@ space.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#well_known_stereotypes#</dia:string>
+            <dia:string>#static_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;well_known_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8497,7 +8497,7 @@ model.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#unknown_stereotypes#</dia:string>
+            <dia:string>#dynamic_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -8506,7 +8506,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Stereotypes that are not part of the yarn UML profile.#</dia:string>
+            <dia:string>#Stereotypes that are not part of the yarn UML profile. These are user defined.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8528,17 +8528,17 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O62">
       <dia:attribute name="obj_pos">
-        <dia:point val="-176.585,-72.671"/>
+        <dia:point val="-178.125,-72.671"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.435,-72.721;-163.746,-44.8781"/>
+        <dia:rectangle val="-178.975,-72.721;-163.746,-44.8781"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-176.585,-72.671"/>
-        <dia:point val="-176.585,-47.9281"/>
+        <dia:point val="-178.125,-72.671"/>
+        <dia:point val="-178.125,-47.9281"/>
         <dia:point val="-163.796,-47.9281"/>
         <dia:point val="-163.796,-44.9281"/>
       </dia:attribute>
@@ -47574,25 +47574,25 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="-191,-100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-191.05,-100.05;-179.472,-87.55"/>
+        <dia:rectangle val="-191.05,-100.05;-182.137,-87.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-191,-100"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.477500000000001"/>
+        <dia:real val="8.8125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#well_known_stereotypes#</dia:string>
+        <dia:string>#static_stereotypes#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Lists all stereotypes defined in the yarn UML profile.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -47995,19 +47995,19 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-176.585,-77.071"/>
+        <dia:point val="-178.125,-77.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-185.311,-87.65;-175.835,-76.271"/>
+        <dia:rectangle val="-186.644,-87.65;-177.375,-76.271"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-176.585,-77.071"/>
-        <dia:point val="-176.585,-81"/>
-        <dia:point val="-185.261,-81"/>
-        <dia:point val="-185.261,-87.6"/>
+        <dia:point val="-178.125,-77.071"/>
+        <dia:point val="-178.125,-81"/>
+        <dia:point val="-186.594,-81"/>
+        <dia:point val="-186.594,-87.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -48386,13 +48386,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="245,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="244.95,58.95;272.5,62.65"/>
+        <dia:rectangle val="244.95,58.95;269.42,62.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="245,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="24.369999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -48488,10 +48488,10 @@ defined stereotypes.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#well_known_stereotypes#</dia:string>
+            <dia:string>#static_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;meta_model::well_known_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -48511,7 +48511,7 @@ defined stereotypes.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#unknown_stereotypes#</dia:string>
+            <dia:string>#dynamic_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>
@@ -48581,7 +48581,7 @@ defined stereotypes.#</dia:string>
         <dia:point val="285.66,52.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="258.675,52.05;286.41,60.6"/>
+        <dia:rectangle val="257.135,52.05;286.41,60.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48589,8 +48589,8 @@ defined stereotypes.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="285.66,52.8"/>
         <dia:point val="285.66,55.45"/>
-        <dia:point val="258.725,55.45"/>
-        <dia:point val="258.725,59"/>
+        <dia:point val="257.185,55.45"/>
+        <dia:point val="257.185,59"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

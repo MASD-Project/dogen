@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -66,8 +66,8 @@ namespace helpers {
 std::ostream& operator<<(std::ostream& s, const stereotypes_conversion_result& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::helpers::stereotypes_conversion_result\"" << ", "
-      << "\"well_known_stereotypes\": " << v.well_known_stereotypes() << ", "
-      << "\"unknown_stereotypes\": " << v.unknown_stereotypes()
+      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
+      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes()
       << " }";
     return(s);
 }

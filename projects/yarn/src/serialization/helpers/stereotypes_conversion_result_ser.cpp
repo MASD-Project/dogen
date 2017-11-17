@@ -29,7 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/well_known_stereotypes_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 #include "dogen/yarn/serialization/helpers/stereotypes_conversion_result_ser.hpp"
 
 namespace boost {
@@ -39,16 +39,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::helpers::stereotypes_conversion_result& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar << make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar << make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::helpers::stereotypes_conversion_result& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
+    ar >> make_nvp("static_stereotypes", v.static_stereotypes_);
+    ar >> make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
 }
 
 } }

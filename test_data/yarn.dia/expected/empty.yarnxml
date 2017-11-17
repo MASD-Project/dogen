@@ -51,55 +51,55 @@
 		<identifiable></identifiable>
 	</meta_name>
 	<documentation></documentation>
-	<well_known_stereotypes class_id="18" tracking_level="0" version="0">
+	<static_stereotypes class_id="18" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</well_known_stereotypes>
-	<unknown_stereotypes class_id="19" tracking_level="0" version="0">
+	</static_stereotypes>
+	<dynamic_stereotypes>
 		<count>0</count>
 		<item_version>0</item_version>
-	</unknown_stereotypes>
-	<tagged_values class_id="20" tracking_level="0" version="0">
+	</dynamic_stereotypes>
+	<tagged_values class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</tagged_values>
-	<modules class_id="21" tracking_level="0" version="0">
+	<modules class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</modules>
-	<object_templates class_id="22" tracking_level="0" version="0">
+	<object_templates class_id="21" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</object_templates>
-	<builtins class_id="23" tracking_level="0" version="0">
+	<builtins class_id="22" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="24" tracking_level="0" version="0">
+	<enumerations class_id="23" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="25" tracking_level="0" version="0">
+	<primitives class_id="24" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="26" tracking_level="0" version="0">
+	<objects class_id="25" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</objects>
-	<exceptions class_id="27" tracking_level="0" version="0">
+	<exceptions class_id="26" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</exceptions>
-	<root_module class_id="28" tracking_level="0" version="0">
-		<first class_id="29" tracking_level="0" version="0">
-			<parent class_id="30" tracking_level="0" version="0">
+	<root_module class_id="27" tracking_level="0" version="0">
+		<first class_id="28" tracking_level="0" version="0">
+			<parent class_id="29" tracking_level="0" version="0">
 				<entries>
 					<count>0</count>
 					<item_version>0</item_version>
 				</entries>
 				<scope>0</scope>
-				<candidate_labels>
+				<candidate_labels class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</candidate_labels>
@@ -151,14 +151,14 @@
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
-					<well_known_stereotypes>
+					<static_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</well_known_stereotypes>
-					<unknown_stereotypes>
+					</static_stereotypes>
+					<dynamic_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</unknown_stereotypes>
+					</dynamic_stereotypes>
 					<meta_name>
 						<id></id>
 						<simple></simple>

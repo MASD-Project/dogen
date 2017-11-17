@@ -31,7 +31,7 @@
 #include "dogen/yarn/io/meta_model/exoelement_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/object_template_io.hpp"
-#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -43,7 +43,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -421,8 +421,8 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"well_known_stereotypes\": " << v.well_known_stereotypes() << ", "
-      << "\"unknown_stereotypes\": " << v.unknown_stereotypes() << ", "
+      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
+      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"object_templates\": " << v.object_templates() << ", "

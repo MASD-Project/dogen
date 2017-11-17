@@ -30,7 +30,7 @@
 #include "dogen/yarn/test_data/meta_model/exoelement_td.hpp"
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
-#include "dogen/yarn/test_data/meta_model/well_known_stereotypes_td.hpp"
+#include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
 
 namespace {
 
@@ -45,15 +45,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::meta_model::well_known_stereotypes
-create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position) {
-    return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
+dogen::yarn::meta_model::static_stereotypes
+create_dogen_yarn_meta_model_static_stereotypes(const unsigned int position) {
+    return dogen::yarn::meta_model::static_stereotypes_generator::create(position);
 }
 
-std::list<dogen::yarn::meta_model::well_known_stereotypes> create_std_list_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
-    std::list<dogen::yarn::meta_model::well_known_stereotypes> r;
+std::list<dogen::yarn::meta_model::static_stereotypes> create_std_list_dogen_yarn_meta_model_static_stereotypes(unsigned int position) {
+    std::list<dogen::yarn::meta_model::static_stereotypes> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
+        r.push_back(create_dogen_yarn_meta_model_static_stereotypes(position + i));
     }
     return r;
 }
@@ -309,8 +309,8 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
     v.documentation(create_std_string(position + 2));
-    v.well_known_stereotypes(create_std_list_dogen_yarn_meta_model_well_known_stereotypes(position + 3));
-    v.unknown_stereotypes(create_std_list_std_string(position + 4));
+    v.static_stereotypes(create_std_list_dogen_yarn_meta_model_static_stereotypes(position + 3));
+    v.dynamic_stereotypes(create_std_list_std_string(position + 4));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 5));
     v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 6));
     v.object_templates(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + 7));

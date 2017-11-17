@@ -25,20 +25,20 @@ namespace yarn {
 namespace helpers {
 
 stereotypes_conversion_result::stereotypes_conversion_result(
-    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::list<std::string>& unknown_stereotypes)
-    : well_known_stereotypes_(well_known_stereotypes),
-      unknown_stereotypes_(unknown_stereotypes) { }
+    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<std::string>& dynamic_stereotypes)
+    : static_stereotypes_(static_stereotypes),
+      dynamic_stereotypes_(dynamic_stereotypes) { }
 
 void stereotypes_conversion_result::swap(stereotypes_conversion_result& other) noexcept {
     using std::swap;
-    swap(well_known_stereotypes_, other.well_known_stereotypes_);
-    swap(unknown_stereotypes_, other.unknown_stereotypes_);
+    swap(static_stereotypes_, other.static_stereotypes_);
+    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
 }
 
 bool stereotypes_conversion_result::operator==(const stereotypes_conversion_result& rhs) const {
-    return well_known_stereotypes_ == rhs.well_known_stereotypes_ &&
-        unknown_stereotypes_ == rhs.unknown_stereotypes_;
+    return static_stereotypes_ == rhs.static_stereotypes_ &&
+        dynamic_stereotypes_ == rhs.dynamic_stereotypes_;
 }
 
 stereotypes_conversion_result& stereotypes_conversion_result::operator=(stereotypes_conversion_result other) {
@@ -47,36 +47,36 @@ stereotypes_conversion_result& stereotypes_conversion_result::operator=(stereoty
     return *this;
 }
 
-const std::list<dogen::yarn::meta_model::well_known_stereotypes>& stereotypes_conversion_result::well_known_stereotypes() const {
-    return well_known_stereotypes_;
+const std::list<dogen::yarn::meta_model::static_stereotypes>& stereotypes_conversion_result::static_stereotypes() const {
+    return static_stereotypes_;
 }
 
-std::list<dogen::yarn::meta_model::well_known_stereotypes>& stereotypes_conversion_result::well_known_stereotypes() {
-    return well_known_stereotypes_;
+std::list<dogen::yarn::meta_model::static_stereotypes>& stereotypes_conversion_result::static_stereotypes() {
+    return static_stereotypes_;
 }
 
-void stereotypes_conversion_result::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
-    well_known_stereotypes_ = v;
+void stereotypes_conversion_result::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
+    static_stereotypes_ = v;
 }
 
-void stereotypes_conversion_result::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
-    well_known_stereotypes_ = std::move(v);
+void stereotypes_conversion_result::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v) {
+    static_stereotypes_ = std::move(v);
 }
 
-const std::list<std::string>& stereotypes_conversion_result::unknown_stereotypes() const {
-    return unknown_stereotypes_;
+const std::list<std::string>& stereotypes_conversion_result::dynamic_stereotypes() const {
+    return dynamic_stereotypes_;
 }
 
-std::list<std::string>& stereotypes_conversion_result::unknown_stereotypes() {
-    return unknown_stereotypes_;
+std::list<std::string>& stereotypes_conversion_result::dynamic_stereotypes() {
+    return dynamic_stereotypes_;
 }
 
-void stereotypes_conversion_result::unknown_stereotypes(const std::list<std::string>& v) {
-    unknown_stereotypes_ = v;
+void stereotypes_conversion_result::dynamic_stereotypes(const std::list<std::string>& v) {
+    dynamic_stereotypes_ = v;
 }
 
-void stereotypes_conversion_result::unknown_stereotypes(const std::list<std::string>&& v) {
-    unknown_stereotypes_ = std::move(v);
+void stereotypes_conversion_result::dynamic_stereotypes(const std::list<std::string>&& v) {
+    dynamic_stereotypes_ = std::move(v);
 }
 
 } } }

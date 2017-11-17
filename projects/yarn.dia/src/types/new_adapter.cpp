@@ -74,8 +74,8 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.name(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());
-    r.unknown_stereotypes(po.unknown_stereotypes());
-    r.well_known_stereotypes(po.well_known_stereotypes());
+    r.dynamic_stereotypes(po.dynamic_stereotypes());
+    r.static_stereotypes(po.static_stereotypes());
 
     for (const auto& attr : po.attributes())
         r.attributes().push_back(adapt(attr));
