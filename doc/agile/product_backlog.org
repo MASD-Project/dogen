@@ -11,6 +11,41 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for using object templates across models              :story:
+
+At present it is not possible to make use of a concept across models
+or even modules in the same model. We have two problems:
+
+- resolution will probably fail;
+- even if resolution does work, the elements of the concept will be
+  invalid. This is because they will have relative references to types
+  (e.g. =Nameable= concept in =yarn::meta_model= assumes it is in
+  that module and so makes use of =name= rather than
+  =yarn::meta_model::name=).
+
+For this to work we could:
+
+- create a flat resolution for concepts, whereby all concepts are
+  resolved from the stereotypes just by the simple name rather than
+  the qualified name. This means we cannot have two concepts with the
+  same name across all loaded models. The alternative is to force
+  users to fully qualify concepts,
+  e.g. =yarn::meta_model::Nameable=. In which case we should probably
+  stop using the upper case convention,
+  e.g. =yarn::meta_model::nameable=.
+- actually the second problem may even be moot; if concept resolution
+  is performed before we merge attributes, all references will be
+  fully qualified by then. We need to test this.
+
+Final conclusion: if somehow one was able to fully qualify concepts as
+part of the stereotype, this would work out of the box.
+
+Notes:
+
+- we did some work on this previously: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_00.org#concepts-cannot-be-placed-inside-of-packages][Concepts cannot be placed
+  inside of packages]]. This solved some of the problems such as
+  allowing concepts to be placed in packages.
+
 *** Consider renaming =yarn::name=                                    :story:
 
 Now that we are using the name "name" to mean a plain string (exomodel
