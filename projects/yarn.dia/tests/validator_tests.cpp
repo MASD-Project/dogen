@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(setting_stereotypes_for_non_uml_classes_throws) {
     dogen::yarn::dia::validator v;
     dogen::yarn::dia::processed_object po;
     po.dia_object_type(dia_object_types::uml_large_package);
-    po.stereotypes().push_back("test");
+    po.unknown_stereotypes().push_back("test");
 
     contains_checker<validation_error> cc(invalid_stereotypes);
     BOOST_LOG_SEV(lg, debug) << "input po: " << po;

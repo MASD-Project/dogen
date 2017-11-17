@@ -2704,7 +2704,7 @@ that make up dogen instructions.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#stereotypes#</dia:string>
+            <dia:string>#unknown_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
@@ -2713,7 +2713,7 @@ that make up dogen instructions.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Stereotypes for this object that were not consumed by yarn.dia.#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -63,7 +63,7 @@ public:
         const dogen::yarn::dia::dia_object_types dia_object_type,
         const dogen::yarn::dia::yarn_element_types yarn_element_type,
         const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::vector<std::string>& stereotypes,
+        const std::vector<std::string>& unknown_stereotypes,
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -113,15 +113,10 @@ public:
     void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
     void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
 
-    /**
-     * @brief Stereotypes for this object that were not consumed by yarn.dia.
-     */
-    /**@{*/
-    const std::vector<std::string>& stereotypes() const;
-    std::vector<std::string>& stereotypes();
-    void stereotypes(const std::vector<std::string>& v);
-    void stereotypes(const std::vector<std::string>&& v);
-    /**@}*/
+    const std::vector<std::string>& unknown_stereotypes() const;
+    std::vector<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::vector<std::string>& v);
+    void unknown_stereotypes(const std::vector<std::string>&& v);
 
     /**
      * @brief Any comments associated with the object.
@@ -181,7 +176,7 @@ private:
     dogen::yarn::dia::dia_object_types dia_object_type_;
     dogen::yarn::dia::yarn_element_types yarn_element_type_;
     std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::vector<std::string> stereotypes_;
+    std::vector<std::string> unknown_stereotypes_;
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;

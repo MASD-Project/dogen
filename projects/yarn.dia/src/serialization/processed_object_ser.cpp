@@ -51,7 +51,7 @@ void save(Archive& ar,
     ar << make_nvp("dia_object_type", v.dia_object_type_);
     ar << make_nvp("yarn_element_type", v.yarn_element_type_);
     ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("stereotypes", v.stereotypes_);
+    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("child_node_id", v.child_node_id_);
     ar << make_nvp("connection", v.connection_);
@@ -67,7 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("dia_object_type", v.dia_object_type_);
     ar >> make_nvp("yarn_element_type", v.yarn_element_type_);
     ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("stereotypes", v.stereotypes_);
+    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("child_node_id", v.child_node_id_);
     ar >> make_nvp("connection", v.connection_);

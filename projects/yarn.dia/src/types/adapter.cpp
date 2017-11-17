@@ -134,8 +134,8 @@ populate_element(const processed_object& po, meta_model::element& e) const {
 
     e.documentation(po.comment().documentation());
 
-    e.unknown_stereotypes().reserve(po.stereotypes().size());
-    for (const auto us : po.stereotypes())
+    e.unknown_stereotypes().reserve(po.unknown_stereotypes().size());
+    for (const auto us : po.unknown_stereotypes())
         e.unknown_stereotypes().push_back(us);
 }
 

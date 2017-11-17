@@ -117,7 +117,7 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"dia_object_type\": " << v.dia_object_type() << ", "
       << "\"yarn_element_type\": " << v.yarn_element_type() << ", "
       << "\"well_known_stereotypes\": " << v.well_known_stereotypes() << ", "
-      << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"unknown_stereotypes\": " << v.unknown_stereotypes() << ", "
       << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "

@@ -312,7 +312,7 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
             require_yarn_type_not_set(po.yarn_element_type());
             po.yarn_element_type(yarn_element_types::object);
         } else
-            po.stereotypes().push_back(stereotype);
+            po.unknown_stereotypes().push_back(stereotype);
     }
 }
 

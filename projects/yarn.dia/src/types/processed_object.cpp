@@ -34,7 +34,7 @@ processed_object::processed_object(processed_object&& rhs)
       dia_object_type_(std::move(rhs.dia_object_type_)),
       yarn_element_type_(std::move(rhs.yarn_element_type_)),
       well_known_stereotypes_(std::move(rhs.well_known_stereotypes_)),
-      stereotypes_(std::move(rhs.stereotypes_)),
+      unknown_stereotypes_(std::move(rhs.unknown_stereotypes_)),
       comment_(std::move(rhs.comment_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
@@ -46,7 +46,7 @@ processed_object::processed_object(
     const dogen::yarn::dia::dia_object_types dia_object_type,
     const dogen::yarn::dia::yarn_element_types yarn_element_type,
     const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& stereotypes,
+    const std::vector<std::string>& unknown_stereotypes,
     const dogen::yarn::dia::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -56,7 +56,7 @@ processed_object::processed_object(
       dia_object_type_(dia_object_type),
       yarn_element_type_(yarn_element_type),
       well_known_stereotypes_(well_known_stereotypes),
-      stereotypes_(stereotypes),
+      unknown_stereotypes_(unknown_stereotypes),
       comment_(comment),
       child_node_id_(child_node_id),
       connection_(connection),
@@ -69,7 +69,7 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(dia_object_type_, other.dia_object_type_);
     swap(yarn_element_type_, other.yarn_element_type_);
     swap(well_known_stereotypes_, other.well_known_stereotypes_);
-    swap(stereotypes_, other.stereotypes_);
+    swap(unknown_stereotypes_, other.unknown_stereotypes_);
     swap(comment_, other.comment_);
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
@@ -82,7 +82,7 @@ bool processed_object::operator==(const processed_object& rhs) const {
         dia_object_type_ == rhs.dia_object_type_ &&
         yarn_element_type_ == rhs.yarn_element_type_ &&
         well_known_stereotypes_ == rhs.well_known_stereotypes_ &&
-        stereotypes_ == rhs.stereotypes_ &&
+        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
         comment_ == rhs.comment_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
@@ -159,20 +159,20 @@ void processed_object::well_known_stereotypes(const std::vector<dogen::yarn::met
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& processed_object::stereotypes() const {
-    return stereotypes_;
+const std::vector<std::string>& processed_object::unknown_stereotypes() const {
+    return unknown_stereotypes_;
 }
 
-std::vector<std::string>& processed_object::stereotypes() {
-    return stereotypes_;
+std::vector<std::string>& processed_object::unknown_stereotypes() {
+    return unknown_stereotypes_;
 }
 
-void processed_object::stereotypes(const std::vector<std::string>& v) {
-    stereotypes_ = v;
+void processed_object::unknown_stereotypes(const std::vector<std::string>& v) {
+    unknown_stereotypes_ = v;
 }
 
-void processed_object::stereotypes(const std::vector<std::string>&& v) {
-    stereotypes_ = std::move(v);
+void processed_object::unknown_stereotypes(const std::vector<std::string>&& v) {
+    unknown_stereotypes_ = std::move(v);
 }
 
 const dogen::yarn::dia::processed_comment& processed_object::comment() const {
