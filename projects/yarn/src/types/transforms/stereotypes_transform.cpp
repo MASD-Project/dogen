@@ -296,15 +296,15 @@ bool stereotypes_transform::try_expand_object_template(const std::string& s,
 void stereotypes_transform::expand(meta_model::object& o,
     meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
-    if (o.stereotypes().empty()) {
+    if (o.unknown_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Original: " << o.stereotypes();
+    BOOST_LOG_SEV(lg, debug) << "Original: " << o.unknown_stereotypes();
     std::vector<std::string> unknown_stereotypes;
     std::vector<std::string> external_stereotypes;
-    for (const auto s : o.stereotypes()) {
+    for (const auto s : o.unknown_stereotypes()) {
         if (is_stereotype_handled_externally(s)) {
             external_stereotypes.push_back(s);
             continue;
@@ -347,20 +347,20 @@ void stereotypes_transform::expand(meta_model::object& o,
      * that are handled externally - e.g. consume the stereotypes
      * which we've already dealt with here.
      */
-    o.stereotypes(external_stereotypes);
+    o.unknown_stereotypes(external_stereotypes);
 }
 
 void stereotypes_transform::expand(meta_model::primitive& p) {
     const auto id(p.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
-    if (p.stereotypes().empty()) {
+    if (p.unknown_stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Original: " << p.stereotypes();
+    BOOST_LOG_SEV(lg, debug) << "Original: " << p.unknown_stereotypes();
     std::vector<std::string> unknown_stereotypes;
-    for (const auto s : p.stereotypes()) {
+    for (const auto s : p.unknown_stereotypes()) {
         if (s == stereotype_immutable)
             p.is_immutable(true);
         else if (s == stereotype_orm_value) {
@@ -381,7 +381,7 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
         BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();
+    BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.unknown_stereotypes();
 }
 
 void stereotypes_transform::

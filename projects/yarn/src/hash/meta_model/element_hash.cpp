@@ -95,7 +95,7 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.contained_by()));
     combine(seed, v.in_global_module());
     combine(seed, hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_vector_std_string(v.stereotypes()));
+    combine(seed, hash_std_vector_std_string(v.unknown_stereotypes()));
     combine(seed, v.meta_name());
     combine(seed, v.is_element_extension());
     combine(seed, v.decoration_properties());

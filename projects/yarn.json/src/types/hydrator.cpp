@@ -294,7 +294,7 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
     e.name(n);
     e.in_global_module(in_global_module);
     e.documentation(read_documentation(pt));
-    e.stereotypes(read_stereotypes(pt));
+    e.unknown_stereotypes(read_stereotypes(pt));
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>

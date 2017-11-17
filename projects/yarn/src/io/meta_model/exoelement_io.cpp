@@ -124,7 +124,7 @@ std::ostream& operator<<(std::ostream& s, const exoelement& v) {
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exoelement\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"well_known_stereotypes\": " << v.well_known_stereotypes() << ", "
-      << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"unknown_stereotypes\": " << v.unknown_stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"parents\": " << v.parents() << ", "

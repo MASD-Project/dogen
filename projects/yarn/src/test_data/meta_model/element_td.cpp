@@ -137,7 +137,7 @@ populate(const unsigned int position, result_type& v) {
     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
     v.in_global_module(create_bool(position + 5));
     v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 6));
-    v.stereotypes(create_std_vector_std_string(position + 7));
+    v.unknown_stereotypes(create_std_vector_std_string(position + 7));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 8));
     v.is_element_extension(create_bool(position + 9));
     v.decoration_properties(create_dogen_formatters_decoration_properties(position + 10));

@@ -134,7 +134,7 @@ element::element(element&& rhs)
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
       well_known_stereotypes_(std::move(rhs.well_known_stereotypes_)),
-      stereotypes_(std::move(rhs.stereotypes_)),
+      unknown_stereotypes_(std::move(rhs.unknown_stereotypes_)),
       meta_name_(std::move(rhs.meta_name_)),
       is_element_extension_(std::move(rhs.is_element_extension_)),
       decoration_properties_(std::move(rhs.decoration_properties_)),
@@ -149,7 +149,7 @@ element::element(
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& stereotypes,
+    const std::vector<std::string>& unknown_stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::formatters::decoration_properties& decoration_properties,
@@ -162,7 +162,7 @@ element::element(
       contained_by_(contained_by),
       in_global_module_(in_global_module),
       well_known_stereotypes_(well_known_stereotypes),
-      stereotypes_(stereotypes),
+      unknown_stereotypes_(unknown_stereotypes),
       meta_name_(meta_name),
       is_element_extension_(is_element_extension),
       decoration_properties_(decoration_properties),
@@ -185,7 +185,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"well_known_stereotypes\": " << well_known_stereotypes_ << ", "
-      << "\"stereotypes\": " << stereotypes_ << ", "
+      << "\"unknown_stereotypes\": " << unknown_stereotypes_ << ", "
       << "\"meta_name\": " << meta_name_ << ", "
       << "\"is_element_extension\": " << is_element_extension_ << ", "
       << "\"decoration_properties\": " << decoration_properties_ << ", "
@@ -203,7 +203,7 @@ void element::swap(element& other) noexcept {
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
     swap(well_known_stereotypes_, other.well_known_stereotypes_);
-    swap(stereotypes_, other.stereotypes_);
+    swap(unknown_stereotypes_, other.unknown_stereotypes_);
     swap(meta_name_, other.meta_name_);
     swap(is_element_extension_, other.is_element_extension_);
     swap(decoration_properties_, other.decoration_properties_);
@@ -219,7 +219,7 @@ bool element::compare(const element& rhs) const {
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
         well_known_stereotypes_ == rhs.well_known_stereotypes_ &&
-        stereotypes_ == rhs.stereotypes_ &&
+        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
         meta_name_ == rhs.meta_name_ &&
         is_element_extension_ == rhs.is_element_extension_ &&
         decoration_properties_ == rhs.decoration_properties_ &&
@@ -323,20 +323,20 @@ void element::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& element::stereotypes() const {
-    return stereotypes_;
+const std::vector<std::string>& element::unknown_stereotypes() const {
+    return unknown_stereotypes_;
 }
 
-std::vector<std::string>& element::stereotypes() {
-    return stereotypes_;
+std::vector<std::string>& element::unknown_stereotypes() {
+    return unknown_stereotypes_;
 }
 
-void element::stereotypes(const std::vector<std::string>& v) {
-    stereotypes_ = v;
+void element::unknown_stereotypes(const std::vector<std::string>& v) {
+    unknown_stereotypes_ = v;
 }
 
-void element::stereotypes(const std::vector<std::string>&& v) {
-    stereotypes_ = std::move(v);
+void element::unknown_stereotypes(const std::vector<std::string>&& v) {
+    unknown_stereotypes_ = std::move(v);
 }
 
 const dogen::yarn::meta_model::name& element::meta_name() const {

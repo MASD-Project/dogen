@@ -66,7 +66,7 @@ void save(Archive& ar,
     ar << make_nvp("contained_by", v.contained_by_);
     ar << make_nvp("in_global_module", v.in_global_module_);
     ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("stereotypes", v.stereotypes_);
+    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("is_element_extension", v.is_element_extension_);
     ar << make_nvp("decoration_properties", v.decoration_properties_);
@@ -85,7 +85,7 @@ void load(Archive& ar,
     ar >> make_nvp("contained_by", v.contained_by_);
     ar >> make_nvp("in_global_module", v.in_global_module_);
     ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("stereotypes", v.stereotypes_);
+    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("is_element_extension", v.is_element_extension_);
     ar >> make_nvp("decoration_properties", v.decoration_properties_);

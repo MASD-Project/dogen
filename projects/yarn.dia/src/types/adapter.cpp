@@ -134,9 +134,9 @@ populate_element(const processed_object& po, meta_model::element& e) const {
 
     e.documentation(po.comment().documentation());
 
-    e.stereotypes().reserve(po.stereotypes().size());
+    e.unknown_stereotypes().reserve(po.stereotypes().size());
     for (const auto us : po.stereotypes())
-        e.stereotypes().push_back(us);
+        e.unknown_stereotypes().push_back(us);
 }
 
 annotations::scribble_group adapter::

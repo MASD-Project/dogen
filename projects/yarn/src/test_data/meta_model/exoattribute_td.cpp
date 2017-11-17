@@ -79,7 +79,7 @@ void exoattribute_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 1));
-    v.stereotypes(create_std_vector_std_string(position + 2));
+    v.unknown_stereotypes(create_std_vector_std_string(position + 2));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 3));
     v.name(create_std_string(position + 4));
     v.type(create_std_string(position + 5));

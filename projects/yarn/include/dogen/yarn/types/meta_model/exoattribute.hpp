@@ -48,7 +48,7 @@ public:
     exoattribute(
         const std::string& documentation,
         const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::vector<std::string>& stereotypes,
+        const std::vector<std::string>& unknown_stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
         const std::string& type);
@@ -87,14 +87,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Stereotypes that are not part of the yarn UML profile, and so are handled
-     * externally.
+     * @brief Stereotypes that are not part of the yarn UML profile.
      */
     /**@{*/
-    const std::vector<std::string>& stereotypes() const;
-    std::vector<std::string>& stereotypes();
-    void stereotypes(const std::vector<std::string>& v);
-    void stereotypes(const std::vector<std::string>&& v);
+    const std::vector<std::string>& unknown_stereotypes() const;
+    std::vector<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::vector<std::string>& v);
+    void unknown_stereotypes(const std::vector<std::string>&& v);
     /**@}*/
 
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -125,7 +124,7 @@ public:
 private:
     std::string documentation_;
     std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::vector<std::string> stereotypes_;
+    std::vector<std::string> unknown_stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::string name_;
     std::string type_;

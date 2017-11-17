@@ -55,10 +55,10 @@
 		<count>0</count>
 		<item_version>0</item_version>
 	</well_known_stereotypes>
-	<stereotypes class_id="19" tracking_level="0" version="0">
+	<unknown_stereotypes class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</stereotypes>
+	</unknown_stereotypes>
 	<tagged_values class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
@@ -155,10 +155,10 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</well_known_stereotypes>
-					<stereotypes>
+					<unknown_stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
-					</stereotypes>
+					</unknown_stereotypes>
 					<meta_name>
 						<id></id>
 						<simple></simple>

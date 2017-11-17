@@ -27,13 +27,13 @@ namespace meta_model {
 exoattribute::exoattribute(
     const std::string& documentation,
     const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& stereotypes,
+    const std::vector<std::string>& unknown_stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::string& name,
     const std::string& type)
     : documentation_(documentation),
       well_known_stereotypes_(well_known_stereotypes),
-      stereotypes_(stereotypes),
+      unknown_stereotypes_(unknown_stereotypes),
       tagged_values_(tagged_values),
       name_(name),
       type_(type) { }
@@ -42,7 +42,7 @@ void exoattribute::swap(exoattribute& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(well_known_stereotypes_, other.well_known_stereotypes_);
-    swap(stereotypes_, other.stereotypes_);
+    swap(unknown_stereotypes_, other.unknown_stereotypes_);
     swap(tagged_values_, other.tagged_values_);
     swap(name_, other.name_);
     swap(type_, other.type_);
@@ -51,7 +51,7 @@ void exoattribute::swap(exoattribute& other) noexcept {
 bool exoattribute::operator==(const exoattribute& rhs) const {
     return documentation_ == rhs.documentation_ &&
         well_known_stereotypes_ == rhs.well_known_stereotypes_ &&
-        stereotypes_ == rhs.stereotypes_ &&
+        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
         tagged_values_ == rhs.tagged_values_ &&
         name_ == rhs.name_ &&
         type_ == rhs.type_;
@@ -95,20 +95,20 @@ void exoattribute::well_known_stereotypes(const std::vector<dogen::yarn::meta_mo
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& exoattribute::stereotypes() const {
-    return stereotypes_;
+const std::vector<std::string>& exoattribute::unknown_stereotypes() const {
+    return unknown_stereotypes_;
 }
 
-std::vector<std::string>& exoattribute::stereotypes() {
-    return stereotypes_;
+std::vector<std::string>& exoattribute::unknown_stereotypes() {
+    return unknown_stereotypes_;
 }
 
-void exoattribute::stereotypes(const std::vector<std::string>& v) {
-    stereotypes_ = v;
+void exoattribute::unknown_stereotypes(const std::vector<std::string>& v) {
+    unknown_stereotypes_ = v;
 }
 
-void exoattribute::stereotypes(const std::vector<std::string>&& v) {
-    stereotypes_ = std::move(v);
+void exoattribute::unknown_stereotypes(const std::vector<std::string>&& v) {
+    unknown_stereotypes_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& exoattribute::tagged_values() const {

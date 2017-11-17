@@ -310,7 +310,7 @@ populate(const unsigned int position, result_type& v) {
     v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
     v.documentation(create_std_string(position + 2));
     v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 3));
-    v.stereotypes(create_std_vector_std_string(position + 4));
+    v.unknown_stereotypes(create_std_vector_std_string(position + 4));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 5));
     v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 6));
     v.object_templates(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + 7));

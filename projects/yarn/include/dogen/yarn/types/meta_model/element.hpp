@@ -73,7 +73,7 @@ public:
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
         const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::vector<std::string>& stereotypes,
+        const std::vector<std::string>& unknown_stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::formatters::decoration_properties& decoration_properties,
@@ -169,14 +169,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Stereotypes that are not part of the yarn UML profile, and so are handled
-     * externally.
+     * @brief Stereotypes that are not part of the yarn UML profile.
      */
     /**@{*/
-    const std::vector<std::string>& stereotypes() const;
-    std::vector<std::string>& stereotypes();
-    void stereotypes(const std::vector<std::string>& v);
-    void stereotypes(const std::vector<std::string>&& v);
+    const std::vector<std::string>& unknown_stereotypes() const;
+    std::vector<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::vector<std::string>& v);
+    void unknown_stereotypes(const std::vector<std::string>&& v);
     /**@}*/
 
     /**
@@ -228,7 +227,7 @@ private:
     boost::optional<dogen::yarn::meta_model::name> contained_by_;
     bool in_global_module_;
     std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::vector<std::string> stereotypes_;
+    std::vector<std::string> unknown_stereotypes_;
     dogen::yarn::meta_model::name meta_name_;
     bool is_element_extension_;
     dogen::formatters::decoration_properties decoration_properties_;

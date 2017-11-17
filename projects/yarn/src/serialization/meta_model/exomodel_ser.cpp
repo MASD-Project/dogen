@@ -56,7 +56,7 @@ void save(Archive& ar,
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("stereotypes", v.stereotypes_);
+    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("modules", v.modules_);
     ar << make_nvp("object_templates", v.object_templates_);
@@ -78,7 +78,7 @@ void load(Archive& ar,
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("stereotypes", v.stereotypes_);
+    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("modules", v.modules_);
     ar >> make_nvp("object_templates", v.object_templates_);

@@ -171,12 +171,12 @@ dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
         uf.insert_quoted(tidy_up_string(e.documentation()));
     }
 
-    if (!e.stereotypes().empty()) {
+    if (!e.unknown_stereotypes().empty()) {
         s << comma_space;
         uf.insert_quoted("stereotypes");
         s << " : [ ";
         bool is_first(true);
-        for (const auto& stereotype : e.stereotypes()) {
+        for (const auto& stereotype : e.unknown_stereotypes()) {
             if (!is_first)
                 s << comma_space;
 

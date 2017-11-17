@@ -45,12 +45,12 @@ annotations_transform::obtain_annotation_group(const context& ctx,
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
-    if (!e.stereotypes().empty()) {
+    if (!e.unknown_stereotypes().empty()) {
         /*
          * Note that we are ignoring children here on purpose;
          * candidate labels are not used by children at present.
          */
-        sg.parent().candidate_labels(e.stereotypes());
+        sg.parent().candidate_labels(e.unknown_stereotypes());
     }
 
     return ctx.groups_factory().make(sg);

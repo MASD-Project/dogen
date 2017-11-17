@@ -246,7 +246,7 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
     combine(seed, v.meta_name());
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_vector_std_string(v.stereotypes()));
+    combine(seed, hash_std_vector_std_string(v.unknown_stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(v.object_templates()));

@@ -89,7 +89,7 @@ std::size_t exoelement_hasher::hash(const exoelement& v) {
 
     combine(seed, v.documentation());
     combine(seed, hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_vector_std_string(v.stereotypes()));
+    combine(seed, hash_std_vector_std_string(v.unknown_stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.parents()));

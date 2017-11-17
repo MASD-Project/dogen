@@ -44,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar << make_nvp("stereotypes", v.stereotypes_);
+    ar << make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
@@ -57,7 +57,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("well_known_stereotypes", v.well_known_stereotypes_);
-    ar >> make_nvp("stereotypes", v.stereotypes_);
+    ar >> make_nvp("unknown_stereotypes", v.unknown_stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);

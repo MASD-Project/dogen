@@ -422,7 +422,7 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"well_known_stereotypes\": " << v.well_known_stereotypes() << ", "
-      << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"unknown_stereotypes\": " << v.unknown_stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"object_templates\": " << v.object_templates() << ", "

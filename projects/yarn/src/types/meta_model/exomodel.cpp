@@ -99,7 +99,7 @@ exomodel::exomodel(
     const dogen::yarn::meta_model::name& meta_name,
     const std::string& documentation,
     const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& stereotypes,
+    const std::vector<std::string>& unknown_stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
@@ -115,7 +115,7 @@ exomodel::exomodel(
       meta_name_(meta_name),
       documentation_(documentation),
       well_known_stereotypes_(well_known_stereotypes),
-      stereotypes_(stereotypes),
+      unknown_stereotypes_(unknown_stereotypes),
       tagged_values_(tagged_values),
       modules_(modules),
       object_templates_(object_templates),
@@ -134,7 +134,7 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(meta_name_, other.meta_name_);
     swap(documentation_, other.documentation_);
     swap(well_known_stereotypes_, other.well_known_stereotypes_);
-    swap(stereotypes_, other.stereotypes_);
+    swap(unknown_stereotypes_, other.unknown_stereotypes_);
     swap(tagged_values_, other.tagged_values_);
     swap(modules_, other.modules_);
     swap(object_templates_, other.object_templates_);
@@ -153,7 +153,7 @@ bool exomodel::operator==(const exomodel& rhs) const {
         meta_name_ == rhs.meta_name_ &&
         documentation_ == rhs.documentation_ &&
         well_known_stereotypes_ == rhs.well_known_stereotypes_ &&
-        stereotypes_ == rhs.stereotypes_ &&
+        unknown_stereotypes_ == rhs.unknown_stereotypes_ &&
         tagged_values_ == rhs.tagged_values_ &&
         modules_ == rhs.modules_ &&
         object_templates_ == rhs.object_templates_ &&
@@ -237,20 +237,20 @@ void exomodel::well_known_stereotypes(const std::vector<dogen::yarn::meta_model:
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& exomodel::stereotypes() const {
-    return stereotypes_;
+const std::vector<std::string>& exomodel::unknown_stereotypes() const {
+    return unknown_stereotypes_;
 }
 
-std::vector<std::string>& exomodel::stereotypes() {
-    return stereotypes_;
+std::vector<std::string>& exomodel::unknown_stereotypes() {
+    return unknown_stereotypes_;
 }
 
-void exomodel::stereotypes(const std::vector<std::string>& v) {
-    stereotypes_ = v;
+void exomodel::unknown_stereotypes(const std::vector<std::string>& v) {
+    unknown_stereotypes_ = v;
 }
 
-void exomodel::stereotypes(const std::vector<std::string>&& v) {
-    stereotypes_ = std::move(v);
+void exomodel::unknown_stereotypes(const std::vector<std::string>&& v) {
+    unknown_stereotypes_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& exomodel::tagged_values() const {

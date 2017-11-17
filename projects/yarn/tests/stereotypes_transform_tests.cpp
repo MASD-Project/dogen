@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& o(*(m.objects().begin()->second));
-    o.stereotypes().push_back("yarn::visitable");
+    o.unknown_stereotypes().push_back("yarn::visitable");
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             auto& o(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             o.is_visitation_root(true);
-            o.stereotypes().push_back("yarn::visitable");
+            o.unknown_stereotypes().push_back("yarn::visitable");
         }
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;
