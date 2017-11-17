@@ -36,7 +36,8 @@ enum class yarn_element_types : unsigned int {
     exception = 3,
     object = 4,
     object_template = 5,
-    primitive = 6
+    primitive = 6,
+    builtin = 7
 };
 
 } } }

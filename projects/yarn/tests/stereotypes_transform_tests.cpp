@@ -24,13 +24,14 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_context_factory.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 
 namespace {
@@ -47,6 +48,7 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 
 }
 
+using dogen::yarn::meta_model::well_known_stereotypes;
 using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
@@ -84,7 +86,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& o(*(m.objects().begin()->second));
-    o.unknown_stereotypes().push_back("yarn::visitable");
+    o.well_known_stereotypes().push_back(well_known_stereotypes::visitable);
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -105,7 +107,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             auto& o(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             o.is_visitation_root(true);
-            o.unknown_stereotypes().push_back("yarn::visitable");
+            const auto st(well_known_stereotypes::visitable);
+            o.well_known_stereotypes().push_back(st);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;

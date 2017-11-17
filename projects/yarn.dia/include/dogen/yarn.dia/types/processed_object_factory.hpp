@@ -75,11 +75,6 @@ private:
     parse_as_dia_text(const dogen::dia::attribute a, processed_object& po);
 
     /**
-     * @brief Throws if the yarn type has already been setup.
-     */
-    static void require_yarn_type_not_set(const yarn_element_types yet);
-
-    /**
      * @brief Processes the raw Dia stereotypes.
      */
     static void
@@ -97,11 +92,6 @@ private:
      */
     static void
     parse_attributes(const dogen::dia::object& o, processed_object& po);
-
-    /**
-     * @brief Defaults the yarn element type, if required.
-     */
-    static void handle_yarn_element_type(processed_object& po);
 
 public:
     /**

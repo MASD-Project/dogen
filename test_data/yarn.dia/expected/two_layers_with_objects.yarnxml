@@ -175,8 +175,9 @@
 						</contained_by>
 						<in_global_module>0</in_global_module>
 						<well_known_stereotypes>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>6</item>
 						</well_known_stereotypes>
 						<unknown_stereotypes>
 							<count>0</count>
@@ -309,8 +310,9 @@
 						</contained_by>
 						<in_global_module>0</in_global_module>
 						<well_known_stereotypes>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>6</item>
 						</well_known_stereotypes>
 						<unknown_stereotypes>
 							<count>0</count>
@@ -464,8 +466,9 @@
 						</contained_by>
 						<in_global_module>0</in_global_module>
 						<well_known_stereotypes>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>1</item>
 						</well_known_stereotypes>
 						<unknown_stereotypes>
 							<count>0</count>
@@ -738,8 +741,9 @@
 						</contained_by>
 						<in_global_module>0</in_global_module>
 						<well_known_stereotypes>
-							<count>0</count>
+							<count>1</count>
 							<item_version>0</item_version>
+							<item>1</item>
 						</well_known_stereotypes>
 						<unknown_stereotypes>
 							<count>0</count>
@@ -1120,8 +1124,9 @@
 		<item class_id="57" tracking_level="0" version="0">
 			<documentation></documentation>
 			<well_known_stereotypes>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>6</item>
 			</well_known_stereotypes>
 			<unknown_stereotypes>
 				<count>0</count>
@@ -1144,8 +1149,9 @@
 		<item>
 			<documentation></documentation>
 			<well_known_stereotypes>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>1</item>
 			</well_known_stereotypes>
 			<unknown_stereotypes>
 				<count>0</count>
@@ -1185,8 +1191,9 @@
 		<item>
 			<documentation></documentation>
 			<well_known_stereotypes>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>6</item>
 			</well_known_stereotypes>
 			<unknown_stereotypes>
 				<count>0</count>
@@ -1209,8 +1216,9 @@
 		<item>
 			<documentation></documentation>
 			<well_known_stereotypes>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>1</item>
 			</well_known_stereotypes>
 			<unknown_stereotypes>
 				<count>0</count>

@@ -24,11 +24,18 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/diagram.hpp"
+#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
+#include "dogen/yarn.dia/io/dia_object_types_io.hpp"
+#include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_comment_factory.hpp"
@@ -58,12 +65,8 @@ const std::string uml_note("UML - Note");
 const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string invalid_object_type("Invalid value for object type: ");
-
-const std::string object("yarn::object");
-const std::string object_template("yarn::object_template");
-const std::string enumeration("yarn::enumeration");
-const std::string primitive("yarn::primitive");
-const std::string exception("yarn::exception");
+const std::string invalid_yarn_element(
+    "Invalid or usupported yarn element type: ");
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
@@ -280,40 +283,77 @@ void  processed_object_factory::parse_as_class_attributes(
 }
 
 void processed_object_factory::
-require_yarn_type_not_set(const yarn_element_types yet) {
-    if (yet == yarn_element_types::invalid)
-        return;
-
-    BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
-    BOOST_THROW_EXCEPTION(building_error(too_many_yarn_types));
-}
-
-void processed_object_factory::
 parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
-    const auto s(parse_string_attribute(a));
-
-    using utility::string::splitter;
-    const auto stereotypes(splitter::split_csv(s));
-
-    for (const auto& stereotype : stereotypes) {
-        if (stereotype == enumeration) {
-            require_yarn_type_not_set(po.yarn_element_type());
-            po.yarn_element_type(yarn_element_types::enumeration);
-        } else if (stereotype == primitive) {
-            require_yarn_type_not_set(po.yarn_element_type());
-            po.yarn_element_type(yarn_element_types::primitive);
-        } else if (stereotype == exception) {
-            require_yarn_type_not_set(po.yarn_element_type());
-            po.yarn_element_type(yarn_element_types::exception);
-        } else if (stereotype == object_template) {
-            require_yarn_type_not_set(po.yarn_element_type());
-            po.yarn_element_type(yarn_element_types::object_template);
-        } else if (stereotype == object) {
-            require_yarn_type_not_set(po.yarn_element_type());
-            po.yarn_element_type(yarn_element_types::object);
-        } else
-            po.unknown_stereotypes().push_back(stereotype);
+    /*
+     * When it comes to stereotypes, we only care about objects and
+     * packages.
+     */
+    if (po.dia_object_type() != dia_object_types::uml_class &&
+        po.dia_object_type() != dia_object_types::uml_large_package) {
+        BOOST_LOG_SEV(lg, debug) << "Not processing stereotypes for object: "
+                                 << po.id() << " of type: "
+                                 << po.dia_object_type();
+        return;
     }
+
+    yarn::helpers::stereotypes_helper h;
+    const auto s(parse_string_attribute(a));
+    BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '" << s << "'";
+    const auto st(h.from_csv_string(s));
+    BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
+
+    for (const auto wks : st.well_known_stereotypes())
+        po.well_known_stereotypes().push_back(wks);
+
+    for (const auto us : st.unknown_stereotypes())
+        po.unknown_stereotypes().push_back(us);
+
+    using wks = meta_model::well_known_stereotypes;
+    auto et(h.extract_element_types(po.well_known_stereotypes()));
+    if (et.size() > 1) {
+        /*
+         * We can only have zero or one yarn element types set.
+         */
+        BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
+        BOOST_THROW_EXCEPTION(building_error(too_many_yarn_types));
+    } else if (et.size() == 0) {
+        using dot = dia_object_types;
+        if (po.dia_object_type() == dot::uml_class) {
+            po.well_known_stereotypes().push_back(wks::object);
+            et.push_back(wks::object);
+        } else if (po.dia_object_type() == dot::uml_large_package) {
+            po.well_known_stereotypes().push_back(wks::module);
+            et.push_back(wks::module);
+        }
+    }
+
+    switch (et.front()) {
+    case wks::object:
+        po.yarn_element_type(yarn_element_types::object);
+        break;
+    case wks::object_template:
+        po.yarn_element_type(yarn_element_types::object_template);
+        break;
+    case wks::exception:
+        po.yarn_element_type(yarn_element_types::exception);
+        break;
+    case wks::primitive:
+        po.yarn_element_type(yarn_element_types::primitive);
+        break;
+    case wks::enumeration:
+        po.yarn_element_type(yarn_element_types::enumeration);
+        break;
+    case wks::module:
+        po.yarn_element_type(yarn_element_types::builtin);
+        break;
+    case wks::builtin:
+        po.yarn_element_type(yarn_element_types::builtin);
+        break;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(et.front()));
+        BOOST_LOG_SEV(lg, error) << invalid_yarn_element << s;;
+        BOOST_THROW_EXCEPTION(building_error(invalid_yarn_element + s));
+    } }
 }
 
 void processed_object_factory::
@@ -332,25 +372,6 @@ parse_attributes(const dogen::dia::object& o, processed_object& po) {
     }
 }
 
-void processed_object_factory::
-handle_yarn_element_type(processed_object& po) {
-    /*
-     * If its already setup there's nothing for us to do. This is the
-     * case if the user has populated the stereotypes with an element.
-     */
-    if (po.yarn_element_type() != yarn_element_types::invalid)
-        return;
-
-    /*
-     * If we're a UML class, map it to a yarn object. All other cases
-     * don't have a mapping.
-     */
-    if (po.dia_object_type() == dia_object_types::uml_class)
-        po.yarn_element_type(yarn_element_types::object);
-    else
-        po.yarn_element_type(yarn_element_types::not_applicable);
-}
-
 processed_object processed_object_factory::make(const dogen::dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
@@ -363,9 +384,8 @@ processed_object processed_object_factory::make(const dogen::dia::object& o) {
 
     parse_connections(o, r);
     parse_attributes(o, r);
-    handle_yarn_element_type(r);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished processing dia object";
+    BOOST_LOG_SEV(lg, debug) << "Finished processing dia object. Result: " << r;
     return r;
 }
 

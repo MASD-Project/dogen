@@ -48,35 +48,49 @@ public:
      * or other artefacts and must match exactly the definition of a
      * well-known yarn stereotype, e.g. 'yarn::object', etc.
      */
-    static meta_model::well_known_stereotypes from_string(const std::string& s);
+    meta_model::well_known_stereotypes from_string(const std::string& s) const;
 
 public:
     /**
      * @brief Given a CSV-separated string, returns the set of
      * well-known stereotypes as well as those it does not know of.
      */
-    static stereotypes_conversion_result from_csv_string(const std::string& s);
+    stereotypes_conversion_result from_csv_string(const std::string& s) const;
+
+    /**
+     * @brief Given a vector of stereotypes as strings, returns the
+     * set of well-known stereotypes as well as those it does not know
+     * of.
+     */
+    stereotypes_conversion_result
+    from_string(const std::vector<std::string>& stereotypes) const;
 
     /**
      * @brief Converts a well-known stereotype to its string representation.
      */
-    static std::string to_string(const meta_model::well_known_stereotypes st);
+    std::string to_string(const meta_model::well_known_stereotypes st) const;
 
 public:
+    /**
+     * @brief Returns true if the well-known stereotype denotes a yarn
+     * element type, false otherwise.
+     */
+    bool is_element_type(const meta_model::well_known_stereotypes wkst) const;
+
     /**
      * @brief Given a list of well-known stereotypes, extracts those
      * which are element types.
      */
-    static std::list<meta_model::well_known_stereotypes> extract_element_types(
-        const std::list<meta_model::well_known_stereotypes>& wkst);
+    std::list<meta_model::well_known_stereotypes> extract_element_types(
+        const std::list<meta_model::well_known_stereotypes>& wkst) const;
 
     /**
      * @brief Given a list of well-known stereotypes, extracts those
      * which are not element types.
      */
-    static std::list<meta_model::well_known_stereotypes>
+    std::list<meta_model::well_known_stereotypes>
     extract_non_element_types(
-        const std::list<meta_model::well_known_stereotypes>& wkst);
+        const std::list<meta_model::well_known_stereotypes>& wkst) const;
 };
 
 } } }

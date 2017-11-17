@@ -28,6 +28,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
+#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
@@ -38,6 +40,7 @@
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 
@@ -294,7 +297,17 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
     e.name(n);
     e.in_global_module(in_global_module);
     e.documentation(read_documentation(pt));
-    e.unknown_stereotypes(read_stereotypes(pt));
+
+    const auto vec(read_stereotypes(pt));
+    yarn::helpers::stereotypes_helper h;
+    const auto st(h.from_string(vec));
+    BOOST_LOG_SEV(lg, debug) << "Original stereotypes: '" << st << "'";
+
+    for (const auto wks : st.well_known_stereotypes())
+        e.well_known_stereotypes().push_back(wks);
+
+    for (const auto us : st.unknown_stereotypes())
+        e.unknown_stereotypes().push_back(us);
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>

@@ -45,8 +45,8 @@ processed_object::processed_object(
     const std::string& name,
     const dogen::yarn::dia::dia_object_types dia_object_type,
     const dogen::yarn::dia::yarn_element_types yarn_element_type,
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& unknown_stereotypes,
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+    const std::list<std::string>& unknown_stereotypes,
     const dogen::yarn::dia::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -143,35 +143,35 @@ void processed_object::yarn_element_type(const dogen::yarn::dia::yarn_element_ty
     yarn_element_type_ = v;
 }
 
-const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& processed_object::well_known_stereotypes() const {
+const std::list<dogen::yarn::meta_model::well_known_stereotypes>& processed_object::well_known_stereotypes() const {
     return well_known_stereotypes_;
 }
 
-std::vector<dogen::yarn::meta_model::well_known_stereotypes>& processed_object::well_known_stereotypes() {
+std::list<dogen::yarn::meta_model::well_known_stereotypes>& processed_object::well_known_stereotypes() {
     return well_known_stereotypes_;
 }
 
-void processed_object::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+void processed_object::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     well_known_stereotypes_ = v;
 }
 
-void processed_object::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
+void processed_object::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& processed_object::unknown_stereotypes() const {
+const std::list<std::string>& processed_object::unknown_stereotypes() const {
     return unknown_stereotypes_;
 }
 
-std::vector<std::string>& processed_object::unknown_stereotypes() {
+std::list<std::string>& processed_object::unknown_stereotypes() {
     return unknown_stereotypes_;
 }
 
-void processed_object::unknown_stereotypes(const std::vector<std::string>& v) {
+void processed_object::unknown_stereotypes(const std::list<std::string>& v) {
     unknown_stereotypes_ = v;
 }
 
-void processed_object::unknown_stereotypes(const std::vector<std::string>&& v) {
+void processed_object::unknown_stereotypes(const std::list<std::string>&& v) {
     unknown_stereotypes_ = std::move(v);
 }
 

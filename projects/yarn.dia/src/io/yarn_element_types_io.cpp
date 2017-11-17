@@ -53,6 +53,9 @@ std::ostream& operator<<(std::ostream& s, const yarn_element_types& v) {
     case yarn_element_types::primitive:
         attr = "\"primitive\"";
         break;
+    case yarn_element_types::builtin:
+        attr = "\"builtin\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for yarn_element_types");
     }

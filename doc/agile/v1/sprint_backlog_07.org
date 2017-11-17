@@ -98,6 +98,7 @@ Originally we had removed upsilon as a frontend but it seems there are
 still some remnants around yarn. Delete them.
 
 *** STARTED Remove yarn element types in dia frontend                 :story:
+    CLOCK: [2017-11-17 Fri 10:47]--[2017-11-17 Fri 13:21] =>  2:34
     CLOCK: [2017-11-17 Fri 10:10]--[2017-11-17 Fri 10:46] =>  0:36
     CLOCK: [2017-11-17 Fri 09:15]--[2017-11-17 Fri 10:09] =>  0:54
     CLOCK: [2017-11-09 Thu 20:12]--[2017-11-09 Thu 20:15] =>  0:03
@@ -112,6 +113,28 @@ stereotypes directly.
 
 Actually the right way of doing this is to split out the well-known
 stereotypes from the other stereotypes.
+
+Tasks:
+
+- rename unknown stereotypes to something else like "non-well-known
+  stereotypes". Basically these may or may not be known. Or perhaps
+  even better: user-defined? Or we can just have static and dynamic
+  stereotypes.
+
+*** Exclude profiles from stereotypes processing                      :story:
+
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
 
 *** Implement exomodel in terms of exoelements                        :story:
 
