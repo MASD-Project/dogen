@@ -161,6 +161,7 @@
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_conversion_result.hpp"
 #include "dogen/yarn/types/meta_model/directory_structure_styles.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_exomodel_chain.hpp"

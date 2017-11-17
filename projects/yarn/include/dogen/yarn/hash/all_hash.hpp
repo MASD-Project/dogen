@@ -82,6 +82,7 @@
 #include "dogen/yarn/hash/meta_model/orm_primitive_properties_hash.hpp"
 #include "dogen/yarn/hash/transforms/exomodel_transform_types_hash.hpp"
 #include "dogen/yarn/hash/transforms/formatting_configuration_hash.hpp"
+#include "dogen/yarn/hash/helpers/stereotypes_conversion_result_hash.hpp"
 #include "dogen/yarn/hash/meta_model/directory_structure_styles_hash.hpp"
 #include "dogen/yarn/hash/meta_model/archetype_family_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/intra_backend_segment_properties_hash.hpp"

@@ -29,18 +29,38 @@
 #include <string>
 #include <utility>
 #include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
+/**
+ * @brief Converts well-known stereotypes from and to strings.
+ */
 class well_known_stereotypes_converter final {
 public:
-    static std::pair<
-        std::list<meta_model::well_known_stereotypes>,
-        std::list<std::string>
-    > from_csv_string(const std::string& s);
-    static std::string to_string(const meta_model::well_known_stereotypes st); 
+    /**
+     * @brief Converts a string with a single well-known stereotype
+     * into its enum.
+     *
+     * @note The string must not have any leading or trailing spaces
+     * or other artefacts and must match exactly the definition of a
+     * well-known yarn stereotype, e.g. 'yarn::object', etc.
+     */
+    static meta_model::well_known_stereotypes from_string(const std::string& s);
+
+public:
+    /**
+     * @brief Given a CSV-separated string, returns the set of
+     * well-known stereotypes as well as those it does not know of.
+     */
+    static stereotypes_conversion_result from_csv_string(const std::string& s);
+
+    /**
+     * @brief Converts a well-known stereotype to its string representation.
+     */
+    static std::string to_string(const meta_model::well_known_stereotypes st);
 };
 
 } } }

@@ -82,6 +82,7 @@
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/io/transforms/exomodel_transform_types_io.hpp"
 #include "dogen/yarn/io/transforms/formatting_configuration_io.hpp"
+#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "dogen/yarn/io/meta_model/directory_structure_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/archetype_family_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"

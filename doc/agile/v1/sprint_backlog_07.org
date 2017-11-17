@@ -98,6 +98,7 @@ Originally we had removed upsilon as a frontend but it seems there are
 still some remnants around yarn. Delete them.
 
 *** STARTED Remove yarn element types in dia frontend                 :story:
+    CLOCK: [2017-11-17 Fri 10:10]
     CLOCK: [2017-11-17 Fri 09:15]--[2017-11-17 Fri 10:09] =>  0:54
     CLOCK: [2017-11-09 Thu 20:12]--[2017-11-09 Thu 20:15] =>  0:03
     CLOCK: [2017-11-09 Thu 20:04]--[2017-11-09 Thu 20:11] =>  0:07

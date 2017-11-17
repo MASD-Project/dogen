@@ -82,6 +82,7 @@
 #include "dogen/yarn/serialization/meta_model/orm_primitive_properties_ser.hpp"
 #include "dogen/yarn/serialization/transforms/exomodel_transform_types_ser.hpp"
 #include "dogen/yarn/serialization/transforms/formatting_configuration_ser.hpp"
+#include "dogen/yarn/serialization/helpers/stereotypes_conversion_result_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"

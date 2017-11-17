@@ -55,42 +55,50 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-std::pair<
-    std::list<meta_model::well_known_stereotypes>,
-    std::list<std::string>
-    >
-well_known_stereotypes_converter::from_csv_string(const std::string& s) {
+meta_model::well_known_stereotypes
+well_known_stereotypes_converter::from_string(const std::string& s) {
     using meta_model::well_known_stereotypes;
-    std::list<well_known_stereotypes> wks;
-    std::list<std::string> uks;
 
+    if (s == stereotype_object)
+        return well_known_stereotypes::object;
+    else if (s == stereotype_object_template)
+        return well_known_stereotypes::object_template;
+    else if (s == stereotype_enumeration)
+        return well_known_stereotypes::enumeration;
+    else if (s == stereotype_primitive)
+        return well_known_stereotypes::primitive;
+    else if (s == stereotype_builtin)
+        return well_known_stereotypes::builtin;
+    else if (s == stereotype_exception)
+        return well_known_stereotypes::exception;
+    else if (s == stereotype_fluent)
+        return well_known_stereotypes::fluent;
+    else if (s == stereotype_immutable)
+        return well_known_stereotypes::immutable;
+    else if (s == stereotype_orm_object)
+        return well_known_stereotypes::orm_object;
+    else if (s == stereotype_orm_value)
+        return well_known_stereotypes::orm_value;
+
+    return well_known_stereotypes::invalid;
+}
+
+stereotypes_conversion_result
+well_known_stereotypes_converter::from_csv_string(const std::string& s) {
     using utility::string::splitter;
     const auto stereotypes(splitter::split_csv(s));
+
+    stereotypes_conversion_result r;
     for (const auto& stereotype : stereotypes) {
-        if (stereotype == stereotype_object)
-            wks.push_back(well_known_stereotypes::object);
-        else if (stereotype == stereotype_object_template)
-            wks.push_back(well_known_stereotypes::object_template);
-        else if (stereotype == stereotype_enumeration)
-            wks.push_back(well_known_stereotypes::enumeration);
-        else if (stereotype == stereotype_primitive)
-            wks.push_back(well_known_stereotypes::primitive);
-        else if (stereotype == stereotype_builtin)
-            wks.push_back(well_known_stereotypes::builtin);
-        else if (stereotype == stereotype_exception)
-            wks.push_back(well_known_stereotypes::exception);
-        else if (stereotype == stereotype_fluent)
-            wks.push_back(well_known_stereotypes::fluent);
-        else if (stereotype == stereotype_immutable)
-            wks.push_back(well_known_stereotypes::immutable);
-        else if (stereotype == stereotype_orm_object)
-            wks.push_back(well_known_stereotypes::orm_object);
-        else if (stereotype == stereotype_orm_value)
-            wks.push_back(well_known_stereotypes::orm_value);
+        const auto wks(from_string(stereotype));
+
+        using meta_model::well_known_stereotypes;
+        if (wks == well_known_stereotypes::invalid)
+            r.unknown_stereotypes().push_back(stereotype);
         else
-            uks.push_back(stereotype);
+            r.well_known_stereotypes().push_back(wks);
     }
-    return std::make_pair(wks, uks);
+    return r;
 }
 
 std::string to_string(const meta_model::well_known_stereotypes st) {
