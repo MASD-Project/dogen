@@ -6723,6 +6723,18 @@ Links:
 - [[https://github.com/nadult/fwk_enum%0A][fwk_enum]]: Improved C++14 enum class with iteration and conversion to
   strings
 
+*** Add support for enumeration subsets                               :story:
+
+Sometimes we have a large enumeration which is made up of several
+smaller subsets. For example in yarn we have well-known stereotypes;
+these can be grouped into subsets such as element types, etc. It would
+be nice to be able to declare these subsets in the meta-model and:
+
+- code-generate automatically methods that extract all enumerations in
+  the subset, not in the subset;
+- create a bool function that given an enumerator tells us if it is in
+  a subset or not.
+
 *** Add support for user supplied test data sets                      :story:
 
 #+begin_quote
