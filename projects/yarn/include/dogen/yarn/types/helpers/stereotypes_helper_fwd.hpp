@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_WELL_KNOWN_STEREOTYPES_CONVERTER_FWD_HPP
-#define DOGEN_YARN_TYPES_HELPERS_WELL_KNOWN_STEREOTYPES_CONVERTER_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_STEREOTYPES_HELPER_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_STEREOTYPES_HELPER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-class well_known_stereotypes_converter;
+class stereotypes_helper;
 
 } } }
 

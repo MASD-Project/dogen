@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_WELL_KNOWN_STEREOTYPES_CONVERTER_HPP
-#define DOGEN_YARN_TYPES_HELPERS_WELL_KNOWN_STEREOTYPES_CONVERTER_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_STEREOTYPES_HELPER_HPP
+#define DOGEN_YARN_TYPES_HELPERS_STEREOTYPES_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@ namespace helpers {
 /**
  * @brief Converts well-known stereotypes from and to strings.
  */
-class well_known_stereotypes_converter final {
+class stereotypes_helper final {
 public:
     /**
      * @brief Converts a string with a single well-known stereotype

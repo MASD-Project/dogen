@@ -26,7 +26,7 @@
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/utility/exception/invalid_enum_value.hpp"
 #include "dogen/yarn/io/meta_model/well_known_stereotypes_io.hpp"
-#include "dogen/yarn/types/helpers/well_known_stereotypes_converter.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 
 namespace {
 
@@ -56,7 +56,7 @@ namespace yarn {
 namespace helpers {
 
 meta_model::well_known_stereotypes
-well_known_stereotypes_converter::from_string(const std::string& s) {
+stereotypes_helper::from_string(const std::string& s) {
     using meta_model::well_known_stereotypes;
 
     if (s == stereotype_object)
@@ -84,7 +84,7 @@ well_known_stereotypes_converter::from_string(const std::string& s) {
 }
 
 stereotypes_conversion_result
-well_known_stereotypes_converter::from_csv_string(const std::string& s) {
+stereotypes_helper::from_csv_string(const std::string& s) {
     using utility::string::splitter;
     const auto stereotypes(splitter::split_csv(s));
 
