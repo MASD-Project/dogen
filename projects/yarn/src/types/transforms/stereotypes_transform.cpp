@@ -79,6 +79,97 @@ is_stereotype_handled_externally(const std::string& s) {
         s == stereotype_csharp_artefact_formatter;
 }
 
+void stereotypes_transform::
+transform_static_stereotypes(meta_model::object& o, meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Static  stereotypes: "
+                             << o.static_stereotypes();
+
+    /*
+     * First we process all of the well-known stereotypes, collecting
+     * any invalid ones as we go along.
+     */
+    helpers::stereotypes_helper h;
+    using meta_model::static_stereotypes;
+    std::list<static_stereotypes> unknown_stereotypes;
+    for (const auto ss : o.static_stereotypes()) {
+        if (h.is_element_type(ss)) {
+            /*
+             * We can safely ignore any element type information as
+             * that has already been used to instantiate the
+             * appropriate meta-model elements.
+             */
+            continue;
+        } else if (ss == static_stereotypes::visitable)
+            expand_visitable(o, em);
+        else if (ss == static_stereotypes::fluent)
+            o.is_fluent(true);
+        else if (ss == static_stereotypes::immutable)
+            o.is_immutable(true);
+        else if (ss == static_stereotypes::orm_object) {
+            meta_model::orm_object_properties cfg;
+            cfg.generate_mapping(true);
+            o.orm_properties(cfg);
+        } else if (ss == static_stereotypes::orm_value) {
+            meta_model::orm_object_properties cfg;
+            cfg.generate_mapping(true);
+            cfg.is_value(true);
+            o.orm_properties(cfg);
+        } else
+            unknown_stereotypes.push_back(ss);
+    }
+
+    /*
+     * Any attempt to use a well-known stereotype against this model
+     * element which we do not recognise must be invalid (since we
+     * process all of the well-known stereotypes at this point).
+     */
+    if (!unknown_stereotypes.empty()) {
+        const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
+        BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
+    }
+}
+
+void stereotypes_transform::transform_dynamic_stereotypes(meta_model::object& o,
+    meta_model::endomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Dynamic stereotypes: "
+                             << o.dynamic_stereotypes();
+
+    std::list<std::string> unknown_stereotypes;
+    for (const auto us : o.dynamic_stereotypes()) {
+        /*
+         * Exclude all stereotypes that are handled externally -
+         * i.e. profiles.
+         *
+         * FIXME: This is a massive hack; we should really ask
+         * annotations for all valid profile names and exclude those
+         * instead of hard-coding them here.
+         */
+        if (is_stereotype_handled_externally(us))
+            continue;
+
+        /*
+         * Attempt to process the stereotype as an object template. If
+         * it isn't then is definitely not one of ours.
+         */
+        const bool is_object_template(try_as_object_template(us, o, em));
+        if (!is_object_template)
+            unknown_stereotypes.push_back(us);
+    }
+
+    /*
+     * If there are any stereotypes we do not know about, throw an
+     * error. This way the user can figure out if its trying to use a
+     * object template but it has not been found or if its trying to
+     * use an unsupported feature.
+     */
+    if (!unknown_stereotypes.empty()) {
+        const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
+        BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
+    }
+}
+
 std::unordered_map<meta_model::location,
                    std::list<meta_model::name>> stereotypes_transform::
 bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
@@ -273,7 +364,7 @@ expand_visitable(meta_model::object& o, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
-bool stereotypes_transform::try_expand_object_template(const std::string& s,
+bool stereotypes_transform::try_as_object_template(const std::string& s,
     meta_model::object& o, const meta_model::endomodel& em) {
 
     using helpers::resolver;
@@ -285,7 +376,7 @@ bool stereotypes_transform::try_expand_object_template(const std::string& s,
     return true;
 }
 
-void stereotypes_transform::expand(meta_model::object& o,
+void stereotypes_transform::transform(meta_model::object& o,
     meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
 
@@ -298,105 +389,11 @@ void stereotypes_transform::expand(meta_model::object& o,
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Well-known stereotypes: "
-                             << o.static_stereotypes();
-    BOOST_LOG_SEV(lg, debug) << "Unknown stereotypes: "
-                             << o.dynamic_stereotypes();
-
-    /*
-     * First we process all of the well-known stereotypes, collecting
-     * any invalid ones as we go along.
-     */
-    helpers::stereotypes_helper h;
-    using meta_model::static_stereotypes;
-    std::list<static_stereotypes> invalid;
-    for (const auto ss : o.static_stereotypes()) {
-        if (h.is_element_type(ss)) {
-            /*
-             * We can safely ignore any element type information as
-             * that has already been used to instantiate the
-             * appropriate meta-model elements.
-             */
-            continue;
-        } else if (ss == static_stereotypes::visitable)
-            expand_visitable(o, em);
-        else if (ss == static_stereotypes::fluent)
-            o.is_fluent(true);
-        else if (ss == static_stereotypes::immutable)
-            o.is_immutable(true);
-        else if (ss == static_stereotypes::orm_object) {
-            meta_model::orm_object_properties cfg;
-            cfg.generate_mapping(true);
-            o.orm_properties(cfg);
-        } else if (ss == static_stereotypes::orm_value) {
-            meta_model::orm_object_properties cfg;
-            cfg.generate_mapping(true);
-            cfg.is_value(true);
-            o.orm_properties(cfg);
-        } else
-            invalid.push_back(ss);
-    }
-
-    /*
-     * Any attempt to use a well-known stereotype against this model
-     * element which we do not recognise must be invalid (since we
-     * process all of the well-known stereotypes at this point).
-     */
-    if (!invalid.empty()) {
-        const auto s(boost::lexical_cast<std::string>(invalid));
-        BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
-        BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
-    }
-
-    /*
-     * Now process the unknown stereotypes.
-     */
-    std::list<std::string> invalid_unknown;
-    std::list<std::string> external_stereotypes;
-    for (const auto us : o.dynamic_stereotypes()) {
-        /*
-         * Exclude all stereotypes that are handled externally -
-         * i.e. profiles.
-         *
-         * FIXME: This is a massive hack; we should really ask
-         * annotations for all valid profile names and exclude those
-         * instead of hard-coding them here.
-         */
-        if (is_stereotype_handled_externally(us)) {
-            external_stereotypes.push_back(us);
-            continue;
-        }
-
-        /*
-         * Attempt to process the stereotype as an object template. If
-         * it isn't then is definitely not one of ours.
-         */
-        const bool is_object_template(try_expand_object_template(us, o, em));
-        if (!is_object_template)
-            invalid_unknown.push_back(us);
-    }
-
-    /*
-     * If there are any stereotypes we do not know about, throw an
-     * error. This way the user can figure out if its trying to use a
-     * object template but it has not been found or if its trying to
-     * use an unsupported feature.
-     */
-    if (!invalid_unknown.empty()) {
-        const auto s(boost::lexical_cast<std::string>(invalid_unknown));
-        BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
-        BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
-    }
-
-    /*
-     * Finally, we trim down the list of stereotypes to just those
-     * that are handled externally - e.g. consume the stereotypes
-     * which we've already dealt with here.
-     */
-    o.dynamic_stereotypes(external_stereotypes);
+    transform_static_stereotypes(o, em);
+    transform_dynamic_stereotypes(o, em);
 }
 
-void stereotypes_transform::expand(meta_model::primitive& p) {
+void stereotypes_transform::transform(meta_model::primitive& p) {
     const auto id(p.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
 
@@ -424,7 +421,7 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
      */
     helpers::stereotypes_helper h;
     using meta_model::static_stereotypes;
-    std::list<static_stereotypes> invalid;
+    std::list<static_stereotypes> unknown_static_stereotypes;
     for (const auto st : p.static_stereotypes()) {
         if (h.is_element_type(st)) {
             /*
@@ -440,7 +437,7 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
             cfg.generate_mapping(true);
             p.orm_properties(cfg);
         } else
-            invalid.push_back(st);
+            unknown_static_stereotypes.push_back(st);
     }
 
     /*
@@ -448,8 +445,9 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
      * element which we do not recognise must be invalid (since we
      * process all of the well-known stereotypes at this point).
      */
-    if (!invalid.empty()) {
-        const auto s(boost::lexical_cast<std::string>(invalid));
+    if (!unknown_static_stereotypes.empty()) {
+        const auto s(boost::lexical_cast<std::string>(
+                unknown_static_stereotypes));
         BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
         BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
@@ -461,10 +459,10 @@ transform(const context& ctx, meta_model::endomodel& em) {
         transform_id, em.name().id(), ctx.prober(), em);
 
     for (auto& pair : em.objects())
-        expand(*pair.second, em);
+        transform(*pair.second, em);
 
     for (auto& pair : em.primitives())
-        expand(*pair.second);
+        transform(*pair.second);
 
     stp.end_transform(em);
 }

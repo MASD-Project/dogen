@@ -52,6 +52,20 @@ private:
      */
     static bool is_stereotype_handled_externally(const std::string& s);
 
+    /**
+     * @brief Transforms the static stereotypes of the object, if any
+     * exist.
+     */
+    static void transform_static_stereotypes(meta_model::object& o,
+        meta_model::endomodel& em);
+
+    /**
+     * @brief Transforms the dynamic stereotypes of the object, if any
+     * exist.
+     */
+    static void transform_dynamic_stereotypes(meta_model::object& o,
+        meta_model::endomodel& em);
+
 private:
     struct visitor_details {
         visitor_details(const meta_model::name& b) : base(b) { }
@@ -99,19 +113,19 @@ private:
      * @brief Try to expand the stereotype as an object
      * template. Returns true on success, false otherwise.
      */
-    static bool try_expand_object_template(const std::string& s,
+    static bool try_as_object_template(const std::string& s,
         meta_model::object& o, const meta_model::endomodel& em);
 
     /**
-     * @brief Expands all stereotypes for the object.
+     * @brief Transforms all stereotypes for the object.
      */
-    static void expand(meta_model::object& o,
+    static void transform(meta_model::object& o,
         meta_model::endomodel& em);
 
     /**
-     * @brief Expands all stereotypes for the primitive.
+     * @brief Transforms all stereotypes for the primitive.
      */
-    static void expand(meta_model::primitive& p);
+    static void transform(meta_model::primitive& p);
 
 public:
     /**

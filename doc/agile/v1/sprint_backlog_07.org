@@ -13,16 +13,16 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-17 Fri 15:56]
-| <75>                                                                        |        |   |      |       |
-| Headline                                                                    | Time   |   |      |     % |
-|-----------------------------------------------------------------------------+--------+---+------+-------|
-| *Total time*                                                                | *9:56* |   |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+---+------+-------|
-| Active                                                                      | 9:56   |   |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |   | 1:03 |  10.6 |
-| COMPLETED Remove remnants of upsilon                                        |        |   | 0:35 |   5.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |        |   | 8:18 |  83.6 |
+#+CAPTION: Clock summary at [2017-11-17 Fri 17:38]
+| <75>                                                                        |         |   |      |       |
+| Headline                                                                    | Time    |   |      |     % |
+|-----------------------------------------------------------------------------+---------+---+------+-------|
+| *Total time*                                                                | *10:19* |   |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+---+------+-------|
+| Active                                                                      | 10:19   |   |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |   | 1:03 |  10.2 |
+| COMPLETED Remove remnants of upsilon                                        |         |   | 0:35 |   5.7 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |   | 8:41 |  84.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -99,6 +99,7 @@ still some remnants around yarn. Delete them.
 
 *** COMPLETED Create a well-defined set of stereotypes                :story:
     CLOSED: [2017-11-17 Fri 15:56]
+    CLOCK: [2017-11-17 Fri 17:15]--[2017-11-17 Fri 17:38] =>  0:23
     CLOCK: [2017-11-17 Fri 15:23]--[2017-11-17 Fri 15:56] =>  0:33
     CLOCK: [2017-11-17 Fri 15:12]--[2017-11-17 Fri 15:22] =>  0:10
     CLOCK: [2017-11-17 Fri 14:51]--[2017-11-17 Fri 15:11] =>  0:20
