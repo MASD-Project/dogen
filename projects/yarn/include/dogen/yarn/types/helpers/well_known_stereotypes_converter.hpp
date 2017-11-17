@@ -61,6 +61,22 @@ public:
      * @brief Converts a well-known stereotype to its string representation.
      */
     static std::string to_string(const meta_model::well_known_stereotypes st);
+
+public:
+    /**
+     * @brief Given a list of well-known stereotypes, extracts those
+     * which are element types.
+     */
+    static std::list<meta_model::well_known_stereotypes> extract_element_types(
+        const std::list<meta_model::well_known_stereotypes>& wkst);
+
+    /**
+     * @brief Given a list of well-known stereotypes, extracts those
+     * which are not element types.
+     */
+    static std::list<meta_model::well_known_stereotypes>
+    extract_non_element_types(
+        const std::list<meta_model::well_known_stereotypes>& wkst);
 };
 
 } } }

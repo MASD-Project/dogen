@@ -29,8 +29,8 @@ create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position)
     return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
 }
 
-std::list<dogen::yarn::meta_model::well_known_stereotypes> create_std_list_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
-    std::list<dogen::yarn::meta_model::well_known_stereotypes> r;
+std::vector<dogen::yarn::meta_model::well_known_stereotypes> create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
+    std::vector<dogen::yarn::meta_model::well_known_stereotypes> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
     }
@@ -61,7 +61,7 @@ stereotypes_conversion_result_generator::stereotypes_conversion_result_generator
 
 void stereotypes_conversion_result_generator::
 populate(const unsigned int position, result_type& v) {
-    v.well_known_stereotypes(create_std_list_dogen_yarn_meta_model_well_known_stereotypes(position + 0));
+    v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 0));
     v.unknown_stereotypes(create_std_vector_std_string(position + 1));
 }
 
