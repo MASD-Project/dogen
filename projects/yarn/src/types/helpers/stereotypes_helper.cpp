@@ -90,25 +90,18 @@ stereotypes_helper::from_string(const std::string& s) const {
 
 stereotypes_conversion_result
 stereotypes_helper::from_csv_string(const std::string& s) const {
-    stereotypes_conversion_result r;
-    if (s.empty())
+    if (s.empty()) {
+        stereotypes_conversion_result r;
         return r;
+    }
 
     using utility::string::splitter;
     const auto stereotypes(splitter::split_csv(s));
-
-    for (const auto& stereotype : stereotypes) {
-        const auto wks(from_string(stereotype));
-        if (wks != well_known_stereotypes::invalid)
-            r.well_known_stereotypes().push_back(wks);
-        else
-            r.unknown_stereotypes().push_back(stereotype);
-    }
-    return r;
+    return from_string(stereotypes);
 }
 
 stereotypes_conversion_result stereotypes_helper::
-from_string(const std::vector<std::string>& stereotypes) const {
+from_string(const std::list<std::string>& stereotypes) const {
     stereotypes_conversion_result r;
     if (stereotypes.empty())
         return r;

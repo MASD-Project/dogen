@@ -175,9 +175,9 @@ void hydrator::read_and_insert_scribble(const meta_model::name& owner,
     }
 }
 
-std::vector<std::string> hydrator::
+std::list<std::string> hydrator::
 read_stereotypes(const boost::property_tree::ptree& pt) const {
-    std::vector<std::string> r;
+    std::list<std::string> r;
     const auto i(pt.find(stereotypes_key));
     if (i == pt.not_found() || i->second.empty())
         return r;
@@ -298,16 +298,13 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
     e.in_global_module(in_global_module);
     e.documentation(read_documentation(pt));
 
-    const auto vec(read_stereotypes(pt));
+    const auto st_str(read_stereotypes(pt));
     yarn::helpers::stereotypes_helper h;
-    const auto st(h.from_string(vec));
+    const auto st(h.from_string(st_str));
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes: '" << st << "'";
 
-    for (const auto wks : st.well_known_stereotypes())
-        e.well_known_stereotypes().push_back(wks);
-
-    for (const auto us : st.unknown_stereotypes())
-        e.unknown_stereotypes().push_back(us);
+    e.well_known_stereotypes(st.well_known_stereotypes());
+    e.unknown_stereotypes(st.unknown_stereotypes());
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>

@@ -25,8 +25,8 @@ namespace yarn {
 namespace helpers {
 
 stereotypes_conversion_result::stereotypes_conversion_result(
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& unknown_stereotypes)
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+    const std::list<std::string>& unknown_stereotypes)
     : well_known_stereotypes_(well_known_stereotypes),
       unknown_stereotypes_(unknown_stereotypes) { }
 
@@ -47,35 +47,35 @@ stereotypes_conversion_result& stereotypes_conversion_result::operator=(stereoty
     return *this;
 }
 
-const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& stereotypes_conversion_result::well_known_stereotypes() const {
+const std::list<dogen::yarn::meta_model::well_known_stereotypes>& stereotypes_conversion_result::well_known_stereotypes() const {
     return well_known_stereotypes_;
 }
 
-std::vector<dogen::yarn::meta_model::well_known_stereotypes>& stereotypes_conversion_result::well_known_stereotypes() {
+std::list<dogen::yarn::meta_model::well_known_stereotypes>& stereotypes_conversion_result::well_known_stereotypes() {
     return well_known_stereotypes_;
 }
 
-void stereotypes_conversion_result::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+void stereotypes_conversion_result::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     well_known_stereotypes_ = v;
 }
 
-void stereotypes_conversion_result::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
+void stereotypes_conversion_result::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& stereotypes_conversion_result::unknown_stereotypes() const {
+const std::list<std::string>& stereotypes_conversion_result::unknown_stereotypes() const {
     return unknown_stereotypes_;
 }
 
-std::vector<std::string>& stereotypes_conversion_result::unknown_stereotypes() {
+std::list<std::string>& stereotypes_conversion_result::unknown_stereotypes() {
     return unknown_stereotypes_;
 }
 
-void stereotypes_conversion_result::unknown_stereotypes(const std::vector<std::string>& v) {
+void stereotypes_conversion_result::unknown_stereotypes(const std::list<std::string>& v) {
     unknown_stereotypes_ = v;
 }
 
-void stereotypes_conversion_result::unknown_stereotypes(const std::vector<std::string>&& v) {
+void stereotypes_conversion_result::unknown_stereotypes(const std::list<std::string>&& v) {
     unknown_stereotypes_ = std::move(v);
 }
 

@@ -34,7 +34,8 @@ namespace dogen {
 namespace utility {
 namespace string {
 
-class splitting_error : public virtual std::exception, public virtual boost::exception {
+class splitting_error : public virtual std::exception,
+                        public virtual boost::exception {
 public:
     splitting_error() = default;
     ~splitting_error() noexcept = default;

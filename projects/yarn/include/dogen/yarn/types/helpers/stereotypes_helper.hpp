@@ -58,12 +58,11 @@ public:
     stereotypes_conversion_result from_csv_string(const std::string& s) const;
 
     /**
-     * @brief Given a vector of stereotypes as strings, returns the
-     * set of well-known stereotypes as well as those it does not know
-     * of.
+     * @brief Given a list of stereotypes as strings, returns the set
+     * of well-known stereotypes as well as those it does not know of.
      */
     stereotypes_conversion_result
-    from_string(const std::vector<std::string>& stereotypes) const;
+    from_string(const std::list<std::string>& stereotypes) const;
 
     /**
      * @brief Converts a well-known stereotype to its string representation.

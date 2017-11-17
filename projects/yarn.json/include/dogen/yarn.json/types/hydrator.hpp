@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
@@ -85,7 +86,7 @@ private:
     /**
      * @brief Reads the stereotypes.
      */
-    std::vector<std::string>
+    std::list<std::string>
     read_stereotypes(const boost::property_tree::ptree& pt) const;
 
     /**

@@ -48386,13 +48386,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="245,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="244.95,58.95;273.27,62.65"/>
+        <dia:rectangle val="244.95,58.95;272.5,62.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="245,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -48491,7 +48491,7 @@ defined stereotypes.#</dia:string>
             <dia:string>#well_known_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;meta_model::well_known_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;meta_model::well_known_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -48514,7 +48514,7 @@ defined stereotypes.#</dia:string>
             <dia:string>#unknown_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -48581,7 +48581,7 @@ defined stereotypes.#</dia:string>
         <dia:point val="285.66,52.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="259.06,52.05;286.41,60.6"/>
+        <dia:rectangle val="258.675,52.05;286.41,60.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48589,8 +48589,8 @@ defined stereotypes.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="285.66,52.8"/>
         <dia:point val="285.66,55.45"/>
-        <dia:point val="259.11,55.45"/>
-        <dia:point val="259.11,59"/>
+        <dia:point val="258.725,55.45"/>
+        <dia:point val="258.725,59"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

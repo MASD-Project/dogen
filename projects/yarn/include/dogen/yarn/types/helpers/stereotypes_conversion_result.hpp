@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
-#include <vector>
 #include <algorithm>
 #include "dogen/yarn/types/meta_model/well_known_stereotypes.hpp"
 #include "dogen/yarn/serialization/helpers/stereotypes_conversion_result_fwd_ser.hpp"
@@ -48,8 +48,8 @@ public:
 
 public:
     stereotypes_conversion_result(
-        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::vector<std::string>& unknown_stereotypes);
+        const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+        const std::list<std::string>& unknown_stereotypes);
 
 private:
     template<typename Archive>
@@ -59,15 +59,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::helpers::stereotypes_conversion_result& v, unsigned int version);
 
 public:
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
-    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
-    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
+    std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
+    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v);
+    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v);
 
-    const std::vector<std::string>& unknown_stereotypes() const;
-    std::vector<std::string>& unknown_stereotypes();
-    void unknown_stereotypes(const std::vector<std::string>& v);
-    void unknown_stereotypes(const std::vector<std::string>&& v);
+    const std::list<std::string>& unknown_stereotypes() const;
+    std::list<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::list<std::string>& v);
+    void unknown_stereotypes(const std::list<std::string>&& v);
 
 public:
     bool operator==(const stereotypes_conversion_result& rhs) const;
@@ -80,8 +80,8 @@ public:
     stereotypes_conversion_result& operator=(stereotypes_conversion_result other);
 
 private:
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::vector<std::string> unknown_stereotypes_;
+    std::list<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
+    std::list<std::string> unknown_stereotypes_;
 };
 
 } } }

@@ -300,13 +300,10 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
     const auto s(parse_string_attribute(a));
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '" << s << "'";
     const auto st(h.from_csv_string(s));
+
     BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
-
-    for (const auto wks : st.well_known_stereotypes())
-        po.well_known_stereotypes().push_back(wks);
-
-    for (const auto us : st.unknown_stereotypes())
-        po.unknown_stereotypes().push_back(us);
+    po.well_known_stereotypes(st.well_known_stereotypes());
+    po.unknown_stereotypes(st.unknown_stereotypes());
 
     using wks = meta_model::well_known_stereotypes;
     auto et(h.extract_element_types(po.well_known_stereotypes()));
