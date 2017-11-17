@@ -74,14 +74,8 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.name(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());
-
-    r.unknown_stereotypes().reserve(po.unknown_stereotypes().size());
-    for (const auto ust : po.unknown_stereotypes())
-        r.unknown_stereotypes().push_back(ust);
-
-    r.well_known_stereotypes().reserve(po.well_known_stereotypes().size());
-    for (const auto wkst : po.well_known_stereotypes())
-        r.well_known_stereotypes().push_back(wkst);
+    r.unknown_stereotypes(po.unknown_stereotypes());
+    r.well_known_stereotypes(po.well_known_stereotypes());
 
     for (const auto& attr : po.attributes())
         r.attributes().push_back(adapt(attr));

@@ -75,16 +75,16 @@ create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position)
     return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
 }
 
-std::vector<dogen::yarn::meta_model::well_known_stereotypes> create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes> r;
+std::list<dogen::yarn::meta_model::well_known_stereotypes> create_std_list_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
+    std::list<dogen::yarn::meta_model::well_known_stereotypes> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
     }
     return r;
 }
 
-std::vector<std::string> create_std_vector_std_string(unsigned int position) {
-    std::vector<std::string> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_string(position + i));
     }
@@ -136,8 +136,8 @@ populate(const unsigned int position, result_type& v) {
     v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 3));
     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
     v.in_global_module(create_bool(position + 5));
-    v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 6));
-    v.unknown_stereotypes(create_std_vector_std_string(position + 7));
+    v.well_known_stereotypes(create_std_list_dogen_yarn_meta_model_well_known_stereotypes(position + 6));
+    v.unknown_stereotypes(create_std_list_std_string(position + 7));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 8));
     v.is_element_extension(create_bool(position + 9));
     v.decoration_properties(create_dogen_formatters_decoration_properties(position + 10));

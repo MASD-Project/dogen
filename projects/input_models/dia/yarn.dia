@@ -8372,13 +8372,13 @@ space.#</dia:string>
         <dia:point val="-188,-77.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.05,-77.121;-164.35,-72.621"/>
+        <dia:rectangle val="-188.05,-77.121;-165.12,-72.621"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-188,-77.071"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.600000000000001"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -8476,7 +8476,7 @@ space.#</dia:string>
             <dia:string>#well_known_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;well_known_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;well_known_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8500,7 +8500,7 @@ model.#</dia:string>
             <dia:string>#unknown_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8528,17 +8528,17 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O62">
       <dia:attribute name="obj_pos">
-        <dia:point val="-176.2,-72.671"/>
+        <dia:point val="-176.585,-72.671"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-177.05,-72.721;-163.746,-44.8781"/>
+        <dia:rectangle val="-177.435,-72.721;-163.746,-44.8781"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-176.2,-72.671"/>
-        <dia:point val="-176.2,-47.9281"/>
+        <dia:point val="-176.585,-72.671"/>
+        <dia:point val="-176.585,-47.9281"/>
         <dia:point val="-163.796,-47.9281"/>
         <dia:point val="-163.796,-44.9281"/>
       </dia:attribute>
@@ -47995,17 +47995,17 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-176.2,-77.071"/>
+        <dia:point val="-176.585,-77.071"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-185.311,-87.65;-175.45,-76.271"/>
+        <dia:rectangle val="-185.311,-87.65;-175.835,-76.271"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-176.2,-77.071"/>
-        <dia:point val="-176.2,-81"/>
+        <dia:point val="-176.585,-77.071"/>
+        <dia:point val="-176.585,-81"/>
         <dia:point val="-185.261,-81"/>
         <dia:point val="-185.261,-87.6"/>
       </dia:attribute>

@@ -27,7 +27,6 @@
 
 #include <list>
 #include <string>
-#include <vector>
 #include <utility>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
@@ -60,8 +59,8 @@ public:
         const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::name& meta_name,
         const std::string& documentation,
-        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::vector<std::string>& unknown_stereotypes,
+        const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+        const std::list<std::string>& unknown_stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
@@ -121,20 +120,20 @@ public:
      * model.
      */
     /**@{*/
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
-    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
-    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
+    std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
+    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v);
+    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v);
     /**@}*/
 
     /**
      * @brief Stereotypes that are not part of the yarn UML profile.
      */
     /**@{*/
-    const std::vector<std::string>& unknown_stereotypes() const;
-    std::vector<std::string>& unknown_stereotypes();
-    void unknown_stereotypes(const std::vector<std::string>& v);
-    void unknown_stereotypes(const std::vector<std::string>&& v);
+    const std::list<std::string>& unknown_stereotypes() const;
+    std::list<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::list<std::string>& v);
+    void unknown_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -206,8 +205,8 @@ private:
     dogen::yarn::meta_model::name name_;
     dogen::yarn::meta_model::name meta_name_;
     std::string documentation_;
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::vector<std::string> unknown_stereotypes_;
+    std::list<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
+    std::list<std::string> unknown_stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > modules_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > > object_templates_;

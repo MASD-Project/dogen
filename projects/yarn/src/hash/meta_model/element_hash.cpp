@@ -45,7 +45,7 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::o
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::size_t hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -53,7 +53,7 @@ inline std::size_t hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(
     return seed;
 }
 
-inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -94,8 +94,8 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.contained_by()));
     combine(seed, v.in_global_module());
-    combine(seed, hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_vector_std_string(v.unknown_stereotypes()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
+    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
     combine(seed, v.meta_name());
     combine(seed, v.is_element_extension());
     combine(seed, v.decoration_properties());

@@ -55,7 +55,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -69,7 +69,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::yarn::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -148,8 +148,8 @@ element::element(
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& unknown_stereotypes,
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+    const std::list<std::string>& unknown_stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::formatters::decoration_properties& decoration_properties,
@@ -307,35 +307,35 @@ void element::in_global_module(const bool v) {
     in_global_module_ = v;
 }
 
-const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& element::well_known_stereotypes() const {
+const std::list<dogen::yarn::meta_model::well_known_stereotypes>& element::well_known_stereotypes() const {
     return well_known_stereotypes_;
 }
 
-std::vector<dogen::yarn::meta_model::well_known_stereotypes>& element::well_known_stereotypes() {
+std::list<dogen::yarn::meta_model::well_known_stereotypes>& element::well_known_stereotypes() {
     return well_known_stereotypes_;
 }
 
-void element::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+void element::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     well_known_stereotypes_ = v;
 }
 
-void element::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
+void element::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& element::unknown_stereotypes() const {
+const std::list<std::string>& element::unknown_stereotypes() const {
     return unknown_stereotypes_;
 }
 
-std::vector<std::string>& element::unknown_stereotypes() {
+std::list<std::string>& element::unknown_stereotypes() {
     return unknown_stereotypes_;
 }
 
-void element::unknown_stereotypes(const std::vector<std::string>& v) {
+void element::unknown_stereotypes(const std::list<std::string>& v) {
     unknown_stereotypes_ = v;
 }
 
-void element::unknown_stereotypes(const std::vector<std::string>&& v) {
+void element::unknown_stereotypes(const std::list<std::string>&& v) {
     unknown_stereotypes_ = std::move(v);
 }
 

@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
@@ -72,8 +72,8 @@ public:
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-        const std::vector<std::string>& unknown_stereotypes,
+        const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+        const std::list<std::string>& unknown_stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::formatters::decoration_properties& decoration_properties,
@@ -162,20 +162,20 @@ public:
      * model.
      */
     /**@{*/
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
-    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v);
-    void well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v);
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes() const;
+    std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes();
+    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v);
+    void well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v);
     /**@}*/
 
     /**
      * @brief Stereotypes that are not part of the yarn UML profile.
      */
     /**@{*/
-    const std::vector<std::string>& unknown_stereotypes() const;
-    std::vector<std::string>& unknown_stereotypes();
-    void unknown_stereotypes(const std::vector<std::string>& v);
-    void unknown_stereotypes(const std::vector<std::string>&& v);
+    const std::list<std::string>& unknown_stereotypes() const;
+    std::list<std::string>& unknown_stereotypes();
+    void unknown_stereotypes(const std::list<std::string>& v);
+    void unknown_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -226,8 +226,8 @@ private:
     dogen::yarn::meta_model::origin_types origin_type_;
     boost::optional<dogen::yarn::meta_model::name> contained_by_;
     bool in_global_module_;
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
-    std::vector<std::string> unknown_stereotypes_;
+    std::list<dogen::yarn::meta_model::well_known_stereotypes> well_known_stereotypes_;
+    std::list<std::string> unknown_stereotypes_;
     dogen::yarn::meta_model::name meta_name_;
     bool is_element_extension_;
     dogen::formatters::decoration_properties decoration_properties_;

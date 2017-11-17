@@ -26,8 +26,8 @@ namespace meta_model {
 
 exoelement::exoelement(
     const std::string& documentation,
-    const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
-    const std::vector<std::string>& unknown_stereotypes,
+    const std::list<dogen::yarn::meta_model::well_known_stereotypes>& well_known_stereotypes,
+    const std::list<std::string>& unknown_stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::string& name,
     const std::list<std::string>& parents,
@@ -83,35 +83,35 @@ void exoelement::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& exoelement::well_known_stereotypes() const {
+const std::list<dogen::yarn::meta_model::well_known_stereotypes>& exoelement::well_known_stereotypes() const {
     return well_known_stereotypes_;
 }
 
-std::vector<dogen::yarn::meta_model::well_known_stereotypes>& exoelement::well_known_stereotypes() {
+std::list<dogen::yarn::meta_model::well_known_stereotypes>& exoelement::well_known_stereotypes() {
     return well_known_stereotypes_;
 }
 
-void exoelement::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+void exoelement::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     well_known_stereotypes_ = v;
 }
 
-void exoelement::well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
+void exoelement::well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>&& v) {
     well_known_stereotypes_ = std::move(v);
 }
 
-const std::vector<std::string>& exoelement::unknown_stereotypes() const {
+const std::list<std::string>& exoelement::unknown_stereotypes() const {
     return unknown_stereotypes_;
 }
 
-std::vector<std::string>& exoelement::unknown_stereotypes() {
+std::list<std::string>& exoelement::unknown_stereotypes() {
     return unknown_stereotypes_;
 }
 
-void exoelement::unknown_stereotypes(const std::vector<std::string>& v) {
+void exoelement::unknown_stereotypes(const std::list<std::string>& v) {
     unknown_stereotypes_ = v;
 }
 
-void exoelement::unknown_stereotypes(const std::vector<std::string>&& v) {
+void exoelement::unknown_stereotypes(const std::list<std::string>&& v) {
     unknown_stereotypes_ = std::move(v);
 }
 

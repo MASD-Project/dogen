@@ -13,16 +13,16 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-17 Fri 10:46]
+#+CAPTION: Clock summary at [2017-11-17 Fri 15:11]
 | <75>                                                                        |        |   |      |       |
 | Headline                                                                    | Time   |   |      |     % |
 |-----------------------------------------------------------------------------+--------+---+------+-------|
-| *Total time*                                                                | *5:31* |   |      | 100.0 |
+| *Total time*                                                                | *9:13* |   |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+---+------+-------|
-| Active                                                                      | 5:31   |   |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |   | 1:03 |  19.0 |
-| COMPLETED Remove remnants of upsilon                                        |        |   | 0:35 |  10.6 |
-| STARTED Remove yarn element types in dia frontend                           |        |   | 3:53 |  70.4 |
+| Active                                                                      | 9:13   |   |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |   | 1:03 |  11.4 |
+| COMPLETED Remove remnants of upsilon                                        |        |   | 0:35 |   6.3 |
+| STARTED Create a well-defined set of stereotypes                            |        |   | 7:35 |  82.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -97,7 +97,9 @@ Updates to sprint and product backlog.
 Originally we had removed upsilon as a frontend but it seems there are
 still some remnants around yarn. Delete them.
 
-*** STARTED Remove yarn element types in dia frontend                 :story:
+*** STARTED Create a well-defined set of stereotypes                  :story:
+    CLOCK: [2017-11-17 Fri 14:51]--[2017-11-17 Fri 15:11] =>  0:20
+    CLOCK: [2017-11-17 Fri 14:02]--[2017-11-17 Fri 14:50] =>  0:48
     CLOCK: [2017-11-17 Fri 10:47]--[2017-11-17 Fri 13:21] =>  2:34
     CLOCK: [2017-11-17 Fri 10:10]--[2017-11-17 Fri 10:46] =>  0:36
     CLOCK: [2017-11-17 Fri 09:15]--[2017-11-17 Fri 10:09] =>  0:54
@@ -107,6 +109,11 @@ still some remnants around yarn. Delete them.
     CLOCK: [2017-11-09 Thu 07:55]--[2017-11-09 Thu 08:40] =>  0:45
     CLOCK: [2017-11-07 Tue 18:09]--[2017-11-07 Tue 19:00] =>  0:51
     CLOCK: [2017-11-07 Tue 09:02]--[2017-11-07 Tue 09:11] =>  0:09
+
+We should process the stereotypes that are hard-coded into yarn
+separately from those that are user supplied.
+
+*Previous understanding*
 
 Instead of mapping to yarn element types, we should be using the
 stereotypes directly.

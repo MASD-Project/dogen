@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -47,7 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::yarn::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

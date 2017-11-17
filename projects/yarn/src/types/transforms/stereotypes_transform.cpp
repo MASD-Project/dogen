@@ -351,8 +351,8 @@ void stereotypes_transform::expand(meta_model::object& o,
     /*
      * Now process the unknown stereotypes.
      */
-    std::vector<std::string> invalid_unknown;
-    std::vector<std::string> external_stereotypes;
+    std::list<std::string> invalid_unknown;
+    std::list<std::string> external_stereotypes;
     for (const auto us : o.unknown_stereotypes()) {
         /*
          * Exclude all stereotypes that are handled externally -

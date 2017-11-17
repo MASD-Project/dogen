@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(const std::vector<dogen::yarn::meta_model::well_known_stereotypes>& v) {
+inline std::size_t hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(const std::list<dogen::yarn::meta_model::well_known_stereotypes>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -37,7 +37,7 @@ inline std::size_t hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(
     return seed;
 }
 
-inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -71,8 +71,8 @@ std::size_t exoattribute_hasher::hash(const exoattribute& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_std_vector_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
-    combine(seed, hash_std_vector_std_string(v.unknown_stereotypes()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_well_known_stereotypes(v.well_known_stereotypes()));
+    combine(seed, hash_std_list_std_string(v.unknown_stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, v.name());
     combine(seed, v.type());

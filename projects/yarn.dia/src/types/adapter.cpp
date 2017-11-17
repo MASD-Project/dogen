@@ -133,14 +133,8 @@ populate_element(const processed_object& po, meta_model::element& e) const {
     }
 
     e.documentation(po.comment().documentation());
-
-    e.well_known_stereotypes().reserve(po.well_known_stereotypes().size());
-    for (const auto wks : po.well_known_stereotypes())
-        e.well_known_stereotypes().push_back(wks);
-
-    e.unknown_stereotypes().reserve(po.unknown_stereotypes().size());
-    for (const auto us : po.unknown_stereotypes())
-        e.unknown_stereotypes().push_back(us);
+    e.well_known_stereotypes(po.well_known_stereotypes());
+    e.unknown_stereotypes(po.unknown_stereotypes());
 }
 
 annotations::scribble_group adapter::

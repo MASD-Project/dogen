@@ -35,16 +35,16 @@ create_dogen_yarn_meta_model_well_known_stereotypes(const unsigned int position)
     return dogen::yarn::meta_model::well_known_stereotypes_generator::create(position);
 }
 
-std::vector<dogen::yarn::meta_model::well_known_stereotypes> create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
-    std::vector<dogen::yarn::meta_model::well_known_stereotypes> r;
+std::list<dogen::yarn::meta_model::well_known_stereotypes> create_std_list_dogen_yarn_meta_model_well_known_stereotypes(unsigned int position) {
+    std::list<dogen::yarn::meta_model::well_known_stereotypes> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_meta_model_well_known_stereotypes(position + i));
     }
     return r;
 }
 
-std::vector<std::string> create_std_vector_std_string(unsigned int position) {
-    std::vector<std::string> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_string(position + i));
     }
@@ -78,8 +78,8 @@ exoattribute_generator::exoattribute_generator() : position_(0) { }
 void exoattribute_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.well_known_stereotypes(create_std_vector_dogen_yarn_meta_model_well_known_stereotypes(position + 1));
-    v.unknown_stereotypes(create_std_vector_std_string(position + 2));
+    v.well_known_stereotypes(create_std_list_dogen_yarn_meta_model_well_known_stereotypes(position + 1));
+    v.unknown_stereotypes(create_std_list_std_string(position + 2));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 3));
     v.name(create_std_string(position + 4));
     v.type(create_std_string(position + 5));
