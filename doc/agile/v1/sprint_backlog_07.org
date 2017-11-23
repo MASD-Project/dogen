@@ -132,25 +132,7 @@ Tasks:
   even better: user-defined? Or we can just have static and dynamic
   stereotypes.
 
-*** Exclude profiles from stereotypes processing                      :story:
-
-At present we are manually excluding profiles from the stereotypes
-transform. This was just a quick hack to get us going. We need to
-replace this with a call to annotations to get a list of profile names
-and exclude those.
-
-We should also rename =is_stereotype_handled_externally= to something
-more like "is profile" or "matches profile name".
-
-Actually the right thing may even be to just remove all of the profile
-stereotypes during annotations processing. However, we should wait
-until we complete the exomodel work since that will remove scribble
-groups, etc. Its all in the annotations transform.
-
-*** Tailor does not output static stereotypes                         :story:
-
-At present we only output static stereotypes. However, there is no
-point on fixing this until we move to the new JSON format.
+*** Create a new exoelement chain
 
 *** Implement exomodel in terms of exoelements                        :story:
 
@@ -195,6 +177,26 @@ Problems:
   the exoelements. Use this method in the stereotypes transforms in
   yarn.
 - name does not have the module (e.g. contained by is not working).
+
+*** Exclude profiles from stereotypes processing                      :story:
+
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
+
+*** Tailor does not output static stereotypes                         :story:
+
+At present we only output static stereotypes. However, there is no
+point on fixing this until we move to the new JSON format.
 
 *** Generate file paths as a transform                                :story:
 

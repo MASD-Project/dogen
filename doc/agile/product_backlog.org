@@ -7133,6 +7133,16 @@ perhaps the way to do it is:
    prepared query approach less tedious.
 #+end_quote
 
+*** Add support for ODB schema version                                :story:
+
+ODB has good support for schema migration. We need to make sure Dogen
+uses it.
+
+Links:
+
+- [[https://www.codesynthesis.com/products/odb/doc/manual.xhtml][C++ Object Persistence with ODB]]: section "13.1 Object Model Version
+  and Changelog" and "13.2 Schema Migration"
+
 *** Add ODB to the build machine                                      :story:
 
 At present we are only compiling and running the ODB tests
