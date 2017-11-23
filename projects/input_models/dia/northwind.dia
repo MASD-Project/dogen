@@ -89,7 +89,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -193,7 +193,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -644,7 +644,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1141,7 +1141,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2045,7 +2045,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2155,7 +2155,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2974,7 +2974,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3264,7 +3264,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#fafad2"/>
+        <dia:color val="#dda0dd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

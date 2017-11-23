@@ -89,7 +89,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -2274,7 +2274,7 @@ yet imposing some constraints on the shape of the data.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -8721,7 +8721,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.2414,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.242,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8729,8 +8729,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.2914,-50"/>
-        <dia:point val="22.292,-45.0502"/>
+        <dia:point val="22.292,-50"/>
+        <dia:point val="22.2923,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

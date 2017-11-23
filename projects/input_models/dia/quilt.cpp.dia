@@ -127,7 +127,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -210,7 +210,7 @@
         <dia:point val="-41.2143,241"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.2643,239.95;1.83571,305.05"/>
+        <dia:rectangle val="-41.2643,239.95;1.8357,305.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1759,7 +1759,7 @@
         <dia:point val="-17.8813,262.146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,262.096;-6.12629,265.196"/>
+        <dia:rectangle val="-17.9313,262.096;-6.1263,265.196"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17.8813,262.146"/>
@@ -1870,7 +1870,7 @@
         <dia:point val="-17.8813,250.146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,250.096;-2.78129,253.196"/>
+        <dia:rectangle val="-17.9313,250.096;-2.7813,253.196"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17.8813,250.146"/>
@@ -3582,7 +3582,7 @@
         <dia:point val="117.786,256"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.736,255.95;132.783,259.05"/>
+        <dia:rectangle val="117.736,255.95;132.784,259.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117.786,256"/>
@@ -3936,7 +3936,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -3994,7 +3994,7 @@ grammar of the C++-11 programming language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -4049,7 +4049,7 @@ C++ language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -4104,7 +4104,7 @@ C++ language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -4159,7 +4159,7 @@ of the C++ language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -4214,7 +4214,7 @@ C++ language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -4269,7 +4269,7 @@ C++ language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -6010,7 +6010,7 @@ facet of the C++ language.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -6652,7 +6652,7 @@ for a given C++ entity.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -6707,7 +6707,7 @@ and those used to generate them.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -6739,7 +6739,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.289,180.43;150.704,184.358"/>
+        <dia:rectangle val="145.288,180.43;150.704,184.358"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7082,7 +7082,7 @@ registry of all available formatters.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -7146,7 +7146,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="-11.2143,190"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.2643,189.95;-1.80929,193.05"/>
+        <dia:rectangle val="-11.2643,189.95;-1.8093,193.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-11.2143,190"/>
@@ -7419,7 +7419,7 @@ registry of all available formatters.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -8847,7 +8847,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="-17.8813,256.146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,256.096;-3.03129,259.196"/>
+        <dia:rectangle val="-17.9313,256.096;-3.0313,259.196"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17.8813,256.146"/>
@@ -10974,7 +10974,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="190.786,256"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,255.95;203.638,259.05"/>
+        <dia:rectangle val="190.736,255.95;203.639,259.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="190.786,256"/>
@@ -11085,7 +11085,7 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="211.786,256"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.736,255.95;228.618,259.05"/>
+        <dia:rectangle val="211.736,255.95;228.619,259.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="211.786,256"/>
@@ -15181,7 +15181,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -15771,7 +15771,7 @@ and element.#</dia:string>
         <dia:point val="-17.8813,268.146"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.9313,268.096;-6.08129,271.196"/>
+        <dia:rectangle val="-17.9313,268.096;-6.0813,271.196"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17.8813,268.146"/>
@@ -23158,7 +23158,7 @@ and element.#</dia:string>
         <dia:point val="-42.2143,223"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.2643,222.95;-7.01429,227.45"/>
+        <dia:rectangle val="-42.2643,222.95;-7.0143,227.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-42.2143,223"/>
@@ -23352,7 +23352,7 @@ and element.#</dia:string>
         <dia:point val="-42.2143,230"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.2643,229.95;-7.01429,234.45"/>
+        <dia:rectangle val="-42.2643,229.95;-7.0143,234.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-42.2143,230"/>
@@ -27098,7 +27098,7 @@ and element.#</dia:string>
         <dia:point val="144.786,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,293.95;157.623,297.05"/>
+        <dia:rectangle val="144.736,293.95;157.624,297.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="144.786,294"/>
@@ -27787,7 +27787,7 @@ and element.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -27875,7 +27875,7 @@ not a regular" helper.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -28871,7 +28871,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="167.786,262"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="167.736,261.95;180.738,265.05"/>
+        <dia:rectangle val="167.736,261.95;180.739,265.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="167.786,262"/>
@@ -28982,7 +28982,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="211.786,268"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="211.736,267.95;224.738,271.05"/>
+        <dia:rectangle val="211.736,267.95;224.739,271.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="211.786,268"/>
@@ -29093,7 +29093,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="-18.2143,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.2643,273.95;-1.28179,277.05"/>
+        <dia:rectangle val="-18.2643,273.95;-1.2818,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-18.2143,274"/>
@@ -29426,7 +29426,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="144.786,269"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="144.736,268.95;161.718,272.05"/>
+        <dia:rectangle val="144.736,268.95;161.719,272.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="144.786,269"/>
@@ -29537,7 +29537,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="190.786,274"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="190.736,273.95;207.718,277.05"/>
+        <dia:rectangle val="190.736,273.95;207.719,277.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="190.786,274"/>
@@ -35400,7 +35400,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="-41.2143,308"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-41.2643,306.95;1.83571,366.05"/>
+        <dia:rectangle val="-41.2643,306.95;1.8357,366.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35460,7 +35460,7 @@ an "odd" formatter.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -35858,7 +35858,7 @@ from JSON,using the RapidJson library.
         <dia:point val="-19.2143,317"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.2643,316.95;-4.11429,320.05"/>
+        <dia:rectangle val="-19.2643,316.95;-4.1143,320.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-19.2143,317"/>
@@ -36857,7 +36857,7 @@ from JSON,using the RapidJson library.
         <dia:point val="104.168,189.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.418,188.3;107.561,207.6"/>
+        <dia:rectangle val="103.418,188.3;107.561,206.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

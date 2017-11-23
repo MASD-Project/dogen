@@ -1556,7 +1556,7 @@ into its yarn representation.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -1800,7 +1800,7 @@ into its yarn representation.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -3535,7 +3535,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -3700,7 +3700,7 @@ the root of an inheritance tree.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -4184,7 +4184,7 @@ and child relationships between objects.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">

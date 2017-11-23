@@ -89,7 +89,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -3956,7 +3956,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f0e68c"/>
       </dia:attribute>
       <dia:attribute name="text">
         <dia:composite type="text">
@@ -16401,7 +16401,7 @@
         <dia:point val="179.917,-84.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="179.167,-85.55;201.882,-77.2"/>
+        <dia:rectangle val="179.167,-85.55;201.883,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

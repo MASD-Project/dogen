@@ -17,25 +17,30 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-for object in dia.active_display().diagram.data.layers[0].objects:
-    if object.type.name != "UML - Class":
-        continue;
+for layer in dia.active_display().diagram.data.layers:
+    for object in layer.objects:
+        if object.type.name == "UML - Note":
+            object.properties["fill_colour"] = "Khaki"
+            continue;
 
-    name = object.properties["name"].value
-    stereotype = object.properties["stereotype"].value
-    if "yarn::enumeration" in stereotype:
-        object.properties["fill_colour"] = "Papaya Whip"
-    elif "yarn::orm::object" in stereotype:
-        object.properties["fill_colour"] = "Pale Green"
-    elif "yarn::primitive" in stereotype:
-        object.properties["fill_colour"] = "Light Goldenrod Yellow"
-    elif "yarn::orm::value" in stereotype:
-        object.properties["fill_colour"] = "Plum"
-    elif "yarn::exception" in stereotype:
-        object.properties["fill_colour"] = "Peach Puff"
-    elif "yarn::object_template" in stereotype:
-        object.properties["fill_colour"] = "Azure"
-    elif "handcrafted" in stereotype:
-        object.properties["fill_colour"] = "Lemon Chiffon"
-    else:
-        object.properties["fill_colour"] = "Mint Cream"
+        if object.type.name != "UML - Class":
+            continue;
+
+        name = object.properties["name"].value
+        stereotype = object.properties["stereotype"].value
+        if "yarn::orm::object" in stereotype:
+            object.properties["fill_colour"] = "Pale Green"
+        elif "yarn::orm::value" in stereotype:
+            object.properties["fill_colour"] = "Plum"
+        elif "yarn::enumeration" in stereotype:
+            object.properties["fill_colour"] = "Papaya Whip"
+        elif "yarn::primitive" in stereotype:
+            object.properties["fill_colour"] = "Light Goldenrod Yellow"
+        elif "yarn::exception" in stereotype:
+            object.properties["fill_colour"] = "Peach Puff"
+        elif "yarn::object_template" in stereotype:
+            object.properties["fill_colour"] = "Azure"
+        elif "handcrafted" in stereotype:
+            object.properties["fill_colour"] = "Lemon Chiffon"
+        else:
+            object.properties["fill_colour"] = "Mint Cream"
