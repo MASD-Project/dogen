@@ -117,9 +117,9 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
             set(profiling_flags
                 "${profiling_flags} -Xclang -coverage-no-function-names-in-data")
 
-            # 407 for gcc 4.7 compatibility of the gcov format.
+            # 408 for gcc 4.8 compatibility of the gcov format.
             set(profiling_flags
-                "${profiling_flags} -Xclang -coverage-version='407*'")
+                "${profiling_flags} -Xclang -coverage-version='408*'")
         endif()
     endif()
 

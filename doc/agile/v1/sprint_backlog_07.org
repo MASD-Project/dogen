@@ -13,18 +13,19 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-29 Wed 08:27]
+#+CAPTION: Clock summary at [2017-11-29 Wed 19:54]
 | <75>                                                                        |         |   |       |       |
 | Headline                                                                    | Time    |   |       |     % |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| *Total time*                                                                | *25:22* |   |       | 100.0 |
+| *Total time*                                                                | *26:14* |   |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| Active                                                                      | 25:22   |   |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   4.1 |
-| STARTED Sprint and product backlog grooming                                 |         |   |  1:20 |   5.3 |
-| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   2.3 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  34.2 |
-| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  54.1 |
+| Active                                                                      | 26:14   |   |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   4.0 |
+| STARTED Sprint and product backlog grooming                                 |         |   |  1:20 |   5.1 |
+| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   2.2 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  33.1 |
+| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  52.3 |
+| STARTED Finish setting up coveralls                                         |         |   |  0:52 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -147,6 +148,43 @@ For some reason rtags is not working in the laptop.
 
 This was due to using symlinks to the SSD. We must make sure we setup
 the project in rtags using exactly the same path as we use in emacs.
+
+*** STARTED Finish setting up coveralls                               :story:
+    CLOCK: [2017-11-29 Wed 19:02]--[2017-11-29 Wed 19:54] =>  0:52
+
+Remaining issues:
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
+
+Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
+
+Notes:
+- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
+  broke Travis build]]
 
 *** Create a new exoelement chain                                     :story:
 

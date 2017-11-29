@@ -7309,38 +7309,6 @@ Create a set of scripts that validate packages:
 
 We had some initial support for this in commit ba54859.
 
-*** Finish setting up coveralls                                       :story:
-
-Remaining issues:
-
-- we are generating far too much output. We need to keep it quieter or
-  we will break travis.
-- we are not filtering out non-project files from initial
-  processing. There must be a gcov option to ignore files.
-
-: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
-: ------------------------------------------------------------------------------
-: File '../../../../projects/quilt/spec/main.cpp'
-: Lines executed:62.50% of 8
-: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
-:
-: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
-: Lines executed:60.00% of 20
-: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
-  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
-  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
-- we should generate coverage from the clang debug build only since
-  that is the fastest build we have. We should use the clang coverage
-  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
-
-Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
-
 *** Consider adding profiling support via build type                  :story:
 
 At present we used a dogen specific variable for profiling:
