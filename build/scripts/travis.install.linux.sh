@@ -94,7 +94,7 @@ rm -rf ${cmake_output} /tmp/${cmake_name}
 #
 # coverage
 #
-sudo pip install cpp-coveralls
+sudo pip install cpp-coveralls==0.3.12
 
 sudo apt-get clean
 echo "Cleaned cache."
