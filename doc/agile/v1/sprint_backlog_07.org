@@ -13,16 +13,18 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-17 Fri 17:38]
-| <75>                                                                        |         |   |      |       |
-| Headline                                                                    | Time    |   |      |     % |
-|-----------------------------------------------------------------------------+---------+---+------+-------|
-| *Total time*                                                                | *10:19* |   |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+---+------+-------|
-| Active                                                                      | 10:19   |   |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |   | 1:03 |  10.2 |
-| COMPLETED Remove remnants of upsilon                                        |         |   | 0:35 |   5.7 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |   | 8:41 |  84.2 |
+#+CAPTION: Clock summary at [2017-11-29 Wed 08:27]
+| <75>                                                                        |         |   |       |       |
+| Headline                                                                    | Time    |   |       |     % |
+|-----------------------------------------------------------------------------+---------+---+-------+-------|
+| *Total time*                                                                | *25:22* |   |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+---+-------+-------|
+| Active                                                                      | 25:22   |   |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   4.1 |
+| STARTED Sprint and product backlog grooming                                 |         |   |  1:20 |   5.3 |
+| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   2.3 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  34.2 |
+| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  54.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -86,6 +88,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-11-28 Tue 17:52]--[2017-11-28 Tue 18:47] =>  0:55
+    CLOCK: [2017-11-28 Tue 07:33]--[2017-11-28 Tue 07:46] =>  0:13
+    CLOCK: [2017-11-28 Tue 07:20]--[2017-11-28 Tue 07:32] =>  0:12
 
 Updates to sprint and product backlog.
 
@@ -132,7 +137,146 @@ Tasks:
   even better: user-defined? Or we can just have static and dynamic
   stereotypes.
 
-*** Create a new exoelement chain
+*** COMPLETED Fix rtags setup in laptop                               :story:
+    CLOSED: [2017-11-28 Tue 07:27]
+    CLOCK: [2017-11-10 Fri 09:10]--[2017-11-10 Fri 12:01] =>  2:51
+    CLOCK: [2017-11-10 Fri 14:05]--[2017-11-10 Fri 18:01] =>  3:56
+    CLOCK: [2017-11-11 Sat 09:05]--[2017-11-11 Sat 16:01] =>  6:56
+
+For some reason rtags is not working in the laptop.
+
+This was due to using symlinks to the SSD. We must make sure we setup
+the project in rtags using exactly the same path as we use in emacs.
+
+*** Create a new exoelement chain                                     :story:
+
+We need to create a new exoelement chain that uses the new exoelements
+to bootstrap a endomodel.
+
+*** Consider moving model names away from sewing terms                 :epic:
+
+Originally we came up with the sewing naming convention because there
+was this idea that we'd end up with a large number of little tools,
+each with their own model and binary. However, with the hindsight of
+several years of development and better understanding of the domain,
+it now seems that the big building blocks are as follows:
+
+- =frontend=: what we are calling =exomodel= at present and associated
+  types; its interface, registrar, etc; the dia and json frontends.
+- "middle-end": which we could call =modeling= core meta-model types,
+  transformations and helpers.
+- =backend=: effectively the =cpp= and =csharp= backends. Conceptually
+  these could make up the =quilt= kernel but this can just be a string
+  rather than a namespace. We are not even sure if we will ever
+  require more than one kernel. We could also call this component
+  =codegen= given its only concern is to generate code. Alternatively:
+  =generation=.
+- =templating=: wale and stitch.
+- =annotations=: this can stay as it is, though it would be nice to
+  have a class called tagged value, in keeping with the literature.
+- =formatters=: this can be renamed to =formatting=?
+- =utility=: stays as is.
+
+The big question to ask here though is what is the purpose of the code
+structure. In theory, one could be renaming and refactoring for ever,
+so there must be some kind of halting function that tells us when we
+reached some kind of stable state that is good enough. This could be
+achieved via criteria. We can come up with a laundry list of what the
+project structure should promote.
+
+Notes on project structure:
+
+- it should make it easy to add new frontends. A developer should not
+  need to know anything about the internals of yarn/modeling in order
+  to add a new frontend. The current structure fails on this regard
+  because we have merged the frontends with the middle-end.
+- it should make it easy to add new backends. This is already the
+  case, more or less, given the decoupling we've done of quilt and
+  yarn.
+- the names should provide a good indication of what the model does,
+  at least to someone familiar to the domain. We fail on this regard
+  due to the use of sewing terms which are not used commonly in the
+  model driven literature.
+- the dependencies between projects should not have cycles. This is
+  the case at present, but having said that we still have yarn
+  connected to both the frontends and the backends (even if this is
+  achieved via interfaces). An ideal world would be where the three
+  components would be linked in linear fashion only. However, one has
+  to be wary of foolish consistency here. In terms of the domain
+  literature, making everything a transform is the correct approach
+  and this is what we've achieved at present (e.g. frontends and
+  backends are merely transformations). Also the dependency is
+  cyclical only if one considers its run-time aspects rather than
+  compile time. The middle-end compiles fine in isolation, but one
+  cannot run its tests because they rely on the presence of frontends
+  and backends.
+- another way of looking at the problem is to say that we need a
+  mirror structure for frontends/middlened/backends: they all have a
+  meta-model and transforms. Each can expose transform chains. This in
+  effect moves us a bit backwards the old world where we had knit as a
+  top-level model but we don't have a good name for what "knit" would
+  be. Its responsibility would be to hook together the top-level
+  transforms. We moved away from it because knit was mainly an empty
+  model with only two or three classes, so the overhead did not
+  justify its existence.
+- if we were to move what we currently call =model= into a =backend=
+  project, and move all the associated transforms as well, we would
+  have a slightly meatier model (e.g. as opposed to =quilt= which had
+  only a couple of classes). This would also help in terms of
+  symmetry: three tiers, each with its meta-model and transforms. You
+  only need to know about the transforms on a given tier when you are
+  doing changes there. One slight wrinkle to this symmetric nirvana is
+  that we still have a =model= and a =text_model=, both of which would
+  live (presumably) in codegen. Or if not, then middleend would have a
+  similar issue (endomodel and model). The latter makes more sense. We
+  could probably get away with endomodel - in fact it becomes even
+  more meaningful, the model used for internal purposes only. All
+  other models can be rename to just "model".
+- all of this leaves us with the perennial question of who guards the
+  guardians. We need a top-level model that glues together the other
+  three. This is knit by another name. The engineering decision that
+  has to be made is whether having a trivial model like knit (for
+  which we do not have a good name) and making the project structure
+  clean outweighs having little "modelets" with very little
+  responsibility.
+
+*** Consider having a single executable for dogen                     :story:
+
+We started off by creating lots of little executables: knitter,
+darter, tailor, stitcher. Each of these has its own project,
+command-line options etc. However, now that we are concentrating all
+of the domain knowledge in yarn, it seems less useful to have so many
+executables that are simply calling yarn transforms. Instead, it may
+make more sense to use an approach similar to git and have a
+"sub-command":
+
+: dogen knit
+: dogen tailor
+
+And so forth. Of course, we could also take this opportunity and clean
+up these names to making them more meaningful to end users. Perhaps:
+
+: dogen codegen
+: dogen transform
+
+Each of these sub-commands or modes would have their own set of
+associated options. We need to figure out how this is done using boost
+program options. We also need to spend a bit of time working out the
+sub-commands to make sure they make sense across the board.
+
+In terms of names, we can't really call the project "dogen". We should
+call it something allusive to the command line, such as cli. However,
+the final binary should be called dogen or perhaps, =dogen.cli=. This
+fits in with other binaries such as =dogen.web=, =dogen.http=,
+=dogen.gui= etc.
+
+*** Add stereotypes support at the attribute level                    :story:
+
+At present dia does not have stereotypes in attributes. This means
+things like ORM primary keys etc are being supplied as tagged values;
+in reality, its more natural (from a UML perspective) to supply them
+as stereotypes. We could add some meta-data that creates a tagged
+value for stereotypes.
 
 *** Implement exomodel in terms of exoelements                        :story:
 
