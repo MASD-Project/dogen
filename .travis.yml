@@ -46,7 +46,7 @@ matrix:
       env: BUILD_TYPE=Debug COMPILER="gcc"
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Debug COMPILER="clang"
+      env: BUILD_TYPE=Debug COVERALLS="1" COMPILER="clang"
 
 addons:
   apt:
@@ -71,6 +71,9 @@ script:
     fi
   - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER} ; fi
+
+after_success:
+  coveralls
 
 notifications:
   email:
