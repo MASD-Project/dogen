@@ -24,10 +24,6 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-if(WITH_COVERALLS)
-    set(COVERALLS_SRC "${COVERALLS_SRC} ${files}" PARENT_SCOPE)
-endif()
-
 add_library(${name} STATIC ${files})
 set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(${name}

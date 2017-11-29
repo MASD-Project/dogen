@@ -13,19 +13,19 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-29 Wed 19:54]
+#+CAPTION: Clock summary at [2017-11-29 Wed 23:47]
 | <75>                                                                        |         |   |       |       |
 | Headline                                                                    | Time    |   |       |     % |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| *Total time*                                                                | *26:14* |   |       | 100.0 |
+| *Total time*                                                                | *27:46* |   |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| Active                                                                      | 26:14   |   |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   4.0 |
-| STARTED Sprint and product backlog grooming                                 |         |   |  1:20 |   5.1 |
-| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   2.2 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  33.1 |
-| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  52.3 |
-| STARTED Finish setting up coveralls                                         |         |   |  0:52 |   3.3 |
+| Active                                                                      | 27:46   |   |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   3.8 |
+| STARTED Sprint and product backlog grooming                                 |         |   |  1:20 |   4.8 |
+| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   2.1 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  31.3 |
+| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  49.4 |
+| STARTED Finish setting up coveralls                                         |         |   |  2:24 |   8.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -150,6 +150,8 @@ This was due to using symlinks to the SSD. We must make sure we setup
 the project in rtags using exactly the same path as we use in emacs.
 
 *** STARTED Finish setting up coveralls                               :story:
+    CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
+    CLOCK: [2017-11-29 Wed 21:50]--[2017-11-29 Wed 22:20] =>  0:30
     CLOCK: [2017-11-29 Wed 19:02]--[2017-11-29 Wed 19:54] =>  0:52
 
 Remaining issues:
@@ -277,6 +279,8 @@ Notes on project structure:
   which we do not have a good name) and making the project structure
   clean outweighs having little "modelets" with very little
   responsibility.
+- the model that sits at the top could be called =orchestrator= or
+  =orchestration= because it orchestrates all components.
 
 *** Consider having a single executable for dogen                     :story:
 

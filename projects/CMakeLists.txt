@@ -202,8 +202,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/wale/include
     )
 
-set(COVERALLS_SRC "")
-
 #
 # add all other projects
 #
@@ -224,11 +222,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/wale)
-
-if(WITH_COVERALLS)
-    set(COVERAGE_SRCS "${COVERALLS_SRC}")
-    coveralls_setup("${COVERAGE_SRCS}" ON "${PROJECT_SOURCE_DIR}/build/cmake")
-endif()
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)
