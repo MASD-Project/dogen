@@ -64,6 +64,7 @@ script:
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64";
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+        export PATH="/usr/local/opt/ccache/libexec:$PATH"
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
         if [[ $BUILD_TYPE == 'Release' ]]; then
             export TARGET="package";

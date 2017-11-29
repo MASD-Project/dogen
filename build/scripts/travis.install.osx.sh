@@ -29,3 +29,4 @@ extract_dir="/tmp/dogen_deps"
 curl -L -o ${output_location} ${input_location}
 mkdir ${extract_dir}
 tar -zxf ${output_location} -C ${extract_dir}
+brew install ccache
