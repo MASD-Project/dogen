@@ -73,7 +73,7 @@ script:
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER} ; fi
 
 after_success:
-  coveralls
+  - coveralls --exclude tests --gcov-options '\-lp'
 
 notifications:
   email:
