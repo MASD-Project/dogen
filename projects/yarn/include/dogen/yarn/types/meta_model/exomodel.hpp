@@ -49,10 +49,12 @@ namespace meta_model {
 
 class exomodel final {
 public:
-    exomodel() = default;
     exomodel(const exomodel&) = default;
     exomodel(exomodel&&) = default;
     ~exomodel() = default;
+
+public:
+    exomodel();
 
 public:
     exomodel(
@@ -71,7 +73,8 @@ public:
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
         const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
         const std::string& new_name,
-        const std::list<dogen::yarn::meta_model::exoelement>& elements);
+        const std::list<dogen::yarn::meta_model::exoelement>& elements,
+        const bool use_new_code);
 
 private:
     template<typename Archive>
@@ -191,6 +194,9 @@ public:
     void elements(const std::list<dogen::yarn::meta_model::exoelement>& v);
     void elements(const std::list<dogen::yarn::meta_model::exoelement>&& v);
 
+    bool use_new_code() const;
+    void use_new_code(const bool v);
+
 public:
     bool operator==(const exomodel& rhs) const;
     bool operator!=(const exomodel& rhs) const {
@@ -218,6 +224,7 @@ private:
     std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > root_module_;
     std::string new_name_;
     std::list<dogen::yarn::meta_model::exoelement> elements_;
+    bool use_new_code_;
 };
 
 } } }

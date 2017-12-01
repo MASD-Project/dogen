@@ -8466,6 +8466,7 @@
 			</attributes>
 		</item>
 	</elements>
+	<use_new_code>0</use_new_code>
 </entity>
 </boost_serialization>
 

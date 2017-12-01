@@ -222,6 +222,7 @@
 		<count>0</count>
 		<item_version>0</item_version>
 	</elements>
+	<use_new_code>0</use_new_code>
 </entity>
 </boost_serialization>
 

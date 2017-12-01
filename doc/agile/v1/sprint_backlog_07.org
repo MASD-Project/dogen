@@ -10,24 +10,26 @@
 
 * Stories
 
-* Active
+** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-01 Fri 13:14]
-| <75>                                                                        |         |   |       |       |
-| Headline                                                                    | Time    |   |       |     % |
-|-----------------------------------------------------------------------------+---------+---+-------+-------|
-| *Total time*                                                                | *31:21* |   |       | 100.0 |
-|-----------------------------------------------------------------------------+---------+---+-------+-------|
-| Active                                                                      | 31:21   |   |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   3.3 |
-| STARTED Sprint and product backlog grooming                                 |         |   |  2:08 |   6.8 |
-| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   1.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  27.7 |
-| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  43.8 |
-| STARTED Finish setting up coveralls                                         |         |   |  2:24 |   7.7 |
-| STARTED Analysis on moving naming away from sewing terms                    |         |   |  1:44 |   5.5 |
-| STARTED Create a single binary for all of dogen                             |         |   |  1:03 |   3.3 |
+#+CAPTION: Clock summary at [2017-12-01 Fri 14:24]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *32:29* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 32:29   |       |       | 100.0 |
+| Active                                                                      |         | 32:29 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   3.2 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   6.6 |
+| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.8 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  26.7 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  42.2 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   7.2 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:24 |   7.4 |
+| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   3.2 |
+| STARTED Implement exomodel in terms of exoelements                          |         |       |  0:31 |   1.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -154,46 +156,9 @@ For some reason rtags is not working in the laptop.
 This was due to using symlinks to the SSD. We must make sure we setup
 the project in rtags using exactly the same path as we use in emacs.
 
-*** STARTED Finish setting up coveralls                               :story:
-    CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
-    CLOCK: [2017-11-29 Wed 21:50]--[2017-11-29 Wed 22:20] =>  0:30
-    CLOCK: [2017-11-29 Wed 19:02]--[2017-11-29 Wed 19:54] =>  0:52
-
-Remaining issues:
-
-- we are generating far too much output. We need to keep it quieter or
-  we will break travis.
-- we are not filtering out non-project files from initial
-  processing. There must be a gcov option to ignore files.
-
-: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
-: ------------------------------------------------------------------------------
-: File '../../../../projects/quilt/spec/main.cpp'
-: Lines executed:62.50% of 8
-: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
-:
-: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
-: Lines executed:60.00% of 20
-: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
-  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
-  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
-- we should generate coverage from the clang debug build only since
-  that is the fastest build we have. We should use the clang coverage
-  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
-
-Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
-
-Notes:
-- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
-  broke Travis build]]
-
-*** STARTED Analysis on moving naming away from sewing terms           :epic:
+*** COMPLETED Analysis on moving naming away from sewing terms        :story:
+    CLOSED: [2017-12-01 Fri 13:18]
+    CLOCK: [2017-12-01 Fri 13:15]--[2017-12-01 Fri 13:52] =>  0:37
     CLOCK: [2017-11-30 Thu 07:22]--[2017-11-30 Thu 08:11] =>  0:49
     CLOCK: [2017-11-28 Tue 17:52]--[2017-11-28 Tue 18:47] =>  0:55
 
@@ -303,7 +268,7 @@ In conclusion, we'd have the following libraries:
   becomes more like formattables model; we probably need to introduce
   a class like augmented element that aggregates element and element
   properties.
-- =templates=: merges stitch and wale as namespaces.
+- =templates=: merges stitch and wale; these become namespaces.
 - =orchestration=: top-level transforms (e.g. knit, tailor). Depends
   on all other libraries.
 
@@ -312,8 +277,47 @@ And the following binaries:
 - =cli=: (producing =dogen.cli=): command-line interface for all
   functionality.
 - =web=: wt based site.
-- =http=: beat based api.
+- =http=: beast based api.
 - =server=: raw sockets api.
+
+*** STARTED Finish setting up coveralls                               :story:
+    CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
+    CLOCK: [2017-11-29 Wed 21:50]--[2017-11-29 Wed 22:20] =>  0:30
+    CLOCK: [2017-11-29 Wed 19:02]--[2017-11-29 Wed 19:54] =>  0:52
+
+Remaining issues:
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
+
+Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
+
+Notes:
+- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
+  broke Travis build]]
 
 *** STARTED Create a single binary for all of dogen                   :story:
     CLOCK: [2017-12-01 Fri 11:47]--[2017-12-01 Fri 12:50] =>  1:03
@@ -337,15 +341,118 @@ program options:
   processing with boost program_options
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
-*** Add a file format parameter to probing                            :story:
+*** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-12-01 Fri 13:53]--[2017-12-01 Fri 14:24] =>  0:31
 
-At present we are dumping all models in probing as JSON. It would be
-nice to be able to dump them as boost serialisation so we can plug
-them into tests or to reproduce some problem. It would be even nicer
-if we could plug that data back in to dogen but its not obvious how
-that would work; we need to have some kind of concept of "stages", and
-then supply the inputs and the stage so that dogen could continue from
-there.
+For details on the analysis, see the comments in the previous sprint.
+
+Notes:
+
+- now that there is no longer a mismatch between dia's model and
+  yarn's model we can probably do away with the processed object and
+  processed comment, and simply map dia directly into yarn.
+
+Tasks:
+
+- change yarn.dia to remember the "contained by" name rather than the
+  module name. Construct the object names from the contained by
+  name. Actually this won't work; the reason why we remember the
+  entire module is because we need to do a lookup in order to find the
+  module so we can update the documentation. We will still have this
+  problem when it comes to exoelements. Best to just create another
+  map this time to exoelement and follow the pattern. Actually, we can
+  clean this up slightly: create a map of exoelements
+- add exoelement, exoattribute.
+- create a parallel infrastructure in dia that populates the
+  exoelements.
+- create a new transform that converts exoelements into
+  endomodels. Somehow isolate the dia part of the pipeline so we can
+  switch between new world and old world. Actually we could very
+  simply check the exoelements container; if not empty use that,
+  otherwise use legacy.
+- once we get the dia side of the pipeline working, delete all classes
+  related to old world in yarn.dia.
+- create an hydrator that reads the new json and creates
+  exoelements. Add some basic feature switch so we can alternate
+  between new world and old world.
+
+Problems:
+
+- modules do not have a stereotype
+- add yarn element types enum to yarn and a method that given a
+  container of strings, returns the types. Use these in yarn.dia
+- add string constants for element stereotypes and use these to mark
+  the exoelements. Use this method in the stereotypes transforms in
+  yarn.
+- name does not have the module (e.g. contained by is not working).
+
+Tasks:
+
+- add a new boolean flag to switch between new world and old
+  world. Set it only on yarn.dia for now.
+- move naming transform to endomodels.
+- add code in exomodel to endomodel transform to convert exolements
+  into elements. Look at yarn.dia for this.
+- create new JSON format for exomodels. Update JSON parser to
+  read/write it. Set flag to true in JSON.
+- remove all deprecated code including scribble groups and related
+  classes.
+
+*** Rename =yarn= to =modeling=                                       :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+*** Rename =quilt.cpp= to =generation.cpp=                            :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+*** Rename =quilt.csharp= to =generation.csharp=                      :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+*** Rename =yarn.dia= to =external.dia=                               :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+*** Rename =yarn.json= to =external.json=                             :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+*** Rename =formatters= to =formatting=                               :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+*** Create the =templates= model                                      :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+Merge stitch and wale into a new model called =templates=.
+
+*** Create the =external= model                                       :story:
+
+Create a new model called =external= and move all exogenous model
+related class to it.
+
+*** Create the =generation= model                                     :story:
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+*** Create the =orchestration= model                                  :story:
+
+Create a model with the top-level transforms.
 
 *** Create a new exoelement chain                                     :story:
 
@@ -389,50 +496,6 @@ things like ORM primary keys etc are being supplied as tagged values;
 in reality, its more natural (from a UML perspective) to supply them
 as stereotypes. We could add some meta-data that creates a tagged
 value for stereotypes.
-
-*** Implement exomodel in terms of exoelements                        :story:
-
-For details on the analysis, see the comments in the previous sprint.
-
-Notes:
-
-- now that there is no longer a mismatch between dia's model and
-  yarn's model we can probably do away with the processed object and
-  processed comment, and simply map dia directly into yarn.
-
-Tasks:
-
-- change yarn.dia to remember the "contained by" name rather than the
-  module name. Construct the object names from the contained by
-  name. Actually this won't work; the reason why we remember the
-  entire module is because we need to do a lookup in order to find the
-  module so we can update the documentation. We will still have this
-  problem when it comes to exoelements. Best to just create another
-  map this time to exoelement and follow the pattern. Actually, we can
-  clean this up slightly: create a map of exoelements
-- add exoelement, exoattribute.
-- create a parallel infrastructure in dia that populates the
-  exoelements.
-- create a new transform that converts exoelements into
-  endomodels. Somehow isolate the dia part of the pipeline so we can
-  switch between new world and old world. Actually we could very
-  simply check the exoelements container; if not empty use that,
-  otherwise use legacy.
-- once we get the dia side of the pipeline working, delete all classes
-  related to old world in yarn.dia.
-- create an hydrator that reads the new json and creates
-  exoelements. Add some basic feature switch so we can alternate
-  between new world and old world.
-
-Problems:
-
-- modules do not have a stereotype
-- add yarn element types enum to yarn and a method that given a
-  container of strings, returns the types. Use these in yarn.dia
-- add string constants for element stereotypes and use these to mark
-  the exoelements. Use this method in the stereotypes transforms in
-  yarn.
-- name does not have the module (e.g. contained by is not working).
 
 *** Exclude profiles from stereotypes processing                      :story:
 
@@ -487,6 +550,16 @@ Tasks:
   interface. On build it computes the parts, generates the repository,
   etc and then supplies that to the registrar. The registrar itself is
   no longer static, just a member of the workflow.
+
+*** Add a file format parameter to probing                            :story:
+
+At present we are dumping all models in probing as JSON. It would be
+nice to be able to dump them as boost serialisation so we can plug
+them into tests or to reproduce some problem. It would be even nicer
+if we could plug that data back in to dogen but its not obvious how
+that would work; we need to have some kind of concept of "stages", and
+then supply the inputs and the stage so that dogen could continue from
+there.
 
 *** Update backend shape to match yarn                                :story:
 

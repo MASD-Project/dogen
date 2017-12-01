@@ -94,6 +94,9 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
+exomodel::exomodel()
+    : use_new_code_(static_cast<bool>(0)) { }
+
 exomodel::exomodel(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
@@ -110,7 +113,8 @@ exomodel::exomodel(
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
     const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
     const std::string& new_name,
-    const std::list<dogen::yarn::meta_model::exoelement>& elements)
+    const std::list<dogen::yarn::meta_model::exoelement>& elements,
+    const bool use_new_code)
     : name_(name),
       meta_name_(meta_name),
       documentation_(documentation),
@@ -126,7 +130,8 @@ exomodel::exomodel(
       exceptions_(exceptions),
       root_module_(root_module),
       new_name_(new_name),
-      elements_(elements) { }
+      elements_(elements),
+      use_new_code_(use_new_code) { }
 
 void exomodel::swap(exomodel& other) noexcept {
     using std::swap;
@@ -146,6 +151,7 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(root_module_, other.root_module_);
     swap(new_name_, other.new_name_);
     swap(elements_, other.elements_);
+    swap(use_new_code_, other.use_new_code_);
 }
 
 bool exomodel::operator==(const exomodel& rhs) const {
@@ -164,7 +170,8 @@ bool exomodel::operator==(const exomodel& rhs) const {
         exceptions_ == rhs.exceptions_ &&
         root_module_ == rhs.root_module_ &&
         new_name_ == rhs.new_name_ &&
-        elements_ == rhs.elements_;
+        elements_ == rhs.elements_ &&
+        use_new_code_ == rhs.use_new_code_;
 }
 
 exomodel& exomodel::operator=(exomodel other) {
@@ -427,6 +434,14 @@ void exomodel::elements(const std::list<dogen::yarn::meta_model::exoelement>& v)
 
 void exomodel::elements(const std::list<dogen::yarn::meta_model::exoelement>&& v) {
     elements_ = std::move(v);
+}
+
+bool exomodel::use_new_code() const {
+    return use_new_code_;
+}
+
+void exomodel::use_new_code(const bool v) {
+    use_new_code_ = v;
 }
 
 } } }

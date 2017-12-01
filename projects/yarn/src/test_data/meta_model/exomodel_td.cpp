@@ -296,6 +296,10 @@ std::list<dogen::yarn::meta_model::exoelement> create_std_list_dogen_yarn_meta_m
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
+}
+
 }
 
 namespace dogen {
@@ -322,6 +326,7 @@ populate(const unsigned int position, result_type& v) {
     v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 13));
     v.new_name(create_std_string(position + 14));
     v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 15));
+    v.use_new_code(create_bool(position + 16));
 }
 
 exomodel_generator::result_type

@@ -32828,6 +32828,7 @@ of the object template instantiated by the base class.
 			</attributes>
 		</item>
 	</elements>
+	<use_new_code>0</use_new_code>
 </entity>
 </boost_serialization>
 
