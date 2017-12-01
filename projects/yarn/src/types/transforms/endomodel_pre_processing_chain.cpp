@@ -24,7 +24,6 @@
 #include "dogen/yarn/types/helpers/endomodel_pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
@@ -69,13 +68,6 @@ bool endomodel_pre_processing_chain::is_language_relevant(
 
 void endomodel_pre_processing_chain::
 apply_first_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
-    /*
-     * First, update all element names and attributes to take into
-     * account the external modules and the model modules, supplied as
-     * meta-data.
-     */
-    // naming_transform::transform(ctx, em);
-
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
