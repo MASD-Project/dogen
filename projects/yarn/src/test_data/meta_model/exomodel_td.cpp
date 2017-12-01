@@ -327,6 +327,7 @@ populate(const unsigned int position, result_type& v) {
     v.new_name(create_std_string(position + 14));
     v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 15));
     v.use_new_code(create_bool(position + 16));
+    v.new_root_module(create_dogen_yarn_meta_model_exoelement(position + 17));
 }
 
 exomodel_generator::result_type

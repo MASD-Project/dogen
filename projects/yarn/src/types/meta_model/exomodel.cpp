@@ -114,7 +114,8 @@ exomodel::exomodel(
     const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
     const std::string& new_name,
     const std::list<dogen::yarn::meta_model::exoelement>& elements,
-    const bool use_new_code)
+    const bool use_new_code,
+    const dogen::yarn::meta_model::exoelement& new_root_module)
     : name_(name),
       meta_name_(meta_name),
       documentation_(documentation),
@@ -131,7 +132,8 @@ exomodel::exomodel(
       root_module_(root_module),
       new_name_(new_name),
       elements_(elements),
-      use_new_code_(use_new_code) { }
+      use_new_code_(use_new_code),
+      new_root_module_(new_root_module) { }
 
 void exomodel::swap(exomodel& other) noexcept {
     using std::swap;
@@ -152,6 +154,7 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(new_name_, other.new_name_);
     swap(elements_, other.elements_);
     swap(use_new_code_, other.use_new_code_);
+    swap(new_root_module_, other.new_root_module_);
 }
 
 bool exomodel::operator==(const exomodel& rhs) const {
@@ -171,7 +174,8 @@ bool exomodel::operator==(const exomodel& rhs) const {
         root_module_ == rhs.root_module_ &&
         new_name_ == rhs.new_name_ &&
         elements_ == rhs.elements_ &&
-        use_new_code_ == rhs.use_new_code_;
+        use_new_code_ == rhs.use_new_code_ &&
+        new_root_module_ == rhs.new_root_module_;
 }
 
 exomodel& exomodel::operator=(exomodel other) {
@@ -442,6 +446,22 @@ bool exomodel::use_new_code() const {
 
 void exomodel::use_new_code(const bool v) {
     use_new_code_ = v;
+}
+
+const dogen::yarn::meta_model::exoelement& exomodel::new_root_module() const {
+    return new_root_module_;
+}
+
+dogen::yarn::meta_model::exoelement& exomodel::new_root_module() {
+    return new_root_module_;
+}
+
+void exomodel::new_root_module(const dogen::yarn::meta_model::exoelement& v) {
+    new_root_module_ = v;
+}
+
+void exomodel::new_root_module(const dogen::yarn::meta_model::exoelement&& v) {
+    new_root_module_ = std::move(v);
 }
 
 } } }

@@ -259,6 +259,7 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
     combine(seed, v.new_name());
     combine(seed, hash_std_list_dogen_yarn_meta_model_exoelement(v.elements()));
     combine(seed, v.use_new_code());
+    combine(seed, v.new_root_module());
 
     return seed;
 }
