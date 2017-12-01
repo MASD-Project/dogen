@@ -236,8 +236,28 @@ create_location(const naming_configuration& nc) {
     return r;
 }
 
+meta_model::static_stereotypes
+exomodel_to_endomodel_transform::obtain_element_type(const std::string& n,
+    const std::list<meta_model::static_stereotypes>& ss) {
+    helpers::stereotypes_helper h;
+    auto et(h.extract_element_types(ss));
+
+    /*
+     * We can only have one yarn element types set.
+     */
+    if (et.size() == 0) {
+        BOOST_LOG_SEV(lg, warn) << missing_element_type << n;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_element_type + n));
+    } else if (et.size() > 1) {
+        BOOST_LOG_SEV(lg, warn) << too_many_element_types << n;
+        BOOST_THROW_EXCEPTION(transformation_error(too_many_element_types + n));
+    }
+
+    return et.front();
+}
+
 meta_model::endomodel exomodel_to_endomodel_transform::
-transform(const context& ctx, const meta_model::exomodel& em) {
+new_transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
@@ -246,58 +266,53 @@ transform(const context& ctx, const meta_model::exomodel& em) {
     const auto nc(make_naming_configuration(tg, ra));
     const auto l(create_location(nc));
 
-    if (em.use_new_code()) {
-        helpers::adapter a;
-        meta_model::endomodel r;
-        yarn::helpers::stereotypes_helper h;
-        for (const auto& ee : em.elements()) {
-            auto et(h.extract_element_types(ee.static_stereotypes()));
-
-            /*
-             * We can only have one yarn element types set.
-             */
-            if (et.size() > 1) {
-                BOOST_LOG_SEV(lg, warn) << too_many_element_types << ee.name();
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(too_many_element_types + ee.name()));
-            } else if (et.size() == 0) {
-                BOOST_LOG_SEV(lg, warn) << missing_element_type << ee.name();
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(missing_element_type + ee.name()));
-            }
-
-            using meta_model::static_stereotypes;
-            switch (et.front()) {
-            case static_stereotypes::object:
-                insert(a.to_object(nc, ee), r.objects());
-                break;
-            case static_stereotypes::object_template:
-                insert(a.to_object_template(nc, ee), r.object_templates());
-                break;
-            case static_stereotypes::exception:
-                insert(a.to_exception(nc, ee), r.exceptions());
-                break;
-            case static_stereotypes::primitive:
-                insert(a.to_primitive(nc, ee), r.primitives());
-                break;
-            case static_stereotypes::enumeration:
-                insert(a.to_enumeration(nc, ee), r.enumerations());
-                break;
-            case static_stereotypes::module:
-                insert(a.to_module(nc, ee), r.modules());
-                break;
-            case static_stereotypes::builtin:
-                insert(a.to_builtin(nc, ee), r.builtins());
-                break;
-            default: {
-                const auto s(boost::lexical_cast<std::string>(et.front()));
-                BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(invalid_element_type + s));
-            } }
-        }
-        return r;
+    helpers::adapter a;
+    meta_model::endomodel r;
+    for (const auto& ee : em.elements()) {
+        using meta_model::static_stereotypes;
+        const auto et(obtain_element_type(ee.name(), ee.static_stereotypes()));
+        switch (et) {
+        case static_stereotypes::object:
+            insert(a.to_object(nc, ee), r.objects());
+            break;
+        case static_stereotypes::object_template:
+            insert(a.to_object_template(nc, ee), r.object_templates());
+            break;
+        case static_stereotypes::exception:
+            insert(a.to_exception(nc, ee), r.exceptions());
+            break;
+        case static_stereotypes::primitive:
+            insert(a.to_primitive(nc, ee), r.primitives());
+            break;
+        case static_stereotypes::enumeration:
+            insert(a.to_enumeration(nc, ee), r.enumerations());
+            break;
+        case static_stereotypes::module:
+            insert(a.to_module(nc, ee), r.modules());
+            break;
+        case static_stereotypes::builtin:
+            insert(a.to_builtin(nc, ee), r.builtins());
+            break;
+        default: {
+            const auto s(boost::lexical_cast<std::string>(et));
+            BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_element_type + s));
+        } }
     }
+    return r;
+}
+
+meta_model::endomodel exomodel_to_endomodel_transform::
+old_transform(const context& ctx, const meta_model::exomodel& em) {
+    helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
+        transform_id, em.name().id(), ctx.prober(), em);
+
+    const auto& ra(em.root_module().second->annotation());
+    const auto tg(make_type_group(ctx.type_repository()));
+    const auto nc(make_naming_configuration(tg, ra));
+    const auto l(create_location(nc));
+
 
     /*
      * Compute the model name and update the root module name with it.
@@ -329,6 +344,17 @@ transform(const context& ctx, const meta_model::exomodel& em) {
 
     stp.end_transform(r);
     return r;
+}
+
+meta_model::endomodel exomodel_to_endomodel_transform::
+transform(const context& ctx, const meta_model::exomodel& em) {
+    helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
+        transform_id, em.name().id(), ctx.prober(), em);
+
+    if (em.use_new_code())
+        return new_transform(ctx, em);
+    else
+        return old_transform(ctx, em);
 }
 
 } } }

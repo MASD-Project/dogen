@@ -62,6 +62,18 @@ private:
     static meta_model::location
     create_location(const naming_configuration& nc);
 
+private:
+    static meta_model::static_stereotypes
+    obtain_element_type(const std::string& n,
+        const std::list<meta_model::static_stereotypes>& ss);
+
+private:
+    static meta_model::endomodel
+    new_transform(const context& ctx, const meta_model::exomodel& em);
+
+    static meta_model::endomodel
+    old_transform(const context& ctx, const meta_model::exomodel& em);
+
 public:
     static meta_model::endomodel
     transform(const context& ctx, const meta_model::exomodel& em);

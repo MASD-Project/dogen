@@ -343,6 +343,7 @@ program options:
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-12-01 Fri 23:06]--[2017-12-01 Fri 23:20] =>  0:14
     CLOCK: [2017-12-01 Fri 22:46]--[2017-12-01 Fri 23:05] =>  0:19
     CLOCK: [2017-12-01 Fri 22:35]--[2017-12-01 Fri 22:45] =>  0:10
     CLOCK: [2017-12-01 Fri 21:14]--[2017-12-01 Fri 22:34] =>  1:20
@@ -401,6 +402,7 @@ Tasks:
 - move naming transform to endomodels.
 - add code in exomodel to endomodel transform to convert exolements
   into elements. Look at yarn.dia for this.
+- handle root module in terms of exoelements.
 - create new JSON format for exomodels. Update JSON parser to
   read/write it. Set flag to true in JSON.
 - remove all deprecated code including scribble groups and related
