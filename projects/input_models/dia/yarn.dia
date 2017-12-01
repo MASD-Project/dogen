@@ -48319,13 +48319,13 @@ defined stereotypes.#</dia:string>
         <dia:point val="73,144"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,143.95;104.35,147.65"/>
+        <dia:rectangle val="72.95,143.95;116.285,147.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,144"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.300000000000001"/>
+        <dia:real val="43.234999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -48450,6 +48450,23 @@ defined stereotypes.#</dia:string>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#nc#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const naming_configuration&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#ee#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
@@ -48476,19 +48493,19 @@ defined stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O357">
       <dia:attribute name="obj_pos">
-        <dia:point val="114,144"/>
+        <dia:point val="129,144"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.95,143.95;126.1,147.65"/>
+        <dia:rectangle val="128.95,143.95;141.1,148.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="114,144"/>
+        <dia:point val="129,144"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#naming_configuration#</dia:string>
@@ -48624,6 +48641,29 @@ defined stereotypes.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#in_global_module#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the type is placed in the global module.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -48737,19 +48777,19 @@ defined stereotypes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="104.3,144"/>
+        <dia:point val="116.235,144"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.55,139.2;120.225,145.6"/>
+        <dia:rectangle val="115.485,139.2;135.225,145.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="104.3,144"/>
-        <dia:point val="104.3,140"/>
-        <dia:point val="120.025,140"/>
-        <dia:point val="120.025,144"/>
+        <dia:point val="116.235,144"/>
+        <dia:point val="116.235,140"/>
+        <dia:point val="135.025,140"/>
+        <dia:point val="135.025,144"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

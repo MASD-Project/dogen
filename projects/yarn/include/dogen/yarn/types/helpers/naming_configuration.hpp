@@ -35,15 +35,18 @@ namespace helpers {
 
 class naming_configuration final {
 public:
-    naming_configuration() = default;
     naming_configuration(const naming_configuration&) = default;
     naming_configuration(naming_configuration&&) = default;
     ~naming_configuration() = default;
 
 public:
+    naming_configuration();
+
+public:
     naming_configuration(
         const std::string& external_modules,
-        const std::string& model_modules);
+        const std::string& model_modules,
+        const bool in_global_module);
 
 private:
     template<typename Archive>
@@ -63,6 +66,14 @@ public:
     void model_modules(const std::string& v);
     void model_modules(const std::string&& v);
 
+    /**
+     * @brief If true, the type is placed in the global module.
+     */
+    /**@{*/
+    bool in_global_module() const;
+    void in_global_module(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const naming_configuration& rhs) const;
     bool operator!=(const naming_configuration& rhs) const {
@@ -76,6 +87,7 @@ public:
 private:
     std::string external_modules_;
     std::string model_modules_;
+    bool in_global_module_;
 };
 
 } } }

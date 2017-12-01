@@ -39,6 +39,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("external_modules", v.external_modules_);
     ar << make_nvp("model_modules", v.model_modules_);
+    ar << make_nvp("in_global_module", v.in_global_module_);
 }
 
 template<typename Archive>
@@ -47,6 +48,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("external_modules", v.external_modules_);
     ar >> make_nvp("model_modules", v.model_modules_);
+    ar >> make_nvp("in_global_module", v.in_global_module_);
 }
 
 } }

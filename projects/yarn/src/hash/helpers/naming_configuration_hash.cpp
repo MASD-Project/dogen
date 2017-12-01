@@ -39,6 +39,7 @@ std::size_t naming_configuration_hasher::hash(const naming_configuration& v) {
 
     combine(seed, v.external_modules());
     combine(seed, v.model_modules());
+    combine(seed, v.in_global_module());
 
     return seed;
 }

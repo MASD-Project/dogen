@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/helpers/naming_configuration_io.hpp"
 
@@ -35,10 +36,17 @@ namespace yarn {
 namespace helpers {
 
 std::ostream& operator<<(std::ostream& s, const naming_configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::helpers::naming_configuration\"" << ", "
       << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
-      << "\"model_modules\": " << "\"" << tidy_up_string(v.model_modules()) << "\""
+      << "\"model_modules\": " << "\"" << tidy_up_string(v.model_modules()) << "\"" << ", "
+      << "\"in_global_module\": " << v.in_global_module()
       << " }";
     return(s);
 }

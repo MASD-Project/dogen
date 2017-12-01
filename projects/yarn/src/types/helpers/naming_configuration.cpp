@@ -24,21 +24,28 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
+naming_configuration::naming_configuration()
+    : in_global_module_(static_cast<bool>(0)) { }
+
 naming_configuration::naming_configuration(
     const std::string& external_modules,
-    const std::string& model_modules)
+    const std::string& model_modules,
+    const bool in_global_module)
     : external_modules_(external_modules),
-      model_modules_(model_modules) { }
+      model_modules_(model_modules),
+      in_global_module_(in_global_module) { }
 
 void naming_configuration::swap(naming_configuration& other) noexcept {
     using std::swap;
     swap(external_modules_, other.external_modules_);
     swap(model_modules_, other.model_modules_);
+    swap(in_global_module_, other.in_global_module_);
 }
 
 bool naming_configuration::operator==(const naming_configuration& rhs) const {
     return external_modules_ == rhs.external_modules_ &&
-        model_modules_ == rhs.model_modules_;
+        model_modules_ == rhs.model_modules_ &&
+        in_global_module_ == rhs.in_global_module_;
 }
 
 naming_configuration& naming_configuration::operator=(naming_configuration other) {
@@ -77,6 +84,14 @@ void naming_configuration::model_modules(const std::string& v) {
 
 void naming_configuration::model_modules(const std::string&& v) {
     model_modules_ = std::move(v);
+}
+
+bool naming_configuration::in_global_module() const {
+    return in_global_module_;
+}
+
+void naming_configuration::in_global_module(const bool v) {
+    in_global_module_ = v;
 }
 
 } } }

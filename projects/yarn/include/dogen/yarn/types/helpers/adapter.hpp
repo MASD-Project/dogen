@@ -25,26 +25,129 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <iosfwd>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/enumerator.hpp"
+#include "dogen/yarn/types/meta_model/exoattribute.hpp"
+#include "dogen/yarn/types/meta_model/exoelement.hpp"
+#include "dogen/yarn/types/helpers/naming_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
 class adapter final {
-public:
-    adapter() = default;
-    adapter(const adapter&) = default;
-    adapter(adapter&&) = default;
-    ~adapter() = default;
-    adapter& operator=(const adapter&) = default;
+private:
+    /**
+     * @brief Ensure the name is not empty.
+     */
+    void ensure_not_empty(const std::string& n) const;
+
+private:
+    /**
+     * @brief Creates a yarn name using the dia name provided.
+     *
+     * @pre n must not be empty.
+     * @pre n must be a simple name, not a qualified name.
+     */
+    meta_model::name to_name(const naming_configuration& configuration,
+        const std::string& n) const;
+
+    /**
+     * @brief Converts a processed attribute into an yarn attribute.
+     *
+     * @param a the Dia UML attribute in processed form.
+     *
+     * @pre name and type of attribute must not be empty.
+     */
+    meta_model::attribute
+    to_attribute(const naming_configuration& configuration,
+        const meta_model::exoattribute& ea) const;
+
+    /**
+     * @brief Converts a processed attribute into an yarn enumerator.
+     *
+     * @param a the Dia UML attribute in processed form.
+     *
+     * @pre name and type of attribute must not be empty.
+     */
+    meta_model::enumerator
+    to_enumerator(const naming_configuration& configuration,
+        const meta_model::exoattribute& ea) const;
+
+private:
+    /**
+     * @brief Populates the meta-model element attributes using the
+     * exoelement.
+     */
+    void populate_element(const naming_configuration& configuration,
+        const meta_model::exoelement& ee, meta_model::element& e) const;
+
+private:
+    /**
+     * @brief Converts an exoelement with a stereotype of yarn::object
+     * to a yarn object.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_object(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * yarn::object_template to a yarn object template.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_object_template(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * yarn::exception to a yarn exception.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_exception(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * yarn::primitive to a yarn primitive.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_primitive(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * yarn::enumeration to a yarn enumeration.
+     *
+     * @param po the Dia UML class containing an enumeration.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_enumeration(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * yarn::module to a yarn module.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_module(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
+
+    /**
+     * @brief Converts an exoelement with a stereotype of
+     * yarn::module to a yarn module.
+     */
+    boost::shared_ptr<meta_model::element>
+    to_builtin(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
 
 public:
-    bool operator==(const adapter& rhs) const;
-    bool operator!=(const adapter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    boost::shared_ptr<meta_model::element>
+    adapt(const naming_configuration& configuration,
+        const meta_model::exoelement& ee) const;
 };
 
 } } }
