@@ -63,7 +63,6 @@
 #include "dogen/yarn/hash/meta_model/type_parameters_hash.hpp"
 #include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/helpers/decomposition_result_hash.hpp"
-#include "dogen/yarn/hash/helpers/naming_configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/hash/meta_model/formatting_styles_hash.hpp"
 #include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"

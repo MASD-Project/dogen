@@ -63,7 +63,6 @@
 #include "dogen/yarn/serialization/meta_model/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/helpers/decomposition_result_ser.hpp"
-#include "dogen/yarn/serialization/helpers/naming_configuration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/formatting_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"

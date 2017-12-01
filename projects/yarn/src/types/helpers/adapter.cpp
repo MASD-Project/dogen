@@ -19,23 +19,10 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
-#include "dogen/yarn/types/meta_model/attribute.hpp"
-#include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn/types/helpers/adaptation_error.hpp"
 #include "dogen/yarn/types/helpers/adapter.hpp"
 
@@ -46,12 +33,6 @@ static logger lg(logger_factory("yarn.helpers.adapter"));
 
 const std::string empty_name("Name is empty.");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
-const std::string too_many_element_types(
-    "Attempting to set the yarn element type more than once. Element: ");
-const std::string missing_element_type("Missing yarn element type. Element: ");
-const std::string invalid_element_type(
-    "Invalid or usupported yarn element type: ");
-
 }
 
 namespace dogen {
@@ -65,7 +46,7 @@ void adapter::ensure_not_empty(const std::string& n) const {
     }
 }
 
-meta_model::name adapter::to_name(const naming_configuration& nc,
+meta_model::name adapter::to_name(const transforms::naming_configuration& nc,
     const std::string& n) const {
     ensure_not_empty(n);
 
@@ -77,7 +58,7 @@ meta_model::name adapter::to_name(const naming_configuration& nc,
 }
 
 meta_model::attribute
-adapter::to_attribute(const naming_configuration& /*nc*/,
+adapter::to_attribute(const transforms::naming_configuration& /*nc*/,
     const meta_model::exoattribute& ea) const {
     ensure_not_empty(ea.name());
 
@@ -89,7 +70,7 @@ adapter::to_attribute(const naming_configuration& /*nc*/,
 }
 
 meta_model::enumerator
-adapter::to_enumerator(const naming_configuration& /*nc*/,
+adapter::to_enumerator(const transforms::naming_configuration& /*nc*/,
     const meta_model::exoattribute& ea) const {
     ensure_not_empty(ea.name());
 
@@ -105,7 +86,7 @@ adapter::to_enumerator(const naming_configuration& /*nc*/,
     return r;
 }
 
-void adapter::populate_element(const naming_configuration& nc,
+void adapter::populate_element(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee, meta_model::element& e) const {
     e.origin_type(meta_model::origin_types::not_yet_determined);
     e.documentation(ee.documentation());
@@ -126,8 +107,8 @@ void adapter::populate_element(const naming_configuration& nc,
     e.name(b.build());
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_object(const naming_configuration& nc,
+boost::shared_ptr<meta_model::object>
+adapter::to_object(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to object: "
                              << ee.name();
@@ -141,8 +122,8 @@ adapter::to_object(const naming_configuration& nc,
     return r;
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_object_template(const naming_configuration& nc,
+boost::shared_ptr<meta_model::object_template>
+adapter::to_object_template(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to object template: "
                              << ee.name();
@@ -156,8 +137,8 @@ adapter::to_object_template(const naming_configuration& nc,
     return r;
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_exception(const naming_configuration& nc,
+boost::shared_ptr<meta_model::exception>
+adapter::to_exception(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to exception: "
                              << ee.name();
@@ -167,8 +148,8 @@ adapter::to_exception(const naming_configuration& nc,
     return r;
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_primitive(const naming_configuration& nc,
+boost::shared_ptr<meta_model::primitive>
+adapter::to_primitive(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to primitive: "
                              << ee.name();
@@ -178,8 +159,8 @@ adapter::to_primitive(const naming_configuration& nc,
     return r;
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_enumeration(const naming_configuration& nc,
+boost::shared_ptr<meta_model::enumeration>
+adapter::to_enumeration(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << ee.name();
@@ -193,8 +174,8 @@ adapter::to_enumeration(const naming_configuration& nc,
     return r;
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_module(const naming_configuration& nc,
+boost::shared_ptr<meta_model::module>
+adapter::to_module(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to module: "
                              << ee.name();
@@ -204,8 +185,8 @@ adapter::to_module(const naming_configuration& nc,
     return r;
 }
 
-boost::shared_ptr<meta_model::element>
-adapter::to_builtin(const naming_configuration& nc,
+boost::shared_ptr<meta_model::builtin>
+adapter::to_builtin(const transforms::naming_configuration& nc,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to builtin: "
                              << ee.name();
@@ -213,41 +194,6 @@ adapter::to_builtin(const naming_configuration& nc,
     auto r(boost::make_shared<meta_model::builtin>());
     populate_element(nc, ee, *r);
     return r;
-}
-
-boost::shared_ptr<meta_model::element>
-adapter::adapt(const naming_configuration& nc,
-    const meta_model::exoelement& ee) const {
-    yarn::helpers::stereotypes_helper h;
-    auto et(h.extract_element_types(ee.static_stereotypes()));
-
-    /*
-     * We can only have one yarn element types set.
-     */
-    if (et.size() > 1) {
-        BOOST_LOG_SEV(lg, warn) << too_many_element_types << ee.name();
-        BOOST_THROW_EXCEPTION(
-            adaptation_error(too_many_element_types + ee.name()));
-    } else if (et.size() == 0) {
-        BOOST_LOG_SEV(lg, warn) << missing_element_type << ee.name();
-        BOOST_THROW_EXCEPTION(
-            adaptation_error(missing_element_type + ee.name()));
-    }
-
-    using meta_model::static_stereotypes;
-    switch (et.front()) {
-    case static_stereotypes::object: return to_object(nc, ee);
-    case static_stereotypes::object_template: return to_object_template(nc, ee);
-    case static_stereotypes::exception: return to_exception(nc, ee);
-    case static_stereotypes::primitive: return to_primitive(nc, ee);
-    case static_stereotypes::enumeration: return to_enumeration(nc, ee);
-    case static_stereotypes::module: return to_module(nc, ee);
-    case static_stereotypes::builtin: return to_builtin(nc, ee);
-    default: {
-        const auto s(boost::lexical_cast<std::string>(et.front()));
-        BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
-        BOOST_THROW_EXCEPTION(adaptation_error(invalid_element_type + s));
-    } }
 }
 
 } } }

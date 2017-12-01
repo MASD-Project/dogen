@@ -56,8 +56,7 @@ private:
     static type_group
     make_type_group(const annotations::type_repository& atrp);
 
-    static naming_configuration
-    make_naming_configuration(const type_group& tg,
+    static naming_configuration make_naming_configuration(const type_group& tg,
         const annotations::annotation& a);
 
     static meta_model::location

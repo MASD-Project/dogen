@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/type_io.hpp"
@@ -33,12 +34,16 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen/yarn/types/helpers/adapter.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -54,6 +59,11 @@ static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_element("Element id already exists: ");
 const std::string missing_model_modules("Must supply model modules.");
+const std::string too_many_element_types(
+    "Attempting to set the yarn element type more than once. Element: ");
+const std::string missing_element_type("Missing yarn element type. Element: ");
+const std::string invalid_element_type(
+    "Invalid or usupported yarn element type: ");
 
 }
 
@@ -81,7 +91,7 @@ public:
     meta_model::name compute_model_name(const meta_model::location& l) const;
 
 private:
-    naming_configuration configuration_;
+    transforms::naming_configuration configuration_;
 };
 
 
@@ -196,7 +206,8 @@ make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-naming_configuration exomodel_to_endomodel_transform::make_naming_configuration(
+naming_configuration
+exomodel_to_endomodel_transform::make_naming_configuration(
     const type_group& tg, const annotations::annotation& a) {
 
     const annotations::entry_selector s(a);
@@ -234,6 +245,59 @@ transform(const context& ctx, const meta_model::exomodel& em) {
     const auto tg(make_type_group(ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
     const auto l(create_location(nc));
+
+    if (em.use_new_code()) {
+        helpers::adapter a;
+        meta_model::endomodel r;
+        yarn::helpers::stereotypes_helper h;
+        for (const auto& ee : em.elements()) {
+            auto et(h.extract_element_types(ee.static_stereotypes()));
+
+            /*
+             * We can only have one yarn element types set.
+             */
+            if (et.size() > 1) {
+                BOOST_LOG_SEV(lg, warn) << too_many_element_types << ee.name();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(too_many_element_types + ee.name()));
+            } else if (et.size() == 0) {
+                BOOST_LOG_SEV(lg, warn) << missing_element_type << ee.name();
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(missing_element_type + ee.name()));
+            }
+
+            using meta_model::static_stereotypes;
+            switch (et.front()) {
+            case static_stereotypes::object:
+                insert(a.to_object(nc, ee), r.objects());
+                break;
+            case static_stereotypes::object_template:
+                insert(a.to_object_template(nc, ee), r.object_templates());
+                break;
+            case static_stereotypes::exception:
+                insert(a.to_exception(nc, ee), r.exceptions());
+                break;
+            case static_stereotypes::primitive:
+                insert(a.to_primitive(nc, ee), r.primitives());
+                break;
+            case static_stereotypes::enumeration:
+                insert(a.to_enumeration(nc, ee), r.enumerations());
+                break;
+            case static_stereotypes::module:
+                insert(a.to_module(nc, ee), r.modules());
+                break;
+            case static_stereotypes::builtin:
+                insert(a.to_builtin(nc, ee), r.builtins());
+                break;
+            default: {
+                const auto s(boost::lexical_cast<std::string>(et.front()));
+                BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(invalid_element_type + s));
+            } }
+        }
+        return r;
+    }
 
     /*
      * Compute the model name and update the root module name with it.

@@ -108,7 +108,6 @@
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 #include "dogen/yarn/types/transforms/validation_error.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
-#include "dogen/yarn/types/helpers/naming_configuration.hpp"
 #include "dogen/yarn/types/helpers/new_name_tree_parser.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/yarn/types/meta_model/formatting_styles.hpp"
