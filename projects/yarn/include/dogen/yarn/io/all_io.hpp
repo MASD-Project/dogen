@@ -63,6 +63,7 @@
 #include "dogen/yarn/io/meta_model/type_parameters_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/helpers/decomposition_result_io.hpp"
+#include "dogen/yarn/io/helpers/naming_configuration_io.hpp"
 #include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
