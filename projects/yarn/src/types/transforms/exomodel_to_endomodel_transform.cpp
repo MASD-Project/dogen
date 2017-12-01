@@ -64,22 +64,6 @@ namespace transforms {
 namespace {
 
 class naming_helper {
-public:
-    naming_helper(const context& ctx, const annotations::annotation& ra);
-
-private:
-    struct type_group {
-        annotations::type external_modules;
-        annotations::type model_modules;
-    };
-
-    // friend std::ostream& operator<<(std::ostream& s, const type_group& v);
-
-    type_group make_type_group(const annotations::type_repository& atrp) const;
-
-    naming_configuration make_naming_configuration(const type_group& tg,
-        const annotations::annotation& a) const;
-
 private:
     void process_element(const meta_model::location& l,
         meta_model::element& e) const;
@@ -94,71 +78,12 @@ public:
         meta_model::object_template& ot) const;
 
 public:
-    meta_model::location create_location() const;
     meta_model::name compute_model_name(const meta_model::location& l) const;
 
 private:
     naming_configuration configuration_;
 };
 
-naming_helper::
-naming_helper(const context& ctx, const annotations::annotation& ra) {
-    const auto tg(make_type_group(ctx.type_repository()));
-    configuration_ = make_naming_configuration(tg, ra);
-}
-
-// std::ostream& operator<<(std::ostream& s, const naming_helper::type_group& v) {
-//     s << " { "
-//       << "\"__type__\": " << "\"yarn::exomodel_to_endomodel_transform::"
-//       << "type_group\"" << ", "
-//       << "\"external_modules\": " << v.external_modules << ", "
-//       << "\"model_modules\": " << v.model_modules
-//       << " }";
-//     return s;
-// }
-
-naming_helper::type_group
-naming_helper::make_type_group(const annotations::type_repository& atrp) const {
-    type_group r;
-
-    const annotations::type_repository_selector rs(atrp);
-
-    const auto& em(traits::external_modules());
-    r.external_modules = rs.select_type_by_name(em);
-
-    const auto& mm(traits::model_modules());
-    r.model_modules = rs.select_type_by_name(mm);
-
-    return r;
-}
-
-naming_configuration naming_helper::make_naming_configuration(
-    const type_group& tg, const annotations::annotation& a) const {
-
-    const annotations::entry_selector s(a);
-    if (!s.has_entry(tg.model_modules)) {
-        BOOST_LOG_SEV(lg, error) << missing_model_modules;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_model_modules));
-    }
-
-    naming_configuration r;
-    r.model_modules(s.get_text_content(tg.model_modules));
-
-    if (s.has_entry(tg.external_modules))
-        r.external_modules(s.get_text_content(tg.external_modules));
-
-    return r;
-}
-
-meta_model::location naming_helper::create_location() const {
-    helpers::location_builder b;
-    b.external_modules(configuration_.external_modules());
-    b.model_modules(configuration_.model_modules());
-
-    const auto r(b.build());
-    BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
-    return r;
-}
 
 void naming_helper::process_element(const meta_model::location& l,
     meta_model::element& e) const {
@@ -245,21 +170,75 @@ to_element_map(const naming_helper& helper, const meta_model::location& l,
     return r;
 }
 
+std::ostream& operator<<(std::ostream& s,
+    const exomodel_to_endomodel_transform::type_group& v) {
+    s << " { "
+      << "\"__type__\": " << "\"yarn::exomodel_to_endomodel_transform::"
+      << "type_group\"" << ", "
+      << "\"external_modules\": " << v.external_modules << ", "
+      << "\"model_modules\": " << v.model_modules
+      << " }";
+    return s;
+}
+
+exomodel_to_endomodel_transform::type_group exomodel_to_endomodel_transform::
+make_type_group(const annotations::type_repository& atrp) {
+    type_group r;
+
+    const annotations::type_repository_selector rs(atrp);
+
+    const auto& em(traits::external_modules());
+    r.external_modules = rs.select_type_by_name(em);
+
+    const auto& mm(traits::model_modules());
+    r.model_modules = rs.select_type_by_name(mm);
+
+    return r;
+}
+
+naming_configuration exomodel_to_endomodel_transform::make_naming_configuration(
+    const type_group& tg, const annotations::annotation& a) {
+
+    const annotations::entry_selector s(a);
+    if (!s.has_entry(tg.model_modules)) {
+        BOOST_LOG_SEV(lg, error) << missing_model_modules;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_model_modules));
+    }
+
+    naming_configuration r;
+    r.model_modules(s.get_text_content(tg.model_modules));
+
+    if (s.has_entry(tg.external_modules))
+        r.external_modules(s.get_text_content(tg.external_modules));
+
+    return r;
+}
+
+meta_model::location exomodel_to_endomodel_transform::
+create_location(const naming_configuration& nc) {
+    helpers::location_builder b;
+    b.external_modules(nc.external_modules());
+    b.model_modules(nc.model_modules());
+
+    const auto r(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
+    return r;
+}
 
 meta_model::endomodel exomodel_to_endomodel_transform::
 transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
-    /*
-     * Obtain all the properties we need to compute the model name.
-     */
-    naming_helper h(ctx, em.root_module().second->annotation());
-    const auto l(h.create_location());
+    const auto& ra(em.root_module().second->annotation());
+    const auto tg(make_type_group(ctx.type_repository()));
+    const auto nc(make_naming_configuration(tg, ra));
+    const auto l(create_location(nc));
 
     /*
      * Compute the model name and update the root module name with it.
      */
+    naming_helper h;
     meta_model::endomodel r;
     r.name(h.compute_model_name(l));
     r.root_module(em.root_module().second);

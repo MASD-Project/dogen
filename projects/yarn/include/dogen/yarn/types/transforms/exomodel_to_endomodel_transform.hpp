@@ -45,6 +45,24 @@ namespace yarn {
 namespace transforms {
 
 class exomodel_to_endomodel_transform final {
+private:
+    struct type_group {
+        annotations::type external_modules;
+        annotations::type model_modules;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    static type_group
+    make_type_group(const annotations::type_repository& atrp);
+
+    static naming_configuration
+    make_naming_configuration(const type_group& tg,
+        const annotations::annotation& a);
+
+    static meta_model::location
+    create_location(const naming_configuration& nc);
+
 public:
     static meta_model::endomodel
     transform(const context& ctx, const meta_model::exomodel& em);
