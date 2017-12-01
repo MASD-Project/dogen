@@ -34,7 +34,7 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
-#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
@@ -157,7 +157,7 @@ void naming_transform::process(const meta_model::location& l,
 }
 
 void naming_transform::
-update_names(const meta_model::location& l, meta_model::exomodel& em) {
+update_names(const meta_model::location& l, meta_model::endomodel& em) {
     process(l, em.modules());
     process(l, em.object_templates());
     process(l, em.builtins());
@@ -179,16 +179,16 @@ naming_transform::compute_model_name(const meta_model::location& l) {
 }
 
 void naming_transform::
-transform(const context& ctx, meta_model::exomodel& em) {
+transform(const context& ctx, meta_model::endomodel& em) {
     helpers::scoped_transform_probing stp(lg, "naming transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
-    const auto& ra(em.root_module().second->annotation());
+    const auto& ra(em.root_module()->annotation());
     const auto tg(make_type_group(ctx.type_repository()));
     const auto cfg(make_naming_configuration(tg, ra));
     const auto l(create_location(cfg));
     em.name(compute_model_name(l));
-    em.root_module().second->name(em.name());
+    em.root_module()->name(em.name());
     update_names(l, em);
 
     stp.end_transform(em);

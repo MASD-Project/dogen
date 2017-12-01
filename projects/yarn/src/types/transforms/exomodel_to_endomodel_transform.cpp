@@ -20,6 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -29,8 +33,12 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -45,6 +53,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_element("Element id already exists: ");
+const std::string missing_model_modules("Must supply model modules.");
 
 }
 
@@ -52,12 +61,166 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+namespace {
+
+class naming_helper {
+public:
+    naming_helper(const context& ctx, const annotations::annotation& ra);
+
+private:
+    struct type_group {
+        annotations::type external_modules;
+        annotations::type model_modules;
+    };
+
+    // friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    naming_configuration make_naming_configuration(const type_group& tg,
+        const annotations::annotation& a) const;
+
+private:
+    void process_element(const meta_model::location& l,
+        meta_model::element& e) const;
+
+    void process_attributes(const meta_model::location& l,
+        std::list<meta_model::attribute>& attrs) const;
+
+public:
+    void process(const meta_model::location& l, meta_model::element& e) const;
+    void process(const meta_model::location& l, meta_model::object& o) const;
+    void process(const meta_model::location& l,
+        meta_model::object_template& ot) const;
+
+public:
+    meta_model::location create_location() const;
+    meta_model::name compute_model_name(const meta_model::location& l) const;
+
+private:
+    naming_configuration configuration_;
+};
+
+naming_helper::
+naming_helper(const context& ctx, const annotations::annotation& ra) {
+    const auto tg(make_type_group(ctx.type_repository()));
+    configuration_ = make_naming_configuration(tg, ra);
+}
+
+// std::ostream& operator<<(std::ostream& s, const naming_helper::type_group& v) {
+//     s << " { "
+//       << "\"__type__\": " << "\"yarn::exomodel_to_endomodel_transform::"
+//       << "type_group\"" << ", "
+//       << "\"external_modules\": " << v.external_modules << ", "
+//       << "\"model_modules\": " << v.model_modules
+//       << " }";
+//     return s;
+// }
+
+naming_helper::type_group
+naming_helper::make_type_group(const annotations::type_repository& atrp) const {
+    type_group r;
+
+    const annotations::type_repository_selector rs(atrp);
+
+    const auto& em(traits::external_modules());
+    r.external_modules = rs.select_type_by_name(em);
+
+    const auto& mm(traits::model_modules());
+    r.model_modules = rs.select_type_by_name(mm);
+
+    return r;
+}
+
+naming_configuration naming_helper::make_naming_configuration(
+    const type_group& tg, const annotations::annotation& a) const {
+
+    const annotations::entry_selector s(a);
+    if (!s.has_entry(tg.model_modules)) {
+        BOOST_LOG_SEV(lg, error) << missing_model_modules;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_model_modules));
+    }
+
+    naming_configuration r;
+    r.model_modules(s.get_text_content(tg.model_modules));
+
+    if (s.has_entry(tg.external_modules))
+        r.external_modules(s.get_text_content(tg.external_modules));
+
+    return r;
+}
+
+meta_model::location naming_helper::create_location() const {
+    helpers::location_builder b;
+    b.external_modules(configuration_.external_modules());
+    b.model_modules(configuration_.model_modules());
+
+    const auto r(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
+    return r;
+}
+
+void naming_helper::process_element(const meta_model::location& l,
+    meta_model::element& e) const {
+    helpers::name_builder b;
+    b.simple_name(e.name().simple());
+
+    /*
+     * Types placed in the global module must not have any of the
+     * location properties set.
+     */
+    if (!e.in_global_module()) {
+        b.external_modules(l.external_modules());
+        b.model_modules(l.model_modules());
+        b.internal_modules(e.name().location().internal_modules());
+    }
+    e.name(b.build());
+}
+
+void naming_helper::process_attributes(const meta_model::location& l,
+    std::list<meta_model::attribute>& attrs) const {
+    for (auto& attr : attrs) {
+        helpers::name_builder b;
+        b.simple_name(attr.name().simple());
+        b.external_modules(l.external_modules());
+        b.model_modules(l.model_modules());
+        b.internal_modules(attr.name().location().internal_modules());
+        attr.name(b.build());
+    }
+}
+
+void naming_helper::
+process(const meta_model::location& l, meta_model::element& e) const {
+    process_element(l, e);
+}
+
+void naming_helper::
+process(const meta_model::location& l, meta_model::object_template& ot) const {
+    process_element(l, ot);
+}
+
+void naming_helper::
+process(const meta_model::location& l, meta_model::object& o) const {
+    process_element(l, o);
+}
+
+meta_model::name
+naming_helper::compute_model_name(const meta_model::location& l) const {
+    helpers::name_builder b(true/*model_name_mode*/);
+    b.external_modules(l.external_modules());
+    b.model_modules(l.model_modules());
+
+    const auto r(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r;
+    return r;
+}
+
+}
+
 template<typename Element>
 inline void
-insert(const std::pair<annotations::scribble_group, boost::shared_ptr<Element>>&
-    pair, std::unordered_map<std::string, boost::shared_ptr<Element>>& dst) {
-
-    const auto e(pair.second);
+insert(const boost::shared_ptr<Element>& e,
+    std::unordered_map<std::string, boost::shared_ptr<Element>>& dst) {
     const auto id(e->name().id());
     bool inserted(dst.insert(std::make_pair(id, e)).second);
     if (!inserted) {
@@ -68,29 +231,49 @@ insert(const std::pair<annotations::scribble_group, boost::shared_ptr<Element>>&
 
 template<typename Element>
 inline std::unordered_map<std::string, boost::shared_ptr<Element>>
-to_element_map(const std::list<std::pair<annotations::scribble_group,
+to_element_map(const naming_helper& helper, const meta_model::location& l,
+    const std::list<std::pair<annotations::scribble_group,
     boost::shared_ptr<Element>>>& elements) {
     std::unordered_map<std::string, boost::shared_ptr<Element>> r;
-    for (const auto pair : elements)
-        insert(pair, r);
+    for (const auto& pair : elements) {
+        auto e(pair.second);
+        helper.process(l, *e);
+        insert(e, r);
+    }
 
     return r;
 }
+
 
 meta_model::endomodel exomodel_to_endomodel_transform::
 transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
+    /*
+     * Obtain all the properties we need to compute the model name.
+     */
+    naming_helper h(ctx, em.root_module().second->annotation());
+    const auto l(h.create_location());
+
+    /*
+     * Compute the model name and update the root module name with it.
+     */
     meta_model::endomodel r;
-    r.name(em.name());
-    r.modules(to_element_map(em.modules()));
-    r.object_templates(to_element_map(em.object_templates()));
-    r.builtins(to_element_map(em.builtins()));
-    r.enumerations(to_element_map(em.enumerations()));
-    r.primitives(to_element_map(em.primitives()));
-    r.objects(to_element_map(em.objects()));
-    r.exceptions(to_element_map(em.exceptions()));
+    r.name(h.compute_model_name(l));
+    r.root_module(em.root_module().second);
+    r.root_module()->name(r.name());
+
+    /*
+     * Now update all elements and copy them across to the endomodel.
+     */
+    r.modules(to_element_map(h, l, em.modules()));
+    r.object_templates(to_element_map(h, l, em.object_templates()));
+    r.builtins(to_element_map(h, l, em.builtins()));
+    r.enumerations(to_element_map(h, l, em.enumerations()));
+    r.primitives(to_element_map(h, l, em.primitives()));
+    r.objects(to_element_map(h, l, em.objects()));
+    r.exceptions(to_element_map(h, l, em.exceptions()));
 
     /*
      * FIXME: For now, we must inject the root module into the element
@@ -98,8 +281,7 @@ transform(const context& ctx, const meta_model::exomodel& em) {
      * just process it from the root_module member variable - but this
      * will be mopped up during the formattables clean up.
      */
-    insert(em.root_module(), r.modules());
-    r.root_module(em.root_module().second);
+    insert(r.root_module(), r.modules());
 
     stp.end_transform(r);
     return r;

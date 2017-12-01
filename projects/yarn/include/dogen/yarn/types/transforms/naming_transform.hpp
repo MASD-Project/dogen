@@ -35,7 +35,7 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
-#include "dogen/yarn/types/meta_model/exomodel.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/naming_configuration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
@@ -72,17 +72,14 @@ private:
         std::list<meta_model::attribute>& attrs);
 
 private:
-    static void process(const meta_model::location& l,
-        meta_model::element& e);
+    static void process(const meta_model::location& l, meta_model::element& e);
+    static void process(const meta_model::location& l, meta_model::object& o);
     static void process(const meta_model::location& l,
         meta_model::object_template& ot);
-    static void process(const meta_model::location& l,
-        meta_model::object& o);
 
     template<typename Element>
     static void process(const meta_model::location& l,
-        std::list<std::pair<annotations::scribble_group,
-        boost::shared_ptr<Element>>>& elements) {
+        std::unordered_map<std::string, boost::shared_ptr<Element>>& elements) {
         for (auto& pair : elements)
             process(l, *pair.second);
     }
@@ -93,10 +90,10 @@ private:
 
     static meta_model::name compute_model_name(const meta_model::location& l);
     static void update_names(const meta_model::location& l,
-        meta_model::exomodel& em);
+        meta_model::endomodel& em);
 
 public:
-    static void transform(const context& ctx, meta_model::exomodel& em);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

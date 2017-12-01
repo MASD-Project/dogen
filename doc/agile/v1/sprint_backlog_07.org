@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-01 Fri 14:24]
+#+CAPTION: Clock summary at [2017-12-01 Fri 16:06]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *32:29* |       |       | 100.0 |
+| *Total time*                                                                | *33:58* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 32:29   |       |       | 100.0 |
-| Active                                                                      |         | 32:29 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   3.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   6.6 |
-| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.8 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  26.7 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  42.2 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   7.2 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:24 |   7.4 |
-| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   3.2 |
-| STARTED Implement exomodel in terms of exoelements                          |         |       |  0:31 |   1.6 |
+| Stories                                                                     | 33:58   |       |       | 100.0 |
+| Active                                                                      |         | 33:58 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   3.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   6.3 |
+| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.7 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  25.6 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  40.4 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   6.9 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:24 |   7.1 |
+| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   3.1 |
+| STARTED Implement exomodel in terms of exoelements                          |         |       |  2:00 |   5.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -342,6 +342,8 @@ program options:
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-12-01 Fri 15:58]--[2017-12-01 Fri 16:06] =>  0:08
+    CLOCK: [2017-12-01 Fri 14:25]--[2017-12-01 Fri 15:46] =>  1:21
     CLOCK: [2017-12-01 Fri 13:53]--[2017-12-01 Fri 14:24] =>  0:31
 
 For details on the analysis, see the comments in the previous sprint.

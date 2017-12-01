@@ -22,7 +22,6 @@
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 
@@ -75,18 +74,11 @@ transform(const context& ctx, const boost::filesystem::path& p) {
     auto r(t.transform(ctx, p));
 
     /*
-     * Now transform the annotations. This must be done at this point
+     * Transform the annotations. This must be done at this point
      * because the naming transform reads naming information from the
      * annotations.
      */
     annotations_transform::transform(ctx, r);
-
-    /*
-     * Finally, update all element names and attributes to take into
-     * account the external modules and the model modules, supplied as
-     * meta-data.
-     */
-    naming_transform::transform(ctx, r);
 
     stp.end_chain(r);
     return r;

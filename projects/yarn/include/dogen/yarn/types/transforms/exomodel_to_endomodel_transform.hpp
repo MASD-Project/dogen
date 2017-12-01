@@ -25,9 +25,20 @@
 #pragma once
 #endif
 
+#include <list>
+#include <iosfwd>
+#include <vector>
+#include <unordered_map>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/location.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/transforms/naming_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
