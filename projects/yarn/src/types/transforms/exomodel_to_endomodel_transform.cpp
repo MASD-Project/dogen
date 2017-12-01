@@ -84,8 +84,8 @@ private:
     void process_element(const meta_model::location& l,
         meta_model::element& e) const;
 
-    void process_attributes(const meta_model::location& l,
-        std::list<meta_model::attribute>& attrs) const;
+    // void process_attributes(const meta_model::location& l,
+    //     std::list<meta_model::attribute>& attrs) const;
 
 public:
     void process(const meta_model::location& l, meta_model::element& e) const;
@@ -177,6 +177,7 @@ void naming_helper::process_element(const meta_model::location& l,
     e.name(b.build());
 }
 
+/*
 void naming_helper::process_attributes(const meta_model::location& l,
     std::list<meta_model::attribute>& attrs) const {
     for (auto& attr : attrs) {
@@ -188,7 +189,7 @@ void naming_helper::process_attributes(const meta_model::location& l,
         attr.name(b.build());
     }
 }
-
+*/
 void naming_helper::
 process(const meta_model::location& l, meta_model::element& e) const {
     process_element(l, e);
