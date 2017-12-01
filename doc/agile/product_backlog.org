@@ -4957,24 +4957,6 @@ Things the marker can/should have:
   every time there is a new commit so perhaps we need to have this
   switched off by default.
 
-*** Move some of the more verbose logging to trace                    :story:
-
-We have a category for finer debug logging (=TRACE=) but we are not
-making use of it. There is some rather verbose logging that could be
-moved to it. Go through all the logging and move some to =TRACE=.
-
-One strategy would be to put in the final object of each workflow as
-=DEBUG= (say the expanded model, etc) but the intermediate steps as
-=TRACE=. This mirrors the way we investigate the problem: we
-could check if each sub-system has done it's job correctly, and spot
-the one that didn't; we can then just enable that one sub-system's
-=TRACE= (when that is supported).
-
-We probably should only do this at the end, as we want to make sure
-that the code generator is usable with full logging on. Or perhaps set
-the default to =TRACE=. We should also add a command line option,
-perhaps really verbose or extra verbose.
-
 *** Inline comments in =comment_formatter= are a hack                 :story:
 
 We need to tidy-up comment formatter. We had introduced
@@ -5004,18 +4986,6 @@ It would be nice to be able to create a block instead, maybe (first stab):
 : copyright_notice=Copyright (C) 2012 Kitanda <info@kitanda.co.uk>
 : modeline_group_name=emacs
 : #DOGEN_END
-
-*** Create a "utility" model like formatters for frontends            :story:
-
-We have a number of utilities that are common to several backends,
-similar to what happened to formatters. We should probably extract
-those into a common model. At present we have:
-
-- =identifier_parser=: in dia to sml but should also be used from JSON
-when we support full models.
-- "method identifier": this will be used by the merger to identify
-methods and to link them back to language specific methods. Not
-quite frontend, but not far.
 
 *** Consider adding =with= support for fluent properties              :story:
 
@@ -5053,14 +5023,6 @@ container class; it seems we do not need shared pointers at all. We
 should look into using a [[http://www.boost.org/doc/libs/1_57_0/libs/ptr_container/doc/ptr_container.html#motivation][boost pointer container]]. We do not have dogen
 support for this so we would have to add it first.
 
-*** Remove new lines from all text to be logged                       :story:
-
-We should strive to write to the log one line per "record". This makes
-grepping etc much easier. We should create a method to convert new
-lines to a marker (say =<new_line>= or whatever we are already doing
-for JSON output). This should be applied to all cases where there is a
-potential to have new lines (comments, etc).
-
 *** Attributes versus properties                                      :story:
 
 At present we have assumed that all attributes in objects should be
@@ -5084,13 +5046,6 @@ machinery. We need to build a test model for this and fix the code.
 
 We should also question if this is a valid scenario - if not we must
 add it to the validation rules.
-
-*** Remove references to namespace when within namespace              :story:
-
-Due to moving classes around, we seem to have lots of cases where code
-in a namespace (say =sml=) refers to types in that namespace with
-qualification (say =sml::qname=). We need to do a grep in each project
-to look for instances of a namespace and ensure they are valid.
 
 *** Investigate current support for =std::set= and =std::map=         :story:
 
@@ -5149,16 +5104,6 @@ boost date time library.
 
 See boost documentation: [[http://www.boost.org/doc/libs/1_53_0/doc/html/date_time/local_time.html#date_time.local_time.posix_time_zone][Posix Time Zone]]
 
-*** Use diagram files to setup test models in cmakefile               :story:
-
-In the CMakeLists for the test models we are already looping through
-all the diagrams:
-
-: foreach(dia_model ${all_dia_test_models})
-
-We should take advantage of this to define =include_directories= and
-=add_subdirectory=. At present we are doing these manually.
-
 *** Persisters only support XML                                       :story:
 
 Persister should support all archive types. At present it always
@@ -5196,11 +5141,6 @@ generate a complete serialisation solution. This only works for files
 extension. Having said that, if there was a way to supply an enum or
 such-like with the stream, we could create a class for streams and
 then implement the file one as an adaptor to the stream class.
-
-*** Setup containing module correctly in mock factory                 :story:
-
-We did not update the yarn mock model factory to populate the
-containing type. We also did not setup the members of the module.
 
 *** Consider moving =add_model_module= to flags                       :story:
 
@@ -5262,39 +5202,6 @@ directly in the global module rather than the model module. If the
 trait is used in the model or a package, all types in the containing
 scope will inherit it.
 
-*** Make features optional at compile time                            :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to ignore all facets in a model that
-I don't need so that I don't have to install unnecessary third-party
-dependencies.
-#+end_quote
-
-One scenario we haven't accounted for is for compile time
-optionality. For example, say we have several serialisation facets,
-all of them useful to a general model; however, individual users of
-that model may only be interested in one of the several
-alternatives. In these cases, users should be able to opt out from
-compiling some of the facets and only include those that they are
-interested in. This is different from the current optionality we
-support in that we allow the user to determine what to code
-generate. In this case, the mainline project wants to code generate
-all facets, but the users of the model may choose to compile only a
-subset of the facets.
-
-To implement this we need a trait - say =optional= - that when set
-results in a set of macros that get defined to protect the facet. The
-user can then pass in that macro to cmake to disable the facet. This
-is not the same as the "feature" macros we use for ODB and EOS. These
-are actually not Dogen macros, just hand-crafted macros we put in to
-allow users to compile Dogen without support for EOS and ODB.
-
-The macros should follow the standard notation of =MODEL.FACET= or
-perhaps =MODEL.FACET.FEATURE=, e.g. =cpp.boost_serialization= to make
-the whole of serialisation optional or
-=cpp.boost_serialization.main_header= to make the header optional. Not
-sure if the latter has any use.
-
 *** Add a configuration class to yarn mock factory                    :story:
 
 Every time we need to extend the mock factory we are finding we need
@@ -5314,29 +5221,6 @@ for the entire factory.
 We are deleting the entire DB schema and re-applying it for every
 invocation of the tests. This does not work on a concurrent world. We
 commented it out for now, but we need a proper solution for this.
-
-*** Move test model diagrams into main diagrams directory             :story:
-
-For some reason - lost in the mists of time - we decided to split the
-test model diagrams from the main models; the first is in the =diagrams=
-directory, the latter is in the rather non-obvious location of
-=test_data/dia_sml/input/=. All source code goes into =projects=
-though, so this seems like a spurious split. Also, the test data
-directory should really only have data that we generate as part of
-testing (e.g. where there is a pairing of expected and actual) and
-the test model diagrams are not of this kind - we never output dia
-diagrams, at least at present.
-
-The right thing to do is to move them into the =diagrams=
-directory. This is not an easy undertaking because:
-
-- there is hard-coding in the test model sets pointing to these
-- the CMake scripts rely on the location of the diagrams to copy them
-  across
-
-We should create =production= and =test= sub-directories for
-diagrams. Or we could just create a sub-directory of test models like
-we did in projects.
 
 *** Make test data generator more configurable                        :story:
 
@@ -5370,39 +5254,6 @@ that use coroutines.
 
 - [[https://kirit.com/How%2520C%252B%252B%2520coroutines%2520work/Generating%2520Iterators][Generating Iterators]]
 
-*** Forward declaration is not always correct for services            :story:
-
-In cases where we used a service as a way of declaring a stand alone
-function (such as the traversals in yarn), the forward declarations do
-not match the header file at all. In this cases we should use
-=nongeneratable= rather than =service= stereotypes, and perhaps when
-that happens we should switch off forward declarations?
-
-In addition, in some cases we may want to use a =struct= rather than a
-=class=. At present we are always forward declaring as =class= but
-sometimes declaring as =struct=.
-
-*** Refactor node according to composite pattern in dia to sml        :story:
-
-This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
-pattern. We should just follow the composite pattern.
-
-*** Use dogen models to test dogen                                    :story:
-
-We should really use the dogen models in the dogen unit tests. The
-rationale is as follows:
-
-- if somebody changes a diagram but forgets to code generate, we want
-  the build to break;
-- if somebody changes the code generator but forgets to regenerate all
-  the dogen models and verify that the code generator still works, we
-  want the build to break.
-
-This will cause some inconvenience during development because it will
-mean that some tests will fail until a feature is finished (or that
-the developer will have to continuously rebase the dogen models), but
-the advantages are important.
-
 *** Add test to check if we are writing when file contents haven't changed :story:
 
 We broke the code that detected changes and did not notice because we
@@ -5410,17 +5261,6 @@ don't have any changes around it. A simple test would be to generate
 code for a test model, read the timestamp of a file (or even all
 files), then regenerate the model and compare the timestamps. If there
 are changes, the test would fail.
-
-*** Adding new knit tests is hard                                     :story:
-
-In order to test models at the knit level one needs to first generate
-the dia input. This can be done as follows:
-
-: ./dogen_knitter --save-dia-model xml --stop-after-merging
-: -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
-
-From the bin directory. We need to make these steps a bit more
-obvious. Why do we even need this?
 
 *** Add test model for disabling XML                                  :story:
 
@@ -5433,13 +5273,6 @@ formatting on the stream depending on the built-in type.
 
 Ideally we should pass in some dynamic extensions to determine the
 formatting. We should also consider using =boost::format= for this.
-
-*** Check if we've replaced =assert_object= with =assert_file=        :story:
-
-Assert file is now able to do intelligent comparisons based on the
-extension of the file. From a cursory look, all the usages we have of
-assert object can be replaced by assert file. If that's the case we
-can also remove this function.
 
 *** Add tests for disconnected connections                            :story:
 
@@ -5495,12 +5328,6 @@ this. We should probably always ask for generators as this means less
 boiler plate code in tests. It does mean a fixed dependency on
 generators.
 
-*** Replace old style for iterations in IO                            :story:
-
-At present we are still doing C++-03 iterations in the STL IO files
-such as =vector_io=, =list_io=, etc. We should be using the new =for=
-syntax for C++-11.
-
 *** Add an includer for all includers                                 :story:
 
 #+begin_quote
@@ -5518,17 +5345,6 @@ We need to find a good use case for this.
 
 Taking into account the "[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-renaming-includers][master header]]" rename, this would be a
 "master master include" file?
-
-*** Add new equivalence operator to domain types                      :story:
-
-#+begin_quote
-*Story*: As a dogen user, I would like to know if two objects are
-equal ignoring the version properties so that I can model my domain
-more accurately.
-#+end_quote
-
-We should have an operator that compares the state of two objects
-ignoring the version (for versioned objects).
 
 *** Add run spec targets for each test                                :story:
 
@@ -6277,6 +6093,17 @@ If a key is made up of a single property, its a bit nonsensical to
 create an unversioned key. We should only generate the versioned
 key. However, it does make life easier. Wait for real world use cases
 to decide.
+
+*Add new equivalence operator to domain types that ignores version*
+
+#+begin_quote
+*Story*: As a dogen user, I would like to know if two objects are
+equal ignoring the version properties so that I can model my domain
+more accurately.
+#+end_quote
+
+We should have an operator that compares the state of two objects
+ignoring the version (for versioned objects).
 
 *** Add versioning support                                            :story:
 

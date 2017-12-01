@@ -13,19 +13,20 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-11-29 Wed 23:47]
+#+CAPTION: Clock summary at [2017-12-01 Fri 11:48]
 | <75>                                                                        |         |   |       |       |
 | Headline                                                                    | Time    |   |       |     % |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| *Total time*                                                                | *27:46* |   |       | 100.0 |
+| *Total time*                                                                | *29:55* |   |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| Active                                                                      | 27:46   |   |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   3.8 |
-| STARTED Sprint and product backlog grooming                                 |         |   |  1:20 |   4.8 |
-| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   2.1 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  31.3 |
-| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  49.4 |
-| STARTED Finish setting up coveralls                                         |         |   |  2:24 |   8.6 |
+| Active                                                                      | 29:55   |   |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   3.5 |
+| STARTED Sprint and product backlog grooming                                 |         |   |  1:45 |   5.8 |
+| COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   1.9 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  29.0 |
+| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  45.8 |
+| STARTED Finish setting up coveralls                                         |         |   |  2:24 |   8.0 |
+| STARTED Analysis on moving naming away from sewing terms                    |         |   |  1:44 |   5.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -89,7 +90,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
-    CLOCK: [2017-11-28 Tue 17:52]--[2017-11-28 Tue 18:47] =>  0:55
+    CLOCK: [2017-12-01 Fri 11:29]--[2017-12-01 Fri 11:46] =>  0:17
+    CLOCK: [2017-11-30 Fri 22:32]--[2017-11-30 Fri 23:02] =>  0:30
+    CLOCK: [2017-11-30 Thu 22:22]--[2017-11-30 Thu 22:55] =>  0:33
     CLOCK: [2017-11-28 Tue 07:33]--[2017-11-28 Tue 07:46] =>  0:13
     CLOCK: [2017-11-28 Tue 07:20]--[2017-11-28 Tue 07:32] =>  0:12
 
@@ -188,12 +191,9 @@ Notes:
 - problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
   broke Travis build]]
 
-*** Create a new exoelement chain                                     :story:
-
-We need to create a new exoelement chain that uses the new exoelements
-to bootstrap a endomodel.
-
-*** Consider moving model names away from sewing terms                 :epic:
+*** STARTED Analysis on moving naming away from sewing terms           :epic:
+    CLOCK: [2017-11-30 Thu 07:22]--[2017-11-30 Thu 08:11] =>  0:49
+    CLOCK: [2017-11-28 Tue 17:52]--[2017-11-28 Tue 18:47] =>  0:55
 
 Originally we came up with the sewing naming convention because there
 was this idea that we'd end up with a large number of little tools,
@@ -281,6 +281,52 @@ Notes on project structure:
   responsibility.
 - the model that sits at the top could be called =orchestrator= or
   =orchestration= because it orchestrates all components.
+
+In conclusion, we'd have the following libraries:
+
+- =annotations=: unchanged.
+- =formatting=: simple rename. No longer =formatters= as this is not
+  the place where all formatters are defined, but instead provides the
+  primitives for formatting.
+- =dia=: unchanged.
+- =exogenous=, including =exogenous.dia= and =exogenous.json=:
+  frontends and associated transforms. With this name, we don't have
+  to worry about finding a good name for middle-end. Also frontend and
+  backend imply there is only one way to hook together the components,
+  which is not right.
+- =modeling=: endomodel and all associated transforms and
+  helpers.
+- =codegen=, including =codegen.cpp= and =codegen.csharp=. model and
+  all associated transforms and helpers move to =codegen=. Model now
+  becomes more like formattables model; we probably need to introduce
+  a class like augmented element that aggregates element and element
+  properties.
+- =templates=: merges stitch and wale as namespaces.
+- =orchestration=: top-level transforms (e.g. knit, tailor). Depends
+  on all other libraries.
+
+And the following binaries:
+
+- =cli=: (producing =dogen.cli=): command-line interface for all
+  functionality.
+- =web=: wt based site.
+- =http=: beat based api.
+- =server=: raw sockets api.
+
+*** Add a file format parameter to probing                            :story:
+
+At present we are dumping all models in probing as JSON. It would be
+nice to be able to dump them as boost serialisation so we can plug
+them into tests or to reproduce some problem. It would be even nicer
+if we could plug that data back in to dogen but its not obvious how
+that would work; we need to have some kind of concept of "stages", and
+then supply the inputs and the stage so that dogen could continue from
+there.
+
+*** Create a new exoelement chain                                     :story:
+
+We need to create a new exoelement chain that uses the new exoelements
+to bootstrap a endomodel.
 
 *** Consider having a single executable for dogen                     :story:
 
@@ -1047,3 +1093,186 @@ empty, or contain only the types which only have connections inside
 the package, plus comments for the package, etc.
 
 ** Deprecated
+*** CANCELLED Move some of the more verbose logging to trace          :story:
+    CLOSED: [2017-11-30 Thu 22:41]
+
+We have a category for finer debug logging (=TRACE=) but we are not
+making use of it. There is some rather verbose logging that could be
+moved to it. Go through all the logging and move some to =TRACE=.
+
+One strategy would be to put in the final object of each workflow as
+=DEBUG= (say the expanded model, etc) but the intermediate steps as
+=TRACE=. This mirrors the way we investigate the problem: we
+could check if each sub-system has done it's job correctly, and spot
+the one that didn't; we can then just enable that one sub-system's
+=TRACE= (when that is supported).
+
+We probably should only do this at the end, as we want to make sure
+that the code generator is usable with full logging on. Or perhaps set
+the default to =TRACE=. We should also add a command line option,
+perhaps really verbose or extra verbose.
+
+*** CANCELLED Create a "utility" model like formatters for frontends  :story:
+    CLOSED: [2017-11-30 Thu 22:42]
+
+We have a number of utilities that are common to several backends,
+similar to what happened to formatters. We should probably extract
+those into a common model. At present we have:
+
+- =identifier_parser=: in dia to sml but should also be used from JSON
+when we support full models.
+- "method identifier": this will be used by the merger to identify
+methods and to link them back to language specific methods. Not
+quite frontend, but not far.
+*** CANCELLED Remove new lines from all text to be logged             :story:
+    CLOSED: [2017-11-30 Thu 22:43]
+
+We should strive to write to the log one line per "record". This makes
+grepping etc much easier. We should create a method to convert new
+lines to a marker (say =<new_line>= or whatever we are already doing
+for JSON output). This should be applied to all cases where there is a
+potential to have new lines (comments, etc).
+
+*** CANCELLED Remove references to namespace when within namespace    :story:
+    CLOSED: [2017-11-30 Thu 22:44]
+
+Due to moving classes around, we seem to have lots of cases where code
+in a namespace (say =sml=) refers to types in that namespace with
+qualification (say =sml::qname=). We need to do a grep in each project
+to look for instances of a namespace and ensure they are valid.
+
+*** CANCELLED Use diagram files to setup test models in cmakefile     :story:
+    CLOSED: [2017-11-30 Thu 22:48]
+
+In the CMakeLists for the test models we are already looping through
+all the diagrams:
+
+: foreach(dia_model ${all_dia_test_models})
+
+We should take advantage of this to define =include_directories= and
+=add_subdirectory=. At present we are doing these manually.
+
+*** CANCELLED Setup containing module correctly in mock factory       :story:
+    CLOSED: [2017-11-30 Thu 22:49]
+
+We did not update the yarn mock model factory to populate the
+containing type. We also did not setup the members of the module.
+*** CANCELLED Make features optional at compile time                  :story:
+    CLOSED: [2017-11-30 Thu 22:50]
+
+#+begin_quote
+*Story*: As a dogen user, I want to ignore all facets in a model that
+I don't need so that I don't have to install unnecessary third-party
+dependencies.
+#+end_quote
+
+One scenario we haven't accounted for is for compile time
+optionality. For example, say we have several serialisation facets,
+all of them useful to a general model; however, individual users of
+that model may only be interested in one of the several
+alternatives. In these cases, users should be able to opt out from
+compiling some of the facets and only include those that they are
+interested in. This is different from the current optionality we
+support in that we allow the user to determine what to code
+generate. In this case, the mainline project wants to code generate
+all facets, but the users of the model may choose to compile only a
+subset of the facets.
+
+To implement this we need a trait - say =optional= - that when set
+results in a set of macros that get defined to protect the facet. The
+user can then pass in that macro to cmake to disable the facet. This
+is not the same as the "feature" macros we use for ODB and EOS. These
+are actually not Dogen macros, just hand-crafted macros we put in to
+allow users to compile Dogen without support for EOS and ODB.
+
+The macros should follow the standard notation of =MODEL.FACET= or
+perhaps =MODEL.FACET.FEATURE=, e.g. =cpp.boost_serialization= to make
+the whole of serialisation optional or
+=cpp.boost_serialization.main_header= to make the header optional. Not
+sure if the latter has any use.
+
+*** CANCELLED Move test model diagrams into main diagrams directory   :story:
+    CLOSED: [2017-11-30 Thu 22:52]
+
+For some reason - lost in the mists of time - we decided to split the
+test model diagrams from the main models; the first is in the =diagrams=
+directory, the latter is in the rather non-obvious location of
+=test_data/dia_sml/input/=. All source code goes into =projects=
+though, so this seems like a spurious split. Also, the test data
+directory should really only have data that we generate as part of
+testing (e.g. where there is a pairing of expected and actual) and
+the test model diagrams are not of this kind - we never output dia
+diagrams, at least at present.
+
+The right thing to do is to move them into the =diagrams=
+directory. This is not an easy undertaking because:
+
+- there is hard-coding in the test model sets pointing to these
+- the CMake scripts rely on the location of the diagrams to copy them
+  across
+
+We should create =production= and =test= sub-directories for
+diagrams. Or we could just create a sub-directory of test models like
+we did in projects.
+
+*** CANCELLED Forward declaration is not always correct for services  :story:
+    CLOSED: [2017-11-30 Thu 22:53]
+
+In cases where we used a service as a way of declaring a stand alone
+function (such as the traversals in yarn), the forward declarations do
+not match the header file at all. In this cases we should use
+=nongeneratable= rather than =service= stereotypes, and perhaps when
+that happens we should switch off forward declarations?
+
+In addition, in some cases we may want to use a =struct= rather than a
+=class=. At present we are always forward declaring as =class= but
+sometimes declaring as =struct=.
+
+*** CANCELLED Refactor node according to composite pattern in dia to sml :story:
+    CLOSED: [2017-11-30 Thu 22:54]
+
+This is not required if we decide to [[*Add%20composite%20stereotype][implement]] the composite
+pattern. We should just follow the composite pattern.
+
+*** CANCELLED Use dogen models to test dogen                          :story:
+    CLOSED: [2017-11-30 Thu 22:54]
+
+We should really use the dogen models in the dogen unit tests. The
+rationale is as follows:
+
+- if somebody changes a diagram but forgets to code generate, we want
+  the build to break;
+- if somebody changes the code generator but forgets to regenerate all
+  the dogen models and verify that the code generator still works, we
+  want the build to break.
+
+This will cause some inconvenience during development because it will
+mean that some tests will fail until a feature is finished (or that
+the developer will have to continuously rebase the dogen models), but
+the advantages are important.
+*** CANCELLED Adding new knit tests is hard                           :story:
+    CLOSED: [2017-12-01 Fri 11:41]
+
+In order to test models at the knit level one needs to first generate
+the dia input. This can be done as follows:
+
+: ./dogen_knitter --save-dia-model xml --stop-after-merging
+: -t ../../../../dogen/test_data/dia_sml/input/boost_model.dia
+
+From the bin directory. We need to make these steps a bit more
+obvious. Why do we even need this?
+
+*** CANCELLED Check if we've replaced =assert_object= with =assert_file= :story:
+    CLOSED: [2017-12-01 Fri 11:42]
+
+Assert file is now able to do intelligent comparisons based on the
+extension of the file. From a cursory look, all the usages we have of
+assert object can be replaced by assert file. If that's the case we
+can also remove this function.
+
+*** CANCELLED Replace old style for iterations in IO                  :story:
+    CLOSED: [2017-12-01 Fri 11:43]
+
+At present we are still doing C++-03 iterations in the STL IO files
+such as =vector_io=, =list_io=, etc. We should be using the new =for=
+syntax for C++-11.
