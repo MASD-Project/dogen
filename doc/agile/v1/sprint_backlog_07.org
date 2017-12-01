@@ -13,20 +13,21 @@
 * Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-01 Fri 11:48]
+#+CAPTION: Clock summary at [2017-12-01 Fri 13:14]
 | <75>                                                                        |         |   |       |       |
 | Headline                                                                    | Time    |   |       |     % |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| *Total time*                                                                | *29:55* |   |       | 100.0 |
+| *Total time*                                                                | *31:21* |   |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+---+-------+-------|
-| Active                                                                      | 29:55   |   |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   3.5 |
-| STARTED Sprint and product backlog grooming                                 |         |   |  1:45 |   5.8 |
+| Active                                                                      | 31:21   |   |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |   |  1:03 |   3.3 |
+| STARTED Sprint and product backlog grooming                                 |         |   |  2:08 |   6.8 |
 | COMPLETED Remove remnants of upsilon                                        |         |   |  0:35 |   1.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  29.0 |
-| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  45.8 |
-| STARTED Finish setting up coveralls                                         |         |   |  2:24 |   8.0 |
-| STARTED Analysis on moving naming away from sewing terms                    |         |   |  1:44 |   5.8 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |   |  8:41 |  27.7 |
+| COMPLETED Fix rtags setup in laptop                                         |         |   | 13:43 |  43.8 |
+| STARTED Finish setting up coveralls                                         |         |   |  2:24 |   7.7 |
+| STARTED Analysis on moving naming away from sewing terms                    |         |   |  1:44 |   5.5 |
+| STARTED Create a single binary for all of dogen                             |         |   |  1:03 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -90,6 +91,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-12-01 Fri 12:51]--[2017-12-01 Fri 13:14] =>  0:23
     CLOCK: [2017-12-01 Fri 11:29]--[2017-12-01 Fri 11:46] =>  0:17
     CLOCK: [2017-11-30 Fri 22:32]--[2017-11-30 Fri 23:02] =>  0:30
     CLOCK: [2017-11-30 Thu 22:22]--[2017-11-30 Thu 22:55] =>  0:33
@@ -312,6 +314,28 @@ And the following binaries:
 - =web=: wt based site.
 - =http=: beat based api.
 - =server=: raw sockets api.
+
+*** STARTED Create a single binary for all of dogen                   :story:
+    CLOCK: [2017-12-01 Fri 11:47]--[2017-12-01 Fri 12:50] =>  1:03
+
+As per analysis, we need to create a single dogen binary, like so:
+
+: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
+
+Where =COMMAND= is:
+
+- =transform=: functionality that is currently in tailor.
+- =generate=: functionality that is currently in knitter.
+- =expand=: functionality that is currently in stitcher plus expansion
+  of wale templates.
+- =make=: functionality in darter: create project, structure etc.
+
+In order to support sub-commands we need to do a lot of hackery with
+program options:
+
+- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
+  processing with boost program_options
+- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** Add a file format parameter to probing                            :story:
 

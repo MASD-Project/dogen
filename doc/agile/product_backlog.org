@@ -11,6 +11,67 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** HTTP API support                                                  :story:
+
+It should be possible to define a few classes in a diagram, annotate
+them as HTTP and have dogen generate all of the restful
+infrastructure. We should take a similar approach to ServiceStack.
+
+Notes:
+
+- the user should supply the routes as meta-data against each object,
+  as well as the HTTP verbs supported (PUT, GET, etc).
+- we should also allow the user to pair request and responses
+  DTOs. This is also done via meta-data.
+- the user should also define a top-level service class, with the
+  comments that are to be displayed on the web-page that we
+  automatically generate. The attributes of the service are the DTOs
+  it supports. However, since the service contains the implementation,
+  we can't code generate it really. We could either treat it as a
+  concept or create an interface for it that the user has to
+  implement. We could use the "lambda approach": the user just has to
+  initialise the generated code by supplying lambdas that do the
+  processing; we automatically generate all of the HTTP
+  machinery. However, we then have to worry about state.
+- we should support both XML and JSON via the same API as service
+  stack:
+
+: http://localhost:/students?format=json
+
+- it should support multiple backends, chosen via meta-data. Example:
+  casablanca/RestSDK, Boost.Beast.
+- things like hostname, port etc must be handled outside the generated
+  code.
+- insane idea: we can use stitch templates to generate HTML just like
+  with razor. Example razor template:
+
+: @using StudentReports.Models
+: @inherits ViewPage<ienumerable<student>>
+:
+: @{
+:     ViewBag.Title = "Student List";
+: }
+:
+: <div class=""row"">
+:     <div class=""panel" panel-default"="">
+:
+:                 @{
+:                     foreach (var item in Model)
+:                     {
+:
+:                     }
+:                 }
+
+- if we use stitch this means we can define classes (or even profiles)
+  and associate them with stitch and wale templates just like we do
+  with formatters. We then generate code to bind these to the API. The
+  objective is to make an interactive view of the API, not to replace
+  Wt.
+
+Links:
+
+- [[http://www.dotnetcurry.com/aspnet/1056/introducing-service-stack-tutorial][Introducing ServiceStack]]
+
 *** Add support for using object templates across models              :story:
 
 At present it is not possible to make use of a concept across models
@@ -1984,7 +2045,6 @@ entail:
 - copyright: input by user, used in CMakeFiles, etc. added to the
   licence.
 - CI support: travis, appveyor
-- EDE support:
 - CMake support: top-level CMakefiles, CPack. versioning
   templates, valgrind, doxygen. For CTest we should also generate a
   "setup cron" and "setup windows scheduler" scripts. User can just
