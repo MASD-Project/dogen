@@ -46,7 +46,7 @@ matrix:
       env: BUILD_TYPE=Debug COMPILER="gcc"
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Debug COVERALLS="1" COMPILER="clang"
+      env: BUILD_TYPE=Debug COMPILER="clang" # COVERALLS="1"
 
 addons:
   apt:
@@ -73,9 +73,9 @@ script:
   - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET}
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER} ; fi
 
-after_success:
-  - gcov --version
-  - coveralls --exclude-pattern '.*/tests/.*' --exclude-pattern '/tmp/dogen_deps/.*' --exclude-pattern '/usr/include/.*' --gcov-options '\-lp'
+# after_success:
+#  - gcov --version
+#  - coveralls --exclude-pattern '.*/tests/.*' --exclude-pattern '/tmp/dogen_deps/.*' --exclude-pattern '/usr/include/.*' --gcov-options '\-lp'
 
 notifications:
   email:
