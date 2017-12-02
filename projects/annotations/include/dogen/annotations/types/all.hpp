@@ -55,6 +55,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_group.hpp"
 #include "dogen/annotations/types/profile_hydrator.hpp"
+#include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/profile_repository.hpp"
 #include "dogen/annotations/types/instantiation_error.hpp"
