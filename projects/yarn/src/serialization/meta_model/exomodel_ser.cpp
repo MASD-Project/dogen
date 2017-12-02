@@ -65,7 +65,6 @@ void save(Archive& ar,
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
     ar << make_nvp("root_module", v.root_module_);
-    ar << make_nvp("new_name", v.new_name_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("use_new_code", v.use_new_code_);
 }
@@ -88,7 +87,6 @@ void load(Archive& ar,
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);
     ar >> make_nvp("root_module", v.root_module_);
-    ar >> make_nvp("new_name", v.new_name_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("use_new_code", v.use_new_code_);
 }

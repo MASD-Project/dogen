@@ -439,7 +439,6 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"root_module\": " << v.root_module() << ", "
-      << "\"new_name\": " << "\"" << tidy_up_string(v.new_name()) << "\"" << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"use_new_code\": " << v.use_new_code()
       << " }";

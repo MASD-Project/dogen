@@ -72,7 +72,6 @@ public:
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
         const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
-        const std::string& new_name,
         const std::list<dogen::yarn::meta_model::exoelement>& elements,
         const bool use_new_code);
 
@@ -184,11 +183,6 @@ public:
     void root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& v);
     void root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v);
 
-    const std::string& new_name() const;
-    std::string& new_name();
-    void new_name(const std::string& v);
-    void new_name(const std::string&& v);
-
     const std::list<dogen::yarn::meta_model::exoelement>& elements() const;
     std::list<dogen::yarn::meta_model::exoelement>& elements();
     void elements(const std::list<dogen::yarn::meta_model::exoelement>& v);
@@ -222,7 +216,6 @@ private:
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > > objects_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > > exceptions_;
     std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > root_module_;
-    std::string new_name_;
     std::list<dogen::yarn::meta_model::exoelement> elements_;
     bool use_new_code_;
 };

@@ -324,9 +324,8 @@ populate(const unsigned int position, result_type& v) {
     v.objects(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + 11));
     v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 12));
     v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 13));
-    v.new_name(create_std_string(position + 14));
-    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 15));
-    v.use_new_code(create_bool(position + 16));
+    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 14));
+    v.use_new_code(create_bool(position + 15));
 }
 
 exomodel_generator::result_type

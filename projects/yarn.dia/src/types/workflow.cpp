@@ -75,7 +75,6 @@ workflow::generate_model(const std::list<processed_object>& pos) {
     boost::depth_first_search(g.graph(), boost::visitor(v));
     auto r(b.build());
     const auto em2(nb.build());
-    r.new_name(em2.new_name());
     r.tagged_values(em2.tagged_values());
     r.documentation(em2.documentation());
     r.elements(em2.elements());

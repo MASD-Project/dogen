@@ -112,7 +112,6 @@ exomodel::exomodel(
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
     const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
-    const std::string& new_name,
     const std::list<dogen::yarn::meta_model::exoelement>& elements,
     const bool use_new_code)
     : name_(name),
@@ -129,7 +128,6 @@ exomodel::exomodel(
       objects_(objects),
       exceptions_(exceptions),
       root_module_(root_module),
-      new_name_(new_name),
       elements_(elements),
       use_new_code_(use_new_code) { }
 
@@ -149,7 +147,6 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
     swap(root_module_, other.root_module_);
-    swap(new_name_, other.new_name_);
     swap(elements_, other.elements_);
     swap(use_new_code_, other.use_new_code_);
 }
@@ -169,7 +166,6 @@ bool exomodel::operator==(const exomodel& rhs) const {
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
         root_module_ == rhs.root_module_ &&
-        new_name_ == rhs.new_name_ &&
         elements_ == rhs.elements_ &&
         use_new_code_ == rhs.use_new_code_;
 }
@@ -402,22 +398,6 @@ void exomodel::root_module(const std::pair<dogen::annotations::scribble_group, b
 
 void exomodel::root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
     root_module_ = std::move(v);
-}
-
-const std::string& exomodel::new_name() const {
-    return new_name_;
-}
-
-std::string& exomodel::new_name() {
-    return new_name_;
-}
-
-void exomodel::new_name(const std::string& v) {
-    new_name_ = v;
-}
-
-void exomodel::new_name(const std::string&& v) {
-    new_name_ = std::move(v);
 }
 
 const std::list<dogen::yarn::meta_model::exoelement>& exomodel::elements() const {
