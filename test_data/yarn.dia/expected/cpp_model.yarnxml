@@ -32829,30 +32829,6 @@ of the object template instantiated by the base class.
 		</item>
 	</elements>
 	<use_new_code>0</use_new_code>
-	<new_root_module>
-		<documentation></documentation>
-		<static_stereotypes>
-			<count>0</count>
-			<item_version>0</item_version>
-		</static_stereotypes>
-		<dynamic_stereotypes>
-			<count>0</count>
-			<item_version>0</item_version>
-		</dynamic_stereotypes>
-		<tagged_values>
-			<count>0</count>
-			<item_version>0</item_version>
-		</tagged_values>
-		<name></name>
-		<parents>
-			<count>0</count>
-			<item_version>0</item_version>
-		</parents>
-		<attributes>
-			<count>0</count>
-			<item_version>0</item_version>
-		</attributes>
-	</new_root_module>
 </entity>
 </boost_serialization>
 

@@ -74,8 +74,7 @@ public:
         const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
         const std::string& new_name,
         const std::list<dogen::yarn::meta_model::exoelement>& elements,
-        const bool use_new_code,
-        const dogen::yarn::meta_model::exoelement& new_root_module);
+        const bool use_new_code);
 
 private:
     template<typename Archive>
@@ -198,11 +197,6 @@ public:
     bool use_new_code() const;
     void use_new_code(const bool v);
 
-    const dogen::yarn::meta_model::exoelement& new_root_module() const;
-    dogen::yarn::meta_model::exoelement& new_root_module();
-    void new_root_module(const dogen::yarn::meta_model::exoelement& v);
-    void new_root_module(const dogen::yarn::meta_model::exoelement&& v);
-
 public:
     bool operator==(const exomodel& rhs) const;
     bool operator!=(const exomodel& rhs) const {
@@ -231,7 +225,6 @@ private:
     std::string new_name_;
     std::list<dogen::yarn::meta_model::exoelement> elements_;
     bool use_new_code_;
-    dogen::yarn::meta_model::exoelement new_root_module_;
 };
 
 } } }
