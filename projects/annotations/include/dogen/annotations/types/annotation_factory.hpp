@@ -125,6 +125,16 @@ private:
         const annotation& original) const;
 
 public:
+    /**
+     * @brief Create an annotation without profile support.
+     */
+    annotation
+    make(const std::list<std::pair<std::string, std::string>>& entries,
+        const scope_types scope) const;
+
+    /**
+     * @brief Create an annotation with profile support.
+     */
     annotation
     make(const std::list<std::pair<std::string, std::string>>& entries,
         const scope_types scope,

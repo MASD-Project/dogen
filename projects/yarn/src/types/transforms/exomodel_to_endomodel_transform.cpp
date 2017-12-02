@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
@@ -262,37 +262,45 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
-    const auto& ra(em.root_module().second->annotation());
+    const auto& f(ctx.annotation_factory());
+    const auto st(annotations::scope_types::root_module);
+    const auto ra(f.make(em.tagged_values(), st, em.dynamic_stereotypes()));
     const auto tg(make_type_group(ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
     const auto l(create_location(nc));
 
-    helpers::adapter a;
     meta_model::endomodel r;
+    helpers::name_builder b(true/*model_name_mode*/);
+    b.external_modules(l.external_modules());
+    b.model_modules(l.model_modules());
+    r.name(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
+
+    const helpers::adapter ad(ctx.annotation_factory());
     for (const auto& ee : em.elements()) {
         using meta_model::static_stereotypes;
         const auto et(obtain_element_type(ee.name(), ee.static_stereotypes()));
         switch (et) {
         case static_stereotypes::object:
-            insert(a.to_object(nc, ee), r.objects());
+            insert(ad.to_object(l, ee), r.objects());
             break;
         case static_stereotypes::object_template:
-            insert(a.to_object_template(nc, ee), r.object_templates());
+            insert(ad.to_object_template(l, ee), r.object_templates());
             break;
         case static_stereotypes::exception:
-            insert(a.to_exception(nc, ee), r.exceptions());
+            insert(ad.to_exception(l, ee), r.exceptions());
             break;
         case static_stereotypes::primitive:
-            insert(a.to_primitive(nc, ee), r.primitives());
+            insert(ad.to_primitive(l, ee), r.primitives());
             break;
         case static_stereotypes::enumeration:
-            insert(a.to_enumeration(nc, ee), r.enumerations());
+            insert(ad.to_enumeration(l, ee), r.enumerations());
             break;
         case static_stereotypes::module:
-            insert(a.to_module(nc, ee), r.modules());
+            insert(ad.to_module(false/*is_root_module*/, l, ee), r.modules());
             break;
         case static_stereotypes::builtin:
-            insert(a.to_builtin(nc, ee), r.builtins());
+            insert(ad.to_builtin(l, ee), r.builtins());
             break;
         default: {
             const auto s(boost::lexical_cast<std::string>(et));
@@ -301,6 +309,19 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
                 transformation_error(invalid_element_type + s));
         } }
     }
+
+    /*
+     * FIXME: For now, we must inject the root module into the element
+     * collection manually. This is not ideal - we should probably
+     * just process it from the root_module member variable - but this
+     * will be mopped up during the formattables clean up.
+     */
+    r.root_module(boost::make_shared<meta_model::module>());
+    r.root_module()->name(r.name());
+    r.root_module()->annotation(ra);
+    r.root_module()->documentation(em.documentation());
+    insert(r.root_module(), r.modules());
+
     return r;
 }
 
@@ -313,7 +334,6 @@ old_transform(const context& ctx, const meta_model::exomodel& em) {
     const auto tg(make_type_group(ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
     const auto l(create_location(nc));
-
 
     /*
      * Compute the model name and update the root module name with it.

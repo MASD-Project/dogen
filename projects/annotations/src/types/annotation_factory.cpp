@@ -343,32 +343,17 @@ handle_profiles(const type_group& tg, const std::unordered_map<std::string,
 
 annotation annotation_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
+    const scope_types scope) const {
+    auto aggregated_entries(aggregate_entries(entries));
+    const auto r(create_annotation(scope, aggregated_entries));
+    return r;
+}
+
+annotation annotation_factory::make(
+    const std::list<std::pair<std::string, std::string>>& entries,
     const scope_types scope,
     const std::list<std::string>& candidate_labels) const {
-
-    /*
-     * First we aggregate entries by key.
-     */
-    auto aggregated_entries(aggregate_entries(entries));
-
-    /*
-     * Then we create the annotation as it was read out from the
-     * entries.
-     */
-    const auto original(create_annotation(scope, aggregated_entries));
-
-    /*
-     * If we are processing an annotation for an attribute or an
-     * operation, there is nothing left to do as they do not support
-     * profile expansion.
-     */
-    if (scope == scope_types::property || scope == scope_types::operation)
-        return original;
-
-    /*
-     * On all other cases, we need to augment the annotation with any
-     * profiles that match the candidate labels.
-     */
+    const auto original(make(entries, scope));
     const auto& cl(candidate_labels);
     const auto r(handle_profiles(type_group_, profiles_, cl, original));
     return r;

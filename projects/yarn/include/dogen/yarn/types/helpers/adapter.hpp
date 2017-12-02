@@ -28,6 +28,9 @@
 #include <string>
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/scope_types.hpp"
+#include "dogen/annotations/types/annotation_factory.hpp"
+#include "dogen/yarn/types/meta_model/location.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
@@ -41,13 +44,15 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/exoattribute.hpp"
 #include "dogen/yarn/types/meta_model/exoelement.hpp"
-#include "dogen/yarn/types/transforms/naming_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
 class adapter final {
+public:
+    explicit adapter(const annotations::annotation_factory& f);
+
 private:
     /**
      * @brief Ensure the name is not empty.
@@ -56,34 +61,30 @@ private:
 
 private:
     /**
-     * @brief Creates a yarn name using the dia name provided.
+     * @brief Creates a yarn name using the exoelement name provided,
+     * and places it in the location provided.
+     *
+     * n may be a simple name or a qualified name.
      *
      * @pre n must not be empty.
-     * @pre n must be a simple name, not a qualified name.
      */
-    meta_model::name to_name(const transforms::naming_configuration& nc,
+    meta_model::name to_name(const meta_model::location& l,
         const std::string& n) const;
 
     /**
-     * @brief Converts a processed attribute into an yarn attribute.
-     *
-     * @param a the Dia UML attribute in processed form.
+     * @brief Converts an exoattribute to an yarn attribute.
      *
      * @pre name and type of attribute must not be empty.
      */
-    meta_model::attribute
-    to_attribute(const transforms::naming_configuration& nc,
+    meta_model::attribute to_attribute(const meta_model::location& l,
         const meta_model::exoattribute& ea) const;
 
     /**
-     * @brief Converts a processed attribute into an yarn enumerator.
-     *
-     * @param a the Dia UML attribute in processed form.
+     * @brief Converts an exoattribute to an yarn enumerator.
      *
      * @pre name and type of attribute must not be empty.
      */
-    meta_model::enumerator
-    to_enumerator(const transforms::naming_configuration& nc,
+    meta_model::enumerator to_enumerator(const meta_model::location& l,
         const meta_model::exoattribute& ea) const;
 
 private:
@@ -91,8 +92,9 @@ private:
      * @brief Populates the meta-model element attributes using the
      * exoelement.
      */
-    void populate_element(const transforms::naming_configuration& nc,
-        const meta_model::exoelement& ee, meta_model::element& e) const;
+    void populate_element(const annotations::scope_types scope,
+        const meta_model::location& l, const meta_model::exoelement& ee,
+        meta_model::element& e) const;
 
 public:
     /**
@@ -100,7 +102,7 @@ public:
      * to a yarn object.
      */
     boost::shared_ptr<meta_model::object>
-    to_object(const transforms::naming_configuration& nc,
+    to_object(const meta_model::location& l,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -108,7 +110,7 @@ public:
      * yarn::object_template to a yarn object template.
      */
     boost::shared_ptr<meta_model::object_template>
-    to_object_template(const transforms::naming_configuration& nc,
+    to_object_template(const meta_model::location& l,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -116,7 +118,7 @@ public:
      * yarn::exception to a yarn exception.
      */
     boost::shared_ptr<meta_model::exception>
-    to_exception(const transforms::naming_configuration& nc,
+    to_exception(const meta_model::location& l,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -124,17 +126,15 @@ public:
      * yarn::primitive to a yarn primitive.
      */
     boost::shared_ptr<meta_model::primitive>
-    to_primitive(const transforms::naming_configuration& nc,
+    to_primitive(const meta_model::location& l,
         const meta_model::exoelement& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
      * yarn::enumeration to a yarn enumeration.
-     *
-     * @param po the Dia UML class containing an enumeration.
      */
     boost::shared_ptr<meta_model::enumeration>
-    to_enumeration(const transforms::naming_configuration& nc,
+    to_enumeration(const meta_model::location& l,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -142,7 +142,7 @@ public:
      * yarn::module to a yarn module.
      */
     boost::shared_ptr<meta_model::module>
-    to_module(const transforms::naming_configuration& nc,
+    to_module(const bool is_root_module, const meta_model::location& l,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -150,8 +150,11 @@ public:
      * yarn::module to a yarn module.
      */
     boost::shared_ptr<meta_model::builtin>
-    to_builtin(const transforms::naming_configuration& nc,
+    to_builtin(const meta_model::location& l,
         const meta_model::exoelement& ee) const;
+
+private:
+    const annotations::annotation_factory& annotation_factory_;
 };
 
 } } }
