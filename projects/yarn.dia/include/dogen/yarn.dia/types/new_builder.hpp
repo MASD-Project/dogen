@@ -83,7 +83,8 @@ private:
     /**
      * @brief Handles the processing of UML large packages.
      */
-    void handle_uml_large_package(const processed_object& po);
+    void handle_uml_large_package(const processed_object& po,
+        const std::string& n);
 
     /**
      * @brief Handles the processing of UML notes.

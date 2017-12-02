@@ -74,6 +74,7 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.name(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());
+    r.tagged_values(po.comment().key_value_pairs());
     r.dynamic_stereotypes(po.dynamic_stereotypes());
     r.static_stereotypes(po.static_stereotypes());
 

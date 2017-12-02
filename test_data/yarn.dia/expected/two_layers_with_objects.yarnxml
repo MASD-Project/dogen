@@ -1160,7 +1160,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_1</name>
+			<name>package_1::class_1</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -1227,7 +1227,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_2</name>
+			<name>Package_2::class_2</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -1255,7 +1255,7 @@
 			</attributes>
 		</item>
 	</elements>
-	<use_new_code>0</use_new_code>
+	<use_new_code>1</use_new_code>
 </entity>
 </boost_serialization>
 

@@ -78,6 +78,7 @@ workflow::generate_model(const std::list<processed_object>& pos) {
     r.tagged_values(em2.tagged_values());
     r.documentation(em2.documentation());
     r.elements(em2.elements());
+    r.use_new_code(true);
     return r;
 }
 

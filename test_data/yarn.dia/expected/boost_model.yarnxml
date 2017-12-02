@@ -6314,7 +6314,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_c</name>
+			<name>pkg1::class_c</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -6913,8 +6913,12 @@
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>boost::posix_time::ptime</second>
+				</item>
 			</tagged_values>
 			<name>ptime_primitive</name>
 			<parents>
@@ -6939,8 +6943,12 @@
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>boost::posix_time::time_duration</second>
+				</item>
 			</tagged_values>
 			<name>time_duration_primitive</name>
 			<parents>
@@ -6965,8 +6973,12 @@
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>boost::gregorian::date</second>
+				</item>
 			</tagged_values>
 			<name>date_primitive</name>
 			<parents>
@@ -7055,7 +7067,7 @@
 			</attributes>
 		</item>
 	</elements>
-	<use_new_code>0</use_new_code>
+	<use_new_code>1</use_new_code>
 </entity>
 </boost_serialization>
 

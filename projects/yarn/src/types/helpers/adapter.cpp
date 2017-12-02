@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/string/splitter.hpp"
+#include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/adaptation_error.hpp"
@@ -58,6 +59,7 @@ void adapter::ensure_not_empty(const std::string& n) const {
 
 meta_model::name adapter::to_name(const meta_model::location& l,
     const std::string& n) const {
+    BOOST_LOG_SEV(lg, debug) << "XLocation: " << l;
     /*
      * Names are expected to be delimited by the scope operator,
      * denoting internal modules.
@@ -65,8 +67,8 @@ meta_model::name adapter::to_name(const meta_model::location& l,
     ensure_not_empty(n);
     auto tokens(utility::string::splitter::split_scoped(n));
     helpers::name_builder b;
-    b.simple_name(tokens.front());
-    tokens.pop_front();
+    b.simple_name(tokens.back());
+    tokens.pop_back();
     if (!tokens.empty())
         b.internal_modules(tokens);
 

@@ -28508,7 +28508,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_1</name>
+			<name>package_1::class_1</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -28550,7 +28550,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_4</name>
+			<name>package_1::class_4</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -28592,7 +28592,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_2</name>
+			<name>package_1::class_2</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -28634,7 +28634,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_5</name>
+			<name>package_1::class_5</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -28676,7 +28676,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_3</name>
+			<name>package_1::class_3</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -28785,7 +28785,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_1</name>
+			<name>package_2::class_1</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -28997,7 +28997,7 @@ third line with &quot;quote&quot;
 					<second>true</second>
 				</item>
 			</tagged_values>
-			<name>package_1</name>
+			<name>package_3::package_1</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -29270,8 +29270,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.enumeration.underlying_element</first>
+					<second>short</second>
+				</item>
 			</tagged_values>
 			<name>short_enum</name>
 			<parents>
@@ -29329,8 +29333,20 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>3</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.enumeration.use_implementation_defined_underlying_element</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>yarn.enumeration.use_implementation_defined_enumerator_values</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>yarn.enumeration.add_invalid_enumerator</first>
+					<second>false</second>
+				</item>
 			</tagged_values>
 			<name>test_all_knobs</name>
 			<parents>
@@ -29390,8 +29406,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.enumeration.add_invalid_enumerator</first>
+					<second>false</second>
+				</item>
 			</tagged_values>
 			<name>hex_flags</name>
 			<parents>
@@ -29548,7 +29568,7 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>shape_types</name>
+			<name>package_4::shape_types</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -29692,7 +29712,7 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>catastrophic_error</name>
+			<name>package_5::catastrophic_error</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -29716,8 +29736,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>short</second>
+				</item>
 			</tagged_values>
 			<name>immutable_primitive</name>
 			<parents>
@@ -29955,8 +29979,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>short</second>
+				</item>
 			</tagged_values>
 			<name>short_primitive</name>
 			<parents>
@@ -29981,8 +30009,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>long</second>
+				</item>
 			</tagged_values>
 			<name>long_primitive</name>
 			<parents>
@@ -30007,8 +30039,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>int</second>
+				</item>
 			</tagged_values>
 			<name>int_primitive</name>
 			<parents>
@@ -30033,8 +30069,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>char</second>
+				</item>
 			</tagged_values>
 			<name>char_primitive</name>
 			<parents>
@@ -30059,8 +30099,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>unsigned char</second>
+				</item>
 			</tagged_values>
 			<name>uchar_primitive</name>
 			<parents>
@@ -30085,8 +30129,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>unsigned long</second>
+				</item>
 			</tagged_values>
 			<name>ulong_primitive</name>
 			<parents>
@@ -30111,8 +30159,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>unsigned int</second>
+				</item>
 			</tagged_values>
 			<name>uint_primitive</name>
 			<parents>
@@ -30137,8 +30189,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>unsigned short</second>
+				</item>
 			</tagged_values>
 			<name>ushort_primitive</name>
 			<parents>
@@ -30163,8 +30219,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>double</second>
+				</item>
 			</tagged_values>
 			<name>double_primitive</name>
 			<parents>
@@ -30189,8 +30249,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>float</second>
+				</item>
 			</tagged_values>
 			<name>float_primitive</name>
 			<parents>
@@ -30215,8 +30279,12 @@ this is a long comment
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>bool</second>
+				</item>
 			</tagged_values>
 			<name>bool_primitive</name>
 			<parents>
@@ -30286,8 +30354,56 @@ this is a long comment
 				<item>handcrafted</item>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>12</count>
 				<item_version>0</item_version>
+				<item>
+					<first>quilt.cpp.hash.enabled</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>quilt.cpp.hash.overwrite</first>
+					<second>false</second>
+				</item>
+				<item>
+					<first>quilt.cpp.io.enabled</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>quilt.cpp.io.overwrite</first>
+					<second>false</second>
+				</item>
+				<item>
+					<first>quilt.cpp.odb.enabled</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>quilt.cpp.odb.overwrite</first>
+					<second>false</second>
+				</item>
+				<item>
+					<first>quilt.cpp.serialization.enabled</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>quilt.cpp.serialization.overwrite</first>
+					<second>false</second>
+				</item>
+				<item>
+					<first>quilt.cpp.test_data.enabled</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>quilt.cpp.test_data.overwrite</first>
+					<second>false</second>
+				</item>
+				<item>
+					<first>quilt.cpp.types.forward_declarations.overwrite</first>
+					<second>true</second>
+				</item>
+				<item>
+					<first>quilt.cpp.serialization.forward_declarations.overwrite</first>
+					<second>true</second>
+				</item>
 			</tagged_values>
 			<name>some_type</name>
 			<parents>
@@ -32053,8 +32169,12 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.generalization.parent</first>
+					<second>parent_with_members</second>
+				</item>
 			</tagged_values>
 			<name>child_via_settings</name>
 			<parents>
@@ -32095,8 +32215,12 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.generalization.is_final</first>
+					<second>false</second>
+				</item>
 			</tagged_values>
 			<name>non_final_leaf</name>
 			<parents>
@@ -32138,8 +32262,12 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.generalization.is_final</first>
+					<second>false</second>
+				</item>
 			</tagged_values>
 			<name>non_final_orphan</name>
 			<parents>
@@ -32208,7 +32336,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>parent</name>
+			<name>package_6::parent</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32250,11 +32378,11 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>child</name>
+			<name>package_6::child</name>
 			<parents>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>parent</item>
+				<item>package_6::parent</item>
 			</parents>
 			<attributes>
 				<count>1</count>
@@ -32290,10 +32418,14 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.generalization.parent</first>
+					<second>package_6::parent</second>
+				</item>
 			</tagged_values>
-			<name>child_via_settings</name>
+			<name>package_6::child_via_settings</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32385,7 +32517,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>parent</name>
+			<name>package_7::parent</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32427,11 +32559,11 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>child</name>
+			<name>package_8::child</name>
 			<parents>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>parent</item>
+				<item>package_7::parent</item>
 			</parents>
 			<attributes>
 				<count>1</count>
@@ -32467,10 +32599,14 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.generalization.parent</first>
+					<second>package_7::parent</second>
+				</item>
 			</tagged_values>
-			<name>child_via_settings</name>
+			<name>package_8::child_via_settings</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32534,10 +32670,14 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.generalization.parent</first>
+					<second>parent_outside</second>
+				</item>
 			</tagged_values>
-			<name>child_via_settings</name>
+			<name>package_9::child_via_settings</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32621,7 +32761,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>child</name>
+			<name>package_9::child</name>
 			<parents>
 				<count>1</count>
 				<item_version>0</item_version>
@@ -32689,7 +32829,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_2</name>
+			<name>package_2::class_2</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32773,7 +32913,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>ObjectTemplateInAPackage</name>
+			<name>package_10::ObjectTemplateInAPackage</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32816,7 +32956,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>consume_object_template</name>
+			<name>package_10::consume_object_template</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -32827,7 +32967,7 @@ of the object template instantiated by the base class.
 			</attributes>
 		</item>
 	</elements>
-	<use_new_code>0</use_new_code>
+	<use_new_code>1</use_new_code>
 </entity>
 </boost_serialization>
 

@@ -7463,7 +7463,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
-			<name>class_c</name>
+			<name>pkg1::class_c</name>
 			<parents>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -8349,8 +8349,12 @@
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.enumeration.underlying_element</first>
+					<second>std::int8_t</second>
+				</item>
 			</tagged_values>
 			<name>enum_with_std_builtin</name>
 			<parents>
@@ -8409,8 +8413,12 @@
 				<item_version>0</item_version>
 			</dynamic_stereotypes>
 			<tagged_values>
-				<count>0</count>
+				<count>1</count>
 				<item_version>0</item_version>
+				<item>
+					<first>yarn.primitive.underlying_element</first>
+					<second>std::string</second>
+				</item>
 			</tagged_values>
 			<name>string_primitive</name>
 			<parents>
@@ -8465,7 +8473,7 @@
 			</attributes>
 		</item>
 	</elements>
-	<use_new_code>0</use_new_code>
+	<use_new_code>1</use_new_code>
 </entity>
 </boost_serialization>
 

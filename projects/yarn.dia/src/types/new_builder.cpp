@@ -20,6 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/pair_io.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/new_adapter.hpp"
 #include "dogen/yarn.dia/types/new_builder.hpp"
@@ -27,7 +29,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.dia.builder"));
+static logger lg(logger_factory("yarn.dia.new_builder"));
 
 const std::string empty_contained_by;
 const std::list<std::string> empty_parents;
@@ -85,9 +87,13 @@ std::string new_builder::contained_by(const std::string& id) const {
     return empty_contained_by;
 }
 
-void new_builder::handle_uml_large_package(const processed_object& po) {
+void new_builder::
+handle_uml_large_package(const processed_object& po, const std::string& n) {
+    BOOST_LOG_SEV(lg, debug) << "Object is a UML Large package: '"
+                             << po.id() << "'. Name: " << n;
+
     uml_large_package_properties p;
-    p.name = po.name();
+    p.name = n;
 
     /*
      * We have just finished inserting the exoelement so we can be
@@ -109,8 +115,9 @@ void new_builder::handle_uml_large_package(const processed_object& po) {
 
 void new_builder::handle_uml_note(const processed_object& po) {
     const auto& c(po.comment());
-    BOOST_LOG_SEV(lg, debug) << "Object is a note: " << po.id()
-                             << ". Note text: '" << c.original_content() << "'";
+    BOOST_LOG_SEV(lg, debug) << "Object is a note: '" << po.id()
+                             << ";. Note text: '"
+                             << c.original_content() << "'";
 
     if (c.original_content().empty() || !c.applicable_to_parent_object())
         return;
@@ -123,6 +130,10 @@ void new_builder::handle_uml_note(const processed_object& po) {
          */
         model_.documentation(c.documentation());
         model_.tagged_values(c.key_value_pairs());
+        BOOST_LOG_SEV(lg, debug) << "Model documentation: '"
+                                 << c.documentation() << "'";
+        BOOST_LOG_SEV(lg, debug) << "Model tagged values: "
+                                 << c.key_value_pairs();
         return;
     }
 
@@ -144,6 +155,9 @@ void new_builder::handle_uml_note(const processed_object& po) {
 }
 
 void new_builder::add(const processed_object& po) {
+    BOOST_LOG_SEV(lg, debug) << "Processing: '" << po.id() << "'"
+                             << " Name: '" << po.name() << "'";
+
     /*
      * First, we handle UML notes. Since Dia does not support adding
      * comments directly to UML packages, we "extended" it via the use
@@ -162,18 +176,21 @@ void new_builder::add(const processed_object& po) {
      * is to figure out the containment of the current process object.
      */
     const auto& id(po.id());
-    const auto cby(contained_by(id));
+    const auto cby(contained_by(po.child_node_id()));
+    BOOST_LOG_SEV(lg, debug) << "Contained by: '" << cby << "'";
 
     /*
      * Then we get the parents for the processed object.
      */
     const auto& p(parents_for_object(id));
+    BOOST_LOG_SEV(lg, debug) << "Parents: " << p;
 
     /*
      * Now we can adapt the processed object and add it to the exomodel.
      */
     const auto e(new_adapter::adapt(po, cby, p));
     model_.elements().push_back(e);
+    BOOST_LOG_SEV(lg, debug) << "Added element: " << e.name();
 
     /*
      * Now we need to deal with the post-processing. For UML packages,
@@ -181,7 +198,7 @@ void new_builder::add(const processed_object& po) {
      * to update them with the contents of UML notes.
      */
     if (dot == dia_object_types::uml_large_package) {
-        handle_uml_large_package(po);
+        handle_uml_large_package(po, e.name());
         return;
     }
 
@@ -191,7 +208,9 @@ void new_builder::add(const processed_object& po) {
      * of the current object, not its parents (which were handled
      * above).
      */
-    update_parentage(id, po.name());
+    update_parentage(id, e.name());
+
+    BOOST_LOG_SEV(lg, debug) << "Finished processing: " << po.name();
 }
 
 meta_model::exomodel new_builder::build() {

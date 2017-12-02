@@ -87,7 +87,7 @@ void location_builder::internal_modules(const std::string& im) {
 void location_builder::internal_modules(
     const std::list<std::string>& im) {
     location_.internal_modules(im);
-    BOOST_LOG_SEV(lg, debug) << "Added external models: " << im;
+    BOOST_LOG_SEV(lg, debug) << "Added internal models: " << im;
 }
 
 void location_builder::location(const meta_model::location& l) {
