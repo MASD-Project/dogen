@@ -42,28 +42,6 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-void validator::validate_yarn(const processed_object& po) {
-    /*
-     * We only have validation rules for yarn objects and primitives;
-     * if we're neither, there's nothing to do.
-     */
-    if (po.yarn_element_type() == yarn_element_types::object ||
-        po.yarn_element_type() == yarn_element_types::primitive)
-        return;
-
-    /*
-     * Stereotypes - other than type-related ones - can only be used
-     * by yarn objects and primitives.
-     */
-    if (!po.dynamic_stereotypes().empty()) {
-        BOOST_LOG_SEV(lg, error) << invalid_use_of_stereotypes
-                                 << " Stereotypes used: "
-                                 << po.dynamic_stereotypes();
-        BOOST_THROW_EXCEPTION(
-            validation_error(invalid_use_of_stereotypes));
-    }
-}
-
 void validator::validate_uml(const processed_object& po) {
     /*
      * All objects must have a valid UML type.
@@ -76,7 +54,6 @@ void validator::validate_uml(const processed_object& po) {
 
 void validator::validate(const processed_object& po) {
     validate_uml(po);
-    validate_yarn(po);
 }
 
 void validator::validate(const std::list<processed_object>& pos) {

@@ -32,7 +32,6 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
-#include "dogen/yarn.dia/types/yarn_element_types.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_fwd_ser.hpp"
@@ -60,7 +59,6 @@ public:
         const std::string& id,
         const std::string& name,
         const dogen::yarn::dia::dia_object_types dia_object_type,
-        const dogen::yarn::dia::yarn_element_types yarn_element_type,
         const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
         const dogen::yarn::dia::processed_comment& comment,
@@ -103,9 +101,6 @@ public:
     dogen::yarn::dia::dia_object_types dia_object_type() const;
     void dia_object_type(const dogen::yarn::dia::dia_object_types v);
     /**@}*/
-
-    dogen::yarn::dia::yarn_element_types yarn_element_type() const;
-    void yarn_element_type(const dogen::yarn::dia::yarn_element_types v);
 
     const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes() const;
     std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes();
@@ -173,7 +168,6 @@ private:
     std::string id_;
     std::string name_;
     dogen::yarn::dia::dia_object_types dia_object_type_;
-    dogen::yarn::dia::yarn_element_types yarn_element_type_;
     std::list<dogen::yarn::meta_model::static_stereotypes> static_stereotypes_;
     std::list<std::string> dynamic_stereotypes_;
     dogen::yarn::dia::processed_comment comment_;

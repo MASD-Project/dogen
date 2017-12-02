@@ -28,7 +28,6 @@
 #include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/yarn_element_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_attribute_io.hpp"
 
 #endif

@@ -43,7 +43,6 @@ const std::string invalid_stereotypes("Stereotypes can only be used with yarn");
 using dogen::utility::test::contains_checker;
 using dogen::yarn::dia::validation_error;
 using dogen::yarn::dia::dia_object_types;
-using dogen::yarn::dia::yarn_element_types;
 
 BOOST_AUTO_TEST_SUITE(validator_tests)
 
@@ -94,48 +93,6 @@ BOOST_AUTO_TEST_CASE(setting_only_one_uml_type_validates) {
     BOOST_LOG_SEV(lg, debug) << "input: " << po;
     v.validate(po);
     BOOST_TEST_CHECKPOINT("po is valid.");
-}
-
-BOOST_AUTO_TEST_CASE(setting_stereotypes_for_non_uml_classes_throws) {
-    SETUP_TEST_LOG_SOURCE("setting_stereotypes_for_non_uml_classes_throws");
-
-    dogen::yarn::dia::validator v;
-    dogen::yarn::dia::processed_object po;
-    po.dia_object_type(dia_object_types::uml_large_package);
-    po.dynamic_stereotypes().push_back("test");
-
-    contains_checker<validation_error> cc(invalid_stereotypes);
-    BOOST_LOG_SEV(lg, debug) << "input po: " << po;
-    BOOST_CHECK_EXCEPTION(v.validate(po), validation_error, cc);
-}
-
-BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
-    SETUP_TEST_LOG_SOURCE("setting_one_yarn_type_validates");
-
-    dogen::yarn::dia::validator v;
-    dogen::yarn::dia::processed_object po0;
-    po0.dia_object_type(dia_object_types::uml_class);
-    po0.yarn_element_type(yarn_element_types::object);
-    BOOST_LOG_SEV(lg, debug) << "input po0: " << po0;
-
-    v.validate(po0);
-    BOOST_TEST_CHECKPOINT("po0 is valid.");
-
-    dogen::yarn::dia::processed_object po1;
-    po1.dia_object_type(dia_object_types::uml_class);
-    po1.yarn_element_type(yarn_element_types::enumeration);
-    BOOST_LOG_SEV(lg, debug) << "input po1: " << po1;
-
-    v.validate(po1);
-    BOOST_TEST_CHECKPOINT("po1 is valid.");
-
-    dogen::yarn::dia::processed_object po2;
-    po2.dia_object_type(dia_object_types::uml_class);
-    po2.yarn_element_type(yarn_element_types::exception);
-    BOOST_LOG_SEV(lg, debug) << "input po2: " << po2;
-
-    v.validate(po2);
-    BOOST_TEST_CHECKPOINT("po2 is valid.");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

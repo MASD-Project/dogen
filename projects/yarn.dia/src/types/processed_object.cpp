@@ -25,14 +25,12 @@ namespace yarn {
 namespace dia {
 
 processed_object::processed_object()
-    : dia_object_type_(static_cast<dogen::yarn::dia::dia_object_types>(0)),
-      yarn_element_type_(static_cast<dogen::yarn::dia::yarn_element_types>(0)) { }
+    : dia_object_type_(static_cast<dogen::yarn::dia::dia_object_types>(0)) { }
 
 processed_object::processed_object(processed_object&& rhs)
     : id_(std::move(rhs.id_)),
       name_(std::move(rhs.name_)),
       dia_object_type_(std::move(rhs.dia_object_type_)),
-      yarn_element_type_(std::move(rhs.yarn_element_type_)),
       static_stereotypes_(std::move(rhs.static_stereotypes_)),
       dynamic_stereotypes_(std::move(rhs.dynamic_stereotypes_)),
       comment_(std::move(rhs.comment_)),
@@ -44,7 +42,6 @@ processed_object::processed_object(
     const std::string& id,
     const std::string& name,
     const dogen::yarn::dia::dia_object_types dia_object_type,
-    const dogen::yarn::dia::yarn_element_types yarn_element_type,
     const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
     const dogen::yarn::dia::processed_comment& comment,
@@ -54,7 +51,6 @@ processed_object::processed_object(
     : id_(id),
       name_(name),
       dia_object_type_(dia_object_type),
-      yarn_element_type_(yarn_element_type),
       static_stereotypes_(static_stereotypes),
       dynamic_stereotypes_(dynamic_stereotypes),
       comment_(comment),
@@ -67,7 +63,6 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(id_, other.id_);
     swap(name_, other.name_);
     swap(dia_object_type_, other.dia_object_type_);
-    swap(yarn_element_type_, other.yarn_element_type_);
     swap(static_stereotypes_, other.static_stereotypes_);
     swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(comment_, other.comment_);
@@ -80,7 +75,6 @@ bool processed_object::operator==(const processed_object& rhs) const {
     return id_ == rhs.id_ &&
         name_ == rhs.name_ &&
         dia_object_type_ == rhs.dia_object_type_ &&
-        yarn_element_type_ == rhs.yarn_element_type_ &&
         static_stereotypes_ == rhs.static_stereotypes_ &&
         dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         comment_ == rhs.comment_ &&
@@ -133,14 +127,6 @@ dogen::yarn::dia::dia_object_types processed_object::dia_object_type() const {
 
 void processed_object::dia_object_type(const dogen::yarn::dia::dia_object_types v) {
     dia_object_type_ = v;
-}
-
-dogen::yarn::dia::yarn_element_types processed_object::yarn_element_type() const {
-    return yarn_element_type_;
-}
-
-void processed_object::yarn_element_type(const dogen::yarn::dia::yarn_element_types v) {
-    yarn_element_type_ = v;
 }
 
 const std::list<dogen::yarn::meta_model::static_stereotypes>& processed_object::static_stereotypes() const {

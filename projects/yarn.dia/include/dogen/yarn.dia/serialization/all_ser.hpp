@@ -28,7 +28,6 @@
 #include "dogen/yarn.dia/serialization/dia_object_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_comment_ser.hpp"
-#include "dogen/yarn.dia/serialization/yarn_element_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_attribute_ser.hpp"
 
 #endif

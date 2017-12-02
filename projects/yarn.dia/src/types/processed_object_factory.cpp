@@ -323,34 +323,6 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
             et.push_back(static_stereotypes::module);
         }
     }
-
-    switch (et.front()) {
-    case static_stereotypes::object:
-        po.yarn_element_type(yarn_element_types::object);
-        break;
-    case static_stereotypes::object_template:
-        po.yarn_element_type(yarn_element_types::object_template);
-        break;
-    case static_stereotypes::exception:
-        po.yarn_element_type(yarn_element_types::exception);
-        break;
-    case static_stereotypes::primitive:
-        po.yarn_element_type(yarn_element_types::primitive);
-        break;
-    case static_stereotypes::enumeration:
-        po.yarn_element_type(yarn_element_types::enumeration);
-        break;
-    case static_stereotypes::module:
-        po.yarn_element_type(yarn_element_types::builtin);
-        break;
-    case static_stereotypes::builtin:
-        po.yarn_element_type(yarn_element_types::builtin);
-        break;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(et.front()));
-        BOOST_LOG_SEV(lg, error) << invalid_yarn_element << s;;
-        BOOST_THROW_EXCEPTION(building_error(invalid_yarn_element + s));
-    } }
 }
 
 void processed_object_factory::

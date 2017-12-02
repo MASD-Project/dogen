@@ -79,7 +79,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     BOOST_CHECK(!po.name().empty());
     BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_class);
     BOOST_REQUIRE(po.dynamic_stereotypes().empty());
-    BOOST_CHECK(po.yarn_element_type() == yarn_element_types::enumeration);
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());
 }
@@ -95,7 +94,6 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_CHECK(!po.name().empty());
     BOOST_CHECK(po.dia_object_type() == dia_object_types::uml_class);
     BOOST_CHECK(po.dynamic_stereotypes().empty());
-    BOOST_CHECK(po.yarn_element_type() == yarn_element_types::exception);
     BOOST_CHECK(!po.comment().original_content().empty());
     BOOST_CHECK(!po.comment().documentation().empty());
 }

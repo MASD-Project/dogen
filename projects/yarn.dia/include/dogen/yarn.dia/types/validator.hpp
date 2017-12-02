@@ -57,11 +57,6 @@ public:
 
 private:
     /**
-     * @brief Checks all data related to Yarn.
-     */
-    static void validate_yarn(const processed_object& p);
-
-    /**
      * @brief Checks all data related to UML.
      */
     static void validate_uml(const processed_object& p);

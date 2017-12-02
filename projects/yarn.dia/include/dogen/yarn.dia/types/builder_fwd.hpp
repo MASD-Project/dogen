@@ -18,21 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_YARN_ELEMENT_TYPES_IO_HPP
-#define DOGEN_YARN_DIA_IO_YARN_ELEMENT_TYPES_IO_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_BUILDER_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_BUILDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn.dia/types/yarn_element_types.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const yarn_element_types& v);
+class builder;
 
 } } }
 

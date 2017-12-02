@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_YARN_ELEMENT_TYPES_HPP
-#define DOGEN_YARN_DIA_TYPES_YARN_ELEMENT_TYPES_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_ADAPTER_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_ADAPTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,16 +29,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-enum class yarn_element_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    not_applicable = 1,
-    enumeration = 2,
-    exception = 3,
-    object = 4,
-    object_template = 5,
-    primitive = 6,
-    builtin = 7
-};
+class adapter;
 
 } } }
 
