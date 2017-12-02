@@ -40,8 +40,6 @@ const std::string name_key("name");
 const std::string parents_key("parents");
 const std::string documentation_key("documentation");
 const std::string tagged_values_key("tagged_values");
-const std::string key_key("key");
-const std::string value_key("value");
 const std::string type_key("type");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
@@ -92,8 +90,8 @@ new_hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
         return r;
 
     for (auto j(i->second.begin()); j != i->second.end(); ++j) {
-        const auto key(j->second.get<std::string>(key_key));
-        const auto value(j->second.get<std::string>(value_key));
+        const auto key(j->first);
+        const auto value(j->second.get_value<std::string>());
         r.push_back(std::make_pair(key, value));
     }
     return r;

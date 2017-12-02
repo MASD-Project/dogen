@@ -66,24 +66,18 @@ const std::string missing_elements("Missing mandatory elements");
 const std::string one_object_model(R"({
     "documentation" : "a_doc",
     "stereotypes" : [ "some stereotype", "another" ],
-    "tagged_values" : [
-        {
-            "key" : "some_key",
-            "value" : "some_value"
-        }
-    ],
+    "tagged_values" : {
+        "some_key" : "some_value"
+    },
     "elements" : [
         {
             "name" : "a_type",
             "documentation" : "a_doc",
             "parents" : [ "a::b::c", "a" ],
             "stereotypes" : [ "yarn::object", "some stereotype" ],
-            "tagged_values" : [
-                {
-                    "key" : "some_key",
-                    "value" : "some_value"
-                }
-            ]
+            "tagged_values" : {
+                "some_key" : "some_value"
+            }
         }
     ]
 }
@@ -100,12 +94,9 @@ const std::string object_with_attribute_model(R"({
                     "type" : "std::string",
                     "documentation" : "a_doc",
                     "stereotypes" : [ "some stereotype", "yarn::fluent" ],
-                    "tagged_values" : [
-                        {
-                            "key" : "some_key",
-                            "value" : "some_value"
-                        }
-                    ]
+                    "tagged_values" : {
+                        "some_key" : "some_value"
+                    }
                 }
             ]
         }
