@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+/*
 #include <sstream>
 #include <initializer_list>
 #include <boost/test/unit_test.hpp>
@@ -450,3 +451,4 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_object_with_on
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

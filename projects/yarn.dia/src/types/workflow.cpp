@@ -19,14 +19,13 @@
  *
  */
 #include <algorithm>
-#include <boost/range/algorithm_ext/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
+#include <boost/range/algorithm_ext/erase.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/new_builder.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
@@ -69,15 +68,10 @@ workflow::generate_model(const std::list<processed_object>& pos) {
      * Go through the dependency graph and build a yarn model from
      * it.
      */
-    builder b(g.parent_id_to_child_ids());
     new_builder nb(g.parent_id_to_child_ids());
-    visitor v(b, nb);
+    visitor v(nb);
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    auto r(b.build());
-    const auto em2(nb.build());
-    r.tagged_values(em2.tagged_values());
-    r.documentation(em2.documentation());
-    r.elements(em2.elements());
+    auto r(nb.build());
     r.use_new_code(true);
     return r;
 }

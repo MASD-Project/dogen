@@ -27,9 +27,6 @@
 
 #include "dogen/yarn.dia/types/dia.hpp"
 #include "dogen/yarn.dia/types/traits.hpp"
-#include "dogen/yarn.dia/types/adapter.hpp"
-#include "dogen/yarn.dia/types/builder.hpp"
-#include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
