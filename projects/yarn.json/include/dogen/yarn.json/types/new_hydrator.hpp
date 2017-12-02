@@ -46,17 +46,35 @@ private:
     read_kvps(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Reads the stereotypes.
+     * @brief Reads the stereotypes, if any exists.
      */
     std::list<std::string>
     read_stereotypes(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Reads the documentation.
+     * @brief Reads the parents, if any exists.
+     */
+    std::list<std::string>
+    read_parents(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads the documentation, if any exists.
      */
     std::string read_documentation(const boost::property_tree::ptree& pt) const;
 
+    /**
+     * @brief Reads the tagged values, if any exists.
+     */
+    std::list<std::pair<std::string, std::string>>
+    read_tagged_values(const boost::property_tree::ptree& pt) const;
+
 private:
+    /**
+     * @brief Reads the exoattributes, if any.
+     */
+    meta_model::exoattribute
+    read_attribute(const boost::property_tree::ptree& pt) const;
+
     /**
      * @brief Reads an element according to its meta-type by
      * dispatching to the correct read functions.

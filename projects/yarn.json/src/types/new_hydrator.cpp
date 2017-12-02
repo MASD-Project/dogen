@@ -23,6 +23,10 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/new_hydrator.hpp"
 
@@ -32,11 +36,18 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.json.new_hydrator"));
 
 const std::string empty;
+const std::string name_key("name");
+const std::string parents_key("parents");
 const std::string documentation_key("documentation");
+const std::string tagged_values_key("tagged_values");
+const std::string key_key("key");
+const std::string value_key("value");
+const std::string type_key("type");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
 const std::string stereotypes_key("stereotypes");
 
+const std::string mssing_elements("Missing mandatory elements collection.");
 const std::string invalid_json_file("Failed to parse JSON file: ");
 const std::string invalid_value_in_json("Failed to value in JSON: ");
 const std::string invalid_path("Failed to find JSON path: ");
@@ -48,6 +59,20 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
+template<typename Stereotypable>
+inline void process_stereotypes(const std::list<std::string>& raw_stereotypes,
+    Stereotypable& stereotypable) {
+
+    BOOST_LOG_SEV(lg, debug) << "Raw stereotypes: '" << raw_stereotypes << "'";
+
+    yarn::helpers::stereotypes_helper h;
+    const auto st(h.from_string(raw_stereotypes));
+
+    BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
+    stereotypable.dynamic_stereotypes(st.dynamic_stereotypes());
+    stereotypable.static_stereotypes(st.static_stereotypes());
+}
+
 std::string
 new_hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     const auto opt(pt.get_optional<std::string>(documentation_key));
@@ -56,6 +81,21 @@ new_hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
 
     auto r(*opt);
     boost::trim(r);
+    return r;
+}
+
+std::list<std::pair<std::string, std::string>>
+new_hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
+    std::list<std::pair<std::string, std::string>> r;
+    const auto i(pt.find(tagged_values_key));
+    if (i == pt.not_found() || i->second.empty())
+        return r;
+
+    for (auto j(i->second.begin()); j != i->second.end(); ++j) {
+        const auto key(j->second.get<std::string>(key_key));
+        const auto value(j->second.get<std::string>(value_key));
+        r.push_back(std::make_pair(key, value));
+    }
     return r;
 }
 
@@ -72,9 +112,52 @@ new_hydrator::read_stereotypes(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
+std::list<std::string>
+new_hydrator::read_parents(const boost::property_tree::ptree& pt) const {
+    std::list<std::string> r;
+    const auto i(pt.find(parents_key));
+    if (i == pt.not_found() || i->second.empty())
+        return r;
+
+    for (auto j(i->second.begin()); j != i->second.end(); ++j)
+        r.push_back(j->second.get_value<std::string>());
+
+    return r;
+}
+
+meta_model::exoattribute new_hydrator::
+read_attribute(const boost::property_tree::ptree& pt) const {
+    meta_model::exoattribute r;
+    r.name(pt.get<std::string>(name_key));
+    r.type(pt.get<std::string>(type_key));
+    r.documentation(read_documentation(pt));
+    r.tagged_values(read_tagged_values(pt));
+
+    const auto raw_stereotypes(read_stereotypes(pt));
+    process_stereotypes(raw_stereotypes, r);
+
+    return r;
+}
+
 meta_model::exoelement new_hydrator::
-read_element(const boost::property_tree::ptree& /*pt*/) const {
+read_element(const boost::property_tree::ptree& pt) const {
     meta_model::exoelement r;
+    r.name(pt.get<std::string>(name_key));
+    r.documentation(read_documentation(pt));
+    r.parents(read_parents(pt));
+    r.tagged_values(read_tagged_values(pt));
+
+    const auto raw_stereotypes(read_stereotypes(pt));
+    process_stereotypes(raw_stereotypes, r);
+
+    const auto i(pt.find(attributes_key));
+    if (i == pt.not_found() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Did not find any attributes in element.";
+    else {
+        for (auto j(i->second.begin()); j != i->second.end(); ++j)
+            r.attributes().push_back(read_attribute(j->second));
+    }
+
     return r;
 }
 
@@ -84,11 +167,18 @@ meta_model::exomodel new_hydrator::read_stream(std::istream& s) const {
 
     meta_model::exomodel r;
     r.documentation(read_documentation(pt));
+    r.tagged_values(read_tagged_values(pt));
+    r.use_new_code(true);
+
     const auto raw_stereotypes(read_stereotypes(pt));
+    process_stereotypes(raw_stereotypes, r);
 
     const auto i(pt.find(elements_key));
-    if (i == pt.not_found() || i->second.empty())
-        BOOST_LOG_SEV(lg, warn) << "Did not find any elements in model.";
+    if (i == pt.not_found()) {
+        BOOST_LOG_SEV(lg, error) << mssing_elements;
+        BOOST_THROW_EXCEPTION(hydration_error(mssing_elements));
+    } else if (i->second.empty())
+        BOOST_LOG_SEV(lg, warn) << "Elements collection is empty.";
     else {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
             r.elements().push_back(read_element(j->second));

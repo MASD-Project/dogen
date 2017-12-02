@@ -74,10 +74,10 @@ meta_model::exoattribute adapter::adapt(const processed_attribute& a) {
 
 void adapter::
 process_stereotypes(const processed_object& po, meta_model::exoelement& ee) {
-    yarn::helpers::stereotypes_helper h;
-
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
                              << po.stereotypes() << "'";
+
+    yarn::helpers::stereotypes_helper h;
     const auto st(h.from_csv_string(po.stereotypes()));
 
     BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
