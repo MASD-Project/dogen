@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn.dia/types/adaptation_error.hpp"
-#include "dogen/yarn.dia/types/new_adapter.hpp"
+#include "dogen/yarn.dia/types/adapter.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.dia.new_adapter"));
+static logger lg(logger_factory("yarn.dia.adapter"));
 
 const std::string name_delimiter("::");
 const std::string empty_dia_object_name("Dia object name is empty");
@@ -37,14 +37,14 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-void new_adapter::validate_dia_object_name(const std::string& n) {
+void adapter::validate_dia_object_name(const std::string& n) {
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
         BOOST_THROW_EXCEPTION(adaptation_error(empty_dia_object_name));
     }
 }
 
-std::string new_adapter::qualified_name(const std::string& contained_by,
+std::string adapter::qualified_name(const std::string& contained_by,
     const std::string& simple_name) {
 
     if (contained_by.empty())
@@ -53,7 +53,7 @@ std::string new_adapter::qualified_name(const std::string& contained_by,
     return contained_by + name_delimiter + simple_name;
 }
 
-meta_model::exoattribute new_adapter::adapt(const processed_attribute& a) {
+meta_model::exoattribute adapter::adapt(const processed_attribute& a) {
     validate_dia_object_name(a.name());
 
     meta_model::exoattribute r;
@@ -65,7 +65,7 @@ meta_model::exoattribute new_adapter::adapt(const processed_attribute& a) {
     return r;
 }
 
-meta_model::exoelement new_adapter::
+meta_model::exoelement adapter::
 adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
     validate_dia_object_name(po.name());

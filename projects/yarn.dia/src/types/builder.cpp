@@ -23,13 +23,13 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
-#include "dogen/yarn.dia/types/new_adapter.hpp"
-#include "dogen/yarn.dia/types/new_builder.hpp"
+#include "dogen/yarn.dia/types/adapter.hpp"
+#include "dogen/yarn.dia/types/builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.dia.new_builder"));
+static logger lg(logger_factory("yarn.dia.builder"));
 
 const std::string empty_contained_by;
 const std::list<std::string> empty_parents;
@@ -43,12 +43,12 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-new_builder::
-new_builder(const std::unordered_map<std::string, std::list<std::string>>&
+builder::
+builder(const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids) : parent_id_to_child_ids_(parent_id_to_child_ids) {}
 
 void
-new_builder::update_parentage(const std::string& id, const std::string& n) {
+builder::update_parentage(const std::string& id, const std::string& n) {
     const auto i(parent_id_to_child_ids_.find(id));
     if (i == parent_id_to_child_ids_.end()) {
         /*
@@ -70,7 +70,7 @@ new_builder::update_parentage(const std::string& id, const std::string& n) {
 }
 
 const std::list<std::string>&
-new_builder::parents_for_object(const std::string& id) const {
+builder::parents_for_object(const std::string& id) const {
     const auto i(child_id_to_parent_names_.find(id));
     if (i != child_id_to_parent_names_.end())
         return i->second;
@@ -78,7 +78,7 @@ new_builder::parents_for_object(const std::string& id) const {
     return empty_parents;
 }
 
-std::string new_builder::contained_by(const std::string& id) const {
+std::string builder::contained_by(const std::string& id) const {
     auto& c(id_to_uml_large_package_properties_);
     const auto i(c.find(id));
     if (i != c.end())
@@ -87,7 +87,7 @@ std::string new_builder::contained_by(const std::string& id) const {
     return empty_contained_by;
 }
 
-void new_builder::
+void builder::
 handle_uml_large_package(const processed_object& po, const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "Object is a UML Large package: '"
                              << po.id() << "'. Name: " << n;
@@ -113,7 +113,7 @@ handle_uml_large_package(const processed_object& po, const std::string& n) {
     }
 }
 
-void new_builder::handle_uml_note(const processed_object& po) {
+void builder::handle_uml_note(const processed_object& po) {
     const auto& c(po.comment());
     BOOST_LOG_SEV(lg, debug) << "Object is a note: '" << po.id()
                              << ";. Note text: '"
@@ -154,7 +154,7 @@ void new_builder::handle_uml_note(const processed_object& po) {
     e.tagged_values(c.key_value_pairs());
 }
 
-void new_builder::add(const processed_object& po) {
+void builder::add(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Processing: '" << po.id() << "'"
                              << " Name: '" << po.name() << "'";
 
@@ -188,7 +188,7 @@ void new_builder::add(const processed_object& po) {
     /*
      * Now we can adapt the processed object and add it to the exomodel.
      */
-    const auto e(new_adapter::adapt(po, cby, p));
+    const auto e(adapter::adapt(po, cby, p));
     model_.elements().push_back(e);
     BOOST_LOG_SEV(lg, debug) << "Added element: " << e.name();
 
@@ -213,7 +213,7 @@ void new_builder::add(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing: " << po.name();
 }
 
-meta_model::exomodel new_builder::build() {
+meta_model::exomodel builder::build() {
     return model_;
 }
 

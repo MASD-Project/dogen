@@ -24,6 +24,6 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-visitor::visitor(new_builder& new_builder) : new_builder_(new_builder) {}
+visitor::visitor(builder& builder) : builder_(builder) {}
 
 } } }
