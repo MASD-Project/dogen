@@ -29,10 +29,6 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) != 0;
-}
-
 }
 
 namespace dogen {
@@ -45,7 +41,6 @@ void naming_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.external_modules(create_std_string(position + 0));
     v.model_modules(create_std_string(position + 1));
-    v.in_global_module(create_bool(position + 2));
 }
 
 naming_configuration_generator::result_type
