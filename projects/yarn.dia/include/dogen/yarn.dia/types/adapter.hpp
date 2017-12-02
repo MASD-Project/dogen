@@ -52,6 +52,12 @@ private:
     static std::string qualified_name(const std::string& contained_by,
         const std::string& simple_name);
 
+    /**
+     * @brief Processes the stereotypes field.
+     */
+    static void process_stereotypes(const processed_object& po,
+        meta_model::exoelement& ee);
+
 private:
     /**
      * @brief Adapts a processed attribute into a yarn exoattribute.
@@ -63,7 +69,7 @@ public:
      * @brief Adapts a processed object into a yarn exoelement.
      */
     static meta_model::exoelement
-    adapt(const processed_object& o, const std::string& contained_by,
+    adapt(const processed_object& po, const std::string& contained_by,
         const std::list<std::string>& parents);
 };
 

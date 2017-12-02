@@ -24,7 +24,6 @@
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_comment_io.hpp"
 #include "dogen/yarn.dia/io/processed_attribute_io.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,34 +31,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -114,8 +85,7 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"dia_object_type\": " << v.dia_object_type() << ", "
-      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
-      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
+      << "\"stereotypes\": " << "\"" << tidy_up_string(v.stereotypes()) << "\"" << ", "
       << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
       << "\"connection\": " << v.connection() << ", "

@@ -33,7 +33,6 @@
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
-#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_fwd_ser.hpp"
 
 namespace dogen {
@@ -59,8 +58,7 @@ public:
         const std::string& id,
         const std::string& name,
         const dogen::yarn::dia::dia_object_types dia_object_type,
-        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
-        const std::list<std::string>& dynamic_stereotypes,
+        const std::string& stereotypes,
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -102,15 +100,10 @@ public:
     void dia_object_type(const dogen::yarn::dia::dia_object_types v);
     /**@}*/
 
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v);
-
-    const std::list<std::string>& dynamic_stereotypes() const;
-    std::list<std::string>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<std::string>& v);
-    void dynamic_stereotypes(const std::list<std::string>&& v);
+    const std::string& stereotypes() const;
+    std::string& stereotypes();
+    void stereotypes(const std::string& v);
+    void stereotypes(const std::string&& v);
 
     /**
      * @brief Any comments associated with the object.
@@ -168,8 +161,7 @@ private:
     std::string id_;
     std::string name_;
     dogen::yarn::dia::dia_object_types dia_object_type_;
-    std::list<dogen::yarn::meta_model::static_stereotypes> static_stereotypes_;
-    std::list<std::string> dynamic_stereotypes_;
+    std::string stereotypes_;
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;

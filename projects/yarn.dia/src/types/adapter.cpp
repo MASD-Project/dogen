@@ -20,6 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.dia/types/adaptation_error.hpp"
 #include "dogen/yarn.dia/types/adapter.hpp"
 
@@ -29,7 +32,11 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.adapter"));
 
 const std::string name_delimiter("::");
+
 const std::string empty_dia_object_name("Dia object name is empty");
+const std::string too_many_yarn_types(
+    "Attempting to set the yarn type more than once.");
+
 
 }
 
@@ -65,6 +72,35 @@ meta_model::exoattribute adapter::adapt(const processed_attribute& a) {
     return r;
 }
 
+void adapter::
+process_stereotypes(const processed_object& po, meta_model::exoelement& ee) {
+    yarn::helpers::stereotypes_helper h;
+
+    BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
+                             << po.stereotypes() << "'";
+    const auto st(h.from_csv_string(po.stereotypes()));
+
+    BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
+    ee.dynamic_stereotypes(st.dynamic_stereotypes());
+    ee.static_stereotypes(st.static_stereotypes());
+
+    using meta_model::static_stereotypes;
+    const auto et(h.extract_element_types(st.static_stereotypes()));
+    if (et.size() > 1) {
+        /*
+         * We can only have zero or one yarn element types set.
+         */
+        BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
+        BOOST_THROW_EXCEPTION(adaptation_error(too_many_yarn_types));
+    } else if (et.size() == 0) {
+        using dot = dia_object_types;
+        if (po.dia_object_type() == dot::uml_class)
+            ee.static_stereotypes().push_back(static_stereotypes::object);
+        else if (po.dia_object_type() == dot::uml_large_package)
+            ee.static_stereotypes().push_back(static_stereotypes::module);
+    }
+}
+
 meta_model::exoelement adapter::
 adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
@@ -75,8 +111,7 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.parents(parents);
     r.documentation(po.comment().documentation());
     r.tagged_values(po.comment().key_value_pairs());
-    r.dynamic_stereotypes(po.dynamic_stereotypes());
-    r.static_stereotypes(po.static_stereotypes());
+    process_stereotypes(po, r);
 
     for (const auto& attr : po.attributes())
         r.attributes().push_back(adapt(attr));

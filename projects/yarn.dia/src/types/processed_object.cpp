@@ -31,8 +31,7 @@ processed_object::processed_object(processed_object&& rhs)
     : id_(std::move(rhs.id_)),
       name_(std::move(rhs.name_)),
       dia_object_type_(std::move(rhs.dia_object_type_)),
-      static_stereotypes_(std::move(rhs.static_stereotypes_)),
-      dynamic_stereotypes_(std::move(rhs.dynamic_stereotypes_)),
+      stereotypes_(std::move(rhs.stereotypes_)),
       comment_(std::move(rhs.comment_)),
       child_node_id_(std::move(rhs.child_node_id_)),
       connection_(std::move(rhs.connection_)),
@@ -42,8 +41,7 @@ processed_object::processed_object(
     const std::string& id,
     const std::string& name,
     const dogen::yarn::dia::dia_object_types dia_object_type,
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes,
+    const std::string& stereotypes,
     const dogen::yarn::dia::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
@@ -51,8 +49,7 @@ processed_object::processed_object(
     : id_(id),
       name_(name),
       dia_object_type_(dia_object_type),
-      static_stereotypes_(static_stereotypes),
-      dynamic_stereotypes_(dynamic_stereotypes),
+      stereotypes_(stereotypes),
       comment_(comment),
       child_node_id_(child_node_id),
       connection_(connection),
@@ -63,8 +60,7 @@ void processed_object::swap(processed_object& other) noexcept {
     swap(id_, other.id_);
     swap(name_, other.name_);
     swap(dia_object_type_, other.dia_object_type_);
-    swap(static_stereotypes_, other.static_stereotypes_);
-    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
+    swap(stereotypes_, other.stereotypes_);
     swap(comment_, other.comment_);
     swap(child_node_id_, other.child_node_id_);
     swap(connection_, other.connection_);
@@ -75,8 +71,7 @@ bool processed_object::operator==(const processed_object& rhs) const {
     return id_ == rhs.id_ &&
         name_ == rhs.name_ &&
         dia_object_type_ == rhs.dia_object_type_ &&
-        static_stereotypes_ == rhs.static_stereotypes_ &&
-        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         comment_ == rhs.comment_ &&
         child_node_id_ == rhs.child_node_id_ &&
         connection_ == rhs.connection_ &&
@@ -129,36 +124,20 @@ void processed_object::dia_object_type(const dogen::yarn::dia::dia_object_types 
     dia_object_type_ = v;
 }
 
-const std::list<dogen::yarn::meta_model::static_stereotypes>& processed_object::static_stereotypes() const {
-    return static_stereotypes_;
+const std::string& processed_object::stereotypes() const {
+    return stereotypes_;
 }
 
-std::list<dogen::yarn::meta_model::static_stereotypes>& processed_object::static_stereotypes() {
-    return static_stereotypes_;
+std::string& processed_object::stereotypes() {
+    return stereotypes_;
 }
 
-void processed_object::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    static_stereotypes_ = v;
+void processed_object::stereotypes(const std::string& v) {
+    stereotypes_ = v;
 }
 
-void processed_object::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v) {
-    static_stereotypes_ = std::move(v);
-}
-
-const std::list<std::string>& processed_object::dynamic_stereotypes() const {
-    return dynamic_stereotypes_;
-}
-
-std::list<std::string>& processed_object::dynamic_stereotypes() {
-    return dynamic_stereotypes_;
-}
-
-void processed_object::dynamic_stereotypes(const std::list<std::string>& v) {
-    dynamic_stereotypes_ = v;
-}
-
-void processed_object::dynamic_stereotypes(const std::list<std::string>&& v) {
-    dynamic_stereotypes_ = std::move(v);
+void processed_object::stereotypes(const std::string&& v) {
+    stereotypes_ = std::move(v);
 }
 
 const dogen::yarn::dia::processed_comment& processed_object::comment() const {

@@ -31,9 +31,6 @@
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
-#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
@@ -86,8 +83,6 @@ const std::string invalid_type_string(
 const std::string object_has_invalid_type("Invalid dia type: ");
 const std::string unexpected_number_of_connections(
     "Expected 2 connections but found: ");
-const std::string too_many_yarn_types(
-    "Attempting to set the yarn type more than once.");
 
 template<typename AttributeValue, typename Variant>
 AttributeValue
@@ -296,33 +291,8 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
         return;
     }
 
-    yarn::helpers::stereotypes_helper h;
     const auto s(parse_string_attribute(a));
-    BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '" << s << "'";
-    const auto st(h.from_csv_string(s));
-
-    BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
-    po.static_stereotypes(st.static_stereotypes());
-    po.dynamic_stereotypes(st.dynamic_stereotypes());
-
-    using meta_model::static_stereotypes;
-    auto et(h.extract_element_types(po.static_stereotypes()));
-    if (et.size() > 1) {
-        /*
-         * We can only have zero or one yarn element types set.
-         */
-        BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
-        BOOST_THROW_EXCEPTION(building_error(too_many_yarn_types));
-    } else if (et.size() == 0) {
-        using dot = dia_object_types;
-        if (po.dia_object_type() == dot::uml_class) {
-            po.static_stereotypes().push_back(static_stereotypes::object);
-            et.push_back(static_stereotypes::object);
-        } else if (po.dia_object_type() == dot::uml_large_package) {
-            po.static_stereotypes().push_back(static_stereotypes::module);
-            et.push_back(static_stereotypes::module);
-        }
-    }
+    po.stereotypes(s);
 }
 
 void processed_object_factory::
