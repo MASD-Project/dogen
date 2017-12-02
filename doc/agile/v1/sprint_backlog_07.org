@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-02 Sat 21:15]
+#+CAPTION: Clock summary at [2017-12-02 Sat 21:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *41:32* |       |       | 100.0 |
+| *Total time*                                                                | *42:03* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 41:32   |       |       | 100.0 |
-| Active                                                                      |         | 41:32 |       | 100.0 |
+| Stories                                                                     | 42:03   |       |       | 100.0 |
+| Active                                                                      |         | 42:03 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.5 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   5.1 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.4 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  20.9 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  33.0 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   5.7 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   7.1 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  20.7 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  32.6 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   5.6 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   7.0 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.5 |
-| STARTED Implement exomodel in terms of exoelements                          |         |       |  9:01 |  21.7 |
+| STARTED Implement exomodel in terms of exoelements                          |         |       |  9:32 |  22.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -343,6 +343,7 @@ program options:
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-12-02 Sat 21:16]--[2017-12-02 Sat 21:47] =>  0:31
     CLOCK: [2017-12-02 Sat 20:55]--[2017-12-02 Sat 21:15] =>  0:20
     CLOCK: [2017-12-02 Sat 20:44]--[2017-12-02 Sat 20:47] =>  0:03
     CLOCK: [2017-12-02 Sat 20:37]--[2017-12-02 Sat 20:43] =>  0:06
@@ -425,6 +426,7 @@ Tasks:
   classes.
 - do we need to have the origin expansion? can we not just supply the
   origin type to the exomodel adapter directly?
+- rename key value pairs to tagged values in yarn.dia processed object.
 
 *** Rename =yarn= to =modeling=                                       :story:
 
