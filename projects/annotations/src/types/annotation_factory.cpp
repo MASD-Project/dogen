@@ -358,8 +358,16 @@ annotation annotation_factory::make(
     const auto original(create_annotation(scope, aggregated_entries));
 
     /*
-     * Finally we augment it with any profiles that match the
-     * candidate labels.
+     * If we are processing an annotation for an attribute or an
+     * operation, there is nothing left to do as they do not support
+     * profile expansion.
+     */
+    if (scope == scope_types::property || scope == scope_types::operation)
+        return original;
+
+    /*
+     * On all other cases, we need to augment the annotation with any
+     * profiles that match the candidate labels.
      */
     const auto& cl(candidate_labels);
     const auto r(handle_profiles(type_group_, profiles_, cl, original));
