@@ -48606,74 +48606,7 @@ defined stereotypes.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O151"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O357">
-      <dia:attribute name="name">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="direction">
-        <dia:enum val="1"/>
-      </dia:attribute>
-      <dia:attribute name="show_direction">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="assoc_type">
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="role_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_a">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_a">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_a">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="role_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="multipicity_b">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="visibility_b">
-        <dia:enum val="3"/>
-      </dia:attribute>
-      <dia:attribute name="show_arrow_b">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="obj_pos">
-        <dia:point val="53.8333,8"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.7833,7.95;55.8833,10.6"/>
-      </dia:attribute>
-      <dia:attribute name="meta">
-        <dia:composite type="dict"/>
-      </dia:attribute>
-      <dia:attribute name="orth_points">
-        <dia:point val="53.8333,8"/>
-        <dia:point val="54.8333,8"/>
-        <dia:point val="54.8333,9"/>
-        <dia:point val="55.8333,9"/>
-      </dia:attribute>
-      <dia:attribute name="orth_orient">
-        <dia:enum val="0"/>
-        <dia:enum val="1"/>
-        <dia:enum val="0"/>
-      </dia:attribute>
-      <dia:attribute name="orth_autoroute">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="text_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="line_colour">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O358">
+    <dia:object type="UML - Class" version="0" id="O357">
       <dia:attribute name="obj_pos">
         <dia:point val="55,144"/>
       </dia:attribute>
@@ -48784,7 +48717,7 @@ defined stereotypes.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O151"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O359">
+    <dia:object type="UML - Association" version="2" id="O358">
       <dia:attribute name="name">
         <dia:string>#&lt; on error throws#</dia:string>
       </dia:attribute>
@@ -48825,7 +48758,7 @@ defined stereotypes.#</dia:string>
         <dia:point val="73,144"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.0012,139.2;73.75,145.6"/>
+        <dia:rectangle val="59.0013,139.2;73.75,144.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48852,7 +48785,7 @@ defined stereotypes.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O356" connection="0"/>
-        <dia:connection handle="1" to="O358" connection="1"/>
+        <dia:connection handle="1" to="O357" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O151"/>
     </dia:object>
