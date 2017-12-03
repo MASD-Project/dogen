@@ -86,6 +86,12 @@ std::size_t exoelement_hasher::hash(const exoelement& v) {
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.parents()));
     combine(seed, hash_std_list_dogen_yarn_meta_model_exoattribute(v.attributes()));
+    combine(seed, v.can_be_primitive_underlier());
+    combine(seed, v.in_global_module());
+    combine(seed, v.can_be_enumeration_underlier());
+    combine(seed, v.is_default_enumeration_type());
+    combine(seed, v.is_associative_container());
+    combine(seed, v.is_floating_point());
 
     return seed;
 }

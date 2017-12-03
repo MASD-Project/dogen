@@ -402,6 +402,12 @@
 					<type>float</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -427,6 +433,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -469,6 +481,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -511,6 +529,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -553,6 +577,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -595,6 +625,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -637,6 +673,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -679,6 +721,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -704,6 +752,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -746,6 +800,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -771,6 +831,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>this is the brief comment
@@ -852,6 +918,12 @@ a second line
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>first line
@@ -881,6 +953,12 @@ third line with &quot;quote&quot;
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>package
@@ -911,6 +989,12 @@ third line with &quot;quote&quot;
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>inner package
@@ -941,6 +1025,12 @@ third line with &quot;quote&quot;
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>this is a brief comment
@@ -1020,6 +1110,12 @@ this is a long comment
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1116,6 +1212,12 @@ this is a long comment
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1192,6 +1294,12 @@ this is a long comment
 					<type>package_4::shape_types</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1255,6 +1363,12 @@ this is a long comment
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1327,6 +1441,12 @@ this is a long comment
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This is an example of an enumeration using hex flags.
@@ -1462,6 +1582,12 @@ this is a long comment
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1487,6 +1613,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1580,6 +1712,12 @@ this is a long comment
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>this is an exception
@@ -1606,6 +1744,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1631,6 +1775,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1656,6 +1806,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test for a primitive which is also immutable.
@@ -1687,6 +1843,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This type makes use of all primitves in this test model.
@@ -1900,6 +2062,12 @@ this is a long comment
 					<type>bool_primitive</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying short.
@@ -1930,6 +2098,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying long.
@@ -1960,6 +2134,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying int.
@@ -1990,6 +2170,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying char.
@@ -2020,6 +2206,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsigned char.
@@ -2050,6 +2242,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsigned long.
@@ -2080,6 +2278,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsigned int.
@@ -2110,6 +2314,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsgined short.
@@ -2140,6 +2350,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying double.
@@ -2170,6 +2386,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying float.
@@ -2200,6 +2422,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying bool.
@@ -2230,6 +2458,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Type is a service.
@@ -2274,6 +2508,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Type is non-generatable.
@@ -2366,6 +2606,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Tests the fluent scenario across the different types of properties.
@@ -2444,6 +2690,12 @@ this is a long comment
 					<type>value</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Immutable class with no properties.
@@ -2471,6 +2723,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -2531,6 +2789,12 @@ this is a long comment
 					<type>std::string</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Immutable class with a built-in property.
@@ -2575,6 +2839,12 @@ this is a long comment
 					<type>bool</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Immutable class with one pod property
@@ -2619,6 +2889,12 @@ this is a long comment
 					<type>std::string</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Immutable class with non-immutable and immutable pods as properties.
@@ -2714,6 +2990,12 @@ this is a long comment
 					<type>immutable_one_builtin</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This is an example of an object template.
@@ -2776,6 +3058,12 @@ this is a long comment
 					<type>value</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This class instantiates the simple object template.
@@ -2821,6 +3109,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This is the base object template.
@@ -2865,6 +3159,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This object template inherits from BaseObjectTemplate.
@@ -2909,6 +3209,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This class instantiates the BaseObjectTemplate.
@@ -2936,6 +3242,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>This class instantiates the DescendantObjectTemplate obje.
@@ -2963,6 +3275,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Base object template.
@@ -3007,6 +3325,12 @@ this is a long comment
 					<type>std::string</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3051,6 +3375,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Second descendant
@@ -3096,6 +3426,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Multiple parents object template
@@ -3142,6 +3478,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Second descendant instance
@@ -3187,6 +3529,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Instantiates object template MultipleParentsObjectTemplate.
@@ -3232,6 +3580,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Type that instantiates more than one object template.
@@ -3278,6 +3632,12 @@ this is a long comment
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Base class that instantiates a derived object template.
@@ -3305,6 +3665,12 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Descendant class that instantiates an object template which is a descendant
@@ -3334,6 +3700,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Type is a value.
@@ -3377,6 +3749,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3419,6 +3797,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3461,6 +3845,12 @@ of the object template instantiated by the base class.
 					<type>class_a</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3486,6 +3876,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3511,6 +3907,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3536,6 +3938,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3562,6 +3970,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3604,6 +4018,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3630,6 +4050,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3673,6 +4099,12 @@ of the object template instantiated by the base class.
 					<type>unsigned int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3699,6 +4131,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3742,6 +4180,12 @@ of the object template instantiated by the base class.
 					<type>unsigned int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3785,6 +4229,12 @@ of the object template instantiated by the base class.
 					<type>unsigned int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3811,6 +4261,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3837,6 +4293,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3863,6 +4325,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3906,6 +4374,12 @@ of the object template instantiated by the base class.
 					<type>bool</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3932,6 +4406,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3975,6 +4455,12 @@ of the object template instantiated by the base class.
 					<type>bool</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Base class for scenario that tests code generated move contructors.
@@ -4019,6 +4505,12 @@ of the object template instantiated by the base class.
 					<type>boost::filesystem::path</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Descendant class for scenario that tests code generated move contructors.
@@ -4064,6 +4556,12 @@ of the object template instantiated by the base class.
 					<type>boost::filesystem::path</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Descendant class for scenario that tests code generated move contructors.
@@ -4091,6 +4589,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4137,6 +4641,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4184,6 +4694,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4230,6 +4746,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4255,6 +4777,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4297,6 +4825,12 @@ of the object template instantiated by the base class.
 					<type>unsigned int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4340,6 +4874,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4386,6 +4926,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4411,6 +4957,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4436,6 +4988,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4478,6 +5036,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4521,6 +5085,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4567,6 +5137,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4592,6 +5168,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4638,6 +5220,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4680,6 +5268,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4723,6 +5317,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4748,6 +5348,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4807,6 +5413,12 @@ of the object template instantiated by the base class.
 					<type>cpp_model::class_1</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4832,6 +5444,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4874,6 +5492,12 @@ of the object template instantiated by the base class.
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4900,6 +5524,12 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 	</elements>
 	<use_new_code>1</use_new_code>

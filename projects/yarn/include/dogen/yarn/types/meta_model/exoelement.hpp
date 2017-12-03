@@ -39,10 +39,12 @@ namespace meta_model {
 
 class exoelement final {
 public:
-    exoelement() = default;
     exoelement(const exoelement&) = default;
     exoelement(exoelement&&) = default;
     ~exoelement() = default;
+
+public:
+    exoelement();
 
 public:
     exoelement(
@@ -52,7 +54,13 @@ public:
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
         const std::list<std::string>& parents,
-        const std::list<dogen::yarn::meta_model::exoattribute>& attributes);
+        const std::list<dogen::yarn::meta_model::exoattribute>& attributes,
+        const bool can_be_primitive_underlier,
+        const bool in_global_module,
+        const bool can_be_enumeration_underlier,
+        const bool is_default_enumeration_type,
+        const bool is_associative_container,
+        const bool is_floating_point);
 
 private:
     template<typename Archive>
@@ -117,6 +125,24 @@ public:
     void attributes(const std::list<dogen::yarn::meta_model::exoattribute>& v);
     void attributes(const std::list<dogen::yarn::meta_model::exoattribute>&& v);
 
+    bool can_be_primitive_underlier() const;
+    void can_be_primitive_underlier(const bool v);
+
+    bool in_global_module() const;
+    void in_global_module(const bool v);
+
+    bool can_be_enumeration_underlier() const;
+    void can_be_enumeration_underlier(const bool v);
+
+    bool is_default_enumeration_type() const;
+    void is_default_enumeration_type(const bool v);
+
+    bool is_associative_container() const;
+    void is_associative_container(const bool v);
+
+    bool is_floating_point() const;
+    void is_floating_point(const bool v);
+
 public:
     bool operator==(const exoelement& rhs) const;
     bool operator!=(const exoelement& rhs) const {
@@ -135,6 +161,12 @@ private:
     std::string name_;
     std::list<std::string> parents_;
     std::list<dogen::yarn::meta_model::exoattribute> attributes_;
+    bool can_be_primitive_underlier_;
+    bool in_global_module_;
+    bool can_be_enumeration_underlier_;
+    bool is_default_enumeration_type_;
+    bool is_associative_container_;
+    bool is_floating_point_;
 };
 
 } } }

@@ -44,6 +44,15 @@ const std::string type_key("type");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
 const std::string stereotypes_key("stereotypes");
+const std::string in_global_module_key("in_global_module");
+const std::string can_be_enumeration_underlier_key(
+    "can_be_enumeration_underlier");
+const std::string can_be_primitive_underlier_key(
+    "can_be_primitive_underlier");
+const std::string is_associative_container_key("is_associative_container");
+const std::string is_floating_point_key("is_floating_point");
+const std::string is_default_enumeration_type_key(
+    "is_default_enumeration_type");
 
 const std::string mssing_elements("Missing mandatory elements collection.");
 const std::string invalid_json_file("Failed to parse JSON file: ");
@@ -155,6 +164,14 @@ read_element(const boost::property_tree::ptree& pt) const {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
             r.attributes().push_back(read_attribute(j->second));
     }
+
+    const auto f(false);
+    r.in_global_module(pt.get(in_global_module_key, f));
+    r.is_associative_container(pt.get(is_associative_container_key, f));
+    r.can_be_primitive_underlier(pt.get(can_be_primitive_underlier_key, f));
+    r.is_default_enumeration_type(pt.get(is_default_enumeration_type_key, f));
+    r.is_floating_point(pt.get(is_floating_point_key, f));
+    r.can_be_enumeration_underlier(pt.get(can_be_enumeration_underlier_key, f));
 
     return r;
 }

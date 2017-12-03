@@ -59,7 +59,7 @@ void adapter::ensure_not_empty(const std::string& n) const {
 
 meta_model::name adapter::to_name(const meta_model::location& l,
     const std::string& n) const {
-    BOOST_LOG_SEV(lg, debug) << "XLocation: " << l;
+    BOOST_LOG_SEV(lg, debug) << "Location: " << l;
     /*
      * Names are expected to be delimited by the scope operator,
      * denoting internal modules.
@@ -72,15 +72,8 @@ meta_model::name adapter::to_name(const meta_model::location& l,
     if (!tokens.empty())
         b.internal_modules(tokens);
 
-    /*
-     * Elements placed in the global module do not have any of the
-     * location properties set.
-     */
-    // FIXME
-    // if (!nc.in_global_module()) {
     b.external_modules(l.external_modules());
     b.model_modules(l.model_modules());
-    // }
 
     return b.build();
 }
@@ -140,6 +133,7 @@ adapter::to_object(const meta_model::location& l,
 
     auto r(boost::make_shared<meta_model::object>());
     populate_element(entity_scope, l, ee, *r);
+    r->is_associative_container(ee.is_associative_container());
 
     for (const auto& attr : ee.attributes())
         r->local_attributes().push_back(to_attribute(l, attr));
@@ -225,6 +219,12 @@ adapter::to_builtin(const meta_model::location& l,
 
     auto r(boost::make_shared<meta_model::builtin>());
     populate_element(entity_scope, l, ee, *r);
+
+    r->can_be_primitive_underlier(ee.can_be_primitive_underlier());
+    r->is_default_enumeration_type(ee.is_default_enumeration_type());
+    r->is_floating_point(ee.is_floating_point());
+    r->can_be_enumeration_underlier(ee.can_be_enumeration_underlier());
+
     return r;
 }
 

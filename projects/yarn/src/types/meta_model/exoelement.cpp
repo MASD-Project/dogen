@@ -24,6 +24,14 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
+exoelement::exoelement()
+    : can_be_primitive_underlier_(static_cast<bool>(0)),
+      in_global_module_(static_cast<bool>(0)),
+      can_be_enumeration_underlier_(static_cast<bool>(0)),
+      is_default_enumeration_type_(static_cast<bool>(0)),
+      is_associative_container_(static_cast<bool>(0)),
+      is_floating_point_(static_cast<bool>(0)) { }
+
 exoelement::exoelement(
     const std::string& documentation,
     const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
@@ -31,14 +39,26 @@ exoelement::exoelement(
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::string& name,
     const std::list<std::string>& parents,
-    const std::list<dogen::yarn::meta_model::exoattribute>& attributes)
+    const std::list<dogen::yarn::meta_model::exoattribute>& attributes,
+    const bool can_be_primitive_underlier,
+    const bool in_global_module,
+    const bool can_be_enumeration_underlier,
+    const bool is_default_enumeration_type,
+    const bool is_associative_container,
+    const bool is_floating_point)
     : documentation_(documentation),
       static_stereotypes_(static_stereotypes),
       dynamic_stereotypes_(dynamic_stereotypes),
       tagged_values_(tagged_values),
       name_(name),
       parents_(parents),
-      attributes_(attributes) { }
+      attributes_(attributes),
+      can_be_primitive_underlier_(can_be_primitive_underlier),
+      in_global_module_(in_global_module),
+      can_be_enumeration_underlier_(can_be_enumeration_underlier),
+      is_default_enumeration_type_(is_default_enumeration_type),
+      is_associative_container_(is_associative_container),
+      is_floating_point_(is_floating_point) { }
 
 void exoelement::swap(exoelement& other) noexcept {
     using std::swap;
@@ -49,6 +69,12 @@ void exoelement::swap(exoelement& other) noexcept {
     swap(name_, other.name_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
+    swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
+    swap(in_global_module_, other.in_global_module_);
+    swap(can_be_enumeration_underlier_, other.can_be_enumeration_underlier_);
+    swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
+    swap(is_associative_container_, other.is_associative_container_);
+    swap(is_floating_point_, other.is_floating_point_);
 }
 
 bool exoelement::operator==(const exoelement& rhs) const {
@@ -58,7 +84,13 @@ bool exoelement::operator==(const exoelement& rhs) const {
         tagged_values_ == rhs.tagged_values_ &&
         name_ == rhs.name_ &&
         parents_ == rhs.parents_ &&
-        attributes_ == rhs.attributes_;
+        attributes_ == rhs.attributes_ &&
+        can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_ &&
+        in_global_module_ == rhs.in_global_module_ &&
+        can_be_enumeration_underlier_ == rhs.can_be_enumeration_underlier_ &&
+        is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
+        is_associative_container_ == rhs.is_associative_container_ &&
+        is_floating_point_ == rhs.is_floating_point_;
 }
 
 exoelement& exoelement::operator=(exoelement other) {
@@ -177,6 +209,54 @@ void exoelement::attributes(const std::list<dogen::yarn::meta_model::exoattribut
 
 void exoelement::attributes(const std::list<dogen::yarn::meta_model::exoattribute>&& v) {
     attributes_ = std::move(v);
+}
+
+bool exoelement::can_be_primitive_underlier() const {
+    return can_be_primitive_underlier_;
+}
+
+void exoelement::can_be_primitive_underlier(const bool v) {
+    can_be_primitive_underlier_ = v;
+}
+
+bool exoelement::in_global_module() const {
+    return in_global_module_;
+}
+
+void exoelement::in_global_module(const bool v) {
+    in_global_module_ = v;
+}
+
+bool exoelement::can_be_enumeration_underlier() const {
+    return can_be_enumeration_underlier_;
+}
+
+void exoelement::can_be_enumeration_underlier(const bool v) {
+    can_be_enumeration_underlier_ = v;
+}
+
+bool exoelement::is_default_enumeration_type() const {
+    return is_default_enumeration_type_;
+}
+
+void exoelement::is_default_enumeration_type(const bool v) {
+    is_default_enumeration_type_ = v;
+}
+
+bool exoelement::is_associative_container() const {
+    return is_associative_container_;
+}
+
+void exoelement::is_associative_container(const bool v) {
+    is_associative_container_ = v;
+}
+
+bool exoelement::is_floating_point() const {
+    return is_floating_point_;
+}
+
+void exoelement::is_floating_point(const bool v) {
+    is_floating_point_ = v;
 }
 
 } } }

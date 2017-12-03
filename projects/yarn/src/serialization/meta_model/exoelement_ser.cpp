@@ -48,6 +48,12 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("attributes", v.attributes_);
+    ar << make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
+    ar << make_nvp("in_global_module", v.in_global_module_);
+    ar << make_nvp("can_be_enumeration_underlier", v.can_be_enumeration_underlier_);
+    ar << make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
+    ar << make_nvp("is_associative_container", v.is_associative_container_);
+    ar << make_nvp("is_floating_point", v.is_floating_point_);
 }
 
 template<typename Archive>
@@ -61,6 +67,12 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("attributes", v.attributes_);
+    ar >> make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
+    ar >> make_nvp("in_global_module", v.in_global_module_);
+    ar >> make_nvp("can_be_enumeration_underlier", v.can_be_enumeration_underlier_);
+    ar >> make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
+    ar >> make_nvp("is_associative_container", v.is_associative_container_);
+    ar >> make_nvp("is_floating_point", v.is_floating_point_);
 }
 
 } }

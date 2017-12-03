@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/exoelement_io.hpp"
 #include "dogen/yarn/io/meta_model/exoattribute_io.hpp"
@@ -106,6 +107,12 @@ namespace yarn {
 namespace meta_model {
 
 std::ostream& operator<<(std::ostream& s, const exoelement& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exoelement\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
@@ -114,7 +121,13 @@ std::ostream& operator<<(std::ostream& s, const exoelement& v) {
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"parents\": " << v.parents() << ", "
-      << "\"attributes\": " << v.attributes()
+      << "\"attributes\": " << v.attributes() << ", "
+      << "\"can_be_primitive_underlier\": " << v.can_be_primitive_underlier() << ", "
+      << "\"in_global_module\": " << v.in_global_module() << ", "
+      << "\"can_be_enumeration_underlier\": " << v.can_be_enumeration_underlier() << ", "
+      << "\"is_default_enumeration_type\": " << v.is_default_enumeration_type() << ", "
+      << "\"is_associative_container\": " << v.is_associative_container() << ", "
+      << "\"is_floating_point\": " << v.is_floating_point()
       << " }";
     return(s);
 }

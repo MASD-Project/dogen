@@ -181,6 +181,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -223,6 +229,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -248,6 +260,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -290,6 +308,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 	</elements>
 	<use_new_code>1</use_new_code>

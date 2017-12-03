@@ -66,6 +66,9 @@ const std::string missing_element_type("Missing yarn element type. Element: ");
 const std::string invalid_element_type(
     "Invalid or usupported yarn element type: ");
 
+using dogen::yarn::meta_model::location;
+const location empty_location = location();
+
 }
 
 namespace dogen {
@@ -267,12 +270,12 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
     const auto ra(f.make(em.tagged_values(), st, em.dynamic_stereotypes()));
     const auto tg(make_type_group(ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
-    const auto l(create_location(nc));
+    const auto model_location(create_location(nc));
 
     meta_model::endomodel r;
     helpers::name_builder b(true/*model_name_mode*/);
-    b.external_modules(l.external_modules());
-    b.model_modules(l.model_modules());
+    b.external_modules(model_location.external_modules());
+    b.model_modules(model_location.model_modules());
     r.name(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
@@ -280,6 +283,8 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
     for (const auto& ee : em.elements()) {
         using meta_model::static_stereotypes;
         const auto et(obtain_element_type(ee.name(), ee.static_stereotypes()));
+        const auto l(ee.in_global_module() ? empty_location : model_location);
+
         switch (et) {
         case static_stereotypes::object:
             insert(ad.to_object(l, ee), r.objects());

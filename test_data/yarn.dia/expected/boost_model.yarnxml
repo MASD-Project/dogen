@@ -300,6 +300,12 @@
 					<type>pkg1::class_c</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -342,6 +348,12 @@
 					<type>unsigned int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -367,6 +379,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -426,6 +444,12 @@
 					<type>std::vector&lt;class_a&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -468,6 +492,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -511,6 +541,12 @@
 					<type>int</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -604,6 +640,12 @@
 					<type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -647,6 +689,12 @@
 					<type>boost::shared_ptr&lt;class_a&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -740,6 +788,12 @@
 					<type>boost::variant&lt;int,std::string,char&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -867,6 +921,12 @@
 					<type>std::list&lt;boost::posix_time::time_duration&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -926,6 +986,12 @@
 					<type>std::list&lt;boost::filesystem::path&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -968,6 +1034,12 @@
 					<type>boost::property_tree::ptree</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying ptime.
@@ -998,6 +1070,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
@@ -1028,6 +1106,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
@@ -1058,6 +1142,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1134,6 +1224,12 @@
 					<type>date_primitive</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 	</elements>
 	<use_new_code>1</use_new_code>

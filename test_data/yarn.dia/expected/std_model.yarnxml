@@ -216,6 +216,12 @@
 					<type>std::string</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -343,6 +349,12 @@
 					<type>std::vector&lt;std::vector&lt;unsigned int&gt;&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -368,6 +380,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -427,6 +445,12 @@
 					<type>std::vector&lt;class_a&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -554,6 +578,12 @@
 					<type>std::list&lt;std::list&lt;unsigned int&gt;&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -681,6 +711,12 @@
 					<type>std::deque&lt;std::deque&lt;unsigned int&gt;&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -757,6 +793,12 @@
 					<type>std::unordered_map&lt;class_a,pkg1::class_c&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -833,6 +875,12 @@
 					<type>std::unordered_map&lt;std::string, class_a&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -875,6 +923,12 @@
 					<type>std::vector&lt;std::string&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -918,6 +972,12 @@
 					<type>std::list&lt;pkg1::class_c&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -977,6 +1037,12 @@
 					<type>std::unordered_set&lt;pkg1::class_c&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1138,6 +1204,12 @@
 					<type>std::uint64_t</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1181,6 +1253,12 @@
 					<type>std::shared_ptr&lt;base&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1257,6 +1335,12 @@
 					<type>std::vector&lt;std::pair&lt;std::string,int&gt;&gt;</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1320,6 +1404,12 @@
 					<type></type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying string.
@@ -1350,6 +1440,12 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1392,6 +1488,12 @@
 					<type>string_primitive</type>
 				</item>
 			</attributes>
+			<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			<in_global_module>0</in_global_module>
+			<can_be_enumeration_underlier>0</can_be_enumeration_underlier>
+			<is_default_enumeration_type>0</is_default_enumeration_type>
+			<is_associative_container>0</is_associative_container>
+			<is_floating_point>0</is_floating_point>
 		</item>
 	</elements>
 	<use_new_code>1</use_new_code>

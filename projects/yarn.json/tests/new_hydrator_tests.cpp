@@ -241,7 +241,24 @@ BOOST_AUTO_TEST_CASE(missing_elements_model_throws) {
     contains_checker<hydration_error> c(missing_elements);
     BOOST_CHECK_EXCEPTION(hydrate(missing_elements_model), hydration_error, c);
 }
+/*
+BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
 
+    using namespace dogen::utility::filesystem;
+    boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
+    const auto m(hydrate(p));
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    const auto& elements(m.elements());
+    BOOST_CHECK(!elements.empty());
+    for (const auto& e : elements) {
+        const auto n(e.name());
+        BOOST_REQUIRE(!n.empty());
+    }
+}
+*/
 /*
 
 BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
@@ -279,30 +296,6 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(m.enumerations().empty());
     BOOST_REQUIRE(m.modules().empty());
-}
-
-BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
-
-    using namespace dogen::utility::filesystem;
-    boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
-    const auto m(hydrate(p));
-
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-
-    const auto& objects(m.objects());
-    BOOST_CHECK(!objects.empty());
-    for (const auto& pair : objects) {
-        const auto& o(*pair.second);
-        const auto n(o.name());
-
-        BOOST_REQUIRE(!n.simple().empty());
-        BOOST_CHECK(n.location().model_modules().empty());
-        BOOST_CHECK(n.location().external_modules().empty());
-    }
-    BOOST_CHECK(m.builtins().empty());
-    BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.modules().empty());
 }
 
 BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
