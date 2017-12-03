@@ -1,32 +1,17 @@
 {
-  "root_module": {
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "C++ Standard Library types.",
-    "annotation": {
-      "yarn.input_language": "cpp",
-      "yarn.is_proxy_model": true,
-      "yarn.model_modules": "std"
-    }
+  "documentation": "C++ Standard Library types.",
+  "tagged_values": {
+    "yarn.input_language": "cpp",
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules": "std"
   },
   "elements": [
     {
-      "name": {
-        "simple": "int8_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "int8_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -34,68 +19,40 @@
       }
     },
     {
-      "name": {
-        "simple": "int16_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "int16_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
-      "name": {
-        "simple": "int32_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "int32_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
-      "name": {
-        "simple": "int64_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "int64_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
-      "name": {
-        "simple": "uint8_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "uint8_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -103,68 +60,40 @@
       }
     },
     {
-      "name": {
-        "simple": "uint16_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "uint16_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
-      "name": {
-        "simple": "uint32_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "uint32_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
-      "name": {
-        "simple": "uint64_t"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "uint64_t",
+      "stereotypes" : [ "yarn::builtin" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.types.builtin_header.primary_inclusion_directive": "<cstdint>"
       }
     },
     {
-      "name": {
-        "simple": "string"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "string",
+      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "String",
         "quilt.cpp.streaming.remove_unprintable_characters": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<string>",
@@ -178,16 +107,9 @@
       }
     },
     {
-      "name": {
-        "simple": "vector"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "vector",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<vector>",
@@ -195,16 +117,9 @@
       }
     },
     {
-      "name": {
-        "simple": "deque"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "deque",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<deque>",
@@ -212,32 +127,18 @@
       }
     },
     {
-      "name": {
-        "simple": "array"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "array",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<array>"
       }
     },
     {
-      "name": {
-        "simple": "list"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "list",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<list>",
@@ -245,33 +146,19 @@
       }
     },
     {
-      "name": {
-        "simple": "forward_list"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "forward_list",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<forward_list>"
       }
     },
     {
-      "name": {
-        "simple": "set"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "set",
+      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<set>",
@@ -279,17 +166,10 @@
       }
     },
     {
-      "name": {
-        "simple": "multiset"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "multiset",
+      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<multiset>",
@@ -297,17 +177,10 @@
       }
     },
     {
-      "name": {
-        "simple": "unordered_set"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "unordered_set",
+      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<unordered_set>",
@@ -315,17 +188,10 @@
       }
     },
     {
-      "name": {
-        "simple": "map"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "map",
+      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<map>",
@@ -333,17 +199,10 @@
       }
     },
     {
-      "name": {
-        "simple": "multimap"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "multimap",
+      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<multimap>",
@@ -351,17 +210,10 @@
       }
     },
     {
-      "name": {
-        "simple": "unordered_map"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "unordered_map",
+      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<unordered_map>",
@@ -369,16 +221,9 @@
       }
     },
     {
-      "name": {
-        "simple": "pair"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "pair",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "Pair",
         "yarn.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<utility>",
@@ -386,16 +231,9 @@
       }
     },
     {
-      "name": {
-        "simple": "shared_ptr"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "shared_ptr",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
@@ -403,16 +241,9 @@
       }
     },
     {
-      "name": {
-        "simple": "weak_ptr"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "weak_ptr",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
@@ -420,16 +251,9 @@
       }
     },
     {
-      "name": {
-        "simple": "unique_ptr"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "unique_ptr",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
@@ -437,74 +261,39 @@
       }
     },
     {
-      "name": {
-        "simple": "function"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "function",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }
     },
     {
-      "name": {
-        "simple": "optional"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "optional",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "Optional",
         "yarn.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }
     },
     {
-      "name": {
-        "simple": "ostream"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "ostream",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<ostream>"
       }
     },
     {
-      "name": {
-        "simple": "ostringstream"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "ostringstream",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<sstream>"
       }
     },
     {
-      "name": {
-        "simple": "type_index"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "type_index",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<typeindex>"
       }
     }

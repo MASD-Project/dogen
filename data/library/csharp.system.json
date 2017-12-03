@@ -1,71 +1,42 @@
 {
-  "root_module": {
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "System types.",
-    "annotation": {
-      "yarn.input_language": "csharp",
-      "yarn.is_proxy_model": true,
-      "yarn.model_modules": "System"
-    }
+  "documentation": "System types.",
+  "tagged_values": {
+    "yarn.input_language": "csharp",
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules": "System"
   },
   "elements": [
     {
-      "name": {
-        "simple": "Int16"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "Int16",
+      "stereotypes" : [ "yarn::builtin" ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Short"
       }
     },
     {
-      "name": {
-        "simple": "Int32"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "Int32",
+      "stereotypes" : [ "yarn::builtin" ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Int"
       }
     },
     {
-      "name": {
-        "simple": "Int64"
-      },
-      "meta_name": {
-        "simple": "builtin",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "Int64",
+      "stereotypes" : [ "yarn::builtin" ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Long"

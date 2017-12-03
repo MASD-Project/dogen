@@ -1,263 +1,147 @@
 {
-  "root_module": {
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Basic collection types.",
-    "annotation": {
-      "yarn.input_language": "csharp",
-      "yarn.is_proxy_model": true,
-      "yarn.model_modules": "System.Collections"
-    }
+  "documentation": "Basic collection types.",
+  "tagged_values": {
+    "yarn.input_language": "csharp",
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules": "System.Collections"
   },
   "elements": [
     {
-      "name": {
-        "simple": "IEnumerable"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "IEnumerable",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "IEnumerable"
       }
     },
     {
-      "name": {
-        "simple": "ICollection"
-      },
+      "name": "ICollection",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "IEnumerable"
-        }
+        "IEnumerable"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "ICollection"
       }
     },
     {
-      "name": {
-        "simple": "IList"
-      },
+      "name": "IList",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "ICollection"
-        }
+        "ICollection"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "IList"
       }
     },
     {
-      "name": {
-        "simple": "ArrayList"
-      },
+      "name": "ArrayList",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "IList"
-        }
+        "IList"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "ArrayList"
       }
     },
     {
-      "name": {
-        "simple": "IDictionary"
-      },
+      "name": "IDictionary",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "ICollection"
-        }
+        "ICollection"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "IDictionary"
       }
     },
     {
-      "name": {
-        "simple": "Hashtable"
-      },
+      "name": "Hashtable",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "IDictionary"
-        }
+        "IDictionary"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Hashtable"
       }
     },
     {
-      "name": {
-        "simple": "HybridDictionary",
-        "internal_modules": "Specialized"
-      },
+      "name": "Specialized.HybridDictionary",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "IDictionary"
-        }
+        "IDictionary"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "HybridDictionary"
       }
     },
     {
-      "name": {
-        "simple": "NameValueCollection",
-        "internal_modules": "Specialized"
-      },
+      "name": "Specialized.NameValueCollection",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "ICollection"
-        }
+        "ICollection"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "NameValueCollection"
       }
     },
     {
-      "name": {
-        "simple": "BitArray"
-      },
+      "name": "BitArray",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "ICollection"
-        }
+        "ICollection"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "BitArray"
       }
     },
     {
-      "name": {
-        "simple": "Queue"
-      },
+      "name": "Queue",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "ICollection"
-        }
+        "ICollection"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Queue"
       }
     },
     {
-      "name": {
-        "simple": "Stack"
-      },
+      "name": "Stack",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "ICollection"
-        }
+        "ICollection"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "Stack"
       }
     },
     {
-      "name": {
-        "simple": "SortedList"
-      },
+      "name": "SortedList",
+      "stereotypes" : [ "yarn::object" ],
       "parents": [
-        {
-          "simple": "IDictionary"
-        }
+        "IDictionary"
       ],
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
         "quilt.csharp.assistant.method_postfix": "SortedList"

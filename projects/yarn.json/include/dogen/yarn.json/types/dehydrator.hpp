@@ -32,6 +32,8 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/scribble.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 
 namespace dogen {

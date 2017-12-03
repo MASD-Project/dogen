@@ -123,6 +123,8 @@ void adapter::populate_element(const annotations::scope_types scope,
     const auto& tv(ee.tagged_values());
     const auto& ds(ee.dynamic_stereotypes());
     e.annotation(annotation_factory_.make(tv, scope, ds));
+    e.in_global_module(
+        l.external_modules().empty() && l.model_modules().empty());
 }
 
 boost::shared_ptr<meta_model::object>
@@ -134,6 +136,7 @@ adapter::to_object(const meta_model::location& l,
     auto r(boost::make_shared<meta_model::object>());
     populate_element(entity_scope, l, ee, *r);
     r->is_associative_container(ee.is_associative_container());
+    r->can_be_primitive_underlier(ee.can_be_primitive_underlier());
 
     for (const auto& attr : ee.attributes())
         r->local_attributes().push_back(to_attribute(l, attr));

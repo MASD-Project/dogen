@@ -24,7 +24,7 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
-#include "dogen/yarn.json/types/hydrator.hpp"
+#include "dogen/yarn.json/types/new_hydrator.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/exomodel_transform.hpp"
 
@@ -64,7 +64,7 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     helpers::scoped_transform_probing stp(lg, "annotations transform",
         transform_id, model_name, ctx.prober());
 
-    hydrator h;
+    new_hydrator h;
     const auto r(h.hydrate(p));
 
     stp.end_transform(r);

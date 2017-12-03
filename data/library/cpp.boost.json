@@ -1,30 +1,15 @@
 {
-  "root_module": {
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Boost Library types.",
-    "annotation": {
-      "yarn.input_language": "cpp",
-      "yarn.is_proxy_model": true,
-      "yarn.model_modules": "boost"
-    }
+  "documentation": "Boost Library types.",
+  "tagged_values": {
+    "yarn.input_language": "cpp",
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules": "boost"
   },
   "elements": [
     {
-      "name": {
-        "simple": "shared_ptr"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "shared_ptr",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
@@ -35,16 +20,9 @@
       }
     },
     {
-      "name": {
-        "simple": "weak_ptr"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "weak_ptr",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
@@ -55,16 +33,9 @@
       }
     },
     {
-      "name": {
-        "simple": "scoped_ptr"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "scoped_ptr",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
@@ -75,16 +46,9 @@
       }
     },
     {
-      "name": {
-        "simple": "optional"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "optional",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "Optional",
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": false,
@@ -96,16 +60,9 @@
       }
     },
     {
-      "name": {
-        "simple": "variant"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "variant",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "BoostVariant",
         "yarn.type_parameters.variable_number_of_parameters": true,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
@@ -120,65 +77,33 @@
       }
     },
     {
-      "name": {
-        "simple": "io_service",
-        "internal_modules": "asio"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "asio::io_service",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
       }
     },
     {
-      "name": {
-        "simple": "socket",
-        "internal_modules": "asio::ip::tcp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "asio::ip::tcp::socket",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
       }
     },
     {
-      "name": {
-        "simple": "acceptor",
-        "internal_modules": "asio::ip::tcp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "asio::ip::tcp::acceptor",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
       }
     },
     {
-      "name": {
-        "simple": "path",
-        "internal_modules": "filesystem"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "filesystem::path",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "BoostPath",
         "quilt.cpp.streaming.string_conversion_method": "generic_string()",
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
@@ -191,18 +116,10 @@
       }
     },
     {
-      "name": {
-        "simple": "date",
-        "internal_modules": "gregorian"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "gregorian::date",
+      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "BoostDate",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
@@ -216,18 +133,10 @@
       }
     },
     {
-      "name": {
-        "simple": "ptime",
-        "internal_modules": "posix_time"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "posix_time::ptime",
+      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "BoostPTime",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
@@ -241,18 +150,10 @@
       }
     },
     {
-      "name": {
-        "simple": "time_duration",
-        "internal_modules": "posix_time"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "posix_time::time_duration",
+      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.helper.family": "BoostTimeDuration",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
@@ -265,17 +166,9 @@
       }
     },
     {
-      "name": {
-        "simple": "ptree",
-        "internal_modules": "property_tree"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "property_tree::ptree",
+      "stereotypes" : [ "yarn::object" ],
+      "tagged_values": {
         "quilt.cpp.helper.family": "BoostPTree",
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
