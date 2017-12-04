@@ -29,7 +29,6 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn/serialization/meta_model/exoattribute_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,11 +45,10 @@ public:
 public:
     exoattribute(
         const std::string& documentation,
-        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
-        const std::list<std::string>& dynamic_stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
-        const std::string& type);
+        const std::string& type,
+        const std::list<std::string>& stereotypes);
 
 private:
     template<typename Archive>
@@ -74,27 +72,6 @@ public:
     void documentation(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief Stereotypes that are part of the yarn UML profile, and so are well-known to the
-     * model.
-     */
-    /**@{*/
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v);
-    /**@}*/
-
-    /**
-     * @brief Stereotypes that are not part of the yarn UML profile. These are user defined.
-     */
-    /**@{*/
-    const std::list<std::string>& dynamic_stereotypes() const;
-    std::list<std::string>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<std::string>& v);
-    void dynamic_stereotypes(const std::list<std::string>&& v);
-    /**@}*/
-
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
     std::list<std::pair<std::string, std::string> >& tagged_values();
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
@@ -110,6 +87,11 @@ public:
     void type(const std::string& v);
     void type(const std::string&& v);
 
+    const std::list<std::string>& stereotypes() const;
+    std::list<std::string>& stereotypes();
+    void stereotypes(const std::list<std::string>& v);
+    void stereotypes(const std::list<std::string>&& v);
+
 public:
     bool operator==(const exoattribute& rhs) const;
     bool operator!=(const exoattribute& rhs) const {
@@ -122,11 +104,10 @@ public:
 
 private:
     std::string documentation_;
-    std::list<dogen::yarn::meta_model::static_stereotypes> static_stereotypes_;
-    std::list<std::string> dynamic_stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::string name_;
     std::string type_;
+    std::list<std::string> stereotypes_;
 };
 
 } } }

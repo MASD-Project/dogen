@@ -41,9 +41,9 @@ namespace dia {
 class adapter final {
 private:
     /**
-     * @brief Ensure the dia object name is valid.
+     * @brief Ensure the dia name is valid.
      */
-    static void validate_dia_object_name(const std::string& n);
+    static void validate_dia_name(const std::string& n);
 
     /**
      * @brief Constructs a qualified name, taking into account the

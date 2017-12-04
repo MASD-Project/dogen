@@ -30,7 +30,6 @@
 #include "dogen/yarn/test_data/meta_model/exoelement_td.hpp"
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
-#include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
 
 namespace {
 
@@ -43,27 +42,6 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-dogen::yarn::meta_model::static_stereotypes
-create_dogen_yarn_meta_model_static_stereotypes(const unsigned int position) {
-    return dogen::yarn::meta_model::static_stereotypes_generator::create(position);
-}
-
-std::list<dogen::yarn::meta_model::static_stereotypes> create_std_list_dogen_yarn_meta_model_static_stereotypes(unsigned int position) {
-    std::list<dogen::yarn::meta_model::static_stereotypes> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_meta_model_static_stereotypes(position + i));
-    }
-    return r;
-}
-
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
 }
 
 std::pair<std::string, std::string>
@@ -300,6 +278,14 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -313,19 +299,18 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
     v.documentation(create_std_string(position + 2));
-    v.static_stereotypes(create_std_list_dogen_yarn_meta_model_static_stereotypes(position + 3));
-    v.dynamic_stereotypes(create_std_list_std_string(position + 4));
-    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 5));
-    v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 6));
-    v.object_templates(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + 7));
-    v.builtins(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + 8));
-    v.enumerations(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + 9));
-    v.primitives(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + 10));
-    v.objects(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + 11));
-    v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 12));
-    v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 13));
-    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 14));
-    v.use_new_code(create_bool(position + 15));
+    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 3));
+    v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 4));
+    v.object_templates(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + 5));
+    v.builtins(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + 6));
+    v.enumerations(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + 7));
+    v.primitives(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + 8));
+    v.objects(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + 9));
+    v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 10));
+    v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 11));
+    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 12));
+    v.use_new_code(create_bool(position + 13));
+    v.stereotypes(create_std_list_std_string(position + 14));
 }
 
 exomodel_generator::result_type

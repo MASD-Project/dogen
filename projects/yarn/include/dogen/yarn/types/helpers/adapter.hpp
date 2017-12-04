@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
@@ -44,6 +45,7 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/exoattribute.hpp"
 #include "dogen/yarn/types/meta_model/exoelement.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -93,8 +95,8 @@ private:
      * exoelement.
      */
     void populate_element(const annotations::scope_types scope,
-        const meta_model::location& l, const meta_model::exoelement& ee,
-        meta_model::element& e) const;
+        const meta_model::location& l, const stereotypes_conversion_result& scr,
+        const meta_model::exoelement& ee, meta_model::element& e) const;
 
 public:
     /**
@@ -103,6 +105,7 @@ public:
      */
     boost::shared_ptr<meta_model::object>
     to_object(const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -111,6 +114,7 @@ public:
      */
     boost::shared_ptr<meta_model::object_template>
     to_object_template(const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -119,6 +123,7 @@ public:
      */
     boost::shared_ptr<meta_model::exception>
     to_exception(const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -127,6 +132,7 @@ public:
      */
     boost::shared_ptr<meta_model::primitive>
     to_primitive(const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -135,6 +141,7 @@ public:
      */
     boost::shared_ptr<meta_model::enumeration>
     to_enumeration(const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -143,6 +150,7 @@ public:
      */
     boost::shared_ptr<meta_model::module>
     to_module(const bool is_root_module, const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
     /**
@@ -151,6 +159,7 @@ public:
      */
     boost::shared_ptr<meta_model::builtin>
     to_builtin(const meta_model::location& l,
+        const stereotypes_conversion_result& scr,
         const meta_model::exoelement& ee) const;
 
 private:

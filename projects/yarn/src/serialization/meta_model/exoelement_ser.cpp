@@ -32,7 +32,6 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/exoelement_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exoattribute_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -42,8 +41,6 @@ void save(Archive& ar,
     const dogen::yarn::meta_model::exoelement& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("static_stereotypes", v.static_stereotypes_);
-    ar << make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("parents", v.parents_);
@@ -54,6 +51,8 @@ void save(Archive& ar,
     ar << make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
     ar << make_nvp("is_associative_container", v.is_associative_container_);
     ar << make_nvp("is_floating_point", v.is_floating_point_);
+    ar << make_nvp("stereotypes", v.stereotypes_);
+    ar << make_nvp("fallback_element_type", v.fallback_element_type_);
 }
 
 template<typename Archive>
@@ -61,8 +60,6 @@ void load(Archive& ar,
     dogen::yarn::meta_model::exoelement& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("static_stereotypes", v.static_stereotypes_);
-    ar >> make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("parents", v.parents_);
@@ -73,6 +70,8 @@ void load(Archive& ar,
     ar >> make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
     ar >> make_nvp("is_associative_container", v.is_associative_container_);
     ar >> make_nvp("is_floating_point", v.is_floating_point_);
+    ar >> make_nvp("stereotypes", v.stereotypes_);
+    ar >> make_nvp("fallback_element_type", v.fallback_element_type_);
 }
 
 } }

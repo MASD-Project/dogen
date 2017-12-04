@@ -21,7 +21,6 @@
 #include <sstream>
 #include "dogen/yarn/test_data/meta_model/exoelement_td.hpp"
 #include "dogen/yarn/test_data/meta_model/exoattribute_td.hpp"
-#include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
 
 namespace {
 
@@ -29,27 +28,6 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
-}
-
-dogen::yarn::meta_model::static_stereotypes
-create_dogen_yarn_meta_model_static_stereotypes(const unsigned int position) {
-    return dogen::yarn::meta_model::static_stereotypes_generator::create(position);
-}
-
-std::list<dogen::yarn::meta_model::static_stereotypes> create_std_list_dogen_yarn_meta_model_static_stereotypes(unsigned int position) {
-    std::list<dogen::yarn::meta_model::static_stereotypes> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_meta_model_static_stereotypes(position + i));
-    }
-    return r;
-}
-
-std::list<std::string> create_std_list_std_string(unsigned int position) {
-    std::list<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_string(position + i));
-    }
-    return r;
 }
 
 std::pair<std::string, std::string>
@@ -64,6 +42,14 @@ std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_str
     std::list<std::pair<std::string, std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_pair_std_string_std_string(position + i));
+    }
+    return r;
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -96,18 +82,18 @@ exoelement_generator::exoelement_generator() : position_(0) { }
 void exoelement_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
-    v.static_stereotypes(create_std_list_dogen_yarn_meta_model_static_stereotypes(position + 1));
-    v.dynamic_stereotypes(create_std_list_std_string(position + 2));
-    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 3));
-    v.name(create_std_string(position + 4));
-    v.parents(create_std_list_std_string(position + 5));
-    v.attributes(create_std_list_dogen_yarn_meta_model_exoattribute(position + 6));
-    v.can_be_primitive_underlier(create_bool(position + 7));
-    v.in_global_module(create_bool(position + 8));
-    v.can_be_enumeration_underlier(create_bool(position + 9));
-    v.is_default_enumeration_type(create_bool(position + 10));
-    v.is_associative_container(create_bool(position + 11));
-    v.is_floating_point(create_bool(position + 12));
+    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 1));
+    v.name(create_std_string(position + 2));
+    v.parents(create_std_list_std_string(position + 3));
+    v.attributes(create_std_list_dogen_yarn_meta_model_exoattribute(position + 4));
+    v.can_be_primitive_underlier(create_bool(position + 5));
+    v.in_global_module(create_bool(position + 6));
+    v.can_be_enumeration_underlier(create_bool(position + 7));
+    v.is_default_enumeration_type(create_bool(position + 8));
+    v.is_associative_container(create_bool(position + 9));
+    v.is_floating_point(create_bool(position + 10));
+    v.stereotypes(create_std_list_std_string(position + 11));
+    v.fallback_element_type(create_std_string(position + 12));
 }
 
 exoelement_generator::result_type

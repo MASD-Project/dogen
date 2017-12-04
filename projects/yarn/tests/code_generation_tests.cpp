@@ -74,7 +74,7 @@ const std::string actual_dia_dir("/actual.dia");
 const std::string actual_json_dir("/actual.json");
 
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
-const std::string dia_invalid_name("Dia object name is empty");
+const std::string dia_invalid_name("Dia name is empty");
 
 struct test_configuration {
     boost::filesystem::path expected;

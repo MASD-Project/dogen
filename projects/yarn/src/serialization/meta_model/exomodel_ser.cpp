@@ -42,7 +42,6 @@
 #include "dogen/yarn/serialization/meta_model/exoelement_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -54,8 +53,6 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("static_stereotypes", v.static_stereotypes_);
-    ar << make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("modules", v.modules_);
     ar << make_nvp("object_templates", v.object_templates_);
@@ -67,6 +64,7 @@ void save(Archive& ar,
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("use_new_code", v.use_new_code_);
+    ar << make_nvp("stereotypes", v.stereotypes_);
 }
 
 template<typename Archive>
@@ -76,8 +74,6 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("static_stereotypes", v.static_stereotypes_);
-    ar >> make_nvp("dynamic_stereotypes", v.dynamic_stereotypes_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("modules", v.modules_);
     ar >> make_nvp("object_templates", v.object_templates_);
@@ -89,6 +85,7 @@ void load(Archive& ar,
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("use_new_code", v.use_new_code_);
+    ar >> make_nvp("stereotypes", v.stereotypes_);
 }
 
 } }

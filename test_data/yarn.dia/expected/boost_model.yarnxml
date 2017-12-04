@@ -51,18 +51,10 @@
 		<identifiable></identifiable>
 	</meta_name>
 	<documentation></documentation>
-	<static_stereotypes class_id="18" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</static_stereotypes>
-	<dynamic_stereotypes>
-		<count>0</count>
-		<item_version>0</item_version>
-	</dynamic_stereotypes>
-	<tagged_values class_id="19" tracking_level="0" version="0">
+	<tagged_values class_id="18" tracking_level="0" version="0">
 		<count>10</count>
 		<item_version>0</item_version>
-		<item class_id="20" tracking_level="0" version="0">
+		<item class_id="19" tracking_level="0" version="0">
 			<first>yarn.dia.comment</first>
 			<second>true</second>
 		</item>
@@ -103,71 +95,62 @@
 			<second>dogen</second>
 		</item>
 	</tagged_values>
-	<modules class_id="21" tracking_level="0" version="0">
+	<modules class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</modules>
-	<object_templates class_id="22" tracking_level="0" version="0">
+	<object_templates class_id="21" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</object_templates>
-	<builtins class_id="23" tracking_level="0" version="0">
+	<builtins class_id="22" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="24" tracking_level="0" version="0">
+	<enumerations class_id="23" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="25" tracking_level="0" version="0">
+	<primitives class_id="24" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="26" tracking_level="0" version="0">
+	<objects class_id="25" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</objects>
-	<exceptions class_id="27" tracking_level="0" version="0">
+	<exceptions class_id="26" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</exceptions>
-	<root_module class_id="28" tracking_level="0" version="0">
-		<first class_id="29" tracking_level="0" version="0">
-			<parent class_id="30" tracking_level="0" version="0">
+	<root_module class_id="27" tracking_level="0" version="0">
+		<first class_id="28" tracking_level="0" version="0">
+			<parent class_id="29" tracking_level="0" version="0">
 				<entries>
 					<count>0</count>
 					<item_version>0</item_version>
 				</entries>
 				<scope>0</scope>
-				<candidate_labels class_id="31" tracking_level="0" version="0">
+				<candidate_labels class_id="30" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</candidate_labels>
 			</parent>
-			<children class_id="32" tracking_level="0" version="0">
+			<children class_id="31" tracking_level="0" version="0">
 				<count>0</count>
 				<bucket_count>1</bucket_count>
 				<item_version>0</item_version>
 			</children>
 		</first>
-		<second class_id="33" tracking_level="0" version="1">
+		<second class_id="32" tracking_level="0" version="1">
 			<px class_id="-1"></px>
 		</second>
 	</root_module>
-	<elements class_id="34" tracking_level="0" version="0">
+	<elements class_id="33" tracking_level="0" version="0">
 		<count>16</count>
 		<item_version>0</item_version>
-		<item class_id="35" tracking_level="0" version="0">
+		<item class_id="34" tracking_level="0" version="0">
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -177,127 +160,99 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</parents>
-			<attributes class_id="36" tracking_level="0" version="0">
+			<attributes class_id="35" tracking_level="0" version="0">
 				<count>7</count>
 				<item_version>0</item_version>
-				<item class_id="37" tracking_level="0" version="0">
+				<item class_id="36" tracking_level="0" version="0">
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::shared_ptr&lt;class_a&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>std::vector&lt;boost::shared_ptr&lt;class_a&gt;&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_2</name>
 					<type>std::unordered_map&lt;int,boost::shared_ptr&lt;class_a&gt;&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_3</name>
 					<type>boost::shared_ptr&lt;pkg1::class_c&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_4</name>
 					<type>boost::shared_ptr&lt;class_base&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_5</name>
 					<type>std::vector&lt;boost::shared_ptr&lt;class_base&gt;&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_6</name>
 					<type>pkg1::class_c</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -306,18 +261,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -332,20 +283,16 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>unsigned int</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -354,18 +301,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>6</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -385,18 +328,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -411,37 +350,29 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>int</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>std::vector&lt;class_a&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -450,18 +381,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -476,20 +403,16 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>int</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -498,18 +421,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -525,20 +444,16 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>int</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -547,18 +462,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -573,71 +484,55 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::optional&lt;int&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>boost::optional&lt;class_a&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_2</name>
 					<type>boost::optional&lt;pkg1::class_c&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_3</name>
 					<type>boost::optional&lt;std::vector&lt;class_a&gt;&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -646,19 +541,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>handcrafted</item>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -673,20 +563,16 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::shared_ptr&lt;class_a&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -695,18 +581,15 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>handcrafted</item>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -721,71 +604,55 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::variant&lt;int,double&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>boost::variant&lt;int,class_derived,double&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_2</name>
 					<type>std::vector&lt;boost::variant&lt;int,class_derived,double&gt;&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_3</name>
 					<type>boost::variant&lt;int,std::string,char&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -794,18 +661,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -820,105 +683,81 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::gregorian::date</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>boost::posix_time::ptime</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_2</name>
 					<type>boost::posix_time::time_duration</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_3</name>
 					<type>std::list&lt;boost::gregorian::date&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_4</name>
 					<type>std::list&lt;boost::posix_time::ptime&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_5</name>
 					<type>std::list&lt;boost::posix_time::time_duration&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -927,18 +766,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -953,37 +788,29 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::filesystem::path</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>std::list&lt;boost::filesystem::path&gt;</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -992,18 +819,14 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -1018,20 +841,16 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>boost::property_tree::ptree</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -1040,19 +859,15 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying ptime.
 </documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>4</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>1</count>
 				<item_version>0</item_version>
@@ -1076,19 +891,16 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>yarn::primitive</item>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
 </documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>4</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>1</count>
 				<item_version>0</item_version>
@@ -1112,19 +924,16 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>yarn::primitive</item>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying time_duration.
 </documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>4</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>1</count>
 				<item_version>0</item_version>
@@ -1148,18 +957,15 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>1</count>
+				<item_version>0</item_version>
+				<item>yarn::primitive</item>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
-			<static_stereotypes>
-				<count>1</count>
-				<item_version>0</item_version>
-				<item>1</item>
-			</static_stereotypes>
-			<dynamic_stereotypes>
-				<count>0</count>
-				<item_version>0</item_version>
-			</dynamic_stereotypes>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
@@ -1174,54 +980,42 @@
 				<item_version>0</item_version>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_0</name>
 					<type>ptime_primitive</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_1</name>
 					<type>time_duration_primitive</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 				<item>
 					<documentation></documentation>
-					<static_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</static_stereotypes>
-					<dynamic_stereotypes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</dynamic_stereotypes>
 					<tagged_values>
 						<count>0</count>
 						<item_version>0</item_version>
 					</tagged_values>
 					<name>prop_2</name>
 					<type>date_primitive</type>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
 				</item>
 			</attributes>
 			<can_be_primitive_underlier>0</can_be_primitive_underlier>
@@ -1230,9 +1024,18 @@
 			<is_default_enumeration_type>0</is_default_enumeration_type>
 			<is_associative_container>0</is_associative_container>
 			<is_floating_point>0</is_floating_point>
+			<stereotypes>
+				<count>0</count>
+				<item_version>0</item_version>
+			</stereotypes>
+			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 	</elements>
 	<use_new_code>1</use_new_code>
+	<stereotypes>
+		<count>0</count>
+		<item_version>0</item_version>
+	</stereotypes>
 </entity>
 </boost_serialization>
 

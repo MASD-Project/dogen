@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.dia/types/adaptation_error.hpp"
 #include "dogen/yarn.dia/types/adapter.hpp"
@@ -33,10 +33,7 @@ static logger lg(logger_factory("yarn.dia.adapter"));
 
 const std::string name_delimiter("::");
 
-const std::string empty_dia_object_name("Dia object name is empty");
-const std::string too_many_yarn_types(
-    "Attempting to set the yarn type more than once.");
-
+const std::string empty_dia_name("Dia name is empty.");
 
 }
 
@@ -44,10 +41,10 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-void adapter::validate_dia_object_name(const std::string& n) {
+void adapter::validate_dia_name(const std::string& n) {
     if (n.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        BOOST_THROW_EXCEPTION(adaptation_error(empty_dia_object_name));
+        BOOST_LOG_SEV(lg, error) << empty_dia_name;
+        BOOST_THROW_EXCEPTION(adaptation_error(empty_dia_name));
     }
 }
 
@@ -61,7 +58,7 @@ std::string adapter::qualified_name(const std::string& contained_by,
 }
 
 meta_model::exoattribute adapter::adapt(const processed_attribute& a) {
-    validate_dia_object_name(a.name());
+    validate_dia_name(a.name());
 
     meta_model::exoattribute r;
     r.name(a.name());
@@ -77,34 +74,31 @@ process_stereotypes(const processed_object& po, meta_model::exoelement& ee) {
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
                              << po.stereotypes() << "'";
 
-    yarn::helpers::stereotypes_helper h;
-    const auto st(h.from_csv_string(po.stereotypes()));
-
-    BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
-    ee.dynamic_stereotypes(st.dynamic_stereotypes());
-    ee.static_stereotypes(st.static_stereotypes());
-
+    /*
+     * Provide the appropriate element types defaulting based on the
+     * dia UML types.
+     */
     using meta_model::static_stereotypes;
-    const auto et(h.extract_element_types(st.static_stereotypes()));
-    if (et.size() > 1) {
-        /*
-         * We can only have zero or one yarn element types set.
-         */
-        BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
-        BOOST_THROW_EXCEPTION(adaptation_error(too_many_yarn_types));
-    } else if (et.size() == 0) {
-        using dot = dia_object_types;
-        if (po.dia_object_type() == dot::uml_class)
-            ee.static_stereotypes().push_back(static_stereotypes::object);
-        else if (po.dia_object_type() == dot::uml_large_package)
-            ee.static_stereotypes().push_back(static_stereotypes::module);
-    }
+    yarn::helpers::stereotypes_helper h;
+    if (po.dia_object_type() == dia_object_types::uml_class)
+        ee.fallback_element_type(h.to_string(static_stereotypes::object));
+    else if (po.dia_object_type() == dia_object_types::uml_large_package)
+        ee.fallback_element_type(h.to_string(static_stereotypes::module));
+
+    /*
+     * Split and copy across the user-supplied stereotypes.
+     */
+    using utility::string::splitter;
+    const auto st(splitter::split_csv(po.stereotypes()));
+    ee.stereotypes(st);
+
+    BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << st;
 }
 
 meta_model::exoelement adapter::
 adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
-    validate_dia_object_name(po.name());
+    validate_dia_name(po.name());
 
     meta_model::exoelement r;
     r.name(qualified_name(contained_by, po.name()));

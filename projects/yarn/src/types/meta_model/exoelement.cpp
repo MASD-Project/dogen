@@ -34,8 +34,6 @@ exoelement::exoelement()
 
 exoelement::exoelement(
     const std::string& documentation,
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::string& name,
     const std::list<std::string>& parents,
@@ -45,10 +43,10 @@ exoelement::exoelement(
     const bool can_be_enumeration_underlier,
     const bool is_default_enumeration_type,
     const bool is_associative_container,
-    const bool is_floating_point)
+    const bool is_floating_point,
+    const std::list<std::string>& stereotypes,
+    const std::string& fallback_element_type)
     : documentation_(documentation),
-      static_stereotypes_(static_stereotypes),
-      dynamic_stereotypes_(dynamic_stereotypes),
       tagged_values_(tagged_values),
       name_(name),
       parents_(parents),
@@ -58,13 +56,13 @@ exoelement::exoelement(
       can_be_enumeration_underlier_(can_be_enumeration_underlier),
       is_default_enumeration_type_(is_default_enumeration_type),
       is_associative_container_(is_associative_container),
-      is_floating_point_(is_floating_point) { }
+      is_floating_point_(is_floating_point),
+      stereotypes_(stereotypes),
+      fallback_element_type_(fallback_element_type) { }
 
 void exoelement::swap(exoelement& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(static_stereotypes_, other.static_stereotypes_);
-    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(tagged_values_, other.tagged_values_);
     swap(name_, other.name_);
     swap(parents_, other.parents_);
@@ -75,12 +73,12 @@ void exoelement::swap(exoelement& other) noexcept {
     swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
     swap(is_associative_container_, other.is_associative_container_);
     swap(is_floating_point_, other.is_floating_point_);
+    swap(stereotypes_, other.stereotypes_);
+    swap(fallback_element_type_, other.fallback_element_type_);
 }
 
 bool exoelement::operator==(const exoelement& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        static_stereotypes_ == rhs.static_stereotypes_ &&
-        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         tagged_values_ == rhs.tagged_values_ &&
         name_ == rhs.name_ &&
         parents_ == rhs.parents_ &&
@@ -90,7 +88,9 @@ bool exoelement::operator==(const exoelement& rhs) const {
         can_be_enumeration_underlier_ == rhs.can_be_enumeration_underlier_ &&
         is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
-        is_floating_point_ == rhs.is_floating_point_;
+        is_floating_point_ == rhs.is_floating_point_ &&
+        stereotypes_ == rhs.stereotypes_ &&
+        fallback_element_type_ == rhs.fallback_element_type_;
 }
 
 exoelement& exoelement::operator=(exoelement other) {
@@ -113,38 +113,6 @@ void exoelement::documentation(const std::string& v) {
 
 void exoelement::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const std::list<dogen::yarn::meta_model::static_stereotypes>& exoelement::static_stereotypes() const {
-    return static_stereotypes_;
-}
-
-std::list<dogen::yarn::meta_model::static_stereotypes>& exoelement::static_stereotypes() {
-    return static_stereotypes_;
-}
-
-void exoelement::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    static_stereotypes_ = v;
-}
-
-void exoelement::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v) {
-    static_stereotypes_ = std::move(v);
-}
-
-const std::list<std::string>& exoelement::dynamic_stereotypes() const {
-    return dynamic_stereotypes_;
-}
-
-std::list<std::string>& exoelement::dynamic_stereotypes() {
-    return dynamic_stereotypes_;
-}
-
-void exoelement::dynamic_stereotypes(const std::list<std::string>& v) {
-    dynamic_stereotypes_ = v;
-}
-
-void exoelement::dynamic_stereotypes(const std::list<std::string>&& v) {
-    dynamic_stereotypes_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& exoelement::tagged_values() const {
@@ -257,6 +225,38 @@ bool exoelement::is_floating_point() const {
 
 void exoelement::is_floating_point(const bool v) {
     is_floating_point_ = v;
+}
+
+const std::list<std::string>& exoelement::stereotypes() const {
+    return stereotypes_;
+}
+
+std::list<std::string>& exoelement::stereotypes() {
+    return stereotypes_;
+}
+
+void exoelement::stereotypes(const std::list<std::string>& v) {
+    stereotypes_ = v;
+}
+
+void exoelement::stereotypes(const std::list<std::string>&& v) {
+    stereotypes_ = std::move(v);
+}
+
+const std::string& exoelement::fallback_element_type() const {
+    return fallback_element_type_;
+}
+
+std::string& exoelement::fallback_element_type() {
+    return fallback_element_type_;
+}
+
+void exoelement::fallback_element_type(const std::string& v) {
+    fallback_element_type_ = v;
+}
+
+void exoelement::fallback_element_type(const std::string&& v) {
+    fallback_element_type_ = std::move(v);
 }
 
 } } }

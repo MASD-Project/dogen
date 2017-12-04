@@ -20,7 +20,6 @@
  */
 #include "dogen/yarn/hash/meta_model/exoelement_hash.hpp"
 #include "dogen/yarn/hash/meta_model/exoattribute_hash.hpp"
-#include "dogen/yarn/hash/meta_model/static_stereotypes_hash.hpp"
 
 namespace {
 
@@ -28,22 +27,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_list_dogen_yarn_meta_model_static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 inline std::size_t hash_std_pair_std_string_std_string(const std::pair<std::string, std::string>& v) {
@@ -58,6 +41,14 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, hash_std_pair_std_string_std_string(i));
+    }
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
     }
     return seed;
 }
@@ -80,8 +71,6 @@ std::size_t exoelement_hasher::hash(const exoelement& v) {
     std::size_t seed(0);
 
     combine(seed, v.documentation());
-    combine(seed, hash_std_list_dogen_yarn_meta_model_static_stereotypes(v.static_stereotypes()));
-    combine(seed, hash_std_list_std_string(v.dynamic_stereotypes()));
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
     combine(seed, v.name());
     combine(seed, hash_std_list_std_string(v.parents()));
@@ -92,6 +81,8 @@ std::size_t exoelement_hasher::hash(const exoelement& v) {
     combine(seed, v.is_default_enumeration_type());
     combine(seed, v.is_associative_container());
     combine(seed, v.is_floating_point());
+    combine(seed, hash_std_list_std_string(v.stereotypes()));
+    combine(seed, v.fallback_element_type());
 
     return seed;
 }

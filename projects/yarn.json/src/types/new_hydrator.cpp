@@ -24,6 +24,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 #include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
@@ -65,20 +66,6 @@ const std::string failed_to_open_file("Failed to open file: ");
 namespace dogen {
 namespace yarn {
 namespace json {
-
-template<typename Stereotypable>
-inline void process_stereotypes(const std::list<std::string>& raw_stereotypes,
-    Stereotypable& stereotypable) {
-
-    BOOST_LOG_SEV(lg, debug) << "Raw stereotypes: '" << raw_stereotypes << "'";
-
-    yarn::helpers::stereotypes_helper h;
-    const auto st(h.from_string(raw_stereotypes));
-
-    BOOST_LOG_SEV(lg, debug) << "Parsed stereotypes: " << st;
-    stereotypable.dynamic_stereotypes(st.dynamic_stereotypes());
-    stereotypable.static_stereotypes(st.static_stereotypes());
-}
 
 std::string
 new_hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
@@ -139,9 +126,7 @@ read_attribute(const boost::property_tree::ptree& pt) const {
     r.type(pt.get<std::string>(type_key));
     r.documentation(read_documentation(pt));
     r.tagged_values(read_tagged_values(pt));
-
-    const auto raw_stereotypes(read_stereotypes(pt));
-    process_stereotypes(raw_stereotypes, r);
+    r.stereotypes(read_stereotypes(pt));
 
     return r;
 }
@@ -153,9 +138,11 @@ read_element(const boost::property_tree::ptree& pt) const {
     r.documentation(read_documentation(pt));
     r.parents(read_parents(pt));
     r.tagged_values(read_tagged_values(pt));
+    r.stereotypes(read_stereotypes(pt));
 
-    const auto raw_stereotypes(read_stereotypes(pt));
-    process_stereotypes(raw_stereotypes, r);
+    yarn::helpers::stereotypes_helper h;
+    using meta_model::static_stereotypes;
+    r.fallback_element_type(h.to_string(static_stereotypes::object));
 
     const auto i(pt.find(attributes_key));
     if (i == pt.not_found() || i->second.empty())
@@ -184,9 +171,7 @@ meta_model::exomodel new_hydrator::read_stream(std::istream& s) const {
     r.documentation(read_documentation(pt));
     r.tagged_values(read_tagged_values(pt));
     r.use_new_code(true);
-
-    const auto raw_stereotypes(read_stereotypes(pt));
-    process_stereotypes(raw_stereotypes, r);
+    r.stereotypes(read_stereotypes(pt));
 
     const auto i(pt.find(elements_key));
     if (i == pt.not_found()) {

@@ -50,8 +50,8 @@ const std::string some_key("some_key");
 const std::string some_value("some_value");
 const std::string first_parent("a::b::c");
 const std::string second_parent("a");
-const std::string first_stereotype("some stereotype");
-const std::string second_stereotype("another");
+const std::string a_stereotype("some stereotype");
+const std::string another_stereotype("another");
 
 const std::string cpp_std_model_path("library/cpp.std.json");
 const std::string cpp_std_model_name("std");
@@ -137,7 +137,6 @@ hydrate(const std::string& content) {
 
 }
 
-using dogen::yarn::meta_model::static_stereotypes;
 using dogen::utility::test::contains_checker;
 using dogen::yarn::json::hydration_error;
 
@@ -151,10 +150,9 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     BOOST_CHECK(m.documentation() == documentation);
-    BOOST_CHECK(m.static_stereotypes().empty());
-    BOOST_REQUIRE(m.dynamic_stereotypes().size() == 2);
-    BOOST_CHECK(m.dynamic_stereotypes().front() == first_stereotype);
-    BOOST_CHECK(m.dynamic_stereotypes().back() == second_stereotype);
+    BOOST_REQUIRE(m.stereotypes().size() == 2);
+    BOOST_CHECK(m.stereotypes().front() == a_stereotype);
+    BOOST_CHECK(m.stereotypes().back() == another_stereotype);
 
     BOOST_REQUIRE(m.tagged_values().size() == 1);
     BOOST_CHECK(m.tagged_values().front().first == some_key);
@@ -173,11 +171,9 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
     BOOST_CHECK(e.tagged_values().front().first == some_key);
     BOOST_CHECK(e.tagged_values().front().second == some_value);
 
-    BOOST_CHECK(e.static_stereotypes().size() == 1);
-    BOOST_CHECK(e.static_stereotypes().front() == static_stereotypes::object);
-
-    BOOST_REQUIRE(e.dynamic_stereotypes().size() == 1);
-    BOOST_CHECK(e.dynamic_stereotypes().front() == first_stereotype);
+    BOOST_REQUIRE(e.stereotypes().size() == 2);
+    BOOST_CHECK(e.stereotypes().back() == a_stereotype);
+    BOOST_CHECK(e.stereotypes().front() == "yarn::object");
 
     BOOST_CHECK(e.attributes().empty());
 }
@@ -190,8 +186,8 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
     BOOST_CHECK(m.documentation().empty());
-    BOOST_CHECK(m.static_stereotypes().empty());
-    BOOST_CHECK(m.dynamic_stereotypes().empty());
+    BOOST_CHECK(m.stereotypes().empty());
+    BOOST_CHECK(m.stereotypes().empty());
     BOOST_CHECK(m.tagged_values().empty());
 
     BOOST_REQUIRE(m.elements().size() == 1);
@@ -212,11 +208,9 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
     BOOST_CHECK(a.tagged_values().front().first == some_key);
     BOOST_CHECK(a.tagged_values().front().second == some_value);
 
-    BOOST_CHECK(a.static_stereotypes().size() == 1);
-    BOOST_CHECK(a.static_stereotypes().front() == static_stereotypes::fluent);
-
-    BOOST_REQUIRE(a.dynamic_stereotypes().size() == 1);
-    BOOST_CHECK(a.dynamic_stereotypes().front() == first_stereotype);
+    BOOST_CHECK(a.stereotypes().size() == 2);
+    BOOST_CHECK(a.stereotypes().front() == a_stereotype);
+    BOOST_CHECK(a.stereotypes().back() == "yarn::fluent");
 }
 
 BOOST_AUTO_TEST_CASE(empty_elements_model_results_in_empty_model) {
@@ -228,10 +222,9 @@ BOOST_AUTO_TEST_CASE(empty_elements_model_results_in_empty_model) {
 
     BOOST_CHECK(m.elements().empty());
     BOOST_CHECK(m.documentation() == documentation);
-    BOOST_CHECK(m.static_stereotypes().empty());
-    BOOST_REQUIRE(m.dynamic_stereotypes().size() == 2);
-    BOOST_CHECK(m.dynamic_stereotypes().front() == first_stereotype);
-    BOOST_CHECK(m.dynamic_stereotypes().back() == second_stereotype);
+    BOOST_REQUIRE(m.stereotypes().size() == 2);
+    BOOST_CHECK(m.stereotypes().front() == a_stereotype);
+    BOOST_CHECK(m.stereotypes().back() == another_stereotype);
 }
 
 BOOST_AUTO_TEST_CASE(missing_elements_model_throws) {

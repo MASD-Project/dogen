@@ -32,7 +32,6 @@
 #include "dogen/yarn/io/meta_model/exoelement_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/object_template_io.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -40,34 +39,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -412,6 +383,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::me
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 namespace meta_model {
@@ -428,8 +413,6 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
-      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"object_templates\": " << v.object_templates() << ", "
@@ -440,7 +423,8 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"elements\": " << v.elements() << ", "
-      << "\"use_new_code\": " << v.use_new_code()
+      << "\"use_new_code\": " << v.use_new_code() << ", "
+      << "\"stereotypes\": " << v.stereotypes()
       << " }";
     return(s);
 }

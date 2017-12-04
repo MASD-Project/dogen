@@ -32,6 +32,7 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/helpers/adapter.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
@@ -62,10 +63,13 @@ private:
     static meta_model::location
     create_location(const naming_configuration& nc);
 
-private:
-    static meta_model::static_stereotypes
-    obtain_element_type(const std::string& n,
-        const std::list<meta_model::static_stereotypes>& ss);
+    static meta_model::static_stereotypes compute_element_type(
+        const std::list<meta_model::static_stereotypes>& st,
+        const std::string& fallback_element_type);
+
+    static void process_element(const helpers::adapter& ad,
+        const meta_model::location& l, const meta_model::exoelement& ee,
+        meta_model::endomodel& em);
 
 private:
     static meta_model::endomodel

@@ -101,8 +101,6 @@ exomodel::exomodel(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
     const std::string& documentation,
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
-    const std::list<std::string>& dynamic_stereotypes,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
@@ -113,12 +111,11 @@ exomodel::exomodel(
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
     const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
     const std::list<dogen::yarn::meta_model::exoelement>& elements,
-    const bool use_new_code)
+    const bool use_new_code,
+    const std::list<std::string>& stereotypes)
     : name_(name),
       meta_name_(meta_name),
       documentation_(documentation),
-      static_stereotypes_(static_stereotypes),
-      dynamic_stereotypes_(dynamic_stereotypes),
       tagged_values_(tagged_values),
       modules_(modules),
       object_templates_(object_templates),
@@ -129,15 +126,14 @@ exomodel::exomodel(
       exceptions_(exceptions),
       root_module_(root_module),
       elements_(elements),
-      use_new_code_(use_new_code) { }
+      use_new_code_(use_new_code),
+      stereotypes_(stereotypes) { }
 
 void exomodel::swap(exomodel& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
     swap(documentation_, other.documentation_);
-    swap(static_stereotypes_, other.static_stereotypes_);
-    swap(dynamic_stereotypes_, other.dynamic_stereotypes_);
     swap(tagged_values_, other.tagged_values_);
     swap(modules_, other.modules_);
     swap(object_templates_, other.object_templates_);
@@ -149,14 +145,13 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(root_module_, other.root_module_);
     swap(elements_, other.elements_);
     swap(use_new_code_, other.use_new_code_);
+    swap(stereotypes_, other.stereotypes_);
 }
 
 bool exomodel::operator==(const exomodel& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
         documentation_ == rhs.documentation_ &&
-        static_stereotypes_ == rhs.static_stereotypes_ &&
-        dynamic_stereotypes_ == rhs.dynamic_stereotypes_ &&
         tagged_values_ == rhs.tagged_values_ &&
         modules_ == rhs.modules_ &&
         object_templates_ == rhs.object_templates_ &&
@@ -167,7 +162,8 @@ bool exomodel::operator==(const exomodel& rhs) const {
         exceptions_ == rhs.exceptions_ &&
         root_module_ == rhs.root_module_ &&
         elements_ == rhs.elements_ &&
-        use_new_code_ == rhs.use_new_code_;
+        use_new_code_ == rhs.use_new_code_ &&
+        stereotypes_ == rhs.stereotypes_;
 }
 
 exomodel& exomodel::operator=(exomodel other) {
@@ -222,38 +218,6 @@ void exomodel::documentation(const std::string& v) {
 
 void exomodel::documentation(const std::string&& v) {
     documentation_ = std::move(v);
-}
-
-const std::list<dogen::yarn::meta_model::static_stereotypes>& exomodel::static_stereotypes() const {
-    return static_stereotypes_;
-}
-
-std::list<dogen::yarn::meta_model::static_stereotypes>& exomodel::static_stereotypes() {
-    return static_stereotypes_;
-}
-
-void exomodel::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    static_stereotypes_ = v;
-}
-
-void exomodel::static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v) {
-    static_stereotypes_ = std::move(v);
-}
-
-const std::list<std::string>& exomodel::dynamic_stereotypes() const {
-    return dynamic_stereotypes_;
-}
-
-std::list<std::string>& exomodel::dynamic_stereotypes() {
-    return dynamic_stereotypes_;
-}
-
-void exomodel::dynamic_stereotypes(const std::list<std::string>& v) {
-    dynamic_stereotypes_ = v;
-}
-
-void exomodel::dynamic_stereotypes(const std::list<std::string>&& v) {
-    dynamic_stereotypes_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& exomodel::tagged_values() const {
@@ -422,6 +386,22 @@ bool exomodel::use_new_code() const {
 
 void exomodel::use_new_code(const bool v) {
     use_new_code_ = v;
+}
+
+const std::list<std::string>& exomodel::stereotypes() const {
+    return stereotypes_;
+}
+
+std::list<std::string>& exomodel::stereotypes() {
+    return stereotypes_;
+}
+
+void exomodel::stereotypes(const std::list<std::string>& v) {
+    stereotypes_ = v;
+}
+
+void exomodel::stereotypes(const std::list<std::string>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 } } }

@@ -35,15 +35,15 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
-#include "dogen/yarn/types/helpers/adapter.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
+#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -60,11 +60,11 @@ static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_element("Element id already exists: ");
 const std::string missing_model_modules("Must supply model modules.");
-const std::string too_many_element_types(
-    "Attempting to set the yarn element type more than once. Element: ");
 const std::string missing_element_type("Missing yarn element type. Element: ");
 const std::string invalid_element_type(
     "Invalid or usupported yarn element type: ");
+const std::string too_many_yarn_types(
+    "Attempting to set the yarn type more than once.");
 
 using dogen::yarn::meta_model::location;
 const location empty_location = location();
@@ -240,24 +240,78 @@ create_location(const naming_configuration& nc) {
     return r;
 }
 
-meta_model::static_stereotypes
-exomodel_to_endomodel_transform::obtain_element_type(const std::string& n,
-    const std::list<meta_model::static_stereotypes>& ss) {
-    helpers::stereotypes_helper h;
-    auto et(h.extract_element_types(ss));
+meta_model::static_stereotypes exomodel_to_endomodel_transform::
+compute_element_type(const std::list<meta_model::static_stereotypes>& st,
+    const std::string& fallback_element_type) {
 
     /*
-     * We can only have one yarn element types set.
+     * Extract the element type information from the supplied static
+     * stereotypes. If we have exactly one, we're go to go.
      */
-    if (et.size() == 0) {
-        BOOST_LOG_SEV(lg, warn) << missing_element_type << n;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_element_type + n));
-    } else if (et.size() > 1) {
-        BOOST_LOG_SEV(lg, warn) << too_many_element_types << n;
-        BOOST_THROW_EXCEPTION(transformation_error(too_many_element_types + n));
+    yarn::helpers::stereotypes_helper h;
+    const auto et(h.extract_element_types(st));
+    if (et.size() == 1)
+        return et.front();
+
+    /*
+     * If we've got more than one element type, there is a user error
+     * so bomb out.
+     */
+    if (et.size() > 1) {
+        BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
+        BOOST_THROW_EXCEPTION(transformation_error(too_many_yarn_types));
     }
 
-    return et.front();
+    /*
+     * If no yarn element type came up, attempt to use the fallback
+     * stereotype suggested by the frontend. If none was suggested
+     * just return invalid.
+     */
+    if (fallback_element_type.empty()) {
+        using meta_model::static_stereotypes;
+        return meta_model::static_stereotypes::invalid;
+    }
+
+    return h.from_string(fallback_element_type);
+}
+
+void exomodel_to_endomodel_transform::
+process_element(const helpers::adapter& ad, const meta_model::location& l,
+    const meta_model::exoelement& ee, meta_model::endomodel& em) {
+
+    helpers::stereotypes_helper h;
+    const auto scr(h.from_string(ee.stereotypes()));
+    const auto& st(scr.static_stereotypes());
+    const auto et(compute_element_type(st, ee.fallback_element_type()));
+
+    using meta_model::static_stereotypes;
+    switch (et) {
+    case static_stereotypes::object:
+        insert(ad.to_object(l, scr, ee), em.objects());
+        break;
+    case static_stereotypes::object_template:
+        insert(ad.to_object_template(l, scr, ee), em.object_templates());
+        break;
+    case static_stereotypes::exception:
+        insert(ad.to_exception(l, scr, ee), em.exceptions());
+        break;
+    case static_stereotypes::primitive:
+        insert(ad.to_primitive(l, scr, ee), em.primitives());
+        break;
+    case static_stereotypes::enumeration:
+        insert(ad.to_enumeration(l, scr, ee), em.enumerations());
+        break;
+    case static_stereotypes::module:
+        insert(ad.to_module(false/*is_root_module*/, l, scr, ee), em.modules());
+        break;
+    case static_stereotypes::builtin:
+        insert(ad.to_builtin(l, scr, ee), em.builtins());
+        break;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(et));
+        BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_element_type + s));
+    } }
 }
 
 meta_model::endomodel exomodel_to_endomodel_transform::
@@ -265,9 +319,11 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
+    helpers::stereotypes_helper h;
+    const auto scr(h.from_string(em.stereotypes()));
     const auto& f(ctx.annotation_factory());
-    const auto st(annotations::scope_types::root_module);
-    const auto ra(f.make(em.tagged_values(), st, em.dynamic_stereotypes()));
+    const auto scope(annotations::scope_types::root_module);
+    const auto ra(f.make(em.tagged_values(), scope, scr.dynamic_stereotypes()));
     const auto tg(make_type_group(ctx.type_repository()));
     const auto nc(make_naming_configuration(tg, ra));
     const auto model_location(create_location(nc));
@@ -281,38 +337,8 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
 
     const helpers::adapter ad(ctx.annotation_factory());
     for (const auto& ee : em.elements()) {
-        using meta_model::static_stereotypes;
-        const auto et(obtain_element_type(ee.name(), ee.static_stereotypes()));
         const auto l(ee.in_global_module() ? empty_location : model_location);
-
-        switch (et) {
-        case static_stereotypes::object:
-            insert(ad.to_object(l, ee), r.objects());
-            break;
-        case static_stereotypes::object_template:
-            insert(ad.to_object_template(l, ee), r.object_templates());
-            break;
-        case static_stereotypes::exception:
-            insert(ad.to_exception(l, ee), r.exceptions());
-            break;
-        case static_stereotypes::primitive:
-            insert(ad.to_primitive(l, ee), r.primitives());
-            break;
-        case static_stereotypes::enumeration:
-            insert(ad.to_enumeration(l, ee), r.enumerations());
-            break;
-        case static_stereotypes::module:
-            insert(ad.to_module(false/*is_root_module*/, l, ee), r.modules());
-            break;
-        case static_stereotypes::builtin:
-            insert(ad.to_builtin(l, ee), r.builtins());
-            break;
-        default: {
-            const auto s(boost::lexical_cast<std::string>(et));
-            BOOST_LOG_SEV(lg, error) << invalid_element_type << s;;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(invalid_element_type + s));
-        } }
+        process_element(ad, l, ee, r);
     }
 
     /*

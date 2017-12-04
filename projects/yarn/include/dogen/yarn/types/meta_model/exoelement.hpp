@@ -30,7 +30,6 @@
 #include <utility>
 #include <algorithm>
 #include "dogen/yarn/types/meta_model/exoattribute.hpp"
-#include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn/serialization/meta_model/exoelement_fwd_ser.hpp"
 
 namespace dogen {
@@ -49,8 +48,6 @@ public:
 public:
     exoelement(
         const std::string& documentation,
-        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
-        const std::list<std::string>& dynamic_stereotypes,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::string& name,
         const std::list<std::string>& parents,
@@ -60,7 +57,9 @@ public:
         const bool can_be_enumeration_underlier,
         const bool is_default_enumeration_type,
         const bool is_associative_container,
-        const bool is_floating_point);
+        const bool is_floating_point,
+        const std::list<std::string>& stereotypes,
+        const std::string& fallback_element_type);
 
 private:
     template<typename Archive>
@@ -82,27 +81,6 @@ public:
     std::string& documentation();
     void documentation(const std::string& v);
     void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Stereotypes that are part of the yarn UML profile, and so are well-known to the
-     * model.
-     */
-    /**@{*/
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::yarn::meta_model::static_stereotypes>&& v);
-    /**@}*/
-
-    /**
-     * @brief Stereotypes that are not part of the yarn UML profile. These are user defined.
-     */
-    /**@{*/
-    const std::list<std::string>& dynamic_stereotypes() const;
-    std::list<std::string>& dynamic_stereotypes();
-    void dynamic_stereotypes(const std::list<std::string>& v);
-    void dynamic_stereotypes(const std::list<std::string>&& v);
     /**@}*/
 
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -143,6 +121,22 @@ public:
     bool is_floating_point() const;
     void is_floating_point(const bool v);
 
+    const std::list<std::string>& stereotypes() const;
+    std::list<std::string>& stereotypes();
+    void stereotypes(const std::list<std::string>& v);
+    void stereotypes(const std::list<std::string>&& v);
+
+    /**
+     * @brief Stereotype conveying element type, to be used when none is provided with the
+     * main stereotypes.
+     */
+    /**@{*/
+    const std::string& fallback_element_type() const;
+    std::string& fallback_element_type();
+    void fallback_element_type(const std::string& v);
+    void fallback_element_type(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const exoelement& rhs) const;
     bool operator!=(const exoelement& rhs) const {
@@ -155,8 +149,6 @@ public:
 
 private:
     std::string documentation_;
-    std::list<dogen::yarn::meta_model::static_stereotypes> static_stereotypes_;
-    std::list<std::string> dynamic_stereotypes_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::string name_;
     std::list<std::string> parents_;
@@ -167,6 +159,8 @@ private:
     bool is_default_enumeration_type_;
     bool is_associative_container_;
     bool is_floating_point_;
+    std::list<std::string> stereotypes_;
+    std::string fallback_element_type_;
 };
 
 } } }

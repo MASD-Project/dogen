@@ -23,7 +23,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/exoelement_io.hpp"
 #include "dogen/yarn/io/meta_model/exoattribute_io.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,34 +30,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::static_stereotypes>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -81,6 +52,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -116,8 +101,6 @@ std::ostream& operator<<(std::ostream& s, const exoelement& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exoelement\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
-      << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
-      << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes() << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"parents\": " << v.parents() << ", "
@@ -127,7 +110,9 @@ std::ostream& operator<<(std::ostream& s, const exoelement& v) {
       << "\"can_be_enumeration_underlier\": " << v.can_be_enumeration_underlier() << ", "
       << "\"is_default_enumeration_type\": " << v.is_default_enumeration_type() << ", "
       << "\"is_associative_container\": " << v.is_associative_container() << ", "
-      << "\"is_floating_point\": " << v.is_floating_point()
+      << "\"is_floating_point\": " << v.is_floating_point() << ", "
+      << "\"stereotypes\": " << v.stereotypes() << ", "
+      << "\"fallback_element_type\": " << "\"" << tidy_up_string(v.fallback_element_type()) << "\""
       << " }";
     return(s);
 }

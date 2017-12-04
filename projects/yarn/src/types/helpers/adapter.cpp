@@ -112,16 +112,18 @@ adapter::to_enumerator(const meta_model::location& /*l*/,
 }
 
 void adapter::populate_element(const annotations::scope_types scope,
-    const meta_model::location& l, const meta_model::exoelement& ee,
-    meta_model::element& e) const {
+    const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const meta_model::exoelement& ee, meta_model::element& e) const {
     e.name(to_name(l, ee.name()));
     e.origin_type(meta_model::origin_types::not_yet_determined);
     e.documentation(ee.documentation());
-    e.static_stereotypes(ee.static_stereotypes());
-    e.dynamic_stereotypes(ee.dynamic_stereotypes());
+    e.static_stereotypes(scr.static_stereotypes());
+
+    const auto& ds(scr.dynamic_stereotypes());
+    e.dynamic_stereotypes(ds);
 
     const auto& tv(ee.tagged_values());
-    const auto& ds(ee.dynamic_stereotypes());
     e.annotation(annotation_factory_.make(tv, scope, ds));
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
@@ -129,12 +131,13 @@ void adapter::populate_element(const annotations::scope_types scope,
 
 boost::shared_ptr<meta_model::object>
 adapter::to_object(const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to object: "
                              << ee.name();
 
     auto r(boost::make_shared<meta_model::object>());
-    populate_element(entity_scope, l, ee, *r);
+    populate_element(entity_scope, l, scr, ee, *r);
     r->is_associative_container(ee.is_associative_container());
     r->can_be_primitive_underlier(ee.can_be_primitive_underlier());
 
@@ -149,12 +152,13 @@ adapter::to_object(const meta_model::location& l,
 
 boost::shared_ptr<meta_model::object_template>
 adapter::to_object_template(const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to object template: "
                              << ee.name();
 
     auto r(boost::make_shared<meta_model::object_template>());
-    populate_element(entity_scope, l, ee, *r);
+    populate_element(entity_scope, l, scr, ee, *r);
 
     for (const auto& attr : ee.attributes())
         r->local_attributes().push_back(to_attribute(l, attr));
@@ -167,34 +171,37 @@ adapter::to_object_template(const meta_model::location& l,
 
 boost::shared_ptr<meta_model::exception>
 adapter::to_exception(const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to exception: "
                              << ee.name();
 
     auto r(boost::make_shared<meta_model::exception>());
-    populate_element(entity_scope, l, ee, *r);
+    populate_element(entity_scope, l, scr, ee, *r);
     return r;
 }
 
 boost::shared_ptr<meta_model::primitive>
 adapter::to_primitive(const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to primitive: "
                              << ee.name();
 
     auto r(boost::make_shared<meta_model::primitive>());
-    populate_element(entity_scope, l, ee, *r);
+    populate_element(entity_scope, l, scr, ee, *r);
     return r;
 }
 
 boost::shared_ptr<meta_model::enumeration>
 adapter::to_enumeration(const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << ee.name();
 
     auto r(boost::make_shared<meta_model::enumeration>());
-    populate_element(entity_scope, l, ee, *r);
+    populate_element(entity_scope, l, scr, ee, *r);
 
     for (const auto& attr : ee.attributes())
         r->enumerators().push_back(to_enumerator(l, attr));
@@ -204,24 +211,27 @@ adapter::to_enumeration(const meta_model::location& l,
 
 boost::shared_ptr<meta_model::module> adapter::
 to_module(const bool is_root_module, const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to module: "
                              << ee.name();
 
-    auto r(boost::make_shared<meta_model::module>());
     const auto st(is_root_module ? root_scope : entity_scope);
-    populate_element(st, l, ee, *r);
+    auto r(boost::make_shared<meta_model::module>());
+    populate_element(st, l, scr, ee, *r);
     return r;
 }
 
 boost::shared_ptr<meta_model::builtin>
 adapter::to_builtin(const meta_model::location& l,
+    const stereotypes_conversion_result& scr,
     const meta_model::exoelement& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming exoobject to builtin: "
                              << ee.name();
 
+    const auto es(annotations::scope_types::entity);
     auto r(boost::make_shared<meta_model::builtin>());
-    populate_element(entity_scope, l, ee, *r);
+    populate_element(es, l, scr, ee, *r);
 
     r->can_be_primitive_underlier(ee.can_be_primitive_underlier());
     r->is_default_enumeration_type(ee.is_default_enumeration_type());
