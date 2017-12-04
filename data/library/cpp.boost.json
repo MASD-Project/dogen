@@ -8,7 +8,6 @@
   "elements": [
     {
       "name": "shared_ptr",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -21,7 +20,6 @@
     },
     {
       "name": "weak_ptr",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -34,7 +32,6 @@
     },
     {
       "name": "scoped_ptr",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -47,7 +44,6 @@
     },
     {
       "name": "optional",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "Optional",
         "yarn.type_parameters.count": 1,
@@ -61,7 +57,6 @@
     },
     {
       "name": "variant",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostVariant",
         "yarn.type_parameters.variable_number_of_parameters": true,
@@ -78,7 +73,6 @@
     },
     {
       "name": "asio::io_service",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
@@ -86,7 +80,6 @@
     },
     {
       "name": "asio::ip::tcp::socket",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
@@ -94,7 +87,6 @@
     },
     {
       "name": "asio::ip::tcp::acceptor",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
@@ -102,7 +94,6 @@
     },
     {
       "name": "filesystem::path",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostPath",
         "quilt.cpp.streaming.string_conversion_method": "generic_string()",
@@ -117,7 +108,6 @@
     },
     {
       "name": "gregorian::date",
-      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostDate",
@@ -134,7 +124,6 @@
     },
     {
       "name": "posix_time::ptime",
-      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostPTime",
@@ -151,7 +140,6 @@
     },
     {
       "name": "posix_time::time_duration",
-      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostTimeDuration",
@@ -167,7 +155,6 @@
     },
     {
       "name": "property_tree::ptree",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostPTree",
         "quilt.cpp.aspect.requires_manual_move_constructor": true,

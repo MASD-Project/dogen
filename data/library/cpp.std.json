@@ -91,7 +91,6 @@
     },
     {
       "name": "string",
-      "stereotypes" : [ "yarn::object" ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "String",
@@ -108,7 +107,6 @@
     },
     {
       "name": "vector",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
@@ -118,7 +116,6 @@
     },
     {
       "name": "deque",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
@@ -128,7 +125,6 @@
     },
     {
       "name": "array",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
@@ -137,7 +133,6 @@
     },
     {
       "name": "list",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
@@ -147,7 +142,6 @@
     },
     {
       "name": "forward_list",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
@@ -156,7 +150,6 @@
     },
     {
       "name": "set",
-      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
@@ -167,7 +160,6 @@
     },
     {
       "name": "multiset",
-      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
@@ -178,7 +170,6 @@
     },
     {
       "name": "unordered_set",
-      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
@@ -189,7 +180,6 @@
     },
     {
       "name": "map",
-      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
@@ -200,7 +190,6 @@
     },
     {
       "name": "multimap",
-      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
@@ -211,7 +200,6 @@
     },
     {
       "name": "unordered_map",
-      "stereotypes" : [ "yarn::object" ],
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
@@ -222,7 +210,6 @@
     },
     {
       "name": "pair",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "Pair",
         "yarn.type_parameters.count": 2,
@@ -232,7 +219,6 @@
     },
     {
       "name": "shared_ptr",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -242,7 +228,6 @@
     },
     {
       "name": "weak_ptr",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -252,7 +237,6 @@
     },
     {
       "name": "unique_ptr",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -262,14 +246,12 @@
     },
     {
       "name": "function",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }
     },
     {
       "name": "optional",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.helper.family": "Optional",
         "yarn.type_parameters.count": 1,
@@ -278,21 +260,18 @@
     },
     {
       "name": "ostream",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<ostream>"
       }
     },
     {
       "name": "ostringstream",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<sstream>"
       }
     },
     {
       "name": "type_index",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<typeindex>"
       }

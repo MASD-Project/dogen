@@ -8,7 +8,6 @@
   "elements": [
     {
       "name": "IEnumerable",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "yarn.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
@@ -17,7 +16,6 @@
     },
     {
       "name": "ICollection",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "IEnumerable"
       ],
@@ -29,7 +27,6 @@
     },
     {
       "name": "IList",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -41,7 +38,6 @@
     },
     {
       "name": "List",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -53,7 +49,6 @@
     },
     {
       "name": "Array",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],

@@ -8,7 +8,6 @@
   "elements": [
     {
       "name": "IEnumerable",
-      "stereotypes" : [ "yarn::object" ],
       "tagged_values": {
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.assistant.requires_assistance": true,
@@ -17,7 +16,6 @@
     },
     {
       "name": "ICollection",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "IEnumerable"
       ],
@@ -29,7 +27,6 @@
     },
     {
       "name": "IList",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -41,7 +38,6 @@
     },
     {
       "name": "ArrayList",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "IList"
       ],
@@ -53,7 +49,6 @@
     },
     {
       "name": "IDictionary",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -65,7 +60,6 @@
     },
     {
       "name": "Hashtable",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "IDictionary"
       ],
@@ -77,7 +71,6 @@
     },
     {
       "name": "Specialized.HybridDictionary",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "IDictionary"
       ],
@@ -89,7 +82,6 @@
     },
     {
       "name": "Specialized.NameValueCollection",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -101,7 +93,6 @@
     },
     {
       "name": "BitArray",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -113,7 +104,6 @@
     },
     {
       "name": "Queue",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -125,7 +115,6 @@
     },
     {
       "name": "Stack",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "ICollection"
       ],
@@ -137,7 +126,6 @@
     },
     {
       "name": "SortedList",
-      "stereotypes" : [ "yarn::object" ],
       "parents": [
         "IDictionary"
       ],
