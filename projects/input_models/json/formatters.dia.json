@@ -1,942 +1,567 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Provides formatting code applicable to all formatters.\n\nThis model is the repository of all formatting related code\nwhich is not language specific. Language-specific models can\nthen make use of it.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "formatters",
-      "yarn.external_modules": "dogen",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen.disable_odb_cmake"
-    }
+  "documentation": "Provides formatting code applicable to all formatters.\\n\\nThis model is the repository of all formatting related code\\nwhich is not language specific. Language-specific models can\\nthen make use of it.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "formatters",
+    "yarn.external_modules": "dogen",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_odb_cmake"
   },
   "elements": [
     {
-      "name": {
-        "simple": "code_generation_marker_factory"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
+      "name": "modeline",
+      "documentation": "Fields representing editor variables for emacs, vi, etc.\\n\\nA field is a key-value pair (KVP), where name is the first element and its value\\nthe second.\\n\\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\\n\\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\\nfield name and its value is @e c++; the KVP separator is @e : and the field\\nseparator is @e ;.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the modeline. Must be unique within a group.\\n"
+        },
+        {
+          "name": "editor",
+          "type": "editors",
+          "documentation": "The modeline will use the syntax for this editor.\\n"
+        },
+        {
+          "name": "location",
+          "type": "modeline_locations",
+          "documentation": "Where to place the modeline.\\n"
+        },
+        {
+          "name": "fields",
+          "type": "std::list<modeline_field>",
+          "documentation": "List of all the parameters in the preamble, in order of appearence.\\n"
+        }
       ]
     },
     {
-      "name": {
-        "simple": "comment_formatter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
+      "name": "licence",
+      "documentation": "Licence which the file is released under.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "copyright_notices",
+          "type": "std::list<std::string>",
+          "documentation": "All copyright notices for the current file.\\n"
+        },
+        {
+          "name": "text",
+          "type": "std::string",
+          "documentation": "Complete legal text for the licence.\\n"
+        }
       ]
     },
     {
-      "name": {
-        "simple": "boilerplate_formatter",
-        "internal_modules": "cpp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "header_guard_formatter",
-        "internal_modules": "cpp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "include_formatter",
-        "internal_modules": "cpp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "namespace_formatter",
-        "internal_modules": "cpp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "scoped_boilerplate_formatter",
-        "internal_modules": "cpp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "licence_text_hydrator",
       "stereotypes": [
         "handcrafted"
       ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "stream_"
-          },
-          "unparsed_type": "std::ostream"
-        },
-        {
-          "name": {
-            "simple": "decoration_properties_"
-          },
-          "unparsed_type": "boost::optional<formatters::decoration_properties>"
-        },
-        {
-          "name": {
-            "simple": "includes_"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "header_guard_"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "scoped_namespace_formatter",
-        "internal_modules": "cpp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "code_generation_marker_factory",
       "stereotypes": [
         "handcrafted"
       ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "modeline_group_hydrator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "modeline_field",
+      "documentation": "Entry in a modeline.\\n",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "stream_"
-          },
-          "unparsed_type": "std::ostream"
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the field.\\n"
         },
         {
-          "name": {
-            "simple": "namespaces_"
-          },
-          "unparsed_type": "std::list<std::string>"
+          "name": "value",
+          "type": "std::string",
+          "documentation": "Value for the field. Can be empty.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "boilerplate_formatter",
-        "internal_modules": "csharp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "namespace_formatter",
-        "internal_modules": "csharp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "scoped_boilerplate_formatter",
-        "internal_modules": "csharp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "scoped_namespace_formatter",
-        "internal_modules": "csharp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "using_formatter",
-        "internal_modules": "csharp"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "decoration_configuration"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "modeline_group",
+      "documentation": "Group of modelines, logically associated.\\n\\nFor example, one may choose to have a set of modelines for @e emacs , or for\\n@e vi, etc.\\n",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "generate_decoration"
-          },
-          "unparsed_type": "boost::optional<bool>"
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the modeline group. Must be unique\\n"
         },
         {
-          "name": {
-            "simple": "copyright_notices"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "licence_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "modeline_group_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "marker_add_date_time"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        },
-        {
-          "name": {
-            "simple": "marker_add_warning"
-          },
-          "unparsed_type": "boost::optional<bool>"
-        },
-        {
-          "name": {
-            "simple": "marker_message"
-          },
-          "unparsed_type": "std::string"
+          "name": "modelines",
+          "type": "std::unordered_map<std::string,modeline>",
+          "documentation": "All the modelines for this group.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "decoration_formatter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "hydration_error",
       "stereotypes": [
-        "handcrafted"
-      ]
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "decoration_properties"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Configuration pertaining to file decoration.\n",
+      "name": "editors",
+      "documentation": "Supported editors for modelines.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "generate_decoration"
-          },
-          "unparsed_type": "bool",
-          "documentation": "If set to true, the decoration will be generated.\n"
+          "name": "emacs",
+          "type": "",
+          "documentation": "The emacs editor\\n"
         },
         {
-          "name": {
-            "simple": "modeline"
-          },
-          "unparsed_type": "boost::optional<modeline>",
-          "documentation": "Modeline to use in this file, if any.\n"
+          "name": "vi",
+          "type": "",
+          "documentation": "The generic vi editor\\n"
         },
         {
-          "name": {
-            "simple": "licence"
-          },
-          "unparsed_type": "boost::optional<licence>",
-          "documentation": "Licence to use in this file, if any.\n"
+          "name": "vim",
+          "type": "",
+          "documentation": "The vi-like editor vim.\\n"
         },
         {
-          "name": {
-            "simple": "code_generation_marker"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Code generation marker to use in this file.\n"
+          "name": "ex",
+          "type": "",
+          "documentation": "The old ex editor.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "decoration_properties_factory"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "modeline_locations",
+      "documentation": "Location in the file to place the modeline.\\n",
       "stereotypes": [
-        "handcrafted"
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "top",
+          "type": "",
+          "documentation": "Very first line in file.\\n"
+        },
+        {
+          "name": "bottom",
+          "type": "",
+          "documentation": "Very last line in file.\\n"
+        }
       ]
     },
     {
-      "name": {
-        "simple": "indent_filter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "repository_factory",
       "stereotypes": [
         "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "modeline_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatting_error",
+      "documentation": "An error has occurred while formatting.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "comment_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "comment_styles",
+      "documentation": "Supported styles of comments.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "c_style",
+          "type": "",
+          "documentation": "Original C programming language style.\\n"
+        },
+        {
+          "name": "cpp_style",
+          "type": "",
+          "documentation": "One line, C++ style.\\n"
+        },
+        {
+          "name": "csharp_style",
+          "type": "",
+          "documentation": "C# programming language style.\\n"
+        },
+        {
+          "name": "shell_style",
+          "type": "",
+          "documentation": "Comments start with a hash.\\n"
+        },
+        {
+          "name": "sql_style",
+          "type": "",
+          "documentation": "Comments start with a double-dash.\\n"
+        },
+        {
+          "name": "xml_style",
+          "type": ""
+        }
       ]
     },
     {
-      "name": {
-        "simple": "infix_configuration"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Configuration to use for a given infix in sequence formatter.\n",
+      "name": "decoration_properties",
+      "documentation": "Configuration pertaining to file decoration.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "generate_decoration",
+          "type": "bool",
+          "documentation": "If set to true, the decoration will be generated.\\n"
+        },
+        {
+          "name": "modeline",
+          "type": "boost::optional<modeline>",
+          "documentation": "Modeline to use in this file, if any.\\n"
+        },
+        {
+          "name": "licence",
+          "type": "boost::optional<licence>",
+          "documentation": "Licence to use in this file, if any.\\n"
+        },
+        {
+          "name": "code_generation_marker",
+          "type": "std::string",
+          "documentation": "Code generation marker to use in this file.\\n"
+        }
+      ]
+    },
+    {
+      "name": "indent_filter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "decoration_properties_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "building_error",
+      "documentation": "An error occurred while the factory was building.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "traits",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "repository",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "modeline_groups",
+          "type": "std::unordered_map<std::string,modeline_group>"
+        },
+        {
+          "name": "licence_texts",
+          "type": "std::unordered_map<std::string,std::string>"
+        }
+      ]
+    },
+    {
+      "name": "utility_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "stream_",
+          "type": "std::ostream"
+        }
+      ]
+    },
+    {
+      "name": "quote_types",
+      "documentation": "Types of quotes that can be used in streaming.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "single_quote",
+          "type": ""
+        },
+        {
+          "name": "double_quote",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "spacing_types",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "no_space",
+          "type": ""
+        },
+        {
+          "name": "left_space",
+          "type": ""
+        },
+        {
+          "name": "right_space",
+          "type": ""
+        },
+        {
+          "name": "left_and_right_space",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "cpp",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "cpp::boilerplate_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "cpp::include_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "cpp::header_guard_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "cpp::scoped_boilerplate_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "stream_",
+          "type": "std::ostream"
+        },
+        {
+          "name": "decoration_properties_",
+          "type": "boost::optional<formatters::decoration_properties>"
+        },
+        {
+          "name": "includes_",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard_",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "cpp::namespace_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "cpp::scoped_namespace_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "stream_",
+          "type": "std::ostream"
+        },
+        {
+          "name": "namespaces_",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "sequence_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "element_separator_",
+          "type": "std::string"
+        },
+        {
+          "name": "sequence_size_",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "infix_configuration",
+      "documentation": "Configuration to use for a given infix in sequence formatter.\\n",
       "stereotypes": [
         "yarn::fluent"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "first"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Applicable only to the first element of a sequence, if the sequence has more\nthan one element.\n"
+          "name": "first",
+          "type": "std::string",
+          "documentation": "Applicable only to the first element of a sequence, if the sequence has more\\nthan one element.\\n"
         },
         {
-          "name": {
-            "simple": "not_first"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Applicable to all elements other than the first.\n"
+          "name": "not_first",
+          "type": "std::string",
+          "documentation": "Applicable to all elements other than the first.\\n"
         },
         {
-          "name": {
-            "simple": "not_last"
-          },
-          "unparsed_type": "std::string"
+          "name": "not_last",
+          "type": "std::string"
         },
         {
-          "name": {
-            "simple": "last"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Only applicable to the last element of a sequence.\n"
+          "name": "last",
+          "type": "std::string",
+          "documentation": "Only applicable to the last element of a sequence.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "licence"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Licence which the file is released under.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "copyright_notices"
-          },
-          "unparsed_type": "std::list<std::string>",
-          "documentation": "All copyright notices for the current file.\n"
-        },
-        {
-          "name": {
-            "simple": "text"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Complete legal text for the licence.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "licence_text_hydrator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "modeline"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the modeline. Must be unique within a group.\n"
-        },
-        {
-          "name": {
-            "simple": "editor"
-          },
-          "unparsed_type": "editors",
-          "documentation": "The modeline will use the syntax for this editor.\n"
-        },
-        {
-          "name": {
-            "simple": "location"
-          },
-          "unparsed_type": "modeline_locations",
-          "documentation": "Where to place the modeline.\n"
-        },
-        {
-          "name": {
-            "simple": "fields"
-          },
-          "unparsed_type": "std::list<modeline_field>",
-          "documentation": "List of all the parameters in the preamble, in order of appearence.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "modeline_field"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Entry in a modeline.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the field.\n"
-        },
-        {
-          "name": {
-            "simple": "value"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Value for the field. Can be empty.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "modeline_formatter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "modeline_group"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the modeline group. Must be unique\n"
-        },
-        {
-          "name": {
-            "simple": "modelines"
-          },
-          "unparsed_type": "std::unordered_map<std::string,modeline>",
-          "documentation": "All the modelines for this group.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "modeline_group_hydrator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "repository"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "modeline_groups"
-          },
-          "unparsed_type": "std::unordered_map<std::string,modeline_group>"
-        },
-        {
-          "name": {
-            "simple": "licence_texts"
-          },
-          "unparsed_type": "std::unordered_map<std::string,std::string>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "repository_factory"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "sequence_formatter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "decoration_formatter",
       "stereotypes": [
         "handcrafted"
       ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "decoration_configuration",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "element_separator_"
-          },
-          "unparsed_type": "std::string"
+          "name": "generate_decoration",
+          "type": "boost::optional<bool>"
         },
         {
-          "name": {
-            "simple": "sequence_size_"
-          },
-          "unparsed_type": "unsigned int"
+          "name": "copyright_notices",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "licence_name",
+          "type": "std::string"
+        },
+        {
+          "name": "modeline_group_name",
+          "type": "std::string"
+        },
+        {
+          "name": "marker_add_date_time",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "marker_add_warning",
+          "type": "boost::optional<bool>"
+        },
+        {
+          "name": "marker_message",
+          "type": "std::string"
         }
       ]
     },
     {
-      "name": {
-        "simple": "traits"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
+      "name": "csharp",
+      "fallback_element_type": "yarn::module"
     },
     {
-      "name": {
-        "simple": "utility_formatter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "csharp::boilerplate_formatter",
       "stereotypes": [
         "handcrafted"
       ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "stream_"
-          },
-          "unparsed_type": "std::ostream"
-        }
-      ]
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "cpp"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "csharp::scoped_boilerplate_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "csharp"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "csharp::using_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "comment_styles"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Supported styles of comments.\n",
-      "enumerators": [
-        {
-          "name": {
-            "simple": "c_style"
-          },
-          "documentation": "Original C programming language style.\n"
-        },
-        {
-          "name": {
-            "simple": "cpp_style"
-          },
-          "documentation": "One line, C++ style.\n"
-        },
-        {
-          "name": {
-            "simple": "csharp_style"
-          },
-          "documentation": "C# programming language style.\n"
-        },
-        {
-          "name": {
-            "simple": "shell_style"
-          },
-          "documentation": "Comments start with a hash.\n"
-        },
-        {
-          "name": {
-            "simple": "sql_style"
-          },
-          "documentation": "Comments start with a double-dash.\n"
-        },
-        {
-          "name": {
-            "simple": "xml_style"
-          }
-        }
-      ]
+      "name": "csharp::scoped_namespace_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "editors"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Supported editors for modelines.\n",
-      "enumerators": [
-        {
-          "name": {
-            "simple": "emacs"
-          },
-          "documentation": "The emacs editor\n"
-        },
-        {
-          "name": {
-            "simple": "vi"
-          },
-          "documentation": "The generic vi editor\n"
-        },
-        {
-          "name": {
-            "simple": "vim"
-          },
-          "documentation": "The vi-like editor vim.\n"
-        },
-        {
-          "name": {
-            "simple": "ex"
-          },
-          "documentation": "The old ex editor.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "modeline_locations"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Location in the file to place the modeline.\n",
-      "enumerators": [
-        {
-          "name": {
-            "simple": "top"
-          },
-          "documentation": "Very first line in file.\n"
-        },
-        {
-          "name": {
-            "simple": "bottom"
-          },
-          "documentation": "Very last line in file.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "quote_types"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Types of quotes that can be used in streaming.\n",
-      "enumerators": [
-        {
-          "name": {
-            "simple": "single_quote"
-          }
-        },
-        {
-          "name": {
-            "simple": "double_quote"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "spacing_types"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "no_space"
-          }
-        },
-        {
-          "name": {
-            "simple": "left_space"
-          }
-        },
-        {
-          "name": {
-            "simple": "right_space"
-          }
-        },
-        {
-          "name": {
-            "simple": "left_and_right_space"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "building_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred while the factory was building.\n"
-    },
-    {
-      "name": {
-        "simple": "formatting_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error has occurred while formatting.\n"
-    },
-    {
-      "name": {
-        "simple": "hydration_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "csharp::namespace_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

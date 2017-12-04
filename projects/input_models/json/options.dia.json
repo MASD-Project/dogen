@@ -1,153 +1,93 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Stores the configuration options for Dogen applications.\n\nThe options model provides types to store general configuration\noptions for all the different Dogen applications, such as knitter,\netc.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "options",
-      "yarn.external_modules": "dogen",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen.disable_common_facets"
-    }
+  "documentation": "Stores the configuration options for Dogen applications.\\n\\nThe options model provides types to store general configuration\\noptions for all the different Dogen applications, such as knitter,\\netc.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "options",
+    "yarn.external_modules": "dogen",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [
     {
-      "name": {
-        "simple": "darting_options"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "stitching_options",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "log_level"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "What level of logging to log at.\n"
+          "name": "log_level",
+          "type": "std::string",
+          "documentation": "What level of logging to log at.\\n"
         },
         {
-          "name": {
-            "simple": "force_write"
-          },
-          "unparsed_type": "bool"
+          "name": "target",
+          "type": "boost::filesystem::path"
         },
         {
-          "name": {
-            "simple": "product_name"
-          },
-          "unparsed_type": "std::string"
+          "name": "force_write",
+          "type": "bool"
         },
         {
-          "name": {
-            "simple": "log_directory"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "log_directory",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "compatibility_mode",
+          "type": "bool",
+          "documentation": "Try to process diagram even if there are errors.\\n\\nOnly a certain class of errors are allowed, believed to be caused by backwards or\\nforwards compatibility problems: missing types or types that do not exist.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "stitching_options"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "tailoring_options",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "log_level"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "What level of logging to log at.\n"
+          "name": "log_level",
+          "type": "std::string",
+          "documentation": "What level of logging to log at.\\n"
         },
         {
-          "name": {
-            "simple": "target"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "target",
+          "type": "boost::filesystem::path"
         },
         {
-          "name": {
-            "simple": "force_write"
-          },
-          "unparsed_type": "bool"
+          "name": "output",
+          "type": "boost::filesystem::path"
         },
         {
-          "name": {
-            "simple": "log_directory"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "force_write",
+          "type": "bool"
         },
         {
-          "name": {
-            "simple": "compatibility_mode"
-          },
-          "unparsed_type": "bool",
-          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
+          "name": "log_directory",
+          "type": "boost::filesystem::path"
         }
       ]
     },
     {
-      "name": {
-        "simple": "tailoring_options"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "darting_options",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "log_level"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "What level of logging to log at.\n"
+          "name": "log_level",
+          "type": "std::string",
+          "documentation": "What level of logging to log at.\\n"
         },
         {
-          "name": {
-            "simple": "target"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "force_write",
+          "type": "bool"
         },
         {
-          "name": {
-            "simple": "output"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "product_name",
+          "type": "std::string"
         },
         {
-          "name": {
-            "simple": "force_write"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "log_directory"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "log_directory",
+          "type": "boost::filesystem::path"
         }
       ]
     }

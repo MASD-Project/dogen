@@ -1,176 +1,101 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "wale",
-      "yarn.external_modules": "dogen",
-      "yarn.reference": "formatters.dia",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen.disable_common_facets"
-    }
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "wale",
+    "yarn.external_modules": "dogen",
+    "yarn.reference": "formatters.dia",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [
     {
-      "name": {
-        "simple": "formatter"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "key_extractor"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "properties"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "text_template",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "template_path"
-          },
-          "unparsed_type": "boost::filesystem::path"
+          "name": "properties",
+          "type": "properties"
         },
         {
-          "name": {
-            "simple": "expected_keys"
-          },
-          "unparsed_type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": {
-            "simple": "supplied_kvps"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::string>"
+          "name": "content",
+          "type": "std::string"
         }
       ]
     },
     {
-      "name": {
-        "simple": "text_template"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "properties",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "properties"
-          },
-          "unparsed_type": "properties"
+          "name": "template_path",
+          "type": "boost::filesystem::path"
         },
         {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "std::string"
+          "name": "expected_keys",
+          "type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": "supplied_kvps",
+          "type": "std::unordered_map<std::string, std::string>"
         }
       ]
     },
     {
-      "name": {
-        "simple": "validator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "key_extractor",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "workflow"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "workflow",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "extraction_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst extracting a key.\n"
+      "name": "formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "formatting_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst formatting.\n"
+      "name": "validator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "validation_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst validating.\n"
+      "name": "validation_error",
+      "documentation": "An error occurred whilst validating.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatting_error",
+      "documentation": "An error occurred whilst formatting.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "extraction_error",
+      "documentation": "An error occurred whilst extracting a key.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

@@ -1,96 +1,60 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Provides yarn file importing support for JSON.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "yarn.json",
-      "yarn.external_modules": "dogen",
-      "yarn.reference": "options.dia",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen.disable_odb_cmake"
-    }
+  "documentation": "Provides yarn file importing support for JSON.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "yarn.json",
+    "yarn.external_modules": "dogen",
+    "yarn.reference": "options.dia",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_odb_cmake"
   },
   "elements": [
     {
-      "name": {
-        "simple": "dehydrator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "hydrator",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "exomodel_transform"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "hydration_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "initializer",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "hydrator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "dehydrator",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "initializer"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "exomodel_transform",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "hydration_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "new_hydrator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

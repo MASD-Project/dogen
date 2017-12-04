@@ -1,3762 +1,1928 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "CPP is the C++ backend in the quilt kernel.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "quilt.cpp",
-      "yarn.external_modules": "dogen",
-      "yarn.reference": "annotations.dia",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen.disable_common_facets"
-    }
+  "documentation": "CPP is the C++ backend in the quilt kernel.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "quilt.cpp",
+    "yarn.external_modules": "dogen",
+    "yarn.reference": "annotations.dia",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [
     {
-      "name": {
-        "simple": "build_files_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formatters::types",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formatters::types::class_header_formatter",
       "stereotypes": [
-        "handcrafted"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "cmakelists",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "include_directory_path"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "source_directory_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "header_file_extension"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "implementation_file_extension"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "odb_targets"
-          },
-          "unparsed_type": "odb_targets"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "common_odb_options",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "sql_name_case"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "databases"
-          },
-          "unparsed_type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "decoration_expander",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "dynamic_transform",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "forward_declarations",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "is_enum"
-          },
-          "unparsed_type": "bool",
-          "documentation": "Returns true if the type for which we are creating a forward declaration is\nan enumeration, false otherwise.\n"
-        },
-        {
-          "name": {
-            "simple": "underlying_element"
-          },
-          "unparsed_type": "yarn::meta_model::name",
-          "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\n"
-        },
-        {
-          "name": {
-            "simple": "is_exception"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "forward_declarations_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "injector",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "master_header",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "inclusion_by_facet"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<yarn::meta_model::name>>>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "master_header_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "meta_name_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "msbuild_targets",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "odb_targets"
-          },
-          "unparsed_type": "odb_targets"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "object_odb_options",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "epilogue"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "include_regexes"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "header_guard_prefix"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "odb_options_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "odb_target",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "comment"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "output_directory"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "types_file"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "move_parameters"
-          },
-          "unparsed_type": "std::list<std::pair<std::string, std::string>>"
-        },
-        {
-          "name": {
-            "simple": "object_odb_options"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "odb_targets",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "main_target_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "common_odb_options"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "targets"
-          },
-          "unparsed_type": "std::list<odb_target>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "registrar",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "leaves"
-          },
-          "unparsed_type": "std::list<yarn::meta_model::name>",
-          "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
-        },
-        {
-          "name": {
-            "simple": "model_dependencies"
-          },
-          "unparsed_type": "std::list<yarn::meta_model::name>",
-          "documentation": "List of all models which the model depends on.\n"
-        },
-        {
-          "name": {
-            "simple": "registrar_dependencies"
-          },
-          "unparsed_type": "std::list<yarn::meta_model::name>",
-          "documentation": "Registrars on other models this registrar depends on.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "registrar_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "visual_studio_configuration",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "project_solution_guid"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "project_guid"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "visual_studio_factory",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "visual_studio_project",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "project_guid"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "project_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "tools_version"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "visual_studio_solution",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "yarn::meta_model::element"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "project_guid"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "project_solution_guid"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "version"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "project_name"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "adapter",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "artefact_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "file_path"
-          },
-          "unparsed_type": "boost::filesystem::path"
-        },
-        {
-          "name": {
-            "simple": "header_guard"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "inclusion_dependencies"
-          },
-          "unparsed_type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "aspect_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "aspect_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "requires_manual_default_constructor"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "requires_manual_move_constructor"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "requires_stream_manipulators"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "build_files_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "canonical_archetype_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "canonical_archetype_resolver",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "cpp_standard_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "dependencies_builder",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "dependencies_builder_factory",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "directive_group",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "primary"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "The main inclusion directive needed for this element.\n"
-        },
-        {
-          "name": {
-            "simple": "secondary"
-          },
-          "unparsed_type": "std::list<std::string>",
-          "documentation": "Any other directives that are also needed for this element.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "directive_group_repository",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "by_id"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_map<std::string, formattables::directive_group>>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "directive_group_repository_factory",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "element_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "All of the properties associated with an element.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "aspect_properties"
-          },
-          "unparsed_type": "formattables::aspect_properties"
-        },
-        {
-          "name": {
-            "simple": "artefact_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::artefact_properties>"
-        },
-        {
-          "name": {
-            "simple": "helper_properties"
-          },
-          "unparsed_type": "std::list<formattables::helper_properties>"
-        },
-        {
-          "name": {
-            "simple": "canonical_archetype_to_archetype"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::string>"
-        },
-        {
-          "name": {
-            "simple": "odb_properties"
-          },
-          "unparsed_type": "boost::optional<formattables::odb_properties>"
-        },
-        {
-          "name": {
-            "simple": "attribute_level_test_data_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, test_data_properties>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "facet_directory_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "facet_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "directory"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "enabled"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "file_path_and_guard_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "formattable",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "master_segment"
-          },
-          "unparsed_type": "boost::shared_ptr<yarn::meta_model::element>"
-        },
-        {
-          "name": {
-            "simple": "all_segments"
-          },
-          "unparsed_type": "std::list<boost::shared_ptr<yarn::meta_model::element>>"
-        },
-        {
-          "name": {
-            "simple": "element_properties"
-          },
-          "unparsed_type": "formattables::element_properties"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "header_guard_factory",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "helper_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "helper_families"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::string>"
-        },
-        {
-          "name": {
-            "simple": "streaming_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::streaming_properties>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "helper_descriptor",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "family"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "namespaces"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "name_identifiable"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "name_qualified"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "name_tree_qualified"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "name_tree_identifiable"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "streaming_properties"
-          },
-          "unparsed_type": "boost::optional<formattables::streaming_properties>"
-        },
-        {
-          "name": {
-            "simple": "is_simple_type"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "requires_hashing_helper"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "is_circular_dependency"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "is_pointer"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "helper_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "helper_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "current"
-          },
-          "unparsed_type": "formattables::helper_descriptor"
-        },
-        {
-          "name": {
-            "simple": "direct_descendants"
-          },
-          "unparsed_type": "std::list<formattables::helper_descriptor>"
-        },
-        {
-          "name": {
-            "simple": "in_inheritance_relationship"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "inclusion_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "locator",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "locator_archetype_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "facet_directory"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "facet_postfix"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "archetype_postfix"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "locator_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "facet_configurations"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::locator_facet_configuration>"
-        },
-        {
-          "name": {
-            "simple": "archetype_configurations"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::locator_archetype_configuration>"
-        },
-        {
-          "name": {
-            "simple": "include_directory_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "source_directory_name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "disable_facet_directories"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "header_file_extension"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "implementation_file_extension"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "backend_directory_name"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "locator_facet_configuration",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "directory"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "postfix"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "model",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "yarn::meta_model::name"
-        },
-        {
-          "name": {
-            "simple": "streaming_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::streaming_properties>"
-        },
-        {
-          "name": {
-            "simple": "formattables"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::formattable>"
-        },
-        {
-          "name": {
-            "simple": "facet_properties"
-          },
-          "unparsed_type": "std::unordered_map<std::string, formattables::facet_properties>"
-        },
-        {
-          "name": {
-            "simple": "cpp_standard"
-          },
-          "unparsed_type": "formattables::cpp_standards"
-        },
-        {
-          "name": {
-            "simple": "odb_databases"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "odb_sql_name_case"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "project_items"
-          },
-          "unparsed_type": "std::list<std::string>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "model_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "odb_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "odb_file_path_generator",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "odb_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "is_value"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "top_level_odb_pragmas"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "attribute_level_odb_pragmas"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<std::string>>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "reducer",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "streaming_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "streaming_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "requires_quoting"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "string_conversion_method"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "remove_unprintable_characters"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "test_data_properties",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "maximum_size"
-          },
-          "unparsed_type": "unsigned int"
-        },
-        {
-          "name": {
-            "simple": "prefix"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "test_data_properties_expander",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "workflow",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "artefact_formatter_interface",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "assistant",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::artefact_formatter_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "stream_"
-          },
-          "unparsed_type": "std::ostringstream"
-        }
-      ]
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "context",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Supplies additional information required for formatting.\n",
+      "name": "model_to_text_model_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "model"
-          },
-          "unparsed_type": "formattables::model"
-        },
-        {
-          "name": {
-            "simple": "element_properties"
-          },
-          "unparsed_type": "formattables::element_properties"
-        },
-        {
-          "name": {
-            "simple": "helpers"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
-        }
-      ]
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "associative_container_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+      "name": "formatters::hash",
+      "fallback_element_type": "yarn::module"
     },
     {
-      "name": {
-        "simple": "builtin_header_formatter",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::hash::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::hash::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "class_implementation_formatter",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::types::exception_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "date_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "enum_header_formatter",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::types::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "optional_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "pair_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "path_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_header_formatter",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::types::namespace_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "primitive_implementation_formatter",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::types::visitor_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "ptime_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "ptree_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "sequence_container_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "smart_pointer_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "time_duration_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "variant_helper",
-        "internal_modules": "formatters::hash"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "helper_formatter_interface",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "include_cmakelists_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::types::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "inclusion_constants",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "associative_container_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "builtin_header_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::hash::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::io",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formatters::io::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "class_implementation_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::io::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "enum_header_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::io::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "enum_implementation_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::io::enum_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::serialization",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formatters::serialization::class_header_formatter",
       "stereotypes": [
-        "handcrafted"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "inserter_implementation_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::serialization::class_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::master_header_formatter",
       "stereotypes": [
         "handcrafted"
       ],
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.types.class_implementation.formatting_style": "stitch",
         "quilt.cpp.types.class_implementation.overwrite": "true"
-      }
+      },
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "optional_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+      "name": "formatters::test_data",
+      "fallback_element_type": "yarn::module"
     },
     {
-      "name": {
-        "simple": "pair_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_header_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::test_data::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "primitive_implementation_formatter",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::test_data::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "ptree_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::test_data::enum_header_formatter",
       "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "sequence_container_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::test_data::enum_implementation_formatter",
       "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "smart_pointer_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::odb",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formatters::odb::class_header_formatter",
       "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "string_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::odb::common_odb_options_formatter",
       "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::include_cmakelists_formatter",
       "stereotypes": [
-        "handcrafted"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "variant_helper",
-        "internal_modules": "formatters::io"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::source_cmakelists_formatter",
       "stereotypes": [
-        "C++ Helper Formatter"
-      ]
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "master_header_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::types::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "annotation": {
-        "quilt.cpp.types.class_implementation.formatting_style": "stitch",
-        "quilt.cpp.types.class_implementation.overwrite": "true"
-      }
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "msbuild_targets_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "builtin_header_formatter",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "common_odb_options_formatter",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "enum_header_formatter",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "object_odb_options_formatter",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_header_formatter",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::odb"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::rapidjson"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_implementation_formatter",
-        "internal_modules": "formatters::rapidjson"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::rapidjson"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::rapidjson"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "registrar",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "repository",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::hash::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "annotation": {
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::traits",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::odb::traits",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::traits",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::serialization::traits",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::registrar",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::registrar_error",
+      "documentation": "There was an error in the registrar.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "workflow_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::formatting_error",
+      "documentation": "An error occurred whilst formatting.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::repository",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "tagged_values": {
         "quilt.cpp.io.enabled": "true",
         "quilt.cpp.io.overwrite": "false"
       },
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "stock_artefact_formatters_by_meta_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>>"
+          "name": "stock_artefact_formatters_by_meta_name",
+          "type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>>"
         },
         {
-          "name": {
-            "simple": "stock_artefact_formatters_by_archetype"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::shared_ptr<formatters::artefact_formatter_interface>>"
+          "name": "stock_artefact_formatters_by_archetype",
+          "type": "std::unordered_map<std::string, std::shared_ptr<formatters::artefact_formatter_interface>>"
         },
         {
-          "name": {
-            "simple": "stock_artefact_formatters"
-          },
-          "unparsed_type": "std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>"
+          "name": "stock_artefact_formatters",
+          "type": "std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>"
         },
         {
-          "name": {
-            "simple": "helper_formatters"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
+          "name": "helper_formatters",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
         }
       ]
     },
     {
-      "name": {
-        "simple": "repository_factory",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "builtin_header_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_implementation_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "enum_header_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "forward_declarations_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "path_helper",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_header_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_implementation_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "registrar_header_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "registrar_implementation_formatter",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::serialization"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "source_cmakelists_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "stitch_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "associative_container_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "bool_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "builtin_header_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "char_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_implementation_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "date_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "domain_type_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "enum_header_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "enum_implementation_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "number_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "optional_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "pair_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "path_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_header_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_implementation_formatter",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "ptime_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "ptree_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "sequence_container_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "smart_pointer_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "string_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "time_duration_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "variant_helper",
-        "internal_modules": "formatters::test_data"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "builtin_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_implementation_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "enum_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "exception_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "forward_declarations_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "initializer",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "namespace_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitive_implementation_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "smart_pointer_helper",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Helper Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "traits",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "visitor_header_formatter",
-        "internal_modules": "formatters::types"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "visual_studio_project_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "visual_studio_solution_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "C++ Artefact Formatter"
-      ]
-    },
-    {
-      "name": {
-        "simple": "wale_formatter",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "workflow",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::workflow",
       "stereotypes": [
         "handcrafted"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "registrar_"
-          },
-          "unparsed_type": "formatters::registrar"
+          "name": "registrar_",
+          "type": "formatters::registrar"
         }
       ]
     },
     {
-      "name": {
-        "simple": "initializer"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formatters::traits",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "model_to_text_model_transform"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "traits",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "traits"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "formattables",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formattables::workflow",
       "stereotypes": [
         "handcrafted"
-      ]
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "fabric"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::inclusion_constants",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "formattables"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::types::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "hash",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "io",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::odb::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "odb",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::io::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "rapidjson",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::serialization::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "serialization",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formattables::locator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "test_data",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::types::forward_declarations_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "types",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::serialization::forward_declarations_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "cpp_standards",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
+      "name": "formattables::dependencies_builder",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::building_error",
+      "documentation": "An error occurred while the factory was building.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::artefact_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "cpp_98"
-          }
+          "name": "file_path",
+          "type": "boost::filesystem::path"
         },
         {
-          "name": {
-            "simple": "cpp_11"
-          }
+          "name": "header_guard",
+          "type": "std::string"
         },
         {
-          "name": {
-            "simple": "cpp_14"
-          }
+          "name": "inclusion_dependencies",
+          "type": "std::list<std::string>"
         }
       ]
     },
     {
-      "name": {
-        "simple": "inclusion_support_types",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
+      "name": "formattables::dependencies_builder_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::assistant",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "not_supported"
-          },
-          "documentation": "This formatter does not export an inclusion directive.\n"
-        },
-        {
-          "name": {
-            "simple": "regular_support"
-          },
-          "documentation": "This formatter exports a regular inclusion directive.\n"
-        },
-        {
-          "name": {
-            "simple": "canonical_support"
-          },
-          "documentation": "This formatter exports a regular inclusion directive and is the default for its facet\nand element.\n"
+          "name": "stream_",
+          "type": "std::ostringstream"
         }
       ]
     },
     {
-      "name": {
-        "simple": "building_error",
-        "internal_modules": "fabric"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::serialization::registrar_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "adaptation_error",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred during adaptation.\n"
+      "name": "formatters::serialization::registrar_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "building_error",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred while the factory was building.\n"
+      "name": "formatters::serialization::enum_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "expansion_error",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::odb::enum_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "location_error",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred while the locator was creating a path.\n"
+      "name": "formatters::context",
+      "documentation": "Supplies additional information required for formatting.\\n",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "model",
+          "type": "formattables::model"
+        },
+        {
+          "name": "element_properties",
+          "type": "formattables::element_properties"
+        },
+        {
+          "name": "helpers",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_formatter_interface>>>>"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "resolution_error",
-        "internal_modules": "formattables"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "formatters::helper_formatter_interface",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "building_error",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst the factory was building.\n"
+      "name": "formatters::building_error",
+      "documentation": "An error occurred whilst the factory was building.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "formatting_error",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst formatting.\n"
+      "name": "formattables::helper_descriptor",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "family",
+          "type": "std::string"
+        },
+        {
+          "name": "namespaces",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "name_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "name_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "name_tree_identifiable",
+          "type": "std::string"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "boost::optional<formattables::streaming_properties>"
+        },
+        {
+          "name": "is_simple_type",
+          "type": "bool"
+        },
+        {
+          "name": "requires_hashing_helper",
+          "type": "bool"
+        },
+        {
+          "name": "is_circular_dependency",
+          "type": "bool"
+        },
+        {
+          "name": "is_pointer",
+          "type": "bool"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "registrar_error",
-        "internal_modules": "formatters"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "There was an error in the registrar.\n"
+      "name": "formattables::helper_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "current",
+          "type": "formattables::helper_descriptor"
+        },
+        {
+          "name": "direct_descendants",
+          "type": "std::list<formattables::helper_descriptor>"
+        },
+        {
+          "name": "in_inheritance_relationship",
+          "type": "bool"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "workflow_error"
+      "name": "formattables::element_properties",
+      "documentation": "All of the properties associated with an element.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "aspect_properties",
+          "type": "formattables::aspect_properties"
+        },
+        {
+          "name": "artefact_properties",
+          "type": "std::unordered_map<std::string, formattables::artefact_properties>"
+        },
+        {
+          "name": "helper_properties",
+          "type": "std::list<formattables::helper_properties>"
+        },
+        {
+          "name": "canonical_archetype_to_archetype",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "odb_properties",
+          "type": "boost::optional<formattables::odb_properties>"
+        },
+        {
+          "name": "attribute_level_test_data_properties",
+          "type": "std::unordered_map<std::string, test_data_properties>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::aspect_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_manual_move_constructor",
+          "type": "bool"
+        },
+        {
+          "name": "requires_stream_manipulators",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "fabric",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "fabric::registrar",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
       },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "leaves",
+          "type": "std::list<yarn::meta_model::name>",
+          "documentation": "List of all concrete classes which are part of an inheritance tree.\\n"
+        },
+        {
+          "name": "model_dependencies",
+          "type": "std::list<yarn::meta_model::name>",
+          "documentation": "List of all models which the model depends on.\\n"
+        },
+        {
+          "name": "registrar_dependencies",
+          "type": "std::list<yarn::meta_model::name>",
+          "documentation": "Registrars on other models this registrar depends on.\\n"
+        }
+      ]
+    },
+    {
+      "name": "fabric::forward_declarations",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "is_enum",
+          "type": "bool",
+          "documentation": "Returns true if the type for which we are creating a forward declaration is\\nan enumeration, false otherwise.\\n"
+        },
+        {
+          "name": "underlying_element",
+          "type": "yarn::meta_model::name",
+          "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\\n"
+        },
+        {
+          "name": "is_exception",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "fabric::injector",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::master_header",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "inclusion_by_facet",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<yarn::meta_model::name>>>"
+        }
+      ]
+    },
+    {
+      "name": "fabric::master_header_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::registrar_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::forward_declarations_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::cmakelists",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "include_directory_path",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "odb_targets",
+          "type": "odb_targets"
+        }
+      ]
+    },
+    {
+      "name": "fabric::common_odb_options",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "sql_name_case",
+          "type": "std::string"
+        },
+        {
+          "name": "databases",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "formatters::inclusion_support_types",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "not_supported",
+          "type": "",
+          "documentation": "This formatter does not export an inclusion directive.\\n"
+        },
+        {
+          "name": "regular_support",
+          "type": "",
+          "documentation": "This formatter exports a regular inclusion directive.\\n"
+        },
+        {
+          "name": "canonical_support",
+          "type": "",
+          "documentation": "This formatter exports a regular inclusion directive and is the default for its facet\\nand element.\\n"
+        }
+      ]
+    },
+    {
+      "name": "formatters::types::builtin_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::builtin_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::builtin_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::builtin_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::odb::builtin_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::serialization::builtin_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::formattable",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "master_segment",
+          "type": "boost::shared_ptr<yarn::meta_model::element>"
+        },
+        {
+          "name": "all_segments",
+          "type": "std::list<boost::shared_ptr<yarn::meta_model::element>>"
+        },
+        {
+          "name": "element_properties",
+          "type": "formattables::element_properties"
+        }
+      ]
+    },
+    {
+      "name": "formattables::adapter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::inclusion_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::reducer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::model_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::file_path_and_guard_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::aspect_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::helper_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::adaptation_error",
+      "documentation": "An error occurred during adaptation.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::expansion_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::odb_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "is_value",
+          "type": "bool"
+        },
+        {
+          "name": "top_level_odb_pragmas",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "attribute_level_odb_pragmas",
+          "type": "std::unordered_map<std::string, std::list<std::string>>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::odb_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::model",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "yarn::meta_model::name"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "std::unordered_map<std::string, formattables::streaming_properties>"
+        },
+        {
+          "name": "formattables",
+          "type": "std::unordered_map<std::string, formattables::formattable>"
+        },
+        {
+          "name": "facet_properties",
+          "type": "std::unordered_map<std::string, formattables::facet_properties>"
+        },
+        {
+          "name": "cpp_standard",
+          "type": "formattables::cpp_standards"
+        },
+        {
+          "name": "odb_databases",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "odb_sql_name_case",
+          "type": "std::string"
+        },
+        {
+          "name": "project_items",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::facet_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "std::string"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "formattables::facet_directory_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::canonical_archetype_resolver",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::canonical_archetype_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::resolution_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::streaming_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "requires_quoting",
+          "type": "bool"
+        },
+        {
+          "name": "string_conversion_method",
+          "type": "std::string"
+        },
+        {
+          "name": "remove_unprintable_characters",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "formattables::streaming_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::locator_configuration",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "facet_configurations",
+          "type": "std::unordered_map<std::string, formattables::locator_facet_configuration>"
+        },
+        {
+          "name": "archetype_configurations",
+          "type": "std::unordered_map<std::string, formattables::locator_archetype_configuration>"
+        },
+        {
+          "name": "include_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "disable_facet_directories",
+          "type": "bool"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "backend_directory_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::locator_facet_configuration",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "std::string"
+        },
+        {
+          "name": "postfix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::locator_archetype_configuration",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "facet_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "facet_postfix",
+          "type": "std::string"
+        },
+        {
+          "name": "archetype_postfix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters::wale_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::stitch_formatter",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::types::smart_pointer_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::smart_pointer_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::time_duration_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::ptree_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::associative_container_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::date_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::optional_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::path_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::pair_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::sequence_container_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::ptime_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::variant_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::associative_container_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::smart_pointer_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::ptree_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::optional_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::pair_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::sequence_container_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::variant_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::string_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::serialization::path_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::associative_container_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::char_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::bool_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::date_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::domain_type_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::number_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::optional_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::pair_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::path_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::ptime_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::ptree_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::sequence_container_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::smart_pointer_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::string_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::time_duration_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::variant_helper",
+      "stereotypes": [
+        "C++ Helper Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::inserter_implementation_helper",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "tagged_values": {
+        "quilt.cpp.types.class_implementation.formatting_style": "stitch",
+        "quilt.cpp.types.class_implementation.overwrite": "true"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::location_error",
+      "documentation": "An error occurred while the locator was creating a path.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::helper_configuration",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "helper_families",
+          "type": "std::unordered_map<std::string, std::string>"
+        },
+        {
+          "name": "streaming_properties",
+          "type": "std::unordered_map<std::string, formattables::streaming_properties>"
+        }
+      ]
+    },
+    {
+      "name": "formatters::types::primitive_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::primitive_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::primitive_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::odb::primitive_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::primitive_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::serialization::primitive_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::types::primitive_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::hash::primitive_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::io::primitive_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::test_data::primitive_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::serialization::primitive_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::directive_group_repository",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "by_id",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, formattables::directive_group>>"
+        }
+      ]
+    },
+    {
+      "name": "formattables::directive_group_repository_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::directive_group",
+      "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "primary",
+          "type": "std::string",
+          "documentation": "The main inclusion directive needed for this element.\\n"
+        },
+        {
+          "name": "secondary",
+          "type": "std::list<std::string>",
+          "documentation": "Any other directives that are also needed for this element.\\n"
+        }
+      ]
+    },
+    {
+      "name": "fabric::odb_options_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::building_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::build_files_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::build_files_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::cpp_standards",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "cpp_98",
+          "type": ""
+        },
+        {
+          "name": "cpp_11",
+          "type": ""
+        },
+        {
+          "name": "cpp_14",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "formattables::cpp_standard_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::header_guard_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::odb_targets",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "main_target_name",
+          "type": "std::string"
+        },
+        {
+          "name": "common_odb_options",
+          "type": "std::string"
+        },
+        {
+          "name": "targets",
+          "type": "std::list<odb_target>"
+        }
+      ]
+    },
+    {
+      "name": "fabric::odb_target",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "comment",
+          "type": "std::string"
+        },
+        {
+          "name": "output_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "types_file",
+          "type": "std::string"
+        },
+        {
+          "name": "move_parameters",
+          "type": "std::list<std::pair<std::string, std::string>>"
+        },
+        {
+          "name": "object_odb_options",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::odb_file_path_generator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::object_odb_options",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "epilogue",
+          "type": "std::string"
+        },
+        {
+          "name": "include_regexes",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard_prefix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters::odb::object_odb_options_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formattables::test_data_properties",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "maximum_size",
+          "type": "unsigned int"
+        },
+        {
+          "name": "prefix",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formattables::test_data_properties_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::msbuild_targets",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "odb_targets",
+          "type": "odb_targets"
+        }
+      ]
+    },
+    {
+      "name": "formatters::msbuild_targets_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::visual_studio_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::visual_studio_project",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string"
+        },
+        {
+          "name": "tools_version",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "fabric::visual_studio_solution",
+      "tagged_values": {
+        "yarn.generalization.parent": "yarn::meta_model::element"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_solution_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "version",
+          "type": "std::string"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "fabric::visual_studio_configuration",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "project_solution_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "formatters::visual_studio_project_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::visual_studio_solution_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::rapidjson",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "formatters::rapidjson::class_header_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::rapidjson::initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::rapidjson::traits",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::rapidjson::class_implementation_formatter",
+      "stereotypes": [
+        "C++ Artefact Formatter"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::decoration_expander",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::dynamic_transform",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "fabric::meta_name_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "formatters::repository_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

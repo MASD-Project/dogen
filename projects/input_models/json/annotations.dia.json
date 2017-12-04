@@ -1,1164 +1,714 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "The Annotations model is responsible for managing run-time typed data.\n\nThe idea is to allow the meta-models to carry data over to the\nformatting process without necessarily knowing about this data, but\nyet imposing some constraints on the shape of the data.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "annotations",
-      "yarn.external_modules": "dogen",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen.disable_odb_cmake"
-    }
+  "documentation": "The Annotations model is responsible for managing run-time typed data.\\n\\nThe idea is to allow the meta-models to carry data over to the\\nformatting process without necessarily knowing about this data, but\\nyet imposing some constraints on the shape of the data.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "annotations",
+    "yarn.external_modules": "dogen",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_odb_cmake"
   },
   "elements": [
     {
-      "name": {
-        "simple": "annotation"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Represents an annotation that can be associated with an external object.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "entries"
-          },
-          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<value>>",
-          "documentation": "All entries in this annotation. Each entry is a key-value-pair of id and value.\n"
-        },
-        {
-          "name": {
-            "simple": "scope"
-          },
-          "unparsed_type": "scope_types"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "annotation_group"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Related set of annotations, grouped into a single-level hierarchy.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "parent"
-          },
-          "unparsed_type": "annotation",
-          "documentation": "Top-level annotation.\n"
-        },
-        {
-          "name": {
-            "simple": "children"
-          },
-          "unparsed_type": "std::unordered_map<std::string, annotation>",
-          "documentation": "Child annotations.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "annotation_groups_factory"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "type_repository_"
-          },
-          "unparsed_type": "type_repository"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "archetype_location"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\n\nThese must be populated in order, e.g. in order to have a backend we must have a\nkernel; in order to have a facet we must have a backend and in order to have a\nformatter we must have a facet. We may not have any.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "kernel"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the kernel that owns this field, if any.\n"
-        },
-        {
-          "name": {
-            "simple": "backend"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the backend that owns this field, if any.\n"
-        },
-        {
-          "name": {
-            "simple": "facet"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the facet that owns this field, if any.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Name of the archetype that owns this field, if any.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "archetype_location_repository"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "archetype_locations"
-          },
-          "unparsed_type": "std::list<archetype_location>"
-        },
-        {
-          "name": {
-            "simple": "facet_names_by_backend_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
-        },
-        {
-          "name": {
-            "simple": "formatter_names_by_backend_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
-        },
-        {
-          "name": {
-            "simple": "archetype_locations_by_meta_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, archetype_locations_group>"
-        },
-        {
-          "name": {
-            "simple": "archetype_locations_by_family"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
-        },
-        {
-          "name": {
-            "simple": "archetypes_by_backend_by_facet"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>"
-        },
-        {
-          "name": {
-            "simple": "archetype_locations_by_intra_backend_segment"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "archetype_location_repository_builder"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "archetype_location_repository_parts"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "archetype_locations"
-          },
-          "unparsed_type": "std::list<archetype_location>",
-          "documentation": "All archetype locations for the archetypes owned by this transform, \nlisting all available backends, facets and archetypes.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype_locations_by_meta_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, archetype_locations_group>",
-          "documentation": "Returns the archetype locations for each meta name.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype_locations_by_family"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype_locations_by_intra_backend_segment"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "archetype_location_repository_parts_builder"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "archetype_locations_group"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "archetype_locations"
-          },
-          "unparsed_type": "std::list<archetype_location>",
-          "documentation": "All archetype locations that belong to this group.\n"
-        },
-        {
-          "name": {
-            "simple": "canonical_archetype_locations"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::string>",
-          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "boolean"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Field can hold a Boolean value.\n",
-      "parents": [
-        {
-          "simple": "value"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "entry_selector"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "annotation_"
-          },
-          "unparsed_type": "annotation"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "entry_template"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "name"
-        },
-        {
-          "name": {
-            "simple": "archetype_location"
-          },
-          "unparsed_type": "archetype_location"
-        },
-        {
-          "name": {
-            "simple": "untyped_value"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "kind"
-          },
-          "unparsed_type": "template_kinds"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "key_value_pair"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "value"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::string>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "merger"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "name"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Name of the field description or field.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "simple"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Non-qualified name of the field.\n"
-        },
-        {
-          "name": {
-            "simple": "qualified"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Qualified name of the field, using dots to separate the hierarchy.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "number"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Field can hold numbers.\n",
-      "parents": [
-        {
-          "simple": "value"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "profile"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "std::string"
-        },
-        {
-          "name": {
-            "simple": "parents"
-          },
-          "unparsed_type": "std::list<std::string>"
-        },
-        {
-          "name": {
-            "simple": "labels"
-          },
-          "unparsed_type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": {
-            "simple": "templates"
-          },
-          "unparsed_type": "std::list<entry_template>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "profile_hydrator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "profile_repository"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "profiles_by_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, profile>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "profiler"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "profiler_configuration"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "profile"
-          },
-          "unparsed_type": "profile"
-        },
-        {
-          "name": {
-            "simple": "annotation"
-          },
-          "unparsed_type": "annotation"
-        },
-        {
-          "name": {
-            "simple": "merged"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "scribble"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "entries"
-          },
-          "unparsed_type": "std::list<std::pair<std::string, std::string>>"
-        },
-        {
-          "name": {
-            "simple": "scope"
-          },
-          "unparsed_type": "scope_types"
-        },
-        {
-          "name": {
-            "simple": "candidate_labels"
-          },
-          "unparsed_type": "std::vector<std::string>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "scribble_group"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "A scribble is an annotation in raw form, prior to processing. A scribble group is a hierachical set of scribles.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "parent"
-          },
-          "unparsed_type": "scribble",
-          "documentation": "Top-level scribble.\n"
-        },
-        {
-          "name": {
-            "simple": "children"
-          },
-          "unparsed_type": "std::unordered_map<std::string, scribble>",
-          "documentation": "Child scribbles.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "template_instantiator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "repository_"
-          },
-          "unparsed_type": "archetype_location_repository"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "text"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Field can hold text.\n",
-      "parents": [
-        {
-          "simple": "value"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Text value.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "text_collection"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Field can hold a collection of text values.\n",
-      "parents": [
-        {
-          "simple": "value"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "content"
-          },
-          "unparsed_type": "std::list<std::string>",
-          "documentation": "Collection of text values.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "type"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Defines the domain of values.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "name",
-          "documentation": "Name of the field to which this definition applies.\n"
-        },
-        {
-          "name": {
-            "simple": "value_type"
-          },
-          "unparsed_type": "value_types",
-          "documentation": "Type of the field.\n"
-        },
-        {
-          "name": {
-            "simple": "scope"
-          },
-          "unparsed_type": "scope_types",
-          "documentation": "Valid scopes where the type may be present.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype_location"
-          },
-          "unparsed_type": "archetype_location",
-          "documentation": "The archetype location for this type.\n"
-        },
-        {
-          "name": {
-            "simple": "default_value"
-          },
-          "unparsed_type": "boost::shared_ptr<value>",
-          "documentation": "Default value for the field, if any.\n"
-        },
-        {
-          "name": {
-            "simple": "is_partially_matchable"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "type_repository"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "all_types"
-          },
-          "unparsed_type": "std::list<type>",
-          "documentation": "All the types available, without categorisation.\n"
-        },
-        {
-          "name": {
-            "simple": "types_by_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, type>",
-          "documentation": "Types by qualified name.\n"
-        },
-        {
-          "name": {
-            "simple": "types_by_facet_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<type>>",
-          "documentation": "Types by facet names, for all models.\n"
-        },
-        {
-          "name": {
-            "simple": "types_by_formatter_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string,std::list<type>>",
-          "documentation": "Types by formatter names, for all models.\n"
-        },
-        {
-          "name": {
-            "simple": "types_by_backend_name"
-          },
-          "unparsed_type": "std::unordered_map<std::string, std::list<type>>",
-          "documentation": "Types by backend name.\n"
-        },
-        {
-          "name": {
-            "simple": "partially_matchable_types"
-          },
-          "unparsed_type": "std::unordered_map<std::string, type>",
-          "documentation": "Types which can be partially matched.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "type_repository_factory"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "type_repository_selector"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "repository_"
-          },
-          "unparsed_type": "type_repository"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "type_template"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Defines a template that can be used to instantiate types.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "name"
-          },
-          "unparsed_type": "name",
-          "documentation": "Name of the field to which this definition applies.\n"
-        },
-        {
-          "name": {
-            "simple": "value_type"
-          },
-          "unparsed_type": "value_types",
-          "documentation": "Type of the field.\n"
-        },
-        {
-          "name": {
-            "simple": "scope"
-          },
-          "unparsed_type": "scope_types",
-          "documentation": "Valid scopes where the type may be present.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype_location"
-          },
-          "unparsed_type": "archetype_location",
-          "documentation": "The archetype location for this type.\n"
-        },
-        {
-          "name": {
-            "simple": "default_value"
-          },
-          "unparsed_type": "boost::shared_ptr<value>",
-          "documentation": "Default value for the field, if any.\n"
-        },
-        {
-          "name": {
-            "simple": "kind"
-          },
-          "unparsed_type": "template_kinds",
-          "documentation": "If the type is a template, defines the kind of template.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "type_templates_hydrator"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "value"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Base class of all value types.\n",
+      "name": "value",
+      "documentation": "Base class of all value types.\\n",
       "stereotypes": [
         "yarn::visitable"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "text",
+      "documentation": "Field can hold text.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Text value.\\n"
+        }
       ]
     },
     {
-      "name": {
-        "simple": "value_factory"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "text_collection",
+      "documentation": "Field can hold a collection of text values.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::list<std::string>",
+          "documentation": "Collection of text values.\\n"
+        }
+      ]
+    },
+    {
+      "name": "boolean",
+      "documentation": "Field can hold a Boolean value.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "name",
+      "documentation": "Name of the field description or field.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "simple",
+          "type": "std::string",
+          "documentation": "Non-qualified name of the field.\\n"
+        },
+        {
+          "name": "qualified",
+          "type": "std::string",
+          "documentation": "Qualified name of the field, using dots to separate the hierarchy.\\n"
+        }
+      ]
+    },
+    {
+      "name": "value_types",
+      "documentation": "What values can a field hold.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "text",
+          "type": ""
+        },
+        {
+          "name": "text_collection",
+          "type": ""
+        },
+        {
+          "name": "number",
+          "type": ""
+        },
+        {
+          "name": "boolean",
+          "type": ""
+        },
+        {
+          "name": "key_value_pair",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "type",
+      "documentation": "Defines the domain of values.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "name",
+          "documentation": "Name of the field to which this definition applies.\\n"
+        },
+        {
+          "name": "value_type",
+          "type": "value_types",
+          "documentation": "Type of the field.\\n"
+        },
+        {
+          "name": "scope",
+          "type": "scope_types",
+          "documentation": "Valid scopes where the type may be present.\\n"
+        },
+        {
+          "name": "archetype_location",
+          "type": "archetype_location",
+          "documentation": "The archetype location for this type.\\n"
+        },
+        {
+          "name": "default_value",
+          "type": "boost::shared_ptr<value>",
+          "documentation": "Default value for the field, if any.\\n"
+        },
+        {
+          "name": "is_partially_matchable",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "annotation",
+      "documentation": "Represents an annotation that can be associated with an external object.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "entries",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<value>>",
+          "documentation": "All entries in this annotation. Each entry is a key-value-pair of id and value.\\n"
+        },
+        {
+          "name": "scope",
+          "type": "scope_types"
+        }
+      ]
+    },
+    {
+      "name": "scope_types",
+      "documentation": "Where can a field appear.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "any",
+          "type": "",
+          "documentation": "Field can appear anywhere.\\n"
+        },
+        {
+          "name": "not_applicable",
+          "type": "",
+          "documentation": "The notion of scopes does not apply to field.\\n"
+        },
+        {
+          "name": "root_module",
+          "type": "",
+          "documentation": "Field can only appear in the root module.\\n"
+        },
+        {
+          "name": "any_module",
+          "type": "",
+          "documentation": "Field can appear in any module.\\n"
+        },
+        {
+          "name": "entity",
+          "type": "",
+          "documentation": "Field can only appear on an entity.\\n"
+        },
+        {
+          "name": "property",
+          "type": "",
+          "documentation": "Field can only appear on a property of an entity.\\n"
+        },
+        {
+          "name": "operation",
+          "type": "",
+          "documentation": "Field can only appear on an operation in an entity.\\n"
+        }
+      ]
+    },
+    {
+      "name": "annotation_groups_factory",
       "stereotypes": [
         "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "scope_types"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Where can a field appear.\n",
-      "enumerators": [
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "any"
-          },
-          "documentation": "Field can appear anywhere.\n"
-        },
-        {
-          "name": {
-            "simple": "not_applicable"
-          },
-          "documentation": "The notion of scopes does not apply to field.\n"
-        },
-        {
-          "name": {
-            "simple": "root_module"
-          },
-          "documentation": "Field can only appear in the root module.\n"
-        },
-        {
-          "name": {
-            "simple": "any_module"
-          },
-          "documentation": "Field can appear in any module.\n"
-        },
-        {
-          "name": {
-            "simple": "entity"
-          },
-          "documentation": "Field can only appear on an entity.\n"
-        },
-        {
-          "name": {
-            "simple": "property"
-          },
-          "documentation": "Field can only appear on a property of an entity.\n"
-        },
-        {
-          "name": {
-            "simple": "operation"
-          },
-          "documentation": "Field can only appear on an operation in an entity.\n"
+          "name": "type_repository_",
+          "type": "type_repository"
         }
       ]
     },
     {
-      "name": {
-        "simple": "template_kinds"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
+      "name": "building_error",
+      "documentation": "An error occurred while the field factory was building.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "archetype_location",
+      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\\n\\nThese must be populated in order, e.g. in order to have a backend we must have a\\nkernel; in order to have a facet we must have a backend and in order to have a\\nformatter we must have a facet. We may not have any.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "instance"
-          }
+          "name": "kernel",
+          "type": "std::string",
+          "documentation": "Name of the kernel that owns this field, if any.\\n"
         },
         {
-          "name": {
-            "simple": "recursive_template"
-          },
-          "documentation": "This field applies recursively, from the current level to all below.\n\nThe starting point of the recursion is the level supplied by an archetype location.\n"
+          "name": "backend",
+          "type": "std::string",
+          "documentation": "Name of the backend that owns this field, if any.\\n"
         },
         {
-          "name": {
-            "simple": "backend_template"
-          },
-          "documentation": "This field applies to all backends.\n"
+          "name": "facet",
+          "type": "std::string",
+          "documentation": "Name of the facet that owns this field, if any.\\n"
         },
         {
-          "name": {
-            "simple": "facet_template"
-          },
-          "documentation": "This field applies to all facets.\n"
-        },
-        {
-          "name": {
-            "simple": "archetype_template"
-          },
-          "documentation": "This field applies to all archetypes.\n"
+          "name": "archetype",
+          "type": "std::string",
+          "documentation": "Name of the archetype that owns this field, if any.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "value_types"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "What values can a field hold.\n",
-      "enumerators": [
+      "name": "value_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "type_repository",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "text"
-          }
+          "name": "all_types",
+          "type": "std::list<type>",
+          "documentation": "All the types available, without categorisation.\\n"
         },
         {
-          "name": {
-            "simple": "text_collection"
-          }
+          "name": "types_by_name",
+          "type": "std::unordered_map<std::string, type>",
+          "documentation": "Types by qualified name.\\n"
         },
         {
-          "name": {
-            "simple": "number"
-          }
+          "name": "types_by_facet_name",
+          "type": "std::unordered_map<std::string, std::list<type>>",
+          "documentation": "Types by facet names, for all models.\\n"
         },
         {
-          "name": {
-            "simple": "boolean"
-          }
+          "name": "types_by_formatter_name",
+          "type": "std::unordered_map<std::string,std::list<type>>",
+          "documentation": "Types by formatter names, for all models.\\n"
         },
         {
-          "name": {
-            "simple": "key_value_pair"
-          }
+          "name": "types_by_backend_name",
+          "type": "std::unordered_map<std::string, std::list<type>>",
+          "documentation": "Types by backend name.\\n"
+        },
+        {
+          "name": "partially_matchable_types",
+          "type": "std::unordered_map<std::string, type>",
+          "documentation": "Types which can be partially matched.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "building_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred while the field factory was building.\n"
+      "name": "entry_selector",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "annotation_",
+          "type": "annotation"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "hydration_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst trying to hydrate field definitions.\n"
+      "name": "selection_error",
+      "documentation": "An error occurred when attempting to select.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "instantiation_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred whilst trying to instantiate a field definition template.\n"
+      "name": "hydration_error",
+      "documentation": "An error occurred whilst trying to hydrate field definitions.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "profiling_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "type_templates_hydrator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "selection_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "An error occurred when attempting to select.\n"
+      "name": "type_repository_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "template_kinds",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "instance",
+          "type": ""
+        },
+        {
+          "name": "recursive_template",
+          "type": "",
+          "documentation": "This field applies recursively, from the current level to all below.\\n\\nThe starting point of the recursion is the level supplied by an archetype location.\\n"
+        },
+        {
+          "name": "backend_template",
+          "type": "",
+          "documentation": "This field applies to all backends.\\n"
+        },
+        {
+          "name": "facet_template",
+          "type": "",
+          "documentation": "This field applies to all facets.\\n"
+        },
+        {
+          "name": "archetype_template",
+          "type": "",
+          "documentation": "This field applies to all archetypes.\\n"
+        }
+      ]
+    },
+    {
+      "name": "template_instantiator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "repository_",
+          "type": "archetype_location_repository"
+        }
+      ]
+    },
+    {
+      "name": "instantiation_error",
+      "documentation": "An error occurred whilst trying to instantiate a field definition template.\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "type_repository_selector",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "repository_",
+          "type": "type_repository"
+        }
+      ]
+    },
+    {
+      "name": "number",
+      "documentation": "Field can hold numbers.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "parents",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "labels",
+          "type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": "templates",
+          "type": "std::list<entry_template>"
+        }
+      ]
+    },
+    {
+      "name": "profile_repository",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "profiles_by_name",
+          "type": "std::unordered_map<std::string, profile>"
+        }
+      ]
+    },
+    {
+      "name": "entry_template",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "name"
+        },
+        {
+          "name": "archetype_location",
+          "type": "archetype_location"
+        },
+        {
+          "name": "untyped_value",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "kind",
+          "type": "template_kinds"
+        }
+      ]
+    },
+    {
+      "name": "profiler",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "profile_hydrator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "merger",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "scribble_group",
+      "documentation": "A scribble is an annotation in raw form, prior to processing. A scribble group is a hierachical set of scribles.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "parent",
+          "type": "scribble",
+          "documentation": "Top-level scribble.\\n"
+        },
+        {
+          "name": "children",
+          "type": "std::unordered_map<std::string, scribble>",
+          "documentation": "Child scribbles.\\n"
+        }
+      ]
+    },
+    {
+      "name": "scribble",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "entries",
+          "type": "std::list<std::pair<std::string, std::string>>"
+        },
+        {
+          "name": "scope",
+          "type": "scope_types"
+        },
+        {
+          "name": "candidate_labels",
+          "type": "std::vector<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "annotation_group",
+      "documentation": "Related set of annotations, grouped into a single-level hierarchy.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "parent",
+          "type": "annotation",
+          "documentation": "Top-level annotation.\\n"
+        },
+        {
+          "name": "children",
+          "type": "std::unordered_map<std::string, annotation>",
+          "documentation": "Child annotations.\\n"
+        }
+      ]
+    },
+    {
+      "name": "type_template",
+      "documentation": "Defines a template that can be used to instantiate types.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "name",
+          "documentation": "Name of the field to which this definition applies.\\n"
+        },
+        {
+          "name": "value_type",
+          "type": "value_types",
+          "documentation": "Type of the field.\\n"
+        },
+        {
+          "name": "scope",
+          "type": "scope_types",
+          "documentation": "Valid scopes where the type may be present.\\n"
+        },
+        {
+          "name": "archetype_location",
+          "type": "archetype_location",
+          "documentation": "The archetype location for this type.\\n"
+        },
+        {
+          "name": "default_value",
+          "type": "boost::shared_ptr<value>",
+          "documentation": "Default value for the field, if any.\\n"
+        },
+        {
+          "name": "kind",
+          "type": "template_kinds",
+          "documentation": "If the type is a template, defines the kind of template.\\n"
+        }
+      ]
+    },
+    {
+      "name": "archetype_location_repository",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "archetype_locations",
+          "type": "std::list<archetype_location>"
+        },
+        {
+          "name": "facet_names_by_backend_name",
+          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
+        },
+        {
+          "name": "formatter_names_by_backend_name",
+          "type": "std::unordered_map<std::string, std::unordered_set<std::string>>"
+        },
+        {
+          "name": "archetype_locations_by_meta_name",
+          "type": "std::unordered_map<std::string, archetype_locations_group>"
+        },
+        {
+          "name": "archetype_locations_by_family",
+          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
+          "documentation": "All archetype locations for a given family.\\n\\nFamilies are backend specific sets of archetype locations, with associated\\nproperties such as file extensions.\\n"
+        },
+        {
+          "name": "archetypes_by_backend_by_facet",
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>"
+        },
+        {
+          "name": "archetype_locations_by_intra_backend_segment",
+          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
+          "documentation": "All archetype locations for a given intra-backend segment.\\n\\nIntra-backend segments are backend specific sets of archetype locations, with\\nassociated properties.\\n"
+        }
+      ]
+    },
+    {
+      "name": "archetype_location_repository_builder",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "profiling_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "profiler_configuration",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "profile",
+          "type": "profile"
+        },
+        {
+          "name": "annotation",
+          "type": "annotation"
+        },
+        {
+          "name": "merged",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "key_value_pair",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::unordered_map<std::string, std::string>"
+        }
+      ]
+    },
+    {
+      "name": "archetype_locations_group",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "archetype_locations",
+          "type": "std::list<archetype_location>",
+          "documentation": "All archetype locations that belong to this group.\\n"
+        },
+        {
+          "name": "canonical_archetype_locations",
+          "type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\\nform is supported. Otherwise no such mapping will exist.\\n"
+        }
+      ]
+    },
+    {
+      "name": "archetype_location_repository_parts",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "archetype_locations",
+          "type": "std::list<archetype_location>",
+          "documentation": "All archetype locations for the archetypes owned by this transform, \\nlisting all available backends, facets and archetypes.\\n"
+        },
+        {
+          "name": "archetype_locations_by_meta_name",
+          "type": "std::unordered_map<std::string, archetype_locations_group>",
+          "documentation": "Returns the archetype locations for each meta name.\\n"
+        },
+        {
+          "name": "archetype_locations_by_family",
+          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
+          "documentation": "All archetype locations for a given family.\\n\\nFamilies are backend specific sets of archetype locations, with associated\\nproperties such as file extensions.\\n"
+        },
+        {
+          "name": "archetype_locations_by_intra_backend_segment",
+          "type": "std::unordered_map<std::string, std::list<archetype_location>>",
+          "documentation": "All archetype locations for a given intra-backend segment.\\n\\nIntra-backend segments are backend specific sets of archetype locations, with\\nassociated properties.\\n"
+        }
+      ]
+    },
+    {
+      "name": "archetype_location_repository_parts_builder",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "annotation_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

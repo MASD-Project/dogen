@@ -1,46 +1,26 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Welcome to Dogen!\n\nThis is one of the simplest models you can generate, a single class with one\nproperty. You can see the use of comments at the class level and property\nlevel.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "hello_world",
-      "yarn.external_modules": "dogen",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false"
-    }
+  "documentation": "Welcome to Dogen!\\n\\nThis is one of the simplest models you can generate, a single class with one\\nproperty. You can see the use of comments at the class level and property\\nlevel.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "hello_world",
+    "yarn.external_modules": "dogen",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false"
   },
   "elements": [
     {
-      "name": {
-        "simple": "one_property"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Hello World class.\n",
+      "name": "one_property",
+      "documentation": "Hello World class.\\n",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "property"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "This is a sample property.\n"
+          "name": "property",
+          "type": "std::string",
+          "documentation": "This is a sample property.\\n"
         }
       ]
     }
