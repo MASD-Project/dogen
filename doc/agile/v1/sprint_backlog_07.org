@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-04 Mon 22:46]
+#+CAPTION: Clock summary at [2017-12-04 Mon 23:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *46:58* |       |       | 100.0 |
+| *Total time*                                                                | *48:34* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 46:58   |       |       | 100.0 |
-| Active                                                                      |         | 46:58 |       | 100.0 |
+| Stories                                                                     | 48:34   |       |       | 100.0 |
+| Active                                                                      |         | 48:34 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.5 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.4 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.2 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  18.5 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  29.2 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   5.0 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   6.3 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.9 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  28.2 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.8 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   6.1 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.2 |
-| STARTED Implement exomodel in terms of exoelements                          |         |       | 14:27 |  30.8 |
+| STARTED Implement exomodel in terms of exoelements                          |         |       | 16:03 |  33.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -343,9 +343,11 @@ program options:
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** STARTED Implement exomodel in terms of exoelements                :story:
+    CLOCK: [2017-12-04 Mon 22:47]--[2017-12-04 Mon 23:46] =>  0:59
     CLOCK: [2017-12-04 Mon 22:42]--[2017-12-04 Mon 22:46] =>  0:04
     CLOCK: [2017-12-04 Mon 22:35]--[2017-12-04 Mon 22:41] =>  0:06
     CLOCK: [2017-12-04 Mon 20:41]--[2017-12-04 Mon 22:34] =>  1:53
+    CLOCK: [2017-12-03 Sun 08:07]--[2017-12-03 Sun 08:44] =>  0:37
     CLOCK: [2017-12-03 Sun 00:22]--[2017-12-03 Sun 00:45] =>  0:23
     CLOCK: [2017-12-02 Sat 23:49]--[2017-12-03 Sun 00:21] =>  0:32
     CLOCK: [2017-12-02 Sat 23:18]--[2017-12-02 Sat 23:48] =>  0:30
@@ -440,6 +442,9 @@ Tasks:
 - need to add: can_be_primitive_underlier, in_global_module,
   can_be_enumeration_underlier, is_default_enumeration_type,
   is_associative_container
+- JSON needs to explicitly contain fallback stereotype or else tailor
+  roundtrip will fail. We should check that fallback is not default,
+  if so do not bother outputting it.
 
 *** Rename =yarn= to =modeling=                                       :story:
 

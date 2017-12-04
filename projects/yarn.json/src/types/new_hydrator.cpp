@@ -37,6 +37,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.json.new_hydrator"));
 
 const std::string empty;
+const std::string fallback_element_type_key("fallback_element_type");
 const std::string name_key("name");
 const std::string parents_key("parents");
 const std::string documentation_key("documentation");
@@ -140,9 +141,13 @@ read_element(const boost::property_tree::ptree& pt) const {
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));
 
-    yarn::helpers::stereotypes_helper h;
-    using meta_model::static_stereotypes;
-    r.fallback_element_type(h.to_string(static_stereotypes::object));
+    const auto opt(pt.get_optional<std::string>(fallback_element_type_key));
+    if (!opt) {
+        yarn::helpers::stereotypes_helper h;
+        using meta_model::static_stereotypes;
+        r.fallback_element_type(h.to_string(static_stereotypes::object));
+    } else
+        r.fallback_element_type(*opt);
 
     const auto i(pt.find(attributes_key));
     if (i == pt.not_found() || i->second.empty())

@@ -27,13 +27,12 @@
 
 #include <map>
 #include <string>
-#include <ostream>
+#include <iosfwd>
 #include <unordered_map>
-#include <boost/filesystem/path.hpp>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/scribble.hpp"
-#include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/attribute.hpp"
+#include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/meta_model/exoelement.hpp"
+#include "dogen/yarn/types/meta_model/exoattribute.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 
 namespace dogen {
@@ -43,40 +42,17 @@ namespace json {
 class dehydrator final {
 private:
     static std::string tidy_up_string(std::string s);
-    static bool has_elements(const meta_model::exomodel& em);
 
 private:
-    static boost::optional<annotations::scribble_group> scribble_group_for_name(
-        const meta_model::exomodel& em,
-        const meta_model::name& n);
-    static boost::optional<annotations::scribble>
-    scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
-        const meta_model::name& n);
-    static void dehydrate_name(
-        const meta_model::name& n, std::ostream& s);
-    static void dehydrate_names(const std::list<meta_model::name>& names,
-        std::ostream& s);
-    static void dehydrate_annotations(
-        const boost::optional<annotations::scribble>& scribble,
-        std::ostream& s);
-    static void dehydrate_element(
-        const boost::optional<annotations::scribble_group>& sg,
-        const meta_model::element& e, std::ostream& s);
-    static void dehydrate_attributes(
-        const boost::optional<annotations::scribble_group>& sg,
-        const std::list<meta_model::attribute>& attrs, std::ostream& s);
-    static void dehydrate_objects(const bool requires_leading_comma,
-        const meta_model::exomodel& em, std::ostream& s);
-    static void dehydrate_object_templates(const bool requires_leading_comma,
-        const meta_model::exomodel& em, std::ostream& s);
-    static void dehydrate_modules(const bool requires_leading_comma,
-        const meta_model::exomodel& em, std::ostream& s);
-    static void dehydrate_enumerations(const bool requires_leading_comma,
-        const meta_model::exomodel& em, std::ostream& s);
-    static void dehydrate_primitives(const bool requires_leading_comma,
-        const meta_model::exomodel& em, std::ostream& s);
-    static void dehydrate_exceptions(const bool requires_leading_comma,
-        const meta_model::exomodel& em, std::ostream& s);
+    static void insert_documentation(std::ostream& s, const std::string& d);
+    static void insert_tagged_values(std::ostream& s,
+        const std::list<std::pair<std::string, std::string>>& tv);
+    static void insert_stereotypes(std::ostream& s,
+        const std::list<std::string>& st);
+    static void insert_attribute(std::ostream& s,
+        const meta_model::exoattribute& ea);
+    static void insert_element(std::ostream& s,
+        const meta_model::exoelement& ee);
 
 public:
     static std::string dehydrate(const meta_model::exomodel& em);
