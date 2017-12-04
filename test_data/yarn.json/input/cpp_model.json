@@ -1,1464 +1,611 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "cpp_model",
-      "yarn.external_modules": "dogen::test_models",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
-      "quilt.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen"
-    }
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "cpp_model",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
+    "quilt.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen"
   },
   "elements": [
     {
-      "name": {
-        "simple": "a_class"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "builtins",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "colour_type"
-          },
-          "unparsed_type": "colour_types"
+          "name": "bool_property",
+          "type": "bool"
         },
         {
-          "name": {
-            "simple": "book_type"
-          },
-          "unparsed_type": "book_types"
+          "name": "char_property",
+          "type": "char"
         },
         {
-          "name": {
-            "simple": "shape_type"
-          },
-          "unparsed_type": "package_4::shape_types"
+          "name": "uchar_property",
+          "type": "unsigned char"
+        },
+        {
+          "name": "int_property",
+          "type": "int"
+        },
+        {
+          "name": "uint_property",
+          "type": "unsigned int"
+        },
+        {
+          "name": "long_property",
+          "type": "long"
+        },
+        {
+          "name": "ulong_property",
+          "type": "unsigned long"
+        },
+        {
+          "name": "long_long_property",
+          "type": "long long"
+        },
+        {
+          "name": "ulong_long_property",
+          "type": "unsigned long long"
+        },
+        {
+          "name": "short_property",
+          "type": "short"
+        },
+        {
+          "name": "ushort_property",
+          "type": "unsigned short"
+        },
+        {
+          "name": "double_property",
+          "type": "double"
+        },
+        {
+          "name": "float_property",
+          "type": "float"
         }
       ]
     },
     {
-      "name": {
-        "simple": "a_service"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
+      "name": "package_1",
+      "fallback_element_type": "yarn::module"
     },
     {
-      "name": {
-        "simple": "base"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "yarn::visitable"
-      ]
-    },
-    {
-      "name": {
-        "simple": "base_object_template_instance"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class instantiates the BaseObjectTemplate.\n",
-      "stereotypes": [
-        "BaseObjectTemplate"
-      ]
-    },
-    {
-      "name": {
-        "simple": "base_with_object_template"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Base class that instantiates a derived object template.\n",
-      "stereotypes": [
-        "SecondChildObjectTemplate"
-      ]
-    },
-    {
-      "name": {
-        "simple": "builtins"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "package_1::class_1",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "bool_property"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "char_property"
-          },
-          "unparsed_type": "char"
-        },
-        {
-          "name": {
-            "simple": "uchar_property"
-          },
-          "unparsed_type": "unsigned char"
-        },
-        {
-          "name": {
-            "simple": "int_property"
-          },
-          "unparsed_type": "int"
-        },
-        {
-          "name": {
-            "simple": "uint_property"
-          },
-          "unparsed_type": "unsigned int"
-        },
-        {
-          "name": {
-            "simple": "long_property"
-          },
-          "unparsed_type": "long"
-        },
-        {
-          "name": {
-            "simple": "ulong_property"
-          },
-          "unparsed_type": "unsigned long"
-        },
-        {
-          "name": {
-            "simple": "long_long_property"
-          },
-          "unparsed_type": "long long"
-        },
-        {
-          "name": {
-            "simple": "ulong_long_property"
-          },
-          "unparsed_type": "unsigned long long"
-        },
-        {
-          "name": {
-            "simple": "short_property"
-          },
-          "unparsed_type": "short"
-        },
-        {
-          "name": {
-            "simple": "ushort_property"
-          },
-          "unparsed_type": "unsigned short"
-        },
-        {
-          "name": {
-            "simple": "double_property"
-          },
-          "unparsed_type": "double"
-        },
-        {
-          "name": {
-            "simple": "float_property"
-          },
-          "unparsed_type": "float"
+          "name": "prop_0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "child_of_a_child1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
+      "name": "package_1::class_4",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "simple": "third_child_with_members"
+          "name": "prop_0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "child_of_a_child2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
+      "name": "package_1::class_2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "simple": "third_child_with_members"
+          "name": "prop_0",
+          "type": "int"
         }
+      ]
+    },
+    {
+      "name": "package_1::class_5",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_1::class_3",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "class_1",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_2",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_2::class_1",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "class_0",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "one_line",
+      "documentation": "this is the brief comment\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int",
+          "documentation": "another brief comment\\n"
+        },
+        {
+          "name": "prop_1",
+          "type": "int",
+          "documentation": "the brief comment\\n\\na second line\\n"
+        },
+        {
+          "name": "prop_2",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "multi_line",
+      "documentation": "first line\\n\\nsecond line\\nthird line with \\\"quote\\\"\\n",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "package_3",
+      "documentation": "package\\n",
+      "tagged_values": {
+        "yarn.dia.comment": "true"
+      },
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_3::package_1",
+      "documentation": "inner package\\n",
+      "tagged_values": {
+        "yarn.dia.comment": "true"
+      },
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "book_types",
+      "documentation": "this is a brief comment\\n\\nthis is a long comment\\n",
+      "stereotypes": [
+        "yarn::enumeration"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "unsigned int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child_via_settings"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "parent_with_members"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child_with_members"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent_without_members"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "unsigned int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child_without_members"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent_without_members"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_0"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "class_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_a"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_b"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "class_a"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_c"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "class_d"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "consumer"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This type makes use of all primitves in this test model.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop0"
-          },
-          "unparsed_type": "short_primitive"
+          "name": "great",
+          "type": ""
         },
         {
-          "name": {
-            "simple": "prop1"
-          },
-          "unparsed_type": "ushort_primitive"
+          "name": "not_so_great",
+          "type": ""
         },
         {
-          "name": {
-            "simple": "prop2"
-          },
-          "unparsed_type": "long_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop3"
-          },
-          "unparsed_type": "ulong_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop4"
-          },
-          "unparsed_type": "int_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop5"
-          },
-          "unparsed_type": "uint_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop6"
-          },
-          "unparsed_type": "char_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop7"
-          },
-          "unparsed_type": "uchar_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop8"
-          },
-          "unparsed_type": "double_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop9"
-          },
-          "unparsed_type": "float_primitive"
-        },
-        {
-          "name": {
-            "simple": "prop10"
-          },
-          "unparsed_type": "bool_primitive"
+          "name": "bad",
+          "type": ""
         }
       ]
     },
     {
-      "name": {
-        "simple": "descendant1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "base"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "descendant2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "base"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "descendant3"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "descendant1"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "descendant_object_template_instance"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class instantiates the DescendantObjectTemplate obje.\n",
+      "name": "colour_types",
       "stereotypes": [
-        "DescendantObjectTemplate"
-      ]
-    },
-    {
-      "name": {
-        "simple": "fluent"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Tests the fluent scenario across the different types of properties.\n",
-      "stereotypes": [
-        "yarn::fluent"
+        "yarn::enumeration"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "unsigned int"
+          "name": "red",
+          "type": "",
+          "documentation": "this is colour red\\n"
         },
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "std::string"
+          "name": "blue",
+          "type": "",
+          "documentation": "this is blue\\n"
         },
         {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "value"
+          "name": "green",
+          "type": ""
+        },
+        {
+          "name": "gray",
+          "type": "",
+          "documentation": "another comment\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "further_inherited"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Descendant class that instantiates an object template which is a descendant\nof the object template instantiated by the base class.\n",
+      "name": "a_class",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "colour_type",
+          "type": "colour_types"
+        },
+        {
+          "name": "book_type",
+          "type": "book_types"
+        },
+        {
+          "name": "shape_type",
+          "type": "package_4::shape_types"
+        }
+      ]
+    },
+    {
+      "name": "short_enum",
       "stereotypes": [
-        "MultipleParentsObjectTemplate"
+        "yarn::enumeration"
       ],
-      "parents": [
+      "tagged_values": {
+        "yarn.enumeration.underlying_element": "short"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "simple": "base_with_object_template"
+          "name": "an_enumerator",
+          "type": ""
+        },
+        {
+          "name": "another_enumerator",
+          "type": ""
         }
       ]
     },
     {
-      "name": {
-        "simple": "immutable_four"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with non-immutable and immutable pods as properties.\n",
+      "name": "test_all_knobs",
       "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "tagged_values": {
+        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
+        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "an_enumerator",
+          "type": ""
+        },
+        {
+          "name": "another_enumerator",
+          "type": "",
+          "documentation": "A comment.\\n"
+        }
+      ]
+    },
+    {
+      "name": "hex_flags",
+      "documentation": "This is an example of an enumeration using hex flags.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "tagged_values": {
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "none",
+          "type": "",
+          "tagged_values": {
+            "yarn.enumerator.value": "0x00"
+          }
+        },
+        {
+          "name": "top",
+          "type": "",
+          "tagged_values": {
+            "yarn.enumerator.value": "0x01"
+          }
+        },
+        {
+          "name": "bottom",
+          "type": "",
+          "tagged_values": {
+            "yarn.enumerator.value": "0x02"
+          }
+        },
+        {
+          "name": "left",
+          "type": "",
+          "tagged_values": {
+            "yarn.enumerator.value": "0x04"
+          }
+        },
+        {
+          "name": "right",
+          "type": "",
+          "tagged_values": {
+            "yarn.enumerator.value": "0x08"
+          }
+        }
+      ]
+    },
+    {
+      "name": "package_4",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_4::shape_types",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "triangle",
+          "type": ""
+        },
+        {
+          "name": "square",
+          "type": ""
+        },
+        {
+          "name": "rectangle",
+          "type": ""
+        },
+        {
+          "name": "circle",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "my_error",
+      "documentation": "this is an exception\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "package_5",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_5::catastrophic_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "immutable_primitive",
+      "documentation": "Test for a primitive which is also immutable.\\n",
+      "stereotypes": [
+        "yarn::primitive",
         "yarn::immutable"
       ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "short"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "consumer",
+      "documentation": "This type makes use of all primitves in this test model.\\n",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "bool"
+          "name": "prop0",
+          "type": "short_primitive"
         },
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "std::string"
+          "name": "prop1",
+          "type": "ushort_primitive"
         },
         {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "value"
+          "name": "prop2",
+          "type": "long_primitive"
         },
         {
-          "name": {
-            "simple": "prop_3"
-          },
-          "unparsed_type": "immutable_one_builtin"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "immutable_one_builtin"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with a built-in property.\n",
-      "stereotypes": [
-        "yarn::immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "immutable_one_non_builtin"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with one pod property\n",
-      "stereotypes": [
-        "yarn::immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "immutable_two"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "yarn::immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "bool"
+          "name": "prop3",
+          "type": "ulong_primitive"
         },
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "immutable_zero"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with no properties.\n",
-      "stereotypes": [
-        "yarn::immutable"
-      ]
-    },
-    {
-      "name": {
-        "simple": "move_ctor_base"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Base class for scenario that tests code generated move contructors.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "boost::filesystem::path",
-          "documentation": "Force manual move constructor.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "move_ctor_descendant"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
-      "parents": [
-        {
-          "simple": "move_ctor_base"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "boost::filesystem::path",
-          "documentation": "Force manual move constructor.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "move_ctor_empty_descendant"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
-      "parents": [
-        {
-          "simple": "move_ctor_base"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "multi_line"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "first line\n\nsecond line\nthird line with \"quote\"\n"
-    },
-    {
-      "name": {
-        "simple": "multi_object_template_instance"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Type that instantiates more than one object template.\n",
-      "stereotypes": [
-        "FirstChildObjectTemplate",
-        "SecondChildObjectTemplate"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_10"
-          },
-          "unparsed_type": "int",
-          "documentation": "Property of class.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "multiple_parents_object_template_instance"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Instantiates object template MultipleParentsObjectTemplate.\n",
-      "stereotypes": [
-        "MultipleParentsObjectTemplate"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_10"
-          },
-          "unparsed_type": "int",
-          "documentation": "Property of the class itself.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "non_final_leaf"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.is_final": "false"
-      },
-      "parents": [
-        {
-          "simple": "descendant1"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "non_final_orphan"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.is_final": "false"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "one_line"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "this is the brief comment\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int",
-          "documentation": "another brief comment\n"
+          "name": "prop4",
+          "type": "int_primitive"
         },
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int",
-          "documentation": "the brief comment\n\na second line\n"
+          "name": "prop5",
+          "type": "uint_primitive"
         },
         {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "consume_object_template",
-        "internal_modules": "package_10"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "ObjectTemplateInAPackage"
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_1",
-        "internal_modules": "package_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_2",
-        "internal_modules": "package_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_3",
-        "internal_modules": "package_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_4",
-        "internal_modules": "package_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_5",
-        "internal_modules": "package_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_1",
-        "internal_modules": "package_2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "class_2",
-        "internal_modules": "package_2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "class_1"
+          "name": "prop6",
+          "type": "char_primitive"
         },
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "cpp_model::class_1"
+          "name": "prop7",
+          "type": "uchar_primitive"
+        },
+        {
+          "name": "prop8",
+          "type": "double_primitive"
+        },
+        {
+          "name": "prop9",
+          "type": "float_primitive"
+        },
+        {
+          "name": "prop10",
+          "type": "bool_primitive"
         }
       ]
     },
     {
-      "name": {
-        "simple": "child",
-        "internal_modules": "package_6"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent",
-          "internal_modules": "package_6"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child_via_settings",
-        "internal_modules": "package_6"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "package_6::parent"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "parent",
-        "internal_modules": "package_6"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "unsigned int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "parent",
-        "internal_modules": "package_7"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child",
-        "internal_modules": "package_8"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent",
-          "internal_modules": "package_7"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child_via_settings",
-        "internal_modules": "package_8"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "package_7::parent"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child",
-        "internal_modules": "package_9"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent_outside"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "child_via_settings",
-        "internal_modules": "package_9"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.parent": "parent_outside"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "parent_outside"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "parent_with_members"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "parent_without_members"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "second_child_without_members"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent_with_members"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "second_descendant_object_template_instance"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Second descendant instance\n",
+      "name": "short_primitive",
+      "documentation": "Test a primitive with an underlying short.\\n",
       "stereotypes": [
-        "SecondChildObjectTemplate"
+        "yarn::primitive"
       ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_10"
-          },
-          "unparsed_type": "int",
-          "documentation": "Property of the class itself.\n"
-        }
-      ]
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "short"
+      },
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "service"
+      "name": "long_primitive",
+      "documentation": "Test a primitive with an underlying long.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "long"
       },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "int_primitive",
+      "documentation": "Test a primitive with an underlying int.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "int"
       },
-      "documentation": "Type is a service.\n",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "char_primitive",
+      "documentation": "Test a primitive with an underlying char.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "char"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "uchar_primitive",
+      "documentation": "Test a primitive with an underlying unsigned char.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "unsigned char"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "ulong_primitive",
+      "documentation": "Test a primitive with an underlying unsigned long.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "unsigned long"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "uint_primitive",
+      "documentation": "Test a primitive with an underlying unsigned int.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "unsigned int"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "ushort_primitive",
+      "documentation": "Test a primitive with an underlying unsgined short.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "unsigned short"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "double_primitive",
+      "documentation": "Test a primitive with an underlying double.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "double"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "float_primitive",
+      "documentation": "Test a primitive with an underlying float.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "float"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "bool_primitive",
+      "documentation": "Test a primitive with an underlying bool.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "bool"
+      },
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "service",
+      "documentation": "Type is a service.\\n",
       "stereotypes": [
         "handcrafted"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
+          "name": "prop_0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "service_interface"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "handcrafted"
-      ]
-    },
-    {
-      "name": {
-        "simple": "simple_object_template_instance"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class instantiates the simple object template.\n",
-      "stereotypes": [
-        "SimpleObjectTemplate"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_10"
-          },
-          "unparsed_type": "int",
-          "documentation": "Property that belongs to class.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "some_type"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Type is non-generatable.\n",
+      "name": "some_type",
+      "documentation": "Type is non-generatable.\\n",
       "stereotypes": [
         "handcrafted"
       ],
-      "annotation": {
+      "tagged_values": {
         "quilt.cpp.hash.enabled": "true",
         "quilt.cpp.hash.overwrite": "false",
         "quilt.cpp.io.enabled": "true",
@@ -1472,812 +619,680 @@
         "quilt.cpp.types.forward_declarations.overwrite": "true",
         "quilt.cpp.serialization.forward_declarations.overwrite": "true"
       },
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
+          "name": "prop_0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "third_child_with_members"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "parent_with_members"
-        }
+      "name": "fluent",
+      "documentation": "Tests the fluent scenario across the different types of properties.\\n",
+      "stereotypes": [
+        "yarn::fluent"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "unsigned int"
+          "name": "prop_0",
+          "type": "unsigned int"
+        },
+        {
+          "name": "prop_1",
+          "type": "std::string"
+        },
+        {
+          "name": "prop_2",
+          "type": "value"
         }
       ]
     },
     {
-      "name": {
-        "simple": "value"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Type is a value.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "BaseObjectTemplate2"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Base object template.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "std::string",
-          "documentation": "Ensure we're testing header files inclusion.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "BaseObjectTemplate"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This is the base object template.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int",
-          "documentation": "Property in the base object template.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "DescendantObjectTemplate"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This object template inherits from BaseObjectTemplate.\n",
-      "parents": [
-        {
-          "simple": "BaseObjectTemplate"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "FirstChildObjectTemplate"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "BaseObjectTemplate2"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int",
-          "documentation": "A property\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "MultipleParentsObjectTemplate"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Multiple parents object template\n",
-      "parents": [
-        {
-          "simple": "FirstChildObjectTemplate"
-        },
-        {
-          "simple": "SecondChildObjectTemplate"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_3"
-          },
-          "unparsed_type": "int",
-          "documentation": "Multiple parents property.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "SecondChildObjectTemplate"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Second descendant\n",
-      "parents": [
-        {
-          "simple": "BaseObjectTemplate2"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "int",
-          "documentation": "Second descendant property\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "SimpleObjectTemplate"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This is an example of an object template.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int",
-          "documentation": "This is a sample property in an object template.\n"
-        },
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "value",
-          "documentation": "Prove that includes of types get picked up.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ObjectTemplateInAPackage",
-        "internal_modules": "package_10"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "package_0"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_10"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_1"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_2"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_3"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "package\n",
-      "annotation": {
-        "yarn.dia.comment": "true"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_1",
-        "internal_modules": "package_3"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "inner package\n",
-      "annotation": {
-        "yarn.dia.comment": "true"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_4"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_5"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_6"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_7"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_8"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_9"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "book_types"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "this is a brief comment\n\nthis is a long comment\n",
-      "enumerators": [
-        {
-          "name": {
-            "simple": "great"
-          }
-        },
-        {
-          "name": {
-            "simple": "not_so_great"
-          }
-        },
-        {
-          "name": {
-            "simple": "bad"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "colour_types"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "red"
-          },
-          "documentation": "this is colour red\n"
-        },
-        {
-          "name": {
-            "simple": "blue"
-          },
-          "documentation": "this is blue\n"
-        },
-        {
-          "name": {
-            "simple": "green"
-          }
-        },
-        {
-          "name": {
-            "simple": "gray"
-          },
-          "documentation": "another comment\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "hex_flags"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This is an example of an enumeration using hex flags.\n",
-      "annotation": {
-        "yarn.enumeration.add_invalid_enumerator": "false"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "none"
-          },
-          "annotation": {
-            "yarn.enumerator.value": "0x00"
-          }
-        },
-        {
-          "name": {
-            "simple": "top"
-          },
-          "annotation": {
-            "yarn.enumerator.value": "0x01"
-          }
-        },
-        {
-          "name": {
-            "simple": "bottom"
-          },
-          "annotation": {
-            "yarn.enumerator.value": "0x02"
-          }
-        },
-        {
-          "name": {
-            "simple": "left"
-          },
-          "annotation": {
-            "yarn.enumerator.value": "0x04"
-          }
-        },
-        {
-          "name": {
-            "simple": "right"
-          },
-          "annotation": {
-            "yarn.enumerator.value": "0x08"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "shape_types",
-        "internal_modules": "package_4"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "triangle"
-          }
-        },
-        {
-          "name": {
-            "simple": "square"
-          }
-        },
-        {
-          "name": {
-            "simple": "rectangle"
-          }
-        },
-        {
-          "name": {
-            "simple": "circle"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "short_enum"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.enumeration.underlying_element": "short"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "an_enumerator"
-          }
-        },
-        {
-          "name": {
-            "simple": "another_enumerator"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "test_all_knobs"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
-        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
-        "yarn.enumeration.add_invalid_enumerator": "false"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "an_enumerator"
-          }
-        },
-        {
-          "name": {
-            "simple": "another_enumerator"
-          },
-          "documentation": "A comment.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "bool_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying bool.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "bool"
-      }
-    },
-    {
-      "name": {
-        "simple": "char_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying char.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "char"
-      }
-    },
-    {
-      "name": {
-        "simple": "double_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying double.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "double"
-      }
-    },
-    {
-      "name": {
-        "simple": "float_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying float.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "float"
-      }
-    },
-    {
-      "name": {
-        "simple": "immutable_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test for a primitive which is also immutable.\n",
+      "name": "immutable_zero",
+      "documentation": "Immutable class with no properties.\\n",
       "stereotypes": [
         "yarn::immutable"
       ],
-      "annotation": {
-        "yarn.primitive.underlying_element": "short"
-      }
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "int_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying int.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "int"
-      }
+      "name": "immutable_two",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "bool"
+        },
+        {
+          "name": "prop_1",
+          "type": "std::string"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "long_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying long.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "long"
-      }
+      "name": "immutable_one_builtin",
+      "documentation": "Immutable class with a built-in property.\\n",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "bool"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "short_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying short.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "short"
-      }
+      "name": "immutable_one_non_builtin",
+      "documentation": "Immutable class with one pod property\\n",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "std::string"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "uchar_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying unsigned char.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "unsigned char"
-      }
+      "name": "immutable_four",
+      "documentation": "Immutable class with non-immutable and immutable pods as properties.\\n",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "bool"
+        },
+        {
+          "name": "prop_1",
+          "type": "std::string"
+        },
+        {
+          "name": "prop_2",
+          "type": "value"
+        },
+        {
+          "name": "prop_3",
+          "type": "immutable_one_builtin"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "uint_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying unsigned int.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "unsigned int"
-      }
+      "name": "SimpleObjectTemplate",
+      "documentation": "This is an example of an object template.\\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int",
+          "documentation": "This is a sample property in an object template.\\n"
+        },
+        {
+          "name": "prop_1",
+          "type": "value",
+          "documentation": "Prove that includes of types get picked up.\\n"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "ulong_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying unsigned long.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "unsigned long"
-      }
+      "name": "simple_object_template_instance",
+      "documentation": "This class instantiates the simple object template.\\n",
+      "stereotypes": [
+        "SimpleObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_10",
+          "type": "int",
+          "documentation": "Property that belongs to class.\\n"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "ushort_primitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying unsgined short.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "unsigned short"
-      }
+      "name": "BaseObjectTemplate",
+      "documentation": "This is the base object template.\\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int",
+          "documentation": "Property in the base object template.\\n"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "my_error"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "this is an exception\n"
+      "name": "DescendantObjectTemplate",
+      "documentation": "This object template inherits from BaseObjectTemplate.\\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "catastrophic_error",
-        "internal_modules": "package_5"
+      "name": "base_object_template_instance",
+      "documentation": "This class instantiates the BaseObjectTemplate.\\n",
+      "stereotypes": [
+        "BaseObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "descendant_object_template_instance",
+      "documentation": "This class instantiates the DescendantObjectTemplate obje.\\n",
+      "stereotypes": [
+        "DescendantObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "BaseObjectTemplate2",
+      "documentation": "Base object template.\\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "std::string",
+          "documentation": "Ensure we're testing header files inclusion.\\n"
+        }
+      ]
+    },
+    {
+      "name": "FirstChildObjectTemplate",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int",
+          "documentation": "A property\\n"
+        }
+      ]
+    },
+    {
+      "name": "SecondChildObjectTemplate",
+      "documentation": "Second descendant\\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_2",
+          "type": "int",
+          "documentation": "Second descendant property\\n"
+        }
+      ]
+    },
+    {
+      "name": "MultipleParentsObjectTemplate",
+      "documentation": "Multiple parents object template\\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_3",
+          "type": "int",
+          "documentation": "Multiple parents property.\\n"
+        }
+      ]
+    },
+    {
+      "name": "second_descendant_object_template_instance",
+      "documentation": "Second descendant instance\\n",
+      "stereotypes": [
+        "SecondChildObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_10",
+          "type": "int",
+          "documentation": "Property of the class itself.\\n"
+        }
+      ]
+    },
+    {
+      "name": "multiple_parents_object_template_instance",
+      "documentation": "Instantiates object template MultipleParentsObjectTemplate.\\n",
+      "stereotypes": [
+        "MultipleParentsObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_10",
+          "type": "int",
+          "documentation": "Property of the class itself.\\n"
+        }
+      ]
+    },
+    {
+      "name": "multi_object_template_instance",
+      "documentation": "Type that instantiates more than one object template.\\n",
+      "stereotypes": [
+        "FirstChildObjectTemplate",
+        "SecondChildObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_10",
+          "type": "int",
+          "documentation": "Property of class.\\n"
+        }
+      ]
+    },
+    {
+      "name": "base_with_object_template",
+      "documentation": "Base class that instantiates a derived object template.\\n",
+      "stereotypes": [
+        "SecondChildObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "further_inherited",
+      "documentation": "Descendant class that instantiates an object template which is a descendant\\nof the object template instantiated by the base class.\\n",
+      "stereotypes": [
+        "MultipleParentsObjectTemplate"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "value",
+      "documentation": "Type is a value.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "class_a",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "class_b",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "class_a"
+        }
+      ]
+    },
+    {
+      "name": "class_c",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "class_d",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "parent_without_members",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "child_without_members",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "parent_with_members",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "second_child_without_members",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "third_child_with_members",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "child_of_a_child1",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "child_of_a_child2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_2",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "child_with_members",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "service_interface",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "a_service",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "base",
+      "stereotypes": [
+        "yarn::visitable"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "descendant2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "descendant1",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "descendant3",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "move_ctor_base",
+      "documentation": "Base class for scenario that tests code generated move contructors.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "boost::filesystem::path",
+          "documentation": "Force manual move constructor.\\n"
+        }
+      ]
+    },
+    {
+      "name": "move_ctor_descendant",
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "boost::filesystem::path",
+          "documentation": "Force manual move constructor.\\n"
+        }
+      ]
+    },
+    {
+      "name": "move_ctor_empty_descendant",
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\\n",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "child_via_settings",
+      "tagged_values": {
+        "yarn.generalization.parent": "parent_with_members"
       },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "non_final_leaf",
+      "tagged_values": {
+        "yarn.generalization.is_final": "false"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "non_final_orphan",
+      "tagged_values": {
+        "yarn.generalization.is_final": "false"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_6",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_6::parent",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "package_6::child",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_6::child_via_settings",
+      "tagged_values": {
+        "yarn.generalization.parent": "package_6::parent"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_8",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_7",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_7::parent",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_8::child",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_8::child_via_settings",
+      "tagged_values": {
+        "yarn.generalization.parent": "package_7::parent"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_9",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_9::child_via_settings",
+      "tagged_values": {
+        "yarn.generalization.parent": "parent_outside"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "parent_outside",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_9::child",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_0",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_2::class_2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "class_1"
+        },
+        {
+          "name": "prop_1",
+          "type": "cpp_model::class_1"
+        }
+      ]
+    },
+    {
+      "name": "package_10",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_10::ObjectTemplateInAPackage",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "package_10::consume_object_template",
+      "stereotypes": [
+        "ObjectTemplateInAPackage"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

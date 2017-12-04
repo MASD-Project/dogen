@@ -1,174 +1,95 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "documentation": "Tests support for C++ 98.\n",
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "cpp_98",
-      "yarn.external_modules": "dogen::test_models",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "quilt.cpp.standard": "c++-98",
-      "quilt.cpp.hash.enabled": "false"
-    }
+  "documentation": "Tests support for C++ 98.\\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "cpp_98",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "quilt.cpp.standard": "c++-98",
+    "quilt.cpp.hash.enabled": "false"
   },
   "elements": [
     {
-      "name": {
-        "simple": "child"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
+      "name": "package1",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package1::first_class",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "simple": "parent"
+          "name": "public_attribute",
+          "type": "int"
+        },
+        {
+          "name": "private_attribute",
+          "type": "int"
         }
+      ]
+    },
+    {
+      "name": "parent",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "child",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "no_default_ctor",
+      "documentation": "This class does not require a default constructor due to using simple types.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prop_0",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "no_properties",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "an_enumeration",
+      "stereotypes": [
+        "yarn::enumeration"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "no_default_ctor"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class does not require a default constructor due to using simple types.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "no_properties"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "first_class",
-        "internal_modules": "package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "public_attribute"
-          },
-          "unparsed_type": "int"
+          "name": "first",
+          "type": ""
         },
         {
-          "name": {
-            "simple": "private_attribute"
-          },
-          "unparsed_type": "int"
+          "name": "second",
+          "type": ""
         }
       ]
     },
     {
-      "name": {
-        "simple": "parent"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "package1"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "an_enumeration"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "first"
-          }
-        },
-        {
-          "name": {
-            "simple": "second"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "an_exception"
-      },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "an_exception",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
     }
   ]
 }

@@ -1,63 +1,33 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "split_project",
-      "yarn.external_modules": "dogen::test_models",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false"
-    }
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "split_project",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false"
   },
   "elements": [
     {
-      "name": {
-        "simple": "first_class",
-        "internal_modules": "package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "public_attribute"
-          },
-          "unparsed_type": "int"
-        },
-        {
-          "name": {
-            "simple": "private_attribute"
-          },
-          "unparsed_type": "int"
-        }
-      ]
+      "name": "package1",
+      "fallback_element_type": "yarn::module"
     },
     {
-      "name": {
-        "simple": "package1"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "package1::first_class",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "public_attribute",
+          "type": "int"
+        },
+        {
+          "name": "private_attribute",
+          "type": "int"
+        }
+      ]
     }
   ]
 }

@@ -1,89 +1,44 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "two_layers_with_objects",
-      "yarn.external_modules": "dogen::test_models",
-      "yarn.input_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false",
-      "annotations.profile": "dogen"
-    }
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "two_layers_with_objects",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen"
   },
   "elements": [
     {
-      "name": {
-        "simple": "class_2",
-        "internal_modules": "Package_2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "package_1",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package_1::class_1",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
+          "name": "prop_0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "class_1",
-        "internal_modules": "package_1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "Package_2",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "Package_2::class_2",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "int"
+          "name": "prop_0",
+          "type": "int"
         }
       ]
-    },
-    {
-      "name": {
-        "simple": "Package_2"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "package_1"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
     }
   ]
 }

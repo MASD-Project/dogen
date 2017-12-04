@@ -1,133 +1,78 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "lam_model",
-      "yarn.external_modules": "dogen::test_models",
-      "yarn.input_language": "language_agnostic",
-      "yarn.output_language": "csharp",
-      "yarn.output_language": "cpp",
-      "quilt.cpp.enabled": "true",
-      "quilt.cpp.msbuild.enabled": "false",
-      "quilt.cpp.visual_studio.project.enabled": "false",
-      "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "true",
-      "annotations.profile": "dogen"
-    }
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "lam_model",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.input_language": "language_agnostic",
+    "yarn.output_language": "csharp",
+    "yarn.output_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "true",
+    "annotations.profile": "dogen"
   },
   "elements": [
     {
-      "name": {
-        "simple": "builtins"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "package1",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "package1::class_in_package",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "lam::character"
-        },
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "lam::byte"
-        },
-        {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "lam::integer8"
-        },
-        {
-          "name": {
-            "simple": "prop_3"
-          },
-          "unparsed_type": "lam::integer16"
-        },
-        {
-          "name": {
-            "simple": "prop_4"
-          },
-          "unparsed_type": "lam::integer32"
-        },
-        {
-          "name": {
-            "simple": "prop_5"
-          },
-          "unparsed_type": "lam::integer64"
-        },
-        {
-          "name": {
-            "simple": "prop_6"
-          },
-          "unparsed_type": "lam::integer"
-        },
-        {
-          "name": {
-            "simple": "prop_7"
-          },
-          "unparsed_type": "lam::single_floating"
-        },
-        {
-          "name": {
-            "simple": "prop_8"
-          },
-          "unparsed_type": "lam::double_floating"
-        },
-        {
-          "name": {
-            "simple": "prop_9"
-          },
-          "unparsed_type": "lam::boolean"
+          "name": "prop_0",
+          "type": "lam::integer"
         }
       ]
     },
     {
-      "name": {
-        "simple": "class_in_package",
-        "internal_modules": "package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "builtins",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "lam::integer"
+          "name": "prop_0",
+          "type": "lam::character"
+        },
+        {
+          "name": "prop_1",
+          "type": "lam::byte"
+        },
+        {
+          "name": "prop_2",
+          "type": "lam::integer8"
+        },
+        {
+          "name": "prop_3",
+          "type": "lam::integer16"
+        },
+        {
+          "name": "prop_4",
+          "type": "lam::integer32"
+        },
+        {
+          "name": "prop_5",
+          "type": "lam::integer64"
+        },
+        {
+          "name": "prop_6",
+          "type": "lam::integer"
+        },
+        {
+          "name": "prop_7",
+          "type": "lam::single_floating"
+        },
+        {
+          "name": "prop_8",
+          "type": "lam::double_floating"
+        },
+        {
+          "name": "prop_9",
+          "type": "lam::boolean"
         }
       ]
-    },
-    {
-      "name": {
-        "simple": "package1"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
     }
   ]
 }

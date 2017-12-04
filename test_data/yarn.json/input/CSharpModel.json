@@ -1,1451 +1,849 @@
 {
-  "root_module": {
-    "name": {
-      "simple": ""
-    },
-    "meta_name": {
-      "simple": "module",
-      "external_modules": "dogen",
-      "model_modules": "yarn",
-      "internal_modules": "meta_model"
-    },
-    "annotation": {
-      "yarn.dia.comment": "true",
-      "yarn.model_modules": "CSharpModel",
-      "yarn.external_modules": "Dogen.TestModels",
-      "yarn.input_language": "csharp",
-      "quilt.csharp.enabled": "true",
-      "quilt.cpp.enabled": "false",
-      "quilt.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",
-      "quilt.csharp.visual_studio.project_solution_guid": "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
-      "annotations.profile": "dogen"
-    }
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "CSharpModel",
+    "yarn.external_modules": "Dogen.TestModels",
+    "yarn.input_language": "csharp",
+    "quilt.csharp.enabled": "true",
+    "quilt.cpp.enabled": "false",
+    "quilt.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",
+    "quilt.csharp.visual_studio.project_solution_guid": "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
+    "annotations.profile": "dogen"
   },
   "elements": [
     {
-      "name": {
-        "simple": "AllObjectCollections"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "PrimitiveBuiltins",
+      "documentation": "This is a class made up of just built-in types.\\n\\nThis is a remark.\\n",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "System.Collections.ArrayList"
+          "name": "ByteProperty",
+          "type": "byte",
+          "documentation": "A comment at property level.\\n"
         },
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "System.Collections.IEnumerable"
+          "name": "ShortByteProperty",
+          "type": "sbyte",
+          "documentation": "A comment at property level.\\n\\nThis is a remark.\\n"
         },
         {
-          "name": {
-            "simple": "Prop2"
-          },
-          "unparsed_type": "System.Collections.ICollection"
+          "name": "IntProperty",
+          "type": "int"
         },
         {
-          "name": {
-            "simple": "Prop3"
-          },
-          "unparsed_type": "System.Collections.IList"
+          "name": "UIntProperty",
+          "type": "uint"
         },
         {
-          "name": {
-            "simple": "Prop4"
-          },
-          "unparsed_type": "System.Collections.Hashtable"
+          "name": "ShortProperty",
+          "type": "short"
         },
         {
-          "name": {
-            "simple": "Prop5"
-          },
-          "unparsed_type": "System.Collections.IDictionary"
+          "name": "UShortProperty",
+          "type": "ushort"
         },
         {
-          "name": {
-            "simple": "Prop6"
-          },
-          "unparsed_type": "System.Collections.Specialized.HybridDictionary"
+          "name": "LongProperty",
+          "type": "long"
         },
         {
-          "name": {
-            "simple": "Prop7"
-          },
-          "unparsed_type": "System.Collections.Specialized.NameValueCollection"
+          "name": "ULongProperty",
+          "type": "ulong"
         },
         {
-          "name": {
-            "simple": "Prop8"
-          },
-          "unparsed_type": "System.Collections.BitArray"
+          "name": "FloatPropertyOne",
+          "type": "float"
         },
         {
-          "name": {
-            "simple": "Prop9"
-          },
-          "unparsed_type": "System.Collections.Queue"
+          "name": "FloatPropertyTwo",
+          "type": "float",
+          "documentation": "Second float to ensure helpers are generated correctly.\\n"
         },
         {
-          "name": {
-            "simple": "Prop10"
-          },
-          "unparsed_type": "System.Collections.Stack"
+          "name": "DoublePropertyOne",
+          "type": "double"
         },
         {
-          "name": {
-            "simple": "Prop11"
-          },
-          "unparsed_type": "System.Collections.SortedList"
+          "name": "DoublePropertyTwo",
+          "type": "double",
+          "documentation": "Second double to ensure helpers are generated correctly.\\n"
+        },
+        {
+          "name": "CharProperty",
+          "type": "char"
+        },
+        {
+          "name": "BoolProperty",
+          "type": "bool"
+        },
+        {
+          "name": "DecimalProperty",
+          "type": "decimal"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Association"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "NoProperties",
+      "documentation": "This class tests the use case of no properties\\n",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "OneProperty",
+      "documentation": "This class tests the use case of one property.\\n",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int",
-          "documentation": "Simple builtin association.\n"
-        },
-        {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "NoProperties",
-          "documentation": "Association with a class that has no properties.\n"
-        },
-        {
-          "name": {
-            "simple": "Prop2"
-          },
-          "unparsed_type": "ColourTypes"
+          "name": "Property",
+          "type": "int",
+          "documentation": "Just the one property.\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Base"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "name": "ComplexBuiltins",
+      "documentation": "This is a class made up of just complex builtin types.\\n\\nThis is a remark.\\n",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "ObjectProperty",
+          "type": "object"
+        },
+        {
+          "name": "StringProperty",
+          "type": "string"
+        }
+      ]
     },
     {
-      "name": {
-        "simple": "ChildOfAChild1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "ThirdChildWithMembers"
-        }
+      "name": "BookTypes",
+      "documentation": "this is a brief comment\\n\\nthis is a long comment\\n",
+      "stereotypes": [
+        "yarn::enumeration"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop2"
-          },
-          "unparsed_type": "int"
+          "name": "Great",
+          "type": ""
+        },
+        {
+          "name": "NotSoGreat",
+          "type": ""
+        },
+        {
+          "name": "Bad",
+          "type": ""
         }
       ]
     },
     {
-      "name": {
-        "simple": "ChildOfAChild2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "ThirdChildWithMembers"
-        }
+      "name": "ColourTypes",
+      "stereotypes": [
+        "yarn::enumeration"
       ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop2"
-          },
-          "unparsed_type": "int"
+          "name": "Red",
+          "type": "",
+          "documentation": "this is colour red\\n"
+        },
+        {
+          "name": "Blue",
+          "type": "",
+          "documentation": "this is blue\\n"
+        },
+        {
+          "name": "Green",
+          "type": ""
+        },
+        {
+          "name": "Gray",
+          "type": "",
+          "documentation": "another comment\\n"
         }
       ]
     },
     {
-      "name": {
-        "simple": "ChildViaSettings"
+      "name": "Package1",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "Package1::Class1",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Package1::Class2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Package1::Class3",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Package1::Class4",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Package1::Class5",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Package1::ShapeTypes",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Triangle",
+          "type": "",
+          "documentation": "some comment\\n"
+        },
+        {
+          "name": "Square",
+          "type": "",
+          "documentation": "other comment\\n"
+        },
+        {
+          "name": "Rectangle",
+          "type": ""
+        },
+        {
+          "name": "Cube",
+          "type": "",
+          "documentation": "some comment\\n"
+        }
+      ]
+    },
+    {
+      "name": "MyException",
+      "documentation": "this is an exception\\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "Package1::CatastrophicException",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "Association",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int",
+          "documentation": "Simple builtin association.\\n"
+        },
+        {
+          "name": "Prop1",
+          "type": "NoProperties",
+          "documentation": "Association with a class that has no properties.\\n"
+        },
+        {
+          "name": "Prop2",
+          "type": "ColourTypes"
+        }
+      ]
+    },
+    {
+      "name": "Package1::AssociationInPackage",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "PrimitiveBuiltins"
+        },
+        {
+          "name": "Prop1",
+          "type": "ComplexBuiltins"
+        },
+        {
+          "name": "Prop2",
+          "type": "Package1.Class1"
+        }
+      ]
+    },
+    {
+      "name": "Base",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "Descendant2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Descendant1",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "Descendant3",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "NonSealedLeaf",
+      "tagged_values": {
+        "yarn.generalization.is_final": "false"
       },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "NonFinalOrphan",
+      "tagged_values": {
+        "yarn.generalization.is_final": "false"
       },
-      "annotation": {
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "ParentWithMembers",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "SecondChildWithoutMembers",
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "ThirdChildWithMembers",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "ChildOfAChild1",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop2",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "ChildOfAChild2",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop2",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "ChildViaSettings",
+      "tagged_values": {
         "yarn.generalization.parent": "ParentWithMembers"
       },
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
+          "name": "Prop1",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "ComplexBuiltins"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This is a class made up of just complex builtin types.\n\nThis is a remark.\n",
+      "name": "Package2",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "Package2::Parent",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "ObjectProperty"
-          },
-          "unparsed_type": "object"
-        },
-        {
-          "name": {
-            "simple": "StringProperty"
-          },
-          "unparsed_type": "string"
+          "name": "Prop0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Descendant1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "Base"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Descendant2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "Base"
-        }
-      ],
+      "name": "Package2::Child",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
+          "name": "Prop1",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Descendant3"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "Descendant1"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ImmutableFour"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with non-immutable and immutable elements as properties.\n",
-      "stereotypes": [
-        "yarn::immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "string"
-        },
-        {
-          "name": {
-            "simple": "Prop2"
-          },
-          "unparsed_type": "ComplexBuiltins"
-        },
-        {
-          "name": {
-            "simple": "Prop3"
-          },
-          "unparsed_type": "ImmutableOnePrimitive"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ImmutableOnePrimitive"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with a builtin property.\n",
-      "stereotypes": [
-        "yarn::immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "bool"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ImmutableTwo"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "stereotypes": [
-        "yarn::immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ImmutableZero"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Immutable class with no properties.\n",
-      "stereotypes": [
-        "yarn::immutable"
-      ]
-    },
-    {
-      "name": {
-        "simple": "NoProperties"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class tests the use case of no properties\n"
-    },
-    {
-      "name": {
-        "simple": "NonFinalOrphan"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.is_final": "false"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "NonSealedLeaf"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.generalization.is_final": "false"
-      },
-      "parents": [
-        {
-          "simple": "Descendant1"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "OneProperty"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class tests the use case of one property.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "Property"
-          },
-          "unparsed_type": "int",
-          "documentation": "Just the one property.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "AssociationInPackage",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "PrimitiveBuiltins"
-        },
-        {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "ComplexBuiltins"
-        },
-        {
-          "name": {
-            "simple": "Prop2"
-          },
-          "unparsed_type": "Package1.Class1"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Class1",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Class2",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Class3",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Class4",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Class5",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "Child",
-        "internal_modules": "Package2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "Parent",
-          "internal_modules": "Package2"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ChildViaSettings",
-        "internal_modules": "Package2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "Package2::ChildViaSettings",
+      "tagged_values": {
         "yarn.generalization.parent": "Package2.Parent"
       },
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
+          "name": "Prop1",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Parent",
-        "internal_modules": "Package2"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "Package3",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "Package3::Parent",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
+          "name": "Prop0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Parent",
-        "internal_modules": "Package3"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
+      "name": "Package4",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "Package4::Child",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
+          "name": "Prop1",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Child",
-        "internal_modules": "Package4"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "Parent",
-          "internal_modules": "Package3"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ChildViaSettings",
-        "internal_modules": "Package4"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "Package4::ChildViaSettings",
+      "tagged_values": {
         "yarn.generalization.parent": "Package3.Parent"
       },
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
+          "name": "Prop1",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Child",
-        "internal_modules": "Package5"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "ParentOutside"
-        }
-      ],
+      "name": "ParentOutside",
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
+          "name": "Prop0",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "ChildViaSettings",
-        "internal_modules": "Package5"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
+      "name": "Package5",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "Package5::Child",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop1",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "Package5::ChildViaSettings",
+      "tagged_values": {
         "yarn.generalization.parent": "ParentOutside"
       },
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
+          "name": "Prop1",
+          "type": "int"
         }
       ]
     },
     {
-      "name": {
-        "simple": "ParentOutside"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ParentWithMembers"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "attributes": [
-        {
-          "name": {
-            "simple": "Prop0"
-          },
-          "unparsed_type": "int"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "PrimitiveBuiltins"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This is a class made up of just built-in types.\n\nThis is a remark.\n",
-      "attributes": [
-        {
-          "name": {
-            "simple": "ByteProperty"
-          },
-          "unparsed_type": "byte",
-          "documentation": "A comment at property level.\n"
-        },
-        {
-          "name": {
-            "simple": "ShortByteProperty"
-          },
-          "unparsed_type": "sbyte",
-          "documentation": "A comment at property level.\n\nThis is a remark.\n"
-        },
-        {
-          "name": {
-            "simple": "IntProperty"
-          },
-          "unparsed_type": "int"
-        },
-        {
-          "name": {
-            "simple": "UIntProperty"
-          },
-          "unparsed_type": "uint"
-        },
-        {
-          "name": {
-            "simple": "ShortProperty"
-          },
-          "unparsed_type": "short"
-        },
-        {
-          "name": {
-            "simple": "UShortProperty"
-          },
-          "unparsed_type": "ushort"
-        },
-        {
-          "name": {
-            "simple": "LongProperty"
-          },
-          "unparsed_type": "long"
-        },
-        {
-          "name": {
-            "simple": "ULongProperty"
-          },
-          "unparsed_type": "ulong"
-        },
-        {
-          "name": {
-            "simple": "FloatPropertyOne"
-          },
-          "unparsed_type": "float"
-        },
-        {
-          "name": {
-            "simple": "FloatPropertyTwo"
-          },
-          "unparsed_type": "float",
-          "documentation": "Second float to ensure helpers are generated correctly.\n"
-        },
-        {
-          "name": {
-            "simple": "DoublePropertyOne"
-          },
-          "unparsed_type": "double"
-        },
-        {
-          "name": {
-            "simple": "DoublePropertyTwo"
-          },
-          "unparsed_type": "double",
-          "documentation": "Second double to ensure helpers are generated correctly.\n"
-        },
-        {
-          "name": {
-            "simple": "CharProperty"
-          },
-          "unparsed_type": "char"
-        },
-        {
-          "name": {
-            "simple": "BoolProperty"
-          },
-          "unparsed_type": "bool"
-        },
-        {
-          "name": {
-            "simple": "DecimalProperty"
-          },
-          "unparsed_type": "decimal"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "SecondChildWithoutMembers"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "ParentWithMembers"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ThirdChildWithMembers"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "parents": [
-        {
-          "simple": "ParentWithMembers"
-        }
+      "name": "ImmutableZero",
+      "documentation": "Immutable class with no properties.\\n",
+      "stereotypes": [
+        "yarn::immutable"
       ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "ImmutableOnePrimitive",
+      "documentation": "Immutable class with a builtin property.\\n",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": {
-            "simple": "Prop1"
-          },
-          "unparsed_type": "int"
+          "name": "Prop0",
+          "type": "bool"
         }
       ]
     },
     {
-      "name": {
-        "simple": "Package1"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "Package2"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "Package3"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "Package4"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "Package5"
-      },
-      "meta_name": {
-        "simple": "module",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
-    },
-    {
-      "name": {
-        "simple": "BookTypes"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "this is a brief comment\n\nthis is a long comment\n",
-      "enumerators": [
+      "name": "ImmutableTwo",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "Great"
-          }
+          "name": "Prop0",
+          "type": "bool"
         },
         {
-          "name": {
-            "simple": "NotSoGreat"
-          }
-        },
-        {
-          "name": {
-            "simple": "Bad"
-          }
+          "name": "Prop1",
+          "type": "string"
         }
       ]
     },
     {
-      "name": {
-        "simple": "ColourTypes"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
+      "name": "ImmutableFour",
+      "documentation": "Immutable class with non-immutable and immutable elements as properties.\\n",
+      "stereotypes": [
+        "yarn::immutable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "Red"
-          },
-          "documentation": "this is colour red\n"
+          "name": "Prop0",
+          "type": "bool"
         },
         {
-          "name": {
-            "simple": "Blue"
-          },
-          "documentation": "this is blue\n"
+          "name": "Prop1",
+          "type": "string"
         },
         {
-          "name": {
-            "simple": "Green"
-          }
+          "name": "Prop2",
+          "type": "ComplexBuiltins"
         },
         {
-          "name": {
-            "simple": "Gray"
-          },
-          "documentation": "another comment\n"
+          "name": "Prop3",
+          "type": "ImmutableOnePrimitive"
         }
       ]
     },
     {
-      "name": {
-        "simple": "HexFlags"
+      "name": "AllObjectCollections",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "Prop0",
+          "type": "System.Collections.ArrayList"
+        },
+        {
+          "name": "Prop1",
+          "type": "System.Collections.IEnumerable"
+        },
+        {
+          "name": "Prop2",
+          "type": "System.Collections.ICollection"
+        },
+        {
+          "name": "Prop3",
+          "type": "System.Collections.IList"
+        },
+        {
+          "name": "Prop4",
+          "type": "System.Collections.Hashtable"
+        },
+        {
+          "name": "Prop5",
+          "type": "System.Collections.IDictionary"
+        },
+        {
+          "name": "Prop6",
+          "type": "System.Collections.Specialized.HybridDictionary"
+        },
+        {
+          "name": "Prop7",
+          "type": "System.Collections.Specialized.NameValueCollection"
+        },
+        {
+          "name": "Prop8",
+          "type": "System.Collections.BitArray"
+        },
+        {
+          "name": "Prop9",
+          "type": "System.Collections.Queue"
+        },
+        {
+          "name": "Prop10",
+          "type": "System.Collections.Stack"
+        },
+        {
+          "name": "Prop11",
+          "type": "System.Collections.SortedList"
+        }
+      ]
+    },
+    {
+      "name": "ShortEnum",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "tagged_values": {
+        "yarn.enumeration.underlying_element": "short"
       },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This is an example of an enumeration using hex flags.\n",
-      "annotation": {
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "AnEnumerator",
+          "type": ""
+        },
+        {
+          "name": "AnotherEnumerator",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "TestAllKnobs",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "tagged_values": {
+        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
+        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
         "yarn.enumeration.add_invalid_enumerator": "false"
       },
-      "enumerators": [
+      "fallback_element_type": "yarn::object",
+      "attributes": [
         {
-          "name": {
-            "simple": "None"
-          },
-          "annotation": {
+          "name": "AnEnumerator",
+          "type": ""
+        },
+        {
+          "name": "AnotherEnumerator",
+          "type": "",
+          "documentation": "A comment.\\n"
+        }
+      ]
+    },
+    {
+      "name": "HexFlags",
+      "documentation": "This is an example of an enumeration using hex flags.\\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "tagged_values": {
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "None",
+          "type": "",
+          "tagged_values": {
             "yarn.enumerator.value": "0x00"
           }
         },
         {
-          "name": {
-            "simple": "Top"
-          },
-          "annotation": {
+          "name": "Top",
+          "type": "",
+          "tagged_values": {
             "yarn.enumerator.value": "0x01"
           }
         },
         {
-          "name": {
-            "simple": "Bottom"
-          },
-          "annotation": {
+          "name": "Bottom",
+          "type": "",
+          "tagged_values": {
             "yarn.enumerator.value": "0x02"
           }
         },
         {
-          "name": {
-            "simple": "Left"
-          },
-          "annotation": {
+          "name": "Left",
+          "type": "",
+          "tagged_values": {
             "yarn.enumerator.value": "0x04"
           }
         },
         {
-          "name": {
-            "simple": "Right"
-          },
-          "annotation": {
+          "name": "Right",
+          "type": "",
+          "tagged_values": {
             "yarn.enumerator.value": "0x08"
           }
         }
       ]
     },
     {
-      "name": {
-        "simple": "ShapeTypes",
-        "internal_modules": "Package1"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "Triangle"
-          },
-          "documentation": "some comment\n"
-        },
-        {
-          "name": {
-            "simple": "Square"
-          },
-          "documentation": "other comment\n"
-        },
-        {
-          "name": {
-            "simple": "Rectangle"
-          }
-        },
-        {
-          "name": {
-            "simple": "Cube"
-          },
-          "documentation": "some comment\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "ShortEnum"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.enumeration.underlying_element": "short"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "AnEnumerator"
-          }
-        },
-        {
-          "name": {
-            "simple": "AnotherEnumerator"
-          }
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "TestAllKnobs"
-      },
-      "meta_name": {
-        "simple": "enumeration",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "annotation": {
-        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
-        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
-        "yarn.enumeration.add_invalid_enumerator": "false"
-      },
-      "enumerators": [
-        {
-          "name": {
-            "simple": "AnEnumerator"
-          }
-        },
-        {
-          "name": {
-            "simple": "AnotherEnumerator"
-          },
-          "documentation": "A comment.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "BoolPrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying bool.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "bool"
-      }
-    },
-    {
-      "name": {
-        "simple": "CharPrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying char.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "char"
-      }
-    },
-    {
-      "name": {
-        "simple": "DoublePrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying double.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "double"
-      }
-    },
-    {
-      "name": {
-        "simple": "FloatPrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying float.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "float"
-      }
-    },
-    {
-      "name": {
-        "simple": "IntPrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying int.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "int"
-      }
-    },
-    {
-      "name": {
-        "simple": "LongPrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying long.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "long"
-      }
-    },
-    {
-      "name": {
-        "simple": "ShortPrimitive"
-      },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying short.\n",
-      "annotation": {
+      "name": "ShortPrimitive",
+      "documentation": "Test a primitive with an underlying short.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
         "yarn.primitive.underlying_element": "short"
-      }
+      },
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "UIntPrimitive"
+      "name": "LongPrimitive",
+      "documentation": "Test a primitive with an underlying long.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "long"
       },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying unsigned int.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "uint"
-      }
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "ULongPrimitive"
+      "name": "IntPrimitive",
+      "documentation": "Test a primitive with an underlying int.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "int"
       },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "CharPrimitive",
+      "documentation": "Test a primitive with an underlying char.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "char"
       },
-      "documentation": "Test a primitive with an underlying unsigned long.\n",
-      "annotation": {
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "ULongPrimitive",
+      "documentation": "Test a primitive with an underlying unsigned long.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
         "yarn.primitive.underlying_element": "ulong"
-      }
+      },
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "UShortPrimitive"
+      "name": "UIntPrimitive",
+      "documentation": "Test a primitive with an underlying unsigned int.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "uint"
       },
-      "meta_name": {
-        "simple": "primitive",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Test a primitive with an underlying unsgined short.\n",
-      "annotation": {
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "UShortPrimitive",
+      "documentation": "Test a primitive with an underlying unsgined short.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
         "yarn.primitive.underlying_element": "ushort"
-      }
+      },
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "MyException"
+      "name": "DoublePrimitive",
+      "documentation": "Test a primitive with an underlying double.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "double"
       },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "this is an exception\n"
+      "fallback_element_type": "yarn::object"
     },
     {
-      "name": {
-        "simple": "CatastrophicException",
-        "internal_modules": "Package1"
+      "name": "FloatPrimitive",
+      "documentation": "Test a primitive with an underlying float.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "float"
       },
-      "meta_name": {
-        "simple": "exception",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      }
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "BoolPrimitive",
+      "documentation": "Test a primitive with an underlying bool.\\n",
+      "stereotypes": [
+        "yarn::primitive"
+      ],
+      "tagged_values": {
+        "yarn.primitive.underlying_element": "bool"
+      },
+      "fallback_element_type": "yarn::object"
     }
   ]
 }
