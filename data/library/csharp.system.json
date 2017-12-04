@@ -8,7 +8,9 @@
   "elements": [
     {
       "name": "Int16",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -20,7 +22,9 @@
     },
     {
       "name": "Int32",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -32,7 +36,9 @@
     },
     {
       "name": "Int64",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,

@@ -8,7 +8,9 @@
   "elements": [
     {
       "name": "bool",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -20,7 +22,9 @@
     },
     {
       "name": "char",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -33,7 +37,9 @@
     },
     {
       "name": "unsigned char",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -46,7 +52,9 @@
     },
     {
       "name": "int",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -58,7 +66,9 @@
     },
     {
       "name": "unsigned int",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "is_default_enumeration_type": true,
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -71,7 +81,9 @@
     },
     {
       "name": "short",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -83,7 +95,9 @@
     },
     {
       "name": "unsigned short",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -95,7 +109,9 @@
     },
     {
       "name": "long",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -107,7 +123,9 @@
     },
     {
       "name": "unsigned long",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -119,7 +137,9 @@
     },
     {
       "name": "long long",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -129,7 +149,9 @@
     },
     {
       "name": "unsigned long long",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -139,7 +161,9 @@
     },
     {
       "name": "float",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
@@ -151,7 +175,9 @@
     },
     {
       "name": "double",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
@@ -164,7 +190,9 @@
     },
     {
       "name": "long double",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {

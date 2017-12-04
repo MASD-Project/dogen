@@ -8,7 +8,9 @@
   "elements": [
     {
       "name": "int8_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -20,7 +22,9 @@
     },
     {
       "name": "int16_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -30,7 +34,9 @@
     },
     {
       "name": "int32_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -40,7 +46,9 @@
     },
     {
       "name": "int64_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -50,7 +58,9 @@
     },
     {
       "name": "uint8_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Character",
@@ -61,7 +71,9 @@
     },
     {
       "name": "uint16_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -71,7 +83,9 @@
     },
     {
       "name": "uint32_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
@@ -81,7 +95,9 @@
     },
     {
       "name": "uint64_t",
-      "stereotypes" : [ "yarn::builtin" ],
+      "stereotypes": [
+        "yarn::builtin"
+      ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "Number",
