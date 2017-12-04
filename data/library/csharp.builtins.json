@@ -172,7 +172,7 @@
     },
     {
       "name": "decimal",
-      "stereotypes" : [ "yarn::object" ],
+      "stereotypes" : [ "yarn::builtin" ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
