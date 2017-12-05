@@ -49,6 +49,8 @@ private:
         const std::list<std::pair<std::string, std::string>>& tv);
     static void insert_stereotypes(std::ostream& s,
         const std::list<std::string>& st);
+    static void insert_parents(std::ostream& s,
+        const std::list<std::string>& parents);
     static void insert_attribute(std::ostream& s,
         const meta_model::exoattribute& ea);
     static void insert_element(std::ostream& s,

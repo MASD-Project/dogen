@@ -60,7 +60,7 @@ void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
     formatters::utility_formatter uf(s);
     uf.insert_quoted("documentation");
     s << " : ";
-    uf.insert_quoted_escaped(tidy_up_string(d));
+    uf.insert_quoted(tidy_up_string(d));
 }
 
 void dehydrator::insert_tagged_values(std::ostream& s,
@@ -82,11 +82,29 @@ void dehydrator::insert_tagged_values(std::ostream& s,
     }
     s << " }";
 }
+
 void dehydrator::insert_stereotypes(std::ostream& s,
     const std::list<std::string>& st) {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("stereotypes");
+    s << " : [";
+
+    bool is_first(true);
+    for (const auto& stereotype : st) {
+        if (!is_first)
+            s << ", ";
+        uf.insert_quoted(stereotype);
+        is_first = false;
+    }
+    s << " ]";
+}
+
+void dehydrator::insert_parents(std::ostream& s,
+    const std::list<std::string>& st) {
+
+    formatters::utility_formatter uf(s);
+    uf.insert_quoted("parents");
     s << " : [";
 
     bool is_first(true);
@@ -140,6 +158,11 @@ void dehydrator::insert_element(std::ostream& s,
     uf.insert_quoted("name");
     s << " : ";
     uf.insert_quoted_escaped(ee.name());
+
+    if (!ee.parents().empty()) {
+        s << comma_space;
+        insert_parents(s, ee.parents());
+    }
 
     if (!ee.documentation().empty()) {
         s << comma_space;
