@@ -47,6 +47,7 @@ public:
     exomodel(
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
+        const std::string& id,
         const std::list<dogen::yarn::meta_model::exoelement>& elements,
         const std::list<std::string>& stereotypes);
 
@@ -77,6 +78,11 @@ public:
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
     void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
 
+    const std::string& id() const;
+    std::string& id();
+    void id(const std::string& v);
+    void id(const std::string&& v);
+
     const std::list<dogen::yarn::meta_model::exoelement>& elements() const;
     std::list<dogen::yarn::meta_model::exoelement>& elements();
     void elements(const std::list<dogen::yarn::meta_model::exoelement>& v);
@@ -100,6 +106,7 @@ public:
 private:
     std::string documentation_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
+    std::string id_;
     std::list<dogen::yarn::meta_model::exoelement> elements_;
     std::list<std::string> stereotypes_;
 };

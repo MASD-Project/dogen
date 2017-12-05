@@ -68,10 +68,10 @@ workflow::generate_model(const std::list<processed_object>& pos) {
      * Go through the dependency graph and build a yarn model from
      * it.
      */
-    builder nb(g.parent_id_to_child_ids());
-    visitor v(nb);
+    builder b(g.parent_id_to_child_ids());
+    visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
-    auto r(nb.build());
+    const auto r(b.build());
     return r;
 }
 
@@ -96,7 +96,6 @@ meta_model::exomodel workflow::execute(const dogen::dia::diagram& d) {
      * Finally, generate the exomodel.
      */
     const auto r(generate_model(pos));
-    BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
     return r;
 }
 

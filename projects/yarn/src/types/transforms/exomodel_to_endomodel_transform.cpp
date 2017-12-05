@@ -220,7 +220,7 @@ process_element(const helpers::adapter& ad, const meta_model::location& l,
 meta_model::endomodel exomodel_to_endomodel_transform::
 transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
-        transform_id, "FIXME"/*em.name().id()*/, ctx.prober(), em);
+        transform_id, em.id(), ctx.prober(), em);
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(em.stereotypes()));

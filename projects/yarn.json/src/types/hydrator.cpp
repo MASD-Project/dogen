@@ -222,7 +222,9 @@ hydrator::hydrate(const boost::filesystem::path& p) const {
         BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
     }
 
-    const auto r(hydrate(s));
+    auto r(hydrate(s));
+    r.id(p.filename().generic_string());
+
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;
 }

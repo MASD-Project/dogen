@@ -553,7 +553,7 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="136.907,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="136.058,-42.05;151.995,-31.95"/>
+        <dia:rectangle val="136.057,-42.05;151.995,-31.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2063,7 +2063,7 @@ content of entries.#</dia:string>
         <dia:point val="137.305,-99.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.672,-99.5707;137.376,-95.6889"/>
+        <dia:rectangle val="133.673,-99.5707;137.376,-95.6889"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6253,7 +6253,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="136.907,-41.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.703,-42.0004;137.757,-32.0004"/>
+        <dia:rectangle val="117.702,-42.0004;137.757,-32.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7701,7 +7701,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.2424,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.2425,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7709,7 +7709,7 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.2924,-50"/>
+        <dia:point val="22.2925,-50"/>
         <dia:point val="22.2925,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -8553,7 +8553,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="57.645,-39.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.895,-41.3999;100.578,-31.95"/>
+        <dia:rectangle val="56.895,-41.3999;100.577,-31.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10615,7 +10615,7 @@ associated properties.#</dia:string>
         <dia:point val="136.907,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="136.058,-42.05;143.695,-25.95"/>
+        <dia:rectangle val="136.057,-42.05;143.695,-25.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

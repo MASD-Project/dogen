@@ -42,6 +42,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("tagged_values", v.tagged_values_);
+    ar << make_nvp("id", v.id_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("stereotypes", v.stereotypes_);
 }
@@ -52,6 +53,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
+    ar >> make_nvp("id", v.id_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("stereotypes", v.stereotypes_);
 }

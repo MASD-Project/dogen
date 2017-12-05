@@ -72,6 +72,7 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
 
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
+    combine(seed, v.id());
     combine(seed, hash_std_list_dogen_yarn_meta_model_exoelement(v.elements()));
     combine(seed, hash_std_list_std_string(v.stereotypes()));
 

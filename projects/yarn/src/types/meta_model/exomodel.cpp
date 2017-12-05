@@ -27,10 +27,12 @@ namespace meta_model {
 exomodel::exomodel(
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::string& id,
     const std::list<dogen::yarn::meta_model::exoelement>& elements,
     const std::list<std::string>& stereotypes)
     : documentation_(documentation),
       tagged_values_(tagged_values),
+      id_(id),
       elements_(elements),
       stereotypes_(stereotypes) { }
 
@@ -38,6 +40,7 @@ void exomodel::swap(exomodel& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
+    swap(id_, other.id_);
     swap(elements_, other.elements_);
     swap(stereotypes_, other.stereotypes_);
 }
@@ -45,6 +48,7 @@ void exomodel::swap(exomodel& other) noexcept {
 bool exomodel::operator==(const exomodel& rhs) const {
     return documentation_ == rhs.documentation_ &&
         tagged_values_ == rhs.tagged_values_ &&
+        id_ == rhs.id_ &&
         elements_ == rhs.elements_ &&
         stereotypes_ == rhs.stereotypes_;
 }
@@ -85,6 +89,22 @@ void exomodel::tagged_values(const std::list<std::pair<std::string, std::string>
 
 void exomodel::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
     tagged_values_ = std::move(v);
+}
+
+const std::string& exomodel::id() const {
+    return id_;
+}
+
+std::string& exomodel::id() {
+    return id_;
+}
+
+void exomodel::id(const std::string& v) {
+    id_ = v;
+}
+
+void exomodel::id(const std::string&& v) {
+    id_ = std::move(v);
 }
 
 const std::list<dogen::yarn::meta_model::exoelement>& exomodel::elements() const {

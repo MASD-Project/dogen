@@ -79,8 +79,9 @@ void exomodel_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 1));
-    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 2));
-    v.stereotypes(create_std_list_std_string(position + 3));
+    v.id(create_std_string(position + 2));
+    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 3));
+    v.stereotypes(create_std_list_std_string(position + 4));
 }
 
 exomodel_generator::result_type

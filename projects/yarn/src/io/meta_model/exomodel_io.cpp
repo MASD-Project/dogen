@@ -95,6 +95,7 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exomodel\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"stereotypes\": " << v.stereotypes()
       << " }";

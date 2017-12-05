@@ -78,7 +78,8 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
-    const auto r(yarn::dia::workflow::execute(diagram));
+    auto r(yarn::dia::workflow::execute(diagram));
+    r.id(p.filename().generic_string());
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
 
     stp.end_transform(r);
