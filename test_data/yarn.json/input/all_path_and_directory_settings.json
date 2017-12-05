@@ -7,6 +7,7 @@
     "annotations.profile": "dogen",
     "yarn.input_language": "language_agnostic",
     "yarn.output_language": "csharp",
+    "yarn.output_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.csharp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
