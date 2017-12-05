@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-05 Tue 18:15]
+#+CAPTION: Clock summary at [2017-12-05 Tue 19:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *49:36* |       |       | 100.0 |
+| *Total time*                                                                | *50:20* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 49:36   |       |       | 100.0 |
-| Active                                                                      |         | 49:36 |       | 100.0 |
+| Stories                                                                     | 50:20   |       |       | 100.0 |
+| Active                                                                      |         | 50:20 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.1 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.5 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.4 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.2 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.5 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  27.7 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.3 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  27.3 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.7 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  32.4 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  31.9 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.8 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   5.9 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.1 |
-| STARTED Remove all deprecated code after exomodels clean up                 |         |       |  0:32 |   1.1 |
+| STARTED Remove all deprecated code after exomodels clean up                 |         |       |  1:16 |   2.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -450,6 +450,8 @@ program options:
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** STARTED Remove all deprecated code after exomodels clean up       :story:
+    CLOCK: [2017-12-05 Tue 19:25]--[2017-12-05 Tue 19:41] =>  0:16
+    CLOCK: [2017-12-05 Tue 18:22]--[2017-12-05 Tue 18:45] =>  0:23
     CLOCK: [2017-12-05 Tue 18:16]--[2017-12-05 Tue 18:21] =>  0:05
     CLOCK: [2017-12-05 Tue 18:11]--[2017-12-05 Tue 18:15] =>  0:04
     CLOCK: [2017-12-05 Tue 17:53]--[2017-12-05 Tue 18:10] =>  0:17
@@ -462,6 +464,7 @@ Remove all deprecated code:
 - yarn: drop exoelement properties, drop new code logic, groups in
   context, annotations transform, nameable/metanameable from exomodel.
 - annotations: scribble groups and related classes.
+- stitch: drop usage of scribbles
 
 *** Add filename to exomodels                                         :story:
 

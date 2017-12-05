@@ -33,7 +33,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
@@ -89,7 +89,7 @@ private:
     std::list<yarn::meta_model::artefact>
     format(const std::unordered_set<yarn::meta_model::element_archetype>&
         enabled_archetype_for_element, const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& agf,
+        const annotations::annotation_factory& af,
         const dogen::formatters::repository& drp,
         const formattables::model& fm) const;
 

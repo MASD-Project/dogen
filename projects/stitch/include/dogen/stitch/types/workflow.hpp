@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
@@ -101,7 +101,7 @@ private:
      */
     std::list<yarn::meta_model::artefact>
     create_artefacts(const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& agf,
+        const annotations::annotation_factory& af,
         const dogen::formatters::repository& drp,
         const std::forward_list<boost::filesystem::path>&
         text_template_paths) const;

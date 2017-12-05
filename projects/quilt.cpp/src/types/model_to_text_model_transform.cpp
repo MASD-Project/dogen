@@ -84,12 +84,11 @@ std::string model_to_text_model_transform::id() const {
 
 std::list<yarn::meta_model::artefact> model_to_text_model_transform::
 format(const std::unordered_set<yarn::meta_model::element_archetype>&
-    enabled_archetype_for_element,
-    const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& agf,
+    enabled_archetype_for_element, const annotations::type_repository& atrp,
+    const annotations::annotation_factory& af,
     const dogen::formatters::repository& drp,
     const formattables::model& fm) const {
-    formatters::workflow wf(atrp, agf, drp);
+    formatters::workflow wf(atrp, af, drp);
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
@@ -173,10 +172,10 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
      */
     yarn::meta_model::text_model r;
     const auto& drp(ctx.formatters_repository());
-    const auto& agf(ctx.groups_factory());
+    const auto& af(ctx.annotation_factory());
     const auto& eafe(m.enabled_archetype_for_element());
 
-    r.artefacts(format(eafe, atrp, agf, drp, fm));
+    r.artefacts(format(eafe, atrp, af, drp, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

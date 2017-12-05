@@ -42,7 +42,7 @@ namespace cpp {
 namespace formatters {
 
 stitch_formatter::stitch_formatter(const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& af,
+    const annotations::annotation_factory& af,
     const dogen::formatters::repository& frp)
     : instantiator_(atrp, af, frp) {}
 

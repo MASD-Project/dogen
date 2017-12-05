@@ -33,7 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
@@ -53,7 +53,7 @@ namespace formatters {
 class workflow final {
 public:
     workflow(const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& af,
+        const annotations::annotation_factory& af,
         const dogen::formatters::repository& frp);
 
 public:

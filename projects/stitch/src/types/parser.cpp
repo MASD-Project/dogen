@@ -250,7 +250,7 @@ text_template_body parser::parse(const std::string& s) const {
 
     std::list<line> lines;
     unsigned int line_number(0);
-    std::list<std::pair<std::string, std::string> > kvps;
+    std::list<std::pair<std::string, std::string>> tagged_values;
     try {
         line output_line;
         bool in_standard_control_block(false), in_directives_block(true);
@@ -275,7 +275,7 @@ text_template_body parser::parse(const std::string& s) const {
                 }
 
                 const auto kvp(parse_directive(input_line));
-                kvps.push_back(kvp);
+                tagged_values.push_back(kvp);
                 continue;
             }
 
@@ -370,18 +370,10 @@ text_template_body parser::parse(const std::string& s) const {
     }
 
     text_template_body r;
+    r.tagged_values(tagged_values);
     r.lines(lines);
 
-    if (!kvps.empty()) {
-        annotations::scribble_group sgrp;
-        using annotations::scope_types;
-        sgrp.parent().scope(scope_types::root_module);
-        sgrp.parent().entries(kvps);
-        r.scribble_group(sgrp);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished parsing.";
-    BOOST_LOG_SEV(lg, debug) << "result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished parsing. Result: " << r;
     return r;
 }
 

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
@@ -41,7 +41,7 @@ namespace formatters {
 class stitch_formatter final {
 public:
     stitch_formatter(const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& af,
+        const annotations::annotation_factory& af,
         const dogen::formatters::repository& frp);
 
 private:

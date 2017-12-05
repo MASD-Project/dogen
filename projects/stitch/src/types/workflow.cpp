@@ -27,7 +27,6 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/yarn/io/meta_model/artefact_io.hpp"
@@ -123,12 +122,12 @@ annotations::type_repository workflow::create_annotations_type_repository(
 
 std::list<yarn::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& agf,
+    const annotations::annotation_factory& af,
     const dogen::formatters::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
     std::list<yarn::meta_model::artefact> r;
-    const instantiator inst(atrp, agf, drp);
+    const instantiator inst(atrp, af, drp);
     for (const auto& p : text_template_paths)
         r.push_front(inst.instantiate(p));
 
@@ -158,7 +157,7 @@ void workflow::execute(const boost::filesystem::path& p) const {
 
     const auto cm(compatibility_mode_);
     const auto frp(create_formatters_repository(data_dirs));
-    annotations::annotation_groups_factory af(data_dirs, alrp, atrp, cm);
+    annotations::annotation_factory af(data_dirs, alrp, atrp, cm);
     properties_factory pf(atrp, frp);
     const auto artefacts(create_artefacts(atrp, af, frp, paths));
     write_artefacts(artefacts);

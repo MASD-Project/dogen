@@ -24,19 +24,19 @@ namespace dogen {
 namespace stitch {
 
 text_template_body::text_template_body(
-    const dogen::annotations::scribble_group& scribble_group,
+    const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<dogen::stitch::line>& lines)
-    : scribble_group_(scribble_group),
+    : tagged_values_(tagged_values),
       lines_(lines) { }
 
 void text_template_body::swap(text_template_body& other) noexcept {
     using std::swap;
-    swap(scribble_group_, other.scribble_group_);
+    swap(tagged_values_, other.tagged_values_);
     swap(lines_, other.lines_);
 }
 
 bool text_template_body::operator==(const text_template_body& rhs) const {
-    return scribble_group_ == rhs.scribble_group_ &&
+    return tagged_values_ == rhs.tagged_values_ &&
         lines_ == rhs.lines_;
 }
 
@@ -46,20 +46,20 @@ text_template_body& text_template_body::operator=(text_template_body other) {
     return *this;
 }
 
-const dogen::annotations::scribble_group& text_template_body::scribble_group() const {
-    return scribble_group_;
+const std::list<std::pair<std::string, std::string> >& text_template_body::tagged_values() const {
+    return tagged_values_;
 }
 
-dogen::annotations::scribble_group& text_template_body::scribble_group() {
-    return scribble_group_;
+std::list<std::pair<std::string, std::string> >& text_template_body::tagged_values() {
+    return tagged_values_;
 }
 
-void text_template_body::scribble_group(const dogen::annotations::scribble_group& v) {
-    scribble_group_ = v;
+void text_template_body::tagged_values(const std::list<std::pair<std::string, std::string> >& v) {
+    tagged_values_ = v;
 }
 
-void text_template_body::scribble_group(const dogen::annotations::scribble_group&& v) {
-    scribble_group_ = std::move(v);
+void text_template_body::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
+    tagged_values_ = std::move(v);
 }
 
 const std::list<dogen::stitch::line>& text_template_body::lines() const {

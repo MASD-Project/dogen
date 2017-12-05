@@ -49,9 +49,8 @@ namespace dogen {
 namespace stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& agf,
-    const dogen::formatters::repository& frp)
-    : annotation_factory_(agf), properties_factory_(atrp, frp) {}
+    const annotations::annotation_factory& af, const dogen::formatters::repository& frp)
+    : annotation_factory_(af), properties_factory_(atrp, frp) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -127,10 +126,9 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
     text_template r;
     try {
         /*
-         * We first start by parsing the raw text templates into
-         * their domain representation. This only populates the
-         * lines and scribble group portions of the text
-         * template.
+         * We first start by parsing the raw text templates into their
+         * domain representation. This only populates the lines and
+         * tagged values portions of the text template.
          */
         parser p;
         r.body(p.parse(text_template_as_string));
@@ -142,13 +140,12 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         r.input_path(input_path);
 
         /*
-         * Convert the scribble group into annotations, which performs
-         * a profile expansion as required. We then take that
+         * Convert the tagged values into an annotation, which
+         * performs a profile expansion as required. We then take that
          * annotation object and use it to generate the properties.
          */
-        const auto& sgrp(r.body().scribble_group());
-        const auto ag(annotation_factory_.make(sgrp));
-        const auto& a(ag.parent());
+        const auto st(annotations::scope_types::root_module);
+        const auto a(annotation_factory_.make(r.body().tagged_values(), st));
         BOOST_LOG_SEV(lg, debug) << "Annotation: " << a;
         r.properties(properties_factory_.make(a));
 

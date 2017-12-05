@@ -26,9 +26,10 @@
 #endif
 
 #include <list>
+#include <string>
+#include <utility>
 #include <algorithm>
 #include "dogen/stitch/types/line.hpp"
-#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/stitch/serialization/text_template_body_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,7 +44,7 @@ public:
 
 public:
     text_template_body(
-        const dogen::annotations::scribble_group& scribble_group,
+        const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<dogen::stitch::line>& lines);
 
 private:
@@ -54,10 +55,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::text_template_body& v, unsigned int version);
 
 public:
-    const dogen::annotations::scribble_group& scribble_group() const;
-    dogen::annotations::scribble_group& scribble_group();
-    void scribble_group(const dogen::annotations::scribble_group& v);
-    void scribble_group(const dogen::annotations::scribble_group&& v);
+    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
+    std::list<std::pair<std::string, std::string> >& tagged_values();
+    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
+    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
 
     const std::list<dogen::stitch::line>& lines() const;
     std::list<dogen::stitch::line>& lines();
@@ -75,7 +76,7 @@ public:
     text_template_body& operator=(text_template_body other);
 
 private:
-    dogen::annotations::scribble_group scribble_group_;
+    std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<dogen::stitch::line> lines_;
 };
 
