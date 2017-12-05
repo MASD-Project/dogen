@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-04 Mon 23:46]
+#+CAPTION: Clock summary at [2017-12-05 Tue 08:49]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *48:34* |       |       | 100.0 |
+| *Total time*                                                                | *48:59* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 48:34   |       |       | 100.0 |
-| Active                                                                      |         | 48:34 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.2 |
+| Stories                                                                     | 48:59   |       |       | 100.0 |
+| Active                                                                      |         | 48:59 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.1 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.4 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.2 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.9 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  28.2 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.7 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  28.0 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.8 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   6.1 |
-| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.2 |
-| STARTED Implement exomodel in terms of exoelements                          |         |       | 16:03 |  33.0 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  32.8 |
+| COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.9 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   6.0 |
+| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -280,69 +281,8 @@ And the following binaries:
 - =http=: beast based api.
 - =server=: raw sockets api.
 
-*** STARTED Finish setting up coveralls                               :story:
-    CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
-    CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
-    CLOCK: [2017-11-29 Wed 21:50]--[2017-11-29 Wed 22:20] =>  0:30
-    CLOCK: [2017-11-29 Wed 19:02]--[2017-11-29 Wed 19:54] =>  0:52
-
-Remaining issues:
-
-- we are generating far too much output. We need to keep it quieter or
-  we will break travis.
-- we are not filtering out non-project files from initial
-  processing. There must be a gcov option to ignore files.
-
-: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
-: ------------------------------------------------------------------------------
-: File '../../../../projects/quilt/spec/main.cpp'
-: Lines executed:62.50% of 8
-: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
-:
-: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
-: Lines executed:60.00% of 20
-: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
-  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
-  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
-- we should generate coverage from the clang debug build only since
-  that is the fastest build we have. We should use the clang coverage
-  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
-
-Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
-
-Notes:
-- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
-  broke Travis build]]
-
-*** STARTED Create a single binary for all of dogen                   :story:
-    CLOCK: [2017-12-01 Fri 11:47]--[2017-12-01 Fri 12:50] =>  1:03
-
-As per analysis, we need to create a single dogen binary, like so:
-
-: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
-
-Where =COMMAND= is:
-
-- =transform=: functionality that is currently in tailor.
-- =generate=: functionality that is currently in knitter.
-- =expand=: functionality that is currently in stitcher plus expansion
-  of wale templates.
-- =make=: functionality in darter: create project, structure etc.
-
-In order to support sub-commands we need to do a lot of hackery with
-program options:
-
-- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
-  processing with boost program_options
-- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
-
-*** STARTED Implement exomodel in terms of exoelements                :story:
+*** COMPLETED Implement exomodel in terms of exoelements              :story:
+    CLOSED: [2017-12-05 Tue 08:37]
     CLOCK: [2017-12-04 Mon 22:47]--[2017-12-04 Mon 23:46] =>  0:59
     CLOCK: [2017-12-04 Mon 22:42]--[2017-12-04 Mon 22:46] =>  0:04
     CLOCK: [2017-12-04 Mon 22:35]--[2017-12-04 Mon 22:41] =>  0:06
@@ -445,6 +385,76 @@ Tasks:
 - JSON needs to explicitly contain fallback stereotype or else tailor
   roundtrip will fail. We should check that fallback is not default,
   if so do not bother outputting it.
+
+*** COMPLETED Fix JSON tests                                          :story:
+    CLOSED: [2017-12-05 Tue 08:48]
+    CLOCK: [2017-12-05 Tue 08:38]--[2017-12-05 Tue 08:48] =>  0:10
+    CLOCK: [2017-12-05 Tue 08:22]--[2017-12-05 Tue 08:37] =>  0:15
+
+After implementing the exomoel in terms of exoelements, we broke the
+JSON tests.
+
+*** STARTED Finish setting up coveralls                               :story:
+    CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
+    CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
+    CLOCK: [2017-11-29 Wed 21:50]--[2017-11-29 Wed 22:20] =>  0:30
+    CLOCK: [2017-11-29 Wed 19:02]--[2017-11-29 Wed 19:54] =>  0:52
+
+Remaining issues:
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
+
+Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
+
+Notes:
+- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
+  broke Travis build]]
+
+*** STARTED Create a single binary for all of dogen                   :story:
+    CLOCK: [2017-12-01 Fri 11:47]--[2017-12-01 Fri 12:50] =>  1:03
+
+As per analysis, we need to create a single dogen binary, like so:
+
+: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
+
+Where =COMMAND= is:
+
+- =transform=: functionality that is currently in tailor.
+- =generate=: functionality that is currently in knitter.
+- =expand=: functionality that is currently in stitcher plus expansion
+  of wale templates.
+- =make=: functionality in darter: create project, structure etc.
+
+In order to support sub-commands we need to do a lot of hackery with
+program options:
+
+- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
+  processing with boost program_options
+- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
 *** Rename =yarn= to =modeling=                                       :story:
 

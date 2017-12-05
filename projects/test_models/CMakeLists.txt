@@ -198,7 +198,7 @@ foreach(dia_model ${all_dia_test_models})
     if (EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
 
-        file(GLOB result ${actual_dir})
+        file(GLOB result ${actual_dir}/*)
         list(LENGTH result result_length)
         if(NOT result_length EQUAL 0)
             set(target_name "diff_${model_name}_json")
