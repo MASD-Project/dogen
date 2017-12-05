@@ -25,9 +25,9 @@ namespace annotations {
 
 annotation merger::merge(const annotation& lhs, const annotation& rhs) const {
     annotation r(lhs);
-    for (const auto& entry : rhs.entries()) {
-        r.entries().insert(entry);
-    }
+    for (const auto& tv : rhs.tagged_values())
+        r.tagged_values().insert(tv);
+
     return r;
 }
 

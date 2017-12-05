@@ -36,7 +36,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("annotations.entry_selector"));
 
-const std::string entry_not_found("Entry not found: ");
+const std::string tagged_value_not_found("Tagged value not found: ");
 const std::string unexpected_value_type("Unexpected value type.");
 const std::string entry("Entry: ");
 const std::string not_number_entry("Entry does not have numeric content: ");
@@ -67,8 +67,8 @@ void entry_selector::ensure_default_value(const type& t) const {
 }
 
 bool entry_selector::has_entry(const std::string& qualified_name) const {
-    const auto i(annotation_.entries().find(qualified_name));
-    return (i != annotation_.entries().end());
+    const auto i(annotation_.tagged_values().find(qualified_name));
+    return (i != annotation_.tagged_values().end());
 }
 
 bool entry_selector::has_entry(const type& t) const {
@@ -76,8 +76,8 @@ bool entry_selector::has_entry(const type& t) const {
 }
 
 bool entry_selector::has_key_ending_with(const std::string& s) const {
-    for (const auto& pair : annotation_.entries()) {
-        const auto& key(pair.first);
+    for (const auto& tv : annotation_.tagged_values()) {
+        const auto& key(tv.first);
         BOOST_LOG_SEV(lg, trace) << "Key: " << key;
 
         if (boost::ends_with(key, s)) {
@@ -91,11 +91,11 @@ bool entry_selector::has_key_ending_with(const std::string& s) const {
 
 const value& entry_selector::
 get_entry_value(const std::string& qualified_name) const {
-    const auto i(annotation_.entries().find(qualified_name));
+    const auto i(annotation_.tagged_values().find(qualified_name));
 
-    if (i == annotation_.entries().end()) {
-        BOOST_LOG_SEV(lg, error) << entry_not_found << qualified_name;
-        BOOST_THROW_EXCEPTION(selection_error(entry_not_found
+    if (i == annotation_.tagged_values().end()) {
+        BOOST_LOG_SEV(lg, error) << tagged_value_not_found << qualified_name;
+        BOOST_THROW_EXCEPTION(selection_error(tagged_value_not_found
                 + qualified_name));
     }
 

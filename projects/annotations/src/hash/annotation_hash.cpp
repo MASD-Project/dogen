@@ -53,7 +53,7 @@ namespace annotations {
 std::size_t annotation_hasher::hash(const annotation& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(v.entries()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(v.tagged_values()));
     combine(seed, v.scope());
 
     return seed;

@@ -72,7 +72,7 @@ namespace annotations {
 std::ostream& operator<<(std::ostream& s, const annotation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::annotations::annotation\"" << ", "
-      << "\"entries\": " << v.entries() << ", "
+      << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"scope\": " << v.scope()
       << " }";
     return(s);

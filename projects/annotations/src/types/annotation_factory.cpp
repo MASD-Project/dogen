@@ -213,7 +213,7 @@ annotation annotation_factory::create_annotation(const scope_types scope,
                 BOOST_THROW_EXCEPTION(building_error(duplicate_key + new_key));
             }
         } else
-            r.entries()[k] = f.make(t, v);
+            r.tagged_values()[k] = f.make(t, v);
     }
 
     for (const auto& pair : all_kvps) {
@@ -221,7 +221,7 @@ annotation annotation_factory::create_annotation(const scope_types scope,
 
         const auto k(pair.first);
         const auto kvps(pair.second);
-        r.entries()[k] = f.make_kvp(kvps);
+        r.tagged_values()[k] = f.make_kvp(kvps);
     }
 
     return r;

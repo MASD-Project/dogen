@@ -50,7 +50,7 @@ public:
 
 public:
     annotation(
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values,
         const dogen::annotations::scope_types scope);
 
 private:
@@ -62,13 +62,13 @@ private:
 
 public:
     /**
-     * @brief All entries in this annotation. Each entry is a key-value-pair of id and value.
+     * @brief All tagged values in this annotation. Each entry is a key-value-pair of id and value.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries();
-    void entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v);
-    void entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values();
+    void tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v);
+    void tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v);
     /**@}*/
 
     dogen::annotations::scope_types scope() const;
@@ -85,7 +85,7 @@ public:
     annotation& operator=(annotation other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > entries_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > tagged_values_;
     dogen::annotations::scope_types scope_;
 };
 

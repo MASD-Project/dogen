@@ -37,19 +37,19 @@ annotation::annotation()
     : scope_(static_cast<dogen::annotations::scope_types>(0)) { }
 
 annotation::annotation(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& entries,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values,
     const dogen::annotations::scope_types scope)
-    : entries_(entries),
+    : tagged_values_(tagged_values),
       scope_(scope) { }
 
 void annotation::swap(annotation& other) noexcept {
     using std::swap;
-    swap(entries_, other.entries_);
+    swap(tagged_values_, other.tagged_values_);
     swap(scope_, other.scope_);
 }
 
 bool annotation::operator==(const annotation& rhs) const {
-    return entries_ == rhs.entries_ &&
+    return tagged_values_ == rhs.tagged_values_ &&
         scope_ == rhs.scope_;
 }
 
@@ -59,20 +59,20 @@ annotation& annotation::operator=(annotation other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::entries() const {
-    return entries_;
+const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::tagged_values() const {
+    return tagged_values_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::entries() {
-    return entries_;
+std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::tagged_values() {
+    return tagged_values_;
 }
 
-void annotation::entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v) {
-    entries_ = v;
+void annotation::tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v) {
+    tagged_values_ = v;
 }
 
-void annotation::entries(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v) {
-    entries_ = std::move(v);
+void annotation::tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v) {
+    tagged_values_ = std::move(v);
 }
 
 dogen::annotations::scope_types annotation::scope() const {

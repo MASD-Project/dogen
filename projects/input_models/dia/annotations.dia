@@ -1401,13 +1401,13 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="94,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,-63.05;120.345,-59.35"/>
+        <dia:rectangle val="93.95,-63.05;122.655,-59.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="94,-63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="28.605"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1502,7 +1502,7 @@ yet imposing some constraints on the shape of the data.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#entries#</dia:string>
+            <dia:string>#tagged_values#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;value&gt;&gt;#</dia:string>
@@ -1511,7 +1511,7 @@ yet imposing some constraints on the shape of the data.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All entries in this annotation. Each entry is a key-value-pair of id and value.#</dia:string>
+            <dia:string>#All tagged values in this annotation. Each entry is a key-value-pair of id and value.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2028,7 +2028,7 @@ content of entries.#</dia:string>
         <dia:point val="117,-77.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.097,-78.15;117.75,-62.2"/>
+        <dia:rectangle val="108.252,-78.15;117.75,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2036,8 +2036,8 @@ content of entries.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="117,-77.4"/>
         <dia:point val="117,-70"/>
-        <dia:point val="107.147,-70"/>
-        <dia:point val="107.147,-63"/>
+        <dia:point val="108.302,-70"/>
+        <dia:point val="108.302,-63"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7378,17 +7378,17 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="120.295,-59.4"/>
+        <dia:point val="122.605,-59.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.545,-60.15;133.2,-44.2"/>
+        <dia:rectangle val="121.855,-60.15;133.2,-44.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="120.295,-59.4"/>
-        <dia:point val="120.295,-50"/>
+        <dia:point val="122.605,-59.4"/>
+        <dia:point val="122.605,-50"/>
         <dia:point val="133,-50"/>
         <dia:point val="133,-45"/>
       </dia:attribute>

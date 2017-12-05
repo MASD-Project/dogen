@@ -400,19 +400,19 @@ void add_test_annotationss(annotations::annotation& a) {
     using namespace annotations;
 
     value_factory f;
-    a.entries().insert(std::make_pair(licence_name_key,
+    a.tagged_values().insert(std::make_pair(licence_name_key,
             f.make_text(licence_name_value)));
 
-    a.entries().insert(std::make_pair(copyright_notices_key,
+    a.tagged_values().insert(std::make_pair(copyright_notices_key,
             f.make_text(copyright_notices_value)));
 
-    a.entries().insert(std::make_pair(modeline_group_name_key,
+    a.tagged_values().insert(std::make_pair(modeline_group_name_key,
             f.make_text(modeline_group_name_value)));
 
-    a.entries().insert(std::make_pair(code_generation_marker_message_key,
+    a.tagged_values().insert(std::make_pair(code_generation_marker_message_key,
             f.make_text(code_generation_marker_message_value)));
 
-    a.entries().insert(std::make_pair(generate_preamble_key,
+    a.tagged_values().insert(std::make_pair(generate_preamble_key,
             f.make_text(generate_preamble_value)));
 }
 

@@ -65,7 +65,7 @@ annotation_generator::annotation_generator() : position_(0) { }
 
 void annotation_generator::
 populate(const unsigned int position, result_type& v) {
-    v.entries(create_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(position + 0));
+    v.tagged_values(create_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(position + 0));
     v.scope(create_dogen_annotations_scope_types(position + 1));
 }
 

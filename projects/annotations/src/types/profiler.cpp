@@ -187,9 +187,9 @@ void profiler::setup_annotations(const archetype_location_repository& alrp,
         pc.annotation().scope(scope_types::not_applicable);
         for (const auto& tpl : pc.profile().templates()) {
             try {
-                const auto entries(ti.instantiate(trp, tpl));
-                for (const auto& entry : entries)
-                    pc.annotation().entries().insert(entry);
+                const auto tagged_values(ti.instantiate(trp, tpl));
+                for (const auto& tv : tagged_values)
+                    pc.annotation().tagged_values().insert(tv);
 
                 BOOST_LOG_SEV(lg, debug) << "Instantiated template: "
                                          << tpl.name().qualified()

@@ -41,7 +41,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::annotations::annotation& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("entries", v.entries_);
+    ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("scope", v.scope_);
 }
 
@@ -49,7 +49,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::annotations::annotation& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("entries", v.entries_);
+    ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("scope", v.scope_);
 }
 
