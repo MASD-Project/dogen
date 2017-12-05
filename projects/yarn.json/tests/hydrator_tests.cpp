@@ -36,25 +36,22 @@
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-/*
+
 namespace {
 
 const std::string test_module("yarn.json");
 const std::string test_suite("hydrator_tests");
 
-const std::string model_name("a_model");
 const std::string documentation("a_doc");
 const std::string type_name("a_type");
-const std::string model_key("model_key");
-const std::string model_value("model_value");
+const std::string attribute_name("some_attr");
+const std::string attribute_type("std::string");
 const std::string some_key("some_key");
 const std::string some_value("some_value");
-const std::string type_key("type_key");
-const std::string type_value("model_value");
-const std::string internal_modules_key("modules");
-const std::string internal_modules_value_1("module_1");
-const std::string internal_modules_value_2("module_2");
-const std::string internal_modules_value_3("module_3");
+const std::string first_parent("a::b::c");
+const std::string second_parent("a");
+const std::string a_stereotype("some stereotype");
+const std::string another_stereotype("another");
 
 const std::string cpp_std_model_path("library/cpp.std.json");
 const std::string cpp_std_model_name("std");
@@ -64,206 +61,74 @@ const std::string hardware_model_path("library/cpp.builtins.json");
 const std::string hardware_model_name_front("cpp");
 const std::string hardware_model_name_back("builtins");
 
-const std::string missing_type_name("name is mandatory.");
-const std::string missing_elements("elements");
+const std::string missing_elements("Missing mandatory elements");
 
-const std::string trivial_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "documentation" : "a_doc",
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
+const std::string one_object_model(R"({
+    "documentation" : "a_doc",
+    "stereotypes" : [ "some stereotype", "another" ],
+    "tagged_values" : {
+        "some_key" : "some_value"
     },
     "elements" : [
         {
-            "name" : {
-                "simple" : "a_type"
-            },
-            "meta_name": {
-              "simple": "object",
-              "external_modules" : "dogen",
-              "model_modules" : "yarn",
-              "internal_modules" : "meta_model"
-            },
-            "documentation" : "a_doc"
-        }
-     ]
-  }
-)");
-
-const std::string no_documentation_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
-    },
-    "elements" : [
-        {
-            "name" : {
-                "simple" : "a_type"
-            },
-            "meta_name": {
-              "simple": "object",
-              "external_modules" : "dogen",
-              "model_modules" : "yarn",
-              "internal_modules" : "meta_model"
+            "name" : "a_type",
+            "documentation" : "a_doc",
+            "parents" : [ "a::b::c", "a" ],
+            "stereotypes" : [ "yarn::object", "some stereotype" ],
+            "tagged_values" : {
+                "some_key" : "some_value"
             }
         }
-     ]
-  }
+    ]
+}
 )");
 
-const std::string no_name_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
-    },
+const std::string object_with_attribute_model(R"({
     "elements" : [
         {
-            "name" : {
-                "simple" : "a_type"
-            },
-            "meta_name": {
-              "simple": "object",
-              "external_modules" : "dogen",
-              "model_modules" : "yarn",
-              "internal_modules" : "meta_model"
-            }
+            "name" : "a_type",
+            "parents" : [ "a::b::c" ],
+            "attributes" : [
+                {
+                    "name" : "some_attr",
+                    "type" : "std::string",
+                    "documentation" : "a_doc",
+                    "stereotypes" : [ "some stereotype", "yarn::fluent" ],
+                    "tagged_values" : {
+                        "some_key" : "some_value"
+                    }
+                }
+            ]
         }
-     ]
-  }
+    ]
+}
 )");
 
-const std::string no_type_name_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
-    },
-    "elements" : [
-        {
-            "meta_name": {
-              "simple": "object",
-              "external_modules" : "dogen",
-              "model_modules" : "yarn",
-              "internal_modules" : "meta_model"
-            }
-        }
-     ]
-  }
-)");
-
-const std::string no_elements_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
-    }
-  }
+const std::string missing_elements_model(R"({
+    "documentation" : "a_doc",
+    "stereotypes" : [ "some stereotype", "another" ]
+}
 )");
 
 const std::string empty_elements_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
-    },
-    "elements" : [ ]
-  }
-)");
-
-const std::string internal_modules_model(R"({
-    "root_module" : {
-        "meta_name": {
-          "simple": "module",
-          "external_modules" : "dogen",
-          "model_modules" : "yarn",
-          "internal_modules" : "meta_model"
-        },
-        "annotation": {
-            "yarn.model_modules": "a_model"
-        }
-    },
-    "elements" : [
-        {
-            "name" : {
-                "simple" : "a_type",
-                "internal_modules" : "module_1::module_2::module_3"
-            },
-            "meta_name": {
-              "simple": "object",
-              "external_modules" : "dogen",
-              "model_modules" : "yarn",
-              "internal_modules" : "meta_model"
-            }
-        }
-     ]
-  }
-)");
-
-dogen::annotations::type_repository create_repository() {
-    using namespace dogen::annotations;
-    test::mock_type_factory f;
-
-    std::list<type> fds;
-    fds.push_back(f.make_type(model_key));
-    fds.push_back(f.make_type(some_key));
-    fds.push_back(f.make_type(type_key, value_types::boolean));
-
-    test::mock_type_repository_factory rf;
-    return rf.make(fds);
+    "documentation" : "a_doc",
+    "stereotypes" : [ "some stereotype", "another" ],
+    "elements" : []
 }
+)");
+
 
 dogen::yarn::meta_model::exomodel hydrate(std::istream& s) {
-    const auto rp(create_repository());
-
     dogen::yarn::json::hydrator h;
     return h.hydrate(s);
 }
-
+/*
 dogen::yarn::meta_model::exomodel
 hydrate(const boost::filesystem::path& p) {
     boost::filesystem::ifstream s(p);
     return hydrate(s);
 }
-
+*/
 dogen::yarn::meta_model::exomodel
 hydrate(const std::string& content) {
     std::istringstream s(content);
@@ -277,101 +142,117 @@ using dogen::yarn::json::hydration_error;
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 
-BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("trivial_model_hydrates_into_expected_model");
+BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("one_object_model_hydrates_into_expected_model");
 
-    BOOST_LOG_SEV(lg, debug) << "input: " << trivial_model;
-    const auto m(hydrate(trivial_model));
+    BOOST_LOG_SEV(lg, debug) << "input: " << one_object_model;
+    const auto m(hydrate(one_object_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_REQUIRE(m.modules().empty());
-    {
-        const auto& pair(m.root_module());
-        BOOST_REQUIRE(pair.second);
-        BOOST_CHECK(pair.second->documentation() == documentation);
-        BOOST_CHECK(pair.second->annotation().entries().empty());
-    }
+    BOOST_CHECK(m.documentation() == documentation);
+    BOOST_REQUIRE(m.stereotypes().size() == 2);
+    BOOST_CHECK(m.stereotypes().front() == a_stereotype);
+    BOOST_CHECK(m.stereotypes().back() == another_stereotype);
 
-    BOOST_REQUIRE(m.objects().size() == 1);
-    {
-        const auto& pair(*m.objects().begin());
-        const auto& n(pair.second->name());
+    BOOST_REQUIRE(m.tagged_values().size() == 1);
+    BOOST_CHECK(m.tagged_values().front().first == some_key);
+    BOOST_CHECK(m.tagged_values().front().second == some_value);
 
-        BOOST_CHECK(n.simple() == type_name);
-        const auto& nl(n.location());
-        BOOST_CHECK(nl.internal_modules().empty());
-        BOOST_CHECK(nl.external_modules().empty());
-        BOOST_CHECK(pair.second->documentation() == documentation);
-    }
+    BOOST_REQUIRE(m.elements().size() == 1);
+    const auto& e(m.elements().front());
+    BOOST_CHECK(e.name() == type_name);
+    BOOST_CHECK(e.documentation() == documentation);
+
+    BOOST_REQUIRE(e.parents().size() == 2);
+    BOOST_CHECK(e.parents().front() == first_parent);
+    BOOST_CHECK(e.parents().back() == second_parent);
+
+    BOOST_REQUIRE(e.tagged_values().size() == 1);
+    BOOST_CHECK(e.tagged_values().front().first == some_key);
+    BOOST_CHECK(e.tagged_values().front().second == some_value);
+
+    BOOST_REQUIRE(e.stereotypes().size() == 2);
+    BOOST_CHECK(e.stereotypes().back() == a_stereotype);
+    BOOST_CHECK(e.stereotypes().front() == "yarn::object");
+
+    BOOST_CHECK(e.attributes().empty());
 }
 
-BOOST_AUTO_TEST_CASE(no_documentation_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("no_documentation_model_hydrates_into_expected_model");
+BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("object_with_attribute_model_hydrates_into_expected_model");
 
-    const auto m(hydrate(no_documentation_model));
+    BOOST_LOG_SEV(lg, debug) << "input: " << object_with_attribute_model;
+    const auto m(hydrate(object_with_attribute_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_REQUIRE(m.modules().empty());
-    {
-        const auto& pair(m.root_module());
-        BOOST_REQUIRE(pair.second);
-        BOOST_CHECK(pair.second->documentation().empty());
-    }
+    BOOST_CHECK(m.documentation().empty());
+    BOOST_CHECK(m.stereotypes().empty());
+    BOOST_CHECK(m.stereotypes().empty());
+    BOOST_CHECK(m.tagged_values().empty());
 
-    BOOST_REQUIRE(m.objects().size() == 1);
-    {
-        const auto& pair(m.objects().begin());
-        BOOST_CHECK(pair->second->documentation().empty());
-    }
+    BOOST_REQUIRE(m.elements().size() == 1);
+    const auto& e(m.elements().front());
+    BOOST_CHECK(e.name() == type_name);
+    BOOST_CHECK(e.documentation().empty());
+
+    BOOST_REQUIRE(e.parents().size() == 1);
+    BOOST_CHECK(e.parents().front() == first_parent);
+
+    BOOST_REQUIRE(e.attributes().size() == 1);
+    const auto& a(e.attributes().front());
+    BOOST_CHECK(a.name() == attribute_name);
+    BOOST_CHECK(a.type() == attribute_type);
+    BOOST_CHECK(a.documentation() == documentation);
+
+    BOOST_REQUIRE(a.tagged_values().size() == 1);
+    BOOST_CHECK(a.tagged_values().front().first == some_key);
+    BOOST_CHECK(a.tagged_values().front().second == some_value);
+
+    BOOST_CHECK(a.stereotypes().size() == 2);
+    BOOST_CHECK(a.stereotypes().front() == a_stereotype);
+    BOOST_CHECK(a.stereotypes().back() == "yarn::fluent");
 }
 
-BOOST_AUTO_TEST_CASE(no_type_name_model_throws) {
-    SETUP_TEST_LOG_SOURCE("no_type_name_model_throws");
-    contains_checker<hydration_error> c(missing_type_name);
-    BOOST_CHECK_EXCEPTION(hydrate(no_type_name_model), hydration_error, c);
-}
+BOOST_AUTO_TEST_CASE(empty_elements_model_results_in_empty_model) {
+    SETUP_TEST_LOG_SOURCE("empty_elements_model_results_in_empty_model");
 
-BOOST_AUTO_TEST_CASE(no_elements_model_results_in_empty_model) {
-    SETUP_TEST_LOG_SOURCE("no_elements_model_throws");
-    const auto m(hydrate(no_elements_model));
-
-    BOOST_CHECK(m.objects().empty());
-    BOOST_CHECK(m.builtins().empty());
-    BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.modules().empty());
-    BOOST_REQUIRE(m.root_module().second);
-}
-
-BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
-    SETUP_TEST_LOG_SOURCE("empty_elements_model_throws");
-
+    BOOST_LOG_SEV(lg, debug) << "input: " << empty_elements_model;
     const auto m(hydrate(empty_elements_model));
-
-    BOOST_CHECK(m.objects().empty());
-    BOOST_CHECK(m.builtins().empty());
-    BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.modules().empty());
-}
-
-BOOST_AUTO_TEST_CASE(internal_modules_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("internal_modules_model_hydrates_into_expected_model");
-    const auto m(hydrate(internal_modules_model));
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    BOOST_REQUIRE(m.objects().size() == 1);
-    const auto& pair(*m.objects().begin());
-    const auto& n(pair.second->name());
-
-    const auto mp(n.location().internal_modules());
-    BOOST_REQUIRE(mp.size() == 3);
-
-    auto i(mp.begin());
-    BOOST_CHECK(*i == internal_modules_value_1);
-    BOOST_CHECK((*(++i)) == internal_modules_value_2);
-    BOOST_CHECK((*(++i)) == internal_modules_value_3);
-
-    BOOST_CHECK(n.location().external_modules().empty());
+    BOOST_CHECK(m.elements().empty());
+    BOOST_CHECK(m.documentation() == documentation);
+    BOOST_REQUIRE(m.stereotypes().size() == 2);
+    BOOST_CHECK(m.stereotypes().front() == a_stereotype);
+    BOOST_CHECK(m.stereotypes().back() == another_stereotype);
 }
+
+BOOST_AUTO_TEST_CASE(missing_elements_model_throws) {
+    SETUP_TEST_LOG_SOURCE("missing_elements_model_throws");
+
+    BOOST_LOG_SEV(lg, debug) << "input: " << missing_elements_model;
+    contains_checker<hydration_error> c(missing_elements);
+    BOOST_CHECK_EXCEPTION(hydrate(missing_elements_model), hydration_error, c);
+}
+/*
+BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
+    SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
+
+    using namespace dogen::utility::filesystem;
+    boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
+    const auto m(hydrate(p));
+
+    BOOST_LOG_SEV(lg, debug) << "model: " << m;
+
+    const auto& elements(m.elements());
+    BOOST_CHECK(!elements.empty());
+    for (const auto& e : elements) {
+        const auto n(e.name());
+        BOOST_REQUIRE(!n.empty());
+    }
+}
+*/
+/*
 
 BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_std_model_hydrates_into_expected_model");
@@ -410,30 +291,6 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.modules().empty());
 }
 
-BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
-    SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
-
-    using namespace dogen::utility::filesystem;
-    boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
-    const auto m(hydrate(p));
-
-    BOOST_LOG_SEV(lg, debug) << "model: " << m;
-
-    const auto& objects(m.objects());
-    BOOST_CHECK(!objects.empty());
-    for (const auto& pair : objects) {
-        const auto& o(*pair.second);
-        const auto n(o.name());
-
-        BOOST_REQUIRE(!n.simple().empty());
-        BOOST_CHECK(n.location().model_modules().empty());
-        BOOST_CHECK(n.location().external_modules().empty());
-    }
-    BOOST_CHECK(m.builtins().empty());
-    BOOST_CHECK(m.enumerations().empty());
-    BOOST_CHECK(m.modules().empty());
-}
-
 BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
     using namespace dogen::utility::filesystem;
@@ -457,6 +314,5 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(m.modules().empty());
 }
-
-BOOST_AUTO_TEST_SUITE_END()
 */
+BOOST_AUTO_TEST_SUITE_END()

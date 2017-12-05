@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-05 Tue 08:55]
+#+CAPTION: Clock summary at [2017-12-05 Tue 09:00]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *49:04* |       |       | 100.0 |
+| *Total time*                                                                | *49:09* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 49:04   |       |       | 100.0 |
-| Active                                                                      |         | 49:04 |       | 100.0 |
+| Stories                                                                     | 49:09   |       |       | 100.0 |
+| Active                                                                      |         | 49:09 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.1 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.5 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.2 |
 | COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.7 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  28.0 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  27.9 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.8 |
 | COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  32.7 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.8 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   6.0 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.1 |
+| STARTED Remove all deprecated code after exomodels clean up                 |         |       |  0:05 |   0.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -448,10 +449,14 @@ program options:
   processing with boost program_options
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
-*** Remove all deprecated code after exomodels clean up               :story:
+*** STARTED Remove all deprecated code after exomodels clean up       :story:
+    CLOCK: [2017-12-05 Tue 08:55]--[2017-12-05 Tue 09:00] =>  0:05
 
-Remove all deprecated code including scribble groups and related
-classes.
+Remove all deprecated code:
+
+- yarn.json: hydrator related classes
+- annotations: scribble groups and related classes.
+- yarn: drop exoelement properties
 
 *** Investigate current implementation of the origin transform        :story:
 
