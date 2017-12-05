@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-05 Tue 08:49]
+#+CAPTION: Clock summary at [2017-12-05 Tue 08:55]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *48:59* |       |       | 100.0 |
+| *Total time*                                                                | *49:04* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 48:59   |       |       | 100.0 |
-| Active                                                                      |         | 48:59 |       | 100.0 |
+| Stories                                                                     | 49:04   |       |       | 100.0 |
+| Active                                                                      |         | 49:04 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.1 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:08 |   4.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.5 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.2 |
 | COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.7 |
 | COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  28.0 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.8 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  32.8 |
-| COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.9 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  32.7 |
+| COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.8 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   6.0 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -94,6 +94,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-12-05 Tue 08:49]--[2017-12-05 Tue 08:54] =>  0:05
     CLOCK: [2017-12-01 Fri 12:51]--[2017-12-01 Fri 13:14] =>  0:23
     CLOCK: [2017-12-01 Fri 11:29]--[2017-12-01 Fri 11:46] =>  0:17
     CLOCK: [2017-11-30 Fri 22:32]--[2017-11-30 Fri 23:02] =>  0:30
@@ -373,15 +374,6 @@ Tasks:
   annotation.
 - create new JSON format for exomodels. Update JSON parser to
   read/write it. Set flag to true in JSON.
-- remove all deprecated code including scribble groups and related
-  classes.
-- do we need to have the origin expansion? can we not just supply the
-  origin type to the exomodel adapter directly?
-- rename key value pairs to tagged values in yarn.dia processed
-  object.
-- need to add: can_be_primitive_underlier, in_global_module,
-  can_be_enumeration_underlier, is_default_enumeration_type,
-  is_associative_container
 - JSON needs to explicitly contain fallback stereotype or else tailor
   roundtrip will fail. We should check that fallback is not default,
   if so do not bother outputting it.
@@ -455,6 +447,30 @@ program options:
 - [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
   processing with boost program_options
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
+
+*** Remove all deprecated code after exomodels clean up               :story:
+
+Remove all deprecated code including scribble groups and related
+classes.
+
+*** Investigate current implementation of the origin transform        :story:
+
+Do we need to have the origin expansion? can we not just supply the
+origin type to the exomodel adapter directly?
+
+*** Clean up tagged values                                            :story:
+
+Tasks:
+
+- rename entries in annotations to tagged values.
+- rename key value pairs to tagged values in yarn.dia processed
+  object.
+
+*** Clean up exoelement                                               :story:
+
+Need to add: can_be_primitive_underlier, in_global_module,
+can_be_enumeration_underlier, is_default_enumeration_type,
+is_associative_container
 
 *** Rename =yarn= to =modeling=                                       :story:
 
