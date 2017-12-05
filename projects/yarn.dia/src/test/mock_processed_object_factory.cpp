@@ -120,7 +120,7 @@ make_uml_note_with_marker(const unsigned int n) {
     r.comment().original_content(s.str());
     r.comment().applicable_to_parent_object(true);
     const auto pair(std::make_pair(instruction_key, instruction_value));
-    r.comment().key_value_pairs().push_back(pair);
+    r.comment().tagged_values().push_back(pair);
     return r;
 }
 

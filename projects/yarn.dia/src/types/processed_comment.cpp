@@ -29,12 +29,12 @@ processed_comment::processed_comment()
 
 processed_comment::processed_comment(
     const std::string& documentation,
-    const std::list<std::pair<std::string, std::string> >& key_value_pairs,
+    const std::list<std::pair<std::string, std::string> >& tagged_values,
     const bool applicable_to_parent_object,
     const std::string& original_content,
     const std::string& external_modules)
     : documentation_(documentation),
-      key_value_pairs_(key_value_pairs),
+      tagged_values_(tagged_values),
       applicable_to_parent_object_(applicable_to_parent_object),
       original_content_(original_content),
       external_modules_(external_modules) { }
@@ -42,7 +42,7 @@ processed_comment::processed_comment(
 void processed_comment::swap(processed_comment& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
-    swap(key_value_pairs_, other.key_value_pairs_);
+    swap(tagged_values_, other.tagged_values_);
     swap(applicable_to_parent_object_, other.applicable_to_parent_object_);
     swap(original_content_, other.original_content_);
     swap(external_modules_, other.external_modules_);
@@ -50,7 +50,7 @@ void processed_comment::swap(processed_comment& other) noexcept {
 
 bool processed_comment::operator==(const processed_comment& rhs) const {
     return documentation_ == rhs.documentation_ &&
-        key_value_pairs_ == rhs.key_value_pairs_ &&
+        tagged_values_ == rhs.tagged_values_ &&
         applicable_to_parent_object_ == rhs.applicable_to_parent_object_ &&
         original_content_ == rhs.original_content_ &&
         external_modules_ == rhs.external_modules_;
@@ -78,20 +78,20 @@ void processed_comment::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, std::string> >& processed_comment::key_value_pairs() const {
-    return key_value_pairs_;
+const std::list<std::pair<std::string, std::string> >& processed_comment::tagged_values() const {
+    return tagged_values_;
 }
 
-std::list<std::pair<std::string, std::string> >& processed_comment::key_value_pairs() {
-    return key_value_pairs_;
+std::list<std::pair<std::string, std::string> >& processed_comment::tagged_values() {
+    return tagged_values_;
 }
 
-void processed_comment::key_value_pairs(const std::list<std::pair<std::string, std::string> >& v) {
-    key_value_pairs_ = v;
+void processed_comment::tagged_values(const std::list<std::pair<std::string, std::string> >& v) {
+    tagged_values_ = v;
 }
 
-void processed_comment::key_value_pairs(const std::list<std::pair<std::string, std::string> >&& v) {
-    key_value_pairs_ = std::move(v);
+void processed_comment::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
+    tagged_values_ = std::move(v);
 }
 
 bool processed_comment::applicable_to_parent_object() const {

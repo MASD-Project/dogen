@@ -72,7 +72,7 @@ processed_comment processed_comment_factory::make(const std::string& c) {
             if (key == traits::external_modules())
                 r.external_modules(value);
 
-            r.key_value_pairs().push_back(std::make_pair(key, value));
+            r.tagged_values().push_back(std::make_pair(key, value));
             continue;
         }
 

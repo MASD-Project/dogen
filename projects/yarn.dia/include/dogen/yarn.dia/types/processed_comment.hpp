@@ -50,7 +50,7 @@ public:
 public:
     processed_comment(
         const std::string& documentation,
-        const std::list<std::pair<std::string, std::string> >& key_value_pairs,
+        const std::list<std::pair<std::string, std::string> >& tagged_values,
         const bool applicable_to_parent_object,
         const std::string& original_content,
         const std::string& external_modules);
@@ -77,10 +77,10 @@ public:
      * @brief Dogen instructions, in the key-value-pair form.
      */
     /**@{*/
-    const std::list<std::pair<std::string, std::string> >& key_value_pairs() const;
-    std::list<std::pair<std::string, std::string> >& key_value_pairs();
-    void key_value_pairs(const std::list<std::pair<std::string, std::string> >& v);
-    void key_value_pairs(const std::list<std::pair<std::string, std::string> >&& v);
+    const std::list<std::pair<std::string, std::string> >& tagged_values() const;
+    std::list<std::pair<std::string, std::string> >& tagged_values();
+    void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
+    void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
     /**@}*/
 
     /**
@@ -123,7 +123,7 @@ public:
 
 private:
     std::string documentation_;
-    std::list<std::pair<std::string, std::string> > key_value_pairs_;
+    std::list<std::pair<std::string, std::string> > tagged_values_;
     bool applicable_to_parent_object_;
     std::string original_content_;
     std::string external_modules_;

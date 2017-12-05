@@ -71,19 +71,19 @@ using dogen::yarn::dia::building_error;
 
 BOOST_AUTO_TEST_SUITE(processed_comment_factory_tests)
 
-BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("empty_comments_result_in_empty_documentation_and_key_value_pairs");
+BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("empty_comments_result_in_empty_documentation_and_tagged_values");
     dogen::yarn::dia::processed_comment_factory f;
     const auto r(f.make(empty));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
     BOOST_CHECK(r.documentation().empty());
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_CHECK(r.key_value_pairs().empty());
+    BOOST_CHECK(r.tagged_values().empty());
 }
 
-BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs");
+BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << line_1;
     dogen::yarn::dia::processed_comment_factory f;
@@ -98,11 +98,11 @@ BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_do
     BOOST_CHECK(line == line_1);
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_CHECK(r.key_value_pairs().empty());
+    BOOST_CHECK(r.tagged_values().empty());
 }
 
-BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_key_value_pairs");
+BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("single_line_comment_with_end_line_results_in_expected_documentation_and_emtpy_tagged_values");
 
     std::ostringstream os;
     os << line_1 << std::endl;
@@ -120,7 +120,7 @@ BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_docum
     BOOST_CHECK(line == line_1);
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_CHECK(r.key_value_pairs().empty());
+    BOOST_CHECK(r.tagged_values().empty());
 }
 
 BOOST_AUTO_TEST_CASE(multi_line_comment_results_in_expected_documentation_and_emtpy_key_value_pair) {
@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_results_in_expected_documentation_and_em
     BOOST_CHECK(!std::getline(is, line));
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_CHECK(r.key_value_pairs().empty());
+    BOOST_CHECK(r.tagged_values().empty());
 }
 
 BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_no_end_line_results_in_empty_documentation_and_expected_key_value_pair) {
@@ -169,9 +169,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_no_end_line_results_in_e
 
     BOOST_CHECK(r.documentation().empty());
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().size() == 1);
+    BOOST_REQUIRE(r.tagged_values().size() == 1);
 
-    const auto& pair(*r.key_value_pairs().begin());
+    const auto& pair(*r.tagged_values().begin());
     BOOST_CHECK(pair.first == key_1);
     BOOST_CHECK(pair.second == value_1);
 }
@@ -189,9 +189,9 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_end_line_results_in_empt
 
     BOOST_CHECK(r.documentation().empty());
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().size() == 1);
+    BOOST_REQUIRE(r.tagged_values().size() == 1);
 
-    const auto& pair(*r.key_value_pairs().begin());
+    const auto& pair(*r.tagged_values().begin());
     BOOST_CHECK(pair.first == key_1);
     BOOST_CHECK(pair.second == value_1);
 }
@@ -220,8 +220,8 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_but_no_key_value_pair_throw
     BOOST_CHECK_THROW(f.make(empty_instruction), building_error);
 }
 
-BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_key_value_pairs");
+BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << marker_without_space;
     dogen::yarn::dia::processed_comment_factory f;
@@ -236,11 +236,11 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_crea
     BOOST_CHECK(line == marker_without_space);
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().empty());
+    BOOST_REQUIRE(r.tagged_values().empty());
 }
 
-BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_key_value_pairs");
+BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << marker_with_leading_space;
     dogen::yarn::dia::processed_comment_factory f;
@@ -255,11 +255,11 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_preceded_by_leading_space_c
     BOOST_CHECK(line == marker_with_leading_space);
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().empty());
+    BOOST_REQUIRE(r.tagged_values().empty());
 }
 
-BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_key_value_pairs");
+BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << marker_in_lower_case;
     dogen::yarn::dia::processed_comment_factory f;
@@ -274,11 +274,11 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_in_lower_case_creates_docum
     BOOST_CHECK(line == marker_in_lower_case);
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().empty());
+    BOOST_REQUIRE(r.tagged_values().empty());
 }
 
-BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation_and_empty_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("comment_with_unknown_marker_creates_documentation_and_empty_key_value_pairs");
+BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation_and_empty_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("comment_with_unknown_marker_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << unknown_marker;
     dogen::yarn::dia::processed_comment_factory f;
@@ -293,7 +293,7 @@ BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation_and_empty
     BOOST_CHECK(line == unknown_marker);
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().empty());
+    BOOST_REQUIRE(r.tagged_values().empty());
 }
 
 BOOST_AUTO_TEST_CASE(multi_line_comment_with_instruction_results_in_expected_documentation_and_expected_key_value_pair) {
@@ -326,14 +326,14 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_with_instruction_results_in_expected_doc
     BOOST_CHECK(!std::getline(is, line));
 
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().size() == 1);
-    const auto& pair(*r.key_value_pairs().begin());
+    BOOST_REQUIRE(r.tagged_values().size() == 1);
+    const auto& pair(*r.tagged_values().begin());
     BOOST_CHECK(pair.first == key_1);
     BOOST_CHECK(pair.second == value_1);
 }
 
-BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documentation_and_expected_key_value_pairs) {
-    SETUP_TEST_LOG_SOURCE("comment_with_multiple_instructions_results_in_empty_documentation_and_expected_key_value_pairs");
+BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documentation_and_expected_tagged_values) {
+    SETUP_TEST_LOG_SOURCE("comment_with_multiple_instructions_results_in_empty_documentation_and_expected_tagged_values");
 
     std::ostringstream os;
     os << instruction_1 << std::endl << instruction_2 << std::endl
@@ -346,9 +346,9 @@ BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documen
 
     BOOST_CHECK(r.documentation().empty());
     BOOST_CHECK(!r.applicable_to_parent_object());
-    BOOST_REQUIRE(r.key_value_pairs().size() == 4);
+    BOOST_REQUIRE(r.tagged_values().size() == 4);
 
-    auto i(r.key_value_pairs().begin());
+    auto i(r.tagged_values().begin());
     BOOST_CHECK(i->first == key_1);
     BOOST_CHECK(i->second == value_1);
 

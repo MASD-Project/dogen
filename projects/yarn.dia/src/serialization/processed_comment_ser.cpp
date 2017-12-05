@@ -40,7 +40,7 @@ void save(Archive& ar,
     const dogen::yarn::dia::processed_comment& v,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
-    ar << make_nvp("key_value_pairs", v.key_value_pairs_);
+    ar << make_nvp("tagged_values", v.tagged_values_);
     ar << make_nvp("applicable_to_parent_object", v.applicable_to_parent_object_);
     ar << make_nvp("original_content", v.original_content_);
     ar << make_nvp("external_modules", v.external_modules_);
@@ -51,7 +51,7 @@ void load(Archive& ar,
     dogen::yarn::dia::processed_comment& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
-    ar >> make_nvp("key_value_pairs", v.key_value_pairs_);
+    ar >> make_nvp("tagged_values", v.tagged_values_);
     ar >> make_nvp("applicable_to_parent_object", v.applicable_to_parent_object_);
     ar >> make_nvp("original_content", v.original_content_);
     ar >> make_nvp("external_modules", v.external_modules_);

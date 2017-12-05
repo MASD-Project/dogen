@@ -64,7 +64,7 @@ meta_model::exoattribute adapter::adapt(const processed_attribute& a) {
     r.name(a.name());
     r.type(a.type());
     r.documentation(a.comment().documentation());
-    r.tagged_values(a.comment().key_value_pairs());
+    r.tagged_values(a.comment().tagged_values());
 
     return r;
 }
@@ -104,7 +104,7 @@ adapt(const processed_object& po, const std::string& contained_by,
     r.name(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());
-    r.tagged_values(po.comment().key_value_pairs());
+    r.tagged_values(po.comment().tagged_values());
     process_stereotypes(po, r);
 
     for (const auto& attr : po.attributes())

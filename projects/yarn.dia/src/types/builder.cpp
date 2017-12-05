@@ -129,11 +129,11 @@ void builder::handle_uml_note(const processed_object& po) {
          * documentation for the model.
          */
         model_.documentation(c.documentation());
-        model_.tagged_values(c.key_value_pairs());
+        model_.tagged_values(c.tagged_values());
         BOOST_LOG_SEV(lg, debug) << "Model documentation: '"
                                  << c.documentation() << "'";
         BOOST_LOG_SEV(lg, debug) << "Model tagged values: "
-                                 << c.key_value_pairs();
+                                 << c.tagged_values();
         return;
     }
 
@@ -151,7 +151,7 @@ void builder::handle_uml_note(const processed_object& po) {
 
     auto& e(*i->second.exoelement);
     e.documentation(c.documentation());
-    e.tagged_values(c.key_value_pairs());
+    e.tagged_values(c.tagged_values());
 }
 
 void builder::add(const processed_object& po) {
