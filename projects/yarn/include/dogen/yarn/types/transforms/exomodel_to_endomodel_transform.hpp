@@ -71,13 +71,6 @@ private:
         const meta_model::location& l, const meta_model::exoelement& ee,
         meta_model::endomodel& em);
 
-private:
-    static meta_model::endomodel
-    new_transform(const context& ctx, const meta_model::exomodel& em);
-
-    static meta_model::endomodel
-    old_transform(const context& ctx, const meta_model::exomodel& em);
-
 public:
     static meta_model::endomodel
     transform(const context& ctx, const meta_model::exomodel& em);

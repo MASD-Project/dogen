@@ -274,10 +274,6 @@ std::list<dogen::yarn::meta_model::exoelement> create_std_list_dogen_yarn_meta_m
     return r;
 }
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) != 0;
-}
-
 std::list<std::string> create_std_list_std_string(unsigned int position) {
     std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
@@ -309,8 +305,7 @@ populate(const unsigned int position, result_type& v) {
     v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 10));
     v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 11));
     v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 12));
-    v.use_new_code(create_bool(position + 13));
-    v.stereotypes(create_std_list_std_string(position + 14));
+    v.stereotypes(create_std_list_std_string(position + 13));
 }
 
 exomodel_generator::result_type

@@ -94,9 +94,6 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-exomodel::exomodel()
-    : use_new_code_(static_cast<bool>(0)) { }
-
 exomodel::exomodel(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
@@ -111,7 +108,6 @@ exomodel::exomodel(
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
     const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
     const std::list<dogen::yarn::meta_model::exoelement>& elements,
-    const bool use_new_code,
     const std::list<std::string>& stereotypes)
     : name_(name),
       meta_name_(meta_name),
@@ -126,7 +122,6 @@ exomodel::exomodel(
       exceptions_(exceptions),
       root_module_(root_module),
       elements_(elements),
-      use_new_code_(use_new_code),
       stereotypes_(stereotypes) { }
 
 void exomodel::swap(exomodel& other) noexcept {
@@ -144,7 +139,6 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(exceptions_, other.exceptions_);
     swap(root_module_, other.root_module_);
     swap(elements_, other.elements_);
-    swap(use_new_code_, other.use_new_code_);
     swap(stereotypes_, other.stereotypes_);
 }
 
@@ -162,7 +156,6 @@ bool exomodel::operator==(const exomodel& rhs) const {
         exceptions_ == rhs.exceptions_ &&
         root_module_ == rhs.root_module_ &&
         elements_ == rhs.elements_ &&
-        use_new_code_ == rhs.use_new_code_ &&
         stereotypes_ == rhs.stereotypes_;
 }
 
@@ -378,14 +371,6 @@ void exomodel::elements(const std::list<dogen::yarn::meta_model::exoelement>& v)
 
 void exomodel::elements(const std::list<dogen::yarn::meta_model::exoelement>&& v) {
     elements_ = std::move(v);
-}
-
-bool exomodel::use_new_code() const {
-    return use_new_code_;
-}
-
-void exomodel::use_new_code(const bool v) {
-    use_new_code_ = v;
 }
 
 const std::list<std::string>& exomodel::stereotypes() const {

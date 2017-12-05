@@ -72,7 +72,6 @@ workflow::generate_model(const std::list<processed_object>& pos) {
     visitor v(nb);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     auto r(nb.build());
-    r.use_new_code(true);
     return r;
 }
 

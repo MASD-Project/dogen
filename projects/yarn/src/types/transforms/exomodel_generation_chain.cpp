@@ -72,16 +72,6 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      */
     auto& t(transform_for_model(p));
     auto r(t.transform(ctx, p));
-
-    if (!r.use_new_code()) {
-        /*
-         * Transform the annotations. This must be done at this point
-         * because the naming transform reads naming information from the
-         * annotations.
-         */
-        annotations_transform::transform(ctx, r);
-    }
-
     stp.end_chain(r);
     return r;
 }

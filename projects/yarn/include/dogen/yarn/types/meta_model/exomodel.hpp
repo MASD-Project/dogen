@@ -48,12 +48,10 @@ namespace meta_model {
 
 class exomodel final {
 public:
+    exomodel() = default;
     exomodel(const exomodel&) = default;
     exomodel(exomodel&&) = default;
     ~exomodel() = default;
-
-public:
-    exomodel();
 
 public:
     exomodel(
@@ -70,7 +68,6 @@ public:
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
         const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
         const std::list<dogen::yarn::meta_model::exoelement>& elements,
-        const bool use_new_code,
         const std::list<std::string>& stereotypes);
 
 private:
@@ -165,9 +162,6 @@ public:
     void elements(const std::list<dogen::yarn::meta_model::exoelement>& v);
     void elements(const std::list<dogen::yarn::meta_model::exoelement>&& v);
 
-    bool use_new_code() const;
-    void use_new_code(const bool v);
-
     const std::list<std::string>& stereotypes() const;
     std::list<std::string>& stereotypes();
     void stereotypes(const std::list<std::string>& v);
@@ -197,7 +191,6 @@ private:
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > > exceptions_;
     std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > root_module_;
     std::list<dogen::yarn::meta_model::exoelement> elements_;
-    bool use_new_code_;
     std::list<std::string> stereotypes_;
 };
 

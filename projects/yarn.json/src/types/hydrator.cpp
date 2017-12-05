@@ -175,7 +175,6 @@ meta_model::exomodel hydrator::read_stream(std::istream& s) const {
     meta_model::exomodel r;
     r.documentation(read_documentation(pt));
     r.tagged_values(read_tagged_values(pt));
-    r.use_new_code(true);
     r.stereotypes(read_stereotypes(pt));
 
     const auto i(pt.find(elements_key));

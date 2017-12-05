@@ -315,7 +315,7 @@ process_element(const helpers::adapter& ad, const meta_model::location& l,
 }
 
 meta_model::endomodel exomodel_to_endomodel_transform::
-new_transform(const context& ctx, const meta_model::exomodel& em) {
+transform(const context& ctx, const meta_model::exomodel& em) {
     helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
@@ -354,59 +354,6 @@ new_transform(const context& ctx, const meta_model::exomodel& em) {
     insert(r.root_module(), r.modules());
 
     return r;
-}
-
-meta_model::endomodel exomodel_to_endomodel_transform::
-old_transform(const context& ctx, const meta_model::exomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
-        transform_id, em.name().id(), ctx.prober(), em);
-
-    const auto& ra(em.root_module().second->annotation());
-    const auto tg(make_type_group(ctx.type_repository()));
-    const auto nc(make_naming_configuration(tg, ra));
-    const auto l(create_location(nc));
-
-    /*
-     * Compute the model name and update the root module name with it.
-     */
-    naming_helper h;
-    meta_model::endomodel r;
-    r.name(h.compute_model_name(l));
-    r.root_module(em.root_module().second);
-    r.root_module()->name(r.name());
-
-    /*
-     * Now update all elements and copy them across to the endomodel.
-     */
-    r.modules(to_element_map(h, l, em.modules()));
-    r.object_templates(to_element_map(h, l, em.object_templates()));
-    r.builtins(to_element_map(h, l, em.builtins()));
-    r.enumerations(to_element_map(h, l, em.enumerations()));
-    r.primitives(to_element_map(h, l, em.primitives()));
-    r.objects(to_element_map(h, l, em.objects()));
-    r.exceptions(to_element_map(h, l, em.exceptions()));
-
-    /*
-     * FIXME: For now, we must inject the root module into the element
-     * collection manually. This is not ideal - we should probably
-     * just process it from the root_module member variable - but this
-     * will be mopped up during the formattables clean up.
-     */
-    insert(r.root_module(), r.modules());
-
-    stp.end_transform(r);
-    return r;
-}
-
-meta_model::endomodel exomodel_to_endomodel_transform::
-transform(const context& ctx, const meta_model::exomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "exomodel to endomodel transform",
-        transform_id, em.name().id(), ctx.prober(), em);
-
-    if (em.use_new_code())
-        return new_transform(ctx, em);
-    else
-        return old_transform(ctx, em);
 }
 
 } } }

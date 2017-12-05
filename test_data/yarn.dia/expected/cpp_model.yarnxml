@@ -4700,7 +4700,6 @@ of the object template instantiated by the base class.
 			<fallback_element_type>yarn::object</fallback_element_type>
 		</item>
 	</elements>
-	<use_new_code>1</use_new_code>
 	<stereotypes>
 		<count>0</count>
 		<item_version>0</item_version>
