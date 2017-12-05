@@ -169,21 +169,6 @@ insert(const boost::shared_ptr<Element>& e,
     }
 }
 
-template<typename Element>
-inline std::unordered_map<std::string, boost::shared_ptr<Element>>
-to_element_map(const naming_helper& helper, const meta_model::location& l,
-    const std::list<std::pair<annotations::scribble_group,
-    boost::shared_ptr<Element>>>& elements) {
-    std::unordered_map<std::string, boost::shared_ptr<Element>> r;
-    for (const auto& pair : elements) {
-        auto e(pair.second);
-        helper.process(l, *e);
-        insert(e, r);
-    }
-
-    return r;
-}
-
 std::ostream& operator<<(std::ostream& s,
     const exomodel_to_endomodel_transform::type_group& v) {
     s << " { "
