@@ -344,16 +344,16 @@ handle_profiles(const type_group& tg, const std::unordered_map<std::string,
 annotation annotation_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
     const scope_types scope) const {
-    auto aggregated_entries(aggregate_entries(entries));
-    const auto r(create_annotation(scope, aggregated_entries));
-    return r;
+    const std::list<std::string> candidate_labels;
+    return make(entries, scope, candidate_labels);
 }
 
 annotation annotation_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
     const scope_types scope,
     const std::list<std::string>& candidate_labels) const {
-    const auto original(make(entries, scope));
+    auto aggregated_entries(aggregate_entries(entries));
+    const auto original(create_annotation(scope, aggregated_entries));
     const auto& cl(candidate_labels);
     const auto r(handle_profiles(type_group_, profiles_, cl, original));
     return r;
