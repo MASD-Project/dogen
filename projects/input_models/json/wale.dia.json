@@ -75,7 +75,7 @@
     },
     {
       "name": "validation_error",
-      "documentation": "An error occurred whilst validating.\\n",
+      "documentation": "An error occurred whilst validating.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -83,7 +83,7 @@
     },
     {
       "name": "formatting_error",
-      "documentation": "An error occurred whilst formatting.\\n",
+      "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -91,7 +91,7 @@
     },
     {
       "name": "extraction_error",
-      "documentation": "An error occurred whilst extracting a key.\\n",
+      "documentation": "An error occurred whilst extracting a key.\n",
       "stereotypes": [
         "yarn::exception"
       ],

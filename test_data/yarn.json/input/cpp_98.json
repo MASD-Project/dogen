@@ -1,5 +1,5 @@
 {
-  "documentation": "Tests support for C++ 98.\\n",
+  "documentation": "Tests support for C++ 98.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "cpp_98",
@@ -44,6 +44,9 @@
     },
     {
       "name": "child",
+      "parents": [
+        "parent"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -54,7 +57,7 @@
     },
     {
       "name": "no_default_ctor",
-      "documentation": "This class does not require a default constructor due to using simple types.\\n",
+      "documentation": "This class does not require a default constructor due to using simple types.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {

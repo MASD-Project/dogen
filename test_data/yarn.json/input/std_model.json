@@ -23,7 +23,7 @@
         {
           "name": "prop1",
           "type": "std::string",
-          "documentation": "test inclusion duplicates\\n"
+          "documentation": "test inclusion duplicates\n"
         }
       ]
     },
@@ -183,6 +183,9 @@
     },
     {
       "name": "derived",
+      "parents": [
+        "base"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -296,7 +299,7 @@
     },
     {
       "name": "string_primitive",
-      "documentation": "Test a primitive with an underlying string.\\n",
+      "documentation": "Test a primitive with an underlying string.\n",
       "stereotypes": [
         "yarn::primitive"
       ],

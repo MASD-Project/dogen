@@ -1,5 +1,5 @@
 {
-  "documentation": "The Northwind model is a \\\"transliteration\\\" of Microsoft's\\nNorthwind database, provided as a sample for Access and SQL Server.\\nIt's objective is to test Dogen integration with ODB.\\n",
+  "documentation": "The Northwind model is a \"transliteration\" of Microsoft's\nNorthwind database, provided as a sample for Access and SQL Server.\nIt's objective is to test Dogen integration with ODB.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "northwind",
@@ -702,7 +702,7 @@
     },
     {
       "name": "non_orm_class",
-      "documentation": "test the ODB behaviour for non-ORM classes.\\n",
+      "documentation": "test the ODB behaviour for non-ORM classes.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {

@@ -1,5 +1,5 @@
 {
-  "documentation": "Provides yarn file importing support for JSON.\\n",
+  "documentation": "Provides yarn file importing support for JSON.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "yarn.json",

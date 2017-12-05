@@ -1,5 +1,5 @@
 {
-  "documentation": "The Annotations model is responsible for managing run-time typed data.\\n\\nThe idea is to allow the meta-models to carry data over to the\\nformatting process without necessarily knowing about this data, but\\nyet imposing some constraints on the shape of the data.\\n",
+  "documentation": "The Annotations model is responsible for managing run-time typed data.\n\nThe idea is to allow the meta-models to carry data over to the\nformatting process without necessarily knowing about this data, but\nyet imposing some constraints on the shape of the data.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "annotations",
@@ -15,7 +15,7 @@
   "elements": [
     {
       "name": "value",
-      "documentation": "Base class of all value types.\\n",
+      "documentation": "Base class of all value types.\n",
       "stereotypes": [
         "yarn::visitable"
       ],
@@ -23,31 +23,40 @@
     },
     {
       "name": "text",
-      "documentation": "Field can hold text.\\n",
+      "parents": [
+        "value"
+      ],
+      "documentation": "Field can hold text.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "content",
           "type": "std::string",
-          "documentation": "Text value.\\n"
+          "documentation": "Text value.\n"
         }
       ]
     },
     {
       "name": "text_collection",
-      "documentation": "Field can hold a collection of text values.\\n",
+      "parents": [
+        "value"
+      ],
+      "documentation": "Field can hold a collection of text values.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "content",
           "type": "std::list<std::string>",
-          "documentation": "Collection of text values.\\n"
+          "documentation": "Collection of text values.\n"
         }
       ]
     },
     {
       "name": "boolean",
-      "documentation": "Field can hold a Boolean value.\\n",
+      "parents": [
+        "value"
+      ],
+      "documentation": "Field can hold a Boolean value.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -58,24 +67,24 @@
     },
     {
       "name": "name",
-      "documentation": "Name of the field description or field.\\n",
+      "documentation": "Name of the field description or field.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "simple",
           "type": "std::string",
-          "documentation": "Non-qualified name of the field.\\n"
+          "documentation": "Non-qualified name of the field.\n"
         },
         {
           "name": "qualified",
           "type": "std::string",
-          "documentation": "Qualified name of the field, using dots to separate the hierarchy.\\n"
+          "documentation": "Qualified name of the field, using dots to separate the hierarchy.\n"
         }
       ]
     },
     {
       "name": "value_types",
-      "documentation": "What values can a field hold.\\n",
+      "documentation": "What values can a field hold.\n",
       "stereotypes": [
         "yarn::enumeration"
       ],
@@ -105,33 +114,33 @@
     },
     {
       "name": "type",
-      "documentation": "Defines the domain of values.\\n",
+      "documentation": "Defines the domain of values.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "name",
           "type": "name",
-          "documentation": "Name of the field to which this definition applies.\\n"
+          "documentation": "Name of the field to which this definition applies.\n"
         },
         {
           "name": "value_type",
           "type": "value_types",
-          "documentation": "Type of the field.\\n"
+          "documentation": "Type of the field.\n"
         },
         {
           "name": "scope",
           "type": "scope_types",
-          "documentation": "Valid scopes where the type may be present.\\n"
+          "documentation": "Valid scopes where the type may be present.\n"
         },
         {
           "name": "archetype_location",
           "type": "archetype_location",
-          "documentation": "The archetype location for this type.\\n"
+          "documentation": "The archetype location for this type.\n"
         },
         {
           "name": "default_value",
           "type": "boost::shared_ptr<value>",
-          "documentation": "Default value for the field, if any.\\n"
+          "documentation": "Default value for the field, if any.\n"
         },
         {
           "name": "is_partially_matchable",
@@ -141,13 +150,13 @@
     },
     {
       "name": "annotation",
-      "documentation": "Represents an annotation that can be associated with an external object.\\n",
+      "documentation": "Represents an annotation that can be associated with an external object.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "entries",
           "type": "std::unordered_map<std::string, boost::shared_ptr<value>>",
-          "documentation": "All entries in this annotation. Each entry is a key-value-pair of id and value.\\n"
+          "documentation": "All entries in this annotation. Each entry is a key-value-pair of id and value.\n"
         },
         {
           "name": "scope",
@@ -157,7 +166,7 @@
     },
     {
       "name": "scope_types",
-      "documentation": "Where can a field appear.\\n",
+      "documentation": "Where can a field appear.\n",
       "stereotypes": [
         "yarn::enumeration"
       ],
@@ -166,37 +175,37 @@
         {
           "name": "any",
           "type": "",
-          "documentation": "Field can appear anywhere.\\n"
+          "documentation": "Field can appear anywhere.\n"
         },
         {
           "name": "not_applicable",
           "type": "",
-          "documentation": "The notion of scopes does not apply to field.\\n"
+          "documentation": "The notion of scopes does not apply to field.\n"
         },
         {
           "name": "root_module",
           "type": "",
-          "documentation": "Field can only appear in the root module.\\n"
+          "documentation": "Field can only appear in the root module.\n"
         },
         {
           "name": "any_module",
           "type": "",
-          "documentation": "Field can appear in any module.\\n"
+          "documentation": "Field can appear in any module.\n"
         },
         {
           "name": "entity",
           "type": "",
-          "documentation": "Field can only appear on an entity.\\n"
+          "documentation": "Field can only appear on an entity.\n"
         },
         {
           "name": "property",
           "type": "",
-          "documentation": "Field can only appear on a property of an entity.\\n"
+          "documentation": "Field can only appear on a property of an entity.\n"
         },
         {
           "name": "operation",
           "type": "",
-          "documentation": "Field can only appear on an operation in an entity.\\n"
+          "documentation": "Field can only appear on an operation in an entity.\n"
         }
       ]
     },
@@ -215,7 +224,7 @@
     },
     {
       "name": "building_error",
-      "documentation": "An error occurred while the field factory was building.\\n",
+      "documentation": "An error occurred while the field factory was building.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -223,28 +232,28 @@
     },
     {
       "name": "archetype_location",
-      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\\n\\nThese must be populated in order, e.g. in order to have a backend we must have a\\nkernel; in order to have a facet we must have a backend and in order to have a\\nformatter we must have a facet. We may not have any.\\n",
+      "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\n\nThese must be populated in order, e.g. in order to have a backend we must have a\nkernel; in order to have a facet we must have a backend and in order to have a\nformatter we must have a facet. We may not have any.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "kernel",
           "type": "std::string",
-          "documentation": "Name of the kernel that owns this field, if any.\\n"
+          "documentation": "Name of the kernel that owns this field, if any.\n"
         },
         {
           "name": "backend",
           "type": "std::string",
-          "documentation": "Name of the backend that owns this field, if any.\\n"
+          "documentation": "Name of the backend that owns this field, if any.\n"
         },
         {
           "name": "facet",
           "type": "std::string",
-          "documentation": "Name of the facet that owns this field, if any.\\n"
+          "documentation": "Name of the facet that owns this field, if any.\n"
         },
         {
           "name": "archetype",
           "type": "std::string",
-          "documentation": "Name of the archetype that owns this field, if any.\\n"
+          "documentation": "Name of the archetype that owns this field, if any.\n"
         }
       ]
     },
@@ -262,32 +271,32 @@
         {
           "name": "all_types",
           "type": "std::list<type>",
-          "documentation": "All the types available, without categorisation.\\n"
+          "documentation": "All the types available, without categorisation.\n"
         },
         {
           "name": "types_by_name",
           "type": "std::unordered_map<std::string, type>",
-          "documentation": "Types by qualified name.\\n"
+          "documentation": "Types by qualified name.\n"
         },
         {
           "name": "types_by_facet_name",
           "type": "std::unordered_map<std::string, std::list<type>>",
-          "documentation": "Types by facet names, for all models.\\n"
+          "documentation": "Types by facet names, for all models.\n"
         },
         {
           "name": "types_by_formatter_name",
           "type": "std::unordered_map<std::string,std::list<type>>",
-          "documentation": "Types by formatter names, for all models.\\n"
+          "documentation": "Types by formatter names, for all models.\n"
         },
         {
           "name": "types_by_backend_name",
           "type": "std::unordered_map<std::string, std::list<type>>",
-          "documentation": "Types by backend name.\\n"
+          "documentation": "Types by backend name.\n"
         },
         {
           "name": "partially_matchable_types",
           "type": "std::unordered_map<std::string, type>",
-          "documentation": "Types which can be partially matched.\\n"
+          "documentation": "Types which can be partially matched.\n"
         }
       ]
     },
@@ -306,7 +315,7 @@
     },
     {
       "name": "selection_error",
-      "documentation": "An error occurred when attempting to select.\\n",
+      "documentation": "An error occurred when attempting to select.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -314,7 +323,7 @@
     },
     {
       "name": "hydration_error",
-      "documentation": "An error occurred whilst trying to hydrate field definitions.\\n",
+      "documentation": "An error occurred whilst trying to hydrate field definitions.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -348,22 +357,22 @@
         {
           "name": "recursive_template",
           "type": "",
-          "documentation": "This field applies recursively, from the current level to all below.\\n\\nThe starting point of the recursion is the level supplied by an archetype location.\\n"
+          "documentation": "This field applies recursively, from the current level to all below.\n\nThe starting point of the recursion is the level supplied by an archetype location.\n"
         },
         {
           "name": "backend_template",
           "type": "",
-          "documentation": "This field applies to all backends.\\n"
+          "documentation": "This field applies to all backends.\n"
         },
         {
           "name": "facet_template",
           "type": "",
-          "documentation": "This field applies to all facets.\\n"
+          "documentation": "This field applies to all facets.\n"
         },
         {
           "name": "archetype_template",
           "type": "",
-          "documentation": "This field applies to all archetypes.\\n"
+          "documentation": "This field applies to all archetypes.\n"
         }
       ]
     },
@@ -382,7 +391,7 @@
     },
     {
       "name": "instantiation_error",
-      "documentation": "An error occurred whilst trying to instantiate a field definition template.\\n",
+      "documentation": "An error occurred whilst trying to instantiate a field definition template.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -403,7 +412,10 @@
     },
     {
       "name": "number",
-      "documentation": "Field can hold numbers.\\n",
+      "parents": [
+        "value"
+      ],
+      "documentation": "Field can hold numbers.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -489,18 +501,18 @@
     },
     {
       "name": "scribble_group",
-      "documentation": "A scribble is an annotation in raw form, prior to processing. A scribble group is a hierachical set of scribles.\\n",
+      "documentation": "A scribble is an annotation in raw form, prior to processing. A scribble group is a hierachical set of scribles.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "parent",
           "type": "scribble",
-          "documentation": "Top-level scribble.\\n"
+          "documentation": "Top-level scribble.\n"
         },
         {
           "name": "children",
           "type": "std::unordered_map<std::string, scribble>",
-          "documentation": "Child scribbles.\\n"
+          "documentation": "Child scribbles.\n"
         }
       ]
     },
@@ -524,55 +536,55 @@
     },
     {
       "name": "annotation_group",
-      "documentation": "Related set of annotations, grouped into a single-level hierarchy.\\n",
+      "documentation": "Related set of annotations, grouped into a single-level hierarchy.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "parent",
           "type": "annotation",
-          "documentation": "Top-level annotation.\\n"
+          "documentation": "Top-level annotation.\n"
         },
         {
           "name": "children",
           "type": "std::unordered_map<std::string, annotation>",
-          "documentation": "Child annotations.\\n"
+          "documentation": "Child annotations.\n"
         }
       ]
     },
     {
       "name": "type_template",
-      "documentation": "Defines a template that can be used to instantiate types.\\n",
+      "documentation": "Defines a template that can be used to instantiate types.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "name",
           "type": "name",
-          "documentation": "Name of the field to which this definition applies.\\n"
+          "documentation": "Name of the field to which this definition applies.\n"
         },
         {
           "name": "value_type",
           "type": "value_types",
-          "documentation": "Type of the field.\\n"
+          "documentation": "Type of the field.\n"
         },
         {
           "name": "scope",
           "type": "scope_types",
-          "documentation": "Valid scopes where the type may be present.\\n"
+          "documentation": "Valid scopes where the type may be present.\n"
         },
         {
           "name": "archetype_location",
           "type": "archetype_location",
-          "documentation": "The archetype location for this type.\\n"
+          "documentation": "The archetype location for this type.\n"
         },
         {
           "name": "default_value",
           "type": "boost::shared_ptr<value>",
-          "documentation": "Default value for the field, if any.\\n"
+          "documentation": "Default value for the field, if any.\n"
         },
         {
           "name": "kind",
           "type": "template_kinds",
-          "documentation": "If the type is a template, defines the kind of template.\\n"
+          "documentation": "If the type is a template, defines the kind of template.\n"
         }
       ]
     },
@@ -599,7 +611,7 @@
         {
           "name": "archetype_locations_by_family",
           "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given family.\\n\\nFamilies are backend specific sets of archetype locations, with associated\\nproperties such as file extensions.\\n"
+          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
         },
         {
           "name": "archetypes_by_backend_by_facet",
@@ -608,7 +620,7 @@
         {
           "name": "archetype_locations_by_intra_backend_segment",
           "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\\n\\nIntra-backend segments are backend specific sets of archetype locations, with\\nassociated properties.\\n"
+          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
         }
       ]
     },
@@ -646,6 +658,9 @@
     },
     {
       "name": "key_value_pair",
+      "parents": [
+        "value"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -661,12 +676,12 @@
         {
           "name": "archetype_locations",
           "type": "std::list<archetype_location>",
-          "documentation": "All archetype locations that belong to this group.\\n"
+          "documentation": "All archetype locations that belong to this group.\n"
         },
         {
           "name": "canonical_archetype_locations",
           "type": "std::unordered_map<std::string, std::string>",
-          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\\nform is supported. Otherwise no such mapping will exist.\\n"
+          "documentation": "Maps a concrete archetype location to its canonical form, if the canonical\nform is supported. Otherwise no such mapping will exist.\n"
         }
       ]
     },
@@ -677,22 +692,22 @@
         {
           "name": "archetype_locations",
           "type": "std::list<archetype_location>",
-          "documentation": "All archetype locations for the archetypes owned by this transform, \\nlisting all available backends, facets and archetypes.\\n"
+          "documentation": "All archetype locations for the archetypes owned by this transform, \nlisting all available backends, facets and archetypes.\n"
         },
         {
           "name": "archetype_locations_by_meta_name",
           "type": "std::unordered_map<std::string, archetype_locations_group>",
-          "documentation": "Returns the archetype locations for each meta name.\\n"
+          "documentation": "Returns the archetype locations for each meta name.\n"
         },
         {
           "name": "archetype_locations_by_family",
           "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given family.\\n\\nFamilies are backend specific sets of archetype locations, with associated\\nproperties such as file extensions.\\n"
+          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
         },
         {
           "name": "archetype_locations_by_intra_backend_segment",
           "type": "std::unordered_map<std::string, std::list<archetype_location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\\n\\nIntra-backend segments are backend specific sets of archetype locations, with\\nassociated properties.\\n"
+          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
         }
       ]
     },

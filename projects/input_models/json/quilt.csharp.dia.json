@@ -1,5 +1,5 @@
 {
-  "documentation": "CSharp is the c# model in the quilt kernel.\\n",
+  "documentation": "CSharp is the c# model in the quilt kernel.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "quilt.csharp",
@@ -230,7 +230,7 @@
     },
     {
       "name": "formatters::registrar_error",
-      "documentation": "There was an error in the registrar.\\n",
+      "documentation": "There was an error in the registrar.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -296,7 +296,7 @@
     },
     {
       "name": "formattables::element_properties",
-      "documentation": "All of the properties associated with an element.\\n",
+      "documentation": "All of the properties associated with an element.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -412,7 +412,7 @@
     },
     {
       "name": "formattables::expansion_error",
-      "documentation": "An error occurred whilst performing model expansion.\\n",
+      "documentation": "An error occurred whilst performing model expansion.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -487,7 +487,7 @@
     },
     {
       "name": "formatters::formatting_error",
-      "documentation": "An error occurred whilst formatting.\\n",
+      "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -615,7 +615,7 @@
     },
     {
       "name": "formattables::location_error",
-      "documentation": "An error occurred while the locator was creating a path.\\n",
+      "documentation": "An error occurred while the locator was creating a path.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -785,12 +785,12 @@
         {
           "name": "requires_assistance",
           "type": "bool",
-          "documentation": "If true, the type needs help of an assistant.\\n"
+          "documentation": "If true, the type needs help of an assistant.\n"
         },
         {
           "name": "method_postfix",
           "type": "std::string",
-          "documentation": "Postfix to use to call the appropriate assistant method, if required.\\n"
+          "documentation": "Postfix to use to call the appropriate assistant method, if required.\n"
         }
       ]
     },
@@ -828,12 +828,12 @@
         {
           "name": "assistant",
           "type": "",
-          "documentation": "The auxiliary function is supplied by an assistant.\\n"
+          "documentation": "The auxiliary function is supplied by an assistant.\n"
         },
         {
           "name": "helper",
           "type": "",
-          "documentation": "The auxiliary function is supplied by a helper.\\n"
+          "documentation": "The auxiliary function is supplied by a helper.\n"
         }
       ]
     },

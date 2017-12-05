@@ -50,33 +50,33 @@
     },
     {
       "name": "text_template",
-      "documentation": "Domain representation of a stitch template.\\n",
+      "documentation": "Domain representation of a stitch template.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "input_path",
           "type": "boost::filesystem::path",
-          "documentation": "Path where the template was read out from, if any.\\n"
+          "documentation": "Path where the template was read out from, if any.\n"
         },
         {
           "name": "output_path",
           "type": "boost::filesystem::path",
-          "documentation": "Path where the template should be outputted to, if any.\\n"
+          "documentation": "Path where the template should be outputted to, if any.\n"
         },
         {
           "name": "properties",
           "type": "properties",
-          "documentation": "Properties of the template.\\n"
+          "documentation": "Properties of the template.\n"
         },
         {
           "name": "variables",
           "type": "std::unordered_map<std::string, std::string>",
-          "documentation": "Any variables which may have been defined with the template.\\n"
+          "documentation": "Any variables which may have been defined with the template.\n"
         },
         {
           "name": "body",
           "type": "text_template_body",
-          "documentation": "Body of the text template.\\n"
+          "documentation": "Body of the text template.\n"
         }
       ]
     },
@@ -89,7 +89,7 @@
     },
     {
       "name": "parsing_error",
-      "documentation": "An error occurred whilst parsing.\\n",
+      "documentation": "An error occurred whilst parsing.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -97,7 +97,7 @@
     },
     {
       "name": "formatting_error",
-      "documentation": "An error occurred whilst formatting.\\n",
+      "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -156,7 +156,7 @@
     },
     {
       "name": "building_error",
-      "documentation": "An error occurred whilst building.\\n",
+      "documentation": "An error occurred whilst building.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -248,7 +248,7 @@
     },
     {
       "name": "resolution_error",
-      "documentation": "An error occurred when trying to resolve a key.\\n",
+      "documentation": "An error occurred when trying to resolve a key.\n",
       "stereotypes": [
         "yarn::exception"
       ],

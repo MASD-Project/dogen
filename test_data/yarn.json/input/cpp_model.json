@@ -154,18 +154,18 @@
     },
     {
       "name": "one_line",
-      "documentation": "this is the brief comment\\n",
+      "documentation": "this is the brief comment\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "prop_0",
           "type": "int",
-          "documentation": "another brief comment\\n"
+          "documentation": "another brief comment\n"
         },
         {
           "name": "prop_1",
           "type": "int",
-          "documentation": "the brief comment\\n\\na second line\\n"
+          "documentation": "the brief comment\n\na second line\n"
         },
         {
           "name": "prop_2",
@@ -175,12 +175,12 @@
     },
     {
       "name": "multi_line",
-      "documentation": "first line\\n\\nsecond line\\nthird line with \\\"quote\\\"\\n",
+      "documentation": "first line\n\nsecond line\nthird line with \"quote\"\n",
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "package_3",
-      "documentation": "package\\n",
+      "documentation": "package\n",
       "tagged_values": {
         "yarn.dia.comment": "true"
       },
@@ -188,7 +188,7 @@
     },
     {
       "name": "package_3::package_1",
-      "documentation": "inner package\\n",
+      "documentation": "inner package\n",
       "tagged_values": {
         "yarn.dia.comment": "true"
       },
@@ -196,7 +196,7 @@
     },
     {
       "name": "book_types",
-      "documentation": "this is a brief comment\\n\\nthis is a long comment\\n",
+      "documentation": "this is a brief comment\n\nthis is a long comment\n",
       "stereotypes": [
         "yarn::enumeration"
       ],
@@ -226,12 +226,12 @@
         {
           "name": "red",
           "type": "",
-          "documentation": "this is colour red\\n"
+          "documentation": "this is colour red\n"
         },
         {
           "name": "blue",
           "type": "",
-          "documentation": "this is blue\\n"
+          "documentation": "this is blue\n"
         },
         {
           "name": "green",
@@ -240,7 +240,7 @@
         {
           "name": "gray",
           "type": "",
-          "documentation": "another comment\\n"
+          "documentation": "another comment\n"
         }
       ]
     },
@@ -301,13 +301,13 @@
         {
           "name": "another_enumerator",
           "type": "",
-          "documentation": "A comment.\\n"
+          "documentation": "A comment.\n"
         }
       ]
     },
     {
       "name": "hex_flags",
-      "documentation": "This is an example of an enumeration using hex flags.\\n",
+      "documentation": "This is an example of an enumeration using hex flags.\n",
       "stereotypes": [
         "yarn::enumeration"
       ],
@@ -384,7 +384,7 @@
     },
     {
       "name": "my_error",
-      "documentation": "this is an exception\\n",
+      "documentation": "this is an exception\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -403,7 +403,7 @@
     },
     {
       "name": "immutable_primitive",
-      "documentation": "Test for a primitive which is also immutable.\\n",
+      "documentation": "Test for a primitive which is also immutable.\n",
       "stereotypes": [
         "yarn::primitive",
         "yarn::immutable"
@@ -415,7 +415,7 @@
     },
     {
       "name": "consumer",
-      "documentation": "This type makes use of all primitves in this test model.\\n",
+      "documentation": "This type makes use of all primitves in this test model.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -466,7 +466,7 @@
     },
     {
       "name": "short_primitive",
-      "documentation": "Test a primitive with an underlying short.\\n",
+      "documentation": "Test a primitive with an underlying short.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -477,7 +477,7 @@
     },
     {
       "name": "long_primitive",
-      "documentation": "Test a primitive with an underlying long.\\n",
+      "documentation": "Test a primitive with an underlying long.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -488,7 +488,7 @@
     },
     {
       "name": "int_primitive",
-      "documentation": "Test a primitive with an underlying int.\\n",
+      "documentation": "Test a primitive with an underlying int.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -499,7 +499,7 @@
     },
     {
       "name": "char_primitive",
-      "documentation": "Test a primitive with an underlying char.\\n",
+      "documentation": "Test a primitive with an underlying char.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -510,7 +510,7 @@
     },
     {
       "name": "uchar_primitive",
-      "documentation": "Test a primitive with an underlying unsigned char.\\n",
+      "documentation": "Test a primitive with an underlying unsigned char.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -521,7 +521,7 @@
     },
     {
       "name": "ulong_primitive",
-      "documentation": "Test a primitive with an underlying unsigned long.\\n",
+      "documentation": "Test a primitive with an underlying unsigned long.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -532,7 +532,7 @@
     },
     {
       "name": "uint_primitive",
-      "documentation": "Test a primitive with an underlying unsigned int.\\n",
+      "documentation": "Test a primitive with an underlying unsigned int.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -543,7 +543,7 @@
     },
     {
       "name": "ushort_primitive",
-      "documentation": "Test a primitive with an underlying unsgined short.\\n",
+      "documentation": "Test a primitive with an underlying unsgined short.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -554,7 +554,7 @@
     },
     {
       "name": "double_primitive",
-      "documentation": "Test a primitive with an underlying double.\\n",
+      "documentation": "Test a primitive with an underlying double.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -565,7 +565,7 @@
     },
     {
       "name": "float_primitive",
-      "documentation": "Test a primitive with an underlying float.\\n",
+      "documentation": "Test a primitive with an underlying float.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -576,7 +576,7 @@
     },
     {
       "name": "bool_primitive",
-      "documentation": "Test a primitive with an underlying bool.\\n",
+      "documentation": "Test a primitive with an underlying bool.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -587,7 +587,7 @@
     },
     {
       "name": "service",
-      "documentation": "Type is a service.\\n",
+      "documentation": "Type is a service.\n",
       "stereotypes": [
         "handcrafted"
       ],
@@ -601,7 +601,7 @@
     },
     {
       "name": "some_type",
-      "documentation": "Type is non-generatable.\\n",
+      "documentation": "Type is non-generatable.\n",
       "stereotypes": [
         "handcrafted"
       ],
@@ -629,7 +629,7 @@
     },
     {
       "name": "fluent",
-      "documentation": "Tests the fluent scenario across the different types of properties.\\n",
+      "documentation": "Tests the fluent scenario across the different types of properties.\n",
       "stereotypes": [
         "yarn::fluent"
       ],
@@ -651,7 +651,7 @@
     },
     {
       "name": "immutable_zero",
-      "documentation": "Immutable class with no properties.\\n",
+      "documentation": "Immutable class with no properties.\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -676,7 +676,7 @@
     },
     {
       "name": "immutable_one_builtin",
-      "documentation": "Immutable class with a built-in property.\\n",
+      "documentation": "Immutable class with a built-in property.\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -690,7 +690,7 @@
     },
     {
       "name": "immutable_one_non_builtin",
-      "documentation": "Immutable class with one pod property\\n",
+      "documentation": "Immutable class with one pod property\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -704,7 +704,7 @@
     },
     {
       "name": "immutable_four",
-      "documentation": "Immutable class with non-immutable and immutable pods as properties.\\n",
+      "documentation": "Immutable class with non-immutable and immutable pods as properties.\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -730,7 +730,7 @@
     },
     {
       "name": "SimpleObjectTemplate",
-      "documentation": "This is an example of an object template.\\n",
+      "documentation": "This is an example of an object template.\n",
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -739,18 +739,18 @@
         {
           "name": "prop_0",
           "type": "int",
-          "documentation": "This is a sample property in an object template.\\n"
+          "documentation": "This is a sample property in an object template.\n"
         },
         {
           "name": "prop_1",
           "type": "value",
-          "documentation": "Prove that includes of types get picked up.\\n"
+          "documentation": "Prove that includes of types get picked up.\n"
         }
       ]
     },
     {
       "name": "simple_object_template_instance",
-      "documentation": "This class instantiates the simple object template.\\n",
+      "documentation": "This class instantiates the simple object template.\n",
       "stereotypes": [
         "SimpleObjectTemplate"
       ],
@@ -759,13 +759,13 @@
         {
           "name": "prop_10",
           "type": "int",
-          "documentation": "Property that belongs to class.\\n"
+          "documentation": "Property that belongs to class.\n"
         }
       ]
     },
     {
       "name": "BaseObjectTemplate",
-      "documentation": "This is the base object template.\\n",
+      "documentation": "This is the base object template.\n",
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -774,13 +774,16 @@
         {
           "name": "prop_0",
           "type": "int",
-          "documentation": "Property in the base object template.\\n"
+          "documentation": "Property in the base object template.\n"
         }
       ]
     },
     {
       "name": "DescendantObjectTemplate",
-      "documentation": "This object template inherits from BaseObjectTemplate.\\n",
+      "parents": [
+        "BaseObjectTemplate"
+      ],
+      "documentation": "This object template inherits from BaseObjectTemplate.\n",
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -794,7 +797,7 @@
     },
     {
       "name": "base_object_template_instance",
-      "documentation": "This class instantiates the BaseObjectTemplate.\\n",
+      "documentation": "This class instantiates the BaseObjectTemplate.\n",
       "stereotypes": [
         "BaseObjectTemplate"
       ],
@@ -802,7 +805,7 @@
     },
     {
       "name": "descendant_object_template_instance",
-      "documentation": "This class instantiates the DescendantObjectTemplate obje.\\n",
+      "documentation": "This class instantiates the DescendantObjectTemplate obje.\n",
       "stereotypes": [
         "DescendantObjectTemplate"
       ],
@@ -810,7 +813,7 @@
     },
     {
       "name": "BaseObjectTemplate2",
-      "documentation": "Base object template.\\n",
+      "documentation": "Base object template.\n",
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -819,12 +822,15 @@
         {
           "name": "prop_0",
           "type": "std::string",
-          "documentation": "Ensure we're testing header files inclusion.\\n"
+          "documentation": "Ensure we're testing header files inclusion.\n"
         }
       ]
     },
     {
       "name": "FirstChildObjectTemplate",
+      "parents": [
+        "BaseObjectTemplate2"
+      ],
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -833,13 +839,16 @@
         {
           "name": "prop_1",
           "type": "int",
-          "documentation": "A property\\n"
+          "documentation": "A property\n"
         }
       ]
     },
     {
       "name": "SecondChildObjectTemplate",
-      "documentation": "Second descendant\\n",
+      "parents": [
+        "BaseObjectTemplate2"
+      ],
+      "documentation": "Second descendant\n",
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -848,13 +857,17 @@
         {
           "name": "prop_2",
           "type": "int",
-          "documentation": "Second descendant property\\n"
+          "documentation": "Second descendant property\n"
         }
       ]
     },
     {
       "name": "MultipleParentsObjectTemplate",
-      "documentation": "Multiple parents object template\\n",
+      "parents": [
+        "FirstChildObjectTemplate",
+        "SecondChildObjectTemplate"
+      ],
+      "documentation": "Multiple parents object template\n",
       "stereotypes": [
         "yarn::object_template"
       ],
@@ -863,13 +876,13 @@
         {
           "name": "prop_3",
           "type": "int",
-          "documentation": "Multiple parents property.\\n"
+          "documentation": "Multiple parents property.\n"
         }
       ]
     },
     {
       "name": "second_descendant_object_template_instance",
-      "documentation": "Second descendant instance\\n",
+      "documentation": "Second descendant instance\n",
       "stereotypes": [
         "SecondChildObjectTemplate"
       ],
@@ -878,13 +891,13 @@
         {
           "name": "prop_10",
           "type": "int",
-          "documentation": "Property of the class itself.\\n"
+          "documentation": "Property of the class itself.\n"
         }
       ]
     },
     {
       "name": "multiple_parents_object_template_instance",
-      "documentation": "Instantiates object template MultipleParentsObjectTemplate.\\n",
+      "documentation": "Instantiates object template MultipleParentsObjectTemplate.\n",
       "stereotypes": [
         "MultipleParentsObjectTemplate"
       ],
@@ -893,13 +906,13 @@
         {
           "name": "prop_10",
           "type": "int",
-          "documentation": "Property of the class itself.\\n"
+          "documentation": "Property of the class itself.\n"
         }
       ]
     },
     {
       "name": "multi_object_template_instance",
-      "documentation": "Type that instantiates more than one object template.\\n",
+      "documentation": "Type that instantiates more than one object template.\n",
       "stereotypes": [
         "FirstChildObjectTemplate",
         "SecondChildObjectTemplate"
@@ -909,13 +922,13 @@
         {
           "name": "prop_10",
           "type": "int",
-          "documentation": "Property of class.\\n"
+          "documentation": "Property of class.\n"
         }
       ]
     },
     {
       "name": "base_with_object_template",
-      "documentation": "Base class that instantiates a derived object template.\\n",
+      "documentation": "Base class that instantiates a derived object template.\n",
       "stereotypes": [
         "SecondChildObjectTemplate"
       ],
@@ -923,7 +936,10 @@
     },
     {
       "name": "further_inherited",
-      "documentation": "Descendant class that instantiates an object template which is a descendant\\nof the object template instantiated by the base class.\\n",
+      "parents": [
+        "base_with_object_template"
+      ],
+      "documentation": "Descendant class that instantiates an object template which is a descendant\nof the object template instantiated by the base class.\n",
       "stereotypes": [
         "MultipleParentsObjectTemplate"
       ],
@@ -931,7 +947,7 @@
     },
     {
       "name": "value",
-      "documentation": "Type is a value.\\n",
+      "documentation": "Type is a value.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -974,6 +990,9 @@
     },
     {
       "name": "child_without_members",
+      "parents": [
+        "parent_without_members"
+      ],
       "fallback_element_type": "yarn::object"
     },
     {
@@ -988,10 +1007,16 @@
     },
     {
       "name": "second_child_without_members",
+      "parents": [
+        "parent_with_members"
+      ],
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "third_child_with_members",
+      "parents": [
+        "parent_with_members"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1002,10 +1027,16 @@
     },
     {
       "name": "child_of_a_child1",
+      "parents": [
+        "third_child_with_members"
+      ],
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "child_of_a_child2",
+      "parents": [
+        "third_child_with_members"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1016,6 +1047,9 @@
     },
     {
       "name": "child_with_members",
+      "parents": [
+        "parent_without_members"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1047,6 +1081,9 @@
     },
     {
       "name": "descendant2",
+      "parents": [
+        "base"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1057,10 +1094,16 @@
     },
     {
       "name": "descendant1",
+      "parents": [
+        "base"
+      ],
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "descendant3",
+      "parents": [
+        "descendant1"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1071,31 +1114,37 @@
     },
     {
       "name": "move_ctor_base",
-      "documentation": "Base class for scenario that tests code generated move contructors.\\n",
+      "documentation": "Base class for scenario that tests code generated move contructors.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "prop_0",
           "type": "boost::filesystem::path",
-          "documentation": "Force manual move constructor.\\n"
+          "documentation": "Force manual move constructor.\n"
         }
       ]
     },
     {
       "name": "move_ctor_descendant",
-      "documentation": "Descendant class for scenario that tests code generated move contructors.\\n",
+      "parents": [
+        "move_ctor_base"
+      ],
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "prop_1",
           "type": "boost::filesystem::path",
-          "documentation": "Force manual move constructor.\\n"
+          "documentation": "Force manual move constructor.\n"
         }
       ]
     },
     {
       "name": "move_ctor_empty_descendant",
-      "documentation": "Descendant class for scenario that tests code generated move contructors.\\n",
+      "parents": [
+        "move_ctor_base"
+      ],
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
       "fallback_element_type": "yarn::object"
     },
     {
@@ -1113,6 +1162,9 @@
     },
     {
       "name": "non_final_leaf",
+      "parents": [
+        "descendant1"
+      ],
       "tagged_values": {
         "yarn.generalization.is_final": "false"
       },
@@ -1153,6 +1205,9 @@
     },
     {
       "name": "package_6::child",
+      "parents": [
+        "package_6::parent"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1194,6 +1249,9 @@
     },
     {
       "name": "package_8::child",
+      "parents": [
+        "package_7::parent"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -1244,6 +1302,9 @@
     },
     {
       "name": "package_9::child",
+      "parents": [
+        "parent_outside"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {

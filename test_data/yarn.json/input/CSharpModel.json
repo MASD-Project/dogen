@@ -13,18 +13,18 @@
   "elements": [
     {
       "name": "PrimitiveBuiltins",
-      "documentation": "This is a class made up of just built-in types.\\n\\nThis is a remark.\\n",
+      "documentation": "This is a class made up of just built-in types.\n\nThis is a remark.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "ByteProperty",
           "type": "byte",
-          "documentation": "A comment at property level.\\n"
+          "documentation": "A comment at property level.\n"
         },
         {
           "name": "ShortByteProperty",
           "type": "sbyte",
-          "documentation": "A comment at property level.\\n\\nThis is a remark.\\n"
+          "documentation": "A comment at property level.\n\nThis is a remark.\n"
         },
         {
           "name": "IntProperty",
@@ -57,7 +57,7 @@
         {
           "name": "FloatPropertyTwo",
           "type": "float",
-          "documentation": "Second float to ensure helpers are generated correctly.\\n"
+          "documentation": "Second float to ensure helpers are generated correctly.\n"
         },
         {
           "name": "DoublePropertyOne",
@@ -66,7 +66,7 @@
         {
           "name": "DoublePropertyTwo",
           "type": "double",
-          "documentation": "Second double to ensure helpers are generated correctly.\\n"
+          "documentation": "Second double to ensure helpers are generated correctly.\n"
         },
         {
           "name": "CharProperty",
@@ -84,24 +84,24 @@
     },
     {
       "name": "NoProperties",
-      "documentation": "This class tests the use case of no properties\\n",
+      "documentation": "This class tests the use case of no properties\n",
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "OneProperty",
-      "documentation": "This class tests the use case of one property.\\n",
+      "documentation": "This class tests the use case of one property.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "Property",
           "type": "int",
-          "documentation": "Just the one property.\\n"
+          "documentation": "Just the one property.\n"
         }
       ]
     },
     {
       "name": "ComplexBuiltins",
-      "documentation": "This is a class made up of just complex builtin types.\\n\\nThis is a remark.\\n",
+      "documentation": "This is a class made up of just complex builtin types.\n\nThis is a remark.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -116,7 +116,7 @@
     },
     {
       "name": "BookTypes",
-      "documentation": "this is a brief comment\\n\\nthis is a long comment\\n",
+      "documentation": "this is a brief comment\n\nthis is a long comment\n",
       "stereotypes": [
         "yarn::enumeration"
       ],
@@ -146,12 +146,12 @@
         {
           "name": "Red",
           "type": "",
-          "documentation": "this is colour red\\n"
+          "documentation": "this is colour red\n"
         },
         {
           "name": "Blue",
           "type": "",
-          "documentation": "this is blue\\n"
+          "documentation": "this is blue\n"
         },
         {
           "name": "Green",
@@ -160,7 +160,7 @@
         {
           "name": "Gray",
           "type": "",
-          "documentation": "another comment\\n"
+          "documentation": "another comment\n"
         }
       ]
     },
@@ -228,12 +228,12 @@
         {
           "name": "Triangle",
           "type": "",
-          "documentation": "some comment\\n"
+          "documentation": "some comment\n"
         },
         {
           "name": "Square",
           "type": "",
-          "documentation": "other comment\\n"
+          "documentation": "other comment\n"
         },
         {
           "name": "Rectangle",
@@ -242,13 +242,13 @@
         {
           "name": "Cube",
           "type": "",
-          "documentation": "some comment\\n"
+          "documentation": "some comment\n"
         }
       ]
     },
     {
       "name": "MyException",
-      "documentation": "this is an exception\\n",
+      "documentation": "this is an exception\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -268,12 +268,12 @@
         {
           "name": "Prop0",
           "type": "int",
-          "documentation": "Simple builtin association.\\n"
+          "documentation": "Simple builtin association.\n"
         },
         {
           "name": "Prop1",
           "type": "NoProperties",
-          "documentation": "Association with a class that has no properties.\\n"
+          "documentation": "Association with a class that has no properties.\n"
         },
         {
           "name": "Prop2",
@@ -305,6 +305,9 @@
     },
     {
       "name": "Descendant2",
+      "parents": [
+        "Base"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -315,10 +318,16 @@
     },
     {
       "name": "Descendant1",
+      "parents": [
+        "Base"
+      ],
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "Descendant3",
+      "parents": [
+        "Descendant1"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -329,6 +338,9 @@
     },
     {
       "name": "NonSealedLeaf",
+      "parents": [
+        "Descendant1"
+      ],
       "tagged_values": {
         "yarn.generalization.is_final": "false"
       },
@@ -365,10 +377,16 @@
     },
     {
       "name": "SecondChildWithoutMembers",
+      "parents": [
+        "ParentWithMembers"
+      ],
       "fallback_element_type": "yarn::object"
     },
     {
       "name": "ThirdChildWithMembers",
+      "parents": [
+        "ParentWithMembers"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -379,6 +397,9 @@
     },
     {
       "name": "ChildOfAChild1",
+      "parents": [
+        "ThirdChildWithMembers"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -389,6 +410,9 @@
     },
     {
       "name": "ChildOfAChild2",
+      "parents": [
+        "ThirdChildWithMembers"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -426,6 +450,9 @@
     },
     {
       "name": "Package2::Child",
+      "parents": [
+        "Package2::Parent"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -467,6 +494,9 @@
     },
     {
       "name": "Package4::Child",
+      "parents": [
+        "Package3::Parent"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -504,6 +534,9 @@
     },
     {
       "name": "Package5::Child",
+      "parents": [
+        "ParentOutside"
+      ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -527,7 +560,7 @@
     },
     {
       "name": "ImmutableZero",
-      "documentation": "Immutable class with no properties.\\n",
+      "documentation": "Immutable class with no properties.\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -535,7 +568,7 @@
     },
     {
       "name": "ImmutableOnePrimitive",
-      "documentation": "Immutable class with a builtin property.\\n",
+      "documentation": "Immutable class with a builtin property.\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -566,7 +599,7 @@
     },
     {
       "name": "ImmutableFour",
-      "documentation": "Immutable class with non-immutable and immutable elements as properties.\\n",
+      "documentation": "Immutable class with non-immutable and immutable elements as properties.\n",
       "stereotypes": [
         "yarn::immutable"
       ],
@@ -683,13 +716,13 @@
         {
           "name": "AnotherEnumerator",
           "type": "",
-          "documentation": "A comment.\\n"
+          "documentation": "A comment.\n"
         }
       ]
     },
     {
       "name": "HexFlags",
-      "documentation": "This is an example of an enumeration using hex flags.\\n",
+      "documentation": "This is an example of an enumeration using hex flags.\n",
       "stereotypes": [
         "yarn::enumeration"
       ],
@@ -737,7 +770,7 @@
     },
     {
       "name": "ShortPrimitive",
-      "documentation": "Test a primitive with an underlying short.\\n",
+      "documentation": "Test a primitive with an underlying short.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -748,7 +781,7 @@
     },
     {
       "name": "LongPrimitive",
-      "documentation": "Test a primitive with an underlying long.\\n",
+      "documentation": "Test a primitive with an underlying long.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -759,7 +792,7 @@
     },
     {
       "name": "IntPrimitive",
-      "documentation": "Test a primitive with an underlying int.\\n",
+      "documentation": "Test a primitive with an underlying int.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -770,7 +803,7 @@
     },
     {
       "name": "CharPrimitive",
-      "documentation": "Test a primitive with an underlying char.\\n",
+      "documentation": "Test a primitive with an underlying char.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -781,7 +814,7 @@
     },
     {
       "name": "ULongPrimitive",
-      "documentation": "Test a primitive with an underlying unsigned long.\\n",
+      "documentation": "Test a primitive with an underlying unsigned long.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -792,7 +825,7 @@
     },
     {
       "name": "UIntPrimitive",
-      "documentation": "Test a primitive with an underlying unsigned int.\\n",
+      "documentation": "Test a primitive with an underlying unsigned int.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -803,7 +836,7 @@
     },
     {
       "name": "UShortPrimitive",
-      "documentation": "Test a primitive with an underlying unsgined short.\\n",
+      "documentation": "Test a primitive with an underlying unsgined short.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -814,7 +847,7 @@
     },
     {
       "name": "DoublePrimitive",
-      "documentation": "Test a primitive with an underlying double.\\n",
+      "documentation": "Test a primitive with an underlying double.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -825,7 +858,7 @@
     },
     {
       "name": "FloatPrimitive",
-      "documentation": "Test a primitive with an underlying float.\\n",
+      "documentation": "Test a primitive with an underlying float.\n",
       "stereotypes": [
         "yarn::primitive"
       ],
@@ -836,7 +869,7 @@
     },
     {
       "name": "BoolPrimitive",
-      "documentation": "Test a primitive with an underlying bool.\\n",
+      "documentation": "Test a primitive with an underlying bool.\n",
       "stereotypes": [
         "yarn::primitive"
       ],

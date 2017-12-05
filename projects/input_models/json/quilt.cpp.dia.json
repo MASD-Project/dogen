@@ -1,5 +1,5 @@
 {
-  "documentation": "CPP is the C++ backend in the quilt kernel.\\n",
+  "documentation": "CPP is the C++ backend in the quilt kernel.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "quilt.cpp",
@@ -279,7 +279,7 @@
     },
     {
       "name": "formatters::registrar_error",
-      "documentation": "There was an error in the registrar.\\n",
+      "documentation": "There was an error in the registrar.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -294,7 +294,7 @@
     },
     {
       "name": "formatters::formatting_error",
-      "documentation": "An error occurred whilst formatting.\\n",
+      "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -446,7 +446,7 @@
     },
     {
       "name": "formattables::building_error",
-      "documentation": "An error occurred while the factory was building.\\n",
+      "documentation": "An error occurred while the factory was building.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -534,7 +534,7 @@
     },
     {
       "name": "formatters::context",
-      "documentation": "Supplies additional information required for formatting.\\n",
+      "documentation": "Supplies additional information required for formatting.\n",
       "stereotypes": [
         "handcrafted"
       ],
@@ -563,7 +563,7 @@
     },
     {
       "name": "formatters::building_error",
-      "documentation": "An error occurred whilst the factory was building.\\n",
+      "documentation": "An error occurred whilst the factory was building.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -639,7 +639,7 @@
     },
     {
       "name": "formattables::element_properties",
-      "documentation": "All of the properties associated with an element.\\n",
+      "documentation": "All of the properties associated with an element.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
@@ -700,17 +700,17 @@
         {
           "name": "leaves",
           "type": "std::list<yarn::meta_model::name>",
-          "documentation": "List of all concrete classes which are part of an inheritance tree.\\n"
+          "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
         },
         {
           "name": "model_dependencies",
           "type": "std::list<yarn::meta_model::name>",
-          "documentation": "List of all models which the model depends on.\\n"
+          "documentation": "List of all models which the model depends on.\n"
         },
         {
           "name": "registrar_dependencies",
           "type": "std::list<yarn::meta_model::name>",
-          "documentation": "Registrars on other models this registrar depends on.\\n"
+          "documentation": "Registrars on other models this registrar depends on.\n"
         }
       ]
     },
@@ -724,12 +724,12 @@
         {
           "name": "is_enum",
           "type": "bool",
-          "documentation": "Returns true if the type for which we are creating a forward declaration is\\nan enumeration, false otherwise.\\n"
+          "documentation": "Returns true if the type for which we are creating a forward declaration is\nan enumeration, false otherwise.\n"
         },
         {
           "name": "underlying_element",
           "type": "yarn::meta_model::name",
-          "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\\n"
+          "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\n"
         },
         {
           "name": "is_exception",
@@ -841,17 +841,17 @@
         {
           "name": "not_supported",
           "type": "",
-          "documentation": "This formatter does not export an inclusion directive.\\n"
+          "documentation": "This formatter does not export an inclusion directive.\n"
         },
         {
           "name": "regular_support",
           "type": "",
-          "documentation": "This formatter exports a regular inclusion directive.\\n"
+          "documentation": "This formatter exports a regular inclusion directive.\n"
         },
         {
           "name": "canonical_support",
           "type": "",
-          "documentation": "This formatter exports a regular inclusion directive and is the default for its facet\\nand element.\\n"
+          "documentation": "This formatter exports a regular inclusion directive and is the default for its facet\nand element.\n"
         }
       ]
     },
@@ -966,7 +966,7 @@
     },
     {
       "name": "formattables::adaptation_error",
-      "documentation": "An error occurred during adaptation.\\n",
+      "documentation": "An error occurred during adaptation.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -1465,7 +1465,7 @@
     },
     {
       "name": "formattables::location_error",
-      "documentation": "An error occurred while the locator was creating a path.\\n",
+      "documentation": "An error occurred while the locator was creating a path.\n",
       "stereotypes": [
         "yarn::exception"
       ],
@@ -1581,18 +1581,18 @@
     },
     {
       "name": "formattables::directive_group",
-      "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\\n",
+      "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\n",
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
           "name": "primary",
           "type": "std::string",
-          "documentation": "The main inclusion directive needed for this element.\\n"
+          "documentation": "The main inclusion directive needed for this element.\n"
         },
         {
           "name": "secondary",
           "type": "std::list<std::string>",
-          "documentation": "Any other directives that are also needed for this element.\\n"
+          "documentation": "Any other directives that are also needed for this element.\n"
         }
       ]
     },

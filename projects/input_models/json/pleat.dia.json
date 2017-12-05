@@ -1,5 +1,5 @@
 {
-  "documentation": "Pleat provides relational database support for models.\\n",
+  "documentation": "Pleat provides relational database support for models.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "annotations",

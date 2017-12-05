@@ -1,5 +1,5 @@
 {
-  "documentation": "Stores the configuration options for Dogen applications.\\n\\nThe options model provides types to store general configuration\\noptions for all the different Dogen applications, such as knitter,\\netc.\\n",
+  "documentation": "Stores the configuration options for Dogen applications.\n\nThe options model provides types to store general configuration\noptions for all the different Dogen applications, such as knitter,\netc.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "options",
@@ -20,7 +20,7 @@
         {
           "name": "log_level",
           "type": "std::string",
-          "documentation": "What level of logging to log at.\\n"
+          "documentation": "What level of logging to log at.\n"
         },
         {
           "name": "target",
@@ -37,7 +37,7 @@
         {
           "name": "compatibility_mode",
           "type": "bool",
-          "documentation": "Try to process diagram even if there are errors.\\n\\nOnly a certain class of errors are allowed, believed to be caused by backwards or\\nforwards compatibility problems: missing types or types that do not exist.\\n"
+          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
         }
       ]
     },
@@ -48,7 +48,7 @@
         {
           "name": "log_level",
           "type": "std::string",
-          "documentation": "What level of logging to log at.\\n"
+          "documentation": "What level of logging to log at.\n"
         },
         {
           "name": "target",
@@ -75,7 +75,7 @@
         {
           "name": "log_level",
           "type": "std::string",
-          "documentation": "What level of logging to log at.\\n"
+          "documentation": "What level of logging to log at.\n"
         },
         {
           "name": "force_write",

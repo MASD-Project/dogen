@@ -1,5 +1,5 @@
 {
-  "documentation": "This model tests all settings related to paths and file names.\\n",
+  "documentation": "This model tests all settings related to paths and file names.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "all_path_and_directory_settings",
