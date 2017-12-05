@@ -29,17 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/types/meta_model/exoelement.hpp"
-#include "dogen/yarn/types/meta_model/module_fwd.hpp"
-#include "dogen/yarn/types/meta_model/object_fwd.hpp"
-#include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
-#include "dogen/yarn/types/meta_model/exception_fwd.hpp"
-#include "dogen/yarn/types/meta_model/primitive_fwd.hpp"
-#include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
-#include "dogen/yarn/types/meta_model/object_template_fwd.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_fwd_ser.hpp"
 
 namespace dogen {
@@ -55,18 +45,8 @@ public:
 
 public:
     exomodel(
-        const dogen::yarn::meta_model::name& name,
-        const dogen::yarn::meta_model::name& meta_name,
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
-        const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module,
         const std::list<dogen::yarn::meta_model::exoelement>& elements,
         const std::list<std::string>& stereotypes);
 
@@ -78,26 +58,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::exomodel& v, unsigned int version);
 
 public:
-    /**
-     * @brief Fully qualified name.
-     */
-    /**@{*/
-    const dogen::yarn::meta_model::name& name() const;
-    dogen::yarn::meta_model::name& name();
-    void name(const dogen::yarn::meta_model::name& v);
-    void name(const dogen::yarn::meta_model::name&& v);
-    /**@}*/
-
-    /**
-     * @brief Name of the element in the meta-model that this instance conforms to.
-     */
-    /**@{*/
-    const dogen::yarn::meta_model::name& meta_name() const;
-    dogen::yarn::meta_model::name& meta_name();
-    void meta_name(const dogen::yarn::meta_model::name& v);
-    void meta_name(const dogen::yarn::meta_model::name&& v);
-    /**@}*/
-
     /**
      * @brief Code comments.
      *
@@ -116,46 +76,6 @@ public:
     std::list<std::pair<std::string, std::string> >& tagged_values();
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
     void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules();
-    void modules(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& v);
-    void modules(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates();
-    void object_templates(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& v);
-    void object_templates(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins();
-    void builtins(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& v);
-    void builtins(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations();
-    void enumerations(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& v);
-    void enumerations(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives();
-    void primitives(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& v);
-    void primitives(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects();
-    void objects(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& v);
-    void objects(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >&& v);
-
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions();
-    void exceptions(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& v);
-    void exceptions(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >&& v);
-
-    const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module() const;
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module();
-    void root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& v);
-    void root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v);
 
     const std::list<dogen::yarn::meta_model::exoelement>& elements() const;
     std::list<dogen::yarn::meta_model::exoelement>& elements();
@@ -178,18 +98,8 @@ public:
     exomodel& operator=(exomodel other);
 
 private:
-    dogen::yarn::meta_model::name name_;
-    dogen::yarn::meta_model::name meta_name_;
     std::string documentation_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > modules_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > > object_templates_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > > builtins_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > > enumerations_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > > primitives_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > > objects_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > > exceptions_;
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > root_module_;
     std::list<dogen::yarn::meta_model::exoelement> elements_;
     std::list<std::string> stereotypes_;
 };

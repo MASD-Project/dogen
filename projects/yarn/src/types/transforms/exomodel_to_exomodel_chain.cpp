@@ -21,7 +21,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
-#include "dogen/yarn/types/transforms/sorting_transform.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
@@ -97,21 +96,7 @@ transform(const transforms::context& ctx,
     auto src(tuple.get<0>().transform(ctx, src_path));
 
     /*
-     * Perform the meta-naming transform to the model. We need this to
-     * ensure all the meta-types have been populated or else they will
-     * come out blank on the generated file.
-     */
-    // meta_naming_transform::transform(ctx, src);
-
-    /*
-     * Perform a sorting transform to ensure we output the elements in
-     * a known order, or else we'll start generating spurious
-     * differences.
-     */
-    sorting_transform::transform(ctx, src);
-
-    /*
-     * Finally, transform the exomodel to text.
+     * Transform the exomodel to the requested representation.
      */
     tuple.get<1>().transform(ctx, src, dst_path);
 }

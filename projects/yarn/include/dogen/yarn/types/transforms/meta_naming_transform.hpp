@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/exomodel_fwd.hpp"
 #include "dogen/yarn/types/meta_model/endomodel_fwd.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
@@ -39,11 +38,6 @@ namespace transforms {
  */
 class meta_naming_transform final {
 public:
-    /**
-     * @brief Performs the transform on the exomodel.
-     */
-    static void transform(const context& ctx, meta_model::exomodel& em);
-
     /**
      * @brief Performs the transform on the endomodel.
      *

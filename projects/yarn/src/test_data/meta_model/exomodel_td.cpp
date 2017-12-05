@@ -19,24 +19,10 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/name_td.hpp"
-#include "dogen/yarn/test_data/meta_model/module_td.hpp"
-#include "dogen/yarn/test_data/meta_model/object_td.hpp"
-#include "dogen/yarn/test_data/meta_model/builtin_td.hpp"
 #include "dogen/yarn/test_data/meta_model/exomodel_td.hpp"
-#include "dogen/yarn/test_data/meta_model/exception_td.hpp"
-#include "dogen/yarn/test_data/meta_model/primitive_td.hpp"
-#include "dogen/annotations/test_data/scribble_group_td.hpp"
 #include "dogen/yarn/test_data/meta_model/exoelement_td.hpp"
-#include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
-#include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
 
 namespace {
-
-dogen::yarn::meta_model::name
-create_dogen_yarn_meta_model_name(const unsigned int position) {
-    return dogen::yarn::meta_model::name_generator::create(position);
-}
 
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
@@ -56,207 +42,6 @@ std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_str
     std::list<std::pair<std::string, std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_std_pair_std_string_std_string(position + i));
-    }
-    return r;
-}
-
-dogen::annotations::scribble_group
-create_dogen_annotations_scribble_group(const unsigned int position) {
-    return dogen::annotations::scribble_group_generator::create(position);
-}
-
-dogen::yarn::meta_model::module*
-create_dogen_yarn_meta_model_module_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::module_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::module>
-create_boost_shared_ptr_dogen_yarn_meta_model_module(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::module> r(
-        create_dogen_yarn_meta_model_module_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_module(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + i));
-    }
-    return r;
-}
-
-dogen::yarn::meta_model::object_template*
-create_dogen_yarn_meta_model_object_template_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::object_template_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::object_template>
-create_boost_shared_ptr_dogen_yarn_meta_model_object_template(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::object_template> r(
-        create_dogen_yarn_meta_model_object_template_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_object_template(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + i));
-    }
-    return r;
-}
-
-dogen::yarn::meta_model::builtin*
-create_dogen_yarn_meta_model_builtin_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::builtin_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::builtin>
-create_boost_shared_ptr_dogen_yarn_meta_model_builtin(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::builtin> r(
-        create_dogen_yarn_meta_model_builtin_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_builtin(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + i));
-    }
-    return r;
-}
-
-dogen::yarn::meta_model::enumeration*
-create_dogen_yarn_meta_model_enumeration_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::enumeration_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::enumeration>
-create_boost_shared_ptr_dogen_yarn_meta_model_enumeration(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::enumeration> r(
-        create_dogen_yarn_meta_model_enumeration_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + i));
-    }
-    return r;
-}
-
-dogen::yarn::meta_model::primitive*
-create_dogen_yarn_meta_model_primitive_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::primitive_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::primitive>
-create_boost_shared_ptr_dogen_yarn_meta_model_primitive(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::primitive> r(
-        create_dogen_yarn_meta_model_primitive_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_primitive(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + i));
-    }
-    return r;
-}
-
-dogen::yarn::meta_model::object*
-create_dogen_yarn_meta_model_object_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::object_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::object>
-create_boost_shared_ptr_dogen_yarn_meta_model_object(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::object> r(
-        create_dogen_yarn_meta_model_object_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_object(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + i));
-    }
-    return r;
-}
-
-dogen::yarn::meta_model::exception*
-create_dogen_yarn_meta_model_exception_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::exception_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::yarn::meta_model::exception>
-create_boost_shared_ptr_dogen_yarn_meta_model_exception(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::exception> r(
-        create_dogen_yarn_meta_model_exception_ptr(position));
-    return r;
-}
-
-std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> >
-create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(unsigned int position) {
-    std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > r(
-        create_dogen_annotations_scribble_group(position),
-        create_boost_shared_ptr_dogen_yarn_meta_model_exception(position));
-    return r;
-}
-
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > > create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(unsigned int position) {
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + i));
     }
     return r;
 }
@@ -292,20 +77,10 @@ exomodel_generator::exomodel_generator() : position_(0) { }
 
 void exomodel_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_dogen_yarn_meta_model_name(position + 0));
-    v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
-    v.documentation(create_std_string(position + 2));
-    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 3));
-    v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 4));
-    v.object_templates(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + 5));
-    v.builtins(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + 6));
-    v.enumerations(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + 7));
-    v.primitives(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + 8));
-    v.objects(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + 9));
-    v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 10));
-    v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 11));
-    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 12));
-    v.stereotypes(create_std_list_std_string(position + 13));
+    v.documentation(create_std_string(position + 0));
+    v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 1));
+    v.elements(create_std_list_dogen_yarn_meta_model_exoelement(position + 2));
+    v.stereotypes(create_std_list_std_string(position + 3));
 }
 
 exomodel_generator::result_type

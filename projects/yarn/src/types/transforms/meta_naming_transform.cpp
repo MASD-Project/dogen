@@ -21,9 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
-#include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
-#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
@@ -94,40 +92,6 @@ public:
         v.meta_name(n);
     }
 };
-
-void meta_naming_transform::
-transform(const context& ctx, meta_model::exomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "meta-naming transform",
-        transform_id, em.name().id(), ctx.prober(), em);
-
-    em.meta_name(meta_name_factory::make_exomodel_name());
-
-    updater u;
-    for (const auto& pair : em.modules())
-        u(*pair.second);
-
-    for (const auto& pair : em.object_templates())
-        u(*pair.second);
-
-    for (const auto& pair : em.builtins())
-        u(*pair.second);
-
-    for (const auto& pair : em.enumerations())
-        u(*pair.second);
-
-    for (const auto& pair : em.primitives())
-        u(*pair.second);
-
-    for (const auto& pair : em.objects())
-        u(*pair.second);
-
-    for (const auto& pair : em.exceptions())
-        u(*pair.second);
-
-    u(*em.root_module().second);
-
-    stp.end_transform(em);
-}
 
 void meta_naming_transform::
 transform(const context& ctx, meta_model::endomodel& em) {

@@ -28,7 +28,6 @@
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
-#include "dogen/yarn/types/transforms/sorting_transform.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_ser.hpp"
 #include "dogen/yarn/test/mock_context_factory.hpp"
@@ -63,9 +62,8 @@ bool test_workflow(
     using namespace dogen::annotations::test;
     mock_type_repository_factory rf;
     const auto rp(rf.make());
-    auto actual(workflow::execute(i));
+    const auto actual(workflow::execute(i));
     const dogen::yarn::transforms::context ctx(mock_context_factory::make());
-    dogen::yarn::transforms::sorting_transform::transform(ctx, actual);
 
     /*
      * Set to true to rebase. Note that you still need to run the

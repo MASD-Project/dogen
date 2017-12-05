@@ -2,59 +2,11 @@
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="14">
 <entity class_id="13" tracking_level="0" version="0">
-	<name class_id="14" tracking_level="0" version="0">
-		<id></id>
-		<simple></simple>
-		<qualified class_id="15" tracking_level="0" version="0">
-			<count>0</count>
-			<item_version>0</item_version>
-		</qualified>
-		<location class_id="16" tracking_level="0" version="0">
-			<external_modules class_id="17" tracking_level="0" version="0">
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_modules>
-			<model_modules>
-				<count>0</count>
-				<item_version>0</item_version>
-			</model_modules>
-			<internal_modules>
-				<count>0</count>
-				<item_version>0</item_version>
-			</internal_modules>
-			<element></element>
-		</location>
-		<identifiable></identifiable>
-	</name>
-	<meta_name>
-		<id></id>
-		<simple></simple>
-		<qualified>
-			<count>0</count>
-			<item_version>0</item_version>
-		</qualified>
-		<location>
-			<external_modules>
-				<count>0</count>
-				<item_version>0</item_version>
-			</external_modules>
-			<model_modules>
-				<count>0</count>
-				<item_version>0</item_version>
-			</model_modules>
-			<internal_modules>
-				<count>0</count>
-				<item_version>0</item_version>
-			</internal_modules>
-			<element></element>
-		</location>
-		<identifiable></identifiable>
-	</meta_name>
 	<documentation></documentation>
-	<tagged_values class_id="18" tracking_level="0" version="0">
+	<tagged_values class_id="14" tracking_level="0" version="0">
 		<count>10</count>
 		<item_version>0</item_version>
-		<item class_id="19" tracking_level="0" version="0">
+		<item class_id="15" tracking_level="0" version="0">
 			<first>yarn.dia.comment</first>
 			<second>true</second>
 		</item>
@@ -95,72 +47,21 @@
 			<second>dogen</second>
 		</item>
 	</tagged_values>
-	<modules class_id="20" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</modules>
-	<object_templates class_id="21" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</object_templates>
-	<builtins class_id="22" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</builtins>
-	<enumerations class_id="23" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</enumerations>
-	<primitives class_id="24" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</primitives>
-	<objects class_id="25" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</objects>
-	<exceptions class_id="26" tracking_level="0" version="0">
-		<count>0</count>
-		<item_version>0</item_version>
-	</exceptions>
-	<root_module class_id="27" tracking_level="0" version="0">
-		<first class_id="28" tracking_level="0" version="0">
-			<parent class_id="29" tracking_level="0" version="0">
-				<entries>
-					<count>0</count>
-					<item_version>0</item_version>
-				</entries>
-				<scope>0</scope>
-				<candidate_labels class_id="30" tracking_level="0" version="0">
-					<count>0</count>
-					<item_version>0</item_version>
-				</candidate_labels>
-			</parent>
-			<children class_id="31" tracking_level="0" version="0">
-				<count>0</count>
-				<bucket_count>1</bucket_count>
-				<item_version>0</item_version>
-			</children>
-		</first>
-		<second class_id="32" tracking_level="0" version="1">
-			<px class_id="-1"></px>
-		</second>
-	</root_module>
-	<elements class_id="33" tracking_level="0" version="0">
+	<elements class_id="16" tracking_level="0" version="0">
 		<count>4</count>
 		<item_version>0</item_version>
-		<item class_id="34" tracking_level="0" version="0">
+		<item class_id="17" tracking_level="0" version="0">
 			<documentation></documentation>
 			<tagged_values>
 				<count>0</count>
 				<item_version>0</item_version>
 			</tagged_values>
 			<name>package_1</name>
-			<parents>
+			<parents class_id="18" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</parents>
-			<attributes class_id="35" tracking_level="0" version="0">
+			<attributes class_id="19" tracking_level="0" version="0">
 				<count>0</count>
 				<item_version>0</item_version>
 			</attributes>
@@ -190,7 +91,7 @@
 			<attributes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item class_id="36" tracking_level="0" version="0">
+				<item class_id="20" tracking_level="0" version="0">
 					<documentation></documentation>
 					<tagged_values>
 						<count>0</count>

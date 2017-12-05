@@ -28,20 +28,10 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/module_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
-#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exoelement_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -50,18 +40,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::meta_model::exomodel& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
-    ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("tagged_values", v.tagged_values_);
-    ar << make_nvp("modules", v.modules_);
-    ar << make_nvp("object_templates", v.object_templates_);
-    ar << make_nvp("builtins", v.builtins_);
-    ar << make_nvp("enumerations", v.enumerations_);
-    ar << make_nvp("primitives", v.primitives_);
-    ar << make_nvp("objects", v.objects_);
-    ar << make_nvp("exceptions", v.exceptions_);
-    ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("stereotypes", v.stereotypes_);
 }
@@ -70,18 +50,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::meta_model::exomodel& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
-    ar >> make_nvp("modules", v.modules_);
-    ar >> make_nvp("object_templates", v.object_templates_);
-    ar >> make_nvp("builtins", v.builtins_);
-    ar >> make_nvp("enumerations", v.enumerations_);
-    ar >> make_nvp("primitives", v.primitives_);
-    ar >> make_nvp("objects", v.objects_);
-    ar >> make_nvp("exceptions", v.exceptions_);
-    ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("stereotypes", v.stereotypes_);
 }
