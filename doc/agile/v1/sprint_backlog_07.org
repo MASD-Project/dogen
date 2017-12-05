@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-05 Tue 20:54]
+#+CAPTION: Clock summary at [2017-12-05 Tue 21:16]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *50:43* |       |       | 100.0 |
+| *Total time*                                                                | *51:04* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 50:43   |       |       | 100.0 |
-| Active                                                                      |         | 50:43 |       | 100.0 |
+| Stories                                                                     | 51:04   |       |       | 100.0 |
+| Active                                                                      |         | 51:04 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.1 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.4 |
-| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.2 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.1 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  27.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.3 |
+| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.1 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  17.0 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  26.9 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.6 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  31.6 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  31.4 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.8 |
+| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.9 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   5.8 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.1 |
-| STARTED Remove all deprecated code after exomodels clean up                 |         |       |  1:39 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -387,6 +387,26 @@ Tasks:
 After implementing the exomoel in terms of exoelements, we broke the
 JSON tests.
 
+*** COMPLETED Remove all deprecated code after exomodels clean up     :story:
+    CLOSED: [2017-12-05 Tue 21:12]
+    CLOCK: [2017-12-05 Tue 20:55]--[2017-12-05 Tue 21:16] =>  0:21
+    CLOCK: [2017-12-05 Tue 20:31]--[2017-12-05 Tue 20:54] =>  0:23
+    CLOCK: [2017-12-05 Tue 19:25]--[2017-12-05 Tue 19:41] =>  0:16
+    CLOCK: [2017-12-05 Tue 18:22]--[2017-12-05 Tue 18:45] =>  0:23
+    CLOCK: [2017-12-05 Tue 18:16]--[2017-12-05 Tue 18:21] =>  0:05
+    CLOCK: [2017-12-05 Tue 18:11]--[2017-12-05 Tue 18:15] =>  0:04
+    CLOCK: [2017-12-05 Tue 17:53]--[2017-12-05 Tue 18:10] =>  0:17
+    CLOCK: [2017-12-05 Tue 09:01]--[2017-12-05 Tue 09:07] =>  0:06
+    CLOCK: [2017-12-05 Tue 08:55]--[2017-12-05 Tue 09:00] =>  0:05
+
+Remove all deprecated code:
+
+- yarn.json: hydrator related classes
+- yarn: drop exoelement properties, drop new code logic, groups in
+  context, annotations transform, nameable/metanameable from exomodel.
+- annotations: scribble groups and related classes.
+- stitch: drop usage of scribbles
+
 *** STARTED Finish setting up coveralls                               :story:
     CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
     CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
@@ -448,24 +468,6 @@ program options:
 - [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
   processing with boost program_options
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
-
-*** STARTED Remove all deprecated code after exomodels clean up       :story:
-    CLOCK: [2017-12-05 Tue 20:31]--[2017-12-05 Tue 20:54] =>  0:23
-    CLOCK: [2017-12-05 Tue 19:25]--[2017-12-05 Tue 19:41] =>  0:16
-    CLOCK: [2017-12-05 Tue 18:22]--[2017-12-05 Tue 18:45] =>  0:23
-    CLOCK: [2017-12-05 Tue 18:16]--[2017-12-05 Tue 18:21] =>  0:05
-    CLOCK: [2017-12-05 Tue 18:11]--[2017-12-05 Tue 18:15] =>  0:04
-    CLOCK: [2017-12-05 Tue 17:53]--[2017-12-05 Tue 18:10] =>  0:17
-    CLOCK: [2017-12-05 Tue 09:01]--[2017-12-05 Tue 09:07] =>  0:06
-    CLOCK: [2017-12-05 Tue 08:55]--[2017-12-05 Tue 09:00] =>  0:05
-
-Remove all deprecated code:
-
-- yarn.json: hydrator related classes
-- yarn: drop exoelement properties, drop new code logic, groups in
-  context, annotations transform, nameable/metanameable from exomodel.
-- annotations: scribble groups and related classes.
-- stitch: drop usage of scribbles
 
 *** Add filename to exomodels                                         :story:
 

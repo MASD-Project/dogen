@@ -31,7 +31,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_factory.hpp"
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
@@ -100,11 +99,6 @@ public:
     const annotations::type_repository& type_repository() const;
 
     /**
-     * @brief Factory to generate annotation groups.
-     */
-    const annotations::annotation_groups_factory& groups_factory() const;
-
-    /**
      * @brief Factory to generate annotations.
      */
     const annotations::annotation_factory& annotation_factory() const;
@@ -142,8 +136,7 @@ private:
     const annotations::archetype_location_repository
     archetype_location_repository_;
     const annotations::type_repository type_repository_;
-    const annotations::annotation_groups_factory groups_factory_;
-    const annotations::annotation_factory annotation_factory_;
+        const annotations::annotation_factory annotation_factory_;
     const helpers::mapping_set_repository mapping_repository_;
     const dogen::formatters::repository formatters_repository_;
     const helpers::transform_prober prober_;

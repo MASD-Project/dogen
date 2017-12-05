@@ -38,8 +38,6 @@ context::context(
         const boost::shared_ptr<helpers::artefact_writer_interface> writer) :
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
-    groups_factory_(data_directories, archetype_location_repository_,
-        type_repository_, options.compatibility_mode()),
     annotation_factory_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
     mapping_repository_(msrp), formatters_repository_(frp), prober_(prober),
@@ -65,10 +63,6 @@ context::archetype_location_repository() const {
 
 const annotations::type_repository& context::type_repository() const {
     return type_repository_;
-}
-
-const annotations::annotation_groups_factory& context::groups_factory() const {
-    return groups_factory_;
 }
 
 const annotations::annotation_factory& context::annotation_factory() const {

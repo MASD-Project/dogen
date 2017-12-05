@@ -61,7 +61,7 @@ std::string model_to_text_model_transform::id() const {
 
 std::list<yarn::meta_model::artefact> model_to_text_model_transform::
 format(const annotations::type_repository& /*atrp*/,
-    const annotations::annotation_groups_factory& /*agf*/,
+    const annotations::annotation_factory& /*af*/,
     const dogen::formatters::repository& /*drp*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
@@ -144,8 +144,8 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
      */
     yarn::meta_model::text_model r;
     const auto& drp(ctx.formatters_repository());
-    const auto& agf(ctx.groups_factory());
-    r.artefacts(format(atrp, agf, drp, fm));
+    const auto& af(ctx.annotation_factory());
+    r.artefacts(format(atrp, af, drp, fm));
     r.managed_directories().push_back(l.project_path());
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";
