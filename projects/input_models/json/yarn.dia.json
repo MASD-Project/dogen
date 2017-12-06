@@ -1201,8 +1201,8 @@
           "type": "annotations::archetype_location_repository"
         },
         {
-          "name": "groups_factory",
-          "type": "annotations::annotation_groups_factory"
+          "name": "annotation_factory",
+          "type": "annotations::annotation_factory"
         },
         {
           "name": "mapping_repository",
@@ -2032,52 +2032,18 @@
     {
       "name": "meta_model::exomodel",
       "stereotypes": [
-        "Nameable",
-        "MetaNameable",
         "Documentable",
         "Taggable"
       ],
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": "modules",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<module>>>"
-        },
-        {
-          "name": "object_templates",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<object_template>>>"
-        },
-        {
-          "name": "builtins",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<builtin>>>"
-        },
-        {
-          "name": "enumerations",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<enumeration>>>"
-        },
-        {
-          "name": "primitives",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<primitive>>>"
-        },
-        {
-          "name": "objects",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<object>>>"
-        },
-        {
-          "name": "exceptions",
-          "type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<exception>>>"
-        },
-        {
-          "name": "root_module",
-          "type": "std::pair<annotations::scribble_group, boost::shared_ptr<module>>"
+          "name": "id",
+          "type": "std::string"
         },
         {
           "name": "elements",
           "type": "std::list<exoelement>"
-        },
-        {
-          "name": "use_new_code",
-          "type": "bool"
         },
         {
           "name": "stereotypes",
@@ -2087,13 +2053,6 @@
     },
     {
       "name": "transforms::exomodel_to_endomodel_transform",
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "fallback_element_type": "yarn::object"
-    },
-    {
-      "name": "transforms::annotations_transform",
       "stereotypes": [
         "handcrafted"
       ],
@@ -2326,13 +2285,6 @@
     },
     {
       "name": "helpers::scoped_transform_probing",
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "fallback_element_type": "yarn::object"
-    },
-    {
-      "name": "transforms::sorting_transform",
       "stereotypes": [
         "handcrafted"
       ],

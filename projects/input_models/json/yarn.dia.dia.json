@@ -216,7 +216,7 @@
           "documentation": "Text of the comment, excluding all Dogen instructions.\n"
         },
         {
-          "name": "key_value_pairs",
+          "name": "tagged_values",
           "type": "std::list<std::pair<std::string,std::string>>",
           "documentation": "Dogen instructions, in the key-value-pair form.\n"
         },

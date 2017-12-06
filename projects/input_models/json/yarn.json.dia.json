@@ -15,13 +15,6 @@
   },
   "elements": [
     {
-      "name": "hydrator",
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "fallback_element_type": "yarn::object"
-    },
-    {
       "name": "hydration_error",
       "stereotypes": [
         "yarn::exception"
@@ -50,7 +43,7 @@
       "fallback_element_type": "yarn::object"
     },
     {
-      "name": "new_hydrator",
+      "name": "hydrator",
       "stereotypes": [
         "handcrafted"
       ],

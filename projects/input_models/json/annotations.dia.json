@@ -154,9 +154,9 @@
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": "entries",
+          "name": "tagged_values",
           "type": "std::unordered_map<std::string, boost::shared_ptr<value>>",
-          "documentation": "All entries in this annotation. Each entry is a key-value-pair of id and value.\n"
+          "documentation": "All tagged values in this annotation. Each entry is a key-value-pair of id and value.\n"
         },
         {
           "name": "scope",
@@ -206,19 +206,6 @@
           "name": "operation",
           "type": "",
           "documentation": "Field can only appear on an operation in an entity.\n"
-        }
-      ]
-    },
-    {
-      "name": "annotation_groups_factory",
-      "stereotypes": [
-        "handcrafted"
-      ],
-      "fallback_element_type": "yarn::object",
-      "attributes": [
-        {
-          "name": "type_repository_",
-          "type": "type_repository"
         }
       ]
     },
@@ -498,58 +485,6 @@
         "handcrafted"
       ],
       "fallback_element_type": "yarn::object"
-    },
-    {
-      "name": "scribble_group",
-      "documentation": "A scribble is an annotation in raw form, prior to processing. A scribble group is a hierachical set of scribles.\n",
-      "fallback_element_type": "yarn::object",
-      "attributes": [
-        {
-          "name": "parent",
-          "type": "scribble",
-          "documentation": "Top-level scribble.\n"
-        },
-        {
-          "name": "children",
-          "type": "std::unordered_map<std::string, scribble>",
-          "documentation": "Child scribbles.\n"
-        }
-      ]
-    },
-    {
-      "name": "scribble",
-      "fallback_element_type": "yarn::object",
-      "attributes": [
-        {
-          "name": "entries",
-          "type": "std::list<std::pair<std::string, std::string>>"
-        },
-        {
-          "name": "scope",
-          "type": "scope_types"
-        },
-        {
-          "name": "candidate_labels",
-          "type": "std::vector<std::string>"
-        }
-      ]
-    },
-    {
-      "name": "annotation_group",
-      "documentation": "Related set of annotations, grouped into a single-level hierarchy.\n",
-      "fallback_element_type": "yarn::object",
-      "attributes": [
-        {
-          "name": "parent",
-          "type": "annotation",
-          "documentation": "Top-level annotation.\n"
-        },
-        {
-          "name": "children",
-          "type": "std::unordered_map<std::string, annotation>",
-          "documentation": "Child annotations.\n"
-        }
-      ]
     },
     {
       "name": "type_template",

@@ -223,8 +223,8 @@
       "fallback_element_type": "yarn::object",
       "attributes": [
         {
-          "name": "scribble_group",
-          "type": "annotations::scribble_group"
+          "name": "tagged_values",
+          "type": "std::list<std::pair<std::string, std::string>>"
         },
         {
           "name": "lines",
