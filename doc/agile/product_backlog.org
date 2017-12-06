@@ -11,6 +11,32 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding a swagger frontend                                :story:
+
+Once we have HTTP API support, we can consider having a frontend for
+swagger. The idea is that the user submits one or more swagger JSON
+files (one per supported version of the API, e.g. =v1=, =v2= etc)
+possibly with a dogen model in JSON or dia. Dogen then converts the
+swagger specification into elements. We can then code-generate:
+
+- all the data objects;
+- all the routing code;
+- an interface that the user can implement;
+- bridge into the HTTP API support for the Rest SDK/Beast code that
+  binds the HTTP processing with the routing;
+
+The generated project should be a binary with the static library
+generation enabled so we can test the web code. However, users should
+be allowed to choose if they want a static or shared library
+instead. This is a bit tricky if there is no dogen model because we
+have no way to supply meta-data.
+
+Links:
+
+- [[http://docs.servicestack.net/swagger-api][ServiceStack Swagger integration]]
+- [[http://radar.oreilly.com/2015/09/building-apis-with-swagger.html][Building APIs with Swagger]]
+- [[http://petstore.swagger.io/v2/swagger.json][Swagger JSON example]]
+
 *** HTTP API support                                                  :story:
 
 It should be possible to define a few classes in a diagram, annotate
@@ -215,10 +241,23 @@ At present the executables are all hand-crafted. However, as we want
 to move the options into each executable we need them to be in a
 model.
 
+When we tackle this we should take into account testability as well.
+At present we have some hacks around binaries to allow us to test the
+code. We manually create a static library that excludes main so that
+the tests can include it. We should make this the code-generated
+approach when we start generating CMake files for binaries.
+
 Tasks:
 
+- tailor generates names with extensions so we have yarn.dia.json. We
+  need to drop the .dia part.
+- references have extensions on them as well. We need to drop all
+  extensions and then be clever and look for files ending on any of
+  the supported extensions. If more than one, error.
+- add meta-data for "model type": library or executable. Defaults to
+  library. When library, users can make use of the CMake machinery to
+  determine if static or shared.
 - create a model for each executable and add the options to the model;
-- create options in yarn and stop using knitting options;
 - add meta-data to generate an executable instead of a library in
   CMake.
 - generate a main skeleton if one does not exist.
