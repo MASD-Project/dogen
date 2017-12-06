@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-06 Wed 20:43]
+#+CAPTION: Clock summary at [2017-12-06 Wed 23:21]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *51:57* |       |       | 100.0 |
+| *Total time*                                                                | *54:35* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 51:57   |       |       | 100.0 |
-| Active                                                                      |         | 51:57 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   2.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.3 |
+| Stories                                                                     | 54:35   |       |       | 100.0 |
+| Active                                                                      |         | 54:35 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.1 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.1 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  16.7 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  26.4 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.5 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  30.9 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  15.9 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  25.1 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.3 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  29.4 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.8 |
-| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.8 |
+| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.7 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.4 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.7 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   5.7 |
-| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   2.0 |
-| STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.6 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   5.4 |
+| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.9 |
+| STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.5 |
+| STARTED Create the =external= model                                         |         |       |  2:38 |   4.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -509,6 +510,42 @@ there are two different kinds of exomodels: proxyness is a fundamental
 property of an exomodel. If we do this we can then do the mapping in
 flight as we transform from exomodel to endomodel.
 
+*** STARTED Create the =external= model                               :story:
+    CLOCK: [2017-12-06 Wed 20:43]--[2017-12-06 Wed 23:21] =>  2:38
+
+Create a new model called =external= and move all exogenous model
+related class to it.
+
+Consider naming it =codec=.
+
+We should also split the model into the usual transforms, helpers,
+meta-model etc split. The top level transforms should be:
+
+- to dia diagram
+- to processed object
+- to model
+
+Notes:
+
+- we should have a dia to codec model chain.
+- rename adapter to factory to match processed object.
+
+*** Create a =transforms= model                                       :story:
+
+We need to move the probing logic into a transforms model, so we can
+use it outside of yarn. We should also move:
+
+- context, context factory
+- options
+
+Actually it makes more sense to just have the probing infrastructure.
+
+*** Rename the =transform= method to =apply=                          :story:
+
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
+
 *** Clean up exoelement                                               :story:
 
 Need to add: can_be_primitive_underlier, in_global_module,
@@ -544,25 +581,6 @@ As per analysis story, we are moving away from the sewing terms.
 As per analysis story, we are moving away from the sewing terms.
 
 Merge stitch and wale into a new model called =templates=.
-
-*** Create the =external= model                                       :story:
-
-Create a new model called =external= and move all exogenous model
-related class to it.
-
-Consider naming it =codec=.
-
-We should also split the model into the usual transforms, helpers,
-meta-model etc split. The top level transforms should be:
-
-- to dia diagram
-- to processed object
-- to model
-
-Notes:
-
-- we should have a dia to codec model chain.
-- rename adapter to factory to match processed object.
 
 *** Create the =generation= model                                     :story:
 
