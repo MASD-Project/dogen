@@ -1,0 +1,265 @@
+{
+  "documentation": "Provides support for encoding and decoding external models.\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "external",
+    "yarn.external_modules": "dogen",
+    "yarn.input_language": "cpp",
+    "yarn.reference": "probing.dia",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_odb_cmake"
+  },
+  "elements": [
+    {
+      "name": "transforms",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "transforms::codec_interface",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::codec_container",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::registrar_error",
+      "documentation": "A registration error has occurred.\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::codec_types",
+      "documentation": "Types of codecs supported.\n",
+      "stereotypes": [
+        "yarn::enumeration"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "encoder",
+          "type": "",
+          "documentation": "Has the ability to encode a model into a format.\n"
+        },
+        {
+          "name": "decoder",
+          "type": "",
+          "documentation": "Has the ability to decode a model from a format.\n"
+        },
+        {
+          "name": "encoder_decoder",
+          "type": "",
+          "documentation": "Has the ability to encode and decode a model from a format.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::model_transform",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::encoding_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::decoding_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::model_to_model_transform",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "meta_model",
+      "fallback_element_type": "yarn::module"
+    },
+    {
+      "name": "meta_model::model",
+      "documentation": "Represents an external model.\n",
+      "stereotypes": [
+        "Nameable",
+        "Documentable",
+        "Taggable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "elements",
+          "type": "std::list<element>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::element",
+      "documentation": "Represents an element from an external model.\n",
+      "stereotypes": [
+        "Nameable",
+        "Documentable",
+        "Taggable",
+        "Stereotypable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "parents",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "attributes",
+          "type": "std::list<attribute>"
+        },
+        {
+          "name": "fallback_element_type",
+          "type": "std::string",
+          "documentation": "Stereotype conveying element type, to be used when none is provided with the\nmain stereotypes.\n"
+        },
+        {
+          "name": "can_be_primitive_underlier",
+          "type": "bool"
+        },
+        {
+          "name": "in_global_module",
+          "type": "bool"
+        },
+        {
+          "name": "can_be_enumeration_underlier",
+          "type": "bool"
+        },
+        {
+          "name": "is_default_enumeration_type",
+          "type": "bool"
+        },
+        {
+          "name": "is_associative_container",
+          "type": "bool"
+        },
+        {
+          "name": "is_associative_container",
+          "type": "bool"
+        },
+        {
+          "name": "is_floating_point",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::attribute",
+      "stereotypes": [
+        "Nameable",
+        "Documentable",
+        "Taggable",
+        "Stereotypable"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Taggable",
+      "documentation": "Ability to contain tagged values.\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "tagged_values",
+          "type": "std::list<std::pair<std::string, std::string>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Stereotypable",
+      "documentation": "Ability to have stereotypes.\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "meta_model::Documentable",
+      "documentation": "Ability to provide documentation.\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "documentation",
+          "type": "std::string",
+          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the programming language in question, e.g. Doxygen for C++, JavaDoc\nfor Java, etc.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::Nameable",
+      "documentation": "Ability to have a name.\n",
+      "stereotypes": [
+        "yarn::object_template"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "prober",
+          "type": "probing::prober"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transformation_error",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "transforms::context_factory",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    }
+  ]
+}

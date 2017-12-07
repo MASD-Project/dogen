@@ -1,0 +1,93 @@
+{
+  "documentation": "Houses classes common to all transformations.\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "external",
+    "yarn.external_modules": "dogen",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_odb_cmake"
+  },
+  "elements": [
+    {
+      "name": "prober",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "builder_",
+          "type": "metrics_builder"
+        },
+        {
+          "name": "configuration_",
+          "type": "prober_configuration"
+        }
+      ]
+    },
+    {
+      "name": "metrics",
+      "fallback_element_type": "yarn::object",
+      "attributes": [
+        {
+          "name": "transform_id",
+          "type": "std::string"
+        },
+        {
+          "name": "model_id",
+          "type": "std::string"
+        },
+        {
+          "name": "guid",
+          "type": "std::string"
+        },
+        {
+          "name": "start",
+          "type": "unsigned long"
+        },
+        {
+          "name": "end",
+          "type": "unsigned long"
+        },
+        {
+          "name": "children",
+          "type": "std::list<boost::shared_ptr<metrics>>"
+        }
+      ]
+    },
+    {
+      "name": "metrics_builder",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "metrics_printer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "probing_error",
+      "documentation": "An error occurred when trying to generate probing data.\n",
+      "stereotypes": [
+        "yarn::exception"
+      ],
+      "fallback_element_type": "yarn::object"
+    },
+    {
+      "name": "scoped_prober",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "yarn::object"
+    }
+  ]
+}
