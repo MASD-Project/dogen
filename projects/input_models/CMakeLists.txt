@@ -103,10 +103,12 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} yarn)
     set(models ${models} yarn.dia)
     set(models ${models} yarn.json)
+    set(models ${models} probing)
+
+    # models that are not yet ready
     # set(models ${models} pleat)
     # set(models ${models} dart)
     # set(models ${models} external)
-    # set(models ${models} probing)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)

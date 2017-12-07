@@ -200,6 +200,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/stitch/include
     ${CMAKE_SOURCE_DIR}/projects/stitcher/include
     ${CMAKE_SOURCE_DIR}/projects/wale/include
+    ${CMAKE_SOURCE_DIR}/projects/probing/include
     )
 
 #
@@ -222,6 +223,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/wale)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/probing)
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)
