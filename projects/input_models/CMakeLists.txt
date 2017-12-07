@@ -71,5 +71,43 @@ if (DOGEN_TAILOR_EXECUTABLE)
     endforeach()
 endif()
 
+if (DOGEN_KNITTER_EXECUTABLE)
+    set(ig_flg "--ignore-files-matching-regex")
+    set(ignore_regexes ${ig_flg} .*/CMakeLists.txt)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/test/.*)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/tests/.*)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/colour.py)
+
+
+    set(other_options --log-level ${DOGEN_LOG_LEVEL})
+    set(other_options ${other_options} --delete-extra-files)
+
+    # uncomment the next line if you require compatibility support
+    # set(other_options ${other_options} --compatibility-mode)
+
+    set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
+    set(common_arguments --output-directory ${projects_dir}/)
+    set(common_arguments ${common_arguments} ${other_options})
+    set(common_arguments ${common_arguments} ${ignore_regexes})
+
+    # main input models
+    set(models annotations)
+    set(models ${models} dia)
+    set(models ${models} formatters)
+    set(models ${models} options)
+    set(models ${models} quilt.cpp)
+    set(models ${models} quilt.csharp)
+    set(models ${models} stitch)
+    set(models ${models} wale)
+    set(models ${models} yarn)
+    set(models ${models} yarn.dia)
+    set(models ${models} yarn.json)
+    # set(models ${models} pleat)
+    # set(models ${models} dart)
+    # set(models ${models} external)
+    # set(models ${models} probing)
+endif()
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/json)

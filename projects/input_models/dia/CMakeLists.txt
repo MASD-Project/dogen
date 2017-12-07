@@ -17,81 +17,30 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 set(frontend "dia")
-set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
 set(models_dir "${projects_dir}/input_models/${frontend}")
 
 if (DOGEN_KNITTER_EXECUTABLE)
-    set(ig_flg "--ignore-files-matching-regex")
-    set(ignore_regexes ${ig_flg} .*/CMakeLists.txt)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/test/.*)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/tests/.*)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/colour.py)
+    foreach(model ${models})
+        set(target ${model})
+        set(target_path ${models_dir}/${target}.${frontend})
+        add_custom_target(knit_${target}
+            COMMENT "Knitting ${target} model" VERBATIM
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMAND ${DOGEN_KNITTER_EXECUTABLE}
+            --target ${target_path} ${common_arguments})
+        add_dependencies(knit_all knit_${target})
 
-
-    set(other_options --log-level ${DOGEN_LOG_LEVEL})
-    set(other_options ${other_options} --delete-extra-files)
-
-    # uncomment the next line if you require compatibility support
-    set(other_options ${other_options} --compatibility-mode)
-
-    set(common_arguments --output-directory ${projects_dir}/)
-    set(common_arguments ${common_arguments} ${other_options})
-    set(common_arguments ${common_arguments} ${ignore_regexes})
-
-    set(target yarn)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Yarn model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target yarn.json)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Yarn JSON model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target dia)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Dia model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target options)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Options model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target quilt.cpp)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Quilt C++ model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target quilt.csharp)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Quilt C# model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
+        if (WITH_BENCHMARKS)
+            add_custom_target(benchmark_knit_${target}
+                COMMENT "Benchmarking knitting ${target} model" VERBATIM
+                WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+                COMMAND ${benchmark_command} ${benchmark_repeats}
+                ${benchmark_directory}/${benchmark_prefix}${target}.csv
+                ${DOGEN_KNITTER_EXECUTABLE} --target ${target_path}
+                ${common_arguments})
+            add_dependencies(benchmark_all benchmark_knit_${target})
+        endif()
+    endforeach()
 
     set(target northwind)
     add_custom_target(knit_${target}
@@ -106,122 +55,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
         --ignore-files-matching-regex .*-odb.*)
     add_dependencies(knit_all knit_${target})
 
-    set(target yarn.dia)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Yarn Dia model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target formatters)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting the Formatters Model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target annotations)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Annotations model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target stitch)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Stitch model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target wale)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Wale model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    if(WITH_BENCHMARKS)
-        set(target yarn)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Yarn model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target yarn.json)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Yarn JSON model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target dia)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Dia model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target options)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Options model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target quilt)
-        add_custom_target(benchmark_knit_${target}x
-            COMMENT "Benchmarking knitting Quilt model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target}x)
-
-        set(target quilt.cpp)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Quilt C++ model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target quilt.csharp)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Quilt C# model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
+    if (WITH_BENCHMARKS)
         set(target northwind)
         add_custom_target(benchmark_knit_${target}
             COMMENT "Benchmarking knitting Northwind model" VERBATIM
@@ -234,56 +68,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
             ${ignore_regexes}
             --ignore-files-matching-regex .*sql
             --ignore-files-matching-regex .*-odb.*)
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target yarn.dia)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Yarn Dia model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target formatters)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Formatters Model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target annotations)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Annotations model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target stitch)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Stitch model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target wale)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Wale model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
     endif()
 endif()
