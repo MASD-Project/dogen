@@ -374,19 +374,19 @@
         <dia:point val="11,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.95,43.95;31.955,49.25"/>
+        <dia:rectangle val="10.95,43.95;29.26,49.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="11,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#codec_registrar#</dia:string>
+        <dia:string>#codec_container#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -506,7 +506,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_codec#</dia:string>
+            <dia:string>#install#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -554,7 +554,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#codec_for_id#</dia:string>
+            <dia:string>#resolve#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -1081,17 +1081,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="31.905,44"/>
+        <dia:point val="29.21,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.155,39.2;41.2,44.8"/>
+        <dia:rectangle val="28.46,39.2;41.2,44.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="31.905,44"/>
-        <dia:point val="31.905,40"/>
+        <dia:point val="29.21,44"/>
+        <dia:point val="29.21,40"/>
         <dia:point val="41,40"/>
         <dia:point val="41,44"/>
       </dia:attribute>
@@ -1485,7 +1485,7 @@
         <dia:point val="25,56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.25,49.15;32.105,56.8"/>
+        <dia:rectangle val="24.25,49.15;29.41,56.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1493,8 +1493,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="25,56"/>
         <dia:point val="25,53"/>
-        <dia:point val="31.905,53"/>
-        <dia:point val="31.905,49.2"/>
+        <dia:point val="29.21,53"/>
+        <dia:point val="29.21,49.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3288,7 +3288,7 @@ for Java, etc.#</dia:string>
         <dia:point val="11,49.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.25,48.45;25.2,68.6"/>
+        <dia:rectangle val="10.25,48.45;25.2,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3360,7 +3360,7 @@ for Java, etc.#</dia:string>
         <dia:point val="59.98,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.935,49.25;60.73,68.6"/>
+        <dia:rectangle val="48.935,49.25;60.73,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3910,7 +3910,7 @@ for Java, etc.#</dia:string>
         <dia:point val="71.18,59.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.43,58.85;73.07,68.6"/>
+        <dia:rectangle val="70.43,58.85;73.07,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
