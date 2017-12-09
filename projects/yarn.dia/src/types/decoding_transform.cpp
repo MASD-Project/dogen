@@ -69,8 +69,8 @@ inline bool is_not_relevant(const processed_object& po) {
 
 decoding_transform::~decoding_transform() noexcept {}
 
-std::list<processed_object>
-obtain_processed_objects(const dogen::dia::diagram& d) {
+std::list<processed_object> decoding_transform::
+obtain_processed_objects(const dogen::dia::diagram& d) const {
     BOOST_LOG_SEV(lg, debug) << "Converting diagram into processed objects.";
 
     /*
@@ -93,8 +93,9 @@ obtain_processed_objects(const dogen::dia::diagram& d) {
     return r;
 }
 
-external::meta_model::model decoding_transform::
-obtain_model(const std::string& name, const std::list<processed_object>& pos) {
+external::meta_model::model
+decoding_transform::obtain_model(const std::string& name,
+    const std::list<processed_object>& pos) const {
     BOOST_LOG_SEV(lg, debug) << "Generating external model.";
 
     /*

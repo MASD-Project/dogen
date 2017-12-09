@@ -32,6 +32,7 @@ target_link_libraries(${tests_name}
     ${name}
     utility
     annotations
+    external
     yarn
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}

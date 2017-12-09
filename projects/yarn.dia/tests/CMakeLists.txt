@@ -32,6 +32,7 @@ target_link_libraries(${tests_name}
     ${name}
     utility
     dia
+    external
     yarn
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}

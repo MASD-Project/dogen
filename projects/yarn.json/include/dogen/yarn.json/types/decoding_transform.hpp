@@ -34,7 +34,7 @@ namespace yarn {
 namespace json {
 
 class decoding_transform final
-    : external::transforms::decoding_transform_interface {
+    : public external::transforms::decoding_transform_interface {
 public:
     decoding_transform() = default;
     decoding_transform(const decoding_transform&) = delete;

@@ -68,6 +68,28 @@ private:
     static std::shared_ptr<transforms::registrar> registrar_;
 };
 
+
+/*
+ * Helper method to register encoding transforms.
+ */
+template<typename EncodingTransform>
+inline void register_encoding_transform() {
+    auto& rg(model_generation_chain::registrar());
+    auto t(std::make_shared<EncodingTransform>());
+    rg.register_encoding_transform(t);
+}
+
+/*
+ * Helper method to register decoding transforms.
+ */
+template<typename DecodingTransform>
+inline void register_decoding_transform() {
+    auto& rg(model_generation_chain::registrar());
+    auto t(std::make_shared<DecodingTransform>());
+    rg.register_decoding_transform(t);
+}
+
+
 } } }
 
 #endif

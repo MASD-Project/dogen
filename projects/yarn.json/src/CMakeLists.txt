@@ -31,8 +31,8 @@ set_target_properties(${name}
 
 target_link_libraries(${name}
     utility
-    formatters
     annotations
+    external
     yarn
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

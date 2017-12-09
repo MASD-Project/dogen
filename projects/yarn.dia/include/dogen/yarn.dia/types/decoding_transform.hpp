@@ -39,7 +39,7 @@ namespace yarn {
 namespace dia {
 
 class decoding_transform final
-    : external::transforms::decoding_transform_interface {
+    : public external::transforms::decoding_transform_interface {
 public:
     decoding_transform() = default;
     decoding_transform(const decoding_transform&) = delete;
@@ -51,14 +51,14 @@ private:
      */
 
     std::list<processed_object>
-    obtain_processed_objects(const dogen::dia::diagram& d);
+    obtain_processed_objects(const dogen::dia::diagram& d) const;
 
     /**
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.
      */
     external::meta_model::model obtain_model(const std::string& name,
-        const std::list<processed_object>& pos);
+        const std::list<processed_object>& pos) const;
 
 public:
     std::string extension() const;

@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/external/types/transforms/model_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
+#include "dogen/yarn.dia/types/decoding_transform.hpp"
 #include "dogen/yarn.dia/types/exomodel_transform.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
 
@@ -28,6 +30,7 @@ namespace dia {
 
 void initializer::initialize() {
     yarn::transforms::register_exomodel_transform<exomodel_transform>();
+    external::transforms::register_decoding_transform<decoding_transform>();
 }
 
 } } }

@@ -33,7 +33,7 @@ namespace yarn {
 namespace json {
 
 class encoding_transform final
-    : external::transforms::encoding_transform_interface {
+    : public external::transforms::encoding_transform_interface {
 public:
     encoding_transform() = default;
     encoding_transform(const encoding_transform&) = delete;

@@ -32,6 +32,7 @@ set_target_properties(${name}
   target_link_libraries(${name}
     utility
     annotations
+    external
     dia
     yarn
     ${LIBXML2_LIBRARIES}
