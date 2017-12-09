@@ -25,28 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <memory>
+#include <functional>
+#include <boost/graph/depth_first_search.hpp>
+#include "dogen/yarn.dia/types/grapher.hpp"
+#include "dogen/yarn.dia/types/new_builder.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-class new_visitor final {
+class new_visitor : public boost::default_dfs_visitor {
 public:
-    new_visitor() = default;
+    new_visitor() = delete;
+    new_visitor& operator=(const new_visitor&) = default;
     new_visitor(const new_visitor&) = default;
     new_visitor(new_visitor&&) = default;
-    ~new_visitor() = default;
-    new_visitor& operator=(const new_visitor&) = default;
 
 public:
-    bool operator==(const new_visitor& rhs) const;
-    bool operator!=(const new_visitor& rhs) const {
-        return !this->operator==(rhs);
+    explicit new_visitor(new_builder& b);
+
+public:
+    template<typename Vertex, typename Graph>
+    void finish_vertex(const Vertex& u, const Graph& g) {
+        const auto& o(g[u]);
+        if (o.id() != grapher::root_id())
+            builder_.add(o);
     }
 
+private:
+    new_builder& builder_;
 };
-
 } } }
 
 #endif

@@ -24,8 +24,6 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-bool new_visitor::operator==(const new_visitor& /*rhs*/) const {
-    return true;
-}
+new_visitor::new_visitor(new_builder& builder) : builder_(builder) {}
 
 } } }

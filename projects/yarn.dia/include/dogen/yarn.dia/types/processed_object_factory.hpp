@@ -33,6 +33,7 @@
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_object_fwd.hpp"
+#include "dogen/yarn.dia/types/processed_comment_fwd.hpp"
 
 namespace dogen {
 namespace yarn {

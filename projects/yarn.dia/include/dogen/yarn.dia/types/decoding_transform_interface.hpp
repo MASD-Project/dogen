@@ -25,26 +25,47 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include "dogen/dia/types/diagram_fwd.hpp"
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/yarn.dia/types/grapher.hpp"
+#include "dogen/yarn.dia/types/validator.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
+#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-class decoding_transform_interface final {
+class decoding_transform_interface final
+    : external::transforms::decoding_transform_interface {
 public:
     decoding_transform_interface() = default;
-    decoding_transform_interface(const decoding_transform_interface&) = default;
-    decoding_transform_interface(decoding_transform_interface&&) = default;
-    ~decoding_transform_interface() = default;
-    decoding_transform_interface& operator=(const decoding_transform_interface&) = default;
+    decoding_transform_interface(const decoding_transform_interface&) = delete;
+    ~decoding_transform_interface() noexcept;
+
+private:
+    /**
+     * @brief Converts the Dia diagram into an
+     */
+
+    std::list<processed_object>
+    obtain_processed_objects(const dogen::dia::diagram& d);
+
+    /**
+     * @brief Transforms the entire graph of processed objects into a
+     * Yarn model.
+     */
+    external::meta_model::model obtain_model(const std::string& name,
+        const std::list<processed_object>& pos);
 
 public:
-    bool operator==(const decoding_transform_interface& rhs) const;
-    bool operator!=(const decoding_transform_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::string extension() const;
 
+    external::meta_model::model
+    transform(const external::transforms::context& ctx,
+        const boost::filesystem::path& p);
 };
 
 } } }
