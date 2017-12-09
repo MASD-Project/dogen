@@ -171,4 +171,24 @@ registrar::decoding_transform_for_extension(const std::string& ext) {
     return r;
 }
 
+encoding_transform_interface&
+registrar::encoding_transform_for_path(const boost::filesystem::path& p) {
+    const auto gs(p.generic_string());
+    const auto ext(p.extension().generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Looking for an encoding transform for path: "
+                             << gs << ". Extension: '" << ext << "'";
+
+    return encoding_transform_for_extension(ext);
+}
+
+decoding_transform_interface&
+registrar::decoding_transform_for_path(const boost::filesystem::path& p) {
+    const auto gs(p.generic_string());
+    const auto ext(p.extension().generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Looking for an decoding transform for path: "
+                             << gs << ". Extension: '" << ext << "'";
+
+    return decoding_transform_for_extension(ext);
+}
+
 } } }

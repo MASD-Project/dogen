@@ -25,7 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <utility>
+#include <boost/tuple/tuple.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen/external/types/transforms/context_fwd.hpp"
+#include "dogen/external/types/transforms/encoding_transform_interface.hpp"
+#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
 
 namespace dogen {
 namespace external {
@@ -33,18 +38,20 @@ namespace transforms {
 
 class model_to_model_chain final {
 public:
-    model_to_model_chain() = default;
-    model_to_model_chain(const model_to_model_chain&) = default;
-    model_to_model_chain(model_to_model_chain&&) = default;
-    ~model_to_model_chain() = default;
-    model_to_model_chain& operator=(const model_to_model_chain&) = default;
+    /**
+     * @note Using boost tuple as we can't get pair to work with
+     * references.
+     */
+    static boost::tuple<decoding_transform_interface&,
+                        encoding_transform_interface&>
+    obtain_transforms(
+        const boost::filesystem::path& src_path,
+        const boost::filesystem::path& dst_path);
 
 public:
-    bool operator==(const model_to_model_chain& rhs) const;
-    bool operator!=(const model_to_model_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const transforms::context& ctx,
+        const boost::filesystem::path& src_path,
+        const boost::filesystem::path& dst_path);
 };
 
 } } }

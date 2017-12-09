@@ -80,6 +80,26 @@ public:
     decoding_transform_interface&
     decoding_transform_for_extension(const std::string& ext);
 
+    /**
+     * @brief Returns the encoding transform that handles the
+     * supplied path.
+     *
+     * @pre An encoding transform must have been registered for this
+     * extension.
+     */
+    encoding_transform_interface&
+    encoding_transform_for_path(const boost::filesystem::path& p);
+
+    /**
+     * @brief Returns the decoding transform that handles the
+     * supplied path.
+     *
+     * @pre An decoding transform must have been registered for this
+     * extension.
+     */
+    decoding_transform_interface&
+    decoding_transform_for_path(const boost::filesystem::path& p);
+
 private:
     std::unordered_map<std::string,
                        std::shared_ptr<encoding_transform_interface>>
