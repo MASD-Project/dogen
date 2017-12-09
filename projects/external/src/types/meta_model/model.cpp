@@ -28,10 +28,12 @@ model::model(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<std::string>& stereotypes,
     const std::list<dogen::external::meta_model::element>& elements)
     : name_(name),
       documentation_(documentation),
       tagged_values_(tagged_values),
+      stereotypes_(stereotypes),
       elements_(elements) { }
 
 void model::swap(model& other) noexcept {
@@ -39,6 +41,7 @@ void model::swap(model& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
+    swap(stereotypes_, other.stereotypes_);
     swap(elements_, other.elements_);
 }
 
@@ -46,6 +49,7 @@ bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         tagged_values_ == rhs.tagged_values_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         elements_ == rhs.elements_;
 }
 
@@ -101,6 +105,22 @@ void model::tagged_values(const std::list<std::pair<std::string, std::string> >&
 
 void model::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
     tagged_values_ = std::move(v);
+}
+
+const std::list<std::string>& model::stereotypes() const {
+    return stereotypes_;
+}
+
+std::list<std::string>& model::stereotypes() {
+    return stereotypes_;
+}
+
+void model::stereotypes(const std::list<std::string>& v) {
+    stereotypes_ = v;
+}
+
+void model::stereotypes(const std::list<std::string>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 const std::list<dogen::external::meta_model::element>& model::elements() const {

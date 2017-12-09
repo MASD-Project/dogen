@@ -1377,16 +1377,16 @@ An exogenous model is defined as:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="38,3"/>
+        <dia:point val="33,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,2.95;52.41,6.65"/>
+        <dia:rectangle val="32.95,2.95;53.185,6.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="38,3"/>
+        <dia:point val="33,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.359999999999999"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1395,7 +1395,7 @@ An exogenous model is defined as:
         <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable, Documentable, Taggable#</dia:string>
+        <dia:string>#Nameable, Documentable, Taggable, Stereotypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents an external model.#</dia:string>
@@ -1512,13 +1512,13 @@ An exogenous model is defined as:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="57,3"/>
+        <dia:point val="58,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.95,2.95;77.185,13.05"/>
+        <dia:rectangle val="57.95,2.95;78.185,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="57,3"/>
+        <dia:point val="58,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -1832,13 +1832,13 @@ main stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="14,3"/>
+        <dia:point val="9,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,2.95;34.185,6.65"/>
+        <dia:rectangle val="8.95,2.95;29.185,6.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14,3"/>
+        <dia:point val="9,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -2547,19 +2547,19 @@ for Java, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="45.18,3"/>
+        <dia:point val="43.0675,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.43,-0.8;67.2675,3.8"/>
+        <dia:rectangle val="42.3175,-0.8;68.2675,3.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="45.18,3"/>
-        <dia:point val="45.18,0"/>
-        <dia:point val="67.0675,0"/>
-        <dia:point val="67.0675,3"/>
+        <dia:point val="43.0675,3"/>
+        <dia:point val="43.0675,0"/>
+        <dia:point val="68.0675,0"/>
+        <dia:point val="68.0675,3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2619,19 +2619,19 @@ for Java, etc.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="67.0675,13"/>
+        <dia:point val="68.0675,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.0175,6.55;67.8175,17.05"/>
+        <dia:rectangle val="19.0175,6.55;68.8175,17.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.0675,13"/>
-        <dia:point val="67.0675,17"/>
-        <dia:point val="24.0675,17"/>
-        <dia:point val="24.0675,6.6"/>
+        <dia:point val="68.0675,13"/>
+        <dia:point val="68.0675,17"/>
+        <dia:point val="19.0675,17"/>
+        <dia:point val="19.0675,6.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

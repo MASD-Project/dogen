@@ -46,6 +46,14 @@ std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_str
     return r;
 }
 
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
 dogen::external::meta_model::element
 create_dogen_external_meta_model_element(const unsigned int position) {
     return dogen::external::meta_model::element_generator::create(position);
@@ -72,7 +80,8 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 2));
-    v.elements(create_std_list_dogen_external_meta_model_element(position + 3));
+    v.stereotypes(create_std_list_std_string(position + 3));
+    v.elements(create_std_list_dogen_external_meta_model_element(position + 4));
 }
 
 model_generator::result_type

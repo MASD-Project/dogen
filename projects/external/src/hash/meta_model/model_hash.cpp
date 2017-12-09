@@ -45,6 +45,14 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<
     return seed;
 }
 
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 inline std::size_t hash_std_list_dogen_external_meta_model_element(const std::list<dogen::external::meta_model::element>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -65,6 +73,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
+    combine(seed, hash_std_list_std_string(v.stereotypes()));
     combine(seed, hash_std_list_dogen_external_meta_model_element(v.elements()));
 
     return seed;

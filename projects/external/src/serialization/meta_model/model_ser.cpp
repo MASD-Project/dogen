@@ -43,6 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("tagged_values", v.tagged_values_);
+    ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("elements", v.elements_);
 }
 
@@ -53,6 +54,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
+    ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("elements", v.elements_);
 }
 
