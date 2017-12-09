@@ -25,26 +25,90 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen/external/types/meta_model/element.hpp"
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
+/**
+ * @brief Builds a external model from dia processed objects.
+ *
+ * Expects the objects to have been supplied in dependency order.
+ */
 class new_builder final {
-public:
-    new_builder() = default;
-    new_builder(const new_builder&) = default;
-    new_builder(new_builder&&) = default;
-    ~new_builder() = default;
-    new_builder& operator=(const new_builder&) = default;
+private:
+    /*
+     * @brief Responsible for tracking the qualified name of the
+     * element for elements corresponding to Dia's UML large package,
+     * as well as an iterator to the element itself in the model.
+     */
+    struct uml_large_package_properties {
+        std::string name;
+        std::list<external::meta_model::element>::iterator element;
+    };
 
 public:
-    bool operator==(const new_builder& rhs) const;
-    bool operator!=(const new_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    explicit new_builder(
+        const std::unordered_map<std::string, std::list<std::string>>&
+        parent_id_to_child_ids);
 
+private:
+    /**
+     * @brief Updates the parenting information for the given object
+     * identified by the dia ID.
+     */
+    void update_parentage(const std::string& id, const std::string& n);
+
+    /**
+     * @brief Returns the list of names of parents for a given dia
+     * object id. If none exist, the list is empty.
+     */
+    const std::list<std::string>&
+    parents_for_object(const std::string& id) const;
+
+    /**
+     * @brief Returns the qualified name of the containing object, or
+     * an empty string.
+     */
+    std::string contained_by(const std::string& id) const;
+
+private:
+    /**
+     * @brief Handles the processing of UML large packages.
+     */
+    void handle_uml_large_package(const processed_object& po,
+        const std::string& n);
+
+    /**
+     * @brief Handles the processing of UML notes.
+     */
+    void handle_uml_note(const processed_object& po);
+
+public:
+    /**
+     * @brief Adds a processed object to the builder.
+     */
+    void add(const processed_object& po);
+
+    /**
+     * @brief Generates the external model.
+     */
+    external::meta_model::model build();
+
+private:
+    const std::unordered_map<std::string, std::list<std::string>>&
+    parent_id_to_child_ids_;
+    std::unordered_map<std::string, uml_large_package_properties>
+    id_to_uml_large_package_properties_;
+    std::unordered_map<std::string, std::list<std::string>>
+    child_id_to_parent_names_;
+    external::meta_model::model model_;
 };
 
 } } }
