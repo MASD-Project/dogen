@@ -25,26 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/external/types/transforms/encoding_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace json {
 
-class encoding_transform final {
+class encoding_transform final
+    : external::transforms::encoding_transform_interface {
 public:
     encoding_transform() = default;
-    encoding_transform(const encoding_transform&) = default;
-    encoding_transform(encoding_transform&&) = default;
-    ~encoding_transform() = default;
-    encoding_transform& operator=(const encoding_transform&) = default;
+    encoding_transform(const encoding_transform&) = delete;
+    ~encoding_transform() noexcept;
 
 public:
-    bool operator==(const encoding_transform& rhs) const;
-    bool operator!=(const encoding_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::string extension() const;
 
+    void transform(const external::transforms::context& ctx,
+        const external::meta_model::model& m, const boost::filesystem::path& p);
 };
 
 } } }

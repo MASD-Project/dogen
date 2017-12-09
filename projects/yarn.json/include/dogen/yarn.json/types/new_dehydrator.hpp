@@ -25,26 +25,41 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <map>
+#include <string>
+#include <iosfwd>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen/external/types/meta_model/element.hpp"
+#include "dogen/external/types/meta_model/attribute.hpp"
+#include "dogen/external/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace json {
 
 class new_dehydrator final {
-public:
-    new_dehydrator() = default;
-    new_dehydrator(const new_dehydrator&) = default;
-    new_dehydrator(new_dehydrator&&) = default;
-    ~new_dehydrator() = default;
-    new_dehydrator& operator=(const new_dehydrator&) = default;
+private:
+    static std::string tidy_up_string(std::string s);
+
+private:
+    static void insert_documentation(std::ostream& s, const std::string& d);
+    static void insert_tagged_values(std::ostream& s,
+        const std::list<std::pair<std::string, std::string>>& tv);
+    static void insert_stereotypes(std::ostream& s,
+        const std::list<std::string>& st);
+    static void insert_parents(std::ostream& s,
+        const std::list<std::string>& parents);
+    static void insert_attribute(std::ostream& s,
+        const external::meta_model::attribute& a);
+    static void insert_element(std::ostream& s,
+        const external::meta_model::element& e);
 
 public:
-    bool operator==(const new_dehydrator& rhs) const;
-    bool operator!=(const new_dehydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string dehydrate(const external::meta_model::model& m);
+    static void dehydrate(const external::meta_model::model& m,
+        const boost::filesystem::path& p);
 };
 
 } } }

@@ -18,14 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen/external/types/transforms/context.hpp"
+#include "dogen/external/io/meta_model/model_io.hpp"
+#include "dogen/external/types/transforms/transformation_error.hpp"
+#include "dogen/yarn.json/types/new_hydrator.hpp"
 #include "dogen/yarn.json/types/decoding_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+const std::string transform_id("yarn.json.decoding_transform");
+auto lg(logger_factory(transform_id));
+
+const std::string extension(".json");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace json {
 
-bool decoding_transform::operator==(const decoding_transform& /*rhs*/) const {
-    return true;
+decoding_transform::~decoding_transform() noexcept {}
+
+std::string decoding_transform::extension() const {
+    return ::extension;
+}
+
+external::meta_model::model decoding_transform::
+transform(const external::transforms::context& ctx,
+    const boost::filesystem::path& p) {
+    const auto model_name(p.filename().string());
+    probing::scoped_transform_prober stp(lg, "JSON decoding transform",
+        transform_id, model_name, ctx.prober());
+
+    new_hydrator h;
+    const auto r(h.hydrate(p));
+
+    stp.end_transform(r);
+    return r;
 }
 
 } } }
