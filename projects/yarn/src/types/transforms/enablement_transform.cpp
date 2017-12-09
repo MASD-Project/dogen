@@ -301,7 +301,7 @@ void enablement_transform::compute_enablement_for_element(
 void enablement_transform::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_transform_prober stp(lg, "enablement new_transform",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& alrp(ctx.archetype_location_repository());
     const auto& albmn(alrp.archetype_locations_by_meta_name());

@@ -41,7 +41,7 @@ namespace transforms {
 std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {
     probing::scoped_chain_prober stp(lg, "model generation chain",
-        transform_id, ctx.new_prober());
+        transform_id, ctx.prober());
 
     /*
      * First we generate the endomodels.

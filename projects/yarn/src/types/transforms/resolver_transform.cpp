@@ -40,7 +40,7 @@ namespace transforms {
 void resolver_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "resolver transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
     helpers::resolver::resolve(idx, em);
     stp.end_transform(em);
 }

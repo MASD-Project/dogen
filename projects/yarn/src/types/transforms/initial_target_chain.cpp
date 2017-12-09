@@ -45,7 +45,7 @@ initial_target_chain::transform(const context& ctx) {
     const auto tp(ctx.transform_options().target());
     const auto model_name(tp.filename().string());
     probing::scoped_chain_prober stp(lg, "initial target chain",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
 
     /*
      * First we obtain the target model in the internal representation

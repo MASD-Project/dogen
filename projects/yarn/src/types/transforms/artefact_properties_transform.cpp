@@ -91,7 +91,7 @@ update_element(const context& ctx, meta_model::element& e) {
 void artefact_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_transform_prober stp(lg, "artefact properties transform",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     for(auto& ptr : m.elements())
         update_element(ctx, *ptr);

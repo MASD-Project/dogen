@@ -192,7 +192,7 @@ transform(const context& ctx, const meta_model::model& m) {
 meta_model::text_model model_to_text_model_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
     probing::scoped_chain_prober stp(lg, "code generation chain",
-        transform_id, ctx.new_prober());
+        transform_id, ctx.prober());
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 

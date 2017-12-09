@@ -83,7 +83,7 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 void primitives_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "primitives transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     for (auto& pair : em.primitives()) {

@@ -480,7 +480,7 @@ void archetype_location_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_transform_prober stp(lg,
         "archetype location properties transform",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& atrp(ctx.type_repository());
     const auto& alrp(ctx.archetype_location_repository());

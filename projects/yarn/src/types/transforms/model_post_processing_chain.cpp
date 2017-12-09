@@ -47,7 +47,7 @@ namespace transforms {
 void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_chain_prober stp(lg, "model post-processing chain",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     /*
      * Perform dynamic expansion first. These are backend specific.

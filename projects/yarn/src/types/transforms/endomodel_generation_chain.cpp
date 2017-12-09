@@ -53,7 +53,7 @@ std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
     probing::scoped_chain_prober stp(lg, "endomodel generation chain",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
 
     /*
      * Obtain the initial target, given the user options. The initial

@@ -126,7 +126,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
 
-    probing::prober new_prober(alrp, atrp,
+    probing::prober prober(alrp, atrp,
         o.log_level(), o.probe_all(), o.probe_all(),
         o.probe_all() || o.probe_stats(),
         o.probe_stats_disable_guids(),
@@ -137,7 +137,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     using helpers::filesystem_writer;
     auto writer(boost::make_shared<filesystem_writer>(o.force_write()));
 
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, new_prober,
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober,
         ibsp, writer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";

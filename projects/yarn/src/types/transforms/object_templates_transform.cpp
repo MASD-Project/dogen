@@ -266,7 +266,7 @@ object_templates_transform::expand_object_templates(meta_model::endomodel& em) {
 void object_templates_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "object templates transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * We must expand object templates before we expand objects as we

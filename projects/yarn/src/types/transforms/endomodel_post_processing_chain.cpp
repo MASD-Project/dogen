@@ -53,7 +53,7 @@ namespace transforms {
 void endomodel_post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_chain_prober stp(lg, "endomodel post-processing chain",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * Enumeration transform must be done after merging as we need the

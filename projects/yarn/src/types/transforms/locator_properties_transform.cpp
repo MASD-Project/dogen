@@ -39,7 +39,7 @@ namespace transforms {
 void locator_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_transform_prober stp(lg, "locator properties transform",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 }
 
 } } }

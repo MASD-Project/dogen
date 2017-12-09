@@ -45,7 +45,7 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
 meta_model::endomodel mapping_transform::transform(const context& ctx,
     const meta_model::endomodel& src, const meta_model::languages to) {
     probing::scoped_transform_prober stp(lg, "mapping transform",
-        transform_id, src.name().id(), ctx.new_prober(), src);
+        transform_id, src.name().id(), ctx.prober(), src);
 
     const helpers::mapper mp(ctx.mapping_repository());
     auto r(mp.map(src.input_language(), to, src));

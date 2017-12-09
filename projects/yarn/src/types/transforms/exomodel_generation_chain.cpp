@@ -60,7 +60,7 @@ meta_model::exomodel exomodel_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
     probing::scoped_chain_prober stp(lg, "exomodel generation chain",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
 
     BOOST_LOG_SEV(lg, debug) << "Path: " << p.generic_string();
 

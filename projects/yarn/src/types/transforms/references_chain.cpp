@@ -58,7 +58,7 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
 std::list<meta_model::endomodel> references_chain::
 transform(const context& ctx, const meta_model::endomodel& target) {
     probing::scoped_chain_prober stp(lg, "references chain",
-        transform_id, target.name().id(), ctx.new_prober());
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * Obtain the absolute paths to all reference models - system and

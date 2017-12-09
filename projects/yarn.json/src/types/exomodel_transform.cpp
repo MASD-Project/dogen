@@ -62,7 +62,7 @@ meta_model::exomodel exomodel_transform::
 transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
     probing::scoped_transform_prober stp(lg, "annotations transform",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
 
     hydrator h;
     const auto r(h.hydrate(p));
@@ -75,7 +75,7 @@ void exomodel_transform::transform(const transforms::context& ctx,
     const meta_model::exomodel& em, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
     probing::scoped_transform_prober stp(lg, "annotations transform",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
     dehydrator::dehydrate(em, p);
 }
 

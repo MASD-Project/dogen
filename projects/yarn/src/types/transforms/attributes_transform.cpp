@@ -235,7 +235,7 @@ void attributes_transform::expand_object_templates(meta_model::endomodel& em) {
 void attributes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "attributes transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     expand_object_templates(em);
     expand_objects(em);

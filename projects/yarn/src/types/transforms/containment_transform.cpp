@@ -104,7 +104,7 @@ inject_global_module(meta_model::endomodel& em) {
 void containment_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "containment transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     inject_global_module(em);
 

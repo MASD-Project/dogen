@@ -96,7 +96,7 @@ public:
 void meta_naming_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "meta-naming transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     em.meta_name(meta_name_factory::make_endomodel_name());
 

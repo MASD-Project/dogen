@@ -102,7 +102,7 @@ apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
 void endomodel_pre_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_chain_prober stp(lg, "pre-processing chain",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     apply_first_set_of_transforms(ctx, em);
     apply_second_set_of_transforms(ctx, em);
@@ -114,7 +114,7 @@ bool endomodel_pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
     meta_model::endomodel& em) {
     probing::scoped_chain_prober stp(lg, "pre-processing chain",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * We must apply the first set of transforms because language

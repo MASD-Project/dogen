@@ -168,7 +168,7 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
 std::list<meta_model::model> endomodel_to_model_transform::
 transform(const context& ctx, const std::list<meta_model::endomodel>& ems) {
     probing::scoped_transform_prober stp(lg, "endomodel to model transform",
-        transform_id, ctx.new_prober(), ems);
+        transform_id, ctx.prober(), ems);
 
     std::list<meta_model::model> r;
     for(const auto& em : ems)

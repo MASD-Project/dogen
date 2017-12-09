@@ -247,7 +247,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 void parsing_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "parsing transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto l(em.input_language());

@@ -31,7 +31,7 @@ context::context(
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
-        const probing::prober& new_prober,
+        const probing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
         intra_backend_segment_properties,
@@ -40,12 +40,12 @@ context::context(
     archetype_location_repository_(alrp), type_repository_(atrp),
     annotation_factory_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
-    mapping_repository_(msrp), formatters_repository_(frp), new_prober_(new_prober),
+    mapping_repository_(msrp), formatters_repository_(frp), prober_(prober),
     intra_backend_segment_properties_(intra_backend_segment_properties),
     writer_(writer) {}
 
 context::~context() {
-    new_prober_.end_probing();
+    prober_.end_probing();
 }
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
@@ -77,8 +77,8 @@ const dogen::formatters::repository& context::formatters_repository() const {
     return formatters_repository_;
 }
 
-const probing::prober& context::new_prober() const {
-    return new_prober_;
+const probing::prober& context::prober() const {
+    return prober_;
 }
 
 const std::unordered_map<std::string,

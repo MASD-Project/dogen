@@ -65,7 +65,7 @@ public:
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
-        const probing::prober& new_prober,
+        const probing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
         intra_backend_segment_properties,
@@ -116,7 +116,7 @@ public:
     /*
      * @brief Returns the transform probe.
      */
-    const probing::prober& new_prober() const;
+    const probing::prober& prober() const;
 
     /**
      * @brief Returns all intra-backend segment properties.
@@ -139,7 +139,7 @@ private:
         const annotations::annotation_factory annotation_factory_;
     const helpers::mapping_set_repository mapping_repository_;
     const dogen::formatters::repository formatters_repository_;
-    const probing::prober new_prober_;
+    const probing::prober prober_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;

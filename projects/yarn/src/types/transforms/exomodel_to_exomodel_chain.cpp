@@ -84,7 +84,7 @@ transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
     probing::scoped_chain_prober stp(lg, "exomodel to exomodel chain",
-        transform_id, ctx.new_prober());
+        transform_id, ctx.prober());
 
     /*
      * Obtain a tuple containing the source and destination

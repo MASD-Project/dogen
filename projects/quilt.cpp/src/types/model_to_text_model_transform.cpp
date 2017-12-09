@@ -149,7 +149,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     const yarn::meta_model::model& m) const {
     probing::scoped_transform_prober stp(lg,
         "C++ model to text transform", transform_id, m.name().id(),
-        ctx.new_prober());
+        ctx.prober());
 
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 

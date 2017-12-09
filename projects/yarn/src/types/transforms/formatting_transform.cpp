@@ -159,7 +159,7 @@ transform_element(const std::unordered_map<std::string, type_group> tgs,
 void formatting_transform::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_transform_prober stp(lg, "formatting transform",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& atrp(ctx.type_repository());
     const auto& als(ctx.archetype_location_repository().archetype_locations());

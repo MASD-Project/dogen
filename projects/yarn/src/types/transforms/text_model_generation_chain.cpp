@@ -42,7 +42,7 @@ meta_model::text_model
 text_model_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
     probing::scoped_chain_prober stp(lg, "text model generation chain",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
 
     /*
      * Obtain the models.

@@ -43,7 +43,7 @@ meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
     probing::scoped_chain_prober stp(lg, "model assembly chain",
-        transform_id, target.name().id(), ctx.new_prober());
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * Perform all the language mapping required for target and

@@ -99,7 +99,7 @@ merge_transform::transform(const context& ctx,
     const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
     probing::scoped_transform_prober stp(lg, "merge transform",
-        transform_id, target.name().id(), ctx.new_prober());
+        transform_id, target.name().id(), ctx.prober());
 
     /*
      * We start by making a complete copy of the target model, which

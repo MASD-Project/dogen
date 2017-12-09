@@ -62,7 +62,7 @@ has_generatable_types(const meta_model::model& m) {
 void generability_transform::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_transform_prober stp(lg, "generability transform",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
     m.has_generatable_types(has_generatable_types(m));
     stp.end_transform(m);
 }

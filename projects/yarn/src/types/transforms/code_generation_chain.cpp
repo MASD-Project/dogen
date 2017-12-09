@@ -66,7 +66,7 @@ void code_generation_chain::transform(const context& ctx) {
     const auto& o(ctx.transform_options());
     const auto model_name(o.target().filename().string());
     probing::scoped_chain_prober stp(lg, "code generation chain",
-        transform_id, model_name, ctx.new_prober());
+        transform_id, model_name, ctx.prober());
 
     /*
      * Obtain the text models.

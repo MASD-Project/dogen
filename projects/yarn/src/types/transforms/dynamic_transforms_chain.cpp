@@ -63,7 +63,7 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::model& m) {
     probing::scoped_chain_prober stp(lg, "dynamic transforms chain",
-        transform_id, m.name().id(), ctx.new_prober(), m);
+        transform_id, m.name().id(), ctx.prober(), m);
 
     auto& rg(registrar());
     rg.validate();

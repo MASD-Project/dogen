@@ -456,7 +456,7 @@ void stereotypes_transform::transform(meta_model::primitive& p) {
 void stereotypes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "stereotypes transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     for (auto& pair : em.objects())
         transform(*pair.second, em);

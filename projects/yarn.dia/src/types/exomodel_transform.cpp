@@ -73,7 +73,7 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
 
     const auto model_name(p.filename().string());
     probing::scoped_transform_prober stp(lg, "dia exomodel transform",
-        transform_id, model_name, ctx.new_prober(), diagram);
+        transform_id, model_name, ctx.prober(), diagram);
 
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 

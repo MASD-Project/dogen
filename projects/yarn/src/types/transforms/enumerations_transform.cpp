@@ -306,7 +306,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 void enumerations_transform::transform(const context& ctx,
     meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "enumerations transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     /*
      * If no enumerations exist, we can just exit. This means we can

@@ -123,7 +123,7 @@ origin_transform::compute_origin_types(const meta_model::endomodel& em,
 void origin_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
     probing::scoped_transform_prober stp(lg, "origin transform",
-        transform_id, em.name().id(), ctx.new_prober(), em);
+        transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ipm(is_proxy_model(tg, em));
