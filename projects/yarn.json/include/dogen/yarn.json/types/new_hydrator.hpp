@@ -18,22 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_ALL_HPP
-#define DOGEN_YARN_JSON_TYPES_ALL_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_NEW_HYDRATOR_HPP
+#define DOGEN_YARN_JSON_TYPES_NEW_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.json/types/json.hpp"
-#include "dogen/yarn.json/types/hydrator.hpp"
-#include "dogen/yarn.json/types/dehydrator.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.json/types/new_hydrator.hpp"
-#include "dogen/yarn.json/types/new_dehydrator.hpp"
-#include "dogen/yarn.json/types/hydration_error.hpp"
-#include "dogen/yarn.json/types/decoding_transform.hpp"
-#include "dogen/yarn.json/types/encoding_transform.hpp"
-#include "dogen/yarn.json/types/exomodel_transform.hpp"
+#include <algorithm>
+
+namespace dogen {
+namespace yarn {
+namespace json {
+
+class new_hydrator final {
+public:
+    new_hydrator() = default;
+    new_hydrator(const new_hydrator&) = default;
+    new_hydrator(new_hydrator&&) = default;
+    ~new_hydrator() = default;
+    new_hydrator& operator=(const new_hydrator&) = default;
+
+public:
+    bool operator==(const new_hydrator& rhs) const;
+    bool operator!=(const new_hydrator& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+} } }
 
 #endif

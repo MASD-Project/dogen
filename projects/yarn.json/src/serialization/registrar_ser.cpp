@@ -29,6 +29,7 @@
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/options/serialization/registrar_ser.hpp"
 #include "dogen/probing/serialization/registrar_ser.hpp"
+#include "dogen/external/serialization/registrar_ser.hpp"
 #include "dogen/yarn.json/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
@@ -39,9 +40,10 @@ namespace json {
 
 template<typename Archive>
 void register_types(Archive& ar) {
+    dogen::probing::register_types(ar);
+    dogen::external::register_types(ar);
     dogen::options::register_types(ar);
     dogen::formatters::register_types(ar);
-    dogen::probing::register_types(ar);
     dogen::yarn::register_types(ar);
     dogen::annotations::register_types(ar);
 }

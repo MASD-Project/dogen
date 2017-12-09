@@ -18,22 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_ALL_HPP
-#define DOGEN_YARN_JSON_TYPES_ALL_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/yarn.json/types/json.hpp"
-#include "dogen/yarn.json/types/hydrator.hpp"
-#include "dogen/yarn.json/types/dehydrator.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.json/types/new_hydrator.hpp"
-#include "dogen/yarn.json/types/new_dehydrator.hpp"
-#include "dogen/yarn.json/types/hydration_error.hpp"
-#include "dogen/yarn.json/types/decoding_transform.hpp"
 #include "dogen/yarn.json/types/encoding_transform.hpp"
-#include "dogen/yarn.json/types/exomodel_transform.hpp"
 
-#endif
+namespace dogen {
+namespace yarn {
+namespace json {
+
+bool encoding_transform::operator==(const encoding_transform& /*rhs*/) const {
+    return true;
+}
+
+} } }

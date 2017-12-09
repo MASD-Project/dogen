@@ -18,22 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_ALL_HPP
-#define DOGEN_YARN_JSON_TYPES_ALL_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_DECODING_TRANSFORM_HPP
+#define DOGEN_YARN_JSON_TYPES_DECODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.json/types/json.hpp"
-#include "dogen/yarn.json/types/hydrator.hpp"
-#include "dogen/yarn.json/types/dehydrator.hpp"
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.json/types/new_hydrator.hpp"
-#include "dogen/yarn.json/types/new_dehydrator.hpp"
-#include "dogen/yarn.json/types/hydration_error.hpp"
-#include "dogen/yarn.json/types/decoding_transform.hpp"
-#include "dogen/yarn.json/types/encoding_transform.hpp"
-#include "dogen/yarn.json/types/exomodel_transform.hpp"
+#include <algorithm>
+
+namespace dogen {
+namespace yarn {
+namespace json {
+
+class decoding_transform final {
+public:
+    decoding_transform() = default;
+    decoding_transform(const decoding_transform&) = default;
+    decoding_transform(decoding_transform&&) = default;
+    ~decoding_transform() = default;
+    decoding_transform& operator=(const decoding_transform&) = default;
+
+public:
+    bool operator==(const decoding_transform& rhs) const;
+    bool operator!=(const decoding_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+} } }
 
 #endif
