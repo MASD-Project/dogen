@@ -2337,13 +2337,15 @@ backends.
 We converted all of dogen's models from dia into JSON using tailor and
 code-generated them to see if there were any differences.
 
-Address these issues:
+Issues to address:
 
-- problems with =quilt.cpp= and =yarn.dia=/=yarn.json=: the conversion
-  of the model path did not work as expected - we do not know of the
-  "."  separator. Fixed it manually and then it all worked (minus
-  CMakeLists, see below). We could possibly fix the builder to
-  automatically use the "." to separate model paths.
+- problems with =quilt.cpp= and =yarn.dia= / =yarn.json=: the
+  conversion of the model path did not work as expected - we do not
+  know of the "."  separator. Fixed it manually and then it all worked
+  (minus CMakeLists, see below). We could possibly fix the builder to
+  automatically use the "." to separate model paths. Actually with the
+  latest changes we now seem to only be looking at the first model
+  module, so for =yarn.dia= we only have =yarn=.
 - CMakeLists were deleted on all models for some reason, even though
   the annotations profile look correct.
 - in quilt we correctly generated the forward declarations for
@@ -2354,6 +2356,8 @@ Address these issues:
   =all_ser.hpp=. Instability in =registrar_ser.cpp=, but content is
   correct otherwise.
 - =database.json= generated invalid JSON.
+- references in dia diagrams have the dia extension. This means that
+  they do not resolve when converted to JSON.
 
 "Script":
 
