@@ -20,8 +20,8 @@
  */
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
@@ -117,9 +117,9 @@ yarn::meta_model::text_model
 model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     const bool enable_backend_directories,
     const yarn::meta_model::model& m) const {
-    yarn::helpers::scoped_transform_probing stp(lg,
-        "C# model to text transform",
-        transform_id, m.name().id(), ctx.prober());
+    probing::scoped_transform_prober stp(lg,
+        "C# model to text transform", transform_id, m.name().id(),
+        ctx.new_prober());
 
     BOOST_LOG_SEV(lg, debug) << "Started backend.";
 

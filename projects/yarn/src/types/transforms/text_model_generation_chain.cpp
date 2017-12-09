@@ -23,7 +23,6 @@
 #include "dogen/yarn/io/meta_model/text_model_io.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
-#include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 
 namespace {

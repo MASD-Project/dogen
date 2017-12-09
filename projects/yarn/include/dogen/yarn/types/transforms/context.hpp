@@ -36,7 +36,6 @@
 #include "dogen/probing/types/prober.hpp"
 #include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 #include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
 
@@ -66,7 +65,6 @@ public:
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
-        const helpers::transform_prober& prober,
         const probing::prober& new_prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
@@ -118,11 +116,6 @@ public:
     /*
      * @brief Returns the transform probe.
      */
-    const helpers::transform_prober& prober() const;
-
-    /*
-     * @brief Returns the transform probe.
-     */
     const probing::prober& new_prober() const;
 
     /**
@@ -146,7 +139,6 @@ private:
         const annotations::annotation_factory annotation_factory_;
     const helpers::mapping_set_repository mapping_repository_;
     const dogen::formatters::repository formatters_repository_;
-    const helpers::transform_prober prober_;
     const probing::prober new_prober_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>

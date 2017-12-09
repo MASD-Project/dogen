@@ -103,22 +103,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,14"/>
+        <dia:point val="-48,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,13.95;-26.26,27.75"/>
+        <dia:rectangle val="-48.05,11.95;-26.26,26.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,14"/>
+        <dia:point val="-48,12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="14.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -141,6 +141,7 @@
 #DOGEN yarn.reference=yarn.dia
 #DOGEN yarn.reference=formatters.dia
 #DOGEN yarn.reference=annotations.dia
+#DOGEN yarn.reference=probing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -156,7 +157,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-47.65,15.245"/>
+            <dia:point val="-47.65,13.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

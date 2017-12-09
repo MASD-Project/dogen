@@ -24,7 +24,6 @@
 #include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"
-#include "dogen/yarn/types/helpers/transform_metrics.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 
 namespace {

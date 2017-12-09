@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/exomodel_transform.hpp"
@@ -61,8 +61,8 @@ std::list<std::string> exomodel_transform::supported_extensions() const {
 meta_model::exomodel exomodel_transform::
 transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    helpers::scoped_transform_probing stp(lg, "annotations transform",
-        transform_id, model_name, ctx.prober());
+    probing::scoped_transform_prober stp(lg, "annotations transform",
+        transform_id, model_name, ctx.new_prober());
 
     hydrator h;
     const auto r(h.hydrate(p));
@@ -74,8 +74,8 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
 void exomodel_transform::transform(const transforms::context& ctx,
     const meta_model::exomodel& em, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    helpers::scoped_transform_probing stp(lg, "annotations transform",
-        transform_id, model_name, ctx.prober());
+    probing::scoped_transform_prober stp(lg, "annotations transform",
+        transform_id, model_name, ctx.new_prober());
     dehydrator::dehydrate(em, p);
 }
 

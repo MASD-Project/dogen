@@ -24,10 +24,10 @@
 #include "dogen/dia/types/hydrator.hpp"
 #include "dogen/dia/types/persister.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/exomodel_transform.hpp"
 
@@ -72,8 +72,8 @@ transform(const transforms::context& ctx, const boost::filesystem::path& p) {
     const auto diagram(h.hydrate(p));
 
     const auto model_name(p.filename().string());
-    helpers::scoped_transform_probing stp(lg, "dia exomodel transform",
-        transform_id, model_name, ctx.prober(), diagram);
+    probing::scoped_transform_prober stp(lg, "dia exomodel transform",
+        transform_id, model_name, ctx.new_prober(), diagram);
 
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
