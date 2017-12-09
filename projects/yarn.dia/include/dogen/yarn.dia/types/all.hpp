@@ -34,6 +34,9 @@
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
+#include "dogen/yarn.dia/types/new_adapter.hpp"
+#include "dogen/yarn.dia/types/new_builder.hpp"
+#include "dogen/yarn.dia/types/new_visitor.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/graphing_error.hpp"
 #include "dogen/yarn.dia/types/adaptation_error.hpp"
@@ -45,5 +48,6 @@
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
 #include "dogen/yarn.dia/types/processed_comment_factory.hpp"
+#include "dogen/yarn.dia/types/decoding_transform_interface.hpp"
 
 #endif
