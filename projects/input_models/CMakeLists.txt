@@ -91,6 +91,10 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(common_arguments ${common_arguments} ${other_options})
     set(common_arguments ${common_arguments} ${ignore_regexes})
 
+    # uncomment to enable probing.
+    # set(common_arguments ${common_arguments} "--probe-all")
+    # set(common_arguments ${common_arguments} "--probe-stats-org-mode")
+
     # main input models
     set(models annotations)
     set(models ${models} dia)
