@@ -18,17 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/context.hpp"
+#define BOOST_TEST_MODULE tailor_tests
+#include <boost/test/included/unit_test.hpp>
+#include "dogen/utility/test/fixture.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
-
-context::context(const dogen::probing::prober& prober)
-    : prober_(prober) { }
-
-const dogen::probing::prober& context::prober() const {
-    return prober_;
-}
-
-} } }
+using namespace dogen::utility::test;
+BOOST_GLOBAL_FIXTURE(exception_fixture);

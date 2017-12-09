@@ -18,17 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/context.hpp"
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace {
 
-context::context(const dogen::probing::prober& prober)
-    : prober_(prober) { }
+const std::string empty;
+const std::string test_module("quilt.csharp");
+const std::string test_suite("fake_tests");
 
-const dogen::probing::prober& context::prober() const {
-    return prober_;
 }
 
-} } }
+BOOST_AUTO_TEST_SUITE(fake_tests)
+
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()

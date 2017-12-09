@@ -34,45 +34,15 @@ namespace transforms {
 
 class context final {
 public:
-    context() = default;
-    context(const context&) = default;
-    context(context&&) = default;
-    ~context() = default;
-
-public:
     explicit context(const dogen::probing::prober& prober);
 
 public:
     const dogen::probing::prober& prober() const;
-    dogen::probing::prober& prober();
-    void prober(const dogen::probing::prober& v);
-    void prober(const dogen::probing::prober&& v);
-
-public:
-    bool operator==(const context& rhs) const;
-    bool operator!=(const context& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(context& other) noexcept;
-    context& operator=(context other);
 
 private:
     dogen::probing::prober prober_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::external::transforms::context& lhs,
-    dogen::external::transforms::context& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif
