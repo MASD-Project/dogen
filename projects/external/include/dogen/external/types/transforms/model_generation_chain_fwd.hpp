@@ -18,14 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/model_to_model_transform.hpp"
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_FWD_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-bool model_to_model_transform::operator==(const model_to_model_transform& /*rhs*/) const {
-    return true;
-}
+class model_generation_chain;
 
 } } }
+
+#endif

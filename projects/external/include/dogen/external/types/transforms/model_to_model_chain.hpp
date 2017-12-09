@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TO_MODEL_TRANSFORM_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TO_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TO_MODEL_CHAIN_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TO_MODEL_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,17 +31,17 @@ namespace dogen {
 namespace external {
 namespace transforms {
 
-class model_to_model_transform final {
+class model_to_model_chain final {
 public:
-    model_to_model_transform() = default;
-    model_to_model_transform(const model_to_model_transform&) = default;
-    model_to_model_transform(model_to_model_transform&&) = default;
-    ~model_to_model_transform() = default;
-    model_to_model_transform& operator=(const model_to_model_transform&) = default;
+    model_to_model_chain() = default;
+    model_to_model_chain(const model_to_model_chain&) = default;
+    model_to_model_chain(model_to_model_chain&&) = default;
+    ~model_to_model_chain() = default;
+    model_to_model_chain& operator=(const model_to_model_chain&) = default;
 
 public:
-    bool operator==(const model_to_model_transform& rhs) const;
-    bool operator!=(const model_to_model_transform& rhs) const {
+    bool operator==(const model_to_model_chain& rhs) const;
+    bool operator!=(const model_to_model_chain& rhs) const {
         return !this->operator==(rhs);
     }
 

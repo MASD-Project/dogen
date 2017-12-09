@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/model_transform.hpp"
+#include "dogen/external/types/transforms/model_to_model_chain.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-bool model_transform::operator==(const model_transform& /*rhs*/) const {
+bool model_to_model_chain::operator==(const model_to_model_chain& /*rhs*/) const {
     return true;
 }
 

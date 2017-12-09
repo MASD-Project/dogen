@@ -18,18 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TRANSFORM_FWD_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TRANSFORM_FWD_HPP
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
+
 namespace dogen {
 namespace external {
 namespace transforms {
 
-class model_transform;
+class model_generation_chain final {
+public:
+    model_generation_chain() = default;
+    model_generation_chain(const model_generation_chain&) = default;
+    model_generation_chain(model_generation_chain&&) = default;
+    ~model_generation_chain() = default;
+    model_generation_chain& operator=(const model_generation_chain&) = default;
+
+public:
+    bool operator==(const model_generation_chain& rhs) const;
+    bool operator!=(const model_generation_chain& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 } } }
 
