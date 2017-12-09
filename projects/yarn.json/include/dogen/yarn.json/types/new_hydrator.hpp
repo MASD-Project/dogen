@@ -25,26 +25,79 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <boost/filesystem/path.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/external/types/meta_model/element.hpp"
+#include "dogen/external/types/meta_model/attribute.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace json {
 
 class new_hydrator final {
-public:
-    new_hydrator() = default;
-    new_hydrator(const new_hydrator&) = default;
-    new_hydrator(new_hydrator&&) = default;
-    ~new_hydrator() = default;
-    new_hydrator& operator=(const new_hydrator&) = default;
+private:
+    /**
+     * @brief Reads the key value pairs from the property tree.
+     */
+    std::list<std::pair<std::string, std::string>>
+    read_kvps(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads the stereotypes, if any exists.
+     */
+    std::list<std::string>
+    read_stereotypes(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads the parents, if any exists.
+     */
+    std::list<std::string>
+    read_parents(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads the documentation, if any exists.
+     */
+    std::string read_documentation(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads the tagged values, if any exists.
+     */
+    std::list<std::pair<std::string, std::string>>
+    read_tagged_values(const boost::property_tree::ptree& pt) const;
+
+private:
+    /**
+     * @brief Reads the attributes, if any.
+     */
+    external::meta_model::attribute
+    read_attribute(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads an element according to its meta-type by
+     * dispatching to the correct read functions.
+     */
+    external::meta_model::element
+    read_element(const boost::property_tree::ptree& pt) const;
+
+    /**
+     * @brief Reads the entire stream as a property tree.
+     */
+    external::meta_model::model read_stream(std::istream& s) const;
 
 public:
-    bool operator==(const new_hydrator& rhs) const;
-    bool operator!=(const new_hydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Hydrates the model from the JSON stream.
+     */
+    external::meta_model::model hydrate(std::istream& s) const;
 
+    /**
+     * @brief Opens up the file at path and then hydrates the model
+     * from the JSON stream.
+     */
+    external::meta_model::model hydrate(const boost::filesystem::path& p) const;
 };
 
 } } }
