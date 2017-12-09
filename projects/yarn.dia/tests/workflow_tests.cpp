@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+/*
 #include <fstream>
 #include <sstream>
 #include <boost/filesystem/fstream.hpp>
@@ -65,10 +66,10 @@ bool test_workflow(
     const auto actual(workflow::execute(i));
     const dogen::yarn::transforms::context ctx(mock_context_factory::make());
 
-    /*
+    *
      * Set to true to rebase. Note that you still need to run the
      * appropriate rebase target afterwards to copy the files across.
-     */
+     *
     const bool rm(false);
     return asserter::assert_object(rm, expected_path, actual_path, actual);
 }
@@ -122,3 +123,4 @@ BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_yarn) {
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+*/

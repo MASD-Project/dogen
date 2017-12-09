@@ -26,14 +26,11 @@
 #endif
 
 #include "dogen/yarn.json/types/json.hpp"
-#include "dogen/yarn.json/types/hydrator.hpp"
-#include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/initializer.hpp"
 #include "dogen/yarn.json/types/new_hydrator.hpp"
 #include "dogen/yarn.json/types/new_dehydrator.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/decoding_transform.hpp"
 #include "dogen/yarn.json/types/encoding_transform.hpp"
-#include "dogen/yarn.json/types/exomodel_transform.hpp"
 
 #endif
