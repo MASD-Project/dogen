@@ -25,26 +25,52 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen/external/types/meta_model/element.hpp"
+#include "dogen/external/types/meta_model/attribute.hpp"
+#include "dogen/yarn.dia/types/processed_object.hpp"
+#include "dogen/yarn.dia/types/processed_attribute.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
+/**
+ * @brief Transforms Dia objects into their yarn counterpart.
+ */
 class new_adapter final {
-public:
-    new_adapter() = default;
-    new_adapter(const new_adapter&) = default;
-    new_adapter(new_adapter&&) = default;
-    ~new_adapter() = default;
-    new_adapter& operator=(const new_adapter&) = default;
+private:
+    /**
+     * @brief Ensure the dia name is valid.
+     */
+    static void validate_dia_name(const std::string& n);
+
+    /**
+     * @brief Constructs a qualified name, taking into account the
+     * contents of the contained by parameter.
+     */
+    static std::string qualified_name(const std::string& contained_by,
+        const std::string& simple_name);
+
+    /**
+     * @brief Processes the stereotypes field.
+     */
+    static void process_stereotypes(const processed_object& po,
+        external::meta_model::element& e);
+
+private:
+    /**
+     * @brief Adapts a processed attribute into a yarn exoattribute.
+     */
+    static external::meta_model::attribute adapt(const processed_attribute& a);
 
 public:
-    bool operator==(const new_adapter& rhs) const;
-    bool operator!=(const new_adapter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Adapts a processed object into a yarn exoelement.
+     */
+    static external::meta_model::element
+    adapt(const processed_object& po, const std::string& contained_by,
+        const std::list<std::string>& parents);
 };
 
 } } }

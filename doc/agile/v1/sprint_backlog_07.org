@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-09 Sat 16:47]
+#+CAPTION: Clock summary at [2017-12-09 Sat 16:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *59:23* |       |       | 100.0 |
+| *Total time*                                                                | *59:28* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 59:23   |       |       | 100.0 |
-| Active                                                                      |         | 59:23 |       | 100.0 |
+| Stories                                                                     | 59:28   |       |       | 100.0 |
+| Active                                                                      |         | 59:28 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.8 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:23 |   4.0 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.0 |
@@ -38,7 +38,7 @@
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   5.0 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.8 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.5 |
-| STARTED Rename =yarn.dia= to =external.dia=                                 |         |       |  0:09 |   0.3 |
+| STARTED Rename =yarn.dia= to =external.dia=                                 |         |       |  0:14 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -576,6 +576,7 @@ property of an exomodel. If we do this we can then do the mapping in
 flight as we transform from exomodel to endomodel.
 
 *** STARTED Rename =yarn.dia= to =external.dia=                       :story:
+    CLOCK: [2017-12-09 Sat 16:48]--[2017-12-09 Sat 16:53] =>  0:05
     CLOCK: [2017-12-09 Sat 16:38]--[2017-12-09 Sat 16:47] =>  0:09
 
 As per analysis story, we are moving away from the sewing terms.
