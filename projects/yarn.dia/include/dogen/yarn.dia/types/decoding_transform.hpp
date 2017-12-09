@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_DECODING_TRANSFORM_INTERFACE_HPP
-#define DOGEN_YARN_DIA_TYPES_DECODING_TRANSFORM_INTERFACE_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_DECODING_TRANSFORM_HPP
+#define DOGEN_YARN_DIA_TYPES_DECODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,12 +38,12 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-class decoding_transform_interface final
+class decoding_transform final
     : external::transforms::decoding_transform_interface {
 public:
-    decoding_transform_interface() = default;
-    decoding_transform_interface(const decoding_transform_interface&) = delete;
-    ~decoding_transform_interface() noexcept;
+    decoding_transform() = default;
+    decoding_transform(const decoding_transform&) = delete;
+    ~decoding_transform() noexcept;
 
 private:
     /**

@@ -37,12 +37,12 @@
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
-#include "dogen/yarn.dia/types/decoding_transform_interface.hpp"
+#include "dogen/yarn.dia/types/decoding_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-const std::string transform_id("yarn.dia.decoding_transform_interface");
+const std::string transform_id("yarn.dia.decoding_transform");
 auto lg(logger_factory(transform_id));
 
 const std::string extension(".dia");
@@ -67,7 +67,7 @@ inline bool is_not_relevant(const processed_object& po) {
     return !is_relevant;
 }
 
-decoding_transform_interface::~decoding_transform_interface() noexcept {}
+decoding_transform::~decoding_transform() noexcept {}
 
 std::list<processed_object>
 obtain_processed_objects(const dogen::dia::diagram& d) {
@@ -93,7 +93,7 @@ obtain_processed_objects(const dogen::dia::diagram& d) {
     return r;
 }
 
-external::meta_model::model decoding_transform_interface::
+external::meta_model::model decoding_transform::
 obtain_model(const std::string& name, const std::list<processed_object>& pos) {
     BOOST_LOG_SEV(lg, debug) << "Generating external model.";
 
@@ -118,11 +118,11 @@ obtain_model(const std::string& name, const std::list<processed_object>& pos) {
     return r;
 }
 
-std::string decoding_transform_interface::extension() const {
+std::string decoding_transform::extension() const {
     return ::extension;
 }
 
-external::meta_model::model decoding_transform_interface::
+external::meta_model::model decoding_transform::
 transform(const external::transforms::context& ctx,
     const boost::filesystem::path& p) {
 

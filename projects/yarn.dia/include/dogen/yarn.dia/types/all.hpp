@@ -44,10 +44,10 @@
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/validation_error.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
+#include "dogen/yarn.dia/types/decoding_transform.hpp"
 #include "dogen/yarn.dia/types/exomodel_transform.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
 #include "dogen/yarn.dia/types/processed_comment_factory.hpp"
-#include "dogen/yarn.dia/types/decoding_transform_interface.hpp"
 
 #endif
