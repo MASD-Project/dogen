@@ -34,6 +34,7 @@ target_link_libraries(${tests_name}
     annotations
     options
     formatters
+    probing
     yarn.dia
     yarn.json
     quilt.cpp

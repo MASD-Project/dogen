@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-09 Sat 11:28]
+#+CAPTION: Clock summary at [2017-12-09 Sat 11:44]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *55:46* |       |       | 100.0 |
+| *Total time*                                                                | *56:01* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 55:46   |       |       | 100.0 |
-| Active                                                                      |         | 55:46 |       | 100.0 |
+| Stories                                                                     | 56:01   |       |       | 100.0 |
+| Active                                                                      |         | 56:01 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.9 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:13 |   4.0 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   1.0 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  15.6 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  24.6 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  15.5 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  24.5 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   4.2 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  28.8 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  28.7 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.7 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.6 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.4 |
@@ -37,7 +37,7 @@
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.9 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.5 |
 | STARTED Create the =external= model                                         |         |       |  2:38 |   4.7 |
-| STARTED Create a =probing= model                                            |         |       |  0:33 |   1.0 |
+| STARTED Create a =probing= model                                            |         |       |  0:48 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -545,6 +545,7 @@ Notes:
 - rename adapter to factory to match processed object.
 
 *** STARTED Create a =probing= model                                  :story:
+    CLOCK: [2017-12-09 Sat 11:29]--[2017-12-09 Sat 11:44] =>  0:15
     CLOCK: [2017-12-09 Sat 11:01]--[2017-12-09 Sat 11:28] =>  0:27
     CLOCK: [2017-12-07 Thu 09:01]--[2017-12-07 Thu 09:07] =>  0:06
 
@@ -555,6 +556,11 @@ use it outside of yarn. We should also move:
 - options
 
 Actually it makes more sense to just have the probing infrastructure.
+
+We need a way to generalise the "initial input" dumping. In effect,
+what we are really saying is that within a transform we may need to
+dump more state than just the initial inputs. We need a way to express
+this in the probing API.
 
 *** Rename the =transform= method to =apply=                          :story:
 

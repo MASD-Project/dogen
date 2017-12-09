@@ -33,6 +33,7 @@
 #include "dogen/annotations/types/annotation_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/formatters/types/repository.hpp"
+#include "dogen/probing/types/prober.hpp"
 #include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
@@ -65,7 +66,8 @@ public:
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp,
-        const helpers::transform_prober prober,
+        const helpers::transform_prober& prober,
+        const probing::prober& new_prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
         intra_backend_segment_properties,
@@ -118,6 +120,11 @@ public:
      */
     const helpers::transform_prober& prober() const;
 
+    /*
+     * @brief Returns the transform probe.
+     */
+    const probing::prober& new_prober() const;
+
     /**
      * @brief Returns all intra-backend segment properties.
      */
@@ -140,6 +147,7 @@ private:
     const helpers::mapping_set_repository mapping_repository_;
     const dogen::formatters::repository formatters_repository_;
     const helpers::transform_prober prober_;
+    const probing::prober new_prober_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;

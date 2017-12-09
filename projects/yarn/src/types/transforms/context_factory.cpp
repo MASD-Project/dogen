@@ -27,6 +27,7 @@
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen/probing/types/prober.hpp"
 #include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
@@ -127,10 +128,19 @@ context context_factory::make(const options& o, const bool enable_validation) {
     const auto frp(frpf.make(data_dirs));
 
     helpers::transform_prober prober(o, alrp, atrp, msrp);
+    probing::prober new_prober(alrp, atrp,
+        o.log_level(), o.probe_all(), o.probe_all(),
+        o.probe_all() || o.probe_stats(),
+        o.probe_stats_disable_guids(),
+        o.probe_stats_org_mode(),
+        o.probe_use_short_names(),
+        o.probe_directory());
+
     using helpers::filesystem_writer;
     auto writer(boost::make_shared<filesystem_writer>(o.force_write()));
 
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober, ibsp, writer);
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober, new_prober,
+        ibsp, writer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;
