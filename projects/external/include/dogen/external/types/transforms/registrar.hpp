@@ -25,26 +25,67 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <memory>
+#include <unordered_map>
+#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
+#include "dogen/external/types/transforms/encoding_transform_interface.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
 class registrar final {
-public:
-    registrar() = default;
-    registrar(const registrar&) = default;
-    registrar(registrar&&) = default;
-    ~registrar() = default;
-    registrar& operator=(const registrar&) = default;
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate();
 
-public:
-    bool operator==(const registrar& rhs) const;
-    bool operator!=(const registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Registers an encoding transform.
+     *
+     * @pre Encoding transform must not yet be registered.
+     * @pre Pointer must not be null.
+     */
+    void register_encoding_transform(
+        std::shared_ptr<encoding_transform_interface> t);
 
+    /**
+     * @brief Registers a decoding transform.
+     *
+     * @pre Encoding transform is not yet registered.
+     * @pre Pointer must not be null.
+     */
+    void register_decoding_transform(
+        std::shared_ptr<decoding_transform_interface> t);
+
+    /**
+     * @brief Returns the encoding transform that handles the
+     * supplied extension.
+     *
+     * @pre An encoding transform must have been registered for this
+     * extension.
+     */
+    encoding_transform_interface&
+    encoding_transform_for_extension(const std::string& ext);
+
+    /**
+     * @brief Returns the decoding transform that handles the
+     * supplied extension.
+     *
+     * @pre A decoding transform must have been registered for this
+     * extension.
+     */
+    decoding_transform_interface&
+    decoding_transform_for_extension(const std::string& ext);
+
+private:
+    std::unordered_map<std::string,
+                       std::shared_ptr<encoding_transform_interface>>
+    encoding_transforms_;
+    std::unordered_map<std::string,
+                       std::shared_ptr<decoding_transform_interface>>
+    decoding_transforms_;
 };
 
 } } }

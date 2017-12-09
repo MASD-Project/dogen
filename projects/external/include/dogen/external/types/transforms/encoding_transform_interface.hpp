@@ -25,26 +25,51 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/external/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-class encoding_transform_interface final {
+/**
+ * @brief Transform that converts models in third-party formats into
+ * our external model representation.
+ */
+class encoding_transform_interface {
 public:
     encoding_transform_interface() = default;
-    encoding_transform_interface(const encoding_transform_interface&) = default;
-    encoding_transform_interface(encoding_transform_interface&&) = default;
-    ~encoding_transform_interface() = default;
-    encoding_transform_interface& operator=(const encoding_transform_interface&) = default;
+    encoding_transform_interface(const encoding_transform_interface&) = delete;
+    virtual ~encoding_transform_interface() noexcept = 0;
 
 public:
-    bool operator==(const encoding_transform_interface& rhs) const;
-    bool operator!=(const encoding_transform_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Returns the extension of the files that this transform
+     * can process.
+     */
+    virtual std::string extension() const = 0;
 
+    /**
+     * @brief Transforms the model at the supplied path into our
+     * internal representation of an external model.
+     *
+     * @param p Path to an external model.
+     *
+     * @pre Model must conform to the format supported by the
+     * transform.
+     *
+     * @note Method is non-const by design at the moment as some
+     * encoding transforms have mutable state.
+     *
+     * @note This function is receiving a path to the model, rather
+     * than the file contents because at the moment the encoding
+     * transform implementations cannot cope with string
+     * processing. In the future this will change to a string.
+     */
+    virtual meta_model::model transform(const context& ctx,
+        const boost::filesystem::path& p) = 0;
 };
 
 } } }

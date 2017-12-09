@@ -24,8 +24,6 @@ namespace dogen {
 namespace external {
 namespace transforms {
 
-bool encoding_transform_interface::operator==(const encoding_transform_interface& /*rhs*/) const {
-    return true;
-}
+encoding_transform_interface::~encoding_transform_interface() noexcept {}
 
 } } }
