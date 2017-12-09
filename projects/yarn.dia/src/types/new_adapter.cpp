@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
 #include "dogen/yarn.dia/types/adaptation_error.hpp"
 #include "dogen/yarn.dia/types/new_adapter.hpp"
 
@@ -32,6 +31,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.adapter"));
 
 const std::string name_delimiter("::");
+const std::string yarn_object_element("yarn::object");
+const std::string yarn_module_element("yarn::module");
 
 const std::string empty_dia_name("Dia name is empty.");
 
@@ -78,12 +79,10 @@ void new_adapter::process_stereotypes(const processed_object& po,
      * Provide the appropriate element types defaulting based on the
      * dia UML types.
      */
-    using meta_model::static_stereotypes;
-    yarn::helpers::stereotypes_helper h;
     if (po.dia_object_type() == dia_object_types::uml_class)
-        e.fallback_element_type(h.to_string(static_stereotypes::object));
+        e.fallback_element_type(yarn_object_element);
     else if (po.dia_object_type() == dia_object_types::uml_large_package)
-        e.fallback_element_type(h.to_string(static_stereotypes::module));
+        e.fallback_element_type(yarn_module_element);
 
     /*
      * Split and copy across the user-supplied stereotypes.
