@@ -18,13 +18,64 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <iomanip>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/probing/types/metrics_printer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("probing.metrics_printer"));
+
+const char org_mode_filler('*');
+const char txt_filler(' ');
+const unsigned int org_mode_fill_size(1);
+const unsigned int txt_fill_size(4);
+
+}
 
 namespace dogen {
 namespace probing {
 
-bool metrics_printer::operator==(const metrics_printer& /*rhs*/) const {
-    return true;
+void metrics_printer::print(std::ostream& o, unsigned int fill_level,
+    const bool disable_guids_in_stats, const bool use_org_mode,
+    const boost::shared_ptr<const metrics> tm) {
+
+    BOOST_LOG_SEV(lg, debug) << "Fill level: " << fill_level;
+    auto elapsed (tm->end() - tm->start());
+
+    if (use_org_mode) {
+        o << std::string(org_mode_fill_size * fill_level, org_mode_filler)
+          << " ";
+    } else
+        o << std::string(txt_fill_size * fill_level, txt_filler);
+
+    o << tm->transform_id() << " (" << elapsed  << " ms)"
+      << " [" << tm->model_id() << "]";
+
+    if (!disable_guids_in_stats)
+        o << " [" << tm->guid() << "]";
+
+    o << std::endl;
+
+    ++fill_level;
+    for(auto child : tm->children())
+        print(o, fill_level, disable_guids_in_stats, use_org_mode, child);
+}
+
+std::string metrics_printer::
+print(const bool disable_guids_in_stats, const bool use_org_mode,
+    const boost::shared_ptr<const metrics> tm) {
+    BOOST_LOG_SEV(lg, debug) << "Printing graph.";
+
+    unsigned int fill_level(use_org_mode ? 1 : 0);
+    std::ostringstream s;
+    print(s, fill_level, disable_guids_in_stats, use_org_mode, tm);
+    const auto r(s.str());
+
+    BOOST_LOG_SEV(lg, debug) << "Finished printing graph.";
+    return r;
 }
 
 } }

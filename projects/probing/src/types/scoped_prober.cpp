@@ -23,8 +23,4 @@
 namespace dogen {
 namespace probing {
 
-bool scoped_prober::operator==(const scoped_prober& /*rhs*/) const {
-    return true;
-}
-
 } }

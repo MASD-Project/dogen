@@ -25,25 +25,125 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/prober.hpp"
 
 namespace dogen {
 namespace probing {
 
-class scoped_prober final {
+class scoped_chain_probing final {
 public:
-    scoped_prober() = default;
-    scoped_prober(const scoped_prober&) = default;
-    scoped_prober(scoped_prober&&) = default;
-    ~scoped_prober() = default;
-    scoped_prober& operator=(const scoped_prober&) = default;
-
-public:
-    bool operator==(const scoped_prober& rhs) const;
-    bool operator!=(const scoped_prober& rhs) const {
-        return !this->operator==(rhs);
+    scoped_chain_probing(dogen::utility::log::logger& lg,
+        const std::string& description, const std::string& id, const prober& tp)
+        : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        prober_.start_chain(id);
     }
 
+    scoped_chain_probing(dogen::utility::log::logger& lg,
+        const std::string& description, const std::string& id,
+        const std::string& model_id, const prober& tp)
+        : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        prober_.start_chain(id, model_id);
+    }
+
+    template<typename Input>
+    scoped_chain_probing(dogen::utility::log::logger& lg,
+        const std::string& description, const std::string& id,
+        const std::string& model_id, const prober& tp, const Input& input)
+        : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description
+                                  << ". Model: " << model_id;
+        prober_.start_chain(id, model_id, input);
+    }
+
+    template<typename Output>
+    void end_chain(const Output& output) {
+        prober_.end_chain(output);
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
+        dismiss_ = true;
+    }
+
+    ~scoped_chain_probing() {
+        if (dismiss_)
+            return;
+
+        try {
+            prober_.end_chain();
+            using namespace dogen::utility::log;
+            BOOST_LOG_SEV(lg_, debug) << "Finished " << description_<< ".";
+        } catch (...) {}
+    }
+
+private:
+    const std::string description_;
+    dogen::utility::log::logger& lg_;
+    bool dismiss_;
+    const prober& prober_;
+};
+
+class scoped_transform_probing final {
+public:
+    scoped_transform_probing(dogen::utility::log::logger& lg,
+        const std::string& description, const std::string& id,
+        const std::string& model_id, const prober& tp)
+        : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        prober_.start_transform(id, model_id);
+    }
+
+    template<typename Input>
+    scoped_transform_probing(dogen::utility::log::logger& lg,
+        const std::string& description, const std::string& id,
+        const prober& tp, const Input& input)
+        : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
+        prober_.start_transform(id, "", input);
+    }
+
+    template<typename Input>
+    scoped_transform_probing(dogen::utility::log::logger& lg,
+        const std::string& description, const std::string& id,
+        const std::string& model_id, const prober& tp, const Input& input)
+        : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Started " << description
+                                  << ". Model: " << model_id;
+        prober_.start_transform(id, model_id, input);
+    }
+
+    template<typename Output>
+    void end_transform(const Output& output) {
+        prober_.end_transform(output);
+        using namespace dogen::utility::log;
+        BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
+        dismiss_ = true;
+    }
+
+    ~scoped_transform_probing() {
+        if (dismiss_)
+            return;
+
+        try {
+            prober_.end_transform();
+            using namespace dogen::utility::log;
+            BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
+        } catch (...) {}
+    }
+
+private:
+    const std::string description_;
+    dogen::utility::log::logger& lg_;
+    bool dismiss_;
+    const prober& prober_;
 };
 
 } }

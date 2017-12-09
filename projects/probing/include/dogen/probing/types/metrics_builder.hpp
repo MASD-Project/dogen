@@ -25,25 +25,37 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <stack>
+#include <string>
+#include <boost/shared_ptr.hpp>
+#include "dogen/probing/types/metrics_fwd.hpp"
 
 namespace dogen {
 namespace probing {
 
 class metrics_builder final {
 public:
-    metrics_builder() = default;
-    metrics_builder(const metrics_builder&) = default;
-    metrics_builder(metrics_builder&&) = default;
-    ~metrics_builder() = default;
-    metrics_builder& operator=(const metrics_builder&) = default;
+    metrics_builder(const std::string& log_level,
+        const bool writing_probe_data);
+
+private:
+    void ensure_stack_not_empty() const;
+    boost::shared_ptr<metrics> create_metrics(const std::string& transform_id,
+        const std::string& model_id) const;
+    void update_end();
 
 public:
-    bool operator==(const metrics_builder& rhs) const;
-    bool operator!=(const metrics_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void start(const std::string& transform_id, const std::string& model_id);
+    void end();
 
+public:
+    const boost::shared_ptr<const metrics> current() const;
+
+public:
+    boost::shared_ptr<metrics> build();
+
+private:
+    std::stack<boost::shared_ptr<metrics>> stack_;
 };
 
 } }

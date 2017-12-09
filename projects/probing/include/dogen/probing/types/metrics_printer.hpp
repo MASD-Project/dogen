@@ -25,25 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <ostream>
+#include <boost/shared_ptr.hpp>
+#include "dogen/probing/types/metrics.hpp"
 
 namespace dogen {
 namespace probing {
 
 class metrics_printer final {
-public:
-    metrics_printer() = default;
-    metrics_printer(const metrics_printer&) = default;
-    metrics_printer(metrics_printer&&) = default;
-    ~metrics_printer() = default;
-    metrics_printer& operator=(const metrics_printer&) = default;
+private:
+    static void print(std::ostream& o, unsigned int fill_level,
+        const bool disable_guids_in_stats, const bool use_org_mode,
+        const boost::shared_ptr<const metrics> tm);
 
 public:
-    bool operator==(const metrics_printer& rhs) const;
-    bool operator!=(const metrics_printer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string
+    print(const bool disable_guids_in_stats, const bool use_org_mode,
+        const boost::shared_ptr<const metrics> tm);
 };
 
 } }
