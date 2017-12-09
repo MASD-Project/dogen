@@ -18,14 +18,64 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen/external/io/meta_model/model_io.hpp"
+#include "dogen/external/types/transforms/context.hpp"
 #include "dogen/external/types/transforms/model_generation_chain.hpp"
+
+namespace {
+
+const std::string transform_id("external.transforms.model_generation_chain");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-bool model_generation_chain::operator==(const model_generation_chain& /*rhs*/) const {
-    return true;
+std::shared_ptr<registrar> model_generation_chain::registrar_;
+
+decoding_transform_interface& model_generation_chain::
+transform_for_model(const boost::filesystem::path& p) {
+    const auto gs(p.generic_string());
+    const auto ext(p.extension().generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Looking for an decoding transform for path: "
+                             << gs << ". Extension: '" << ext << "'";
+
+    /*
+     * Ensure the registrar is in a valid state before we proceed.
+     */
+    auto& rg(registrar());
+    rg.validate();
+    return rg.decoding_transform_for_extension(ext);
+}
+
+transforms::registrar& model_generation_chain::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<transforms::registrar>();
+
+    return *registrar_;
+}
+
+meta_model::model model_generation_chain::
+transform(const context& ctx, const boost::filesystem::path& p) {
+    const auto model_name(p.filename().generic_string());
+    probing::scoped_chain_prober stp(lg, "external model generation chain",
+        transform_id, model_name, ctx.prober());
+
+    /*
+     * Transform the exogenous model - in whatever supported exogenous
+     * representation it may be in, Dia, JSON, etc - into the internal
+     * representation of an exogenous model.
+     */
+    auto& t(transform_for_model(p));
+    auto r(t.transform(ctx, p));
+    stp.end_chain(r);
+    return r;
 }
 
 } } }

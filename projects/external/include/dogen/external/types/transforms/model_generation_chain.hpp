@@ -25,26 +25,47 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/external/types/transforms/registrar.hpp"
+#include "dogen/external/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
+/**
+ * @brief Given the location of a supported exogenous model, it
+ * obtains it and transforms it into an external model.
+ */
 class model_generation_chain final {
-public:
-    model_generation_chain() = default;
-    model_generation_chain(const model_generation_chain&) = default;
-    model_generation_chain(model_generation_chain&&) = default;
-    ~model_generation_chain() = default;
-    model_generation_chain& operator=(const model_generation_chain&) = default;
+private:
+    /*
+     * @brief Given a path to an exogenous model, returns the
+     * appropriate decoding transform for it.
+     */
+    static decoding_transform_interface&
+    transform_for_model(const boost::filesystem::path& p);
 
 public:
-    bool operator==(const model_generation_chain& rhs) const;
-    bool operator!=(const model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Registrar that keeps track of the available encoding and
+     * decoding transforms.
+     */
+    static transforms::registrar& registrar();
 
+public:
+    /**
+     * @brief Apply the transform to the exogenous model at path @e p.
+     *
+     * @pre @e p must point to a valid file, and contain a supported
+     * exogenous model.
+     */
+    static meta_model::model
+    transform(const context& ctx, const boost::filesystem::path& p);
+
+private:
+    static std::shared_ptr<transforms::registrar> registrar_;
 };
 
 } } }

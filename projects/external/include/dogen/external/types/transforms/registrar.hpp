@@ -36,6 +36,7 @@ namespace external {
 namespace transforms {
 
 class registrar final {
+public:
     /**
      * @brief Ensures the registrar is ready to be used.
      */

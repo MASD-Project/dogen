@@ -35,8 +35,8 @@ namespace external {
 namespace transforms {
 
 /**
- * @brief Transform that converts models in our external model
- * representation to a third-party format.
+ * @brief Transform that converts exogenous models into our external
+ * model representation.
  */
 class decoding_transform_interface {
 public:
@@ -52,23 +52,26 @@ public:
     virtual std::string extension() const = 0;
 
     /**
-     * @brief Transforms our internal model representation into a
-     * third-party representation
+     * @brief Transforms the model at the supplied path into our
+     * internal representation of an external model.
      *
-     * @param ctx context in which the transformation is taking place.
-     * @param m model to transform.
+     * @param p Path to an external model.
+     *
+     * @pre Model must conform to the format supported by the
+     * transform.
      *
      * @note Method is non-const by design at the moment as some
-     * decoding transforms have state.
+     * decoding transforms have mutable state.
      *
      * @note This function is receiving a path to the model, rather
-     * than return the file contents because at the moment the
-     * exogenous transformers cannot cope with string processing. In
-     * the future this will change to returning a string.
+     * than the file contents because at the moment the decoding
+     * transform implementations cannot cope with string
+     * processing. In the future this will change to a string.
      */
-    virtual void transform(const context& ctx, const meta_model::model& m,
+    virtual meta_model::model transform(const context& ctx,
         const boost::filesystem::path& p) = 0;
 };
+
 
 } } }
 
