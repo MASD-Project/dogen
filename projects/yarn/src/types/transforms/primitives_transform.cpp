@@ -23,9 +23,9 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
@@ -82,8 +82,8 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 
 void primitives_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "primitives transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "primitives transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     for (auto& pair : em.primitives()) {

@@ -32,9 +32,9 @@
 namespace dogen {
 namespace probing {
 
-class scoped_chain_probing final {
+class scoped_chain_prober final {
 public:
-    scoped_chain_probing(dogen::utility::log::logger& lg,
+    scoped_chain_prober(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id, const prober& tp)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
         using namespace dogen::utility::log;
@@ -42,7 +42,7 @@ public:
         prober_.start_chain(id);
     }
 
-    scoped_chain_probing(dogen::utility::log::logger& lg,
+    scoped_chain_prober(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
@@ -52,7 +52,7 @@ public:
     }
 
     template<typename Input>
-    scoped_chain_probing(dogen::utility::log::logger& lg,
+    scoped_chain_prober(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
@@ -70,7 +70,7 @@ public:
         dismiss_ = true;
     }
 
-    ~scoped_chain_probing() {
+    ~scoped_chain_prober() {
         if (dismiss_)
             return;
 
@@ -88,9 +88,9 @@ private:
     const prober& prober_;
 };
 
-class scoped_transform_probing final {
+class scoped_transform_prober final {
 public:
-    scoped_transform_probing(dogen::utility::log::logger& lg,
+    scoped_transform_prober(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
@@ -100,7 +100,7 @@ public:
     }
 
     template<typename Input>
-    scoped_transform_probing(dogen::utility::log::logger& lg,
+    scoped_transform_prober(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const prober& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
@@ -110,7 +110,7 @@ public:
     }
 
     template<typename Input>
-    scoped_transform_probing(dogen::utility::log::logger& lg,
+    scoped_transform_prober(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
@@ -128,7 +128,7 @@ public:
         dismiss_ = true;
     }
 
-    ~scoped_transform_probing() {
+    ~scoped_transform_prober() {
         if (dismiss_)
             return;
 

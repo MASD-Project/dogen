@@ -22,10 +22,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 
@@ -300,8 +300,8 @@ void enablement_transform::compute_enablement_for_element(
 
 void enablement_transform::
 transform(const context& ctx, meta_model::model& m) {
-    helpers::scoped_transform_probing stp(lg, "enablement new_transform",
-        transform_id, m.name().id(), ctx.prober(), m);
+    probing::scoped_transform_prober stp(lg, "enablement new_transform",
+        transform_id, m.name().id(), ctx.new_prober(), m);
 
     const auto& alrp(ctx.archetype_location_repository());
     const auto& albmn(alrp.archetype_locations_by_meta_name());

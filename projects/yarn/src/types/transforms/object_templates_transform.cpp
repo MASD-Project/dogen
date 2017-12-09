@@ -26,11 +26,11 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/object_templates_transform.hpp"
 
@@ -265,8 +265,8 @@ object_templates_transform::expand_object_templates(meta_model::endomodel& em) {
 
 void object_templates_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "object templates transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "object templates transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     /*
      * We must expand object templates before we expand objects as we

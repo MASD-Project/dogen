@@ -25,6 +25,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
@@ -39,7 +40,6 @@
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
@@ -494,8 +494,8 @@ transform_modules(const type_group& tg, meta_model::endomodel& em) {
 
 void orm_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "orm transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "orm transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto& rm(*em.root_module());

@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
@@ -46,8 +46,8 @@ namespace transforms {
 
 void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
-    helpers::scoped_chain_probing stp(lg, "model post-processing chain",
-        transform_id, m.name().id(), ctx.prober(), m);
+    probing::scoped_chain_prober stp(lg, "model post-processing chain",
+        transform_id, m.name().id(), ctx.new_prober(), m);
 
     /*
      * Perform dynamic expansion first. These are backend specific.

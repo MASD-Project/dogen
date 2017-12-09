@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -30,7 +31,6 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 
@@ -90,8 +90,8 @@ update_element(const context& ctx, meta_model::element& e) {
 
 void artefact_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
-    helpers::scoped_transform_probing stp(lg, "artefact properties transform",
-        transform_id, m.name().id(), ctx.prober(), m);
+    probing::scoped_transform_prober stp(lg, "artefact properties transform",
+        transform_id, m.name().id(), ctx.new_prober(), m);
 
     for(auto& ptr : m.elements())
         update_element(ctx, *ptr);

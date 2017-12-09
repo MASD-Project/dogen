@@ -19,11 +19,11 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/text_model_io.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 
 namespace {
@@ -42,8 +42,8 @@ namespace transforms {
 meta_model::text_model
 text_model_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
-    helpers::scoped_chain_probing stp(lg, "text model generation chain",
-        transform_id, model_name, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "text model generation chain",
+        transform_id, model_name, ctx.new_prober());
 
     /*
      * Obtain the models.

@@ -23,10 +23,10 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
 
@@ -191,8 +191,8 @@ transform(const context& ctx, const meta_model::model& m) {
 
 meta_model::text_model model_to_text_model_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
-    helpers::scoped_chain_probing stp(lg, "code generation chain",
-        transform_id, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "code generation chain",
+        transform_id, ctx.new_prober());
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 

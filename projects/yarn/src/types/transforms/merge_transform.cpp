@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -98,8 +98,8 @@ meta_model::endomodel
 merge_transform::transform(const context& ctx,
     const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-    helpers::scoped_transform_probing stp(lg, "merge transform",
-        transform_id, target.name().id(), ctx.prober());
+    probing::scoped_transform_prober stp(lg, "merge transform",
+        transform_id, target.name().id(), ctx.new_prober());
 
     /*
      * We start by making a complete copy of the target model, which

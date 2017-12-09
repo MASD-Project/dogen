@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/locator_properties_transform.hpp"
@@ -38,8 +39,8 @@ namespace transforms {
 
 void locator_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
-    helpers::scoped_transform_probing stp(lg, "locator properties transform",
-        transform_id, m.name().id(), ctx.prober(), m);
+    probing::scoped_transform_prober stp(lg, "locator properties transform",
+        transform_id, m.name().id(), ctx.new_prober(), m);
 }
 
 } } }

@@ -19,9 +19,8 @@
  *
  */
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 #include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
@@ -41,8 +40,8 @@ namespace transforms {
 
 std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {
-    helpers::scoped_chain_probing stp(lg, "model generation chain",
-        transform_id, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "model generation chain",
+        transform_id, ctx.new_prober());
 
     /*
      * First we generate the endomodels.

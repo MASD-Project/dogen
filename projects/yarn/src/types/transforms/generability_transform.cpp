@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -28,7 +29,6 @@
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 
 namespace {
@@ -61,8 +61,8 @@ has_generatable_types(const meta_model::model& m) {
 
 void generability_transform::
 transform(const context& ctx, meta_model::model& m) {
-    helpers::scoped_transform_probing stp(lg, "generability transform",
-        transform_id, m.name().id(), ctx.prober(), m);
+    probing::scoped_transform_prober stp(lg, "generability transform",
+        transform_id, m.name().id(), ctx.new_prober(), m);
     m.has_generatable_types(has_generatable_types(m));
     stp.end_transform(m);
 }

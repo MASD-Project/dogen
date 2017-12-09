@@ -24,10 +24,10 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/formatting_transform.hpp"
 
@@ -158,8 +158,8 @@ transform_element(const std::unordered_map<std::string, type_group> tgs,
 
 void formatting_transform::
 transform(const context& ctx, meta_model::model& m) {
-    helpers::scoped_transform_probing stp(lg, "formatting transform",
-        transform_id, m.name().id(), ctx.prober(), m);
+    probing::scoped_transform_prober stp(lg, "formatting transform",
+        transform_id, m.name().id(), ctx.new_prober(), m);
 
     const auto& atrp(ctx.type_repository());
     const auto& als(ctx.archetype_location_repository().archetype_locations());

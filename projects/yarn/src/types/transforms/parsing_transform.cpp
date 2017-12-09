@@ -26,6 +26,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
@@ -41,7 +42,6 @@
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
@@ -246,8 +246,8 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 
 void parsing_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "parsing transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "parsing transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto l(em.input_language());

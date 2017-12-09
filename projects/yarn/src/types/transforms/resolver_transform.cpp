@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
 
 namespace {
@@ -39,8 +39,8 @@ namespace transforms {
 
 void resolver_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "resolver transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "resolver transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
     helpers::resolver::resolve(idx, em);
     stp.end_transform(em);
 }

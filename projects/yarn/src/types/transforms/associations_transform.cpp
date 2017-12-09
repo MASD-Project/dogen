@@ -24,10 +24,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 
@@ -132,8 +132,8 @@ expand_object(const meta_model::endomodel& em, meta_model::object& o) {
 
 void associations_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "associations transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "associations transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     BOOST_LOG_SEV(lg, debug) << "Total objects: " << em.objects().size();
 

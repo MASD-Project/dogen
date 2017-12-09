@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
@@ -83,8 +83,8 @@ void exomodel_to_exomodel_chain::
 transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
-    helpers::scoped_chain_probing stp(lg, "exomodel to exomodel chain",
-        transform_id, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "exomodel to exomodel chain",
+        transform_id, ctx.new_prober());
 
     /*
      * Obtain a tuple containing the source and destination

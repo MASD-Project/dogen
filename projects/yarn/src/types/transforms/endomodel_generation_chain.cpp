@@ -25,10 +25,10 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
@@ -52,8 +52,8 @@ namespace transforms {
 std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
-    helpers::scoped_chain_probing stp(lg, "endomodel generation chain",
-        transform_id, model_name, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "endomodel generation chain",
+        transform_id, model_name, ctx.new_prober());
 
     /*
      * Obtain the initial target, given the user options. The initial

@@ -26,16 +26,16 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 
 namespace {
@@ -305,8 +305,8 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 
 void enumerations_transform::transform(const context& ctx,
     meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "enumerations transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "enumerations transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     /*
      * If no enumerations exist, we can just exit. This means we can

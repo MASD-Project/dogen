@@ -21,10 +21,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/utility/filesystem/file.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 
 namespace {
@@ -66,8 +66,8 @@ void code_generation_chain::transform(const context& ctx) {
 
     const auto& o(ctx.transform_options());
     const auto model_name(o.target().filename().string());
-    helpers::scoped_chain_probing stp(lg, "code generation chain",
-        transform_id, model_name, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "code generation chain",
+        transform_id, model_name, ctx.new_prober());
 
     /*
      * Obtain the text models.

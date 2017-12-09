@@ -24,6 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/vector_io.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
@@ -31,7 +32,6 @@
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_primitive_properties.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
@@ -455,8 +455,8 @@ void stereotypes_transform::transform(meta_model::primitive& p) {
 
 void stereotypes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    helpers::scoped_transform_probing stp(lg, "stereotypes transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    probing::scoped_transform_prober stp(lg, "stereotypes transform",
+        transform_id, em.name().id(), ctx.new_prober(), em);
 
     for (auto& pair : em.objects())
         transform(*pair.second, em);

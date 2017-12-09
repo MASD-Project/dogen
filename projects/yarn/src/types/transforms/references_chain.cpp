@@ -20,10 +20,10 @@
  */
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
@@ -57,8 +57,8 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
 
 std::list<meta_model::endomodel> references_chain::
 transform(const context& ctx, const meta_model::endomodel& target) {
-    helpers::scoped_chain_probing stp(lg, "references chain",
-        transform_id, target.name().id(), ctx.prober());
+    probing::scoped_chain_prober stp(lg, "references chain",
+        transform_id, target.name().id(), ctx.new_prober());
 
     /*
      * Obtain the absolute paths to all reference models - system and

@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/helpers/mapper.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 
@@ -44,8 +44,8 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
 
 meta_model::endomodel mapping_transform::transform(const context& ctx,
     const meta_model::endomodel& src, const meta_model::languages to) {
-    helpers::scoped_transform_probing stp(lg, "mapping transform",
-        transform_id, src.name().id(), ctx.prober(), src);
+    probing::scoped_transform_prober stp(lg, "mapping transform",
+        transform_id, src.name().id(), ctx.new_prober(), src);
 
     const helpers::mapper mp(ctx.mapping_repository());
     auto r(mp.map(src.input_language(), to, src));

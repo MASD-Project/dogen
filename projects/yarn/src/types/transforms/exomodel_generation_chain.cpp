@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 
@@ -59,8 +59,8 @@ exomodel_transform_registrar& exomodel_generation_chain::registrar() {
 meta_model::exomodel exomodel_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    helpers::scoped_chain_probing stp(lg, "exomodel generation chain",
-        transform_id, model_name, ctx.prober());
+    probing::scoped_chain_prober stp(lg, "exomodel generation chain",
+        transform_id, model_name, ctx.new_prober());
 
     BOOST_LOG_SEV(lg, debug) << "Path: " << p.generic_string();
 

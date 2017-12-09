@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -36,7 +37,6 @@
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
-#include "dogen/yarn/types/helpers/scoped_transform_probing.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
@@ -167,8 +167,8 @@ endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
 
 std::list<meta_model::model> endomodel_to_model_transform::
 transform(const context& ctx, const std::list<meta_model::endomodel>& ems) {
-    helpers::scoped_transform_probing stp(lg, "endomodel to model transform",
-        transform_id, ctx.prober(), ems);
+    probing::scoped_transform_prober stp(lg, "endomodel to model transform",
+        transform_id, ctx.new_prober(), ems);
 
     std::list<meta_model::model> r;
     for(const auto& em : ems)
