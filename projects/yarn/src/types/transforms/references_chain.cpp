@@ -24,8 +24,11 @@
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
-#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "dogen/external/types/transforms/context.hpp"
+#include "dogen/external/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
+// #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 
@@ -84,13 +87,16 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Obtain the reference model in the internal representation
          * of the exogenous model.
          */
-        const auto em(exomodel_generation_chain::transform(ctx, rp));
+        // const auto em(exomodel_generation_chain::transform(ctx, rp));
+        const external::transforms::context ext_ctx(ctx.prober());
+        const auto em(external::transforms::model_generation_chain::transform(ext_ctx, rp));
 
         /*
          * Convert the internal representation of the exogenous model into
          * an endogenous model, ready for further processing.
          */
-        auto m(exomodel_to_endomodel_transform::transform(ctx, em));
+        // auto m(exomodel_to_endomodel_transform::transform(ctx, em));
+        auto m(external_model_to_endomodel_transform::transform(ctx, em));
 
         /*
          * Apply all of the pre-processing transforms to the reference

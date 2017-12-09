@@ -23,8 +23,11 @@
 #include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
-#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "dogen/external/types/transforms/context.hpp"
+#include "dogen/external/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
+// #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 
@@ -51,13 +54,16 @@ initial_target_chain::transform(const context& ctx) {
      * First we obtain the target model in the internal representation
      * of the exogenous model.
      */
-    const auto em(exomodel_generation_chain::transform(ctx, tp));
+    // const auto em(exomodel_generation_chain::transform(ctx, tp));
+    const external::transforms::context ext_ctx(ctx.prober());
+    const auto m(external::transforms::model_generation_chain::transform(ext_ctx, tp));
 
     /*
      * Then we convert the internal representation of the exogenous
      * model into an endogenous model, ready for further processing.
      */
-    auto r(exomodel_to_endomodel_transform::transform(ctx, em));
+    // auto r(exomodel_to_endomodel_transform::transform(ctx, em));
+    auto r(external_model_to_endomodel_transform::transform(ctx, m));
 
     /*
      * Next, we set the origin of the target model to target so that
