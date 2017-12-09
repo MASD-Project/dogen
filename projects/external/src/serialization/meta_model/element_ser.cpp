@@ -43,6 +43,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("tagged_values", v.tagged_values_);
+    ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("attributes", v.attributes_);
     ar << make_nvp("fallback_element_type", v.fallback_element_type_);
@@ -61,6 +62,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("tagged_values", v.tagged_values_);
+    ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("attributes", v.attributes_);
     ar >> make_nvp("fallback_element_type", v.fallback_element_type_);

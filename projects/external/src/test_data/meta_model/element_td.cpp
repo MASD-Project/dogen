@@ -84,15 +84,16 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
     v.documentation(create_std_string(position + 1));
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 2));
-    v.parents(create_std_list_std_string(position + 3));
-    v.attributes(create_std_list_dogen_external_meta_model_attribute(position + 4));
-    v.fallback_element_type(create_std_string(position + 5));
-    v.can_be_primitive_underlier(create_bool(position + 6));
-    v.in_global_module(create_bool(position + 7));
-    v.can_be_enumeration_underlier(create_bool(position + 8));
-    v.is_default_enumeration_type(create_bool(position + 9));
-    v.is_associative_container(create_bool(position + 10));
-    v.is_floating_point(create_bool(position + 11));
+    v.stereotypes(create_std_list_std_string(position + 3));
+    v.parents(create_std_list_std_string(position + 4));
+    v.attributes(create_std_list_dogen_external_meta_model_attribute(position + 5));
+    v.fallback_element_type(create_std_string(position + 6));
+    v.can_be_primitive_underlier(create_bool(position + 7));
+    v.in_global_module(create_bool(position + 8));
+    v.can_be_enumeration_underlier(create_bool(position + 9));
+    v.is_default_enumeration_type(create_bool(position + 10));
+    v.is_associative_container(create_bool(position + 11));
+    v.is_floating_point(create_bool(position + 12));
 }
 
 element_generator::result_type

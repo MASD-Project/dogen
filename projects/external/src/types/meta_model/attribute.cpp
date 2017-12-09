@@ -28,10 +28,12 @@ attribute::attribute(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<std::string>& stereotypes,
     const std::string& type)
     : name_(name),
       documentation_(documentation),
       tagged_values_(tagged_values),
+      stereotypes_(stereotypes),
       type_(type) { }
 
 void attribute::swap(attribute& other) noexcept {
@@ -39,6 +41,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
+    swap(stereotypes_, other.stereotypes_);
     swap(type_, other.type_);
 }
 
@@ -46,6 +49,7 @@ bool attribute::operator==(const attribute& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         tagged_values_ == rhs.tagged_values_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         type_ == rhs.type_;
 }
 
@@ -101,6 +105,22 @@ void attribute::tagged_values(const std::list<std::pair<std::string, std::string
 
 void attribute::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
     tagged_values_ = std::move(v);
+}
+
+const std::list<std::string>& attribute::stereotypes() const {
+    return stereotypes_;
+}
+
+std::list<std::string>& attribute::stereotypes() {
+    return stereotypes_;
+}
+
+void attribute::stereotypes(const std::list<std::string>& v) {
+    stereotypes_ = v;
+}
+
+void attribute::stereotypes(const std::list<std::string>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 const std::string& attribute::type() const {

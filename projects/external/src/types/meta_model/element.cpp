@@ -36,6 +36,7 @@ element::element(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<std::string>& stereotypes,
     const std::list<std::string>& parents,
     const std::list<dogen::external::meta_model::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -48,6 +49,7 @@ element::element(
     : name_(name),
       documentation_(documentation),
       tagged_values_(tagged_values),
+      stereotypes_(stereotypes),
       parents_(parents),
       attributes_(attributes),
       fallback_element_type_(fallback_element_type),
@@ -63,6 +65,7 @@ void element::swap(element& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(tagged_values_, other.tagged_values_);
+    swap(stereotypes_, other.stereotypes_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
     swap(fallback_element_type_, other.fallback_element_type_);
@@ -78,6 +81,7 @@ bool element::operator==(const element& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         tagged_values_ == rhs.tagged_values_ &&
+        stereotypes_ == rhs.stereotypes_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
         fallback_element_type_ == rhs.fallback_element_type_ &&
@@ -141,6 +145,22 @@ void element::tagged_values(const std::list<std::pair<std::string, std::string> 
 
 void element::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
     tagged_values_ = std::move(v);
+}
+
+const std::list<std::string>& element::stereotypes() const {
+    return stereotypes_;
+}
+
+std::list<std::string>& element::stereotypes() {
+    return stereotypes_;
+}
+
+void element::stereotypes(const std::list<std::string>& v) {
+    stereotypes_ = v;
+}
+
+void element::stereotypes(const std::list<std::string>&& v) {
+    stereotypes_ = std::move(v);
 }
 
 const std::list<std::string>& element::parents() const {

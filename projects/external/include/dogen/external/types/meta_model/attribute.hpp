@@ -47,6 +47,7 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
+        const std::list<std::string>& stereotypes,
         const std::string& type);
 
 private:
@@ -81,6 +82,11 @@ public:
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
     void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
 
+    const std::list<std::string>& stereotypes() const;
+    std::list<std::string>& stereotypes();
+    void stereotypes(const std::list<std::string>& v);
+    void stereotypes(const std::list<std::string>&& v);
+
     const std::string& type() const;
     std::string& type();
     void type(const std::string& v);
@@ -100,6 +106,7 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
+    std::list<std::string> stereotypes_;
     std::string type_;
 };
 

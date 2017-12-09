@@ -53,6 +53,7 @@ public:
         const std::string& name,
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
+        const std::list<std::string>& stereotypes,
         const std::list<std::string>& parents,
         const std::list<dogen::external::meta_model::attribute>& attributes,
         const std::string& fallback_element_type,
@@ -94,6 +95,11 @@ public:
     std::list<std::pair<std::string, std::string> >& tagged_values();
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
     void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+
+    const std::list<std::string>& stereotypes() const;
+    std::list<std::string>& stereotypes();
+    void stereotypes(const std::list<std::string>& v);
+    void stereotypes(const std::list<std::string>&& v);
 
     const std::list<std::string>& parents() const;
     std::list<std::string>& parents();
@@ -148,6 +154,7 @@ private:
     std::string name_;
     std::string documentation_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
+    std::list<std::string> stereotypes_;
     std::list<std::string> parents_;
     std::list<dogen::external::meta_model::attribute> attributes_;
     std::string fallback_element_type_;

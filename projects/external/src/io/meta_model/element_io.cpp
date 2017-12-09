@@ -103,6 +103,7 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
+      << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"parents\": " << v.parents() << ", "
       << "\"attributes\": " << v.attributes() << ", "
       << "\"fallback_element_type\": " << "\"" << tidy_up_string(v.fallback_element_type()) << "\"" << ", "

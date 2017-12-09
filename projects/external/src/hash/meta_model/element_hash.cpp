@@ -73,6 +73,7 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
+    combine(seed, hash_std_list_std_string(v.stereotypes()));
     combine(seed, hash_std_list_std_string(v.parents()));
     combine(seed, hash_std_list_dogen_external_meta_model_attribute(v.attributes()));
     combine(seed, v.fallback_element_type());

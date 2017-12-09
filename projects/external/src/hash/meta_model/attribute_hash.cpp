@@ -44,6 +44,14 @@ inline std::size_t hash_std_list_std_pair_std_string_std_string(const std::list<
     return seed;
 }
 
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -56,6 +64,7 @@ std::size_t attribute_hasher::hash(const attribute& v) {
     combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, hash_std_list_std_pair_std_string_std_string(v.tagged_values()));
+    combine(seed, hash_std_list_std_string(v.stereotypes()));
     combine(seed, v.type());
 
     return seed;

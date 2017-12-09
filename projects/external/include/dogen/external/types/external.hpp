@@ -28,7 +28,13 @@
 namespace dogen {
 
 /**
- * @brief Provides support for encoding and decoding external models.
+ * @brief Provides support for encoding and decoding exogenous models.
+ *
+ * An exogenous model is defined as:
+ *
+ * - a third-party format that is not owned or controlled by
+ *   Dogen, such as Dia
+ * - a Dogen format designed for interoperability (JSON).
  */
 namespace external {
 }
