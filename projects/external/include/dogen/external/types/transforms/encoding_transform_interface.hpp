@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,17 +31,17 @@ namespace dogen {
 namespace external {
 namespace transforms {
 
-class context_factory final {
+class encoding_transform_interface final {
 public:
-    context_factory() = default;
-    context_factory(const context_factory&) = default;
-    context_factory(context_factory&&) = default;
-    ~context_factory() = default;
-    context_factory& operator=(const context_factory&) = default;
+    encoding_transform_interface() = default;
+    encoding_transform_interface(const encoding_transform_interface&) = default;
+    encoding_transform_interface(encoding_transform_interface&&) = default;
+    ~encoding_transform_interface() = default;
+    encoding_transform_interface& operator=(const encoding_transform_interface&) = default;
 
 public:
-    bool operator==(const context_factory& rhs) const;
-    bool operator!=(const context_factory& rhs) const {
+    bool operator==(const encoding_transform_interface& rhs) const;
+    bool operator!=(const encoding_transform_interface& rhs) const {
         return !this->operator==(rhs);
     }
 

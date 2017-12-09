@@ -18,18 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_FACTORY_FWD_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_FACTORY_FWD_HPP
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
+
 namespace dogen {
 namespace external {
 namespace transforms {
 
-class context_factory;
+class decoding_transform_interface final {
+public:
+    decoding_transform_interface() = default;
+    decoding_transform_interface(const decoding_transform_interface&) = default;
+    decoding_transform_interface(decoding_transform_interface&&) = default;
+    ~decoding_transform_interface() = default;
+    decoding_transform_interface& operator=(const decoding_transform_interface&) = default;
+
+public:
+    bool operator==(const decoding_transform_interface& rhs) const;
+    bool operator!=(const decoding_transform_interface& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 } } }
 

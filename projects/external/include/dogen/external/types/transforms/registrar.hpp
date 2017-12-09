@@ -18,14 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/codec_interface.hpp"
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-bool codec_interface::operator==(const codec_interface& /*rhs*/) const {
-    return true;
-}
+class registrar final {
+public:
+    registrar() = default;
+    registrar(const registrar&) = default;
+    registrar(registrar&&) = default;
+    ~registrar() = default;
+    registrar& operator=(const registrar&) = default;
+
+public:
+    bool operator==(const registrar& rhs) const;
+    bool operator!=(const registrar& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 } } }
+
+#endif

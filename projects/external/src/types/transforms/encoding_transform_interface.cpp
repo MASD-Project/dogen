@@ -18,19 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_CODEC_TYPES_FWD_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_CODEC_TYPES_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/external/types/transforms/encoding_transform_interface.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-enum class codec_types : unsigned int;
+bool encoding_transform_interface::operator==(const encoding_transform_interface& /*rhs*/) const {
+    return true;
+}
 
 } } }
-
-#endif

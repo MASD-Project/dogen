@@ -18,35 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_ERROR_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_ERROR_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include <boost/exception/info.hpp>
+#include "dogen/external/types/transforms/registrar.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-class encoding_error : public virtual std::exception, public virtual boost::exception {
-public:
-    encoding_error() = default;
-    ~encoding_error() noexcept = default;
-
-public:
-    explicit encoding_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+bool registrar::operator==(const registrar& /*rhs*/) const {
+    return true;
+}
 
 } } }
-
-#endif

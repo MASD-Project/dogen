@@ -28,6 +28,5 @@
 #include "dogen/external/io/meta_model/model_io.hpp"
 #include "dogen/external/io/meta_model/element_io.hpp"
 #include "dogen/external/io/meta_model/attribute_io.hpp"
-#include "dogen/external/io/transforms/codec_types_io.hpp"
 
 #endif

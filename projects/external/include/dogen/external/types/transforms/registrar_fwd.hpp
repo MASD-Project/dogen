@@ -18,28 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/test_data/transforms/codec_types_td.hpp"
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_FWD_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-codec_types_generator::codec_types_generator() : position_(0) { }
-void codec_types_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<codec_types>(position % 4);
-}
-
-codec_types_generator::result_type
-codec_types_generator::create(const unsigned int  position) {
-    result_type r;
-    codec_types_generator::populate(position, r);
-    return r;
-}
-
-codec_types_generator::result_type
-codec_types_generator::operator()() {
-    return create(position_++);
-}
+class registrar;
 
 } } }
+
+#endif

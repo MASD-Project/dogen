@@ -30,15 +30,12 @@
 #include "dogen/external/types/meta_model/element.hpp"
 #include "dogen/external/types/transforms/context.hpp"
 #include "dogen/external/types/meta_model/attribute.hpp"
-#include "dogen/external/types/transforms/codec_types.hpp"
-#include "dogen/external/types/transforms/decoding_error.hpp"
-#include "dogen/external/types/transforms/encoding_error.hpp"
-#include "dogen/external/types/transforms/codec_container.hpp"
-#include "dogen/external/types/transforms/codec_interface.hpp"
-#include "dogen/external/types/transforms/context_factory.hpp"
+#include "dogen/external/types/transforms/registrar.hpp"
 #include "dogen/external/types/transforms/model_transform.hpp"
 #include "dogen/external/types/transforms/registrar_error.hpp"
 #include "dogen/external/types/transforms/transformation_error.hpp"
 #include "dogen/external/types/transforms/model_to_model_transform.hpp"
+#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
+#include "dogen/external/types/transforms/encoding_transform_interface.hpp"
 
 #endif

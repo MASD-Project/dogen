@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_ERROR_FWD_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_ERROR_FWD_HPP
+#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_FWD_HPP
+#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace external {
 namespace transforms {
 
-class decoding_error;
+class encoding_transform_interface;
 
 } } }
 

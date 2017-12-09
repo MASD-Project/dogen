@@ -28,6 +28,5 @@
 #include "dogen/external/hash/meta_model/model_hash.hpp"
 #include "dogen/external/hash/meta_model/element_hash.hpp"
 #include "dogen/external/hash/meta_model/attribute_hash.hpp"
-#include "dogen/external/hash/transforms/codec_types_hash.hpp"
 
 #endif

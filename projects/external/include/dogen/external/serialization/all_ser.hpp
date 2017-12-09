@@ -28,6 +28,5 @@
 #include "dogen/external/serialization/meta_model/model_ser.hpp"
 #include "dogen/external/serialization/meta_model/element_ser.hpp"
 #include "dogen/external/serialization/meta_model/attribute_ser.hpp"
-#include "dogen/external/serialization/transforms/codec_types_ser.hpp"
 
 #endif

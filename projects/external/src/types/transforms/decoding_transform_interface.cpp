@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/context_factory.hpp"
+#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
 
 namespace dogen {
 namespace external {
 namespace transforms {
 
-bool context_factory::operator==(const context_factory& /*rhs*/) const {
+bool decoding_transform_interface::operator==(const decoding_transform_interface& /*rhs*/) const {
     return true;
 }
 
