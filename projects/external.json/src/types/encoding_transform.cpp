@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/external/types/transforms/context.hpp"
-#include "dogen/external.json/types/new_dehydrator.hpp"
+#include "dogen/external.json/types/dehydrator.hpp"
 #include "dogen/external.json/types/encoding_transform.hpp"
 
 namespace {
@@ -50,7 +50,7 @@ transform(const transforms::context& ctx, const meta_model::model& m,
     probing::scoped_transform_prober stp(lg, "JSON encoding transform",
         transform_id, m.name(), ctx.prober());
 
-    new_dehydrator::dehydrate(m, p);
+    dehydrator::dehydrate(m, p);
 }
 
 } } }

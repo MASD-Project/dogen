@@ -22,12 +22,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
-#include "dogen/external.json/types/new_dehydrator.hpp"
+#include "dogen/external.json/types/dehydrator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("external.json.new_dehydrator"));
+static logger lg(logger_factory("external.json.dehydrator"));
 
 const std::string scope("::");
 const std::string comma_space(", ");
@@ -39,21 +39,21 @@ namespace dogen {
 namespace external {
 namespace json {
 
-std::string new_dehydrator::tidy_up_string(std::string s) {
+std::string dehydrator::tidy_up_string(std::string s) {
     boost::replace_all(s, "\r", "\\r");
     boost::replace_all(s, "\n", "\\n");
     boost::replace_all(s, "\"", "\\\"");
     return s;
 }
 
-void new_dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
+void dehydrator::insert_documentation(std::ostream& s,  const std::string& d) {
     formatters::utility_formatter uf(s);
     uf.insert_quoted("documentation");
     s << " : ";
     uf.insert_quoted(tidy_up_string(d));
 }
 
-void new_dehydrator::insert_tagged_values(std::ostream& s,
+void dehydrator::insert_tagged_values(std::ostream& s,
     const std::list<std::pair<std::string, std::string>>& tv) {
 
     formatters::utility_formatter uf(s);
@@ -73,7 +73,7 @@ void new_dehydrator::insert_tagged_values(std::ostream& s,
     s << " }";
 }
 
-void new_dehydrator::insert_stereotypes(std::ostream& s,
+void dehydrator::insert_stereotypes(std::ostream& s,
     const std::list<std::string>& st) {
 
     formatters::utility_formatter uf(s);
@@ -90,7 +90,7 @@ void new_dehydrator::insert_stereotypes(std::ostream& s,
     s << " ]";
 }
 
-void new_dehydrator::insert_parents(std::ostream& s,
+void dehydrator::insert_parents(std::ostream& s,
     const std::list<std::string>& st) {
 
     formatters::utility_formatter uf(s);
@@ -107,7 +107,7 @@ void new_dehydrator::insert_parents(std::ostream& s,
     s << " ]";
 }
 
-void new_dehydrator::insert_attribute(std::ostream& s,
+void dehydrator::insert_attribute(std::ostream& s,
     const external::meta_model::attribute& a) {
 
     s << "{ ";
@@ -139,7 +139,7 @@ void new_dehydrator::insert_attribute(std::ostream& s,
     s << " }";
 }
 
-void new_dehydrator::insert_element(std::ostream& s,
+void dehydrator::insert_element(std::ostream& s,
     const external::meta_model::element& e) {
 
     s << "{ ";
@@ -193,7 +193,7 @@ void new_dehydrator::insert_element(std::ostream& s,
     s << " }";
 }
 
-std::string new_dehydrator::dehydrate(const external::meta_model::model& m) {
+std::string dehydrator::dehydrate(const external::meta_model::model& m) {
     std::ostringstream s;
 
     s << "{ ";
@@ -233,7 +233,7 @@ std::string new_dehydrator::dehydrate(const external::meta_model::model& m) {
     return s.str();
 }
 
-void new_dehydrator::dehydrate(const external::meta_model::model& m,
+void dehydrator::dehydrate(const external::meta_model::model& m,
     const boost::filesystem::path& p) {
     const auto s(dehydrate(m));
     utility::filesystem::write_file_content(p, s);

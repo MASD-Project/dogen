@@ -24,7 +24,7 @@
 #include "dogen/external/types/transforms/context.hpp"
 #include "dogen/external/io/meta_model/model_io.hpp"
 #include "dogen/external/types/transforms/transformation_error.hpp"
-#include "dogen/external.json/types/new_hydrator.hpp"
+#include "dogen/external.json/types/hydrator.hpp"
 #include "dogen/external.json/types/decoding_transform.hpp"
 
 namespace {
@@ -53,7 +53,7 @@ meta_model::model decoding_transform::transform(const transforms::context& ctx,
     probing::scoped_transform_prober stp(lg, "JSON decoding transform",
         transform_id, model_name, ctx.prober());
 
-    new_hydrator h;
+    hydrator h;
     const auto r(h.hydrate(p));
 
     stp.end_transform(r);

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_JSON_TYPES_NEW_HYDRATOR_HPP
-#define DOGEN_YARN_JSON_TYPES_NEW_HYDRATOR_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_HYDRATOR_HPP
+#define DOGEN_YARN_JSON_TYPES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@ namespace dogen {
 namespace external {
 namespace json {
 
-class new_hydrator final {
+class hydrator final {
 private:
     /**
      * @brief Reads the key value pairs from the property tree.

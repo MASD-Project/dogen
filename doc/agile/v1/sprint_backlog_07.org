@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-10 Sun 00:09]
+#+CAPTION: Clock summary at [2017-12-10 Sun 00:17]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *62:59* |       |       | 100.0 |
+| *Total time*                                                                | *63:05* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 62:59   |       |       | 100.0 |
-| Active                                                                      |         | 62:59 |       | 100.0 |
+| Stories                                                                     | 63:05   |       |       | 100.0 |
+| Active                                                                      |         | 63:05 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.7 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:23 |   3.8 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.9 |
 | COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  13.8 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.8 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.7 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.7 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  25.5 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  25.4 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.7 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.2 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
@@ -35,11 +35,11 @@
 | COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   1.0 |
 | COMPLETED Create a =probing= model                                          |         |       |  1:22 |   2.2 |
 | COMPLETED Create the =external= model                                       |         |       |  5:07 |   8.1 |
+| COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.9 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.7 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.7 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.5 |
 | STARTED Rename =yarn.dia= to =external.dia=                                 |         |       |  1:20 |   2.1 |
-| STARTED Rename =yarn.json= to =external.json=                               |         |       |  1:45 |   2.8 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   1.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -497,6 +497,17 @@ Notes:
 - we should have a dia to codec model chain.
 - rename adapter to factory to match processed object.
 
+*** COMPLETED Rename =yarn.json= to =external.json=                   :story:
+    CLOSED: [2017-12-10 Sun 00:16]
+    CLOCK: [2017-12-10 Sun 00:10]--[2017-12-10 Sun 00:16] =>  0:06
+    CLOCK: [2017-12-09 Sat 23:36]--[2017-12-10 Sun 00:09] =>  0:33
+    CLOCK: [2017-12-09 Sat 21:46]--[2017-12-09 Sat 22:16] =>  0:30
+    CLOCK: [2017-12-09 Sat 21:24]--[2017-12-09 Sat 21:45] =>  0:21
+    CLOCK: [2017-12-09 Sat 21:05]--[2017-12-09 Sat 21:23] =>  0:18
+    CLOCK: [2017-12-09 Sat 21:01]--[2017-12-09 Sat 21:04] =>  0:03
+
+As per analysis story, we are moving away from the sewing terms.
+
 *** STARTED Finish setting up coveralls                               :story:
     CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
     CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
@@ -586,15 +597,6 @@ flight as we transform from exomodel to endomodel.
     CLOCK: [2017-12-09 Sat 16:54]--[2017-12-09 Sat 16:58] =>  0:04
     CLOCK: [2017-12-09 Sat 16:48]--[2017-12-09 Sat 16:53] =>  0:05
     CLOCK: [2017-12-09 Sat 16:38]--[2017-12-09 Sat 16:47] =>  0:09
-
-As per analysis story, we are moving away from the sewing terms.
-
-*** STARTED Rename =yarn.json= to =external.json=                     :story:
-    CLOCK: [2017-12-09 Sat 23:36]--[2017-12-10 Sun 00:09] =>  0:33
-    CLOCK: [2017-12-09 Sat 21:46]--[2017-12-09 Sat 22:16] =>  0:30
-    CLOCK: [2017-12-09 Sat 21:24]--[2017-12-09 Sat 21:45] =>  0:21
-    CLOCK: [2017-12-09 Sat 21:05]--[2017-12-09 Sat 21:23] =>  0:18
-    CLOCK: [2017-12-09 Sat 21:01]--[2017-12-09 Sat 21:04] =>  0:03
 
 As per analysis story, we are moving away from the sewing terms.
 

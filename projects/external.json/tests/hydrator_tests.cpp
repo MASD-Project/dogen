@@ -31,7 +31,7 @@
 #include "dogen/external/types/meta_model/model.hpp"
 #include "dogen/external/io/meta_model/model_io.hpp"
 #include "dogen/external.json/types/hydration_error.hpp"
-#include "dogen/external.json/types/new_hydrator.hpp"
+#include "dogen/external.json/types/hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {
@@ -116,7 +116,7 @@ const std::string empty_elements_model(R"({
 
 
 dogen::external::meta_model::model hydrate(std::istream& s) {
-    dogen::external::json::new_hydrator h;
+    dogen::external::json::hydrator h;
     return h.hydrate(s);
 }
 

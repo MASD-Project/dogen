@@ -26,9 +26,9 @@
 #endif
 
 #include "dogen/external.json/types/json.hpp"
+#include "dogen/external.json/types/hydrator.hpp"
+#include "dogen/external.json/types/dehydrator.hpp"
 #include "dogen/external.json/types/initializer.hpp"
-#include "dogen/external.json/types/new_hydrator.hpp"
-#include "dogen/external.json/types/new_dehydrator.hpp"
 #include "dogen/external.json/types/hydration_error.hpp"
 #include "dogen/external.json/types/decoding_transform.hpp"
 #include "dogen/external.json/types/encoding_transform.hpp"

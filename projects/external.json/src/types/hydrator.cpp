@@ -26,12 +26,12 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/external.json/types/hydration_error.hpp"
-#include "dogen/external.json/types/new_hydrator.hpp"
+#include "dogen/external.json/types/hydrator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("external.json.new_hydrator"));
+auto lg(logger_factory("external.json.hydrator"));
 
 const std::string empty;
 const std::string yarn_object_element("yarn::object");
@@ -67,7 +67,7 @@ namespace external {
 namespace json {
 
 std::string
-new_hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
+hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     const auto opt(pt.get_optional<std::string>(documentation_key));
     if (!opt)
         return empty;
@@ -78,7 +78,7 @@ new_hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
 }
 
 std::list<std::pair<std::string, std::string>>
-new_hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
+hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
     std::list<std::pair<std::string, std::string>> r;
     const auto i(pt.find(tagged_values_key));
     if (i == pt.not_found() || i->second.empty())
@@ -93,7 +93,7 @@ new_hydrator::read_tagged_values(const boost::property_tree::ptree& pt) const {
 }
 
 std::list<std::string>
-new_hydrator::read_stereotypes(const boost::property_tree::ptree& pt) const {
+hydrator::read_stereotypes(const boost::property_tree::ptree& pt) const {
     std::list<std::string> r;
     const auto i(pt.find(stereotypes_key));
     if (i == pt.not_found() || i->second.empty())
@@ -106,7 +106,7 @@ new_hydrator::read_stereotypes(const boost::property_tree::ptree& pt) const {
 }
 
 std::list<std::string>
-new_hydrator::read_parents(const boost::property_tree::ptree& pt) const {
+hydrator::read_parents(const boost::property_tree::ptree& pt) const {
     std::list<std::string> r;
     const auto i(pt.find(parents_key));
     if (i == pt.not_found() || i->second.empty())
@@ -118,7 +118,7 @@ new_hydrator::read_parents(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-external::meta_model::attribute new_hydrator::
+external::meta_model::attribute hydrator::
 read_attribute(const boost::property_tree::ptree& pt) const {
     external::meta_model::attribute r;
     r.name(pt.get<std::string>(name_key));
@@ -130,7 +130,7 @@ read_attribute(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-external::meta_model::element new_hydrator::
+external::meta_model::element hydrator::
 read_element(const boost::property_tree::ptree& pt) const {
     external::meta_model::element r;
     r.name(pt.get<std::string>(name_key));
@@ -165,7 +165,7 @@ read_element(const boost::property_tree::ptree& pt) const {
 }
 
 external::meta_model::model
-new_hydrator::read_stream(std::istream& s) const {
+hydrator::read_stream(std::istream& s) const {
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
@@ -188,7 +188,7 @@ new_hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-external::meta_model::model new_hydrator::hydrate(std::istream& s) const {
+external::meta_model::model hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -209,7 +209,7 @@ external::meta_model::model new_hydrator::hydrate(std::istream& s) const {
 }
 
 external::meta_model::model
-new_hydrator::hydrate(const boost::filesystem::path& p) const {
+hydrator::hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);

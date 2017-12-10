@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_JSON_TYPES_NEW_HYDRATOR_FWD_HPP
-#define DOGEN_EXTERNAL_JSON_TYPES_NEW_HYDRATOR_FWD_HPP
+#ifndef DOGEN_EXTERNAL_JSON_TYPES_DEHYDRATOR_FWD_HPP
+#define DOGEN_EXTERNAL_JSON_TYPES_DEHYDRATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace external {
 namespace json {
 
-class new_hydrator;
+class dehydrator;
 
 } } }
 
