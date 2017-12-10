@@ -13,34 +13,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-10 Sun 00:17]
+#+CAPTION: Clock summary at [2017-12-10 Sun 01:12]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *63:05* |       |       | 100.0 |
+| *Total time*                                                                | *63:59* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 63:05   |       |       | 100.0 |
-| Active                                                                      |         | 63:05 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.7 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:23 |   3.8 |
+| Stories                                                                     | 63:59   |       |       | 100.0 |
+| Active                                                                      |         | 63:59 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:23 |   3.7 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  13.8 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.7 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  13.6 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.4 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.7 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  25.4 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  25.1 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.7 |
-| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.2 |
+| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.1 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.6 |
 | COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   1.0 |
-| COMPLETED Create a =probing= model                                          |         |       |  1:22 |   2.2 |
-| COMPLETED Create the =external= model                                       |         |       |  5:07 |   8.1 |
+| COMPLETED Create a =probing= model                                          |         |       |  1:22 |   2.1 |
+| COMPLETED Create the =external= model                                       |         |       |  5:07 |   8.0 |
 | COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.9 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.7 |
-| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.7 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.6 |
+| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.6 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.5 |
-| STARTED Rename =yarn.dia= to =external.dia=                                 |         |       |  1:20 |   2.1 |
-| STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   1.1 |
+| STARTED Rename =yarn.dia= to =external.dia=                                 |         |       |  2:14 |   3.5 |
+| STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -589,6 +589,8 @@ property of an exomodel. If we do this we can then do the mapping in
 flight as we transform from exomodel to endomodel.
 
 *** STARTED Rename =yarn.dia= to =external.dia=                       :story:
+    CLOCK: [2017-12-10 Sun 00:56]--[2017-12-10 Sun 01:12] =>  0:16
+    CLOCK: [2017-12-10 Sun 00:17]--[2017-12-10 Sun 00:55] =>  0:38
     CLOCK: [2017-12-09 Sat 23:21]--[2017-12-09 Sat 23:35] =>  0:14
     CLOCK: [2017-12-09 Sat 22:17]--[2017-12-09 Sat 22:38] =>  0:21
     CLOCK: [2017-12-09 Sat 17:26]--[2017-12-09 Sat 17:28] =>  0:02

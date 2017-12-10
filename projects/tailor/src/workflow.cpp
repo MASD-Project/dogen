@@ -29,8 +29,7 @@
 #include "dogen/external/types/transforms/model_to_model_chain.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/external.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-// #include "dogen/yarn/types/transforms/exomodel_to_exomodel_chain.hpp"
+#include "dogen/external.dia/types/initializer.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
@@ -113,7 +112,7 @@ void workflow::tailor(const options::tailoring_options& to) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
     external::json::initializer::initialize();
-    yarn::dia::initializer::initialize();
+    external::dia::initializer::initialize();
 
     yarn::transforms::options o;
     o.target(to.target());

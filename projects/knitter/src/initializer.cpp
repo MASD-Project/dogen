@@ -21,7 +21,7 @@
 #include "dogen/quilt.csharp/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 #include "dogen/external.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
+#include "dogen/external.dia/types/initializer.hpp"
 #include "dogen/knitter/initializer.hpp"
 
 namespace dogen {
@@ -29,7 +29,7 @@ namespace knitter {
 
 void initializer::initialize() {
     dogen::external::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
+    dogen::external::dia::initializer::initialize();
     dogen::quilt::csharp::initializer::initialize();
     dogen::quilt::cpp::initializer::initialize();
 }

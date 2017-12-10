@@ -34,8 +34,8 @@ target_link_libraries(${name}
     formatters
     external
     external.json
+    external.dia
     yarn
-    yarn.dia
     quilt.cpp
     quilt.csharp
     ${LIBXML2_LIBRARIES}

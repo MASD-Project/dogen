@@ -35,7 +35,7 @@ target_link_libraries(${tests_name}
     options
     formatters
     probing
-    yarn.dia
+    external.dia
     external.json
     quilt.cpp
     quilt.csharp

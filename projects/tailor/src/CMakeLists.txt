@@ -33,8 +33,7 @@ target_link_libraries(${name}
     dia
     external
     external.json
-    yarn
-    yarn.dia
+    external.dia
     quilt.cpp
     quilt.csharp
     ${LIBXML2_LIBRARIES}
