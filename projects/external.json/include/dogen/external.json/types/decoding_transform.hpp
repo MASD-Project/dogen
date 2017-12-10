@@ -18,20 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/initializer.hpp"
-#include "dogen/quilt.cpp/types/initializer.hpp"
-#include "dogen/external.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knitter/initializer.hpp"
+#ifndef DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_HPP
+#define DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
 
 namespace dogen {
-namespace knitter {
+namespace external {
+namespace json {
 
-void initializer::initialize() {
-    dogen::external::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::quilt::csharp::initializer::initialize();
-    dogen::quilt::cpp::initializer::initialize();
-}
+class decoding_transform final
+    : public transforms::decoding_transform_interface {
+public:
+    decoding_transform() = default;
+    decoding_transform(const decoding_transform&) = delete;
+    ~decoding_transform() noexcept;
 
-} }
+public:
+    std::string extension() const;
+
+    meta_model::model transform(const transforms::context& ctx,
+        const boost::filesystem::path& p);
+};
+
+} } }
+
+#endif

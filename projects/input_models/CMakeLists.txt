@@ -106,7 +106,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} wale)
     set(models ${models} yarn)
     set(models ${models} yarn.dia)
-    set(models ${models} yarn.json)
+    set(models ${models} external.json)
     set(models ${models} probing)
     set(models ${models} external)
 

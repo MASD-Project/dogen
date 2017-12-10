@@ -17,53 +17,25 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "knitter")
+set(name "external.json")
 set(tests_name "${name}.tests")
 set(binary_name "dogen.${tests_name}")
-set(tests_files "")
-file(GLOB_RECURSE tests_files RELATIVE
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
-    "${CMAKE_CURRENT_SOURCE_DIR}/../src"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../src/*.cpp")
-
-set(executable_files "")
-set(ignore_file false)
-foreach(cpp_file ${all_files})
-    if("${cpp_file}" MATCHES "main.cpp")
-        set(ignore_file true)
-    endif()
-
-    if(NOT ignore_file)
-        set(executable_files ${executable_files}
-            "${CMAKE_CURRENT_SOURCE_DIR}/../src/${cpp_file}")
-    endif()
-    set(ignore_file false)
-endforeach()
-
-add_executable(${tests_name} ${tests_files} ${executable_files})
-
+add_executable(${tests_name} ${files})
 set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${tests_name}
+    ${name}
     utility
-    options
-    dia
-    formatters
+    annotations
     external
-    external.json
-    yarn
-    yarn.dia
-    quilt.cpp
-    quilt.csharp
     ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES}
-    ${PQXX_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT})
+    ${Boost_LIBRARIES})
 
 set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
@@ -86,6 +58,6 @@ if(WITH_BENCHMARKS)
     add_dependencies(benchmark_all benchmark_${tests_name})
 endif()
 
-add_boost_tests(${name} ${tests_files})
+add_boost_tests(${name} ${files})
 
 install(TARGETS ${tests_name} RUNTIME DESTINATION bin COMPONENT tests)

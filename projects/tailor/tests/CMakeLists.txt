@@ -51,8 +51,9 @@ set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 target_link_libraries(${tests_name}
     utility
     options
+    external
+    external.json
     yarn.dia
-    yarn.json
     quilt.cpp
     quilt.csharp
     ${LIBXML2_LIBRARIES}

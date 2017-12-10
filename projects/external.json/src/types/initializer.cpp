@@ -18,20 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/initializer.hpp"
-#include "dogen/quilt.cpp/types/initializer.hpp"
+#include "dogen/external/types/transforms/model_generation_chain.hpp"
+#include "dogen/external.json/types/encoding_transform.hpp"
+#include "dogen/external.json/types/decoding_transform.hpp"
 #include "dogen/external.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knitter/initializer.hpp"
 
 namespace dogen {
-namespace knitter {
+namespace external {
+namespace json {
 
 void initializer::initialize() {
-    dogen::external::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::quilt::csharp::initializer::initialize();
-    dogen::quilt::cpp::initializer::initialize();
+    transforms::register_encoding_transform<encoding_transform>();
+    transforms::register_decoding_transform<decoding_transform>();
 }
 
-} }
+} } }

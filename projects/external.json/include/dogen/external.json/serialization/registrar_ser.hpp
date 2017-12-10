@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/initializer.hpp"
-#include "dogen/quilt.cpp/types/initializer.hpp"
-#include "dogen/external.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
-#include "dogen/knitter/initializer.hpp"
+#ifndef DOGEN_EXTERNAL_JSON_SERIALIZATION_REGISTRAR_SER_HPP
+#define DOGEN_EXTERNAL_JSON_SERIALIZATION_REGISTRAR_SER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
-namespace knitter {
+namespace external {
+namespace json {
 
-void initializer::initialize() {
-    dogen::external::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    dogen::quilt::csharp::initializer::initialize();
-    dogen::quilt::cpp::initializer::initialize();
-}
+template<typename Archive>
+void register_types(Archive& ar);
 
-} }
+} } }
+
+#endif

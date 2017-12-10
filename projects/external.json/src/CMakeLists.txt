@@ -7,7 +7,7 @@
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# This program is distributed in the hope that it will be useful,
+# This program is distributed in the hope that it will be  useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
@@ -17,28 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "knitter")
+set(name "external.json")
 set(binary_name "dogen.${name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(${name} ${files})
+add_library(${name} STATIC ${files})
 set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
+set_target_properties(${name}
+  PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
 target_link_libraries(${name}
     utility
-    options
-    dia
-    formatters
+    annotations
     external
-    external.json
-    yarn
-    yarn.dia
-    quilt.cpp
-    quilt.csharp
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-install(TARGETS ${name} RUNTIME DESTINATION bin COMPONENT applications)
+install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)
