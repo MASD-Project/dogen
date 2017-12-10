@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_NEW_BUILDER_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_NEW_BUILDER_HPP
+#ifndef DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
+#define DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,7 +41,7 @@ namespace dia {
  *
  * Expects the objects to have been supplied in dependency order.
  */
-class new_builder final {
+class builder final {
 private:
     /*
      * @brief Responsible for tracking the qualified name of the
@@ -54,7 +54,7 @@ private:
     };
 
 public:
-    explicit new_builder(
+    explicit builder(
         const std::unordered_map<std::string, std::list<std::string>>&
         parent_id_to_child_ids);
 

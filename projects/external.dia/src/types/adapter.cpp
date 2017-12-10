@@ -23,7 +23,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/external.dia/types/adaptation_error.hpp"
-#include "dogen/external.dia/types/new_adapter.hpp"
+#include "dogen/external.dia/types/adapter.hpp"
 
 namespace {
 
@@ -42,14 +42,14 @@ namespace dogen {
 namespace external {
 namespace dia {
 
-void new_adapter::validate_dia_name(const std::string& n) {
+void adapter::validate_dia_name(const std::string& n) {
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_name;
         BOOST_THROW_EXCEPTION(adaptation_error(empty_dia_name));
     }
 }
 
-std::string new_adapter::qualified_name(const std::string& contained_by,
+std::string adapter::qualified_name(const std::string& contained_by,
     const std::string& simple_name) {
 
     if (contained_by.empty())
@@ -59,7 +59,7 @@ std::string new_adapter::qualified_name(const std::string& contained_by,
 }
 
 external::meta_model::attribute
-new_adapter::adapt(const processed_attribute& a) {
+adapter::adapt(const processed_attribute& a) {
     validate_dia_name(a.name());
 
     external::meta_model::attribute r;
@@ -70,7 +70,7 @@ new_adapter::adapt(const processed_attribute& a) {
     return r;
 }
 
-void new_adapter::process_stereotypes(const processed_object& po,
+void adapter::process_stereotypes(const processed_object& po,
     external::meta_model::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
                              << po.stereotypes() << "'";
@@ -94,7 +94,7 @@ void new_adapter::process_stereotypes(const processed_object& po,
     BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << st;
 }
 
-external::meta_model::element new_adapter::
+external::meta_model::element adapter::
 adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
     validate_dia_name(po.name());

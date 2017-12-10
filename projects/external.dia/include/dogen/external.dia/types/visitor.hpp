@@ -18,19 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_NEW_VISITOR_FWD_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_NEW_VISITOR_FWD_HPP
+#ifndef DOGEN_EXTERNAL_DIA_TYPES_VISITOR_HPP
+#define DOGEN_EXTERNAL_DIA_TYPES_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <memory>
+#include <functional>
+#include <boost/graph/depth_first_search.hpp>
+#include "dogen/external.dia/types/grapher.hpp"
+#include "dogen/external.dia/types/builder.hpp"
+
 namespace dogen {
 namespace external {
 namespace dia {
 
-class new_visitor;
+class visitor : public boost::default_dfs_visitor {
+public:
+    visitor() = delete;
+    visitor& operator=(const visitor&) = default;
+    visitor(const visitor&) = default;
+    visitor(visitor&&) = default;
 
+public:
+    explicit visitor(builder& b);
+
+public:
+    template<typename Vertex, typename Graph>
+    void finish_vertex(const Vertex& u, const Graph& g) {
+        const auto& o(g[u]);
+        if (o.id() != grapher::root_id())
+            builder_.add(o);
+    }
+
+private:
+    builder& builder_;
+};
 } } }
 
 #endif

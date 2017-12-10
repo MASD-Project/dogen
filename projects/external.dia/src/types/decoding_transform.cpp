@@ -32,8 +32,8 @@
 #include "dogen/external/types/transforms/context.hpp"
 #include "dogen/external/io/meta_model/model_io.hpp"
 #include "dogen/external/types/transforms/transformation_error.hpp"
-#include "dogen/external.dia/types/new_builder.hpp"
-#include "dogen/external.dia/types/new_visitor.hpp"
+#include "dogen/external.dia/types/builder.hpp"
+#include "dogen/external.dia/types/visitor.hpp"
 #include "dogen/external.dia/types/processed_object.hpp"
 #include "dogen/external.dia/types/processed_comment.hpp"
 #include "dogen/external.dia/types/processed_object_factory.hpp"
@@ -109,8 +109,8 @@ decoding_transform::obtain_model(const std::string& name,
      * Go through the dependency graph and build a external model from
      * it.
      */
-    new_builder b(g.parent_id_to_child_ids());
-    new_visitor v(b);
+    builder b(g.parent_id_to_child_ids());
+    visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     auto r(b.build());
     r.name(name);

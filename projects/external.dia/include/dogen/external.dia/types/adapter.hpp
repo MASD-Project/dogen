@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_NEW_ADAPTER_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_NEW_ADAPTER_HPP
+#ifndef DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
+#define DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@ namespace dia {
 /**
  * @brief Transforms Dia objects into their external counterpart.
  */
-class new_adapter final {
+class adapter final {
 private:
     /**
      * @brief Ensure the dia name is valid.

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_NEW_BUILDER_FWD_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_NEW_BUILDER_FWD_HPP
+#ifndef DOGEN_EXTERNAL_DIA_TYPES_VISITOR_FWD_HPP
+#define DOGEN_EXTERNAL_DIA_TYPES_VISITOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace external {
 namespace dia {
 
-class new_builder;
+class visitor;
 
 } } }
 
