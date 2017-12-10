@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-10 Sun 21:15]
+#+CAPTION: Clock summary at [2017-12-10 Sun 21:34]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *64:28* |       |       | 100.0 |
+| *Total time*                                                                | *64:47* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 64:28   |       |       | 100.0 |
-| Active                                                                      |         | 64:28 |       | 100.0 |
+| Stories                                                                     | 64:47   |       |       | 100.0 |
+| Active                                                                      |         | 64:47 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.6 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:23 |   3.7 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:42 |   4.2 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  13.5 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.3 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  13.4 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.2 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.6 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  24.9 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  24.8 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.6 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.1 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
@@ -104,6 +104,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-12-10 Sun 21:15]--[2017-12-10 Sun 21:34] =>  0:19
     CLOCK: [2017-12-09 Sat 12:22]--[2017-12-09 Sat 12:32] =>  0:10
     CLOCK: [2017-12-05 Tue 08:49]--[2017-12-05 Tue 08:54] =>  0:05
     CLOCK: [2017-12-01 Fri 12:51]--[2017-12-01 Fri 13:14] =>  0:23
@@ -614,33 +615,44 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
-*** Update =yarn.dia= traits to external                              :story:
+*** Create the =orchestration= model                                  :story:
 
-We renamed the model but did not update the traits.
+Create a model with the top-level transforms.
 
-*** Add support for "ad-hoc" probing                                  :story:
+*** Create the =generation= model                                     :story:
 
-We have a set of inputs supplied to the prober called "initial
-input". This is not ideal. We need a way to generalise the "initial
-input" dumping. In effect, what we are really saying is that within a
-transform we may need to dump more state than just the initial
-inputs. We need a way to express this in the probing API.
+Create a new model called =generation= and move all code-generation
+related class to it.
 
-*** Rename the =transform= method to =apply=                          :story:
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
 
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
 
-*** Clean up external element                                         :story:
+Alternatively we could just call it =element= and make it contain a
+modeling element.
 
-Need to add: can_be_primitive_underlier, in_global_module,
-can_be_enumeration_underlier, is_default_enumeration_type,
-is_associative_container
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
 
 *** Rename =yarn= to =modeling=                                       :story:
 
 As per analysis story, we are moving away from the sewing terms.
+
+Tasks:
+
+- rename endomodel to just model.
+- simplify the transform options to contain only modeling specific
+  things.
 
 *** Rename =quilt.cpp= to =generation.cpp=                            :story:
 
@@ -660,26 +672,29 @@ As per analysis story, we are moving away from the sewing terms.
 
 Merge stitch and wale into a new model called =templates=.
 
-*** Create the =generation= model                                     :story:
+*** Rename the =transform= method to =apply=                          :story:
 
-Create a new model called =generation= and move all code-generation
-related class to it.
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
 
-We need to create classes for element properties and make model have a
-collection that is a pair of element and element properties. We need a
-good name for this pair:
+*** Update =yarn.dia= traits to external                              :story:
 
-- extended element
-- augmented element
-- decorated element: though not using the decorator pattern; also, we
-  already have decoration properties so this is confusing.
+We renamed the model but did not update the traits.
 
-Alternatively we could just call it =element= and make it contain a
-modeling element.
+*** Add support for "ad-hoc" probing                                  :story:
 
-*** Create the =orchestration= model                                  :story:
+We have a set of inputs supplied to the prober called "initial
+input". This is not ideal. We need a way to generalise the "initial
+input" dumping. In effect, what we are really saying is that within a
+transform we may need to dump more state than just the initial
+inputs. We need a way to express this in the probing API.
 
-Create a model with the top-level transforms.
+*** Clean up external element                                         :story:
+
+Need to add: can_be_primitive_underlier, in_global_module,
+can_be_enumeration_underlier, is_default_enumeration_type,
+is_associative_container
 
 *** Create a new exoelement chain                                     :story:
 
