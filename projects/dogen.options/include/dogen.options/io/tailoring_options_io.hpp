@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/options/types/tailoring_options.hpp"
+#include "dogen.options/types/tailoring_options.hpp"
 
 namespace dogen {
 namespace options {

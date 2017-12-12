@@ -31,7 +31,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/options/types/tailoring_options.hpp"
+#include "dogen.options/types/tailoring_options.hpp"
 
 namespace dogen {
 namespace tailor {

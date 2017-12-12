@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_DARTING_OPTIONS_FWD_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_DARTING_OPTIONS_FWD_SER_HPP
+#ifndef DOGEN_OPTIONS_SERIALIZATION_TAILORING_OPTIONS_FWD_SER_HPP
+#define DOGEN_OPTIONS_SERIALIZATION_TAILORING_OPTIONS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/types/darting_options_fwd.hpp"
+#include "dogen.options/types/tailoring_options_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::options::darting_options& v, unsigned int version);
+void save(Archive& ar, const dogen::options::tailoring_options& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::options::darting_options& v, unsigned int version);
+void load(Archive& ar, dogen::options::tailoring_options& v, unsigned int version);
 
 } }
 

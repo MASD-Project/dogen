@@ -23,7 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/options/io/stitching_options_io.hpp"
+#include "dogen.options/io/stitching_options_io.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
 #include "dogen/stitcher/parser_validation_error.hpp"
 

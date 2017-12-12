@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/types/tailoring_options.hpp"
+#include "dogen.options/types/tailoring_options.hpp"
 
 namespace dogen {
 namespace options {

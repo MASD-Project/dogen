@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/types/stitching_options.hpp"
+#include "dogen.options/types/stitching_options.hpp"
 
 namespace dogen {
 namespace stitcher {

@@ -29,7 +29,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/options/serialization/darting_options_ser.hpp"
+#include "dogen.options/serialization/darting_options_ser.hpp"
 
 namespace boost {
 namespace serialization {

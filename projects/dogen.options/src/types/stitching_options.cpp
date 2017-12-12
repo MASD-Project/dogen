@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/types/stitching_options.hpp"
+#include "dogen.options/types/stitching_options.hpp"
 
 namespace dogen {
 namespace options {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_STITCHING_OPTIONS_HPP
-#define DOGEN_OPTIONS_TYPES_STITCHING_OPTIONS_HPP
+#ifndef DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_HPP
+#define DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,36 +28,36 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/serialization/stitching_options_fwd_ser.hpp"
+#include "dogen.options/serialization/tailoring_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace options {
 
-class stitching_options final {
+class tailoring_options final {
 public:
-    stitching_options(const stitching_options&) = default;
-    ~stitching_options() = default;
+    tailoring_options(const tailoring_options&) = default;
+    ~tailoring_options() = default;
 
 public:
-    stitching_options();
+    tailoring_options();
 
 public:
-    stitching_options(stitching_options&& rhs);
+    tailoring_options(tailoring_options&& rhs);
 
 public:
-    stitching_options(
+    tailoring_options(
         const std::string& log_level,
         const boost::filesystem::path& target,
+        const boost::filesystem::path& output,
         const bool force_write,
-        const boost::filesystem::path& log_directory,
-        const bool compatibility_mode);
+        const boost::filesystem::path& log_directory);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::options::stitching_options& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::options::tailoring_options& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::options::stitching_options& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::options::tailoring_options& v, unsigned int version);
 
 public:
     /**
@@ -75,6 +75,11 @@ public:
     void target(const boost::filesystem::path& v);
     void target(const boost::filesystem::path&& v);
 
+    const boost::filesystem::path& output() const;
+    boost::filesystem::path& output();
+    void output(const boost::filesystem::path& v);
+    void output(const boost::filesystem::path&& v);
+
     bool force_write() const;
     void force_write(const bool v);
 
@@ -83,33 +88,22 @@ public:
     void log_directory(const boost::filesystem::path& v);
     void log_directory(const boost::filesystem::path&& v);
 
-    /**
-     * @brief Try to process diagram even if there are errors.
-     *
-     * Only a certain class of errors are allowed, believed to be caused by backwards or
-     * forwards compatibility problems: missing types or types that do not exist.
-     */
-    /**@{*/
-    bool compatibility_mode() const;
-    void compatibility_mode(const bool v);
-    /**@}*/
-
 public:
-    bool operator==(const stitching_options& rhs) const;
-    bool operator!=(const stitching_options& rhs) const {
+    bool operator==(const tailoring_options& rhs) const;
+    bool operator!=(const tailoring_options& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(stitching_options& other) noexcept;
-    stitching_options& operator=(stitching_options other);
+    void swap(tailoring_options& other) noexcept;
+    tailoring_options& operator=(tailoring_options other);
 
 private:
     std::string log_level_;
     boost::filesystem::path target_;
+    boost::filesystem::path output_;
     bool force_write_;
     boost::filesystem::path log_directory_;
-    bool compatibility_mode_;
 };
 
 } }
@@ -118,8 +112,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::options::stitching_options& lhs,
-    dogen::options::stitching_options& rhs) {
+    dogen::options::tailoring_options& lhs,
+    dogen::options::tailoring_options& rhs) {
     lhs.swap(rhs);
 }
 

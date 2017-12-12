@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_DARTING_OPTIONS_HPP
-#define DOGEN_OPTIONS_TYPES_DARTING_OPTIONS_HPP
+#ifndef DOGEN_OPTIONS_TYPES_STITCHING_OPTIONS_HPP
+#define DOGEN_OPTIONS_TYPES_STITCHING_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,35 +28,36 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/options/serialization/darting_options_fwd_ser.hpp"
+#include "dogen.options/serialization/stitching_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace options {
 
-class darting_options final {
+class stitching_options final {
 public:
-    darting_options(const darting_options&) = default;
-    ~darting_options() = default;
+    stitching_options(const stitching_options&) = default;
+    ~stitching_options() = default;
 
 public:
-    darting_options();
+    stitching_options();
 
 public:
-    darting_options(darting_options&& rhs);
+    stitching_options(stitching_options&& rhs);
 
 public:
-    darting_options(
+    stitching_options(
         const std::string& log_level,
+        const boost::filesystem::path& target,
         const bool force_write,
-        const std::string& product_name,
-        const boost::filesystem::path& log_directory);
+        const boost::filesystem::path& log_directory,
+        const bool compatibility_mode);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::options::darting_options& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::options::stitching_options& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::options::darting_options& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::options::stitching_options& v, unsigned int version);
 
 public:
     /**
@@ -69,34 +70,46 @@ public:
     void log_level(const std::string&& v);
     /**@}*/
 
+    const boost::filesystem::path& target() const;
+    boost::filesystem::path& target();
+    void target(const boost::filesystem::path& v);
+    void target(const boost::filesystem::path&& v);
+
     bool force_write() const;
     void force_write(const bool v);
-
-    const std::string& product_name() const;
-    std::string& product_name();
-    void product_name(const std::string& v);
-    void product_name(const std::string&& v);
 
     const boost::filesystem::path& log_directory() const;
     boost::filesystem::path& log_directory();
     void log_directory(const boost::filesystem::path& v);
     void log_directory(const boost::filesystem::path&& v);
 
+    /**
+     * @brief Try to process diagram even if there are errors.
+     *
+     * Only a certain class of errors are allowed, believed to be caused by backwards or
+     * forwards compatibility problems: missing types or types that do not exist.
+     */
+    /**@{*/
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+    /**@}*/
+
 public:
-    bool operator==(const darting_options& rhs) const;
-    bool operator!=(const darting_options& rhs) const {
+    bool operator==(const stitching_options& rhs) const;
+    bool operator!=(const stitching_options& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(darting_options& other) noexcept;
-    darting_options& operator=(darting_options other);
+    void swap(stitching_options& other) noexcept;
+    stitching_options& operator=(stitching_options other);
 
 private:
     std::string log_level_;
+    boost::filesystem::path target_;
     bool force_write_;
-    std::string product_name_;
     boost::filesystem::path log_directory_;
+    bool compatibility_mode_;
 };
 
 } }
@@ -105,8 +118,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::options::darting_options& lhs,
-    dogen::options::darting_options& rhs) {
+    dogen::options::stitching_options& lhs,
+    dogen::options::stitching_options& rhs) {
     lhs.swap(rhs);
 }
 

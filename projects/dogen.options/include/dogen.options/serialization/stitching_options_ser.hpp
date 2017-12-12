@@ -18,15 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_OPTIONS_SERIALIZATION_ALL_SER_HPP
+#ifndef DOGEN_OPTIONS_SERIALIZATION_STITCHING_OPTIONS_SER_HPP
+#define DOGEN_OPTIONS_SERIALIZATION_STITCHING_OPTIONS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/options/serialization/darting_options_ser.hpp"
-#include "dogen/options/serialization/stitching_options_ser.hpp"
-#include "dogen/options/serialization/tailoring_options_ser.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen.options/types/stitching_options.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::options::stitching_options)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::options::stitching_options& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::options::stitching_options& v, unsigned int version);
+
+} }
 
 #endif
