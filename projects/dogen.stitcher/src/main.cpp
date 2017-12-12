@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitcher/workflow.hpp"
+#include "dogen.stitcher/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
     dogen::stitcher::workflow w;
