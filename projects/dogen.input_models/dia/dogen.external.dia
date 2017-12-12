@@ -932,13 +932,12 @@
 
 An exogenous model is defined as:
 
-- a third-party format that is not owned or controlled by 
+- a third-party format that is not owned or controlled by
   Dogen, such as Dia
 - a Dogen format designed for interoperability (JSON).
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=external
-#DOGEN yarn.external_modules=dogen
+#DOGEN yarn.model_modules=dogen.external
 #DOGEN yarn.input_language=cpp
 #DOGEN yarn.reference=probing.dia
 #DOGEN quilt.cpp.enabled=true

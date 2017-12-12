@@ -101,8 +101,7 @@ formatting process without necessarily knowing about this data, but
 yet imposing some constraints on the shape of the data.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=annotations
-#DOGEN yarn.external_modules=dogen
+#DOGEN yarn.model_modules=dogen.annotations
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -10995,7 +10994,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All archetype locations for the archetypes owned by this transform, 
+            <dia:string>#All archetype locations for the archetypes owned by this transform,
 listing all available backends, facets and archetypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 set(frontend "dia")
-set(models_dir "${projects_dir}/input_models/${frontend}")
+set(models_dir "${projects_dir}/dogen.input_models/${frontend}")
 
 if (DOGEN_KNITTER_EXECUTABLE)
     foreach(model ${models})

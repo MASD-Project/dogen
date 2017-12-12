@@ -842,8 +842,7 @@ etc.).
 and to build it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=yarn
-#DOGEN yarn.external_modules=dogen
+#DOGEN yarn.model_modules=dogen.yarn
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=formatters.dia
 #DOGEN yarn.reference=probing.dia

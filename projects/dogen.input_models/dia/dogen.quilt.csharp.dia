@@ -97,8 +97,7 @@
             <dia:string>#CSharp is the c# model in the quilt kernel.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=quilt.csharp
-#DOGEN yarn.external_modules=dogen
+#DOGEN yarn.model_modules=dogen.quilt.csharp
 #DOGEN yarn.reference=options.dia
 #DOGEN yarn.reference=yarn.dia
 #DOGEN yarn.reference=formatters.dia
