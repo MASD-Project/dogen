@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/knitter/workflow.hpp"
+#include "dogen.knitter/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
     dogen::knitter::workflow w;

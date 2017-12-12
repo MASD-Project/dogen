@@ -29,11 +29,11 @@
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
-#include "dogen/knitter/initializer.hpp"
-#include "dogen/knitter/workflow_error.hpp"
-#include "dogen/knitter/program_options_parser.hpp"
-#include "dogen/knitter/parser_validation_error.hpp"
-#include "dogen/knitter/workflow.hpp"
+#include "dogen.knitter/initializer.hpp"
+#include "dogen.knitter/workflow_error.hpp"
+#include "dogen.knitter/program_options_parser.hpp"
+#include "dogen.knitter/parser_validation_error.hpp"
+#include "dogen.knitter/workflow.hpp"
 
 typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
 
