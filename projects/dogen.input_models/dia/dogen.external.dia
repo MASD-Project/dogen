@@ -939,7 +939,7 @@ An exogenous model is defined as:
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.external
 #DOGEN yarn.input_language=cpp
-#DOGEN yarn.reference=probing.dia
+#DOGEN yarn.reference=dogen.probing.dia
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.cpp.visual_studio.project.enabled=false

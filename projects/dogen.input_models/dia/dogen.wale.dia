@@ -96,7 +96,7 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.wale
-#DOGEN yarn.reference=formatters.dia
+#DOGEN yarn.reference=dogen.formatters.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false

@@ -98,11 +98,11 @@
 
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.quilt.csharp
-#DOGEN yarn.reference=options.dia
-#DOGEN yarn.reference=yarn.dia
-#DOGEN yarn.reference=formatters.dia
-#DOGEN yarn.reference=annotations.dia
-#DOGEN yarn.reference=probing.dia
+#DOGEN yarn.reference=dogen.options.dia
+#DOGEN yarn.reference=dogen.yarn.dia
+#DOGEN yarn.reference=dogen.formatters.dia
+#DOGEN yarn.reference=dogen.annotations.dia
+#DOGEN yarn.reference=dogen.probing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
