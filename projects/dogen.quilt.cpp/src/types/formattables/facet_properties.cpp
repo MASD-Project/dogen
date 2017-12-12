@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/facet_properties.hpp"
+#include "dogen.quilt.cpp/types/formattables/facet_properties.hpp"
 
 namespace dogen {
 namespace quilt {

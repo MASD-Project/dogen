@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/quilt.cpp/io/formattables/cpp_standards_io.hpp"
+#include "dogen.quilt.cpp/io/formattables/cpp_standards_io.hpp"
 
 namespace dogen {
 namespace quilt {

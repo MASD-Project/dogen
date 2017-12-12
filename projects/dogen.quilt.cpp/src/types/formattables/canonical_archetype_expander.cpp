@@ -21,10 +21,10 @@
 #include <typeindex>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
+#include "dogen.quilt.cpp/types/formatters/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/inclusion_support_types.hpp"
+#include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {
 

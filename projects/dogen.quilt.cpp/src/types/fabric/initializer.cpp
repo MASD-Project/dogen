@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/fabric/dynamic_transform.hpp"
+#include "dogen.quilt.cpp/types/fabric/dynamic_transform.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
-#include "dogen/quilt.cpp/types/fabric/initializer.hpp"
+#include "dogen.quilt.cpp/types/fabric/initializer.hpp"
 
 namespace dogen {
 namespace quilt {

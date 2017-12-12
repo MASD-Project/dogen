@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
-#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/formatting_error.hpp"
+#include "dogen.quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.cpp/types/formatters/traits.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>

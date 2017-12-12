@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/builtin_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/primitive_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/primitive_implementation_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/class_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/class_implementation_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/enum_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/forward_declarations_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/smart_pointer_helper.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/master_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/builtin_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/primitive_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/primitive_implementation_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/class_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/class_implementation_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/enum_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/exception_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/visitor_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/forward_declarations_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/smart_pointer_helper.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen {
 namespace quilt {

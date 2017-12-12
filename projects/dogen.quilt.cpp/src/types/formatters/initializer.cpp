@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/visual_studio_solution_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/visual_studio_project_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/msbuild_targets_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/initializer.hpp"
-#include "dogen/quilt.cpp/types/formatters/hash/initializer.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb/initializer.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
-#include "dogen/quilt.cpp/types/formatters/test_data/initializer.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/initializer.hpp"
-#include "dogen/quilt.cpp/types/formatters/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/visual_studio_solution_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/visual_studio_project_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/include_cmakelists_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/msbuild_targets_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/hash/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/odb/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/io/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/test_data/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/serialization/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/initializer.hpp"
 
 namespace dogen {
 namespace quilt {

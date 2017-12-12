@@ -21,14 +21,14 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formatters/workflow.hpp"
-#include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/visual_studio_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/injector.hpp"
+#include "dogen.quilt.cpp/types/formatters/workflow.hpp"
+#include "dogen.quilt.cpp/types/fabric/registrar_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/build_files_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/odb_options_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/master_header_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/visual_studio_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/forward_declarations_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/injector.hpp"
 
 namespace {
 

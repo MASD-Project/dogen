@@ -33,10 +33,10 @@
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
-#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
-#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.cpp/types/fabric/master_header_factory.hpp"
 
 namespace {
 

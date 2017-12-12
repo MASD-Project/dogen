@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
+#include "dogen.quilt.cpp/types/formattables/directive_group.hpp"
 
 namespace dogen {
 namespace quilt {

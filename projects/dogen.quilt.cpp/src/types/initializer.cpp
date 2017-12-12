@@ -19,12 +19,12 @@
  *
  */
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
-#include "dogen/quilt.cpp/types/formatters/workflow.hpp"
-#include "dogen/quilt.cpp/types/formattables/workflow.hpp"
-#include "dogen/quilt.cpp/types/formatters/initializer.hpp"
-#include "dogen/quilt.cpp/types/fabric/initializer.hpp"
-#include "dogen/quilt.cpp/types/model_to_text_model_transform.hpp"
-#include "dogen/quilt.cpp/types/initializer.hpp"
+#include "dogen.quilt.cpp/types/formatters/workflow.hpp"
+#include "dogen.quilt.cpp/types/formattables/workflow.hpp"
+#include "dogen.quilt.cpp/types/formatters/initializer.hpp"
+#include "dogen.quilt.cpp/types/fabric/initializer.hpp"
+#include "dogen.quilt.cpp/types/model_to_text_model_transform.hpp"
+#include "dogen.quilt.cpp/types/initializer.hpp"
 
 namespace dogen {
 namespace quilt {

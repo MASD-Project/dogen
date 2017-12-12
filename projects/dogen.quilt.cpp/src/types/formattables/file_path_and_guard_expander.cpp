@@ -20,10 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formattables/header_guard_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
+#include "dogen.quilt.cpp/types/formattables/header_guard_factory.hpp"
+#include "dogen.quilt.cpp/types/formattables/expansion_error.hpp"
+#include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
 
 namespace {
 

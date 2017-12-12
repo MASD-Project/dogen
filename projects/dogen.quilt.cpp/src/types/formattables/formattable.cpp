@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen.quilt.cpp/types/formattables/formattable.hpp"
 
 namespace boost {
 

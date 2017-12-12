@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/fabric/odb_target.hpp"
+#include "dogen.quilt.cpp/types/fabric/odb_target.hpp"
 
 namespace dogen {
 namespace quilt {

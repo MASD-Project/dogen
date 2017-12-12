@@ -25,9 +25,9 @@
 #include "dogen.annotations/io/type_io.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/io/formattables/aspect_properties_io.hpp"
+#include "dogen.quilt.cpp/types/formattables/aspect_expander.hpp"
 
 namespace {
 

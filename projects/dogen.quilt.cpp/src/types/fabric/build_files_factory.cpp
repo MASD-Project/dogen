@@ -24,11 +24,11 @@
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
-#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
-#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen.quilt.cpp/types/fabric/msbuild_targets.hpp"
+#include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/build_files_factory.hpp"
 
 namespace {
 

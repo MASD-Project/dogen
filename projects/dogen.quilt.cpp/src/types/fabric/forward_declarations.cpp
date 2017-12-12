@@ -22,8 +22,8 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+#include "dogen.quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen.quilt.cpp/types/fabric/forward_declarations.hpp"
 
 namespace dogen {
 namespace quilt {

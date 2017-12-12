@@ -22,8 +22,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen.quilt.cpp/types/formatters/stitch_formatter.hpp"
 
 namespace {
 

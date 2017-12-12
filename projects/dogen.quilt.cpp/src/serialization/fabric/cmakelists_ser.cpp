@@ -29,8 +29,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
-#include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
-#include "dogen/quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
+#include "dogen.quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
+#include "dogen.quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::quilt::cpp::fabric::cmakelists,

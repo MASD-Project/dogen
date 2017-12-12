@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/rapidjson/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/rapidjson/traits.hpp"
 
 namespace dogen {
 namespace quilt {

@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/quilt.cpp/io/formattables/helper_descriptor_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
+#include "dogen.quilt.cpp/io/formattables/helper_descriptor_io.hpp"
+#include "dogen.quilt.cpp/io/formattables/helper_properties_io.hpp"
 
 namespace std {
 

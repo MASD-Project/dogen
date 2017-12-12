@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
-#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/io/associative_container_helper.hpp"
+#include "dogen.quilt.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.quilt.cpp/types/formatters/types/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/io/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen.quilt.cpp/types/formatters/io/associative_container_helper.hpp"
 #include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {

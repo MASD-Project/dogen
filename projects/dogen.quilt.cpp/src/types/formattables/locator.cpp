@@ -25,10 +25,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formattables/location_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formattables/locator.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/types/formattables/location_error.hpp"
+#include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.cpp/types/formattables/locator.hpp"
 
 namespace {
 

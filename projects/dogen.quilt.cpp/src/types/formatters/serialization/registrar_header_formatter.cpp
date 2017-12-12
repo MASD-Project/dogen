@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/serialization/registrar_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen.quilt.cpp/types/formatters/serialization/registrar_header_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 

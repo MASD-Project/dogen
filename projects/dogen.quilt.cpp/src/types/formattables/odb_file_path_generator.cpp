@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/odb_file_path_generator.hpp"
+#include "dogen.quilt.cpp/types/formattables/odb_file_path_generator.hpp"
 
 namespace dogen {
 namespace quilt {

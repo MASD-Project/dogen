@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formattables/adapter.hpp"
-#include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/workflow.hpp"
+#include "dogen.quilt.cpp/types/formattables/adapter.hpp"
+#include "dogen.quilt.cpp/types/formattables/model_expander.hpp"
+#include "dogen.quilt.cpp/types/formattables/workflow.hpp"
 
 namespace {
 

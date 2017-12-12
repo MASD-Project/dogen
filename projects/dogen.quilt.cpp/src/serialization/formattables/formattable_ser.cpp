@@ -30,8 +30,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/element_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

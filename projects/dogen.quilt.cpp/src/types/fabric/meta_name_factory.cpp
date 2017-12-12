@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/types/helpers/name_builder.hpp"
-#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 
 namespace dogen {
 namespace quilt {

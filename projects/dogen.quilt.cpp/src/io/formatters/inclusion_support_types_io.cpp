@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
+#include "dogen.quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
 
 namespace dogen {
 namespace quilt {

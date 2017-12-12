@@ -24,9 +24,9 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
-#include "dogen/quilt.cpp/types/formattables/building_error.hpp"
-#include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/dependencies_builder.hpp"
+#include "dogen.quilt.cpp/types/formattables/building_error.hpp"
+#include "dogen.quilt.cpp/io/formattables/directive_group_io.hpp"
+#include "dogen.quilt.cpp/types/formattables/dependencies_builder.hpp"
 
 namespace {
 

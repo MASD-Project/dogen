@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
+#include "dogen.quilt.cpp/io/fabric/odb_targets_io.hpp"
+#include "dogen.quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen.quilt.cpp/types/fabric/msbuild_targets.hpp"
 
 namespace dogen {
 namespace quilt {

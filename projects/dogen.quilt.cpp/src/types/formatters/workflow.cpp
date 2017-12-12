@@ -22,13 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/quilt.cpp/types/workflow_error.hpp"
+#include "dogen.quilt.cpp/types/workflow_error.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/artefact_properties_io.hpp"
-#include "dogen/quilt.cpp/types/formatters/context.hpp"
-#include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/workflow.hpp"
+#include "dogen.quilt.cpp/io/formattables/artefact_properties_io.hpp"
+#include "dogen.quilt.cpp/types/formatters/context.hpp"
+#include "dogen.quilt.cpp/types/formatters/wale_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/formatting_error.hpp"
+#include "dogen.quilt.cpp/types/formatters/workflow.hpp"
 
 namespace {
 

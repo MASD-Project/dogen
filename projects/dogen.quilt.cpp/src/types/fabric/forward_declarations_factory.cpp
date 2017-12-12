@@ -27,9 +27,9 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
-#include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.cpp/types/fabric/forward_declarations.hpp"
+#include "dogen.quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 
 namespace {
 

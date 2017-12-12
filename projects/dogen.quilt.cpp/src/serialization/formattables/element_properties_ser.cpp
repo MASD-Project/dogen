@@ -31,12 +31,12 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/artefact_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/test_data_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/element_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/artefact_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/test_data_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

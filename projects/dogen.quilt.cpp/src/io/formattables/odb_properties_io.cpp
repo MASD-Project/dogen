@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
+#include "dogen.quilt.cpp/io/formattables/odb_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

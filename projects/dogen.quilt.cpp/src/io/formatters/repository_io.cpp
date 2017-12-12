@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
+#include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.quilt.cpp/io/formatters/repository_io.hpp"
 
 namespace dogen {
 namespace quilt {

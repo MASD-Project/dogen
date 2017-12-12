@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/serialization/class_implementation_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/serialization/class_implementation_formatter.hpp"
+#include "dogen.quilt.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen.quilt.cpp/types/formatters/formatting_error.hpp"
+#include "dogen.quilt.cpp/types/formatters/assistant.hpp"
+#include "dogen.quilt.cpp/types/formatters/traits.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/utility/log/logger.hpp"

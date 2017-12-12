@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/types/formattables/header_guard_factory.hpp"
+#include "dogen.quilt.cpp/types/formattables/header_guard_factory.hpp"
 
 namespace {
 

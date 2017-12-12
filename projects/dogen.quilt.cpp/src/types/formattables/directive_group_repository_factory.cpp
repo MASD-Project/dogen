@@ -27,13 +27,13 @@
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen.annotations/io/type_io.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/traits.hpp"
-#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
-#include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
-#include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"
-#include "dogen/quilt.cpp/types/formattables/directive_group_repository_factory.hpp"
+#include "dogen.quilt.cpp/types/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/traits.hpp"
+#include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.cpp/types/formattables/expansion_error.hpp"
+#include "dogen.quilt.cpp/types/formattables/directive_group.hpp"
+#include "dogen.quilt.cpp/io/formattables/directive_group_io.hpp"
+#include "dogen.quilt.cpp/types/formattables/directive_group_repository_factory.hpp"
 
 namespace {
 

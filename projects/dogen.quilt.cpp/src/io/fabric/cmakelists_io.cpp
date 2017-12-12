@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
+#include "dogen.quilt.cpp/io/fabric/cmakelists_io.hpp"
+#include "dogen.quilt.cpp/io/fabric/odb_targets_io.hpp"
 
 namespace dogen {
 namespace quilt {

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/locator_facet_configuration.hpp"
+#include "dogen.quilt.cpp/types/formattables/locator_facet_configuration.hpp"
 
 namespace dogen {
 namespace quilt {

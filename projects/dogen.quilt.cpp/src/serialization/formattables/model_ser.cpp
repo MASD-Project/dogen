@@ -31,11 +31,11 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/name_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/cpp_standards_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/streaming_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/model_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/cpp_standards_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
+#include "dogen.quilt.cpp/serialization/formattables/streaming_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
