@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/darter/workflow.hpp"
+#include "dogen.darter/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
     dogen::darter::workflow w;

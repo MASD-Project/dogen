@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "dart")
+set(name "darter")
 set(tests_name "${name}.tests")
 set(binary_name "dogen.${tests_name}")
 set(tests_files "")

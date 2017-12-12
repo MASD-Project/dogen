@@ -24,10 +24,10 @@
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/version.hpp"
-#include "dogen/darter/program_options_parser.hpp"
-#include "dogen/darter/parser_validation_error.hpp"
 #include "dogen/options/types/darting_options.hpp"
-#include "dogen/darter/workflow.hpp"
+#include "dogen.darter/program_options_parser.hpp"
+#include "dogen.darter/parser_validation_error.hpp"
+#include "dogen.darter/workflow.hpp"
 
 namespace {
 

@@ -19,8 +19,8 @@
  *
  */
 #include <boost/filesystem/operations.hpp>
-#include "dogen/darter/parser_validation_error.hpp"
-#include "dogen/darter/program_options_parser.hpp"
+#include "dogen.darter/parser_validation_error.hpp"
+#include "dogen.darter/program_options_parser.hpp"
 
 /*
  * Note on logging: we are NOT logging any of the exceptions to the
