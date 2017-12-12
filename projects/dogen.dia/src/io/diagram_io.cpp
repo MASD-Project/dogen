@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/dia/io/layer_io.hpp"
-#include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/dia/io/diagram_data_io.hpp"
+#include "dogen.dia/io/layer_io.hpp"
+#include "dogen.dia/io/diagram_io.hpp"
+#include "dogen.dia/io/diagram_data_io.hpp"
 
 namespace std {
 

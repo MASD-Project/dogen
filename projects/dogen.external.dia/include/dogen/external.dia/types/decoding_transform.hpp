@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include "dogen/dia/types/diagram_fwd.hpp"
+#include "dogen.dia/types/diagram_fwd.hpp"
 #include "dogen/external/types/meta_model/model.hpp"
 #include "dogen/external.dia/types/grapher.hpp"
 #include "dogen/external.dia/types/validator.hpp"

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/types/enumeration.hpp"
+#include "dogen.dia/types/enumeration.hpp"
 
 namespace dogen {
 namespace dia {

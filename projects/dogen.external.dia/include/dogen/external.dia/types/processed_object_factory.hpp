@@ -26,11 +26,11 @@
 #endif
 
 #include <string>
-#include "dogen/dia/types/attribute_fwd.hpp"
-#include "dogen/dia/types/object_fwd.hpp"
-#include "dogen/dia/types/attribute_fwd.hpp"
-#include "dogen/dia/types/composite_fwd.hpp"
-#include "dogen/dia/types/diagram_fwd.hpp"
+#include "dogen.dia/types/attribute_fwd.hpp"
+#include "dogen.dia/types/object_fwd.hpp"
+#include "dogen.dia/types/attribute_fwd.hpp"
+#include "dogen.dia/types/composite_fwd.hpp"
+#include "dogen.dia/types/diagram_fwd.hpp"
 #include "dogen/external.dia/types/dia_object_types.hpp"
 #include "dogen/external.dia/types/processed_object_fwd.hpp"
 #include "dogen/external.dia/types/processed_comment_fwd.hpp"

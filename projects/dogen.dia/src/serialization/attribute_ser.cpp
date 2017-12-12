@@ -30,17 +30,17 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/dia/serialization/font_ser.hpp"
-#include "dogen/dia/serialization/real_ser.hpp"
-#include "dogen/dia/serialization/color_ser.hpp"
-#include "dogen/dia/serialization/point_ser.hpp"
-#include "dogen/dia/serialization/string_ser.hpp"
-#include "dogen/dia/serialization/boolean_ser.hpp"
-#include "dogen/dia/serialization/integer_ser.hpp"
-#include "dogen/dia/serialization/attribute_ser.hpp"
-#include "dogen/dia/serialization/composite_ser.hpp"
-#include "dogen/dia/serialization/rectangle_ser.hpp"
-#include "dogen/dia/serialization/enumeration_ser.hpp"
+#include "dogen.dia/serialization/font_ser.hpp"
+#include "dogen.dia/serialization/real_ser.hpp"
+#include "dogen.dia/serialization/color_ser.hpp"
+#include "dogen.dia/serialization/point_ser.hpp"
+#include "dogen.dia/serialization/string_ser.hpp"
+#include "dogen.dia/serialization/boolean_ser.hpp"
+#include "dogen.dia/serialization/integer_ser.hpp"
+#include "dogen.dia/serialization/attribute_ser.hpp"
+#include "dogen.dia/serialization/composite_ser.hpp"
+#include "dogen.dia/serialization/rectangle_ser.hpp"
+#include "dogen.dia/serialization/enumeration_ser.hpp"
 
 namespace boost {
 namespace serialization {

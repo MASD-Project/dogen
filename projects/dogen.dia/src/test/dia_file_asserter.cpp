@@ -23,9 +23,9 @@
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
-#include "dogen/dia/serialization/diagram_ser.hpp"
-#include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/dia/test/dia_file_asserter.hpp"
+#include "dogen.dia/serialization/diagram_ser.hpp"
+#include "dogen.dia/io/diagram_io.hpp"
+#include "dogen.dia/test/dia_file_asserter.hpp"
 
 using namespace dogen::utility::log;
 

@@ -21,17 +21,17 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include <boost/variant/apply_visitor.hpp>
-#include "dogen/dia/io/font_io.hpp"
-#include "dogen/dia/io/real_io.hpp"
-#include "dogen/dia/io/color_io.hpp"
-#include "dogen/dia/io/point_io.hpp"
-#include "dogen/dia/io/string_io.hpp"
-#include "dogen/dia/io/boolean_io.hpp"
-#include "dogen/dia/io/integer_io.hpp"
-#include "dogen/dia/io/attribute_io.hpp"
-#include "dogen/dia/io/composite_io.hpp"
-#include "dogen/dia/io/rectangle_io.hpp"
-#include "dogen/dia/io/enumeration_io.hpp"
+#include "dogen.dia/io/font_io.hpp"
+#include "dogen.dia/io/real_io.hpp"
+#include "dogen.dia/io/color_io.hpp"
+#include "dogen.dia/io/point_io.hpp"
+#include "dogen.dia/io/string_io.hpp"
+#include "dogen.dia/io/boolean_io.hpp"
+#include "dogen.dia/io/integer_io.hpp"
+#include "dogen.dia/io/attribute_io.hpp"
+#include "dogen.dia/io/composite_io.hpp"
+#include "dogen.dia/io/rectangle_io.hpp"
+#include "dogen.dia/io/enumeration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

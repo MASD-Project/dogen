@@ -25,11 +25,11 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/dia/types/all.hpp"
-#include "dogen/dia/io/all_io.hpp"
-#include "dogen/dia/serialization/all_ser.hpp"
-#include "dogen/dia/serialization/registrar_ser.hpp"
-#include "dogen/dia/types/hydrator.hpp"
+#include "dogen.dia/types/all.hpp"
+#include "dogen.dia/io/all_io.hpp"
+#include "dogen.dia/serialization/all_ser.hpp"
+#include "dogen.dia/serialization/registrar_ser.hpp"
+#include "dogen.dia/types/hydrator.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     dogen::dia::register_types<Archive>(ar);

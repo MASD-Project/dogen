@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/types/attribute.hpp"
-#include "dogen/dia/types/composite.hpp"
+#include "dogen.dia/types/attribute.hpp"
+#include "dogen.dia/types/composite.hpp"
 
 namespace boost {
 

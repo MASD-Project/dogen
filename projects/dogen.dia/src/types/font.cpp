@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/dia/types/font.hpp"
+#include "dogen.dia/types/font.hpp"
 
 namespace dogen {
 namespace dia {

@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/dia/io/attribute_io.hpp"
-#include "dogen/dia/io/diagram_data_io.hpp"
+#include "dogen.dia/io/attribute_io.hpp"
+#include "dogen.dia/io/diagram_data_io.hpp"
 
 namespace std {
 

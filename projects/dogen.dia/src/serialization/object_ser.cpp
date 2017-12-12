@@ -30,10 +30,10 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/dia/serialization/object_ser.hpp"
-#include "dogen/dia/serialization/attribute_ser.hpp"
-#include "dogen/dia/serialization/child_node_ser.hpp"
-#include "dogen/dia/serialization/connection_ser.hpp"
+#include "dogen.dia/serialization/object_ser.hpp"
+#include "dogen.dia/serialization/attribute_ser.hpp"
+#include "dogen.dia/serialization/child_node_ser.hpp"
+#include "dogen.dia/serialization/connection_ser.hpp"
 
 namespace boost {
 namespace serialization {

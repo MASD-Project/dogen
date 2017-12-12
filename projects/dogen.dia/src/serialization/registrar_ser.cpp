@@ -26,7 +26,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/dia/serialization/registrar_ser.hpp"
+#include "dogen.dia/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace dia {

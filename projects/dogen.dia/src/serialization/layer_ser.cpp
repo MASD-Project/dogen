@@ -29,8 +29,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/dia/serialization/layer_ser.hpp"
-#include "dogen/dia/serialization/object_ser.hpp"
+#include "dogen.dia/serialization/layer_ser.hpp"
+#include "dogen.dia/serialization/object_ser.hpp"
 
 namespace boost {
 namespace serialization {
