@@ -30,9 +30,9 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen/annotations/types/archetype_location.hpp"
-#include "dogen/annotations/types/archetype_locations_group.hpp"
-#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
+#include "dogen.annotations/types/archetype_location.hpp"
+#include "dogen.annotations/types/archetype_locations_group.hpp"
+#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"

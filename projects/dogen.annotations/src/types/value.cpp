@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/annotations/types/value.hpp"
+#include "dogen.annotations/types/value.hpp"
 
 namespace dogen {
 namespace annotations {

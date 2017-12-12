@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {

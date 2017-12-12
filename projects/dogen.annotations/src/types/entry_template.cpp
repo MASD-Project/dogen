@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/entry_template.hpp"
+#include "dogen.annotations/types/entry_template.hpp"
 
 namespace dogen {
 namespace annotations {

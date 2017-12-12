@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/name_td.hpp"
+#include "dogen.annotations/test_data/name_td.hpp"
 
 namespace {
 

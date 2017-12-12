@@ -30,8 +30,8 @@
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/profile_ser.hpp"
-#include "dogen/annotations/serialization/entry_template_ser.hpp"
+#include "dogen.annotations/serialization/profile_ser.hpp"
+#include "dogen.annotations/serialization/entry_template_ser.hpp"
 
 namespace boost {
 namespace serialization {

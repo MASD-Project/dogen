@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/annotations/io/scope_types_io.hpp"
+#include "dogen.annotations/io/scope_types_io.hpp"
 
 namespace dogen {
 namespace annotations {

@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/profile_td.hpp"
-#include "dogen/annotations/test_data/profile_repository_td.hpp"
+#include "dogen.annotations/test_data/profile_td.hpp"
+#include "dogen.annotations/test_data/profile_repository_td.hpp"
 
 namespace {
 

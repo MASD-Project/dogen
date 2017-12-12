@@ -28,13 +28,13 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/name_ser.hpp"
-#include "dogen/annotations/serialization/value_ser.hpp"
-#include "dogen/annotations/serialization/scope_types_ser.hpp"
-#include "dogen/annotations/serialization/value_types_ser.hpp"
-#include "dogen/annotations/serialization/type_template_ser.hpp"
-#include "dogen/annotations/serialization/template_kinds_ser.hpp"
-#include "dogen/annotations/serialization/archetype_location_ser.hpp"
+#include "dogen.annotations/serialization/name_ser.hpp"
+#include "dogen.annotations/serialization/value_ser.hpp"
+#include "dogen.annotations/serialization/scope_types_ser.hpp"
+#include "dogen.annotations/serialization/value_types_ser.hpp"
+#include "dogen.annotations/serialization/type_template_ser.hpp"
+#include "dogen.annotations/serialization/template_kinds_ser.hpp"
+#include "dogen.annotations/serialization/archetype_location_ser.hpp"
 
 namespace boost {
 namespace serialization {

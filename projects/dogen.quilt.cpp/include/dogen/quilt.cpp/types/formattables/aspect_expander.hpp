@@ -29,9 +29,9 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/type.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type.hpp"
 #include "dogen/yarn/types/meta_model/name_tree.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"

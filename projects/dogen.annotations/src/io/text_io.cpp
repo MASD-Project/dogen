@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/text_io.hpp"
-#include "dogen/annotations/io/value_io.hpp"
+#include "dogen.annotations/io/text_io.hpp"
+#include "dogen.annotations/io/value_io.hpp"
 
 namespace dogen {
 namespace annotations {

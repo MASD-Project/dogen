@@ -27,8 +27,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/value_ser.hpp"
-#include "dogen/annotations/serialization/number_ser.hpp"
+#include "dogen.annotations/serialization/value_ser.hpp"
+#include "dogen.annotations/serialization/number_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::annotations::number,

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_expander.hpp"

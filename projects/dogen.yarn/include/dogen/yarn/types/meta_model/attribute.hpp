@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/annotations/types/annotation.hpp"
+#include "dogen.annotations/types/annotation.hpp"
 #include "dogen/yarn/types/meta_model/name_tree.hpp"
 #include "dogen/yarn/types/meta_model/orm_attribute_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/attribute_fwd_ser.hpp"

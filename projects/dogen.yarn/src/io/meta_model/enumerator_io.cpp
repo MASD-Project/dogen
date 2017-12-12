@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen.annotations/io/annotation_io.hpp"
 #include "dogen/yarn/io/meta_model/enumerator_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

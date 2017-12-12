@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/annotations/io/name_io.hpp"
-#include "dogen/annotations/io/value_io.hpp"
-#include "dogen/annotations/io/scope_types_io.hpp"
-#include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/type_template_io.hpp"
-#include "dogen/annotations/io/template_kinds_io.hpp"
-#include "dogen/annotations/io/archetype_location_io.hpp"
+#include "dogen.annotations/io/name_io.hpp"
+#include "dogen.annotations/io/value_io.hpp"
+#include "dogen.annotations/io/scope_types_io.hpp"
+#include "dogen.annotations/io/value_types_io.hpp"
+#include "dogen.annotations/io/type_template_io.hpp"
+#include "dogen.annotations/io/template_kinds_io.hpp"
+#include "dogen.annotations/io/archetype_location_io.hpp"
 
 namespace boost {
 

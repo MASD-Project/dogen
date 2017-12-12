@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
 

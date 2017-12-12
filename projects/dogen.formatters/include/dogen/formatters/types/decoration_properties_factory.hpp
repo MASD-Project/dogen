@@ -27,8 +27,8 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/licence.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/modeline_group.hpp"

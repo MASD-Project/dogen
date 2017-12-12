@@ -19,11 +19,11 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/io/type_io.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/type.hpp"
+#include "dogen.annotations/types/type_repository_selector.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/io/type_io.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/optional_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"

@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/archetype_location_io.hpp"
-#include "dogen/annotations/io/archetype_locations_group_io.hpp"
-#include "dogen/annotations/io/archetype_location_repository_parts_io.hpp"
+#include "dogen.annotations/io/archetype_location_io.hpp"
+#include "dogen.annotations/io/archetype_locations_group_io.hpp"
+#include "dogen.annotations/io/archetype_location_repository_parts_io.hpp"
 
 namespace std {
 

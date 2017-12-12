@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/merger.hpp"
+#include "dogen.annotations/types/merger.hpp"
 
 namespace dogen {
 namespace annotations {

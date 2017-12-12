@@ -23,13 +23,13 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/text.hpp"
-#include "dogen/annotations/types/number.hpp"
-#include "dogen/annotations/types/boolean.hpp"
-#include "dogen/annotations/types/key_value_pair.hpp"
-#include "dogen/annotations/types/text_collection.hpp"
-#include "dogen/annotations/types/selection_error.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/text.hpp"
+#include "dogen.annotations/types/number.hpp"
+#include "dogen.annotations/types/boolean.hpp"
+#include "dogen.annotations/types/key_value_pair.hpp"
+#include "dogen.annotations/types/text_collection.hpp"
+#include "dogen.annotations/types/selection_error.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
 
 namespace {
 

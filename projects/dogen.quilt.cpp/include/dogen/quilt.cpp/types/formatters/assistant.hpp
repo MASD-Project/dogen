@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/comment_styles.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"

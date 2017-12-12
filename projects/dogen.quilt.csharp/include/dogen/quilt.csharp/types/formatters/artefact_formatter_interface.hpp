@@ -28,7 +28,7 @@
 #include <string>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"

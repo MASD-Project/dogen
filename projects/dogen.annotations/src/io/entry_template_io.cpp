@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/name_io.hpp"
-#include "dogen/annotations/io/entry_template_io.hpp"
-#include "dogen/annotations/io/template_kinds_io.hpp"
-#include "dogen/annotations/io/archetype_location_io.hpp"
+#include "dogen.annotations/io/name_io.hpp"
+#include "dogen.annotations/io/entry_template_io.hpp"
+#include "dogen.annotations/io/template_kinds_io.hpp"
+#include "dogen.annotations/io/archetype_location_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

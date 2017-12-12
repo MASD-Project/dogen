@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_locations_group.hpp"
-#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
+#include "dogen.annotations/types/archetype_locations_group.hpp"
+#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/text_model.hpp"

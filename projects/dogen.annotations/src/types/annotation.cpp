@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/value.hpp"
-#include "dogen/annotations/types/annotation.hpp"
+#include "dogen.annotations/types/value.hpp"
+#include "dogen.annotations/types/annotation.hpp"
 
 namespace boost {
 

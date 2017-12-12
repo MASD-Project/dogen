@@ -30,7 +30,7 @@
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
-#include "dogen/annotations/types/annotation.hpp"
+#include "dogen.annotations/types/annotation.hpp"
 
 namespace dogen {
 namespace yarn {

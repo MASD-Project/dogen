@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen/stitch/types/traits.hpp"
 #include "dogen/stitch/types/building_error.hpp"
 #include "dogen/stitch/types/stitching_properties_factory.hpp"

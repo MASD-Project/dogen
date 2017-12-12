@@ -29,8 +29,8 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/value_ser.hpp"
-#include "dogen/annotations/serialization/key_value_pair_ser.hpp"
+#include "dogen.annotations/serialization/value_ser.hpp"
+#include "dogen.annotations/serialization/key_value_pair_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::annotations::key_value_pair,

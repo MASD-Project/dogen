@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/name_tree.hpp"

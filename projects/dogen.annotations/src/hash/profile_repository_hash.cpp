@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/profile_hash.hpp"
-#include "dogen/annotations/hash/profile_repository_hash.hpp"
+#include "dogen.annotations/hash/profile_hash.hpp"
+#include "dogen.annotations/hash/profile_repository_hash.hpp"
 
 namespace {
 

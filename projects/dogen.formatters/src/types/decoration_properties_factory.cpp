@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen/formatters/types/traits.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/formatters/types/code_generation_marker_factory.hpp"

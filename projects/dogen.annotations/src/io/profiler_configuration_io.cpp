@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/annotations/io/profile_io.hpp"
-#include "dogen/annotations/io/annotation_io.hpp"
-#include "dogen/annotations/io/profiler_configuration_io.hpp"
+#include "dogen.annotations/io/profile_io.hpp"
+#include "dogen.annotations/io/annotation_io.hpp"
+#include "dogen.annotations/io/profiler_configuration_io.hpp"
 
 namespace dogen {
 namespace annotations {

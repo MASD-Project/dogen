@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/text_model.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"

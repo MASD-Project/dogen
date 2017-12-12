@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/annotations/io/value_io.hpp"
-#include "dogen/annotations/types/value_visitor.hpp"
-#include "dogen/annotations/types/text_collection.hpp"
+#include "dogen.annotations/io/value_io.hpp"
+#include "dogen.annotations/types/value_visitor.hpp"
+#include "dogen.annotations/types/text_collection.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

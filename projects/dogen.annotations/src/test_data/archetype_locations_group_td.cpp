@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/archetype_location_td.hpp"
-#include "dogen/annotations/test_data/archetype_locations_group_td.hpp"
+#include "dogen.annotations/test_data/archetype_location_td.hpp"
+#include "dogen.annotations/test_data/archetype_locations_group_td.hpp"
 
 namespace {
 

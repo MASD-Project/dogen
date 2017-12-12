@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/archetype_location_repository_parts.hpp"
+#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
 
 namespace dogen {
 namespace annotations {

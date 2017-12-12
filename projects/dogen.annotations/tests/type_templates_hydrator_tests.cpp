@@ -24,8 +24,8 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/annotations/io/type_template_io.hpp"
-#include "dogen/annotations/types/type_templates_hydrator.hpp"
+#include "dogen.annotations/io/type_template_io.hpp"
+#include "dogen.annotations/types/type_templates_hydrator.hpp"
 
 namespace {
 

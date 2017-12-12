@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/meta_model/name_td.hpp"
-#include "dogen/annotations/test_data/annotation_td.hpp"
+#include "dogen.annotations/test_data/annotation_td.hpp"
 #include "dogen/yarn/test_data/meta_model/module_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_td.hpp"
 #include "dogen/yarn/test_data/meta_model/builtin_td.hpp"

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/test_data/scope_types_td.hpp"
+#include "dogen.annotations/test_data/scope_types_td.hpp"
 
 namespace dogen {
 namespace annotations {

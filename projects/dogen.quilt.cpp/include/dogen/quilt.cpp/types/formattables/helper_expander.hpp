@@ -26,8 +26,8 @@
 #endif
 
 #include <unordered_map>
-#include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"

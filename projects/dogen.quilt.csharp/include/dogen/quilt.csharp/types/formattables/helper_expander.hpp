@@ -27,7 +27,7 @@
 
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_configuration.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"

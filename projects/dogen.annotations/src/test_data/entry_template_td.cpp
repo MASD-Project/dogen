@@ -19,10 +19,10 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/name_td.hpp"
-#include "dogen/annotations/test_data/entry_template_td.hpp"
-#include "dogen/annotations/test_data/template_kinds_td.hpp"
-#include "dogen/annotations/test_data/archetype_location_td.hpp"
+#include "dogen.annotations/test_data/name_td.hpp"
+#include "dogen.annotations/test_data/entry_template_td.hpp"
+#include "dogen.annotations/test_data/template_kinds_td.hpp"
+#include "dogen.annotations/test_data/archetype_location_td.hpp"
 
 namespace {
 

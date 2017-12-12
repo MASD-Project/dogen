@@ -24,8 +24,8 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/hydration_error.hpp"
-#include "dogen/annotations/types/profile_hydrator.hpp"
+#include "dogen.annotations/types/hydration_error.hpp"
+#include "dogen.annotations/types/profile_hydrator.hpp"
 
 namespace {
 

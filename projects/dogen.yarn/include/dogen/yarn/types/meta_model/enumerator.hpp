@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/annotations/types/annotation.hpp"
+#include "dogen.annotations/types/annotation.hpp"
 #include "dogen/yarn/serialization/meta_model/enumerator_fwd_ser.hpp"
 
 namespace dogen {

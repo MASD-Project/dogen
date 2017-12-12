@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/annotations/io/name_io.hpp"
-#include "dogen/annotations/io/type_io.hpp"
-#include "dogen/annotations/io/value_io.hpp"
-#include "dogen/annotations/io/scope_types_io.hpp"
-#include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/archetype_location_io.hpp"
+#include "dogen.annotations/io/name_io.hpp"
+#include "dogen.annotations/io/type_io.hpp"
+#include "dogen.annotations/io/value_io.hpp"
+#include "dogen.annotations/io/scope_types_io.hpp"
+#include "dogen.annotations/io/value_types_io.hpp"
+#include "dogen.annotations/io/archetype_location_io.hpp"
 
 namespace boost {
 

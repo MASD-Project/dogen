@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/annotations/io/value_io.hpp"
-#include "dogen/annotations/types/number.hpp"
-#include "dogen/annotations/types/value_visitor.hpp"
+#include "dogen.annotations/io/value_io.hpp"
+#include "dogen.annotations/types/number.hpp"
+#include "dogen.annotations/types/value_visitor.hpp"
 
 namespace dogen {
 namespace annotations {

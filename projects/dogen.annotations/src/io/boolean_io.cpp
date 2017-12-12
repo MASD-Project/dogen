@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/annotations/io/value_io.hpp"
-#include "dogen/annotations/io/boolean_io.hpp"
+#include "dogen.annotations/io/value_io.hpp"
+#include "dogen.annotations/io/boolean_io.hpp"
 
 namespace dogen {
 namespace annotations {

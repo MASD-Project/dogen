@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
-#include "dogen/annotations/hash/annotation_hash.hpp"
+#include "dogen.annotations/hash/annotation_hash.hpp"
 #include "dogen/yarn/hash/meta_model/enumerator_hash.hpp"
 
 namespace {

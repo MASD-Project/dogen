@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/annotations/io/archetype_location_io.hpp"
+#include "dogen.annotations/io/archetype_location_io.hpp"
 #include "dogen/quilt.csharp/io/formatters/repository_io.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"

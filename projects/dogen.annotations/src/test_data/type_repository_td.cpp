@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/type_td.hpp"
-#include "dogen/annotations/test_data/type_repository_td.hpp"
+#include "dogen.annotations/test_data/type_td.hpp"
+#include "dogen.annotations/test_data/type_repository_td.hpp"
 
 namespace {
 

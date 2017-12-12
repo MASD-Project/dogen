@@ -28,7 +28,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/stitch/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
-#include "dogen/annotations/serialization/registrar_ser.hpp"
+#include "dogen.annotations/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace stitch {

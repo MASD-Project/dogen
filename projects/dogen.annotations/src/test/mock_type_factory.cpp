@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/test/mock_type_factory.hpp"
+#include "dogen.annotations/test/mock_type_factory.hpp"
 
 namespace dogen {
 namespace annotations {

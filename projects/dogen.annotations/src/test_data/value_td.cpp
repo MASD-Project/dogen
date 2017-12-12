@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/test_data/text_td.hpp"
-#include "dogen/annotations/test_data/value_td.hpp"
-#include "dogen/annotations/test_data/number_td.hpp"
-#include "dogen/annotations/test_data/boolean_td.hpp"
-#include "dogen/annotations/test_data/key_value_pair_td.hpp"
-#include "dogen/annotations/test_data/text_collection_td.hpp"
+#include "dogen.annotations/test_data/text_td.hpp"
+#include "dogen.annotations/test_data/value_td.hpp"
+#include "dogen.annotations/test_data/number_td.hpp"
+#include "dogen.annotations/test_data/boolean_td.hpp"
+#include "dogen.annotations/test_data/key_value_pair_td.hpp"
+#include "dogen.annotations/test_data/text_collection_td.hpp"
 
 namespace dogen {
 namespace annotations {

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/test_data/profile_td.hpp"
-#include "dogen/annotations/test_data/annotation_td.hpp"
-#include "dogen/annotations/test_data/profiler_configuration_td.hpp"
+#include "dogen.annotations/test_data/profile_td.hpp"
+#include "dogen.annotations/test_data/annotation_td.hpp"
+#include "dogen.annotations/test_data/profiler_configuration_td.hpp"
 
 namespace {
 

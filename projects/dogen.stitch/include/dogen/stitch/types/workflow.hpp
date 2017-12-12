@@ -30,10 +30,10 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/annotation_factory.hpp"
-#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/annotation_factory.hpp"
+#include "dogen.annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"

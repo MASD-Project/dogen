@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/building_error.hpp"
-#include "dogen/annotations/test/mock_type_factory.hpp"
-#include "dogen/annotations/test/mock_type_repository_factory.hpp"
+#include "dogen.annotations/types/building_error.hpp"
+#include "dogen.annotations/test/mock_type_factory.hpp"
+#include "dogen.annotations/test/mock_type_repository_factory.hpp"
 
 namespace {
 

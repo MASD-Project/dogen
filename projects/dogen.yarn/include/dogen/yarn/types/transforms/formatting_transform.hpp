@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/annotations/types/type.hpp"
+#include "dogen.annotations/types/type.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/formatting_styles.hpp"

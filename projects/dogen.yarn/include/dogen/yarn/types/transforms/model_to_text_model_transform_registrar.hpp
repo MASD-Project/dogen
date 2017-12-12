@@ -30,7 +30,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
 

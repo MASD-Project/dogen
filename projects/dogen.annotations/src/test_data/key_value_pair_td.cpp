@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/value_td.hpp"
-#include "dogen/annotations/test_data/key_value_pair_td.hpp"
+#include "dogen.annotations/test_data/value_td.hpp"
+#include "dogen.annotations/test_data/key_value_pair_td.hpp"
 
 namespace {
 

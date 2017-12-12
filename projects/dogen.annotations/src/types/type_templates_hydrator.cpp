@@ -24,11 +24,11 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/io/value_types_io.hpp"
-#include "dogen/annotations/io/template_kinds_io.hpp"
-#include "dogen/annotations/types/value_factory.hpp"
-#include "dogen/annotations/types/hydration_error.hpp"
-#include "dogen/annotations/types/type_templates_hydrator.hpp"
+#include "dogen.annotations/io/value_types_io.hpp"
+#include "dogen.annotations/io/template_kinds_io.hpp"
+#include "dogen.annotations/types/value_factory.hpp"
+#include "dogen.annotations/types/hydration_error.hpp"
+#include "dogen.annotations/types/type_templates_hydrator.hpp"
 
 namespace {
 

@@ -28,7 +28,7 @@
 #include <sstream>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
 #include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "dogen/formatters/types/csharp/scoped_namespace_formatter.hpp"

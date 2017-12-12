@@ -22,7 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen.annotations/io/annotation_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/formatters/io/decoration_properties_io.hpp"

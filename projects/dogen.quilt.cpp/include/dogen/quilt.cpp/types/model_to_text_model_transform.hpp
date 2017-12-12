@@ -31,9 +31,9 @@
 #include <memory>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/annotation.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/annotations/types/annotation_factory.hpp"
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/annotation_factory.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"

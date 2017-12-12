@@ -21,8 +21,8 @@
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"

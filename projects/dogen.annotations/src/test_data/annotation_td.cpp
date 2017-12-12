@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/annotations/test_data/value_td.hpp"
-#include "dogen/annotations/test_data/annotation_td.hpp"
-#include "dogen/annotations/test_data/scope_types_td.hpp"
+#include "dogen.annotations/test_data/value_td.hpp"
+#include "dogen.annotations/test_data/annotation_td.hpp"
+#include "dogen.annotations/test_data/scope_types_td.hpp"
 
 namespace {
 

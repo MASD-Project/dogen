@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen.annotations/types/entry_selector.hpp"
+#include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/traits.hpp"

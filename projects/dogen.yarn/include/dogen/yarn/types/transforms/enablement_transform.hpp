@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/annotations/types/archetype_locations_group.hpp"
+#include "dogen.annotations/types/archetype_locations_group.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"

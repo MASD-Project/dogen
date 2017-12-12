@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen.annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/element_archetype.hpp"

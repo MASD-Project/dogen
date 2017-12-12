@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/types/profile_repository.hpp"
+#include "dogen.annotations/types/profile_repository.hpp"
 
 namespace dogen {
 namespace annotations {

@@ -27,12 +27,12 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/text_ser.hpp"
-#include "dogen/annotations/serialization/value_ser.hpp"
-#include "dogen/annotations/serialization/number_ser.hpp"
-#include "dogen/annotations/serialization/boolean_ser.hpp"
-#include "dogen/annotations/serialization/key_value_pair_ser.hpp"
-#include "dogen/annotations/serialization/text_collection_ser.hpp"
+#include "dogen.annotations/serialization/text_ser.hpp"
+#include "dogen.annotations/serialization/value_ser.hpp"
+#include "dogen.annotations/serialization/number_ser.hpp"
+#include "dogen.annotations/serialization/boolean_ser.hpp"
+#include "dogen.annotations/serialization/key_value_pair_ser.hpp"
+#include "dogen.annotations/serialization/text_collection_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::annotations::value,

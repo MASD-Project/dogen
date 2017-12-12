@@ -30,8 +30,8 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/annotations/serialization/archetype_location_ser.hpp"
-#include "dogen/annotations/serialization/archetype_locations_group_ser.hpp"
+#include "dogen.annotations/serialization/archetype_location_ser.hpp"
+#include "dogen.annotations/serialization/archetype_locations_group_ser.hpp"
 
 namespace boost {
 namespace serialization {

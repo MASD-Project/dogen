@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/annotations/hash/archetype_location_hash.hpp"
-#include "dogen/annotations/hash/archetype_locations_group_hash.hpp"
+#include "dogen.annotations/hash/archetype_location_hash.hpp"
+#include "dogen.annotations/hash/archetype_locations_group_hash.hpp"
 
 namespace {
 
