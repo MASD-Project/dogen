@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/module_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_module_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/module_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_module_properties_io.hpp"
 
 namespace dogen {
 namespace yarn {

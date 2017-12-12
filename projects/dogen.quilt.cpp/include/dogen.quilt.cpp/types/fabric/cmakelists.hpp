@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
 #include "dogen.quilt.cpp/types/fabric/odb_targets.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/cmakelists_fwd_ser.hpp"
 

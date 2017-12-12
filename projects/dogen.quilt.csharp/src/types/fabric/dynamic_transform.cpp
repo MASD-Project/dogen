@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/types/transforms/transformation_error.hpp"
+#include "dogen.yarn/types/transforms/context.hpp"
 #include "dogen.quilt.csharp/types/fabric/injector.hpp"
 #include "dogen.quilt.csharp/types/fabric/decoration_expander.hpp"
 #include "dogen.quilt.csharp/types/fabric/dynamic_transform.hpp"

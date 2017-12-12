@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.utility/log/logger.hpp"
-#include "dogen/yarn/types/helpers/new_name_tree_parser.hpp"
+#include "dogen.yarn/types/helpers/new_name_tree_parser.hpp"
 
 namespace {
 

@@ -24,7 +24,7 @@
 #include "dogen.utility/test_data/validating_resolver.hpp"
 #include "dogen.utility/test_data/tds_test_good.hpp"
 #include "dogen.utility/test/logging.hpp"
-#include "dogen/yarn/types/helpers/file_linter.hpp"
+#include "dogen.yarn/types/helpers/file_linter.hpp"
 
 namespace  {
 

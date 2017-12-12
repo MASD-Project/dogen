@@ -23,11 +23,11 @@
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/test/asserter.hpp"
 #include "dogen.utility/io/list_io.hpp"
-#include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn/types/helpers/parsing_error.hpp"
-#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
+#include "dogen.yarn/types/helpers/name_factory.hpp"
+#include "dogen.yarn/types/helpers/parsing_error.hpp"
+#include "dogen.yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen.utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;

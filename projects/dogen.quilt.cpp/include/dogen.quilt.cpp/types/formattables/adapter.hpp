@@ -27,10 +27,10 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/meta_model/orm_database_systems.hpp"
-#include "dogen/yarn/types/meta_model/letter_cases.hpp"
-#include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
+#include "dogen.yarn/types/meta_model/model.hpp"
+#include "dogen.yarn/types/meta_model/orm_database_systems.hpp"
+#include "dogen.yarn/types/meta_model/letter_cases.hpp"
+#include "dogen.yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen.quilt.cpp/types/formatters/repository.hpp"
 #include "dogen.quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen.quilt.cpp/types/formattables/model.hpp"

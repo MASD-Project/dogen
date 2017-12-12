@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/helpers/mapping_set_td.hpp"
-#include "dogen/yarn/test_data/helpers/mapping_set_repository_td.hpp"
+#include "dogen.yarn/test_data/helpers/mapping_set_td.hpp"
+#include "dogen.yarn/test_data/helpers/mapping_set_repository_td.hpp"
 
 namespace {
 

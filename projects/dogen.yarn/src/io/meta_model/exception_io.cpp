@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/exception_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/exception_io.hpp"
 
 namespace dogen {
 namespace yarn {

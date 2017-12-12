@@ -19,7 +19,7 @@
  *
  */
 #include <iostream>
-#include "dogen/yarn/types/helpers/stream_writer.hpp"
+#include "dogen.yarn/types/helpers/stream_writer.hpp"
 
 namespace {
 

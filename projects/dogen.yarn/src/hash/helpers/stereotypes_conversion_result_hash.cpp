@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/static_stereotypes_hash.hpp"
-#include "dogen/yarn/hash/helpers/stereotypes_conversion_result_hash.hpp"
+#include "dogen.yarn/hash/meta_model/static_stereotypes_hash.hpp"
+#include "dogen.yarn/hash/helpers/stereotypes_conversion_result_hash.hpp"
 
 namespace {
 

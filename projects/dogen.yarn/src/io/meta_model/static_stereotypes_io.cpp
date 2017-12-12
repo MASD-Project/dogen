@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen.yarn/io/meta_model/static_stereotypes_io.hpp"
 
 namespace dogen {
 namespace yarn {

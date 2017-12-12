@@ -26,8 +26,8 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace quilt {

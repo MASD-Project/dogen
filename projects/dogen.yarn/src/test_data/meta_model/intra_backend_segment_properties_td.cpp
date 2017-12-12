@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/path_contribution_types_td.hpp"
-#include "dogen/yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/path_contribution_types_td.hpp"
+#include "dogen.yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
 
 namespace {
 

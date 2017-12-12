@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/archetype_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/archetype_properties_io.hpp"
 
 namespace boost {
 

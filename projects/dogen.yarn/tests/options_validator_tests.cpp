@@ -23,10 +23,10 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/transforms/validation_error.hpp"
-#include "dogen/yarn/types/transforms/options.hpp"
-#include "dogen/yarn/test/mock_options_factory.hpp"
-#include "dogen/yarn/types/transforms/options_validator.hpp"
+#include "dogen.yarn/types/transforms/validation_error.hpp"
+#include "dogen.yarn/types/transforms/options.hpp"
+#include "dogen.yarn/test/mock_options_factory.hpp"
+#include "dogen.yarn/types/transforms/options_validator.hpp"
 
 namespace {
 

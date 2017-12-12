@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
 #include "dogen.quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen.quilt.csharp/types/fabric/element_visitor.hpp"
 

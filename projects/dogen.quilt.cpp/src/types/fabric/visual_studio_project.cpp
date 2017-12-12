@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
 #include "dogen.quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen.quilt.cpp/types/fabric/visual_studio_project.hpp"
 

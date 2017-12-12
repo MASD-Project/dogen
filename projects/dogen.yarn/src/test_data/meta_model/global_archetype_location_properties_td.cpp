@@ -19,11 +19,11 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/backend_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/archetype_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/denormalised_archetype_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/facet_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/backend_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/archetype_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/denormalised_archetype_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
 
 namespace {
 

@@ -33,19 +33,19 @@
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/module_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/endomodel_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/languages_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/name_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/module_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/object_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/builtin_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/visitor_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/endomodel_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/exception_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/languages_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/primitive_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/enumeration_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/origin_types_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/object_template_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/orm_model_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

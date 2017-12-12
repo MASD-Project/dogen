@@ -29,11 +29,11 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/backend_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/archetype_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/denormalised_archetype_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/global_archetype_location_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/facet_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/backend_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/archetype_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/denormalised_archetype_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/global_archetype_location_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/local_archetype_location_properties_io.hpp"
 
 namespace boost {
 

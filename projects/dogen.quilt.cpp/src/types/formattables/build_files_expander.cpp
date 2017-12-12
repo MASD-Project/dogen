@@ -24,7 +24,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/io/pair_io.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
 #include "dogen.quilt.cpp/types/fabric/odb_target.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.quilt.cpp/types/fabric/msbuild_targets.hpp"

@@ -28,13 +28,13 @@
 #include "dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen.formatters/types/repository_factory.hpp"
 #include "dogen.probing/types/prober.hpp"
-#include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
-#include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
-#include "dogen/yarn/types/helpers/filesystem_writer.hpp"
-#include "dogen/yarn/types/transforms/building_error.hpp"
-#include "dogen/yarn/types/transforms/options_validator.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
-#include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen.yarn/types/helpers/mapping_set_repository_factory.hpp"
+#include "dogen.yarn/types/helpers/artefact_writer_interface.hpp"
+#include "dogen.yarn/types/helpers/filesystem_writer.hpp"
+#include "dogen.yarn/types/transforms/building_error.hpp"
+#include "dogen.yarn/types/transforms/options_validator.hpp"
+#include "dogen.yarn/types/transforms/model_to_text_model_chain.hpp"
+#include "dogen.yarn/types/transforms/context_factory.hpp"
 
 namespace {
 

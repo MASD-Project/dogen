@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/name_td.hpp"
+#include "dogen.yarn/test_data/meta_model/name_td.hpp"
 #include "dogen.annotations/test_data/annotation_td.hpp"
-#include "dogen/yarn/test_data/meta_model/enumerator_td.hpp"
+#include "dogen.yarn/test_data/meta_model/enumerator_td.hpp"
 
 namespace {
 

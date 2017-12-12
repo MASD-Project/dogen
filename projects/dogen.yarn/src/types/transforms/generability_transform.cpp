@@ -20,16 +20,16 @@
  */
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/transforms/generability_transform.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/builtin.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/exception.hpp"
+#include "dogen.yarn/types/meta_model/primitive.hpp"
+#include "dogen.yarn/types/meta_model/enumeration.hpp"
+#include "dogen.yarn/types/meta_model/object_template.hpp"
+#include "dogen.yarn/io/meta_model/model_io.hpp"
+#include "dogen.yarn/types/transforms/generability_transform.hpp"
 
 namespace {
 

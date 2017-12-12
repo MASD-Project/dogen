@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/letter_cases_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_database_systems_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/letter_cases_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_database_systems_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_model_properties_io.hpp"
 
 namespace std {
 

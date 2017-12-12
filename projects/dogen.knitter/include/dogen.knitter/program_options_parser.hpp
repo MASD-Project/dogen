@@ -30,7 +30,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
-#include "dogen/yarn/types/transforms/options.hpp"
+#include "dogen.yarn/types/transforms/options.hpp"
 
 namespace dogen {
 namespace knitter {

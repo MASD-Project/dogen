@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/meta_model/builtin_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/builtin_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
 
 namespace dogen {
 namespace yarn {

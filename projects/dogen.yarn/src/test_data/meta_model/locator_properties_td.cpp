@@ -19,11 +19,11 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/locator_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/model_segment_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/directory_structure_styles_td.hpp"
-#include "dogen/yarn/test_data/meta_model/archetype_family_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/locator_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/model_segment_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/directory_structure_styles_td.hpp"
+#include "dogen.yarn/test_data/meta_model/archetype_family_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/intra_backend_segment_properties_td.hpp"
 
 namespace {
 

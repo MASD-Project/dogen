@@ -19,16 +19,16 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/name_td.hpp"
-#include "dogen/yarn/test_data/meta_model/model_td.hpp"
-#include "dogen/yarn/test_data/meta_model/module_td.hpp"
-#include "dogen/yarn/test_data/meta_model/element_td.hpp"
-#include "dogen/yarn/test_data/meta_model/languages_td.hpp"
-#include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
-#include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
-#include "dogen/yarn/test_data/meta_model/locator_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/name_td.hpp"
+#include "dogen.yarn/test_data/meta_model/model_td.hpp"
+#include "dogen.yarn/test_data/meta_model/module_td.hpp"
+#include "dogen.yarn/test_data/meta_model/element_td.hpp"
+#include "dogen.yarn/test_data/meta_model/languages_td.hpp"
+#include "dogen.yarn/test_data/meta_model/origin_types_td.hpp"
+#include "dogen.yarn/test_data/meta_model/element_archetype_td.hpp"
+#include "dogen.yarn/test_data/meta_model/locator_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/orm_model_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/global_archetype_location_properties_td.hpp"
 
 namespace {
 

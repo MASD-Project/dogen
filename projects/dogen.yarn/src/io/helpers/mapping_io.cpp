@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/helpers/mapping_io.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/io/helpers/mapping_value_io.hpp"
+#include "dogen.yarn/io/helpers/mapping_io.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/helpers/mapping_value_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

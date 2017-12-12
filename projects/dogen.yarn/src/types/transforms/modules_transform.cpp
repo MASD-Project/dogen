@@ -23,15 +23,15 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
-#include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn/types/helpers/name_builder.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/modules_transform.hpp"
+#include "dogen.yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen.yarn/types/helpers/name_factory.hpp"
+#include "dogen.yarn/types/helpers/name_builder.hpp"
+#include "dogen.yarn/types/transforms/context.hpp"
+#include "dogen.yarn/types/transforms/transformation_error.hpp"
+#include "dogen.yarn/types/transforms/modules_transform.hpp"
 
 namespace {
 

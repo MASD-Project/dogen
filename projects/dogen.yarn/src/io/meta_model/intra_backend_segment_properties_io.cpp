@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/path_contribution_types_io.hpp"
-#include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/path_contribution_types_io.hpp"
+#include "dogen.yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
 
 namespace dogen {
 namespace yarn {

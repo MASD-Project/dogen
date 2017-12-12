@@ -25,10 +25,10 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/string/splitter.hpp"
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/types/helpers/decomposer.hpp"
-#include "dogen/yarn/types/helpers/validation_error.hpp"
-#include "dogen/yarn/types/helpers/endomodel_post_processing_validator.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/types/helpers/decomposer.hpp"
+#include "dogen.yarn/types/helpers/validation_error.hpp"
+#include "dogen.yarn/types/helpers/endomodel_post_processing_validator.hpp"
 
 typedef boost::error_info<struct owner, std::string>
 errmsg_validation_owner;

@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
 #include "dogen.quilt.csharp/serialization/fabric/visual_studio_solution_fwd_ser.hpp"
 
 namespace dogen {

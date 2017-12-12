@@ -20,8 +20,8 @@
  */
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/transforms/locator_properties_transform.hpp"
+#include "dogen.yarn/io/meta_model/model_io.hpp"
+#include "dogen.yarn/types/transforms/locator_properties_transform.hpp"
 
 namespace {
 

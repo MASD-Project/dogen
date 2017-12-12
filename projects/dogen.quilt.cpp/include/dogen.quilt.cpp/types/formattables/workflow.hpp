@@ -29,8 +29,8 @@
 #include <unordered_set>
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.yarn/types/meta_model/model.hpp"
+#include "dogen.yarn/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/model.hpp"
 #include "dogen.quilt.cpp/types/formattables/locator.hpp"
 #include "dogen.quilt.cpp/types/formatters/repository.hpp"

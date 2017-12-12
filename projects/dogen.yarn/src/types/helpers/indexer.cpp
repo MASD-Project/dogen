@@ -20,10 +20,10 @@
  */
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen/yarn/io/helpers/indices_io.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/helpers/indexer.hpp"
+#include "dogen.yarn/io/helpers/indices_io.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/builtin.hpp"
+#include "dogen.yarn/types/helpers/indexer.hpp"
 
 namespace {
 

@@ -27,12 +27,12 @@
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/helpers/resolver.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/object_templates_transform.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/object_template.hpp"
+#include "dogen.yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen.yarn/types/helpers/resolver.hpp"
+#include "dogen.yarn/types/transforms/transformation_error.hpp"
+#include "dogen.yarn/types/transforms/object_templates_transform.hpp"
 
 namespace {
 

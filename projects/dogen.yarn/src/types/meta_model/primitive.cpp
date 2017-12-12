@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/attribute_io.hpp"
-#include "dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/yarn/types/meta_model/element_visitor.hpp"
-#include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/attribute_io.hpp"
+#include "dogen.yarn/types/meta_model/primitive.hpp"
+#include "dogen.yarn/types/meta_model/element_visitor.hpp"
+#include "dogen.yarn/io/meta_model/orm_primitive_properties_io.hpp"
 
 namespace boost {
 

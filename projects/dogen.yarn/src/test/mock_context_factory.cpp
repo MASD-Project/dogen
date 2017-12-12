@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/test/mock_context_factory.hpp"
+#include "dogen.yarn/types/transforms/context_factory.hpp"
+#include "dogen.yarn/test/mock_context_factory.hpp"
 
 namespace dogen {
 namespace yarn {

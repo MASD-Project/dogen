@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.utility/serialization/path.hpp"
-#include "dogen/yarn/serialization/transforms/options_ser.hpp"
+#include "dogen.yarn/serialization/transforms/options_ser.hpp"
 
 namespace boost {
 namespace serialization {

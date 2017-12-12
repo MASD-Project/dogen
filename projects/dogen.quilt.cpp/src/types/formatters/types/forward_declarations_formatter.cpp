@@ -28,7 +28,7 @@
 #include "dogen.quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
 
 namespace dogen {
 namespace quilt {

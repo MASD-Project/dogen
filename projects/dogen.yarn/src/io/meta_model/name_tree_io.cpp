@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/meta_model/name_tree_io.hpp"
 
 namespace std {
 

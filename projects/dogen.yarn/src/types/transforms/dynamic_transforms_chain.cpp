@@ -23,10 +23,10 @@
 #include "dogen.formatters/types/repository_factory.hpp"
 #include "dogen.formatters/types/decoration_properties_factory.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/io/meta_model/model_io.hpp"
+#include "dogen.yarn/types/transforms/context.hpp"
+#include "dogen.yarn/types/transforms/dynamic_transforms_chain.hpp"
 
 namespace {
 

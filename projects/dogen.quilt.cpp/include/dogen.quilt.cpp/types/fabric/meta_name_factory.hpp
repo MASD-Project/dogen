@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen.yarn/types/meta_model/name.hpp"
 
 namespace dogen {
 namespace quilt {

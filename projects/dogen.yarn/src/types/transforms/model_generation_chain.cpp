@@ -20,11 +20,11 @@
  */
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
-#include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
-#include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
-#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+#include "dogen.yarn/io/meta_model/model_io.hpp"
+#include "dogen.yarn/types/transforms/endomodel_generation_chain.hpp"
+#include "dogen.yarn/types/transforms/endomodel_to_model_transform.hpp"
+#include "dogen.yarn/types/transforms/model_post_processing_chain.hpp"
+#include "dogen.yarn/types/transforms/model_generation_chain.hpp"
 
 namespace {
 

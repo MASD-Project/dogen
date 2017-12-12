@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/name_td.hpp"
-#include "dogen/yarn/test_data/helpers/mapping_context_td.hpp"
+#include "dogen.yarn/test_data/meta_model/name_td.hpp"
+#include "dogen.yarn/test_data/helpers/mapping_context_td.hpp"
 
 namespace {
 

@@ -21,9 +21,9 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen/yarn/types/transforms/registrar_error.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "dogen.yarn/types/transforms/registrar_error.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 namespace {
 

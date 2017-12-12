@@ -32,11 +32,11 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
-#include "dogen/yarn/types/helpers/parsing_error.hpp"
-#include "dogen/yarn/types/helpers/name_tree_builder.hpp"
-#include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen.yarn/types/helpers/parsing_error.hpp"
+#include "dogen.yarn/types/helpers/name_tree_builder.hpp"
+#include "dogen.yarn/types/helpers/legacy_name_tree_parser.hpp"
 
 namespace {
 

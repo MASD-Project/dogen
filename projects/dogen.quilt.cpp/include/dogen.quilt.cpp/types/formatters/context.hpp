@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen/yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.yarn/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/model.hpp"
 #include "dogen.quilt.cpp/types/formattables/element_properties.hpp"
 #include "dogen.quilt.cpp/types/formatters/helper_formatter_interface.hpp"

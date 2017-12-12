@@ -29,8 +29,8 @@
 #include <string>
 #include <utility>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/model.hpp"
 #include "dogen.quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {

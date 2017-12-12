@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen.yarn/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen.yarn/io/helpers/stereotypes_conversion_result_io.hpp"
 
 namespace std {
 

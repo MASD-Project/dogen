@@ -27,7 +27,7 @@
 
 #include <list>
 #include <memory>
-#include "dogen/yarn/types/meta_model/artefact.hpp"
+#include "dogen.yarn/types/meta_model/artefact.hpp"
 #include "dogen.quilt.csharp/types/formattables/model.hpp"
 #include "dogen.quilt.csharp/types/formatters/registrar.hpp"
 

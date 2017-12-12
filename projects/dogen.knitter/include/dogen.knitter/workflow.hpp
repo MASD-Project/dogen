@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/transforms/options.hpp"
+#include "dogen.yarn/types/transforms/options.hpp"
 
 namespace dogen {
 namespace knitter {

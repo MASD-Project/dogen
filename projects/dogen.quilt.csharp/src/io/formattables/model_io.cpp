@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
 #include "dogen.quilt.csharp/io/formattables/model_io.hpp"
 #include "dogen.quilt.csharp/io/formattables/formattable_io.hpp"
 #include "dogen.quilt.csharp/io/formattables/aspect_properties_io.hpp"

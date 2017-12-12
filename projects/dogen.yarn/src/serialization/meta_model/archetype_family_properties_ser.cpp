@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/model.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
 
 namespace boost {
 

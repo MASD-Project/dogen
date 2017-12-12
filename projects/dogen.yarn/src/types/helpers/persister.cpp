@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/serialization/xml_helper.hpp"
-#include "dogen/yarn/serialization/meta_model/endomodel_ser.hpp"
-#include "dogen/yarn/types/helpers/persister_error.hpp"
-#include "dogen/yarn/types/helpers/persister.hpp"
+#include "dogen.yarn/serialization/meta_model/endomodel_ser.hpp"
+#include "dogen.yarn/types/helpers/persister_error.hpp"
+#include "dogen.yarn/types/helpers/persister.hpp"
 
 namespace {
 

@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/yarn/io/meta_model/letter_cases_io.hpp"
+#include "dogen.yarn/io/meta_model/letter_cases_io.hpp"
 
 namespace dogen {
 namespace yarn {

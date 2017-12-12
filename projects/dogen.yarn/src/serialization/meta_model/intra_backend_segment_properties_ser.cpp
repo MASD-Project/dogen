@@ -28,8 +28,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.utility/serialization/path.hpp"
-#include "dogen/yarn/serialization/meta_model/path_contribution_types_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/path_contribution_types_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

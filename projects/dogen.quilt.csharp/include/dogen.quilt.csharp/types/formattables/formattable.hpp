@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/element_fwd.hpp"
+#include "dogen.yarn/types/meta_model/element_fwd.hpp"
 #include "dogen.quilt.csharp/types/formattables/element_properties.hpp"
 #include "dogen.quilt.csharp/serialization/formattables/formattable_fwd_ser.hpp"
 

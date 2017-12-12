@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/object_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/attribute_io.hpp"
-#include "dogen/yarn/io/meta_model/type_parameters_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/object_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/attribute_io.hpp"
+#include "dogen.yarn/io/meta_model/type_parameters_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_object_properties_io.hpp"
 
 namespace dogen {
 namespace yarn {

@@ -31,7 +31,7 @@
 #include "dogen.utility/io/forward_list_io.hpp"
 #include "dogen.utility/filesystem/file.hpp"
 #include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen/yarn/types/helpers/file_linter.hpp"
+#include "dogen.yarn/types/helpers/file_linter.hpp"
 
 namespace {
 

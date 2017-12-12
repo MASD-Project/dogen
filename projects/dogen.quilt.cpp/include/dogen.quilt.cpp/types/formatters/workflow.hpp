@@ -34,10 +34,10 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.annotations/types/type_repository.hpp"
 #include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen/yarn/types/meta_model/artefact.hpp"
+#include "dogen.yarn/types/meta_model/artefact.hpp"
 #include "dogen.formatters/types/repository.hpp"
-#include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/model.hpp"
 #include "dogen.quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen.quilt.cpp/types/formatters/stitch_formatter.hpp"

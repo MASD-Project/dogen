@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/denormalised_archetype_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/denormalised_archetype_properties_td.hpp"
 
 namespace {
 

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/transforms/options_td.hpp"
+#include "dogen.yarn/test_data/transforms/options_td.hpp"
 
 namespace {
 

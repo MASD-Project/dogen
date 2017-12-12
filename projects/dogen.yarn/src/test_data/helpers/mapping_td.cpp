@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/helpers/mapping_td.hpp"
-#include "dogen/yarn/test_data/meta_model/languages_td.hpp"
-#include "dogen/yarn/test_data/helpers/mapping_value_td.hpp"
+#include "dogen.yarn/test_data/helpers/mapping_td.hpp"
+#include "dogen.yarn/test_data/meta_model/languages_td.hpp"
+#include "dogen.yarn/test_data/helpers/mapping_value_td.hpp"
 
 namespace {
 

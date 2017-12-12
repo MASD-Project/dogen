@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
 #include "dogen.quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen.quilt.cpp/types/fabric/element_visitor.hpp"
 

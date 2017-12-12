@@ -30,9 +30,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/module_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/element_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/orm_module_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/module_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/element_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/orm_module_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::meta_model::module,

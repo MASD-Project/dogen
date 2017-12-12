@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/transforms/naming_configuration_td.hpp"
+#include "dogen.yarn/test_data/transforms/naming_configuration_td.hpp"
 
 namespace {
 

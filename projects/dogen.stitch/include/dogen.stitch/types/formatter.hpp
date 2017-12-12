@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen/yarn/types/meta_model/artefact.hpp"
+#include "dogen.yarn/types/meta_model/artefact.hpp"
 #include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen.stitch/types/line.hpp"
 #include "dogen.stitch/types/text_template.hpp"

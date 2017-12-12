@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/visitor_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/visitor_io.hpp"
 
 namespace dogen {
 namespace yarn {

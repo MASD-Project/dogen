@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/visitor.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
-#include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/types/meta_model/object_template.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/builtin.hpp"
+#include "dogen.yarn/types/meta_model/visitor.hpp"
+#include "dogen.yarn/types/meta_model/endomodel.hpp"
+#include "dogen.yarn/types/meta_model/exception.hpp"
+#include "dogen.yarn/types/meta_model/primitive.hpp"
+#include "dogen.yarn/types/meta_model/enumeration.hpp"
+#include "dogen.yarn/types/meta_model/object_template.hpp"
 
 namespace boost {
 

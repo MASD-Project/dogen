@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
 
 namespace dogen {
 namespace yarn {

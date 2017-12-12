@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/helpers/stereotypes_conversion_result.hpp"
+#include "dogen.yarn/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen {
 namespace yarn {

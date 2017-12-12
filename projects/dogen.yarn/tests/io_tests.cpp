@@ -21,9 +21,9 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/test/canned_tests.hpp"
-#include "dogen/yarn/types/all.hpp"
-#include "dogen/yarn/io/all_io.hpp"
-#include "dogen/yarn/test_data/all_td.hpp"
+#include "dogen.yarn/types/all.hpp"
+#include "dogen.yarn/io/all_io.hpp"
+#include "dogen.yarn/test_data/all_td.hpp"
 
 namespace {
 

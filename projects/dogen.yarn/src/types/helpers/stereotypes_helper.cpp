@@ -25,8 +25,8 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/string/splitter.hpp"
 #include "dogen.utility/exception/invalid_enum_value.hpp"
-#include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen/yarn/types/helpers/stereotypes_helper.hpp"
+#include "dogen.yarn/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen.yarn/types/helpers/stereotypes_helper.hpp"
 
 namespace {
 

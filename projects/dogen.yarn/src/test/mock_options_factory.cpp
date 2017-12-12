@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test/mock_options_factory.hpp"
+#include "dogen.yarn/test/mock_options_factory.hpp"
 
 namespace dogen {
 namespace yarn {

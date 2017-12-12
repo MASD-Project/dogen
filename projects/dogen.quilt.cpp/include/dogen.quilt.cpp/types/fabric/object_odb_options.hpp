@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen.yarn/types/meta_model/element.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/object_odb_options_fwd_ser.hpp"
 
 namespace dogen {

@@ -24,15 +24,15 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/types/meta_model/endomodel.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/test/mock_context_factory.hpp"
-#include "dogen/yarn/test/mock_endomodel_factory.hpp"
-#include "dogen/yarn/types/transforms/merge_transform.hpp"
+#include "dogen.yarn/types/meta_model/name.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/types/meta_model/endomodel.hpp"
+#include "dogen.yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/transforms/transformation_error.hpp"
+#include "dogen.yarn/test/mock_context_factory.hpp"
+#include "dogen.yarn/test/mock_endomodel_factory.hpp"
+#include "dogen.yarn/types/transforms/merge_transform.hpp"
 
 namespace {
 

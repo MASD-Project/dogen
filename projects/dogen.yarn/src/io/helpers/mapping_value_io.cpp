@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/helpers/mapping_value_io.hpp"
-#include "dogen/yarn/io/helpers/mapping_actions_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/helpers/mapping_value_io.hpp"
+#include "dogen.yarn/io/helpers/mapping_actions_io.hpp"
 
 namespace boost {
 

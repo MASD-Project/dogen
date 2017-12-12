@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen.yarn/types/meta_model/name.hpp"
 #include "dogen.quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen.quilt.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen.quilt.csharp/types/formattables/assistant_properties.hpp"

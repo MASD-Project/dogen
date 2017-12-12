@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/name_hash.hpp"
-#include "dogen/yarn/hash/meta_model/module_hash.hpp"
-#include "dogen/yarn/hash/meta_model/object_hash.hpp"
-#include "dogen/yarn/hash/meta_model/builtin_hash.hpp"
-#include "dogen/yarn/hash/meta_model/visitor_hash.hpp"
-#include "dogen/yarn/hash/meta_model/endomodel_hash.hpp"
-#include "dogen/yarn/hash/meta_model/exception_hash.hpp"
-#include "dogen/yarn/hash/meta_model/languages_hash.hpp"
-#include "dogen/yarn/hash/meta_model/primitive_hash.hpp"
-#include "dogen/yarn/hash/meta_model/enumeration_hash.hpp"
-#include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
-#include "dogen/yarn/hash/meta_model/object_template_hash.hpp"
-#include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/name_hash.hpp"
+#include "dogen.yarn/hash/meta_model/module_hash.hpp"
+#include "dogen.yarn/hash/meta_model/object_hash.hpp"
+#include "dogen.yarn/hash/meta_model/builtin_hash.hpp"
+#include "dogen.yarn/hash/meta_model/visitor_hash.hpp"
+#include "dogen.yarn/hash/meta_model/endomodel_hash.hpp"
+#include "dogen.yarn/hash/meta_model/exception_hash.hpp"
+#include "dogen.yarn/hash/meta_model/languages_hash.hpp"
+#include "dogen.yarn/hash/meta_model/primitive_hash.hpp"
+#include "dogen.yarn/hash/meta_model/enumeration_hash.hpp"
+#include "dogen.yarn/hash/meta_model/origin_types_hash.hpp"
+#include "dogen.yarn/hash/meta_model/object_template_hash.hpp"
+#include "dogen.yarn/hash/meta_model/orm_model_properties_hash.hpp"
 
 namespace {
 

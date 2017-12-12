@@ -20,15 +20,15 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/visitor.hpp"
-#include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/types/meta_model/object_template.hpp"
-#include "dogen/yarn/types/helpers/validation_error.hpp"
-#include "dogen/yarn/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/builtin.hpp"
+#include "dogen.yarn/types/meta_model/visitor.hpp"
+#include "dogen.yarn/types/meta_model/exception.hpp"
+#include "dogen.yarn/types/meta_model/enumeration.hpp"
+#include "dogen.yarn/types/meta_model/object_template.hpp"
+#include "dogen.yarn/types/helpers/validation_error.hpp"
+#include "dogen.yarn/types/helpers/endomodel_pre_processing_validator.hpp"
 
 namespace {
 

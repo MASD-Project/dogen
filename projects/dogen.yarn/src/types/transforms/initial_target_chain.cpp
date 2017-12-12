@@ -21,15 +21,15 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen.yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen.yarn/types/transforms/context.hpp"
 #include "dogen.external/types/transforms/context.hpp"
 #include "dogen.external/types/transforms/model_generation_chain.hpp"
-#include "dogen/yarn/types/transforms/external_model_to_endomodel_transform.hpp"
-// #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
-// #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "dogen/yarn/types/transforms/endomodel_pre_processing_chain.hpp"
-#include "dogen/yarn/types/transforms/initial_target_chain.hpp"
+#include "dogen.yarn/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "dogen.yarn/types/transforms/exomodel_generation_chain.hpp"
+// #include "dogen.yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "dogen.yarn/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "dogen.yarn/types/transforms/initial_target_chain.hpp"
 
 namespace {
 

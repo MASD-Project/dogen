@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {

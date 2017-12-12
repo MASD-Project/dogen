@@ -27,13 +27,13 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/unordered_set_io.hpp"
 #include "dogen.utility/io/list_io.hpp"
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/location_io.hpp"
-#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
-#include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/helpers/name_builder.hpp"
-#include "dogen/yarn/types/helpers/building_error.hpp"
-#include "dogen/yarn/types/helpers/name_tree_builder.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/location_io.hpp"
+#include "dogen.yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen.yarn/types/meta_model/languages.hpp"
+#include "dogen.yarn/types/helpers/name_builder.hpp"
+#include "dogen.yarn/types/helpers/building_error.hpp"
+#include "dogen.yarn/types/helpers/name_tree_builder.hpp"
 
 namespace {
 

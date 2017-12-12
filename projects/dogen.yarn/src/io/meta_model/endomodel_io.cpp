@@ -20,19 +20,19 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/module_io.hpp"
-#include "dogen/yarn/io/meta_model/object_io.hpp"
-#include "dogen/yarn/io/meta_model/builtin_io.hpp"
-#include "dogen/yarn/io/meta_model/visitor_io.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/io/meta_model/exception_io.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/io/meta_model/primitive_io.hpp"
-#include "dogen/yarn/io/meta_model/enumeration_io.hpp"
-#include "dogen/yarn/io/meta_model/origin_types_io.hpp"
-#include "dogen/yarn/io/meta_model/object_template_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/module_io.hpp"
+#include "dogen.yarn/io/meta_model/object_io.hpp"
+#include "dogen.yarn/io/meta_model/builtin_io.hpp"
+#include "dogen.yarn/io/meta_model/visitor_io.hpp"
+#include "dogen.yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen.yarn/io/meta_model/exception_io.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/meta_model/primitive_io.hpp"
+#include "dogen.yarn/io/meta_model/enumeration_io.hpp"
+#include "dogen.yarn/io/meta_model/origin_types_io.hpp"
+#include "dogen.yarn/io/meta_model/object_template_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_model_properties_io.hpp"
 
 namespace std {
 

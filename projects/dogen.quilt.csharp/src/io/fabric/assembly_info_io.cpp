@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
 #include "dogen.quilt.csharp/io/fabric/assembly_info_io.hpp"
 
 namespace dogen {

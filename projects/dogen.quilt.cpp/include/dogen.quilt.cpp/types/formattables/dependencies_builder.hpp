@@ -30,8 +30,8 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/directive_group.hpp"
 #include "dogen.quilt.cpp/types/formattables/directive_group_repository.hpp"
 

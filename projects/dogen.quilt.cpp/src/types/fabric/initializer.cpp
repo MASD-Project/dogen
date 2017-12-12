@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.quilt.cpp/types/fabric/dynamic_transform.hpp"
-#include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
+#include "dogen.yarn/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen.quilt.cpp/types/fabric/initializer.hpp"
 
 namespace dogen {

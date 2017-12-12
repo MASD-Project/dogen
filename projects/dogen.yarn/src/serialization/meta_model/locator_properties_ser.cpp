@@ -29,11 +29,11 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/locator_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/model_segment_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/locator_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/model_segment_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/directory_structure_styles_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/archetype_family_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/intra_backend_segment_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

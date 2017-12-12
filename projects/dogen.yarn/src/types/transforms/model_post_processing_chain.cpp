@@ -20,15 +20,15 @@
  */
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/types/transforms/generability_transform.hpp"
-#include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
-#include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
-#include "dogen/yarn/types/transforms/enablement_transform.hpp"
-#include "dogen/yarn/types/transforms/formatting_transform.hpp"
-#include "dogen/yarn/types/transforms/archetype_location_properties_transform.hpp"
-#include "dogen/yarn/types/transforms/locator_properties_transform.hpp"
-#include "dogen/yarn/types/transforms/model_post_processing_chain.hpp"
+#include "dogen.yarn/io/meta_model/model_io.hpp"
+#include "dogen.yarn/types/transforms/generability_transform.hpp"
+#include "dogen.yarn/types/transforms/dynamic_transforms_chain.hpp"
+#include "dogen.yarn/types/transforms/artefact_properties_transform.hpp"
+#include "dogen.yarn/types/transforms/enablement_transform.hpp"
+#include "dogen.yarn/types/transforms/formatting_transform.hpp"
+#include "dogen.yarn/types/transforms/archetype_location_properties_transform.hpp"
+#include "dogen.yarn/types/transforms/locator_properties_transform.hpp"
+#include "dogen.yarn/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
 

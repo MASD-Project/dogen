@@ -26,18 +26,18 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/registrar_ser.hpp"
+#include "dogen.yarn/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
 #include "dogen.formatters/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/module_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/module_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/object_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/builtin_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/visitor_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/exception_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/primitive_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/enumeration_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/object_template_ser.hpp"
 
 namespace dogen {
 namespace yarn {

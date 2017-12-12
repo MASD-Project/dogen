@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
+#include "dogen.yarn/test_data/meta_model/element_archetype_td.hpp"
 
 namespace {
 

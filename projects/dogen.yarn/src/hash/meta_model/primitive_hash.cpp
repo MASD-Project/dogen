@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/element_hash.hpp"
-#include "dogen/yarn/hash/meta_model/attribute_hash.hpp"
-#include "dogen/yarn/hash/meta_model/primitive_hash.hpp"
-#include "dogen/yarn/hash/meta_model/orm_primitive_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/element_hash.hpp"
+#include "dogen.yarn/hash/meta_model/attribute_hash.hpp"
+#include "dogen.yarn/hash/meta_model/primitive_hash.hpp"
+#include "dogen.yarn/hash/meta_model/orm_primitive_properties_hash.hpp"
 
 namespace {
 

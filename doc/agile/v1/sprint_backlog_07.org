@@ -13,33 +13,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-10 Sun 21:34]
+#+CAPTION: Clock summary at [2017-12-12 Tue 23:13]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *64:47* |       |       | 100.0 |
+| *Total time*                                                                | *68:14* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 64:47   |       |       | 100.0 |
-| Active                                                                      |         | 64:47 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.6 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:42 |   4.2 |
+| Stories                                                                     | 68:14   |       |       | 100.0 |
+| Active                                                                      |         | 68:14 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.5 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:42 |   4.0 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  13.4 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  21.2 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.6 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  24.8 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  12.7 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  20.1 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.4 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  23.5 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.6 |
-| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   3.1 |
+| COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   2.9 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.6 |
-| COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   1.0 |
-| COMPLETED Create a =probing= model                                          |         |       |  1:22 |   2.1 |
-| COMPLETED Create the =external= model                                       |         |       |  5:07 |   7.9 |
-| COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.9 |
-| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   4.2 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.6 |
-| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.6 |
-| STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.5 |
+| COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   0.9 |
+| COMPLETED Create a =probing= model                                          |         |       |  1:22 |   2.0 |
+| COMPLETED Create the =external= model                                       |         |       |  5:07 |   7.5 |
+| COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.7 |
+| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   4.0 |
+| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   5.1 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.3 |
+| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.5 |
+| STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -527,6 +528,25 @@ As per analysis story, we are moving away from the sewing terms.
 
 As per analysis story, we are moving away from the sewing terms.
 
+*** COMPLETED Make =dogen= part of model modules                      :story:
+    CLOSED: [2017-12-12 Tue 23:12]
+    CLOCK: [2017-12-12 Tue 20:25]--[2017-12-12 Tue 23:12] =>  2:47
+    CLOCK: [2017-12-12 Tue 19:44]--[2017-12-12 Tue 20:24] =>  0:40
+
+Whilst we are renaming the models, we should perform a long-standing
+task from the early days of dogen: to make =dogen= part of the model
+modules rather than the external modules. This makes the folder
+structure cleaner under projects. This needs to be done all in one go
+for it to work or else it will break resolution.
+
+Tasks:
+
+- rename input models
+- drop external module from input models, add to model modules
+- rename project folders
+- code-generate; expectation is that no files will change (after
+  folder rename).
+
 *** STARTED Finish setting up coveralls                               :story:
     CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
     CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
@@ -614,23 +634,6 @@ flight as we transform from exomodel to endomodel.
 Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
-
-*** STARTED Make =dogen= part of model modules                        :story:
-    CLOCK: [2017-12-12 Tue 19:44]--[2017-12-12 Tue 20:24] =>  0:40
-
-Whilst we are renaming the models, we should perform a long-standing
-task from the early days of dogen: to make =dogen= part of the model
-modules rather than the external modules. This makes the folder
-structure cleaner under projects. This needs to be done all in one go
-for it to work or else it will break resolution.
-
-Tasks:
-
-- rename input models
-- drop external module from input models, add to model modules
-- rename project folders
-- code-generate; expectation is that no files will change (after
-  folder rename).
 
 *** Rename =yarn= to =modeling=                                       :story:
 

@@ -22,8 +22,8 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.yarn/types/helpers/name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/building_error.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/common_odb_options.hpp"

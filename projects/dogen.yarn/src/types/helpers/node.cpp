@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/helpers/node.hpp"
+#include "dogen.yarn/types/helpers/node.hpp"
 
 namespace boost {
 

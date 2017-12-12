@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/enumerator_io.hpp"
-#include "dogen/yarn/io/meta_model/enumeration_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/enumerator_io.hpp"
+#include "dogen.yarn/io/meta_model/enumeration_io.hpp"
 
 namespace dogen {
 namespace yarn {

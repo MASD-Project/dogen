@@ -29,11 +29,11 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/name_ser.hpp"
 #include "dogen.annotations/serialization/annotation_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/attribute_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/name_tree_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/orm_attribute_properties_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/attribute_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/name_tree_ser.hpp"
+#include "dogen.yarn/serialization/meta_model/orm_attribute_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
-#include "dogen/yarn/test_data/helpers/stereotypes_conversion_result_td.hpp"
+#include "dogen.yarn/test_data/meta_model/static_stereotypes_td.hpp"
+#include "dogen.yarn/test_data/helpers/stereotypes_conversion_result_td.hpp"
 
 namespace {
 

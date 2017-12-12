@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/model_segment_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/directory_structure_styles_io.hpp"
-#include "dogen/yarn/io/meta_model/archetype_family_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/locator_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/model_segment_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/directory_structure_styles_io.hpp"
+#include "dogen.yarn/io/meta_model/archetype_family_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/intra_backend_segment_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

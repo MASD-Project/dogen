@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/backend_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/archetype_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/denormalised_archetype_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/facet_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/backend_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/archetype_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/denormalised_archetype_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
 

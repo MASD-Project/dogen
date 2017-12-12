@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/backend_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/archetype_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/denormalised_archetype_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/global_archetype_location_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/facet_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/backend_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/archetype_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/denormalised_archetype_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/global_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

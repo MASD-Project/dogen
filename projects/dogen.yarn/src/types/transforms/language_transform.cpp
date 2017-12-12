@@ -24,13 +24,13 @@
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
-#include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/language_transform.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/meta_model/endomodel_io.hpp"
+#include "dogen.yarn/types/traits.hpp"
+#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.yarn/types/transforms/context.hpp"
+#include "dogen.yarn/types/transforms/transformation_error.hpp"
+#include "dogen.yarn/types/transforms/language_transform.hpp"
 
 namespace {
 

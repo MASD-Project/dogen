@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/letter_cases_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/letter_cases_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_primitive_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

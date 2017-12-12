@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/transforms/dynamic_transform_interface.hpp"
+#include "dogen.yarn/types/transforms/context_fwd.hpp"
+#include "dogen.yarn/types/transforms/dynamic_transform_interface.hpp"
 
 namespace dogen {
 namespace quilt {

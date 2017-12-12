@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/meta_model/letter_cases_td.hpp"
-#include "dogen/yarn/test_data/meta_model/orm_primitive_properties_td.hpp"
+#include "dogen.yarn/test_data/meta_model/letter_cases_td.hpp"
+#include "dogen.yarn/test_data/meta_model/orm_primitive_properties_td.hpp"
 
 namespace {
 

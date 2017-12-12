@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "dogen.yarn/types/transforms/model_to_text_model_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {

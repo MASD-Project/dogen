@@ -21,16 +21,16 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
-#include "dogen/yarn/io/meta_model/module_io.hpp"
-#include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/io/meta_model/origin_types_io.hpp"
-#include "dogen/yarn/io/meta_model/element_archetype_io.hpp"
-#include "dogen/yarn/io/meta_model/locator_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/global_archetype_location_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/name_io.hpp"
+#include "dogen.yarn/io/meta_model/model_io.hpp"
+#include "dogen.yarn/io/meta_model/module_io.hpp"
+#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.yarn/io/meta_model/languages_io.hpp"
+#include "dogen.yarn/io/meta_model/origin_types_io.hpp"
+#include "dogen.yarn/io/meta_model/element_archetype_io.hpp"
+#include "dogen.yarn/io/meta_model/locator_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/orm_model_properties_io.hpp"
+#include "dogen.yarn/io/meta_model/global_archetype_location_properties_io.hpp"
 
 namespace std {
 

@@ -25,8 +25,8 @@
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/filesystem/file.hpp"
-#include "dogen/yarn/io/meta_model/artefact_io.hpp"
-#include "dogen/yarn/types/helpers/filesystem_writer.hpp"
+#include "dogen.yarn/io/meta_model/artefact_io.hpp"
+#include "dogen.yarn/types/helpers/filesystem_writer.hpp"
 
 namespace {
 

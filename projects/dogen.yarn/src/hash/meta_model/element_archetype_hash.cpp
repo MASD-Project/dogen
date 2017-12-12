@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
+#include "dogen.yarn/hash/meta_model/element_archetype_hash.hpp"
 
 namespace {
 

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/helpers/artefact_writer_interface.hpp"
+#include "dogen.yarn/types/helpers/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace yarn {

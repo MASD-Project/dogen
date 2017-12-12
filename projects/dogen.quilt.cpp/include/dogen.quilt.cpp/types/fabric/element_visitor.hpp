@@ -27,7 +27,7 @@
 
 #include "dogen.quilt.cpp/types/fabric/registrar_fwd.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists_fwd.hpp"
-#include "dogen/yarn/types/meta_model/element_visitor.hpp"
+#include "dogen.yarn/types/meta_model/element_visitor.hpp"
 #include "dogen.quilt.cpp/types/fabric/master_header_fwd.hpp"
 #include "dogen.quilt.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen.quilt.cpp/types/fabric/common_odb_options_fwd.hpp"

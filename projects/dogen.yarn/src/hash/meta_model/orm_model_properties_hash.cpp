@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/meta_model/letter_cases_hash.hpp"
-#include "dogen/yarn/hash/meta_model/orm_database_systems_hash.hpp"
-#include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
+#include "dogen.yarn/hash/meta_model/letter_cases_hash.hpp"
+#include "dogen.yarn/hash/meta_model/orm_database_systems_hash.hpp"
+#include "dogen.yarn/hash/meta_model/orm_model_properties_hash.hpp"
 
 namespace {
 

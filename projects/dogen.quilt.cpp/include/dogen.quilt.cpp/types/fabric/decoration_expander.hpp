@@ -27,7 +27,7 @@
 
 #include "dogen.formatters/types/decoration_properties.hpp"
 #include "dogen.formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen.yarn/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace quilt {

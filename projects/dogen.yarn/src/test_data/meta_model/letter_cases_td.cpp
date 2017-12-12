@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/meta_model/letter_cases_td.hpp"
+#include "dogen.yarn/test_data/meta_model/letter_cases_td.hpp"
 
 namespace dogen {
 namespace yarn {

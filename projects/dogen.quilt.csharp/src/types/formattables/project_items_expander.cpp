@@ -20,13 +20,13 @@
  */
 #include <set>
 #include <algorithm>
-#include"dogen/yarn/types/helpers/meta_name_factory.hpp"
-#include"dogen/yarn/types/meta_model/object.hpp"
-#include"dogen/yarn/types/meta_model/visitor.hpp"
-#include"dogen/yarn/types/meta_model/builtin.hpp"
-#include"dogen/yarn/types/meta_model/exception.hpp"
-#include"dogen/yarn/types/meta_model/enumeration.hpp"
-#include"dogen/yarn/types/meta_model/primitive.hpp"
+#include"dogen.yarn/types/helpers/meta_name_factory.hpp"
+#include"dogen.yarn/types/meta_model/object.hpp"
+#include"dogen.yarn/types/meta_model/visitor.hpp"
+#include"dogen.yarn/types/meta_model/builtin.hpp"
+#include"dogen.yarn/types/meta_model/exception.hpp"
+#include"dogen.yarn/types/meta_model/enumeration.hpp"
+#include"dogen.yarn/types/meta_model/primitive.hpp"
 #include "dogen.quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.csharp/types/formattables/project_items_expander.hpp"

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/helpers/indices_td.hpp"
+#include "dogen.yarn/test_data/helpers/indices_td.hpp"
 
 namespace {
 

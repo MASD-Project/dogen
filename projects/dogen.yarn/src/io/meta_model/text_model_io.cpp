@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/meta_model/artefact_io.hpp"
-#include "dogen/yarn/io/meta_model/text_model_io.hpp"
+#include "dogen.yarn/io/meta_model/artefact_io.hpp"
+#include "dogen.yarn/io/meta_model/text_model_io.hpp"
 
 namespace std {
 
