@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen.formatters/types/decoration_properties.hpp"
 
 namespace dogen {
 namespace formatters {

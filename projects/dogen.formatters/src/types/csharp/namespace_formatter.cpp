@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string/join.hpp>
-#include "dogen/formatters/types/csharp/namespace_formatter.hpp"
+#include "dogen.formatters/types/csharp/namespace_formatter.hpp"
 
 namespace {
 

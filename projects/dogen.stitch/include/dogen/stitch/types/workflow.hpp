@@ -35,7 +35,7 @@
 #include "dogen.annotations/types/annotation_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 #include "dogen/yarn/types/meta_model/artefact.hpp"
-#include "dogen/formatters/types/repository.hpp"
+#include "dogen.formatters/types/repository.hpp"
 #include "dogen/stitch/types/properties.hpp"
 #include "dogen/stitch/types/text_template.hpp"
 

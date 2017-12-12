@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
-#include "dogen/formatters/types/decoration_formatter.hpp"
-#include "dogen/formatters/types/cpp/include_formatter.hpp"
-#include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
-#include "dogen/formatters/types/cpp/boilerplate_formatter.hpp"
+#include "dogen.formatters/types/decoration_formatter.hpp"
+#include "dogen.formatters/types/cpp/include_formatter.hpp"
+#include "dogen.formatters/types/cpp/header_guard_formatter.hpp"
+#include "dogen.formatters/types/cpp/boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace formatters {

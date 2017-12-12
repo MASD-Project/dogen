@@ -21,8 +21,8 @@
 #include <ostream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
+#include "dogen.formatters/types/indent_filter.hpp"
+#include "dogen.formatters/types/cpp/header_guard_formatter.hpp"
 
 namespace {
 

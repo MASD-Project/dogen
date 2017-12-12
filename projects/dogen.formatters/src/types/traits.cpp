@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/traits.hpp"
+#include "dogen.formatters/types/traits.hpp"
 
 namespace dogen {
 namespace formatters {

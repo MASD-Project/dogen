@@ -26,7 +26,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen.formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
 

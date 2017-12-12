@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/modeline_field_hash.hpp"
+#include "dogen.formatters/hash/modeline_field_hash.hpp"
 
 namespace {
 

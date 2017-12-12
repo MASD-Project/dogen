@@ -20,9 +20,9 @@
  */
 #include <sstream>
 #include <ostream>
-#include "dogen/formatters/types/comment_formatter.hpp"
-#include "dogen/formatters/types/modeline_formatter.hpp"
-#include "dogen/formatters/types/decoration_formatter.hpp"
+#include "dogen.formatters/types/comment_formatter.hpp"
+#include "dogen.formatters/types/modeline_formatter.hpp"
+#include "dogen.formatters/types/decoration_formatter.hpp"
 
 namespace {
 

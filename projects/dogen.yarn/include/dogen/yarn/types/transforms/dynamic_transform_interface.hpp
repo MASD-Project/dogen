@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen.formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 

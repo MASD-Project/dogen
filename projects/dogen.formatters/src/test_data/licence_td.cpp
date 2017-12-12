@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/licence_td.hpp"
+#include "dogen.formatters/test_data/licence_td.hpp"
 
 namespace {
 

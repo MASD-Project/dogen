@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/modeline.hpp"
+#include "dogen.formatters/types/modeline.hpp"
 
 namespace dogen {
 namespace formatters {

@@ -28,7 +28,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen.annotations/types/type_repository_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen.formatters/types/repository_factory.hpp"
 #include "dogen/yarn/io/meta_model/artefact_io.hpp"
 #include "dogen/yarn/types/helpers/filesystem_writer.hpp"
 #include "dogen/stitch/types/parser.hpp"

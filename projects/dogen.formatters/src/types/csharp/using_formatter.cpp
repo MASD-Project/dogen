@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/filesystem/path.hpp>
-#include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/formatters/types/csharp/using_formatter.hpp"
+#include "dogen.formatters/types/indent_filter.hpp"
+#include "dogen.formatters/types/csharp/using_formatter.hpp"
 
 namespace dogen {
 namespace formatters {

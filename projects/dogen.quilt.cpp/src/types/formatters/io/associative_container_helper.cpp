@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/associative_container_helper.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace quilt {

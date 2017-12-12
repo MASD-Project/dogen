@@ -20,8 +20,8 @@
  */
 #include <cctype>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/indent_filter.hpp"
-#include "dogen/formatters/types/comment_formatter.hpp"
+#include "dogen.formatters/types/indent_filter.hpp"
+#include "dogen.formatters/types/comment_formatter.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"

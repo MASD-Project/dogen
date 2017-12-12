@@ -34,7 +34,7 @@
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
-#include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen.formatters/types/decoration_properties.hpp"
 #include "dogen/yarn/types/meta_model/static_stereotypes.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor_fwd.hpp"

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/hash/repository_hash.hpp"
-#include "dogen/formatters/hash/modeline_group_hash.hpp"
+#include "dogen.formatters/hash/repository_hash.hpp"
+#include "dogen.formatters/hash/modeline_group_hash.hpp"
 
 namespace {
 

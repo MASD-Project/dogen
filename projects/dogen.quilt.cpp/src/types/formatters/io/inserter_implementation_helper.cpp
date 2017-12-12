@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen.formatters/types/sequence_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 
 namespace dogen {

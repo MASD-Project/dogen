@@ -21,9 +21,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/utility_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatters/types/utility_formatter.hpp"
+#include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/stitch/io/block_types_io.hpp"
 #include "dogen/stitch/types/formatting_error.hpp"
 #include "dogen/stitch/types/formatter.hpp"

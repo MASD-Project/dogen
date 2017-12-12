@@ -29,8 +29,8 @@
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 

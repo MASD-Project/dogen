@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
-#include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen.formatters/types/repository_factory.hpp"
 #include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"

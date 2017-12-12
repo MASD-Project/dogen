@@ -22,8 +22,8 @@
 #include <boost/filesystem/fstream.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/formatters/types/hydration_error.hpp"
-#include "dogen/formatters/types/licence_text_hydrator.hpp"
+#include "dogen.formatters/types/hydration_error.hpp"
+#include "dogen.formatters/types/licence_text_hydrator.hpp"
 
 using namespace dogen::utility::log;
 

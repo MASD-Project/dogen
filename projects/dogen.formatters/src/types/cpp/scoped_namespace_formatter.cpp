@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace formatters {

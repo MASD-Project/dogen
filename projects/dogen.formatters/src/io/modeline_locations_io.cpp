@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/formatters/io/modeline_locations_io.hpp"
+#include "dogen.formatters/io/modeline_locations_io.hpp"
 
 namespace dogen {
 namespace formatters {

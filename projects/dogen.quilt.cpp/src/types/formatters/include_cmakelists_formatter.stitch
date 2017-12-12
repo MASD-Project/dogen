@@ -3,7 +3,7 @@
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/cmakelists.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>

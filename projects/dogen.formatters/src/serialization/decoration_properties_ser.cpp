@@ -29,9 +29,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/formatters/serialization/licence_ser.hpp"
-#include "dogen/formatters/serialization/modeline_ser.hpp"
-#include "dogen/formatters/serialization/decoration_properties_ser.hpp"
+#include "dogen.formatters/serialization/licence_ser.hpp"
+#include "dogen.formatters/serialization/modeline_ser.hpp"
+#include "dogen.formatters/serialization/decoration_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

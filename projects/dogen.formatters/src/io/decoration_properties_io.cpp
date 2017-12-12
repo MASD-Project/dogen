@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/licence_io.hpp"
-#include "dogen/formatters/io/modeline_io.hpp"
-#include "dogen/formatters/io/decoration_properties_io.hpp"
+#include "dogen.formatters/io/licence_io.hpp"
+#include "dogen.formatters/io/modeline_io.hpp"
+#include "dogen.formatters/io/decoration_properties_io.hpp"
 
 namespace boost {
 

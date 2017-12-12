@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen.formatters/types/indent_filter.hpp"
 
 using namespace dogen::utility::log;
 

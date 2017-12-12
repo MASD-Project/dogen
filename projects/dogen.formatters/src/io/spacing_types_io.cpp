@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/formatters/io/spacing_types_io.hpp"
+#include "dogen.formatters/io/spacing_types_io.hpp"
 
 namespace dogen {
 namespace formatters {

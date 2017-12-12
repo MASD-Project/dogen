@@ -21,7 +21,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
-#include "dogen/formatters/types/utility_formatter.hpp"
+#include "dogen.formatters/types/utility_formatter.hpp"
 #include "dogen.external.json/types/dehydrator.hpp"
 
 namespace {

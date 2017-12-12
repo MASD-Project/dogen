@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/modeline_field_td.hpp"
+#include "dogen.formatters/test_data/modeline_field_td.hpp"
 
 namespace {
 

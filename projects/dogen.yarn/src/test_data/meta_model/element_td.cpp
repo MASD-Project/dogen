@@ -31,7 +31,7 @@
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
-#include "dogen/formatters/test_data/decoration_properties_td.hpp"
+#include "dogen.formatters/test_data/decoration_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/static_stereotypes_td.hpp"
 #include "dogen/yarn/test_data/meta_model/artefact_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/local_archetype_location_properties_td.hpp"

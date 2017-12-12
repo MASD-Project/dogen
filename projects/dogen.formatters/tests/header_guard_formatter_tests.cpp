@@ -19,12 +19,12 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/formatters/types/indent_filter.hpp"
+#include "dogen.formatters/types/indent_filter.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/formatters/types/cpp/header_guard_formatter.hpp"
+#include "dogen.formatters/types/cpp/header_guard_formatter.hpp"
 
 namespace {
 

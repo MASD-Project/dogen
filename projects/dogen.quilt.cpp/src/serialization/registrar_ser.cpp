@@ -30,7 +30,7 @@
 #include "dogen/options/serialization/registrar_ser.hpp"
 #include "dogen/probing/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/registrar_ser.hpp"
-#include "dogen/formatters/serialization/registrar_ser.hpp"
+#include "dogen.formatters/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"

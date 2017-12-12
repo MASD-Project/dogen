@@ -25,7 +25,7 @@
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen.formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/throw_exception.hpp>

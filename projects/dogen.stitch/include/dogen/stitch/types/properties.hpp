@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/stitch/types/stitching_properties.hpp"
-#include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen.formatters/types/decoration_properties.hpp"
 #include "dogen/stitch/serialization/properties_fwd_ser.hpp"
 
 namespace dogen {

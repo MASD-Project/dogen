@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen/formatters/types/code_generation_marker_factory.hpp"
+#include "dogen.formatters/types/code_generation_marker_factory.hpp"
 
 namespace {
 

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/infix_configuration.hpp"
+#include "dogen.formatters/types/infix_configuration.hpp"
 
 namespace dogen {
 namespace formatters {

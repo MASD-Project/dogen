@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test/mock_decoration_properties_factory.hpp"
+#include "dogen.formatters/test/mock_decoration_properties_factory.hpp"
 
 namespace  {
 

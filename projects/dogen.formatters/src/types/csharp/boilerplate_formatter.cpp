@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/formatters/types/decoration_formatter.hpp"
-#include "dogen/formatters/types/csharp/using_formatter.hpp"
-#include "dogen/formatters/types/csharp/boilerplate_formatter.hpp"
+#include "dogen.formatters/types/decoration_formatter.hpp"
+#include "dogen.formatters/types/csharp/using_formatter.hpp"
+#include "dogen.formatters/types/csharp/boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace formatters {

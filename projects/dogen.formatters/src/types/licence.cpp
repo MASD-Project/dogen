@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/formatters/types/licence.hpp"
+#include "dogen.formatters/types/licence.hpp"
 
 namespace dogen {
 namespace formatters {

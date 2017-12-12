@@ -22,11 +22,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen/formatters/types/traits.hpp"
-#include "dogen/formatters/types/repository_factory.hpp"
-#include "dogen/formatters/types/code_generation_marker_factory.hpp"
-#include "dogen/formatters/types/building_error.hpp"
-#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen.formatters/types/traits.hpp"
+#include "dogen.formatters/types/repository_factory.hpp"
+#include "dogen.formatters/types/code_generation_marker_factory.hpp"
+#include "dogen.formatters/types/building_error.hpp"
+#include "dogen.formatters/types/decoration_properties_factory.hpp"
 
 namespace {
 

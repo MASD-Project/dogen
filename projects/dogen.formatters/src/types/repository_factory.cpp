@@ -23,11 +23,11 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/formatters/io/repository_io.hpp"
-#include "dogen/formatters/io/modeline_group_io.hpp"
-#include "dogen/formatters/types/modeline_group_hydrator.hpp"
-#include "dogen/formatters/types/licence_text_hydrator.hpp"
-#include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen.formatters/io/repository_io.hpp"
+#include "dogen.formatters/io/modeline_group_io.hpp"
+#include "dogen.formatters/types/modeline_group_hydrator.hpp"
+#include "dogen.formatters/types/licence_text_hydrator.hpp"
+#include "dogen.formatters/types/repository_factory.hpp"
 
 using namespace dogen::utility::log;
 

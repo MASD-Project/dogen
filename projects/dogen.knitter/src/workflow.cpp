@@ -25,7 +25,7 @@
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/types/formatting_error.hpp"
+#include "dogen.formatters/types/formatting_error.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"

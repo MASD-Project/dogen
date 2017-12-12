@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/formatters/test_data/decoration_configuration_td.hpp"
+#include "dogen.formatters/test_data/decoration_configuration_td.hpp"
 
 namespace {
 

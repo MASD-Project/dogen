@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/formatters/io/infix_configuration_io.hpp"
-#include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen.formatters/io/infix_configuration_io.hpp"
+#include "dogen.formatters/types/sequence_formatter.hpp"
 
 namespace {
 

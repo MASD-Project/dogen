@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/formatters/types/csharp/scoped_boilerplate_formatter.hpp"
+#include "dogen.formatters/types/csharp/scoped_boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace formatters {
