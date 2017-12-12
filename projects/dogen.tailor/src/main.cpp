@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/tailor/workflow.hpp"
+#include "dogen.tailor/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
     dogen::tailor::workflow w;

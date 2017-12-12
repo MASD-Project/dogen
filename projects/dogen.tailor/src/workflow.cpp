@@ -27,14 +27,14 @@
 #include "dogen.options/types/tailoring_options.hpp"
 #include "dogen.external/types/transforms/context.hpp"
 #include "dogen.external/types/transforms/model_to_model_chain.hpp"
-#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen.external.json/types/initializer.hpp"
 #include "dogen.external.dia/types/initializer.hpp"
+#include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/tailor/program_options_parser.hpp"
-#include "dogen/tailor/parser_validation_error.hpp"
-#include "dogen/tailor/workflow_error.hpp"
-#include "dogen/tailor/workflow.hpp"
+#include "dogen.tailor/program_options_parser.hpp"
+#include "dogen.tailor/parser_validation_error.hpp"
+#include "dogen.tailor/workflow_error.hpp"
+#include "dogen.tailor/workflow.hpp"
 
 namespace {
 
