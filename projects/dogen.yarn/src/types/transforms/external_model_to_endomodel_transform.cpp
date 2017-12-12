@@ -38,7 +38,7 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
-#include "dogen/external/io/meta_model/model_io.hpp"
+#include "dogen.external/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen/yarn/io/helpers/stereotypes_conversion_result_io.hpp"

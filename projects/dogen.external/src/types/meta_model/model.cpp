@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace external {

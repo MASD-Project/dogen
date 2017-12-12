@@ -30,7 +30,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/external/serialization/meta_model/attribute_ser.hpp"
+#include "dogen.external/serialization/meta_model/attribute_ser.hpp"
 
 namespace boost {
 namespace serialization {

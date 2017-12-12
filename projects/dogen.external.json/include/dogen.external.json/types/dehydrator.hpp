@@ -31,9 +31,9 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/external/types/meta_model/element.hpp"
-#include "dogen/external/types/meta_model/attribute.hpp"
-#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen.external/types/meta_model/element.hpp"
+#include "dogen.external/types/meta_model/attribute.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace external {

@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/external/types/meta_model/element.hpp"
-#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen.external/types/meta_model/element.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
 #include "dogen.external.dia/types/processed_object.hpp"
 
 namespace dogen {

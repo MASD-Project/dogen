@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen/external/types/meta_model/element.hpp"
-#include "dogen/external/types/meta_model/attribute.hpp"
+#include "dogen.external/types/meta_model/element.hpp"
+#include "dogen.external/types/meta_model/attribute.hpp"
 #include "dogen.external.dia/types/processed_object.hpp"
 #include "dogen.external.dia/types/processed_attribute.hpp"
 

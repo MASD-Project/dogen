@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/external/test_data/meta_model/model_td.hpp"
-#include "dogen/external/test_data/meta_model/element_td.hpp"
+#include "dogen.external/test_data/meta_model/model_td.hpp"
+#include "dogen.external/test_data/meta_model/element_td.hpp"
 
 namespace {
 

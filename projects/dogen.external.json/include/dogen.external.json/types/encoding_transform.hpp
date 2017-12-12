@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/external/types/meta_model/model.hpp"
-#include "dogen/external/types/transforms/encoding_transform_interface.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
+#include "dogen.external/types/transforms/encoding_transform_interface.hpp"
 
 namespace dogen {
 namespace external {

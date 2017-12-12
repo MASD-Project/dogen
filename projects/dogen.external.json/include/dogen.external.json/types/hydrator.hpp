@@ -29,9 +29,9 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/external/types/meta_model/model.hpp"
-#include "dogen/external/types/meta_model/element.hpp"
-#include "dogen/external/types/meta_model/attribute.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
+#include "dogen.external/types/meta_model/element.hpp"
+#include "dogen.external/types/meta_model/attribute.hpp"
 
 namespace dogen {
 namespace external {

@@ -28,7 +28,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/options/serialization/registrar_ser.hpp"
 #include "dogen/probing/serialization/registrar_ser.hpp"
-#include "dogen/external/serialization/registrar_ser.hpp"
+#include "dogen.external/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen.external.json/serialization/registrar_ser.hpp"

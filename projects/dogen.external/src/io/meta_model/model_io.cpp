@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/external/io/meta_model/model_io.hpp"
-#include "dogen/external/io/meta_model/element_io.hpp"
+#include "dogen.external/io/meta_model/model_io.hpp"
+#include "dogen.external/io/meta_model/element_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

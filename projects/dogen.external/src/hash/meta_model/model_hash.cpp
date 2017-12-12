@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/hash/meta_model/model_hash.hpp"
-#include "dogen/external/hash/meta_model/element_hash.hpp"
+#include "dogen.external/hash/meta_model/model_hash.hpp"
+#include "dogen.external/hash/meta_model/element_hash.hpp"
 
 namespace {
 

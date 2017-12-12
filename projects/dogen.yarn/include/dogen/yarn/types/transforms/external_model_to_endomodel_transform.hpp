@@ -32,7 +32,7 @@
 #include "dogen.annotations/types/type.hpp"
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen/external/types/meta_model/model.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
 #include "dogen/yarn/types/helpers/new_adapter.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"

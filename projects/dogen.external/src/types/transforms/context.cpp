@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external/types/transforms/context.hpp"
+#include "dogen.external/types/transforms/context.hpp"
 
 namespace dogen {
 namespace external {

@@ -20,11 +20,11 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/probing/types/scoped_prober.hpp"
-#include "dogen/external/types/meta_model/model.hpp"
-#include "dogen/external/types/transforms/context.hpp"
-#include "dogen/external/types/transforms/transformation_error.hpp"
-#include "dogen/external/types/transforms/model_generation_chain.hpp"
-#include "dogen/external/types/transforms/model_to_model_chain.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
+#include "dogen.external/types/transforms/context.hpp"
+#include "dogen.external/types/transforms/transformation_error.hpp"
+#include "dogen.external/types/transforms/model_generation_chain.hpp"
+#include "dogen.external/types/transforms/model_to_model_chain.hpp"
 
 namespace {
 

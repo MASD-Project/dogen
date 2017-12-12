@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/external/test_data/meta_model/attribute_td.hpp"
+#include "dogen.external/test_data/meta_model/attribute_td.hpp"
 
 namespace {
 

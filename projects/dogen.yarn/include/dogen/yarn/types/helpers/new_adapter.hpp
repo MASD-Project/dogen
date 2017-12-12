@@ -31,8 +31,8 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.annotations/types/scope_types.hpp"
 #include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen/external/types/meta_model/attribute.hpp"
-#include "dogen/external/types/meta_model/element.hpp"
+#include "dogen.external/types/meta_model/attribute.hpp"
+#include "dogen.external/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"

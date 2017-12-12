@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen/external/types/meta_model/model.hpp"
-#include "dogen/external/types/transforms/decoding_transform_interface.hpp"
+#include "dogen.external/types/meta_model/model.hpp"
+#include "dogen.external/types/transforms/decoding_transform_interface.hpp"
 
 namespace dogen {
 namespace external {
