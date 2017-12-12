@@ -31,7 +31,7 @@
 #include "dogen/external/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
-#include "dogen/external.json/serialization/registrar_ser.hpp"
+#include "dogen.external.json/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace external {

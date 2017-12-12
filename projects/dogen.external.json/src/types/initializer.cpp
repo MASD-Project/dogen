@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/external/types/transforms/model_generation_chain.hpp"
-#include "dogen/external.json/types/encoding_transform.hpp"
-#include "dogen/external.json/types/decoding_transform.hpp"
-#include "dogen/external.json/types/initializer.hpp"
+#include "dogen.external.json/types/encoding_transform.hpp"
+#include "dogen.external.json/types/decoding_transform.hpp"
+#include "dogen.external.json/types/initializer.hpp"
 
 namespace dogen {
 namespace external {

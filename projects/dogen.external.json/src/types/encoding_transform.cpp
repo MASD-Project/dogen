@@ -21,8 +21,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/probing/types/scoped_prober.hpp"
 #include "dogen/external/types/transforms/context.hpp"
-#include "dogen/external.json/types/dehydrator.hpp"
-#include "dogen/external.json/types/encoding_transform.hpp"
+#include "dogen.external.json/types/dehydrator.hpp"
+#include "dogen.external.json/types/encoding_transform.hpp"
 
 namespace {
 

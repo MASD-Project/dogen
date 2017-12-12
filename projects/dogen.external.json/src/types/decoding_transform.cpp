@@ -24,8 +24,8 @@
 #include "dogen/external/types/transforms/context.hpp"
 #include "dogen/external/io/meta_model/model_io.hpp"
 #include "dogen/external/types/transforms/transformation_error.hpp"
-#include "dogen/external.json/types/hydrator.hpp"
-#include "dogen/external.json/types/decoding_transform.hpp"
+#include "dogen.external.json/types/hydrator.hpp"
+#include "dogen.external.json/types/decoding_transform.hpp"
 
 namespace {
 

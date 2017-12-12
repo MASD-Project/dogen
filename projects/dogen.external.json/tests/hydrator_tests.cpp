@@ -30,8 +30,8 @@
 #include "dogen.annotations/types/type.hpp"
 #include "dogen/external/types/meta_model/model.hpp"
 #include "dogen/external/io/meta_model/model_io.hpp"
-#include "dogen/external.json/types/hydration_error.hpp"
-#include "dogen/external.json/types/hydrator.hpp"
+#include "dogen.external.json/types/hydration_error.hpp"
+#include "dogen.external.json/types/hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 namespace {

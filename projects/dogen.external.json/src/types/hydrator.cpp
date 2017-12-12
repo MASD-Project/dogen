@@ -25,8 +25,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/external.json/types/hydration_error.hpp"
-#include "dogen/external.json/types/hydrator.hpp"
+#include "dogen.external.json/types/hydration_error.hpp"
+#include "dogen.external.json/types/hydrator.hpp"
 
 namespace {
 
