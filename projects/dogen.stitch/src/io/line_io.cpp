@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/stitch/io/line_io.hpp"
-#include "dogen/stitch/io/block_io.hpp"
+#include "dogen.stitch/io/line_io.hpp"
+#include "dogen.stitch/io/block_io.hpp"
 
 namespace std {
 

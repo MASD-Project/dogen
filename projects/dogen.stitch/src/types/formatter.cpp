@@ -24,9 +24,9 @@
 #include "dogen.formatters/types/utility_formatter.hpp"
 #include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/stitch/io/block_types_io.hpp"
-#include "dogen/stitch/types/formatting_error.hpp"
-#include "dogen/stitch/types/formatter.hpp"
+#include "dogen.stitch/io/block_types_io.hpp"
+#include "dogen.stitch/types/formatting_error.hpp"
+#include "dogen.stitch/types/formatter.hpp"
 
 namespace {
 

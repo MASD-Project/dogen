@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/stitch/types/traits.hpp"
+#include "dogen.stitch/types/traits.hpp"
 
 namespace dogen {
 namespace stitch {

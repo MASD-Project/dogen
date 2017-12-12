@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/stitch/io/block_types_io.hpp"
+#include "dogen.stitch/io/block_types_io.hpp"
 
 namespace dogen {
 namespace stitch {

@@ -30,10 +30,10 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/stitch/io/line_io.hpp"
-#include "dogen/stitch/types/parsing_error.hpp"
-#include "dogen/stitch/io/text_template_body_io.hpp"
-#include "dogen/stitch/types/parser.hpp"
+#include "dogen.stitch/io/line_io.hpp"
+#include "dogen.stitch/types/parsing_error.hpp"
+#include "dogen.stitch/io/text_template_body_io.hpp"
+#include "dogen.stitch/types/parser.hpp"
 
 namespace {
 

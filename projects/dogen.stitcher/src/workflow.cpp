@@ -29,9 +29,9 @@
 #include "dogen/version.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
 #include "dogen/stitcher/parser_validation_error.hpp"
-#include "dogen/stitch/types/parser.hpp"
-#include "dogen/stitch/types/instantiator.hpp"
-#include "dogen/stitch/types/workflow.hpp"
+#include "dogen.stitch/types/parser.hpp"
+#include "dogen.stitch/types/instantiator.hpp"
+#include "dogen.stitch/types/workflow.hpp"
 #include "dogen/stitcher/workflow.hpp"
 
 using namespace dogen::utility::log;

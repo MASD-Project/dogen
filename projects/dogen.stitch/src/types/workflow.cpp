@@ -31,12 +31,12 @@
 #include "dogen.formatters/types/repository_factory.hpp"
 #include "dogen/yarn/io/meta_model/artefact_io.hpp"
 #include "dogen/yarn/types/helpers/filesystem_writer.hpp"
-#include "dogen/stitch/types/parser.hpp"
-#include "dogen/stitch/types/properties_factory.hpp"
-#include "dogen/stitch/types/instantiator.hpp"
-#include "dogen/stitch/types/formatter.hpp"
-#include "dogen/stitch/types/workflow_error.hpp"
-#include "dogen/stitch/types/workflow.hpp"
+#include "dogen.stitch/types/parser.hpp"
+#include "dogen.stitch/types/properties_factory.hpp"
+#include "dogen.stitch/types/instantiator.hpp"
+#include "dogen.stitch/types/formatter.hpp"
+#include "dogen.stitch/types/workflow_error.hpp"
+#include "dogen.stitch/types/workflow.hpp"
 
 namespace {
 

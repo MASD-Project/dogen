@@ -28,8 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/stitch/serialization/line_ser.hpp"
-#include "dogen/stitch/serialization/block_ser.hpp"
+#include "dogen.stitch/serialization/line_ser.hpp"
+#include "dogen.stitch/serialization/block_ser.hpp"
 
 namespace boost {
 namespace serialization {

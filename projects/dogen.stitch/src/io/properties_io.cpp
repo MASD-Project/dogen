@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/stitch/io/properties_io.hpp"
-#include "dogen/stitch/io/stitching_properties_io.hpp"
+#include "dogen.stitch/io/properties_io.hpp"
+#include "dogen.stitch/io/stitching_properties_io.hpp"
 #include "dogen.formatters/io/decoration_properties_io.hpp"
 
 namespace boost {

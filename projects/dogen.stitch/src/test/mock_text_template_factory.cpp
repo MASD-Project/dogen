@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen.formatters/test/mock_decoration_properties_factory.hpp"
-#include "dogen/stitch/test/mock_text_template_factory.hpp"
+#include "dogen.stitch/test/mock_text_template_factory.hpp"
 
 namespace {
 

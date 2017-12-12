@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/stitch/io/properties_io.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/io/text_template_body_io.hpp"
+#include "dogen.stitch/io/properties_io.hpp"
+#include "dogen.stitch/io/text_template_io.hpp"
+#include "dogen.stitch/io/text_template_body_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

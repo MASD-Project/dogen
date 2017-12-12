@@ -23,11 +23,11 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/io/meta_model/artefact_io.hpp"
-#include "dogen/stitch/test/mock_text_template_factory.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/types/resolution_error.hpp"
-#include "dogen/stitch/types/formatting_error.hpp"
-#include "dogen/stitch/types/formatter.hpp"
+#include "dogen.stitch/test/mock_text_template_factory.hpp"
+#include "dogen.stitch/io/text_template_io.hpp"
+#include "dogen.stitch/types/resolution_error.hpp"
+#include "dogen.stitch/types/formatting_error.hpp"
+#include "dogen.stitch/types/formatter.hpp"
 
 namespace {
 

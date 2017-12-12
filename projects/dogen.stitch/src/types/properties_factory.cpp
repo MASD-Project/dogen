@@ -19,8 +19,8 @@
  *
  */
 #include "dogen.formatters/types/decoration_properties_factory.hpp"
-#include "dogen/stitch/types/stitching_properties_factory.hpp"
-#include "dogen/stitch/types/properties_factory.hpp"
+#include "dogen.stitch/types/stitching_properties_factory.hpp"
+#include "dogen.stitch/types/properties_factory.hpp"
 
 namespace {
 

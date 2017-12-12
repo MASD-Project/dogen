@@ -24,9 +24,9 @@
 #include "dogen/utility/test_data/seam.hpp"
 #include "dogen/utility/test_data/stitch.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/stitch/io/text_template_io.hpp"
-#include "dogen/stitch/types/instantiation_error.hpp"
-#include "dogen/stitch/types/workflow.hpp"
+#include "dogen.stitch/io/text_template_io.hpp"
+#include "dogen.stitch/types/instantiation_error.hpp"
+#include "dogen.stitch/types/workflow.hpp"
 
 namespace {
 
