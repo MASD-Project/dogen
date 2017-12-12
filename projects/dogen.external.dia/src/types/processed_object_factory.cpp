@@ -31,12 +31,12 @@
 #include "dogen.dia/types/attribute.hpp"
 #include "dogen.dia/types/composite.hpp"
 #include "dogen.dia/types/diagram.hpp"
-#include "dogen/external.dia/io/dia_object_types_io.hpp"
-#include "dogen/external.dia/io/processed_object_io.hpp"
-#include "dogen/external.dia/types/building_error.hpp"
-#include "dogen/external.dia/types/processed_object.hpp"
-#include "dogen/external.dia/types/processed_comment_factory.hpp"
-#include "dogen/external.dia/types/processed_object_factory.hpp"
+#include "dogen.external.dia/io/dia_object_types_io.hpp"
+#include "dogen.external.dia/io/processed_object_io.hpp"
+#include "dogen.external.dia/types/building_error.hpp"
+#include "dogen.external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/types/processed_comment_factory.hpp"
+#include "dogen.external.dia/types/processed_object_factory.hpp"
 
 namespace {
 

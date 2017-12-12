@@ -29,11 +29,11 @@
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/exception_io.hpp"
-#include "dogen/external.dia/types/adapter.hpp"
-#include "dogen/external.dia/types/adaptation_error.hpp"
-#include "dogen/external.dia/io/context_io.hpp"
-#include "dogen/external.dia/types/processed_object.hpp"
-#include "dogen/external.dia/test/mock_processed_object_factory.hpp"
+#include "dogen.external.dia/types/adapter.hpp"
+#include "dogen.external.dia/types/adaptation_error.hpp"
+#include "dogen.external.dia/io/context_io.hpp"
+#include "dogen.external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/test/mock_processed_object_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using namespace dogen::external::dia;

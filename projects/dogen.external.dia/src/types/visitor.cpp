@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/external.dia/types/visitor.hpp"
+#include "dogen.external.dia/types/visitor.hpp"
 
 namespace dogen {
 namespace external {

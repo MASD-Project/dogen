@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/external/types/transforms/model_generation_chain.hpp"
-#include "dogen/external.dia/types/decoding_transform.hpp"
-#include "dogen/external.dia/types/initializer.hpp"
+#include "dogen.external.dia/types/decoding_transform.hpp"
+#include "dogen.external.dia/types/initializer.hpp"
 
 namespace dogen {
 namespace external {

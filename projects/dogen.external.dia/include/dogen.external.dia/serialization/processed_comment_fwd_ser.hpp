@@ -18,24 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
-#define DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_COMMENT_SER_HPP
+#ifndef DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_COMMENT_FWD_SER_HPP
+#define DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_COMMENT_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/external.dia/types/processed_comment.hpp"
+#include "dogen.external.dia/types/processed_comment_fwd.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::external::dia::processed_comment)
 namespace boost {
 namespace serialization {
 
-template<typename Archive>
+template<class Archive>
 void save(Archive& ar, const dogen::external::dia::processed_comment& v, unsigned int version);
 
-template<typename Archive>
+template<class Archive>
 void load(Archive& ar, dogen::external::dia::processed_comment& v, unsigned int version);
 
 } }

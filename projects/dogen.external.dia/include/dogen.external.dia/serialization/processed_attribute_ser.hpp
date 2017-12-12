@@ -18,22 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_IO_DIA_OBJECT_TYPES_IO_HPP
-#define DOGEN_EXTERNAL_DIA_IO_DIA_OBJECT_TYPES_IO_HPP
+#ifndef DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_ATTRIBUTE_SER_HPP
+#define DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_ATTRIBUTE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/external.dia/types/dia_object_types.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::external::dia::processed_attribute)
+namespace boost {
+namespace serialization {
 
-std::ostream& operator<<(std::ostream& s, const dia_object_types& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::external::dia::processed_attribute& v, unsigned int version);
 
-} } }
+template<typename Archive>
+void load(Archive& ar, dogen::external::dia::processed_attribute& v, unsigned int version);
+
+} }
 
 #endif

@@ -24,10 +24,10 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
-#include "dogen/external.dia/io/processed_object_io.hpp"
-#include "dogen/external.dia/test/mock_processed_object_factory.hpp"
-#include "dogen/external.dia/types/graphing_error.hpp"
-#include "dogen/external.dia/types/grapher.hpp"
+#include "dogen.external.dia/io/processed_object_io.hpp"
+#include "dogen.external.dia/test/mock_processed_object_factory.hpp"
+#include "dogen.external.dia/types/graphing_error.hpp"
+#include "dogen.external.dia/types/grapher.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 

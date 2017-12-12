@@ -28,8 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/external.dia/serialization/processed_comment_ser.hpp"
-#include "dogen/external.dia/serialization/processed_attribute_ser.hpp"
+#include "dogen.external.dia/serialization/processed_comment_ser.hpp"
+#include "dogen.external.dia/serialization/processed_attribute_ser.hpp"
 
 namespace boost {
 namespace serialization {

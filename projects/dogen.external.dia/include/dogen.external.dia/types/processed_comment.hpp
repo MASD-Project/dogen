@@ -29,7 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen/external.dia/serialization/processed_comment_fwd_ser.hpp"
+#include "dogen.external.dia/serialization/processed_comment_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {

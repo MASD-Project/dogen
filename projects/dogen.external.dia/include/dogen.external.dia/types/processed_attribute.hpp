@@ -27,8 +27,8 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/external.dia/types/processed_comment.hpp"
-#include "dogen/external.dia/serialization/processed_attribute_fwd_ser.hpp"
+#include "dogen.external.dia/types/processed_comment.hpp"
+#include "dogen.external.dia/serialization/processed_attribute_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {

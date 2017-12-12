@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen/external.dia/types/processed_comment.hpp"
+#include "dogen.external.dia/types/processed_comment.hpp"
 
 namespace dogen {
 namespace external {

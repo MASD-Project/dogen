@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_IO_ALL_IO_HPP
-#define DOGEN_EXTERNAL_DIA_IO_ALL_IO_HPP
+#ifndef DOGEN_EXTERNAL_DIA_SERIALIZATION_ALL_SER_HPP
+#define DOGEN_EXTERNAL_DIA_SERIALIZATION_ALL_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/external.dia/io/dia_object_types_io.hpp"
-#include "dogen/external.dia/io/processed_object_io.hpp"
-#include "dogen/external.dia/io/processed_comment_io.hpp"
-#include "dogen/external.dia/io/processed_attribute_io.hpp"
+#include "dogen.external.dia/serialization/dia_object_types_ser.hpp"
+#include "dogen.external.dia/serialization/processed_object_ser.hpp"
+#include "dogen.external.dia/serialization/processed_comment_ser.hpp"
+#include "dogen.external.dia/serialization/processed_attribute_ser.hpp"
 
 #endif

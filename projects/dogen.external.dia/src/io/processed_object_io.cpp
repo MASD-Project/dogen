@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/external.dia/io/dia_object_types_io.hpp"
-#include "dogen/external.dia/io/processed_object_io.hpp"
-#include "dogen/external.dia/io/processed_comment_io.hpp"
-#include "dogen/external.dia/io/processed_attribute_io.hpp"
+#include "dogen.external.dia/io/dia_object_types_io.hpp"
+#include "dogen.external.dia/io/processed_object_io.hpp"
+#include "dogen.external.dia/io/processed_comment_io.hpp"
+#include "dogen.external.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

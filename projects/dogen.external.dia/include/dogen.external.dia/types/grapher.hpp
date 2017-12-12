@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen/external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/types/processed_object.hpp"
 
 namespace dogen {
 namespace external {

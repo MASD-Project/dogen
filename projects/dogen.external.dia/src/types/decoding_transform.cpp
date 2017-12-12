@@ -32,12 +32,12 @@
 #include "dogen/external/types/transforms/context.hpp"
 #include "dogen/external/io/meta_model/model_io.hpp"
 #include "dogen/external/types/transforms/transformation_error.hpp"
-#include "dogen/external.dia/types/builder.hpp"
-#include "dogen/external.dia/types/visitor.hpp"
-#include "dogen/external.dia/types/processed_object.hpp"
-#include "dogen/external.dia/types/processed_comment.hpp"
-#include "dogen/external.dia/types/processed_object_factory.hpp"
-#include "dogen/external.dia/types/decoding_transform.hpp"
+#include "dogen.external.dia/types/builder.hpp"
+#include "dogen.external.dia/types/visitor.hpp"
+#include "dogen.external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/types/processed_comment.hpp"
+#include "dogen.external.dia/types/processed_object_factory.hpp"
+#include "dogen.external.dia/types/decoding_transform.hpp"
 
 namespace {
 

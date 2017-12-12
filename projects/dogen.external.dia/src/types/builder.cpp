@@ -22,9 +22,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/pair_io.hpp"
-#include "dogen/external.dia/types/building_error.hpp"
-#include "dogen/external.dia/types/adapter.hpp"
-#include "dogen/external.dia/types/builder.hpp"
+#include "dogen.external.dia/types/building_error.hpp"
+#include "dogen.external.dia/types/adapter.hpp"
+#include "dogen.external.dia/types/builder.hpp"
 
 namespace {
 

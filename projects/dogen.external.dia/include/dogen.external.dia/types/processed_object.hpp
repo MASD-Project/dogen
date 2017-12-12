@@ -30,10 +30,10 @@
 #include <utility>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/external.dia/types/dia_object_types.hpp"
-#include "dogen/external.dia/types/processed_comment.hpp"
-#include "dogen/external.dia/types/processed_attribute.hpp"
-#include "dogen/external.dia/serialization/processed_object_fwd_ser.hpp"
+#include "dogen.external.dia/types/dia_object_types.hpp"
+#include "dogen.external.dia/types/processed_comment.hpp"
+#include "dogen.external.dia/types/processed_attribute.hpp"
+#include "dogen.external.dia/serialization/processed_object_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {

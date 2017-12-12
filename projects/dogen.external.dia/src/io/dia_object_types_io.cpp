@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/external.dia/io/dia_object_types_io.hpp"
+#include "dogen.external.dia/io/dia_object_types_io.hpp"
 
 namespace dogen {
 namespace external {

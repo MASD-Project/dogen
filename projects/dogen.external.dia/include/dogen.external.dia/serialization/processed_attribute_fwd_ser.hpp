@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_SERIALIZATION_DIA_OBJECT_TYPES_SER_HPP
-#define DOGEN_EXTERNAL_DIA_SERIALIZATION_DIA_OBJECT_TYPES_SER_HPP
+#ifndef DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_ATTRIBUTE_FWD_SER_HPP
+#define DOGEN_EXTERNAL_DIA_SERIALIZATION_PROCESSED_ATTRIBUTE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/external.dia/types/dia_object_types.hpp"
+#include "dogen.external.dia/types/processed_attribute_fwd.hpp"
+
+namespace boost {
+namespace serialization {
 
 template<class Archive>
-void serialize(Archive& ar, dogen::external::dia::dia_object_types& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("dia_object_types", v);
-}
+void save(Archive& ar, const dogen::external::dia::processed_attribute& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::external::dia::processed_attribute& v, unsigned int version);
+
+} }
 
 #endif

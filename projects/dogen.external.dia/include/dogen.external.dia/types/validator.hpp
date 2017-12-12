@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/types/processed_object.hpp"
 
 namespace dogen {
 namespace external {

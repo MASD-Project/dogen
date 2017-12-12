@@ -23,9 +23,9 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/external.dia/types/traits.hpp"
-#include "dogen/external.dia/types/building_error.hpp"
-#include "dogen/external.dia/types/processed_comment_factory.hpp"
+#include "dogen.external.dia/types/traits.hpp"
+#include "dogen.external.dia/types/building_error.hpp"
+#include "dogen.external.dia/types/processed_comment_factory.hpp"
 
 using namespace dogen::utility::log;
 

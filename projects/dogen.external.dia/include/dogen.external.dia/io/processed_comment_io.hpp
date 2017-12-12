@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_IO_PROCESSED_OBJECT_IO_HPP
-#define DOGEN_EXTERNAL_DIA_IO_PROCESSED_OBJECT_IO_HPP
+#ifndef DOGEN_EXTERNAL_DIA_IO_PROCESSED_COMMENT_IO_HPP
+#define DOGEN_EXTERNAL_DIA_IO_PROCESSED_COMMENT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/types/processed_comment.hpp"
 
 namespace dogen {
 namespace external {
@@ -34,7 +34,7 @@ namespace dia {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::external::dia::processed_object& v);
+     const dogen::external::dia::processed_comment& v);
 
 } } }
 

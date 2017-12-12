@@ -25,7 +25,7 @@
 #include "dogen/quilt.csharp/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 #include "dogen/external.json/types/initializer.hpp"
-#include "dogen/external.dia/types/initializer.hpp"
+#include "dogen.external.dia/types/initializer.hpp"
 
 namespace  {
 

@@ -29,9 +29,9 @@
 #include <string>
 #include "dogen.dia/types/diagram_fwd.hpp"
 #include "dogen/external/types/meta_model/model.hpp"
-#include "dogen/external.dia/types/grapher.hpp"
-#include "dogen/external.dia/types/validator.hpp"
-#include "dogen/external.dia/types/processed_object.hpp"
+#include "dogen.external.dia/types/grapher.hpp"
+#include "dogen.external.dia/types/validator.hpp"
+#include "dogen.external.dia/types/processed_object.hpp"
 #include "dogen/external/types/transforms/decoding_transform_interface.hpp"
 
 namespace dogen {
