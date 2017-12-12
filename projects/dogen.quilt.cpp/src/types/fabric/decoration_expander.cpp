@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"

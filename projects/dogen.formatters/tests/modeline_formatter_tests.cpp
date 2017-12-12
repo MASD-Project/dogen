@@ -19,13 +19,13 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/canned_tests.hpp"
 #include "dogen.formatters/types/modeline.hpp"
 #include "dogen.formatters/types/modeline_formatter.hpp"
 #include "dogen.formatters/types/formatting_error.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 

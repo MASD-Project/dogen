@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/building_error.hpp"

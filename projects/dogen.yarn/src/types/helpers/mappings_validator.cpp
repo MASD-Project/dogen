@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/types/helpers/mappings_validator.hpp"
 

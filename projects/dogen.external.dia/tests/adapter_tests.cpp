@@ -23,8 +23,8 @@
 #include <initializer_list>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/module_io.hpp"
@@ -34,7 +34,7 @@
 #include "dogen.external.dia/io/context_io.hpp"
 #include "dogen.external.dia/types/processed_object.hpp"
 #include "dogen.external.dia/test/mock_processed_object_factory.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 
 using namespace dogen::external::dia;
 using dogen::utility::test::asserter;

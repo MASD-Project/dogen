@@ -23,10 +23,10 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file_not_found.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file_not_found.hpp"
 
 namespace {
 

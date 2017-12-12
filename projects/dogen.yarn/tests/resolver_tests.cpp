@@ -21,7 +21,7 @@
 #include <array>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/logging.hpp"
+#include "dogen.utility/test/logging.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/helpers/indices.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/attribute_io.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 #include "dogen/yarn/test/mock_context_factory.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"

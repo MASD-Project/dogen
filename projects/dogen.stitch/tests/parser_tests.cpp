@@ -20,10 +20,10 @@
  */
 #include <algorithm>
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.stitch/io/text_template_body_io.hpp"
 #include "dogen.stitch/types/parsing_error.hpp"

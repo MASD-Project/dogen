@@ -23,9 +23,9 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/test_data/yarn_dia.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test_data/xml_reader.hpp"
+#include "dogen.utility/test_data/yarn_dia.hpp"
 
 namespace {
 

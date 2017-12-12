@@ -21,11 +21,11 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/forward_list_io.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen.annotations/types/type_repository_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen.formatters/types/repository_factory.hpp"

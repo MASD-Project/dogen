@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.stitch/types/resolution_error.hpp"
 #include "dogen.stitch/types/resolver.hpp"
 

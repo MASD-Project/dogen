@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/io/transforms/options_io.hpp"
 #include "dogen/yarn/types/transforms/validation_error.hpp"
 #include "dogen/yarn/types/transforms/options_validator.hpp"

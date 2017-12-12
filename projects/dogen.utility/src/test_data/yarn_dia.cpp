@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/test_data/resolver.hpp"
-#include "dogen/utility/test_data/validating_resolver.hpp"
-#include "dogen/utility/test_data/yarn_dia.hpp"
+#include "dogen.utility/test_data/resolver.hpp"
+#include "dogen.utility/test_data/validating_resolver.hpp"
+#include "dogen.utility/test_data/yarn_dia.hpp"
 
 using boost::filesystem::path;
 

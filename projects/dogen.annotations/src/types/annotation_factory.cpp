@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/erase.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.annotations/io/type_io.hpp"
 #include "dogen.annotations/io/annotation_io.hpp"
 #include "dogen.annotations/io/scope_types_io.hpp"

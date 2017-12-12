@@ -20,12 +20,12 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
 #include "dogen.external.dia/types/validator.hpp"
 #include "dogen.external.dia/io/processed_object_io.hpp"
 #include "dogen.external.dia/types/validation_error.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;
 

@@ -22,8 +22,8 @@
 #include <iomanip>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/convenience.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen.annotations/io/type_repository_io.hpp"
 #include "dogen.annotations/io/archetype_location_repository_io.hpp"
 #include "dogen.probing/types/probing_error.hpp"

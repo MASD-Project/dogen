@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/filesystem/file_not_found.hpp"
+#include "dogen.utility/filesystem/file_not_found.hpp"
 
 namespace {
 

@@ -19,10 +19,10 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/serialization/xml_helper.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/exception/utility_exception.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/serialization/xml_helper.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/exception/utility_exception.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/serialization/meta_model/endomodel_ser.hpp"
 #include "dogen/yarn/test/yarn_file_asserter.hpp"

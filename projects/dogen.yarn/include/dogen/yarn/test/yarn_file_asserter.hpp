@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
-#include "dogen/utility/test/file_asserter.hpp"
+#include "dogen.utility/test/file_asserter.hpp"
 
 namespace dogen {
 namespace yarn {

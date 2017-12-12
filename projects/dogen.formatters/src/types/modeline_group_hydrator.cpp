@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
 #include "dogen.formatters/types/hydration_error.hpp"
 #include "dogen.formatters/types/modeline_group_hydrator.hpp"
 

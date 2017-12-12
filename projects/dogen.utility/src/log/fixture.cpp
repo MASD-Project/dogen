@@ -22,7 +22,7 @@
 #include <boost/exception/info.hpp>
 #include <boost/test/unit_test_monitor.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen/utility/test/fixture.hpp"
+#include "dogen.utility/test/fixture.hpp"
 
 namespace  {
 

@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/results_collector.hpp>
-#include "dogen/utility/test/logging.hpp"
+#include "dogen.utility/test/logging.hpp"
 
 namespace dogen {
 namespace utility {

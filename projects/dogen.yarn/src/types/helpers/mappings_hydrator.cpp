@@ -25,7 +25,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/hydration_error.hpp"
 #include "dogen/yarn/types/helpers/mappings_hydrator.hpp"

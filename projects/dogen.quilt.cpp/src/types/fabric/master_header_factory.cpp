@@ -21,7 +21,7 @@
 #include <memory>
 #include <forward_list>
 #include <boost/make_shared.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"

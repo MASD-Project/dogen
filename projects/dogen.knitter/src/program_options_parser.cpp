@@ -30,8 +30,8 @@
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/exception/invalid_enum_value.hpp"
 #include "dogen.knitter/parser_validation_error.hpp"
 #include "dogen.knitter/program_options_parser.hpp"
 

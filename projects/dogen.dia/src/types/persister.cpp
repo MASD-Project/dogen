@@ -19,9 +19,9 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.dia/serialization/diagram_ser.hpp"
-#include "dogen/utility/serialization/xml_helper.hpp"
+#include "dogen.utility/serialization/xml_helper.hpp"
 #include "dogen.dia/types/persister_error.hpp"
 #include "dogen.dia/types/persister.hpp"
 

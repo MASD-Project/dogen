@@ -19,9 +19,9 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 #include "dogen/yarn/io/meta_model/artefact_io.hpp"
 #include "dogen.stitch/test/mock_text_template_factory.hpp"
 #include "dogen.stitch/io/text_template_io.hpp"

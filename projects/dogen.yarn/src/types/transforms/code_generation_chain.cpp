@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/transforms/text_model_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"

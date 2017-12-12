@@ -19,7 +19,7 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/string_processor.hpp"
 
 namespace {

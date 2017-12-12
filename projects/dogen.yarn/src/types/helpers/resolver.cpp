@@ -24,8 +24,8 @@
 #include <algorithm>
 #include <functional>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"

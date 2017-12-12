@@ -21,14 +21,14 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/test/logging.hpp"
 #include "dogen.dia/io/object_io.hpp"
 #include "dogen.external.dia/types/processed_object.hpp"
 #include "dogen.external.dia/types/processed_object_factory.hpp"
 #include "dogen.external.dia/io/processed_object_io.hpp"
 #include "dogen.dia/test/mock_object_factory.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 
 using namespace dogen::external::dia;
 using dogen::utility::test::asserter;

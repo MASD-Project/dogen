@@ -20,10 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen.annotations/io/annotation_io.hpp"
 #include "dogen/wale/types/workflow.hpp"
 #include "dogen.stitch/types/instantiation_error.hpp"

@@ -24,13 +24,13 @@
 #include <boost/test/unit_test_monitor.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include "dogen/utility/test_data/validating_resolver.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/test/macros.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test_data/yarn_dia.hpp"
-#include "dogen/utility/test_data/yarn_json.hpp"
-#include "dogen/utility/test/logging.hpp"
+#include "dogen.utility/test_data/validating_resolver.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/test/macros.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/test_data/yarn_dia.hpp"
+#include "dogen.utility/test_data/yarn_json.hpp"
+#include "dogen.utility/test/logging.hpp"
 #include "dogen.dia/io/diagram_io.hpp"
 #include "dogen/yarn/test/mock_options_factory.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
@@ -41,7 +41,7 @@
 #include "dogen/yarn/serialization/meta_model/model_ser.hpp"
 #include "dogen.dia/test/dia_file_asserter.hpp"
 #include "dogen/yarn/test/yarn_file_asserter.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 
 /*
  * Comment these out as required if testing only one frontend. These

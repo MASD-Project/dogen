@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.annotations/types/text.hpp"
 #include "dogen.annotations/types/number.hpp"
 #include "dogen.annotations/types/boolean.hpp"

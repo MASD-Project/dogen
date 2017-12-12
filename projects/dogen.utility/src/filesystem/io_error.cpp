@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/filesystem/io_error.hpp"
+#include "dogen.utility/filesystem/io_error.hpp"
 
 namespace dogen {
 namespace utility {

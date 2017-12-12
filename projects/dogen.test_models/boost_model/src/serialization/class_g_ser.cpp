@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/path.hpp"
+#include "dogen.utility/serialization/path.hpp"
 #include "dogen/test_models/boost_model/serialization/class_g_ser.hpp"
 
 namespace boost {

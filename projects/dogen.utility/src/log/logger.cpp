@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 
 namespace dogen {
 namespace utility {

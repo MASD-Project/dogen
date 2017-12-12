@@ -30,8 +30,8 @@
 #include <windows.h>
 #endif
 #include "dogen/version.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file_not_found.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file_not_found.hpp"
 
 #ifdef __APPLE__
 extern "C" int _NSGetExecutablePath(char* buf, unsigned int * bufsize);

@@ -21,9 +21,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen.annotations/types/type_repository_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen.formatters/types/repository_factory.hpp"

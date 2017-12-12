@@ -23,13 +23,13 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/test_data/test_data.hpp"
-#include "dogen/utility/test_data/generate_container.hpp"
-#include "dogen/utility/test_data/generator.hpp"
-#include "dogen/utility/test_data/sequence.hpp"
-#include "dogen/utility/io/vector_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test_data/xml_reader.hpp"
+#include "dogen.utility/test_data/test_data.hpp"
+#include "dogen.utility/test_data/generate_container.hpp"
+#include "dogen.utility/test_data/generator.hpp"
+#include "dogen.utility/test_data/sequence.hpp"
+#include "dogen.utility/io/vector_io.hpp"
 
 namespace {
 

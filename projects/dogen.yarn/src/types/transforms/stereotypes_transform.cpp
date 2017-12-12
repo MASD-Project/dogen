@@ -21,9 +21,9 @@
 #include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/vector_io.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/static_stereotypes_io.hpp"

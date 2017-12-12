@@ -22,8 +22,8 @@
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
 #include "dogen.dia/types/hydrator.hpp"
 #include "dogen.dia/types/persister.hpp"
 #include "dogen.dia/io/diagram_io.hpp"

@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.quilt.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"

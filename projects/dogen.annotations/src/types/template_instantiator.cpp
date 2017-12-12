@@ -20,11 +20,11 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/forward_list_io.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
+#include "dogen.utility/io/unordered_set_io.hpp"
 #include "dogen.annotations/io/template_kinds_io.hpp"
 #include "dogen.annotations/io/archetype_location_io.hpp"
 #include "dogen.annotations/io/type_io.hpp"

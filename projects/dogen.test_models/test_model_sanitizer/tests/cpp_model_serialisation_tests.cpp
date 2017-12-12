@@ -20,9 +20,9 @@
  */
 #include <boost/test/unit_test.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/canned_tests.hpp"
 #include "dogen/test_models/cpp_model/types/all.hpp"
 #include "dogen/test_models/cpp_model/io/all_io.hpp"
 #include "dogen/test_models/cpp_model/serialization/all_ser.hpp"

@@ -22,9 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen/yarn/io/meta_model/artefact_io.hpp"
 #include "dogen/yarn/types/helpers/filesystem_writer.hpp"
 

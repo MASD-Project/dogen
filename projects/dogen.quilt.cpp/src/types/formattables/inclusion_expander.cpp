@@ -20,9 +20,9 @@
  */
 #include <typeindex>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen.quilt.cpp/types/formattables/directive_group_repository_factory.hpp"

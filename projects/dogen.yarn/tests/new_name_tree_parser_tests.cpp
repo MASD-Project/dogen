@@ -20,9 +20,9 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/io/list_io.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 
 /*
@@ -35,7 +35,7 @@
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/merger.hpp"*/
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/helpers/new_name_tree_parser.hpp"
 
 using dogen::utility::test::asserter;

@@ -20,10 +20,10 @@
  */
 #include <array>
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"

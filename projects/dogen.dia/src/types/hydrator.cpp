@@ -20,9 +20,9 @@
  */
 #include <string>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/xml/text_reader.hpp"
-#include "dogen/utility/xml/node_types_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/xml/text_reader.hpp"
+#include "dogen.utility/xml/node_types_io.hpp"
 #include "dogen.dia/types/hydration_error.hpp"
 #include "dogen.dia/types/composite.hpp"
 #include "dogen.dia/types/rectangle.hpp"

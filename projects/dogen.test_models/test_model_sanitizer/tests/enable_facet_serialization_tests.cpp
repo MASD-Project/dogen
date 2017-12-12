@@ -19,10 +19,10 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/macros.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/macros.hpp"
+#include "dogen.utility/test/canned_tests.hpp"
 #include "dogen/test_models/enable_facet_serialization/serialization/all_ser.hpp"
 #include "dogen/test_models/test_model_sanitizer/register_types.hpp"
 #include "dogen/test_models/enable_facet_serialization/types/all.hpp"

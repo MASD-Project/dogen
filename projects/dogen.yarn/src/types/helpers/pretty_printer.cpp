@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/printing_error.hpp"
 #include "dogen/yarn/types/helpers/pretty_printer.hpp"
 

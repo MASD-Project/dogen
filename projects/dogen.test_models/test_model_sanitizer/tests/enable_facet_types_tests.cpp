@@ -19,9 +19,9 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/canned_tests.hpp"
 #include "dogen/test_models/enable_facet_types/types/all.hpp"
 
 namespace {

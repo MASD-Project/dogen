@@ -21,11 +21,11 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/set_io.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/set_io.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/io/forward_list_io.hpp"
 #include "dogen.annotations/io/type_repository_io.hpp"
 #include "dogen.annotations/io/archetype_location_io.hpp"
 #include "dogen.annotations/types/template_instantiator.hpp"

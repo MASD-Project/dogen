@@ -24,18 +24,18 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/io/jsonify_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/io/pair_io.hpp"
-#include "dogen/utility/io/map_io.hpp"
-#include "dogen/utility/io/array_io.hpp"
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/log/life_cycle_manager.hpp"
-#include "dogen/utility/log/scoped_life_cycle_manager.hpp"
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/exception/utility_exception.hpp"
-#include "dogen/utility/test/json_validator.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/io/jsonify_io.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/io/pair_io.hpp"
+#include "dogen.utility/io/map_io.hpp"
+#include "dogen.utility/io/array_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "dogen.utility/log/scoped_life_cycle_manager.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/exception/utility_exception.hpp"
+#include "dogen.utility/test/json_validator.hpp"
 
 namespace this_is_a_test {
 

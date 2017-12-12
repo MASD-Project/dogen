@@ -24,9 +24,9 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/xml/exception.hpp"
-#include "dogen/utility/xml/text_reader.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/xml/exception.hpp"
+#include "dogen.utility/xml/text_reader.hpp"
 
 using namespace dogen::utility::log;
 using dogen::utility::xml::exception;

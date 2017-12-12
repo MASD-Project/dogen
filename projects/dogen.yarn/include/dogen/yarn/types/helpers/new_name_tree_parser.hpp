@@ -40,7 +40,7 @@
 
 #include <boost/phoenix/bind/bind_function.hpp>
 
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/name_tree_io.hpp"
 #include "dogen/yarn/types/helpers/parsing_error.hpp"

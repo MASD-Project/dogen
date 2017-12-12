@@ -21,9 +21,9 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/io/list_io.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/test/mock_type_factory.hpp"
 #include "dogen.annotations/test/mock_type_repository_factory.hpp"
@@ -32,7 +32,7 @@
 #include "dogen.external/io/meta_model/model_io.hpp"
 #include "dogen.external.json/types/hydration_error.hpp"
 #include "dogen.external.json/types/hydrator.hpp"
-#include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 

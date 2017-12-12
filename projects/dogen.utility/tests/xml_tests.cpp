@@ -24,16 +24,16 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/macros.hpp"
-#include "dogen/utility/test_data/test_data.hpp"
-#include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/xml/exception.hpp"
-#include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/utility/xml/text_reader.hpp"
-#include "dogen/utility/xml/text_reader_io.hpp"
-#include "dogen/utility/xml/node_types.hpp"
-#include "dogen/utility/xml/node_types_io.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/macros.hpp"
+#include "dogen.utility/test_data/test_data.hpp"
+#include "dogen.utility/test_data/xml_reader.hpp"
+#include "dogen.utility/xml/exception.hpp"
+#include "dogen.utility/exception/invalid_enum_value.hpp"
+#include "dogen.utility/xml/text_reader.hpp"
+#include "dogen.utility/xml/text_reader_io.hpp"
+#include "dogen.utility/xml/node_types.hpp"
+#include "dogen.utility/xml/node_types_io.hpp"
 
 namespace {
 

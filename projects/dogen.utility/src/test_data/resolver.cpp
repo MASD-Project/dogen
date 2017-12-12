@@ -21,9 +21,9 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/filesystem/path.hpp"
-#include "dogen/utility/test_data/test_data_exception.hpp"
-#include "dogen/utility/test_data/resolver.hpp"
+#include "dogen.utility/filesystem/path.hpp"
+#include "dogen.utility/test_data/test_data_exception.hpp"
+#include "dogen.utility/test_data/resolver.hpp"
 
 namespace {
 

@@ -21,8 +21,8 @@
 #include <string>
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/utility/xml/node_types_io.hpp"
+#include "dogen.utility/exception/invalid_enum_value.hpp"
+#include "dogen.utility/xml/node_types_io.hpp"
 
 namespace {
 

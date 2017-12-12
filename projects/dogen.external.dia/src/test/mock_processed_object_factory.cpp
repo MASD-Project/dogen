@@ -20,7 +20,7 @@
  */
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.external.dia/test/mock_processed_object_factory.hpp"
 
 namespace {

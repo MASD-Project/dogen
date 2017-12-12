@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.dia/types/diagram.hpp"
-#include "dogen/utility/test/file_asserter.hpp"
+#include "dogen.utility/test/file_asserter.hpp"
 
 namespace dogen {
 namespace dia {

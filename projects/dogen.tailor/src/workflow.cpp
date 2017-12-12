@@ -21,9 +21,9 @@
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/version.hpp"
-#include "dogen/utility/log/life_cycle_manager.hpp"
-#include "dogen/utility/log/severity_level.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "dogen.utility/log/severity_level.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.options/types/tailoring_options.hpp"
 #include "dogen.external/types/transforms/context.hpp"
 #include "dogen.external/types/transforms/model_to_model_chain.hpp"

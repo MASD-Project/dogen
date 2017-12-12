@@ -20,12 +20,12 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/filesystem/file.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
+#include "dogen.utility/filesystem/file.hpp"
 #include "dogen.annotations/io/profiler_configuration_io.hpp"
 #include "dogen.annotations/io/profile_io.hpp"
 #include "dogen.annotations/io/annotation_io.hpp"

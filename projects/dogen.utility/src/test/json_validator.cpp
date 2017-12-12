@@ -22,7 +22,7 @@
 #include <istream>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/support_istream_iterator.hpp>
-#include "dogen/utility/test/json_validator.hpp"
+#include "dogen.utility/test/json_validator.hpp"
 
 namespace {
 

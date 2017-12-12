@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.formatters/types/repository_factory.hpp"
 #include "dogen.formatters/types/decoration_properties_factory.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"

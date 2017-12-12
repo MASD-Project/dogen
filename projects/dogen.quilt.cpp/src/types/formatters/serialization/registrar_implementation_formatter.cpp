@@ -31,7 +31,7 @@
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
 namespace dogen {

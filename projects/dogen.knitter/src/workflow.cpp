@@ -22,9 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/version.hpp"
-#include "dogen/utility/log/life_cycle_manager.hpp"
-#include "dogen/utility/log/severity_level.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "dogen.utility/log/severity_level.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.formatters/types/formatting_error.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"

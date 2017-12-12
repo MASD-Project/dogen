@@ -23,10 +23,10 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/vector_io.hpp"
-#include "dogen/utility/string/splitter.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/vector_io.hpp"
+#include "dogen.utility/string/splitter.hpp"
 #include "dogen.dia/types/object.hpp"
 #include "dogen.dia/types/attribute.hpp"
 #include "dogen.dia/types/composite.hpp"

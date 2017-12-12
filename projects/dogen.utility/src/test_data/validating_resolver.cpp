@@ -21,9 +21,9 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/filesystem/file_not_found.hpp"
-#include "dogen/utility/test_data/resolver.hpp"
-#include "dogen/utility/test_data/validating_resolver.hpp"
+#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "dogen.utility/test_data/resolver.hpp"
+#include "dogen.utility/test_data/validating_resolver.hpp"
 
 namespace dogen {
 namespace utility {

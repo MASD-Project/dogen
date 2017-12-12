@@ -25,12 +25,12 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/set_io.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/set_io.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/forward_list_io.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/io/forward_list_io.hpp"
 #include "dogen/yarn/types/helpers/file_linter.hpp"
 
 namespace {

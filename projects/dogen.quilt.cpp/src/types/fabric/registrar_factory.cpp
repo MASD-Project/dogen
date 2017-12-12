@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"

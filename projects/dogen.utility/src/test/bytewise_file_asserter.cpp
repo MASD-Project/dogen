@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/test/bytewise_file_asserter.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/test/bytewise_file_asserter.hpp"
 
 namespace dogen {
 namespace utility {

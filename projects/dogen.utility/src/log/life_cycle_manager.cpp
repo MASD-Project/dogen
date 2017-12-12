@@ -28,8 +28,8 @@
 #include <boost/log/core.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/utility/log/life_cycle_manager.hpp"
+#include "dogen.utility/exception/invalid_enum_value.hpp"
+#include "dogen.utility/log/life_cycle_manager.hpp"
 
 namespace {
 

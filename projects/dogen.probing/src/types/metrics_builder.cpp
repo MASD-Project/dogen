@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include "dogen/version.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/metrics.hpp"
 #include "dogen.probing/types/probing_error.hpp"
 #include "dogen.probing/types/metrics_builder.hpp"

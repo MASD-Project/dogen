@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.quilt.cpp/types/formattables/adapter.hpp"
 #include "dogen.quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen.quilt.cpp/types/formattables/workflow.hpp"

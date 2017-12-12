@@ -20,8 +20,8 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/string/splitter.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/string/splitter.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"

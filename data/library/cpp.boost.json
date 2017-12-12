@@ -100,8 +100,8 @@
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
-        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "\"dogen/utility/serialization/path.hpp\"",
-        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "\"dogen/utility/serialization/path.hpp\"",
+        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "\"dogen.utility/serialization/path.hpp\"",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "\"dogen.utility/serialization/path.hpp\"",
         "quilt.cpp.test_data.class_header.primary_inclusion_directive": "<sstream>",
         "quilt.cpp.test_data.primitive_header.primary_inclusion_directive": "<sstream>"
       }

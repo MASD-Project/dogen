@@ -21,9 +21,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/unordered_set_io.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"

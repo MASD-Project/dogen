@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/prober.hpp"
 
 namespace dogen {

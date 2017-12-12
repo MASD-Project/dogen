@@ -21,7 +21,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.formatters/io/quote_types_io.hpp"
 #include "dogen.formatters/types/formatting_error.hpp"
 #include "dogen.formatters/types/utility_formatter.hpp"

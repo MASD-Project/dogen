@@ -29,7 +29,7 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/path.hpp"
+#include "dogen.utility/serialization/path.hpp"
 #include "dogen.stitch/serialization/properties_ser.hpp"
 #include "dogen.stitch/serialization/text_template_ser.hpp"
 #include "dogen.stitch/serialization/text_template_body_ser.hpp"

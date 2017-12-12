@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/exception/invalid_enum_value.hpp"
-#include "dogen/utility/serialization/archive_types.hpp"
+#include "dogen.utility/exception/invalid_enum_value.hpp"
+#include "dogen.utility/serialization/archive_types.hpp"
 
 namespace {
 

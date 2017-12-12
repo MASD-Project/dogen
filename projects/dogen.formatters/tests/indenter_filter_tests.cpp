@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
 #include "dogen.formatters/types/indent_filter.hpp"
 
 namespace {

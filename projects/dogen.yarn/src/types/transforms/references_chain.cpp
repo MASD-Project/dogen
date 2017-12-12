@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"

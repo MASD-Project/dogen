@@ -22,9 +22,9 @@
 #include <iterator>
 #include <algorithm>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/set_io.hpp"
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/set_io.hpp"
+#include "dogen.utility/io/forward_list_io.hpp"
 #include "dogen.annotations/io/archetype_location_io.hpp"
 #include "dogen.quilt.cpp/types/formatters/traits.hpp"
 #include "dogen.quilt.cpp/io/formatters/repository_io.hpp"

@@ -20,8 +20,8 @@
  */
 #include <iterator>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.quilt.cpp/types/workflow_error.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
 #include "dogen.quilt.cpp/io/formattables/artefact_properties_io.hpp"

@@ -21,8 +21,8 @@
 #include <ostream>
 #include <iomanip>
 #include <boost/io/ios_state.hpp>
-#include "dogen/utility/xml/node_types_io.hpp"
-#include "dogen/utility/xml/text_reader_io.hpp"
+#include "dogen.utility/xml/node_types_io.hpp"
+#include "dogen.utility/xml/text_reader_io.hpp"
 
 namespace dogen {
 namespace utility {

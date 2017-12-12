@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/pair_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/pair_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen.quilt.cpp/types/fabric/odb_target.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"

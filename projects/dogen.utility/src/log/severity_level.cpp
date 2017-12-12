@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/severity_level.hpp"
-#include "dogen/utility/exception/invalid_enum_value.hpp"
+#include "dogen.utility/log/severity_level.hpp"
+#include "dogen.utility/exception/invalid_enum_value.hpp"
 
 namespace {
 

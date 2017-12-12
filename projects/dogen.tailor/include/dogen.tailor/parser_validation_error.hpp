@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/utility/exception/utility_exception.hpp"
+#include "dogen.utility/exception/utility_exception.hpp"
 
 namespace dogen {
 namespace tailor {

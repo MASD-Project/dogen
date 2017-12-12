@@ -23,9 +23,9 @@
 #include <boost/exception/all.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen/utility/log/life_cycle_manager.hpp"
-#include "dogen/utility/log/severity_level.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "dogen.utility/log/severity_level.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/version.hpp"
 #include "dogen.stitch/types/parser.hpp"
 #include "dogen.stitch/types/instantiator.hpp"

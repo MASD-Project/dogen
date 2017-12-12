@@ -19,7 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/registrar_error.hpp"
 #include "dogen/yarn/types/transforms/dynamic_transform_registrar.hpp"
 

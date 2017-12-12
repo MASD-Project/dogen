@@ -20,8 +20,8 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/test/logging.hpp"
 #include "simple_template.hpp"
 #include "complex_template.hpp"
 

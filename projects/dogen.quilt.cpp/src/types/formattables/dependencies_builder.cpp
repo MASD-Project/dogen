@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.quilt.cpp/types/formattables/building_error.hpp"

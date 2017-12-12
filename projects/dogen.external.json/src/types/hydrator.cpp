@@ -22,9 +22,9 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/string/splitter.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/string/splitter.hpp"
 #include "dogen.external.json/types/hydration_error.hpp"
 #include "dogen.external.json/types/hydrator.hpp"
 

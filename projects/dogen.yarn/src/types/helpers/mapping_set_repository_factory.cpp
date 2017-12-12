@@ -19,10 +19,10 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/filesystem/file.hpp"
-#include "dogen/utility/io/list_io.hpp"
-#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/filesystem/file.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_io.hpp"

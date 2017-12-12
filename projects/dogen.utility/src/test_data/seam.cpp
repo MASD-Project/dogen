@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/test_data/resolver.hpp"
-#include "dogen/utility/test_data/validating_resolver.hpp"
-#include "dogen/utility/test_data/seam.hpp"
+#include "dogen.utility/test_data/resolver.hpp"
+#include "dogen.utility/test_data/validating_resolver.hpp"
+#include "dogen.utility/test_data/seam.hpp"
 
 using boost::filesystem::path;
 

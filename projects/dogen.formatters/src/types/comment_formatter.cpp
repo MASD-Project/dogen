@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.formatters/io/comment_styles_io.hpp"
 #include "dogen.formatters/types/comment_formatter.hpp"
 #include "dogen.formatters/types/formatting_error.hpp"

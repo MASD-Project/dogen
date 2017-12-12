@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/scoped_life_cycle_manager.hpp"
+#include "dogen.utility/log/scoped_life_cycle_manager.hpp"
 
 namespace dogen {
 namespace utility {

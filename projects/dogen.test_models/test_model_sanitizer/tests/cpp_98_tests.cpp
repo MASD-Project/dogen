@@ -19,8 +19,8 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/canned_tests.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/canned_tests.hpp"
 #include "dogen/test_models/cpp_98/types/all.hpp"
 #include "dogen/test_models/cpp_98/io/all_io.hpp"
 #include "dogen/test_models/cpp_98/serialization/all_ser.hpp"

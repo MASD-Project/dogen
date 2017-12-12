@@ -20,7 +20,7 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/letter_cases_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_database_systems_io.hpp"
 #include "dogen/yarn/types/meta_model/orm_database_systems.hpp"

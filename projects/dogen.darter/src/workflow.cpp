@@ -20,9 +20,9 @@
  */
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen/utility/log/life_cycle_manager.hpp"
-#include "dogen/utility/log/severity_level.hpp"
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "dogen.utility/log/severity_level.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen/version.hpp"
 #include "dogen.options/types/darting_options.hpp"
 #include "dogen.darter/program_options_parser.hpp"

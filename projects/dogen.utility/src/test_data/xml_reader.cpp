@@ -20,10 +20,10 @@
  */
 #include <string>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/test_data/test_data.hpp"
-#include "dogen/utility/test_data/xml_reader.hpp"
-#include "dogen/utility/test_data/validating_resolver.hpp"
-#include "dogen/utility/test_data/resolver.hpp"
+#include "dogen.utility/test_data/test_data.hpp"
+#include "dogen.utility/test_data/xml_reader.hpp"
+#include "dogen.utility/test_data/validating_resolver.hpp"
+#include "dogen.utility/test_data/resolver.hpp"
 
 using boost::filesystem::path;
 

@@ -20,7 +20,7 @@
  */
 #define BOOST_TEST_MODULE dart_tests
 #include <boost/test/included/unit_test.hpp>
-#include "dogen/utility/test/fixture.hpp"
+#include "dogen.utility/test/fixture.hpp"
 
 using namespace dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen/utility/log/logger.hpp"
+#include "dogen.utility/log/logger.hpp"
 #include "dogen.formatters/io/modeline_io.hpp"
 #include "dogen.formatters/types/formatting_error.hpp"
 #include "dogen.formatters/types/modeline_formatter.hpp"

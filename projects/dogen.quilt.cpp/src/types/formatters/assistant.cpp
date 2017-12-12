@@ -22,8 +22,8 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/unordered_set_io.hpp"
 #include "dogen.formatters/types/indent_filter.hpp"
 #include "dogen.formatters/types/comment_formatter.hpp"
 #include "dogen.formatters/types/decoration_formatter.hpp"

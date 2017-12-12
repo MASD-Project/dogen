@@ -20,11 +20,11 @@
  */
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem.hpp>
-#include "dogen/utility/test/macros.hpp"
-#include "dogen/utility/test/logging.hpp"
-#include "dogen/utility/test/asserter.hpp"
-#include "dogen/utility/test_data/yarn_dia.hpp"
-#include "dogen/utility/io/vector_io.hpp"
+#include "dogen.utility/test/macros.hpp"
+#include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/test/asserter.hpp"
+#include "dogen.utility/test_data/yarn_dia.hpp"
+#include "dogen.utility/io/vector_io.hpp"
 #include "dogen.dia/types/all.hpp"
 #include "dogen.dia/io/all_io.hpp"
 #include "dogen.dia/serialization/all_ser.hpp"
