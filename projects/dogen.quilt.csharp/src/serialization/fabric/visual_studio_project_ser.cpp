@@ -29,7 +29,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
+#include "dogen.quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::quilt::csharp::fabric::visual_studio_project,

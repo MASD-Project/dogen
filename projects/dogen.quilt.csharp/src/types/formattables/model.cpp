@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formattables/model.hpp"
+#include "dogen.quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {

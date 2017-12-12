@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_project.hpp"
+#include "dogen.quilt.csharp/types/fabric/element_visitor.hpp"
+#include "dogen.quilt.csharp/types/fabric/visual_studio_project.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

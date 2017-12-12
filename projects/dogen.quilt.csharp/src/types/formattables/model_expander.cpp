@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/aspect_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/assistant_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/reducer.hpp"
-#include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/helper_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/project_items_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/aspect_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/assistant_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/reducer.hpp"
+#include "dogen.quilt.csharp/types/formattables/file_path_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/helper_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen {
 namespace quilt {

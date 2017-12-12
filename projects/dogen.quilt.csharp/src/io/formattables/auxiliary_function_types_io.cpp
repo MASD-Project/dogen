@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/quilt.csharp/io/formattables/auxiliary_function_types_io.hpp"
+#include "dogen.quilt.csharp/io/formattables/auxiliary_function_types_io.hpp"
 
 namespace dogen {
 namespace quilt {

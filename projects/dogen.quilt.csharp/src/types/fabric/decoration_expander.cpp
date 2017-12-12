@@ -29,9 +29,9 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
-#include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
-#include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
+#include "dogen.quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen.quilt.csharp/types/fabric/element_visitor.hpp"
+#include "dogen.quilt.csharp/types/fabric/decoration_expander.hpp"
 
 namespace {
 

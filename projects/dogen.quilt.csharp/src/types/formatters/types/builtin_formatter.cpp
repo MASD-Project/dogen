@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/types/builtin_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/assistant.hpp"
-#include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
-#include "dogen/quilt.csharp/types/traits.hpp"
+#include "dogen.quilt.csharp/types/formatters/types/builtin_formatter.hpp"
+#include "dogen.quilt.csharp/types/formatters/assistant.hpp"
+#include "dogen.quilt.csharp/types/formatters/types/traits.hpp"
+#include "dogen.quilt.csharp/types/traits.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 

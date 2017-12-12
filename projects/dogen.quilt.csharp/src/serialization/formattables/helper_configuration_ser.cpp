@@ -29,7 +29,7 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.csharp/serialization/formattables/helper_configuration_ser.hpp"
+#include "dogen.quilt.csharp/serialization/formattables/helper_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {

@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/formattable_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
+#include "dogen.quilt.csharp/io/formattables/formattable_io.hpp"
+#include "dogen.quilt.csharp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 

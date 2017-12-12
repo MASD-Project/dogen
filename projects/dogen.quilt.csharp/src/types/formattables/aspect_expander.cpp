@@ -29,11 +29,11 @@
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
-#include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
-#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
-#include "dogen/quilt.csharp/types/formattables/aspect_expander.hpp"
+#include "dogen.quilt.csharp/types/traits.hpp"
+#include "dogen.quilt.csharp/types/formattables/aspect_properties.hpp"
+#include "dogen.quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.csharp/types/formattables/expansion_error.hpp"
+#include "dogen.quilt.csharp/types/formattables/aspect_expander.hpp"
 
 namespace {
 

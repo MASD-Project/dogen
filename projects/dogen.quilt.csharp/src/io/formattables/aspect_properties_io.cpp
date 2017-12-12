@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/quilt.csharp/io/formattables/aspect_properties_io.hpp"
+#include "dogen.quilt.csharp/io/formattables/aspect_properties_io.hpp"
 
 namespace dogen {
 namespace quilt {

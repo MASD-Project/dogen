@@ -28,8 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.csharp/serialization/formattables/auxiliary_function_types_ser.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/auxiliary_function_properties_ser.hpp"
+#include "dogen.quilt.csharp/serialization/formattables/auxiliary_function_types_ser.hpp"
+#include "dogen.quilt.csharp/serialization/formattables/auxiliary_function_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

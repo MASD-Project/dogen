@@ -19,10 +19,10 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.csharp/types/formattables/adapter.hpp"
-#include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/workflow.hpp"
-#include "dogen/quilt.csharp/io/formattables/model_io.hpp"
+#include "dogen.quilt.csharp/types/formattables/adapter.hpp"
+#include "dogen.quilt.csharp/types/formattables/model_expander.hpp"
+#include "dogen.quilt.csharp/types/formattables/workflow.hpp"
+#include "dogen.quilt.csharp/io/formattables/model_io.hpp"
 
 namespace {
 

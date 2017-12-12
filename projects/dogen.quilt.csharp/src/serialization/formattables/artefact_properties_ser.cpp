@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/utility/serialization/path.hpp"
-#include "dogen/quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
+#include "dogen.quilt.csharp/serialization/formattables/artefact_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

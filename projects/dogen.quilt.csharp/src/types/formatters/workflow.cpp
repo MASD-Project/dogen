@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.csharp/types/formatters/context.hpp"
-#include "dogen/quilt.csharp/types/formatters/workflow.hpp"
+#include "dogen.quilt.csharp/types/formatters/context.hpp"
+#include "dogen.quilt.csharp/types/formatters/workflow.hpp"
 
 namespace {
 

@@ -21,9 +21,9 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assembly_info.hpp"
-#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assembly_info_factory.hpp"
+#include "dogen.quilt.csharp/types/fabric/assembly_info.hpp"
+#include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.csharp/types/fabric/assembly_info_factory.hpp"
 
 namespace {
 

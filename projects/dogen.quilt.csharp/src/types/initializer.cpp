@@ -19,11 +19,11 @@
  *
  */
 #include "dogen/yarn/types/transforms/model_to_text_model_chain.hpp"
-#include "dogen/quilt.csharp/types/formatters/workflow.hpp"
-#include "dogen/quilt.csharp/types/formatters/initializer.hpp"
-#include "dogen/quilt.csharp/types/fabric/initializer.hpp"
-#include "dogen/quilt.csharp/types/model_to_text_model_transform.hpp"
-#include "dogen/quilt.csharp/types/initializer.hpp"
+#include "dogen.quilt.csharp/types/formatters/workflow.hpp"
+#include "dogen.quilt.csharp/types/formatters/initializer.hpp"
+#include "dogen.quilt.csharp/types/fabric/initializer.hpp"
+#include "dogen.quilt.csharp/types/model_to_text_model_transform.hpp"
+#include "dogen.quilt.csharp/types/initializer.hpp"
 
 namespace dogen {
 namespace quilt {

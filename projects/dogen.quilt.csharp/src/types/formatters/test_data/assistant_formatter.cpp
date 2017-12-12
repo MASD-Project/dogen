@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/formatters/test_data/assistant_formatter.hpp"
-#include "dogen/quilt.csharp/types/formatters/assistant.hpp"
-#include "dogen/quilt.csharp/types/formatters/test_data/traits.hpp"
-#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
-#include "dogen/quilt.csharp/types/traits.hpp"
+#include "dogen.quilt.csharp/types/formatters/test_data/assistant_formatter.hpp"
+#include "dogen.quilt.csharp/types/formatters/assistant.hpp"
+#include "dogen.quilt.csharp/types/formatters/test_data/traits.hpp"
+#include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen.quilt.csharp/types/traits.hpp"
 #include "dogen.formatters/types/sequence_formatter.hpp"
 
 namespace dogen {

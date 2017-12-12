@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/quilt.csharp/io/fabric/visual_studio_project_io.hpp"
+#include "dogen.quilt.csharp/io/fabric/visual_studio_project_io.hpp"
 
 namespace dogen {
 namespace quilt {

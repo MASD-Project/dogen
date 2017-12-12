@@ -22,11 +22,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/types/formattables/workflow.hpp"
-#include "dogen/quilt.csharp/types/formatters/workflow.hpp"
-#include "dogen/quilt.csharp/types/formattables/locator.hpp"
-#include "dogen/quilt.csharp/types/model_to_text_model_transform.hpp"
+#include "dogen.quilt.csharp/types/traits.hpp"
+#include "dogen.quilt.csharp/types/formattables/workflow.hpp"
+#include "dogen.quilt.csharp/types/formatters/workflow.hpp"
+#include "dogen.quilt.csharp/types/formattables/locator.hpp"
+#include "dogen.quilt.csharp/types/model_to_text_model_transform.hpp"
 
 namespace {
 

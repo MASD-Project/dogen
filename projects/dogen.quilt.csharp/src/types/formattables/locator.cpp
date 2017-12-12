@@ -23,10 +23,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/types/formattables/location_error.hpp"
-#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.csharp/types/formattables/locator.hpp"
+#include "dogen.quilt.csharp/types/traits.hpp"
+#include "dogen.quilt.csharp/types/formattables/location_error.hpp"
+#include "dogen.quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.csharp/types/formattables/locator.hpp"
 
 namespace {
 

@@ -26,11 +26,11 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
-#include "dogen/quilt.csharp/types/fabric/traits.hpp"
-#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_project.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_factory.hpp"
+#include "dogen.quilt.csharp/types/fabric/traits.hpp"
+#include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.csharp/types/fabric/visual_studio_project.hpp"
+#include "dogen.quilt.csharp/types/fabric/visual_studio_solution.hpp"
+#include "dogen.quilt.csharp/types/fabric/visual_studio_factory.hpp"
 
 namespace {
 

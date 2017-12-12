@@ -27,9 +27,9 @@
 #include"dogen/yarn/types/meta_model/exception.hpp"
 #include"dogen/yarn/types/meta_model/enumeration.hpp"
 #include"dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
-#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
+#include "dogen.quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
+#include "dogen.quilt.csharp/types/formattables/project_items_expander.hpp"
 
 namespace dogen {
 namespace quilt {

@@ -30,12 +30,12 @@
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
-#include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/helper_configuration_io.hpp"
-#include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
-#include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen/quilt.csharp/types/formattables/helper_expander.hpp"
+#include "dogen.quilt.csharp/types/traits.hpp"
+#include "dogen.quilt.csharp/io/formattables/helper_properties_io.hpp"
+#include "dogen.quilt.csharp/io/formattables/helper_configuration_io.hpp"
+#include "dogen.quilt.csharp/types/formattables/expansion_error.hpp"
+#include "dogen.quilt.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.quilt.csharp/types/formattables/helper_expander.hpp"
 
 namespace {
 

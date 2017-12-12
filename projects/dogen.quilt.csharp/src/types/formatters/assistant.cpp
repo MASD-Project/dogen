@@ -24,9 +24,9 @@
 #include "dogen.formatters/types/comment_formatter.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
-#include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
-#include "dogen/quilt.csharp/types/formatters/assistant.hpp"
+#include "dogen.quilt.csharp/io/formattables/helper_properties_io.hpp"
+#include "dogen.quilt.csharp/types/formatters/formatting_error.hpp"
+#include "dogen.quilt.csharp/types/formatters/assistant.hpp"
 
 namespace {
 

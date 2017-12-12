@@ -20,10 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
-#include "dogen/quilt.csharp/types/formattables/adaptation_error.hpp"
-#include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.csharp/types/formattables/adapter.hpp"
+#include "dogen.quilt.csharp/types/formattables/artefact_properties.hpp"
+#include "dogen.quilt.csharp/types/formattables/adaptation_error.hpp"
+#include "dogen.quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.quilt.csharp/types/formattables/adapter.hpp"
 
 namespace {
 

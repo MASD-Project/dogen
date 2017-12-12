@@ -31,11 +31,11 @@
 #include "dogen.probing/serialization/registrar_ser.hpp"
 #include "dogen.formatters/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
-#include "dogen/quilt.csharp/serialization/registrar_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assistant_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
+#include "dogen.quilt.csharp/serialization/registrar_ser.hpp"
+#include "dogen.quilt.csharp/serialization/fabric/assistant_ser.hpp"
+#include "dogen.quilt.csharp/serialization/fabric/assembly_info_ser.hpp"
+#include "dogen.quilt.csharp/serialization/fabric/visual_studio_project_ser.hpp"
+#include "dogen.quilt.csharp/serialization/fabric/visual_studio_solution_ser.hpp"
 
 namespace dogen {
 namespace quilt {

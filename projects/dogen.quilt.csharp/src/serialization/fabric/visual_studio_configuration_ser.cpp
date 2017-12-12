@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.csharp/serialization/fabric/visual_studio_configuration_ser.hpp"
+#include "dogen.quilt.csharp/serialization/fabric/visual_studio_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
