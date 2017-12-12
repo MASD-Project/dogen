@@ -184,48 +184,48 @@ include_directories(
     ${stage_inc_dir}/
 
     # real code
-    ${CMAKE_SOURCE_DIR}/projects/dia/include
-    ${CMAKE_SOURCE_DIR}/projects/formatters/include
-    ${CMAKE_SOURCE_DIR}/projects/utility/include
-    ${CMAKE_SOURCE_DIR}/projects/options/include
-    ${CMAKE_SOURCE_DIR}/projects/external/include
-    ${CMAKE_SOURCE_DIR}/projects/external.json/include
-    ${CMAKE_SOURCE_DIR}/projects/external.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/yarn/include
-    ${CMAKE_SOURCE_DIR}/projects/quilt.cpp/include
-    ${CMAKE_SOURCE_DIR}/projects/quilt.csharp/include
-    ${CMAKE_SOURCE_DIR}/projects/knitter/include
-    ${CMAKE_SOURCE_DIR}/projects/tailor/include
-    ${CMAKE_SOURCE_DIR}/projects/darter/include
-    ${CMAKE_SOURCE_DIR}/projects/annotations/include
-    ${CMAKE_SOURCE_DIR}/projects/stitch/include
-    ${CMAKE_SOURCE_DIR}/projects/stitcher/include
-    ${CMAKE_SOURCE_DIR}/projects/wale/include
-    ${CMAKE_SOURCE_DIR}/projects/probing/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.formatters/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.options/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.external/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.external.json/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.external.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.yarn/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.quilt.cpp/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.quilt.csharp/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.knitter/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.tailor/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.darter/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.annotations/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.stitch/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.stitcher/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.wale/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.probing/include
     )
 
 #
 # add all other projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/input_models)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external.json)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/options)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt.cpp)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt.csharp)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/formatters)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/knitter)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tailor)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/darter)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/annotations)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitch)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stitcher)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/wale)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/probing)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.input_models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.yarn)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external.json)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.options)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.quilt.cpp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.quilt.csharp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.formatters)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.knitter)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tailor)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.darter)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.annotations)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.stitch)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.stitcher)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.wale)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.probing)
 
 # test models
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.test_models)

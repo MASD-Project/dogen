@@ -6597,6 +6597,11 @@ all code that makes use of these typedefs when when its trivial code.
   would result in the creation of typedef xyz using the type of the
   attribute; getters, setters and property would then be declared with
   the typedef.
+- actually we should have a "type alias" at the modeling level. This
+  is just a simple mapping of a type to a type definition. This makes
+  using types such as =dec:decimal<8>= etc possible without changing
+  the parsing code.
+
 
 *** Automatic typedef generation                                      :story:
 

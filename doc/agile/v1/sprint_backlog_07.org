@@ -615,6 +615,63 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
+*** STARTED Make =dogen= part of model modules                        :story:
+    CLOCK: [2017-12-12 Tue 19:44]--[2017-12-12 Tue 20:24] =>  0:40
+
+Whilst we are renaming the models, we should perform a long-standing
+task from the early days of dogen: to make =dogen= part of the model
+modules rather than the external modules. This makes the folder
+structure cleaner under projects. This needs to be done all in one go
+for it to work or else it will break resolution.
+
+Tasks:
+
+- rename input models
+- drop external module from input models, add to model modules
+- rename project folders
+- code-generate; expectation is that no files will change (after
+  folder rename).
+
+*** Rename =yarn= to =modeling=                                       :story:
+
+As per analysis story, we are moving away from the sewing terms.
+
+Tasks:
+
+- rename endomodel to just model.
+- simplify the transform options to contain only modeling specific
+  things.
+
+*** Clean up UML profiles and meta-data                               :story:
+
+It makes more sense to create a dogen-wide UML profile rather than one
+just specific to yarn/modeling. This means renaming all stereotypes to
+dogen, i.e.: =yarn::object_template= becomes dogen::object_template=
+and so forth. Modeling/yarn is just one of the possible
+implementations of the profile.
+
+Notes:
+
+- we should wait until we rename =quilt= too so we can clean up the
+  quilt meta-data at the same time.
+- rename references too since they belong to external, i.e.:
+
+: #DOGEN yarn.reference=annotations.dia
+
+  should be:
+
+: #DOGEN external.reference=annotations.dia
+
+- similarly with:
+
+: #DOGEN yarn.dia.comment=true
+
+  should instead be:
+
+: #DOGEN external.dia.comment=true
+
+  in fact, should we mention "tagged values" instead of "comment"?
+
 *** Create the =orchestration= model                                  :story:
 
 Create a model with the top-level transforms.
@@ -643,16 +700,6 @@ Approach:
   endomodel to generation model.
 - augment formattables with the new element properties. Supply this
   data via the context or assistant.
-
-*** Rename =yarn= to =modeling=                                       :story:
-
-As per analysis story, we are moving away from the sewing terms.
-
-Tasks:
-
-- rename endomodel to just model.
-- simplify the transform options to contain only modeling specific
-  things.
 
 *** Rename =quilt.cpp= to =generation.cpp=                            :story:
 

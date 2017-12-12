@@ -20,23 +20,23 @@
 
 # user includes
 include_directories(
-    ${CMAKE_SOURCE_DIR}/projects/test_models/all_path_and_directory_settings/cpp_backend/some_include_dir
-    ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_model/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/compressed/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/disable_facet_folders/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_types/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_hash/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_io/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_serialization/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/two_layers_with_objects/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/std_model/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc/another
-    ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_98/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/lam_model/cpp/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/all_path_and_directory_settings/cpp_backend/some_include_dir
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/cpp_model/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/compressed/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/disable_facet_folders/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/disable_cmakelists/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/enable_facet_types/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/enable_facet_hash/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/enable_facet_io/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/enable_facet_serialization/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/two_layers_with_objects/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/std_model/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/boost_model/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/test_model_sanitizer/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/seam/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/split_project/dir/inc/another
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/cpp_98/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.test_models/lam_model/cpp/include
     )
 
 #
@@ -44,7 +44,7 @@ include_directories(
 #
 if(ODB_FOUND)
     message(STATUS "Adding ODB feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/northwind/include)
+    include_directories(${CMAKE_SOURCE_DIR}/projects/dogen.test_models/northwind/include)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind/tests)
 endif()
