@@ -18,26 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_SERIALIZATION_METRICS_SER_HPP
-#define DOGEN_PROBING_SERIALIZATION_METRICS_SER_HPP
+#ifndef DOGEN_PROBING_TYPES_ALL_HPP
+#define DOGEN_PROBING_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/probing/types/metrics.hpp"
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::probing::metrics)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::probing::metrics& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::probing::metrics& v, unsigned int version);
-
-} }
+#include "dogen.probing/types/prober.hpp"
+#include "dogen.probing/types/metrics.hpp"
+#include "dogen.probing/types/probing.hpp"
+#include "dogen.probing/types/probing_error.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/metrics_builder.hpp"
+#include "dogen.probing/types/metrics_printer.hpp"
 
 #endif

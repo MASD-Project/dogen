@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_HASH_METRICS_HASH_HPP
-#define DOGEN_PROBING_HASH_METRICS_HASH_HPP
+#ifndef DOGEN_PROBING_SERIALIZATION_METRICS_SER_HPP
+#define DOGEN_PROBING_SERIALIZATION_METRICS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/probing/types/metrics.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen.probing/types/metrics.hpp"
 
-namespace dogen {
-namespace probing {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::probing::metrics)
+namespace boost {
+namespace serialization {
 
-struct metrics_hasher {
-public:
-    static std::size_t hash(const metrics& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::probing::metrics& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::probing::metrics& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::probing::metrics> {
-public:
-    size_t operator()(const dogen::probing::metrics& v) const {
-        return dogen::probing::metrics_hasher::hash(v);
-    }
-};
-
-}
 #endif

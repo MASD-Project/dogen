@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"

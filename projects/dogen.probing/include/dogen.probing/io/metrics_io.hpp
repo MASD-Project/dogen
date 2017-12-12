@@ -18,13 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TEST_DATA_ALL_TD_HPP
-#define DOGEN_PROBING_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_PROBING_IO_METRICS_IO_HPP
+#define DOGEN_PROBING_IO_METRICS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/probing/test_data/metrics_td.hpp"
+#include <iosfwd>
+#include "dogen.probing/types/metrics.hpp"
+
+namespace dogen {
+namespace probing {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::probing::metrics& v);
+
+} }
 
 #endif

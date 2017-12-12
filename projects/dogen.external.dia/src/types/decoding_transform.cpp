@@ -28,7 +28,7 @@
 #include "dogen.dia/types/persister.hpp"
 #include "dogen.dia/io/diagram_io.hpp"
 #include "dogen.dia/types/diagram.hpp"
-#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen.external/types/transforms/context.hpp"
 #include "dogen.external/io/meta_model/model_io.hpp"
 #include "dogen.external/types/transforms/transformation_error.hpp"

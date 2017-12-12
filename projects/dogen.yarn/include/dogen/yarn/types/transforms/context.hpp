@@ -33,7 +33,7 @@
 #include "dogen.annotations/types/annotation_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 #include "dogen.formatters/types/repository.hpp"
-#include "dogen/probing/types/prober.hpp"
+#include "dogen.probing/types/prober.hpp"
 #include "dogen/yarn/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen/yarn/types/transforms/options.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"

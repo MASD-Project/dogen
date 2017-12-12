@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"

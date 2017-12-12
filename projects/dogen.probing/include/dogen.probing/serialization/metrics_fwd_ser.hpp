@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_IO_METRICS_IO_HPP
-#define DOGEN_PROBING_IO_METRICS_IO_HPP
+#ifndef DOGEN_PROBING_SERIALIZATION_METRICS_FWD_SER_HPP
+#define DOGEN_PROBING_SERIALIZATION_METRICS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/probing/types/metrics.hpp"
+#include "dogen.probing/types/metrics_fwd.hpp"
 
-namespace dogen {
-namespace probing {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::probing::metrics& v);
+template<class Archive>
+void save(Archive& ar, const dogen::probing::metrics& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::probing::metrics& v, unsigned int version);
 
 } }
 

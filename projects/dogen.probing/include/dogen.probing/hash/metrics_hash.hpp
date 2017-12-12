@@ -18,46 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_METRICS_BUILDER_HPP
-#define DOGEN_PROBING_TYPES_METRICS_BUILDER_HPP
+#ifndef DOGEN_PROBING_HASH_METRICS_HASH_HPP
+#define DOGEN_PROBING_HASH_METRICS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <stack>
-#include <string>
-#include <boost/shared_ptr.hpp>
-#include "dogen/probing/types/metrics_fwd.hpp"
+#include <functional>
+#include "dogen.probing/types/metrics.hpp"
 
 namespace dogen {
 namespace probing {
 
-class metrics_builder final {
+struct metrics_hasher {
 public:
-    metrics_builder(const std::string& log_level,
-        const bool writing_probe_data);
-
-private:
-    void ensure_stack_not_empty() const;
-    boost::shared_ptr<metrics> create_metrics(const std::string& transform_id,
-        const std::string& model_id) const;
-    void update_end();
-
-public:
-    void start(const std::string& transform_id, const std::string& model_id);
-    void end();
-
-public:
-    const boost::shared_ptr<const metrics> current() const;
-
-public:
-    boost::shared_ptr<metrics> build();
-
-private:
-    std::stack<boost::shared_ptr<metrics>> stack_;
+    static std::size_t hash(const metrics& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::probing::metrics> {
+public:
+    size_t operator()(const dogen::probing::metrics& v) const {
+        return dogen::probing::metrics_hasher::hash(v);
+    }
+};
+
+}
 #endif

@@ -18,32 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_METRICS_PRINTER_HPP
-#define DOGEN_PROBING_TYPES_METRICS_PRINTER_HPP
+#ifndef DOGEN_PROBING_TEST_DATA_ALL_TD_HPP
+#define DOGEN_PROBING_TEST_DATA_ALL_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <ostream>
-#include <boost/shared_ptr.hpp>
-#include "dogen/probing/types/metrics.hpp"
-
-namespace dogen {
-namespace probing {
-
-class metrics_printer final {
-private:
-    static void print(std::ostream& o, unsigned int fill_level,
-        const bool disable_guids_in_stats, const bool use_org_mode,
-        const boost::shared_ptr<const metrics> tm);
-
-public:
-    static std::string
-    print(const bool disable_guids_in_stats, const bool use_org_mode,
-        const boost::shared_ptr<const metrics> tm);
-};
-
-} }
+#include "dogen.probing/test_data/metrics_td.hpp"
 
 #endif

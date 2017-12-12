@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/probing/types/metrics_fwd.hpp"
-#include "dogen/probing/serialization/metrics_fwd_ser.hpp"
+#include "dogen.probing/types/metrics_fwd.hpp"
+#include "dogen.probing/serialization/metrics_fwd_ser.hpp"
 
 namespace dogen {
 namespace probing {

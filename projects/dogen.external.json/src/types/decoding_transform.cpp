@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen.external/types/transforms/context.hpp"
 #include "dogen.external/io/meta_model/model_io.hpp"
 #include "dogen.external/types/transforms/transformation_error.hpp"

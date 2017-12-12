@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/probing/types/metrics.hpp"
+#include "dogen.probing/types/metrics.hpp"
 
 namespace boost {
 

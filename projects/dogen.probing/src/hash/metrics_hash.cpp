@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/probing/hash/metrics_hash.hpp"
+#include "dogen.probing/hash/metrics_hash.hpp"
 
 namespace {
 

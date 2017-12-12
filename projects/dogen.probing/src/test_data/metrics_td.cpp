@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/probing/test_data/metrics_td.hpp"
+#include "dogen.probing/test_data/metrics_td.hpp"
 
 namespace {
 

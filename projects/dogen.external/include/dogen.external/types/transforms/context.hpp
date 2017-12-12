@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen/probing/types/prober.hpp"
+#include "dogen.probing/types/prober.hpp"
 
 namespace dogen {
 namespace external {

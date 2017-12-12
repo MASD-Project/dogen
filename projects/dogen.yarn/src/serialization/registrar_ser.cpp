@@ -27,7 +27,7 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/probing/serialization/registrar_ser.hpp"
+#include "dogen.probing/serialization/registrar_ser.hpp"
 #include "dogen.formatters/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"

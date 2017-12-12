@@ -26,10 +26,10 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen.annotations/io/type_repository_io.hpp"
 #include "dogen.annotations/io/archetype_location_repository_io.hpp"
-#include "dogen/probing/types/probing_error.hpp"
-#include "dogen/probing/types/metrics.hpp"
-#include "dogen/probing/types/metrics_printer.hpp"
-#include "dogen/probing/types/prober.hpp"
+#include "dogen.probing/types/probing_error.hpp"
+#include "dogen.probing/types/metrics.hpp"
+#include "dogen.probing/types/metrics_printer.hpp"
+#include "dogen.probing/types/prober.hpp"
 
 namespace {
 

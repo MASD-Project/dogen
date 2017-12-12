@@ -30,7 +30,7 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/probing/serialization/metrics_ser.hpp"
+#include "dogen.probing/serialization/metrics_ser.hpp"
 
 namespace boost {
 namespace serialization {

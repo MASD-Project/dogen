@@ -26,7 +26,7 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"

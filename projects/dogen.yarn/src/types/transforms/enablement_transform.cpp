@@ -22,7 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/probing/types/scoped_prober.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"

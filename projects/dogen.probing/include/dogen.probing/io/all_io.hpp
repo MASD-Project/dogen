@@ -25,6 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/probing/io/metrics_io.hpp"
+#include "dogen.probing/io/metrics_io.hpp"
 
 #endif
