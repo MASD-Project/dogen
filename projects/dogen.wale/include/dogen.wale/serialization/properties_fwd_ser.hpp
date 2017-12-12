@@ -18,25 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_SERIALIZATION_TEXT_TEMPLATE_SER_HPP
-#define DOGEN_WALE_SERIALIZATION_TEXT_TEMPLATE_SER_HPP
+#ifndef DOGEN_WALE_SERIALIZATION_PROPERTIES_FWD_SER_HPP
+#define DOGEN_WALE_SERIALIZATION_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/wale/types/text_template.hpp"
+#include "dogen.wale/types/properties_fwd.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::wale::text_template)
 namespace boost {
 namespace serialization {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::wale::text_template& v, unsigned int version);
+template<class Archive>
+void save(Archive& ar, const dogen::wale::properties& v, unsigned int version);
 
-template<typename Archive>
-void load(Archive& ar, dogen::wale::text_template& v, unsigned int version);
+template<class Archive>
+void load(Archive& ar, dogen::wale::properties& v, unsigned int version);
 
 } }
 

@@ -22,11 +22,11 @@
 #include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.utility/filesystem/path.hpp"
 #include "dogen.utility/filesystem/file.hpp"
-#include "dogen/wale/io/properties_io.hpp"
-#include "dogen/wale/types/key_extractor.hpp"
-#include "dogen/wale/types/formatter.hpp"
-#include "dogen/wale/types/validator.hpp"
-#include "dogen/wale/types/workflow.hpp"
+#include "dogen.wale/io/properties_io.hpp"
+#include "dogen.wale/types/key_extractor.hpp"
+#include "dogen.wale/types/formatter.hpp"
+#include "dogen.wale/types/validator.hpp"
+#include "dogen.wale/types/workflow.hpp"
 
 namespace {
 

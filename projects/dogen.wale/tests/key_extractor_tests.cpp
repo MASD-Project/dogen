@@ -21,7 +21,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen/wale/types/key_extractor.hpp"
+#include "dogen.wale/types/key_extractor.hpp"
 
 namespace {
 

@@ -21,8 +21,8 @@
 #include <sstream>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen/wale/types/key_extractor.hpp"
-#include "dogen/wale/types/extraction_error.hpp"
+#include "dogen.wale/types/key_extractor.hpp"
+#include "dogen.wale/types/extraction_error.hpp"
 
 namespace {
 

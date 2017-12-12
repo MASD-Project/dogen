@@ -18,26 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_TYPES_FORMATTER_HPP
-#define DOGEN_WALE_TYPES_FORMATTER_HPP
+#ifndef DOGEN_WALE_SERIALIZATION_TEXT_TEMPLATE_FWD_SER_HPP
+#define DOGEN_WALE_SERIALIZATION_TEXT_TEMPLATE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/wale/types/text_template.hpp"
+#include "dogen.wale/types/text_template_fwd.hpp"
 
-namespace dogen {
-namespace wale {
+namespace boost {
+namespace serialization {
 
-class formatter final {
-private:
-    std::string wrap_key(const std::string& key) const;
+template<class Archive>
+void save(Archive& ar, const dogen::wale::text_template& v, unsigned int version);
 
-public:
-    std::string format(const text_template& tt) const;
-};
+template<class Archive>
+void load(Archive& ar, dogen::wale::text_template& v, unsigned int version);
 
 } }
 

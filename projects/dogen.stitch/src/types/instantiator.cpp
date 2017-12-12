@@ -25,7 +25,7 @@
 #include "dogen.utility/filesystem/path.hpp"
 #include "dogen.utility/filesystem/file.hpp"
 #include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen/wale/types/workflow.hpp"
+#include "dogen.wale/types/workflow.hpp"
 #include "dogen.stitch/types/instantiation_error.hpp"
 #include "dogen.stitch/types/parser.hpp"
 #include "dogen.stitch/types/properties.hpp"

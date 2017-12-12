@@ -18,21 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_TYPES_ALL_HPP
-#define DOGEN_WALE_TYPES_ALL_HPP
+#ifndef DOGEN_WALE_TYPES_VALIDATOR_HPP
+#define DOGEN_WALE_TYPES_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/wale/types/workflow.hpp"
-#include "dogen/wale/types/formatter.hpp"
-#include "dogen/wale/types/validator.hpp"
-#include "dogen/wale/types/properties.hpp"
-#include "dogen/wale/types/key_extractor.hpp"
-#include "dogen/wale/types/text_template.hpp"
-#include "dogen/wale/types/extraction_error.hpp"
-#include "dogen/wale/types/formatting_error.hpp"
-#include "dogen/wale/types/validation_error.hpp"
+#include "dogen.wale/types/text_template.hpp"
+
+namespace dogen {
+namespace wale {
+
+class validator final {
+public:
+    void validate(const text_template& tt) const;
+};
+
+} }
 
 #endif

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/wale/serialization/properties_ser.hpp"
-#include "dogen/wale/serialization/text_template_ser.hpp"
+#include "dogen.wale/serialization/properties_ser.hpp"
+#include "dogen.wale/serialization/text_template_ser.hpp"
 
 #endif

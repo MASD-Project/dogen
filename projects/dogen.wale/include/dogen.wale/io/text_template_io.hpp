@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_IO_PROPERTIES_IO_HPP
-#define DOGEN_WALE_IO_PROPERTIES_IO_HPP
+#ifndef DOGEN_WALE_IO_TEXT_TEMPLATE_IO_HPP
+#define DOGEN_WALE_IO_TEXT_TEMPLATE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/wale/types/properties.hpp"
+#include "dogen.wale/types/text_template.hpp"
 
 namespace dogen {
 namespace wale {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::wale::properties& v);
+     const dogen::wale::text_template& v);
 
 } }
 

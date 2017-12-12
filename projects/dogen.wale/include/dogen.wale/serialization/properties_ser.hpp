@@ -18,22 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_IO_TEXT_TEMPLATE_IO_HPP
-#define DOGEN_WALE_IO_TEXT_TEMPLATE_IO_HPP
+#ifndef DOGEN_WALE_SERIALIZATION_PROPERTIES_SER_HPP
+#define DOGEN_WALE_SERIALIZATION_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/wale/types/text_template.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen.wale/types/properties.hpp"
 
-namespace dogen {
-namespace wale {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::wale::properties)
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::wale::text_template& v);
+template<typename Archive>
+void save(Archive& ar, const dogen::wale::properties& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::wale::properties& v, unsigned int version);
 
 } }
 

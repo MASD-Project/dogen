@@ -29,8 +29,8 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/wale/types/properties.hpp"
-#include "dogen/wale/types/text_template.hpp"
+#include "dogen.wale/types/properties.hpp"
+#include "dogen.wale/types/text_template.hpp"
 
 namespace dogen {
 namespace wale {

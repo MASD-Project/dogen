@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/wale/types/properties.hpp"
+#include "dogen.wale/types/properties.hpp"
 
 namespace dogen {
 namespace wale {

@@ -27,8 +27,8 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/wale/types/properties.hpp"
-#include "dogen/wale/serialization/text_template_fwd_ser.hpp"
+#include "dogen.wale/types/properties.hpp"
+#include "dogen.wale/serialization/text_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace wale {

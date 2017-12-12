@@ -18,24 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_SERIALIZATION_PROPERTIES_FWD_SER_HPP
-#define DOGEN_WALE_SERIALIZATION_PROPERTIES_FWD_SER_HPP
+#ifndef DOGEN_WALE_IO_ALL_IO_HPP
+#define DOGEN_WALE_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/wale/types/properties_fwd.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::wale::properties& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::wale::properties& v, unsigned int version);
-
-} }
+#include "dogen.wale/io/properties_io.hpp"
+#include "dogen.wale/io/text_template_io.hpp"
 
 #endif

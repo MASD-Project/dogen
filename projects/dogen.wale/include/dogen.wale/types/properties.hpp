@@ -30,7 +30,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen/wale/serialization/properties_fwd_ser.hpp"
+#include "dogen.wale/serialization/properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace wale {

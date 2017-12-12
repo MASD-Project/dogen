@@ -18,14 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_IO_ALL_IO_HPP
-#define DOGEN_WALE_IO_ALL_IO_HPP
+#ifndef DOGEN_WALE_TYPES_FORMATTER_HPP
+#define DOGEN_WALE_TYPES_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/wale/io/properties_io.hpp"
-#include "dogen/wale/io/text_template_io.hpp"
+#include <string>
+#include "dogen.wale/types/text_template.hpp"
+
+namespace dogen {
+namespace wale {
+
+class formatter final {
+private:
+    std::string wrap_key(const std::string& key) const;
+
+public:
+    std::string format(const text_template& tt) const;
+};
+
+} }
 
 #endif

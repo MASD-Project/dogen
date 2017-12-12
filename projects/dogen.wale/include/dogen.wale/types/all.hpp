@@ -18,24 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_WALE_SERIALIZATION_TEXT_TEMPLATE_FWD_SER_HPP
-#define DOGEN_WALE_SERIALIZATION_TEXT_TEMPLATE_FWD_SER_HPP
+#ifndef DOGEN_WALE_TYPES_ALL_HPP
+#define DOGEN_WALE_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/wale/types/text_template_fwd.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::wale::text_template& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::wale::text_template& v, unsigned int version);
-
-} }
+#include "dogen.wale/types/workflow.hpp"
+#include "dogen.wale/types/formatter.hpp"
+#include "dogen.wale/types/validator.hpp"
+#include "dogen.wale/types/properties.hpp"
+#include "dogen.wale/types/key_extractor.hpp"
+#include "dogen.wale/types/text_template.hpp"
+#include "dogen.wale/types/extraction_error.hpp"
+#include "dogen.wale/types/formatting_error.hpp"
+#include "dogen.wale/types/validation_error.hpp"
 
 #endif

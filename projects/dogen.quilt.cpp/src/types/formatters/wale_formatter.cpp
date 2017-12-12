@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.formatters/types/utility_formatter.hpp"
-#include "dogen/wale/types/workflow.hpp"
+#include "dogen.wale/types/workflow.hpp"
 #include "dogen.quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen.quilt.cpp/types/formatters/wale_formatter.hpp"

@@ -19,7 +19,7 @@
  *
  */
 #include <boost/algorithm/string/replace.hpp>
-#include "dogen/wale/types/formatter.hpp"
+#include "dogen.wale/types/formatter.hpp"
 
 namespace {
 
