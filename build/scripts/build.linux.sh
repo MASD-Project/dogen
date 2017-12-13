@@ -156,7 +156,7 @@ fi
 #
 if [ "${WITH_CSHARP}" == "1" ]; then
     echo "* Starting C# build."
-    csharp_dir="${product_dir}/projects/test_models";
+    csharp_dir="${product_dir}/projects/dogen.test_models";
     cd ${csharp_dir}
     nuget restore Dogen.TestModels.sln
     if [ $? -ne 0 ]; then
