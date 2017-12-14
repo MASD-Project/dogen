@@ -212,6 +212,19 @@ meta_model::name resolver::resolve_name_with_internal_modules(
     }
 
     /*
+     * FIXME: major hack to get external modules to model modules
+     * conversion to work.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Resolving using hacked name: " << im.name();
+    if (!im.name().location().model_modules().empty()) {
+        auto r(nf.build_hacked_combined_element_name(im.name(), n));
+        if (is_name_referable(idx, r)) {
+            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+            return r;
+        }
+    }
+
+    /*
      * Now let's try the same thing but for the references. Note
      * that we do not really need to go through all of this, we
      * could simply slot the references into a set and see if the

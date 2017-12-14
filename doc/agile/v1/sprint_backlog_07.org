@@ -13,35 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-12 Tue 23:13]
+#+CAPTION: Clock summary at [2017-12-14 Thu 08:48]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *68:14* |       |       | 100.0 |
+| *Total time*                                                                | *69:19* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 68:14   |       |       | 100.0 |
-| Active                                                                      |         | 68:14 |       | 100.0 |
+| Stories                                                                     | 69:19   |       |       | 100.0 |
+| Active                                                                      |         | 69:19 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:42 |   4.0 |
-| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.9 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  12.7 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  20.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:42 |   3.9 |
+| COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.8 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  12.5 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  19.8 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.4 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  23.5 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  23.2 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.6 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   2.9 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.6 |
 | COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   0.9 |
 | COMPLETED Create a =probing= model                                          |         |       |  1:22 |   2.0 |
-| COMPLETED Create the =external= model                                       |         |       |  5:07 |   7.5 |
+| COMPLETED Create the =external= model                                       |         |       |  5:07 |   7.4 |
 | COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.7 |
-| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   4.0 |
-| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   5.1 |
+| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.9 |
+| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   5.0 |
+| COMPLETED Fix travis build                                                  |         |       |  0:03 |   0.1 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.3 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.5 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   1.0 |
+| STARTED Add model modules to name resolution                                |         |       |  1:02 |   1.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -642,11 +644,67 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
-*** Add model modules to name resolution
+*** STARTED Add model modules to name resolution                      :story:
+    CLOCK: [2017-12-14 Thu 08:27]--[2017-12-14 Thu 08:48] =>  0:21
+    CLOCK: [2017-12-13 Wed 08:30]--[2017-12-13 Wed 09:11] =>  0:41
 
 Even since we did the external modules / model modules change we broke
 code generation; this is because we do not go up the model modules
 during name resolution. Add this to resolver.
+
+Let's walk through a simple example:. Name cames in as:
+
+- model module: =probing=
+- simple: =prober=
+
+We are in model:
+
+- model module: =dogen.external=
+
+Expected behaviour is to try all combinations of model modules:
+
+- =dogen.external.probing=
+- =dogen.probing
+- =probing=
+
+This highlights a fundamental problem with resolution: we view the
+{external, model internal} modules as if they are separate entities
+but in reality, for the purposes of resolution, there is only one
+thing that is relevant: the module path. If it matches because of
+{external, model internal} modules, well that is not relevant to
+resolution. Other users of =name= do need to know this information
+(for example to  generate directories or file names) but not the
+resolver.
+
+Interestingly, because we are only looking for an id, it doesn't
+really matter how we get to it (in terms of the internal composition
+of the name), as long as it matches bitwise. This means we can look at
+the process slightly differently:
+
+- start off with the name as the user provided it. Extract all strings
+  from it to create a list, in order: external, model, internal,
+  simple. Try to resolve that. Call it user list.
+- then create a second list from model / context: external, model,
+  internal. Call it model list.
+- try concantenating model list and user list, pretty printing and
+  resolving it. If it fails, pop model list and concatenate again. Try
+  until model list is empty.
+
+Tasks:
+
+- first add a quick hack just to get the code generator working
+  again. For example, take the first model module of the model and try
+  resolving with that. Then worry about fixing this properly.
+- split the conversion of name into list from pretty printer. Printer
+  should merely take a string or list of strings and do its thing. We
+  need to find a good location for this method, since (for now) we
+  cannot place it in the right location which is the name class
+  itself.
+- change resolver to obtain the lists as per above. The to list
+  machinery can be used for this, though we need to handle model names
+  somehow. We can copy the =model_name_mode= logic from printer.
+- drop all of the logic in resolver at present and use the list logic
+  as per above. Do not check references, etc.
 
 *** Rename =yarn= to =modeling=                                       :story:
 

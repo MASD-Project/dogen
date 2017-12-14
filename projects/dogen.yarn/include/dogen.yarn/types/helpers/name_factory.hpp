@@ -101,6 +101,10 @@ public:
         const bool populate_model_modules_if_blank = false,
         const bool populate_internal_modules_if_blank = false) const;
 
+    meta_model::name build_hacked_combined_element_name(
+        const meta_model::name& model_name,
+        const meta_model::name& partial_element_name) const;
+
     /**
      * @brief Promotes the first name of the internal module path to
      * become the model name.

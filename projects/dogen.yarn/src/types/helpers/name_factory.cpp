@@ -185,6 +185,27 @@ meta_model::name name_factory::build_combined_element_name(
     return b.build();
 }
 
+meta_model::name name_factory::build_hacked_combined_element_name(
+    const meta_model::name& model_name,
+    const meta_model::name& partial_element_name) const {
+
+    name_builder b;
+    b.simple_name(partial_element_name.simple());
+
+    const auto& l(model_name.location());
+    if (!l.model_modules().empty()) {
+        auto mm(partial_element_name.location().model_modules());
+        mm.push_front(l.model_modules().front());
+        b.model_modules(mm);
+    } else
+        b.model_modules(partial_element_name.location().model_modules());
+
+    b.internal_modules(partial_element_name.location().internal_modules());
+    b.external_modules(l.external_modules());
+
+    return b.build();
+}
+
 meta_model::name name_factory::
 build_promoted_module_name(const meta_model::name& element_name) const {
     name_builder b;
