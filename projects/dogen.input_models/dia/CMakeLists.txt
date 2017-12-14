@@ -48,7 +48,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.${frontend}
-        --output-dir ${projects_dir}/test_models
+        --output-dir ${projects_dir}/dogen.test_models
         ${other_options}
         ${ignore_regexes}
         --ignore-files-matching-regex .*sql
