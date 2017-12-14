@@ -1,14 +1,14 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
-<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/fabric/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/fabric/visual_studio_project.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/visual_studio_project_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/fabric/visual_studio_project.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/visual_studio_project_formatter.hpp" #>
 <#+
 
 std::string visual_studio_project_formatter::static_id() {

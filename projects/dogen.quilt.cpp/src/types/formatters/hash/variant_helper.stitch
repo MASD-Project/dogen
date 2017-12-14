@@ -1,9 +1,9 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::hash #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/variant_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/hash/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/hash/variant_helper.hpp" #>
 <#@ stitch.wale.template=cpp_helper_formatter_implementation_enabled.wale #>
 <#@ stitch.wale.kvp.helper.family=BoostVariant #>
 <#@ stitch.wale.kvp.class.simple_name=variant_helper #>
