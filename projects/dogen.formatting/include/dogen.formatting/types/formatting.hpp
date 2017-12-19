@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_FORMATTERS_HPP
-#define DOGEN_FORMATTERS_TYPES_FORMATTERS_HPP
+#ifndef DOGEN_FORMATTING_TYPES_FORMATTING_HPP
+#define DOGEN_FORMATTING_TYPES_FORMATTING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 
 /**
- * @brief Provides formatting code applicable to all formatting.
+ * @brief Provides the basic formatting primitives.
  *
  * This model is the repository of all formatting related code
  * which is not language specific. Language-specific models can

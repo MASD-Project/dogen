@@ -844,7 +844,7 @@ and to build it.
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.yarn
 #DOGEN yarn.reference=dogen.annotations.dia
-#DOGEN yarn.reference=dogen.formatters.dia
+#DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.reference=dogen.probing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
@@ -4570,7 +4570,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
             <dia:string>#decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatters::decoration_properties#</dia:string>
+            <dia:string>#formatting::decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11666,10 +11666,10 @@ model.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#formatters_repository#</dia:string>
+            <dia:string>#formatting_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dogen::formatters::repository#</dia:string>
+            <dia:string>#dogen::formatting::repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

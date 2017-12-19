@@ -1200,7 +1200,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatters::artefact#</dia:string>
+            <dia:string>#formatting::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1788,7 +1788,7 @@
             <dia:string>#decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::decoration_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;formatting::decoration_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3837,7 +3837,7 @@
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.stitch
 #DOGEN yarn.reference=dogen.annotations.dia
-#DOGEN yarn.reference=dogen.formatters.dia
+#DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -3977,7 +3977,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatters::artefact#</dia:string>
+            <dia:string>#formatting::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

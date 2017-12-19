@@ -138,7 +138,7 @@
 #DOGEN yarn.model_modules=dogen.quilt.cpp
 #DOGEN yarn.reference=dogen.options.dia
 #DOGEN yarn.reference=dogen.yarn.dia
-#DOGEN yarn.reference=dogen.formatters.dia
+#DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.reference=dogen.annotations.dia
 #DOGEN yarn.reference=dogen.probing.dia
 #DOGEN yarn.input_language=cpp
@@ -813,7 +813,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dogen::formatters::artefact#</dia:string>
+            <dia:string>#dogen::formatting::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5937,7 +5937,7 @@ facet of the C++ language.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;dogen::formatters::file&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;dogen::formatting::file&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6554,7 +6554,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatters::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10948,7 +10948,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#gs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const boost::optional&lt;dogen::formatters::decoration_configuration&gt;#</dia:string>
+                <dia:string>#const boost::optional&lt;dogen::formatting::decoration_configuration&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -17694,7 +17694,7 @@ and element.#</dia:string>
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatters::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36175,7 +36175,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatters::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36441,7 +36441,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatters::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

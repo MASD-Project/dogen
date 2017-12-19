@@ -2504,7 +2504,7 @@ the root of an inheritance tree.
 #DOGEN yarn.model_modules=dogen.external.dia
 #DOGEN yarn.reference=dogen.dia.dia
 #DOGEN yarn.reference=dogen.annotations.dia
-#DOGEN yarn.reference=dogen.formatters.dia
+#DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.reference=dogen.options.dia
 #DOGEN yarn.reference=dogen.probing.dia
 #DOGEN yarn.reference=dogen.external.dia

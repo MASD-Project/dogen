@@ -969,7 +969,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dogen::formatters::artefact#</dia:string>
+            <dia:string>#dogen::formatting::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

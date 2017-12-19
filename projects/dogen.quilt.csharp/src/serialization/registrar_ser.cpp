@@ -43,8 +43,8 @@ namespace csharp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::formatting::register_types(ar);
     dogen::probing::register_types(ar);
+    dogen::formatting::register_types(ar);
     dogen::options::register_types(ar);
     dogen::annotations::register_types(ar);
     dogen::yarn::register_types(ar);

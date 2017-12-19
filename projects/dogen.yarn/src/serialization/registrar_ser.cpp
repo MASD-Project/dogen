@@ -44,8 +44,8 @@ namespace yarn {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::probing::register_types(ar);
     dogen::annotations::register_types(ar);
+    dogen::probing::register_types(ar);
     dogen::formatting::register_types(ar);
 
     ar.template register_type<dogen::yarn::meta_model::builtin>();

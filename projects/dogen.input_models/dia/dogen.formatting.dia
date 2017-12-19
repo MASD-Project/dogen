@@ -4390,14 +4390,14 @@ code: indentation and dividers.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Provides formatting code applicable to all formatters.
+            <dia:string>#Provides the basic formatting primitives.
 
 This model is the repository of all formatting related code
 which is not language specific. Language-specific models can
 then make use of it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.formatters
+#DOGEN yarn.model_modules=dogen.formatting
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -7495,7 +7495,7 @@ then make use of it.
             <dia:string>#decoration_properties_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatters::decoration_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;decoration_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -7612,7 +7612,7 @@ then make use of it.
                 <dia:string>#dp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::optional&lt;formatters::decoration_properties&gt;#</dia:string>
+                <dia:string>#boost::optional&lt;decoration_properties&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
