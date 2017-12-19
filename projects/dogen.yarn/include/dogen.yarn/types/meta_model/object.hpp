@@ -74,7 +74,7 @@ public:
         const std::list<std::string>& dynamic_stereotypes,
         const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::formatters::decoration_properties& decoration_properties,
+        const dogen::formatting::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::list<dogen::yarn::meta_model::attribute>& all_attributes,

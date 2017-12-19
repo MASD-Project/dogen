@@ -24,7 +24,7 @@
 #include "dogen.quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen.quilt.cpp/types/formatters/traits.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/enumeration.hpp"
 
@@ -108,7 +108,7 @@ a.stream() << "enum class " << ye.name().simple() << " {" << std::endl;
 a.stream() << "enum class " << ye.name().simple() << " : " << a.get_qualified_name(ye.underlying_element()) << " {" << std::endl;
             }
 
-            dogen::formatters::sequence_formatter sf(ye.enumerators().size());
+            dogen::formatting::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
 a.stream() << "    " << en.name().simple() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;

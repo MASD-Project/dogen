@@ -22,7 +22,7 @@
 #include "dogen.annotations/hash/annotation_hash.hpp"
 #include "dogen.yarn/hash/meta_model/element_hash.hpp"
 #include "dogen.yarn/hash/meta_model/origin_types_hash.hpp"
-#include "dogen.formatters/hash/decoration_properties_hash.hpp"
+#include "dogen.formatting/hash/decoration_properties_hash.hpp"
 #include "dogen.yarn/hash/meta_model/static_stereotypes_hash.hpp"
 #include "dogen.yarn/hash/meta_model/artefact_properties_hash.hpp"
 #include "dogen.yarn/hash/meta_model/local_archetype_location_properties_hash.hpp"

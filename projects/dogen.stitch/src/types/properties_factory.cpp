@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatters/types/decoration_properties_factory.hpp"
+#include "dogen.formatting/types/decoration_properties_factory.hpp"
 #include "dogen.stitch/types/stitching_properties_factory.hpp"
 #include "dogen.stitch/types/properties_factory.hpp"
 
@@ -32,14 +32,14 @@ namespace dogen {
 namespace stitch {
 
 properties_factory::properties_factory(const annotations::type_repository& atrp,
-    const dogen::formatters::repository& frp)
-    : annotations_repository_(atrp),   formatters_repository_(frp) {}
+    const dogen::formatting::repository& frp)
+    : annotations_repository_(atrp),   formatting_repository_(frp) {}
 
-boost::optional<formatters::decoration_properties> properties_factory::
+boost::optional<formatting::decoration_properties> properties_factory::
 make_decoration_properties(const annotations::annotation& a) const {
-    using dogen::formatters::decoration_properties_factory;
+    using dogen::formatting::decoration_properties_factory;
     const auto& drp(annotations_repository_);
-    decoration_properties_factory f(drp, formatters_repository_);
+    decoration_properties_factory f(drp, formatting_repository_);
     return f.make(cpp_modeline_name, a);
 }
 

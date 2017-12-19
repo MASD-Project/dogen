@@ -71,7 +71,7 @@ update_element(const context& ctx, meta_model::element& e) {
     /*
      * Perform the artefact expansion by looking at all the archetype
      * locations available in the context. These were originally
-     * sourced from the formatters available in each backend.
+     * sourced from the formatting available in each backend.
      */
     auto& ap(e.artefact_properties());
     for (const auto& al : i->second.archetype_locations()) {

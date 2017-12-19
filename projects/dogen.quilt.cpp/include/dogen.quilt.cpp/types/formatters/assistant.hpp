@@ -34,9 +34,9 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen.yarn/types/meta_model/artefact.hpp"
-#include "dogen.formatters/types/comment_styles.hpp"
-#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen.formatting/types/comment_styles.hpp"
+#include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen.yarn/types/meta_model/name.hpp"
 #include "dogen.yarn/types/meta_model/element.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
@@ -262,20 +262,20 @@ private:
     /**
      * @brief Returns the decoration properties for a given yarn element.
      */
-    const dogen::formatters::decoration_properties&
+    const dogen::formatting::decoration_properties&
     get_decoration_properties(const yarn::meta_model::element& e) const;
 
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
-    dogen::formatters::cpp::scoped_boilerplate_formatter
+    dogen::formatting::cpp::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter(const yarn::meta_model::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.
      */
-    dogen::formatters::cpp::scoped_namespace_formatter
+    dogen::formatting::cpp::scoped_namespace_formatter
     make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
     /**
@@ -283,11 +283,11 @@ public:
      */
     /**@{*/
     void make_decoration_preamble(
-        const dogen::formatters::comment_styles cs,
+        const dogen::formatting::comment_styles cs,
         const yarn::meta_model::element& e);
     void make_decoration_preamble(
-        const dogen::formatters::comment_styles cs,
-        const boost::optional<dogen::formatters::decoration_properties> dc);
+        const dogen::formatting::comment_styles cs,
+        const boost::optional<dogen::formatting::decoration_properties> dc);
     /**@}*/
 
 public:

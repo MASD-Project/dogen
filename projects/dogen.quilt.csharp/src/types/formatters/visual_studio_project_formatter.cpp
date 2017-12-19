@@ -25,7 +25,7 @@
 #include "dogen.quilt.csharp/types/fabric/visual_studio_project.hpp"
 #include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.csharp/types/traits.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
 namespace dogen {

@@ -28,8 +28,8 @@
 #include <boost/optional.hpp>
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatters/types/repository.hpp"
-#include "dogen.formatters/types/decoration_properties.hpp"
+#include "dogen.formatting/types/repository.hpp"
+#include "dogen.formatting/types/decoration_properties.hpp"
 #include "dogen.stitch/types/stitching_properties.hpp"
 #include "dogen.stitch/types/properties.hpp"
 
@@ -42,13 +42,13 @@ namespace stitch {
 class properties_factory {
 public:
     properties_factory(const annotations::type_repository& atrp,
-        const dogen::formatters::repository& frp);
+        const dogen::formatting::repository& frp);
 
 private:
     /**
      * @brief Create the decoration properties.
      */
-    boost::optional<formatters::decoration_properties>
+    boost::optional<formatting::decoration_properties>
     make_decoration_properties(const annotations::annotation& a) const;
 
     /**
@@ -65,7 +65,7 @@ public:
 
 private:
     const annotations::type_repository& annotations_repository_;
-    const dogen::formatters::repository& formatters_repository_;
+    const dogen::formatting::repository& formatting_repository_;
 };
 
 } }

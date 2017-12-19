@@ -26,7 +26,7 @@
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/builtin.hpp"
-#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace quilt {

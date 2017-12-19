@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 
 namespace dogen {
@@ -46,7 +46,7 @@ a.stream() << std::endl;
 a.stream() << "    s << \" { \"" << std::endl;
 a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\"" << (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") << std::endl;
 
-    dogen::formatters::sequence_formatter sf(o.parents().size());
+    dogen::formatting::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {

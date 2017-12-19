@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/enumeration.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/types/traits.hpp" #>
@@ -60,7 +60,7 @@ enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_el
 <#+
             }
 
-            dogen::formatters::sequence_formatter sf(ye.enumerators().size());
+            dogen::formatting::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
 #>

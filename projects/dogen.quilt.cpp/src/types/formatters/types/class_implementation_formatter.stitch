@@ -4,7 +4,7 @@
 <#@ stitch.inclusion_dependency="dogen.utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/assistant.hpp" #>
@@ -125,7 +125,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
 <#+
                 unsigned int size(o.parents().size() + o.local_attributes().size());
 
-                dogen::formatters::sequence_formatter sf(size);
+                dogen::formatting::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 if (!o.parents().empty()) {
@@ -163,7 +163,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
 <#= sn #>::<#= sn #>(
 <#+
 
-                    dogen::formatters::sequence_formatter sf(attr_count);
+                    dogen::formatting::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto attr : o.all_attributes()) {
 #>
@@ -179,7 +179,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
                 }
 
-                dogen::formatters::sequence_formatter sf(sequence_size);
+                dogen::formatting::sequence_formatter sf(sequence_size);
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
                 for (const auto pair : o.inherited_attributes()) {
@@ -195,7 +195,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
     <#= sf.prefix() #><#= pqn #>(<#= sf.postfix(true/*skip*/) #>
 <#+
                         sf.next();
-                        dogen::formatters::sequence_formatter sf2(pattrs.size());
+                        dogen::formatting::sequence_formatter sf2(pattrs.size());
                         sf2.element_separator("");
 
                         sf2.prefix_configuration().first("  ").not_first("  ");
@@ -389,7 +389,7 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
     return true;
 <#+
             else {
-                dogen::formatters::sequence_formatter sf(o.parents().size());
+                dogen::formatting::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");

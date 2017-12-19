@@ -30,7 +30,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.stitch/serialization/properties_ser.hpp"
 #include "dogen.stitch/serialization/stitching_properties_ser.hpp"
-#include "dogen.formatters/serialization/decoration_properties_ser.hpp"
+#include "dogen.formatting/serialization/decoration_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {

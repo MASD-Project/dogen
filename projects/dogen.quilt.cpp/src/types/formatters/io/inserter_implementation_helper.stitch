@@ -1,7 +1,7 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::io #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#+
 
 void inserter_implementation_helper(
@@ -27,7 +27,7 @@ void inserter_implementation_helper(
       << "\"__type__\": " << "\"<#= qn #>\""<#= (no_parent_and_no_attributes ? " << \" }\";" : " << \", \"") #>
 <#+
 
-    dogen::formatters::sequence_formatter sf(o.parents().size());
+    dogen::formatting::sequence_formatter sf(o.parents().size());
     sf.prefix_configuration().first("  << ").not_first("s << ");
     sf.element_separator("");
     if (!o.parents().empty()) {

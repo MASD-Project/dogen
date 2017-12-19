@@ -35,7 +35,7 @@
 #include "dogen.annotations/types/annotation_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 #include "dogen.yarn/types/meta_model/artefact.hpp"
-#include "dogen.formatters/types/repository.hpp"
+#include "dogen.formatting/types/repository.hpp"
 #include "dogen.stitch/types/properties.hpp"
 #include "dogen.stitch/types/text_template.hpp"
 
@@ -83,9 +83,9 @@ private:
     obtain_archetype_location_repository() const;
 
     /**
-     * @brief Creates the formatters' repository.
+     * @brief Creates the formatting' repository.
      */
-    dogen::formatters::repository create_formatters_repository(
+    dogen::formatting::repository create_formatting_repository(
         const std::vector<boost::filesystem::path>& data_dirs) const;
 
     /**
@@ -102,7 +102,7 @@ private:
     std::list<yarn::meta_model::artefact>
     create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const dogen::formatters::repository& drp,
+        const dogen::formatting::repository& drp,
         const std::forward_list<boost::filesystem::path>&
         text_template_paths) const;
 

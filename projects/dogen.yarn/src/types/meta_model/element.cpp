@@ -25,7 +25,7 @@
 #include "dogen.annotations/io/annotation_io.hpp"
 #include "dogen.yarn/types/meta_model/element.hpp"
 #include "dogen.yarn/io/meta_model/origin_types_io.hpp"
-#include "dogen.formatters/io/decoration_properties_io.hpp"
+#include "dogen.formatting/io/decoration_properties_io.hpp"
 #include "dogen.yarn/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen.yarn/io/meta_model/artefact_properties_io.hpp"
 #include "dogen.yarn/io/meta_model/local_archetype_location_properties_io.hpp"
@@ -152,7 +152,7 @@ element::element(
     const std::list<std::string>& dynamic_stereotypes,
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::formatters::decoration_properties& decoration_properties,
+    const dogen::formatting::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties)
     : name_(name),
@@ -363,19 +363,19 @@ void element::is_element_extension(const bool v) {
     is_element_extension_ = v;
 }
 
-const dogen::formatters::decoration_properties& element::decoration_properties() const {
+const dogen::formatting::decoration_properties& element::decoration_properties() const {
     return decoration_properties_;
 }
 
-dogen::formatters::decoration_properties& element::decoration_properties() {
+dogen::formatting::decoration_properties& element::decoration_properties() {
     return decoration_properties_;
 }
 
-void element::decoration_properties(const dogen::formatters::decoration_properties& v) {
+void element::decoration_properties(const dogen::formatting::decoration_properties& v) {
     decoration_properties_ = v;
 }
 
-void element::decoration_properties(const dogen::formatters::decoration_properties&& v) {
+void element::decoration_properties(const dogen::formatting::decoration_properties&& v) {
     decoration_properties_ = std::move(v);
 }
 

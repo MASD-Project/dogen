@@ -1,6 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::test_data #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/cpp/scoped_namespace_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/cpp/scoped_namespace_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/traits.hpp" #>

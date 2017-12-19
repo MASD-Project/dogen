@@ -29,7 +29,7 @@
 #include "dogen.yarn/serialization/registrar_ser.hpp"
 #include "dogen.options/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
-#include "dogen.formatters/serialization/registrar_ser.hpp"
+#include "dogen.formatting/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen.quilt.csharp/serialization/registrar_ser.hpp"
 #include "dogen.quilt.csharp/serialization/fabric/assistant_ser.hpp"
@@ -43,7 +43,7 @@ namespace csharp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::formatters::register_types(ar);
+    dogen::formatting::register_types(ar);
     dogen::probing::register_types(ar);
     dogen::options::register_types(ar);
     dogen::annotations::register_types(ar);

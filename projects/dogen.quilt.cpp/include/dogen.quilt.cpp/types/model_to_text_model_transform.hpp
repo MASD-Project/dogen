@@ -90,7 +90,7 @@ private:
     format(const std::unordered_set<yarn::meta_model::element_archetype>&
         enabled_archetype_for_element, const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const dogen::formatters::repository& drp,
+        const dogen::formatting::repository& drp,
         const formattables::model& fm) const;
 
     /**

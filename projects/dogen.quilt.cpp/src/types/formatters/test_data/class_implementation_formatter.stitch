@@ -5,7 +5,7 @@
 <#@ stitch.inclusion_dependency="dogen.utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/assistant.hpp" #>
@@ -132,7 +132,7 @@ populate(const unsigned int position, result_type& v) {
 
 <#+
                     else {
-                        dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                        dogen::formatting::sequence_formatter sf(o.local_attributes().size());
                         for (const auto attr : o.local_attributes()) {
 #>
         create_<#= attr.parsed_type().identifiable() #>(position + <#= sf.current_position() #>)<#= sf.postfix() #>

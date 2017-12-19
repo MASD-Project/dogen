@@ -27,7 +27,7 @@
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen.quilt.cpp/types/formatters/traits.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
 #include "dogen.utility/log/logger.hpp"
@@ -183,7 +183,7 @@ a.stream() << std::endl;
 a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
                 unsigned int size(o.parents().size() + o.local_attributes().size());
 
-                dogen::formatters::sequence_formatter sf(size);
+                dogen::formatting::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
                 sf.postfix_configuration().last(" { }");
                 if (!o.parents().empty()) {
@@ -213,7 +213,7 @@ a.stream() << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_
 a.stream() << std::endl;
 a.stream() << sn << "::" << sn << "(" << std::endl;
 
-                    dogen::formatters::sequence_formatter sf(attr_count);
+                    dogen::formatting::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto attr : o.all_attributes()) {
 a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
@@ -227,7 +227,7 @@ a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
                 }
 
-                dogen::formatters::sequence_formatter sf(sequence_size);
+                dogen::formatting::sequence_formatter sf(sequence_size);
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
                 for (const auto pair : o.inherited_attributes()) {
@@ -239,7 +239,7 @@ a.stream() << "    " << sf.prefix() << pqn << "(" << (pattrs.empty() ? "" : patt
                     } else {
 a.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) << std::endl;
                         sf.next();
-                        dogen::formatters::sequence_formatter sf2(pattrs.size());
+                        dogen::formatting::sequence_formatter sf2(pattrs.size());
                         sf2.element_separator("");
 
                         sf2.prefix_configuration().first("  ").not_first("  ");
@@ -383,7 +383,7 @@ a.stream() << "bool " << sn << "::" << method_name << "(const " << sn << "& " <<
             if (o.all_attributes().empty())
 a.stream() << "    return true;" << std::endl;
             else {
-                dogen::formatters::sequence_formatter sf(o.parents().size());
+                dogen::formatting::sequence_formatter sf(o.parents().size());
                 sf.element_separator("");
                 sf.prefix_configuration().first("return ").not_first("    ");
                 sf.postfix_configuration().not_last(" &&");

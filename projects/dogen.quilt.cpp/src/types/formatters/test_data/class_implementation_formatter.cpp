@@ -26,7 +26,7 @@
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen.quilt.cpp/types/formatters/traits.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
 #include "dogen.utility/log/logger.hpp"
@@ -174,7 +174,7 @@ a.stream() << "    return " << sn << "(" << std::endl;
                     if (o.local_attributes().empty())
 a.stream() << std::endl;
                     else {
-                        dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                        dogen::formatting::sequence_formatter sf(o.local_attributes().size());
                         for (const auto attr : o.local_attributes()) {
 a.stream() << "        create_" << attr.parsed_type().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();

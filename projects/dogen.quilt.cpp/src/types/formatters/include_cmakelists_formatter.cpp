@@ -26,7 +26,7 @@
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/throw_exception.hpp>
@@ -99,7 +99,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        const auto cs(dogen::formatters::comment_styles::shell_style);
+        const auto cs(dogen::formatting::comment_styles::shell_style);
         a.make_decoration_preamble(cs, e);
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
 a.stream() << std::endl;

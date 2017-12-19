@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatters/types/decoration_properties_factory.hpp"
+#include "dogen.formatting/types/decoration_properties_factory.hpp"
 #include "dogen.yarn/types/meta_model/model.hpp"
 #include "dogen.yarn/types/transforms/context_fwd.hpp"
 
@@ -45,7 +45,7 @@ public:
 public:
     virtual std::string id() const = 0;
     virtual void transform(const context& ctx,
-        const dogen::formatters::decoration_properties_factory& dpf,
+        const dogen::formatting::decoration_properties_factory& dpf,
         meta_model::model& m) const = 0;
 };
 

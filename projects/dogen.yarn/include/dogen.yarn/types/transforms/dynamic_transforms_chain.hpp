@@ -27,7 +27,7 @@
 
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatters/types/decoration_properties_factory.hpp"
+#include "dogen.formatting/types/decoration_properties_factory.hpp"
 #include "dogen.yarn/types/meta_model/endomodel.hpp"
 #include "dogen.yarn/types/transforms/dynamic_transform_registrar.hpp"
 #include "dogen.yarn/types/transforms/context_fwd.hpp"
@@ -42,7 +42,7 @@ private:
     /**
      * @brief Create the decoration configuration factory.
      */
-    static dogen::formatters::decoration_properties_factory
+    static dogen::formatting::decoration_properties_factory
     create_decoration_properties_factory(
         const context& ctx, const annotations::annotation& ra);
 

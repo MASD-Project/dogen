@@ -49,7 +49,7 @@ namespace dogen {
 namespace stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
-    const annotations::annotation_factory& af, const dogen::formatters::repository& frp)
+    const annotations::annotation_factory& af, const dogen::formatting::repository& frp)
     : annotation_factory_(af), properties_factory_(atrp, frp) {}
 
 boost::filesystem::path

@@ -185,7 +185,7 @@ include_directories(
 
     # real code
     ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.formatters/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.formatting/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.options/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.external/include
@@ -216,7 +216,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.options)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.quilt.cpp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.quilt.csharp)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.formatters)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.formatting)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.knitter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tailor)

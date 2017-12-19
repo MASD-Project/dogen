@@ -60,7 +60,7 @@ void dynamic_transform::expand_injection(
 }
 
 void dynamic_transform::expand_decoration(
-    const dogen::formatters::decoration_properties_factory& dpf,
+    const dogen::formatting::decoration_properties_factory& dpf,
     yarn::meta_model::model& m) const {
     decoration_expander de;
     de.expand(dpf, m);
@@ -71,7 +71,7 @@ std::string dynamic_transform::id() const {
 }
 
 void dynamic_transform::transform(const yarn::transforms::context& ctx,
-    const dogen::formatters::decoration_properties_factory& dpf,
+    const dogen::formatting::decoration_properties_factory& dpf,
     yarn::meta_model::model& m) const {
 
     if (!requires_expansion(m))

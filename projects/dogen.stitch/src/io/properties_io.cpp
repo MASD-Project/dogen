@@ -21,11 +21,11 @@
 #include <ostream>
 #include "dogen.stitch/io/properties_io.hpp"
 #include "dogen.stitch/io/stitching_properties_io.hpp"
-#include "dogen.formatters/io/decoration_properties_io.hpp"
+#include "dogen.formatting/io/decoration_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatting::decoration_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

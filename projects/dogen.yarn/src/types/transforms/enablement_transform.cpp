@@ -94,16 +94,16 @@ void enablement_transform::compute_enablement_for_artefact_properties(
     const auto& lalp(local_archetype_location_properties);
 
     /*
-     * As we may be processing a segmented entity, not all formatters
+     * As we may be processing a segmented entity, not all formatting
      * need to be present in the local configuration. For example, an
      * entity may be segmented into an object and a forward
      * declaration; in this case, when we are processing the object,
-     * we will still see the forward declaration formatters in the
+     * we will still see the forward declaration formatting in the
      * formattable configuration since the transformer merged all
      * segments of the element together. However, these are not
      * present in the local configuration container because we are
      * only processing one segment at a time. So, we need to ignore
-     * the formatters for the segments we are not processing.
+     * the formatting for the segments we are not processing.
      */
     const auto j(lalp.find(archetype));
     if (j == lalp.end()) {
@@ -219,13 +219,13 @@ void enablement_transform::compute_enablement_for_element(
     BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*
-     * Not all elements have formatters. For example, object templates
+     * Not all elements have formatting. For example, object templates
      * do not have any at present. This manifests itself as an absence
      * of archetype locations mapped against this element. If it is
      * so, skip the element.
      */
     if (e.archetype_location_properties().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Element has no formatters, "
+        BOOST_LOG_SEV(lg, debug) << "Element has no formatting, "
                                  << " so nothing enable.";
         return;
     }
@@ -248,7 +248,7 @@ void enablement_transform::compute_enablement_for_element(
     /*
      * Once we got both the global and the local configuration, we can
      * then compute the enablement values for this formattable, across
-     * all the supported formatters.
+     * all the supported formatting.
      */
     auto& eafe(enabled_archetype_for_element);
     for (auto& pair : e.artefact_properties()) {

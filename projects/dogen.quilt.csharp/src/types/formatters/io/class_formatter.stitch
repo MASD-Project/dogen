@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::io #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/io/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/assistant.hpp" #>
@@ -68,7 +68,7 @@ using System;
 <#+
                 }
 
-                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                dogen::formatting::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(", true/*withSeparator*/");
                 sf.postfix_configuration().last("");

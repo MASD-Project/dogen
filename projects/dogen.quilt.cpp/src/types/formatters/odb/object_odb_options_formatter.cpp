@@ -28,7 +28,7 @@
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/object_odb_options.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
@@ -102,7 +102,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto& ooo(a.as<fabric::object_odb_options>(e));
 
     {
-        const auto cs(dogen::formatters::comment_styles::shell_style);
+        const auto cs(dogen::formatting::comment_styles::shell_style);
         a.make_decoration_preamble(cs, e);
 a.stream() << "# epilogue" << std::endl;
 a.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;

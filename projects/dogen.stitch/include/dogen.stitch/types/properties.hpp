@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.stitch/types/stitching_properties.hpp"
-#include "dogen.formatters/types/decoration_properties.hpp"
+#include "dogen.formatting/types/decoration_properties.hpp"
 #include "dogen.stitch/serialization/properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,7 +45,7 @@ public:
 
 public:
     properties(
-        const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
+        const boost::optional<dogen::formatting::decoration_properties>& decoration_properties,
         const dogen::stitch::stitching_properties& stitching_properties);
 
 private:
@@ -56,10 +56,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::stitch::properties& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::formatters::decoration_properties>& decoration_properties() const;
-    boost::optional<dogen::formatters::decoration_properties>& decoration_properties();
-    void decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v);
-    void decoration_properties(const boost::optional<dogen::formatters::decoration_properties>&& v);
+    const boost::optional<dogen::formatting::decoration_properties>& decoration_properties() const;
+    boost::optional<dogen::formatting::decoration_properties>& decoration_properties();
+    void decoration_properties(const boost::optional<dogen::formatting::decoration_properties>& v);
+    void decoration_properties(const boost::optional<dogen::formatting::decoration_properties>&& v);
 
     const dogen::stitch::stitching_properties& stitching_properties() const;
     dogen::stitch::stitching_properties& stitching_properties();
@@ -77,7 +77,7 @@ public:
     properties& operator=(properties other);
 
 private:
-    boost::optional<dogen::formatters::decoration_properties> decoration_properties_;
+    boost::optional<dogen::formatting::decoration_properties> decoration_properties_;
     dogen::stitch::stitching_properties stitching_properties_;
 };
 

@@ -27,7 +27,7 @@
 #include "dogen.quilt.cpp/types/formatters/traits.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
 
@@ -216,7 +216,7 @@ a.stream() << "public:" << std::endl;
 a.stream() << "    explicit " << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
                 } else {
 a.stream() << "    " << sn << "(" << std::endl;
-                    dogen::formatters::sequence_formatter sf(attr_count);
+                    dogen::formatting::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(");");
                     for (const auto& attr : o.all_attributes()) {
 a.stream() << "        const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;

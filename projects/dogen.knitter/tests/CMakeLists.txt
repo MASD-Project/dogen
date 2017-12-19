@@ -52,7 +52,7 @@ target_link_libraries(${tests_name}
     utility
     options
     dia
-    formatters
+    formatting
     external
     external.json
     external.dia

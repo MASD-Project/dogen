@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.formatters/types/utility_formatter.hpp"
+#include "dogen.formatting/types/utility_formatter.hpp"
 #include "dogen.wale/types/workflow.hpp"
 #include "dogen.quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
@@ -57,7 +57,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         { "class.simple_name", e.name().simple() }
     };
 
-    dogen::formatters::utility_formatter uf(a.stream());
+    dogen::formatting::utility_formatter uf(a.stream());
     {
         const auto& n(e.name());
         const auto qn(a.get_qualified_name(n));

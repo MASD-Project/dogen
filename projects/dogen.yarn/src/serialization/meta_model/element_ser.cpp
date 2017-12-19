@@ -43,7 +43,7 @@
 #include "dogen.yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/object_template_ser.hpp"
-#include "dogen.formatters/serialization/decoration_properties_ser.hpp"
+#include "dogen.formatting/serialization/decoration_properties_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/static_stereotypes_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/artefact_properties_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/local_archetype_location_properties_ser.hpp"

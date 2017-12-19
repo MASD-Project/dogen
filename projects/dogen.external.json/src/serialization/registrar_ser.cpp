@@ -29,7 +29,7 @@
 #include "dogen.options/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
 #include "dogen.external/serialization/registrar_ser.hpp"
-#include "dogen.formatters/serialization/registrar_ser.hpp"
+#include "dogen.formatting/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen.external.json/serialization/registrar_ser.hpp"
 
@@ -42,7 +42,7 @@ void register_types(Archive& ar) {
     dogen::probing::register_types(ar);
     dogen::options::register_types(ar);
     dogen::external::register_types(ar);
-    dogen::formatters::register_types(ar);
+    dogen::formatting::register_types(ar);
     dogen::annotations::register_types(ar);
 }
 

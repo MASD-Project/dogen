@@ -27,14 +27,14 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.wale/serialization/registrar_ser.hpp"
-#include "dogen.formatters/serialization/registrar_ser.hpp"
+#include "dogen.formatting/serialization/registrar_ser.hpp"
 
 namespace dogen {
 namespace wale {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::formatters::register_types(ar);
+    dogen::formatting::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

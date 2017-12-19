@@ -32,7 +32,7 @@ set_target_properties(${name}
 target_link_libraries(${name}
     utility
     annotations
-    formatters
+    formatting
     probing
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

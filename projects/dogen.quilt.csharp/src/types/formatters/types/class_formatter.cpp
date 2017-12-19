@@ -22,7 +22,7 @@
 #include "dogen.quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen.quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen.quilt.csharp/types/traits.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
 
@@ -120,7 +120,7 @@ a.stream() << "        public " << sn << "(" << a.get_qualified_name(attr.parsed
                 } else {
 a.stream() << std::endl;
 a.stream() << "        public " << sn << "(" << std::endl;
-                    dogen::formatters::sequence_formatter sf(attr_count);
+                    dogen::formatting::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
                     for (const auto attr : o.all_attributes()) {
 a.stream() << "            " << a.get_qualified_name(attr.parsed_type()) << " " << a.make_argument_name(attr) << sf.postfix() << std::endl;
@@ -138,7 +138,7 @@ a.stream() << "            : base()" << std::endl;
                     } else if (size == 1) {
 a.stream() << "            : base(" << a.make_argument_name(pattrs.front()) << ")" << std::endl;
                     } else {
-                        dogen::formatters::sequence_formatter sf(size);
+                        dogen::formatting::sequence_formatter sf(size);
                         sf.postfix_configuration().last(")");
                         sf.prefix_configuration().first(",").not_first(",");
 a.stream() << "            : base(" << std::endl;
@@ -185,7 +185,7 @@ a.stream() << "            if (value == null) return false;" << std::endl;
                 }
 a.stream() << std::endl;
 a.stream() << "            return" << std::endl;
-                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                dogen::formatting::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(" &&");
                 sf.postfix_configuration().last(";");

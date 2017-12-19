@@ -1,6 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::io #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/csharp/scoped_namespace_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/csharp/scoped_namespace_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/io/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formattables/helper_properties.hpp" #>

@@ -26,7 +26,7 @@
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen.quilt.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
@@ -98,7 +98,7 @@ format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto& c(a.as<fabric::msbuild_targets>(e));
 
     {
-        const auto cs(dogen::formatters::comment_styles::xml_style);
+        const auto cs(dogen::formatting::comment_styles::xml_style);
         a.make_decoration_preamble(cs, e);
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
@@ -120,7 +120,7 @@ a.stream() << std::endl;
 a.stream() << "        .OUTPUTS:" << std::endl;
 a.stream() << "    ]-->" << std::endl;
 a.stream() << "    <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
-            dogen::formatters::sequence_formatter sf(targets.targets().size());
+            dogen::formatting::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
                                      .not_first("                            ");
             sf.postfix_configuration().last("\">");

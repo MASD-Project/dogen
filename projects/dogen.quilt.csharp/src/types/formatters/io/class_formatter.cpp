@@ -22,7 +22,7 @@
 #include "dogen.quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen.quilt.csharp/types/formatters/io/traits.hpp"
 #include "dogen.quilt.csharp/types/traits.hpp"
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen.yarn/types/meta_model/object.hpp"
 
@@ -115,7 +115,7 @@ a.stream() << "            assistant.AddPairSeparator();" << std::endl;
 a.stream() << "            " << pqn << "Dumper.Dump(assistant, value" << (has_attributes ? ", true/*withSeparator*/" : "") << ");" << std::endl;
                 }
 
-                dogen::formatters::sequence_formatter sf(o.local_attributes().size());
+                dogen::formatting::sequence_formatter sf(o.local_attributes().size());
                 sf.element_separator("");
                 sf.postfix_configuration().not_last(", true/*withSeparator*/");
                 sf.postfix_configuration().last("");

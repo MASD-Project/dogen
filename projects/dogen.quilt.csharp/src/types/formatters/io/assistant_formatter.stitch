@@ -1,6 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::io #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/fabric/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/fabric/meta_name_factory.hpp" #>

@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::types #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/enumeration.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/assistant.hpp" #>
@@ -42,7 +42,7 @@ using System;
     public enum <#= sn #> : <#= a.get_qualified_name(ye.underlying_element()) #>
     {
 <#+
-            dogen::formatters::sequence_formatter sf(ye.enumerators().size());
+            dogen::formatting::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
 #>

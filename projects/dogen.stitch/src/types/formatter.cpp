@@ -21,9 +21,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.formatters/types/utility_formatter.hpp"
-#include "dogen.formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen.formatters/types/cpp/scoped_namespace_formatter.hpp"
+#include "dogen.formatting/types/utility_formatter.hpp"
+#include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen.stitch/io/block_types_io.hpp"
 #include "dogen.stitch/types/formatting_error.hpp"
 #include "dogen.stitch/types/formatter.hpp"
@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("stitch.formatters"));
+static logger lg(logger_factory("stitch.formatting"));
 
 const std::string empty_header_guard;
 /*
@@ -58,10 +58,10 @@ namespace stitch {
 
 void formatter::format_text_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
-    const auto spaces(formatters::spacing_types::left_and_right_space);
+    const auto spaces(formatting::spacing_types::left_and_right_space);
     s << stream_name;
 
-    const formatters::utility_formatter u(s);
+    const formatting::utility_formatter u(s);
     u.insert(inserter, spaces);
     if (!l.empty()) {
         u.insert_quoted(l, true/*escape_content*/);
@@ -76,8 +76,8 @@ format_expression_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
     s << stream_name;
 
-    const formatters::utility_formatter u(s);
-    const auto spaces(formatters::spacing_types::left_and_right_space);
+    const formatting::utility_formatter u(s);
+    const auto spaces(formatting::spacing_types::left_and_right_space);
     u.insert(inserter, spaces);
 
     s << l;
@@ -101,8 +101,8 @@ format_standard_control_block_line(
 
 void formatter::format_mixed_content_line(const std::string& stream_name,
     const line& l, std::ostream& s) const {
-    const auto spaces(formatters::spacing_types::left_and_right_space);
-    const formatters::utility_formatter u(s);
+    const auto spaces(formatting::spacing_types::left_and_right_space);
+    const formatting::utility_formatter u(s);
     bool is_first(true);
     for (const auto& b : l.blocks()) {
         if (is_first) {
@@ -167,11 +167,11 @@ yarn::meta_model::artefact formatter::format(const text_template& tt) const {
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());
-        dogen::formatters::cpp::scoped_boilerplate_formatter
+        dogen::formatting::cpp::scoped_boilerplate_formatter
             sbf(s, tt.properties().decoration_properties(), id,
                 empty_header_guard);
 
-        dogen::formatters::cpp::scoped_namespace_formatter snf(
+        dogen::formatting::cpp::scoped_namespace_formatter snf(
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
             true/*add_new_line_*/);
 

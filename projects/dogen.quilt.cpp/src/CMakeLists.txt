@@ -27,7 +27,7 @@ file(GLOB_RECURSE files RELATIVE
 add_library(${name} STATIC ${files})
 target_link_libraries(${name}
     annotations
-    formatters
+    formatting
     yarn
     wale
     stitch

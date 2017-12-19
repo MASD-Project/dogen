@@ -62,7 +62,7 @@ std::string model_to_text_model_transform::id() const {
 std::list<yarn::meta_model::artefact> model_to_text_model_transform::
 format(const annotations::type_repository& /*atrp*/,
     const annotations::annotation_factory& /*af*/,
-    const dogen::formatters::repository& /*drp*/,
+    const dogen::formatting::repository& /*drp*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
@@ -143,7 +143,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
      * Code-generate all artefacts.
      */
     yarn::meta_model::text_model r;
-    const auto& drp(ctx.formatters_repository());
+    const auto& drp(ctx.formatting_repository());
     const auto& af(ctx.annotation_factory());
     r.artefacts(format(atrp, af, drp, fm));
     r.managed_directories().push_back(l.project_path());

@@ -31,7 +31,7 @@ target_link_libraries(${name}
     utility
     options
     dia
-    formatters
+    formatting
     external
     external.json
     external.dia

@@ -28,7 +28,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.yarn/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
-#include "dogen.formatters/serialization/registrar_ser.hpp"
+#include "dogen.formatting/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen.yarn/serialization/meta_model/object_ser.hpp"
@@ -46,7 +46,7 @@ template<typename Archive>
 void register_types(Archive& ar) {
     dogen::probing::register_types(ar);
     dogen::annotations::register_types(ar);
-    dogen::formatters::register_types(ar);
+    dogen::formatting::register_types(ar);
 
     ar.template register_type<dogen::yarn::meta_model::builtin>();
     ar.template register_type<dogen::yarn::meta_model::enumeration>();

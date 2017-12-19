@@ -33,8 +33,9 @@ target_link_libraries(${tests_name}
     utility
     annotations
     options
-    formatters
+    formatting
     probing
+    external
     external.dia
     external.json
     quilt.cpp

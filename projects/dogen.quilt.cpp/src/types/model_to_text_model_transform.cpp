@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/filesystem/path.hpp"
-#include "dogen.formatters/types/repository_factory.hpp"
+#include "dogen.formatting/types/repository_factory.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
 #include "dogen.yarn/types/meta_model/module.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
@@ -86,7 +86,7 @@ std::list<yarn::meta_model::artefact> model_to_text_model_transform::
 format(const std::unordered_set<yarn::meta_model::element_archetype>&
     enabled_archetype_for_element, const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const dogen::formatters::repository& drp,
+    const dogen::formatting::repository& drp,
     const formattables::model& fm) const {
     formatters::workflow wf(atrp, af, drp);
     return wf.execute(enabled_archetype_for_element, fm);
@@ -171,7 +171,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
      * Code-generate all artefacts.
      */
     yarn::meta_model::text_model r;
-    const auto& drp(ctx.formatters_repository());
+    const auto& drp(ctx.formatting_repository());
     const auto& af(ctx.annotation_factory());
     const auto& eafe(m.enabled_archetype_for_element());
 

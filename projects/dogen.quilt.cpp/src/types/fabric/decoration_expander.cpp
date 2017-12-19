@@ -59,7 +59,7 @@ namespace fabric {
 class decoration_updater : public element_visitor {
 public:
     decoration_updater(
-        const dogen::formatters::decoration_properties_factory& dpf)
+        const dogen::formatting::decoration_properties_factory& dpf)
         : factory_(dpf) {}
 
 private:
@@ -88,11 +88,11 @@ public:
     void visit(registrar& rg) { update(rg); }
 
 private:
-    const dogen::formatters::decoration_properties_factory& factory_;
+    const dogen::formatting::decoration_properties_factory& factory_;
 };
 
 void decoration_expander::
-expand(const dogen::formatters::decoration_properties_factory& dpf,
+expand(const dogen::formatting::decoration_properties_factory& dpf,
     yarn::meta_model::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";

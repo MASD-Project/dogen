@@ -27,7 +27,7 @@
 
 #include "dogen.annotations/types/annotation_factory.hpp"
 #include "dogen.yarn/types/meta_model/artefact.hpp"
-#include "dogen.formatters/types/repository.hpp"
+#include "dogen.formatting/types/repository.hpp"
 #include "dogen.yarn/types/meta_model/element_fwd.hpp"
 #include "dogen.stitch/types/instantiator.hpp"
 #include "dogen.quilt.cpp/types/formattables/artefact_properties.hpp"
@@ -42,7 +42,7 @@ class stitch_formatter final {
 public:
     stitch_formatter(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const dogen::formatters::repository& frp);
+        const dogen::formatting::repository& frp);
 
 private:
     bool is_header(const inclusion_support_types ist) const;

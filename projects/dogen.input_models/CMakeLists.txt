@@ -98,7 +98,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     # main input models
     set(models dogen.annotations)
     set(models ${models} dogen.dia)
-    set(models ${models} dogen.formatters)
+    set(models ${models} dogen.formatting)
     set(models ${models} dogen.options)
     set(models ${models} dogen.probing)
     set(models ${models} dogen.external)

@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/traits.hpp" #>
@@ -192,7 +192,7 @@ public:
 #>
     <#= sn #>(
 <#+
-                    dogen::formatters::sequence_formatter sf(attr_count);
+                    dogen::formatting::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(");");
                     for (const auto& attr : o.all_attributes()) {
 #>

@@ -30,7 +30,7 @@
 #include "dogen.yarn/types/meta_model/enumeration.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
-#include "dogen.formatters/types/sequence_formatter.hpp"
+#include "dogen.formatting/types/sequence_formatter.hpp"
 
 namespace dogen {
 namespace quilt {

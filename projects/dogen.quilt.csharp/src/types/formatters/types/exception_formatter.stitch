@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::types #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/exception.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/assistant.hpp" #>
