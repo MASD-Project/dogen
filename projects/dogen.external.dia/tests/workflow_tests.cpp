@@ -26,25 +26,25 @@
 #include "dogen.utility/test/xml_serialization_helper.hpp"
 #include "dogen.utility/test/asserter.hpp"
 #include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test_data/yarn_dia.hpp"
+#include "dogen.utility/test_data/external_dia.hpp"
 #include "dogen.dia/io/diagram_io.hpp"
-#include "dogen.yarn/types/meta_model/exomodel.hpp"
-#include "dogen.yarn/io/meta_model/exomodel_io.hpp"
-#include "dogen.yarn/serialization/meta_model/exomodel_ser.hpp"
-#include "dogen.yarn/test/mock_context_factory.hpp"
+#include "dogen.modeling/types/meta_model/exomodel.hpp"
+#include "dogen.modeling/io/meta_model/exomodel_io.hpp"
+#include "dogen.modeling/serialization/meta_model/exomodel_ser.hpp"
+#include "dogen.modeling/test/mock_context_factory.hpp"
 #include "dogen.utility/test/exception_checkers.hpp"
 #include "dogen.dia/test/diagram_serialization_helper.hpp"
-#include "dogen.yarn/serialization/registrar_ser.hpp"
+#include "dogen.modeling/serialization/registrar_ser.hpp"
 #include "dogen.annotations/test/mock_type_repository_factory.hpp"
 #include "dogen.external.dia/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
-    dogen::yarn::register_types<Archive>(ar);
+    dogen::modeling::register_types<Archive>(ar);
 }
 
 using namespace dogen::external::dia;
 using dogen::utility::test::asserter;
-using dogen::yarn::test::mock_context_factory;
+using dogen::modeling::test::mock_context_factory;
 
 namespace  {
 
@@ -64,7 +64,7 @@ bool test_workflow(
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     const auto actual(workflow::execute(i));
-    const dogen::yarn::transforms::context ctx(mock_context_factory::make());
+    const dogen::modeling::transforms::context ctx(mock_context_factory::make());
 
     *
      * Set to true to rebase. Note that you still need to run the
@@ -76,49 +76,49 @@ bool test_workflow(
 
 }
 
-using dogen::utility::test_data::yarn_dia;
+using dogen::utility::test_data::external_dia;
 using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("empty_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_empty_dia_xml());
-    const auto e(yarn_dia::expected_empty_yarn_xml());
-    const auto a(yarn_dia::actual_empty_yarn_xml());
+BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_model) {
+    SETUP_TEST_LOG("empty_dia_transforms_into_expected_model");
+    const auto i(external_dia::expected_empty_dia_xml());
+    const auto e(external_dia::expected_empty_external_xml());
+    const auto a(external_dia::actual_empty_external_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_two_layers_with_objects_dia_xml());
-    const auto e(yarn_dia::expected_two_layers_with_objects_yarn_xml());
-    const auto a(yarn_dia::actual_two_layers_with_objects_yarn_xml());
+BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_model) {
+    SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_model");
+    const auto i(external_dia::expected_two_layers_with_objects_dia_xml());
+    const auto e(external_dia::expected_two_layers_with_objects_external_xml());
+    const auto a(external_dia::actual_two_layers_with_objects_external_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("cpp_model_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_cpp_model_dia_xml());
-    const auto e(yarn_dia::expected_cpp_model_yarn_xml());
-    const auto a(yarn_dia::actual_cpp_model_yarn_xml());
+BOOST_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_model) {
+    SETUP_TEST_LOG("cpp_model_dia_transforms_into_expected_model");
+    const auto i(external_dia::expected_cpp_model_dia_xml());
+    const auto e(external_dia::expected_cpp_model_external_xml());
+    const auto a(external_dia::actual_cpp_model_external_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
 
-BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("std_model_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_std_model_dia_xml());
-    const auto e(yarn_dia::expected_std_model_yarn_xml());
-    const auto a(yarn_dia::actual_std_model_yarn_xml());
+BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_model) {
+    SETUP_TEST_LOG("std_model_dia_transforms_into_expected_model");
+    const auto i(external_dia::expected_std_model_dia_xml());
+    const auto e(external_dia::expected_std_model_external_xml());
+    const auto a(external_dia::actual_std_model_external_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("boost_model_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_boost_model_dia_xml());
-    const auto e(yarn_dia::expected_boost_model_yarn_xml());
-    const auto a(yarn_dia::actual_boost_model_yarn_xml());
+BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_model) {
+    SETUP_TEST_LOG("boost_model_dia_transforms_into_expected_model");
+    const auto i(external_dia::expected_boost_model_dia_xml());
+    const auto e(external_dia::expected_boost_model_external_xml());
+    const auto a(external_dia::actual_boost_model_external_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
