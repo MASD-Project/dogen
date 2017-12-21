@@ -26,9 +26,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.modeling/serialization/registrar_ser.hpp"
 #include "dogen.options/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
+#include "dogen.modeling/serialization/registrar_ser.hpp"
 #include "dogen.formatting/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen.quilt.csharp/serialization/registrar_ser.hpp"
@@ -43,10 +43,10 @@ namespace csharp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
+    dogen::annotations::register_types(ar);
     dogen::probing::register_types(ar);
     dogen::formatting::register_types(ar);
     dogen::options::register_types(ar);
-    dogen::annotations::register_types(ar);
     dogen::modeling::register_types(ar);
 
     ar.template register_type<dogen::quilt::csharp::fabric::assembly_info>();

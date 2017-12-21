@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/element_visitor.hpp"
 #include "dogen.quilt.csharp/types/fabric/assistant_fwd.hpp"
+#include "dogen.modeling/types/meta_model/element_visitor.hpp"
 #include "dogen.quilt.csharp/types/fabric/assembly_info_fwd.hpp"
 #include "dogen.quilt.csharp/types/fabric/visual_studio_project_fwd.hpp"
 #include "dogen.quilt.csharp/types/fabric/visual_studio_solution_fwd.hpp"

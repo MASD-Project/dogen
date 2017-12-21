@@ -29,8 +29,8 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.modeling/serialization/meta_model/name_ser.hpp"
-#include "dogen.modeling/serialization/meta_model/element_ser.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/registrar_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/element_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::quilt::cpp::fabric::registrar,

@@ -661,7 +661,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -726,7 +726,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -791,7 +791,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::element&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -856,7 +856,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::element&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1050,7 +1050,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::meta_model::languages#</dia:string>
+            <dia:string>#modeling::meta_model::languages#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1080,7 +1080,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::meta_model::text_model#</dia:string>
+            <dia:string>#modeling::meta_model::text_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1106,7 +1106,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::transforms::context&amp;#</dia:string>
+                <dia:string>#const modeling::transforms::context&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1140,7 +1140,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::model&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6605,7 +6605,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::model&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8397,7 +8397,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#model_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8479,7 +8479,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8544,7 +8544,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8609,7 +8609,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8674,7 +8674,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8739,7 +8739,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8804,7 +8804,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9316,7 +9316,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9381,7 +9381,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;yarn::meta_model::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;modeling::meta_model::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9446,7 +9446,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#names#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;yarn::meta_model::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;modeling::meta_model::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13135,7 +13135,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13221,7 +13221,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#leaves#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;yarn::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::list&lt;modeling::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13244,7 +13244,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#model_dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;yarn::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::list&lt;modeling::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13267,7 +13267,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#registrar_dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;yarn::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::list&lt;modeling::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13316,7 +13316,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13426,7 +13426,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>#underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::meta_model::name#</dia:string>
+            <dia:string>#modeling::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13631,7 +13631,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#modeling::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14032,7 +14032,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14118,7 +14118,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>#inclusion_by_facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;yarn::meta_model::name&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;modeling::meta_model::name&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -14329,7 +14329,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;yarn::meta_model::element&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;modeling::meta_model::element&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14372,7 +14372,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#modeling::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14577,7 +14577,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;yarn::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;modeling::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14809,7 +14809,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;yarn::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;modeling::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14951,7 +14951,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15305,7 +15305,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16541,7 +16541,7 @@ and element.#</dia:string>
             <dia:string>#master_segment#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;yarn::meta_model::element&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;modeling::meta_model::element&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16564,7 +16564,7 @@ and element.#</dia:string>
             <dia:string>#all_segments#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;yarn::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;modeling::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17129,7 +17129,7 @@ and element.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::model&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19761,7 +19761,7 @@ and element.#</dia:string>
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::meta_model::name#</dia:string>
+            <dia:string>#modeling::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -23326,7 +23326,7 @@ and element.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::element&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23520,7 +23520,7 @@ and element.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::element&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30735,7 +30735,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32794,7 +32794,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32876,7 +32876,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32992,7 +32992,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33816,7 +33816,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34322,7 +34322,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const modeling::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34366,7 +34366,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34547,7 +34547,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=yarn::meta_model::element#</dia:string>
+        <dia:string>##DOGEN yarn.generalization.parent=modeling::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36192,7 +36192,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#modeling::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36424,7 +36424,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const yarn::transforms::context&amp;#</dia:string>
+                <dia:string>#const modeling::transforms::context&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36458,7 +36458,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#modeling::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

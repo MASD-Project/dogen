@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.quilt.cpp/types/fabric/element_visitor.hpp"
 
 namespace std {
