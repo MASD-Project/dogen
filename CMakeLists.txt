@@ -169,7 +169,7 @@ endif()
 #
 set(all_dia_test_models "")
 file(GLOB_RECURSE all_dia_test_models ABSOLUTE
-    "${CMAKE_SOURCE_DIR}/test_data/yarn.dia/input/*.dia")
+    "${CMAKE_SOURCE_DIR}/test_data/external.dia/input/*.dia")
 
 #
 # setup git

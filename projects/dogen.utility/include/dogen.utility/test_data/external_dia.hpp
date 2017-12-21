@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_YARN_DIA_HPP
-#define DOGEN_UTILITY_TEST_DATA_YARN_DIA_HPP
+#ifndef DOGEN_UTILITY_TEST_DATA_EXTERNAL_DIA_HPP
+#define DOGEN_UTILITY_TEST_DATA_EXTERNAL_DIA_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,13 +31,13 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-class yarn_dia {
+class external_dia {
 public:
-    yarn_dia() = delete;
-    yarn_dia(const yarn_dia&) = delete;
-    ~yarn_dia() = delete;
-    yarn_dia(yarn_dia&&) = delete;
-    yarn_dia& operator=(const yarn_dia&) = delete;
+    external_dia() = delete;
+    external_dia(const external_dia&) = delete;
+    ~external_dia() = delete;
+    external_dia(external_dia&&) = delete;
+    external_dia& operator=(const external_dia&) = delete;
 
 public:
     static boost::filesystem::path data_set();
@@ -67,41 +67,41 @@ public:
 
     static boost::filesystem::path expected();
     static boost::filesystem::path expected_cpp_model_dia_xml();
-    static boost::filesystem::path expected_cpp_model_yarn_xml();
+    static boost::filesystem::path expected_cpp_model_external_xml();
     static boost::filesystem::path expected_compressed_dia_xml();
     static boost::filesystem::path expected_empty_dia_xml();
-    static boost::filesystem::path expected_empty_yarn_xml();
+    static boost::filesystem::path expected_empty_external_xml();
     static boost::filesystem::path expected_empty_cpp_xml();
     static boost::filesystem::path expected_two_empty_layers_dia_xml();
     static boost::filesystem::path expected_class_without_name_dia_xml();
     static boost::filesystem::path expected_package_without_name_dia_xml();
     static boost::filesystem::path expected_two_layers_with_objects_dia_xml();
-    static boost::filesystem::path expected_two_layers_with_objects_yarn_xml();
+    static boost::filesystem::path expected_two_layers_with_objects_external_xml();
     static boost::filesystem::path expected_std_model_dia_xml();
-    static boost::filesystem::path expected_std_model_yarn_xml();
+    static boost::filesystem::path expected_std_model_external_xml();
     static boost::filesystem::path expected_boost_model_dia_xml();
-    static boost::filesystem::path expected_boost_model_yarn_xml();
+    static boost::filesystem::path expected_boost_model_external_xml();
     static boost::filesystem::path expected_csharp_model_dia_xml();
-    static boost::filesystem::path expected_csharp_model_yarn_xml();
+    static boost::filesystem::path expected_csharp_model_external_xml();
 
     static boost::filesystem::path actual();
     static boost::filesystem::path actual_cpp_model_dia_xml();
-    static boost::filesystem::path actual_cpp_model_yarn_xml();
+    static boost::filesystem::path actual_cpp_model_external_xml();
     static boost::filesystem::path actual_compressed_dia_xml();
     static boost::filesystem::path actual_empty_dia_xml();
-    static boost::filesystem::path actual_empty_yarn_xml();
+    static boost::filesystem::path actual_empty_external_xml();
     static boost::filesystem::path actual_empty_cpp_xml();
     static boost::filesystem::path actual_two_empty_layers_dia_xml();
     static boost::filesystem::path actual_class_without_name_dia_xml();
     static boost::filesystem::path actual_package_without_name_dia_xml();
     static boost::filesystem::path actual_two_layers_with_objects_dia_xml();
-    static boost::filesystem::path actual_two_layers_with_objects_yarn_xml();
+    static boost::filesystem::path actual_two_layers_with_objects_external_xml();
     static boost::filesystem::path actual_std_model_dia_xml();
-    static boost::filesystem::path actual_std_model_yarn_xml();
+    static boost::filesystem::path actual_std_model_external_xml();
     static boost::filesystem::path actual_boost_model_dia_xml();
-    static boost::filesystem::path actual_boost_model_yarn_xml();
+    static boost::filesystem::path actual_boost_model_external_xml();
     static boost::filesystem::path actual_csharp_model_dia_xml();
-    static boost::filesystem::path actual_csharp_model_yarn_xml();
+    static boost::filesystem::path actual_csharp_model_external_xml();
 };
 
 } } }

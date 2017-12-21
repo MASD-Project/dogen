@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_YARN_JSON_HPP
-#define DOGEN_UTILITY_TEST_DATA_YARN_JSON_HPP
+#ifndef DOGEN_UTILITY_TEST_DATA_EXTERNAL_JSON_HPP
+#define DOGEN_UTILITY_TEST_DATA_EXTERNAL_JSON_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,13 +31,13 @@ namespace dogen {
 namespace utility {
 namespace test_data {
 
-class yarn_json {
+class external_json {
 public:
-    yarn_json() = delete;
-    yarn_json(const yarn_json&) = delete;
-    ~yarn_json() = delete;
-    yarn_json(yarn_json&&) = delete;
-    yarn_json& operator=(const yarn_json&) = delete;
+    external_json() = delete;
+    external_json(const external_json&) = delete;
+    ~external_json() = delete;
+    external_json(external_json&&) = delete;
+    external_json& operator=(const external_json&) = delete;
 
 public:
     static boost::filesystem::path data_set();

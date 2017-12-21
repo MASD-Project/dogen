@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/test_data/xml_reader.hpp"
-#include "dogen.utility/test_data/yarn_dia.hpp"
+#include "dogen.utility/test_data/external_dia.hpp"
 
 namespace {
 
@@ -40,16 +40,16 @@ const std::string xml_reader_input_dir("xml_reader/input");
 const std::string xml_reader_expected_dir("xml_reader/expected");
 const std::string xml_reader_actual_dir("xml_reader/actual");
 
-const std::string yarn_dia_dir("yarn.dia");
-const std::string yarn_dia_input_dir("yarn.dia/input");
-const std::string yarn_dia_expected_dir("yarn.dia/expected");
-const std::string yarn_dia_actual_dir("yarn.dia/actual");
+const std::string external_dia_dir("external.dia");
+const std::string external_dia_input_dir("external.dia/input");
+const std::string external_dia_expected_dir("external.dia/expected");
+const std::string external_dia_actual_dir("external.dia/actual");
 
 const std::string boolean_values_file("xml_reader/input/boolean_values.xml");
 const std::string class_namespace_file_dia(
-    "yarn.dia/input/boost_model.dia");
+    "external.dia/input/boost_model.dia");
 const std::string class_namespace_file_diaxml(
-    "yarn.dia/expected/boost_model.diaxml");
+    "external.dia/expected/boost_model.diaxml");
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {
@@ -99,18 +99,18 @@ BOOST_AUTO_TEST_CASE(xml_reader_passes_sanity_checks) {
     test_valid_file(xml_reader::input_boolean_values(), boolean_values_file);
 }
 
-BOOST_AUTO_TEST_CASE(yarn_dia_passes_sanity_checks) {
-    SETUP_TEST_LOG("yarn_dia_passes_sanity_checks");
-    using dogen::utility::test_data::yarn_dia;
-    test_main_directory(yarn_dia::data_set(), yarn_dia_dir);
-    test_main_directory(yarn_dia::input(), yarn_dia_input_dir);
-    test_main_directory(yarn_dia::expected(), yarn_dia_expected_dir);
-    test_main_directory(yarn_dia::actual(), yarn_dia_actual_dir);
-    test_non_existent_file(yarn_dia::non_existent_file(), dia_extension);
+BOOST_AUTO_TEST_CASE(external_dia_passes_sanity_checks) {
+    SETUP_TEST_LOG("external_dia_passes_sanity_checks");
+    using dogen::utility::test_data::external_dia;
+    test_main_directory(external_dia::data_set(), external_dia_dir);
+    test_main_directory(external_dia::input(), external_dia_input_dir);
+    test_main_directory(external_dia::expected(), external_dia_expected_dir);
+    test_main_directory(external_dia::actual(), external_dia_actual_dir);
+    test_non_existent_file(external_dia::non_existent_file(), dia_extension);
 
-    test_valid_file(yarn_dia::input_boost_model_dia(),
+    test_valid_file(external_dia::input_boost_model_dia(),
         class_namespace_file_dia);
-    test_valid_file(yarn_dia::expected_boost_model_dia_xml(),
+    test_valid_file(external_dia::expected_boost_model_dia_xml(),
         class_namespace_file_diaxml);
 }
 
