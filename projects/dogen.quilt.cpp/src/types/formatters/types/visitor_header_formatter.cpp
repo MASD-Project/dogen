@@ -27,8 +27,8 @@
 #include "dogen.quilt.cpp/types/formatters/traits.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen.yarn/types/helpers/meta_name_factory.hpp"
-#include "dogen.yarn/types/meta_model/visitor.hpp"
+#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "dogen.modeling/types/meta_model/visitor.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -53,8 +53,8 @@ visitor_header_formatter::archetype_location() const {
     return r;
 }
 
-const yarn::meta_model::name& visitor_header_formatter::meta_name() const {
-    using yarn::helpers::meta_name_factory;
+const modeling::meta_model::name& visitor_header_formatter::meta_name() const {
+    using modeling::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visitor_name());
     return r;
 }
@@ -68,19 +68,19 @@ inclusion_support_types visitor_header_formatter::inclusion_support_type() const
 }
 
 boost::filesystem::path visitor_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path visitor_header_formatter::full_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::meta_model::element& e) const {
-    using yarn::meta_model::visitor;
+    const modeling::meta_model::element& e) const {
+    using modeling::meta_model::visitor;
     const auto& v(assistant::as<visitor>(e));
     auto builder(f.make());
     builder.add(v.visits(), traits::forward_declarations_archetype());
@@ -91,10 +91,10 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-yarn::meta_model::artefact visitor_header_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact visitor_header_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& v(a.as<yarn::meta_model::visitor>(e));
+    const auto& v(a.as<modeling::meta_model::visitor>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

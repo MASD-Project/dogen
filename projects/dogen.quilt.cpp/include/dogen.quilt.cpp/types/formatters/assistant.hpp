@@ -33,15 +33,15 @@
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.yarn/types/meta_model/artefact.hpp"
+#include "dogen.modeling/types/meta_model/artefact.hpp"
 #include "dogen.formatting/types/comment_styles.hpp"
 #include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen.yarn/types/meta_model/name.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
-#include "dogen.yarn/types/meta_model/name_tree.hpp"
-#include "dogen.yarn/types/meta_model/letter_cases.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/name_tree.hpp"
+#include "dogen.modeling/types/meta_model/letter_cases.hpp"
 #include "dogen.quilt.cpp/types/formatters/context.hpp"
 #include "dogen.quilt.cpp/types/formattables/helper_properties.hpp"
 
@@ -55,7 +55,7 @@ namespace formatters {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const yarn::meta_model::element& e,
+    assistant(const context& ctx, const modeling::meta_model::element& e,
         const annotations::archetype_location& al,
         const bool requires_header_guard);
 
@@ -69,7 +69,7 @@ private:
 public:
     template<typename T>
     static const T&
-    as(const yarn::meta_model::element& e) {
+    as(const modeling::meta_model::element& e) {
         return dynamic_cast<const T&>(e);
     }
 
@@ -78,7 +78,7 @@ public:
      * final keyword. If non-empty, includes a trailing space.
      */
     std::string
-    make_final_keyword_text(const yarn::meta_model::object& o) const;
+    make_final_keyword_text(const modeling::meta_model::object& o) const;
 
     /**
      * @brief Returns the override keyword, if supported by the
@@ -96,7 +96,7 @@ public:
      * @brief Returns the by-ref to use given the property.
      */
     static std::string
-    make_by_ref_text(const yarn::meta_model::attribute& attr);
+    make_by_ref_text(const modeling::meta_model::attribute& attr);
 
     /**
      * @brief Makes the return type of a setter, taking into account
@@ -104,27 +104,27 @@ public:
      */
     static std::string make_setter_return_type(
         const std::string& containing_type_name,
-        const yarn::meta_model::attribute& attr);
+        const modeling::meta_model::attribute& attr);
 
     /**
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const yarn::meta_model::name& n) const;
-    std::string get_qualified_name(const yarn::meta_model::name_tree& nt) const;
+    std::string get_qualified_name(const modeling::meta_model::name& n) const;
+    std::string get_qualified_name(const modeling::meta_model::name_tree& nt) const;
     /**@}*/
 
     /**
      * @brief Obtains the model name as a string.
      */
     std::string
-    get_identifiable_model_name(const yarn::meta_model::name& n) const;
+    get_identifiable_model_name(const modeling::meta_model::name& n) const;
 
     /**
      * @brief Obtains the product name. This is defined to be the
      * first external module, if any exists.
      */
-    std::string get_product_name(const yarn::meta_model::name& n) const;
+    std::string get_product_name(const modeling::meta_model::name& n) const;
 
 private:
     /**
@@ -142,8 +142,8 @@ private:
     const formattables::artefact_properties& obtain_artefact_properties(
         const std::string& element_id, const std::string& archetype) const;
 
-    const yarn::meta_model::artefact_properties& obtain_new_artefact_properties(
-        const yarn::meta_model::element& e, const std::string& archetype) const;
+    const modeling::meta_model::artefact_properties& obtain_new_artefact_properties(
+        const modeling::meta_model::element& e, const std::string& archetype) const;
 
     /**
      * @brief Obtains the facet configuration for the facet
@@ -216,19 +216,19 @@ public:
      * @brief Returns the property as a member variable.
      */
     std::string
-    make_member_variable_name(const yarn::meta_model::attribute& attr) const;
+    make_member_variable_name(const modeling::meta_model::attribute& attr) const;
 
     /**
      * @brief Returns the property as a getter.
      */
     std::string
-    make_getter_setter_name(const yarn::meta_model::attribute& attr) const;
+    make_getter_setter_name(const modeling::meta_model::attribute& attr) const;
 
     /**
      * @brief returns the c++ namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const yarn::meta_model::name& n) const;
+    make_namespaces(const modeling::meta_model::name& n) const;
 
  public:
     /**
@@ -263,14 +263,14 @@ private:
      * @brief Returns the decoration properties for a given yarn element.
      */
     const dogen::formatting::decoration_properties&
-    get_decoration_properties(const yarn::meta_model::element& e) const;
+    get_decoration_properties(const modeling::meta_model::element& e) const;
 
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
     dogen::formatting::cpp::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const yarn::meta_model::element& e);
+    make_scoped_boilerplate_formatter(const modeling::meta_model::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -284,7 +284,7 @@ public:
     /**@{*/
     void make_decoration_preamble(
         const dogen::formatting::comment_styles cs,
-        const yarn::meta_model::element& e);
+        const modeling::meta_model::element& e);
     void make_decoration_preamble(
         const dogen::formatting::comment_styles cs,
         const boost::optional<dogen::formatting::decoration_properties> dc);
@@ -336,7 +336,7 @@ public:
     /**@{*/
     std::string streaming_for_type(const formattables::helper_descriptor& hd,
         const std::string& s) const;
-    std::string streaming_for_type(const yarn::meta_model::name& n,
+    std::string streaming_for_type(const modeling::meta_model::name& n,
         const std::string& s) const;
     /**@}*/
 
@@ -345,7 +345,7 @@ public:
      * helper method.
      */
     bool requires_hashing_helper_method(
-        const yarn::meta_model::attribute& attr) const;
+        const modeling::meta_model::attribute& attr) const;
 
 public:
     /**
@@ -368,13 +368,13 @@ public:
      * @brief Returns the subset of names for which the supplied
      * archetype is enabled.
      */
-    std::list<yarn::meta_model::name>
+    std::list<modeling::meta_model::name>
     names_with_enabled_archetype(const std::string& archetype,
-        const std::list<yarn::meta_model::name> names) const;
+        const std::list<modeling::meta_model::name> names) const;
 
 public:
     const formattables::artefact_properties& artefact_properties() const;
-    const yarn::meta_model::artefact_properties&
+    const modeling::meta_model::artefact_properties&
     new_artefact_properties() const;
 
 public:
@@ -387,15 +387,15 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    yarn::meta_model::artefact make_artefact() const;
+    modeling::meta_model::artefact make_artefact() const;
 
 private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
-    const yarn::meta_model::element& element_;
+    const modeling::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
-    yarn::meta_model::artefact_properties new_artefact_properties_;
+    modeling::meta_model::artefact_properties new_artefact_properties_;
     const annotations::archetype_location archetype_location_;
     const bool requires_header_guard_;
 };

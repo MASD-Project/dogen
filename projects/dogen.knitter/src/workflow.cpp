@@ -26,9 +26,9 @@
 #include "dogen.utility/log/severity_level.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.formatting/types/formatting_error.hpp"
-#include "dogen.yarn/types/transforms/options.hpp"
-#include "dogen.yarn/types/transforms/context_factory.hpp"
-#include "dogen.yarn/types/transforms/code_generation_chain.hpp"
+#include "dogen.modeling/types/transforms/options.hpp"
+#include "dogen.modeling/types/transforms/context_factory.hpp"
+#include "dogen.modeling/types/transforms/code_generation_chain.hpp"
 #include "dogen.knitter/initializer.hpp"
 #include "dogen.knitter/workflow_error.hpp"
 #include "dogen.knitter/program_options_parser.hpp"
@@ -82,12 +82,12 @@ namespace knitter {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const yarn::transforms::options& o) {
+initialise_model_name(const modeling::transforms::options& o) {
     const boost::filesystem::path p(o.target());
     model_name_ = p.stem().filename().string();
 }
 
-boost::optional<yarn::transforms::options>
+boost::optional<modeling::transforms::options>
 workflow::generate_options(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
@@ -100,7 +100,7 @@ workflow::generate_options(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::initialise_logging(const yarn::transforms::options& o) {
+void workflow::initialise_logging(const modeling::transforms::options& o) {
     log_path_ = o.log_file();
 
     life_cycle_manager lcm;
@@ -109,13 +109,13 @@ void workflow::initialise_logging(const yarn::transforms::options& o) {
     can_log_ = true;
 }
 
-void workflow::knit(const yarn::transforms::options& o) const {
+void workflow::knit(const modeling::transforms::options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
 
     initializer::initialize();
 
     try {
-        using namespace yarn::transforms;
+        using namespace modeling::transforms;
         const auto ctx(context_factory::make(o));
         code_generation_chain::transform(ctx);
     } catch(const dogen::formatting::formatting_error& e) {

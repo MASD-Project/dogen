@@ -56,7 +56,7 @@ target_link_libraries(${tests_name}
     external
     external.json
     external.dia
-    yarn
+    modeling
     quilt.cpp
     quilt.csharp
     ${LIBXML2_LIBRARIES}

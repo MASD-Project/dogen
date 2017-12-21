@@ -1,7 +1,7 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::test_data #>
-<#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/primitive.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.modeling/types/meta_model/primitive.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.modeling/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.csharp/types/formatters/test_data/traits.hpp" #>
@@ -10,17 +10,17 @@
 <#@ stitch.wale.template=csharp_formatter_implementation.wale #>
 <#@ stitch.wale.kvp.class.simple_name=primitive_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=primitive #>
-<#@ stitch.wale.kvp.yarn_element=yarn::meta_model::primitive #>
+<#@ stitch.wale.kvp.yarn_element=modeling::meta_model::primitive #>
 <#@ stitch.wale.kvp.meta_element=primitive #>
-<#@ stitch.wale.kvp.meta_name_factory=yarn::helpers::meta_name_factory #>
+<#@ stitch.wale.kvp.meta_name_factory=modeling::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-yarn::meta_model::artefact primitive_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact primitive_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& p(a.as<yarn::meta_model::primitive>(static_id(), e));
+    const auto& p(a.as<modeling::meta_model::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

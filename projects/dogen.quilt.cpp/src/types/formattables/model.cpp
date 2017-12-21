@@ -29,7 +29,7 @@ model::model()
     : cpp_standard_(static_cast<dogen::quilt::cpp::formattables::cpp_standards>(0)) { }
 
 model::model(
-    const dogen::yarn::meta_model::name& name,
+    const dogen::modeling::meta_model::name& name,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
@@ -75,19 +75,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::yarn::meta_model::name& model::name() const {
+const dogen::modeling::meta_model::name& model::name() const {
     return name_;
 }
 
-dogen::yarn::meta_model::name& model::name() {
+dogen::modeling::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::yarn::meta_model::name& v) {
+void model::name(const dogen::modeling::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::yarn::meta_model::name&& v) {
+void model::name(const dogen::modeling::meta_model::name&& v) {
     name_ = std::move(v);
 }
 

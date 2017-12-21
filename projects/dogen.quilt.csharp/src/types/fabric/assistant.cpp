@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen.quilt.csharp/types/fabric/element_visitor.hpp"
 
@@ -29,20 +29,20 @@ namespace csharp {
 namespace fabric {
 
 assistant::assistant(
-    const dogen::yarn::meta_model::name& name,
+    const dogen::modeling::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::origin_types origin_type,
-    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
+    const dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::yarn::meta_model::name& meta_name,
+    const dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties)
-    : dogen::yarn::meta_model::element(
+    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties)
+    : dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -57,28 +57,28 @@ assistant::assistant(
       artefact_properties,
       archetype_location_properties) { }
 
-void assistant::accept(const dogen::yarn::meta_model::element_visitor& v) const {
+void assistant::accept(const dogen::modeling::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void assistant::accept(dogen::yarn::meta_model::element_visitor& v) const {
+void assistant::accept(dogen::modeling::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void assistant::accept(const dogen::yarn::meta_model::element_visitor& v) {
+void assistant::accept(const dogen::modeling::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void assistant::accept(dogen::yarn::meta_model::element_visitor& v) {
+void assistant::accept(dogen::modeling::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -89,23 +89,23 @@ void assistant::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assistant\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::meta_model::element::to_stream(s);
+    dogen::modeling::meta_model::element::to_stream(s);
     s << " }";
 }
 
 void assistant::swap(assistant& other) noexcept {
-    dogen::yarn::meta_model::element::swap(other);
+    dogen::modeling::meta_model::element::swap(other);
 
 }
 
-bool assistant::equals(const dogen::yarn::meta_model::element& other) const {
+bool assistant::equals(const dogen::modeling::meta_model::element& other) const {
     const assistant* const p(dynamic_cast<const assistant* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool assistant::operator==(const assistant& rhs) const {
-    return dogen::yarn::meta_model::element::compare(rhs);
+    return dogen::modeling::meta_model::element::compare(rhs);
 }
 
 assistant& assistant::operator=(assistant other) {

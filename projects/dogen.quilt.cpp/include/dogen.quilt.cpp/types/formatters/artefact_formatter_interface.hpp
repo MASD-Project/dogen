@@ -28,9 +28,9 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.yarn/types/meta_model/name.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/artefact.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/artefact.hpp"
 #include "dogen.quilt.cpp/types/formattables/locator.hpp"
 #include "dogen.quilt.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.quilt.cpp/types/formatters/inclusion_support_types.hpp"
@@ -63,7 +63,7 @@ public:
      * @brief Returns name of the meta-model element that this
      * formatter supports.
      */
-    virtual const yarn::meta_model::name& meta_name() const = 0;
+    virtual const modeling::meta_model::name& meta_name() const = 0;
 
     /**
      * @brief Family to which this formatter belongs.
@@ -84,13 +84,13 @@ public:
      */
     virtual boost::filesystem::path inclusion_path(
         const formattables::locator& l,
-        const yarn::meta_model::name& n) const = 0;
+        const modeling::meta_model::name& n) const = 0;
 
     /**
      * @brief Provides the full path.
      */
     virtual boost::filesystem::path full_path(const formattables::locator& l,
-        const yarn::meta_model::name& n) const = 0;
+        const modeling::meta_model::name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter
@@ -98,14 +98,14 @@ public:
      */
     virtual std::list<std::string> inclusion_dependencies(
         const formattables::dependencies_builder_factory& f,
-        const yarn::meta_model::element& e) const = 0;
+        const modeling::meta_model::element& e) const = 0;
 
 public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual yarn::meta_model::artefact
-    format(const context& ctx, const yarn::meta_model::element& e) const = 0;
+    virtual modeling::meta_model::artefact
+    format(const context& ctx, const modeling::meta_model::element& e) const = 0;
 };
 
 } } } }

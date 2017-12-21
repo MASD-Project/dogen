@@ -30,8 +30,8 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.yarn/types/meta_model/object.hpp"
-#include "dogen.yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/directive_group.hpp"
 #include "dogen.quilt.cpp/types/formattables/directive_group_repository.hpp"
 
@@ -48,7 +48,7 @@ class dependencies_builder {
 public:
     dependencies_builder(
         const directive_group_repository& dgrp,
-        const std::unordered_set<yarn::meta_model::element_archetype>&
+        const std::unordered_set<modeling::meta_model::element_archetype>&
         enabled_archetype_for_element);
 
 private:
@@ -59,14 +59,14 @@ private:
      * @pre name must exist in path derivatives collection.
      */
     boost::optional<directive_group>
-    get_directive_group(const yarn::meta_model::name& n,
+    get_directive_group(const modeling::meta_model::name& n,
         const std::string& archetype) const;
 
 public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const yarn::meta_model::name& n,
+    bool is_enabled(const modeling::meta_model::name& n,
         const std::string& archetype) const;
 
 public:
@@ -84,8 +84,8 @@ public:
      * and name.
      */
     /**@{*/
-    void add(const yarn::meta_model::name& n, const std::string& archetype);
-    void add(const boost::optional<yarn::meta_model::name>& n,
+    void add(const modeling::meta_model::name& n, const std::string& archetype);
+    void add(const boost::optional<modeling::meta_model::name>& n,
         const std::string& archetype);
     /**@}*/
 
@@ -93,7 +93,7 @@ public:
      * @brief Adds the inclusion directives for the supplied
      * archetype, for each of the supplied names.
      */
-    void add(const std::list<yarn::meta_model::name>& names,
+    void add(const std::list<modeling::meta_model::name>& names,
         const std::string& archetype);
 
 public:
@@ -106,7 +106,7 @@ public:
 private:
     const directive_group_repository& repository_;
     std::list<std::string> dependencies_;
-    const std::unordered_set<yarn::meta_model::element_archetype>&
+    const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element_;
 };
 

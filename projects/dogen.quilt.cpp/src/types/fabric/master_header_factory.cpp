@@ -22,17 +22,17 @@
 #include <forward_list>
 #include <boost/make_shared.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/types/helpers/building_error.hpp"
-#include "dogen.yarn/io/meta_model/name_io.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
-#include "dogen.yarn/types/meta_model/module.hpp"
-#include "dogen.yarn/types/meta_model/visitor.hpp"
-#include "dogen.yarn/types/meta_model/exception.hpp"
-#include "dogen.yarn/types/meta_model/enumeration.hpp"
-#include "dogen.yarn/types/meta_model/object_template.hpp"
-#include "dogen.yarn/types/meta_model/element_visitor.hpp"
-#include "dogen.yarn/types/helpers/name_factory.hpp"
-#include "dogen.yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen.modeling/types/helpers/building_error.hpp"
+#include "dogen.modeling/io/meta_model/name_io.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/module.hpp"
+#include "dogen.modeling/types/meta_model/visitor.hpp"
+#include "dogen.modeling/types/meta_model/exception.hpp"
+#include "dogen.modeling/types/meta_model/enumeration.hpp"
+#include "dogen.modeling/types/meta_model/object_template.hpp"
+#include "dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "dogen.modeling/types/helpers/name_factory.hpp"
+#include "dogen.modeling/types/meta_model/elements_traversal.hpp"
 #include "dogen.quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -56,9 +56,9 @@ namespace fabric {
 
 namespace {
 
-class generator final : public yarn::meta_model::element_visitor {
+class generator final : public modeling::meta_model::element_visitor {
 public:
-    generator(const yarn::meta_model::name& model_name,
+    generator(const modeling::meta_model::name& model_name,
         const formatters::repository& rp)
         : result_(create_master_header(model_name)),
           file_formatters_by_meta_name_(
@@ -66,7 +66,7 @@ public:
 
 private:
     boost::shared_ptr<master_header>
-    create_master_header(const yarn::meta_model::name& model_name);
+    create_master_header(const modeling::meta_model::name& model_name);
 
     std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
     filter_formatters(const std::forward_list<
@@ -79,22 +79,22 @@ private:
             std::shared_ptr<formatters::artefact_formatter_interface>>>
     filter_file_formatters_by_meta_name(const formatters::repository& rp) const;
 
-    void process_element(const yarn::meta_model::element& e);
+    void process_element(const modeling::meta_model::element& e);
 
 public:
-    using yarn::meta_model::element_visitor::visit;
-    void visit(const yarn::meta_model::visitor& v) { process_element(v); }
-    void visit(const yarn::meta_model::enumeration& e) {
+    using modeling::meta_model::element_visitor::visit;
+    void visit(const modeling::meta_model::visitor& v) { process_element(v); }
+    void visit(const modeling::meta_model::enumeration& e) {
         process_element(e);
     }
-    void visit(const yarn::meta_model::primitive& p) {
+    void visit(const modeling::meta_model::primitive& p) {
         process_element(p);
     }
-    void visit(const yarn::meta_model::object& o) { process_element(o); }
-    void visit(const yarn::meta_model::exception& e) {
+    void visit(const modeling::meta_model::object& o) { process_element(o); }
+    void visit(const modeling::meta_model::exception& e) {
         process_element(e);
     }
-    void visit(const yarn::meta_model::module& m) { process_element(m); }
+    void visit(const modeling::meta_model::module& m) { process_element(m); }
 
 public:
     boost::shared_ptr<master_header> result() { return result_; }
@@ -110,12 +110,12 @@ private:
 };
 
 boost::shared_ptr<master_header>
-generator::create_master_header(const yarn::meta_model::name& model_name) {
+generator::create_master_header(const modeling::meta_model::name& model_name) {
     auto r(boost::make_shared<master_header>());
-    yarn::helpers::name_factory f;
+    modeling::helpers::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
     r->meta_name(meta_name_factory::make_master_header_name());
-    r->origin_type(yarn::meta_model::origin_types::target);
+    r->origin_type(modeling::meta_model::origin_types::target);
     return r;
 }
 
@@ -157,8 +157,8 @@ generator::filter_file_formatters_by_meta_name(
     return r;
 }
 
-void generator::process_element(const yarn::meta_model::element& e) {
-    if (e.origin_type() != yarn::meta_model::origin_types::target)
+void generator::process_element(const modeling::meta_model::element& e) {
+    if (e.origin_type() != modeling::meta_model::origin_types::target)
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
@@ -168,7 +168,7 @@ void generator::process_element(const yarn::meta_model::element& e) {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, error) << formatter_not_found_for_type << id;
         BOOST_THROW_EXCEPTION(
-            yarn::helpers::building_error(formatter_not_found_for_type + id));
+            modeling::helpers::building_error(formatter_not_found_for_type + id));
     }
 
     for (const auto& fmt : i->second) {
@@ -182,9 +182,9 @@ void generator::process_element(const yarn::meta_model::element& e) {
 
 }
 
-boost::shared_ptr<yarn::meta_model::element>
+boost::shared_ptr<modeling::meta_model::element>
 master_header_factory::make(const formatters::repository& frp,
-    const yarn::meta_model::model& m) const {
+    const modeling::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
 
     generator g(m.name(), frp);

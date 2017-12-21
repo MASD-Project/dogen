@@ -23,8 +23,8 @@
 #include "dogen.quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen.quilt.csharp/types/traits.hpp"
 #include "dogen.formatting/types/sequence_formatter.hpp"
-#include "dogen.yarn/types/helpers/meta_name_factory.hpp"
-#include "dogen.yarn/types/meta_model/enumeration.hpp"
+#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "dogen.modeling/types/meta_model/enumeration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -48,8 +48,8 @@ annotations::archetype_location enum_formatter::archetype_location() const {
     return r;
 }
 
-const yarn::meta_model::name& enum_formatter::meta_name() const {
-    using yarn::helpers::meta_name_factory;
+const modeling::meta_model::name& enum_formatter::meta_name() const {
+    using modeling::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_enumeration_name());
     return r;
 }
@@ -59,21 +59,21 @@ std::string enum_formatter::family() const {
 }
 
 boost::filesystem::path enum_formatter::full_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> enum_formatter::
-inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
+inclusion_dependencies(const modeling::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-yarn::meta_model::artefact enum_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact enum_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& ye(a.as<yarn::meta_model::enumeration>(static_id(), e));
+    const auto& ye(a.as<modeling::meta_model::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

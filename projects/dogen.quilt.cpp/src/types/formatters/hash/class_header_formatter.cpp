@@ -28,8 +28,8 @@
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen.quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
-#include "dogen.yarn/types/helpers/meta_name_factory.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.formatting/types/sequence_formatter.hpp"
 
 namespace dogen {
@@ -55,8 +55,8 @@ class_header_formatter::archetype_location() const {
     return r;
 }
 
-const yarn::meta_model::name& class_header_formatter::meta_name() const {
-    using yarn::helpers::meta_name_factory;
+const modeling::meta_model::name& class_header_formatter::meta_name() const {
+    using modeling::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
 }
@@ -70,18 +70,18 @@ inclusion_support_types class_header_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path class_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path class_header_formatter::full_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> class_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::meta_model::element& e) const {
+    const modeling::meta_model::element& e) const {
 
     auto builder(f.make());
     builder.add(inclusion_constants::std::functional());
@@ -89,10 +89,10 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-yarn::meta_model::artefact class_header_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact class_header_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<yarn::meta_model::object>(e));
+    const auto& o(a.as<modeling::meta_model::object>(e));
 
     const auto sn(o.name().simple());
     const auto qn(a.get_qualified_name(o.name()));

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.quilt.cpp/types/formatters/assistant.hpp"
 
 namespace dogen {
@@ -35,7 +35,7 @@ namespace formatters {
 namespace io {
 
 void inserter_implementation_helper(
-    assistant& a, const yarn::meta_model::object& o, const bool inside_class);
+    assistant& a, const modeling::meta_model::object& o, const bool inside_class);
 
 } } } } }
 

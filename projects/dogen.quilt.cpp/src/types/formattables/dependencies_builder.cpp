@@ -22,8 +22,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/list_io.hpp"
-#include "dogen.yarn/io/meta_model/name_io.hpp"
-#include "dogen.yarn/hash/meta_model/element_archetype_hash.hpp"
+#include "dogen.modeling/io/meta_model/name_io.hpp"
+#include "dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.quilt.cpp/types/formattables/building_error.hpp"
 #include "dogen.quilt.cpp/io/formattables/directive_group_io.hpp"
 #include "dogen.quilt.cpp/types/formattables/dependencies_builder.hpp"
@@ -55,14 +55,14 @@ namespace formattables {
 
 dependencies_builder::dependencies_builder(
     const directive_group_repository& dgrp,
-    const std::unordered_set<yarn::meta_model::element_archetype>&
+    const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element)
     : repository_(dgrp),
       enabled_archetype_for_element_(enabled_archetype_for_element) {}
 
 boost::optional<directive_group>
 dependencies_builder::get_directive_group(
-    const yarn::meta_model::name& n, const std::string& archetype) const {
+    const modeling::meta_model::name& n, const std::string& archetype) const {
     const auto& c(repository_.by_id());
     const auto i(c.find(n.id()));
     if (i == c.end())
@@ -75,9 +75,9 @@ dependencies_builder::get_directive_group(
     return j->second;
 }
 
-bool dependencies_builder::is_enabled(const yarn::meta_model::name& n,
+bool dependencies_builder::is_enabled(const modeling::meta_model::name& n,
     const std::string& archetype) const {
-    yarn::meta_model::element_archetype ea(n.id(), archetype);
+    modeling::meta_model::element_archetype ea(n.id(), archetype);
     const auto i(enabled_archetype_for_element_.find(ea));
     const bool is_disabled(i == enabled_archetype_for_element_.end());
     return !is_disabled;
@@ -101,7 +101,7 @@ add(const std::list<std::string>& inclusion_directives) {
 }
 
 void dependencies_builder::
-add(const yarn::meta_model::name& n, const std::string& archetype) {
+add(const modeling::meta_model::name& n, const std::string& archetype) {
     BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
 
     if (!is_enabled(n, archetype)) {
@@ -118,7 +118,7 @@ add(const yarn::meta_model::name& n, const std::string& archetype) {
         BOOST_LOG_SEV(lg, trace) << "Could not find an inclusion directive.";
 }
 
-void dependencies_builder::add(const boost::optional<yarn::meta_model::name>& n,
+void dependencies_builder::add(const boost::optional<modeling::meta_model::name>& n,
     const std::string& archetype) {
 
     if (!n)
@@ -127,7 +127,7 @@ void dependencies_builder::add(const boost::optional<yarn::meta_model::name>& n,
     add(*n, archetype);
 }
 
-void dependencies_builder::add(const std::list<yarn::meta_model::name>& names,
+void dependencies_builder::add(const std::list<modeling::meta_model::name>& names,
     const std::string& archetype) {
     for (const auto& n : names)
         add(n, archetype);

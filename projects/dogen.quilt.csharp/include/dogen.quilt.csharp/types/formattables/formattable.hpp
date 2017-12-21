@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.yarn/types/meta_model/element_fwd.hpp"
+#include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.quilt.csharp/types/formattables/element_properties.hpp"
 #include "dogen.quilt.csharp/serialization/formattables/formattable_fwd_ser.hpp"
 
@@ -46,7 +46,7 @@ public:
 public:
     formattable(
         const dogen::quilt::csharp::formattables::element_properties& element_properties,
-        const boost::shared_ptr<dogen::yarn::meta_model::element>& element);
+        const boost::shared_ptr<dogen::modeling::meta_model::element>& element);
 
 private:
     template<typename Archive>
@@ -61,10 +61,10 @@ public:
     void element_properties(const dogen::quilt::csharp::formattables::element_properties& v);
     void element_properties(const dogen::quilt::csharp::formattables::element_properties&& v);
 
-    const boost::shared_ptr<dogen::yarn::meta_model::element>& element() const;
-    boost::shared_ptr<dogen::yarn::meta_model::element>& element();
-    void element(const boost::shared_ptr<dogen::yarn::meta_model::element>& v);
-    void element(const boost::shared_ptr<dogen::yarn::meta_model::element>&& v);
+    const boost::shared_ptr<dogen::modeling::meta_model::element>& element() const;
+    boost::shared_ptr<dogen::modeling::meta_model::element>& element();
+    void element(const boost::shared_ptr<dogen::modeling::meta_model::element>& v);
+    void element(const boost::shared_ptr<dogen::modeling::meta_model::element>&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -78,7 +78,7 @@ public:
 
 private:
     dogen::quilt::csharp::formattables::element_properties element_properties_;
-    boost::shared_ptr<dogen::yarn::meta_model::element> element_;
+    boost::shared_ptr<dogen::modeling::meta_model::element> element_;
 };
 
 } } } }

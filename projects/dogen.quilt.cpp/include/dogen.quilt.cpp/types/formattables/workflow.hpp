@@ -29,8 +29,8 @@
 #include <unordered_set>
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.yarn/types/meta_model/model.hpp"
-#include "dogen.yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.modeling/types/meta_model/model.hpp"
+#include "dogen.modeling/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/model.hpp"
 #include "dogen.quilt.cpp/types/formattables/locator.hpp"
 #include "dogen.quilt.cpp/types/formatters/repository.hpp"
@@ -44,12 +44,12 @@ namespace formattables {
 class workflow {
 private:
     model make_model(const formatters::repository& frp,
-        const yarn::meta_model::model& m) const;
+        const modeling::meta_model::model& m) const;
 
     void expand_model(
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
-        const std::unordered_set<yarn::meta_model::element_archetype>&
+        const std::unordered_set<modeling::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
@@ -58,7 +58,7 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const locator& l, const formatters::repository& frp,
-        const yarn::meta_model::model& m) const;
+        const modeling::meta_model::model& m) const;
 };
 
 } } } }

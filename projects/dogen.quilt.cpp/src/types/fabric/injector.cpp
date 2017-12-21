@@ -47,41 +47,41 @@ namespace fabric {
 injector::~injector() noexcept {}
 
 void injector::
-add_element(const boost::shared_ptr<yarn::meta_model::element>& e,
-    yarn::meta_model::model& m) const {
+add_element(const boost::shared_ptr<modeling::meta_model::element>& e,
+    modeling::meta_model::model& m) const {
     m.elements().push_back(e);
 }
 
 void injector::add_elements(
-    const std::list<boost::shared_ptr<yarn::meta_model::element>>& elements,
-    yarn::meta_model::model& m) const {
+    const std::list<boost::shared_ptr<modeling::meta_model::element>>& elements,
+    modeling::meta_model::model& m) const {
     for (auto& e : elements)
         add_element(e, m);
 }
 
 void injector::
-inject_registrar(yarn::meta_model::model& m) const {
+inject_registrar(modeling::meta_model::model& m) const {
     registrar_factory f;
     const auto elements(f.make(m));
     add_elements(elements, m);
 }
 
 void injector::
-inject_build_files(yarn::meta_model::model& m) const {
+inject_build_files(modeling::meta_model::model& m) const {
     build_files_factory f;
     const auto elements(f.make(m));
     add_elements(elements, m);
 }
 
 void injector::
-inject_odb_options(yarn::meta_model::model& m) const {
+inject_odb_options(modeling::meta_model::model& m) const {
     odb_options_factory f;
     const auto elements(f.make(m));
     add_elements(elements, m);
 }
 
 void injector::
-inject_master_headers(yarn::meta_model::model& m) const {
+inject_master_headers(modeling::meta_model::model& m) const {
     const auto& rg(formatters::workflow::registrar());
     const auto& frp(rg.formatter_repository());
     master_header_factory f;
@@ -90,21 +90,21 @@ inject_master_headers(yarn::meta_model::model& m) const {
 }
 
 void injector::inject_visual_studio(const annotations::type_repository& atrp,
-    yarn::meta_model::model& m) const {
+    modeling::meta_model::model& m) const {
     visual_studio_factory f;
     const auto e(f.make(atrp, m));
     add_elements(e, m);
 }
 
 void injector::
-inject_forward_declarations(yarn::meta_model::model& m) const {
+inject_forward_declarations(modeling::meta_model::model& m) const {
     forward_declarations_factory f;
     const auto e(f.make(m));
     add_elements(e, m);
 }
 
 void injector::inject(const annotations::type_repository& atrp,
-    yarn::meta_model::model& m) const {
+    modeling::meta_model::model& m) const {
     inject_registrar(m);
     inject_build_files(m);
     inject_odb_options(m);

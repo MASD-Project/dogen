@@ -20,15 +20,15 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
-#include "dogen.yarn/types/meta_model/module.hpp"
-#include "dogen.yarn/types/meta_model/object_template.hpp"
-#include "dogen.yarn/types/meta_model/builtin.hpp"
-#include "dogen.yarn/types/meta_model/enumeration.hpp"
-#include "dogen.yarn/types/meta_model/primitive.hpp"
-#include "dogen.yarn/types/meta_model/exception.hpp"
-#include "dogen.yarn/types/meta_model/visitor.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/module.hpp"
+#include "dogen.modeling/types/meta_model/object_template.hpp"
+#include "dogen.modeling/types/meta_model/builtin.hpp"
+#include "dogen.modeling/types/meta_model/enumeration.hpp"
+#include "dogen.modeling/types/meta_model/primitive.hpp"
+#include "dogen.modeling/types/meta_model/exception.hpp"
+#include "dogen.modeling/types/meta_model/visitor.hpp"
 #include "dogen.quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.quilt.cpp/types/fabric/master_header.hpp"
@@ -63,7 +63,7 @@ public:
         : factory_(dpf) {}
 
 private:
-    void update(yarn::meta_model::element& e,
+    void update(modeling::meta_model::element& e,
         const std::string & modeline_name = cpp_modeline_name) {
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
         e.decoration_properties(factory_.make(modeline_name));
@@ -71,14 +71,14 @@ private:
 
 public:
     using element_visitor::visit;
-    void visit(yarn::meta_model::module& m) { update(m); }
-    void visit(yarn::meta_model::object_template& ot) { update(ot); }
-    void visit(yarn::meta_model::builtin& b) { update(b); }
-    void visit(yarn::meta_model::enumeration& e) { update(e); }
-    void visit(yarn::meta_model::primitive& p) { update(p); }
-    void visit(yarn::meta_model::object& o) { update(o); }
-    void visit(yarn::meta_model::exception& e) { update(e); }
-    void visit(yarn::meta_model::visitor& v) { update(v); }
+    void visit(modeling::meta_model::module& m) { update(m); }
+    void visit(modeling::meta_model::object_template& ot) { update(ot); }
+    void visit(modeling::meta_model::builtin& b) { update(b); }
+    void visit(modeling::meta_model::enumeration& e) { update(e); }
+    void visit(modeling::meta_model::primitive& p) { update(p); }
+    void visit(modeling::meta_model::object& o) { update(o); }
+    void visit(modeling::meta_model::exception& e) { update(e); }
+    void visit(modeling::meta_model::visitor& v) { update(v); }
     void visit(cmakelists& cm) { update(cm, cmake_modeline_name); }
     void visit(common_odb_options& coo) { update(coo, odb_modeline_name); }
     void visit(forward_declarations& fd) { update(fd); }
@@ -93,7 +93,7 @@ private:
 
 void decoration_expander::
 expand(const dogen::formatting::decoration_properties_factory& dpf,
-    yarn::meta_model::model& m) const {
+    modeling::meta_model::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";
 

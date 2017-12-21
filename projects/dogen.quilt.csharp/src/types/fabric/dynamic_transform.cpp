@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/io/meta_model/languages_io.hpp"
-#include "dogen.yarn/types/transforms/transformation_error.hpp"
-#include "dogen.yarn/types/transforms/context.hpp"
+#include "dogen.modeling/io/meta_model/languages_io.hpp"
+#include "dogen.modeling/types/transforms/transformation_error.hpp"
+#include "dogen.modeling/types/transforms/context.hpp"
 #include "dogen.quilt.csharp/types/fabric/injector.hpp"
 #include "dogen.quilt.csharp/types/fabric/decoration_expander.hpp"
 #include "dogen.quilt.csharp/types/fabric/dynamic_transform.hpp"
@@ -42,9 +42,9 @@ namespace csharp {
 namespace fabric {
 
 bool dynamic_transform::
-requires_expansion(const yarn::meta_model::model& m) const {
+requires_expansion(const modeling::meta_model::model& m) const {
     const auto l(m.output_language());
-    const auto r(l == yarn::meta_model::languages::csharp);
+    const auto r(l == modeling::meta_model::languages::csharp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
                                  << m.name().id() << " for language: " << l;
@@ -54,14 +54,14 @@ requires_expansion(const yarn::meta_model::model& m) const {
 
 void dynamic_transform::expand_injection(
     const annotations::type_repository& atrp,
-    yarn::meta_model::model& m) const {
+    modeling::meta_model::model& m) const {
     injector i;
     i.inject(atrp, m);
 }
 
 void dynamic_transform::expand_decoration(
     const dogen::formatting::decoration_properties_factory& dpf,
-    yarn::meta_model::model& m) const {
+    modeling::meta_model::model& m) const {
     decoration_expander de;
     de.expand(dpf, m);
 }
@@ -70,9 +70,9 @@ std::string dynamic_transform::id() const {
     return ::id;
 }
 
-void dynamic_transform:: transform(const yarn::transforms::context& ctx,
+void dynamic_transform:: transform(const modeling::transforms::context& ctx,
     const dogen::formatting::decoration_properties_factory& dpf,
-    yarn::meta_model::model& m) const {
+    modeling::meta_model::model& m) const {
 
     if (!requires_expansion(m)) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "

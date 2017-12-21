@@ -1,7 +1,7 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::io #>
-<#@ stitch.inclusion_dependency="dogen.yarn/types/meta_model/primitive.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.yarn/types/helpers/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.modeling/types/meta_model/primitive.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.modeling/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.quilt.cpp/types/formatters/types/traits.hpp" #>
@@ -13,15 +13,15 @@
 <#@ stitch.wale.kvp.class.simple_name=primitive_header_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=primitive_header #>
 <#@ stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ stitch.wale.kvp.yarn_element=yarn::meta_model::primitive #>
+<#@ stitch.wale.kvp.yarn_element=modeling::meta_model::primitive #>
 <#@ stitch.wale.kvp.meta_element=primitive #>
-<#@ stitch.wale.kvp.meta_name_factory=yarn::helpers::meta_name_factory #>
+<#@ stitch.wale.kvp.meta_name_factory=modeling::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::meta_model::element& e) const {
+    const modeling::meta_model::element& e) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::iosfwd());
 
@@ -31,10 +31,10 @@ std::list<std::string> primitive_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-yarn::meta_model::artefact primitive_header_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact primitive_header_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& p(a.as<yarn::meta_model::primitive>(e));
+    const auto& p(a.as<modeling::meta_model::primitive>(e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

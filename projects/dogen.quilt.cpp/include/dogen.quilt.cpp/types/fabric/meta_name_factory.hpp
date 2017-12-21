@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.yarn/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -35,21 +35,21 @@ namespace fabric {
 
 class meta_name_factory final {
 private:
-    static yarn::meta_model::location make_location();
+    static modeling::meta_model::location make_location();
 
 private:
-    static yarn::meta_model::name make_name(const std::string& sn);
+    static modeling::meta_model::name make_name(const std::string& sn);
 
 public:
-    static yarn::meta_model::name make_cmakelists_name();
-    static yarn::meta_model::name make_master_header_name();
-    static yarn::meta_model::name make_msbuild_targets_name();
-    static yarn::meta_model::name make_visual_studio_project_name();
-    static yarn::meta_model::name make_visual_studio_solution_name();
-    static yarn::meta_model::name make_common_odb_options_name();
-    static yarn::meta_model::name make_object_odb_options_name();
-    static yarn::meta_model::name make_registrar_name();
-    static yarn::meta_model::name make_forward_declarations_name();
+    static modeling::meta_model::name make_cmakelists_name();
+    static modeling::meta_model::name make_master_header_name();
+    static modeling::meta_model::name make_msbuild_targets_name();
+    static modeling::meta_model::name make_visual_studio_project_name();
+    static modeling::meta_model::name make_visual_studio_solution_name();
+    static modeling::meta_model::name make_common_odb_options_name();
+    static modeling::meta_model::name make_object_odb_options_name();
+    static modeling::meta_model::name make_registrar_name();
+    static modeling::meta_model::name make_forward_declarations_name();
 };
 
 } } } }

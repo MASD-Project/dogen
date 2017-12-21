@@ -29,7 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.yarn/serialization/meta_model/element_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/element_ser.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/common_odb_options_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -43,7 +43,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::fabric::common_odb_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
+    ar << make_nvp("element", base_object<dogen::modeling::meta_model::element>(v));
 
     ar << make_nvp("sql_name_case", v.sql_name_case_);
     ar << make_nvp("databases", v.databases_);
@@ -53,7 +53,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::fabric::common_odb_options& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
+    ar >> make_nvp("element", base_object<dogen::modeling::meta_model::element>(v));
 
     ar >> make_nvp("sql_name_case", v.sql_name_case_);
     ar >> make_nvp("databases", v.databases_);

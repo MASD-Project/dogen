@@ -26,7 +26,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.yarn/serialization/registrar_ser.hpp"
+#include "dogen.modeling/serialization/registrar_ser.hpp"
 #include "dogen.options/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
 #include "dogen.formatting/serialization/registrar_ser.hpp"
@@ -47,7 +47,7 @@ void register_types(Archive& ar) {
     dogen::formatting::register_types(ar);
     dogen::options::register_types(ar);
     dogen::annotations::register_types(ar);
-    dogen::yarn::register_types(ar);
+    dogen::modeling::register_types(ar);
 
     ar.template register_type<dogen::quilt::csharp::fabric::assembly_info>();
     ar.template register_type<dogen::quilt::csharp::fabric::assistant>();

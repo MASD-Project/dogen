@@ -33,7 +33,7 @@ target_link_libraries(${name}
     utility
     annotations
     formatting
-    yarn
+    modeling
     wale
     ${Boost_LIBRARIES})
 

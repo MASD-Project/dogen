@@ -29,14 +29,14 @@
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.yarn/types/meta_model/artefact.hpp"
+#include "dogen.modeling/types/meta_model/artefact.hpp"
 #include "dogen.formatting/types/csharp/scoped_boilerplate_formatter.hpp"
 #include "dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
-#include "dogen.yarn/types/meta_model/name.hpp"
-#include "dogen.yarn/types/meta_model/attribute.hpp"
-#include "dogen.yarn/types/meta_model/name_tree.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/attribute.hpp"
+#include "dogen.modeling/types/meta_model/name_tree.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.quilt.csharp/types/formatters/context.hpp"
 #include "dogen.quilt.csharp/types/formattables/helper_properties.hpp"
 #include "dogen.quilt.csharp/types/formattables/assistant_properties.hpp"
@@ -59,7 +59,7 @@ private:
 public:
     template<typename T>
         static const T& as(const std::string& /*archetype*/,
-            const yarn::meta_model::element& e) {
+            const modeling::meta_model::element& e) {
         return dynamic_cast<const T&>(e);
     }
 
@@ -69,15 +69,15 @@ public:
      * includes a trailing space.
      */
     static std::string
-    make_inheritance_keyword_text(const yarn::meta_model::object& o);
+    make_inheritance_keyword_text(const modeling::meta_model::object& o);
 
 public:
     /**
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const yarn::meta_model::name& n) const;
-    std::string get_qualified_name(const yarn::meta_model::name_tree& nt) const;
+    std::string get_qualified_name(const modeling::meta_model::name& n) const;
+    std::string get_qualified_name(const modeling::meta_model::name_tree& nt) const;
     /**@}*/
 
 private:
@@ -85,14 +85,14 @@ private:
      * @brief Returns the decoration properties for a given yarn element.
      */
     const dogen::formatting::decoration_properties&
-    get_decoration_properties(const yarn::meta_model::element& e) const;
+    get_decoration_properties(const modeling::meta_model::element& e) const;
 
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
     dogen::formatting::csharp::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const yarn::meta_model::element& e);
+    make_scoped_boilerplate_formatter(const modeling::meta_model::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -105,10 +105,10 @@ public:
      * @brief returns the c# namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const yarn::meta_model::name& n) const;
+    make_namespaces(const modeling::meta_model::name& n) const;
 
 public:
-    std::string reference_equals(const yarn::meta_model::attribute& attr) const;
+    std::string reference_equals(const modeling::meta_model::attribute& attr) const;
 
 public:
     /**
@@ -123,7 +123,7 @@ public:
 
 public:
     std::string
-    make_argument_name(const yarn::meta_model::attribute& attr) const;
+    make_argument_name(const modeling::meta_model::attribute& attr) const;
 
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
@@ -138,7 +138,7 @@ public:
 
 public:
     boost::optional<formattables::assistant_properties>
-    get_assistant_properties(const yarn::meta_model::attribute& attr) const;
+    get_assistant_properties(const modeling::meta_model::attribute& attr) const;
 
 public:
     /**
@@ -150,7 +150,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    yarn::meta_model::artefact make_artefact() const;
+    modeling::meta_model::artefact make_artefact() const;
 
 private:
     std::ostringstream stream_;

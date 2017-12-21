@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.yarn/types/helpers/name_builder.hpp"
+#include "dogen.modeling/types/helpers/name_builder.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 
 namespace dogen {
@@ -26,8 +26,8 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-yarn::meta_model::location meta_name_factory::make_location() {
-    yarn::meta_model::location r;
+modeling::meta_model::location meta_name_factory::make_location() {
+    modeling::meta_model::location r;
     r.external_modules().push_back("dogen");
     r.model_modules().push_back("quilt");
     r.model_modules().push_back("cpp");
@@ -35,55 +35,55 @@ yarn::meta_model::location meta_name_factory::make_location() {
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_name(const std::string& sn) {
+modeling::meta_model::name meta_name_factory::make_name(const std::string& sn) {
     static const auto l(make_location());
-    yarn::helpers::name_builder b;
+    modeling::helpers::name_builder b;
     b.location(l);
     b.simple_name(sn);
     return b.build();
 }
 
-yarn::meta_model::name meta_name_factory::make_cmakelists_name() {
+modeling::meta_model::name meta_name_factory::make_cmakelists_name() {
     static const auto r(make_name("cmakelists"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_master_header_name() {
+modeling::meta_model::name meta_name_factory::make_master_header_name() {
     static const auto r(make_name("maste_header"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_msbuild_targets_name() {
+modeling::meta_model::name meta_name_factory::make_msbuild_targets_name() {
     static const auto r(make_name("msbuild_targets"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_visual_studio_project_name() {
+modeling::meta_model::name meta_name_factory::make_visual_studio_project_name() {
     static const auto r(make_name("visual_studio_project"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
+modeling::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
     static const auto r(make_name("visual_studio_solution"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_common_odb_options_name() {
+modeling::meta_model::name meta_name_factory::make_common_odb_options_name() {
     static const auto r(make_name("common_odb_options"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_object_odb_options_name() {
+modeling::meta_model::name meta_name_factory::make_object_odb_options_name() {
     static const auto r(make_name("object_odb_options"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_registrar_name() {
+modeling::meta_model::name meta_name_factory::make_registrar_name() {
     static const auto r(make_name("registrar"));
     return r;
 }
 
-yarn::meta_model::name meta_name_factory::make_forward_declarations_name() {
+modeling::meta_model::name meta_name_factory::make_forward_declarations_name() {
     static const auto r(make_name("forward_declarations"));
     return r;
 }

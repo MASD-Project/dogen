@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/types/helpers/name_factory.hpp"
+#include "dogen.modeling/types/helpers/name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/registrar_factory.hpp"
@@ -41,8 +41,8 @@ namespace cpp {
 namespace fabric {
 
 boost::shared_ptr<fabric::registrar> registrar_factory::
-make(const yarn::meta_model::name& model_name) const {
-    yarn::helpers::name_factory nf;
+make(const modeling::meta_model::name& model_name) const {
+    modeling::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<registrar>());
     r->name(n);
@@ -50,20 +50,20 @@ make(const yarn::meta_model::name& model_name) const {
     return r;
 }
 
-std::list<boost::shared_ptr<yarn::meta_model::element>>
-registrar_factory::make(const yarn::meta_model::model& m) const {
+std::list<boost::shared_ptr<modeling::meta_model::element>>
+registrar_factory::make(const modeling::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
 
-    std::list<boost::shared_ptr<yarn::meta_model::element>> r;
+    std::list<boost::shared_ptr<modeling::meta_model::element>> r;
 
     auto rg(make(m.name()));
-    using yarn::meta_model::origin_types;
+    using modeling::meta_model::origin_types;
     rg->origin_type(origin_types::target);
     for (const auto& l : m.leaves())
         rg->leaves().push_back(l);
 
-    const auto lambda([](const yarn::meta_model::name& a,
-            const yarn::meta_model::name& b) {
+    const auto lambda([](const modeling::meta_model::name& a,
+            const modeling::meta_model::name& b) {
             return a.id() < b.id();
         });
     rg->leaves().sort(lambda);

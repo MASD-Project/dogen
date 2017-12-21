@@ -28,8 +28,8 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/model.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -41,22 +41,22 @@ public:
     virtual ~injector() noexcept;
 
 private:
-    void add_element(const boost::shared_ptr<yarn::meta_model::element>& e,
-        yarn::meta_model::model& m) const;
+    void add_element(const boost::shared_ptr<modeling::meta_model::element>& e,
+        modeling::meta_model::model& m) const;
 
     void add_elements(
-        const std::list<boost::shared_ptr<yarn::meta_model::element>>& elements,
-        yarn::meta_model::model& m) const;
+        const std::list<boost::shared_ptr<modeling::meta_model::element>>& elements,
+        modeling::meta_model::model& m) const;
 
 private:
     void inject_visual_studio(const annotations::type_repository& atrp,
-        yarn::meta_model::model& m) const;
-    void inject_assembly_info(yarn::meta_model::model& m) const;
-    void inject_assistant(yarn::meta_model::model& m) const;
+        modeling::meta_model::model& m) const;
+    void inject_assembly_info(modeling::meta_model::model& m) const;
+    void inject_assistant(modeling::meta_model::model& m) const;
 
 public:
     void inject(const annotations::type_repository& atrp,
-        yarn::meta_model::model& m) const;
+        modeling::meta_model::model& m) const;
 };
 
 } } } }

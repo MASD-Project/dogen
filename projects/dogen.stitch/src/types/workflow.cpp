@@ -29,8 +29,8 @@
 #include "dogen.annotations/types/type_repository_factory.hpp"
 #include "dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen.formatting/types/repository_factory.hpp"
-#include "dogen.yarn/io/meta_model/artefact_io.hpp"
-#include "dogen.yarn/types/helpers/filesystem_writer.hpp"
+#include "dogen.modeling/io/meta_model/artefact_io.hpp"
+#include "dogen.modeling/types/helpers/filesystem_writer.hpp"
 #include "dogen.stitch/types/parser.hpp"
 #include "dogen.stitch/types/properties_factory.hpp"
 #include "dogen.stitch/types/instantiator.hpp"
@@ -120,13 +120,13 @@ annotations::type_repository workflow::create_annotations_type_repository(
     return f.make(alrp, data_dirs);
 }
 
-std::list<yarn::meta_model::artefact>
+std::list<modeling::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const dogen::formatting::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
-    std::list<yarn::meta_model::artefact> r;
+    std::list<modeling::meta_model::artefact> r;
     const instantiator inst(atrp, af, drp);
     for (const auto& p : text_template_paths)
         r.push_front(inst.instantiate(p));
@@ -135,10 +135,10 @@ workflow::create_artefacts(const annotations::type_repository& atrp,
 }
 
 void workflow::
-write_artefacts(const std::list<yarn::meta_model::artefact>& artefacts) const {
+write_artefacts(const std::list<modeling::meta_model::artefact>& artefacts) const {
     BOOST_LOG_SEV(lg, debug) << "About to write. Artefacts: " << artefacts;
 
-    yarn::helpers::filesystem_writer w(false/*force_write*/);
+    modeling::helpers::filesystem_writer w(false/*force_write*/);
     w.write(artefacts);
 
     BOOST_LOG_SEV(lg, debug) << "Finished writing.";

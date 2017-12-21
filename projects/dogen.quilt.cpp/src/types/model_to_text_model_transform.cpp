@@ -23,7 +23,7 @@
 #include "dogen.utility/filesystem/path.hpp"
 #include "dogen.formatting/types/repository_factory.hpp"
 #include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.yarn/types/meta_model/module.hpp"
+#include "dogen.modeling/types/meta_model/module.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen.quilt.cpp/types/formattables/workflow.hpp"
@@ -58,16 +58,16 @@ formattables::model model_to_text_model_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
-    const yarn::meta_model::model& m) const {
+    const modeling::meta_model::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, l, frp, m);
 }
 
 formattables::locator model_to_text_model_transform::make_locator(
-    const yarn::transforms::options& o,
+    const modeling::transforms::options& o,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const formatters::repository& frp, const bool enable_backend_directories,
-    const yarn::meta_model::model& m) const {
+    const modeling::meta_model::model& m) const {
 
     const auto& mn(m.name());
     const auto odp(o.output_directory_path());
@@ -82,8 +82,8 @@ std::string model_to_text_model_transform::id() const {
     return traits::backend();
 }
 
-std::list<yarn::meta_model::artefact> model_to_text_model_transform::
-format(const std::unordered_set<yarn::meta_model::element_archetype>&
+std::list<modeling::meta_model::artefact> model_to_text_model_transform::
+format(const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element, const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const dogen::formatting::repository& drp,
@@ -128,25 +128,25 @@ model_to_text_model_transform::archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-yarn::meta_model::languages model_to_text_model_transform::language() const {
-    return yarn::meta_model::languages::cpp;
+modeling::meta_model::languages model_to_text_model_transform::language() const {
+    return modeling::meta_model::languages::cpp;
 }
 
 std::unordered_map<std::string,
-                   yarn::meta_model::intra_backend_segment_properties>
+                   modeling::meta_model::intra_backend_segment_properties>
 model_to_text_model_transform::
-intra_backend_segment_properties(const yarn::transforms::options& /*o*/) const {
-    // yarn::meta_model::intra_backend_segment_properties include;
-    // yarn::meta_model::intra_backend_segment_properties implementation;
+intra_backend_segment_properties(const modeling::transforms::options& /*o*/) const {
+    // modeling::meta_model::intra_backend_segment_properties include;
+    // modeling::meta_model::intra_backend_segment_properties implementation;
     std::unordered_map<std::string,
-                       yarn::meta_model::intra_backend_segment_properties> r;
+                       modeling::meta_model::intra_backend_segment_properties> r;
     return r;
 }
 
-yarn::meta_model::text_model
-model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
+modeling::meta_model::text_model
+model_to_text_model_transform::transform(const modeling::transforms::context& ctx,
     const bool enable_backend_directories,
-    const yarn::meta_model::model& m) const {
+    const modeling::meta_model::model& m) const {
     probing::scoped_transform_prober stp(lg,
         "C++ model to text transform", transform_id, m.name().id(),
         ctx.prober());
@@ -170,7 +170,7 @@ model_to_text_model_transform::transform(const yarn::transforms::context& ctx,
     /*
      * Code-generate all artefacts.
      */
-    yarn::meta_model::text_model r;
+    modeling::meta_model::text_model r;
     const auto& drp(ctx.formatting_repository());
     const auto& af(ctx.annotation_factory());
     const auto& eafe(m.enabled_archetype_for_element());

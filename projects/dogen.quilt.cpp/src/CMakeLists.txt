@@ -28,7 +28,7 @@ add_library(${name} STATIC ${files})
 target_link_libraries(${name}
     annotations
     formatting
-    yarn
+    modeling
     wale
     stitch
     ${Boost_LIBRARIES})

@@ -23,8 +23,8 @@
 #include "dogen.annotations/types/entry_selector.hpp"
 #include "dogen.annotations/types/type_repository_selector.hpp"
 #include "dogen.annotations/io/type_io.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.quilt.cpp/types/traits.hpp"
 #include "dogen.quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.quilt.cpp/types/formattables/aspect_expander.hpp"
@@ -135,7 +135,7 @@ obtain_aspect_properties(const annotations::type_repository& atrp,
     return r;
 }
 
-void aspect_expander::walk_name_tree(const yarn::meta_model::name_tree& nt,
+void aspect_expander::walk_name_tree(const modeling::meta_model::name_tree& nt,
     const bool is_top_level, const aspect_properties_type& element_aps,
     aspect_properties& ap) const {
 
@@ -165,7 +165,7 @@ void aspect_expander::walk_name_tree(const yarn::meta_model::name_tree& nt,
 
 aspect_properties aspect_expander::compute_aspect_properties(
     const aspect_properties_type& element_aps,
-    const std::list<yarn::meta_model::attribute>& attrs) const {
+    const std::list<modeling::meta_model::attribute>& attrs) const {
 
     aspect_properties r;
     for (const auto attr : attrs) {
@@ -195,14 +195,14 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * be build prior to reduction or else we will not get aspects
      * for referenced models.
      */
-    if (ms->origin_type() != yarn::meta_model::origin_types::target)
+    if (ms->origin_type() != modeling::meta_model::origin_types::target)
         return;
 
     /*
      * We are only interested in yarn objects; all other element
      * types do not need helpers.
      */
-    const auto ptr(dynamic_cast<const yarn::meta_model::object*>(ms.get()));
+    const auto ptr(dynamic_cast<const modeling::meta_model::object*>(ms.get()));
     if (ptr == nullptr)
         return;
 

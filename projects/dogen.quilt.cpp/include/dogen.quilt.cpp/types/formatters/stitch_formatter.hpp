@@ -26,9 +26,9 @@
 #endif
 
 #include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.yarn/types/meta_model/artefact.hpp"
+#include "dogen.modeling/types/meta_model/artefact.hpp"
 #include "dogen.formatting/types/repository.hpp"
-#include "dogen.yarn/types/meta_model/element_fwd.hpp"
+#include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.stitch/types/instantiator.hpp"
 #include "dogen.quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -48,9 +48,9 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    yarn::meta_model::artefact
+    modeling::meta_model::artefact
     format(const artefact_formatter_interface& stock_formatter,
-        const context& ctx, const yarn::meta_model::element& e) const;
+        const context& ctx, const modeling::meta_model::element& e) const;
 
 private:
     const stitch::instantiator instantiator_;

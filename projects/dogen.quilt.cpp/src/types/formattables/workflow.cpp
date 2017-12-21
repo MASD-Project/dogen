@@ -36,7 +36,7 @@ namespace cpp {
 namespace formattables {
 
 model workflow::make_model(const formatters::repository& frp,
-    const yarn::meta_model::model& m) const {
+    const modeling::meta_model::model& m) const {
     adapter a;
     return a.adapt(frp, m);
 }
@@ -44,7 +44,7 @@ model workflow::make_model(const formatters::repository& frp,
 void workflow::expand_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
-    const std::unordered_set<yarn::meta_model::element_archetype>&
+    const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
@@ -55,7 +55,7 @@ model workflow::execute(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const locator& l, const formatters::repository& frp,
-    const yarn::meta_model::model& m) const {
+    const modeling::meta_model::model& m) const {
 
     auto r(make_model(frp, m));
     expand_model(atrp, ra, m.enabled_archetype_for_element(), frp, l, r);

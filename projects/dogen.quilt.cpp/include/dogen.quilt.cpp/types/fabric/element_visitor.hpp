@@ -27,7 +27,7 @@
 
 #include "dogen.quilt.cpp/types/fabric/registrar_fwd.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists_fwd.hpp"
-#include "dogen.yarn/types/meta_model/element_visitor.hpp"
+#include "dogen.modeling/types/meta_model/element_visitor.hpp"
 #include "dogen.quilt.cpp/types/fabric/master_header_fwd.hpp"
 #include "dogen.quilt.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen.quilt.cpp/types/fabric/common_odb_options_fwd.hpp"
@@ -44,12 +44,12 @@ namespace fabric {
 /**
  * @brief Visitor for element
  */
-class element_visitor : public dogen::yarn::meta_model::element_visitor {
+class element_visitor : public dogen::modeling::meta_model::element_visitor {
 public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
-    using dogen::yarn::meta_model::element_visitor::visit;
+    using dogen::modeling::meta_model::element_visitor::visit;
 
     /**
      * @brief Accept visits for type dogen::quilt::cpp::fabric::cmakelists

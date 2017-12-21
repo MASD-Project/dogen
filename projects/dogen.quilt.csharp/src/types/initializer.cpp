@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.yarn/types/transforms/model_to_text_model_chain.hpp"
+#include "dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
 #include "dogen.quilt.csharp/types/formatters/workflow.hpp"
 #include "dogen.quilt.csharp/types/formatters/initializer.hpp"
 #include "dogen.quilt.csharp/types/fabric/initializer.hpp"
@@ -32,7 +32,7 @@ namespace csharp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize();
-    yarn::transforms::register_transform<model_to_text_model_transform>();
+    modeling::transforms::register_transform<model_to_text_model_transform>();
 }
 
 } } }

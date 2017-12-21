@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.quilt.cpp/types/fabric/odb_targets.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/cmakelists_fwd_ser.hpp"
 
@@ -37,7 +37,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class cmakelists final : public dogen::yarn::meta_model::element {
+class cmakelists final : public dogen::modeling::meta_model::element {
 public:
     cmakelists() = default;
     cmakelists(const cmakelists&) = default;
@@ -47,19 +47,19 @@ public:
 
 public:
     cmakelists(
-        const dogen::yarn::meta_model::name& name,
+        const dogen::modeling::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::meta_model::origin_types origin_type,
-        const boost::optional<dogen::yarn::meta_model::name>& contained_by,
+        const dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::yarn::meta_model::name& meta_name,
+        const dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::string& include_directory_path,
         const std::string& source_directory_name,
         const std::string& header_file_extension,
@@ -74,12 +74,12 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::cmakelists& v, unsigned int version);
 
 public:
-    using dogen::yarn::meta_model::element::accept;
+    using dogen::modeling::meta_model::element::accept;
 
-    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::yarn::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::yarn::meta_model::element_visitor& v) override;
+    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::modeling::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -116,7 +116,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::meta_model::element& other) const override;
+    bool equals(const dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(cmakelists& other) noexcept;

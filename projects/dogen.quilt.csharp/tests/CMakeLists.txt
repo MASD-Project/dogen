@@ -33,7 +33,7 @@ target_link_libraries(${tests_name}
     utility
     options
     dia
-    yarn
+    modeling
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}

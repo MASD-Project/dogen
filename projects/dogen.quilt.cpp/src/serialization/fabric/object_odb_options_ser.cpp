@@ -29,7 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.yarn/serialization/meta_model/element_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/element_ser.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -43,7 +43,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::fabric::object_odb_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
+    ar << make_nvp("element", base_object<dogen::modeling::meta_model::element>(v));
 
     ar << make_nvp("epilogue", v.epilogue_);
     ar << make_nvp("include_regexes", v.include_regexes_);
@@ -54,7 +54,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::fabric::object_odb_options& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
+    ar >> make_nvp("element", base_object<dogen::modeling::meta_model::element>(v));
 
     ar >> make_nvp("epilogue", v.epilogue_);
     ar >> make_nvp("include_regexes", v.include_regexes_);

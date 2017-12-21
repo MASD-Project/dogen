@@ -29,8 +29,8 @@
 #include "dogen.external/types/transforms/model_to_model_chain.hpp"
 #include "dogen.external.json/types/initializer.hpp"
 #include "dogen.external.dia/types/initializer.hpp"
-#include "dogen.yarn/types/transforms/options.hpp"
-#include "dogen.yarn/types/transforms/context_factory.hpp"
+#include "dogen.modeling/types/transforms/options.hpp"
+#include "dogen.modeling/types/transforms/context_factory.hpp"
 #include "dogen.tailor/program_options_parser.hpp"
 #include "dogen.tailor/parser_validation_error.hpp"
 #include "dogen.tailor/workflow_error.hpp"
@@ -54,7 +54,7 @@ const std::string errors_msg(" finished with errors.");
  */
 void help(const std::string& d) {
     std::cout << "Dogen Tailor." << std::endl
-              << "Transforms yarn models to different representations."
+              << "Transforms models to different representations."
               << std::endl << std::endl << d << std::endl;
 }
 
@@ -114,9 +114,9 @@ void workflow::tailor(const options::tailoring_options& to) const {
     external::json::initializer::initialize();
     external::dia::initializer::initialize();
 
-    yarn::transforms::options o;
+    modeling::transforms::options o;
     o.target(to.target());
-    using namespace yarn::transforms;
+    using namespace modeling::transforms;
     const auto ctx(context_factory::make(o, false/*enable_validation*/));
     const external::transforms::context ext_ctx(ctx.prober());
     using namespace external::transforms;

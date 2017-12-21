@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/types/helpers/name_factory.hpp"
+#include "dogen.modeling/types/helpers/name_factory.hpp"
 #include "dogen.quilt.csharp/types/fabric/assembly_info.hpp"
 #include "dogen.quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.csharp/types/fabric/assembly_info_factory.hpp"
@@ -40,18 +40,18 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-boost::shared_ptr<yarn::meta_model::element> assembly_info_factory::
-make(const yarn::meta_model::model& m) const {
+boost::shared_ptr<modeling::meta_model::element> assembly_info_factory::
+make(const modeling::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
 
-    yarn::helpers::name_factory nf;
+    modeling::helpers::name_factory nf;
     auto n(nf.build_element_in_model(m.name(), simple_name));
     n.location().internal_modules().push_back(module_name);
 
     auto r(boost::make_shared<assembly_info>());
     r->name(n);
     r->meta_name(meta_name_factory::make_assembly_info_name());
-    r->origin_type(yarn::meta_model::origin_types::target);
+    r->origin_type(modeling::meta_model::origin_types::target);
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";
     return r;

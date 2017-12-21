@@ -26,8 +26,8 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/model.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -36,8 +36,8 @@ namespace fabric {
 
 class assembly_info_factory {
 public:
-    boost::shared_ptr<yarn::meta_model::element>
-    make(const yarn::meta_model::model& m) const;
+    boost::shared_ptr<modeling::meta_model::element>
+    make(const modeling::meta_model::model& m) const;
 };
 
 } } } }

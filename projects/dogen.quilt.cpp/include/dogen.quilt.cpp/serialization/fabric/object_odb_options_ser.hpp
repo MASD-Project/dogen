@@ -33,7 +33,7 @@ namespace boost {
 
 template<>struct
 is_virtual_base_of<
-    dogen::yarn::meta_model::element,
+    dogen::modeling::meta_model::element,
     dogen::quilt::cpp::fabric::object_odb_options
 > : public mpl::true_ {};
 

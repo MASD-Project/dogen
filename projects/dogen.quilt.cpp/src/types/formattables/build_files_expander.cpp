@@ -24,7 +24,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/io/pair_io.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.quilt.cpp/types/fabric/odb_target.hpp"
 #include "dogen.quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.quilt.cpp/types/fabric/msbuild_targets.hpp"
@@ -62,12 +62,12 @@ bool odb_target_comparer(
 class odb_targets_factory : public fabric::element_visitor {
 public:
     odb_targets_factory(const model& fm,
-        const locator& l, const yarn::meta_model::name& model_name);
+        const locator& l, const modeling::meta_model::name& model_name);
 
 public:
     using fabric::element_visitor::visit;
     void visit(const fabric::common_odb_options& coo);
-    void visit(const yarn::meta_model::object& o);
+    void visit(const modeling::meta_model::object& o);
 
 public:
     const fabric::odb_targets& result() const;
@@ -80,7 +80,7 @@ private:
 };
 
 odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
-    const yarn::meta_model::name& model_name)
+    const modeling::meta_model::name& model_name)
     : model_(fm), locator_(l),
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
@@ -95,7 +95,7 @@ void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
         );
 }
 
-void odb_targets_factory::visit(const yarn::meta_model::object& o) {
+void odb_targets_factory::visit(const modeling::meta_model::object& o) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -194,7 +194,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
          * can be ignored.
          */
         auto& segment(formattable.master_segment());
-        if (segment->origin_type() != yarn::meta_model::origin_types::target) {
+        if (segment->origin_type() != modeling::meta_model::origin_types::target) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
@@ -218,7 +218,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
 
         auto& formattable(pair.second);
         auto& segment(formattable.master_segment());
-        if (segment->origin_type() != yarn::meta_model::origin_types::target) {
+        if (segment->origin_type() != modeling::meta_model::origin_types::target) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }

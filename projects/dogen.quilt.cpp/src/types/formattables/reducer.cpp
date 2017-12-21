@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.quilt.cpp/types/formattables/reducer.hpp"
 
 namespace {
@@ -42,7 +42,7 @@ void reducer::reduce(model& fm) const {
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.master_segment());
-        if (e.origin_type() != yarn::meta_model::origin_types::target)
+        if (e.origin_type() != modeling::meta_model::origin_types::target)
             continue;
 
         reduced.insert(pair);

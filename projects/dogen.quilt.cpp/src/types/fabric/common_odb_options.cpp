@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen.quilt.cpp/types/fabric/common_odb_options.hpp"
 
@@ -52,22 +52,22 @@ namespace cpp {
 namespace fabric {
 
 common_odb_options::common_odb_options(
-    const dogen::yarn::meta_model::name& name,
+    const dogen::modeling::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::origin_types origin_type,
-    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
+    const dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::yarn::meta_model::name& meta_name,
+    const dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::string& sql_name_case,
     const std::list<std::string>& databases)
-    : dogen::yarn::meta_model::element(
+    : dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -84,28 +84,28 @@ common_odb_options::common_odb_options(
       sql_name_case_(sql_name_case),
       databases_(databases) { }
 
-void common_odb_options::accept(const dogen::yarn::meta_model::element_visitor& v) const {
+void common_odb_options::accept(const dogen::modeling::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void common_odb_options::accept(dogen::yarn::meta_model::element_visitor& v) const {
+void common_odb_options::accept(dogen::modeling::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void common_odb_options::accept(const dogen::yarn::meta_model::element_visitor& v) {
+void common_odb_options::accept(const dogen::modeling::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void common_odb_options::accept(dogen::yarn::meta_model::element_visitor& v) {
+void common_odb_options::accept(dogen::modeling::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -116,7 +116,7 @@ void common_odb_options::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::common_odb_options\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::meta_model::element::to_stream(s);
+    dogen::modeling::meta_model::element::to_stream(s);
     s << ", "
       << "\"sql_name_case\": " << "\"" << tidy_up_string(sql_name_case_) << "\"" << ", "
       << "\"databases\": " << databases_
@@ -124,21 +124,21 @@ void common_odb_options::to_stream(std::ostream& s) const {
 }
 
 void common_odb_options::swap(common_odb_options& other) noexcept {
-    dogen::yarn::meta_model::element::swap(other);
+    dogen::modeling::meta_model::element::swap(other);
 
     using std::swap;
     swap(sql_name_case_, other.sql_name_case_);
     swap(databases_, other.databases_);
 }
 
-bool common_odb_options::equals(const dogen::yarn::meta_model::element& other) const {
+bool common_odb_options::equals(const dogen::modeling::meta_model::element& other) const {
     const common_odb_options* const p(dynamic_cast<const common_odb_options* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool common_odb_options::operator==(const common_odb_options& rhs) const {
-    return dogen::yarn::meta_model::element::compare(rhs) &&
+    return dogen::modeling::meta_model::element::compare(rhs) &&
         sql_name_case_ == rhs.sql_name_case_ &&
         databases_ == rhs.databases_;
 }

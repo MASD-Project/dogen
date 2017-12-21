@@ -22,8 +22,8 @@
 #include "dogen.quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen.quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen.quilt.csharp/types/traits.hpp"
-#include "dogen.yarn/types/helpers/meta_name_factory.hpp"
-#include "dogen.yarn/types/meta_model/builtin.hpp"
+#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "dogen.modeling/types/meta_model/builtin.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -47,8 +47,8 @@ annotations::archetype_location builtin_formatter::archetype_location() const {
     return r;
 }
 
-const yarn::meta_model::name& builtin_formatter::meta_name() const {
-    using yarn::helpers::meta_name_factory;
+const modeling::meta_model::name& builtin_formatter::meta_name() const {
+    using modeling::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_builtin_name());
     return r;
 }
@@ -58,19 +58,19 @@ std::string builtin_formatter::family() const {
 }
 
 boost::filesystem::path builtin_formatter::full_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> builtin_formatter::
-inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
+inclusion_dependencies(const modeling::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-yarn::meta_model::artefact builtin_formatter::
-format(const context& /*ctx*/, const yarn::meta_model::element& /*e*/) const {
-    yarn::meta_model::artefact r;
+modeling::meta_model::artefact builtin_formatter::
+format(const context& /*ctx*/, const modeling::meta_model::element& /*e*/) const {
+    modeling::meta_model::artefact r;
     return r;
 }
 

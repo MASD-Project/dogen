@@ -23,7 +23,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.quilt.cpp/types/workflow_error.hpp"
-#include "dogen.yarn/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.modeling/io/meta_model/formatting_styles_io.hpp"
 #include "dogen.quilt.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.quilt.cpp/types/formatters/context.hpp"
 #include "dogen.quilt.cpp/types/formatters/wale_formatter.hpp"
@@ -59,8 +59,8 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-const yarn::meta_model::artefact_properties& workflow::get_artefact_properties(
-    const yarn::meta_model::element& e, const std::string& archetype) const {
+const modeling::meta_model::artefact_properties& workflow::get_artefact_properties(
+    const modeling::meta_model::element& e, const std::string& archetype) const {
 
     const auto& ap(e.artefact_properties());
     const auto i(ap.find(archetype));
@@ -71,10 +71,10 @@ const yarn::meta_model::artefact_properties& workflow::get_artefact_properties(
     return i->second;
 }
 
-std::list<yarn::meta_model::artefact>
-workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
+std::list<modeling::meta_model::artefact>
+workflow::format(const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
-    const yarn::meta_model::element& e,
+    const modeling::meta_model::element& e,
     const formattables::element_properties& ep) const {
 
     const auto id(e.name().id());
@@ -83,7 +83,7 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
     const auto mn(e.meta_name().id());
     BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
-    std::list<yarn::meta_model::artefact> r;
+    std::list<modeling::meta_model::artefact> r;
     const auto& frp(registrar().formatter_repository());
     const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
     if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
@@ -102,7 +102,7 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
             continue;
         }
 
-        using yarn::meta_model::formatting_styles;
+        using modeling::meta_model::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(enabled_archetype_for_element, ep, fm,
             frp.helper_formatters());
@@ -142,11 +142,11 @@ workflow::format(const std::unordered_set<yarn::meta_model::element_archetype>&
     return r;
 }
 
-std::list<yarn::meta_model::artefact> workflow::
-execute(const std::unordered_set<yarn::meta_model::element_archetype>&
+std::list<modeling::meta_model::artefact> workflow::
+execute(const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
-    std::list<yarn::meta_model::artefact> r;
+    std::list<modeling::meta_model::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());

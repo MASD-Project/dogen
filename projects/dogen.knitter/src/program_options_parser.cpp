@@ -225,9 +225,9 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-yarn::transforms::options program_options_parser::
+modeling::transforms::options program_options_parser::
 make_knitting_options(const variables_map& vm) const {
-    yarn::transforms::options r;
+    modeling::transforms::options r;
 
     if (vm.count(target_arg) == 0)
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
@@ -294,8 +294,8 @@ make_knitting_options(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<yarn::transforms::options> program_options_parser::parse() {
-    const boost::optional<yarn::transforms::options> r;
+boost::optional<modeling::transforms::options> program_options_parser::parse() {
+    const boost::optional<modeling::transforms::options> r;
     const auto od(make_options_description());
     const auto ovm(make_variables_map(od));
 

@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.yarn/io/meta_model/element_io.hpp"
+#include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.quilt.csharp/types/fabric/assembly_info.hpp"
 #include "dogen.quilt.csharp/types/fabric/element_visitor.hpp"
 
@@ -29,20 +29,20 @@ namespace csharp {
 namespace fabric {
 
 assembly_info::assembly_info(
-    const dogen::yarn::meta_model::name& name,
+    const dogen::modeling::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::origin_types origin_type,
-    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
+    const dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::yarn::meta_model::name& meta_name,
+    const dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties)
-    : dogen::yarn::meta_model::element(
+    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties)
+    : dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -57,28 +57,28 @@ assembly_info::assembly_info(
       artefact_properties,
       archetype_location_properties) { }
 
-void assembly_info::accept(const dogen::yarn::meta_model::element_visitor& v) const {
+void assembly_info::accept(const dogen::modeling::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void assembly_info::accept(dogen::yarn::meta_model::element_visitor& v) const {
+void assembly_info::accept(dogen::modeling::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void assembly_info::accept(const dogen::yarn::meta_model::element_visitor& v) {
+void assembly_info::accept(const dogen::modeling::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void assembly_info::accept(dogen::yarn::meta_model::element_visitor& v) {
+void assembly_info::accept(dogen::modeling::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -89,23 +89,23 @@ void assembly_info::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assembly_info\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::meta_model::element::to_stream(s);
+    dogen::modeling::meta_model::element::to_stream(s);
     s << " }";
 }
 
 void assembly_info::swap(assembly_info& other) noexcept {
-    dogen::yarn::meta_model::element::swap(other);
+    dogen::modeling::meta_model::element::swap(other);
 
 }
 
-bool assembly_info::equals(const dogen::yarn::meta_model::element& other) const {
+bool assembly_info::equals(const dogen::modeling::meta_model::element& other) const {
     const assembly_info* const p(dynamic_cast<const assembly_info* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool assembly_info::operator==(const assembly_info& rhs) const {
-    return dogen::yarn::meta_model::element::compare(rhs);
+    return dogen::modeling::meta_model::element::compare(rhs);
 }
 
 assembly_info& assembly_info::operator=(assembly_info other) {

@@ -168,14 +168,14 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
     }
 }
 
-yarn::meta_model::artefact
+modeling::meta_model::artefact
 instantiator::format_text_template(const text_template& tt) const {
     formatter fmt;
     const auto r(fmt.format(tt));
     return r;
 }
 
-yarn::meta_model::artefact
+modeling::meta_model::artefact
 instantiator::instantiate(const boost::filesystem::path& input_path) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "
                              << input_path.generic_string();

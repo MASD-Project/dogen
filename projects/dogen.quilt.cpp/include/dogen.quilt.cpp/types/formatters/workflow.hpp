@@ -34,10 +34,10 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.annotations/types/type_repository.hpp"
 #include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.yarn/types/meta_model/artefact.hpp"
+#include "dogen.modeling/types/meta_model/artefact.hpp"
 #include "dogen.formatting/types/repository.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
-#include "dogen.yarn/types/meta_model/element_archetype.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/element_archetype.hpp"
 #include "dogen.quilt.cpp/types/formattables/model.hpp"
 #include "dogen.quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen.quilt.cpp/types/formatters/stitch_formatter.hpp"
@@ -64,20 +64,20 @@ public:
     static cpp::formatters::registrar& registrar();
 
 private:
-    const yarn::meta_model::artefact_properties&
-    get_artefact_properties(const yarn::meta_model::element& e,
+    const modeling::meta_model::artefact_properties&
+    get_artefact_properties(const modeling::meta_model::element& e,
         const std::string& archetype) const;
 
 private:
-    std::list<yarn::meta_model::artefact>
-    format(const std::unordered_set<yarn::meta_model::element_archetype>&
+    std::list<modeling::meta_model::artefact>
+    format(const std::unordered_set<modeling::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
-        const yarn::meta_model::element& e,
+        const modeling::meta_model::element& e,
         const formattables::element_properties& ep) const;
 
 public:
-    std::list<yarn::meta_model::artefact>
-    execute(const std::unordered_set<yarn::meta_model::element_archetype>&
+    std::list<modeling::meta_model::artefact>
+    execute(const std::unordered_set<modeling::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm) const;
 
 private:

@@ -48,7 +48,7 @@ annotations::archetype_location assistant_formatter::archetype_location() const 
     return r;
 }
 
-const yarn::meta_model::name& assistant_formatter::meta_name() const {
+const modeling::meta_model::name& assistant_formatter::meta_name() const {
     using fabric::meta_name_factory;
     static auto r(meta_name_factory::make_assistant_name());
     return r;
@@ -59,18 +59,18 @@ std::string assistant_formatter::family() const {
 }
 
 boost::filesystem::path assistant_formatter::full_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> assistant_formatter::
-inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
+inclusion_dependencies(const modeling::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-yarn::meta_model::artefact assistant_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact assistant_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
     {

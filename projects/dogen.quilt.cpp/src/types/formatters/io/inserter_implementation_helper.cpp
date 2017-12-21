@@ -28,7 +28,7 @@ namespace formatters {
 namespace io {
 
 void inserter_implementation_helper(
-    assistant& a, const yarn::meta_model::object& o, const bool inside_class) {
+    assistant& a, const modeling::meta_model::object& o, const bool inside_class) {
 
     const auto qn(a.get_qualified_name(o.name()));
 

@@ -27,7 +27,7 @@ namespace formattables {
 
 dependencies_builder_factory::dependencies_builder_factory(
     const directive_group_repository& dgrp,
-    const std::unordered_set<yarn::meta_model::element_archetype>&
+    const std::unordered_set<modeling::meta_model::element_archetype>&
     enabled_archetype_for_element)
     : inclusion_directives_(dgrp),
       enabled_archetype_for_element_(enabled_archetype_for_element) {}

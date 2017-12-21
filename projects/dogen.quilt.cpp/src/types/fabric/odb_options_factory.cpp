@@ -22,8 +22,8 @@
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.yarn/types/meta_model/object.hpp"
-#include "dogen.yarn/types/helpers/name_factory.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/helpers/name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/building_error.hpp"
 #include "dogen.quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.quilt.cpp/types/fabric/common_odb_options.hpp"
@@ -44,13 +44,13 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::list<boost::shared_ptr<yarn::meta_model::element>> odb_options_factory::
-make(const yarn::meta_model::model& m) const {
+std::list<boost::shared_ptr<modeling::meta_model::element>> odb_options_factory::
+make(const modeling::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
-    using yarn::meta_model::object;
-    using yarn::meta_model::origin_types;
-    std::list<boost::shared_ptr<yarn::meta_model::element>> r;
+    using modeling::meta_model::object;
+    using modeling::meta_model::origin_types;
+    std::list<boost::shared_ptr<modeling::meta_model::element>> r;
     for (const auto& ptr : m.elements()) {
         /*
          * If we're not an object or if we do not belong to the target
@@ -86,7 +86,7 @@ make(const yarn::meta_model::model& m) const {
     if (r.empty())
         return r;
 
-    yarn::helpers::name_factory nf;
+    modeling::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), common_odb_options_name));
 
     auto coo(boost::make_shared<common_odb_options>());

@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.quilt.csharp/types/fabric/dynamic_transform.hpp"
-#include "dogen.yarn/types/transforms/dynamic_transforms_chain.hpp"
+#include "dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen.quilt.csharp/types/fabric/initializer.hpp"
 
 namespace dogen {
@@ -28,7 +28,7 @@ namespace csharp {
 namespace fabric {
 
 void initializer::initialize() {
-    yarn::transforms::register_dynamic_transform<dynamic_transform>();
+    modeling::transforms::register_dynamic_transform<dynamic_transform>();
 }
 
 } } } }

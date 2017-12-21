@@ -27,8 +27,8 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen.yarn/types/meta_model/name.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/forward_declarations_fwd_ser.hpp"
 
 namespace dogen {
@@ -36,7 +36,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class forward_declarations final : public dogen::yarn::meta_model::element {
+class forward_declarations final : public dogen::modeling::meta_model::element {
 public:
     forward_declarations(const forward_declarations&) = default;
     forward_declarations(forward_declarations&&) = default;
@@ -48,21 +48,21 @@ public:
 
 public:
     forward_declarations(
-        const dogen::yarn::meta_model::name& name,
+        const dogen::modeling::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::meta_model::origin_types origin_type,
-        const boost::optional<dogen::yarn::meta_model::name>& contained_by,
+        const dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::yarn::meta_model::name& meta_name,
+        const dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const bool is_enum,
-        const dogen::yarn::meta_model::name& underlying_element,
+        const dogen::modeling::meta_model::name& underlying_element,
         const bool is_exception);
 
 private:
@@ -73,12 +73,12 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::forward_declarations& v, unsigned int version);
 
 public:
-    using dogen::yarn::meta_model::element::accept;
+    using dogen::modeling::meta_model::element::accept;
 
-    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::yarn::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::yarn::meta_model::element_visitor& v) override;
+    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::modeling::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -96,10 +96,10 @@ public:
      * @brief The underlying type of the enumeration, if we are an enum forward declaration.
      */
     /**@{*/
-    const dogen::yarn::meta_model::name& underlying_element() const;
-    dogen::yarn::meta_model::name& underlying_element();
-    void underlying_element(const dogen::yarn::meta_model::name& v);
-    void underlying_element(const dogen::yarn::meta_model::name&& v);
+    const dogen::modeling::meta_model::name& underlying_element() const;
+    dogen::modeling::meta_model::name& underlying_element();
+    void underlying_element(const dogen::modeling::meta_model::name& v);
+    void underlying_element(const dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     bool is_exception() const;
@@ -112,7 +112,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::meta_model::element& other) const override;
+    bool equals(const dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(forward_declarations& other) noexcept;
@@ -120,7 +120,7 @@ public:
 
 private:
     bool is_enum_;
-    dogen::yarn::meta_model::name underlying_element_;
+    dogen::modeling::meta_model::name underlying_element_;
     bool is_exception_;
 };
 

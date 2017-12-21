@@ -23,8 +23,8 @@
 #include "dogen.quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen.quilt.csharp/types/traits.hpp"
 #include "dogen.formatting/types/sequence_formatter.hpp"
-#include "dogen.yarn/types/helpers/meta_name_factory.hpp"
-#include "dogen.yarn/types/meta_model/primitive.hpp"
+#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "dogen.modeling/types/meta_model/primitive.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -48,8 +48,8 @@ annotations::archetype_location primitive_formatter::archetype_location() const 
     return r;
 }
 
-const yarn::meta_model::name& primitive_formatter::meta_name() const {
-    using yarn::helpers::meta_name_factory;
+const modeling::meta_model::name& primitive_formatter::meta_name() const {
+    using modeling::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
@@ -59,21 +59,21 @@ std::string primitive_formatter::family() const {
 }
 
 boost::filesystem::path primitive_formatter::full_path(
-    const formattables::locator& l, const yarn::meta_model::name& n) const {
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> primitive_formatter::
-inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
+inclusion_dependencies(const modeling::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-yarn::meta_model::artefact primitive_formatter::
-format(const context& ctx, const yarn::meta_model::element& e) const {
+modeling::meta_model::artefact primitive_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& p(a.as<yarn::meta_model::primitive>(static_id(), e));
+    const auto& p(a.as<modeling::meta_model::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

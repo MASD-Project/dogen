@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.yarn/types/transforms/context_fwd.hpp"
-#include "dogen.yarn/types/transforms/dynamic_transform_interface.hpp"
+#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,23 +34,23 @@ namespace cpp {
 namespace fabric {
 
 class dynamic_transform final :
-        public yarn::transforms::dynamic_transform_interface {
+        public modeling::transforms::dynamic_transform_interface {
 private:
     bool requires_expansion(
-        const yarn::meta_model::model& m) const;
+        const modeling::meta_model::model& m) const;
 
     void expand_injection(const annotations::type_repository& atrp,
-        yarn::meta_model::model& m) const;
+        modeling::meta_model::model& m) const;
 
     void expand_decoration(
         const dogen::formatting::decoration_properties_factory& dpf,
-        yarn::meta_model::model& m) const;
+        modeling::meta_model::model& m) const;
 
 public:
     std::string id() const override;
-    void transform(const yarn::transforms::context& ctx,
+    void transform(const modeling::transforms::context& ctx,
         const dogen::formatting::decoration_properties_factory& dpf,
-        yarn::meta_model::model& m) const override;
+        modeling::meta_model::model& m) const override;
 };
 
 } } } }

@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.yarn/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen.quilt.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.quilt.cpp/types/formattables/facet_properties.hpp"
@@ -52,7 +52,7 @@ public:
 
 public:
     model(
-        const dogen::yarn::meta_model::name& name,
+        const dogen::modeling::meta_model::name& name,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
@@ -69,10 +69,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::model& v, unsigned int version);
 
 public:
-    const dogen::yarn::meta_model::name& name() const;
-    dogen::yarn::meta_model::name& name();
-    void name(const dogen::yarn::meta_model::name& v);
-    void name(const dogen::yarn::meta_model::name&& v);
+    const dogen::modeling::meta_model::name& name() const;
+    dogen::modeling::meta_model::name& name();
+    void name(const dogen::modeling::meta_model::name& v);
+    void name(const dogen::modeling::meta_model::name&& v);
 
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties() const;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties();
@@ -118,7 +118,7 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::yarn::meta_model::name name_;
+    dogen::modeling::meta_model::name name_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties> streaming_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties> facet_properties_;

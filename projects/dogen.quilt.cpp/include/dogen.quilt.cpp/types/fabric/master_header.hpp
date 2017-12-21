@@ -30,8 +30,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.yarn/types/meta_model/name.hpp"
-#include "dogen.yarn/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.quilt.cpp/serialization/fabric/master_header_fwd_ser.hpp"
 
 namespace dogen {
@@ -39,7 +39,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class master_header final : public dogen::yarn::meta_model::element {
+class master_header final : public dogen::modeling::meta_model::element {
 public:
     master_header() = default;
     master_header(const master_header&) = default;
@@ -49,20 +49,20 @@ public:
 
 public:
     master_header(
-        const dogen::yarn::meta_model::name& name,
+        const dogen::modeling::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::meta_model::origin_types origin_type,
-        const boost::optional<dogen::yarn::meta_model::name>& contained_by,
+        const dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::yarn::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::yarn::meta_model::name& meta_name,
+        const dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& inclusion_by_facet);
+        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > >& inclusion_by_facet);
 
 private:
     template<typename Archive>
@@ -72,20 +72,20 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::master_header& v, unsigned int version);
 
 public:
-    using dogen::yarn::meta_model::element::accept;
+    using dogen::modeling::meta_model::element::accept;
 
-    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::yarn::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::yarn::meta_model::element_visitor& v) override;
+    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::modeling::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& inclusion_by_facet() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& inclusion_by_facet();
-    void inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& v);
-    void inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >&& v);
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > >& inclusion_by_facet() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > >& inclusion_by_facet();
+    void inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > >& v);
+    void inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > >&& v);
 
 public:
     bool operator==(const master_header& rhs) const;
@@ -94,14 +94,14 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::meta_model::element& other) const override;
+    bool equals(const dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(master_header& other) noexcept;
     master_header& operator=(master_header other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > > inclusion_by_facet_;
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > > inclusion_by_facet_;
 };
 
 } } } }
