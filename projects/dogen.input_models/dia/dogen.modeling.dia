@@ -813,25 +813,25 @@ supported languages.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Yarn is the Dogen meta-model.
 
-@section yarn_0 Overview
+@section modeling_0 Overview
 
-Yarn is a meta-model that provides a programming-language-neutral type
+Modeling is a meta-model that provides a programming-language-neutral type
 representation, designed for code generation. There are two core types
-in yarn: @e endomodel and @e model. Intermediate models are
+in modeling: @e endomodel and @e model. Intermediate models are
 obtained via @frontends and post-processed until they form a cohesive
 whole. They are then transformed into a final model representation, at
 which point they are suitable for code generation.
 
-@section yarn_0 Mission
+@section modeling_0 Mission
 
-Yarn's objectives are:
+Modeling's objectives are:
 
 @li to provide a set of constructs that the frontends can map to
 easily, as well as the machinery for frontend management
 (registration, etc.).
 
 @li to provide the tooling required to combine multiple intermediate
-yarn models together into a bigger model - called the intermediate @e
+modeling models together into a bigger model - called the intermediate @e
 merged model.
 
 @li to ensure the consistency of the intermediate merged model via
@@ -842,7 +842,7 @@ etc.).
 and to build it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.yarn
+#DOGEN yarn.model_modules=dogen.modeling
 #DOGEN yarn.reference=dogen.annotations.dia
 #DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.reference=dogen.probing.dia
@@ -2752,7 +2752,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
       <dia:attribute name="comment">
         <dia:string>#Representation of the class notion in the OOP paradigm.
 
-The yarn @e object is equivalent to a meta-class, but we decided against this
+The @e object is equivalent to a meta-class, but we decided against this
 name because all elements should also have the prefix meta - after all, yarn is a
 meta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.#</dia:string>
@@ -4235,7 +4235,7 @@ type with a number of linked lists, one per meaning.
 
 A location is not necessarily connected to modules, although these are the main
 model elements that provide containment. For example, inner classes are
-contained within classes; in yarn terms it means a location should also have an
+contained within classes; in modeling terms it means a location should also have an
 "object" attribute to represent this relationship.
 
 Also, note that the location class itself encodes the address of the element that
@@ -4749,7 +4749,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:string>#Nameable, MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Yarn model.#</dia:string>
+        <dia:string>#Modeling model.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8482,7 +8482,7 @@ space.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Stereotypes that are part of the yarn UML profile, and so are well-known to the
+            <dia:string>#Stereotypes that are part of the dogen UML profile, and so are well-known to the
 model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -14896,7 +14896,7 @@ model.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Houses all of the transformations supported by yarn.
+            <dia:string>#Houses all of the transformations supported by modeling.
 
 #DOGEN dia.comment=true#</dia:string>
           </dia:attribute>
@@ -18425,7 +18425,7 @@ model.#</dia:string>
             <dia:string>#transforms_by_language_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;yarn::meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -18579,7 +18579,7 @@ model.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#const std::unordered_map&lt;yarn::meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;&amp;#</dia:string>
+            <dia:string>#const std::unordered_map&lt;meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;&amp;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

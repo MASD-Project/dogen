@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_YARN_HPP
-#define DOGEN_YARN_TYPES_YARN_HPP
+#ifndef DOGEN_MODELING_TYPES_MODELING_HPP
+#define DOGEN_MODELING_TYPES_MODELING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,25 +30,25 @@ namespace dogen {
 /**
  * @brief Yarn is the Dogen meta-model.
  *
- * @section yarn_0 Overview
+ * @section modeling_0 Overview
  *
- * Yarn is a meta-model that provides a programming-language-neutral type
+ * Modeling is a meta-model that provides a programming-language-neutral type
  * representation, designed for code generation. There are two core types
- * in yarn: @e endomodel and @e model. Intermediate models are
+ * in modeling: @e endomodel and @e model. Intermediate models are
  * obtained via @frontends and post-processed until they form a cohesive
  * whole. They are then transformed into a final model representation, at
  * which point they are suitable for code generation.
  *
- * @section yarn_0 Mission
+ * @section modeling_0 Mission
  *
- * Yarn's objectives are:
+ * Modeling's objectives are:
  *
  * @li to provide a set of constructs that the frontends can map to
  * easily, as well as the machinery for frontend management
  * (registration, etc.).
  *
  * @li to provide the tooling required to combine multiple intermediate
- * yarn models together into a bigger model - called the intermediate @e
+ * modeling models together into a bigger model - called the intermediate @e
  * merged model.
  *
  * @li to ensure the consistency of the intermediate merged model via

@@ -99,7 +99,7 @@
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.quilt.csharp
 #DOGEN yarn.reference=dogen.options.dia
-#DOGEN yarn.reference=dogen.yarn.dia
+#DOGEN yarn.reference=dogen.modeling.dia
 #DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.reference=dogen.annotations.dia
 #DOGEN yarn.reference=dogen.probing.dia

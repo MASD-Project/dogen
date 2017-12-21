@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/name_io.hpp"
 #include "dogen.annotations/io/annotation_io.hpp"
+#include "dogen.modeling/io/meta_model/name_io.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/io/meta_model/origin_types_io.hpp"
 #include "dogen.formatting/io/decoration_properties_io.hpp"
+#include "dogen.modeling/io/meta_model/origin_types_io.hpp"
 #include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen.modeling/io/meta_model/artefact_properties_io.hpp"
 #include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"

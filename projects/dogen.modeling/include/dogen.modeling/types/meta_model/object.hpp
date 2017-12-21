@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_OBJECT_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_OBJECT_HPP
+#ifndef DOGEN_MODELING_TYPES_META_MODEL_OBJECT_HPP
+#define DOGEN_MODELING_TYPES_META_MODEL_OBJECT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -45,7 +45,7 @@ namespace meta_model {
 /**
  * @brief Representation of the class notion in the OOP paradigm.
  *
- * The yarn @e object is equivalent to a meta-class, but we decided against this
+ * The @e object is equivalent to a meta-class, but we decided against this
  * name because all elements should also have the prefix meta - after all, yarn is a
  * meta-model. Since the word class cannot be used in c++ to name types, we
  * decided instead to use the word object.

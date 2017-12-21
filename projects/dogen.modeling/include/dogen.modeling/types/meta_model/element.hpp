@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_ELEMENT_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_ELEMENT_HPP
+#ifndef DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_HPP
+#define DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,10 +31,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.annotations/types/annotation.hpp"
-#include "dogen.modeling/types/meta_model/origin_types.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.formatting/types/decoration_properties.hpp"
+#include "dogen.modeling/types/meta_model/origin_types.hpp"
 #include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
 #include "dogen.modeling/types/meta_model/artefact_properties.hpp"
 #include "dogen.modeling/types/meta_model/element_visitor_fwd.hpp"
@@ -158,7 +158,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Stereotypes that are part of the yarn UML profile, and so are well-known to the
+     * @brief Stereotypes that are part of the dogen UML profile, and so are well-known to the
      * model.
      */
     /**@{*/

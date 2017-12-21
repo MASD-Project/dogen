@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_ATTRIBUTE_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_ATTRIBUTE_HPP
+#ifndef DOGEN_MODELING_TYPES_META_MODEL_ATTRIBUTE_HPP
+#define DOGEN_MODELING_TYPES_META_MODEL_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,8 +28,8 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.annotations/types/annotation.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 #include "dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
 #include "dogen.modeling/serialization/meta_model/attribute_fwd_ser.hpp"

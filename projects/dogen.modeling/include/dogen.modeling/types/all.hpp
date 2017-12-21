@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ALL_HPP
-#define DOGEN_YARN_TYPES_ALL_HPP
+#ifndef DOGEN_MODELING_TYPES_ALL_HPP
+#define DOGEN_MODELING_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.modeling/types/yarn.hpp"
 #include "dogen.modeling/types/traits.hpp"
+#include "dogen.modeling/types/modeling.hpp"
 #include "dogen.modeling/types/helpers/node.hpp"
 #include "dogen.modeling/types/helpers/mapper.hpp"
 #include "dogen.modeling/types/helpers/indexer.hpp"

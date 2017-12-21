@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_MODEL_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_MODEL_HPP
+#ifndef DOGEN_MODELING_TYPES_META_MODEL_MODEL_HPP
+#define DOGEN_MODELING_TYPES_META_MODEL_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -50,7 +50,7 @@ namespace modeling {
 namespace meta_model {
 
 /**
- * @brief Yarn model.
+ * @brief Modeling model.
  */
 class model final {
 public:

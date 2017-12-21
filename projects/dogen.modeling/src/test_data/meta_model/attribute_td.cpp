@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen.modeling/test_data/meta_model/name_td.hpp"
 #include "dogen.annotations/test_data/annotation_td.hpp"
+#include "dogen.modeling/test_data/meta_model/name_td.hpp"
 #include "dogen.modeling/test_data/meta_model/attribute_td.hpp"
 #include "dogen.modeling/test_data/meta_model/name_tree_td.hpp"
 #include "dogen.modeling/test_data/meta_model/orm_attribute_properties_td.hpp"

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_ENUMERATOR_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_ENUMERATOR_HPP
+#ifndef DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
+#define DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,8 +27,8 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.annotations/types/annotation.hpp"
+#include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/serialization/meta_model/enumerator_fwd_ser.hpp"
 
 namespace dogen {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_LOCATION_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_LOCATION_HPP
+#ifndef DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
+#define DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -48,7 +48,7 @@ namespace meta_model {
  *
  * A location is not necessarily connected to modules, although these are the main
  * model elements that provide containment. For example, inner classes are
- * contained within classes; in yarn terms it means a location should also have an
+ * contained within classes; in modeling terms it means a location should also have an
  * "object" attribute to represent this relationship.
  *
  * Also, note that the location class itself encodes the address of the element that
@@ -84,7 +84,7 @@ public:
      * It is sometimes useful to create a model within a set of existing modules. In this
      * case, the model does not own the existing modules and they are considered
      * "external" to the model. This is useful, for example, when declaring a model
-     * within a larger project such as @e dogen::modeling. In this case, @e dogen is the
+     * within a larger project such as @e dogen::yarn. In this case, @e dogen is the
      * external module.
      */
     /**@{*/

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-21 Thu 22:20]
+#+CAPTION: Clock summary at [2017-12-21 Thu 22:40]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *72:48* |       |       | 100.0 |
+| *Total time*                                                                | *73:06* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 72:48   |       |       | 100.0 |
-| Active                                                                      |         | 72:48 |       | 100.0 |
+| Stories                                                                     | 73:06   |       |       | 100.0 |
+| Active                                                                      |         | 73:06 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.4 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:46 |   3.8 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.8 |
@@ -41,11 +41,11 @@
 | COMPLETED Fix travis build                                                  |         |       |  0:03 |   0.1 |
 | COMPLETED Do a quick hack to fix name resolution                            |         |       |  1:20 |   1.8 |
 | COMPLETED Rename =formatters= to =formatting=                               |         |       |  1:45 |   2.4 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.1 |
+| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:40 |   2.3 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.0 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.4 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   0.9 |
-| STARTED Rename =yarn= to =modeling=                                         |         |       |  1:22 |   1.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -583,6 +583,20 @@ this properly later.
 
 As per analysis story, we are moving away from the sewing terms.
 
+*** COMPLETED Rename =yarn= to =modeling=                             :story:
+    CLOSED: [2017-12-21 Thu 22:39]
+    CLOCK: [2017-12-21 Thu 22:21]--[2017-12-21 Thu 22:39] =>  0:18
+    CLOCK: [2017-12-21 Thu 22:03]--[2017-12-21 Thu 22:20] =>  0:17
+    CLOCK: [2017-12-21 Thu 20:57]--[2017-12-21 Thu 22:02] =>  1:05
+
+As per analysis story, we are moving away from the sewing terms.
+
+Tasks:
+
+- rename endomodel to just model.
+- simplify the transform options to contain only modeling specific
+  things.
+
 *** STARTED Finish setting up coveralls                               :story:
     CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
     CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
@@ -670,18 +684,6 @@ flight as we transform from exomodel to endomodel.
 Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
-
-*** STARTED Rename =yarn= to =modeling=                               :story:
-    CLOCK: [2017-12-21 Thu 22:03]--[2017-12-21 Thu 22:20] =>  0:17
-    CLOCK: [2017-12-21 Thu 20:57]--[2017-12-21 Thu 22:02] =>  1:05
-
-As per analysis story, we are moving away from the sewing terms.
-
-Tasks:
-
-- rename endomodel to just model.
-- simplify the transform options to contain only modeling specific
-  things.
 
 *** Rename =quilt.cpp= to =generation.cpp=                            :story:
 

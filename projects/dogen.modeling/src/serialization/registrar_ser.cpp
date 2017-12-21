@@ -26,8 +26,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.modeling/serialization/registrar_ser.hpp"
 #include "dogen.probing/serialization/registrar_ser.hpp"
+#include "dogen.modeling/serialization/registrar_ser.hpp"
 #include "dogen.formatting/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/module_ser.hpp"

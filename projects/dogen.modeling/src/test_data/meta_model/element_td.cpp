@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen.modeling/test_data/meta_model/name_td.hpp"
 #include "dogen.annotations/test_data/annotation_td.hpp"
+#include "dogen.modeling/test_data/meta_model/name_td.hpp"
 #include "dogen.modeling/test_data/meta_model/module_td.hpp"
 #include "dogen.modeling/test_data/meta_model/object_td.hpp"
 #include "dogen.modeling/test_data/meta_model/builtin_td.hpp"
@@ -29,9 +29,9 @@
 #include "dogen.modeling/test_data/meta_model/exception_td.hpp"
 #include "dogen.modeling/test_data/meta_model/primitive_td.hpp"
 #include "dogen.modeling/test_data/meta_model/enumeration_td.hpp"
+#include "dogen.formatting/test_data/decoration_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/origin_types_td.hpp"
 #include "dogen.modeling/test_data/meta_model/object_template_td.hpp"
-#include "dogen.formatting/test_data/decoration_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/static_stereotypes_td.hpp"
 #include "dogen.modeling/test_data/meta_model/artefact_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/local_archetype_location_properties_td.hpp"
