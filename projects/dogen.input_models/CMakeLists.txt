@@ -109,6 +109,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} dogen.stitch)
     set(models ${models} dogen.wale)
     set(models ${models} dogen.modeling)
+    set(models ${models} dogen.templating)
     # models that are not yet ready
     # set(models ${models} pleat)
     # set(models ${models} dart)
