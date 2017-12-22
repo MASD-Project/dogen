@@ -202,6 +202,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.stitcher/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.wale/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.probing/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
     )
 
 #
@@ -226,6 +227,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.stitch)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.stitcher)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.wale)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.probing)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
 
 # test models
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.test_models)
