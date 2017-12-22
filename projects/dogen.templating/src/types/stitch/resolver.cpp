@@ -18,14 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.templating/types/stitch/resolution_error.hpp"
 #include "dogen.templating/types/stitch/resolver.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("templating.stitch.resolver"));
+
+const std::string key_not_found("Key not found: ");
+
+}
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
-bool resolver::operator==(const resolver& /*rhs*/) const {
-    return true;
+resolver::resolver(const std::unordered_map<std::string, std::string>& kvps)
+    : kvps_(kvps) {}
+
+std::string resolver::resolve(const std::string& k) const {
+    const auto i (kvps_.find(k));
+    if (i == kvps_.end()) {
+        BOOST_LOG_SEV(lg, error) << key_not_found << k;
+        BOOST_THROW_EXCEPTION(resolution_error(key_not_found + k));
+    }
+    return i->second;
 }
 
 } } }

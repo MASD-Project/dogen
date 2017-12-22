@@ -25,26 +25,50 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
-class traits final {
-public:
-    traits() = default;
-    traits(const traits&) = default;
-    traits(traits&&) = default;
-    ~traits() = default;
-    traits& operator=(const traits&) = default;
+struct traits {
+    /**
+     * @brief Name of the model that owns the fields.
+     */
+    static std::string model_name();
 
-public:
-    bool operator==(const traits& rhs) const;
-    bool operator!=(const traits& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Name of the variable used for streaming.
+     *
+     * For example: @code stream_
+     */
+    static std::string stream_variable_name();
 
+    /**
+     * @brief Relative path to the directory in which to place the
+     * output, if any.
+     */
+    static std::string relative_output_directory();
+
+    /**
+     * @brief Inclusion dependencies required by the template.
+     */
+    static std::string inclusion_dependency();
+
+    /**
+     * @brief Namespaces that contain the content in the template.
+     */
+    static std::string containing_namespaces();
+
+    /**
+     * @brief Name of the associated wale template, if any.
+     */
+    static std::string wale_template();
+
+    /**
+     * @brief Name of the associated wale kvps, if any.
+     */
+    static std::string wale_kvp();
 };
 
 } } }

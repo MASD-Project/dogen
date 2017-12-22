@@ -25,26 +25,86 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
+#include "dogen.templating/types/stitch/stitching_properties.hpp"
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
-class stitching_properties_factory final {
+/**
+ * @brief Creates the stitching settings.
+ */
+class stitching_properties_factory {
 public:
-    stitching_properties_factory() = default;
-    stitching_properties_factory(const stitching_properties_factory&) = default;
-    stitching_properties_factory(stitching_properties_factory&&) = default;
-    ~stitching_properties_factory() = default;
-    stitching_properties_factory& operator=(const stitching_properties_factory&) = default;
+    explicit
+    stitching_properties_factory(const annotations::type_repository& arp);
+
+private:
+    struct type_group {
+        annotations::type stream_variable_name;
+        annotations::type relative_output_directory;
+        annotations::type inclusion_dependency;
+        annotations::type containing_namespaces;
+        annotations::type wale_template;
+        annotations::type wale_kvp;
+    };
+
+    /**
+     * @brief Creates the formatter properties.
+     */
+    type_group
+    make_type_group(const annotations::type_repository& arp) const;
+
+private:
+    /**
+     * @brief Extracts the stream variable name.
+     */
+    std::string
+    extract_stream_variable_name(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extracts the relative output directory.
+     */
+    boost::filesystem::path
+    extract_relative_output_directory(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extracts inclusion dependencies.
+     */
+    std::list<std::string>
+    extract_inclusion_dependencies(const annotations::annotation& o) const;
+
+    /**
+     * @brief Extract containing namespaces.
+     */
+    std::list<std::string>
+    extract_containing_namespaces(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extract wale template
+     */
+    std::string extract_wale_template(const annotations::annotation& a) const;
+
+    /**
+     * @brief Extract wale kvps
+     */
+    std::unordered_map<std::string, std::string>
+    extract_wale_kvps(const annotations::annotation& a) const;
 
 public:
-    bool operator==(const stitching_properties_factory& rhs) const;
-    bool operator!=(const stitching_properties_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Create the stitching settings.
+     */
+    stitching_properties make(const annotations::annotation& a) const;
 
+private:
+    const type_group type_group_;
 };
 
 } } }

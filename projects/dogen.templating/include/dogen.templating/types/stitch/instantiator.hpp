@@ -25,26 +25,70 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
+#include "dogen.annotations/types/annotation_factory.hpp"
+#include "dogen.modeling/types/meta_model/artefact.hpp"
+#include "dogen.formatting/types/repository.hpp"
+#include "dogen.templating/types/stitch/properties_factory.hpp"
+#include "dogen.templating/types/stitch/text_template.hpp"
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
+/**
+ * @brief Provides file name information on errors.
+ */
+typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
+
 class instantiator final {
 public:
-    instantiator() = default;
-    instantiator(const instantiator&) = default;
-    instantiator(instantiator&&) = default;
-    ~instantiator() = default;
-    instantiator& operator=(const instantiator&) = default;
+    instantiator(const annotations::type_repository& atrp,
+        const annotations::annotation_factory& af,
+        const dogen::formatting::repository& formatting_repository);
+
+private:
+    /**
+     * @brief Computes the output path, given the template input path.
+     */
+    boost::filesystem::path
+    compute_output_path(const boost::filesystem::path& input_path,
+        const properties& props) const;
+
+    /**
+     * @brief Reads the supplied stitch text template into memory as a
+     * raw string.
+     */
+    std::string read_text_template(const boost::filesystem::path& p) const;
+
+    /**
+     * @brief Instantiates the wale template, if configured.
+     */
+    void handle_wale_template(text_template& tt) const;
+
+    /**
+     * @brief Creates the text template.
+     */
+    text_template create_text_template(
+        const boost::filesystem::path& input_path,
+        const std::string& text_template_as_string) const;
+
+    /**
+     * @brief Formats the supplied text template.
+     */
+    modeling::meta_model::artefact
+    format_text_template(const text_template& tt) const;
 
 public:
-    bool operator==(const instantiator& rhs) const;
-    bool operator!=(const instantiator& rhs) const {
-        return !this->operator==(rhs);
-    }
+    modeling::meta_model::artefact
+    instantiate(const boost::filesystem::path& input_path) const;
 
+private:
+    const annotations::annotation_factory& annotation_factory_;
+    const properties_factory properties_factory_;
 };
 
 } } }

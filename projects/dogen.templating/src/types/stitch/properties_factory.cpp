@@ -18,14 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.formatting/types/decoration_properties_factory.hpp"
+#include "dogen.templating/types/stitch/stitching_properties_factory.hpp"
 #include "dogen.templating/types/stitch/properties_factory.hpp"
+
+namespace {
+
+const std::string cpp_modeline_name("cpp");
+
+}
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
-bool properties_factory::operator==(const properties_factory& /*rhs*/) const {
-    return true;
+properties_factory::properties_factory(const annotations::type_repository& atrp,
+    const dogen::formatting::repository& frp)
+    : annotations_repository_(atrp),   formatting_repository_(frp) {}
+
+boost::optional<formatting::decoration_properties> properties_factory::
+make_decoration_properties(const annotations::annotation& a) const {
+    using dogen::formatting::decoration_properties_factory;
+    const auto& drp(annotations_repository_);
+    decoration_properties_factory f(drp, formatting_repository_);
+    return f.make(cpp_modeline_name, a);
+}
+
+stitching_properties properties_factory::
+make_stitching_properties(const annotations::annotation& a) const {
+    stitching_properties_factory f(annotations_repository_);
+    return f.make(a);
+}
+
+properties
+properties_factory::make(const annotations::annotation& a) const {
+    properties r;
+    r.decoration_properties(make_decoration_properties(a));
+    r.stitching_properties(make_stitching_properties(a));
+    return r;
 }
 
 } } }

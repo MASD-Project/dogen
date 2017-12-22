@@ -25,26 +25,71 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include "dogen.modeling/types/meta_model/artefact.hpp"
+#include "dogen.annotations/types/archetype_location.hpp"
+#include "dogen.templating/types/stitch/line.hpp"
+#include "dogen.templating/types/stitch/text_template.hpp"
+#include "dogen.templating/types/stitch/resolver.hpp"
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
+/**
+ * @brief Format a text template into a file.
+ */
 class formatter final {
-public:
-    formatter() = default;
-    formatter(const formatter&) = default;
-    formatter(formatter&&) = default;
-    ~formatter() = default;
-    formatter& operator=(const formatter&) = default;
+private:
+    /**
+     * @brief Formats a line with just a text block.
+     */
+    void format_text_block_line(
+        const std::string& stream_name, const std::string& l,
+        std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with just an expression block.
+     */
+    void format_expression_block_line(const std::string& stream_name,
+        const std::string& l, std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with just a variable block.
+     */
+    void format_variable_block_line(const std::string& l,
+        const resolver& rs, std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with just a standard control block.
+     */
+    void format_standard_control_block_line(
+        const std::string& l, std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with mixed content.
+     *
+     * @pre Mixed content must be text blocks and expression blocks.
+     */
+    void format_mixed_content_line(const std::string& stream_name,
+        const line& l, std::ostream& s) const;
+
+    /**
+     * @brief Formats a line with a single block.
+     */
+    void format_line_with_single_block(const std::string& stream_name,
+        const line& l, const resolver& rs, std::ostream& s) const;
 
 public:
-    bool operator==(const formatter& rhs) const;
-    bool operator!=(const formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Archetype location for this formatter.
+     */
+    annotations::archetype_location archetype_location() const;
 
+    /**
+     * @brief Formats the template into an artefact.
+     */
+    modeling::meta_model::artefact format(const text_template& tt) const;
 };
 
 } } }

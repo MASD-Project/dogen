@@ -24,8 +24,39 @@ namespace dogen {
 namespace templating {
 namespace stitch {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::model_name() {
+    static std::string r("stitch");
+    return r;
+}
+
+std::string traits::stream_variable_name() {
+    static std::string r("stitch.stream_variable_name");
+    return r;
+}
+
+std::string traits::relative_output_directory() {
+    static std::string r("stitch.relative_output_directory");
+    return r;
+}
+
+std::string traits::inclusion_dependency() {
+    static std::string r("stitch.inclusion_dependency");
+    return r;
+}
+
+std::string traits::containing_namespaces() {
+    static std::string r("stitch.containing_namespaces");
+    return r;
+}
+
+std::string traits::wale_template() {
+    static std::string r("stitch.wale.template");
+    return r;
+}
+
+std::string traits::wale_kvp() {
+    static std::string r("stitch.wale.kvp");
+    return r;
 }
 
 } } }

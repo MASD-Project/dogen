@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <unordered_map>
 
 namespace dogen {
 namespace templating {
@@ -33,18 +33,13 @@ namespace stitch {
 
 class resolver final {
 public:
-    resolver() = default;
-    resolver(const resolver&) = default;
-    resolver(resolver&&) = default;
-    ~resolver() = default;
-    resolver& operator=(const resolver&) = default;
+    resolver(const std::unordered_map<std::string, std::string>& kvps);
 
 public:
-    bool operator==(const resolver& rhs) const;
-    bool operator!=(const resolver& rhs) const {
-        return !this->operator==(rhs);
-    }
+    std::string resolve(const std::string& k) const;
 
+private:
+    const std::unordered_map<std::string, std::string>& kvps_;
 };
 
 } } }

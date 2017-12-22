@@ -25,26 +25,48 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen.annotations/types/annotation.hpp"
+#include "dogen.annotations/types/type_repository.hpp"
+#include "dogen.formatting/types/repository.hpp"
+#include "dogen.formatting/types/decoration_properties.hpp"
+#include "dogen.templating/types/stitch/stitching_properties.hpp"
+#include "dogen.templating/types/stitch/properties.hpp"
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
-class properties_factory final {
+/**
+ * @brief Creates the settings bundle.
+ */
+class properties_factory {
 public:
-    properties_factory() = default;
-    properties_factory(const properties_factory&) = default;
-    properties_factory(properties_factory&&) = default;
-    ~properties_factory() = default;
-    properties_factory& operator=(const properties_factory&) = default;
+    properties_factory(const annotations::type_repository& atrp,
+        const dogen::formatting::repository& frp);
+
+private:
+    /**
+     * @brief Create the decoration properties.
+     */
+    boost::optional<formatting::decoration_properties>
+    make_decoration_properties(const annotations::annotation& a) const;
+
+    /**
+     * @brief Create the stitching settings.
+     */
+    stitching_properties
+    make_stitching_properties(const annotations::annotation& a) const;
 
 public:
-    bool operator==(const properties_factory& rhs) const;
-    bool operator!=(const properties_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Create the settings bundle.
+     */
+    properties make(const annotations::annotation& a) const;
 
+private:
+    const annotations::type_repository& annotations_repository_;
+    const dogen::formatting::repository& formatting_repository_;
 };
 
 } } }

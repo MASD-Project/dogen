@@ -25,26 +25,80 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <utility>
+#include "dogen.templating/types/stitch/line.hpp"
+#include "dogen.templating/types/stitch/block.hpp"
+#include "dogen.templating/types/stitch/text_template_body.hpp"
 
 namespace dogen {
 namespace templating {
 namespace stitch {
 
-class parser final {
-public:
-    parser() = default;
-    parser(const parser&) = default;
-    parser(parser&&) = default;
-    ~parser() = default;
-    parser& operator=(const parser&) = default;
+/**
+ * @brief Provides line number information on errors.
+ */
+typedef boost::error_info<struct tag_line_number, std::string> error_at_line;
+
+/**
+ * @brief Converts a string that respects the grammer of a text
+ * template into a object representation of the text template.
+ */
+class parser {
+private:
+    /**
+     * @brief Creates a block with the supplied properties.
+     */
+    block create_block(const block_types bt, const std::string& c,
+        const bool trim) const;
+
+    /**
+     * @brief Creates a block of type text.
+     */
+    block create_text_block(const std::string& c,
+        const bool trim = false) const;
+
+    /**
+     * @brief Creates an expression block.
+     */
+    block create_expression_block(const std::string& c,
+        const bool trim = false) const;
+
+    /**
+     * @brief Creates a standard control block.
+     */
+    block create_standard_control_block(const std::string& c,
+        const bool trim = false) const;
+
+private:
+    /**
+     * @brief Parses a line that contains an expression block.
+     */
+    line parse_expression_block(const std::string& input_line) const;
+
+    /**
+     * @brief Parses a line that contains an inline standard control
+     * block.
+     */
+    line parse_inline_standard_control_block(
+        const std::string& input_line) const;
+
+    /**
+     * @brief Parse a line with a directive.
+     */
+    std::pair<std::string, std::string>
+    parse_directive(const std::string& input_line) const;
+
+    /**
+     * @brief Parse a line with a variable.
+     */
+    line parse_variable(const std::string& input_line) const;
 
 public:
-    bool operator==(const parser& rhs) const;
-    bool operator!=(const parser& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Parse the string.
+     */
+    text_template_body parse(const std::string& s) const;
 };
 
 } } }
