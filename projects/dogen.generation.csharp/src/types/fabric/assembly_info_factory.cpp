@@ -28,7 +28,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quit.csharp.fabric.assembly_info_factory"));
+static logger lg(logger_factory("generation.csharp.fabric.assembly_info_factory"));
 
 const std::string simple_name("AssemblyInfo");
 const std::string module_name("Properties");

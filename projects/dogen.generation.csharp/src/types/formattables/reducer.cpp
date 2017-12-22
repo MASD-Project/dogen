@@ -25,7 +25,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quit.cpp.formatters.reducer"));
+static logger lg(logger_factory("generation.cpp.formatters.reducer"));
 
 }
 
