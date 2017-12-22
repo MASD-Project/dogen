@@ -132,10 +132,10 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#CPP is the C++ backend in the quilt kernel.
+            <dia:string>#CPP is the C++ backend in the default generation kernel.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.quilt.cpp
+#DOGEN yarn.model_modules=dogen.generation.cpp
 #DOGEN yarn.reference=dogen.options.dia
 #DOGEN yarn.reference=dogen.modeling.dia
 #DOGEN yarn.reference=dogen.formatting.dia

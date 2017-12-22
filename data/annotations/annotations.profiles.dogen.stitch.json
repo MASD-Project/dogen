@@ -64,7 +64,7 @@
       },
       "template_kind": "instance",
       "untyped_value": [
-        "dogen::quilt::cpp::formatters"
+        "dogen::generation::cpp::formatters"
       ]
     }
   ]

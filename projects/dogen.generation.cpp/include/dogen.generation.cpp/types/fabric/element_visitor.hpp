@@ -26,9 +26,9 @@
 #endif
 
 #include "dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
+#include "dogen.modeling/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/master_header_fwd.hpp"
-#include "dogen.modeling/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options_fwd.hpp"
