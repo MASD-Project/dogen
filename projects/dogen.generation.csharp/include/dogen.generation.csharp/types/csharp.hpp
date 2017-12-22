@@ -29,7 +29,7 @@ namespace dogen {
 namespace generation {
 
 /**
- * @brief CSharp is the c# model in the quilt kernel.
+ * @brief CSharp is the c# model in the default generation kernel.
  */
 namespace csharp {
 }
