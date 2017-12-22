@@ -1,0 +1,102 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::generation::csharp::formatters #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/fabric/visual_studio_project.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/visual_studio_project_formatter.hpp" #>
+<#+
+
+std::string visual_studio_project_formatter::static_id() {
+    return traits::visual_studio_project_archetype();
+}
+
+std::string visual_studio_project_formatter::id() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+visual_studio_project_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(csharp::traits::kernel(), csharp::traits::backend(),
+          traits::visual_studio_facet(),
+          visual_studio_project_formatter::static_id());
+    return r;
+}
+
+const modeling::meta_model::name&
+visual_studio_project_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
+    return r;
+}
+
+std::string visual_studio_project_formatter::family() const {
+    return csharp::traits::visual_studio_project_family();
+}
+
+boost::filesystem::path visual_studio_project_formatter::
+full_path(const formattables::locator& l, const modeling::meta_model::name& n) const {
+    return l.make_full_path_for_project(n, static_id());
+}
+
+std::list<std::string> visual_studio_project_formatter::
+inclusion_dependencies(const modeling::meta_model::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+modeling::meta_model::artefact visual_studio_project_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
+    const auto& vsp(a.as<fabric::visual_studio_project>(static_id(), e));
+
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{<#= vsp.project_guid() #>}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace><#= vsp.project_name() #></RootNamespace>
+    <AssemblyName><#= vsp.project_name() #></AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+<#+
+    for (const auto& f : ctx.model().project_items())
+#>
+    <Compile Include="<#= f #>" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
+<#+
+    return a.make_artefact();
+}
+#>

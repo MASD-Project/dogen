@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.quilt.csharp/types/initializer.hpp"
+#include "dogen.generation.csharp/types/initializer.hpp"
 #include "dogen.generation.cpp/types/initializer.hpp"
 #include "dogen.external.json/types/initializer.hpp"
 #include "dogen.external.dia/types/initializer.hpp"
@@ -30,7 +30,7 @@ namespace knitter {
 void initializer::initialize() {
     dogen::external::json::initializer::initialize();
     dogen::external::dia::initializer::initialize();
-    dogen::quilt::csharp::initializer::initialize();
+    dogen::generation::csharp::initializer::initialize();
     dogen::generation::cpp::initializer::initialize();
 }
 

@@ -39,7 +39,7 @@ target_link_libraries(${tests_name}
     external.dia
     external.json
     generation.cpp
-    quilt.csharp
+    generation.csharp
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${Boost_LIBRARIES})
