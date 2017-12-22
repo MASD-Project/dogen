@@ -29,7 +29,7 @@
 #include "dogen.modeling/types/meta_model/artefact.hpp"
 #include "dogen.formatting/types/repository.hpp"
 #include "dogen.modeling/types/meta_model/element_fwd.hpp"
-#include "dogen.stitch/types/instantiator.hpp"
+#include "dogen.templating/types/stitch/instantiator.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
@@ -53,7 +53,7 @@ public:
         const context& ctx, const modeling::meta_model::element& e) const;
 
 private:
-    const stitch::instantiator instantiator_;
+    const templating::stitch::instantiator instantiator_;
 };
 
 } } } }

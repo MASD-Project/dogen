@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.formatting/types/utility_formatter.hpp"
-#include "dogen.wale/types/workflow.hpp"
+#include "dogen.templating/types/wale/workflow.hpp"
 #include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/wale_formatter.hpp"
@@ -73,7 +73,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
             }
 
             uf.insert_end_line();
-            dogen::wale::workflow w;
+            templating::wale::workflow w;
             a.stream() << w.execute(fi, kvps);
             uf.insert_end_line();
         }

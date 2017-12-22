@@ -29,8 +29,7 @@ target_link_libraries(${name}
     annotations
     formatting
     modeling
-    wale
-    stitch
+    templating
     ${Boost_LIBRARIES})
 
 set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
