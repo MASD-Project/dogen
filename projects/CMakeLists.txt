@@ -196,7 +196,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.generation.csharp/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.knitter/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.tailor/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.darter/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.annotations/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.probing/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
@@ -218,7 +217,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.formatting)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.knitter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tailor)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.darter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.probing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
