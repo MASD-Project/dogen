@@ -1,0 +1,39 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::io #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/sequence_container_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.wale.template=cpp_helper_formatter_implementation.wale #>
+<#@ stitch.wale.kvp.helper.family=SequenceContainer #>
+<#@ stitch.wale.kvp.class.simple_name=sequence_container_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void sequence_container_helper::
+format(assistant& a, const formattables::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto qn(d.name_tree_qualified());
+        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << <#= a.streaming_for_type(containee, "*i") #>;
+    }
+    s << "] ";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>

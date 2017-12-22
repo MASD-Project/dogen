@@ -34,7 +34,7 @@ target_link_libraries(${name}
     external
     external.json
     external.dia
-    quilt.cpp
+    generation.cpp
     quilt.csharp
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

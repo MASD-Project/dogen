@@ -1,0 +1,54 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::serialization #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/cpp/scoped_namespace_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/registrar.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/serialization/registrar_header_formatter.hpp" #>
+<#@ stitch.wale.template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ stitch.wale.kvp.class.simple_name=registrar_header_formatter #>
+<#@ stitch.wale.kvp.archetype.simple_name=registrar_header #>
+<#@ stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ stitch.wale.kvp.yarn_element=fabric::registrar #>
+<#@ stitch.wale.kvp.meta_element=registrar #>
+<#@ stitch.wale.kvp.meta_name_factory=fabric::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> registrar_header_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const modeling::meta_model::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+modeling::meta_model::artefact registrar_header_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& rg(a.as<fabric::registrar>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(rg.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+template<typename Archive>
+void register_types(Archive& ar);
+
+<#+
+        } // snf
+#>
+
+<#+
+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

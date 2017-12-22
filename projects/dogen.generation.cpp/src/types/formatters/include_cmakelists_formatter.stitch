@@ -1,0 +1,93 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ stitch.inclusion_dependency="dogen.utility/log/logger.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/cmakelists.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/include_cmakelists_formatter.hpp" #>
+<#+
+
+std::string include_cmakelists_formatter::static_id() {
+    return traits::include_cmakelists_archetype();
+}
+
+std::string include_cmakelists_formatter::id() const {
+    return static_id();
+}
+
+annotations::archetype_location include_cmakelists_formatter::
+archetype_location() const {
+    static annotations::archetype_location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::cmake_facet(),
+          include_cmakelists_formatter::static_id());
+    return r;
+}
+
+const modeling::meta_model::name& include_cmakelists_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_cmakelists_name());
+    return r;
+}
+
+std::string include_cmakelists_formatter::family() const {
+    return cpp::traits::cmake_family();
+}
+
+inclusion_support_types include_cmakelists_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path include_cmakelists_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
+
+    using namespace dogen::utility::log;
+    using namespace dogen::generation::cpp::formatters;
+    static logger lg(logger_factory(include_cmakelists_formatter::static_id()));
+
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path include_cmakelists_formatter::full_path(
+    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    return l.make_full_path_for_include_cmakelists(n, static_id());
+}
+
+std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const modeling::meta_model::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+modeling::meta_model::artefact include_cmakelists_formatter::
+format(const context& ctx, const modeling::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& c(a.as<fabric::cmakelists>(e));
+
+    {
+        const auto cs(dogen::formatting::comment_styles::shell_style);
+        a.make_decoration_preamble(cs, e);
+#>
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
+
+install(
+    DIRECTORY <#= c.include_directory_path() #>/
+    DESTINATION <#= c.include_directory_path() #>/
+    COMPONENT headers
+    FILES_MATCHING PATTERN "*.<#= c.header_file_extension() #>")
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

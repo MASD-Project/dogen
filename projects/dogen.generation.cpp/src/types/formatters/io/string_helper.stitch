@@ -1,0 +1,27 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::io #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/string_helper.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.wale.template=cpp_helper_formatter_implementation.wale #>
+<#@ stitch.wale.kvp.helper.family=String #>
+<#@ stitch.wale.kvp.class.simple_name=string_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void string_helper::
+format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+#>
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+<#+
+}
+#>

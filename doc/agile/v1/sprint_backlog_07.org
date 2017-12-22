@@ -13,39 +13,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-21 Thu 23:04]
+#+CAPTION: Clock summary at [2017-12-22 Fri 12:34]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *73:29* |       |       | 100.0 |
+| *Total time*                                                                | *75:16* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 73:29   |       |       | 100.0 |
-| Active                                                                      |         | 73:29 |       | 100.0 |
+| Stories                                                                     | 75:16   |       |       | 100.0 |
+| Active                                                                      |         | 75:16 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.4 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:51 |   3.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:51 |   3.8 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.8 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  11.8 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  18.7 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.2 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  21.8 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  11.5 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  18.2 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.1 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  21.3 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.6 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   2.7 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.5 |
-| COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   0.9 |
-| COMPLETED Create a =probing= model                                          |         |       |  1:22 |   1.9 |
-| COMPLETED Create the =external= model                                       |         |       |  5:07 |   7.0 |
+| COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   0.8 |
+| COMPLETED Create a =probing= model                                          |         |       |  1:22 |   1.8 |
+| COMPLETED Create the =external= model                                       |         |       |  5:07 |   6.8 |
 | COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.5 |
-| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.7 |
-| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   4.7 |
+| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.6 |
+| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   4.6 |
 | COMPLETED Fix travis build                                                  |         |       |  0:03 |   0.1 |
 | COMPLETED Do a quick hack to fix name resolution                            |         |       |  1:20 |   1.8 |
-| COMPLETED Rename =formatters= to =formatting=                               |         |       |  1:45 |   2.4 |
-| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:58 |   2.7 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   4.0 |
+| COMPLETED Rename =formatters= to =formatting=                               |         |       |  1:45 |   2.3 |
+| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:58 |   2.6 |
+| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   3.9 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.4 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   0.9 |
+| STARTED Rename =quilt.cpp= to =generation.cpp=                              |         |       |  1:47 |   2.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -687,7 +688,8 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
-*** Rename =quilt.cpp= to =generation.cpp=                            :story:
+*** STARTED Rename =quilt.cpp= to =generation.cpp=                    :story:
+    CLOCK: [2017-12-22 Fri 10:33]--[2017-12-22 Fri 12:20] =>  1:47
 
 As per analysis story, we are moving away from the sewing terms.
 
@@ -695,11 +697,11 @@ As per analysis story, we are moving away from the sewing terms.
 
 As per analysis story, we are moving away from the sewing terms.
 
-*** Create the =templates= model                                      :story:
+*** Create the =templating= model                                     :story:
 
 As per analysis story, we are moving away from the sewing terms.
 
-Merge stitch and wale into a new model called =templates=.
+Merge stitch and wale into a new model called =templating=.
 
 *** Create the =generation= model                                     :story:
 
