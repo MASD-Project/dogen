@@ -20,19 +20,28 @@
  */
 #include <boost/test/unit_test.hpp>
 #include "dogen.utility/test/logging.hpp"
+#include "dogen.utility/io/unordered_set_io.hpp"
+#include "dogen.templating/types/wale/workflow.hpp"
 
 namespace {
 
-const std::string empty;
 const std::string test_module("templating");
-const std::string test_suite("fake_tests");
+const std::string test_suite("wale_workflow_tests");
 
 }
 
-BOOST_AUTO_TEST_SUITE(fake_tests)
+BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
+BOOST_AUTO_TEST_CASE(wale_templates_in_data_produce_expected_instantiation) {
+    SETUP_TEST_LOG_SOURCE("wale_templates_in_data_produce_expected_instantiation");
+
+    const auto kvps = std::unordered_map<std::string, std::string> {
+        {"class.simple_name", "some_class"}
+    };
+
+    dogen::templating::wale::workflow w;
+    w.execute("cpp_artefact_formatter_header.wale", kvps);
+    BOOST_TEST_CHECKPOINT("Instantiated template.");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

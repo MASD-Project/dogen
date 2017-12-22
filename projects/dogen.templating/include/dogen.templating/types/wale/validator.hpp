@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.templating/types/wale/text_template.hpp"
 
 namespace dogen {
 namespace templating {
@@ -33,18 +33,7 @@ namespace wale {
 
 class validator final {
 public:
-    validator() = default;
-    validator(const validator&) = default;
-    validator(validator&&) = default;
-    ~validator() = default;
-    validator& operator=(const validator&) = default;
-
-public:
-    bool operator==(const validator& rhs) const;
-    bool operator!=(const validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void validate(const text_template& tt) const;
 };
 
 } } }

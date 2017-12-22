@@ -18,14 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_set>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/io/unordered_set_io.hpp"
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.templating/types/wale/validation_error.hpp"
 #include "dogen.templating/types/wale/validator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("templating.wale.validator"));
+
+const std::string key_error("Expected key not supplied: ");
+
+}
 
 namespace dogen {
 namespace templating {
 namespace wale {
 
-bool validator::operator==(const validator& /*rhs*/) const {
-    return true;
+void validator::validate(const text_template& tt) const {
+    std::unordered_set<std::string> s;
+    for (const auto& kvp : tt.properties().supplied_kvps())
+        s.insert(kvp.first);
+
+    BOOST_LOG_SEV(lg, debug) << " Supplied keys: " << s;
+
+    const auto& e(tt.properties().expected_keys());
+    BOOST_LOG_SEV(lg, debug) << " Expected keys: " << e;
+
+    /*
+     * Ensure that all expected keys have been supplied. We may have
+     * received additional keys, but we don't care about those.
+     */
+    for (const auto ek : e) {
+        const auto i(s.find(ek));
+        if (i == s.end()) {
+            BOOST_LOG_SEV(lg, error) << key_error + ek;
+            BOOST_THROW_EXCEPTION(validation_error(key_error + ek));
+        }
+    }
 }
 
 } } }

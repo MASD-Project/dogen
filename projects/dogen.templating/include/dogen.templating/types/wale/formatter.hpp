@@ -25,26 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.templating/types/wale/text_template.hpp"
 
 namespace dogen {
 namespace templating {
 namespace wale {
 
 class formatter final {
-public:
-    formatter() = default;
-    formatter(const formatter&) = default;
-    formatter(formatter&&) = default;
-    ~formatter() = default;
-    formatter& operator=(const formatter&) = default;
+private:
+    std::string wrap_key(const std::string& key) const;
 
 public:
-    bool operator==(const formatter& rhs) const;
-    bool operator!=(const formatter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::string format(const text_template& tt) const;
 };
 
 } } }

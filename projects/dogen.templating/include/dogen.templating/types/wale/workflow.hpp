@@ -25,26 +25,40 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <unordered_set>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include "dogen.templating/types/wale/properties.hpp"
+#include "dogen.templating/types/wale/text_template.hpp"
 
 namespace dogen {
 namespace templating {
 namespace wale {
 
 class workflow final {
-public:
-    workflow() = default;
-    workflow(const workflow&) = default;
-    workflow(workflow&&) = default;
-    ~workflow() = default;
-    workflow& operator=(const workflow&) = default;
+private:
+    properties create_properties(const boost::filesystem::path& template_path,
+        const std::unordered_map<std::string, std::string>& kvps) const;
+
+    boost::filesystem::path
+    resolve_path(const boost::filesystem::path& p) const;
+
+    std::string
+    read_content(const boost::filesystem::path& template_path) const;
+
+    std::unordered_set<std::string>
+    get_expected_keys(const std::string& s) const;
+
+    std::string format(const text_template& tt) const;
+
+    void validate(const text_template& tt) const;
+
+    text_template create_text_template(const properties& props) const;
 
 public:
-    bool operator==(const workflow& rhs) const;
-    bool operator!=(const workflow& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::string execute(const boost::filesystem::path& template_path,
+        const std::unordered_map<std::string, std::string>& kvps) const;
 };
 
 } } }
