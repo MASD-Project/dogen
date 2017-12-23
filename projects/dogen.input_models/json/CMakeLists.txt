@@ -17,57 +17,60 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 set(frontend "json")
-set(models_dir "${projects_dir}/input_models/${frontend}")
+set(models_dir "${projects_dir}/dogen.input_models/${frontend}")
 
 if (DOGEN_KNITTER_EXECUTABLE)
     foreach(model ${models})
         set(target ${model})
-        set(target_path ${models_dir}/${target}.${frontend})
-        add_custom_target(knit_${target}_${frontend}
-            COMMENT "Knitting ${target} model" VERBATIM
+        set(target_ext ${target}.${frontend})
+        set(target_path ${models_dir}/${target_ext})
+        add_custom_target(knit_${target_ext}
+            COMMENT "Knitting ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${DOGEN_KNITTER_EXECUTABLE}
             --target ${target_path} ${common_arguments})
-        add_dependencies(knit_all knit_${target})
+        add_dependencies(knit_all_${frontend} knit_${target_ext})
 
         if (WITH_BENCHMARKS)
-            add_custom_target(benchmark_knit_${target}_${frontend}
-                COMMENT "Benchmarking knitting ${target} model" VERBATIM
+            add_custom_target(benchmark_knit_${target_ext}
+                COMMENT "Benchmarking knitting ${target_ext} model" VERBATIM
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                 COMMAND ${benchmark_command} ${benchmark_repeats}
                 ${benchmark_directory}/${benchmark_prefix}${target}.csv
                 ${DOGEN_KNITTER_EXECUTABLE} --target ${target_path}
                 ${common_arguments})
-            add_dependencies(benchmark_all benchmark_knit_${target})
+            add_dependencies(benchmark_${frontend}
+                benchmark_knit_${target_ext})
         endif()
     endforeach()
 
     set(target northwind)
-    add_custom_target(knit_${target}_${frontend}
-        COMMENT "Knitting Northwind model" VERBATIM
+    set(target_ext ${target}.${frontend})
+    set(target_path ${models_dir}/${target_ext})
+    add_custom_target(knit_${target_ext}
+        COMMENT "Knitting ${target_ext} model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.${frontend}
-        --output-dir ${projects_dir}/test_models
-        ${other_options}
-        ${ignore_regexes}
+        --target ${target_path} --output-dir ${projects_dir}/dogen.test_models
+        ${other_options} ${ignore_regexes}
         --ignore-files-matching-regex .*sql
         --ignore-files-matching-regex .*-odb.*)
-    add_dependencies(knit_all knit_${target})
+    add_dependencies(knit_all_${frontend} knit_${target_ext})
 
     if (WITH_BENCHMARKS)
         set(target northwind)
-        add_custom_target(benchmark_knit_${target}_${frontend}
-            COMMENT "Benchmarking knitting Northwind model" VERBATIM
+        set(target_ext ${target}.${frontend})
+        set(target_path ${models_dir}/${target_ext})
+        add_custom_target(benchmark_knit_${target}.${frontend}
+            COMMENT "Benchmarking knitting ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.${frontend}
-            --output-dir ${projects_dir}/test_models
-            ${other_options}
-            ${ignore_regexes}
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${target_ext}
+            --output-dir ${projects_dir}/dogen.test_models
+            ${other_options} ${ignore_regexes}
             --ignore-files-matching-regex .*sql
             --ignore-files-matching-regex .*-odb.*)
-        add_dependencies(benchmark_all benchmark_knit_${target})
+        add_dependencies(benchmark_${frontend} benchmark_knit_${target_ext})
     endif()
 endif()

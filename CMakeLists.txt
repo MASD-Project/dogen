@@ -26,7 +26,7 @@ enable_testing()
 # Setup CCache
 #
 find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
+if (CCACHE_PROGRAM)
     message(STATUS "Found CCache (${CCACHE_PROGRAM})...")
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
 
@@ -40,7 +40,7 @@ endif()
 project(dogen)
 
 # conan support
-if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
+if (EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
     message(STATUS "Setting up Conan support.")
     set(FOUND_CONAN "true")
     include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
@@ -92,29 +92,29 @@ find_package(Boost 1.61 REQUIRED COMPONENTS
     atomic
     )
 
-if(Boost_FOUND)
+if (Boost_FOUND)
     include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 endif()
 
 # iconv - required by libxml
 find_package(Iconv REQUIRED)
-if(ICONV_FOUND)
+if (ICONV_FOUND)
     include_directories(SYSTEM ${ICONV_INCLUDE_DIR})
     set(LIBS ${LIBS} ${ICONV_LIBRARIES})
 endif()
 
 # libxml
 find_package(LibXml2 REQUIRED)
-if(LIBXML2_FOUND)
+if (LIBXML2_FOUND)
     include_directories(SYSTEM ${LIBXML2_INCLUDE_DIR})
     set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
 endif()
 
 # odb
 find_package(Oracle)
-if(ORACLE_FOUND)
+if (ORACLE_FOUND)
     find_package(ODB COMPONENTS boost oracle pgsql)
-    if(ODB_FOUND)
+    if (ODB_FOUND)
         message(STATUS "Found odb...")
 
         include_directories(SYSTEM ${ORACLE_INCLUDE_DIR} ${ODB_INCLUDE_DIRS})
@@ -128,7 +128,7 @@ endif()
 
 # rapidjson
 find_package(RapidJSON)
-if(RAPIDJSON_FOUND)
+if (RAPIDJSON_FOUND)
     message(STATUS "Found RapidJSON...")
     include_directories(SYSTEM ${RAPIDJSON_INCLUDEDIR})
 else()
@@ -136,15 +136,15 @@ else()
 endif()
 
 # packaging type
-if(WITH_MINIMAL_PACKAGING)
+if (WITH_MINIMAL_PACKAGING)
     message(STATUS "Packaging just the main application")
 else()
     message(STATUS "Packaging everything main application")
 endif()
 
 # profiling
-if(WITH_PROFILING)
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+if (WITH_PROFILING)
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
         message(STATUS "Profiling enabled...")
     else()
         message(STATUS "Ignoring attempt to enable profiling without debug.")
@@ -155,8 +155,8 @@ else()
 endif()
 
 # coveralls
-if(WITH_COVERALLS)
-    if(WITH_PROFILING)
+if (WITH_COVERALLS)
+    if (WITH_PROFILING)
         message(STATUS "Coveralls enabled...")
     else()
         message(STATUS "Ignoring attempt to enable Coveralls without profiling.")
@@ -175,7 +175,7 @@ file(GLOB_RECURSE all_dia_test_models ABSOLUTE
 # setup git
 #
 find_program(GIT_COMMAND NAMES git)
-if(GIT_COMMAND)
+if (GIT_COMMAND)
     message(STATUS "Found git (${GIT_COMMAND})...")
 else()
     message(FATAL_ERROR "git not found.")
@@ -185,14 +185,14 @@ endif()
 # setup pdflatex
 #
 find_program(PDFLATEX_COMMAND NAMES pdflatex)
-if(PDFLATEX_COMMAND)
+if (PDFLATEX_COMMAND)
     message(STATUS "Found pdflatex (${PDFLATEX_COMMAND})...")
 else()
     message(STATUS "pdflatex not found, disabling latex documents.")
     set(WITH_LATEX "off")
 endif()
 
-if(WITH_LATEX)
+if (WITH_LATEX)
     message(STATUS "Building latex documents...")
 else()
     message(STATUS "NOT building latex documents...")
@@ -202,7 +202,7 @@ endif()
 # setup jq, for JSON validation.
 #
 find_program(JQ_COMMAND NAMES jq)
-if(JQ_COMMAND)
+if (JQ_COMMAND)
     message(STATUS "Found jq (${JQ_COMMAND})...")
     add_custom_target(validate_all_json)
     add_custom_target(indent_all_json)
@@ -371,49 +371,48 @@ set(DOGEN_LOG_LEVEL "debug")
 find_package(Dogen REQUIRED)
 
 #
-# aggregate targets
+# aggregate targets and their aliases
 #
 add_custom_target(run_all_tests)
-add_custom_target(run_windows_green_tests)
-add_custom_target(rebase)
-add_custom_target(diff)
-if (DOGEN_KNITTER_EXECUTABLE AND DOGEN_STITCHER_EXECUTABLE)
-    add_custom_target(knit_and_stitch)
-    add_dependencies(knit_and_stitch knit_all)
-    add_dependencies(knit_and_stitch stitch_all)
-endif()
-
-#
-# target aliases
-#
 add_custom_target(rat)
 add_dependencies(rat run_all_tests)
+add_custom_target(run_windows_green_tests)
+
+add_custom_target(rebase)
+add_custom_target(diff)
 
 if (DOGEN_KNITTER_EXECUTABLE)
-    add_custom_target(knit_all)
+    add_custom_target(knit_all_dia)
     add_custom_target(knit_all_json)
+    add_custom_target(ka)
+    add_dependencies(ka knit_all_dia)
 endif()
 
 if (DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(stitch_all)
-endif()
-
-if (DOGEN_TAILOR_EXECUTABLE)
-    add_custom_target(tailor_all)
+    add_custom_target(sa)
+    add_dependencies(sa stitch_all)
 endif()
 
 if (DOGEN_KNITTER_EXECUTABLE AND DOGEN_STITCHER_EXECUTABLE)
+    add_custom_target(knit_and_stitch)
+    add_dependencies(knit_and_stitch knit_all_dia)
+    add_dependencies(knit_and_stitch stitch_all)
     add_custom_target(kas)
-    add_custom_target(ka)
-    add_custom_target(sa)
+    add_dependencies(kas knit_and_stitch)
+endif()
+
+
+if (DOGEN_TAILOR_EXECUTABLE)
+    add_custom_target(tailor_all)
     add_custom_target(ta)
+    add_dependencies(ta tailor_all)
+endif()
+
+if (WITH_JSON_VALIDATION)
     add_custom_target(iaj)
     add_custom_target(vaj)
 
-    add_dependencies(kas knit_and_stitch)
-    add_dependencies(ka knit_all)
-    add_dependencies(sa stitch_all)
-    add_dependencies(ta tailor_all)
     add_dependencies(iaj indent_all_json)
     add_dependencies(vaj indent_all_json)
 endif()
@@ -438,6 +437,10 @@ if(WITH_BENCHMARKS)
     add_custom_target(benchmark_all)
     add_custom_target(ba)
     add_dependencies(ba benchmark_all)
+
+    add_custom_target(benchmark_dia)
+    add_custom_target(benchmark_json)
+    add_dependencies(benchmark_all benchmark_dia)
 endif()
 
 #
