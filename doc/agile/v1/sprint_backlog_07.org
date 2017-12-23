@@ -13,42 +13,43 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-22 Fri 21:49]
+#+CAPTION: Clock summary at [2017-12-23 Sat 11:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *78:59* |       |       | 100.0 |
+| *Total time*                                                                | *80:21* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 78:59   |       |       | 100.0 |
-| Active                                                                      |         | 78:59 |       | 100.0 |
+| Stories                                                                     | 80:21   |       |       | 100.0 |
+| Active                                                                      |         | 80:21 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:51 |   3.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:51 |   3.5 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.7 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  11.0 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  17.4 |
-| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   3.0 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  20.3 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  10.8 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  17.1 |
+| COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   2.9 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  20.0 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.5 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   2.5 |
-| COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.3 |
+| COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.2 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.5 |
 | COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   0.8 |
 | COMPLETED Create a =probing= model                                          |         |       |  1:22 |   1.7 |
-| COMPLETED Create the =external= model                                       |         |       |  5:07 |   6.5 |
+| COMPLETED Create the =external= model                                       |         |       |  5:07 |   6.4 |
 | COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.3 |
 | COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.4 |
-| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   4.4 |
+| COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   4.3 |
 | COMPLETED Fix travis build                                                  |         |       |  0:03 |   0.1 |
 | COMPLETED Do a quick hack to fix name resolution                            |         |       |  1:20 |   1.7 |
 | COMPLETED Rename =formatters= to =formatting=                               |         |       |  1:45 |   2.2 |
-| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:58 |   2.5 |
+| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:58 |   2.4 |
 | COMPLETED Rename =quilt.cpp= to =generation.cpp=                            |         |       |  2:04 |   2.6 |
-| COMPLETED Rename =quilt.csharp= to =generation.csharp=                      |         |       |  2:11 |   2.8 |
+| COMPLETED Rename =quilt.csharp= to =generation.csharp=                      |         |       |  2:11 |   2.7 |
 | COMPLETED Create the =templating= model                                     |         |       |  1:15 |   1.6 |
 | STARTED Finish setting up coveralls                                         |         |       |  2:57 |   3.7 |
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.3 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   0.8 |
+| STARTED Create the =generation= model                                       |         |       |  1:22 |   1.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -714,7 +715,8 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
-*** Create the =generation= model                                     :story:
+*** STARTED Create the =generation= model                             :story:
+    CLOCK: [2017-12-23 Sat 10:25]--[2017-12-23 Sat 11:47] =>  1:22
 
 Create a new model called =generation= and move all code-generation
 related class to it.
