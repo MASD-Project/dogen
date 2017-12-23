@@ -7221,15 +7221,6 @@ linking to work, as proved in [[https://travis-ci.org/DomainDrivenConsulting/dog
 - [[https://forums.developer.apple.com/thread/9233][DYLD_LIBRARY_PATH and make]]: according to this article, fallback
   should have fixed the problem but didn't.
 
-*** Reduce build times to avoid timeouts                              :story:
-
-At present we get random build time violations on travis due to builds
-taking longer than 50 mins. We need to think of ways to reduce the
-build time. Things to try:
-
-- remove all of the hashing etc for the types we don't need to hash.
-- get rid of the warnings for boost.
-
 *** Add scripts to sanity check packages                               :epic:
 
 Create a set of scripts that validate packages:
