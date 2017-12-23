@@ -25,15 +25,26 @@
 #pragma once
 #endif
 
-#include <ostream>
-#include <algorithm>
+#include <iosfwd>
 #include "dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
 namespace dogen {
 namespace generation {
 namespace helpers {
 
-class stream_writer final : public dogen::generation::helpers::artefact_writer_interface {
+/**
+ * @brief Writes the artefacts into a user-supplied stream,
+ * as text.
+ */
+class stream_writer : public artefact_writer_interface {
+public:
+    explicit stream_writer(std::ostream& s);
+
+public:
+    void write(const std::list<meta_model::artefact>& files) const override;
+
+private:
+    std::ostream& stream_;
 };
 
 } } }

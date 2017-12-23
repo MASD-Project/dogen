@@ -25,13 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen.generation/types/meta_model/artefact.hpp"
 
 namespace dogen {
 namespace generation {
 namespace helpers {
 
+/**
+ * @brief Class with the ability to write artefacts into some storage
+ * medium.
+ */
 class artefact_writer_interface {
+public:
+    virtual ~artefact_writer_interface() noexcept = 0;
+
+public:
+    /**
+     * @brief Write the artefacts.
+     */
+    virtual void
+    write(const std::list<meta_model::artefact>& artefacts) const = 0;
 };
 
 } } }

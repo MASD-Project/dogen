@@ -18,11 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
 #include "dogen.generation/types/helpers/stream_writer.hpp"
+
+namespace {
+
+const std::string outputter_name("Stream outputter");
+const std::string file_name("Filename: ");
+const std::string content("Content: ");
+
+}
 
 namespace dogen {
 namespace generation {
 namespace helpers {
 
+stream_writer::stream_writer(std::ostream& s) : stream_(s) {}
+
+void stream_writer::write(const std::list<meta_model::artefact>& files) const {
+    for (const auto& f : files) {
+        stream_ << file_name << f.path().generic_string() << std::endl
+                << content << std::endl << f.content() << std::endl;
+    }
+}
 
 } } }

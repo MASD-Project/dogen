@@ -24,4 +24,6 @@ namespace dogen {
 namespace generation {
 namespace helpers {
 
+artefact_writer_interface::~artefact_writer_interface() noexcept { }
+
 } } }
