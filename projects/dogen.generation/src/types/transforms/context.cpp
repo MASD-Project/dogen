@@ -24,8 +24,56 @@ namespace dogen {
 namespace generation {
 namespace transforms {
 
-bool context::operator==(const context& /*rhs*/) const {
-    return true;
+context::context(
+    const std::vector<boost::filesystem::path>& data_directories,
+    const annotations::archetype_location_repository& alrp,
+    const annotations::type_repository& atrp,
+    const dogen::formatting::repository& frp,
+    const probing::prober& prober,
+    const std::unordered_map<std::string,
+    meta_model::intra_backend_segment_properties>&
+    intra_backend_segment_properties,
+    const boost::shared_ptr<helpers::artefact_writer_interface> writer) :
+    archetype_location_repository_(alrp), type_repository_(atrp),
+    annotation_factory_(data_directories, archetype_location_repository_,
+        type_repository_, false/*options.compatibility_mode()*/),
+    formatting_repository_(frp), prober_(prober),
+    intra_backend_segment_properties_(intra_backend_segment_properties),
+    writer_(writer) {}
+
+context::~context() {
+    prober_.end_probing();
+}
+
+const annotations::archetype_location_repository&
+context::archetype_location_repository() const {
+    return archetype_location_repository_;
+}
+
+const annotations::type_repository& context::type_repository() const {
+    return type_repository_;
+}
+
+const annotations::annotation_factory& context::annotation_factory() const {
+    return annotation_factory_;
+}
+
+const dogen::formatting::repository& context::formatting_repository() const {
+    return formatting_repository_;
+}
+
+const probing::prober& context::prober() const {
+    return prober_;
+}
+
+const std::unordered_map<std::string,
+                         meta_model::intra_backend_segment_properties>&
+context::intra_backend_segment_properties() const {
+    return intra_backend_segment_properties_;
+}
+
+const helpers::artefact_writer_interface& context::artefact_writer() const {
+    return *writer_;
 }
 
 } } }

@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-23 Sat 23:27]
+#+CAPTION: Clock summary at [2017-12-23 Sat 23:49]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *83:11* |       |       | 100.0 |
+| *Total time*                                                                | *83:31* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 83:11   |       |       | 100.0 |
-| Active                                                                      |         | 83:11 |       | 100.0 |
+| Stories                                                                     | 83:31   |       |       | 100.0 |
+| Active                                                                      |         | 83:31 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.3 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  3:22 |   4.0 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.7 |
 | COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  10.4 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  16.5 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  16.4 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   2.8 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  19.3 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  19.2 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.5 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   2.4 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.2 |
 | COMPLETED Clean up tagged values                                            |         |       |  0:23 |   0.5 |
 | COMPLETED Simplify input model generation in cmake                          |         |       |  0:38 |   0.8 |
 | COMPLETED Create a =probing= model                                          |         |       |  1:22 |   1.6 |
-| COMPLETED Create the =external= model                                       |         |       |  5:07 |   6.2 |
+| COMPLETED Create the =external= model                                       |         |       |  5:07 |   6.1 |
 | COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.2 |
 | COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.3 |
 | COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   4.1 |
@@ -49,7 +49,7 @@
 | STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.3 |
 | STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
 | STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   0.8 |
-| STARTED Create the =generation= model                                       |         |       |  3:41 |   4.4 |
+| STARTED Create the =generation= model                                       |         |       |  4:01 |   4.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -717,6 +717,7 @@ legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
 *** STARTED Create the =generation= model                             :story:
+    CLOCK: [2017-12-23 Sat 23:28]--[2017-12-23 Sat 23:48] =>  0:20
     CLOCK: [2017-12-23 Sat 23:01]--[2017-12-23 Sat 23:27] =>  0:26
     CLOCK: [2017-12-23 Sat 15:28]--[2017-12-23 Sat 15:47] =>  0:19
     CLOCK: [2017-12-23 Sat 14:21]--[2017-12-23 Sat 15:27] =>  1:06
