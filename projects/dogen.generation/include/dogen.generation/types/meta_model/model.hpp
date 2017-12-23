@@ -33,6 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.modeling/types/meta_model/name.hpp"
+#include "dogen.modeling/hash/meta_model/name_hash.hpp"
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/types/meta_model/module_fwd.hpp"
 #include "dogen.modeling/types/meta_model/origin_types.hpp"
@@ -40,6 +41,7 @@
 #include "dogen.generation/types/meta_model/locator_properties.hpp"
 #include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
 #include "dogen.generation/types/meta_model/generatable_element.hpp"
+#include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.generation/serialization/meta_model/model_fwd_ser.hpp"
 #include "dogen.generation/types/meta_model/global_archetype_location_properties.hpp"
 
