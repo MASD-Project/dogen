@@ -77,7 +77,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/test/.*)
     set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/tests/.*)
     set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
-    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/colour.py)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/*.py)
 
 
     set(other_options --log-level ${DOGEN_LOG_LEVEL})
