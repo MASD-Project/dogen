@@ -38,7 +38,7 @@ set_target_properties(${name}
 
 if (DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(stitch_${name}
-        COMMENT "Stitching Quilt C++ model" VERBATIM
+        COMMENT "Stitching ${name} model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_STITCHER_EXECUTABLE}
         --target ${CMAKE_CURRENT_SOURCE_DIR}/
