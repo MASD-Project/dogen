@@ -18,14 +18,187 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_set>
+#include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/log/logger.hpp"
+#include "dogen.utility/io/list_io.hpp"
+#include "dogen.probing/types/scoped_prober.hpp"
+#include "dogen.modeling/types/meta_model/module.hpp"
+#include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/builtin.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+#include "dogen.modeling/types/meta_model/visitor.hpp"
+#include "dogen.modeling/types/meta_model/exception.hpp"
+#include "dogen.modeling/types/meta_model/primitive.hpp"
+#include "dogen.modeling/types/meta_model/enumeration.hpp"
+#include "dogen.modeling/types/meta_model/object_template.hpp"
+#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "dogen.modeling/io/meta_model/languages_io.hpp"
+#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "dogen.modeling/types/meta_model/elements_traversal.hpp"
+#include "dogen.generation/io/meta_model/model_io.hpp"
+#include "dogen.generation/types/meta_model/generatable_element.hpp"
+#include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/modeling_model_to_generation_model_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "generation.transforms.endomodel_to_model_transform");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string empty;
+const std::string duplicate_qualified_name("Duplicate qualified name: ");
+const std::string expected_one_output_language(
+    "Expected exactly one output language.");
+
+}
 
 namespace dogen {
 namespace generation {
 namespace transforms {
 
-bool modeling_model_to_generation_model_transform::operator==(const modeling_model_to_generation_model_transform& /*rhs*/) const {
-    return true;
+namespace {
+
+class model_populator {
+public:
+    explicit model_populator(meta_model::model& m) : result_(m) { }
+
+private:
+    void ensure_not_yet_processed(const std::string& id) {
+        const auto i(processed_ids_.find(id));
+        if (i != processed_ids_.end()) {
+            BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_qualified_name + id));
+        }
+    }
+
+    void add(boost::shared_ptr<modeling::meta_model::element> e) {
+        /*
+         * We need to ensure that there aren't any duplicate element
+         * id's across all of the different containers. However, there
+         * is an exception: element extensions share the same id as
+         * the original element, so they are not considered
+         * duplicates. All other elements must have unique element
+         * ids.
+         */
+        if (!e->is_element_extension()) {
+            const auto id(e->name().id());
+            ensure_not_yet_processed(id);
+            processed_ids_.insert(id);
+        }
+
+        meta_model::generatable_element ge;
+        ge.modeling_element(e);
+        result_.elements().push_back(ge);
+    }
+
+public:
+    void operator()(boost::shared_ptr<modeling::meta_model::element>) { }
+    void operator()(boost::shared_ptr<modeling::meta_model::module> m) {
+        result_.module_ids().insert(m->name().id());
+        add(m);
+    }
+    void operator()
+    (boost::shared_ptr<modeling::meta_model::object_template> ot) {
+        add(ot);
+    }
+    void operator()(boost::shared_ptr<modeling::meta_model::builtin> b) {
+        add(b);
+    }
+    void operator()(boost::shared_ptr<modeling::meta_model::enumeration> e) {
+        add(e);
+    }
+    void operator()(boost::shared_ptr<modeling::meta_model::primitive> p) {
+        add(p);
+    }
+    void operator()(boost::shared_ptr<modeling::meta_model::object> o) {
+        add(o);
+    }
+    void operator()(boost::shared_ptr<modeling::meta_model::exception> e) {
+        add(e);
+    }
+    void operator()(boost::shared_ptr<modeling::meta_model::visitor> v) {
+        add(v);
+    }
+
+public:
+    void add(
+        const std::list<boost::shared_ptr<modeling::meta_model::element>>& ie) {
+        for (const auto& e : ie)
+            add(e);
+    }
+
+public:
+    const meta_model::model& result() const { return result_; }
+
+private:
+    meta_model::model& result_;
+    std::unordered_set<std::string> processed_ids_;
+};
+
+}
+
+std::size_t modeling_model_to_generation_model_transform::
+compute_total_size(const modeling::meta_model::endomodel& em) {
+    std::size_t r;
+    r = em.modules().size();
+    r += em.object_templates().size();
+    r += em.builtins().size();
+    r += em.enumerations().size();
+    r += em.primitives().size();
+    r += em.objects().size();
+    r += em.exceptions().size();
+    r += em.visitors().size();
+    return r;
+}
+
+meta_model::model modeling_model_to_generation_model_transform::
+transform(const modeling::meta_model::endomodel& m) {
+    meta_model::model r;
+    r.name(m.name());
+    r.meta_name(modeling::helpers::meta_name_factory::make_model_name());
+
+    r.input_language(m.input_language());
+    if (m.output_languages().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << expected_one_output_language
+                                 << " Output languages: "
+                                 << m.output_languages();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(expected_one_output_language));
+    }
+    const auto ol(m.output_languages().front());
+    r.output_language(ol);
+
+    r.leaves(m.leaves());
+    r.references(m.references());
+    r.root_module(m.root_module());
+    r.orm_properties(m.orm_properties());
+
+    const auto size(compute_total_size(m));
+    r.elements().reserve(size);
+
+    model_populator mp(r);
+    modeling::meta_model::shared_elements_traversal(m, mp);
+
+    return r;
+}
+
+std::list<meta_model::model> modeling_model_to_generation_model_transform::
+transform(const context& ctx, const
+    std::list<modeling::meta_model::endomodel>& ms) {
+    probing::scoped_transform_prober stp(lg, "endomodel to model transform",
+        transform_id, ctx.prober(), ms);
+
+    std::list<meta_model::model> r;
+    for(const auto& m : ms)
+        r.push_back(transform(m));
+
+    stp.end_transform(r);
+    return r;
 }
 
 } } }

@@ -18,33 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_TRANSFORMATION_ERROR_HPP
+#define DOGEN_GENERATION_TYPES_TRANSFORMS_TRANSFORMATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.generation/types/transforms/context.hpp"
-
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace generation {
 namespace transforms {
 
-class modeling_model_to_generation_model_transform final {
-private:
-    static std::size_t
-    compute_total_size(const modeling::meta_model::endomodel& em);
-    static meta_model::model
-    transform(const modeling::meta_model::endomodel& em);
+/**
+ * @brief An error occurred whilst applying a transformation.
+ */
+class transformation_error : public virtual std::exception, public virtual boost::exception {
+public:
+    transformation_error() = default;
+    ~transformation_error() noexcept = default;
 
 public:
-    static std::list<meta_model::model> transform(const context& ctx,
-        const std::list<modeling::meta_model::endomodel>& ems);
+    explicit transformation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } }

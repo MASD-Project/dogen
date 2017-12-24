@@ -717,6 +717,8 @@ legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
 *** STARTED Create the =generation= model                             :story:
+    CLOCK: [2017-12-24 Sun 12:49]--[2017-12-24 Sun 12:53] =>  0:04
+    CLOCK: [2017-12-24 Sun 12:31]--[2017-12-24 Sun 12:48] =>  0:17
     CLOCK: [2017-12-23 Sat 23:28]--[2017-12-23 Sat 23:48] =>  0:20
     CLOCK: [2017-12-23 Sat 23:01]--[2017-12-23 Sat 23:27] =>  0:26
     CLOCK: [2017-12-23 Sat 15:28]--[2017-12-23 Sat 15:47] =>  0:19

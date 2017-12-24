@@ -43,6 +43,7 @@
 #include "dogen.generation/types/meta_model/archetype_properties.hpp"
 #include "dogen.generation/types/transforms/enablement_transform.hpp"
 #include "dogen.generation/types/transforms/formatting_transform.hpp"
+#include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/helpers/artefact_writer_interface.hpp"
 #include "dogen.generation/types/transforms/generability_transform.hpp"
 #include "dogen.generation/types/transforms/model_generation_chain.hpp"
