@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-12-23 Sat 23:49]
+#+CAPTION: Clock summary at [2018-01-01 Mon 09:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *83:31* |       |       | 100.0 |
+| *Total time*                                                                | *83:58* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 83:31   |       |       | 100.0 |
-| Active                                                                      |         | 83:31 |       | 100.0 |
+| Stories                                                                     | 83:58   |       |       | 100.0 |
+| Active                                                                      |         | 83:58 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  1:03 |   1.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:22 |   4.0 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  3:28 |   4.1 |
 | COMPLETED Remove remnants of upsilon                                        |         |       |  0:35 |   0.7 |
-| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  10.4 |
-| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  16.4 |
+| COMPLETED Create a well-defined set of stereotypes                          |         |       |  8:41 |  10.3 |
+| COMPLETED Fix rtags setup in laptop                                         |         |       | 13:43 |  16.3 |
 | COMPLETED Analysis on moving naming away from sewing terms                  |         |       |  2:21 |   2.8 |
-| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  19.2 |
+| COMPLETED Implement exomodel in terms of exoelements                        |         |       | 16:03 |  19.1 |
 | COMPLETED Fix JSON tests                                                    |         |       |  0:25 |   0.5 |
 | COMPLETED Remove all deprecated code after exomodels clean up               |         |       |  2:00 |   2.4 |
 | COMPLETED Add some kind of identity to exomodels                            |         |       |  0:12 |   0.2 |
@@ -36,20 +36,20 @@
 | COMPLETED Create a =probing= model                                          |         |       |  1:22 |   1.6 |
 | COMPLETED Create the =external= model                                       |         |       |  5:07 |   6.1 |
 | COMPLETED Rename =yarn.json= to =external.json=                             |         |       |  1:51 |   2.2 |
-| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.3 |
+| COMPLETED Rename =yarn.dia= to =external.dia=                               |         |       |  2:43 |   3.2 |
 | COMPLETED Make =dogen= part of model modules                                |         |       |  3:27 |   4.1 |
 | COMPLETED Fix travis build                                                  |         |       |  0:03 |   0.1 |
 | COMPLETED Do a quick hack to fix name resolution                            |         |       |  1:20 |   1.6 |
 | COMPLETED Rename =formatters= to =formatting=                               |         |       |  1:45 |   2.1 |
-| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:58 |   2.4 |
+| COMPLETED Rename =yarn= to =modeling=                                       |         |       |  1:58 |   2.3 |
 | COMPLETED Rename =quilt.cpp= to =generation.cpp=                            |         |       |  2:04 |   2.5 |
 | COMPLETED Rename =quilt.csharp= to =generation.csharp=                      |         |       |  2:11 |   2.6 |
 | COMPLETED Create the =templating= model                                     |         |       |  1:15 |   1.5 |
-| STARTED Finish setting up coveralls                                         |         |       |  2:57 |   3.5 |
-| STARTED Create a single binary for all of dogen                             |         |       |  1:03 |   1.3 |
-| STARTED Investigate current implementation of the origin transform          |         |       |  0:18 |   0.4 |
-| STARTED Remove exomodel and all deprecated classes                          |         |       |  0:40 |   0.8 |
-| STARTED Create the =generation= model                                       |         |       |  4:01 |   4.8 |
+| COMPLETED Create the =generation= model                                     |         |       |  4:22 |   5.2 |
+| POSTPONED Finish setting up coveralls                                       |         |       |  2:57 |   3.5 |
+| POSTPONED Create a single binary for all of dogen                           |         |       |  1:03 |   1.3 |
+| POSTPONED Investigate current implementation of the origin transform        |         |       |  0:18 |   0.4 |
+| POSTPONED Remove exomodel and all deprecated classes                        |         |       |  0:40 |   0.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -112,7 +112,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6333421782644719616][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2018-01-01 Mon 09:40]
+    CLOCK: [2018-01-01 Mon 09:34]--[2018-01-01 Mon 09:40] =>  0:06
     CLOCK: [2017-12-23 Sat 13:49]--[2017-12-23 Sat 14:20] =>  0:31
     CLOCK: [2017-12-21 Thu 22:59]--[2017-12-21 Thu 23:04] =>  0:05
     CLOCK: [2017-12-14 Thu 09:08]--[2017-12-14 Thu 09:12] =>  0:04
@@ -628,7 +630,42 @@ As per analysis story, we are moving away from the sewing terms.
 
 Merge stitch and wale into a new model called =templating=.
 
-*** STARTED Finish setting up coveralls                               :story:
+*** COMPLETED Create the =generation= model                           :story:
+    CLOSED: [2018-01-01 Mon 09:41]
+    CLOCK: [2017-12-24 Sun 12:49]--[2017-12-24 Sun 12:53] =>  0:04
+    CLOCK: [2017-12-24 Sun 12:31]--[2017-12-24 Sun 12:48] =>  0:17
+    CLOCK: [2017-12-23 Sat 23:28]--[2017-12-23 Sat 23:48] =>  0:20
+    CLOCK: [2017-12-23 Sat 23:01]--[2017-12-23 Sat 23:27] =>  0:26
+    CLOCK: [2017-12-23 Sat 15:28]--[2017-12-23 Sat 15:47] =>  0:19
+    CLOCK: [2017-12-23 Sat 14:21]--[2017-12-23 Sat 15:27] =>  1:06
+    CLOCK: [2017-12-23 Sat 11:48]--[2017-12-23 Sat 12:16] =>  0:28
+    CLOCK: [2017-12-23 Sat 10:25]--[2017-12-23 Sat 11:47] =>  1:22
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
+
+*** POSTPONED Finish setting up coveralls                             :story:
+    CLOSED: [2018-01-01 Mon 09:41]
     CLOCK: [2017-11-29 Wed 23:48]--[2017-11-30 Thu 00:21] =>  0:33
     CLOCK: [2017-11-29 Wed 22:45]--[2017-11-29 Wed 23:47] =>  1:02
     CLOCK: [2017-11-29 Wed 21:50]--[2017-11-29 Wed 22:20] =>  0:30
@@ -668,7 +705,8 @@ Notes:
 - problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
   broke Travis build]]
 
-*** STARTED Create a single binary for all of dogen                   :story:
+*** POSTPONED Create a single binary for all of dogen                 :story:
+    CLOSED: [2018-01-01 Mon 09:41]
     CLOCK: [2017-12-01 Fri 11:47]--[2017-12-01 Fri 12:50] =>  1:03
 
 As per analysis, we need to create a single dogen binary, like so:
@@ -690,7 +728,8 @@ program options:
   processing with boost program_options
 - [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
 
-*** STARTED Investigate current implementation of the origin transform :story:
+*** POSTPONED Investigate current implementation of the origin transform :story:
+    CLOSED: [2018-01-01 Mon 09:41]
     CLOCK: [2017-12-06 Wed 20:25]--[2017-12-06 Wed 20:43] =>  0:18
 
 Do we need to have the origin expansion? can we not just supply the
@@ -708,944 +747,14 @@ there are two different kinds of exomodels: proxyness is a fundamental
 property of an exomodel. If we do this we can then do the mapping in
 flight as we transform from exomodel to endomodel.
 
-*** STARTED Remove exomodel and all deprecated classes                :story:
+*** POSTPONED Remove exomodel and all deprecated classes              :story:
+    CLOSED: [2018-01-01 Mon 09:41]
     CLOCK: [2017-12-09 Sat 23:03]--[2017-12-09 Sat 23:20] =>  0:17
     CLOCK: [2017-12-09 Sat 22:39]--[2017-12-09 Sat 23:02] =>  0:23
 
 Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
-
-*** STARTED Create the =generation= model                             :story:
-    CLOCK: [2017-12-24 Sun 12:49]--[2017-12-24 Sun 12:53] =>  0:04
-    CLOCK: [2017-12-24 Sun 12:31]--[2017-12-24 Sun 12:48] =>  0:17
-    CLOCK: [2017-12-23 Sat 23:28]--[2017-12-23 Sat 23:48] =>  0:20
-    CLOCK: [2017-12-23 Sat 23:01]--[2017-12-23 Sat 23:27] =>  0:26
-    CLOCK: [2017-12-23 Sat 15:28]--[2017-12-23 Sat 15:47] =>  0:19
-    CLOCK: [2017-12-23 Sat 14:21]--[2017-12-23 Sat 15:27] =>  1:06
-    CLOCK: [2017-12-23 Sat 11:48]--[2017-12-23 Sat 12:16] =>  0:28
-    CLOCK: [2017-12-23 Sat 10:25]--[2017-12-23 Sat 11:47] =>  1:22
-
-Create a new model called =generation= and move all code-generation
-related class to it.
-
-We need to create classes for element properties and make model have a
-collection that is a pair of element and element properties. We need a
-good name for this pair:
-
-- extended element
-- augmented element
-- decorated element: though not using the decorator pattern; also, we
-  already have decoration properties so this is confusing.
-
-Alternatively we could just call it =element= and make it contain a
-modeling element.
-
-Approach:
-
-- create a new generation model, copying across all of the meta-model
-  and transform classes from yarn. Get the model to transform from
-  endomodel to generation model.
-- augment formattables with the new element properties. Supply this
-  data via the context or assistant.
-
-*** Reduce build times to avoid timeouts                              :story:
-
-Refactoring at the moment is painful because every time we change
-CMakeFiles we end up rebuilding everything. At 2K plus ninja targets,
-it is a long wait. In addition, we have been getting really close to
-the maximum travis time, resulting in lots of manual fiddling to get
-things to work. However, there is one very easy win: split test models
-from production code. This is more than just a quick hack, really:
-
-- we are compiling the test models with every build at present, but
-  since they are not production code, we only really need to validate
-  them whenever they change. That is - for a given OS, compiler, etc -
-  once a test model compiles, links and its tests run, nothing else
-  needs to be said until the test model changes.
-- test models change very infrequently; only when we do a breaking
-  change on Dogen and we rebase.
-- test models by definition do not reference production code (or at
-  least, /should/ not).
-
-As a first step we should try to isolate the two builds (production,
-test models) via variables so that we can create separate
-travis/appveyor builds for them. In the future we should make the
-separation even more explicit, by moving the folder away from the
-production code.
-
-*Previous Understanding*
-
-At present we get random build time violations on travis due to builds
-taking longer than 50 mins. We need to think of ways to reduce the
-build time. Things to try:
-
-- remove all of the hashing etc for the types we don't need to hash.
-- get rid of the warnings for boost.
-
-*** Create the =orchestration= model                                  :story:
-
-Create a model with the top-level transforms.
-
-*** Clean up UML profiles and meta-data                               :story:
-
-It makes more sense to create a dogen-wide UML profile rather than one
-just specific to yarn/modeling. This means renaming all stereotypes to
-dogen, i.e.: =yarn::object_template= becomes =dogen::object_template=
-and so forth. Modeling/yarn is just one of the possible
-implementations of the profile.
-
-Notes:
-
-- we should wait until we rename =quilt= too so we can clean up the
-  quilt meta-data at the same time.
-- rename references too since they belong to external, i.e.:
-
-: #DOGEN yarn.reference=annotations.dia
-
-  should be:
-
-: #DOGEN external.reference=annotations.dia
-
-- similarly with:
-
-: #DOGEN yarn.dia.comment=true
-
-  should instead be:
-
-: #DOGEN external.dia.comment=true
-
-  in fact, should we mention "tagged values" instead of "comment"?
-
-*** Default model modules from filename                               :story:
-
-It would be nice to be able to not have to supply model modules when
-its obvious from the filename.
-
-*** Rename the =transform= method to =apply=                          :story:
-
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
-
-*** Rewrite name resolution in terms of lists                         :story:
-
-Even since we did the external modules / model modules change we broke
-code generation; this is because we do not go up the model modules
-during name resolution. We did a quick hack to fix this but it needs
-to be done properly.
-
-Let's walk through a simple example:. Name cames in as:
-
-- model module: =probing=
-- simple: =prober=
-
-We are in model:
-
-- model module: =dogen.external=
-
-Expected behaviour is to try all combinations of model modules:
-
-- =dogen.external.probing=
-- =dogen.probing
-- =probing=
-
-This highlights a fundamental problem with resolution: we view the
-{external, model internal} modules as if they are separate entities
-but in reality, for the purposes of resolution, there is only one
-thing that is relevant: the module path. If it matches because of
-{external, model internal} modules, well that is not relevant to
-resolution. Other users of =name= do need to know this information
-(for example to  generate directories or file names) but not the
-resolver.
-
-Interestingly, because we are only looking for an id, it doesn't
-really matter how we get to it (in terms of the internal composition
-of the name), as long as it matches bitwise. This means we can look at
-the process slightly differently:
-
-- start off with the name as the user provided it. Extract all strings
-  from it to create a list, in order: external, model, internal,
-  simple. Try to resolve that. Call it user list.
-- then create a second list from model / context: external, model,
-  internal. Call it model list.
-- try concantenating model list and user list, pretty printing and
-  resolving it. If it fails, pop model list and concatenate again. Try
-  until model list is empty.
-
-Tasks:
-
-- first add a quick hack just to get the code generator working
-  again. For example, take the first model module of the model and try
-  resolving with that. Then worry about fixing this properly.
-- split the conversion of name into list from pretty printer. Printer
-  should merely take a string or list of strings and do its thing. We
-  need to find a good location for this method, since (for now) we
-  cannot place it in the right location which is the name class
-  itself.
-- change resolver to obtain the lists as per above. The to list
-  machinery can be used for this, though we need to handle model names
-  somehow. We can copy the =model_name_mode= logic from printer.
-- drop all of the logic in resolver at present and use the list logic
-  as per above. Do not check references, etc.
-
-*** Windows packages have a sanity folder                             :story:
-
-We should remove the ctest file and add the dia and json examples. We
-should also have pdf/html docs.
-
-*** Update =yarn.dia= traits to external                              :story:
-
-We renamed the model but did not update the traits.
-
-*** Add support for "ad-hoc" probing                                  :story:
-
-We have a set of inputs supplied to the prober called "initial
-input". This is not ideal. We need a way to generalise the "initial
-input" dumping. In effect, what we are really saying is that within a
-transform we may need to dump more state than just the initial
-inputs. We need a way to express this in the probing API.
-
-*** Clean up external element                                         :story:
-
-Need to add: can_be_primitive_underlier, in_global_module,
-can_be_enumeration_underlier, is_default_enumeration_type,
-is_associative_container
-
-*** Create a new exoelement chain                                     :story:
-
-We need to create a new exoelement chain that uses the new exoelements
-to bootstrap a endomodel.
-
-*** Consider having a single executable for dogen                     :story:
-
-We started off by creating lots of little executables: knitter,
-darter, tailor, stitcher. Each of these has its own project,
-command-line options etc. However, now that we are concentrating all
-of the domain knowledge in yarn, it seems less useful to have so many
-executables that are simply calling yarn transforms. Instead, it may
-make more sense to use an approach similar to git and have a
-"sub-command":
-
-: dogen knit
-: dogen tailor
-
-And so forth. Of course, we could also take this opportunity and clean
-up these names to making them more meaningful to end users. Perhaps:
-
-: dogen codegen
-: dogen transform
-
-Each of these sub-commands or modes would have their own set of
-associated options. We need to figure out how this is done using boost
-program options. We also need to spend a bit of time working out the
-sub-commands to make sure they make sense across the board.
-
-In terms of names, we can't really call the project "dogen". We should
-call it something allusive to the command line, such as cli. However,
-the final binary should be called dogen or perhaps, =dogen.cli=. This
-fits in with other binaries such as =dogen.web=, =dogen.http=,
-=dogen.gui= etc.
-
-*** Add stereotypes support at the attribute level                    :story:
-
-At present dia does not have stereotypes in attributes. This means
-things like ORM primary keys etc are being supplied as tagged values;
-in reality, its more natural (from a UML perspective) to supply them
-as stereotypes. We could add some meta-data that creates a tagged
-value for stereotypes.
-
-*** Exclude profiles from stereotypes processing                      :story:
-
-At present we are manually excluding profiles from the stereotypes
-transform. This was just a quick hack to get us going. We need to
-replace this with a call to annotations to get a list of profile names
-and exclude those.
-
-We should also rename =is_stereotype_handled_externally= to something
-more like "is profile" or "matches profile name".
-
-Actually the right thing may even be to just remove all of the profile
-stereotypes during annotations processing. However, we should wait
-until we complete the exomodel work since that will remove scribble
-groups, etc. Its all in the annotations transform.
-
-*** Tailor does not output static stereotypes                         :story:
-
-At present we only output static stereotypes. However, there is no
-point on fixing this until we move to the new JSON format.
-
-*** Generate file paths as a transform                                :story:
-
-See the comments in the previous sprint.
-
-*** Split registrar into two classes                                  :story:
-
-At present we do not distinguish between the setting up of the
-registrar and the usage of the registrar. Up to know this is not a
-major issue, although its a bit of a smell that we have to call
-validate at some arbitrary point.
-
-However, with the new parts/builder setup, this becomes even more of a
-problem because we only want to build the parts once we have
-registered all of the formatters. The right thing would have been to
-have:
-
-- a registrar builder, used during registration;
-- a build step which returns the (validated) registrar. Once build is
-  called, we should throw if anyone attempts to add more formatters.
-
-This makes it hard to misuse the API.
-
-Notes:
-
-- how does this affect plugins? will it still be possible to register
-  formatters from a shared library?
-
-Tasks:
-
-- create a registrar builder with most of the existing registrar
-  interface. On build it computes the parts, generates the repository,
-  etc and then supplies that to the registrar. The registrar itself is
-  no longer static, just a member of the workflow.
-
-*** Add a file format parameter to probing                            :story:
-
-At present we are dumping all models in probing as JSON. It would be
-nice to be able to dump them as boost serialisation so we can plug
-them into tests or to reproduce some problem. It would be even nicer
-if we could plug that data back in to dogen but its not obvious how
-that would work; we need to have some kind of concept of "stages", and
-then supply the inputs and the stage so that dogen could continue from
-there.
-
-*** Update backend shape to match yarn                                :story:
-
-In an ideal world, the backends should be made up of two components:
-
-- *meta-model*: a set of types that augment yarn with backend
-  specific elements. This is what we call fabric at present.
-- *transforms*: of these we have two kinds:
-  - the model-to-model transforms that involve either yarn meta-model
-    elements or backened specific meta-model elements. These live in
-    fabric at present.
-   - the model-to-text transforms that convert a meta-model element
-     (yarn or backend specific) into an artefact. These we call
-     formatters at present.
-
-The ultimate destination for the backend is then to have a shape that
-reflects this:
-
-- rename formatters to transforms
-- move artefact formatter into yarn; with this it means we can also
-  move all of the top-level workflow formatting logic into
-  yarn. However, before we can do this we must make all of the backend
-  specific code in the formatter interface go away.
-- note that at this point we no longer need to know what formatters
-  belong to what backend other than perhaps to figure out if the
-  backend is enabled. This means yarn can now have the registrars for
-  formatters and organise them by backend. Which means the
-  model-to-text chain will own all of these. However, we still have
-  the managed directories to worry about; somehow, someone has to be
-  able to compute the managed directories per kernel. This could be
-  done at yarn level if the locator is clever enough.
-
-Of course, before we can contemplate this change, we must first get
-rid of formattables altogether.
-
-We must also somehow model canonical formatters in yarn. Take this
-into account when we do:
-
-:        /*
-:         * We must have one canonical formatter per type per facet.
-:         * FIXME: this check is broken at the moment because this is
-:         * only applicable to yarn types, not fabric types. It is also
-:         * not applicable to forward declarations. We need some
-:         * additional information from yarn to be able to figure out
-:         * which types must have a canonical archetype.
-:         */
-
-*** Improvements to dia model                                         :story:
-
-Assorted notes on cleaning-up the dia model:
-
-- create a base class such as =value= and make all values inherit from
-  it instead of using boost variant.
-- according to DTD, a composite can be made up of either composites or
-  attributes. We incorrectly modeled it as having just one inner
-  composite.
-- perhaps this is better thought of slightly differently: an attribute
-  has child nodes. The child nodes can either be leaf nodes, in which
-  case they are values, or non-leaf nodes in which case they are
-  composite nodes. Composite nodes themselves can have child nodes. If
-  they are leaf nodes they are values; if they are non-leaf nodes they
-  are either attributes or composites.
-- note that we do not need to use shared pointers in composite: we
-  could simply have an attribute by value. However, we still need to
-  handle the case where the children are either composite or
-  attributes. So if we somehow could get composite and attribute to
-  have a common base class, we could have a container of that base
-  class in composite. For this we would need a shared pointer.
-- consider adding the postfix =node= to class names and make it a real
-  tree, as per dia's implementation.
-- covert all vectors to lists since we do not know their sizes on
-  construction.
-- one thing to bear in mind is that if we fix the tree structure, we
-  will break the XML parsing code in hydrator, which took quite a
-  while to get right (and has hacks such as "inner composite").
-- its not obvious why we need to treat =dia::string= in a different
-  way from all other attribute values (except for =dia::font=).
-
-*** Consider bucketing elements by meta-type in model                 :story:
-
-At the moment we have a flat container of elements in the main
-model. However, it seems like one of its use cases will be to bucket
-the elements by meta-type before processing: formatters will want to
-locate all formatters for a given meta-type and apply them all. At
-present we are asking for the formatters for meta-name
-repeatedly. This makes no sense, we should just ask for them once and
-apply all formatters in one go.
-
-For this we could simply group elements by meta-name in the model
-itself and then use that container at formatting time. However, there
-may be cases where looping through the whole model is more convenient
-(during transforms) so this is not without its downsides.
-
-Alternatively we could consider just bucketing in the formatters'
-workflow itself.
-
-This work will only be useful once we get rid of the formattables
-model.
-
-*** Properties vs configuration                                       :story:
-
-Originally we had defined properties to mean things which are computed
-and configuration to mean things which are read directly from the
-meta-data and not touched afterwards. This made life easier in
-determining how each class was used. However, this was not strictly
-enforced and now there are many cases where properties are used when
-configuration should have been (and probably vice-versa). In addition,
-we have cases where we should have used configuration but used nothing
-(type parameters springs to mind). We need to do a clean up of the
-meta-model.
-
-*** Create a text model post-processing chain                         :story:
-
-The following transforms can be done after generation of the text model:
-
-- clang format
-- protected regions: read the file on disk, replace contents of the
-  protected region with the data read from disk.
-
-These can be contained in a post-processing chain for the text model.
-
-Note that we need artefacts to have an associated language so that we
-can use the correct clang format configuration. If a language is not
-supported by clang format (e.g. c#) we should just skip the files. The
-text model could group files by language.
-
-*** Postfix and directory fields in annotations look weird            :story:
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates?
-
-*** Rename options to transformation request                          :story:
-
-These are not really "options"; it is a request made into yarn to
-code-generate a model. We haven't yet got a proper name but it has to
-somehow involve the word "request". The best way is to visualise this
-as part of some API where may such requests can be made (and handled
-concurrently).
-
-This also means we need to split out the request from the context. We
-should have an initialisation phase where we construct the context and
-then we should be able to reuse the pipeline for many requests. This
-also means that the right place to put the transform metrics is in the
-request - not the context - given that these are request specific.
-
-The best way to go about it may be to have two contexts:
-
-- transformation context: const; loaded at start-up.
-- request context: request specific context, including probing and the
-  request itself.
-
-Then:
-
-- clients are responsible for setting up the transformation
-  context. This ensures we do it only once.
-- clients are also responsible for setting up the request context, but
-  they then do it for each request.
-
-Note also that a request should support multiple target models.
-
-*** Detect unqualified stereotypes                                    :story:
-
-If a user enters say =enumeration= instead of =yarn::enumeration= we
-are providing an unhelpful error message:
-
-: Error: Attribute type is empty: structured
-
-This is because we validate the class as if it was an object and then
-figure out that there are no types against the attributes. One easy
-way to make things more useful is to detect unqualified stereotypes
-and error straight away with a more useful message such as "did you
-mean yarn::xyz?".
-
-We could also do the same if the stereotype is blank ("did you mean
-enumeration?").
-
-*** Tidy-up fabric                                                    :story:
-
-Now we have dynamic transforms, we don't really need all the classlets
-we've created in fabric. We can get away with probably just the
-dynamic transform, calling all the factories.
-
-*** Clean-up archetype locations modeling                             :story:
-
-We now have a large number of containers with different aspects of
-archetype locations data. We need to look through all of the usages of
-archetype locations and see if we can make the data structures a bit
-more sensible. For example, we should use archetype location id's
-where possible and only use the full type where required.
-
-Notes:
-
-- formatters could return id's?
-- add an ID to archetype location; create a builder like name builder
-  and populate ID as part of the build process.
-
-*** Use element ids for associations                                  :story:
-
-There doesn't seem a need for having entire names for associations;
-these are used to find information by ID anyway. We should try to
-convert them to element id's instead and see what breaks.
-
-- transparent, opaque associations
-- base, derived visitor
-- contained by
-
-We can't do this for:
-
-- visitor: we use the name in the formatter.
-
-Actually there is a reason for this: we use the names to build the
-file paths and the includes. We need to add some comments.
-
-*** Add facet validation against language standard                    :story:
-
-With the move of enablement to yarn, we can no longer validate facets
-against the language standard. For example, we should not allow
-hashing on C++ 98. The code was as follows:
-
-#+begin_src c++
-void enablement_expander::validate_enabled_facets(
-    const global_enablement_configurations_type& gcs,
-    const formattables::cpp_standards cs) const {
-    BOOST_LOG_SEV(lg, debug) << "Validating enabled facets.";
-
-    if (cs == formattables::cpp_standards::cpp_98) {
-        using formatters::hash::traits;
-        const auto arch(traits::class_header_archetype());
-
-        const auto i(gcs.find(arch));
-        if (i == gcs.end()) {
-            BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
-            BOOST_THROW_EXCEPTION(expansion_error(archetype_not_found + arch));
-        }
-
-        const auto& gc(i->second);
-        if (gc.facet_enabled()) {
-            const auto fctn(gc.facet_name());
-            BOOST_LOG_SEV(lg, error) << incompatible_facet << fctn;
-            BOOST_THROW_EXCEPTION(expansion_error(incompatible_facet + fctn));
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Validated enabled facets.";
-}
-#+end_src
-
-It was called from the main transform method in enablement transform,
-prior to uptading facet enablement.
-
-*** Tidy-up assistant API                                             :story:
-
-Now we have element in assistant we can start removing the need for
-element in the calls, making the templates simpler.
-
-*** Facets incompatible with standards                                :story:
-
-Some facets may not be supported for all settings of a language. For
-example the hash facet is not compatible with C++ 98. We need to have
-some kind of facet/formatter level validation for this.
-
-*** Handcrafted templates                                             :story:
-
-At present we generate constructors, swap, etc. for handcrafted
-classes. Ideally users should be able to create a profile that enables
-the things they want to see on a template and then associate it with a
-stereotype. For this we will need aspect support.
-
-*** Drop the original extension in tailor                             :story:
-
-Filenames in tailor look weird:
-
-: dart.dia.json
-
-it should just be:
-
-: dart.json
-
-*** Move dependencies into yarn                                       :story:
-
-Actually the dependencies will be generated at the kernel level
-because 99% of the code is kernel specific. However, we need to make
-it an external transform.
-
-Tasks:
-
-- create the locator in the C++ external transform
-- create a dependencies transform that uses the existing include
-  generation code.
-
-*Previous understanding*
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
-*** Consider folding quilt into yarn                                  :story:
-
-In the far distant future, when we finally finish merging all the
-quilt specific stuff into yarn (e.g. formattables), it actually makes
-sense to deprecate quilt as a concept. Yarn then becomes the central
-point, and frontends and backends are just implementations that hook
-into it. Thus we then have simply =yarn.cpp= and =yarn.csharp=.
-
-However, there is still a concept that needs to be captured: the
-kernel. That is, a set of backends that work together to provide some
-kind of "service". In quilt's case the basic type definitions. We
-could potentially want to implement other backends that are totally
-distinct from quilt. However, we still do not have a concrete use case
-for this. Thus it may make more sense to just fold now and worry about
-these more flexible use cases when they arrive. We can always rename.
-
-*** Code-generate annotations type templates                          :story:
-
-Tasks:
-
-- create a meta-model element for type templates. Add container in
-  exomodel for it. Name: =yarn::annotation_type_template=?
-- add frontend support for the type template element.
-- add a transform that reads all the meta-data from type templates and
-  populates the yarn element of the type template. Add this transform
-  to the exomodel transforms, at the end of the chain (e.g. after
-  annotations).
-- create a meta-model element for the initialiser of type templates,
-  made up of all type templates in the model. Add a container of
-  initialiser in endomodel.
-- add a transform that moves all of the type templates into the
-  initialiser. This can be done as part of the exomodel to endomodel
-  transform. Or maybe we should have a stand alone transform, and the
-  final transform simply ignores type templates.
-- create a registrar in annotations that registers type templates.
-- create a stitch template for the initialiser, taking the registrar
-  as an argument, and registering all type templates.
-- add all type templates to all models, and generate the type
-  initialisers.
-- hook the type initialisers to the initialisers.
-- change type group repository to initialise from the registrar.
-- delete all type groups JSON and hydrator and related code.
-
-Merged stories:
-
-*Initialisation of meta-data*
-
-At present we are reading meta-data files for every transformation. In
-reality, it makes no sense to allow the meta-data files to change
-dynamically, because the consumers of the meta-data are hard-coded. So
-it would make more sense to treat them as a initialisation step. This
-will make even more sense when we code-generate the types instead of
-using JSON. Then we can hook up the generated code to the
-initialisers.
-
-*** Cannot make qualified references to concepts                      :story:
-
-At present it is not possible to consume concepts defined in a
-referenced model, nor is it possible to refer to a concept in a
-different module from the module in which the element is in, e.g.: say
-concept C0 is declared in module M0; all types of M0 can have C0 as
-stereotype and that will resolve. However any types on any other
-module cannot see the concept.
-
-One suggestion is to allow scoped names in stereotypes:
-=module::Concept=.
-
-The heuristic for concept resolution is then:
-
-- external modules are never part of the scoped name;
-- on a scoped concept with M names, we first start by assuming that
-  the first name is the model module and M-2 is/are the internal
-  module(s). We try this for all names in M-2, e.g. first two names
-  are model modules and M-3 names are internal modules and so forth.
-
-*** Add support for object templates that work cross-model            :story:
-
-We've implemented support for cross-model inheritance in sprint 87 but
-we did not cover object templates. Most of the approach is the same,
-but unfortunately we can't just reuse it.
-
-Tasks:
-
-- we need a refines field which is a text collection.
-- we need refinement settings, factory etc.
-- update parsing expander.
-
-*** Move formatting styles into yarn                                  :story:
-
-We need to support the formatting styles at the meta-model level.
-
-*** Throw on unsupported stereotypes                                  :story:
-
-In some cases we may support a feature in one language but not on
-others like say ORM at present. If a user requests ORM in a C# model,
-we should throw.
-
-If we are in compatibility mode, however, we should not throw.
-
-Note that we are already throwing if a stereotype is totally
-unknown. The problem here is that the stereotype is known, but not
-supported for all kernels. This is a bit trickier.
-
-We also need to check the existing code in stereotypes transform to
-stop trowing if compatibility flag is on.
-
-*** Change order of includes according to Lakos major design rule     :story:
-
-Lakos says:
-
-#+begin_quote
-The .c file of every component should include its own .h file as the
-first substantive line of code.
-#+end_quote
-
-We decided to include it as the last line. However, Lakos approach has
-the side-effect of automatically detecting headers that are missing
-includes. We used to do this manually by generating =.cpp= files that
-just included the header but then had to remove it because it was
-slowing down compilation. With Lakos approach we get the best of both
-worlds.
-
-We need to also update the generated code to follow this
-approach. This will require some thinking.
-
-*** Move element segmentation into yarn                               :story:
-
-We've added the notion that an element can be composed of other
-elements in quilt, in order to handle forward declarations. However,
-with a little bit of effort we can generalise it into yarn. It would
-be useful for other things such as inner classes. We don't need to
-actually implement inner classes right now but we should make sure the
-moving of this feature into yarn is compatible with it.
-
-Notes:
-
-- seems like we have two use cases: a) we need all elements, master
-  and extensions and we don't really care about which is which. b) we
-  only want masters. However, we must be able to access the same
-  element properties from either the master or the extension. Having
-  said all that, it seems we don't really need all of the element
-  properties for both - forward declarations probably only need:
-  decoration and artefact properties.
-- we don't seem to use the map in formattables model anywhere, other
-  than to find master/extension elements.
-- Yarn model could have two simple list containers (masters and
-  all). Or maybe we don't even need this to start off with, we can
-  just iterate and skip extensions where required.
-- so in conclusion, we to move decoration, enablement and dependencies
-  into yarn (basically decoration and artefact properties) first and
-  then see where segmentation ends.
-
-Tasks:
-
-- add a concept for element extensions: =Extensible=. Contains a list
-  of element pointers.
-- populate it with the extensions.
-- change enablement to merge all element properties of extensible
-  elements.
-
-*** Create a yarn locator                                             :story:
-
-We need to move all functionality which is not kernel specific into
-yarn for the locator. This will exist in the helpers namespace. We
-then need to implement the C++ locator as a composite of yarn
-locator. It will live in fabric.
-
-*Other Notes*
-
-At present we have multiple calls in locator, which are a bit
-ad-hoc. We could potentially create a pattern. Say for C++, we have
-the following parameters:
-
-- relative or full path
-- include or implementation: this is simultaneously used to determine
-  the placement (below) and the extension.
-- meta-model element:
-- "placement": top-level project directory, source directory or
-  "natural" location inside of facet.
-- archetype location: used to determine the facet and archetype
-  postfixes.
-
-E.g.:
-
-: make_full_path_for_enumeration_implementation
-
-Interestingly, the "placement" is a function of the archetype location
-(a given artefact has a fixed placement). So a naive approach to this
-seems to imply one could create a data driven locator, that works for
-all languages if supplied suitable configuration data. To generalise:
-
-- project directory is common to all languages.
-- source or include directories become "project
-  sub-directories". There is a mapping between the artefact location
-  and a project sub-directory.
-- there is a mapping between the artefact location and the facet and
-  artefact postfixes.
-- extensions are a slight complication: a) we want to allow users to
-  override header/implementation extensions, but to do it so for the
-  entire project (except maybe for ODB files). However, what yarn's
-  locator needs is a mapping of artefact location to  extension. It
-  would be a tad cumbersome to have to specify extensions one artefact
-  location at a time. So someone has to read a kernel level
-  configuration parameter with the artefact extensions and expand it
-  to the required mappings. Whilst dealing with this we also have the
-  issue of elements which have extension in their names such as visual
-  studio projects and solutions. The correct solution is to implement
-  these using element extensions, and to remove the extension from the
-  element name.
-- each kernel can supply its configuration to yarn's locator via the
-  kernel interface. This is fairly static so it can be supplied early
-  on during initialisation.
-- there is still something not quite right. We are performing a
-  mapping between some logical space (the modeling space) and the
-  physical space (paths in the filesystem). Some modeling elements
-  such as the various CMakeLists.txt do not have enough information at
-  the logical level to tell us about their location; at present the
-  formatter itself gives us this hint ("include cmakelists" or "source
-  cmakelists"?). It would be annoying to have to split these into
-  multiple archetypes just so we can have a function between the
-  archetype location and the physical space. Although, if this is the
-  only case of a modeling element not mapping uniquely, perhaps we
-  should do exactly this.
-- However, we still have inclusion paths to worry about. As we done
-  with the source/include directories, we need to somehow create a
-  concept of inclusion path which is not language specific; "relative
-  path" and "requires relative path" perhaps? These could be a
-  function of archetype location.
-
-*** Add a modeline to stitch                                          :story:
-
-It would be nice to be able to supply the mode and other emacs
-properties to stitch templates. For that we just need a special KVP
-used at the top that contains the modeline:
-
-: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
-
-Stitch can read this KVP and ignore it.
-
-*** Create "opaque" kernel and element properties                     :story:
-
-As part of the element container, we can have a set of base classes
-that are empty: =opaque_element_properties=. This class is then
-specialised in each kernel with the properties that are specific to
-it. We probably need an equivalent for:
-
-- kernel level properties
-- element level properties
-- attribute level properties.
-
-We then have to do a lot of casting in the helpers.
-
-Once we got these opaque properties, we can then create "kernel
-specific expanders" which are passed in to the yarn workflow. These
-populate the opaque properties.
-
-*** Move helpers into yarn                                            :story:
-
-Looking at helpers, it is clear that they are common to all
-languages. We just need to rename the terminology slightly -
-particularly wrt to streaming properties - and then move this code
-across into yarn.
-
-*** Move facet properties into yarn                                   :story:
-
-We should be able to handle these generically in yarn.
-
-*** Move ORM camel-case and databases into yarn                       :story:
-
-We should handle this property at the ORM level, rather than at the
-ODB level.
-
-Similarly, we should move the ODB databases into yarn and make that a
-ORM-level concept.
-
-*** Distinguish between meta-types that require canonical archetypes  :story:
-
-At present it is not possible to know which meta-types require
-canonical archetypes and which don't. In the validation we said:
-
-:         * We must have one canonical formatter per type per facet.
-:         * FIXME: this check is broken at the moment because this is
-:         * only applicable to yarn types, not fabric types. It is also
-:         * not applicable to forward declarations. We need some
-:         * additional information from yarn to be able to figure out
-:         * which types must have a canonical archetype.
-
-We should have some kind of flag in yarn to distinguish. This still
-requires a bit of thinking.
-
-*** Tidy-up of inclusion terminology                                  :story:
-
-Random notes:
-
-- imports and exports
-- some types support both (headers)
-- some support imports only (cpp)
-- some support neither (cmakelists, etc).
-
-*** Add support for qualified class names in dia                      :story:
-
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to define packages in
-certain cases.
-#+end_quote
-
-It has become apparent that creating large packages in dia and placing
-all classes in a large package is cumbersome:
-
-- there are issues with the large package implementation in dia,
-  making copying and pasting a dark art; its not very obvious how one
-  copies into a package (e.g. populating the child node id correctly).
-- models do not always have a neat division between packages; in
-  dogen, where packages would be useful, there are all sorts of
-  connections (e.g. inheritance, association) between the package and
-  the model "package" or other packages. Thus is very difficult to
-  produce a representative diagram.
-
-A solution to this problem would be to support qualified names in
-class names; these would be interpreted as being part of the current
-model. One would still have to define a large package, but it could be
-empty, or contain only the types which only have connections inside
-the package, plus comments for the package, etc.
 
 ** Deprecated
 *** CANCELLED Move some of the more verbose logging to trace          :story:
