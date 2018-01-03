@@ -26,13 +26,46 @@
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** STARTED Edit release notes for previous sprint                    :story:
+    CLOCK: [2018-01-01 Mon 18:01]--[2018-01-01 Mon 19:22] =>  1:21
+    CLOCK: [2018-01-01 Mon 11:35]--[2018-01-01 Mon 14:04] =>  2:29
+    CLOCK: [2018-01-01 Mon 09:52]--[2018-01-01 Mon 10:34] =>  0:42
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.07, ""
+Title: Dogen v1.0.07, "Mercado"
 
 #+begin_src markdown
+![Mercado](http://static.panoramio.com/photos/large/8148799.jpg) _Mercado Municipal, Namibe, Angola. (C) Edwin Mello, 2008._
+
+# TL; DR
+
+The bulk of the work this sprint was yet again spent on
+refactoring. Many a lesson was learned, as described in the brand new
+section ```Commentary```. Think of this section as a blog post-like
+format, reflecting on the lessons learned on the sprint.
+
+The remainder was spent on infrastructural tasks such as fixing
+travis, tests, rtags and so forth.
+
+User visible changes
+================
+
+Next Sprint
+===========
+
+Binaries
+======
+You can download binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.06_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.06/dogen_1.0.06_amd64-applications.deb)
+- [dogen-1.0.06-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.06/dogen-1.0.06-Darwin-x86_64.dmg)
+- [dogen-1.0.06-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.06-Windows-AMD64.msi)
+
+,**Note**: They are produced by CI so they may not yet be ready.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+
 #+end_src
 
 - [[https://twitter.com/MarcoCraveiro/status/927655421531361280][Tweet]]
