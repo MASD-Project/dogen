@@ -1,158 +1,241 @@
-#+title: Nerd Food: The Halting Problem
+#+title: Nerd Food: The Refactoring Quagmire
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
 [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_07.org][The latest Dogen sprint]] turned out to be a really long and tortuous
 one, which is all the more perplexing given the [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_06.org][long]] [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_05.org][list]] of [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_04.org][hard]]
-[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_03.org][sprints]] that preceded it. Clearly, the slope is steepening
-unrelentingly. Experience teaches that whenever you find yourself over
-these terrains, its time to stop and gather your thoughts; more likely
-than not, you are doing something wrong.
+[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_03.org][sprints]] that preceded it. Clearly, the slope of the curve is
+steepening unrelentingly. Experience teaches that whenever you find
+yourself wandering over such terrains, it is time to stop and gather
+your thoughts; more likely than not, you are going the wrong way -
+fast.
 
 Thus, for Dogen, this a post of reflection. To the casual reader - if
 nothing else - it will hopefully serve as a cautionary tale.
 
-* Plus ça change
+* Not Even Wrong
 
-If you are one of the lucky few internauts who follows our release
-notes, you may recall that the [[https://github.com/DomainDrivenConsulting/dogen/releases/tag/v1.0.06][previous sprint]] had produced a moment
-of enlightenment where we finally understood =yarn= as /the/ core of
-Dogen. At the time, it felt like an /eureka/ moment, and it did seem
-this it was "the one last great change to the architecture";
-afterwards, all would be light. On the face of it, the changed seemed
-logical and made perfect sense in the historical context. This could
-be briefly summarised as follows: Dogen started out as split into
-three very distinct parts: the frontends, the middle-end and the
-backends; over time, we moved more and more functionality that was
-originally on the frontends and backends into the middle-end (that is,
-=yarn=) because it meant that it could easily be reused. You could say ww
+If you are one of the lucky few internauts who avidly follows our
+release notes, you may recall that the [[https://github.com/DomainDrivenConsulting/dogen/releases/tag/v1.0.06][previous sprint]] had produced a
+moment of enlightenment where we finally understood =yarn= as /the/
+core of Dogen. At the time, it felt like one of those rare /eureka/
+moments, and "the one last great change to the architecture";
+afterwards, all would be light. "Famous last words", you may have said
+then and, of course, if you did, you were right. But given the
+historical context, the optimism wasn't entirely unjustified. To
+understand why, we need to quickly recap how the architecture has
+evolved over time.
 
+Dogen started out divided into three very distinct parts: the
+frontends (Dia, JSON), the middle-end (=yarn=) and the backends (C++,
+C#). The "pipeline" metaphor guided our design because we saw Dogen
+very much like a compiler, with its frontend, middle-end and backend
+stages. This was very handy as it meant we could test all stages of
+the pipeline in isolation. Composition was done by orchestrating
+frontend, middle-end and backends, at a higher level. This
+architecture had very good properties when it came to testability and
+debuggability: we'd start by running the entire pipeline and locating
+the problem; then, one could easily isolate the issue to a specific
+component either by looking at the log file, or by dumping the inputs
+and outputs of the different stages and sifting through them. As a
+result, bug reproduction was very straightforward since we just needed
+to record the inputs and create the test at the right level. Whilst
+the names of the models and their responsibilities changed over time,
+the overall pipeline architecture remained so since the very early
+days of Dogen.
 
-place all meta-models and transforms in one place, and the
-code to hook things. Everything is either a meta-model element or a
-transform, as per the literature. Yet, just as we were about to
-complete this work, it quickly became apparent that there were some
-downsides, which were not understood when we started it. This is a
-disadvantage of working alone and in your spare time: without feedback
-from other developers, its easy to convince yourself and then enter a
-tunnel of self-reinforcement.
+In parallel to this, a second trend had emerged over the last ten
+sprints or so: we moved more and more functionality from the frontends
+and backends to the middle-end. The key objective here was [[https://en.wikipedia.org/wiki/Don%2527t_repeat_yourself][DRY]]: we
+soon found a lot of commonalities between frontends, driving us to
+create a simple frontend intermediate format so that the work was
+carried out only once. Not long after, we discovered that backends
+suffered from precisely the same malaise, so the same cure begun to be
+applied there too. So far so good, as we were following [[http://www.dmi.usherb.ca/~sgiroux/COURS/2008/ift785/fichiers/articles/Roberts_EvolvingFrameworks.pdf][Roberts and
+Johnson's]] sage advice:
 
-The problem of centralising all responsibilities into ```yarn```,
-obvious on hindsight, is that we start to create "circular"
-dependencies. Now, these are not "canonically circular" - and this is
-probably why the problem was not picked up in the first place -
-because ```yarn``` provides interfaces for other models to
-implement. Thus, due to the magic of (hand-crafted) dependency
-injection, at run time we assemble ```yarn``` with all of its
-dependencies. [Lakos](https://www.amazon.co.uk/Large-Scale-C-Software-Design-APC/dp/0201633620),
-is very helpful here in explaining what is going on: our _logical_
-design had no cycles, but the _physical_ design had them.
+#+begin_quote
+People develop abstractions by generalizing from concrete
+examples. Every attempt to determine the correct abstractions on paper
+without actually developing a running system is doomed to failure. No
+one is that smart. A framework is a reusable design, so you develop it
+by looking at the things it is supposed to be a design of. The more
+examples you look at, the more general your framework will be.
+#+end_quote
 
-* From a Pipeline to a Circle
-
-Originally, we had used the "pipeline" metaphor to guide our physical
-and logical design because we saw Dogen very much like a compiler,
-with distinct frontend, middle-end and backend stages. This was very
-handy because it meant we could test all elements of the pipeline in
-isolation. Composition was done by orchestrating frontend, middle-end
-and backends, at a higher level. This architecture had very good
-properties when it came to debugging: we'd start by running the entire
-pipeline and finding the problem; then, one could easily isolate the
-issue to a specific component either by looking at the log file, or by
-dumping the inputs and outputs of the different stages and sifting
-through them. As a result, bug reproduction was very straightforward
-since we just needed to record the inputs and create the test at the
-right level (e.g. frontend, middle-end, backend).
-
-The downside of this approach was that it resulted in a number of very
-small models - "modelets", we named them. These are models with very
-little responsibility other than gluing together a few things. The
+The literature was with us and the wind was on our sails: the concrete
+code in the frontends and backends was slowly cleaned up, made general
+and moved across to the middle-end. As this process took hold, the
+middle-end grew and grew in size and responsibilities, just as
+everybody else shed them. Before long, we ended up with one big model,
+a couple medium-sized models and lots of very small models:
+"modelets", we named them. These were models with very little
+responsibility other than gluing together one or two things. The
 overhead of maintaining a physical component (e.g. static or dynamic
-library) for the sake of one or two classes was deemed to be too high,
-which led us to revisit the architecture and centralise orchestration
-in ```yarn```, in addition to its middle-end responsibilities. Even
-though frontends and backends still had their own models, the net
-result of this change was that we jumbled up all of the elements of
-the pipeline into a single model. This meant for example that
-explaining the code to a new developer now meant saying things such as
-"ah, don't worry about that bit for now, it belongs to the
-middle-end". [Reasonability](https://the-whiteboard.github.io/coding/debugging/2016/04/07/reasonable-code.html),
-once a property of the architecture itself, now had to be explained in
-words; our pursuit of clarity muddied up the waters.
+library) for the sake of one or two classes seemed a tad too
+high.
 
-## Refactoring _Ad Inifinitum_
+As we begun to extrapolate the trend somewhat, a vision suddenly
+appeared: why not centralise *everything* in the middle-end? That is:
+
+- place *all* meta-models and transforms in one single central
+  location, together with their orchestration; call it the "core
+  model";
+- orchestration becomes either helper code or a transform in its own
+  right;
+- within this "core model", provide interfaces that backends and
+  frontends implement, injecting them dynamically;
+- make these new interfaces appear as transform chains themselves
+  (mostly).
+
+In this elegant and clean brave new world, we would no longer have
+"ends" as such but something more akin to "plugins", dynamically glued
+into the "middle-end" via the magic of dependency injection; the
+"middle-end" itself would no longer be a "middle" but /the/ center of
+everything. Backends and frontends had to merely implement the
+interfaces supplied by the core and the system would just magically
+sort itself out. The idea seemed amazing and we quickly moved to
+implementation.
+
+Alas, in our haste to jump into the fray, we had forgotten to heed
+Mencken:
+
+#+begin_quote
+[T]here is always a well-known solution to every human problem — neat,
+plausible, and wrong.
+#+end_quote
+
+* The Strange Loop
+
+One of the biggest downsides of working alone and in your spare time
+is the lack of feedback from other developers. And it's not even just
+that other developers will teach you lots of new things. No, most
+often than not, they'll simply drag you away from the echo chambers
+and tunnels of self-reinforcement you carefully craft and curate for
+yourself. You are your own intellectual jailer.
+
+In the cold light of day, any developer will tell you that creating
+cycles is not a good idea, and should not be done without a great deal
+of thought. Yet, we managed to create "circular" dependencies between
+all components of the system by centralising all responsibilities into
+=yarn=. Now, you may say that these are not "canonically circular" -
+and this is probably why the problem was not picked up in the first
+place - because =yarn= provides interfaces for other models to
+implement. Well, [[https://www.amazon.co.uk/Large-Scale-C-Software-Design-APC/dp/0201633620][Lakos]] is very helpful here in explaining what is
+going on: our /logical design/ had no cycles - because =yarn= does not
+explicitly call any frontends or backends - but the /physical design/
+did have them. And these came at a cost.
+
+For starters, it screwed up [[https://the-whiteboard.github.io/coding/debugging/2016/04/07/reasonable-code.html][reasonability]]. Even though frontends and
+backends still had their own models, the net result was that we
+jumbled up all of the elements of the pipeline into a single model,
+making it really hard to tell what's what. Explaining the system to a
+new developer now required saying things such as "ah, don't worry
+about that part for now, it belongs to the middle-end, but here we are
+dealing only with the backends" - a clear code smell. Once a property
+of the architecture, reasonability now had to be conveyed in lossy
+natural language. Testability and debuggability got screwed up too
+because now everything went through one single central model; if you
+needed to test a frontend fix you still required building the backends
+and middle-end and initialise them too. Our pursuit of clarity muddied
+up the waters.
 
 To make matters worse, an even more pertinent question arose: just
 when exactly should you stop refactoring? In my two decades of
-professional development I had never encountered this question. In the
-real world, you are lucky to get a tiny amount of time allocated to
-refactoring - most of the time you need to somehow sneak it in into
-some overall estimate and hope no one notices. Like sharks, Project
-Managers are bred to smell refactoring efforts from a mile a way and
-know how to trim estimates down to the bone. Even when you are lucky
-and have an enlightened manager who will bat for you, he or she will
-still have to contend with the realities of corporate development. No
-one gets away with refactoring forever. No one, that is, other than
+professional development, I had never encountered this problem. In the
+real world, you are fortunate if you get a tiny amount of time
+allocated to refactoring - most of the time you need to somehow sneak
+it in into some overall estimate and hope no one notices. Like sharks,
+Project Managers (PM) are bred to smell refactoring efforts from a
+mile a way and know how to trim estimates down to the bone. Even when
+you are in a greenfield project or just lucky enough to have an
+enlightened PM who will bat for you, you still need to contend with
+the realities of corporate development: you need to ship, /now/. No
+one gets away with endless refactoring. No one, that is, other than
 the Free and Open Source Software Developer.
 
 Like many a spare time project, Dogen is my test bed of ideas around
 coding and coding processes; a general sandbox to have fun outside of
 work. As such - and very much by design - the traditional feedback
 loops that exist in the real world need not apply. I wanted to see
-what happened if you coded without _any_ constraints and, in the end,
-what I found out was that if you do not self-impose some kind of
-halting machinery, _you will refactor on forever_. In practice,
+what would happen if you coded without /any/ constraints and, in the
+end, what I found out was that if you do not self-impose some kind of
+halting machinery, /you will refactor on forever/. In practice,
 physics still apply, so your project will eventually die out because
-its energy will dissipate across the many refactoring efforts and
-entropy will, as always, triumph. To keep it at bay, at least for a
-little while, one has to have one single, consistent vision - "wrong"
-as it may be according to some metric or other. Voltaire, of course,
-had warned about it a long time ago: "Le mieux est l'ennemi du bien".
-Like the sisyphian creatures that we are, we are condemned to repeat
-history.
+its energy will dissipate across the many refactoring fronts and
+entropy will, as always, triumph. But if you really want to keep it at
+bay, at least for a little while, you need to preserve energy by
+having one single, consistent vision - "wrong" as it may be according
+to some metric or other. For, as Voltaire said and we often forget,
+"le mieux est l'ennemi du bien".
 
-On reflection, the problem is that refactoring is made up of a set of
-engineering trade-offs, and when you optimise for one thing you'll
-inevitably make something else worse. Looking for a global minima in
-such a gigantic multidimensional space is impossible so you need to
-make do with local minima. But how do you known you reach a "good
-enough" point in that space? How do you halt the refactoring
-algorithm?
+The trouble is that refactoring is made up of a set of engineering
+trade-offs, and when you optimise for one thing you'll inevitably make
+something else worse. So, first and foremost, you need to make sure
+you understand what your trade-offs are, and prioritise
+accordingly. Secondly, looking for a global minima in such a gigantic
+multidimensional space is impossible, so you need to make do with
+local minima. But how do you known you reach a "good enough" point in
+that space? You need some kind of conceptual cost function.
 
-## Solving the Halting Problem
+* Descending the Gradient
 
-To solve this conundrum, we want back to basics and asked: given what
-we now know about the domain and its implementation, what are the most
-important characteristics of an idealised physical and logical design?
-The answer was deceptively simple:
+So it was that we started by defining the key dimensions across which
+we were trying to optimise. This can be phrased slightly differently:
+given what we now know about the domain and its implementation, what
+are the most important characteristics of an idealised physical and
+logical design?
 
-1. the entities of the logical design (models, namespaces, classes,
-   methods and the like) should reflect what one reads in the
-   literature of Model Driven Engineering (MDE). That is, a person
-   competent on the field should find a code base that talks his or
-   her language.
-2. logical and physical design should promote reasonability and
-   isolation, and orchestration should be performed via composition
-   rather than by circular physical dependencies.
+After some thinking, the final answer was deceptively simple:
 
-These are the two fundamental pillars of Dogen architecture, and any
-engineering trade-offs to be made must ensure these dimensions take
-precedence. In other words, we can only optimise away any "modelets"
-only if they do not impact negatively either of these two
-dimensions. If they do, then we must discard the refactoring
-option. More generally, it is now possible to classify all refactoring
-activity - a refactoring gradient descent if you'd like; it either
-brings us closer to the local minima or further away. We have a sieve
-for the product backlog.
+- the entities of the logical design (models, namespaces, classes,
+  methods and the like) should reflect what one reads in the
+  literature of Model Driven Engineering (MDE). That is, a person
+  competent on the field should find a code base that talks his or
+  her language.
+- logical and physical design should promote reasonability and
+  isolation, and thus orchestration should be performed via
+  composition rather than by circular physical dependencies.
 
-So it was that we then came up with a "final" set of changes to the
-architecture to get us closer to the local minima:
+For now, these are the two fundamental pillars guiding the Dogen
+architecture; any engineering trade-offs to be made must ensure these
+dimensions take precedence. In other words, we can only optimise away
+any "modelets" if they do not impact negatively either of these two
+dimensions. If they do, then we must discard this refactoring
+option. More generally, it is now possible to "cost" all refactoring
+activity - a conceptual refactoring gradient descent if you'd like; it
+either brings us closer to the local minima or further away. It gave
+us a sieve with which to filter the product and sprint backlogs.
 
-- **move away from sewing terms**: this was a painful decision but
-  clearly required if one is to comply to point one above. We need to
-  replace all sewing terms with domain specific vocabulary.
-- **reorganise the models into a pipeline**: however, instead of
-  simply going back to the "modelets" of the past, have a deep think
-  as to what responsibilities belong at what stage of the
+To cut a rather long story short, we ended up with a "final" - ha,
+ha - set of changes to the architecture to get us closer to the local
+minima:
+
+- *move away from sewing terms*: from the beginning we had used terms
+  such as =knitter=, =yarn= and so forth. These were... colourful, but
+  did not add any value and detracted us from the first
+  dimension. This was a painful decision but clearly required if one
+  is to comply to point one above: we need to replace all sewing terms
+  with domain specific vocabulary.
+- *reorganise the models into a pipeline*: however, instead of simply
+  going back to the "modelets" of the past, we need to have a deep
+  think as to what responsibilities belong at what stage of the
   pipeline. Perhaps the "modelets" were warning us of design failures.
 
-Fragmenting the ```yarn``` model
+* Conclusion
+
+Its never a great feeling when you end a long and arduous sprint only
+to figure out you were going in the wrong direction in design
+space. In fact, it is rather frustrating. We have many stories in the
+product backlog which are really exciting and which will add real
+value to the end users - well, at this point, just us really but hey -
+yet we seemed to be lost in some kind of refactoring ground hog day,
+with no end in sight. However, the main point of Dogen is to teach,
+and learn we undoubtedly did.
+
+As with anything in the physical world, nothing in software
+engineering exists in splendid perfection like some kind of platonic
+solid. Perfection belongs to the realm of maths. In engineering,
+something can only be described as "fit for purpose", and to do so
+requires to first determine best we can what that purpose might
+be. So, before you wonder into a refactoring quagmire of your own
+making, be sure to have a very firm idea of what your trade-offs are.
