@@ -14,22 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-01-03 Wed 16:20]
+#+CAPTION: Clock summary at [2018-01-03 Wed 16:44]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:28* |      |      | 100.0 |
+| *Total time*                                                                | *8:51* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:28   |      |      | 100.0 |
-| Active                                                                      |        | 8:28 |      | 100.0 |
-| STARTED Edit release notes for previous sprint                              |        |      | 4:32 |  53.5 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   2.2 |
-| COMPLETED Write a blog post on previous sprint                              |        |      | 3:35 |  42.3 |
-| COMPLETED Update Readme with links to blog posts                            |        |      | 0:10 |   2.0 |
+| Stories                                                                     | 8:51   |      |      | 100.0 |
+| Active                                                                      |        | 8:51 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 4:55 |  55.6 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   2.1 |
+| COMPLETED Write a blog post on previous sprint                              |        |      | 3:35 |  40.5 |
+| COMPLETED Update Readme with links to blog posts                            |        |      | 0:10 |   1.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2018-01-03 Wed 16:44]
+    CLOCK: [2018-01-03 Wed 16:21]--[2018-01-03 Wed 16:44] =>  0:23
     CLOCK: [2018-01-01 Mon 18:01]--[2018-01-01 Mon 19:22] =>  1:21
     CLOCK: [2018-01-01 Mon 11:35]--[2018-01-01 Mon 14:04] =>  2:29
     CLOCK: [2018-01-01 Mon 09:52]--[2018-01-01 Mon 10:34] =>  0:42
@@ -43,36 +45,35 @@ Title: Dogen v1.0.07, "Mercado"
 
 # Overview
 
-The bulk of the work this sprint was yet again spent on
-refactoring. Many a lesson was learned, as described in the brand new
-section ```Commentary```. Think of this section as a blog post-like
-format, reflecting on the lessons learned on the sprint.
+The bulk of the work this sprint was yet again spent on refactoring, but at least it now seems there is a light at the end of the tunnel. The adventures were narrated on a blog post: [Nerd Food: The Refactoring Quagmire](https://mcraveiro.blogspot.co.uk/2018/01/nerd-food-refactoring-quagmire.html). The TL; DR of it is that - at long last - we now have a way to contain the refactoring work, which was somewhat spiraling out of control.
 
-The remainder was spent on infrastructural tasks such as fixing
-travis, tests, rtags and so forth.
+The remainder of the sprint was spent on infrastructural tasks such as fixing travis, tests, rtags and so forth.
 
 User visible changes
 ================
 
+There are no user visible changes this sprint.
+
 Next Sprint
 ===========
 
+Next sprint will be focused on continuing the clean up as described in the blog post above, which hopefully will take us to the final iteration of the architecture - at least for the near future.
+
 Binaries
 ======
-You can download binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.06_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.06/dogen_1.0.06_amd64-applications.deb)
-- [dogen-1.0.06-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.06/dogen-1.0.06-Darwin-x86_64.dmg)
-- [dogen-1.0.06-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.06-Windows-AMD64.msi)
+You can download the remaining binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
-,**Note**: They are produced by CI so they may not yet be ready.
+- [dogen_1.0.07_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.07/dogen_1.0.07_amd64-applications.deb)
+- [dogen-1.0.07-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.07/dogen-1.0.07-Darwin-x86_64.dmg)
+
+*Note: due to issues with Conan, we were not able to generate Windows binaries for this sprint.*
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
-
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/927655421531361280][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6333421782644719616][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/948594830267043840][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6354361007493775361][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
