@@ -61,6 +61,7 @@
 #include "dogen.modeling/test_data/helpers/decomposition_result_td.hpp"
 #include "dogen.modeling/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen.modeling/test_data/meta_model/formatting_styles_td.hpp"
+#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/backend_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/locator_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/static_stereotypes_td.hpp"

@@ -61,6 +61,7 @@
 #include "dogen.modeling/hash/helpers/decomposition_result_hash.hpp"
 #include "dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.modeling/hash/meta_model/formatting_styles_hash.hpp"
+#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/backend_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/locator_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/static_stereotypes_hash.hpp"

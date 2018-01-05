@@ -41,7 +41,8 @@ assembly_info::assembly_info(
     const bool is_element_extension,
     const dogen::formatting::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties)
+    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties)
     : dogen::modeling::meta_model::element(
       name,
       documentation,
@@ -55,7 +56,8 @@ assembly_info::assembly_info(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties) { }
+      archetype_location_properties,
+      opaque_properties) { }
 
 void assembly_info::accept(const dogen::modeling::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;

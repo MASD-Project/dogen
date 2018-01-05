@@ -23,6 +23,7 @@
 #include "dogen.modeling/hash/meta_model/element_hash.hpp"
 #include "dogen.formatting/hash/decoration_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/origin_types_hash.hpp"
+#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/static_stereotypes_hash.hpp"
 #include "dogen.modeling/hash/meta_model/artefact_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/local_archetype_location_properties_hash.hpp"
@@ -79,6 +80,21 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_l
     return seed;
 }
 
+inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(const boost::shared_ptr<dogen::modeling::meta_model::opaque_properties>& v) {
+    std::size_t seed(0);
+    combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(i.second));
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -101,6 +117,7 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.decoration_properties());
     combine(seed, hash_std_unordered_map_std_string_dogen_modeling_meta_model_artefact_properties(v.artefact_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_modeling_meta_model_local_archetype_location_properties(v.archetype_location_properties()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(v.opaque_properties()));
 
     return seed;
 }

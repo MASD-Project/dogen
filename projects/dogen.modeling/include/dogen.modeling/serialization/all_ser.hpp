@@ -61,6 +61,7 @@
 #include "dogen.modeling/serialization/helpers/decomposition_result_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/formatting_styles_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/opaque_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/backend_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/locator_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/static_stereotypes_ser.hpp"

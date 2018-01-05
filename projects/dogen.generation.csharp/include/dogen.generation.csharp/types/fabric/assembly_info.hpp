@@ -57,7 +57,8 @@ public:
         const bool is_element_extension,
         const dogen::formatting::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties);
+        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties);
 
 private:
     template<typename Archive>

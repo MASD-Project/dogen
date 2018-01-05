@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/origin_types_io.hpp"
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/io/meta_model/artefact_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
+
+namespace {
+
+
+}
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
+std::size_t opaque_properties_hasher::hash(const opaque_properties&) {
+    std::size_t seed(0);
+    return seed;
 }
 
 } } }

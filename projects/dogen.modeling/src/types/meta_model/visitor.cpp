@@ -77,6 +77,7 @@ visitor::visitor(
     const dogen::formatting::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
     const std::list<dogen::modeling::meta_model::name>& visits,
     const boost::optional<dogen::modeling::meta_model::name>& parent)
     : dogen::modeling::meta_model::element(
@@ -92,7 +93,8 @@ visitor::visitor(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties),
+      archetype_location_properties,
+      opaque_properties),
       visits_(visits),
       parent_(parent) { }
 

@@ -28,6 +28,7 @@
 #include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
@@ -44,6 +45,7 @@
 #include "dogen.formatting/serialization/decoration_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/object_template_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/opaque_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/static_stereotypes_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/artefact_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/local_archetype_location_properties_ser.hpp"
@@ -72,6 +74,7 @@ void save(Archive& ar,
     ar << make_nvp("decoration_properties", v.decoration_properties_);
     ar << make_nvp("artefact_properties", v.artefact_properties_);
     ar << make_nvp("archetype_location_properties", v.archetype_location_properties_);
+    ar << make_nvp("opaque_properties", v.opaque_properties_);
 }
 
 template<typename Archive>
@@ -91,6 +94,7 @@ void load(Archive& ar,
     ar >> make_nvp("decoration_properties", v.decoration_properties_);
     ar >> make_nvp("artefact_properties", v.artefact_properties_);
     ar >> make_nvp("archetype_location_properties", v.archetype_location_properties_);
+    ar >> make_nvp("opaque_properties", v.opaque_properties_);
 }
 
 } }

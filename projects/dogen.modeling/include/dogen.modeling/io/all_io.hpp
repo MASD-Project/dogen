@@ -61,6 +61,7 @@
 #include "dogen.modeling/io/helpers/decomposition_result_io.hpp"
 #include "dogen.modeling/io/meta_model/element_archetype_io.hpp"
 #include "dogen.modeling/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
 #include "dogen.modeling/io/meta_model/backend_properties_io.hpp"
 #include "dogen.modeling/io/meta_model/locator_properties_io.hpp"
 #include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"

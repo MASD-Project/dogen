@@ -51,6 +51,7 @@ visual_studio_project::visual_studio_project(
     const dogen::formatting::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
     const std::string& project_guid,
     const std::string& project_name,
     const std::string& tools_version)
@@ -67,7 +68,8 @@ visual_studio_project::visual_studio_project(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties),
+      archetype_location_properties,
+      opaque_properties),
       project_guid_(project_guid),
       project_name_(project_name),
       tools_version_(tools_version) { }

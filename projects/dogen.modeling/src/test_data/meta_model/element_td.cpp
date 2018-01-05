@@ -32,6 +32,7 @@
 #include "dogen.formatting/test_data/decoration_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/origin_types_td.hpp"
 #include "dogen.modeling/test_data/meta_model/object_template_td.hpp"
+#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/static_stereotypes_td.hpp"
 #include "dogen.modeling/test_data/meta_model/artefact_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/local_archetype_location_properties_td.hpp"
@@ -122,6 +123,26 @@ std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_loc
     return r;
 }
 
+dogen::modeling::meta_model::opaque_properties*
+create_dogen_modeling_meta_model_opaque_properties_ptr(const unsigned int position) {
+    return dogen::modeling::meta_model::opaque_properties_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::modeling::meta_model::opaque_properties>
+create_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(unsigned int position) {
+    boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> r(
+        create_dogen_modeling_meta_model_opaque_properties_ptr(position));
+    return r;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -143,6 +164,7 @@ populate(const unsigned int position, result_type& v) {
     v.decoration_properties(create_dogen_formatting_decoration_properties(position + 10));
     v.artefact_properties(create_std_unordered_map_std_string_dogen_modeling_meta_model_artefact_properties(position + 11));
     v.archetype_location_properties(create_std_unordered_map_std_string_dogen_modeling_meta_model_local_archetype_location_properties(position + 12));
+    v.opaque_properties(create_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(position + 13));
 }
 
 element_generator::result_type*

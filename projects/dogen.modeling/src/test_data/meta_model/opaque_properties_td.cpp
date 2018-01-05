@@ -18,26 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/origin_types_io.hpp"
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/io/meta_model/artefact_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
+opaque_properties_generator::opaque_properties_generator() : position_(0) { }
+
+void opaque_properties_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
+}
+
+opaque_properties_generator::result_type
+opaque_properties_generator::create(const unsigned int/*position*/) {
+    opaque_properties r;
+    return r;
+}
+
+opaque_properties_generator::result_type*
+opaque_properties_generator::create_ptr(const unsigned int position) {
+    opaque_properties* p = new opaque_properties();
+    opaque_properties_generator::populate(position, *p);
+    return p;
+}
+
+opaque_properties_generator::result_type
+opaque_properties_generator::operator()() {
+    return create(position_++);
 }
 
 } } }

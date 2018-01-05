@@ -97,6 +97,7 @@ Given we have a number of blog posts inspired by work on Dogen, we
 should add links to them on the main readme.
 
 *** STARTED Create the =generation= model                             :story:
+    CLOCK: [2018-01-05 Fri 13:53]--[2018-01-05 Fri 13:57] =>  0:04
     CLOCK: [2018-01-05 Fri 13:28]--[2018-01-05 Fri 13:52] =>  0:24
     CLOCK: [2018-01-05 Fri 11:31]--[2018-01-05 Fri 11:41] =>  0:10
     CLOCK: [2018-01-05 Fri 10:41]--[2018-01-05 Fri 11:01] =>  0:46

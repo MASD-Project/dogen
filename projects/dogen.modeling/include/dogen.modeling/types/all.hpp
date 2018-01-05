@@ -105,6 +105,7 @@
 #include "dogen.modeling/types/helpers/new_name_tree_parser.hpp"
 #include "dogen.modeling/types/meta_model/element_archetype.hpp"
 #include "dogen.modeling/types/meta_model/formatting_styles.hpp"
+#include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 #include "dogen.modeling/types/transforms/mapping_transform.hpp"
 #include "dogen.modeling/types/transforms/modules_transform.hpp"
 #include "dogen.modeling/types/transforms/options_validator.hpp"

@@ -18,26 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/origin_types_io.hpp"
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/io/meta_model/artefact_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#ifndef DOGEN_MODELING_HASH_META_MODEL_OPAQUE_PROPERTIES_HASH_HPP
+#define DOGEN_MODELING_HASH_META_MODEL_OPAQUE_PROPERTIES_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
-    v.to_stream(s);
-    return(s);
-}
+struct opaque_properties_hasher {
+public:
+    static std::size_t hash(const opaque_properties& v);
+};
 
 } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::modeling::meta_model::opaque_properties> {
+public:
+    size_t operator()(const dogen::modeling::meta_model::opaque_properties& v) const {
+        return dogen::modeling::meta_model::opaque_properties_hasher::hash(v);
+    }
+};
+
+}
+#endif
