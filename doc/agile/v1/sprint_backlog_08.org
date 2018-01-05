@@ -96,6 +96,55 @@ Do a quick write-up on the difficulties of the previous sprint.
 Given we have a number of blog posts inspired by work on Dogen, we
 should add links to them on the main readme.
 
+*** STARTED Create the =generation= model                             :story:
+    CLOCK: [2018-01-05 Fri 13:28]--[2018-01-05 Fri 13:52] =>  0:24
+    CLOCK: [2018-01-05 Fri 11:31]--[2018-01-05 Fri 11:41] =>  0:10
+    CLOCK: [2018-01-05 Fri 10:41]--[2018-01-05 Fri 11:01] =>  0:46
+    CLOCK: [2018-01-04 Thu 13:48]--[2018-01-04 Thu 14:30] =>  0:42
+    CLOCK: [2018-01-04 Thu 13:33]--[2018-01-04 Thu 13:47] =>  0:14
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
+
+Problems:
+
+- all of the transforms assume access to the modeling element means
+  access to the generation properties. However, with the introduction
+  of the generation element we now have a disconnect. For example, we
+  sometimes sort and bucket the elements, and then modify them; this
+  no longer works with generation elements because these are not
+  pointers. It would be easier to make the generation properties a
+  part of the element. This is an ongoing discussion we've had since
+  the days of formattables. However, in formattables we did write all
+  of the transforms to take into account the formattable contained
+  both the element and the formattable properties, whereas now we need
+  to update all transforms to fit this approach. This is a lot more
+  work. The quick hack is to slot in the properties directly into the
+  element as some kind of "opaque properties". We could create a base
+  class =opaque_properties= and then have a container of these in
+  element. However, to make it properly extensible, the only way is to
+  make it a unordered set of pointers.
+
 *** Finish setting up coveralls                                       :story:
 
 Remaining issues:
@@ -175,31 +224,6 @@ flight as we transform from exomodel to endomodel.
 Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
-
-*** Create the =generation= model                                     :story:
-
-Create a new model called =generation= and move all code-generation
-related class to it.
-
-We need to create classes for element properties and make model have a
-collection that is a pair of element and element properties. We need a
-good name for this pair:
-
-- extended element
-- augmented element
-- decorated element: though not using the decorator pattern; also, we
-  already have decoration properties so this is confusing.
-
-Alternatively we could just call it =element= and make it contain a
-modeling element.
-
-Approach:
-
-- create a new generation model, copying across all of the meta-model
-  and transform classes from yarn. Get the model to transform from
-  endomodel to generation model.
-- augment formattables with the new element properties. Supply this
-  data via the context or assistant.
 
 *** Reduce build times to avoid timeouts                              :story:
 
