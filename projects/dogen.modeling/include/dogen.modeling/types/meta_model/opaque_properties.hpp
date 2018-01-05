@@ -35,7 +35,7 @@ namespace meta_model {
 /**
  * @brief Base class for any properties that are not known to modeling.
  */
-class opaque_properties final {
+class opaque_properties {
 public:
     opaque_properties() = default;
     opaque_properties(const opaque_properties&) = default;
