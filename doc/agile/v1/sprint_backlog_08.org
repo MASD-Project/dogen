@@ -97,6 +97,8 @@ Given we have a number of blog posts inspired by work on Dogen, we
 should add links to them on the main readme.
 
 *** STARTED Create the =generation= model                             :story:
+    CLOCK: [2018-01-05 Fri 15:44]--[2018-01-05 Fri 15:47] =>  0:03
+    CLOCK: [2018-01-05 Fri 15:04]--[2018-01-05 Fri 15:43] =>  0:39
     CLOCK: [2018-01-05 Fri 13:53]--[2018-01-05 Fri 13:57] =>  0:04
     CLOCK: [2018-01-05 Fri 13:28]--[2018-01-05 Fri 13:52] =>  0:24
     CLOCK: [2018-01-05 Fri 11:31]--[2018-01-05 Fri 11:41] =>  0:10
@@ -145,6 +147,15 @@ Problems:
   class =opaque_properties= and then have a container of these in
   element. However, to make it properly extensible, the only way is to
   make it a unordered set of pointers.
+
+*** Parent without descendants in current model is invalid            :story:
+
+At present it is not possible to generate a parent in a model which
+does not have at least one descendant in that model. This is because
+we do not generate the base class methods. We need a meta-data
+parameter to force a class to become a parent.
+
+For now we just hacked it by adding a fake descendant.
 
 *** Finish setting up coveralls                                       :story:
 
