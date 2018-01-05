@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen.generation/types/traits.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/meta_model/artefact.hpp"
