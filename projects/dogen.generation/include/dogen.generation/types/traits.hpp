@@ -25,25 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 
 namespace dogen {
 namespace generation {
 
-class traits final {
-public:
-    traits() = default;
-    traits(const traits&) = default;
-    traits(traits&&) = default;
-    ~traits() = default;
-    traits& operator=(const traits&) = default;
-
-public:
-    bool operator==(const traits& rhs) const;
-    bool operator!=(const traits& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+struct traits {
+    static std::string enabled();
+    static std::string directory();
+    static std::string postfix();
+    static std::string supported();
+    static std::string overwrite();
+    static std::string input_language();
+    static std::string output_language();
+    static std::string is_proxy_model();
+    static std::string reference();
+    static std::string external_modules();
+    static std::string model_modules();
+    static std::string enable_backend_directories();
+    static std::string force_backend_directory();
 };
 
 } }
