@@ -20,6 +20,16 @@
  */
 #include "dogen.modeling/types/meta_model/module.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.modeling/types/meta_model/element.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::modeling::meta_model::element>& lhs,
+const boost::shared_ptr<dogen::modeling::meta_model::element>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace boost {
 
@@ -60,7 +70,7 @@ model::model(
     const dogen::modeling::meta_model::name& meta_name,
     const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& references,
     const std::unordered_set<dogen::modeling::meta_model::name>& leaves,
-    const std::vector<dogen::generation::meta_model::generatable_element>& elements,
+    const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements,
     const boost::shared_ptr<dogen::modeling::meta_model::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
@@ -190,19 +200,19 @@ void model::leaves(const std::unordered_set<dogen::modeling::meta_model::name>&&
     leaves_ = std::move(v);
 }
 
-const std::vector<dogen::generation::meta_model::generatable_element>& model::elements() const {
+const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& model::elements() const {
     return elements_;
 }
 
-std::vector<dogen::generation::meta_model::generatable_element>& model::elements() {
+std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& model::elements() {
     return elements_;
 }
 
-void model::elements(const std::vector<dogen::generation::meta_model::generatable_element>& v) {
+void model::elements(const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& v) {
     elements_ = v;
 }
 
-void model::elements(const std::vector<dogen::generation::meta_model::generatable_element>&& v) {
+void model::elements(const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >&& v) {
     elements_ = std::move(v);
 }
 

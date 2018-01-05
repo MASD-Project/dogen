@@ -38,7 +38,6 @@
 #include "dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "dogen.modeling/types/meta_model/elements_traversal.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.generation/types/meta_model/generatable_element.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/modeling_model_to_generation_model_transform.hpp"
 
@@ -91,9 +90,9 @@ private:
             processed_ids_.insert(id);
         }
 
-        meta_model::generatable_element ge;
+        /*meta_model::generatable_element ge;
         ge.modeling_element(e);
-        result_.elements().push_back(ge);
+        result_.elements().push_back(ge);*/
     }
 
 public:

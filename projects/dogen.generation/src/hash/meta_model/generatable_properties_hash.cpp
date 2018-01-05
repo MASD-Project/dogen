@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/element_hash.hpp"
 #include "dogen.formatting/hash/decoration_properties_hash.hpp"
+#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
 #include "dogen.generation/hash/meta_model/artefact_properties_hash.hpp"
-#include "dogen.generation/hash/meta_model/generatable_element_hash.hpp"
+#include "dogen.generation/hash/meta_model/generatable_properties_hash.hpp"
 #include "dogen.generation/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
@@ -30,12 +30,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_element(const boost::shared_ptr<dogen::modeling::meta_model::element>& v) {
-    std::size_t seed(0);
-    combine(seed, *v);
-    return seed;
 }
 
 inline std::size_t hash_std_unordered_map_std_string_dogen_generation_meta_model_artefact_properties(const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& v) {
@@ -62,10 +56,11 @@ namespace dogen {
 namespace generation {
 namespace meta_model {
 
-std::size_t generatable_element_hasher::hash(const generatable_element& v) {
+std::size_t generatable_properties_hasher::hash(const generatable_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_element(v.modeling_element()));
+    combine(seed, dynamic_cast<const dogen::modeling::meta_model::opaque_properties&>(v));
+
     combine(seed, v.decoration_properties());
     combine(seed, hash_std_unordered_map_std_string_dogen_generation_meta_model_artefact_properties(v.artefact_properties()));
     combine(seed, hash_std_unordered_map_std_string_dogen_generation_meta_model_local_archetype_location_properties(v.archetype_location_properties()));

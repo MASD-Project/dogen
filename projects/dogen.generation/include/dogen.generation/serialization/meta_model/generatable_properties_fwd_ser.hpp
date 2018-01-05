@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_GENERATABLE_ELEMENT_FWD_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_GENERATABLE_ELEMENT_FWD_HPP
+#ifndef DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_PROPERTIES_FWD_SER_HPP
+#define DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_PROPERTIES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+#include "dogen.generation/types/meta_model/generatable_properties_fwd.hpp"
 
-class generatable_element;
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+
+} }
 
 #endif

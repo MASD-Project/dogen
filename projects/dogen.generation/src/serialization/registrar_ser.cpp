@@ -31,6 +31,7 @@
 #include "dogen.formatting/serialization/registrar_ser.hpp"
 #include "dogen.generation/serialization/registrar_ser.hpp"
 #include "dogen.annotations/serialization/registrar_ser.hpp"
+#include "dogen.generation/serialization/meta_model/generatable_properties_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -41,6 +42,8 @@ void register_types(Archive& ar) {
     dogen::formatting::register_types(ar);
     dogen::modeling::register_types(ar);
     dogen::annotations::register_types(ar);
+
+    ar.template register_type<dogen::generation::meta_model::generatable_properties>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

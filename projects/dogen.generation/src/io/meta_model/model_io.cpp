@@ -24,12 +24,12 @@
 #include "dogen.modeling/io/meta_model/name_io.hpp"
 #include "dogen.modeling/io/meta_model/module_io.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
+#include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.modeling/io/meta_model/languages_io.hpp"
 #include "dogen.modeling/io/meta_model/origin_types_io.hpp"
 #include "dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "dogen.generation/io/meta_model/locator_properties_io.hpp"
 #include "dogen.modeling/io/meta_model/orm_model_properties_io.hpp"
-#include "dogen.generation/io/meta_model/generatable_element_io.hpp"
 #include "dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
 
 namespace std {
@@ -64,9 +64,25 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::modeling::meta_model::element>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::generation::meta_model::generatable_element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

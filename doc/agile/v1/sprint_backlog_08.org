@@ -14,18 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-01-03 Wed 16:44]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:51* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:51   |      |      | 100.0 |
-| Active                                                                      |        | 8:51 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 4:55 |  55.6 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   2.1 |
-| COMPLETED Write a blog post on previous sprint                              |        |      | 3:35 |  40.5 |
-| COMPLETED Update Readme with links to blog posts                            |        |      | 0:10 |   1.9 |
+#+CAPTION: Clock summary at [2018-01-05 Fri 16:01]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *11:40* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 11:40   |       |      | 100.0 |
+| Active                                                                      |         | 11:40 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 4:55 |  42.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.6 |
+| COMPLETED Write a blog post on previous sprint                              |         |       | 3:35 |  30.7 |
+| COMPLETED Update Readme with links to blog posts                            |         |       | 0:10 |   1.4 |
+| STARTED Create the =generation= model                                       |         |       | 2:49 |  24.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -97,6 +98,7 @@ Given we have a number of blog posts inspired by work on Dogen, we
 should add links to them on the main readme.
 
 *** STARTED Create the =generation= model                             :story:
+    CLOCK: [2018-01-05 Fri 15:48]--[2018-01-05 Fri 16:01] =>  0:13
     CLOCK: [2018-01-05 Fri 15:44]--[2018-01-05 Fri 15:47] =>  0:03
     CLOCK: [2018-01-05 Fri 15:04]--[2018-01-05 Fri 15:43] =>  0:39
     CLOCK: [2018-01-05 Fri 13:53]--[2018-01-05 Fri 13:57] =>  0:04

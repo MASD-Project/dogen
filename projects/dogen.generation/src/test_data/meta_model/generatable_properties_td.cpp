@@ -19,25 +19,13 @@
  *
  */
 #include <sstream>
-#include "dogen.modeling/test_data/meta_model/element_td.hpp"
 #include "dogen.formatting/test_data/decoration_properties_td.hpp"
+#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
 #include "dogen.generation/test_data/meta_model/artefact_properties_td.hpp"
-#include "dogen.generation/test_data/meta_model/generatable_element_td.hpp"
+#include "dogen.generation/test_data/meta_model/generatable_properties_td.hpp"
 #include "dogen.generation/test_data/meta_model/local_archetype_location_properties_td.hpp"
 
 namespace {
-
-dogen::modeling::meta_model::element*
-create_dogen_modeling_meta_model_element_ptr(const unsigned int position) {
-    return dogen::modeling::meta_model::element_generator::create_ptr(position);
-}
-
-boost::shared_ptr<dogen::modeling::meta_model::element>
-create_boost_shared_ptr_dogen_modeling_meta_model_element(unsigned int position) {
-    boost::shared_ptr<dogen::modeling::meta_model::element> r(
-        create_dogen_modeling_meta_model_element_ptr(position));
-    return r;
-}
 
 dogen::formatting::decoration_properties
 create_dogen_formatting_decoration_properties(const unsigned int position) {
@@ -82,32 +70,32 @@ namespace dogen {
 namespace generation {
 namespace meta_model {
 
-generatable_element_generator::generatable_element_generator() : position_(0) { }
+generatable_properties_generator::generatable_properties_generator() : position_(0) { }
 
-void generatable_element_generator::
+void generatable_properties_generator::
 populate(const unsigned int position, result_type& v) {
-    v.modeling_element(create_boost_shared_ptr_dogen_modeling_meta_model_element(position + 0));
-    v.decoration_properties(create_dogen_formatting_decoration_properties(position + 1));
-    v.artefact_properties(create_std_unordered_map_std_string_dogen_generation_meta_model_artefact_properties(position + 2));
-    v.archetype_location_properties(create_std_unordered_map_std_string_dogen_generation_meta_model_local_archetype_location_properties(position + 3));
+    dogen::modeling::meta_model::opaque_properties_generator::populate(position, v);
+    v.decoration_properties(create_dogen_formatting_decoration_properties(position + 0));
+    v.artefact_properties(create_std_unordered_map_std_string_dogen_generation_meta_model_artefact_properties(position + 1));
+    v.archetype_location_properties(create_std_unordered_map_std_string_dogen_generation_meta_model_local_archetype_location_properties(position + 2));
 }
 
-generatable_element_generator::result_type
-generatable_element_generator::create(const unsigned int position) {
-    generatable_element r;
-    generatable_element_generator::populate(position, r);
+generatable_properties_generator::result_type
+generatable_properties_generator::create(const unsigned int position) {
+    generatable_properties r;
+    generatable_properties_generator::populate(position, r);
     return r;
 }
 
-generatable_element_generator::result_type*
-generatable_element_generator::create_ptr(const unsigned int position) {
-    generatable_element* p = new generatable_element();
-    generatable_element_generator::populate(position, *p);
+generatable_properties_generator::result_type*
+generatable_properties_generator::create_ptr(const unsigned int position) {
+    generatable_properties* p = new generatable_properties();
+    generatable_properties_generator::populate(position, *p);
     return p;
 }
 
-generatable_element_generator::result_type
-generatable_element_generator::operator()() {
+generatable_properties_generator::result_type
+generatable_properties_generator::operator()() {
     return create(position_++);
 }
 

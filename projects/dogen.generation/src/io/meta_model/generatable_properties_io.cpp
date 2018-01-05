@@ -18,24 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_ELEMENT_FWD_SER_HPP
-#define DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_ELEMENT_FWD_SER_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.formatting/io/decoration_properties_io.hpp"
+#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "dogen.generation/io/meta_model/artefact_properties_io.hpp"
+#include "dogen.generation/io/meta_model/generatable_properties_io.hpp"
+#include "dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace generation {
+namespace meta_model {
 
-#include "dogen.generation/types/meta_model/generatable_element_fwd.hpp"
+std::ostream& operator<<(std::ostream& s, const generatable_properties& v) {
+    v.to_stream(s);
+    return(s);
+}
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::generation::meta_model::generatable_element& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::generation::meta_model::generatable_element& v, unsigned int version);
-
-} }
-
-#endif
+} } }

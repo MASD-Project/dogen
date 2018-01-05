@@ -36,12 +36,12 @@
 #include "dogen.modeling/serialization/meta_model/name_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/module_ser.hpp"
 #include "dogen.generation/serialization/meta_model/model_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/element_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/languages_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen.generation/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen.generation/serialization/meta_model/locator_properties_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/orm_model_properties_ser.hpp"
-#include "dogen.generation/serialization/meta_model/generatable_element_ser.hpp"
 #include "dogen.generation/serialization/meta_model/global_archetype_location_properties_ser.hpp"
 
 namespace boost {

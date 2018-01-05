@@ -36,11 +36,11 @@
 #include "dogen.modeling/hash/meta_model/name_hash.hpp"
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/types/meta_model/module_fwd.hpp"
+#include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.modeling/types/meta_model/origin_types.hpp"
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
 #include "dogen.generation/types/meta_model/locator_properties.hpp"
 #include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
-#include "dogen.generation/types/meta_model/generatable_element.hpp"
 #include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.generation/serialization/meta_model/model_fwd_ser.hpp"
 #include "dogen.generation/types/meta_model/global_archetype_location_properties.hpp"
@@ -69,7 +69,7 @@ public:
         const dogen::modeling::meta_model::name& meta_name,
         const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& references,
         const std::unordered_set<dogen::modeling::meta_model::name>& leaves,
-        const std::vector<dogen::generation::meta_model::generatable_element>& elements,
+        const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements,
         const boost::shared_ptr<dogen::modeling::meta_model::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
@@ -120,10 +120,10 @@ public:
     void leaves(const std::unordered_set<dogen::modeling::meta_model::name>&& v);
     /**@}*/
 
-    const std::vector<dogen::generation::meta_model::generatable_element>& elements() const;
-    std::vector<dogen::generation::meta_model::generatable_element>& elements();
-    void elements(const std::vector<dogen::generation::meta_model::generatable_element>& v);
-    void elements(const std::vector<dogen::generation::meta_model::generatable_element>&& v);
+    const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements() const;
+    std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements();
+    void elements(const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& v);
+    void elements(const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >&& v);
 
     /**
      * @brief The module that represents the model.
@@ -204,7 +204,7 @@ private:
     dogen::modeling::meta_model::name meta_name_;
     std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types> references_;
     std::unordered_set<dogen::modeling::meta_model::name> leaves_;
-    std::vector<dogen::generation::meta_model::generatable_element> elements_;
+    std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> > elements_;
     boost::shared_ptr<dogen::modeling::meta_model::module> root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;

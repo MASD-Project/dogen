@@ -26,24 +26,28 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/shared_ptr.hpp>
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.modeling/serialization/meta_model/element_ser.hpp"
 #include "dogen.formatting/serialization/decoration_properties_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/opaque_properties_ser.hpp"
 #include "dogen.generation/serialization/meta_model/artefact_properties_ser.hpp"
-#include "dogen.generation/serialization/meta_model/generatable_element_ser.hpp"
+#include "dogen.generation/serialization/meta_model/generatable_properties_ser.hpp"
 #include "dogen.generation/serialization/meta_model/local_archetype_location_properties_ser.hpp"
+
+BOOST_CLASS_TRACKING(
+    dogen::generation::meta_model::generatable_properties,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::generation::meta_model::generatable_element& v,
+    const dogen::generation::meta_model::generatable_properties& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("modeling_element", v.modeling_element_);
+    ar << make_nvp("opaque_properties", base_object<dogen::modeling::meta_model::opaque_properties>(v));
+
     ar << make_nvp("decoration_properties", v.decoration_properties_);
     ar << make_nvp("artefact_properties", v.artefact_properties_);
     ar << make_nvp("archetype_location_properties", v.archetype_location_properties_);
@@ -51,9 +55,10 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::generation::meta_model::generatable_element& v,
+    dogen::generation::meta_model::generatable_properties& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("modeling_element", v.modeling_element_);
+    ar >> make_nvp("opaque_properties", base_object<dogen::modeling::meta_model::opaque_properties>(v));
+
     ar >> make_nvp("decoration_properties", v.decoration_properties_);
     ar >> make_nvp("artefact_properties", v.artefact_properties_);
     ar >> make_nvp("archetype_location_properties", v.archetype_location_properties_);
@@ -64,16 +69,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::generation::meta_model::generatable_element& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::generation::meta_model::generatable_element& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::generation::meta_model::generatable_element& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::generation::meta_model::generatable_element& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::generation::meta_model::generatable_element& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::generation::meta_model::generatable_element& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::generation::meta_model::generatable_element& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::generation::meta_model::generatable_element& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
 
 } }

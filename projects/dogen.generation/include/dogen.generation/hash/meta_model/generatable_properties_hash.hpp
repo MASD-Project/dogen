@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_HASH_META_MODEL_GENERATABLE_ELEMENT_HASH_HPP
-#define DOGEN_GENERATION_HASH_META_MODEL_GENERATABLE_ELEMENT_HASH_HPP
+#ifndef DOGEN_GENERATION_HASH_META_MODEL_GENERATABLE_PROPERTIES_HASH_HPP
+#define DOGEN_GENERATION_HASH_META_MODEL_GENERATABLE_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.generation/types/meta_model/generatable_element.hpp"
+#include "dogen.generation/types/meta_model/generatable_properties.hpp"
 
 namespace dogen {
 namespace generation {
 namespace meta_model {
 
-struct generatable_element_hasher {
+struct generatable_properties_hasher {
 public:
-    static std::size_t hash(const generatable_element& v);
+    static std::size_t hash(const generatable_properties& v);
 };
 
 } } }
@@ -42,10 +42,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::generation::meta_model::generatable_element> {
+struct hash<dogen::generation::meta_model::generatable_properties> {
 public:
-    size_t operator()(const dogen::generation::meta_model::generatable_element& v) const {
-        return dogen::generation::meta_model::generatable_element_hasher::hash(v);
+    size_t operator()(const dogen::generation::meta_model::generatable_properties& v) const {
+        return dogen::generation::meta_model::generatable_properties_hasher::hash(v);
     }
 };
 

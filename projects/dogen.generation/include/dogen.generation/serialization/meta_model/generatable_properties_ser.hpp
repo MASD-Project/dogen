@@ -18,37 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TEST_DATA_META_MODEL_GENERATABLE_ELEMENT_TD_HPP
-#define DOGEN_GENERATION_TEST_DATA_META_MODEL_GENERATABLE_ELEMENT_TD_HPP
+#ifndef DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_PROPERTIES_SER_HPP
+#define DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.generation/types/meta_model/generatable_element.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen.generation/types/meta_model/generatable_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace boost {
 
-class generatable_element_generator {
-public:
-    generatable_element_generator();
+template<>struct
+is_virtual_base_of<
+    dogen::modeling::meta_model::opaque_properties,
+    dogen::generation::meta_model::generatable_properties
+> : public mpl::true_ {};
 
-public:
-    typedef dogen::generation::meta_model::generatable_element result_type;
+}
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::generation::meta_model::generatable_properties)
+namespace boost {
+namespace serialization {
 
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
 
-} } }
+template<typename Archive>
+void load(Archive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
+
+} }
 
 #endif

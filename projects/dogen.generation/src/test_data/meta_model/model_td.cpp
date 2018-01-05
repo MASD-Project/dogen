@@ -22,12 +22,12 @@
 #include "dogen.modeling/test_data/meta_model/name_td.hpp"
 #include "dogen.modeling/test_data/meta_model/module_td.hpp"
 #include "dogen.generation/test_data/meta_model/model_td.hpp"
+#include "dogen.modeling/test_data/meta_model/element_td.hpp"
 #include "dogen.modeling/test_data/meta_model/languages_td.hpp"
 #include "dogen.modeling/test_data/meta_model/origin_types_td.hpp"
 #include "dogen.generation/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen.generation/test_data/meta_model/locator_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/orm_model_properties_td.hpp"
-#include "dogen.generation/test_data/meta_model/generatable_element_td.hpp"
 #include "dogen.generation/test_data/meta_model/global_archetype_location_properties_td.hpp"
 
 namespace {
@@ -58,15 +58,22 @@ std::unordered_set<dogen::modeling::meta_model::name> create_std_unordered_set_d
     return r;
 }
 
-dogen::generation::meta_model::generatable_element
-create_dogen_generation_meta_model_generatable_element(const unsigned int position) {
-    return dogen::generation::meta_model::generatable_element_generator::create(position);
+dogen::modeling::meta_model::element*
+create_dogen_modeling_meta_model_element_ptr(const unsigned int position) {
+    return dogen::modeling::meta_model::element_generator::create_ptr(position);
 }
 
-std::vector<dogen::generation::meta_model::generatable_element> create_std_vector_dogen_generation_meta_model_generatable_element(unsigned int position) {
-    std::vector<dogen::generation::meta_model::generatable_element> r;
+boost::shared_ptr<dogen::modeling::meta_model::element>
+create_boost_shared_ptr_dogen_modeling_meta_model_element(unsigned int position) {
+    boost::shared_ptr<dogen::modeling::meta_model::element> r(
+        create_dogen_modeling_meta_model_element_ptr(position));
+    return r;
+}
+
+std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> > create_std_vector_boost_shared_ptr_dogen_modeling_meta_model_element(unsigned int position) {
+    std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_generation_meta_model_generatable_element(position + i));
+        r.push_back(create_boost_shared_ptr_dogen_modeling_meta_model_element(position + i));
     }
     return r;
 }
@@ -155,7 +162,7 @@ populate(const unsigned int position, result_type& v) {
     v.meta_name(create_dogen_modeling_meta_model_name(position + 1));
     v.references(create_std_unordered_map_dogen_modeling_meta_model_name_dogen_modeling_meta_model_origin_types(position + 2));
     v.leaves(create_std_unordered_set_dogen_modeling_meta_model_name(position + 3));
-    v.elements(create_std_vector_dogen_generation_meta_model_generatable_element(position + 4));
+    v.elements(create_std_vector_boost_shared_ptr_dogen_modeling_meta_model_element(position + 4));
     v.root_module(create_boost_shared_ptr_dogen_modeling_meta_model_module(position + 5));
     v.module_ids(create_std_unordered_set_std_string(position + 6));
     v.has_generatable_types(create_bool(position + 7));

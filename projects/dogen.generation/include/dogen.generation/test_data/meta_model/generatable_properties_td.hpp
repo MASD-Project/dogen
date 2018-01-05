@@ -18,23 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_IO_META_MODEL_GENERATABLE_ELEMENT_IO_HPP
-#define DOGEN_GENERATION_IO_META_MODEL_GENERATABLE_ELEMENT_IO_HPP
+#ifndef DOGEN_GENERATION_TEST_DATA_META_MODEL_GENERATABLE_PROPERTIES_TD_HPP
+#define DOGEN_GENERATION_TEST_DATA_META_MODEL_GENERATABLE_PROPERTIES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.generation/types/meta_model/generatable_element.hpp"
+#include "dogen.generation/types/meta_model/generatable_properties.hpp"
 
 namespace dogen {
 namespace generation {
 namespace meta_model {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::generation::meta_model::generatable_element& v);
+class generatable_properties_generator {
+public:
+    generatable_properties_generator();
+
+public:
+    typedef dogen::generation::meta_model::generatable_properties result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
 

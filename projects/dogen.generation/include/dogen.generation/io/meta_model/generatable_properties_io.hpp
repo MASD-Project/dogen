@@ -18,26 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_ELEMENT_SER_HPP
-#define DOGEN_GENERATION_SERIALIZATION_META_MODEL_GENERATABLE_ELEMENT_SER_HPP
+#ifndef DOGEN_GENERATION_IO_META_MODEL_GENERATABLE_PROPERTIES_IO_HPP
+#define DOGEN_GENERATION_IO_META_MODEL_GENERATABLE_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen.generation/types/meta_model/generatable_element.hpp"
+#include <iosfwd>
+#include "dogen.generation/types/meta_model/generatable_properties.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::generation::meta_model::generatable_element)
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace generation {
+namespace meta_model {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::generation::meta_model::generatable_element& v, unsigned int version);
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::generation::meta_model::generatable_properties& v);
 
-template<typename Archive>
-void load(Archive& ar, dogen::generation::meta_model::generatable_element& v, unsigned int version);
-
-} }
+} } }
 
 #endif
