@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
-#include "dogen.modeling/test_data/meta_model/fake_opaque_properties_td.hpp"
+#ifndef DOGEN_MODELING_TEST_DATA_META_MODEL_FAKE_OPAQUE_PROPERTIES_TD_HPP
+#define DOGEN_MODELING_TEST_DATA_META_MODEL_FAKE_OPAQUE_PROPERTIES_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen.modeling/types/meta_model/fake_opaque_properties.hpp"
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-void opaque_properties_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
+class fake_opaque_properties_generator {
+public:
+    fake_opaque_properties_generator();
 
-opaque_properties_generator::result_type*
-opaque_properties_generator::create_ptr(const unsigned int position) {
-    return dogen::modeling::meta_model::fake_opaque_properties_generator::create_ptr(position);
-}
+public:
+    typedef dogen::modeling::meta_model::fake_opaque_properties result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif

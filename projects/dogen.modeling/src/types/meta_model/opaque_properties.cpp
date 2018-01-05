@@ -18,13 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-bool opaque_properties::operator==(const opaque_properties& /*rhs*/) const {
+void opaque_properties::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::modeling::meta_model::opaque_properties\"" << " }";
+}
+
+void opaque_properties::swap(opaque_properties&) noexcept {
+}
+
+bool opaque_properties::compare(const opaque_properties& /*rhs*/) const {
     return true;
 }
 

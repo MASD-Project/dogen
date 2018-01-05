@@ -38,6 +38,7 @@
 #include "dogen.modeling/serialization/meta_model/primitive_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen.modeling/serialization/meta_model/object_template_ser.hpp"
+#include "dogen.modeling/serialization/meta_model/fake_opaque_properties_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -51,6 +52,7 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::modeling::meta_model::builtin>();
     ar.template register_type<dogen::modeling::meta_model::enumeration>();
     ar.template register_type<dogen::modeling::meta_model::exception>();
+    ar.template register_type<dogen::modeling::meta_model::fake_opaque_properties>();
     ar.template register_type<dogen::modeling::meta_model::module>();
     ar.template register_type<dogen::modeling::meta_model::object>();
     ar.template register_type<dogen::modeling::meta_model::object_template>();

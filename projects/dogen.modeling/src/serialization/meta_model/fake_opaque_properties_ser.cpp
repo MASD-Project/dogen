@@ -31,22 +31,24 @@
 #include "dogen.modeling/serialization/meta_model/fake_opaque_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::modeling::meta_model::opaque_properties,
+    dogen::modeling::meta_model::fake_opaque_properties,
     boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& /*ar*/,
-    const dogen::modeling::meta_model::opaque_properties& /*v*/,
+void save(Archive& ar,
+    const dogen::modeling::meta_model::fake_opaque_properties& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("opaque_properties", base_object<dogen::modeling::meta_model::opaque_properties>(v));
 }
 
 template<typename Archive>
-void load(Archive& /*ar*/,
-    dogen::modeling::meta_model::opaque_properties& /*v*/,
+void load(Archive& ar,
+    dogen::modeling::meta_model::fake_opaque_properties& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("opaque_properties", base_object<dogen::modeling::meta_model::opaque_properties>(v));
 }
 
 } }
@@ -54,16 +56,16 @@ void load(Archive& /*ar*/,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
 
 } }

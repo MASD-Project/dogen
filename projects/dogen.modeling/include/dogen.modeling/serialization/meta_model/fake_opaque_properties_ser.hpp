@@ -18,32 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TEST_DATA_META_MODEL_OPAQUE_PROPERTIES_TD_HPP
-#define DOGEN_MODELING_TEST_DATA_META_MODEL_OPAQUE_PROPERTIES_TD_HPP
+#ifndef DOGEN_MODELING_SERIALIZATION_META_MODEL_FAKE_OPAQUE_PROPERTIES_SER_HPP
+#define DOGEN_MODELING_SERIALIZATION_META_MODEL_FAKE_OPAQUE_PROPERTIES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/opaque_properties.hpp"
+#include <boost/serialization/split_free.hpp>
+#include <boost/type_traits/is_virtual_base_of.hpp>
+#include "dogen.modeling/types/meta_model/fake_opaque_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace boost {
 
-class opaque_properties_generator {
-public:
-    opaque_properties_generator();
+template<>struct
+is_virtual_base_of<
+    dogen::modeling::meta_model::opaque_properties,
+    dogen::modeling::meta_model::fake_opaque_properties
+> : public mpl::true_ {};
 
-public:
-    typedef dogen::modeling::meta_model::opaque_properties result_type;
+}
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::modeling::meta_model::fake_opaque_properties)
+namespace boost {
+namespace serialization {
 
-} } }
+template<typename Archive>
+void save(Archive& ar, const dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+
+} }
 
 #endif

@@ -73,6 +73,7 @@
 #include "dogen.modeling/hash/transforms/naming_configuration_hash.hpp"
 #include "dogen.modeling/hash/meta_model/orm_module_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/orm_object_properties_hash.hpp"
+#include "dogen.modeling/hash/meta_model/fake_opaque_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/path_contribution_types_hash.hpp"
 #include "dogen.modeling/hash/meta_model/model_segment_properties_hash.hpp"
 #include "dogen.modeling/hash/meta_model/orm_attribute_properties_hash.hpp"

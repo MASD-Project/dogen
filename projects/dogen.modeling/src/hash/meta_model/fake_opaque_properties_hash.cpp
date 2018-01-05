@@ -18,20 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
-#include "dogen.modeling/test_data/meta_model/fake_opaque_properties_td.hpp"
+#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
+#include "dogen.modeling/hash/meta_model/fake_opaque_properties_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-void opaque_properties_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
+std::size_t fake_opaque_properties_hasher::hash(const fake_opaque_properties& v) {
+    std::size_t seed(0);
 
-opaque_properties_generator::result_type*
-opaque_properties_generator::create_ptr(const unsigned int position) {
-    return dogen::modeling::meta_model::fake_opaque_properties_generator::create_ptr(position);
+    combine(seed, dynamic_cast<const dogen::modeling::meta_model::opaque_properties&>(v));
+    return seed;
 }
 
 } } }

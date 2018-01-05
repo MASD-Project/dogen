@@ -73,6 +73,7 @@
 #include "dogen.modeling/test_data/transforms/naming_configuration_td.hpp"
 #include "dogen.modeling/test_data/meta_model/orm_module_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/orm_object_properties_td.hpp"
+#include "dogen.modeling/test_data/meta_model/fake_opaque_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/path_contribution_types_td.hpp"
 #include "dogen.modeling/test_data/meta_model/model_segment_properties_td.hpp"
 #include "dogen.modeling/test_data/meta_model/orm_attribute_properties_td.hpp"

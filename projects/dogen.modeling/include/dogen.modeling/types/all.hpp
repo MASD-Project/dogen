@@ -138,6 +138,7 @@
 #include "dogen.modeling/types/transforms/type_params_transform.hpp"
 #include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
 #include "dogen.modeling/types/helpers/reference_paths_extractor.hpp"
+#include "dogen.modeling/types/meta_model/fake_opaque_properties.hpp"
 #include "dogen.modeling/types/transforms/associations_transform.hpp"
 #include "dogen.modeling/types/transforms/enumerations_transform.hpp"
 #include "dogen.modeling/types/transforms/generability_transform.hpp"

@@ -18,20 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
-#include "dogen.modeling/test_data/meta_model/fake_opaque_properties_td.hpp"
+#ifndef DOGEN_MODELING_SERIALIZATION_META_MODEL_FAKE_OPAQUE_PROPERTIES_FWD_SER_HPP
+#define DOGEN_MODELING_SERIALIZATION_META_MODEL_FAKE_OPAQUE_PROPERTIES_FWD_SER_HPP
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void opaque_properties_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
+#include "dogen.modeling/types/meta_model/fake_opaque_properties_fwd.hpp"
 
-opaque_properties_generator::result_type*
-opaque_properties_generator::create_ptr(const unsigned int position) {
-    return dogen::modeling::meta_model::fake_opaque_properties_generator::create_ptr(position);
-}
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::modeling::meta_model::fake_opaque_properties& v, unsigned int version);
+
+} }
+
+#endif

@@ -18,20 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/test_data/meta_model/opaque_properties_td.hpp"
-#include "dogen.modeling/test_data/meta_model/fake_opaque_properties_td.hpp"
+#include <ostream>
+#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "dogen.modeling/types/meta_model/fake_opaque_properties.hpp"
 
 namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-void opaque_properties_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+void fake_opaque_properties::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::modeling::meta_model::fake_opaque_properties\"" << ", "
+      << "\"__parent_0__\": ";
+    dogen::modeling::meta_model::opaque_properties::to_stream(s);
+    s << " }";
 }
 
-opaque_properties_generator::result_type*
-opaque_properties_generator::create_ptr(const unsigned int position) {
-    return dogen::modeling::meta_model::fake_opaque_properties_generator::create_ptr(position);
+bool fake_opaque_properties::equals(const dogen::modeling::meta_model::opaque_properties& other) const {
+    const fake_opaque_properties* const p(dynamic_cast<const fake_opaque_properties* const>(&other));
+    if (!p) return false;
+    return *this == *p;
+}
+
+bool fake_opaque_properties::operator==(const fake_opaque_properties& /*rhs*/) const {
+    return true;
 }
 
 } } }

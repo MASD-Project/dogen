@@ -25,13 +25,29 @@ namespace dogen {
 namespace modeling {
 namespace meta_model {
 
-void opaque_properties_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
+fake_opaque_properties_generator::fake_opaque_properties_generator() : position_(0) { }
+
+void fake_opaque_properties_generator::
+populate(const unsigned int position, result_type& v) {
+    dogen::modeling::meta_model::opaque_properties_generator::populate(position, v);
 }
 
-opaque_properties_generator::result_type*
-opaque_properties_generator::create_ptr(const unsigned int position) {
-    return dogen::modeling::meta_model::fake_opaque_properties_generator::create_ptr(position);
+fake_opaque_properties_generator::result_type
+fake_opaque_properties_generator::create(const unsigned int/*position*/) {
+    fake_opaque_properties r;
+    return r;
+}
+
+fake_opaque_properties_generator::result_type*
+fake_opaque_properties_generator::create_ptr(const unsigned int position) {
+    fake_opaque_properties* p = new fake_opaque_properties();
+    fake_opaque_properties_generator::populate(position, *p);
+    return p;
+}
+
+fake_opaque_properties_generator::result_type
+fake_opaque_properties_generator::operator()() {
+    return create(position_++);
 }
 
 } } }

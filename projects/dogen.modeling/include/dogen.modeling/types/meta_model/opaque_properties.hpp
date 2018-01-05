@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <iosfwd>
 #include <algorithm>
 #include "dogen.modeling/serialization/meta_model/opaque_properties_fwd_ser.hpp"
 
@@ -40,8 +41,9 @@ public:
     opaque_properties() = default;
     opaque_properties(const opaque_properties&) = default;
     opaque_properties(opaque_properties&&) = default;
-    ~opaque_properties() = default;
     opaque_properties& operator=(const opaque_properties&) = default;
+
+    virtual ~opaque_properties() noexcept = 0;
 
 private:
     template<typename Archive>
@@ -51,12 +53,23 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::opaque_properties& v, unsigned int version);
 
 public:
-    bool operator==(const opaque_properties& rhs) const;
-    bool operator!=(const opaque_properties& rhs) const {
-        return !this->operator==(rhs);
-    }
+    virtual void to_stream(std::ostream& s) const;
+
+protected:
+    bool compare(const opaque_properties& rhs) const;
+public:
+    virtual bool equals(const opaque_properties& other) const = 0;
+
+protected:
+    void swap(opaque_properties& other) noexcept;
 
 };
+
+inline opaque_properties::~opaque_properties() noexcept { }
+
+inline bool operator==(const opaque_properties& lhs, const opaque_properties& rhs) {
+    return lhs.equals(rhs);
+}
 
 } } }
 

@@ -26,9 +26,12 @@
 #endif
 
 #include <boost/serialization/split_free.hpp>
+#include <boost/serialization/assume_abstract.hpp>
 #include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 
 BOOST_SERIALIZATION_SPLIT_FREE(dogen::modeling::meta_model::opaque_properties)
+BOOST_SERIALIZATION_ASSUME_ABSTRACT(dogen::modeling::meta_model::opaque_properties)
+
 namespace boost {
 namespace serialization {
 
