@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="124"
+   height="20"
+   id="svg3576"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="License-Properietary-blue.svg">
+  <metadata
+     id="metadata3608">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3606" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1047"
+     id="namedview3604"
+     showgrid="false"
+     inkscape:zoom="2.7016129"
+     inkscape:cx="62"
+     inkscape:cy="10"
+     inkscape:window-x="1680"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g3586" />
+  <linearGradient
+     id="b"
+     x2="0"
+     y2="100%">
+    <stop
+       offset="0"
+       stop-color="#bbb"
+       stop-opacity=".1"
+       id="stop3579" />
+    <stop
+       offset="1"
+       stop-opacity=".1"
+       id="stop3581" />
+  </linearGradient>
+  <mask
+     id="a">
+    <rect
+       width="124"
+       height="20"
+       rx="3"
+       fill="#fff"
+       id="rect3584" />
+  </mask>
+  <g
+     mask="url(#a)"
+     id="g3586">
+    <path
+       fill="#555"
+       d="M0 0h51v20H0z"
+       id="path3588" />
+    <path
+       fill="#007ec6"
+       d="M51 0h73v20H51z"
+       id="path3590" />
+    <path
+       fill="url(#b)"
+       d="M0 0h124v20H0z"
+       id="path3592" />
+  </g>
+  <g
+     font-size="11"
+     id="g3594"
+     text-anchor="middle"
+     font-family="DejaVu Sans,Verdana,Geneva,sans-serif"
+     fill="#fff">
+    <text
+       x="25.5"
+       y="15"
+       id="text3596"
+       fill-opacity=".3"
+       fill="#010101">License</text>
+    <text
+       x="25.5"
+       y="14"
+       id="text3598">License</text>
+    <text
+       x="86.5"
+       y="15"
+       id="text3600"
+       style="fill:#010101;fill-opacity:0.3">Proprietary</text>
+    <text
+       x="86.5"
+       y="14"
+       id="text3602">Proprietary</text>
+  </g>
+</svg>
