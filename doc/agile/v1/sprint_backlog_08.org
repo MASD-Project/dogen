@@ -150,6 +150,15 @@ Problems:
   element. However, to make it properly extensible, the only way is to
   make it a unordered set of pointers.
 
+*** Build dogen from docker                                           :story:
+
+- fix references to gcc6 etc
+- run:
+
+: docker exec -it zen_euclid env TERM=dumb
+: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
+: Release 4 gcc /home/marco/local
+
 *** Parent without descendants in current model is invalid            :story:
 
 At present it is not possible to generate a parent in a model which
