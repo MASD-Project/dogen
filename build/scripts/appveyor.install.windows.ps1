@@ -41,6 +41,7 @@ $env:PATH += ";$env:PYTHON/Scripts"
 pip.exe install conan
 $env:PATH += ";C:\Program Files (x86)\Conan\conan"
 conan --version
+conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 
 #
 # cmake
