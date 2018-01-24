@@ -1,6 +1,6 @@
 [requires]
 libxml2/2.9.3@bincrafters/stable
-Boost/1.65.1@bincrafters/testing
+Boost/1.64.0@bincrafters/testing
 
 [generators]
 cmake
