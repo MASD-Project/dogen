@@ -101,11 +101,11 @@ endif()
 if(FOUND_CONAN AND WIN32)
     message(STATUS "Copying conan dependencies to stage.")
     execute_process(
-        COMMAND cp -L ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_WINICONV}/iconv.dll ${stage_lib_dir}
+        COMMAND cp -L ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_LIBICONV}/iconv.dll ${stage_lib_dir}
         RESULT_VARIABLE ret_var
         OUTPUT_VARIABLE output_var)
 
-    install(FILES ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_WINICONV}/iconv.dll
+    install(FILES ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_LIBICONV}/iconv.dll
         DESTINATION bin COMPONENT applications)
 endif()
 
