@@ -105,7 +105,8 @@ if(FOUND_CONAN AND WIN32)
         RESULT_VARIABLE ret_var
         OUTPUT_VARIABLE output_var)
 
-    install(FILES ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll ${CONAN_BIN_DIRS_LIBICONV}/iconv.dll
+    install(FILES ${CONAN_BIN_DIRS_LIBXML2}/libxml2.dll
+        # ${CONAN_BIN_DIRS_LIBICONV}/iconv.dll
         DESTINATION bin COMPONENT applications)
 endif()
 

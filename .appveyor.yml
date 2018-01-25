@@ -27,7 +27,6 @@ build_script:
   - ps: $target = "ALL_BUILD run_windows_green_tests";
   - ps: cd $project_dir
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $env:compiler -third_party $third_party -target $target
-  - ps: Get-ChildItem C:/Users/appveyor/.conan/data/libiconv/1.15/bincrafters/stable/package/f6bcf0d95fafcf303dfebe42c8562386d4cdbf69 -Recurse
   - ps: if ($build_type -eq "Release") {
             cd $project_dir\build\output\$env:compiler\$build_type;
             $env:Path += ";" + $env:WIX;
