@@ -17,7 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-find_program(DOGEN_KNITTER_EXECUTABLE NAMES dogen.knitter)
+find_program(DOGEN_KNITTER_EXECUTABLE NAMES dogen.knitter
+    HINTS ${CMAKE_BINARY_DIR}/stage/bin)
 if (DOGEN_KNITTER_EXECUTABLE)
     execute_process(
         COMMAND ${DOGEN_KNITTER_EXECUTABLE} --version
@@ -34,7 +35,8 @@ else()
     message(STATUS "Dogen Knitter not found.")
 endif()
 
-find_program(DOGEN_STITCHER_EXECUTABLE NAMES dogen.stitcher)
+find_program(DOGEN_STITCHER_EXECUTABLE NAMES dogen.stitcher
+    HINTS ${CMAKE_BINARY_DIR}/stage/bin)
 if (DOGEN_STITCHER_EXECUTABLE)
     execute_process(
         COMMAND ${DOGEN_STITCHER_EXECUTABLE} --version
@@ -51,7 +53,8 @@ else()
     message(STATUS "Dogen Stitcher not found.")
 endif()
 
-find_program(DOGEN_TAILOR_EXECUTABLE NAMES dogen.tailor)
+find_program(DOGEN_TAILOR_EXECUTABLE NAMES dogen.tailor
+    HINTS ${CMAKE_BINARY_DIR}/stage/bin)
 if (DOGEN_TAILOR_EXECUTABLE)
     execute_process(
         COMMAND ${DOGEN_TAILOR_EXECUTABLE} --version
