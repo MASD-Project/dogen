@@ -25,6 +25,7 @@
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/io/pair_io.hpp"
 #include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/primitive.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -64,10 +65,14 @@ public:
     odb_targets_factory(const model& fm,
         const locator& l, const modeling::meta_model::name& model_name);
 
+private:
+    void generate_targets(const modeling::meta_model::name& n);
+
 public:
     using fabric::element_visitor::visit;
     void visit(const fabric::common_odb_options& coo);
     void visit(const modeling::meta_model::object& o);
+    void visit(const modeling::meta_model::primitive& p);
 
 public:
     const fabric::odb_targets& result() const;
@@ -95,15 +100,9 @@ void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
         );
 }
 
-void odb_targets_factory::visit(const modeling::meta_model::object& o) {
-    /*
-     * We only care about objects which have ORM enabled.
-     */
-    if (!o.orm_properties())
-        return;
-
+void odb_targets_factory::
+generate_targets(const modeling::meta_model::name& n) {
     fabric::odb_target t;
-    const auto& n(o.name());
     t.name(target_name_ + separator + n.simple());
     t.comment("ODB " + n.simple());
 
@@ -123,9 +122,8 @@ void odb_targets_factory::visit(const modeling::meta_model::object& o) {
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
     t.types_file(tp.lexically_relative(src_dir).generic_string());
 
-    const auto odb_options_rp(
-        locator_.make_relative_path_for_odb_options(o.name(), odb_arch,
-            false/*include_source_directory*/));
+    const auto odb_options_rp(locator_.make_relative_path_for_odb_options(n,
+            odb_arch, false/*include_source_directory*/));
     t.object_odb_options(odb_options_rp.generic_string());
 
     BOOST_LOG_SEV(lg, debug) << "Databases: " << model_.odb_databases();
@@ -149,6 +147,28 @@ void odb_targets_factory::visit(const modeling::meta_model::object& o) {
         t.move_parameters().push_back(pair);
     }
     result_.targets().push_back(t);
+}
+
+void odb_targets_factory::visit(const modeling::meta_model::object& o) {
+    /*
+     * We only care about objects which have ORM enabled.
+     */
+    if (!o.orm_properties())
+        return;
+
+    const auto& n(o.name());
+    generate_targets(n);
+}
+
+void odb_targets_factory::visit(const modeling::meta_model::primitive& p) {
+    /*
+     * We only care about objects which have ORM enabled.
+     */
+    if (!p.orm_properties())
+        return;
+
+    const auto& n(p.name());
+    generate_targets(n);
 }
 
 const fabric::odb_targets& odb_targets_factory::result() const {
@@ -186,6 +206,7 @@ void build_files_updater::visit(fabric::msbuild_targets& mt) {
 
 void build_files_expander::expand(const locator& l, model& fm) const {
     odb_targets_factory f(fm, l, fm.name());
+    const auto ott(modeling::meta_model::origin_types::target);
     for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
 
@@ -194,7 +215,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
          * can be ignored.
          */
         auto& segment(formattable.master_segment());
-        if (segment->origin_type() != modeling::meta_model::origin_types::target) {
+        if (segment->origin_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
@@ -218,7 +239,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
 
         auto& formattable(pair.second);
         auto& segment(formattable.master_segment());
-        if (segment->origin_type() != modeling::meta_model::origin_types::target) {
+        if (segment->origin_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
