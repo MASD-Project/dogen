@@ -14,7 +14,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-02-25 Sun 18:32]
+#+CAPTION: Clock summary at [2018-02-25 Sun 18:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
@@ -27,8 +27,8 @@
 | COMPLETED Write a blog post on previous sprint                              |         |       | 3:35 |  27.9 |
 | COMPLETED Update Readme with links to blog posts                            |         |       | 0:10 |   1.3 |
 | COMPLETED Rename stereotypes                                                |         |       | 0:35 |   4.5 |
+| COMPLETED Dogen does not generate ODB targets for primitives                |         |       | 0:36 |   4.7 |
 | STARTED Create the =generation= model                                       |         |       | 2:49 |  21.9 |
-| STARTED Dogen does not generate ODB targets for primitives                  |         |       | 0:36 |   4.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -109,6 +109,15 @@ dogen, i.e.: =yarn::object_template= becomes =dogen::object_template=
 and so forth. Modeling/yarn is just one of the possible
 implementations of the profile.
 
+*** COMPLETED Dogen does not generate ODB targets for primitives      :story:
+    CLOSED: [2018-02-25 Sun 18:40]
+    CLOCK: [2018-02-25 Sun 18:17]--[2018-02-25 Sun 18:32] =>  0:15
+    CLOCK: [2018-02-25 Sun 17:55]--[2018-02-25 Sun 18:16] =>  0:21
+
+At present the northwind model does not have any targets to generate
+primitives, causing the northwind model build to fail when ODB is
+enabled.
+
 *** STARTED Create the =generation= model                             :story:
     CLOCK: [2018-01-05 Fri 15:48]--[2018-01-05 Fri 16:01] =>  0:13
     CLOCK: [2018-01-05 Fri 15:44]--[2018-01-05 Fri 15:47] =>  0:03
@@ -161,14 +170,6 @@ Problems:
   class =opaque_properties= and then have a container of these in
   element. However, to make it properly extensible, the only way is to
   make it a unordered set of pointers.
-
-*** STARTED Dogen does not generate ODB targets for primitives        :story:
-    CLOCK: [2018-02-25 Sun 18:17]--[2018-02-25 Sun 18:32] =>  0:15
-    CLOCK: [2018-02-25 Sun 17:55]--[2018-02-25 Sun 18:16] =>  0:21
-
-At present the northwind model does not have any targets to generate
-primitives, causing the northwind model build to fail when ODB is
-enabled.
 
 *** Add support for proper JSON serialisation in C++                  :story:
 
