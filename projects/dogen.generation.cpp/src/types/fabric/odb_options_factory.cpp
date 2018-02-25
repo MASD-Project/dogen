@@ -44,8 +44,24 @@ namespace generation {
 namespace cpp {
 namespace fabric {
 
-std::list<boost::shared_ptr<modeling::meta_model::element>> odb_options_factory::
-make(const modeling::meta_model::model& m) const {
+boost::shared_ptr<modeling::meta_model::element> odb_options_factory::
+make(const modeling::meta_model::name& n,
+    const modeling::meta_model::origin_types& ot,
+    const annotations::annotation& a) const {
+    const auto id(n.id());
+    BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+
+    auto r(boost::make_shared<object_odb_options>());
+    r->name(n);
+    r->meta_name(meta_name_factory::make_object_odb_options_name());
+    r->origin_type(ot);
+    r->annotation(a);
+    r->is_element_extension(true);
+    return r;
+}
+
+std::list<boost::shared_ptr<modeling::meta_model::element>>
+odb_options_factory::make(const modeling::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
     using modeling::meta_model::object;
@@ -53,30 +69,21 @@ make(const modeling::meta_model::model& m) const {
     std::list<boost::shared_ptr<modeling::meta_model::element>> r;
     for (const auto& ptr : m.elements()) {
         /*
-         * If we're not an object or if we do not belong to the target
-         * model, there is nothing to do.
+         * If we do not belong to the target model, there is nothing
+         * to do.
          */
-        const auto optr(boost::dynamic_pointer_cast<object>(ptr));
-        if (!optr || optr->origin_type() != origin_types::target)
+        if (ptr->origin_type() != origin_types::target)
             continue;
 
         /*
-         * We only care about objects which have ORM enabled.
+         * If we're an object with ORM properties, we need to be
+         * processed.
          */
-        const auto& o(*optr);
-        if (!o.orm_properties())
-            continue;
-
-        const auto id(o.name().id());
-        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
-
-        auto ooo(boost::make_shared<object_odb_options>());
-        ooo->name(o.name());
-        ooo->meta_name(meta_name_factory::make_object_odb_options_name());
-        ooo->origin_type(o.origin_type());
-        ooo->annotation(o.annotation());
-        ooo->is_element_extension(true);
-        r.push_back(ooo);
+        const auto optr(boost::dynamic_pointer_cast<object>(ptr));
+        if (optr && optr->orm_properties()) {
+            const auto& o(*optr);
+            r.push_back(make(o.name(), o.origin_type(), o.annotation()));
+        }
     }
 
     /*
