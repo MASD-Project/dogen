@@ -37,14 +37,21 @@
     ]-->
     <Target Name="odb_northwind"
           DependsOnTargets="odb_northwind_categories;
+                            odb_northwind_category_id;
                             odb_northwind_class_0;
+                            odb_northwind_customer_id;
                             odb_northwind_customers;
+                            odb_northwind_employee_id;
                             odb_northwind_employees;
                             odb_northwind_order_details;
                             odb_northwind_order_details_key;
+                            odb_northwind_order_id;
                             odb_northwind_orders;
+                            odb_northwind_product_id;
                             odb_northwind_products;
+                            odb_northwind_shipper_id;
                             odb_northwind_shippers;
+                            odb_northwind_supplier_id;
                             odb_northwind_suppliers">
         <Message Importance="high" Text="ODB northwind "/>
     </Target>
@@ -59,6 +66,16 @@
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/categories-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
     </Target>
+    <Target Name="odb_northwind_category_id">
+        <Message Importance="high" Text="ODB category_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/category_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/category_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/category_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/category_id-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
     <Target Name="odb_northwind_class_0">
         <Message Importance="high" Text="ODB class_0"/>
         <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/package/class_0_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/package $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/package/class_0.hpp" />
@@ -69,6 +86,16 @@
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/package/class_0-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/package/" />
     </Target>
+    <Target Name="odb_northwind_customer_id">
+        <Message Importance="high" Text="ODB customer_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/customer_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/customer_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/customer_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/customer_id-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
     <Target Name="odb_northwind_customers">
         <Message Importance="high" Text="ODB customers"/>
         <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/customers_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/customers.hpp" />
@@ -77,6 +104,16 @@
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
         <Move
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/customers-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
+    <Target Name="odb_northwind_employee_id">
+        <Message Importance="high" Text="ODB employee_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/employee_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/employee_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/employee_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/employee_id-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
     </Target>
     <Target Name="odb_northwind_employees">
@@ -109,6 +146,16 @@
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/order_details_key-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
     </Target>
+    <Target Name="odb_northwind_order_id">
+        <Message Importance="high" Text="ODB order_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/order_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/order_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/order_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/order_id-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
     <Target Name="odb_northwind_orders">
         <Message Importance="high" Text="ODB orders"/>
         <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/orders_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/orders.hpp" />
@@ -117,6 +164,16 @@
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
         <Move
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/orders-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
+    <Target Name="odb_northwind_product_id">
+        <Message Importance="high" Text="ODB product_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/product_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/product_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/product_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/product_id-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
     </Target>
     <Target Name="odb_northwind_products">
@@ -129,6 +186,16 @@
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/products-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
     </Target>
+    <Target Name="odb_northwind_shipper_id">
+        <Message Importance="high" Text="ODB shipper_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/shipper_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/shipper_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/shipper_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/shipper_id-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
     <Target Name="odb_northwind_shippers">
         <Message Importance="high" Text="ODB shippers"/>
         <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/shippers_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/shippers.hpp" />
@@ -137,6 +204,16 @@
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
         <Move
             SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/shippers-odb-oracle.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+    </Target>
+    <Target Name="odb_northwind_supplier_id">
+        <Message Importance="high" Text="ODB supplier_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/supplier_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb $(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/types/supplier_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/supplier_id-odb-pgsql.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen/test_models/northwind/odb/supplier_id-odb-oracle.cxx"
             DestinationFolder="$(MSBuildThisFileDirectory)odb/" />
     </Target>
     <Target Name="odb_northwind_suppliers">
