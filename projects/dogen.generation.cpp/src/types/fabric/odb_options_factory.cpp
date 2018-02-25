@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.modeling/types/meta_model/object.hpp"
+#include "dogen.modeling/types/meta_model/primitive.hpp"
 #include "dogen.modeling/types/helpers/name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/building_error.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
@@ -64,7 +65,6 @@ std::list<boost::shared_ptr<modeling::meta_model::element>>
 odb_options_factory::make(const modeling::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
-    using modeling::meta_model::object;
     using modeling::meta_model::origin_types;
     std::list<boost::shared_ptr<modeling::meta_model::element>> r;
     for (const auto& ptr : m.elements()) {
@@ -79,10 +79,22 @@ odb_options_factory::make(const modeling::meta_model::model& m) const {
          * If we're an object with ORM properties, we need to be
          * processed.
          */
+        using modeling::meta_model::object;
         const auto optr(boost::dynamic_pointer_cast<object>(ptr));
         if (optr && optr->orm_properties()) {
             const auto& o(*optr);
             r.push_back(make(o.name(), o.origin_type(), o.annotation()));
+        }
+
+        /*
+         * If we're a primitive with ORM properties, we need to be
+         * processed.
+         */
+        using modeling::meta_model::primitive;
+        const auto pptr(boost::dynamic_pointer_cast<primitive>(ptr));
+        if (pptr && pptr->orm_properties()) {
+            const auto& p(*pptr);
+            r.push_back(make(p.name(), p.origin_type(), p.annotation()));
         }
     }
 
