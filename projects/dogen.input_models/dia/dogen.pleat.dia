@@ -144,7 +144,7 @@
         <dia:string>#workspace#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::orm::object#</dia:string>
+        <dia:string>#dogen::orm::object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -324,7 +324,7 @@
         <dia:string>#input#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::orm::object#</dia:string>
+        <dia:string>#dogen::orm::object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -573,7 +573,7 @@
         <dia:string>#output#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::orm::object#</dia:string>
+        <dia:string>#dogen::orm::object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -868,7 +868,7 @@
         <dia:string>#workspace_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::orm::value, yarn::primitive#</dia:string>
+        <dia:string>#dogen::orm::value, dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=std::string#</dia:string>
@@ -1191,7 +1191,7 @@
         <dia:string>#input_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::orm::value, yarn::primitive#</dia:string>
+        <dia:string>#dogen::orm::value, dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=std::string#</dia:string>
@@ -1301,7 +1301,7 @@
         <dia:string>#output_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::orm::value, yarn::primitive#</dia:string>
+        <dia:string>#dogen::orm::value, dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=std::string#</dia:string>

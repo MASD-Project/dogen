@@ -35,18 +35,18 @@ const std::string transform_id("yarn.transforms.stereotypes_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string stereotype_object("yarn::object");
-const std::string stereotype_object_template("yarn::object_template");
-const std::string stereotype_exception("yarn::exception");
-const std::string stereotype_primitive("yarn::primitive");
-const std::string stereotype_enumeration("yarn::enumeration");
-const std::string stereotype_module("yarn::module");
-const std::string stereotype_builtin("yarn::builtin");
-const std::string stereotype_visitable("yarn::visitable");
-const std::string stereotype_fluent("yarn::fluent");
-const std::string stereotype_immutable("yarn::immutable");
-const std::string stereotype_orm_object("yarn::orm::object");
-const std::string stereotype_orm_value("yarn::orm::value");
+const std::string stereotype_object("dogen::object");
+const std::string stereotype_object_template("dogen::object_template");
+const std::string stereotype_exception("dogen::exception");
+const std::string stereotype_primitive("dogen::primitive");
+const std::string stereotype_enumeration("dogen::enumeration");
+const std::string stereotype_module("dogen::module");
+const std::string stereotype_builtin("dogen::builtin");
+const std::string stereotype_visitable("dogen::visitable");
+const std::string stereotype_fluent("dogen::fluent");
+const std::string stereotype_immutable("dogen::immutable");
+const std::string stereotype_orm_object("dogen::orm::object");
+const std::string stereotype_orm_value("dogen::orm::value");
 
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
@@ -59,6 +59,8 @@ namespace helpers {
 using meta_model::static_stereotypes;
 
 static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
+    BOOST_LOG_SEV(lg, error) << "Converting stereotype: " << s;
+
     if (s == stereotype_object)
         return static_stereotypes::object;
     else if (s == stereotype_object_template)
@@ -83,6 +85,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::orm_object;
     else if (s == stereotype_orm_value)
         return static_stereotypes::orm_value;
+
+    BOOST_LOG_SEV(lg, error) << "Could not convert stereotype.";
 
     return static_stereotypes::invalid;
 }

@@ -16,27 +16,27 @@
     {
       "name": "workflow_error",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "workflow",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "parser",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "block",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "type",
@@ -51,7 +51,7 @@
     {
       "name": "text_template",
       "documentation": "Domain representation of a stitch template.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "input_path",
@@ -85,27 +85,27 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "parsing_error",
       "documentation": "An error occurred whilst parsing.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "properties",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "decoration_properties",
@@ -119,7 +119,7 @@
     },
     {
       "name": "stitching_properties",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "stream_variable_name",
@@ -152,33 +152,33 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "building_error",
       "documentation": "An error occurred whilst building.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "properties_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "line",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "blocks",
@@ -189,9 +189,9 @@
     {
       "name": "block_types",
       "stereotypes": [
-        "yarn::enumeration"
+        "dogen::enumeration"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "text_block",
@@ -216,11 +216,11 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "text_template_body",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "tagged_values",
@@ -235,24 +235,24 @@
     {
       "name": "instantiation_error",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "resolver",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "resolution_error",
       "documentation": "An error occurred when trying to resolve a key.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     }
   ]
 }

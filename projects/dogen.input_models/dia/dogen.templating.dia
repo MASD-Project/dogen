@@ -1609,7 +1609,7 @@
         <dia:string>#validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst validating.#</dia:string>
@@ -1792,7 +1792,7 @@
         <dia:string>#formatting_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst formatting.#</dia:string>
@@ -1975,7 +1975,7 @@
         <dia:string>#extraction_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst extracting a key.#</dia:string>
@@ -2195,7 +2195,7 @@
         <dia:string>#workflow_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3459,7 +3459,7 @@
         <dia:string>#parsing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst parsing.#</dia:string>
@@ -3642,7 +3642,7 @@
         <dia:string>#formatting_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst formatting.#</dia:string>
@@ -4447,7 +4447,7 @@
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst building.#</dia:string>
@@ -5691,7 +5691,7 @@
         <dia:string>#block_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6734,7 +6734,7 @@
         <dia:string>#instantiation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7197,7 +7197,7 @@
         <dia:string>#resolution_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred when trying to resolve a key.#</dia:string>

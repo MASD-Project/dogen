@@ -14,7 +14,7 @@
   "elements": [
     {
       "name": "class_b",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -48,7 +48,7 @@
     },
     {
       "name": "class_a",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -58,11 +58,11 @@
     },
     {
       "name": "pkg1",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "pkg1::class_c",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -76,7 +76,7 @@
     },
     {
       "name": "class_base",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -89,7 +89,7 @@
       "parents": [
         "class_base"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_1",
@@ -99,7 +99,7 @@
     },
     {
       "name": "class_d",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -124,7 +124,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -134,7 +134,7 @@
     },
     {
       "name": "class_e",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -156,7 +156,7 @@
     },
     {
       "name": "class_f",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -186,7 +186,7 @@
     },
     {
       "name": "class_g",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -200,7 +200,7 @@
     },
     {
       "name": "class_h",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -212,38 +212,38 @@
       "name": "ptime_primitive",
       "documentation": "Test a primitive with an underlying ptime.\n",
       "stereotypes": [
-        "yarn::primitive"
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "boost::posix_time::ptime"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "time_duration_primitive",
       "documentation": "Test a primitive with an underlying time_duration.\n",
       "stereotypes": [
-        "yarn::primitive"
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "boost::posix_time::time_duration"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "date_primitive",
       "documentation": "Test a primitive with an underlying time_duration.\n",
       "stereotypes": [
-        "yarn::primitive"
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "boost::gregorian::date"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "class_j",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",

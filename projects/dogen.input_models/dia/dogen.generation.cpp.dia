@@ -5252,7 +5252,7 @@ facet of the C++ language.
         <dia:string>#registrar_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#There was an error in the registrar.#</dia:string>
@@ -5363,7 +5363,7 @@ facet of the C++ language.
         <dia:string>#workflow_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5473,7 +5473,7 @@ facet of the C++ language.
         <dia:string>#formatting_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst formatting.#</dia:string>
@@ -9534,7 +9534,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred while the factory was building.#</dia:string>
@@ -12044,7 +12044,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst the factory was building.#</dia:string>
@@ -15532,7 +15532,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>#inclusion_support_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -18876,7 +18876,7 @@ and element.#</dia:string>
         <dia:string>#adaptation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred during adaptation.#</dia:string>
@@ -19059,7 +19059,7 @@ and element.#</dia:string>
         <dia:string>#expansion_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21353,7 +21353,7 @@ and element.#</dia:string>
         <dia:string>#resolution_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -27957,7 +27957,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>#location_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred while the locator was creating a path.#</dia:string>
@@ -30848,7 +30848,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -31374,7 +31374,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>#cpp_standards#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

@@ -16,37 +16,37 @@
   "elements": [
     {
       "name": "transforms",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "transforms::codec_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::codec_container",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::registrar_error",
       "documentation": "A registration error has occurred.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::codec_types",
       "documentation": "Types of codecs supported.\n",
       "stereotypes": [
-        "yarn::enumeration"
+        "dogen::enumeration"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "encoder",
@@ -70,32 +70,32 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::encoding_error",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::decoding_error",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::model_to_model_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "meta_model",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "meta_model::model",
@@ -105,7 +105,7 @@
         "Documentable",
         "Taggable"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "elements",
@@ -122,7 +122,7 @@
         "Taggable",
         "Stereotypable"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "parents",
@@ -175,7 +175,7 @@
         "Taggable",
         "Stereotypable"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "type",
@@ -187,9 +187,9 @@
       "name": "meta_model::Taggable",
       "documentation": "Ability to contain tagged values.\n",
       "stereotypes": [
-        "yarn::object_template"
+        "dogen::object_template"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "tagged_values",
@@ -201,17 +201,17 @@
       "name": "meta_model::Stereotypable",
       "documentation": "Ability to have stereotypes.\n",
       "stereotypes": [
-        "yarn::object_template"
+        "dogen::object_template"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "meta_model::Documentable",
       "documentation": "Ability to provide documentation.\n",
       "stereotypes": [
-        "yarn::object_template"
+        "dogen::object_template"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "documentation",
@@ -224,9 +224,9 @@
       "name": "meta_model::Nameable",
       "documentation": "Ability to have a name.\n",
       "stereotypes": [
-        "yarn::object_template"
+        "dogen::object_template"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -239,7 +239,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prober",
@@ -250,16 +250,16 @@
     {
       "name": "transforms::transformation_error",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "transforms::context_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     }
   ]
 }

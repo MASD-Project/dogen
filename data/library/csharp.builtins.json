@@ -9,7 +9,7 @@
     {
       "name": "byte",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -23,7 +23,7 @@
     {
       "name": "sbyte",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -37,7 +37,7 @@
     {
       "name": "int",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "is_default_enumeration_type": true,
       "in_global_module": true,
@@ -52,7 +52,7 @@
     {
       "name": "uint",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -66,7 +66,7 @@
     {
       "name": "short",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -80,7 +80,7 @@
     {
       "name": "ushort",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -94,7 +94,7 @@
     {
       "name": "long",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -108,7 +108,7 @@
     {
       "name": "ulong",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -122,7 +122,7 @@
     {
       "name": "float",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "is_floating_point": true,
@@ -137,7 +137,7 @@
     {
       "name": "double",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "is_floating_point": true,
@@ -152,7 +152,7 @@
     {
       "name": "char",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
@@ -165,7 +165,7 @@
     {
       "name": "bool",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,
@@ -195,7 +195,7 @@
     {
       "name": "decimal",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "in_global_module": true,
       "can_be_primitive_underlier": true,

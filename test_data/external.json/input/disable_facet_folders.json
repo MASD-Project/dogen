@@ -14,11 +14,11 @@
   "elements": [
     {
       "name": "package1",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "package1::first_class",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "public_attribute",

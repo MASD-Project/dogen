@@ -16,9 +16,9 @@
     {
       "name": "workspace",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "workspace_id",
@@ -40,9 +40,9 @@
     {
       "name": "input",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "input_id",
@@ -76,9 +76,9 @@
     {
       "name": "output",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "output_id",
@@ -120,35 +120,35 @@
     {
       "name": "workspace_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "std::string"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "input_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "std::string"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "output_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "std::string"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     }
   ]
 }

@@ -17,9 +17,9 @@
       "name": "value",
       "documentation": "Base class of all value types.\n",
       "stereotypes": [
-        "yarn::visitable"
+        "dogen::visitable"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "text",
@@ -27,7 +27,7 @@
         "value"
       ],
       "documentation": "Field can hold text.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "content",
@@ -42,7 +42,7 @@
         "value"
       ],
       "documentation": "Field can hold a collection of text values.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "content",
@@ -57,7 +57,7 @@
         "value"
       ],
       "documentation": "Field can hold a Boolean value.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "content",
@@ -68,7 +68,7 @@
     {
       "name": "name",
       "documentation": "Name of the field description or field.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "simple",
@@ -86,9 +86,9 @@
       "name": "value_types",
       "documentation": "What values can a field hold.\n",
       "stereotypes": [
-        "yarn::enumeration"
+        "dogen::enumeration"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "text",
@@ -115,7 +115,7 @@
     {
       "name": "type",
       "documentation": "Defines the domain of values.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -151,7 +151,7 @@
     {
       "name": "annotation",
       "documentation": "Represents an annotation that can be associated with an external object.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "tagged_values",
@@ -168,9 +168,9 @@
       "name": "scope_types",
       "documentation": "Where can a field appear.\n",
       "stereotypes": [
-        "yarn::enumeration"
+        "dogen::enumeration"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "any",
@@ -213,14 +213,14 @@
       "name": "building_error",
       "documentation": "An error occurred while the field factory was building.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "archetype_location",
       "documentation": "Location of an archetype or set of archetypes in the hierarchical artchetype space.\n\nThese must be populated in order, e.g. in order to have a backend we must have a\nkernel; in order to have a facet we must have a backend and in order to have a\nformatter we must have a facet. We may not have any.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "kernel",
@@ -249,11 +249,11 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "type_repository",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "all_types",
@@ -292,7 +292,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "annotation_",
@@ -304,38 +304,38 @@
       "name": "selection_error",
       "documentation": "An error occurred when attempting to select.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "hydration_error",
       "documentation": "An error occurred whilst trying to hydrate field definitions.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "type_templates_hydrator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "type_repository_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "template_kinds",
       "stereotypes": [
-        "yarn::enumeration"
+        "dogen::enumeration"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "instance",
@@ -368,7 +368,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "repository_",
@@ -380,16 +380,16 @@
       "name": "instantiation_error",
       "documentation": "An error occurred whilst trying to instantiate a field definition template.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "type_repository_selector",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "repository_",
@@ -403,7 +403,7 @@
         "value"
       ],
       "documentation": "Field can hold numbers.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "content",
@@ -413,7 +413,7 @@
     },
     {
       "name": "profile",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -435,7 +435,7 @@
     },
     {
       "name": "profile_repository",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "profiles_by_name",
@@ -445,7 +445,7 @@
     },
     {
       "name": "entry_template",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -470,26 +470,26 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "profile_hydrator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "merger",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "type_template",
       "documentation": "Defines a template that can be used to instantiate types.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -525,7 +525,7 @@
     },
     {
       "name": "archetype_location_repository",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "archetype_locations",
@@ -564,18 +564,18 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "profiling_error",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "profiler_configuration",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "profile",
@@ -596,7 +596,7 @@
       "parents": [
         "value"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "content",
@@ -606,7 +606,7 @@
     },
     {
       "name": "archetype_locations_group",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "archetype_locations",
@@ -622,7 +622,7 @@
     },
     {
       "name": "archetype_location_repository_parts",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "archetype_locations",
@@ -651,14 +651,14 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "annotation_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     }
   ]
 }

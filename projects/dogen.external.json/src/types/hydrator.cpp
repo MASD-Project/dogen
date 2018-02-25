@@ -34,7 +34,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("external.json.hydrator"));
 
 const std::string empty;
-const std::string yarn_object_element("yarn::object");
+const std::string object_element_type("dogen::object");
 const std::string fallback_element_type_key("fallback_element_type");
 const std::string name_key("name");
 const std::string parents_key("parents");
@@ -141,7 +141,7 @@ read_element(const boost::property_tree::ptree& pt) const {
 
     const auto opt(pt.get_optional<std::string>(fallback_element_type_key));
     if (!opt)
-        r.fallback_element_type(yarn_object_element);
+        r.fallback_element_type(object_element_type);
     else
         r.fallback_element_type(*opt);
 

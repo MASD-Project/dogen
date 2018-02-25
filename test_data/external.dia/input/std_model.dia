@@ -2678,7 +2678,7 @@
         <dia:string>#enum_with_std_builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.enumeration.underlying_element=std::int8_t#</dia:string>
@@ -2835,7 +2835,7 @@
         <dia:string>#string_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::primitive#</dia:string>
+        <dia:string>#dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying string.

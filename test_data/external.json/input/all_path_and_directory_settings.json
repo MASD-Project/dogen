@@ -96,11 +96,11 @@
   "elements": [
     {
       "name": "package_0",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "package_0::class_1",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -110,7 +110,7 @@
     },
     {
       "name": "class_0",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -120,11 +120,11 @@
     },
     {
       "name": "package_0::package_0_1",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "package_0::package_0_1::class_2",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",

@@ -15,7 +15,7 @@
     {
       "name": "diagram_data",
       "documentation": "Represents a all the data associated with a diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "attributes",
@@ -27,7 +27,7 @@
     {
       "name": "attribute",
       "documentation": "Attribute in a Dia diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -44,7 +44,7 @@
     {
       "name": "composite",
       "documentation": "Attribute value which is made up of other attributes.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "type",
@@ -66,7 +66,7 @@
     {
       "name": "color",
       "documentation": "Represents a color in a diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -78,7 +78,7 @@
     {
       "name": "diagram",
       "documentation": "Represents a diagram in Dia.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "diagram_data",
@@ -95,7 +95,7 @@
     {
       "name": "layer",
       "documentation": "Represents a layer in a Dia diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
@@ -122,7 +122,7 @@
     {
       "name": "real",
       "documentation": "Represents a real value.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -134,7 +134,7 @@
     {
       "name": "integer",
       "documentation": "Represents an integer value.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -146,7 +146,7 @@
     {
       "name": "object",
       "documentation": "Represents a Dia object.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "type",
@@ -183,7 +183,7 @@
     {
       "name": "point",
       "documentation": "Represents a point in a diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -195,7 +195,7 @@
     {
       "name": "boolean",
       "documentation": "Represents a boolean value.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -207,7 +207,7 @@
     {
       "name": "child_node",
       "documentation": "Represents a child_node in a diagram.\n\nChild nodes are used in Dia to represent the relationship between a\npackage and the entities it contains. For example, if class O1 is\ninside package O0 then class O1 will have a child node element with\na parent pointing to O0.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "parent",
@@ -219,7 +219,7 @@
     {
       "name": "string",
       "documentation": "Represents a string value.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -231,7 +231,7 @@
     {
       "name": "font",
       "documentation": "Represents a font in a diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "family",
@@ -250,7 +250,7 @@
     {
       "name": "enumeration",
       "documentation": "Represents a enumeration in a diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -262,7 +262,7 @@
     {
       "name": "connection",
       "documentation": "Connection between entities in a Dia diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "handle",
@@ -284,7 +284,7 @@
     {
       "name": "rectangle",
       "documentation": "Represents a rectangle in a diagram.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "value",
@@ -299,30 +299,30 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "hydration_error",
       "documentation": "An error occurred while reading a diagram.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "persister",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "persister_error",
       "documentation": "An error occurred whilst tryng to persist a Dia diagram.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     }
   ]
 }

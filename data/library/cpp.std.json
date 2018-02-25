@@ -9,7 +9,7 @@
     {
       "name": "int8_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -23,7 +23,7 @@
     {
       "name": "int16_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -35,7 +35,7 @@
     {
       "name": "int32_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -47,7 +47,7 @@
     {
       "name": "int64_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -59,7 +59,7 @@
     {
       "name": "uint8_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -72,7 +72,7 @@
     {
       "name": "uint16_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -84,7 +84,7 @@
     {
       "name": "uint32_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {
@@ -96,7 +96,7 @@
     {
       "name": "uint64_t",
       "stereotypes": [
-        "yarn::builtin"
+        "dogen::builtin"
       ],
       "can_be_primitive_underlier": true,
       "tagged_values": {

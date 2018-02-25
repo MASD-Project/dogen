@@ -15,7 +15,7 @@
   "elements": [
     {
       "name": "stitching_options",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "log_level",
@@ -43,7 +43,7 @@
     },
     {
       "name": "tailoring_options",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "log_level",
@@ -70,7 +70,7 @@
     },
     {
       "name": "darting_options",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "log_level",

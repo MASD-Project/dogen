@@ -761,7 +761,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#formatting_styles#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1676,7 +1676,7 @@ backend enabled.#</dia:string>
         <dia:string>#directory_structure_styles#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2113,7 +2113,7 @@ If not supplied the model path segment is computed from the remaining settings.#
         <dia:string>#path_contribution_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::enumeration#</dia:string>
+        <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Different kinds of contributions that can be made to the final path computation.#</dia:string>
@@ -4942,7 +4942,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::object_template#</dia:string>
+        <dia:string>#dogen::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5077,7 +5077,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::object_template#</dia:string>
+        <dia:string>#dogen::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11614,7 +11614,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#writing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error ocrurred whilst writing.#</dia:string>
@@ -11953,7 +11953,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#transformation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::exception#</dia:string>
+        <dia:string>#dogen::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst applying a transformation.#</dia:string>

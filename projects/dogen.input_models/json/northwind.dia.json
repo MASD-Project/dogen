@@ -19,20 +19,20 @@
     {
       "name": "product_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "products",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "product_id",
@@ -91,20 +91,20 @@
     {
       "name": "supplier_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "suppliers",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "supplier_id",
@@ -192,20 +192,20 @@
     {
       "name": "category_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "order_details",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "order_details_key",
@@ -241,9 +241,9 @@
     {
       "name": "order_details_key",
       "stereotypes": [
-        "yarn::orm::value"
+        "dogen::orm::value"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "order_id",
@@ -258,9 +258,9 @@
     {
       "name": "orders",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "order_id",
@@ -365,31 +365,31 @@
     {
       "name": "order_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "employee_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "categories",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "category_id",
@@ -421,9 +421,9 @@
     {
       "name": "employees",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "employee_id",
@@ -553,20 +553,20 @@
     {
       "name": "shipper_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "shippers",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "shipper_id",
@@ -588,20 +588,20 @@
     {
       "name": "customer_id",
       "stereotypes": [
-        "yarn::orm::value",
-        "yarn::primitive"
+        "dogen::orm::value",
+        "dogen::primitive"
       ],
       "tagged_values": {
         "yarn.primitive.underlying_element": "int"
       },
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "customers",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "customer_id",
@@ -685,14 +685,14 @@
     },
     {
       "name": "package",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "package::class_0",
       "stereotypes": [
-        "yarn::orm::object"
+        "dogen::orm::object"
       ],
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -703,7 +703,7 @@
     {
       "name": "non_orm_class",
       "documentation": "test the ODB behaviour for non-ORM classes.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",

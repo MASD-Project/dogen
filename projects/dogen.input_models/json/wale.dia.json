@@ -15,7 +15,7 @@
   "elements": [
     {
       "name": "text_template",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "properties",
@@ -29,7 +29,7 @@
     },
     {
       "name": "properties",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "template_path",
@@ -50,52 +50,52 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "workflow",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "formatter",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "validator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "validation_error",
       "documentation": "An error occurred whilst validating.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "extraction_error",
       "documentation": "An error occurred whilst extracting a key.\n",
       "stereotypes": [
-        "yarn::exception"
+        "dogen::exception"
       ],
-      "fallback_element_type": "yarn::object"
+      "fallback_element_type": "dogen::object"
     }
   ]
 }

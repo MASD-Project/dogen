@@ -31,8 +31,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("external.dia.adapter"));
 
 const std::string name_delimiter("::");
-const std::string yarn_object_element("yarn::object");
-const std::string yarn_module_element("yarn::module");
+const std::string object_element("dogen::object");
+const std::string module_element("dogen::module");
 
 const std::string empty_dia_name("Dia name is empty.");
 
@@ -80,9 +80,9 @@ void adapter::process_stereotypes(const processed_object& po,
      * dia UML types.
      */
     if (po.dia_object_type() == dia_object_types::uml_class)
-        e.fallback_element_type(yarn_object_element);
+        e.fallback_element_type(object_element);
     else if (po.dia_object_type() == dia_object_types::uml_large_package)
-        e.fallback_element_type(yarn_module_element);
+        e.fallback_element_type(module_element);
 
     /*
      * Split and copy across the user-supplied stereotypes.

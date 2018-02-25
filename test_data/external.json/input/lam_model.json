@@ -16,11 +16,11 @@
   "elements": [
     {
       "name": "package1",
-      "fallback_element_type": "yarn::module"
+      "fallback_element_type": "dogen::module"
     },
     {
       "name": "package1::class_in_package",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",
@@ -30,7 +30,7 @@
     },
     {
       "name": "builtins",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "prop_0",

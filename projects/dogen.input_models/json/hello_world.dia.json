@@ -15,7 +15,7 @@
     {
       "name": "one_property",
       "documentation": "Hello World class.\n",
-      "fallback_element_type": "yarn::object",
+      "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "property",

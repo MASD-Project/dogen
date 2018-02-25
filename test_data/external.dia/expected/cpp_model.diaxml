@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="14">
+<boost_serialization signature="serialization::archive" version="16">
 <entity class_id="0" tracking_level="0" version="0">
 	<diagram_data class_id="1" tracking_level="0" version="0">
 		<attributes class_id="2" tracking_level="0" version="0">
@@ -332,7 +332,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</connections>
-					<child_node class_id="20" tracking_level="0" version="0">
+					<child_node class_id="20" tracking_level="0" version="1">
 						<initialized>0</initialized>
 					</child_node>
 					<attributes>
@@ -2812,7 +2812,6 @@
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value class_id="25" tracking_level="0" version="0">
 							<parent>O2</parent>
 						</value>
@@ -3438,7 +3437,6 @@
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O2</parent>
 						</value>
@@ -4064,7 +4062,6 @@
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O2</parent>
 						</value>
@@ -4690,7 +4687,6 @@
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O2</parent>
 						</value>
@@ -5316,7 +5312,6 @@
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O2</parent>
 						</value>
@@ -6743,7 +6738,6 @@
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O9</parent>
 						</value>
@@ -9831,7 +9825,6 @@ it will be ignored.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O16</parent>
 						</value>
@@ -10014,7 +10007,6 @@ it will be ignored.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O16</parent>
 						</value>
@@ -10271,7 +10263,6 @@ it will be ignored.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O17</parent>
 						</value>
@@ -10618,7 +10609,7 @@ it will be ignored.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::enumeration#</value>
+										<value>#dogen::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -11478,7 +11469,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::enumeration#</value>
+										<value>#dogen::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -13312,7 +13303,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::enumeration#</value>
+										<value>#dogen::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -14052,7 +14043,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::enumeration#</value>
+										<value>#dogen::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -14794,7 +14785,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::enumeration#</value>
+										<value>#dogen::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -15979,7 +15970,6 @@ this is a long comment#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O26</parent>
 						</value>
@@ -16073,7 +16063,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::enumeration#</value>
+										<value>#dogen::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -17049,7 +17039,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::exception#</value>
+										<value>#dogen::exception#</value>
 									</value>
 								</item>
 							</values>
@@ -17642,7 +17632,6 @@ this is a long comment#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O29</parent>
 						</value>
@@ -17736,7 +17725,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::exception#</value>
+										<value>#dogen::exception#</value>
 									</value>
 								</item>
 							</values>
@@ -18240,7 +18229,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive, yarn::immutable#</value>
+										<value>#dogen::primitive, dogen::immutable#</value>
 									</value>
 								</item>
 							</values>
@@ -20548,7 +20537,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -21054,7 +21043,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -21560,7 +21549,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -22066,7 +22055,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -22572,7 +22561,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -23078,7 +23067,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -23584,7 +23573,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -24090,7 +24079,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -24596,7 +24585,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -25102,7 +25091,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -25608,7 +25597,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::primitive#</value>
+										<value>#dogen::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -27371,7 +27360,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::fluent#</value>
+										<value>#dogen::fluent#</value>
 									</value>
 								</item>
 							</values>
@@ -28229,7 +28218,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::immutable#</value>
+										<value>#dogen::immutable#</value>
 									</value>
 								</item>
 							</values>
@@ -28733,7 +28722,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::immutable#</value>
+										<value>#dogen::immutable#</value>
 									</value>
 								</item>
 							</values>
@@ -29473,7 +29462,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::immutable#</value>
+										<value>#dogen::immutable#</value>
 									</value>
 								</item>
 							</values>
@@ -30095,7 +30084,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::immutable#</value>
+										<value>#dogen::immutable#</value>
 									</value>
 								</item>
 							</values>
@@ -30717,7 +30706,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::immutable#</value>
+										<value>#dogen::immutable#</value>
 									</value>
 								</item>
 							</values>
@@ -31693,7 +31682,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -33055,7 +33044,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -33677,7 +33666,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -35500,7 +35489,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -36122,7 +36111,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -36744,7 +36733,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -37752,7 +37741,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -54857,7 +54846,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::visitable#</value>
+										<value>#dogen::visitable#</value>
 									</value>
 								</item>
 							</values>
@@ -61970,7 +61959,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O122</parent>
 						</value>
@@ -62596,7 +62584,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O122</parent>
 						</value>
@@ -63222,7 +63209,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O122</parent>
 						</value>
@@ -63858,7 +63844,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O122</parent>
 						</value>
@@ -64403,7 +64388,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O127</parent>
 						</value>
@@ -65029,7 +65013,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O128</parent>
 						</value>
@@ -65848,7 +65831,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O128</parent>
 						</value>
@@ -66653,7 +66635,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O133</parent>
 						</value>
@@ -67279,7 +67260,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O133</parent>
 						</value>
@@ -68277,7 +68257,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O9</parent>
 						</value>
@@ -69021,7 +69000,6 @@ of the object template instantiated by the base class.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O9</parent>
 						</value>
@@ -69289,7 +69267,6 @@ name.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O9</parent>
 						</value>
@@ -69618,7 +69595,6 @@ name.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O141</parent>
 						</value>
@@ -69712,7 +69688,7 @@ name.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#yarn::object_template#</value>
+										<value>#dogen::object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -70244,7 +70220,6 @@ name.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O141</parent>
 						</value>
@@ -70762,7 +70737,6 @@ name.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O141</parent>
 						</value>
@@ -71079,7 +71053,6 @@ name.#</value>
 					</connections>
 					<child_node>
 						<initialized>1</initialized>
-						<item_version>0</item_version>
 						<value>
 							<parent>O141</parent>
 						</value>

@@ -2134,7 +2134,7 @@
         <dia:string>#ptime_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::primitive#</dia:string>
+        <dia:string>#dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying ptime.
@@ -2246,7 +2246,7 @@
         <dia:string>#time_duration_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::primitive#</dia:string>
+        <dia:string>#dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying time_duration.
@@ -2358,7 +2358,7 @@
         <dia:string>#date_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::primitive#</dia:string>
+        <dia:string>#dogen::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying time_duration.

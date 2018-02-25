@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="14">
+<boost_serialization signature="serialization::archive" version="16">
 <entity class_id="0" tracking_level="0" version="0">
 	<diagram_data class_id="1" tracking_level="0" version="0">
 		<attributes class_id="2" tracking_level="0" version="0">

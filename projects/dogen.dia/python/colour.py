@@ -28,17 +28,17 @@ for layer in dia.active_display().diagram.data.layers:
 
         name = object.properties["name"].value
         stereotype = object.properties["stereotype"].value
-        if "yarn::orm::object" in stereotype:
+        if "dogen::orm::object" in stereotype:
             object.properties["fill_colour"] = "Pale Green"
-        elif "yarn::orm::value" in stereotype:
+        elif "dogen::orm::value" in stereotype:
             object.properties["fill_colour"] = "Plum"
-        elif "yarn::enumeration" in stereotype:
+        elif "dogen::enumeration" in stereotype:
             object.properties["fill_colour"] = "Papaya Whip"
-        elif "yarn::primitive" in stereotype:
+        elif "dogen::primitive" in stereotype:
             object.properties["fill_colour"] = "Light Goldenrod Yellow"
-        elif "yarn::exception" in stereotype:
+        elif "dogen::exception" in stereotype:
             object.properties["fill_colour"] = "Peach Puff"
-        elif "yarn::object_template" in stereotype:
+        elif "dogen::object_template" in stereotype:
             object.properties["fill_colour"] = "Azure"
         elif "handcrafted" in stereotype:
             object.properties["fill_colour"] = "Lemon Chiffon"
