@@ -61,7 +61,6 @@ script:
   - JOBS=2
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         export TARGET="package run_all_tests";
-        # export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_gcc_5.3_linux_amd64";
         export THIRD_PARTY="/tmp/hedgr_deps/local";
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
