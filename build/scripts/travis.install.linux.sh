@@ -21,9 +21,12 @@
 #
 # deps
 #
-dropbox="https://www.dropbox.com/s/trikqhe5uw3orjk/dogen_deps_gcc_5.3_linux_amd64_v9.tar.bz2?dl=0"
-version=9
-package="dogen_deps_gcc_5.3_linux_amd64_v${version}.tar.bz2"
+# dropbox="https://www.dropbox.com/s/trikqhe5uw3orjk/dogen_deps_gcc_5.3_linux_amd64_v9.tar.bz2?dl=0"
+# version=9
+# package="dogen_deps_gcc_5.3_linux_amd64_v${version}.tar.bz2"
+dropbox="https://www.dropbox.com/s/lco0kn2wsjbmpjf/hedgr_deps_ubuntu_14.04_amd64_v1.tgz?dl=0"
+version=1
+package="hedgr_deps_ubuntu_14.04_amd64_v${version}.tgz"
 input_location="${dropbox}/${package}"
 output_location="/tmp/${package}"
 extract_dir="/tmp/dogen_deps"
