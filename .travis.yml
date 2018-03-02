@@ -61,7 +61,7 @@ script:
   - JOBS=2
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         export TARGET="package run_all_tests";
-        export THIRD_PARTY="/tmp/hedgr_deps/local";
+        export THIRD_PARTY="/tmp/dogen_deps/local";
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
         export PATH="/usr/local/opt/ccache/libexec:$PATH"
