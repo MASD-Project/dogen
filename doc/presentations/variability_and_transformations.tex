@@ -78,15 +78,20 @@ v${DOGEN_VERSION}
 \pause
 
 \item Formal models are written using a \acf{DSL}. The \ac{DSL} is
-  designed specifically for modeling. \acf{UML} is an example of such
-  a \ac{DSL}. \ac{UML} has a graphical representation~--- called a
-  \emph{concrete syntax}, but also an \emph{abstract syntax}.
+  designed specifically for modeling.
+
+\pause
+
+\item
+  \acf{UML} is an example of such a \ac{DSL}. \ac{UML} has a graphical
+  representation~--- called a \emph{concrete syntax}~--- but it also
+  has an \emph{abstract syntax}.
 
 \pause
 
 \item A \emph{meta-model} is made up of the abstract syntax and the
-  static semantics of the \ac{DSL}. The metamodel is the basis for the
-  transformations.
+  static semantics of the \ac{DSL}. The metamodel is the basis for
+  \emph{transformations}.
 
 \end{itemize}
 
@@ -101,16 +106,29 @@ v${DOGEN_VERSION}
 
 \pause
 
-\item The output of a transform can be another model; in this case we
-  classify the transform as \acf{M2M}. The output model can either
-  \emph{conform} to the same metamodel or to a different metamodel.
+\item We can classify transforms based on the \emph{type} of its
+  output:
 
 \pause
 
-\item The output of the transform can also be text; in this case we
-  classify the transform as \acf{M2T}. These transforms are commonly
-  referred to as \emph{generators} because they are a generalisation
-  of the notion \emph{code generators}.
+\begin{itemize}
+
+\item \textbf{\acf{M2M}}: the output is another model. Note that the
+  output can \emph{conform} to the same metamodel or to a different
+  metamodel.
+
+\pause
+
+\item \textbf{\acf{M2T}}: the output is a textual representation of
+  the model.
+
+\end{itemize}
+
+\pause
+
+\item \ac{M2T} transforms are commonly referred to as
+  \emph{generators} because they are a generalisation of the notion of
+  a \emph{code generator}.
 
 \end{itemize}
 
