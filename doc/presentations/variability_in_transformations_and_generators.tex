@@ -1,0 +1,190 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{acronym}
+\usepackage{graphicx}
+\usepackage[backend=bibtex]{biblatex}
+
+\newcommand{\etal}{\textit{et al}. }
+\newcommand{\ie}{\textit{i}.\textit{e}., }
+\newcommand{\eg}{\textit{e}.\textit{g}. }
+\newcommand{\etc}{\textit{etc}. }
+
+\title{Variability in Transformations and Generators}
+\author{Marco Craveiro}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{variability_in_transformations_and_generators}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+v${DOGEN_VERSION}
+\end{frame}
+
+\section{Background}
+
+\begin{frame}
+\frametitle{What is \ac{MDE}}
+
+\begin{itemize}
+\item Previous presentation provided an overview of what \ac{MDE} is
+  and why you should consider it for Software Engineering.
+
+\pause
+
+\item \ac{MDE} is a ``development paradigm that uses models as the
+  primary artifact of the development process. Usually [\ldots] the
+  implementation is (semi-)automatically generated from the
+  models.''\cite{brambilla2012model}
+
+\pause
+
+\item \ac{MDE} ``goes beyond the pure development activities and
+  encompasses other model-based tasks of a complete software
+  engineering process (\eg the model-based evolution of the system or
+  the model-driven reverse engineering of a legacy
+  system.)''\cite{brambilla2012model}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\ac{MDE} Key Components}
+
+\begin{itemize}
+
+\item ``Fundamental'' \ac{MDE} equation: Models + Transformations =
+  Software
+
+\pause
+
+\item \ac{MDE} is only interested in a special class of models: those
+  which are described according to a \textbf{formal language} and thus
+  have precise semantics.
+
+\pause
+
+\item Formal models are written using a \ac{DSL}. The \ac{DSL} is
+  designed specifically for modeling. \ac{UML} is an example of such a
+  \ac{DSL}. \ac{UML} has a graphical representation~--- called a
+  \emph{concrete syntax}, but also an \emph{abstract syntax}.
+
+\pause
+
+\item A \emph{meta-model} is made up of the abstract syntax and the
+  static semantics of the \ac{DSL}. The metamodel is the basis for the
+  transformations.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\ac{MDE} Key Components}
+
+\begin{itemize}
+
+\item \emph{Transformations}~--- or just transforms~--- can be thought
+  of as functions that take models as inputs and produce an output.
+
+\pause
+
+\item The output of a transform can be another model; it can either
+  conforming to the same metamodel or to a different metamodel. In
+  this case we classify the transform as \ac{M2M}.
+
+\pause
+
+\item The output of the transform can also be text; in this case we
+  classify the transform as \ac{M2T}. These are commonly referred to
+  as \emph{generators}.
+
+\end{itemize}
+
+\end{frame}
+
+\section{Variability}
+
+\begin{frame}
+\frametitle{Software Product Lines}
+
+\begin{itemize}
+
+\item \ac{MDE} ``pursues the goal of creating a software
+  \emph{product} in part or in the whole through one or more
+  transformations.''\cite{völter2013model}
+
+\pause
+
+\item Once you have a product, the next logical think is to think of
+  \emph{product families}: ``the set of all products that can be
+  created with a certain domain architecture is commonly referred to
+  as a \emph{software system family}.''''\cite{volter2013model}
+
+\pause
+
+\item ``Software product line engineering aims to reduce development
+  time, effort, cost, and complexity by taking advantage of the
+  commonality within a portfolio of similar
+  products.''\cite{voelter2007handling}
+
+\pause
+
+\item \ac{PLE} integrates with \ac{MDE} seamlessly:
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Software Product Lines}
+
+\begin{itemize}
+
+\item \emph{Transformations}~--- or just transforms~--- can be thought
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Acronyms}
+
+\begin{acronym}
+  \acro{DSL}{Domain Specific Language}
+  \acro{GPML}{General Purpose Modeling Languages}
+  \acro{M2M}{Model-to-Model}
+  \acro{M2T}{Model-to-Text}
+  \acro{MDE}{Model-driven Engineering}
+  \acro{PIM}{Platform Independent Model}
+  \acro{PLE}{Product Line Engineering}
+  \acro{PSM}{Platform Specific Model}
+  \acro{T2M}{Text-to-Model}
+  \acro{UML}{Unified Modeling Language}
+\end{acronym}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Bibliography}
+
+\printbibliography
+
+\end{frame}
+
+
+
+\end{document}
