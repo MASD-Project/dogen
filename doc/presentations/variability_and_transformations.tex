@@ -127,13 +127,12 @@ v${DOGEN_VERSION}
 \pause
 
 \item \ac{M2T} transforms are commonly referred to as
-  \emph{generators} because they are a generalisation of the notion of
-  a \emph{code generator}.
+  \emph{generators} because they generalise of the notion of a
+  \emph{code generator}.
 
 \end{itemize}
 
 \end{frame}
-
 \section{Variability}
 
 \begin{frame}
@@ -198,18 +197,15 @@ v${DOGEN_VERSION}
 
 \item ``Variability management is the activity concerned with
   identifying, designing, implementing, and tracing flexibility in
-  software product lines (SPLs).''
+  software product lines (SPLs).''\cite{voelter2007handling}
 
 \pause
 
-\item In practice, there are problems integrating \ac{MDE} with
-  \ac{PLE}: ``One of the most interesting question [sic] when it comes
-  to software product lines and model driven engineering is how to
-  formulate the knowledge of a software product line by using
-  models. Especially, the variability aspect is in this context of
-  main interest as modeling languages are quite often lacking
-  variability as a first-class language
-  concept.''\cite{brambilla2012model}
+\item ``The effectiveness of a software product line approach directly
+  depends on how well feature variability within the portfolio is
+  implemented and managed throughout the development lifecycle, from
+  early analysis through maintenance and evolution.''
+  \cite{groher2007expressing}
 
 \end{itemize}
 
@@ -218,13 +214,93 @@ v${DOGEN_VERSION}
 \begin{frame}
 \frametitle{Software Product Lines: Variability}
 
-Variability has been around for a long time, in various guises.
+In practice, there are problems integrating \ac{MDE} with
+\ac{PLE}. Brambilla states\cite{brambilla2012model}:
+
+\begin{quote}
+``One of the most interesting question [sic] when it comes to software
+product lines and model driven engineering is how to formulate the
+knowledge of a software product line by using models. Especially, the
+variability aspect is in this context of main interest as modeling
+languages are quite often lacking variability as a first-class
+language concept.''
+\end{quote}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Software Product Lines: Variability}
+
+\begin{itemize}
+\item Thus the crux of the problem is how to integrate the traditional
+  modeling techniques~--- based on modeling \ac{DSL}s~--- with the
+  modeling of variability. For this we need to understand variability.
+
+\pause
+
+\item Groher and V{\"o}lter classify variability into two broad types
+  \cite{groher2007expressing}:
+
+\pause
+
+\begin{itemize}
+\item \textbf{Structural}: described using creative construction DSLs,
+  \eg \ac{UML}. These allow one to creatively construct any arbitrary
+  data structure, defining any number of models.
+
+\pause
+
+\item \textbf{Non-structural}: described using configuration
+  languages, \eg application config files, build system configuration,
+  macros, \etc.
+
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Software Product Lines: Variability}
+
+However, in practice, variability does not fit neatly into these
+categories. Instead, there is a ``spectrum of languages commonly used
+for expressing and binding variability.''\cite{groher2007expressing}
 
 \begin{figure}
   \centering
   \includegraphics[scale=0.6]{images/variability_spectrum_voelter.png}
   \caption{Expressive power of \ac{DSL}s.\cite{groher2007expressing}}
 \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Software Product Lines: Variability}
+
+\begin{itemize}
+\item Another way to look at variability is to focus on how it is
+  applied. Here, Groher and V{\"o}lter outline two approaches
+  \cite{groher2007expressing}:
+
+  \pause
+
+  \begin{itemize}
+
+  \item \textbf{Positive Variability}: ``starts with a minimal core
+    and selectively adds additional parts based on the presence or
+    absence of features in the configuration models.''
+
+  \pause
+
+  \item \textbf{Negative Variability}: ``Negative variability
+    selectively takes away parts of a creative construction model
+    based on the presence or absence of features in the configuration
+    models''
+
+  \end{itemize}
+
+\end{itemize}
 
 \end{frame}
 
@@ -252,7 +328,5 @@ Variability has been around for a long time, in various guises.
 \printbibliography
 
 \end{frame}
-
-
 
 \end{document}
