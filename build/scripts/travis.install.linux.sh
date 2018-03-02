@@ -35,6 +35,7 @@ mkdir ${extract_dir}
 tar -xaf ${output_location} -C ${extract_dir}
 rm ${output_location}
 echo "Deleted ${output_location}"
+ls ${extract_dir}/*
 
 #
 # common repos
