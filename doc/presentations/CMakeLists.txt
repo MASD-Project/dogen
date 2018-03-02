@@ -22,7 +22,7 @@ if (WITH_LATEX)
         file(MAKE_DIRECTORY ${stage_doc_dir})
     endif()
 
-    set(presentation_dir ${stage_doc_dir}/presentation)
+    set(presentation_dir ${stage_doc_dir}/presentations)
     if(NOT IS_DIRECTORY ${presentation_dir})
         file(MAKE_DIRECTORY ${presentation_dir})
     endif()
