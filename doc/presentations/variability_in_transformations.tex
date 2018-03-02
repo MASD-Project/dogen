@@ -12,7 +12,7 @@
 \newcommand{\eg}{\textit{e}.\textit{g}. }
 \newcommand{\etc}{\textit{etc}. }
 
-\title{Variability in Transformations and Generators}
+\title{Variability in Transformations}
 \author{Marco Craveiro}
 \date{\today}
 
@@ -24,7 +24,7 @@
   \end{frame}
 }
 
-\bibliography{variability_in_transformations_and_generators}
+\bibliography{variability_in_transformations}
 
 \begin{document}
 
@@ -77,16 +77,10 @@ v${DOGEN_VERSION}
 
 \pause
 
-\item Formal models are written using a \ac{DSL}. The \ac{DSL} is
-  designed specifically for modeling. \ac{UML} is an example of such a
-  \ac{DSL}. \ac{UML} has a graphical representation~--- called a
+\item Formal models are written using a \acf{DSL}. The \ac{DSL} is
+  designed specifically for modeling. \acf{UML} is an example of such
+  a \ac{DSL}. \ac{UML} has a graphical representation~--- called a
   \emph{concrete syntax}, but also an \emph{abstract syntax}.
-
-\pause
-
-\item A \emph{meta-model} is made up of the abstract syntax and the
-  static semantics of the \ac{DSL}. The metamodel is the basis for the
-  transformations.
 
 \end{itemize}
 
@@ -97,13 +91,19 @@ v${DOGEN_VERSION}
 
 \begin{itemize}
 
+\item A \emph{meta-model} is made up of the abstract syntax and the
+  static semantics of the \ac{DSL}. The metamodel is the basis for the
+  transformations.
+
+\pause
+
 \item \emph{Transformations}~--- or just transforms~--- can be thought
   of as functions that take models as inputs and produce an output.
 
 \pause
 
 \item The output of a transform can be another model; it can either
-  conforming to the same metamodel or to a different metamodel. In
+  \emph{conform} to the same metamodel or to a different metamodel. In
   this case we classify the transform as \ac{M2M}.
 
 \pause
@@ -125,7 +125,7 @@ v${DOGEN_VERSION}
 
 \item \ac{MDE} ``pursues the goal of creating a software
   \emph{product} in part or in the whole through one or more
-  transformations.''\cite{völter2013model}
+  transformations.''\cite{volter2013model}
 
 \pause
 
@@ -141,10 +141,6 @@ v${DOGEN_VERSION}
   commonality within a portfolio of similar
   products.''\cite{voelter2007handling}
 
-\pause
-
-\item \ac{PLE} integrates with \ac{MDE} seamlessly:
-
 \end{itemize}
 
 \end{frame}
@@ -154,7 +150,10 @@ v${DOGEN_VERSION}
 
 \begin{itemize}
 
-\item \emph{Transformations}~--- or just transforms~--- can be thought
+\item \ac{PLE} integrates with \ac{MDE} seamlessly:
+
+\pause
+
 
 \end{itemize}
 
