@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-03-02 Fri 12:07]
-| <75>                                                                        |         |       |      |       |
-| Headline                                                                    | Time    |       |      |     % |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:46* |       |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:46   |       |      | 100.0 |
-| Active                                                                      |         | 15:46 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 4:55 |  31.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.2 |
-| COMPLETED Write a blog post on previous sprint                              |         |       | 3:35 |  22.7 |
-| COMPLETED Update Readme with links to blog posts                            |         |       | 0:10 |   1.1 |
-| COMPLETED Rename stereotypes                                                |         |       | 0:35 |   3.7 |
-| COMPLETED Dogen does not generate ODB targets for primitives                |         |       | 0:36 |   3.8 |
-| STARTED Create the =generation= model                                       |         |       | 2:49 |  17.9 |
-| STARTED Create a presentation on variability                                |         |       | 2:55 |  18.5 |
+#+CAPTION: Clock summary at [2018-03-06 Tue 14:58]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *26:03* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 26:03   |       |       | 100.0 |
+| Active                                                                      |         | 26:03 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  4:55 |  18.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:11 |   0.7 |
+| COMPLETED Write a blog post on previous sprint                              |         |       |  3:35 |  13.8 |
+| COMPLETED Update Readme with links to blog posts                            |         |       |  0:10 |   0.6 |
+| COMPLETED Rename stereotypes                                                |         |       |  0:35 |   2.2 |
+| COMPLETED Dogen does not generate ODB targets for primitives                |         |       |  0:36 |   2.3 |
+| STARTED Create the =generation= model                                       |         |       |  2:49 |  10.8 |
+| STARTED Create a presentation on variability                                |         |       | 13:12 |  50.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -173,6 +173,10 @@ Problems:
   make it a unordered set of pointers.
 
 *** STARTED Create a presentation on variability                      :story:
+    CLOCK: [2018-03-06 Tue 14:58]
+    CLOCK: [2018-03-06 Tue 12:30]--[2018-03-06 Tue 14:57] =>  2:27
+    CLOCK: [2018-03-06 Tue 09:05]--[2018-03-06 Tue 12:10] =>  3:05
+    CLOCK: [2018-03-05 Mon 12:05]--[2018-03-05 Mon 16:50] =>  4:45
     CLOCK: [2018-03-02 Fri 09:11]--[2018-03-02 Fri 12:06] =>  2:55
 
 We need to do a presentation on how variability is linked to MDE.

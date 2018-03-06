@@ -33,7 +33,7 @@
 v${DOGEN_VERSION}
 \end{frame}
 
-\section{Background}
+\section{\ac{MDE}}
 
 \begin{frame}
 \frametitle{What is \ac{MDE}}
@@ -82,8 +82,8 @@ v${DOGEN_VERSION}
 
 \pause
 
-\item
-  \acf{UML} is an example of such a \ac{DSL}. \ac{UML} has a graphical
+\item \acf{UML} is an example of such a \ac{DSL} (\emph{when suitably
+  extended with stereotypes and profiles}). \ac{UML} has a graphical
   representation~--- called a \emph{concrete syntax}~--- but it also
   has an \emph{abstract syntax}.
 
@@ -133,10 +133,11 @@ v${DOGEN_VERSION}
 \end{itemize}
 
 \end{frame}
-\section{Variability}
+
+\section{\acf{SPL}}
 
 \begin{frame}
-\frametitle{Software Product Lines}
+\frametitle{What are \ac{SPL}}
 
 \begin{itemize}
 
@@ -163,7 +164,7 @@ v${DOGEN_VERSION}
 \end{frame}
 
 \begin{frame}
-\frametitle{Software Product Lines}
+\frametitle{What are \ac{SPL}}
 
 \begin{itemize}
 
@@ -190,8 +191,10 @@ v${DOGEN_VERSION}
 
 \end{frame}
 
+\section{Variability}
+
 \begin{frame}
-\frametitle{Software Product Lines: Variability}
+\frametitle{Variability}
 
 \begin{itemize}
 
@@ -212,31 +215,129 @@ v${DOGEN_VERSION}
 \end{frame}
 
 \begin{frame}
-\frametitle{Software Product Lines: Variability}
+\frametitle{Variability}
 
 In practice, there are problems integrating \ac{MDE} with
 \ac{PLE}. Brambilla states\cite{brambilla2012model}:
 
 \begin{quote}
-``One of the most interesting question [sic] when it comes to software
+One of the most interesting question [sic] when it comes to software
 product lines and model driven engineering is how to formulate the
-knowledge of a software product line by using models. Especially, the
-variability aspect is in this context of main interest as modeling
-languages are quite often lacking variability as a first-class
-language concept.''
+knowledge of a \ac{SPL} by using models. Especially, the variability
+aspect is in this context of main interest as modeling languages are
+quite often lacking variability as a first-class language concept
 \end{quote}
 
 \end{frame}
 
 \begin{frame}
-\frametitle{Software Product Lines: Variability}
+\frametitle{Traditional Handling of Variability}
 
 \begin{itemize}
-\item Thus the crux of the problem is how to integrate the traditional
-  modeling techniques~--- based on modeling \ac{DSL}s~--- with the
-  modeling of variability. For this we need to understand variability.
+
+\item Thus far, engineers have handled variability using the available
+  tools:
+
+  \begin{itemize}
+
+  \item mechanisms provided by the implementation language: patterns,
+    frameworks, polymorphism, reflection, pre-compilers,
+    pre-processors.
+
+    \pause
+
+  \item configuration and build tools to set compile time variables
+    and select variants of assets.
+
+  \end{itemize}
+
+  \pause
+
+\item These approaches are limited because they are at the wrong level
+  of abstraction: the code.
 
 \pause
+
+\item In the context of \ac{MDE} and \ac{SPL} we want to make the most
+  of variability as a first class citizen.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Feature Models}
+
+One possible solution is to use a metamodel designed specifically to
+model variability. A common choice is the Feature Model:
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{images/example_feature_model_voelter.png}
+  \caption{Example feature model.\cite{czarnecki2000generative}}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Feature Models}
+
+\begin{itemize}
+
+\item By using a feature model, we now have a much more intuitive way
+  to define the features and their relationships; the language was
+  defined specifically to have the vocabulary to do so. But...
+
+  \pause
+
+\item As JWZ said: ``Some people, when confronted with a problem,
+  think "I know, I'll use regular expressions." Now they have two
+  problems.''
+
+  \pause
+
+\item How do we integrate the traditional \ac{MDE} modeling
+  techniques~--- based on modeling \ac{DSL}s~--- with the modeling of
+  variability. Groher and V{\"o}lter propose a solution to this
+  ``two-model'' problem in their papers.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Variability Pervasiveness}
+
+But first we need to understand more about the nature of
+variability. The trouble is, variability is \emph{pervasive}; it
+exists at all levels of \ac{MDE}, from analysis, to problem space, to
+solution space:
+
+\pause
+
+\begin{itemize}
+\item Variability impacts \emph{all} the models we create: some
+  model elements may be added or removed depending how we choose to
+  instantiate the product;
+
+  \pause
+
+\item Variability impacts \ac{M2M} transforms: they may require
+  parameters expressing user choices in order to execute;
+
+  \pause
+
+\item Variability impacts \ac{M2T} transforms: some code may or may
+  not be generated in response to user choices.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Variability Classification}
+
+\begin{itemize}
 
 \item Groher and V{\"o}lter classify variability into two broad types
   \cite{groher2007expressing}:
@@ -261,7 +362,7 @@ language concept.''
 \end{frame}
 
 \begin{frame}
-\frametitle{Software Product Lines: Variability}
+\frametitle{Variability Classification}
 
 However, in practice, variability does not fit neatly into these
 categories. Instead, there is a ``spectrum of languages commonly used
@@ -276,7 +377,7 @@ for expressing and binding variability.''\cite{groher2007expressing}
 \end{frame}
 
 \begin{frame}
-\frametitle{Software Product Lines: Variability}
+\frametitle{Variability Classification}
 
 \begin{itemize}
 \item Another way to look at variability is to focus on how it is
@@ -289,14 +390,16 @@ for expressing and binding variability.''\cite{groher2007expressing}
 
   \item \textbf{Positive Variability}: ``starts with a minimal core
     and selectively adds additional parts based on the presence or
-    absence of features in the configuration models.''
+    absence of features in the configuration models.'' In this case we
+    need to \emph{weave} in other models in response to user choices.
 
   \pause
 
   \item \textbf{Negative Variability}: ``Negative variability
     selectively takes away parts of a creative construction model
     based on the presence or absence of features in the configuration
-    models''
+    models'' In this case we need to remove model elements in response
+    to user choices.
 
   \end{itemize}
 
@@ -305,9 +408,58 @@ for expressing and binding variability.''\cite{groher2007expressing}
 \end{frame}
 
 \begin{frame}
+\frametitle{Approach}
+
+Their approach can be summarised as follows:
+
+\begin{itemize}
+
+\item ``[Use] models to describe product lines. Variants are defined
+  on [sic] model-level.  Transformations generate running
+  applications. \acf{AO} techniques are used to help define the va-
+  riants in the models as well as in the transformers and
+  generators.''\cite{voelter2007handling}
+
+  \pause
+
+\item ``The core idea is to express variability in models and
+  generators, since, due to the higher abstrac- tion level in models
+  [...], the number of variation points is
+  lower[...].''\cite{voelter2007handling}
+
+  \pause
+
+
+
+
+
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}
+
+\begin{center}
+  \huge{Thank You}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+
+\begin{center}
+    \huge{Q \& A}
+\end{center}
+
+\end{frame}
+
+\begin{frame}
 \frametitle{Acronyms}
 
 \begin{acronym}
+  \acro{AO}{Aspect Oriented}
   \acro{DSL}{Domain Specific Language}
   \acro{GPML}{General Purpose Modeling Languages}
   \acro{M2M}{Model-to-Model}
@@ -316,6 +468,7 @@ for expressing and binding variability.''\cite{groher2007expressing}
   \acro{PIM}{Platform Independent Model}
   \acro{PLE}{Product Line Engineering}
   \acro{PSM}{Platform Specific Model}
+  \acro{SPL}{Software Product Lines}
   \acro{T2M}{Text-to-Model}
   \acro{UML}{Unified Modeling Language}
 \end{acronym}
