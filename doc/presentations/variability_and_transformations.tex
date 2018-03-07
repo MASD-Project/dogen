@@ -88,16 +88,34 @@ v${DOGEN_VERSION} % chktex-file 25
 
 \pause{}
 
-\item \acf{UML} is an example of such a \ac{DSL} (\emph{when suitably
-  extended with stereotypes and profiles}). \ac{UML} has a graphical
-  representation~--- called a \emph{concrete syntax}~--- but it also
-  has an \emph{abstract syntax}.
+\item \acf{UML} is an example of such a \ac{DSL} \emph{when suitably
+  extended and annotated with profiles and \acf{OCL} expressions}.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\ac{MDE} Key Components: Models}
+
+\begin{itemize}
+
+\item \ac{UML} has a graphical notation~--- called a \emph{concrete
+  syntax}~--- but it also has an \emph{abstract syntax}.
+
+  \pause{}
+
+  \item The abstract syntax could be shared by multiple
+    representations (\eg a text representation of a \ac{UML} diagram).
 
 \pause{}
 
 \item A \emph{meta-model} is made up of the abstract syntax and the
-  static semantics of the \ac{DSL}. The metamodel is the basis for
-  \emph{transformations}.
+  static semantics of the \ac{DSL}.
+
+\pause{}
+
+\item The metamodel is the basis for \emph{transformations}.
 
 \end{itemize}
 
@@ -190,8 +208,12 @@ v${DOGEN_VERSION} % chktex-file 25
 \item If all went according to plan, we should be able to
   \enquote{simply} supply additional inputs to our models; these then
   determine the \emph{concrete} product we want to produce from the
-  universe of \emph{possible} products supported by our models. The
-  key here is \emph{variability} and how to express it.
+  universe of \emph{possible} products supported by our models.
+
+  \pause{}
+
+
+\item The key here is \emph{variability} and how to express it.
 
 \end{itemize}
 
@@ -223,16 +245,21 @@ v${DOGEN_VERSION} % chktex-file 25
 \begin{frame}
 \frametitle{Variability}
 
-In practice, there are problems integrating \ac{MDE} with
-\ac{PLE}. Brambilla states\cite{brambilla2012model}:
+\begin{itemize}
 
-\begin{quote}
-One of the most interesting question [sic] when it comes to software
-product lines and model driven engineering is how to formulate the
-knowledge of a \ac{SPL} by using models. Especially, the variability
-aspect is in this context of main interest as modeling languages are
-quite often lacking variability as a first-class language concept
-\end{quote}
+\item In practice, there are problems integrating \ac{MDE} with
+  \ac{PLE}.
+
+\pause{}
+
+\enquote{One of the most interesting question [sic] when it comes to
+  software product lines and model driven engineering is how to
+  formulate the knowledge of a \ac{SPL} by using models. Especially,
+  the variability aspect is in this context of main interest as
+  modeling languages are quite often lacking variability as a
+  first-class language concept.}\cite{brambilla2012model}
+
+\end{itemize}
 
 \end{frame}
 
@@ -276,9 +303,19 @@ quite often lacking variability as a first-class language concept
 \begin{frame}
 \frametitle{Feature Models}
 
-One possible solution is to use a metamodel designed specifically to
-model variability. A common choice is the Feature
-Model\cite{czarnecki2000generative}:
+\begin{itemize}
+
+\item One possible solution is to use a metamodel designed specifically to
+  model variability.
+
+  \pause{}
+
+\item A common choice is the Feature
+  Model.\cite{czarnecki2000generative}
+
+  \pause{}
+
+\end{itemize}
 
 \begin{figure}
   \centering
@@ -431,24 +468,32 @@ We can see this visually:
 \end{frame}
 
 \begin{frame}
-\frametitle{Implementation Approach}
+\frametitle{Implementation}
 
 \begin{itemize}
 
-\item Groher and V{\"o}lter was to \enquote{divide and conquer}. They
-  split variability into two types, from an implementation
-  perspective: \emph{Positive Variability} and \emph{Negative
-    Variability}. Details on next slide.
+\item Groher and V{\"o}lter's approach was to \enquote{divide and
+  conquer}. They split variability into two types, from an
+  implementation perspective: \emph{Positive Variability} and
+  \emph{Negative Variability}~--- details on next slide.
 
   \pause{}
 
-\item For each variability type they created specific tooling. They
-  extended an existing modeling toolchain with these additional tools.
+\item Tooling was created specifically for each variability type.
 
   \pause{}
 
-  \item They had to create changes at all levels: from feature
-    modeling, to transformation workflows, to the generator templates.
+\item An existing modeling toolchain was extended with these
+  additional tools.
+
+  \pause{}
+
+\item Changes were made at all levels: from feature modeling, to
+  transformation workflows, to the generator templates.
+
+  \pause{}
+
+\item Lets look into positive and negative variability in more detail.
 
 \end{itemize}
 
@@ -457,12 +502,20 @@ We can see this visually:
 \begin{frame}
 \frametitle{Positive Variability}
 
-\enquote{[S]tarts with a minimal core and selectively adds additional
-  parts based on the presence or absence of features in the
-  configuration models.}\cite{groher2007expressing} In this case we
-need to \emph{weave} in other models in response to user choices.
+\begin{itemize}
 
-\pause{}
+\item \enquote{[S]tarts with a minimal core and selectively adds additional
+  parts based on the presence or absence of features in the
+  configuration models.}\cite{groher2007expressing}
+
+  \pause
+
+\item In this case we need to \emph{weave} in other models in response
+  to user choices.
+
+  \pause{}
+
+\end{itemize}
 
 \begin{figure}
   \centering
@@ -475,11 +528,18 @@ need to \emph{weave} in other models in response to user choices.
 \begin{frame}
 \frametitle{Negative Variability}
 
-\enquote{Negative variability selectively takes away parts of a
+\begin{itemize}
+
+\item \enquote{Negative variability selectively takes away parts of a
   creative construction model based on the presence or absence of
-  features in the configuration models.}\cite{groher2007expressing} In
-this case we need to remove model elements in response to user
-choices.
+  features in the configuration models.}\cite{groher2007expressing}
+
+  \pause{}
+
+\item In this case we need to remove model elements in response to
+  user choices.
+
+\end{itemize}
 
 \pause{}
 
@@ -488,6 +548,37 @@ choices.
   \includegraphics[scale=0.5]{images/negative_variability_voelter.png}
   \caption{Negative variability.\cite{groher2007expressing}}
 \end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Conclusions}
+
+\begin{itemize}
+
+\item It is hard to dynamically add a feature. If done naively, it
+  would result in code changes that ripple across the entire
+  code-base.
+
+  \pause{}
+
+\item Groher and V{\"o}lter's approach is to use \ac{AO} techniques so
+  that we can split out the code that is related to the feature.
+
+  \pause{}
+
+\item The advantage of their approach is that the system is really
+  flexible, and the code associated with the feature is nicely
+  separated from the rest of the system.
+
+  \pause{}
+
+\item The downside is the complexity of the system: it is hard to
+  reason about it, with some parts in XML configuration and others in
+  code. Making changes requires a lot of knowledge of both the base
+  tooling and the extensions they have done to it.
+
+\end{itemize}
 
 \end{frame}
 
@@ -517,6 +608,7 @@ choices.
   \acro{M2M}{Model-to-Model}
   \acro{M2T}{Model-to-Text}
   \acro{MDE}{Model Driven Engineering}
+  \acro{OCL}{Object Constraint Language}
   \acro{PIM}{Platform Independent Model}
   \acro{PLE}{Product Line Engineering}
   \acro{PSM}{Platform Specific Model}
@@ -527,7 +619,7 @@ choices.
 
 \end{frame}
 
-\begin{frame}
+\begin{frame}[allowframebreaks]
 \frametitle{Bibliography}
 
 \printbibliography{}
