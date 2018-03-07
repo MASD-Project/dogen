@@ -5,6 +5,8 @@
 \usepackage{times}
 \usepackage{acronym}
 \usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[UKenglish]{babel}
 \usepackage[backend=bibtex]{biblatex}
 
 \newcommand{\etal}{\textit{et al}. }
@@ -29,8 +31,11 @@
 \begin{document}
 
 \begin{frame}
-\titlepage
-v${DOGEN_VERSION}
+
+\titlepage{}
+
+% v${DOGEN_VERSION} % chktex-file 25
+
 \end{frame}
 
 \section{\ac{MDE}}
@@ -39,17 +44,18 @@ v${DOGEN_VERSION}
 \frametitle{What is \ac{MDE}}
 
 \begin{itemize}
-\item The previous presentation provided an overview of what \ac{MDE}
-  is and why you should consider it for Software Engineering.
+\item The previous presentation provided an overview of what \acf{MDE}
+  is and why you should consider it for Software Engineering. Let's do
+  a quick recap.
 
-\pause
+\pause{}
 
-\item \ac{MDE} is a ``development paradigm that uses models as the
-  primary artifact of the development process. Usually [\ldots] the
-  implementation is (semi-)automatically generated from the
-  models.''\cite{brambilla2012model}
+\item \ac{MDE} is a \enquote{development paradigm that uses models as
+  the primary artifact of the development process. Usually [\ldots]
+  the implementation is (semi-) automatically generated from the
+  models.}\cite{brambilla2012model}
 
-\pause
+\pause{}
 
 \item \ac{MDE} ``goes beyond the pure development activities and
   encompasses other model-based tasks of a complete software
@@ -175,7 +181,7 @@ v${DOGEN_VERSION}
 
 \pause
 
-\item In theory, \ac{PLE} integrates well with \ac{MDE}: it provides
+\item In theory, \acf{PLE} integrates well with \ac{MDE}: it provides
   an analytical framework with which to model the domain looking for
   variations.
 
@@ -207,8 +213,8 @@ v${DOGEN_VERSION}
 \item ``The effectiveness of a software product line approach directly
   depends on how well feature variability within the portfolio is
   implemented and managed throughout the development lifecycle, from
-  early analysis through maintenance and evolution.''
-  \cite{groher2007expressing}
+  early analysis through maintenance and
+  evolution.''\cite{groher2007expressing}
 
 \end{itemize}
 
@@ -235,8 +241,10 @@ quite often lacking variability as a first-class language concept
 
 \begin{itemize}
 
-\item Thus far, engineers have handled variability using the available
-  tools:
+\item Thus far, Software Engineers have handled variability using the
+  available tools:
+
+  \pause
 
   \begin{itemize}
 
@@ -269,12 +277,13 @@ quite often lacking variability as a first-class language concept
 \frametitle{Feature Models}
 
 One possible solution is to use a metamodel designed specifically to
-model variability. A common choice is the Feature Model:
+model variability. A common choice is the Feature
+Model\cite{czarnecki2000generative}:
 
 \begin{figure}
   \centering
   \includegraphics[scale=0.4]{images/example_feature_model_voelter.png}
-  \caption{Example feature model.\cite{czarnecki2000generative}}
+  \caption{Example feature model.\cite{groher2007expressing}}
 \end{figure}
 
 \end{frame}
@@ -286,20 +295,20 @@ model variability. A common choice is the Feature Model:
 
 \item By using a feature model, we now have a much more intuitive way
   to define the features and their relationships; the language was
-  defined specifically to have the vocabulary to do so. But...
+  defined specifically to have the vocabulary to do so. But\ldots
 
   \pause
 
-\item As JWZ said: ``Some people, when confronted with a problem,
-  think "I know, I'll use regular expressions." Now they have two
-  problems.''
+\item \ldots as JWZ famously said: \enquote{Some people, when
+  confronted with a problem, think \enquote{I know, I'll use regular
+    expressions.} Now they have two problems.}
 
   \pause
 
-\item How do we integrate the traditional \ac{MDE} modeling
-  techniques~--- based on modeling \ac{DSL}s~--- with the modeling of
-  variability. Groher and V{\"o}lter propose a solution to this
-  ``two-model'' problem in their papers.
+\item The question then is: how do we integrate the traditional
+  \ac{MDE} modeling techniques~--- based on modeling \ac{DSL}s~---
+  with the modeling of variability? Groher and V{\"o}lter propose a
+  solution to this ``two-model'' problem in their papers.
 
 \end{itemize}
 
@@ -308,10 +317,9 @@ model variability. A common choice is the Feature Model:
 \begin{frame}
 \frametitle{Variability Pervasiveness}
 
-But first we need to understand more about the nature of
-variability. The trouble is, variability is \emph{pervasive}; it
-exists at all levels of \ac{MDE}, from analysis, to problem space, to
-solution space:
+First we need to understand more about the nature of variability. The
+trouble is, variability is \emph{pervasive}; it exists at all levels
+of \ac{MDE}, from analysis, to problem space, to solution space:
 
 \pause
 
@@ -339,8 +347,8 @@ solution space:
 
 \begin{itemize}
 
-\item Groher and V{\"o}lter classify variability into two broad types
-  \cite{groher2007expressing}:
+\item Groher and V{\"o}lter classify variability into two broad
+  types\cite{groher2007expressing}:
 
 \pause
 
@@ -353,9 +361,13 @@ solution space:
 
 \item \textbf{Non-structural}: described using configuration
   languages, \eg application config files, build system configuration,
-  macros, \etc.
+  macros, \etc
+
+\pause
 
 \end{itemize}
+
+\item Their focus is on structural variability.
 
 \end{itemize}
 
@@ -364,7 +376,7 @@ solution space:
 \begin{frame}
 \frametitle{Variability Classification}
 
-However, in practice, variability does not fit neatly into these
+In practice, variability does not fit neatly into these
 categories. Instead, there is a ``spectrum of languages commonly used
 for expressing and binding variability.''\cite{groher2007expressing}
 
@@ -377,31 +389,27 @@ for expressing and binding variability.''\cite{groher2007expressing}
 \end{frame}
 
 \begin{frame}
-\frametitle{Variability Classification}
+\frametitle{Approach}
+
+Now we have enough context, we can focus on the overall approach. It
+can be summarised as follows:
+
+\pause
 
 \begin{itemize}
-\item Another way to look at variability is to focus on how it is
-  applied. Here, Groher and V{\"o}lter outline two approaches
-  \cite{groher2007expressing}:
+
+\item ``[Use] models to describe product lines. Variants are defined
+  on [sic] model-level.  Transformations generate running
+  applications. \acf{AO} techniques are used to help define the
+  variants in the models as well as in the transformers and
+  generators.''\cite{voelter2007handling}
 
   \pause
 
-  \begin{itemize}
-
-  \item \textbf{Positive Variability}: ``starts with a minimal core
-    and selectively adds additional parts based on the presence or
-    absence of features in the configuration models.'' In this case we
-    need to \emph{weave} in other models in response to user choices.
-
-  \pause
-
-  \item \textbf{Negative Variability}: ``Negative variability
-    selectively takes away parts of a creative construction model
-    based on the presence or absence of features in the configuration
-    models'' In this case we need to remove model elements in response
-    to user choices.
-
-  \end{itemize}
+\item ``The core idea is to express variability in models and
+  generators, since, due to the higher abstraction level in models
+  [\ldots], the number of variation points is
+  lower[\ldots].''\cite{voelter2007handling}
 
 \end{itemize}
 
@@ -410,34 +418,76 @@ for expressing and binding variability.''\cite{groher2007expressing}
 \begin{frame}
 \frametitle{Approach}
 
-Their approach can be summarised as follows:
+We can see this visually:
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{images/variation_point_voelter.png}
+  \caption{Variation points in
+    models\ac{DSL}s.\cite{voelter2007handling}}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Implementation Approach}
 
 \begin{itemize}
 
-\item ``[Use] models to describe product lines. Variants are defined
-  on [sic] model-level.  Transformations generate running
-  applications. \acf{AO} techniques are used to help define the va-
-  riants in the models as well as in the transformers and
-  generators.''\cite{voelter2007handling}
+\item Groher and V{\"o}lter was to ``divide and conquer''. They split
+  variability into two types, from an implementation perspective:
+  \emph{Positive Variability} and \emph{Negative Variability}. Details
+  on next slide.
 
   \pause
 
-\item ``The core idea is to express variability in models and
-  generators, since, due to the higher abstrac- tion level in models
-  [...], the number of variation points is
-  lower[...].''\cite{voelter2007handling}
+\item For each variability type they created specific tooling. They
+  extended an existing modeling toolchain with these additional tools.
 
   \pause
 
-
-
-
+  \item They had to create changes at all levels: from feature
+    modeling, to transformation workflows, to the generator templates.
 
 \end{itemize}
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Positive Variability}
 
+``[S]tarts with a minimal core and selectively adds additional parts
+based on the presence or absence of features in the configuration
+models.''\cite{groher2007expressing} In this case we need to
+\emph{weave} in other models in response to user choices.
+
+\pause
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.3]{images/positive_variability_voelter.png}
+  \caption{Positive variability.\cite{groher2007expressing}}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Negative Variability}
+
+``Negative variability selectively takes away parts of a creative
+construction model based on the presence or absence of features in the
+configuration models.''\cite{groher2007expressing} In this case we
+need to remove model elements in response to user choices.
+
+\pause
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{images/negative_variability_voelter.png}
+  \caption{Negative variability.\cite{groher2007expressing}}
+\end{figure}
+
+\end{frame}
 
 \begin{frame}
 
@@ -464,7 +514,7 @@ Their approach can be summarised as follows:
   \acro{GPML}{General Purpose Modeling Languages}
   \acro{M2M}{Model-to-Model}
   \acro{M2T}{Model-to-Text}
-  \acro{MDE}{Model-driven Engineering}
+  \acro{MDE}{Model Driven Engineering}
   \acro{PIM}{Platform Independent Model}
   \acro{PLE}{Product Line Engineering}
   \acro{PSM}{Platform Specific Model}
