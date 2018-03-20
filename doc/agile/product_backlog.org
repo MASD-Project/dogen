@@ -11,6 +11,74 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding Xpand support                                      :epic:
+
+We created our own templating language to make it easy. Stitch works,
+but its not as nice as Xpand:
+
+- we are mixing C++ and template logic in templates. It would be nice
+  if templates just had template logic.
+- Xpand makes the "template methods" more explicit, making variability
+  regions etc more natural.
+- it is already a standard language so we can rely on existing
+  documentation / examples, to an extent.
+
+Our implementation of Xpand would be a bit special though:
+
+- the metamodel is hardcoded to our code generation metamodel.
+- we would transform Xpand code into C++ code, that would then be
+  compiled in.
+- file names would be automatically generated.
+- there is no assistant, so we need some way to access the things
+  which are not directly available in the metamodel.
+- we would have to write a boost::spirit parser for Xpand, which would
+  keep the template blocks (potentially it could even reuse the stitch
+  model / abstract syntax).
+- we would probably have to bastardise Xpand. We can't allow multiple
+  files on a template, filenames are defined by the framework, we need
+  support for boilerplate, etc.
+- we still need support for includes, computed externally. So the
+  formatter would be made up of the existing formatting code plus the
+  template. On the plus side we could agument Xpand with the
+  variability support required so that all functions could have a very
+  simple predicate based on features being on or off. We could also
+  have support for inclusion built in, via some commands specifically
+  designed for it. This would mean we could associate inclusion with
+  "template methods" so that if a template method is off, the
+  inclusion will not be added.
+- so really we could make the template language specifically for our
+  code generation metamodel, with understanding of facets, features,
+  etc so that making a template would be very simple. In addition, we
+  should also have a fixed interface so that the C++ code could define
+  both the implementation and the interface in the C++, as well as
+  register itself. Then we could get rid of wale. The objective is for
+  the generated code to match the code that stitch is generating it at
+  present.
+
+*** Null assertion on pointers                                        :story:
+
+For languages such as C# and Java it would be nice if setters could
+check if the pointer is null. This is also useful for C++. This could
+be a meta-data parameter, either global or local.
+
+Users may want to provide their own assert function which throws the
+adequate exception for their use case.
+
+*** Factory method instead of complete constructor                    :story:
+
+Perhaps it is useful to give users the option to create a static
+factory method on a class instead of (in addition to?) a complete
+constructor. This would be specially useful for classes that are meant
+to be used as pointers. We need metadata for the given variation
+points (return pointer, return object, etc). We could also then demote
+the complete constructor to private so no one else can make use of
+it. This would be a metadata parameter of the complete constructor.
+
+Users can then package up this feature configuration into a sensible
+"profile" such as =FactoryMethodConstruction=. It would be great if
+the users could set the package to "transitive" or "non-transitive",
+causing all associated objects to also have it or not.
+
 *** Sort out iconv on windows                                         :story:
 
 Latest conan packages seem to have changed how iconv is packaged. Output:
