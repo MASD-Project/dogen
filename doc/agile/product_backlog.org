@@ -97,7 +97,6 @@ Requirements for the template language:
   like.
 - produce simple C++ code that any regular c++ developer can debug.
 
-
 *** Null assertion on pointers                                        :story:
 
 For languages such as C# and Java it would be nice if setters could
@@ -3096,6 +3095,7 @@ See also:
   diagnostics".
 - [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
 - [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
+- [[https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/][Recommended compiler and linker flags for GCC]]
 
 Merged stories:
 
