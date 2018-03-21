@@ -11,7 +11,7 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Consider adding Xpand support                                      :epic:
+*** Consider adding Xpand/Xtend support                                :epic:
 
 We created our own templating language to make it easy. Stitch works,
 but its not as nice as Xpand:
@@ -22,6 +22,12 @@ but its not as nice as Xpand:
   regions etc more natural.
 - it is already a standard language so we can rely on existing
   documentation / examples, to an extent.
+- seems like Xpand has been replaced by Xtend: [[http://blog.efftinge.de/2013/06/five-good-reasons-to-port-your-code.html][Five good reasons to
+  port your code generator to Xtend]] (presentation included). Xtend has
+  a lot of interesting features including commands for spacing like
+  =before= and =after=, =separator= etc. These could be copied and
+  mapped. We do not need grey space support because we believe pretty
+  printing is done by a cartridge that knows the language.
 
 Our implementation of Xpand would be a bit special though:
 
@@ -54,6 +60,43 @@ Our implementation of Xpand would be a bit special though:
   register itself. Then we could get rid of wale. The objective is for
   the generated code to match the code that stitch is generating it at
   present.
+
+Changes to the stitch approach:
+
+- there is no wale; wale machinery is hard-coded in stitch2. These are
+  expressed as "template types", either a formatter or a helper.
+- there are no inclusion dependencies. They are automatically done for
+  you.
+- inclusion building is done via DSL extensions. We need to add
+  commands to the DSL to allow it to support all of the use cases we
+  identified with stitch.
+- boilerplate etc are commands in the language. We need a name for
+  these.
+- helper commands are commands in the language. For example, instead
+  of:
+
+: if (a.supports_defaulted_functions()) {
+
+  you need to create a predicate for the variability region:
+
+: supports_defaulted_functions
+
+  these are exposed as part of the API.
+
+- variability regions must support =ELSEIF= predicates.
+- variability regions may have a comment/description as well as a
+  name.
+- variability regions can have a predicate based on a feature
+  configuration or on any other structural query.
+
+Requirements for the template language:
+
+- create templates that are very close to the generated code so that
+  you can take an existing file and templatise it, or you can look at
+  an existing template and predict what the generated code will look
+  like.
+- produce simple C++ code that any regular c++ developer can debug.
+
 
 *** Null assertion on pointers                                        :story:
 
