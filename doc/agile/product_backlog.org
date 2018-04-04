@@ -11,6 +11,97 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Basic support for operations                                      :story:
+
+We could add support for operations without having full parsing
+support for all variations in c++. This could be achieved as follows:
+
+- do not support LAM to start off with. Mapping of types requires
+  parsing all expressions on operations and this will not work until
+  we support pointers, references and const.
+- treat parameters in operations as a string - e.g. no parsing into
+  name trees. Because we cannot parse, we also cannot resolve
+  dependencies (e.g. the includes etc will not be right). One
+  alternative is to have a hard-coded support for just =const= and
+  =&=, which are the only use cases we have at present. If the parser
+  could just ignore those we could still build name trees and have
+  dependency support.
+- for value objects, associate every operation with a protected
+  region. For handcrafted objects, they are used just for creating the
+  initial "class template" or the interface.
+- when code-generating the operation, merely write the variable name
+  and type without any transformation at all.
+- users must associate a GUID with the operation for the protected
+  region. This has to be done manually to preserve traceability
+  links.
+- since the protected region is bounded by function scope, we can
+  simply look for protected region begin and end markers, and copy the
+  region into the generated artefact.
+- the purpose of these operations is just to: a) add trivial behaviour
+  to value objects b) generate interfaces. It is kept really simple.
+
+*** Consider splitting transforms into rules                          :story:
+
+According to MDE, transforms are split out into several parts:
+
+- the filtering of the targets of the transform.
+- the application of the transform.
+
+For example, we seem to loop through the model and then find elements
+of interest to mutate. They seem to suggest we should first
+query/filter the model using a rule and then apply the mutation to the
+result of the query/filter. This would perhaps improve the code. The
+query result could be a typed container (pointer container?) with the
+elements that match. That means we can then start to converge towards
+a rule engine. However, we'd have to go through all the transforms and
+see if they would all benefit from this split.
+
+We don't really have a need for a flexible rules application engine
+that schedules rules and so forth, but we could take on the aspects
+that make the code cleaner.
+
+In [[https://gsd.uwaterloo.ca/sites/default/files/ibm06.pdf][Feature-Based Survey of Model Transformation Approaches]], Czarnecki
+and Helsen state:
+
+#+begin_quote
+Transformation rules. In this paper, transformation rules are
+understood as a broad term describing the smallest units of
+transformation. Rewrite rules with a left-hand side (LHS) and a
+right-hand side (RHS) are obvious examples of transformation rules;
+however, we also consider a function or a procedure implementing some
+transformation step as a transformation rule. In fact, the boundary
+between rules and functions is not so clear-cut;
+#+end_quote
+
+Notes:
+
+- our source-target relationship is chosen based on the needs of the
+  transform. Sometimes we use in-place, in other cases (such as
+  merging and translation) we use distinct source and targets. We
+  should probably add comments to each transform describing these
+  properties.
+-
+*** Consider renaming probing to tracing                              :story:
+
+It seems that in MDE what we called probing is more aptly called
+"tracing". We should rename the code to match this. Czarnecki and
+Helsen:
+
+#+begin_quote
+Tracing can be understood as the runtime footprint of transformation
+execution. A common form of trace information in model transformation
+are traceability links connecting source and target elements, which
+are essentially instances of the mapping between the source and target
+domains.
+#+end_quote
+
+*** Consider having a =transformator=                                 :story:
+
+In "Aspect-Oriented Model-Driven Software Product Line Engineering",
+Groher and Voelter name the top-level owner of transforms
+"transformator", in symmetry with the "generaotr". We could probably
+have these classes.
+
 *** Consider adding support for RTTR                                  :story:
 
 Instead of creating our own reflection, we could just add the code
@@ -4486,6 +4577,18 @@ code generation, e.g. =--validate= or something along those lines.
 
 We are interested in performing the parsing. This would be useful for
 example for a flymake mode in emacs.
+
+An additional feature of dry-run would be to run, generate the model
+and then produce a unified diff, e.g. tell me what you'd change. For
+this we'd have to link against a diff library. We need to
+automatically exclude non-overwrite files (or have an option to
+exclude/include them).
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][google Diff Match Patch library]]
+- [[https://github.com/cubicdaiya/dtl][DTL: Diff Template Library]]
+- [[https://stackoverflow.com/questions/1451694/is-there-a-way-to-diff-files-from-c][SO: Is there a way to diff files from C++?]]
 
 *** Partial matching of built-ins doesn't work for certain types      :story:
 
@@ -9096,6 +9199,9 @@ Notes:
 - the proper technical name for methods that can be manually edited is
   "protected regions". Merging is not a technical term according to
   MDSD at least.
+- the act of checking the generated files vs the user edited files is
+  called "model synchronisation" and its part of incremental
+  transformation (according to [[https://pdfs.semanticscholar.org/7eca/ca8db190608dc4482999e19b1593cc6ad4e5.pdf][Czarnecki and Helsen]])
 
 We should also address the MDSD comment:
 
