@@ -102,6 +102,26 @@ Groher and Voelter name the top-level owner of transforms
 "transformator", in symmetry with the "generaotr". We could probably
 have these classes.
 
+*** Sections to add to manual                                         :story:
+
+Random list of things that we need to have in manual:
+
+- Drivers/frontends: The importance of drivers to allow existing
+  frameworks to interoperate; eCore, MSVC, Dia, JSON.  Structural
+  variability at modeling level. Dia frontend: use of colours,
+  validation (checking of stereotypes), "on the impact of layout
+  quality to understanding UML diagrams", this constrains the size of
+  a model.
+- Stitch. Variability regions vs aspects (Oberweis paper "modeling
+  variability in template-based code generators"). Why we need both
+  feature modeling and variability regions / aspects: because features
+  are a high-level concept that is implemented using variability
+  regions. We need to map layers to facets and to our generation
+  model. Dependencies between features and variability regions.
+- External integration and its importance, cartridges. integration
+  with Clang, ODB, XML tool.
+- Agile and MDD: tight integration. Lightweight MDD with agile
+
 *** Consider adding support for RTTR                                  :story:
 
 Instead of creating our own reflection, we could just add the code
@@ -3847,6 +3867,12 @@ should probably have a "postfix" that can be added in case of
 clashes. The generated code will not cause problems, its just the
 formattables pipeline.
 
+*Allow renaming of visitor*                                         :story:*
+
+At present the visitor is named by dogen. There is nothing stopping us
+from allowing users to rename it via meta-data. We don't have a use
+case yet.
+
 *** Add =interface= stereotype                                        :story:
 
 Even though we can't generate much outside of plain types, we should
@@ -6266,12 +6292,6 @@ infos. In addition, the visitor infos should tell the template if they
 are abstract or implemented. We may be able to reuse the existing
 =visitor_info= class for this.
 
-*** Allow renaming of visitor                                         :story:
-
-At present the visitor is named by dogen. There is nothing stopping us
-from allowing users to rename it via meta-data. We don't have a use
-case yet.
-
 *** Move =invalid= value to a different value                         :story:
 
 Value zero should always be assigned to the most used enumeration
@@ -8615,6 +8635,43 @@ using the fmt library:
 
 https://github.com/fmtlib/fmt
 
+*** Determine types that are no longer used                           :story:
+
+One of the problems of code generation is that we may end up producing
+a lot code generated types, and its hard to figure out what is being
+used. We could either rely on a clang tool for this, and treat
+generated code exactly the same way as non generated code. Or we could
+try to provide helpers for this.
+
+If we do provide helpers, we could supply a list of all of the "root
+types" for the generated types (e.g. root nodes of a graph of
+types). Then, for all models that reference a model, we could
+determine if a root type is used in non-generated code. Because we
+have a list of all files that are not code-generated, we could simply
+grep that list. The objective of this tool is:
+
+- load all models in a product.
+- for each model, extract all the root types.
+- then, for each model, get a list of all non-generated files. Search
+  for each root type on the non-generated files. The search could be a
+  clang search or if not available a more basic grep. Then, if the
+  type is found, exclude the type from the list.
+- then, go through all models that have a reference to that model and
+  do the same thing. At the end, produce a list of types that are not
+  referenced any where.
+
+For extra bonus points, it would be even more useful if we could mark
+types as internal and external so that we could exclude external
+types. However, here there are two notions of external: Intra-product
+external (e.g. other models use it, but not the outside world) and
+inter-product external (e.g. other products use it). Its not clear how
+this would work.
+
+Interestingly, we could use this to produce a weighted list of usages
+(heat map?). This would allow us to understand how used a type is, so
+that if we are trying to remove it we can figure out how used the type
+is and where.
+
 *** Add support for element renaming                                  :story:
 
 This story is still in its early days. We could probably create a
@@ -8641,6 +8698,26 @@ tree. This would be a multi-step process:
   elements and save it to file (maybe as =.new=?).
 - we can then reload the yarn model from the new and generate from
   there.
+
+A slightly more useful approach would be to integrate clang with
+dogen. It would be a multi-step process:
+
+- update the input format (JSON, DIA)
+- run clang rename across all affected models; for this, we need to
+  know the references. This is more problematic across products, so
+  for now lets just imagine an update within a product. We would read
+  all models in a product to create a model dependency graph, then use
+  that to obtain a list of files that depend on the item to be
+  renamed. This is done by separating the generated and non-generated
+  files. The generated files we can infer dependencies from the
+  metamodel. The non-generated files we can infer dependencies from
+  the list of includes (for C++).
+- then we'd generate clang tool code to rename all of the dependent
+  files.
+- finally we'd code generate.
+
+This process shares a lot of commonalities with finding deprecated
+(not used) elements.
 
 *Automatic Renames*
 
