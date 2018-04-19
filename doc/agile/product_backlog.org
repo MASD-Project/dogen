@@ -11,6 +11,23 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for structs                                           :story:
+
+Even in C++ it is useful sometimes to define a type as a plain struct,
+with no getters and setters and all members public. We could still
+generate IO etc as per usual (well, almost as the API would be
+different).
+
+For this we would need a different stereotype. We need to do more
+research on POCOs/PODs/POJOs.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Plain_old_Java_object][POJO]]
+- [[https://en.wikipedia.org/wiki/Plain_old_CLR_object][POCO]]
+- [[https://en.wikipedia.org/wiki/Passive_data_structure][Passive data structure]]
+- [[https://en.wikipedia.org/wiki/Data_transfer_object][Data transfer object]]
+
 *** Basic support for operations                                      :story:
 
 We could add support for operations without having full parsing
@@ -8671,6 +8688,10 @@ Interestingly, we could use this to produce a weighted list of usages
 (heat map?). This would allow us to understand how used a type is, so
 that if we are trying to remove it we can figure out how used the type
 is and where.
+
+Links:
+
+- [[https://github.com/llvm-mirror/clang-tools-extra][clang tools extra]]: including clangd, a LSP-based code indexer.
 
 *** Add support for element renaming                                  :story:
 
