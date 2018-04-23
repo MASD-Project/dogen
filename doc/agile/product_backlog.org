@@ -11,6 +11,19 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for primitive validation                              :story:
+
+When defining a primitive, it may be useful to define associated
+validation. For example:
+
+- integers in a certain range (e.g. < 1000, etc).
+- strings that follow a regex
+
+It would be nice if these validation expressions could be supplied as
+meta data with the primitive in the model and then validation code
+would be generated for them. We could then trigger the validation code
+in the constructor.
+
 *** Add support for structs                                           :story:
 
 Even in C++ it is useful sometimes to define a type as a plain struct,
