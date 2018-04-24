@@ -11,6 +11,18 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for dependency graphs and complexity data             :story:
+
+It would be nice to incorporate some of the complexity measures found
+in Lako's Large-Scale C++ Software Design. We could copy across some
+of the code of TomTom's [[https://github.com/tomtom-international/cpp-dependencies][cpp-dependencies]] and make use of it against
+the dogen model.
+
+Links:
+
+- [[http://gamesfromwithin.com/physical-structure-and-c-part-1-a-first-look][Physical Structure and C++ – Part 1: A First Look]]
+- [[http://gamesfromwithin.com/physical-structure-and-c-part-2-build-times][Physical Structure and C++ – Part 2: Build Times]]
+
 *** Add support for primitive validation                              :story:
 
 When defining a primitive, it may be useful to define associated
