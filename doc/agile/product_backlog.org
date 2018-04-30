@@ -11,6 +11,108 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for RPC                                                :epic:
+
+It would be nice to be able to mark a type as a service and then have
+dogen generate all the comms for it:
+
+- generate a service interface with appropriate async such as using
+  ==boost::future= or =std::future= depending on user options. User
+  then has to implement this interface.
+- generate a new model called comms. For each method =M= in the
+  service, create two new classes named =M_request= and
+  =M_response=. These classes are composed of the types from the
+  method. Also, they will have additional fields such as security
+  token, status, error message, etc.
+- in comms we need to create a server. This is made up of several
+  layers: 1) socket setup: create a socket, open it, etc. 2)
+  serialiser: convert from/to raw serialisation format. 3) dispatcher:
+  given a message, call the appropriate method on the service and
+  construct the appropriate response. The server implementation owns a
+  service, receives messages, unpacks them and calls the service; then
+  takes the result packs it and returns the response.
+- similarly, we also need a client with the responsibility of calling
+  the server over a socket. We need to be able to support both "raw"
+  sockets as well as HTTP.
+- in an ideal world, we would also generate console client and server
+  binaries. These would automatically have the command line options
+  setup for them given the service request/response. They would make
+  use of comms.
+- validation of the security token must be done by the generated code
+  somehow, as must session ID management and message IDs. Generated
+  code must do all the logging of received messages (requests and
+  responses) with their correlation IDs. Composition of services must
+  be done by routing (e.g. assume [[https://github.com/envoyproxy/envoy][envoy]] is used).
+- name of the comms model must be "original model" + =.comms=. Similar
+  approach for all dependent models.
+- since dogen has been hard-wired to generate one model, we need some
+  kind of command line parameter that we can supply to generate
+  RPC. Or alternatively, if there is RPC for a given model, we just
+  automatically generate all dependent models. Users can
+  enable/disable client/server etc via meta-data.
+- stereotype: =dogen::rpc::service=. We then manually create objects
+  with the dependent stereotypes, e.g. =dogen::rpm::message=,
+  etc. Note that creating these objects manually or automatically
+  should result in exactly the same behaviour, e.g. first implement
+  them manually. The automatically generated models still follow the
+  same approach for facets such as =types=, etc. They just have more
+  types such as dispatcher, serialisers, etc. These can be injected
+  into a model manually (e.g. =dogen::rpc::dispatcher=, etc).
+- because the service is async (or can be), the server needs to chain
+  to a future for the processing. Similarly, the client provides an
+  async interface, with a coroutine. We must use the exact same
+  approach for HTTP and raw socket (ideally even the same class).
+- for HTTP, users may need to set the method (e.g. PUT, POST,
+  etc). This could be done as meta-data. But however, we should have
+  an RPC stereotype that maps to these, so that we can use the same
+  information for both "raw" sockets and HTTP. Dia supports
+  stereotypes in methods, so we could have something like
+  =dogen::rpc::put= as a stereotype.
+- we have a story for type framing. We should implement this feature
+  first and then make use of it. Basically, the entire RPC
+  infrastructure is made up of discrete dogen features. These can be
+  used stand-alone.
+- we should automatically add the async and sync infrastructure. The
+  user can choose one or both, and we generate the
+  interfaces. However, user needs to manually implement the service
+  methods.
+- by having a single library for comms it means we will ship both
+  client and server on it (as well as raw and HTTP). This is not ideal
+  since it means clients will link to server code and also means we
+  will pull in the domain library. However, in practice its probably
+  OK because in most cases we will need to make use of the domain
+  library anyway unless the service is trivial. The alternative is to
+  have a ==comms.server= and a =comms.client= project. But since they
+  will share a lot of code, this sounds like overkill.
+- we need a way to set the available serialisation formats. This can
+  be done via meta-data. The service could also have meta-data for RPC
+  or non-RPC.
+- in order for this to work with the current transform chains, we need
+  some way to supply the target and obtain the RPC models; then we
+  start the existing code generation chain. However, the chains at
+  present are not design to receive a model as an input. We need to
+  wire them differently in order to cope with this use case. In
+  addition, we may not need all of the post-processing we have in the
+  text model chain at present (e.g. visitor, etc) given that we know
+  exactly what the generated types will be. Perhaps we can have chains
+  designed specifically for this use case?
+- we need to copy a lot of the model properties for the generated
+  models such as licence, copyright, etc, but not model name. In
+  theory we should be able to just override that one and copy all the
+  other ones. We also need to inject references.
+- If the user has enabled both C++ and C#, this should still work
+  (assuming we have RPC support for C#).
+- we need to add support for executables, operations, program options,
+  main, etc etc before we can satisfy the client/server use cases. We
+  need to break down this epic into all of its dependent stories.
+- ServiceStack like API interfaces should be generated automatically
+  if HTTP is enabled. See ServiceStack/swagger story for
+  details. Service comments are used for swagger comments.
+- we need to manually inject command line options such as host name,
+  port, log level etc. Remaining options are taken from the operations
+  in service. Comments provided by users on the operations can be used
+  for the command line description.
+
 *** Add support for dependency graphs and complexity data             :story:
 
 It would be nice to incorporate some of the complexity measures found
