@@ -112,6 +112,11 @@ dogen generate all the comms for it:
   port, log level etc. Remaining options are taken from the operations
   in service. Comments provided by users on the operations can be used
   for the command line description.
+- it would be great if the client could have a =--interactive= option
+  in which case it would then use readline and allow users to send
+  commands. For simple types this is trivial (perhaps quotes for
+  strings) but for non-simple types it would require a bit of
+  thinking.
 
 *** Add support for dependency graphs and complexity data             :story:
 
