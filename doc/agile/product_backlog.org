@@ -11,6 +11,85 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Rename validators to checkers                                     :story:
+
+In the literature, model validators seems to be called
+"checkers". There are global checkers and local checkers. We need to
+go through our validation logic and see if we can follow the pattern
+of the literature. In particular we need a definition for what a
+checker is and what global/local means. Also, should there be checkers
+associated with model elements? For example, check that an enumeration
+has enumerators, that these have distinct names, etc.
+
+We should have a documented set of rules for this, like compiler
+errors. We need to classify these by severity:
+
+- warning
+- error
+- information
+
+The result of the checker should be a list of "events" at different
+levels which can then be handled by the user interface - e.g. for the
+command line output errors like clang/gcc so that we can integrate
+with emacs.
+
+Checkers also include meta-data validation, such as missing fields,
+fields with incorrect types, etc.
+
+*** Consider renaming =object=                                        :story:
+
+We started off by having the notion of "value objects" but this was
+subsequently changed to just objects. Value objects as understood by
+DDD are really for things with value semantics. What we were looking
+for was something akin to:
+
+- [[https://en.wikipedia.org/wiki/Plain_old_Java_object][POJO]]
+- [[https://en.wikipedia.org/wiki/Plain_old_CLR_object][POCO]]
+- [[https://en.wikipedia.org/wiki/Passive_data_structure][Passive data structure]]
+- [[https://en.wikipedia.org/wiki/Data_transfer_object][Data transfer object]]
+
+However, in addition to these basic behaviours we also may have others
+such as IO, test data etc. We need a name that reflects this. Ideas:
+
+- aggregate object
+- record
+
+Interestingly, we could then have two levels: struct (no behaviour),
+non-struct (behaviour).
+
+*** Support for multiple "generation strategies"                      :story:
+
+It seems we have a requirement to support different kinds of
+generation:
+
+- full generation: this is what we currently associate with an
+  =pbject=, =enumeration=, etc.
+- partial generation: this would be useful when associated with
+  =object= so that we could add methods. For this we can make use of
+  protected regions.
+- skeleton and stub generation (on-off): we use this for handcrafted
+  types; create the initial structure of the class, but then let the
+  user manually code it.
+- no generation: we don't have this at present, but in some cases we
+  may want to just give the user an empty file.
+- round-tripping generation: it would be great if the user could mark
+  a type as round-tripped and then we would automatically update the
+  model with any manual changes and generate new methods, stubs etc as
+  the user changes the model. This is conditional on having really
+  good clang integration. Users should be aware that when using
+  round-tripping problems may occur (code gets deleted etc).
+
+What is interesting here is that we may need all of these kinds of
+generation depending on the particular use case; one model may require
+all code generation types. Thus this is not a property of the code
+generator but of the model.
+
+We could probably call this the "generation strategy". It could be a
+property of the model element. However, given that we have multiple
+facets, it seems that the generation strategy is also a function of
+the facet; certain facets may only support a subset of the generation
+strategies.
+
 *** Add support for RPC                                                :epic:
 
 It would be nice to be able to mark a type as a service and then have
@@ -243,6 +322,10 @@ are traceability links connecting source and target elements, which
 are essentially instances of the mapping between the source and target
 domains.
 #+end_quote
+
+The top-level object responsible for tracing is called the
+=tracer=. Although its not clear if a tracer is just providing probing
+data or is also an execution engine.
 
 *** Consider having a =transformator=                                 :story:
 
