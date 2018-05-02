@@ -36,6 +36,9 @@ with emacs.
 Checkers also include meta-data validation, such as missing fields,
 fields with incorrect types, etc.
 
+We also need to understand the difference between model checking and
+model verification.
+
 *** Consider renaming =object=                                        :story:
 
 We started off by having the notion of "value objects" but this was
@@ -196,6 +199,65 @@ dogen generate all the comms for it:
   commands. For simple types this is trivial (perhaps quotes for
   strings) but for non-simple types it would require a bit of
   thinking.
+- before we start defining stereotypes, we need to read: "Towards a
+  UML Profile for Service-Oriented Architectures" by Reiko Heckel,
+  Marc Lohmann and Sebastian Thöne.
+
+Merged stories:
+
+*Remote method invocation*
+
+See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]].
+
+It seems fairly straightforward to add remote method invocation to a
+few select types. The following would have to be done:
+
+- create a new stereotype like =dispatchable=, =remotable= or suchlike
+- for languages which support this natively, we could map to their
+  technology (e.g. Beans in Java, etc).
+- create a new stereotype: interface.
+- add support for interface code generation.
+- validation: model must have a model ID, thought to be unique across
+  models.
+- validation: types must be marked as both =remotable= and
+  =interface= and have a unique type ID in the model.
+- validation: types must have at least one public method
+- injector: if at least one type is =remotable=, a new facet is
+  created: =rmi=.
+- injector: a system enumeration will be created with all the
+  supported serialisation types. actually, we should create this
+  anyway in serialisation or reflection.
+- rmi will contain one class that represents a "frame". this
+  frame will be composed as follows: model ID, type ID, serialisation
+  type, raw buffer. we need to look at RMI terminology to come up with
+  a good name for this frame.
+- messages: for each method that exists in each dispatchable service,
+  a message class will be created with a name following some well
+  defined convention such as =CLASS_NAME_METHOD_NAME=. we need
+  examples to make up a sensible convention. or perhaps an
+  implementation specific parameter can override the class name. the
+  message class is a data object and has as attributes all of the
+  parameters of the method.
+- a dispatcher class will be created in dispatching. it will have as
+  constructor arguments references to all the dispatchable
+  services. when passed in a frame, it will hydrate it and dispatch it
+  to the correct service.
+- a "framer" class will be created in dispatching. it will be
+  configured for a given serialisation type. it will take a message
+  object, serialise it and frame it.
+- we could support the notion of callbacks. for this we need to be
+  able to serialise stubs as references such that when the other end
+  receives it, it calls a registrar to activate a client stub.
+
+Now we just need a way of creating some generic interfaces that take a
+wire client and a wire service and plug the framer and the dispatcher
+into it.
+
+Notes:
+
+- we need basic support for operations so that we can convert the
+  operations into messages.
+- we need some wire format support such as flat buffers.
 
 *** Add support for dependency graphs and complexity data             :story:
 
@@ -353,16 +415,6 @@ Random list of things that we need to have in manual:
 - External integration and its importance, cartridges. integration
   with Clang, ODB, XML tool.
 - Agile and MDD: tight integration. Lightweight MDD with agile
-
-*** Consider adding support for RTTR                                  :story:
-
-Instead of creating our own reflection, we could just add the code
-necessary to register types and use a third party library such as
-RTTR. It would be most useful if the models contained operations.
-
-Links:
-
-- [[https://github.com/rttrorg/rttr][GitHub Page]]
 
 *** Consider adding Xpand/Xtend support                                :epic:
 
@@ -587,6 +639,7 @@ Links:
 - [[http://docs.servicestack.net/swagger-api][ServiceStack Swagger integration]]
 - [[http://radar.oreilly.com/2015/09/building-apis-with-swagger.html][Building APIs with Swagger]]
 - [[http://petstore.swagger.io/v2/swagger.json][Swagger JSON example]]
+- [[https://github.com/OAI/OpenAPI-Specification][OpenAPI]]: Swagger has been renamed to OpenAPI
 
 *** HTTP API support                                                  :story:
 
@@ -648,6 +701,7 @@ Notes:
 Links:
 
 - [[http://www.dotnetcurry.com/aspnet/1056/introducing-service-stack-tutorial][Introducing ServiceStack]]
+- See also the story on Swagger/OpenAPI
 
 *** Add support for using object templates across models              :story:
 
@@ -1992,6 +2046,14 @@ some clean up logic and re-enable the tests.
 
 We should automatically add the benchmarking code in the generated
 CMakeLists. This could be behind a feature switch in meta-data.
+
+*** Consider using hayai for benchmarks                               :story:
+
+It seems there is a C++ benchmarks framework which could be used for
+dogen's benchmarks:
+
+- [[https://github.com/nickbruun/hayai][hayai]]
+- [[https://bruun.co/2012/02/07/easy-cpp-benchmarking][Easy C++ benchmarking]]
 
 *** Add cross-model support to C#                                     :story:
 
@@ -10531,6 +10593,13 @@ using python:
 - [[http://pastebin.com/pPkL3PxQ][Manipulating UML in Dia's Python Console]]
 - [[https://github.com/GNOME/dia/tree/master/plug-ins/python][Lots of examples of python scripts]]
 
+Another interesting thing to do is to add validation support at the
+Dia level. First we need validation support to be implemented. Once
+that is done, we could create a python plugin that calls dogen on the
+diagram, retrieves the errors (marked against Dia objects) and then
+updates the diagram with errors/warnings. For example, we could mark
+the classes in red/yellow.
+
 *** Consider adding YQL support                                        :epic:
 
 YQL offers a REST based API with lots of interesting information; an
@@ -10548,60 +10617,6 @@ Synthesis [[http://www.codesynthesis.com/products/xsd/][XSD tool]] for that, so 
 There is nothing stopping us from using a GtkBuilder / Glade XML file
 to do the boiler plate setup of the UI. With a bit more work one could
 potentially even generate the bindings for a presentation model.
-
-*** Remote method invocation                                           :epic:
-
-See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]].
-
-It seems fairly straightforward to add remote method invocation to a
-few select types. The following would have to be done:
-
-- create a new stereotype like =dispatchable=, =remotable= or suchlike
-- for languages which support this natively, we could map to their
-  technology (e.g. Beans in Java, etc).
-- create a new stereotype: interface.
-- add support for interface code generation.
-- validation: model must have a model ID, thought to be unique across
-  models.
-- validation: types must be marked as both =remotable= and
-  =interface= and have a unique type ID in the model.
-- validation: types must have at least one public method
-- injector: if at least one type is =remotable=, a new facet is
-  created: =rmi=.
-- injector: a system enumeration will be created with all the
-  supported serialisation types. actually, we should create this
-  anyway in serialisation or reflection.
-- rmi will contain one class that represents a "frame". this
-  frame will be composed as follows: model ID, type ID, serialisation
-  type, raw buffer. we need to look at RMI terminology to come up with
-  a good name for this frame.
-- messages: for each method that exists in each dispatchable service,
-  a message class will be created with a name following some well
-  defined convention such as =CLASS_NAME_METHOD_NAME=. we need
-  examples to make up a sensible convention. or perhaps an
-  implementation specific parameter can override the class name. the
-  message class is a data object and has as attributes all of the
-  parameters of the method.
-- a dispatcher class will be created in dispatching. it will have as
-  constructor arguments references to all the dispatchable
-  services. when passed in a frame, it will hydrate it and dispatch it
-  to the correct service.
-- a "framer" class will be created in dispatching. it will be
-  configured for a given serialisation type. it will take a message
-  object, serialise it and frame it.
-- we could support the notion of callbacks. for this we need to be
-  able to serialise stubs as references such that when the other end
-  receives it, it calls a registrar to activate a client stub.
-
-Now we just need a way of creating some generic interfaces that take a
-wire client and a wire service and plug the framer and the dispatcher
-into it.
-
-Notes:
-
-- we need basic support for operations so that we can convert the
-  operations into messages.
-- we need some wire format support such as flat buffers.
 
 *** Generate state diagrams                                            :epic:
 
@@ -10649,6 +10664,20 @@ Links:
 - [[https://github.com/billyquith/ponder][Ponder]] a c++ reflection library.
 - [[https://github.com/cginternals/cppexpose][cppexpose]]: library for type introspection, reflection, and scripting
   interface.
+- [[https://github.com/Manu343726/siplasplas][siplasplas]]
+- [[https://github.com/rttrorg/rttr][RTTR]]
+
+Merged stories:
+
+*Consider adding support for RTTR*
+
+Instead of creating our own reflection, we could just add the code
+necessary to register types and use a third party library such as
+RTTR. It would be most useful if the models contained operations.
+
+Links:
+
+- [[https://github.com/rttrorg/rttr][GitHub Page]]
 
 *** Add diff support                                                   :epic:
 
