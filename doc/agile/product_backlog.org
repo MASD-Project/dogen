@@ -39,6 +39,9 @@ fields with incorrect types, etc.
 We also need to understand the difference between model checking and
 model verification.
 
+We also need to look at EVL: [[https://www.eclipse.org/epsilon/doc/evl/][Eclipse Validation Language]]. See Chapter
+4 of the [[https://www.eclipse.org/epsilon/doc/book/][Epsilon book]].
+
 *** Consider renaming =object=                                        :story:
 
 We started off by having the notion of "value objects" but this was
@@ -7870,6 +7873,9 @@ features, as explained here:
 - [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
 - [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
 - [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
 
 We need to implement this using proper CMake idioms.
 
