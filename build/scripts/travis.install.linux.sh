@@ -57,25 +57,25 @@ fi
 # clang
 #
 if [ "$CXX" == "clang++" ]; then
-    server="http://llvm.org/apt/precise/"
+    server="http://apt.llvm.org/trusty/"
     sources="/etc/apt/sources.list"
-    precise="llvm-toolchain-precise"
-    sudo sh -c "echo 'deb ${server} ${precise}-3.7 main' >> ${sources}"
-    sudo sh -c "echo 'deb ${server} ${precise} main' >> ${sources}"
+    trusty="llvm-toolchain-trusty"
+    sudo sh -c "echo 'deb ${server} ${trusty}-6.0 main' >> ${sources}"
+    sudo sh -c "echo 'deb ${server} ${trusty}-6.0 main' >> ${sources}"
     wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
     sudo apt-get update -qq
 
-    sudo apt-get install --allow-unauthenticated -qq clang-3.7
-    which clang-3.7
-    export CXX="clang++-3.7" CC="clang-3.7"
+    sudo apt-get install --allow-unauthenticated -qq clang-6.0
+    which clang-6.0
+    export CXX="clang++-6.0" CC="clang-6.0"
 fi
 
 #
 # g++
 #
 if [ "$CXX" = "g++" ]; then
-    sudo apt-get install -qq g++-6
-    export CXX="g++-6" CC="gcc-6" GCOV="gcov-6"
+    sudo apt-get install -qq g++-8
+    export CXX="g++-8" CC="gcc-8" GCOV="gcov-8"
 fi
 
 #
