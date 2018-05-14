@@ -8397,6 +8397,29 @@ Links:
 
 These stories are far in the future or just plain crazy.
 
+*** Add support for =smartref=                                        :story:
+
+This seems like an interesting library. Not exactly clear how to use
+it, but to support it should be easy: add generated code that
+registers user defined types:
+
+: class Person
+: {
+: public:
+:    auto first_name() {...}
+:    auto last_name() {...}
+: };
+: REFLECTABLE(first_name);
+: REFLECTABLE(last_name);
+
+However, to properly use it we probably need support for protected
+regions so that we can overload calls manually.
+
+Links:
+
+- [[https://github.com/erikvalkering/smartref][GitHub]]
+- [[https://medium.com/@eejv/on-the-origin-of-smartref-proxy-pattern-f6fe53f41286][On the Origin of smartref: Proxy Pattern]]
+
 *** Make more use of stack instead of heap                            :story:
 
 We should do some analysis as to how the following classes are being
@@ -8431,7 +8454,7 @@ possibly eliminate the use of lists and strings and instead use
   to look for the correct exception to throw if the string is not big
   enough.
 
-*** Add support for MetaStuff
+*** Add support for MetaStuff                                         :story:
 
 Interesting serialisation library:
 
