@@ -57,29 +57,13 @@ shift
 if [[ "x${compiler}" = "x" ]]; then
     compiler="gcc";
     echo "* Compiler: ${compiler} (default)"
-    export CC=gcc-6
-    export CXX=g++-6
+    export CC=gcc-8
+    export CXX=g++-8
 elif [ "${compiler}" = "gcc" ]; then
     echo "* Compiler: ${compiler}"
-    export CC=gcc-6
-    export CXX=g++-6
-elif [ "${compiler}" = "gcc-7" ]; then
-    echo "* Compiler: ${compiler}"
-    export CC=gcc-7
-    export CXX=g++-7
+    export CC=gcc-8
+    export CXX=g++-8
 elif [ "${compiler}" = "clang" ]; then
-    echo "* Compiler: ${compiler}"
-    export CC=clang-3.7
-    export CXX=clang++-3.7
-elif [ "${compiler}" = "clang-4" ]; then
-    echo "* Compiler: ${compiler}"
-    export CC=clang-4.0
-    export CXX=clang++-4.0
-elif [ "${compiler}" = "clang-5" ]; then
-    echo "* Compiler: ${compiler}"
-    export CC=clang-5.0
-    export CXX=clang++-5.0
-elif [ "${compiler}" = "clang-6" ]; then
     echo "* Compiler: ${compiler}"
     export CC=clang-6.0
     export CXX=clang++-6.0
