@@ -746,13 +746,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="177,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="176.95,74.95;185.635,80.25"/>
+        <dia:rectangle val="176.95,74.95;186.02,80.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="177,75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2650,13 +2650,13 @@ If not supplied the model path segment is computed from the remaining settings.#
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="112,75"/>
+        <dia:point val="115,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.95,74.95;130.26,81.85"/>
+        <dia:rectangle val="114.95,74.95;133.26,81.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="112,75"/>
+        <dia:point val="115,75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -3425,7 +3425,7 @@ model directory.#</dia:string>
         <dia:point val="122,66.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.055,65.85;122.75,75.8"/>
+        <dia:rectangle val="121.25,65.85;124.305,75.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3433,8 +3433,8 @@ model directory.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="122,66.6"/>
         <dia:point val="122,72"/>
-        <dia:point val="121.105,72"/>
-        <dia:point val="121.105,75"/>
+        <dia:point val="124.105,72"/>
+        <dia:point val="124.105,75"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3773,7 +3773,7 @@ model directory.#</dia:string>
         <dia:point val="162.5,39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.477,31.15;163.25,39.8"/>
+        <dia:rectangle val="153.478,31.15;163.25,39.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4164,7 +4164,7 @@ model directory.#</dia:string>
         <dia:point val="138.77,44.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.02,43.45;152.727,59.8"/>
+        <dia:rectangle val="138.02,43.45;152.728,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5488,7 +5488,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="162.5,43.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.75,42.65;173.572,59.7498"/>
+        <dia:rectangle val="161.75,42.65;173.573,59.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11599,13 +11599,13 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="238,153"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="237.95,152.95;245.865,156.05"/>
+        <dia:rectangle val="237.95,152.95;246.25,156.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="238,153"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
