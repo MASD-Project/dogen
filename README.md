@@ -17,6 +17,7 @@
 ![msvc2015](https://img.shields.io/badge/MSVC-2015-ff69b4.svg)
 ![gcc-6.3.0](https://img.shields.io/badge/GCC-6.3.0-ff69b4.svg)
 ![clang-3.7](https://img.shields.io/badge/CLANG-3.7-ff69b4.svg)
+[![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 
 # Overview
 
