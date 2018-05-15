@@ -10668,9 +10668,12 @@ potentially even generate the bindings for a presentation model.
 *** Generate state diagrams                                            :epic:
 
 There is nothing stopping us from reading the UML State Chart objects
-in Dia and generating an FSM off of it, using one (or both) of boost's
-state machines. We could make the state machine contain inheritable
-methods which could be overridden by the user manually.
+in Dia and generating an FSM off of it, using boost's state
+machines. The state machine could be drawn in the same diagram as the
+classes; users could create a state machine associated with a class
+somehow. The states would refer to the methods which the user would
+manually implement. The system would spit out a state machine for the
+target class.
 
 These seem to be vaguely related to workflows. Some interesting posts
 in dia mailinglist:
@@ -10684,6 +10687,7 @@ See also:
 - [[https://en.wikipedia.org/wiki/SCXML][SCXML (wikipedia)]]
 - [[https://www.w3.org/TR/scxml/][State Chart XML (SCXML): State Machine Notation for Control Abstraction]]
 - [[https://github.com/tklab-tud/uscxml][uscxml]]
+- There are two possible implementations in boost: [[https://www.boost.org/doc/libs/1_67_0/libs/msm/doc/HTML/index.html][MSM]] and [[https://www.boost.org/doc/libs/1_67_0/libs/statechart/doc/index.html][StateChart]].
 
 *** Add reflection support by using model and type enums               :epic:
 
