@@ -11,6 +11,17 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider using Boost.PolyCollection in model                      :story:
+
+We have a collection of elements at present in model. It appears there
+is a more efficient way of storing collections of base types by using
+Boost.PolyCollection. We just need to expose these types. We also need
+to figure out their serialisation support.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_67_0/doc/html/poly_collection.html][Boost.PolyCollection]]
+
 *** Add support for design by contract                                 :epic:
 
 If dogen had a way to parse OCL, we could allow users to specify OCL
