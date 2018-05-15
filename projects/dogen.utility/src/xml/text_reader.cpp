@@ -341,7 +341,7 @@ bool text_reader::value_as_boolean() const {
 double text_reader::value_as_double() const {
     try {
         return boost::lexical_cast<double>(value_as_string());
-    } catch (boost::bad_lexical_cast) {
+    } catch (const boost::bad_lexical_cast&) {
         BOOST_LOG_SEV(lg, error) << error_converting_double
                                  << quoted_string(value_as_string());
         BOOST_THROW_EXCEPTION(exception(error_converting_double +
@@ -352,7 +352,7 @@ double text_reader::value_as_double() const {
 int text_reader::value_as_int() const {
     try {
         return boost::lexical_cast<int>(value_as_string());
-    } catch (boost::bad_lexical_cast) {
+    } catch (const boost::bad_lexical_cast&) {
         BOOST_LOG_SEV(lg, error) << error_converting_int
                                  << quoted_string(value_as_string());
         BOOST_THROW_EXCEPTION(exception(error_converting_int +
@@ -363,7 +363,7 @@ int text_reader::value_as_int() const {
 long text_reader::value_as_long() const {
     try {
         return boost::lexical_cast<long>(value_as_string());
-    } catch (boost::bad_lexical_cast) {
+    } catch (const boost::bad_lexical_cast&) {
         BOOST_LOG_SEV(lg, error) << error_converting_long
                                  << quoted_string(value_as_string());
         BOOST_THROW_EXCEPTION(exception(error_converting_long +
@@ -386,7 +386,7 @@ bool text_reader::get_attribute_as_boolean(const std::string& name) const {
 int text_reader::get_attribute_as_int(const std::string& name) const {
     try {
         return boost::lexical_cast<int>(get_attribute_as_string(name));
-    } catch (boost::bad_lexical_cast) {
+    } catch (const boost::bad_lexical_cast&) {
         BOOST_LOG_SEV(lg, error) << error_converting_int
                                  << quoted_string(value_as_string());
         BOOST_THROW_EXCEPTION(exception(error_converting_int +
