@@ -11,6 +11,13 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for design by contract                                 :epic:
+
+If dogen had a way to parse OCL, we could allow users to specify OCL
+constraints on operations. These could then be used to code-generate
+design by contract code. For C++ we could use [[https://www.boost.org/doc/libs/develop/libs/contract/doc/html/index.html][Boost.Contract]]. This
+appears to be a very difficult thing to do.
+
 *** Rename validators to checkers                                     :story:
 
 In the literature, model validators seems to be called
