@@ -236,8 +236,6 @@ Notes:
   also do not want to have to define all of the meta-model elements
   again in order to attach the generatable properties.
 
-
-
 *** Rename core models                                                :story:
 
 The more we catch up with the literature, the more the current model
@@ -245,6 +243,13 @@ names look weird, particularly =modeling= and =generation=. In reality
 all of the models relate to "modeling" and to generation. We should
 just bite the bullet and use the compiler related names: frontend,
 middleend and backend.
+
+Interestingly, eCore/EMF also take the same approach of having a model
+that is then enriched for generation. This means we could have:
+
+- frontend/interop/external.
+- middleend/modeling
+- backend/generation
 
 *** Propagate =fluent= stereotype                                     :story:
 

@@ -9344,6 +9344,86 @@ created using the resultant modeling environment
 
 Source code is available [[http://repo.isis.vanderbilt.edu/GME/old/15.5.8/][here]].
 
+*** Random notes on domodl                                             :epic:
+
+eCore and GME seem to point out that there is a companion product to
+dogen at the meta-modeling level. A tool that allows one to define
+metamodels and instances of those metamodels. Name: domodl (domain
+modeler).
+
+For example, for finance we could define a structure like so:
+
+- M3: GME or eCore, some kind of reflexive meta-metamodel.
+- M2: instrument taxonomy (? building blocks): define the basic
+  building blocks for all instruments in finance. Examples: barriers
+  by type (american, parisian, etc), triggerable, monitoring,
+  settlement types,
+- M1: instruments: using the M2 building blocks, create instruments
+  such as spot, forward. This is a dogen model that is code
+  generated.
+- M0: actual finance system.
+
+To some extent we already started doing this by introducing the notion
+of object templates / concepts: these are in effect a bridge to the
+modeling layer above, joining two distinct layers in a single
+diagram. This is not a good idea according to the literature, but we
+can leave it there with a warning. However, there is something that is
+still not quite right: if we define say =ForwardAmountExchange= as
+inheriting from =Class= and then say that a =forward= is an instance
+of =ForwardAmountExchange= then there is an expectation that we should
+supply say =forward_points= when we define the model just like we
+supply a class name when we define a class. However, what we are
+saying is more like "this is the shape of the forward that you will
+instantiate". We need to understand how to express this in eCore.
+
+From a dia perspective, a domodl diagram uses the metamodel instances
+as profiles/stereotypes
+
+Features:
+
+- ability to read eCore diagrams
+- ability to read dia diagrams and parse them as eCore diagrams. We
+  need the merging (simultaneous loading) of both the metamodel and
+  the model so that we can make sense of the diagram. We also need to
+  understand how do expose concepts of Mn at Mn-1 - is it always
+  profiles/stereotypes? or perhaps the dia model must have the correct
+  metamodel stereotypes (e.g. =Class, etc=).
+- ability to "flatten" the read models into a dogen external
+  model. There is a dependency on dogen for this, but that's only for
+  the export.
+- we also need to somehow create an XSD and a spirit parser for the
+  instances of the metamodel. These are then used to generate a binary
+  that reads these instances and creates dogen models. In an ideal
+  world these could be injected into dogen as plugins, able to read an
+  extension (in effect, new frontends/externals). So domodl actually
+  somehow code generates these dogen plugins. Once we have dart, then
+  we have all the tools required to create build files etc. The user
+  can then create a git repo for the plugin, build it and inject it
+  into dogen. From then on dogen can parse their DSL and generate code
+  for it.
+- for completeness we should generate spirit parsing code so that we
+  could have syntax other than XML. This seems hard as it must need
+  some kind of EBNF interfacing. We should see what [[https://www.eclipse.org/Xtext/][XText]] does. The
+  parser can then be plugged in to the plugin and becomes in effect a
+  "compiler" for the new DSL. The errors should be outputted using
+  emacs/vi compliant syntax so that flycheck will automatically work.
+  XText even has LSP support.
+- it would also be ideal if we could generate emacs/vim syntax
+  highlighting.
+- we need to somehow be able to "transport" metadata into the
+  models. For example, instruments need to support ORM, etc. The
+  generated languages must have a way of supplying stereotypes so that
+  dogen knows what to generate.
+- it should be possible to just output the dogen model so that the
+  user can see what domodl is doing. It should always be possible to
+  manually replicate it (and bypass it).
+- domodl parsing code etc. should be as good as if written by hand.
+
+Notes:
+
+- users should start by creating dogen models and then try to
+  generalise them into a DSL.
+
 *** Consider introducing formatter "location strings"                 :story:
 
 In MDSD, we have the notion of "location strngs":
