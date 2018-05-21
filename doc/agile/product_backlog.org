@@ -741,6 +741,21 @@ Links:
 
 - [[http://www.dotnetcurry.com/aspnet/1056/introducing-service-stack-tutorial][Introducing ServiceStack]]
 - See also the story on Swagger/OpenAPI
+- [[https://docs.microsoft.com/en-gb/teamblog/announcing-rest-improvements?WT.mc_id=docsmsft-twitter][Announcing Updates to the REST API Experience]]: microsoft has created
+  a centralised place to try all REST APIs. We should be able to code
+  generate something similar. However, we need a way to create a
+  single site with all APIs - this is not so easy because we'd have to
+  load up shared objects from different models. It would be nicer to
+  have some kind of tree with all the products on the left and then
+  all of the internal APIs for each product (perhaps grouped by
+  top-level functionality?). Then, when you click on a request you get
+  the documentation for the end point as well as an interactive "try
+  it" environment. This should work even without a login. The MSFT
+  documentation includes a description of all of the returned types as
+  well as the input parameters and the return codes. These contain
+  documentation from the types and their attributes. The graph is
+  expanded to aggregate types so that there is a link to the aggregate
+  type. Primitive types have their documentation inline.
 
 *** Add support for using object templates across models              :story:
 
