@@ -9423,6 +9423,11 @@ Notes:
 
 - users should start by creating dogen models and then try to
   generalise them into a DSL.
+- interestingly, dogen's external model input format could be seen as
+  one such DSL. It would be great to have syntax highlighting,
+  flycheck integration etc for model development. Completion would be
+  great too (for example, get a list of types of elements, including
+  external models, etc).
 
 *** Consider introducing formatter "location strings"                 :story:
 
@@ -10736,7 +10741,8 @@ Dia level. First we need validation support to be implemented. Once
 that is done, we could create a python plugin that calls dogen on the
 diagram, retrieves the errors (marked against Dia objects) and then
 updates the diagram with errors/warnings. For example, we could mark
-the classes in red/yellow.
+the classes in red/yellow. If dia had tooltips we could also display
+the errors as tooltips.
 
 *** Consider adding YQL support                                        :epic:
 
@@ -10808,6 +10814,7 @@ Links:
   interface.
 - [[https://github.com/Manu343726/siplasplas][siplasplas]]
 - [[https://github.com/rttrorg/rttr][RTTR]]
+- [[https://github.com/hugoam/mud][mud]]
 
 Merged stories:
 
