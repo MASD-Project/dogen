@@ -11,6 +11,12 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for MARISA                                            :story:
+
+This seems like a useful data structure:
+
+- [[https://github.com/s-yata/marisa-trie][marisa-trie]]
+
 *** Create a =ci= folder in build                                     :story:
 
 We should use the same approach as nupic for organising the scripts: a
@@ -672,6 +678,7 @@ Links:
 - [[http://radar.oreilly.com/2015/09/building-apis-with-swagger.html][Building APIs with Swagger]]
 - [[http://petstore.swagger.io/v2/swagger.json][Swagger JSON example]]
 - [[https://github.com/OAI/OpenAPI-Specification][OpenAPI]]: Swagger has been renamed to OpenAPI
+- [[https://github.com/eidheim/Simple-Web-Server][Simple-Web-Server]]: alternative to beast.
 
 *** HTTP API support                                                  :story:
 
@@ -8635,6 +8642,10 @@ Notes:
   them in generated code. This is probably just adding default value
   support to dogen, for which we have a separate story.
 
+Links:
+
+- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
+
 *** Consider creating a TextUML frontend                              :story:
 
 We could create a frontend that reads TextUML files:
@@ -10887,6 +10898,58 @@ Diff support is injected into the model just like keys. It also
 requires that basic reflection support gets injected too.
 
 With this approach we can satisfy all use cases.
+
+It seems this is known in the literature as a "difference model". Once
+we have a difference model, we can apply it to the modeling metamodel
+itself. This is useful when we change the metamodel and want to tell
+users what chances to make to their templates. Some people advocate
+automating the changes to the templates (paper below) but this seems
+like quite a hard thing to implement. However, it is conceivable that
+we could end up with a fixed set of commands to apply (e.g. rename
+class, rename method, etc). These could be thought of as clang
+transformations. Of course, stitch template are not visible to clang
+transformations so they would have to be updated by some other
+means. On top of that, its not clear that you can apply the clang
+transforms when the code does not compile, so the transforms would
+have to be applied prior to running dogen; the actual metamodel code
+would be first updated by the transform and then regenerated.
+
+In order for the stitch templates refactoring to work, we'd need some
+kind of way of relating the sources back to the templates, much like
+protected regions; then we would have to generate a graph
+representation in memory of the generated code that resembles the
+fragments of the template, and update the template from the generated
+code.
+
+This whole problem can be seen as a variation of the "rename problem",
+which we captured elsewhere: if a model element is renamed, how do we
+propagate that change to all of the dependent code? One possibility is
+to split it into several steps:
+
+- change the model. users should only do one change at a time to make
+  the process less brittle.
+- run dogen with git awareness (see rename story) so that we can see
+  both the old and the new model.
+- compute the diffs between the two and come up with a set of
+  diffs.
+- convert the diffs into clang refactor commands. Apply those commands
+  to the *entire* code base.
+- perform reverse mapping to the stitch templates, and update them.
+- user then inspects the diffs to make sure it looks above board and
+  signs them off. Code generator is rebuilt and all models are
+  regenerated.
+
+Its not clear if this kind of work (diffs, etc) is not more suitable
+to domodl, with an eCore based metamodel.
+
+Links:
+
+- [[http://www.academia.edu/download/41278180/Dealing_with_the_coupled_evolution_of_me20160116-11059-1d1j84g.pdf][Dealing with the coupled evolution of metamodels and model-to-text
+  transforms]].
+- [[https://dl.acm.org/citation.cfm?id=2523603][Bridging state-based differencing and co-evolution]]
+- [[https://ieeexplore.ieee.org/abstract/document/4634773/][Automating Co-evolution in Model-Driven Engineering]]
+- [[https://s3.amazonaws.com/academia.edu.documents/30769313/paper9.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1526902206&Signature=hUQoUssMBwZ%252FYLfQuVUmqmZ66Nc%253D&response-content-disposition=inline%253B%2520filename%253DA_metamodel_independent_approach_to_diff.pdf][A Metamodel Independent Approach to Difference Representation]]
+- [[https://www.eclipse.org/emf/compare/][EMF Compare]]
 
 *** Add SQL support to Dogen                                           :epic:
 
