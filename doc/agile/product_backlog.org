@@ -555,6 +555,7 @@ Dogen models. Its not clear at all how this would work.
 Links:
 
 - [[http://www.boost.org/community/feature_model_diagrams.html][Feature Model Diagrams in text and HTML]]
+- [[https://github.com/EmilianoSanchez/Feature-Model-Optimization][Feature-Model-Optimization]]
 
 *** Null assertion on pointers                                        :story:
 
