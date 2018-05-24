@@ -98,6 +98,15 @@ such as IO, test data etc. We need a name that reflects this. Ideas:
 Interestingly, we could then have two levels: struct (no behaviour),
 non-struct (behaviour).
 
+In addition to this, we have made a mistake by transforming attributes
+into getters and setters without any stereotyping. We need something
+like =property= for this. Then we can say that for these kinds of
+objects and their templates, the default attribute stereotype is
+=property=. When not set, we should just code generate the attribute
+with the correct visibility. This also means that the code templates
+will be much easier, and support for real classes too (useful when we
+can make use of protected regions).
+
 *** Support for multiple "generation strategies"                      :story:
 
 It seems we have a requirement to support different kinds of
@@ -130,6 +139,10 @@ property of the model element. However, given that we have multiple
 facets, it seems that the generation strategy is also a function of
 the facet; certain facets may only support a subset of the generation
 strategies.
+
+Links:
+
+- [[https://link.springer.com/chapter/10.1007/978-3-319-27869-8_7][Integration of handwritten and generated object-oriented code]]
 
 *** Add support for RPC                                                :epic:
 
