@@ -4054,6 +4054,15 @@ Note that the XMI support approach may make this unnecessary. Where
 possible, we should just use XMI instead of having lots of different
 exogenous models.
 
+*** Add a frontend for ArgoUML                                        :story:
+
+Seems like a popular UML tool. Not sure if it supports XMI.
+
+Links:
+
+- http://argouml.tigris.org/
+- https://github.com/cscorley/argouml-mirror
+
 *** Add support for "project capitalisation"                          :story:
 
 It would be nice if facets, classes etc which are at present in lower
