@@ -11,6 +11,95 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Cross-model transformations                                       :story:
+
+Once we have interfaces, there are at least two very useful
+transformations we could do:
+
+- remotable transformation: take a service and convert it into a set
+  of messages - possibly in an IDL (e.g. protocol buffers, grpc,
+  thrift), possibly in a c++ representation. For this we could have a
+  meta-model element (=dogen::remotable=?) and a meta-data parameter
+  pointing to the interface to make remotable, as well as the
+  implementation (internal implementation to be named with boost,
+  beast, etc (=mutu=?), gprc, protobuf, etc). Users can create a model
+  and customise globally these parameters, then "import" the required
+  services. When dogen spots a meta-model element of type remotable,
+  it locates the original service interface and then for each method
+  it creates messages. These are then processed depending on the
+  enabled facets (for example if protobuf is enabled, generates the
+  IDLs, etc). It is not possible to mix transport layers in a
+  model. The generated code also contains a wrapper interface for the
+  client which implements the original interface in terms of the
+  transport layer. Dogen should automatically enable the required
+  serialisation mechanisms (e.g. JSON, etc).
+- interop transformation: take a service and generate a SWIG wrapper
+  for it. Interestingly, if we had access to ports, connect,
+  disconnect, etc (probably not much more) the SWIG wrapper would also
+  be able to cope with transport layer implementations as well,
+  allowing us to invoke remote services. However, this is probably not
+  important because we can either use HTTP or protobuf etc from the
+  scripting languages.
+
+*** Add support for multi-components in a  model                      :story:
+
+In the world of cross-model transformations (see story), we need lots
+of separate models just because they need to generate their own
+libraries or executables. It is a bit of a shame that we need to have
+a number of "modelets", each for its own component. An alternative
+would be to support multiple components from a single model, but this
+would be a bit tricky. Thoughts:
+
+- the model would have a multi-component mode, set at the top. No
+  model elements are allowed at the top level.
+- each package has a stereotype of =dogen::component= (not the best of
+  names given it conflicts with UML component diagrams). Dogen
+  generates each of these namespaces as a separate component
+  (e.g. shared library or executable).
+- the top-level model name becomes the first model name, the package
+  name the second model name. Interestingly, this should mean dogen
+  will generate all components on the top-level directory without any
+  additional work.
+- the easiest thing to do in terms of the existing pipeline is to
+  create the concept of components at the meta-model level and then
+  create a transform that takes a component based model and generates
+  one model per component and processes them one at a time with the
+  existing pipeline. However, we need to be careful because one model
+  will contain all of the business logic whereas the other models are
+  simple references to it. This could be addressed by having
+  references, based on the existing model references.
+
+*** Simplify argument parsing for operations                          :story:
+
+One of the main stumbling blocks for adding support for operations has
+been the complexity of parsing all the permutations allowed by
+C++. However, for the majority of use cases we have found so far
+(particularly for the definition of interfaces), we don't actually
+require access to the full expressiveness of c++:
+
+- we don't use raw pointers that much;
+- we always pass types by const reference or const (simple types);
+- in cases where we need full power, we can always hand-craft those
+  classes.
+
+If we were to only allow types in arguments to be those already
+available for attributes, we could start parsing operations really
+easily. Once we have those, a few use cases open up:
+
+- generation of skeleton for classes (header and c++);
+- full generation of interfaces;
+- we can start work on services/remoting (see other stories)
+- we can start to consider generating SWIG interfaces,
+
+In addition, Dia has a direction for each parameter (e.g. In, In &
+Out, etc) so this can also be leveraged.
+
+Notes:
+
+- we should disable parsing of operations if hand-crafted is on (or do
+  a shallow parse and just literally copy the string; we have another
+  story for this in the backlog).
+
 *** Add support for MARISA                                            :story:
 
 This seems like a useful data structure:
@@ -6542,6 +6631,17 @@ the facets, independently.
 
 At present we support this, but only for types as it is hard-coded.
 #+end_quote
+
+A better understanding for this problem is to think that we have
+meta-model elements which have a default behaviour of being projected
+into all facets: =Projectable=. We define projectable elemets in the
+modeling space, and then automatically projections happen into
+facets. However, it should be possible to also define
+"non-projectable" elements, which need a facet to house them. We can
+either create a namespace with a stereotype of say =<<facet_name>>= or
+set the meta-data in the element. This has the same effect as
+disabling all facets except for the one we're interested in. However,
+not-projectable elements lose access to IO, etc (by definition).
 
 *** Control JSON output via traits                                    :story:
 
