@@ -11,6 +11,17 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add dogen specific binary serialisation                           :story:
+
+Given we know the internals of the model types to serialise, there is
+nothing to stop us from serialising types directly instead of relying
+on third party serialisation APIs.
+
+Links:
+
+- [[https://legacy.gitbook.com/book/arobenko/comms-protocols-cpp/details][Guide to Implementing Communication Protocols in C++ (for Embedded
+  Systems)]]
+
 *** Cross-model transformations                                       :story:
 
 Once we have interfaces, there are at least two very useful
@@ -10588,6 +10599,35 @@ We could generate the code required to expose the C++ types into ruby
 or python by creating a formatter for it. Boost.Python would be more
 straightforward as it is plain C++ code; SWIG would require generating
 an interface file (IDL-like) and as such is closer to [[*Add%20support%20for%20thrift%20and%20protocol%20buffers][this]] story.
+
+When generating code for SWIG we must also take into account that SWIG
+will generate the type definitions for all other languages, and as
+such we cross-language support will not be compatible with it. For
+example, if a user wants C# interoperability, it will not be possible
+to also generate C# code from Dogen as the types will clash. In
+addition, it should be possible to add Dogen level overrides for SWIG,
+e.g.:
+
+: %typemap(csattributes) AClass          "[ThreadSafe]"
+: %csattributes AClass::AClass(double d) "[ThreadSafe(false)]"
+: %csattributes AClass::AMethod()        "[ThreadSafe(true)]"
+:
+: %inline %{
+: class AClass {
+: public:
+:  AClass(double a) {}
+:  void AMethod() {}
+: };
+: %}
+
+The typemap attributes must be supplied as meta-data in the class and
+attributes. They must also be assigned to a language, e.g.:
+
+: swig.attribute.csharp=[ThreadSafe]"
+
+and in the attribute:
+
+: swig.attribute.csharp=[ThreadSafe(false)]"
 
 Links:
 
