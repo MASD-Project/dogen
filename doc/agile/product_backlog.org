@@ -8054,6 +8054,7 @@ this way all travis builds are pushing into CDash.
 It seems we are not using proper CMake idioms to pick up compiler
 features, as explained here:
 
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
 - [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
 - [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
 - [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
