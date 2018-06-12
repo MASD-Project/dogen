@@ -9140,12 +9140,22 @@ At present we are generating builds whenever we update the docs
 orphan branches with documentation. We can then use git worktrees to
 manage these folders.
 
+*** Add support for the fmt library                                   :story:
+
+We could add a facet for fmt that acts like the iostreams
+facet.
+
+Links:
+
+- https://accu.org/index.php/journals/2509
+- https://github.com/fmtlib/fmt
+
 *** Consider using the fmt library instead of iostreams               :story:
 
 It would be interesting to benchmark dogen using iostreams vs dogen
-using the fmt library:
+using the fmt library.
 
-https://github.com/fmtlib/fmt
+- https://github.com/fmtlib/fmt
 
 *** Determine types that are no longer used                           :story:
 
