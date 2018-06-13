@@ -9001,12 +9001,28 @@ Note:
   to making =yarn= a proper specialisation of the UML
   meta-model. Problems start when users try to make use of UML
   meta-model types for their own templates though.
+- it seems there is no publicly available XMI XSD for UML. Actually it
+  seems there is no proper UML support in XMI and each vendor has
+  created incompatible extensions. SeeL
+  - https://bugs.kde.org/show_bug.cgi?id=56184
+  - http://plantuml.com/xmi
+  The only solution for this problem is to create a "libxmi" that has
+  many frontends and supports a single object model that covers all of
+  UML as per OMG UML XMI. Then manually create XMI XSD schemas for
+  each variant of UML, use the XSD tool to create C++ representations
+  of these and manually create mappings between these dialects and the
+  standard UML object model. One should try to make the mappings
+  bidirectional so that the library could be used to create a
+  converter between XMI formats. However, this is a very large task
+  and its not clear its worth it.
 
 Links:
 
 - [[https://github.com/catedrasaes-umu/emf4cpp][EMF4CPP]]
 - [[https://github.com/MDE4CPP][MDE4CPP]]
 - [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
+- [[https://www.omg.org/spec/XMI/20131001/XMI.xsd][XMI XSD v2.5.1]]
+- [[http://www.omg.org/spec/xmi/2.5.1/][XMI specification v2.5.1]]
 
 *Previous Understanding*
 
