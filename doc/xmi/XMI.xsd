@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          	xmlns="http://www.omg.org/spec/XMI/20131001"
-          	targetNamespace="http://www.omg.org/spec/XMI/20131001">
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://www.omg.org/spec/XMI/20131001"
+            targetNamespace="http://www.omg.org/spec/XMI/20131001">
 
 <xsd:attribute name="id" type="xsd:ID"/>
 
