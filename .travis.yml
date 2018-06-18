@@ -108,11 +108,11 @@ script:
             export TARGET="package run_all_tests";
         else
             export TARGET="run_all_tests";
-        fi
+        fi;
         export THIRD_PARTY="/tmp/dogen_deps/local";
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-        export PATH="/usr/local/opt/ccache/libexec:$PATH"
+        export PATH="/usr/local/opt/ccache/libexec:$PATH";
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
         if [[ $BUILD_TYPE == 'Release' && $WITH_CORE_ONLY == '1' ]]; then
             export TARGET="package";
