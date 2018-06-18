@@ -453,9 +453,3 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/doc)
 add_subdirectory(${CMAKE_SOURCE_DIR}/test_data)
 add_subdirectory(${CMAKE_SOURCE_DIR}/projects)
-
-#
-# dependencies for aggregate targets
-#
-add_dependencies(rebase rebase_test_models rebase_dataset)
-add_dependencies(diff diff_test_models diff_dataset)

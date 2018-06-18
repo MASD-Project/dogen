@@ -219,3 +219,9 @@ foreach(dia_model ${all_dia_test_models})
         endif()
     endif()
 endforeach()
+
+#
+# dependencies for aggregate targets
+#
+add_dependencies(rebase rebase_test_models rebase_dataset)
+add_dependencies(diff diff_test_models diff_dataset)

@@ -208,7 +208,7 @@ include_directories(
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
 
 if(WITH_CORE)
-    message(STATUS, "Building core.")
+    message(STATUS "Building core.")
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.input_models)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling)
@@ -226,16 +226,16 @@ if(WITH_CORE)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.probing)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
 else()
-    message(STATUS, "NOT building core.")
+    message(STATUS "NOT building core.")
 endif()
 
 #
 # test models
 #
 if(WITH_TEST_MODELS)
-    message(STATUS, "Building test models.")
+    message(STATUS "Building test models.")
 
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.test_models)
 else()
-    message(STATUS, "NOT building test models.")
+    message(STATUS "NOT building test models.")
 endif()
