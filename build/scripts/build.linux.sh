@@ -141,7 +141,7 @@ if [ "${WITH_CORE_ONLY}" == "1" ]; then
     cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=OFF"
 elif [ "${WITH_TEST_MODELS_ONLY}" == "1" ]; then
     cmake_defines="${cmake_defines} -DWITH_CORE=OFF"
-    cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=OFF"
+    cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=ON"
 fi
 
 #
