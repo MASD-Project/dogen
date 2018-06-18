@@ -102,6 +102,15 @@ else
 fi
 
 #
+# C++
+#
+if [[ "x${WITH_CPP}" = "x" ]]; then
+    echo "* C++: disabled"
+else
+    echo "* C++: enabled"
+fi
+
+#
 # Setup directories
 #
 output_dir="${product_dir}/build/output";
@@ -126,6 +135,14 @@ cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
 cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 cmake_defines="${cmake_defines} -DWITH_BENCHMARKS=ON"
+
+if [ "${WITH_CORE_ONLY}" == "1" ]; then
+    cmake_defines="${cmake_defines} -DWITH_CORE=ON"
+    cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=OFF"
+elif [ "${WITH_TEST_MODELS_ONLY}" == "1" ]; then
+    cmake_defines="${cmake_defines} -DWITH_CORE=OFF"
+    cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=OFF"
+fi
 
 #
 # Use minimal packaging in debug to preserve disk space.
@@ -165,10 +182,12 @@ if [ "${WITH_CSHARP}" == "1" ]; then
     fi
 fi
 
-echo "* Starting C++ build."
-cd ${build_type_dir}
-cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
-if [ $? -ne 0 ]; then
-    echo "Error running CMake." >&2
-    exit 1;
+if [ "${WITH_CPP}" == "1" ]; then
+    echo "* Starting C++ build."
+    cd ${build_type_dir}
+    cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
+    if [ $? -ne 0 ]; then
+        echo "Error running CMake." >&2
+        exit 1;
+    fi
 fi

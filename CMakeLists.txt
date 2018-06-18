@@ -61,6 +61,8 @@ option(WITH_COVERALLS "Generate coveralls coverage." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 option(WITH_BENCHMARKS "Adds targets for running benchmarks" on)
+option(WITH_CORE "Build core dogen" on)
+option(WITH_TEST_MODELS "Build test models" on)
 
 #
 # check for dependencies
