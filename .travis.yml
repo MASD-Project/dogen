@@ -119,7 +119,7 @@ script:
         fi
     fi
   - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET}
-  - if [[ $TRAVIS_OS_NAME == 'linux' && WITH_CORE_ONLY == '1']]; then
+  - if [[ $TRAVIS_OS_NAME == 'linux' && WITH_CORE_ONLY == '1' ]]; then
         ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER}
     fi
 
