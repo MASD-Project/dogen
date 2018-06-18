@@ -104,7 +104,7 @@ install:
 script:
   - JOBS=2
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
-        if [[ $WITH_CORE_ONLY == '1']]; then
+        if [[ $WITH_CORE_ONLY == '1' ]]; then
             export TARGET="package run_all_tests";
         else
             export TARGET="run_all_tests";
