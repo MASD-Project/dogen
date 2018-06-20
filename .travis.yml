@@ -26,26 +26,6 @@ git:
   depth: 2
 
 matrix:
-  allow_failures:
-    #
-    # Linux Builds: Core GCC
-    #
-    - os: linux
-      compiler: gcc
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc" WITH_CORE_ONLY="1" WITH_CPP="1"
-    - os: linux
-      compiler: gcc
-      env: BUILD_TYPE=Debug COMPILER="gcc" WITH_CORE_ONLY="1" WITH_CPP="1"
-    #
-    # Linux Builds: Core Clang
-    #
-    - os: linux
-      compiler: clang
-      env: BUILD_TYPE=Release COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
-    - os: linux
-      compiler: clang
-      env: BUILD_TYPE=Debug COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
-
   include:
     #
     # OSX builds: Core Clang
@@ -93,6 +73,26 @@ matrix:
     - os: linux
       compiler: clang
       env: BUILD_TYPE=Debug COMPILER="clang" WITH_TEST_MODELS_ONLY="1" WITH_CPP="1"
+
+    allow_failures:
+      #
+      # Linux Builds: Core GCC
+      #
+      - os: linux
+        compiler: gcc
+        env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc" WITH_CORE_ONLY="1" WITH_CPP="1"
+        - os: linux
+          compiler: gcc
+          env: BUILD_TYPE=Debug COMPILER="gcc" WITH_CORE_ONLY="1" WITH_CPP="1"
+      #
+      # Linux Builds: Core Clang
+      #
+      - os: linux
+        compiler: clang
+        env: BUILD_TYPE=Release COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
+        - os: linux
+          compiler: clang
+          env: BUILD_TYPE=Debug COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
 
 addons:
   apt:
