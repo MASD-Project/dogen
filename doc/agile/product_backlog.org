@@ -11,6 +11,67 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Split dogen testing from core                                     :story:
+
+At present we have tests in modeling that perform "code generation";
+that is, regenerate all dogen test models from JSON and Dia. These are
+boost unit tests. Due to this, we have welded the test models with the
+core models, which means that we cannot easily separate repos without
+a lot of hacks. However, if we were to generalise the problem: there
+is no reason why test models should be coupled with the core or
+treated specially; they are just an instance of a project with dogen
+models which can be used to validate dogen. A better approach is to
+move all this work to "system testing", done using the dogen binary
+rather than within unit tests. This would work as follows:
+
+- add a mode in dogen called "validation mode" or diagnostics, etc. In
+  this mode, dogen does not write files to the file system but instead
+  produces a number of "reports":
+  - a list of all validation errors, if any, in GCC format, pointing
+    to the original models.
+  - a set of diff files with all the differences, if any.
+  - a benchmark report.
+  - a top-level report with the project name, its git repo and the git
+    commit.
+- projects that wish to help dogen must have a well-defined target to
+  generate the reports for all models under test.
+- dogen project contains a script with a list of such projects and
+  their git repos. Every time we build dogen core we install the
+  package into the travis VM and run the reports.
+- a environment variable containing the path into which to write the
+  reports must be set before running dogen.
+- a git repo is created with all the reports, and a structure as
+  follows:
+  /repo
+      /branch
+          /dogen_commit
+              /summary for this commit
+              /project_a
+                  /summary for this commit
+                  /diffs
+                  /errors
+                  /benchmark data
+              /project_b
+ ...
+- git clones are shallow (1 commit)
+- once all reports are generated into the git report repo, the build
+  commits the report. The comment is the dogen commit.
+- a travis build is triggered on the back of the commit. It checks the
+  latest commit. If the report is a pass the build is green, if its a
+  fail the build is red.
+- in an ideal world the system tests build is separate from the dogen
+  core build, and triggered from a bintray upload. However, as we do
+  not know how to do this yet, we can just run the system tests at the
+  end of the dogen build.
+
+With this approach we can have any number of projects contributing to
+validate dogen (including dogen itself). The only slight downside is
+that the models must always be up-to-date (e.g. if the user has
+changed the model but not regenerated, system tests will
+fail). Perhaps we could have different categories of test models:
+mandatory and optional. Mandatory must pass, optional do not
+contribute to the build failing.
+
 *** Add support for entity framework                                  :story:
 
 It seems there is a C# entity framework which is some kind of ORM.
