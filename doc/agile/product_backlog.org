@@ -11,6 +11,75 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Grepping non-generated code                                       :story:
+
+In order to determine if a type is no longer used, it would be really
+useful to grep non-generated code. This could be an option in dogen
+itself: given a project or set of projects, it determines the list of
+non-generated files and then runs grep on those.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_61_0/libs/regex/example/grep/grep.cpp][Grep in c++ using boost regex]]
+
+*** Model Oriented Programming                                        :story:
+
+There is a type of programming called MOP - Model Oriented
+Programming. Umple seems to be the main language implementing
+MOP. Some of the ideas of MOP are quite interesting: to develop a
+modeling language that can be used just like regular code. This would
+be ideal for Dogen because we are using UML diagrams with lots of
+extensions to be ale to convey the full Dogen DSL. Instead, we could
+create a MOP lanugage that is the dogen DSL:
+
+: import "my_profile"
+: import "model_a"
+: import "model_b"
+;
+: model my_model {
+:     external_modules = "a.b.c";
+:     model_modules = "d";
+:     profile p1;
+:
+:     module a_module {
+:         enumeration my_enum {
+:             type int;
+:             enumerator a = 1;
+:         }
+:
+:         public object my_object {
+:             generation handcrafted;
+:             concepts c1, c2;
+:             facets types, serialisation, hashing;
+:             public property p1;
+:             public method a(in std::list<std::string> l) returns std::string;
+:         }
+:     }
+: }
+
+The language could have profiles as first class citizens and support
+includes. This would make sharing profiles across models much easier,
+and also defining a product (just include all models into the
+product).
+
+Notes:
+
+- its not obvious that there are a lot of advantages over plain
+  JSON. At present: 1) language could have support for comments, 2)
+  inclusion in JSON is not obvious 3) the syntax can be made
+  specifically to fit our DSL (for example, we could force that files
+  must start with =model=, or =product= or =profile= and not require
+  ={}= for these elements).
+- creating a parser for the language will not be trivial.
+- on the plus side, we can then place the model definition with the
+  component itself. There is a nice symmetry with source code.
+- MOP then becomes the DSL for the methodology which is nice from a
+  MDE perspective.
+
+Links:
+
+- [[https://cruise.eecs.uottawa.ca/umple/][UMPLE Home]]
+
 *** Split dogen testing from core                                     :story:
 
 At present we have tests in modeling that perform "code generation";
