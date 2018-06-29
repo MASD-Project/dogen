@@ -11,6 +11,49 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Profiles as meta-model elements                                   :story:
+
+Initially we separated the notion of annotations and profiles from the
+metamodel. This is a mistake. Profiles are metamodel
+elements. Annotations are just a way to convey profiles in UML.
+
+In the same fashion, there is a distinction between a facet (like say
+types) and a facet configuration (enable types, enable default
+constructors, etc). These should also be metamodel elements. User
+models should create facet configurations (this is part of the profile
+machinery) and then associate them with elements.  This means we could
+provide out of the box configurations such as =Serialisable= which
+come from dogen profiles. We could also have =JsonSerialisable=. Users
+can use these or override them in their own profiles. However,
+crucial, modeling elements should not reference facets directly
+because this makes the metamodel very messy.
+
+In this view of the world, the global profile could then have
+associations between these facet configurations and metamodel element
+types, e.g.
+
+: object -> serialisable, hashable
+
+These can then be overridden locally.
+
+In effect we are extending the notion of traits from Umple. However,
+we also want traits to cover facets, not just concepts.
+
+Terminology clarification:
+
+- traits: configuration of facets.
+- profile: mapping of traits to metamodel elements, with
+  defaults. E.g. =object -> serialisable, hashable=
+
+Actually there is a problem: traits as used in MOP are close to our
+templates. We should rename templates to traits to make it
+consistent. However, we still need the notion of named collections of
+facet configurations with inheritance support.
+
+Links:
+
+- https://cruise.eecs.uottawa.ca/umple/Traits.html
+
 *** Grepping non-generated code                                       :story:
 
 In order to determine if a type is no longer used, it would be really
@@ -32,26 +75,63 @@ be ideal for Dogen because we are using UML diagrams with lots of
 extensions to be ale to convey the full Dogen DSL. Instead, we could
 create a MOP lanugage that is the dogen DSL:
 
-: import "my_profile"
-: import "model_a"
-: import "model_b"
-;
+: import "my_profile";
+: import "model_a";
+: import "model_b";
+:
+: traits {
+:     internal trait Definable {
+:         facet cpp.types {
+:             option default_constructor = 1;
+:         }
+:     }
+:
+:     internal trait Serialisable {
+:         comments "Model type can be serialised."
+:         facet cpp.serialisation.boost {
+:             option with_xml = 1;
+:         }
+:     }
+:
+:     internal trait SomeTrait {
+:         inherit Definable, Serialisable;
+;     }
+: }
+:
 : model my_model {
-:     external_modules = "a.b.c";
-:     model_modules = "d";
-:     profile p1;
+:     name a;
+:     external_modules b.c;
+:     model_modules d.e;
+:     input_language cpp;
+:     output_language cpp; # or just language cpp;
+:     type generatable; # or proxy, defaults to generatable.
+:     target executable; # library
+:     using profile p1;
 :
 :     module a_module {
+:         using profile p2;
 :         enumeration my_enum {
+:             comments "My enumeration";
 :             type int;
-:             enumerator a = 1;
+:             enumerators {
+:                 a = 1,
+:                 b = 2
+:             }
 :         }
 :
 :         public object my_object {
+:             immutable; # defaults to mutable
+:             comment "This is an object";
+:             using profile p2; # override global profile
 :             generation handcrafted;
 :             concepts c1, c2;
-:             facets types, serialisation, hashing;
-:             public property p1;
+:             parents o2;
+:             using traits types, serialisation, hashing; # using abstract facets, relies on mapping
+:             using traits types.cpp; # using concrete facets.
+:             public property p1 {
+:                 comments "my property";
+:                 type int;
+:             }
 :             public method a(in std::list<std::string> l) returns std::string;
 :         }
 :     }
@@ -69,7 +149,8 @@ Notes:
   inclusion in JSON is not obvious 3) the syntax can be made
   specifically to fit our DSL (for example, we could force that files
   must start with =model=, or =product= or =profile= and not require
-  ={}= for these elements).
+  ={}= for these elements). An alternative to JSON which could be more
+  suitable is [[https://github.com/toml-lang/toml#user-content-example][TOML]].
 - creating a parser for the language will not be trivial.
 - on the plus side, we can then place the model definition with the
   component itself. There is a nice symmetry with source code.
