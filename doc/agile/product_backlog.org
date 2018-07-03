@@ -11,6 +11,16 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider integrating a sqitch like approach                      :story:
+
+It would be nice to have a way to manage relational schemas, etc from
+within a dogen model. Sqitch seems to have an interesting approach,
+which may even suit ODB.
+
+Links:
+
+- https://metacpan.org/pod/sqitchtutorial
+
 *** Profiles as meta-model elements                                   :story:
 
 Initially we separated the notion of annotations and profiles from the
