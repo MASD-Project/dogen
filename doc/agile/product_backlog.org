@@ -11,6 +11,18 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Interactive interface to models                                    :epic:
+
+There are a number of interactive interfaces available such as
+Jupiter. It may be interesting to think of ways to generate the
+interactive interface automatically from a model.
+
+Links:
+
+- [[http://glench.github.io/fuzzyset.js/ui/][FuzzySet]]: A Human-Readable Interactive Representation of a Code
+  Library
+- [[https://github.com/QuantStack/xeus-cling][xeus-cling]]: C++ interface for Jupyter notebooks.
+
 *** Consider integrating a sqitch like approach                      :story:
 
 It would be nice to have a way to manage relational schemas, etc from
