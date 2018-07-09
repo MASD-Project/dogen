@@ -1459,6 +1459,165 @@ Motes:
 At present we need to fall back to ODB pragmas in order to rename a
 column. We should have =yarn.orm.column_name=.
 
+*** Add test data "types" for generated data                          :story:
+
+At present we are creating really "dumb" test data, just a prefix for
+strings and a simple counter for numbers. A much better approach is
+the one used by mockaroo. They have the idea of "classes", that is a
+"type" for the field which is in addition to the programming type. For
+example:
+
+- ip address
+- first name
+- last name
+- email address
+
+and so forth (more examples below). We could easily create a set of
+classes such as these ones, including constraints (e.g. maximum
+characters, etc) and then encode them into dogen. These are just
+configuration parameters for the test data facet. For each type we
+could have an authoritative source which is just a text file. Users
+can then submit new sources.
+
+Links:
+
+- https://mockaroo.com/
+
+**** Example Types
+
+- Animal Common Name
+- Animal Scientific Name
+- App Bundle ID. Three part app bundle id (com.google.powerflex, com.microsoft.prodder)
+- App Name
+- Avatar. Random avatar image url.
+- Base64 Image URL. data:image/png;base64,iVBORwoA...
+- Binomial Distribution.
+- Bitcoin Address
+- Blank. Always generates a null value
+- Boolean
+- Buzzword
+- Car Make
+- Car Model
+- Car Model Year
+- Car VIN. A random car VIN number, not correlated to other car fields.
+- Catch Phrase
+- Character Sequence
+- City
+- Color
+- Company Name
+- Country
+- Country Code
+- Credit Card number
+- Credit Card Type. visa, mastercard, americanexpress
+- Currency. Dollar
+- Currency Code (USD, EUR, MXN)
+- Custom List. Picks items randomly or sequentially from a custom list of values
+- Dataset Column. Pick records randomly or sequentially from one of my datasets
+- Date. 07/04/2013
+- Department (Corporate). Human Resources, Accounting, Engineering
+- Department (Retail). Grocery, Books, Health & Beauty
+- Digit Sequence. Create simple sequences of characters, digits, and symbols
+- Domain Name. google.com
+- Drug Company. Eli Lilly and Company, Novartis Pharmaceuticals Corporation
+- Drug Name (Brand). Cialis, Nexium, Lipitor
+- Drug Name (Generic). Naproxen Sodium, Selenium Sulfide, Acetaminophen
+- Dummy Image URL. Image url from dummyimage.com. http://dummyimage.com/250x100
+- DUNS Number. Randomly generated DUNS numbers
+- EIN. Randomly generated employer identification numbers
+- Email Address
+- Encrypt. Simulates encrypted text
+- Exponential Distribution. Generates numbers based on an exponential distribution with a specific λ rate.
+- Fake Company Name. Morar Group,  Stark-Glover, Sawayn and Sons
+- Family Name (Chinese)
+- FDA NDC Code
+- File Name. lobortis.pptx, erat_volutpat.csv, TortorSollicitudin.docx
+- First Name. Jim, Mark, Sasha
+- First Name (European). Choose language? Görel, Marie-josée, Hélène
+- First Name (Female). Susan, Jessica, Sasha
+- First Name (Male). Mark, Bob, Tim
+- Formula. Compute a value based on data from other columns
+- Frequency. Never, Once, Seldom, Often, Daily, Weekly, Monthly, Yearly
+- Full Name. Nancy Smith, Tim Fisher, Al Jones
+- Gender. Male, Female. Missing new genders. Should have "classical"
+  and "modern" gender.
+- Gender (abbrev). M, F
+- Geometric Distribution. Generates numbers based on a geometric distribution with a specific probability of success.
+- Given Name (Chinese)
+- GUID. 36 character hex guid
+- Hex Color. #142a0b
+- IBAN. FR73 5960 2948 07N1 L9TC PVYX E17, SE85 4302 3680 7231 4238 1624
+- ICD10 Diagnosis Code. ICD10 diagnosis code. Source: cms.gov.
+- IP Address v4. 121.150.202.132
+- IP Address v4 CIDR. 188.245.97.43/27
+- IP Address v6. 770:44c0:1c4:9996:2fd:6907:3045:9627
+- IP Address v6 CIDR. 9ea4:2b0b:11ba:47a3:47a8:ede4:2ddd:c5f8/115
+- ISBN. 574398570-7
+- Job Title. Design Engineer, General Manager, Help Desk Technician
+- JSON Array. Generates an array of objects in json format.
+- Language. German, English, Spanish
+- Last Name. Smith, Jones, Miller
+- Latitude. 48.52469361225269, 72.26886762838888, -12.592370752117404
+- LinkedIn Skill. Algorithms, Sports Nutrition, Payroll
+- Longitude. -45.15259533671917, 115.70563293321999, 81.9426325226724
+- MAC Address. 2C-D6-9B-77-E5-0B, 2C:D6:9B:77:E5:0B, 2c:d6:9b:77:e5:0b
+- MD5. Random hex encoded MD5 hash
+- MIME Type. text/plain, image/png, application/pdf
+- Money. $3.00, £12.94, €127,54
+- MongoDB ObjectID. Globally unique identifiers for MongoDB objects
+- Movie Genres. Action | Suspense, Thriller, Comedy
+- Movie Title. Goodfellas, Titanic, Silverado
+- Naughty String. Strings which have a high probability of causing issues when used as user-input data.
+- NHS Number. 10-digit NHS number with mod11 checksum
+- Normal Distribution. Generates random numbers in a normal distribution using the Box-Muller algorithm
+- Number. 0.25, 5.2, 1000
+- Paragraphs. Chosen randomly from lorem ipsum
+- Password. A random string of 6-12 characters. bnTZ28AFZ,
+  u1vn6SIM5KBA
+- Phone. 8-(598)633-6672
+- Plant Common Name. Abietinella Moss, Silver Fir, Sedge
+- Plant Family. Thuidiaceae, Pinaceae, Cyperaceae
+- Plant Scientific Name. Abietinella abietina, Abies alba
+- Poisson Distribution. Generates numbers based on a Poisson distribution with a specific mean value.
+- Postal Code. Region-specific postal codes (not available for all locations).
+- Product (Grocery). Tomato - Green, Spinach - Baby, Avocado
+- Race. Filipino, Venezuelan, Asian
+- Regular Expression. Generate random data based on a regular expression
+- Repeating Element. Repeats an XML element a specified number of times
+- Row Number. 1, 2, 3
+- Scenario. Generates a number using a saved scenario
+- Sentences. Chosen randomly from lorem ipsum
+- Sequence. Generates a sequence of numbers with adjustable step and repeat options.
+- SHA1. Random hex encoded SHA1 hash
+- SHA256. Random hex encoded SHA256 hash
+- Shirt Size. S, M, L
+- Short Hex Color. #14b, #a32, #926
+- Slogan. Randomly generated marketing slogans
+- SQL Expression. Specify a SQL expression to use as the inserted value.
+- SSN. 678-59-9455, 312-20-4597, 684-62-5799
+- State. State/Province names, US and worldwide
+- State (abbrev). Two character state/province abbreviations, US and worldwide
+- Stock Industry. Semiconductors, Major Banks, Oil & Gas Production
+- Stock Market. NYSE, NASDAQ,
+- Stock Market Cap. $33.03B, $54.29M, $41.02M
+- Stock Name. Microsoft Corporation, NetApp, Inc., The Bancorp, Inc.
+- Stock Sector. Technology, Capital Goods, Finance
+- Stock Symbol. MSFT, NTAP, TBBK
+- Street Address. Street number, name, and suffix. 6449 Pine View Drive
+- Street Name. Street name and suffix. Pine View Drive
+- Street Number. A street number between 1 and 5 digits, 6449
+- Street Suffix. Drive, Terrace, Street
+- Suffix. Jr, Sr, III
+- Template. Concatenate values from several columns into one
+- Time. 3:30 PM, 15:30
+0 Time Zone. America/Los_Angeles, Europe/Budapest, Pacific/Fiji
+- Title. Mr, Ms, Dr
+- Top Level Domain. com, edu, org
+- University. The Johns Hopkins University, Pepperdine University, University of Texas
+- URL. https://facebook.com, http://google.com/path?foo=bar, /foo/bar
+- User Agent. A user agent string from a popular web browser or bot.
+- Username. jdoe, twilliams, jfang
+- Words. Chosen randomly from lorem ipsum
+
 *** Allow users to override string prefixes in test data              :story:
 
 At present we have a hard-coded string prefix in test data:
