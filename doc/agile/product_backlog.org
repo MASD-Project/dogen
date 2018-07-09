@@ -1629,6 +1629,21 @@ Links:
 - Username. jdoe, twilliams, jfang
 - Words. Chosen randomly from lorem ipsum
 
+*** Add support for data anonymisation                                :story:
+
+If users could mark certain fields as "sensitive", we could use test
+data generation for them. The process would be as follows:
+
+- mark certain fields in a model as sensitive. Names, addresses, etc.
+- provide a anonymiser facet. For each field, it creates a map using
+  the appropriate test data source for the field. The map is important
+  so that each original value corresponds to one and only one mapped
+  value, thus preserving the properties of the original data. Users
+  supply a graph of objects to anonymise.
+- anonymised data can now be serialised and supplied as test
+  data. Dogen itself can use this framework. See "Model anonymizer and
+  slicer".
+
 *** Allow users to override string prefixes in test data              :story:
 
 At present we have a hard-coded string prefix in test data:
