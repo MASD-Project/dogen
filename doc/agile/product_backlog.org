@@ -1477,7 +1477,18 @@ classes such as these ones, including constraints (e.g. maximum
 characters, etc) and then encode them into dogen. These are just
 configuration parameters for the test data facet. For each type we
 could have an authoritative source which is just a text file. Users
-can then submit new sources.
+can then submit new sources. Or perhaps even better: we could create a
+separate open source project that is responsible for maintaining the
+test data bundles. Any user can submit and make use of these
+bundles. Periodically dogen snapshots the bundles and includes them
+with its releases. This way we benefit from anyone who wants to help
+out.
+
+Once we have the types, the next logical thing is to create mock
+endpoints. This can be done very easily because of remoting. In
+reality, we just implement the remote end point as a "fountain" using
+the test data generator to produce the data. We know all of the
+endpoint details due to remoting so this should be fairly trivial.
 
 Links:
 
