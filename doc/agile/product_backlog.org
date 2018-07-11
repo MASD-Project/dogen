@@ -11,6 +11,50 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for compile time mocking                              :story:
+
+In a post in HN, a user [[https://news.ycombinator.com/item?id=17504197][suggested the following]]:
+
+: mehrdadn 1 hour ago [-]
+:
+: I'm just saying do conditional compilation instead of virtual dispatch, since
+: you generally shouldn't really need both the test and production
+: implementations to run inside the same program. So if you have reason to
+: require
+:   // widget.h
+:   class Widget { virtual void throb(); };
+:   // widget.cc
+:   class WidgetImpl : public Widget { void throb() { ... } };
+:   class WidgetTest : public Widget { void throb() { ... } };
+: then, instead of that, just do
+:   // widget.h
+:   class Widget { void throb(); };
+:   // widget.cc
+:   void Widget::throb() { ... }
+:   // widget.test.cc
+:   void Widget::throb() { ... }
+: where you only compile widget.cc for the production build, and only compile
+: widget.test.cc for the test build.
+
+Dogen could automatically support this by having a "compile time mock"
+stereotype. The targets for tests and for the binary would be
+automatically generated adding the correct object files. However, this
+could easily cause problems if we're not careful. For example, what if
+a library A wants to use mocks from library B. Library A should only
+include its mocks when it is built in "test mode" but not in
+production mode, so this means we need two different builds of the
+library. However, if we officialised these builds, e.g.:
+
+- A.mock.so
+- A.so
+
+And created targets specifically for these then perhaps there would be
+no confusion. The other problem is that when we mock we must mock
+everything (as there is only one mock build for the library). Thus we
+cannot test selectively. We should also not inline any functions in
+the header. For this we could put comments/attributes marking the
+class as "compile time mockable" so that developers are aware./
+
 *** Interactive interface to models                                    :epic:
 
 There are a number of interactive interfaces available such as
