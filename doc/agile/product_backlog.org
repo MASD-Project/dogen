@@ -11164,6 +11164,10 @@ http://plantuml.com/
 It would also be nice to be able to export models into PlantUML for
 visualisation. This would make JSON models more compelling.
 
+Links:
+
+- http://plantuml.com/sitemap-language-specification: specs
+
 *** Code generation as a service                                       :epic:
 
 *Latest Understanding*
