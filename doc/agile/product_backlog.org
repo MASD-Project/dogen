@@ -8561,6 +8561,7 @@ Notes:
 - remove the stage folder and use the traditional CMake
   directories. This will also fix the problems we have with
   BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
 
 Merged stories:
 
