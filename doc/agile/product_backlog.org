@@ -11476,6 +11476,7 @@ See also:
 - [[https://www.w3.org/TR/scxml/][State Chart XML (SCXML): State Machine Notation for Control Abstraction]]
 - [[https://github.com/tklab-tud/uscxml][uscxml]]
 - There are two possible implementations in boost: [[https://www.boost.org/doc/libs/1_67_0/libs/msm/doc/HTML/index.html][MSM]] and [[https://www.boost.org/doc/libs/1_67_0/libs/statechart/doc/index.html][StateChart]].
+- See ragel as well: http://www.colm.net/open-source/ragel/
 
 *** Add reflection support by using model and type enums               :epic:
 
