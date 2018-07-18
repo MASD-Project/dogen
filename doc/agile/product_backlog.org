@@ -9490,7 +9490,7 @@ Note:
 
 Links:
 
-- [[https://github.com/catedrasaes-umu/emf4cpp][EMF4CPP]]
+- [[https://github.com/catedrasaes-umu/emf4cpp][EMF4CPP]] (see also https://github.com/mdoerfel/emf4cpp/tree/v2)
 - [[https://github.com/MDE4CPP][MDE4CPP]]
 - [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 - [[https://www.omg.org/spec/XMI/20131001/XMI.xsd][XMI XSD v2.5.1]]
