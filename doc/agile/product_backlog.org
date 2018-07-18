@@ -9474,9 +9474,10 @@ Note:
   meta-model types for their own templates though.
 - it seems there is no publicly available XMI XSD for UML. Actually it
   seems there is no proper UML support in XMI and each vendor has
-  created incompatible extensions. SeeL
+  created incompatible extensions. See:
   - https://bugs.kde.org/show_bug.cgi?id=56184
   - http://plantuml.com/xmi
+  - https://github.com/plantuml/plantuml
   The only solution for this problem is to create a "libxmi" that has
   many frontends and supports a single object model that covers all of
   UML as per OMG UML XMI. Then manually create XMI XSD schemas for
@@ -11168,6 +11169,7 @@ visualisation. This would make JSON models more compelling.
 Links:
 
 - http://plantuml.com/sitemap-language-specification: specs
+- https://github.com/plantuml/plantuml
 
 *** Code generation as a service                                       :epic:
 
