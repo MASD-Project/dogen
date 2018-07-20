@@ -11,6 +11,21 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider creating a "test" facet                                  :story:
+
+Whilst we can't really generate tests, we can at least create the
+stubs for them. For this we could have a =test= facet that uses a
+stereotype, e.g. =test_suite=. Users mark classes with
+these. Attributes are the test cases. At the model level users can
+choose the test framework. For example for Boost.Test, it generates
+the main file with fixture initialisation, etc. We could then have one
+of two approaches:
+
+- protected regions, where the test contents are protected and perhaps
+  an area at the top for globals etc.
+- stubs only, were we generate the original content but then users
+  subsequently manage the files.
+
 *** Add support for compile time mocking                              :story:
 
 In a post in HN, a user [[https://news.ycombinator.com/item?id=17504197][suggested the following]]:
@@ -115,6 +130,25 @@ Actually there is a problem: traits as used in MOP are close to our
 templates. We should rename templates to traits to make it
 consistent. However, we still need the notion of named collections of
 facet configurations with inheritance support.
+
+*More thoughts*
+
+There is a facet in dogen called "features". The facet can have
+multiple backends:
+
+- dogen/UML: special case when adding new features to dogen
+  itself. Any features added to this backend will be read out by dogen
+  and made available to facets.
+- file based configuration: property tree or other simple system to
+  read configuration from file.
+- database based configuration: a database schema (defined by the
+  facet) is code-generated.
+- etcd: code to read and write configuration from etcd is generated.
+
+The feature facet can be used within a component model or on its own
+model. Features are specifically only product features, not properties
+of users etc. They can be dynamically updated if the backend supports
+it. Generated code must handle event notification.
 
 Links:
 
@@ -9486,7 +9520,11 @@ Note:
   standard UML object model. One should try to make the mappings
   bidirectional so that the library could be used to create a
   converter between XMI formats. However, this is a very large task
-  and its not clear its worth it.
+  and its not clear its worth it. Actually we probably want a "libuml"
+  product which contains the XMI adapters. It should also contain
+  other adapters such as Dot/GraphViz, Dia, etc. It should also define
+  its own libuml XMI with XSD. It should also include OCL parsing. It
+  could share code with umbrello.
 
 Links:
 
