@@ -11,6 +11,48 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding support for GraphQL                               :story:
+
+GraphQL is a DSL for RESTful APIs. Its largely based on JSON and a
+JSON like format for queries:
+
+: getUser(id: "user_123") {
+:  currency,
+:  email,
+:  subscriptions
+: }
+
+Users can request specific attributes in objects from an object graph
+rather than get massive objects and then pick the attributes of
+interest. It raises several questions:
+
+- the meta-data describing all objects must be auto-generated. This
+  can easily be done by creating a new facet for GraphQL that contains
+  the meta-data for each object of interest.
+- the JSON serialisation of objects must only serialise fields of
+  interest as per query. The JSON serialiser must have some kind of
+  flags at the field level for each object which it queries to
+  determine if a field is enabled or not. However, we do not want to
+  do this on all cases or else it will slow down all JSON
+  serialisation. So we need two different kinds of JSON
+  serialisers. In addition, we will not be able to deserialise from
+  these JSON objects (given they are incomplete).
+- we should also develop a "querying" layer that is independent of
+  GraphQL so that we could reuse it for other backends. However, there
+  are trade-offs to be made here. We do not want arbitrary complex
+  queries (querying by primary key or foreign key is sufficient for
+  most cases) whereas GraphQL probably supports very complex queries
+  including joins etc.
+- complete support for GraphQL may be difficult as the DSL appears to
+  be very large. Perhaps we could start by supporting the basic
+  functionality once there are use cases.
+
+Links:
+
+- https://brandur.org/graphql
+- https://github.com/graphql/libgraphqlparser
+- http://graphql.github.io/learn/queries/
+
 *** Consider creating a "test" facet                                  :story:
 
 Whilst we can't really generate tests, we can at least create the
