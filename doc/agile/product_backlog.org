@@ -11,6 +11,62 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Platform description models                                       :story:
+
+We should consider integrating all of the information regarding
+"platforms" into platform description models (PDMs). These include:
+
+- all types available in a library (proxy models) and their mapping in
+  terms of aspects. We could make the mapping a bit clearer by
+  designing platform description models that are not part of
+  modeling. We don't really need support for attributes, operations
+  etc. However, we need some kind of "adaptor" that extracts all the
+  type information (or some other way of making resolution work across
+  different model types).
+- name of the library, supported language (e.g. for Boost, C++ etc),
+  versions of the library. We must associate the types with a version
+  (e.g. introduced on version X, deprecated on version Y) so that when
+  the user is using a given version it errors if a type is not
+  available.
+- packaging support: mapping to the name used on most common packaging
+  systems such as DEB, RPM etc. Also, mapping on language specific
+  package managers such as build2, vcpkg, conan, nuget, etc. User can
+  decide what package manager to use overall or for a specific library
+  (e.g. possible to mix-and-match package manager). It should also
+  have a mapping for CMake support that includes "in CMake library
+  from version X" and "available on an external source" with a URL. If
+  the user selects the latter, Dogen can download the CMake file (or
+  maybe Dogen should include the external CMake files to guarantee a
+  stable behaviour).
+
+Notes:
+
+- with this we can now move away from the bad modeling used with proxy
+  models, where it was not quite clear what they were. We can create
+  a different file format (e.g. *.pdm* )that can share some
+  similarities with existing JSON models but is not stuck with all the
+  baggage needed to represent user models.
+- PDMs should be organised by language (e.g. folder for cpp, etc). Top
+  level directory is PDM rather than library.
+- users declare references to PDMs just like normal models. PDMs have
+  an attribute for "auto-loading". If on, we load regardless. Else it
+  must be referenced. This is useful for say STL, hardware types.
+- users can supply their own PDMs, although they are encouraged to
+  submit them if they are general enough.
+- if users choose CMake as the build system, we automatically add all
+  the boilerplate required to add the library to CMake. In an ideal
+  world, the PDM should contain the CMake snippets, with "macros"
+  where required (e.g. version, etc). This would mean we wouldn't have
+  to change templates when new libraries are added. We could also have
+  a "standard" CMake snippet that works for most libraries.
+- different libraries may have different types of support (e.g. a
+  library may not exist in a package manager, etc)
+- we could now create an installation script that sets up all
+  dependencies (e.g. DEB/RPM). It cannot be a target because the build
+  would fail (e.g. CMake would not find all dependencies).
+- now that =library= can be renamed to =pdm=, we could call the
+  top-level directory =library=.
+
 *** Consider adding support for GraphQL                               :story:
 
 GraphQL is a DSL for RESTful APIs. Its largely based on JSON and a
