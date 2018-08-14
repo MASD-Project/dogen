@@ -11,6 +11,18 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add serialisation support for JSON                                :story:
+
+It seems we do not yet have a story for this. The idea is to have some
+basic JSON roundtripping support. The user can configure the backend.
+
+Links:
+
+- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
+- [[https://github.com/Tencent/rapidjson][RapidJSON]]
+- [[https://github.com/nlohmann/json][JSON]]
+- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
+
 *** Platform description models                                       :story:
 
 We should consider integrating all of the information regarding
