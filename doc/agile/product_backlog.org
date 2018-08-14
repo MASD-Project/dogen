@@ -10353,6 +10353,16 @@ users to supply lambdas for the expectations.
 
 This will require proper operations support.
 
+Actually this may not be so easy because mock frameworks have so much
+functionality. An easy way is simply to have a =mock= facet that
+instantiates the mocks using the macros. It would be easy to code
+generate this code.
+
+Links:
+
+- [[https://github.com/rollbear/trompeloeil][trompeloeil]]: Header only C++14 mocking framework
+- [[http://turtle.sourceforge.net/index.html][Turtle]]: A C++ mock object library for Boost
+
 *** Consider representing namespaces in file names rather than directories :story:
 
 Languages like .Net represent namespacing using dots rather than
