@@ -11,6 +11,17 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding support for OutOfLine                             :story:
+
+OutOfLine seems like an interesting pattern to improve cache
+locality. It would be nice if we could make it a meta-pattern so that
+we could annotate classes (e.g. =out_of_line=?) and then generate the
+code to match the solution below.
+
+Links:
+
+- [[https://blog.headlandstech.com/2018/08/15/outofline-a-memory-locality-pattern-for-high-performance-c/][OutOfLine – A Memory-Locality Pattern for High Performance C++]]
+
 *** Add serialisation support for JSON                                :story:
 
 It seems we do not yet have a story for this. The idea is to have some
@@ -22,6 +33,7 @@ Links:
 - [[https://github.com/Tencent/rapidjson][RapidJSON]]
 - [[https://github.com/nlohmann/json][JSON]]
 - [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
+- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
 
 *** Platform description models                                       :story:
 
