@@ -190,7 +190,12 @@ no confusion. The other problem is that when we mock we must mock
 everything (as there is only one mock build for the library). Thus we
 cannot test selectively. We should also not inline any functions in
 the header. For this we could put comments/attributes marking the
-class as "compile time mockable" so that developers are aware./
+class as "compile time mockable" so that developers are aware.
+
+Links:
+
+- [[https://www.fluentcpp.com/2018/08/21/default-parameters-mocking/][Integrating Mocking With C++ Default Parameters]]: article with
+  techniques to simulate mocking without a mock framework.
 
 *** Interactive interface to models                                    :epic:
 
@@ -1234,6 +1239,7 @@ Links:
 - [[http://petstore.swagger.io/v2/swagger.json][Swagger JSON example]]
 - [[https://github.com/OAI/OpenAPI-Specification][OpenAPI]]: Swagger has been renamed to OpenAPI
 - [[https://github.com/eidheim/Simple-Web-Server][Simple-Web-Server]]: alternative to beast.
+- [[https://github.com/Stiffstream/restinio][RESTinio]]: another HTTP/websockets framework based on asio.
 
 *** HTTP API support                                                  :story:
 
