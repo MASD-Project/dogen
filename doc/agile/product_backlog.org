@@ -11,6 +11,26 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding support for bitsery serialisation                 :story:
+
+There is yet another modern c++ serialisation library: bitsery. It
+seems pretty trivial to add support for it as a facet.
+
+Links:
+
+- https://github.com/fraillt/bitsery/
+
+*** Consider adding support for the spaceship operator                :story:
+
+It seems C++ 20 will introduce a new operator: =<=>=. We should be
+able to support it within Dogen. However, it will require knowing the
+C++ version to ensure we do not generate it when using C++ 17 or
+below.
+
+Links:
+
+- [[https://blog.tartanllama.xyz/spaceship-operator/][Spaceship Operator]]
+
 *** Consider adding support for OutOfLine                             :story:
 
 OutOfLine seems like an interesting pattern to improve cache
@@ -3487,6 +3507,20 @@ Notes:
 - user to enter copyright, github URL.
 - we probably need to create a kernel for dart due to the
   peculiarities of the directory structure.
+
+*Directory Themes*
+
+It seems obvious no one in C++ will agree with a single way of
+structuring projects. The best way out is to start a taxonomy of these
+project layouts (directory structure themes?) and add this to the
+project generator as a theme. At present there are several already
+available:
+
+- [[https://github.com/vector-of-bool/vector-of-bool.github.io/blob/master/_drafts/project-layout.md][Project Layout]]: see also discussion in [[https://old.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][reddit]].
+- [[https://build2.org/][Build2]]: the packaging system seems to have a preferred directory
+  layout.
+- GNU: gnu projects seem to have a well-defined structure, if not the
+  most sensible.
 
 Links:
 
