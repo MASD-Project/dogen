@@ -11352,6 +11352,8 @@ Links:
 
 - [[https://www.softwariness.com/articles/api-design-for-swig/][C++ API Design for SWIG]]
 - [[https://github.com/pybind/pybind11][pybind11]]: Seamless operability between C++11 and Python
+- [[https://blog.esciencecenter.nl/irregular-data-in-pandas-using-c-88ce311cb9ef][50 times faster data loading for Pandas: no problem]]: talks about
+  integration of c++ with python (cookie cutterk).
 
 *** Consider adding support for Boost.Operators                       :story:
 
