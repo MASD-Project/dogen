@@ -442,6 +442,72 @@ it. Generated code must handle event notification.
   metamodel.
 - =profiles= should be used in the UML sense only.
 
+*Thoughts on code generation*
+
+- create a stereotype for =dogen::feature_group=. The name of the
+  feature (e.g. the path for the kvp) will be given by the model name
+  and location plus package plus feature group name plus feature
+  name. example =dogen.language.input= instead of
+  =yarn.input_languages=.
+- the UML class's attributes become the features. The types must match
+  the types we use in annotation, except these are also real dogen
+  types and thus must be defined in a model and must be fully
+  qualified. We must reference this model. Default value of the
+  attribute is the UML value.
+- any properties of the feature that cannot be supplied directly are
+  supplied via features:
+
+:    "template_kind": "instance",
+:    "scope": "root_module"
+
+- note that these are features too, so there will be a feature group
+  for feature properties. Interestingly, we can now solve the
+  enumeration problem because we can define a
+  =dogen::features::enumeration= that can only be used for features
+  and can be used to check that the values are correct. One of the
+  values of the type is any element who's meta-type is
+  =feature_enumeration=. Actually we don't even need this, it can be a
+  regular enumeration (provided it knows how to read itself from a
+  string). Basically a valid type for a feature is any dogen
+  enumeration.
+- annotations become a very simple model. There are no types in
+  annotation itself, just functions to cast strings. These will be
+  used by generated code. The profile merging code remains the same,
+  but now it has no notion of artefact location; it simply merges KVPs
+  based on a graph of inheritance (this time given by model
+  relationships, but with exactly the same result as the JSON
+  approach).
+- annotation merging still takes place, both at the named
+  configuration levels, and then subsequently at the element
+  level. Named configurations are just meta-model entities so we can
+  locate them by name, and literally copy across any key that we do
+  not have (as we do now).
+- code generation creates a factory for the feature group containing:
+  - a registration method. We still need some kind of registration of
+    key to scope so that we can validate that a key was not used in
+    the wrong scope.
+  - a class with all the members of the feature group in c++ types;
+  - a factory method that takes in a KVP or an annotation and returns
+    the class.
+- there are no templates any longer; we need to manually create each
+  feature in the appropriate feature group. Also, at present we are
+  reading features individually in each transform. Going forward this
+  is inefficient because we'd end up creating the configuration many
+  times. We need some kind of way of caching features against
+  types. At present we do this via properties. We could create
+  something like a "configuration" class and then just initialise all
+  features in one go. The transforms can then use these. Model
+  elements are associated with configurations. The easiest way is to
+  have a base class for configurations and then cast them as required
+  (or even have a visitor, since we know of the types). Alternatively,
+  we need to change the transforms so that we process a feature group
+  all in one go. This would be the cleanest way of doing it but
+  perhaps quite difficult given the current structure of the code.
+- we could also always set the KVP value to be string and use a
+  separator for containers and make it invalid to use it in strings
+  (something like |). Then we could split the string on the fly when
+  time comes for creating a vector/list.
+
 Notes:
 
 - loading profiles as meta-model elements is going to be a challenge,
@@ -460,7 +526,46 @@ Notes:
   into a name quite early in the pipeline. In the past this worked
   because we were only performing a very shallow resolution (string
   matching and always in the same model?) whereas now we are asking
-  for full location resolution, across models.
+  for full location resolution, across models. This will also be a
+  problem for mappings as meta-model elements.
+- a possible solution is to split processing into the following
+  phases:
+  1. load up target model.
+  2. read references from target, load references. Need also to
+     process model name via annotations. This means its not possible
+     to use external modules as a named configuration (or else its
+     recursive, we cannot find a configuration because its missing
+     EMs, and its missing EMs because we did not process the named
+     configuration).
+  3. collect all elements that need pre-processing and pre-process
+     them: mappings, licences, named configurations/profiles. Not
+     traits/object templates. All initialised structures are placed in
+     the context. Note that we are actually processing only these
+     elements into the endomodel, everything else is untouched. Also
+     we need to remove these elements from the model as well so that
+     they are not re-processed on the second phase. In addition, we
+     need resolution for the meta-elements on the first phase, so we
+     need to prime the resolver with these entities somehow,
+     independently of the model merging. Or better, we need to create
+     a first phase model-merge that only contains entities for the
+     first phase and process that. So: load target, collect all
+     first-phase meta-elements and remove from target, add target to
+     cache. Then repeat process with references. Then merge this model
+     and process it.
+  4. Second phase is as at present, except we no longer load the
+     models, we reuse them from an in-memory cache, after the
+     filtering has taken place.
+- note that the new meta-model elements are marked as non-generatable
+  so a model that only contains these is non-generatable. Same with
+  object templates/traits.
+- the only slight problem with this approach is that we wanted the
+  context to be const. This way we need to do all of these transforms
+  before we can initialise the context. One possible solution is to
+  split out first pass from second pass (different namespaces) so that
+  "context" means different things. We can then say that the second
+  phase context depends on first phase transform chain (in fact the
+  input for the second phase is the output of the first phase,
+  including cached models etc).
 
 Links:
 
