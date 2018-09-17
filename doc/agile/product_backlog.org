@@ -11,6 +11,17 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding support for Meta Enum  library                    :story:
+
+Meta Enum provides a number of features for enumerations. We could
+simply declare enums using their library. A second useful thing is to
+copy all of their features and offer them as plain code generation
+features.
+
+Links:
+
+- https://github.com/therocode/meta_enum
+
 *** Remove implicit modeling elements                                 :story:
 
 At present we have a number of modeling elements that can be
@@ -330,7 +341,7 @@ Links:
   Library
 - [[https://github.com/QuantStack/xeus-cling][xeus-cling]]: C++ interface for Jupyter notebooks.
 
-*** Consider integrating a sqitch like approach                      :story:
+*** Consider integrating a sqitch like approach                       :story:
 
 It would be nice to have a way to manage relational schemas, etc from
 within a dogen model. Sqitch seems to have an interesting approach,
