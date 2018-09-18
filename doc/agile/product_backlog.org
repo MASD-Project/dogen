@@ -3797,7 +3797,8 @@ project layouts (directory structure themes?) and add this to the
 project generator as a theme. At present there are several already
 available:
 
-- [[https://github.com/vector-of-bool/vector-of-bool.github.io/blob/master/_drafts/project-layout.md][Project Layout]]: see also discussion in [[https://old.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][reddit]].
+- [[https://github.com/vector-of-bool/vector-of-bool.github.io/blob/master/_drafts/project-layout.md][Project Layout]]: see also discussion in [[https://old.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][reddit]]. Also: [[https://vector-of-bool.github.io/2018/09/16/layout-survey.html][Project
+  Layout - Survey Results and Updates]]
 - [[https://build2.org/][Build2]]: the packaging system seems to have a preferred directory
   layout. In particular, see [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]].
 - GNU: gnu projects seem to have a well-defined structure, if not the
