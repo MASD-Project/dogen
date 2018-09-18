@@ -1,4 +1,5 @@
 ![Dogen Logo](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/images/new_logo_with_message.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen?ref=badge_shield)
 
 [![Licence](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/LICENCE)
 [![Build Status](https://img.shields.io/travis/DomainDrivenConsulting/dogen.svg?label=linux/osx)](https://travis-ci.org/DomainDrivenConsulting/dogen)
@@ -149,3 +150,7 @@ also include:
 
 Bugs can be submitted
 using [github Issues](https://github.com/kitanda/dogen/issues).
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen?ref=badge_large)
