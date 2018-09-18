@@ -11,6 +11,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding support for SBE                                   :story:
+
+There is an efficient serialisation protocol: Simple Binary
+Encoding. It supports multiple languages. We could add a facet for it.
+
+Links:
+
+- https://github.com/real-logic/simple-binary-encoding
+
 *** Consider adding support for Meta Enum  library                    :story:
 
 Meta Enum provides a number of features for enumerations. We could
@@ -11066,6 +11075,14 @@ need a top-level object that contains all objects.
 More of a placeholder - will require further investigation. Seems like
 Microsoft has their own Thrift/ProtoBuf-like implementation called
 [[https://github.com/Microsoft/bond/][Bond]]. It supports [[https://microsoft.github.io/bond/manual/bond_cpp.html][C++]]. Once could conceive Dogen support for it.
+
+*** Add support for Aeron                                             :story:
+
+Yet another RPC like framework.
+
+Links:
+
+- https://github.com/real-logic/aeron
 
 *** Add cling support                                                 :story:
 
