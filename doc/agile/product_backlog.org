@@ -2039,6 +2039,27 @@ example, for usernames we should take into account the comments in
 [[https://www.b-list.org/weblog/2018/feb/11/usernames/][Let’s talk about usernames]] and look at [[https://github.com/ubernostrum/django-registration/blob/1d7d0f01a24b916977016c1d66823a5e4a33f2a0/registration/validators.py#L25][django validators]]. We can then
 perhaps create generators that are either "valid" or "invalid".
 
+We could even have a "combined" generator that generates a percentage
+of "valids" and "invalids" as supplied by the user.
+
+In effect, instead of one generator, we would have many:
+
+- trivial generator: prefix for strings, with postfix; numbers in a
+  range, etc. Random strings with configurable sizes (readable and
+  unreadable characters).
+- valid realistic generator: valid entries from a domain.
+- invalid realistic generator: invalid entries from a domain
+- realistic generator: valid and invalid entries, according to
+  percentages.
+
+Each generator group is associated with a class.
+
+Actually maybe we can have multiple bundles for a given item. For
+example, take company names: we may want fortune 500 or just small
+companies (certain patterns with names may only appear in say small
+businesses). So company names is the class, with a default bundle, but
+there may be multiple bundles.
+
 Links:
 
 - https://mockaroo.com/
@@ -11333,6 +11354,24 @@ Or some such approach. Now that we have support for dot model names,
 this is easier to do. We should have a meta-data element that
 determines if a given facet is "built-in" ("shared"?) or if it is
 "external".
+
+This is not exclusive to facets like coherence. For example, we may
+not need test data in production, particularly when we start
+supporting test data types because we would then include a lot of data
+in the binary (or start requiring data files to be distributed with
+the model). This is useful to create system tests, but not ideal for
+the production binary.
+
+We may not need separate projects. Having different directories
+complicates facet management a great deal. If we take the [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][build2
+approach]], in that a single project can create multiple binaries, this
+would make life *much* easier: we could then simply generate static or
+dynamic libraries if the facet is not built-in. We could also
+automatically add the dependency between the facet library and the
+main library, or even between facet libraries because we have access
+to the facet dependency graph. The user should just classify the facet
+as "external"; it is up to CMake to determine if its a static or
+shared library.
 
 *** Support for platform specific code                                :story:
 
