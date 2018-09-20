@@ -2063,6 +2063,10 @@ there may be multiple bundles.
 Links:
 
 - https://mockaroo.com/
+- [[https://github.com/Devskiller/jfairy/tree/master/src/main/resources][jfairy]]: seems like there is an existing open source project for
+  this. See also [[https://medium.freecodecamp.org/how-our-test-data-generator-makes-fake-data-look-real-ace01c5bde4a][this post]].
+- [[https://ieeexplore.ieee.org/abstract/document/8004406/][Automated Generator for Complex and Realistic Test Data]]: paper on
+  the subject. Tool they created: [[https://github.com/mrfranta/jop-discontinued][jop]]
 
 **** Example Types
 
