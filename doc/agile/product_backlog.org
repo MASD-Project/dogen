@@ -1975,6 +1975,21 @@ Motes:
 At present we need to fall back to ODB pragmas in order to rename a
 column. We should have =yarn.orm.column_name=.
 
+*** Add support for data anonymisation                                :story:
+
+If users could mark certain fields as "sensitive", we could use test
+data generation for them. The process would be as follows:
+
+- mark certain fields in a model as sensitive. Names, addresses, etc.
+- provide a anonymiser facet. For each field, it creates a map using
+  the appropriate test data source for the field. The map is important
+  so that each original value corresponds to one and only one mapped
+  value, thus preserving the properties of the original data. Users
+  supply a graph of objects to anonymise.
+- anonymised data can now be serialised and supplied as test
+  data. Dogen itself can use this framework. See "Model anonymizer and
+  slicer".
+
 *** Add test data "types" for generated data                          :story:
 
 At present we are creating really "dumb" test data, just a prefix for
@@ -1998,13 +2013,31 @@ separate open source project that is responsible for maintaining the
 test data bundles. Any user can submit and make use of these
 bundles. Periodically dogen snapshots the bundles and includes them
 with its releases. This way we benefit from anyone who wants to help
-out.
+out. The bundles should be split by language so that we can have
+translations. We should use the exact same approach as regular
+[[https://developer.wordpress.org/themes/functionality/localization/][translation files]].
 
 Once we have the types, the next logical thing is to create mock
 endpoints. This can be done very easily because of remoting. In
 reality, we just implement the remote end point as a "fountain" using
 the test data generator to produce the data. We know all of the
 endpoint details due to remoting so this should be fairly trivial.
+
+Another option is to have "local fountains". Users can supply a path
+to a fountain file with data and some kind of "process" to describe
+how to read the data (e.g. linear, uniform random, etc). Users can
+associate the path with a type (possibly via primitives, or directly
+on an attribute). Dogen creates static data structures with the data
+and accesses them at run time. This exact same approach can also be
+applied to the bundles described above.
+
+We should also have an option to mark each entry as "valid" or
+"invalid" so that test data sets can also include invalid data. There
+should be a comment as to the purpose of the test (e.g. invalid
+because). These can then be used to generate unit or system tests. For
+example, for usernames we should take into account the comments in
+[[https://www.b-list.org/weblog/2018/feb/11/usernames/][Let’s talk about usernames]] and look at [[https://github.com/ubernostrum/django-registration/blob/1d7d0f01a24b916977016c1d66823a5e4a33f2a0/registration/validators.py#L25][django validators]]. We can then
+perhaps create generators that are either "valid" or "invalid".
 
 Links:
 
@@ -2144,21 +2177,6 @@ Links:
 - User Agent. A user agent string from a popular web browser or bot.
 - Username. jdoe, twilliams, jfang
 - Words. Chosen randomly from lorem ipsum
-
-*** Add support for data anonymisation                                :story:
-
-If users could mark certain fields as "sensitive", we could use test
-data generation for them. The process would be as follows:
-
-- mark certain fields in a model as sensitive. Names, addresses, etc.
-- provide a anonymiser facet. For each field, it creates a map using
-  the appropriate test data source for the field. The map is important
-  so that each original value corresponds to one and only one mapped
-  value, thus preserving the properties of the original data. Users
-  supply a graph of objects to anonymise.
-- anonymised data can now be serialised and supplied as test
-  data. Dogen itself can use this framework. See "Model anonymizer and
-  slicer".
 
 *** Allow users to override string prefixes in test data              :story:
 
