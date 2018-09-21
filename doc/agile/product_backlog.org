@@ -11,6 +11,39 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add additional primitive validation                               :story:
+
+The classes that we are thinking about adding for test data are useful
+in other ways such as for validation. We could have out of the box
+validators for each class (where it makes sense, e.g. IP address,
+etc). This is mostly useful when converting from an "untyped type"
+like std::string to a stronger type such as IP Address.
+
+*** Add support for configuration as environment variables            :story:
+
+One of the principles in the [[https://www.12factor.net/][12 factor app]] is using environment
+variables for all [[https://www.12factor.net/config][config]]. This can then be [[https://www.nginx.com/blog/microservices-reference-architecture-nginx-twelve-factor-app/][managed externally]]. Dogen
+can help with the process by allowing users to define configurations
+as meta-model elements. These can then be obtained from factories,
+using =std::getenv=. They can have all the right types (e.g. perform
+casting as required) and can even have built-in validation. For this
+we can rely on the taxonomy made for test data (this will be on a
+separate story). In addition, this will make mocking easier: we can
+either create an interface for the factory with a mock implementation,
+or the factory could receive a map on one of its constructors.
+
+We should also take into account the story on config, as well as the
+support for env variables built in to [[https://www.boost.org/doc/libs/1_68_0/doc/html/program_options/overview.html#id-1.3.31.5.10.3][program options]]. The good thing
+about using program options is that we'd also have support for command
+line arguments as well as env variables. We'd also need a way to
+describe the env variable name separately from the command line option
+name, e.g. =hostname= vs =MY_APPLICATION_HOSTNAME=.
+
+Links:
+
+- [[https://en.cppreference.com/w/cpp/utility/program/getenv][std::getenv]]
+- [[https://stackoverflow.com/questions/44819569/how-to-extract-environment-variable-with-boostprogram-options][How to extract environment variable with boost::program_options?]]
+
 *** Consider adding support for SBE                                   :story:
 
 There is an efficient serialisation protocol: Simple Binary
@@ -289,7 +322,7 @@ of two approaches:
 - stubs only, were we generate the original content but then users
   subsequently manage the files.
 
-*** Add support for compile time mocking                              :story:
+*** Consider adding support for compile time mocking                  :story:
 
 In a post in HN, a user [[https://news.ycombinator.com/item?id=17504197][suggested the following]]:
 
@@ -1300,7 +1333,7 @@ data or is also an execution engine.
 
 In "Aspect-Oriented Model-Driven Software Product Line Engineering",
 Groher and Voelter name the top-level owner of transforms
-"transformator", in symmetry with the "generaotr". We could probably
+"transformator", in symmetry with the "generator". We could probably
 have these classes.
 
 *** Sections to add to manual                                         :story:
@@ -1434,6 +1467,16 @@ be a meta-data parameter, either global or local.
 
 Users may want to provide their own assert function which throws the
 adequate exception for their use case.
+
+Actually these should be meta-data parameters for when using a pointer
+type:
+
+- check for null
+- exception to throw
+
+This also means we should get the constructors to call the setters
+instead of setting variables directly. We can also do this for
+immutable types, but make the setters private.
 
 *** Factory method instead of complete constructor                    :story:
 
@@ -1776,6 +1819,15 @@ At present we have some hacks around binaries to allow us to test the
 code. We manually create a static library that excludes main so that
 the tests can include it. We should make this the code-generated
 approach when we start generating CMake files for binaries.
+
+This is all made much simpler if we use the Build2 approach of merging
+all files into a single directory and have multiple targets per
+project. However, we may need to manually add files to each target or
+at least ensure there is a good way of doing this via regex. For
+example, all test files can be =.test.cpp=. We can then use a regex to
+exclude these from the main binary, and exclude =main.cpp= from the
+tests. Or it may make sense to always create a static or shared
+library for all files excluding =main.cpp= and then link against it.
 
 Tasks:
 
