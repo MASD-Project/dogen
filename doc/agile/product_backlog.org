@@ -11,6 +11,66 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider code generating utility at a product level               :story:
+
+At present we are copying and pasting logging from utilities to all
+new projects and then adding log initialisation to binaries. It would
+be nicer if this was part of dogen itself, and we could somehow state
+that we are targeting Boost.Log at the executable level and have the
+logging initialisation code all generated, including
+initialisation. Of course, when using it on a product with multiple
+components, it would be even better if this code could be shared. We
+need to review all the code in utilities and see if there is a way to
+create a model that can take on that functionality as meta-data
+parameters. Useful things:
+
+- dogen "standard" exceptions: invalid enum value, etc. Exceptions
+  that we think may be useful in several applications but for which
+  there is no c++ standard equivalent.
+- file utilities: read whole file etc.
+- hashing
+- io
+- etc.
+
+In effect what we really want is to have a way to generate the utility
+library for each product, which is what we are doing at present
+manually. A better way of doing this would be to have a product line
+level option whereby users could state they would like it included
+with their product. Dogen would then code generate it with all the
+right options. In effect, its a configurable model with trivial
+utilities. We could also just go back to the ideas around needle and
+call it =needle=, or something else that is not very likely to clash
+with user code.
+
+*** Code generation of tests for dogen models                         :story:
+
+We probably already have a story for this. At present we are manually
+generating tests for each model (serialisation, etc). The structure of
+the tests is very predictable. In a world where tests are a facet, we
+could have some options to control the generation of tests. This would
+also allow end users to generate tests for their models and report the
+results. We would need to generate the utility model for this - or
+perhaps we could code generate tests in a way that no longer requires
+templates - its all "hard-coded". This would make the tests easier to
+follow, but we would generate a lot of code.
+
+We could separate dogen specific tests from user tests by naming them
+differently, e.g. =abc_dogen_test.cpp=. We can then create two
+different test binaries, one for dogen tests and another for user
+tests, so that users don't have to run dogen tests unless something
+has gone wrong.
+
+Interestingly we could even set rules to ignore tests that are known
+to fail:
+
+- if object has no members do not do equality tests
+- if object has some kind of recursion do not do tests
+- etc.
+
+These can be marked as known limitations. At present the tests require
+Boost.Test but it should be possible to target other frameworks
+(meta-data option).
+
 *** Add additional primitive validation                               :story:
 
 The classes that we are thinking about adding for test data are useful
@@ -38,6 +98,10 @@ about using program options is that we'd also have support for command
 line arguments as well as env variables. We'd also need a way to
 describe the env variable name separately from the command line option
 name, e.g. =hostname= vs =MY_APPLICATION_HOSTNAME=.
+
+Configuration should be read by a singleton, which is initialised at
+program start up. Initialisation validates config. All other calls
+return the cached configuration.
 
 Links:
 
@@ -5183,7 +5247,7 @@ some kind of mechanism to display whats on offer in the command line,
 via the =--info= option. This is slightly tricky because the fronend
 and backend models do not know of the command line. We need a method
 in the frontend that returns a description and a method in the
-workflow that returns all descriptions. These must be static. The
+workflow that returns all descriptions. These must be static. Then
 knitter can then call these methods and build the info text.
 
 ** In current major release
@@ -5235,6 +5299,13 @@ could translate to:
   built-in into a underscore delimited string, used as a key in the
   cache.
 - we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
+- we could consider code-generating code to link the far cache with
+  the near cache but it seems this is the job of a caching library.
+
+Links:
+
+- https://pocoproject.org/docs/package-Foundation.Cache.html
+- https://pocoproject.org/slides/140-Cache.pdf
 
 *** Generate Redis get/set code                                       :story:
 
@@ -5323,7 +5394,15 @@ expected to be modified by the user. Example:
 
 : /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
 
-There must be a vi equivalent.
+There must be a vi equivalent. There is =view= but its not clear how
+to set it into a modeline. The alternative is to write the files as
+read only.
+
+: /* vim: tw=60: ts=2: view=t: set ro: */
+
+Requires changes  to =.vimrc=:
+
+: set modeline
 
 It would be even better if we could make parts of a file read only, so
 that only the protected regions could be written on.
