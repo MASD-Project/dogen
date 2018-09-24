@@ -11,6 +11,19 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for code coverage                                     :story:
+
+We started the work on code coverage but never finished it. At present
+it seems we don't even have a story detailing the current state of
+coverage in the backlog. From memory the problem was that the upload
+was too large and the coverage was including lots of files that should
+be ignored. We never got the upload to work. In the mean time, it
+seems that kcov is a better approach instead of using lcov, gcov, etc.
+
+Links:
+
+- https://github.com/SimonKagstrom/kcov
+
 *** Consider code generating utility at a product level               :story:
 
 At present we are copying and pasting logging from utilities to all
