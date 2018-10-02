@@ -3,7 +3,7 @@
 [![Licence](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](https://raw.githubusercontent.com/MASD-Project/dogen/master/LICENCE)
 [![Build Status](https://img.shields.io/travis/MASD-Project/dogen.svg?label=linux/osx)](https://travis-ci.org/MASD-Project/dogen)
 [![Build Status](https://img.shields.io/appveyor/ci/mcraveiro/dogen.svg?label=windows)](https://ci.appveyor.com/project/mcraveiro/dogen)
-[![Coverage Status](https://img.shields.io/coveralls/MASD-Project/dogen.svg)](https://coveralls.io/r/MASD-Project/dogen)
+[![Coverage Status](https://coveralls.io/repos/github/MASD-Project/dogen/badge.svg?branch=master)](https://coveralls.io/github/MASD-Project/dogen?branch=master)
 [![Issues](https://img.shields.io/github/issues/domaindrivenconsulting/dogen.svg)](https://github.com/MASD-Project/dogen/issues)
 [![Releases](https://img.shields.io/github/release/domaindrivenconsulting/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 ![GitHub commits](https://img.shields.io/github/commits-since/domaindrivenconsulting/dogen/v1.0.08.svg)
