@@ -850,6 +850,8 @@ rather than within unit tests. This would work as follows:
                   /benchmark data
               /project_b
  ...
+- to avoid clashes, make the branches named after the build,
+  e.g. travis osx etc.
 - git clones are shallow (1 commit)
 - once all reports are generated into the git report repo, the build
   commits the report. The comment is the dogen commit.
@@ -860,6 +862,9 @@ rather than within unit tests. This would work as follows:
   core build, and triggered from a bintray upload. However, as we do
   not know how to do this yet, we can just run the system tests at the
   end of the dogen build.
+- we should split the reporting work from the build separation. We
+  could have a simple build that just fails if there are any diffs to
+  start off with and worry about reporting later.
 
 With this approach we can have any number of projects contributing to
 validate dogen (including dogen itself). The only slight downside is
@@ -867,7 +872,12 @@ that the models must always be up-to-date (e.g. if the user has
 changed the model but not regenerated, system tests will
 fail). Perhaps we could have different categories of test models:
 mandatory and optional. Mandatory must pass, optional do not
-contribute to the build failing.
+contribute to the build failing. However, they still show up in the
+report.
+
+Links:
+
+- https://github.com/cubicdaiya/dtl
 
 *** Add support for entity framework                                  :story:
 
@@ -1662,14 +1672,39 @@ be allowed to choose if they want a static or shared library
 instead. This is a bit tricky if there is no dogen model because we
 have no way to supply meta-data.
 
+We need to ensure we do not hard-code the OpenAPI implementation
+against a specific HTTP library such as Boost.Beast or Casablanca. It
+should be possible to plug it in with different libraries (even if at
+generation time only, since users don't really need more than one
+library at the same time).
+
+In addition, in keeping with the move towards meta-elements to
+represent all concepts, we should either implement the OpenAPI
+concepts as meta-elements or as meta-data parameters. However, in this
+case we probably want to keep the input in YAML (parsing it using
+something like [[https://github.com/jbeder/yaml-cpp][yaml-cpp]]) but then instantiate meta-model elements that
+model OpenAPI. These are then used by the templates to generate code
+(after possibly some enrichment). Interestingly, with OpenAPI we have
+all that is required in order to create a service definition. The only
+slight problem is that we cannot bind back to the underlying library,
+even given a interface definition, because there is such a big
+mismatch between the swagger API and a regular programming language
+interface. From this perspective, it perhaps makes more sense to have
+swagger metamodel elements instead of relying on YAML because we could
+automatically generate them from the interface declaration (what is
+hard is the opposite).
+
 Links:
 
 - [[http://docs.servicestack.net/swagger-api][ServiceStack Swagger integration]]
 - [[http://radar.oreilly.com/2015/09/building-apis-with-swagger.html][Building APIs with Swagger]]
 - [[http://petstore.swagger.io/v2/swagger.json][Swagger JSON example]]
-- [[https://github.com/OAI/OpenAPI-Specification][OpenAPI]]: Swagger has been renamed to OpenAPI
+- [[https://github.com/OAI/OpenAPI-Specification][OpenAPI]]: Swagger has been renamed to OpenAPI. See also [[https://swagger.io/specification/][this page]].
 - [[https://github.com/eidheim/Simple-Web-Server][Simple-Web-Server]]: alternative to beast.
 - [[https://github.com/Stiffstream/restinio][RESTinio]]: another HTTP/websockets framework based on asio.
+- [[https://github.com/swagger-api/swagger-codegen][Swagger codegen]]: tool for code generation of swagger APIs. See also
+  [[https://swagger.io/tools/swagger-codegen/][this link]].
+- [[https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v3.0][OpenAPI examples]]: YAML documents with examples.
 
 *** HTTP API support                                                  :story:
 
