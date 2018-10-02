@@ -20,6 +20,7 @@
 ![clang-3.7](https://img.shields.io/badge/CLANG-3.7-ff69b4.svg)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen?ref=badge_shield)
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
+[![Contributors](https://img.shields.io/github/contributors/DomainDrivenConsulting/dogen.svg)](https://github.com/DomainDrivenConsulting/dogen/graphs/contributors)
 
 # Overview
 
