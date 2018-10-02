@@ -1,0 +1,164 @@
+#+title: Sprint Backlog 08
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Start the planning towards v2;
+- Start addressing build issues.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2018-10-02 Tue 17:52]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *1:30* |      |      |   0.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 1:30   |      |      |   0.0 |
+| Active                                                                      |        | 1:30 |      |   0.0 |
+| Edit release notes for previous sprint                                      |        |      | 1:30 |   0.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2018-10-02 Tue 17:51]
+    :LOGBOOK:
+    CLOCK: [2018-10-02 Tue 15:30]--[2018-10-02 Tue 17:00] =>  1:30
+    :END:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.08, "Zunga"
+
+#+begin_src markdown
+![Caminhada](https://i2.wp.com/cookthebeans.com/wp-content/uploads/2017/03/img_5465.jpg) _Long walk towards a traditional village, Huambo, Angola. [(C) Ana Rocha 2017](https://cookthebeans.com/2017/03/09/benguela-huambo-bie-in-the-route-of-angolas-up-country)_.
+
+# Overview
+
+After a rather long hiatus of some nine months, Dogen development resumes once more. In truth, the break was only related to the open source aspect of the Dogen project; behind the scenes I have been hard at work on my PhD, which has morphed into an attempt to lay the theoretical foundations for all the software engineering that has been done with Dogen. Sadly, I cannot perform that work out in the open until the thesis or papers are published, so it is expected to remain closed for at least another year or two.
+
+On the bright side, after performing an extensive literature review of the field of [Model Driven Engineering](https://en.wikipedia.org/wiki/Model-driven_engineering) - the technical name used in academia for the field Dogen is in - a lot of what we have been trying to do has finally become clear. The down side is that, as a result of all of this theoretical work, very little has changed with regards to the code during this period. As such, this sprint contains only some minor analysis work that was done in parallel, and I am closing it just avoid conflating it with the new work going forward.
+
+The future for Dogen is bright, though. We are now starting the long road towards the very ambitious release that will be Dogen 2.0. The objective is to sync the code to match all of the work done on the theory side. This work as already started; you will not fail to notice that the repository has been moved to the _MASD project_ - Model Assisted Software Development.
+
+User visible changes
+================
+
+There are no user visible changes this sprint.
+
+Next Sprint
+===========
+
+The next few sprints will be extremely active, addressing a number of long standing issues such as moving test models outside of the main repo and concluding ongoing refactorings.
+
+Binaries
+======
+
+You can download the remaining binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.08_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.08/dogen_1.0.08_amd64-applications.deb)
+- [dogen-1.0.08-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.08/dogen-1.0.08-Darwin-x86_64.dmg)
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/948594830267043840][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6354361007493775361][LinkedIn]]
+- [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
+
+*** STARTED Update readme to reflect org move                         :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-02 Tue 17:52]
+    :END:
+
+Now that dogen is under MASD, we have a number of links that are
+pointing to the old Domain Driven Consulting org. Update those.
+
+*** Sprint and product backlog grooming                               :story:
+
+Updates to sprint and product backlog.
+
+*** Create the =generation= model                                     :story:
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
+
+Problems:
+
+- all of the transforms assume access to the modeling element means
+  access to the generation properties. However, with the introduction
+  of the generation element we now have a disconnect. For example, we
+  sometimes sort and bucket the elements, and then modify them; this
+  no longer works with generation elements because these are not
+  pointers. It would be easier to make the generation properties a
+  part of the element. This is an ongoing discussion we've had since
+  the days of formattables. However, in formattables we did write all
+  of the transforms to take into account the formattable contained
+  both the element and the formattable properties, whereas now we need
+  to update all transforms to fit this approach. This is a lot more
+  work. The quick hack is to slot in the properties directly into the
+  element as some kind of "opaque properties". We could create a base
+  class =opaque_properties= and then have a container of these in
+  element. However, to make it properly extensible, the only way is to
+  make it a unordered set of pointers.
+
+*** Reduce build times to avoid timeouts                              :story:
+
+Refactoring at the moment is painful because every time we change
+CMakeFiles we end up rebuilding everything. At 2K plus ninja targets,
+it is a long wait. In addition, we have been getting really close to
+the maximum travis time, resulting in lots of manual fiddling to get
+things to work. However, there is one very easy win: split test models
+from production code. This is more than just a quick hack, really:
+
+- we are compiling the test models with every build at present, but
+  since they are not production code, we only really need to validate
+  them whenever they change. That is - for a given OS, compiler, etc -
+  once a test model compiles, links and its tests run, nothing else
+  needs to be said until the test model changes.
+- test models change very infrequently; only when we do a breaking
+  change on Dogen and we rebase.
+- test models by definition do not reference production code (or at
+  least, /should/ not).
+
+As a first step we should try to isolate the two builds (production,
+test models) via variables so that we can create separate
+travis/appveyor builds for them. In the future we should make the
+separation even more explicit, by moving the folder away from the
+production code.
+
+*Previous Understanding*
+
+At present we get random build time violations on travis due to builds
+taking longer than 50 mins. We need to think of ways to reduce the
+build time. Things to try:
+
+- remove all of the hashing etc for the types we don't need to hash.
+- get rid of the warnings for boost.
+
+** Deprecated
