@@ -1,26 +1,26 @@
-![Dogen Logo](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/images/new_logo_with_message.png)
+![Dogen Logo](https://raw.githubusercontent.com/MASD-Project/dogen/master/doc/images/new_logo_with_message.png)
 
-[![Licence](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/LICENCE)
-[![Build Status](https://img.shields.io/travis/DomainDrivenConsulting/dogen.svg?label=linux/osx)](https://travis-ci.org/DomainDrivenConsulting/dogen)
+[![Licence](https://img.shields.io/badge/license-GPL_3-green.svg?dummy)](https://raw.githubusercontent.com/MASD-Project/dogen/master/LICENCE)
+[![Build Status](https://img.shields.io/travis/MASD-Project/dogen.svg?label=linux/osx)](https://travis-ci.org/MASD-Project/dogen)
 [![Build Status](https://img.shields.io/appveyor/ci/mcraveiro/dogen.svg?label=windows)](https://ci.appveyor.com/project/mcraveiro/dogen)
-[![Coverage Status](https://img.shields.io/coveralls/DomainDrivenConsulting/dogen.svg)](https://coveralls.io/r/DomainDrivenConsulting/dogen)
-[![Issues](https://img.shields.io/github/issues/domaindrivenconsulting/dogen.svg)](https://github.com/DomainDrivenConsulting/dogen/issues)
-[![Releases](https://img.shields.io/github/release/domaindrivenconsulting/dogen.svg)](https://github.com/DomainDrivenConsulting/dogen/releases)
+[![Coverage Status](https://img.shields.io/coveralls/MASD-Project/dogen.svg)](https://coveralls.io/r/MASD-Project/dogen)
+[![Issues](https://img.shields.io/github/issues/domaindrivenconsulting/dogen.svg)](https://github.com/MASD-Project/dogen/issues)
+[![Releases](https://img.shields.io/github/release/domaindrivenconsulting/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 ![GitHub commits](https://img.shields.io/github/commits-since/domaindrivenconsulting/dogen/v1.0.08.svg)
-[![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)](https://github.com/DomainDrivenConsulting/dogen/pulse/monthly)
+[![Status](https://img.shields.io/badge/status-active-brightgreen.svg?style=flat)](https://github.com/MASD-Project/dogen/pulse/monthly)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/domaindrivenconsulting/dogen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Coverity](https://img.shields.io/coverity/scan/9268.svg)](https://scan.coverity.com/projects/domaindrivenconsulting-dogen)
 [![Download](https://api.bintray.com/packages/domaindrivenconsulting/Dogen/Dogen/images/download.svg?version=1.0.08) ](https://bintray.com/domaindrivenconsulting/Dogen/Dogen/1.0.08/link)
-[![Github All Releases](https://img.shields.io/github/downloads/DomainDrivenConsulting/dogen/total.svg)](https://github.com/DomainDrivenConsulting/dogen)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5d7fca8ac9a64ea8b8d35bc8b0d534b5)](https://www.codacy.com/app/marco-craveiro/dogen?utm_source=github.com&utm_medium=referral&utm_content=DomainDrivenConsulting/dogen&utm_campaign=badger)
+[![Github All Releases](https://img.shields.io/github/downloads/MASD-Project/dogen/total.svg)](https://github.com/MASD-Project/dogen)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5d7fca8ac9a64ea8b8d35bc8b0d534b5)](https://www.codacy.com/app/marco-craveiro/dogen?utm_source=github.com&utm_medium=referral&utm_content=MASD-Project/dogen&utm_campaign=badger)
 ![language](https://img.shields.io/badge/language-c++-blue.svg)
 ![C++](https://img.shields.io/badge/std-c++14-blue.svg)
 ![msvc2015](https://img.shields.io/badge/MSVC-2015-ff69b4.svg)
 ![gcc-6.3.0](https://img.shields.io/badge/GCC-6.3.0-ff69b4.svg)
 ![clang-3.7](https://img.shields.io/badge/CLANG-3.7-ff69b4.svg)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FDomainDrivenConsulting%2Fdogen?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMASD-Project%2Fdogen.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMASD-Project%2Fdogen?ref=badge_shield)
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
-[![Contributors](https://img.shields.io/github/contributors/DomainDrivenConsulting/dogen.svg)](https://github.com/DomainDrivenConsulting/dogen/graphs/contributors)
+[![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
 
 # Overview
 
@@ -33,9 +33,9 @@ respecting a set of predefined restrictions; Dogen then uses this
 input to generate a source code representation of the model. At
 present the main frontend
 is [Dia](https://en.wikipedia.org/wiki/Dia_(software))
-([Dia test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input)),
+([Dia test models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.dia/input)),
 but we also support JSON
-([JSON test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input)). Depending
+([JSON test models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.json/input)). Depending
 on use cases and user demand, other frontends may follow.
 
 The generated code contains most of the functionality required from a
@@ -62,7 +62,7 @@ Dogen has the following dependencies, across all operative systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
-| Git    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/DomainDrivenConsulting/dogen).               |
+| Git    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/MASD-Project/dogen).               |
 | CMake  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
 | Boost  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | ODB    | Optional  | Any recent.    | If you want to build the ORM examples, you need ODB. You will also need a backend such as Oracle, Postgres, etc.|
@@ -77,7 +77,7 @@ the repository and create the build directory, using the shell of your
 choice (ours is Bash):
 
 ```
-git clone git@github.com:DomainDrivenConsulting/dogen.git
+git clone git@github.com:MASD-Project/dogen.git
 cd dogen/build
 mkdir output
 cd output
