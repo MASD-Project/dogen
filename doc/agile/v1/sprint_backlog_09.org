@@ -13,16 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-03 Wed 10:39]
+#+CAPTION: Clock summary at [2018-10-03 Wed 10:44]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:28* |      |      |   0.0 |
+| *Total time*                                                                | *3:30* |      |      |   0.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:28   |      |      |   0.0 |
-| Active                                                                      |        | 3:28 |      |   0.0 |
+| Stories                                                                     | 3:30   |      |      |   0.0 |
+| Active                                                                      |        | 3:30 |      |   0.0 |
 | Edit release notes for previous sprint                                      |        |      | 1:30 |   0.0 |
 | Update readme to reflect org move                                           |        |      | 1:58 |   0.0 |
+| Create project for C# test model                                            |        |      | 0:02 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -67,6 +68,10 @@ Due to the transition of organisations, we did not generate any binaries for thi
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6354361007493775361][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
+*** Sprint and product backlog grooming                               :story:
+
+Updates to sprint and product backlog.
+
 *** COMPLETED Update readme to reflect org move                       :story:
     CLOSED: [2018-10-03 Wed 10:39]
     :LOGBOOK:
@@ -79,9 +84,48 @@ Due to the transition of organisations, we did not generate any binaries for thi
 Now that dogen is under MASD, we have a number of links that are
 pointing to the old Domain Driven Consulting org. Update those.
 
-*** Sprint and product backlog grooming                               :story:
+*** COMPLETED Analysis on reducing build times to avoid timeouts      :story:
+    CLOSED: [2018-10-03 Wed 10:40]
 
-Updates to sprint and product backlog.
+Refactoring at the moment is painful because every time we change
+CMakeFiles we end up rebuilding everything. At 2K plus ninja targets,
+it is a long wait. In addition, we have been getting really close to
+the maximum travis time, resulting in lots of manual fiddling to get
+things to work. However, there is one very easy win: split test models
+from production code. This is more than just a quick hack, really:
+
+- we are compiling the test models with every build at present, but
+  since they are not production code, we only really need to validate
+  them whenever they change. That is - for a given OS, compiler, etc -
+  once a test model compiles, links and its tests run, nothing else
+  needs to be said until the test model changes.
+- test models change very infrequently; only when we do a breaking
+  change on Dogen and we rebase.
+- test models by definition do not reference production code (or at
+  least, /should/ not).
+
+As a first step we should try to isolate the two builds (production,
+test models) via variables so that we can create separate
+travis/appveyor builds for them. In the future we should make the
+separation even more explicit, by moving the folder away from the
+production code.
+
+*Previous Understanding*
+
+At present we get random build time violations on travis due to builds
+taking longer than 50 mins. We need to think of ways to reduce the
+build time. Things to try:
+
+- remove all of the hashing etc for the types we don't need to hash.
+- get rid of the warnings for boost.
+
+*** STARTED Create project for C# test model                          :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-03 Wed 10:42]--[2018-10-03 Wed 10:44] =>  0:02
+    :END:
+
+We need to create a separate repo for the C# test model. This also
+means we need to generate the LAM model in two different locations.
 
 *** Create the =generation= model                                     :story:
 
@@ -126,39 +170,5 @@ Problems:
   class =opaque_properties= and then have a container of these in
   element. However, to make it properly extensible, the only way is to
   make it a unordered set of pointers.
-
-*** Reduce build times to avoid timeouts                              :story:
-
-Refactoring at the moment is painful because every time we change
-CMakeFiles we end up rebuilding everything. At 2K plus ninja targets,
-it is a long wait. In addition, we have been getting really close to
-the maximum travis time, resulting in lots of manual fiddling to get
-things to work. However, there is one very easy win: split test models
-from production code. This is more than just a quick hack, really:
-
-- we are compiling the test models with every build at present, but
-  since they are not production code, we only really need to validate
-  them whenever they change. That is - for a given OS, compiler, etc -
-  once a test model compiles, links and its tests run, nothing else
-  needs to be said until the test model changes.
-- test models change very infrequently; only when we do a breaking
-  change on Dogen and we rebase.
-- test models by definition do not reference production code (or at
-  least, /should/ not).
-
-As a first step we should try to isolate the two builds (production,
-test models) via variables so that we can create separate
-travis/appveyor builds for them. In the future we should make the
-separation even more explicit, by moving the folder away from the
-production code.
-
-*Previous Understanding*
-
-At present we get random build time violations on travis due to builds
-taking longer than 50 mins. We need to think of ways to reduce the
-build time. Things to try:
-
-- remove all of the hashing etc for the types we don't need to hash.
-- get rid of the warnings for boost.
 
 ** Deprecated
