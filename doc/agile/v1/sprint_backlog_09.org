@@ -13,15 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-02 Tue 17:52]
+#+CAPTION: Clock summary at [2018-10-03 Wed 10:01]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:30* |      |      |   0.0 |
+| *Total time*                                                                | *2:52* |      |      |   0.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:30   |      |      |   0.0 |
-| Active                                                                      |        | 1:30 |      |   0.0 |
+| Stories                                                                     | 2:52   |      |      |   0.0 |
+| Active                                                                      |        | 2:52 |      |   0.0 |
 | Edit release notes for previous sprint                                      |        |      | 1:30 |   0.0 |
+| Update readme to reflect org move                                           |        |      | 1:22 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -33,7 +34,7 @@
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.08, "Zunga"
+Title: Dogen v1.0.08, "Caminhada"
 
 #+begin_src markdown
 ![Caminhada](https://i2.wp.com/cookthebeans.com/wp-content/uploads/2017/03/img_5465.jpg) _Long walk towards a traditional village, Huambo, Angola. [(C) Ana Rocha 2017](https://cookthebeans.com/2017/03/09/benguela-huambo-bie-in-the-route-of-angolas-up-country)_.
@@ -59,12 +60,7 @@ The next few sprints will be extremely active, addressing a number of long stand
 Binaries
 ======
 
-You can download the remaining binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
-
-- [dogen_1.0.08_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.08/dogen_1.0.08_amd64-applications.deb)
-- [dogen-1.0.08-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.08/dogen-1.0.08-Darwin-x86_64.dmg)
-
-For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+Due to the transition of organisations, we did not generate any binaries for this release. As there are no code changes, please use the binaries for the previous release ([v1.0.07](https://github.com/MASD-Project/dogen/releases/tag/v1.0.07)) or build Dogen from source. Source downloads are available at the top.
 #+end_src
 
 - [[https://twitter.com/MarcoCraveiro/status/948594830267043840][Tweet]]
@@ -73,7 +69,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Update readme to reflect org move                         :story:
     :LOGBOOK:
-    CLOCK: [2018-10-02 Tue 17:52]
+    CLOCK: [2018-10-03 Wed 09:54]--[2018-10-03 Wed 10:01] =>  0:07
+    CLOCK: [2018-10-03 Wed 09:15]--[2018-10-03 Wed 09:53] =>  0:38
+    CLOCK: [2018-10-02 Tue 17:52]--[2018-10-02 Tue 18:29] =>  0:37
     :END:
 
 Now that dogen is under MASD, we have a number of links that are
