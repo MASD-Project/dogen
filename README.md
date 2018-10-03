@@ -150,4 +150,4 @@ also include:
   ```MODEL``` is the name of the model you ran against.
 
 Bugs can be submitted
-using [github Issues](https://github.com/kitanda/dogen/issues).
+using [github Issues](https://github.com/MASD-Project/dogen/issues).
