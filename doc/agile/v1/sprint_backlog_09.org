@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-03 Wed 10:01]
+#+CAPTION: Clock summary at [2018-10-03 Wed 10:39]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:52* |      |      |   0.0 |
+| *Total time*                                                                | *3:28* |      |      |   0.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:52   |      |      |   0.0 |
-| Active                                                                      |        | 2:52 |      |   0.0 |
+| Stories                                                                     | 3:28   |      |      |   0.0 |
+| Active                                                                      |        | 3:28 |      |   0.0 |
 | Edit release notes for previous sprint                                      |        |      | 1:30 |   0.0 |
-| Update readme to reflect org move                                           |        |      | 1:22 |   0.0 |
+| Update readme to reflect org move                                           |        |      | 1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -67,8 +67,10 @@ Due to the transition of organisations, we did not generate any binaries for thi
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6354361007493775361][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
-*** STARTED Update readme to reflect org move                         :story:
+*** COMPLETED Update readme to reflect org move                       :story:
+    CLOSED: [2018-10-03 Wed 10:39]
     :LOGBOOK:
+    CLOCK: [2018-10-03 Wed 10:02]--[2018-10-03 Wed 10:38] =>  0:36
     CLOCK: [2018-10-03 Wed 09:54]--[2018-10-03 Wed 10:01] =>  0:07
     CLOCK: [2018-10-03 Wed 09:15]--[2018-10-03 Wed 09:53] =>  0:38
     CLOCK: [2018-10-02 Tue 17:52]--[2018-10-02 Tue 18:29] =>  0:37

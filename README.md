@@ -19,7 +19,7 @@
 [![gcc-6.3.0](https://img.shields.io/badge/GCC-6.3.0-ff69b4.svg)](https://www.gnu.org/software/gcc/gcc-6)
 [![clang-3.7](https://img.shields.io/badge/CLANG-3.7-ff69b4.svg)](http://releases.llvm.org/3.7.0/tools/clang/docs/ReleaseNotes.html)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FMASD-Project%2Fdogen.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FMASD-Project%2Fdogen?ref=badge_shield)
-[![Coverity](https://img.shields.io/coverity/scan/9268.svg)](https://scan.coverity.com/projects/domaindrivenconsulting-dogen)
+[![Coverity](https://img.shields.io/coverity/scan/16865.svg)](https://scan.coverity.com/projects/masd-project-dogen)
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 
 # Overview
@@ -50,7 +50,7 @@ parity with C++ support.
 # Binary Packages
 
 Binary packages are available on
-[BinTray](https://bintray.com/domaindrivenconsulting/Dogen), for
+[BinTray](https://bintray.com/masd-project/Dogen/), for
 Debian Linux, OSX and Windows - all in 64-bit. Packages are generated
 at the end of each sprint - with the exception of Windows, where we
 generate them on each commit due to a [problem with
