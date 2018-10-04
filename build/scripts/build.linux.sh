@@ -93,24 +93,6 @@ target="$*"
 echo "* Target: '${target}'"
 
 #
-# C#
-#
-if [[ "x${WITH_CSHARP}" = "x" ]]; then
-    echo "* C#: disabled"
-else
-    echo "* C#: enabled"
-fi
-
-#
-# C++
-#
-if [[ "x${WITH_CPP}" = "x" ]]; then
-    echo "* C++: disabled"
-else
-    echo "* C++: enabled"
-fi
-
-#
 # Setup directories
 #
 output_dir="${product_dir}/build/output";
@@ -136,14 +118,6 @@ cmake_defines="${cmake_defines} -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
 cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 cmake_defines="${cmake_defines} -DWITH_BENCHMARKS=ON"
 
-if [ "${WITH_CORE_ONLY}" == "1" ]; then
-    cmake_defines="${cmake_defines} -DWITH_CORE=ON"
-    cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=OFF"
-elif [ "${WITH_TEST_MODELS_ONLY}" == "1" ]; then
-    cmake_defines="${cmake_defines} -DWITH_CORE=OFF"
-    cmake_defines="${cmake_defines} -DWITH_TEST_MODELS=ON"
-fi
-
 #
 # Use minimal packaging in debug to preserve disk space.
 #
@@ -159,37 +133,12 @@ fi
 #
 # Build
 #
-if [ "${WITH_CSHARP}" == "1" ]; then
-    echo "* Starting C# build."
-    csharp_dir="${product_dir}/projects/dogen.test_models";
-    cd ${csharp_dir}
-    nuget restore Dogen.TestModels.sln
-    if [ $? -ne 0 ]; then
-        echo "Error in nuget restore." >&2
-        exit 1;
-    fi
-
-    xbuild Dogen.TestModels.sln
-    if [ $? -ne 0 ]; then
-        echo "Error building C# solution." >&2
-        exit 1;
-    fi
-
-    mono packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe CSharpModel.Tests/bin/Debug/Dogen.TestModels.CSharpModel.Tests.dll
-    if [ $? -ne 0 ]; then
-        echo "Error running C# unit tests." >&2
-        exit 1;
-    fi
-fi
-
-if [ "${WITH_CPP}" == "1" ]; then
-    echo "* Starting C++ build."
-    cd ${build_type_dir}
-    cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
-    if [ $? -ne 0 ]; then
-        echo "Error running CMake." >&2
-        exit 1;
-    fi
+echo "* Starting C++ build."
+cd ${build_type_dir}
+cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
+if [ $? -ne 0 ]; then
+    echo "Error running CMake." >&2
+    exit 1;
 fi
 
 exit 0;

@@ -5,27 +5,31 @@
 
 * Mission Statement
 
-- Start the planning towards v2;
-- Address build issues.
+- Address build issues; the build must work reliably and the tests
+  must give us confidence that we did not break the code generator
+  across the entire feature set.
+- Start the planning towards v2: get a good idea of what we think is
+  in and what should be out. Make the product backlog reflect this
+  triage.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-04 Thu 13:12]
+#+CAPTION: Clock summary at [2018-10-04 Thu 16:01]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:26* |       |      |   0.0 |
+| *Total time*                                                                | *16:12* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:26   |       |      |   0.0 |
-| Active                                                                      |         | 13:26 |      |   0.0 |
+| Stories                                                                     | 16:12   |       |      |   0.0 |
+| Active                                                                      |         | 16:12 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
-| Create project for C# test model                                            |         |       | 5:12 |   0.0 |
-| Create project for C++ test model                                           |         |       | 3:59 |   0.0 |
+| Create project for C# test model                                            |         |       | 5:23 |   0.0 |
 | Fix boost path serialisation errors                                         |         |       | 0:47 |   0.0 |
+| Create project for C++ test model                                           |         |       | 6:34 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -124,6 +128,7 @@ build time. Things to try:
 *** COMPLETED Create project for C# test model                        :story:
     CLOSED: [2018-10-03 Wed 16:18]
     :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 13:45]--[2018-10-04 Thu 13:56] =>  0:11
     CLOCK: [2018-10-04 Thu 08:47]--[2018-10-04 Thu 09:02] =>  0:15
     CLOCK: [2018-10-04 Thu 08:15]--[2018-10-04 Thu 08:46] =>  0:31
     CLOCK: [2018-10-03 Wed 15:46]--[2018-10-03 Wed 16:18] =>  0:32
@@ -136,8 +141,27 @@ build time. Things to try:
 We need to create a separate repo for the C# test model. This also
 means we need to generate the LAM model in two different locations.
 
-*** STARTED Create project for C++ test model                         :story:
+*** COMPLETED Fix boost path serialisation errors                     :story:
+    CLOSED: [2018-10-04 Thu 13:11]
     :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 12:47]--[2018-10-04 Thu 13:11] =>  0:24
+    CLOCK: [2018-10-04 Thu 11:02]--[2018-10-04 Thu 11:25] =>  0:23
+    :END:
+
+When we use boost path outside of dogen, the code fails to compile:
+
+: /home/marco/Development/DomainDrivenConsulting/hedgr/projects/hedgr.personae.comms.llcp_server/src/serialization/options_ser.cpp:27:10: fatal error: dogen.utility/serialization/path.hpp: No such file or directory
+: #include "dogen.utility/serialization/path.hpp"
+
+Dogen has hard-coded the serialisation to its own utilities. We should
+be using a helper instead.
+
+*** COMPLETED Create project for C++ test model                       :story:
+    CLOSED: [2018-10-04 Thu 16:01]
+    :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 16:20]--[2018-10-04 Thu 16:41] =>  0:21
+    CLOCK: [2018-10-04 Thu 13:57]--[2018-10-04 Thu 16:01] =>  2:04
+    CLOCK: [2018-10-04 Thu 13:13]--[2018-10-04 Thu 13:44] =>  0:31
     CLOCK: [2018-10-04 Thu 09:29]--[2018-10-04 Thu 11:01] =>  1:32
     CLOCK: [2018-10-04 Thu 09:03]--[2018-10-04 Thu 09:28] =>  0:25
     CLOCK: [2018-10-03 Wed 16:18]--[2018-10-03 Wed 18:20] =>  2:02
@@ -148,8 +172,8 @@ Create a separate repo for the C++ test model.
 Notes on testing:
 
 - some tests do not make sense in a reference implementation:
-  - class without a name: this is just a validation test so we should
-    do it as a unit test.
+  - class without a name, package without a name: these are just
+    validation tests so we should do it as a unit test.
   - disable all kernels: doesn't generate anything. Not sure where it
     should go.
   - empty and two empty layers: not even valid any more as we must
@@ -183,36 +207,19 @@ Problems to fix:
   one solution per component).
 - not clear what the seam model does.
 
-*** COMPLETED Fix boost path serialisation errors                     :story:
-    CLOSED: [2018-10-04 Thu 13:11]
+Notes:
+
+- remove story about not building all the tests.
+
+*** COMPLETED Add flat directory model to C#                          :story:
+    CLOSED: [2018-10-04 Thu 16:01]
+
+It seems this model is also a LAM model. Add it to C#.
+
+*** STARTED Remove test models from dogen project                     :story:
     :LOGBOOK:
-    CLOCK: [2018-10-04 Thu 12:47]--[2018-10-04 Thu 13:11] =>  0:24
-    CLOCK: [2018-10-04 Thu 11:02]--[2018-10-04 Thu 11:25] =>  0:23
+    CLOCK: [2018-10-04 Thu 16:42]
     :END:
-
-When we use boost path outside of dogen, the code fails to compile:
-
-: /home/marco/Development/DomainDrivenConsulting/hedgr/projects/hedgr.personae.comms.llcp_server/src/serialization/options_ser.cpp:27:10: fatal error: dogen.utility/serialization/path.hpp: No such file or directory
-: #include "dogen.utility/serialization/path.hpp"
-
-Dogen has hard-coded the serialisation to its own utilities. We should
-be using a helper instead.
-
-*** Make ignore regexes a model property                              :story:
-
-At present we have a command line option:
-=--ignore-files-matching-regex=. It is used to ignore files in a
-project. However, the problem is, because it is a command line option,
-it must be supplied with each invocation of Dogen. This means that if
-we want to run dogen from outside the build system, we need to know
-what options were set in the build scripts or else we will have
-different results. This is a problem for testing. We should make it a
-meta-data option, which is supplied with each model and even more
-interesting, can be used with profiling. This means we can create
-profiles for specific purposes (ODB, lisp, etc) and then reuse them in
-different projects.
-
-*** Remove test models from dogen project                             :story:
 
 Once we have created projects for both C# and C++, we need to delete
 all references to test models:
@@ -230,6 +237,54 @@ different. We can then use these flags to determine if tests pass. In
 the future we can extend this approach to include a proper diff of the
 files, but for now we just need a reliable way to run system tests
 again.
+
+*** Rework the tests using diff mode                                  :story:
+
+Once we have diff mode, we need to find some kind of workflow for
+tests:
+
+- each product is composed of a git URL and a list of models.
+- we git clone all repos as part of the build process.
+- directories and model locations are hard-coded in each test.
+- test runs against the model and hard-coded location, produces the
+  diff. Test asserts of the diff being non-zero.
+
+*** Fix the northwind model                                           :story:
+
+There are numerous problems with this model:
+
+- at present we have oracle support on ODB. Oracle libs are not
+  distributed with debian. If we do not find oracle we do not compile
+  northwind. This is not ideal. We should remove oracle support from
+  northwind, and install odb support in the build machine (hopefully
+  available as debs).
+- the tests are commented out and require a clean up.
+- the tests require a database to be up.
+
+Notes:
+
+- it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
+
+*** Update all stereotypes to masd                                    :story:
+
+We need to start distinguishing MASD from dogen. The profile for UML
+is part of MASD rather than dogen, so we should update all stereotypes
+to match. We need to make a decision regarding the "dia extensions" -
+its not clear if its MASD or dogen.
+
+*** Make "ignore regexes" a model property                            :story:
+
+At present we have a command line option:
+=--ignore-files-matching-regex=. It is used to ignore files in a
+project. However, the problem is, because it is a command line option,
+it must be supplied with each invocation of Dogen. This means that if
+we want to run dogen from outside the build system, we need to know
+what options were set in the build scripts or else we will have
+different results. This is a problem for testing. We should make it a
+meta-data option, which is supplied with each model and even more
+interesting, can be used with profiling. This means we can create
+profiles for specific purposes (ODB, lisp, etc) and then reuse them in
+different projects.
 
 *** Incorrect generation when changing external modules               :story:
 
@@ -250,6 +305,12 @@ Links:
 - https://github.com/Ullink/gradle-opencover-plugin/issues/1
 - https://github.com/codecov/example-csharp/blob/master/appveyor.yml
 - https://www.appveyor.com/blog/2017/03/17/codecov/
+
+*** Improve comments on reference implementation                      :story:
+
+At present it is very difficult to understand what each model and/or
+each type does in the reference implementations. We need to add some
+comments to make it more obvious.
 
 *** Code generate C# models using msbuild                             :story:
 

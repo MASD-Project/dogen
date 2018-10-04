@@ -28,71 +28,34 @@ git:
 matrix:
   include:
     #
-    # OSX builds: Core Clang
+    # OSX builds
     #
     - os: osx
       compiler: clang
       osx_image: xcode8
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
+      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="clang"
     - os: osx
       compiler: clang
       osx_image: xcode8
-      env: BUILD_TYPE=Debug COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
+      env: BUILD_TYPE=Debug COMPILER="clang"
     #
-    # OSX builds: Test Models Clang
-    #
-    - os: osx
-      compiler: clang
-      osx_image: xcode8
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="clang" WITH_TEST_MODELS_ONLY="1"  WITH_CPP="1"
-    - os: osx
-      compiler: clang
-      osx_image: xcode8
-      env: BUILD_TYPE=Debug COMPILER="clang" WITH_TEST_MODELS_ONLY="1" WITH_CPP="1"
-    #
-    # Linux Builds: C#
+    # Linux Builds
     #
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Release COMPILER="gcc" WITH_CSHARP="1"
-    #
-    # Linux Builds: Test Models GCC
-    #
+      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc"
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Release COMPILER="gcc" WITH_TEST_MODELS_ONLY="1" WITH_CPP="1"
-    - os: linux
-      compiler: gcc
-      env: BUILD_TYPE=Debug COMPILER="gcc" WITH_TEST_MODELS_ONLY="1" WITH_CPP="1"
+      env: BUILD_TYPE=Debug COMPILER="gcc"
     #
-    # Linux Builds: Test Models Clang
+    # Linux Builds
     #
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Release COMPILER="clang" WITH_TEST_MODELS_ONLY="1" WITH_CPP="1"
+      env: BUILD_TYPE=Release COMPILER="clang"
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Debug COMPILER="clang" WITH_TEST_MODELS_ONLY="1" WITH_CPP="1"
-
-  allow_failures:
-    #
-    # Linux Builds: Core GCC
-    #
-    - os: linux
-      compiler: gcc
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc" WITH_CORE_ONLY="1" WITH_CPP="1"
-    - os: linux
-      compiler: gcc
-      env: BUILD_TYPE=Debug COMPILER="gcc" WITH_CORE_ONLY="1" WITH_CPP="1"
-    #
-    # Linux Builds: Core Clang
-    #
-    - os: linux
-      compiler: clang
-      env: BUILD_TYPE=Release COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
-    - os: linux
-      compiler: clang
-      env: BUILD_TYPE=Debug COMPILER="clang" WITH_CORE_ONLY="1" WITH_CPP="1"
+      env: BUILD_TYPE=Debug COMPILER="clang"
 
 addons:
   apt:
@@ -106,22 +69,18 @@ install:
 script:
   - JOBS=2
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
-        if [[ $WITH_CORE_ONLY == '1' ]]; then
-            export TARGET="package run_all_tests";
-        else
-            export TARGET="run_all_tests";
-        fi;
+        export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/local";
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
-        if [[ $BUILD_TYPE == 'Release' && $WITH_CORE_ONLY == '1' ]]; then
+        if [[ $BUILD_TYPE == 'Release' ]]; then
             export TARGET="package";
         fi
     fi
   - ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET}
-  - if [[ $TRAVIS_OS_NAME == 'linux' && $WITH_CORE_ONLY == '1' ]]; then
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER};
     fi
 
