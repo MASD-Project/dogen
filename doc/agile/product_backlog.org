@@ -7,9 +7,44 @@
 
 This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/product-backlog][product backlog]] for Dogen.
 
-** In next few sprints
+** Bug-fixes
 
-Stories that we intend to look at in the very near future.
+*** Do not output JSON markers for primitives                         :story:
+
+We should just output the underlying primitive.
+
+
+*** Fix typo in ODB error message                                     :story:
+
+Spelt =FATAL= instead of =FATAL_ERROR= in ODB makefile:
+
+: if (NOT ODB_EXECUTABLE)
+:    message(FATAL_ERROR "ODB Executable not defined.")
+: endif()
+
+*** Parent without descendants in current model is invalid            :story:
+
+At present it is not possible to generate a parent in a model which
+does not have at least one descendant in that model. This is because
+we do not generate the base class methods. We need a meta-data
+parameter to force a class to become a parent.
+
+For now we just hacked it by adding a fake descendant.
+
+*** Default model modules from filename                               :story:
+
+It would be nice to be able to not have to supply model modules when
+its obvious from the filename.
+*** Windows packages have a sanity folder                             :story:
+
+We should remove the ctest file and add the dia and json examples. We
+should also have pdf/html docs.
+
+
+
+** Required for V2
+
+Stories that need to be implemented in order to complete the V2 vision.
 
 *** Rename core models                                                :story:
 
@@ -26,15 +61,102 @@ that is then enriched for generation. This means we could have:
 - middleend/modeling
 - backend/generation
 
+*** Create a single binary for all of dogen                           :story:
+
+As per analysis, we need to create a single dogen binary, like so:
+
+: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
+
+Where =COMMAND= is:
+
+- =transform=: functionality that is currently in tailor.
+- =generate=: functionality that is currently in knitter.
+- =expand=: functionality that is currently in stitcher plus expansion
+  of wale templates.
+- =make=: functionality in darter: create project, structure etc.
+
+In order to support sub-commands we need to do a lot of hackery with
+program options:
+
+- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
+  processing with boost program_options
+- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
+
+*Merged Stories*
+
+We started off by creating lots of little executables: knitter,
+darter, tailor, stitcher. Each of these has its own project,
+command-line options etc. However, now that we are concentrating all
+of the domain knowledge in yarn, it seems less useful to have so many
+executables that are simply calling yarn transforms. Instead, it may
+make more sense to use an approach similar to git and have a
+"sub-command":
+
+: dogen knit
+: dogen tailor
+
+And so forth. Of course, we could also take this opportunity and clean
+up these names to making them more meaningful to end users. Perhaps:
+
+: dogen codegen
+: dogen transform
+
+Each of these sub-commands or modes would have their own set of
+associated options. We need to figure out how this is done using boost
+program options. We also need to spend a bit of time working out the
+sub-commands to make sure they make sense across the board.
+
+In terms of names, we can't really call the project "dogen". We should
+call it something allusive to the command line, such as cli. However,
+the final binary should be called dogen or perhaps, =dogen.cli=. This
+fits in with other binaries such as =dogen.web=, =dogen.http=,
+=dogen.gui= etc.
+
+*** Create the =orchestration= model                                  :story:
+
+Create a model with the top-level transforms.
+
+*** Clean up UML profiles and meta-data                               :story:
+
+- we should wait until we rename =quilt= too so we can clean up the
+  quilt meta-data at the same time.
+- rename references too since they belong to external, i.e.:
+
+: #DOGEN yarn.reference=annotations.dia
+
+  should be:
+
+: #DOGEN external.reference=annotations.dia
+
+- similarly with:
+
+: #DOGEN yarn.dia.comment=true
+
+  should instead be:
+
+: #DOGEN external.dia.comment=true
+
+  in fact, should we mention "tagged values" instead of "comment"?
+*** Update =yarn.dia= traits to external                              :story:
+
+We renamed the model but did not update the traits.
+
+*** Clean up external element                                         :story:
+
+Need to add: can_be_primitive_underlier, in_global_module,
+can_be_enumeration_underlier, is_default_enumeration_type,
+is_associative_container
+
+
+** In next few sprints
+
+Stories that we intend to look at in the very near future.
+
 *** Propagate =fluent= stereotype                                     :story:
 
 It would be nice to be able to mark an object template called say
 Message with =dogen::fluent= and then have all of the classes that
 instantiate that template set to fluent.
-
-*** Do not output JSON markers for primitives                         :story:
-
-We should just output the underlying primitive.
 
 *** Add support for proper JSON serialisation in C++                  :story:
 
@@ -117,32 +239,6 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** Fix typo in ODB error message                                     :story:
-
-Spelt =FATAL= instead of =FATAL_ERROR= in ODB makefile:
-
-: if (NOT ODB_EXECUTABLE)
-:    message(FATAL_ERROR "ODB Executable not defined.")
-: endif()
-
-*** Build dogen from docker                                           :story:
-
-- fix references to gcc6 etc
-- run:
-
-: docker exec -it zen_euclid env TERM=dumb
-: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
-: Release 4 gcc /home/marco/local
-
-*** Parent without descendants in current model is invalid            :story:
-
-At present it is not possible to generate a parent in a model which
-does not have at least one descendant in that model. This is because
-we do not generate the base class methods. We need a meta-data
-parameter to force a class to become a parent.
-
-For now we just hacked it by adding a fake descendant.
-
 *** Finish setting up coveralls                                       :story:
 
 Remaining issues:
@@ -179,27 +275,6 @@ Notes:
 - problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
   broke Travis build]]
 
-*** Create a single binary for all of dogen                           :story:
-
-As per analysis, we need to create a single dogen binary, like so:
-
-: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
-
-Where =COMMAND= is:
-
-- =transform=: functionality that is currently in tailor.
-- =generate=: functionality that is currently in knitter.
-- =expand=: functionality that is currently in stitcher plus expansion
-  of wale templates.
-- =make=: functionality in darter: create project, structure etc.
-
-In order to support sub-commands we need to do a lot of hackery with
-program options:
-
-- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
-  processing with boost program_options
-- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
-
 *** Investigate current implementation of the origin transform        :story:
 
 Do we need to have the origin expansion? can we not just supply the
@@ -228,45 +303,6 @@ of it.
 Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
-
-*** Create a build script just for C#                                 :story:
-
-At the moment we are doing C++ and C# on the same build script, making
-it really complex. It would be much easier to have a separate C# build
-script. We should also have a separate install script for C# so we
-don't have to waste time installing packages if we're not going to use
-them.
-
-*** Create the =orchestration= model                                  :story:
-
-Create a model with the top-level transforms.
-
-*** Clean up UML profiles and meta-data                               :story:
-
-- we should wait until we rename =quilt= too so we can clean up the
-  quilt meta-data at the same time.
-- rename references too since they belong to external, i.e.:
-
-: #DOGEN yarn.reference=annotations.dia
-
-  should be:
-
-: #DOGEN external.reference=annotations.dia
-
-- similarly with:
-
-: #DOGEN yarn.dia.comment=true
-
-  should instead be:
-
-: #DOGEN external.dia.comment=true
-
-  in fact, should we mention "tagged values" instead of "comment"?
-
-*** Default model modules from filename                               :story:
-
-It would be nice to be able to not have to supply model modules when
-its obvious from the filename.
 
 *** Rename the =transform= method to =apply=                          :story:
 
@@ -335,15 +371,6 @@ Tasks:
 - drop all of the logic in resolver at present and use the list logic
   as per above. Do not check references, etc.
 
-*** Windows packages have a sanity folder                             :story:
-
-We should remove the ctest file and add the dia and json examples. We
-should also have pdf/html docs.
-
-*** Update =yarn.dia= traits to external                              :story:
-
-We renamed the model but did not update the traits.
-
 *** Add support for "ad-hoc" probing                                  :story:
 
 We have a set of inputs supplied to the prober called "initial
@@ -351,47 +378,6 @@ input". This is not ideal. We need a way to generalise the "initial
 input" dumping. In effect, what we are really saying is that within a
 transform we may need to dump more state than just the initial
 inputs. We need a way to express this in the probing API.
-
-*** Clean up external element                                         :story:
-
-Need to add: can_be_primitive_underlier, in_global_module,
-can_be_enumeration_underlier, is_default_enumeration_type,
-is_associative_container
-
-*** Create a new exoelement chain                                     :story:
-
-We need to create a new exoelement chain that uses the new exoelements
-to bootstrap a endomodel.
-
-*** Consider having a single executable for dogen                     :story:
-
-We started off by creating lots of little executables: knitter,
-darter, tailor, stitcher. Each of these has its own project,
-command-line options etc. However, now that we are concentrating all
-of the domain knowledge in yarn, it seems less useful to have so many
-executables that are simply calling yarn transforms. Instead, it may
-make more sense to use an approach similar to git and have a
-"sub-command":
-
-: dogen knit
-: dogen tailor
-
-And so forth. Of course, we could also take this opportunity and clean
-up these names to making them more meaningful to end users. Perhaps:
-
-: dogen codegen
-: dogen transform
-
-Each of these sub-commands or modes would have their own set of
-associated options. We need to figure out how this is done using boost
-program options. We also need to spend a bit of time working out the
-sub-commands to make sure they make sense across the board.
-
-In terms of names, we can't really call the project "dogen". We should
-call it something allusive to the command line, such as cli. However,
-the final binary should be called dogen or perhaps, =dogen.cli=. This
-fits in with other binaries such as =dogen.web=, =dogen.http=,
-=dogen.gui= etc.
 
 *** Add stereotypes support at the attribute level                    :story:
 
@@ -6369,6 +6355,15 @@ knitter can then call these methods and build the info text.
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
+
+*** Build dogen from docker                                           :story:
+
+- fix references to gcc6 etc
+- run:
+
+: docker exec -it zen_euclid env TERM=dumb
+: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
+: Release 4 gcc /home/marco/local
 
 *** Add a frontend for visual studio models                           :story:
 
