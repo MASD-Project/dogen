@@ -17,19 +17,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-04 Thu 16:01]
+#+CAPTION: Clock summary at [2018-10-04 Thu 17:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:12* |       |      |   0.0 |
+| *Total time*                                                                | *17:34* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:12   |       |      |   0.0 |
-| Active                                                                      |         | 16:12 |      |   0.0 |
+| Stories                                                                     | 17:34   |       |      |   0.0 |
+| Active                                                                      |         | 17:34 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
 | Create project for C# test model                                            |         |       | 5:23 |   0.0 |
 | Fix boost path serialisation errors                                         |         |       | 0:47 |   0.0 |
-| Create project for C++ test model                                           |         |       | 6:34 |   0.0 |
+| Create project for C++ test model                                           |         |       | 6:55 |   0.0 |
+| Remove test models from dogen project                                       |         |       | 1:01 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -218,7 +219,7 @@ It seems this model is also a LAM model. Add it to C#.
 
 *** STARTED Remove test models from dogen project                     :story:
     :LOGBOOK:
-    CLOCK: [2018-10-04 Thu 16:42]
+    CLOCK: [2018-10-04 Thu 16:42]--[2018-10-04 Thu 17:43] =>  1:01
     :END:
 
 Once we have created projects for both C# and C++, we need to delete
@@ -264,6 +265,15 @@ There are numerous problems with this model:
 Notes:
 
 - it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
+
+*** Simplify split configuration configuration                        :story:
+
+At present we have two separate command line parameters to configure
+the main output directory and the directory for header files. The
+second parameter is used for split configurations. The problem is that
+we now need to treat split configuration projects specially because of
+this. It makes more sense to force the header directory to be relative
+to the output path and make it a meta-data parameter.
 
 *** Update all stereotypes to masd                                    :story:
 

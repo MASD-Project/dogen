@@ -45,6 +45,7 @@ using dogen::templating::stitch::instantiation_error;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
+/*
 BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("simple_template_results_in_expected_output");
 
@@ -68,6 +69,7 @@ BOOST_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
             seam::expected_complex_template_stitch_cpp(),
             seam::actual_complex_template_stitch_cpp()));
 }
+*/
 
 BOOST_AUTO_TEST_CASE(empty_template_throws) {
     SETUP_TEST_LOG_SOURCE("empty_template_throws");
