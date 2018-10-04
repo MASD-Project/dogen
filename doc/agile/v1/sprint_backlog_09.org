@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 08
+#+title: Sprint Backlog 09
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) }
@@ -6,24 +6,25 @@
 * Mission Statement
 
 - Start the planning towards v2;
-- Start addressing build issues.
+- Address build issues.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-03 Wed 16:22]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:54* |      |      |   0.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:54   |      |      |   0.0 |
-| Active                                                                      |        | 7:54 |      |   0.0 |
-| Edit release notes for previous sprint                                      |        |      | 1:30 |   0.0 |
-| Update readme to reflect org move                                           |        |      | 1:58 |   0.0 |
-| Create project for C# test model                                            |        |      | 4:26 |   0.0 |
+#+CAPTION: Clock summary at [2018-10-04 Thu 09:30]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *11:07* |       |      |   0.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 11:07   |       |      |   0.0 |
+| Active                                                                      |         | 11:07 |      |   0.0 |
+| Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
+| Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
+| Create project for C# test model                                            |         |       | 5:12 |   0.0 |
+| Create project for C++ test model                                           |         |       | 2:27 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -122,6 +123,8 @@ build time. Things to try:
 *** COMPLETED Create project for C# test model                        :story:
     CLOSED: [2018-10-03 Wed 16:18]
     :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 08:47]--[2018-10-04 Thu 09:02] =>  0:15
+    CLOCK: [2018-10-04 Thu 08:15]--[2018-10-04 Thu 08:46] =>  0:31
     CLOCK: [2018-10-03 Wed 15:46]--[2018-10-03 Wed 16:18] =>  0:32
     CLOCK: [2018-10-03 Wed 15:40]--[2018-10-03 Wed 15:45] =>  0:05
     CLOCK: [2018-10-03 Wed 12:45]--[2018-10-03 Wed 14:59] =>  2:14
@@ -132,7 +135,11 @@ build time. Things to try:
 We need to create a separate repo for the C# test model. This also
 means we need to generate the LAM model in two different locations.
 
-*** Create project for C++ test model                                 :story:
+*** STARTED Create project for C++ test model                         :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 09:03]--[2018-10-04 Thu 09:28] =>  0:25
+    CLOCK: [2018-10-03 Wed 16:18]--[2018-10-03 Wed 18:20] =>  2:02
+    :END:
 
 Create a separate repo for the C++ test model.
 
@@ -174,6 +181,16 @@ Links:
 - https://github.com/Ullink/gradle-opencover-plugin/issues/1
 - https://github.com/codecov/example-csharp/blob/master/appveyor.yml
 - https://www.appveyor.com/blog/2017/03/17/codecov/
+
+*** Code generate C# models using msbuild                             :story:
+
+At present we did a quick hack to code generate in C#: a simple bash
+script that runs dogen. However, this is not how we expect the end
+user to consume it; there should be a msbuild target that:
+
+- detects the code generator;
+- contains the configuration (e.g. options, location of models);'
+- runs the code generator - possibly every time models change.
 
 *** Add project documentation                                         :story:
 
