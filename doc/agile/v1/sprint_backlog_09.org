@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-04 Thu 09:30]
+#+CAPTION: Clock summary at [2018-10-04 Thu 11:01]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:07* |       |      |   0.0 |
+| *Total time*                                                                | *12:39* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:07   |       |      |   0.0 |
-| Active                                                                      |         | 11:07 |      |   0.0 |
+| Stories                                                                     | 12:39   |       |      |   0.0 |
+| Active                                                                      |         | 12:39 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
 | Create project for C# test model                                            |         |       | 5:12 |   0.0 |
-| Create project for C++ test model                                           |         |       | 2:27 |   0.0 |
+| Create project for C++ test model                                           |         |       | 3:59 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -137,11 +137,64 @@ means we need to generate the LAM model in two different locations.
 
 *** STARTED Create project for C++ test model                         :story:
     :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 09:29]--[2018-10-04 Thu 11:01] =>  1:32
     CLOCK: [2018-10-04 Thu 09:03]--[2018-10-04 Thu 09:28] =>  0:25
     CLOCK: [2018-10-03 Wed 16:18]--[2018-10-03 Wed 18:20] =>  2:02
     :END:
 
 Create a separate repo for the C++ test model.
+
+Notes on testing:
+
+- some tests do not make sense in a reference implementation:
+  - class without a name: this is just a validation test so we should
+    do it as a unit test.
+  - disable all kernels: doesn't generate anything. Not sure where it
+    should go.
+  - empty and two empty layers: not even valid any more as we must
+    supply model modules. Can be done as a unit test once defaulting
+    is in place.
+- we have failures on hasing on both OSX and Windows. However, its
+  very difficult to debug these due to the heavy use of templates in
+  tests. We should probably wait until tests become facets and then
+  ensure the boost log message contains a dump of the object state for
+  each test.
+
+Problems to fix:
+
+- at present we have oracle support on ODB. Oracle libs are not
+  distributed with debian. If we do not find oracle we do not compile
+  northwind. This is not ideal. We should remove oracle support from
+  northwind, and install odb support in the build machine (hopefully
+  available as debs).
+- all path and directories is a LAM model. Move the C# part into C#.
+- models are under external module path =dogen::test_models=. Move
+  them to =cpp_ref_impl=.
+- path serialisation depends on dogen utility. Fix code generation so
+  that it doesn't.
+- some models have the postfix "model". Remove it.
+- rename =cpp_model= to =cpp_11=.
+- rename =std_model= to =stl=.
+- we are generating solutions and VC projects but not testing
+  these. We should probably have a separate build on AppVeyor that
+  uses the solutions instead of CMake. However, as we do not have
+  project level support yet, this will be hard to do (e.g. we generate
+  one solution per component).
+- not clear what the seam model does.
+
+*** Make ignore regexes a model property                              :story:
+
+At present we have a command line option:
+=--ignore-files-matching-regex=. It is used to ignore files in a
+project. However, the problem is, because it is a command line option,
+it must be supplied with each invocation of Dogen. This means that if
+we want to run dogen from outside the build system, we need to know
+what options were set in the build scripts or else we will have
+different results. This is a problem for testing. We should make it a
+meta-data option, which is supplied with each model and even more
+interesting, can be used with profiling. This means we can create
+profiles for specific purposes (ODB, lisp, etc) and then reuse them in
+different projects.
 
 *** Remove test models from dogen project                             :story:
 
@@ -190,7 +243,8 @@ user to consume it; there should be a msbuild target that:
 
 - detects the code generator;
 - contains the configuration (e.g. options, location of models);'
-- runs the code generator - possibly every time models change.
+- runs the code generator - possibly every time models change;
+- has a tailor target to generate JSON.
 
 *** Add project documentation                                         :story:
 
