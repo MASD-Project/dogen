@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-04 Thu 11:01]
+#+CAPTION: Clock summary at [2018-10-04 Thu 13:12]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:39* |       |      |   0.0 |
+| *Total time*                                                                | *13:26* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:39   |       |      |   0.0 |
-| Active                                                                      |         | 12:39 |      |   0.0 |
+| Stories                                                                     | 13:26   |       |      |   0.0 |
+| Active                                                                      |         | 13:26 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
 | Create project for C# test model                                            |         |       | 5:12 |   0.0 |
 | Create project for C++ test model                                           |         |       | 3:59 |   0.0 |
+| Fix boost path serialisation errors                                         |         |       | 0:47 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -181,6 +182,21 @@ Problems to fix:
   project level support yet, this will be hard to do (e.g. we generate
   one solution per component).
 - not clear what the seam model does.
+
+*** COMPLETED Fix boost path serialisation errors                     :story:
+    CLOSED: [2018-10-04 Thu 13:11]
+    :LOGBOOK:
+    CLOCK: [2018-10-04 Thu 12:47]--[2018-10-04 Thu 13:11] =>  0:24
+    CLOCK: [2018-10-04 Thu 11:02]--[2018-10-04 Thu 11:25] =>  0:23
+    :END:
+
+When we use boost path outside of dogen, the code fails to compile:
+
+: /home/marco/Development/DomainDrivenConsulting/hedgr/projects/hedgr.personae.comms.llcp_server/src/serialization/options_ser.cpp:27:10: fatal error: dogen.utility/serialization/path.hpp: No such file or directory
+: #include "dogen.utility/serialization/path.hpp"
+
+Dogen has hard-coded the serialisation to its own utilities. We should
+be using a helper instead.
 
 *** Make ignore regexes a model property                              :story:
 

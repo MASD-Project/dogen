@@ -36,16 +36,6 @@ instantiate that template set to fluent.
 
 We should just output the underlying primitive.
 
-*** Boost path serialisation errors                                   :story:
-
-When we use boost path outside of dogen, the code fails to compile:
-
-: /home/marco/Development/DomainDrivenConsulting/hedgr/projects/hedgr.personae.comms.llcp_server/src/serialization/options_ser.cpp:27:10: fatal error: dogen.utility/serialization/path.hpp: No such file or directory
-: #include "dogen.utility/serialization/path.hpp"
-
-Dogen has hard-coded the serialisation to its own utilities. We should
-be using a helper instead.
-
 *** Add support for proper JSON serialisation in C++                  :story:
 
 We need to add support for JSON in C++. It will eventually have to
