@@ -39,11 +39,9 @@ as much as possible: the user creates models in one of the supported
 frontend formats and respecting a set of predefined restrictions;
 Dogen then uses this input to generate a source code representation of
 the model. At present the main frontend is
-[Dia](https://en.wikipedia.org/wiki/Dia_(software)) ([Dia test
-models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.dia/input)),
-but we also support JSON ([JSON test
-models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.json/input)). Depending
-on use cases and user demand, other frontends may follow.
+[Dia](https://en.wikipedia.org/wiki/Dia_(software)), but we also
+support JSON. Depending on use cases and user demand, other frontends
+may follow.
 
 The generated code contains most of the functionality required from a
 typical C++ domain object such as serialisation, hashing, streaming
@@ -56,8 +54,12 @@ support.
 Dogen provides a reference implementation for each supported language,
 available on a separate git repo:
 
-- [C++ Reference Model](https://github.com/MASD-Project/cpp_ref_impl)
-- [C# Reference Model](https://github.com/MASD-Project/csharp_ref_impl)
+- [C++ Reference
+  Implementation](https://github.com/MASD-Project/cpp_ref_impl). Models
+  available [here](https://github.com/MASD-Project/cpp_ref_impl/tree/master/projects/models).
+- [C# Reference
+  Implementation](https://github.com/MASD-Project/csharp_ref_impl). Models
+  available [here](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/Models).
 
 These are designed to give you a feel for how the generated code will
 look like, and they attempt to exercise all of Dogen's functionality.
