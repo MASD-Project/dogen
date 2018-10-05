@@ -41,6 +41,31 @@ We should remove the ctest file and add the dia and json examples. We
 should also have pdf/html docs.
 
 
+*** Drop the original extension in tailor                             :story:
+
+Filenames in tailor look weird:
+
+: dart.dia.json
+
+it should just be:
+
+: dart.json
+
+*** Throw on unsupported stereotypes                                  :story:
+
+In some cases we may support a feature in one language but not on
+others like say ORM at present. If a user requests ORM in a C# model,
+we should throw.
+
+If we are in compatibility mode, however, we should not throw.
+
+Note that we are already throwing if a stereotype is totally
+unknown. The problem here is that the stereotype is known, but not
+supported for all kernels. This is a bit trickier.
+
+We also need to check the existing code in stereotypes transform to
+stop trowing if compatibility flag is on.
+
 
 ** Required for V2
 
@@ -147,150 +172,12 @@ Need to add: can_be_primitive_underlier, in_global_module,
 can_be_enumeration_underlier, is_default_enumeration_type,
 is_associative_container
 
+*** Rename the =transform= method to =apply=                          :story:
 
-** In next few sprints
+Its a bit silly to name classes =x_transform= and then to have their
+main method also called =transform=. We should rename these to
+something like =apply=.
 
-Stories that we intend to look at in the very near future.
-
-*** Propagate =fluent= stereotype                                     :story:
-
-It would be nice to be able to mark an object template called say
-Message with =dogen::fluent= and then have all of the classes that
-instantiate that template set to fluent.
-
-*** Add support for proper JSON serialisation in C++                  :story:
-
-We need to add support for JSON in C++. It will eventually have to
-roundtrip to JSON in C# but that will be handled as two separate
-stories.
-
-Libraries:
-
-- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
-- One interesting library is [[https://github.com/dropbox/json11][Json11]].
-
-When we implement this we should provide support for JSON with
-roundtripping tests.
-
-We will not replace the current IO implementation; it should continue
-to exist as is, requiring no external dependencies.
-
-We should consider supporting multiple JSON libraries: instead of
-making the mistake we did with serialisation where we bound the name
-=serialization= with boost serialisation, we should call it by its
-real name, e.g. =json_spirit= etc. Then when a user creates a
-stereotype for a profile such as =Serializable= it can choose which
-serialisation codecs to enable for which language. This means that the
-same stereotypes can have different meanings in different
-architectures, which is the desired behaviour.
-
-We should create a serialise / deserialise functions following the
-same logic as boost:
-
-#+begin_src c++
-void serialize(Value& v, const object& o);
-void serialize(Value& v, const base& b);
-
-void deserialize(const Value& v, object& o);
-base* deserialize(const Value& v);
-#+end_src
-
-Or perhaps even better, we can make the above the internal methods and
-use =operator<<= and =operator>>= as the external methods:
-
-#+begin_src c++
-void operator<<(Value& v, const object& o);
-void operator>>(const Value& v, object& o);
-#+end_src
-
-Notes:
-
-- create a registrar with a map for each base type. The function
-  returns a base type pointer.
-- when you deserialize a base type pointer, you call the pointer
-  deserialize above. Same for when you have a pointer to an object. It
-  will internally call the registrar (if its a base type) and get the
-  right function.
-- this means we only need to look at type for inheritance. Although we
-  should probably always do it for validation? However, what happens
-  if we want to make a model so we can read external JSON? It won't
-  contain type markings.
-- =operator>>= will not be defined for pointers or base classes.
-- this wont work for the case of =doc << base=. For this we need a map
-  that looks up on type_index.
-
-Merged stories:
-
-For the previous attempt to integrate RapidJson see this commit:
-
-b2cce41 * third party: remove includes and rapid json
-
-*Add support for JSON serialisation*
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
-
-*** Finish setting up coveralls                                       :story:
-
-Remaining issues:
-
-- we are generating far too much output. We need to keep it quieter or
-  we will break travis.
-- we are not filtering out non-project files from initial
-  processing. There must be a gcov option to ignore files.
-
-: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
-: ------------------------------------------------------------------------------
-: File '../../../../projects/quilt/spec/main.cpp'
-: Lines executed:62.50% of 8
-: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
-:
-: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
-: Lines executed:60.00% of 20
-: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
-  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
-  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
-- we should generate coverage from the clang debug build only since
-  that is the fastest build we have. We should use the clang coverage
-  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
-
-Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
-
-Notes:
-- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
-  broke Travis build]]
-
-*** Investigate current implementation of the origin transform        :story:
-
-Do we need to have the origin expansion? can we not just supply the
-origin type to the exomodel adapter directly?
-
-Actually this cannot be done. The problem is we still need to
-distinguish between dogen models and non-dogen models; we need to
-register all dogen models. This is done via meta-data. We cannot use
-the meta-data until we have converted into an endomodel. We could
-consider having a flag at the exomodel level for this - it is a
-concept at this level - but we still need to map it to origin
-types. However, it is perhaps cleaner to express this concept at the
-exomodel level rather than the endomodel level given we are saying
-there are two different kinds of exomodels: proxyness is a fundamental
-property of an exomodel. If we do this we can then do the mapping in
-flight as we transform from exomodel to endomodel.
 
 *** Remove exomodel remnants                                          :story:
 
@@ -304,81 +191,6 @@ Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
 
-*** Rename the =transform= method to =apply=                          :story:
-
-Its a bit silly to name classes =x_transform= and then to have their
-main method also called =transform=. We should rename these to
-something like =apply=.
-
-*** Rewrite name resolution in terms of lists                         :story:
-
-Even since we did the external modules / model modules change we broke
-code generation; this is because we do not go up the model modules
-during name resolution. We did a quick hack to fix this but it needs
-to be done properly.
-
-Let's walk through a simple example:. Name cames in as:
-
-- model module: =probing=
-- simple: =prober=
-
-We are in model:
-
-- model module: =dogen.external=
-
-Expected behaviour is to try all combinations of model modules:
-
-- =dogen.external.probing=
-- =dogen.probing
-- =probing=
-
-This highlights a fundamental problem with resolution: we view the
-{external, model internal} modules as if they are separate entities
-but in reality, for the purposes of resolution, there is only one
-thing that is relevant: the module path. If it matches because of
-{external, model internal} modules, well that is not relevant to
-resolution. Other users of =name= do need to know this information
-(for example to  generate directories or file names) but not the
-resolver.
-
-Interestingly, because we are only looking for an id, it doesn't
-really matter how we get to it (in terms of the internal composition
-of the name), as long as it matches bitwise. This means we can look at
-the process slightly differently:
-
-- start off with the name as the user provided it. Extract all strings
-  from it to create a list, in order: external, model, internal,
-  simple. Try to resolve that. Call it user list.
-- then create a second list from model / context: external, model,
-  internal. Call it model list.
-- try concantenating model list and user list, pretty printing and
-  resolving it. If it fails, pop model list and concatenate again. Try
-  until model list is empty.
-
-Tasks:
-
-- first add a quick hack just to get the code generator working
-  again. For example, take the first model module of the model and try
-  resolving with that. Then worry about fixing this properly.
-- split the conversion of name into list from pretty printer. Printer
-  should merely take a string or list of strings and do its thing. We
-  need to find a good location for this method, since (for now) we
-  cannot place it in the right location which is the name class
-  itself.
-- change resolver to obtain the lists as per above. The to list
-  machinery can be used for this, though we need to handle model names
-  somehow. We can copy the =model_name_mode= logic from printer.
-- drop all of the logic in resolver at present and use the list logic
-  as per above. Do not check references, etc.
-
-*** Add support for "ad-hoc" probing                                  :story:
-
-We have a set of inputs supplied to the prober called "initial
-input". This is not ideal. We need a way to generalise the "initial
-input" dumping. In effect, what we are really saying is that within a
-transform we may need to dump more state than just the initial
-inputs. We need a way to express this in the probing API.
-
 *** Add stereotypes support at the attribute level                    :story:
 
 At present dia does not have stereotypes in attributes. This means
@@ -386,6 +198,10 @@ things like ORM primary keys etc are being supplied as tagged values;
 in reality, its more natural (from a UML perspective) to supply them
 as stereotypes. We could add some meta-data that creates a tagged
 value for stereotypes.
+
+This also lines up with the story we had where we question our use of
+attributes. In reality we have created a notion of "property". We need
+a stereotype for this.
 
 *** Exclude profiles from stereotypes processing                      :story:
 
@@ -402,54 +218,9 @@ stereotypes during annotations processing. However, we should wait
 until we complete the exomodel work since that will remove scribble
 groups, etc. Its all in the annotations transform.
 
-*** Tailor does not output static stereotypes                         :story:
-
-At present we only output static stereotypes. However, there is no
-point on fixing this until we move to the new JSON format.
-
 *** Generate file paths as a transform                                :story:
 
 See the comments in the previous sprint.
-
-*** Split registrar into two classes                                  :story:
-
-At present we do not distinguish between the setting up of the
-registrar and the usage of the registrar. Up to know this is not a
-major issue, although its a bit of a smell that we have to call
-validate at some arbitrary point.
-
-However, with the new parts/builder setup, this becomes even more of a
-problem because we only want to build the parts once we have
-registered all of the formatters. The right thing would have been to
-have:
-
-- a registrar builder, used during registration;
-- a build step which returns the (validated) registrar. Once build is
-  called, we should throw if anyone attempts to add more formatters.
-
-This makes it hard to misuse the API.
-
-Notes:
-
-- how does this affect plugins? will it still be possible to register
-  formatters from a shared library?
-
-Tasks:
-
-- create a registrar builder with most of the existing registrar
-  interface. On build it computes the parts, generates the repository,
-  etc and then supplies that to the registrar. The registrar itself is
-  no longer static, just a member of the workflow.
-
-*** Add a file format parameter to probing                            :story:
-
-At present we are dumping all models in probing as JSON. It would be
-nice to be able to dump them as boost serialisation so we can plug
-them into tests or to reproduce some problem. It would be even nicer
-if we could plug that data back in to dogen but its not obvious how
-that would work; we need to have some kind of concept of "stages", and
-then supply the inputs and the stage so that dogen could continue from
-there.
 
 *** Update backend shape to match yarn                                :story:
 
@@ -497,36 +268,24 @@ into account when we do:
 :         * which types must have a canonical archetype.
 :         */
 
-*** Improvements to dia model                                         :story:
+Notes from MASD:
 
-Assorted notes on cleaning-up the dia model:
-
-- create a base class such as =value= and make all values inherit from
-  it instead of using boost variant.
-- according to DTD, a composite can be made up of either composites or
-  attributes. We incorrectly modeled it as having just one inner
-  composite.
-- perhaps this is better thought of slightly differently: an attribute
-  has child nodes. The child nodes can either be leaf nodes, in which
-  case they are values, or non-leaf nodes in which case they are
-  composite nodes. Composite nodes themselves can have child nodes. If
-  they are leaf nodes they are values; if they are non-leaf nodes they
-  are either attributes or composites.
-- note that we do not need to use shared pointers in composite: we
-  could simply have an attribute by value. However, we still need to
-  handle the case where the children are either composite or
-  attributes. So if we somehow could get composite and attribute to
-  have a common base class, we could have a container of that base
-  class in composite. For this we would need a shared pointer.
-- consider adding the postfix =node= to class names and make it a real
-  tree, as per dia's implementation.
-- covert all vectors to lists since we do not know their sizes on
-  construction.
-- one thing to bear in mind is that if we fix the tree structure, we
-  will break the XML parsing code in hydrator, which took quite a
-  while to get right (and has hacks such as "inner composite").
-- its not obvious why we need to treat =dia::string= in a different
-  way from all other attribute values (except for =dia::font=).
+- Formatters are now seen as merely *text transforms* that convert
+  from the generational model to the extractional model. We could
+  house them under "text transforms" rather than transforms because we
+  will also need regular model transforms.
+- Formatters model is the extractional model. It provides primitives
+  to create transforms to generate its types. It needs to be augmented
+  with the model types, and divided using the traditional namespaces
+  (metamodel, transforms, helpers).
+- moving towards having multiple components per model means that its
+  much easier to support facets in this way. The other great advantage
+  of this approach is that now each facet can have its DLL main / main
+  if a binary is to be made for it, on its own folder. Conversely, the
+  top-level DLL main / main is the cross-facet component, so its
+  slightly clearer who includes what. We should also start specifying
+  explicitly what is included in each target.
+- when tests become a facet rename it to testing.
 
 *** Consider bucketing elements by meta-type in model                 :story:
 
@@ -561,6 +320,19 @@ we have cases where we should have used configuration but used nothing
 (type parameters springs to mind). We need to do a clean up of the
 meta-model.
 
+Actually we now have a clear answer to this question, based on feature
+modeling and variability analysis: we have a feature model, composed
+of features; this is what we have so far called "properties". The
+instances of these features are called configurations. We just need a
+strategy for mapping features into UML models, for which there are
+several in the literature.
+
+*** Tidy-up fabric                                                    :story:
+
+Now we have dynamic transforms, we don't really need all the classlets
+we've created in fabric. We can get away with probably just the
+dynamic transform, calling all the factories.
+
 *** Create a text model post-processing chain                         :story:
 
 The following transforms can be done after generation of the text model:
@@ -575,11 +347,6 @@ Note that we need artefacts to have an associated language so that we
 can use the correct clang format configuration. If a language is not
 supported by clang format (e.g. c#) we should just skip the files. The
 text model could group files by language.
-
-*** Postfix and directory fields in annotations look weird            :story:
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates?
 
 *** Rename options to transformation request                          :story:
 
@@ -626,11 +393,8 @@ mean yarn::xyz?".
 We could also do the same if the stereotype is blank ("did you mean
 enumeration?").
 
-*** Tidy-up fabric                                                    :story:
-
-Now we have dynamic transforms, we don't really need all the classlets
-we've created in fabric. We can get away with probably just the
-dynamic transform, calling all the factories.
+- for extra bonus points use the [[http://en.wikipedia.org/wiki/levenshtein_distance][levenshtein distance]] for spelling
+  suggestions. See story on this.
 
 *** Clean-up archetype locations modeling                             :story:
 
@@ -645,23 +409,6 @@ Notes:
 - formatters could return id's?
 - add an ID to archetype location; create a builder like name builder
   and populate ID as part of the build process.
-
-*** Use element ids for associations                                  :story:
-
-There doesn't seem a need for having entire names for associations;
-these are used to find information by ID anyway. We should try to
-convert them to element id's instead and see what breaks.
-
-- transparent, opaque associations
-- base, derived visitor
-- contained by
-
-We can't do this for:
-
-- visitor: we use the name in the formatter.
-
-Actually there is a reason for this: we use the names to build the
-file paths and the includes. We need to add some comments.
 
 *** Add facet validation against language standard                    :story:
 
@@ -700,12 +447,20 @@ void enablement_expander::validate_enabled_facets(
 It was called from the main transform method in enablement transform,
 prior to uptading facet enablement.
 
-*** Tidy-up assistant API                                             :story:
+What we really need is the concept of a technical space in the
+metamodel, as well as a "version" for that technical space, and then
+also the concept of a facet. Then we are effectively building
+(weaving?) an instance of a theoretical TS based on the configuration
+(positive variability). We can then validate the configuration.
 
-Now we have element in assistant we can start removing the need for
-element in the calls, making the templates simpler.
+*Merged stories*
 
-*** Facets incompatible with standards                                :story:
+Facets incompatible with standards
+
+Some facets may not be supported for all settings of a language. For
+example the hash facet is not compatible with C++ 98. We need to have
+some kind of facet/formatter level validation for this.
+
 
 Some facets may not be supported for all settings of a language. For
 example the hash facet is not compatible with C++ 98. We need to have
@@ -718,44 +473,13 @@ classes. Ideally users should be able to create a profile that enables
 the things they want to see on a template and then associate it with a
 stereotype. For this we will need aspect support.
 
-*** Drop the original extension in tailor                             :story:
-
-Filenames in tailor look weird:
-
-: dart.dia.json
-
-it should just be:
-
-: dart.json
-
-*** Move dependencies into yarn                                       :story:
-
-Actually the dependencies will be generated at the kernel level
-because 99% of the code is kernel specific. However, we need to make
-it an external transform.
-
-Tasks:
-
-- create the locator in the C++ external transform
-- create a dependencies transform that uses the existing include
-  generation code.
-
-*Previous understanding*
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
 *** Code-generate annotations type templates                          :story:
+
+Type templates are in effect features from a feature model. We need to
+add UML support for features (e.g. add meta-model elements for them),
+with code generation, and link them back to annotations.
+
+*Previous Understanding*
 
 Tasks:
 
@@ -794,7 +518,23 @@ will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
 
-*** Cannot make qualified references to concepts                      :story:
+
+
+*** Add support for object templates that work cross-model            :story:
+
+We've implemented support for cross-model inheritance in sprint 87 but
+we did not cover object templates. Most of the approach is the same,
+but unfortunately we can't just reuse it.
+
+Tasks:
+
+- we need a refines field which is a text collection.
+- we need refinement settings, factory etc.
+- update parsing expander.
+
+*Merged Stories*
+
+Cannot make qualified references to concepts
 
 At present it is not possible to consume concepts defined in a
 referenced model, nor is it possible to refer to a concept in a
@@ -814,36 +554,36 @@ The heuristic for concept resolution is then:
   module(s). We try this for all names in M-2, e.g. first two names
   are model modules and M-3 names are internal modules and so forth.
 
-*** Add support for object templates that work cross-model            :story:
+*** Move dependencies into yarn                                       :story:
 
-We've implemented support for cross-model inheritance in sprint 87 but
-we did not cover object templates. Most of the approach is the same,
-but unfortunately we can't just reuse it.
+Actually the dependencies will be generated at the kernel level
+because 99% of the code is kernel specific. However, we need to make
+it an external transform.
 
 Tasks:
 
-- we need a refines field which is a text collection.
-- we need refinement settings, factory etc.
-- update parsing expander.
+- create the locator in the C++ external transform
+- create a dependencies transform that uses the existing include
+  generation code.
+
+*Previous understanding*
+
+It seems all languages we support have some form of "dependencies":
+
+- in c++ these are the includes
+- in c# these are the usings
+- in java these are the imports
+
+So, it would make sense to move these into yarn. The process of
+obtaining the dependencies must still be done in a kernel dependent
+way because we need to build any language-specific structures that the
+dependencies builder requires. However, we can create an interface for
+the dependencies builder in yarn and implement it in each kernel. Each
+kernel must also supply a factory for the builders.
 
 *** Move formatting styles into yarn                                  :story:
 
 We need to support the formatting styles at the meta-model level.
-
-*** Throw on unsupported stereotypes                                  :story:
-
-In some cases we may support a feature in one language but not on
-others like say ORM at present. If a user requests ORM in a C# model,
-we should throw.
-
-If we are in compatibility mode, however, we should not throw.
-
-Note that we are already throwing if a stereotype is totally
-unknown. The problem here is that the stereotype is known, but not
-supported for all kernels. This is a bit trickier.
-
-We also need to check the existing code in stereotypes transform to
-stop trowing if compatibility flag is on.
 
 *** Change order of includes according to Lakos major design rule     :story:
 
@@ -861,8 +601,18 @@ just included the header but then had to remove it because it was
 slowing down compilation. With Lakos approach we get the best of both
 worlds.
 
-We need to also update the generated code to follow this
-approach. This will require some thinking.
+We need to update the generated code to follow this approach. This
+will require some thinking. We should create two include blocks to
+make this distinction clear, e.g.:
+
+: // MAIN_HEADER
+: #include "XYZ"
+:
+: // DEPS
+: #include "ZZZ"
+
+This means the include container should have two different containers
+to match this structure.
 
 *** Move element segmentation into yarn                               :story:
 
@@ -968,44 +718,6 @@ all languages if supplied suitable configuration data. To generalise:
   path" and "requires relative path" perhaps? These could be a
   function of archetype location.
 
-*** Add a modeline to stitch                                          :story:
-
-It would be nice to be able to supply the mode and other emacs
-properties to stitch templates. For that we just need a special KVP
-used at the top that contains the modeline:
-
-: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
-
-Stitch can read this KVP and ignore it.
-
-*** Create "opaque" kernel and element properties                     :story:
-
-As part of the element container, we can have a set of base classes
-that are empty: =opaque_element_properties=. This class is then
-specialised in each kernel with the properties that are specific to
-it. We probably need an equivalent for:
-
-- kernel level properties
-- element level properties
-- attribute level properties.
-
-We then have to do a lot of casting in the helpers.
-
-Once we got these opaque properties, we can then create "kernel
-specific expanders" which are passed in to the yarn workflow. These
-populate the opaque properties.
-
-*** Move helpers into yarn                                            :story:
-
-Looking at helpers, it is clear that they are common to all
-languages. We just need to rename the terminology slightly -
-particularly wrt to streaming properties - and then move this code
-across into yarn.
-
-*** Move facet properties into yarn                                   :story:
-
-We should be able to handle these generically in yarn.
-
 *** Move ORM camel-case and databases into yarn                       :story:
 
 We should handle this property at the ORM level, rather than at the
@@ -1038,43 +750,16 @@ Random notes:
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
 
-*** Add support for qualified class names in dia                      :story:
+*** Move helpers into yarn                                            :story:
 
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to define packages in
-certain cases.
-#+end_quote
+Looking at helpers, it is clear that they are common to all
+languages. We just need to rename the terminology slightly -
+particularly wrt to streaming properties - and then move this code
+across into yarn.
 
-It has become apparent that creating large packages in dia and placing
-all classes in a large package is cumbersome:
+*** Move facet properties into yarn                                   :story:
 
-- there are issues with the large package implementation in dia,
-  making copying and pasting a dark art; its not very obvious how one
-  copies into a package (e.g. populating the child node id correctly).
-- models do not always have a neat division between packages; in
-  dogen, where packages would be useful, there are all sorts of
-  connections (e.g. inheritance, association) between the package and
-  the model "package" or other packages. Thus is very difficult to
-  produce a representative diagram.
-
-A solution to this problem would be to support qualified names in
-class names; these would be interpreted as being part of the current
-model. One would still have to define a large package, but it could be
-empty, or contain only the types which only have connections inside
-the package, plus comments for the package, etc.
-
-*** Add support for code coverage                                     :story:
-
-We started the work on code coverage but never finished it. At present
-it seems we don't even have a story detailing the current state of
-coverage in the backlog. From memory the problem was that the upload
-was too large and the coverage was including lots of files that should
-be ignored. We never got the upload to work. In the mean time, it
-seems that kcov is a better approach instead of using lcov, gcov, etc.
-
-Links:
-
-- https://github.com/SimonKagstrom/kcov
+We should be able to handle these generically in yarn.
 
 *** Consider code generating utility at a product level               :story:
 
@@ -1136,62 +821,22 @@ These can be marked as known limitations. At present the tests require
 Boost.Test but it should be possible to target other frameworks
 (meta-data option).
 
-*** Add additional primitive validation                               :story:
+Merged stories:
 
-The classes that we are thinking about adding for test data are useful
-in other ways such as for validation. We could have out of the box
-validators for each class (where it makes sense, e.g. IP address,
-etc). This is mostly useful when converting from an "untyped type"
-like std::string to a stronger type such as IP Address.
+*Consider creating a "test" facet*
 
-*** Add support for configuration as environment variables            :story:
+Whilst we can't really generate tests, we can at least create the
+stubs for them. For this we could have a =test= facet that uses a
+stereotype, e.g. =test_suite=. Users mark classes with
+these. Attributes are the test cases. At the model level users can
+choose the test framework. For example for Boost.Test, it generates
+the main file with fixture initialisation, etc. We could then have one
+of two approaches:
 
-One of the principles in the [[https://www.12factor.net/][12 factor app]] is using environment
-variables for all [[https://www.12factor.net/config][config]]. This can then be [[https://www.nginx.com/blog/microservices-reference-architecture-nginx-twelve-factor-app/][managed externally]]. Dogen
-can help with the process by allowing users to define configurations
-as meta-model elements. These can then be obtained from factories,
-using =std::getenv=. They can have all the right types (e.g. perform
-casting as required) and can even have built-in validation. For this
-we can rely on the taxonomy made for test data (this will be on a
-separate story). In addition, this will make mocking easier: we can
-either create an interface for the factory with a mock implementation,
-or the factory could receive a map on one of its constructors.
-
-We should also take into account the story on config, as well as the
-support for env variables built in to [[https://www.boost.org/doc/libs/1_68_0/doc/html/program_options/overview.html#id-1.3.31.5.10.3][program options]]. The good thing
-about using program options is that we'd also have support for command
-line arguments as well as env variables. We'd also need a way to
-describe the env variable name separately from the command line option
-name, e.g. =hostname= vs =MY_APPLICATION_HOSTNAME=.
-
-Configuration should be read by a singleton, which is initialised at
-program start up. Initialisation validates config. All other calls
-return the cached configuration.
-
-Links:
-
-- [[https://en.cppreference.com/w/cpp/utility/program/getenv][std::getenv]]
-- [[https://stackoverflow.com/questions/44819569/how-to-extract-environment-variable-with-boostprogram-options][How to extract environment variable with boost::program_options?]]
-
-*** Consider adding support for SBE                                   :story:
-
-There is an efficient serialisation protocol: Simple Binary
-Encoding. It supports multiple languages. We could add a facet for it.
-
-Links:
-
-- https://github.com/real-logic/simple-binary-encoding
-
-*** Consider adding support for Meta Enum  library                    :story:
-
-Meta Enum provides a number of features for enumerations. We could
-simply declare enums using their library. A second useful thing is to
-copy all of their features and offer them as plain code generation
-features.
-
-Links:
-
-- https://github.com/therocode/meta_enum
+- protected regions, where the test contents are protected and perhaps
+  an area at the top for globals etc.
+- stubs only, were we generate the original content but then users
+  subsequently manage the files.
 
 *** Remove implicit modeling elements                                 :story:
 
@@ -1226,59 +871,14 @@ current script). If we make the colours standard RGB, they can also be
 used in other frontends. We must also include entries for metamodel
 elements such as =dogen::enumeration=.
 
-*** Consider adding support for bitsery serialisation                 :story:
+*** Propagate =fluent= stereotype                                     :story:
 
-There is yet another modern c++ serialisation library: bitsery. It
-seems pretty trivial to add support for it as a facet.
+It would be nice to be able to mark an object template called say
+Message with =dogen::fluent= and then have all of the classes that
+instantiate that template set to fluent.
 
-Links:
-
-- https://github.com/fraillt/bitsery/
-
-*** Consider adding support for the spaceship operator                :story:
-
-It seems C++ 20 will introduce a new operator: =<=>=. We should be
-able to support it within Dogen. However, it will require knowing the
-C++ version to ensure we do not generate it when using C++ 17 or
-below.
-
-Links:
-
-- [[https://blog.tartanllama.xyz/spaceship-operator/][Spaceship Operator]]
-
-*** Add support for LGTM                                              :story:
-
-As seen in project Heatherstone.
-
-Links:
-
-- https://github.com/utilForever/Hearthstonepp
-- https://lgtm.com/
-- https://lgtm.com/projects/g/utilForever/Hearthstonepp/alerts/?mode=list
-
-*** Consider adding support for OutOfLine                             :story:
-
-OutOfLine seems like an interesting pattern to improve cache
-locality. It would be nice if we could make it a meta-pattern so that
-we could annotate classes (e.g. =out_of_line=?) and then generate the
-code to match the solution below.
-
-Links:
-
-- [[https://blog.headlandstech.com/2018/08/15/outofline-a-memory-locality-pattern-for-high-performance-c/][OutOfLine – A Memory-Locality Pattern for High Performance C++]]
-
-*** Add serialisation support for JSON                                :story:
-
-It seems we do not yet have a story for this. The idea is to have some
-basic JSON roundtripping support. The user can configure the backend.
-
-Links:
-
-- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
-- [[https://github.com/Tencent/rapidjson][RapidJSON]]
-- [[https://github.com/nlohmann/json][JSON]]
-- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
-- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
+This is a variation on the general problem of feature propagation
+(e.g. hashing, etc).
 
 *** Mappings as meta-model elements                                   :story:
 
@@ -1393,134 +993,6 @@ Notes:
   would fail (e.g. CMake would not find all dependencies).
 - now that =library= can be renamed to =pdm=, we could call the
   top-level directory =library=.
-
-*** Consider adding support for GraphQL                               :story:
-
-GraphQL is a DSL for RESTful APIs. Its largely based on JSON and a
-JSON like format for queries:
-
-: getUser(id: "user_123") {
-:  currency,
-:  email,
-:  subscriptions
-: }
-
-Users can request specific attributes in objects from an object graph
-rather than get massive objects and then pick the attributes of
-interest. It raises several questions:
-
-- the meta-data describing all objects must be auto-generated. This
-  can easily be done by creating a new facet for GraphQL that contains
-  the meta-data for each object of interest.
-- the JSON serialisation of objects must only serialise fields of
-  interest as per query. The JSON serialiser must have some kind of
-  flags at the field level for each object which it queries to
-  determine if a field is enabled or not. However, we do not want to
-  do this on all cases or else it will slow down all JSON
-  serialisation. So we need two different kinds of JSON
-  serialisers. In addition, we will not be able to deserialise from
-  these JSON objects (given they are incomplete).
-- we should also develop a "querying" layer that is independent of
-  GraphQL so that we could reuse it for other backends. However, there
-  are trade-offs to be made here. We do not want arbitrary complex
-  queries (querying by primary key or foreign key is sufficient for
-  most cases) whereas GraphQL probably supports very complex queries
-  including joins etc.
-- complete support for GraphQL may be difficult as the DSL appears to
-  be very large. Perhaps we could start by supporting the basic
-  functionality once there are use cases.
-
-Links:
-
-- https://brandur.org/graphql
-- https://github.com/graphql/libgraphqlparser
-- http://graphql.github.io/learn/queries/
-
-*** Consider creating a "test" facet                                  :story:
-
-Whilst we can't really generate tests, we can at least create the
-stubs for them. For this we could have a =test= facet that uses a
-stereotype, e.g. =test_suite=. Users mark classes with
-these. Attributes are the test cases. At the model level users can
-choose the test framework. For example for Boost.Test, it generates
-the main file with fixture initialisation, etc. We could then have one
-of two approaches:
-
-- protected regions, where the test contents are protected and perhaps
-  an area at the top for globals etc.
-- stubs only, were we generate the original content but then users
-  subsequently manage the files.
-
-*** Consider adding support for compile time mocking                  :story:
-
-In a post in HN, a user [[https://news.ycombinator.com/item?id=17504197][suggested the following]]:
-
-: mehrdadn 1 hour ago [-]
-:
-: I'm just saying do conditional compilation instead of virtual dispatch, since
-: you generally shouldn't really need both the test and production
-: implementations to run inside the same program. So if you have reason to
-: require
-:   // widget.h
-:   class Widget { virtual void throb(); };
-:   // widget.cc
-:   class WidgetImpl : public Widget { void throb() { ... } };
-:   class WidgetTest : public Widget { void throb() { ... } };
-: then, instead of that, just do
-:   // widget.h
-:   class Widget { void throb(); };
-:   // widget.cc
-:   void Widget::throb() { ... }
-:   // widget.test.cc
-:   void Widget::throb() { ... }
-: where you only compile widget.cc for the production build, and only compile
-: widget.test.cc for the test build.
-
-Dogen could automatically support this by having a "compile time mock"
-stereotype. The targets for tests and for the binary would be
-automatically generated adding the correct object files. However, this
-could easily cause problems if we're not careful. For example, what if
-a library A wants to use mocks from library B. Library A should only
-include its mocks when it is built in "test mode" but not in
-production mode, so this means we need two different builds of the
-library. However, if we officialised these builds, e.g.:
-
-- A.mock.so
-- A.so
-
-And created targets specifically for these then perhaps there would be
-no confusion. The other problem is that when we mock we must mock
-everything (as there is only one mock build for the library). Thus we
-cannot test selectively. We should also not inline any functions in
-the header. For this we could put comments/attributes marking the
-class as "compile time mockable" so that developers are aware.
-
-Links:
-
-- [[https://www.fluentcpp.com/2018/08/21/default-parameters-mocking/][Integrating Mocking With C++ Default Parameters]]: article with
-  techniques to simulate mocking without a mock framework.
-
-*** Interactive interface to models                                    :epic:
-
-There are a number of interactive interfaces available such as
-Jupiter. It may be interesting to think of ways to generate the
-interactive interface automatically from a model.
-
-Links:
-
-- [[http://glench.github.io/fuzzyset.js/ui/][FuzzySet]]: A Human-Readable Interactive Representation of a Code
-  Library
-- [[https://github.com/QuantStack/xeus-cling][xeus-cling]]: C++ interface for Jupyter notebooks.
-
-*** Consider integrating a sqitch like approach                       :story:
-
-It would be nice to have a way to manage relational schemas, etc from
-within a dogen model. Sqitch seems to have an interesting approach,
-which may even suit ODB.
-
-Links:
-
-- https://metacpan.org/pod/sqitchtutorial
 
 *** Profiles as meta-model elements                                   :story:
 
@@ -1753,203 +1225,6 @@ Links:
 
 - https://cruise.eecs.uottawa.ca/umple/Traits.html
 
-*** Grepping non-generated code                                       :story:
-
-In order to determine if a type is no longer used, it would be really
-useful to grep non-generated code. This could be an option in dogen
-itself: given a project or set of projects, it determines the list of
-non-generated files and then runs grep on those.
-
-Links:
-
-- [[https://www.boost.org/doc/libs/1_61_0/libs/regex/example/grep/grep.cpp][Grep in c++ using boost regex]]
-
-*** Model Oriented Programming                                        :story:
-
-There is a type of programming called MOP - Model Oriented
-Programming. Umple seems to be the main language implementing
-MOP. Some of the ideas of MOP are quite interesting: to develop a
-modeling language that can be used just like regular code. This would
-be ideal for Dogen because we are using UML diagrams with lots of
-extensions to be ale to convey the full Dogen DSL. Instead, we could
-create a MOP lanugage that is the dogen DSL:
-
-: import "my_profile";
-: import "model_a";
-: import "model_b";
-:
-: traits {
-:     internal trait Definable {
-:         facet cpp.types {
-:             option default_constructor = 1;
-:         }
-:     }
-:
-:     internal trait Serialisable {
-:         comments "Model type can be serialised."
-:         facet cpp.serialisation.boost {
-:             option with_xml = 1;
-:         }
-:     }
-:
-:     internal trait SomeTrait {
-:         inherit Definable, Serialisable;
-;     }
-: }
-:
-: model my_model {
-:     name a;
-:     external_modules b.c;
-:     model_modules d.e;
-:     input_language cpp;
-:     output_language cpp; # or just language cpp;
-:     type generatable; # or proxy, defaults to generatable.
-:     target executable; # library
-:     using profile p1;
-:
-:     module a_module {
-:         using profile p2;
-:         enumeration my_enum {
-:             comments "My enumeration";
-:             type int;
-:             enumerators {
-:                 a = 1,
-:                 b = 2
-:             }
-:         }
-:
-:         public object my_object {
-:             immutable; # defaults to mutable
-:             comment "This is an object";
-:             using profile p2; # override global profile
-:             generation handcrafted;
-:             concepts c1, c2;
-:             parents o2;
-:             using traits types, serialisation, hashing; # using abstract facets, relies on mapping
-:             using traits types.cpp; # using concrete facets.
-:             public property p1 {
-:                 comments "my property";
-:                 type int;
-:             }
-:             public method a(in std::list<std::string> l) returns std::string;
-:         }
-:     }
-: }
-
-The language could have profiles as first class citizens and support
-includes. This would make sharing profiles across models much easier,
-and also defining a product (just include all models into the
-product).
-
-Notes:
-
-- its not obvious that there are a lot of advantages over plain
-  JSON. At present: 1) language could have support for comments, 2)
-  inclusion in JSON is not obvious 3) the syntax can be made
-  specifically to fit our DSL (for example, we could force that files
-  must start with =model=, or =product= or =profile= and not require
-  ={}= for these elements). An alternative to JSON which could be more
-  suitable is [[https://github.com/toml-lang/toml#user-content-example][TOML]].
-- creating a parser for the language will not be trivial.
-- on the plus side, we can then place the model definition with the
-  component itself. There is a nice symmetry with source code.
-- MOP then becomes the DSL for the methodology which is nice from a
-  MDE perspective.
-
-Links:
-
-- [[https://cruise.eecs.uottawa.ca/umple/][UMPLE Home]]
-
-*** Split dogen testing from core                                     :story:
-
-At present we have tests in modeling that perform "code generation";
-that is, regenerate all dogen test models from JSON and Dia. These are
-boost unit tests. Due to this, we have welded the test models with the
-core models, which means that we cannot easily separate repos without
-a lot of hacks. However, if we were to generalise the problem: there
-is no reason why test models should be coupled with the core or
-treated specially; they are just an instance of a project with dogen
-models which can be used to validate dogen. A better approach is to
-move all this work to "system testing", done using the dogen binary
-rather than within unit tests. This would work as follows:
-
-- add a mode in dogen called "validation mode" or diagnostics, etc. In
-  this mode, dogen does not write files to the file system but instead
-  produces a number of "reports":
-  - a list of all validation errors, if any, in GCC format, pointing
-    to the original models.
-  - a set of diff files with all the differences, if any.
-  - a benchmark report.
-  - a top-level report with the project name, its git repo and the git
-    commit.
-- projects that wish to help dogen must have a well-defined target to
-  generate the reports for all models under test.
-- dogen project contains a script with a list of such projects and
-  their git repos. Every time we build dogen core we install the
-  package into the travis VM and run the reports.
-- a environment variable containing the path into which to write the
-  reports must be set before running dogen.
-- a git repo is created with all the reports, and a structure as
-  follows:
-  /repo
-      /branch
-          /dogen_commit
-              /summary for this commit
-              /project_a
-                  /summary for this commit
-                  /diffs
-                  /errors
-                  /benchmark data
-              /project_b
- ...
-- to avoid clashes, make the branches named after the build,
-  e.g. travis osx etc.
-- git clones are shallow (1 commit)
-- once all reports are generated into the git report repo, the build
-  commits the report. The comment is the dogen commit.
-- a travis build is triggered on the back of the commit. It checks the
-  latest commit. If the report is a pass the build is green, if its a
-  fail the build is red.
-- in an ideal world the system tests build is separate from the dogen
-  core build, and triggered from a bintray upload. However, as we do
-  not know how to do this yet, we can just run the system tests at the
-  end of the dogen build.
-- we should split the reporting work from the build separation. We
-  could have a simple build that just fails if there are any diffs to
-  start off with and worry about reporting later.
-
-With this approach we can have any number of projects contributing to
-validate dogen (including dogen itself). The only slight downside is
-that the models must always be up-to-date (e.g. if the user has
-changed the model but not regenerated, system tests will
-fail). Perhaps we could have different categories of test models:
-mandatory and optional. Mandatory must pass, optional do not
-contribute to the build failing. However, they still show up in the
-report.
-
-Links:
-
-- https://github.com/cubicdaiya/dtl
-
-*** Add support for entity framework                                  :story:
-
-It seems there is a C# entity framework which is some kind of ORM.
-
-Links:
-
-- [[https://docs.microsoft.com/en-us/ef/core/][Entity Framework Core Quick Overview]]
-
-*** Add dogen specific binary serialisation                           :story:
-
-Given we know the internals of the model types to serialise, there is
-nothing to stop us from serialising types directly instead of relying
-on third party serialisation APIs.
-
-Links:
-
-- [[https://legacy.gitbook.com/book/arobenko/comms-protocols-cpp/details][Guide to Implementing Communication Protocols in C++ (for Embedded
-  Systems)]]
-
 *** Cross-model transformations                                       :story:
 
 Once we have interfaces, there are at least two very useful
@@ -1980,7 +1255,7 @@ transformations we could do:
   important because we can either use HTTP or protobuf etc from the
   scripting languages.
 
-*** Add support for multi-components in a  model                      :story:
+*** Add support for multi-components in a model                       :story:
 
 In the world of cross-model transformations (see story), we need lots
 of separate models just because they need to generate their own
@@ -2007,6 +1282,313 @@ would be a bit tricky. Thoughts:
   will contain all of the business logic whereas the other models are
   simple references to it. This could be addressed by having
   references, based on the existing model references.
+
+
+** In next few sprints
+
+ Stories that we intend to look at in the very near future.
+
+*** Add support for proper JSON serialisation in C++                  :story:
+
+We need to add support for JSON in C++. It will eventually have to
+roundtrip to JSON in C# but that will be handled as two separate
+stories.
+
+Libraries:
+
+- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+- One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should provide support for JSON with
+roundtripping tests.
+
+We will not replace the current IO implementation; it should continue
+to exist as is, requiring no external dependencies.
+
+We should consider supporting multiple JSON libraries: instead of
+making the mistake we did with serialisation where we bound the name
+=serialization= with boost serialisation, we should call it by its
+real name, e.g. =json_spirit= etc. Then when a user creates a
+stereotype for a profile such as =Serializable= it can choose which
+serialisation codecs to enable for which language. This means that the
+same stereotypes can have different meanings in different
+architectures, which is the desired behaviour.
+
+We should create a serialise / deserialise functions following the
+same logic as boost:
+
+#+begin_src c++
+void serialize(Value& v, const object& o);
+void serialize(Value& v, const base& b);
+
+void deserialize(const Value& v, object& o);
+base* deserialize(const Value& v);
+#+end_src
+
+Or perhaps even better, we can make the above the internal methods and
+use =operator<<= and =operator>>= as the external methods:
+
+#+begin_src c++
+void operator<<(Value& v, const object& o);
+void operator>>(const Value& v, object& o);
+#+end_src
+
+Notes:
+
+- create a registrar with a map for each base type. The function
+  returns a base type pointer.
+- when you deserialize a base type pointer, you call the pointer
+  deserialize above. Same for when you have a pointer to an object. It
+  will internally call the registrar (if its a base type) and get the
+  right function.
+- this means we only need to look at type for inheritance. Although we
+  should probably always do it for validation? However, what happens
+  if we want to make a model so we can read external JSON? It won't
+  contain type markings.
+- =operator>>= will not be defined for pointers or base classes.
+- this wont work for the case of =doc << base=. For this we need a map
+  that looks up on type_index.
+
+Merged stories:
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+*Add support for JSON serialisation*
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*Add serialisation support for JSON*
+
+It seems we do not yet have a story for this. The idea is to have some
+basic JSON roundtripping support. The user can configure the backend.
+
+Links:
+
+- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
+- [[https://github.com/Tencent/rapidjson][RapidJSON]]
+- [[https://github.com/nlohmann/json][JSON]]
+- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
+- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
+
+*** Investigate current implementation of the origin transform        :story:
+
+Do we need to have the origin expansion? can we not just supply the
+origin type to the exomodel adapter directly?
+
+Actually this cannot be done. The problem is we still need to
+distinguish between dogen models and non-dogen models; we need to
+register all dogen models. This is done via meta-data. We cannot use
+the meta-data until we have converted into an endomodel. We could
+consider having a flag at the exomodel level for this - it is a
+concept at this level - but we still need to map it to origin
+types. However, it is perhaps cleaner to express this concept at the
+exomodel level rather than the endomodel level given we are saying
+there are two different kinds of exomodels: proxyness is a fundamental
+property of an exomodel. If we do this we can then do the mapping in
+flight as we transform from exomodel to endomodel.
+
+*** Rewrite name resolution in terms of lists                         :story:
+
+Even since we did the external modules / model modules change we broke
+code generation; this is because we do not go up the model modules
+during name resolution. We did a quick hack to fix this but it needs
+to be done properly.
+
+Let's walk through a simple example:. Name cames in as:
+
+- model module: =probing=
+- simple: =prober=
+
+We are in model:
+
+- model module: =dogen.external=
+
+Expected behaviour is to try all combinations of model modules:
+
+- =dogen.external.probing=
+- =dogen.probing
+- =probing=
+
+This highlights a fundamental problem with resolution: we view the
+{external, model internal} modules as if they are separate entities
+but in reality, for the purposes of resolution, there is only one
+thing that is relevant: the module path. If it matches because of
+{external, model internal} modules, well that is not relevant to
+resolution. Other users of =name= do need to know this information
+(for example to  generate directories or file names) but not the
+resolver.
+
+Interestingly, because we are only looking for an id, it doesn't
+really matter how we get to it (in terms of the internal composition
+of the name), as long as it matches bitwise. This means we can look at
+the process slightly differently:
+
+- start off with the name as the user provided it. Extract all strings
+  from it to create a list, in order: external, model, internal,
+  simple. Try to resolve that. Call it user list.
+- then create a second list from model / context: external, model,
+  internal. Call it model list.
+- try concantenating model list and user list, pretty printing and
+  resolving it. If it fails, pop model list and concatenate again. Try
+  until model list is empty.
+
+Tasks:
+
+- first add a quick hack just to get the code generator working
+  again. For example, take the first model module of the model and try
+  resolving with that. Then worry about fixing this properly.
+- split the conversion of name into list from pretty printer. Printer
+  should merely take a string or list of strings and do its thing. We
+  need to find a good location for this method, since (for now) we
+  cannot place it in the right location which is the name class
+  itself.
+- change resolver to obtain the lists as per above. The to list
+  machinery can be used for this, though we need to handle model names
+  somehow. We can copy the =model_name_mode= logic from printer.
+- drop all of the logic in resolver at present and use the list logic
+  as per above. Do not check references, etc.
+
+*** Add support for "ad-hoc" probing                                  :story:
+
+We have a set of inputs supplied to the prober called "initial
+input". This is not ideal. We need a way to generalise the "initial
+input" dumping. In effect, what we are really saying is that within a
+transform we may need to dump more state than just the initial
+inputs. We need a way to express this in the probing API.
+
+*** Tailor does not output static stereotypes                         :story:
+
+At present we only output static stereotypes. However, there is no
+point on fixing this until we move to the new JSON format.
+
+*** Split registrar into two classes                                  :story:
+
+At present we do not distinguish between the setting up of the
+registrar and the usage of the registrar. Up to know this is not a
+major issue, although its a bit of a smell that we have to call
+validate at some arbitrary point.
+
+However, with the new parts/builder setup, this becomes even more of a
+problem because we only want to build the parts once we have
+registered all of the formatters. The right thing would have been to
+have:
+
+- a registrar builder, used during registration;
+- a build step which returns the (validated) registrar. Once build is
+  called, we should throw if anyone attempts to add more formatters.
+
+This makes it hard to misuse the API.
+
+Notes:
+
+- how does this affect plugins? will it still be possible to register
+  formatters from a shared library?
+
+Tasks:
+
+- create a registrar builder with most of the existing registrar
+  interface. On build it computes the parts, generates the repository,
+  etc and then supplies that to the registrar. The registrar itself is
+  no longer static, just a member of the workflow.
+
+*** Postfix and directory fields in annotations look weird            :story:
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates?
+
+*** Use element ids for associations                                  :story:
+
+There doesn't seem a need for having entire names for associations;
+these are used to find information by ID anyway. We should try to
+convert them to element id's instead and see what breaks.
+
+- transparent, opaque associations
+- base, derived visitor
+- contained by
+
+We can't do this for:
+
+- visitor: we use the name in the formatter.
+
+Actually there is a reason for this: we use the names to build the
+file paths and the includes. We need to add some comments.
+
+*** Tidy-up assistant API                                             :story:
+
+Now we have element in assistant we can start removing the need for
+element in the calls, making the templates simpler.
+
+*** Add a modeline to stitch                                          :story:
+
+It would be nice to be able to supply the mode and other emacs
+properties to stitch templates. For that we just need a special KVP
+used at the top that contains the modeline:
+
+: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
+
+Stitch can read this KVP and ignore it.
+
+*** Create "opaque" kernel and element properties                     :story:
+
+As part of the element container, we can have a set of base classes
+that are empty: =opaque_element_properties=. This class is then
+specialised in each kernel with the properties that are specific to
+it. We probably need an equivalent for:
+
+- kernel level properties
+- element level properties
+- attribute level properties.
+
+We then have to do a lot of casting in the helpers.
+
+Once we got these opaque properties, we can then create "kernel
+specific expanders" which are passed in to the yarn workflow. These
+populate the opaque properties.
+
+*** Add support for qualified class names in dia                      :story:
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to define packages in
+certain cases.
+#+end_quote
+
+It has become apparent that creating large packages in dia and placing
+all classes in a large package is cumbersome:
+
+- there are issues with the large package implementation in dia,
+  making copying and pasting a dark art; its not very obvious how one
+  copies into a package (e.g. populating the child node id correctly).
+- models do not always have a neat division between packages; in
+  dogen, where packages would be useful, there are all sorts of
+  connections (e.g. inheritance, association) between the package and
+  the model "package" or other packages. Thus is very difficult to
+  produce a representative diagram.
+
+A solution to this problem would be to support qualified names in
+class names; these would be interpreted as being part of the current
+model. One would still have to define a large package, but it could be
+empty, or contain only the types which only have connections inside
+the package, plus comments for the package, etc.
+
+*** Add additional primitive validation                               :story:
+
+The classes that we are thinking about adding for test data are useful
+in other ways such as for validation. We could have out of the box
+validators for each class (where it makes sense, e.g. IP address,
+etc). This is mostly useful when converting from an "untyped type"
+like std::string to a stronger type such as IP Address.
 
 *** Simplify argument parsing for operations                          :story:
 
@@ -2038,12 +1620,6 @@ Notes:
 - we should disable parsing of operations if hand-crafted is on (or do
   a shallow parse and just literally copy the string; we have another
   story for this in the backlog).
-
-*** Add support for MARISA                                            :story:
-
-This seems like a useful data structure:
-
-- [[https://github.com/s-yata/marisa-trie][marisa-trie]]
 
 *** Create a =ci= folder in build                                     :story:
 
@@ -2171,184 +1747,6 @@ strategies.
 Links:
 
 - [[https://link.springer.com/chapter/10.1007/978-3-319-27869-8_7][Integration of handwritten and generated object-oriented code]]
-
-*** Add support for RPC                                                :epic:
-
-It would be nice to be able to mark a type as a service and then have
-dogen generate all the comms for it:
-
-- generate a service interface with appropriate async such as using
-  ==boost::future= or =std::future= depending on user options. User
-  then has to implement this interface.
-- generate a new model called comms. For each method =M= in the
-  service, create two new classes named =M_request= and
-  =M_response=. These classes are composed of the types from the
-  method. Also, they will have additional fields such as security
-  token, status, error message, etc.
-- in comms we need to create a server. This is made up of several
-  layers: 1) socket setup: create a socket, open it, etc. 2)
-  serialiser: convert from/to raw serialisation format. 3) dispatcher:
-  given a message, call the appropriate method on the service and
-  construct the appropriate response. The server implementation owns a
-  service, receives messages, unpacks them and calls the service; then
-  takes the result packs it and returns the response.
-- similarly, we also need a client with the responsibility of calling
-  the server over a socket. We need to be able to support both "raw"
-  sockets as well as HTTP.
-- in an ideal world, we would also generate console client and server
-  binaries. These would automatically have the command line options
-  setup for them given the service request/response. They would make
-  use of comms.
-- validation of the security token must be done by the generated code
-  somehow, as must session ID management and message IDs. Generated
-  code must do all the logging of received messages (requests and
-  responses) with their correlation IDs. Composition of services must
-  be done by routing (e.g. assume [[https://github.com/envoyproxy/envoy][envoy]] is used).
-- name of the comms model must be "original model" + =.comms=. Similar
-  approach for all dependent models.
-- since dogen has been hard-wired to generate one model, we need some
-  kind of command line parameter that we can supply to generate
-  RPC. Or alternatively, if there is RPC for a given model, we just
-  automatically generate all dependent models. Users can
-  enable/disable client/server etc via meta-data.
-- stereotype: =dogen::rpc::service=. We then manually create objects
-  with the dependent stereotypes, e.g. =dogen::rpm::message=,
-  etc. Note that creating these objects manually or automatically
-  should result in exactly the same behaviour, e.g. first implement
-  them manually. The automatically generated models still follow the
-  same approach for facets such as =types=, etc. They just have more
-  types such as dispatcher, serialisers, etc. These can be injected
-  into a model manually (e.g. =dogen::rpc::dispatcher=, etc).
-- because the service is async (or can be), the server needs to chain
-  to a future for the processing. Similarly, the client provides an
-  async interface, with a coroutine. We must use the exact same
-  approach for HTTP and raw socket (ideally even the same class).
-- for HTTP, users may need to set the method (e.g. PUT, POST,
-  etc). This could be done as meta-data. But however, we should have
-  an RPC stereotype that maps to these, so that we can use the same
-  information for both "raw" sockets and HTTP. Dia supports
-  stereotypes in methods, so we could have something like
-  =dogen::rpc::put= as a stereotype.
-- we have a story for type framing. We should implement this feature
-  first and then make use of it. Basically, the entire RPC
-  infrastructure is made up of discrete dogen features. These can be
-  used stand-alone.
-- we should automatically add the async and sync infrastructure. The
-  user can choose one or both, and we generate the
-  interfaces. However, user needs to manually implement the service
-  methods.
-- by having a single library for comms it means we will ship both
-  client and server on it (as well as raw and HTTP). This is not ideal
-  since it means clients will link to server code and also means we
-  will pull in the domain library. However, in practice its probably
-  OK because in most cases we will need to make use of the domain
-  library anyway unless the service is trivial. The alternative is to
-  have a ==comms.server= and a =comms.client= project. But since they
-  will share a lot of code, this sounds like overkill.
-- we need a way to set the available serialisation formats. This can
-  be done via meta-data. The service could also have meta-data for RPC
-  or non-RPC.
-- in order for this to work with the current transform chains, we need
-  some way to supply the target and obtain the RPC models; then we
-  start the existing code generation chain. However, the chains at
-  present are not design to receive a model as an input. We need to
-  wire them differently in order to cope with this use case. In
-  addition, we may not need all of the post-processing we have in the
-  text model chain at present (e.g. visitor, etc) given that we know
-  exactly what the generated types will be. Perhaps we can have chains
-  designed specifically for this use case?
-- we need to copy a lot of the model properties for the generated
-  models such as licence, copyright, etc, but not model name. In
-  theory we should be able to just override that one and copy all the
-  other ones. We also need to inject references.
-- If the user has enabled both C++ and C#, this should still work
-  (assuming we have RPC support for C#).
-- we need to add support for executables, operations, program options,
-  main, etc etc before we can satisfy the client/server use cases. We
-  need to break down this epic into all of its dependent stories.
-- ServiceStack like API interfaces should be generated automatically
-  if HTTP is enabled. See ServiceStack/swagger story for
-  details. Service comments are used for swagger comments.
-- we need to manually inject command line options such as host name,
-  port, log level etc. Remaining options are taken from the operations
-  in service. Comments provided by users on the operations can be used
-  for the command line description.
-- it would be great if the client could have a =--interactive= option
-  in which case it would then use readline and allow users to send
-  commands. For simple types this is trivial (perhaps quotes for
-  strings) but for non-simple types it would require a bit of
-  thinking.
-- before we start defining stereotypes, we need to read: "Towards a
-  UML Profile for Service-Oriented Architectures" by Reiko Heckel,
-  Marc Lohmann and Sebastian Thöne.
-
-Merged stories:
-
-*Remote method invocation*
-
-See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]].
-
-It seems fairly straightforward to add remote method invocation to a
-few select types. The following would have to be done:
-
-- create a new stereotype like =dispatchable=, =remotable= or suchlike
-- for languages which support this natively, we could map to their
-  technology (e.g. Beans in Java, etc).
-- create a new stereotype: interface.
-- add support for interface code generation.
-- validation: model must have a model ID, thought to be unique across
-  models.
-- validation: types must be marked as both =remotable= and
-  =interface= and have a unique type ID in the model.
-- validation: types must have at least one public method
-- injector: if at least one type is =remotable=, a new facet is
-  created: =rmi=.
-- injector: a system enumeration will be created with all the
-  supported serialisation types. actually, we should create this
-  anyway in serialisation or reflection.
-- rmi will contain one class that represents a "frame". this
-  frame will be composed as follows: model ID, type ID, serialisation
-  type, raw buffer. we need to look at RMI terminology to come up with
-  a good name for this frame.
-- messages: for each method that exists in each dispatchable service,
-  a message class will be created with a name following some well
-  defined convention such as =CLASS_NAME_METHOD_NAME=. we need
-  examples to make up a sensible convention. or perhaps an
-  implementation specific parameter can override the class name. the
-  message class is a data object and has as attributes all of the
-  parameters of the method.
-- a dispatcher class will be created in dispatching. it will have as
-  constructor arguments references to all the dispatchable
-  services. when passed in a frame, it will hydrate it and dispatch it
-  to the correct service.
-- a "framer" class will be created in dispatching. it will be
-  configured for a given serialisation type. it will take a message
-  object, serialise it and frame it.
-- we could support the notion of callbacks. for this we need to be
-  able to serialise stubs as references such that when the other end
-  receives it, it calls a registrar to activate a client stub.
-
-Now we just need a way of creating some generic interfaces that take a
-wire client and a wire service and plug the framer and the dispatcher
-into it.
-
-Notes:
-
-- we need basic support for operations so that we can convert the
-  operations into messages.
-- we need some wire format support such as flat buffers.
-
-*** Add support for dependency graphs and complexity data             :story:
-
-It would be nice to incorporate some of the complexity measures found
-in Lako's Large-Scale C++ Software Design. We could copy across some
-of the code of TomTom's [[https://github.com/tomtom-international/cpp-dependencies][cpp-dependencies]] and make use of it against
-the dogen model.
-
-Links:
-
-- [[http://gamesfromwithin.com/physical-structure-and-c-part-1-a-first-look][Physical Structure and C++ – Part 1: A First Look]]
-- [[http://gamesfromwithin.com/physical-structure-and-c-part-2-build-times][Physical Structure and C++ – Part 2: Build Times]]
 
 *** Add support for primitive validation                              :story:
 
@@ -7500,6 +6898,49 @@ depend only on the forward declarations.
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
 
+*** Add a file format parameter to probing                            :story:
+
+At present we are dumping all models in probing as JSON. It would be
+nice to be able to dump them as boost serialisation so we can plug
+them into tests or to reproduce some problem. It would be even nicer
+if we could plug that data back in to dogen but its not obvious how
+that would work; we need to have some kind of concept of "stages", and
+then supply the inputs and the stage so that dogen could continue from
+there.
+
+*** Improvements to dia model                                         :story:
+
+Assorted notes on cleaning-up the dia model:
+
+- create a base class such as =value= and make all values inherit from
+  it instead of using boost variant.
+- according to DTD, a composite can be made up of either composites or
+  attributes. We incorrectly modeled it as having just one inner
+  composite.
+- perhaps this is better thought of slightly differently: an attribute
+  has child nodes. The child nodes can either be leaf nodes, in which
+  case they are values, or non-leaf nodes in which case they are
+  composite nodes. Composite nodes themselves can have child nodes. If
+  they are leaf nodes they are values; if they are non-leaf nodes they
+  are either attributes or composites.
+- note that we do not need to use shared pointers in composite: we
+  could simply have an attribute by value. However, we still need to
+  handle the case where the children are either composite or
+  attributes. So if we somehow could get composite and attribute to
+  have a common base class, we could have a container of that base
+  class in composite. For this we would need a shared pointer.
+- consider adding the postfix =node= to class names and make it a real
+  tree, as per dia's implementation.
+- covert all vectors to lists since we do not know their sizes on
+  construction.
+- one thing to bear in mind is that if we fix the tree structure, we
+  will break the XML parsing code in hydrator, which took quite a
+  while to get right (and has hacks such as "inner composite").
+- its not obvious why we need to treat =dia::string= in a different
+  way from all other attribute values (except for =dia::font=).
+- alternative: create an XML schema from the DTD and use it with the
+  XSD tool to create the model.
+
 *** Add full support for type_index                                   :story:
 
 At present we cannot create containers using =std::type_index= as a
@@ -8444,6 +7885,522 @@ sufficient.
 
 This may not be required once we move over to Catch since the specs
 become very readable.
+
+** Features that would be really nice to have one day
+
+*** Add support for RPC                                                :epic:
+
+It would be nice to be able to mark a type as a service and then have
+dogen generate all the comms for it:
+
+- generate a service interface with appropriate async such as using
+  ==boost::future= or =std::future= depending on user options. User
+  then has to implement this interface.
+- generate a new model called comms. For each method =M= in the
+  service, create two new classes named =M_request= and
+  =M_response=. These classes are composed of the types from the
+  method. Also, they will have additional fields such as security
+  token, status, error message, etc.
+- in comms we need to create a server. This is made up of several
+  layers: 1) socket setup: create a socket, open it, etc. 2)
+  serialiser: convert from/to raw serialisation format. 3) dispatcher:
+  given a message, call the appropriate method on the service and
+  construct the appropriate response. The server implementation owns a
+  service, receives messages, unpacks them and calls the service; then
+  takes the result packs it and returns the response.
+- similarly, we also need a client with the responsibility of calling
+  the server over a socket. We need to be able to support both "raw"
+  sockets as well as HTTP.
+- in an ideal world, we would also generate console client and server
+  binaries. These would automatically have the command line options
+  setup for them given the service request/response. They would make
+  use of comms.
+- validation of the security token must be done by the generated code
+  somehow, as must session ID management and message IDs. Generated
+  code must do all the logging of received messages (requests and
+  responses) with their correlation IDs. Composition of services must
+  be done by routing (e.g. assume [[https://github.com/envoyproxy/envoy][envoy]] is used).
+- name of the comms model must be "original model" + =.comms=. Similar
+  approach for all dependent models.
+- since dogen has been hard-wired to generate one model, we need some
+  kind of command line parameter that we can supply to generate
+  RPC. Or alternatively, if there is RPC for a given model, we just
+  automatically generate all dependent models. Users can
+  enable/disable client/server etc via meta-data.
+- stereotype: =dogen::rpc::service=. We then manually create objects
+  with the dependent stereotypes, e.g. =dogen::rpm::message=,
+  etc. Note that creating these objects manually or automatically
+  should result in exactly the same behaviour, e.g. first implement
+  them manually. The automatically generated models still follow the
+  same approach for facets such as =types=, etc. They just have more
+  types such as dispatcher, serialisers, etc. These can be injected
+  into a model manually (e.g. =dogen::rpc::dispatcher=, etc).
+- because the service is async (or can be), the server needs to chain
+  to a future for the processing. Similarly, the client provides an
+  async interface, with a coroutine. We must use the exact same
+  approach for HTTP and raw socket (ideally even the same class).
+- for HTTP, users may need to set the method (e.g. PUT, POST,
+  etc). This could be done as meta-data. But however, we should have
+  an RPC stereotype that maps to these, so that we can use the same
+  information for both "raw" sockets and HTTP. Dia supports
+  stereotypes in methods, so we could have something like
+  =dogen::rpc::put= as a stereotype.
+- we have a story for type framing. We should implement this feature
+  first and then make use of it. Basically, the entire RPC
+  infrastructure is made up of discrete dogen features. These can be
+  used stand-alone.
+- we should automatically add the async and sync infrastructure. The
+  user can choose one or both, and we generate the
+  interfaces. However, user needs to manually implement the service
+  methods.
+- by having a single library for comms it means we will ship both
+  client and server on it (as well as raw and HTTP). This is not ideal
+  since it means clients will link to server code and also means we
+  will pull in the domain library. However, in practice its probably
+  OK because in most cases we will need to make use of the domain
+  library anyway unless the service is trivial. The alternative is to
+  have a ==comms.server= and a =comms.client= project. But since they
+  will share a lot of code, this sounds like overkill.
+- we need a way to set the available serialisation formats. This can
+  be done via meta-data. The service could also have meta-data for RPC
+  or non-RPC.
+- in order for this to work with the current transform chains, we need
+  some way to supply the target and obtain the RPC models; then we
+  start the existing code generation chain. However, the chains at
+  present are not design to receive a model as an input. We need to
+  wire them differently in order to cope with this use case. In
+  addition, we may not need all of the post-processing we have in the
+  text model chain at present (e.g. visitor, etc) given that we know
+  exactly what the generated types will be. Perhaps we can have chains
+  designed specifically for this use case?
+- we need to copy a lot of the model properties for the generated
+  models such as licence, copyright, etc, but not model name. In
+  theory we should be able to just override that one and copy all the
+  other ones. We also need to inject references.
+- If the user has enabled both C++ and C#, this should still work
+  (assuming we have RPC support for C#).
+- we need to add support for executables, operations, program options,
+  main, etc etc before we can satisfy the client/server use cases. We
+  need to break down this epic into all of its dependent stories.
+- ServiceStack like API interfaces should be generated automatically
+  if HTTP is enabled. See ServiceStack/swagger story for
+  details. Service comments are used for swagger comments.
+- we need to manually inject command line options such as host name,
+  port, log level etc. Remaining options are taken from the operations
+  in service. Comments provided by users on the operations can be used
+  for the command line description.
+- it would be great if the client could have a =--interactive= option
+  in which case it would then use readline and allow users to send
+  commands. For simple types this is trivial (perhaps quotes for
+  strings) but for non-simple types it would require a bit of
+  thinking.
+- before we start defining stereotypes, we need to read: "Towards a
+  UML Profile for Service-Oriented Architectures" by Reiko Heckel,
+  Marc Lohmann and Sebastian Thöne.
+
+Merged stories:
+
+*Remote method invocation*
+
+See [[*Type%20framing][type framing]], [[*Model%20and%20type%20enums][Model and type enums]].
+
+It seems fairly straightforward to add remote method invocation to a
+few select types. The following would have to be done:
+
+- create a new stereotype like =dispatchable=, =remotable= or suchlike
+- for languages which support this natively, we could map to their
+  technology (e.g. Beans in Java, etc).
+- create a new stereotype: interface.
+- add support for interface code generation.
+- validation: model must have a model ID, thought to be unique across
+  models.
+- validation: types must be marked as both =remotable= and
+  =interface= and have a unique type ID in the model.
+- validation: types must have at least one public method
+- injector: if at least one type is =remotable=, a new facet is
+  created: =rmi=.
+- injector: a system enumeration will be created with all the
+  supported serialisation types. actually, we should create this
+  anyway in serialisation or reflection.
+- rmi will contain one class that represents a "frame". this
+  frame will be composed as follows: model ID, type ID, serialisation
+  type, raw buffer. we need to look at RMI terminology to come up with
+  a good name for this frame.
+- messages: for each method that exists in each dispatchable service,
+  a message class will be created with a name following some well
+  defined convention such as =CLASS_NAME_METHOD_NAME=. we need
+  examples to make up a sensible convention. or perhaps an
+  implementation specific parameter can override the class name. the
+  message class is a data object and has as attributes all of the
+  parameters of the method.
+- a dispatcher class will be created in dispatching. it will have as
+  constructor arguments references to all the dispatchable
+  services. when passed in a frame, it will hydrate it and dispatch it
+  to the correct service.
+- a "framer" class will be created in dispatching. it will be
+  configured for a given serialisation type. it will take a message
+  object, serialise it and frame it.
+- we could support the notion of callbacks. for this we need to be
+  able to serialise stubs as references such that when the other end
+  receives it, it calls a registrar to activate a client stub.
+
+Now we just need a way of creating some generic interfaces that take a
+wire client and a wire service and plug the framer and the dispatcher
+into it.
+
+Notes:
+
+- we need basic support for operations so that we can convert the
+  operations into messages.
+- we need some wire format support such as flat buffers.
+
+*** Add support for dependency graphs and complexity data             :story:
+
+It would be nice to incorporate some of the complexity measures found
+in Lako's Large-Scale C++ Software Design. We could copy across some
+of the code of TomTom's [[https://github.com/tomtom-international/cpp-dependencies][cpp-dependencies]] and make use of it against
+the dogen model.
+
+Links:
+
+- [[http://gamesfromwithin.com/physical-structure-and-c-part-1-a-first-look][Physical Structure and C++ – Part 1: A First Look]]
+- [[http://gamesfromwithin.com/physical-structure-and-c-part-2-build-times][Physical Structure and C++ – Part 2: Build Times]]
+
+*** Grepping non-generated code                                       :story:
+
+In order to determine if a type is no longer used, it would be really
+useful to grep non-generated code. This could be an option in dogen
+itself: given a project or set of projects, it determines the list of
+non-generated files and then runs grep on those.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_61_0/libs/regex/example/grep/grep.cpp][Grep in c++ using boost regex]]
+
+*** Add support for configuration as environment variables            :story:
+
+One of the principles in the [[https://www.12factor.net/][12 factor app]] is using environment
+variables for all [[https://www.12factor.net/config][config]]. This can then be [[https://www.nginx.com/blog/microservices-reference-architecture-nginx-twelve-factor-app/][managed externally]]. Dogen
+can help with the process by allowing users to define configurations
+as meta-model elements. These can then be obtained from factories,
+using =std::getenv=. They can have all the right types (e.g. perform
+casting as required) and can even have built-in validation. For this
+we can rely on the taxonomy made for test data (this will be on a
+separate story). In addition, this will make mocking easier: we can
+either create an interface for the factory with a mock implementation,
+or the factory could receive a map on one of its constructors.
+
+We should also take into account the story on config, as well as the
+support for env variables built in to [[https://www.boost.org/doc/libs/1_68_0/doc/html/program_options/overview.html#id-1.3.31.5.10.3][program options]]. The good thing
+about using program options is that we'd also have support for command
+line arguments as well as env variables. We'd also need a way to
+describe the env variable name separately from the command line option
+name, e.g. =hostname= vs =MY_APPLICATION_HOSTNAME=.
+
+Configuration should be read by a singleton, which is initialised at
+program start up. Initialisation validates config. All other calls
+return the cached configuration.
+
+Links:
+
+- [[https://en.cppreference.com/w/cpp/utility/program/getenv][std::getenv]]
+- [[https://stackoverflow.com/questions/44819569/how-to-extract-environment-variable-with-boostprogram-options][How to extract environment variable with boost::program_options?]]
+
+*** Consider adding support for SBE                                   :story:
+
+There is an efficient serialisation protocol: Simple Binary
+Encoding. It supports multiple languages. We could add a facet for it.
+
+Links:
+
+- https://github.com/real-logic/simple-binary-encoding
+
+*** Consider adding support for Meta Enum library                     :story:
+
+Meta Enum provides a number of features for enumerations. We could
+simply declare enums using their library. A second useful thing is to
+copy all of their features and offer them as plain code generation
+features.
+
+Links:
+
+- https://github.com/therocode/meta_enum
+
+*** Consider adding support for bitsery serialisation                 :story:
+
+There is yet another modern c++ serialisation library: bitsery. It
+seems pretty trivial to add support for it as a facet.
+
+Links:
+
+- https://github.com/fraillt/bitsery/
+
+*** Consider adding support for the spaceship operator                :story:
+
+It seems C++ 20 will introduce a new operator: =<=>=. We should be
+able to support it within Dogen. However, it will require knowing the
+C++ version to ensure we do not generate it when using C++ 17 or
+below.
+
+Links:
+
+- [[https://blog.tartanllama.xyz/spaceship-operator/][Spaceship Operator]]
+
+*** Add support for LGTM                                              :story:
+
+As seen in project Heatherstone.
+
+Links:
+
+- https://github.com/utilForever/Hearthstonepp
+- https://lgtm.com/
+- https://lgtm.com/projects/g/utilForever/Hearthstonepp/alerts/?mode=list
+
+*** Consider adding support for OutOfLine                             :story:
+
+OutOfLine seems like an interesting pattern to improve cache
+locality. It would be nice if we could make it a meta-pattern so that
+we could annotate classes (e.g. =out_of_line=?) and then generate the
+code to match the solution below.
+
+Links:
+
+- [[https://blog.headlandstech.com/2018/08/15/outofline-a-memory-locality-pattern-for-high-performance-c/][OutOfLine – A Memory-Locality Pattern for High Performance C++]]
+
+*** Consider adding support for GraphQL                               :story:
+
+GraphQL is a DSL for RESTful APIs. Its largely based on JSON and a
+JSON like format for queries:
+
+: getUser(id: "user_123") {
+:  currency,
+:  email,
+:  subscriptions
+: }
+
+Users can request specific attributes in objects from an object graph
+rather than get massive objects and then pick the attributes of
+interest. It raises several questions:
+
+- the meta-data describing all objects must be auto-generated. This
+  can easily be done by creating a new facet for GraphQL that contains
+  the meta-data for each object of interest.
+- the JSON serialisation of objects must only serialise fields of
+  interest as per query. The JSON serialiser must have some kind of
+  flags at the field level for each object which it queries to
+  determine if a field is enabled or not. However, we do not want to
+  do this on all cases or else it will slow down all JSON
+  serialisation. So we need two different kinds of JSON
+  serialisers. In addition, we will not be able to deserialise from
+  these JSON objects (given they are incomplete).
+- we should also develop a "querying" layer that is independent of
+  GraphQL so that we could reuse it for other backends. However, there
+  are trade-offs to be made here. We do not want arbitrary complex
+  queries (querying by primary key or foreign key is sufficient for
+  most cases) whereas GraphQL probably supports very complex queries
+  including joins etc.
+- complete support for GraphQL may be difficult as the DSL appears to
+  be very large. Perhaps we could start by supporting the basic
+  functionality once there are use cases.
+
+Links:
+
+- https://brandur.org/graphql
+- https://github.com/graphql/libgraphqlparser
+- http://graphql.github.io/learn/queries/
+
+*** Consider adding support for compile time mocking                  :story:
+
+In a post in HN, a user [[https://news.ycombinator.com/item?id=17504197][suggested the following]]:
+
+: mehrdadn 1 hour ago [-]
+:
+: I'm just saying do conditional compilation instead of virtual dispatch, since
+: you generally shouldn't really need both the test and production
+: implementations to run inside the same program. So if you have reason to
+: require
+:   // widget.h
+:   class Widget { virtual void throb(); };
+:   // widget.cc
+:   class WidgetImpl : public Widget { void throb() { ... } };
+:   class WidgetTest : public Widget { void throb() { ... } };
+: then, instead of that, just do
+:   // widget.h
+:   class Widget { void throb(); };
+:   // widget.cc
+:   void Widget::throb() { ... }
+:   // widget.test.cc
+:   void Widget::throb() { ... }
+: where you only compile widget.cc for the production build, and only compile
+: widget.test.cc for the test build.
+
+Dogen could automatically support this by having a "compile time mock"
+stereotype. The targets for tests and for the binary would be
+automatically generated adding the correct object files. However, this
+could easily cause problems if we're not careful. For example, what if
+a library A wants to use mocks from library B. Library A should only
+include its mocks when it is built in "test mode" but not in
+production mode, so this means we need two different builds of the
+library. However, if we officialised these builds, e.g.:
+
+- A.mock.so
+- A.so
+
+And created targets specifically for these then perhaps there would be
+no confusion. The other problem is that when we mock we must mock
+everything (as there is only one mock build for the library). Thus we
+cannot test selectively. We should also not inline any functions in
+the header. For this we could put comments/attributes marking the
+class as "compile time mockable" so that developers are aware.
+
+Links:
+
+- [[https://www.fluentcpp.com/2018/08/21/default-parameters-mocking/][Integrating Mocking With C++ Default Parameters]]: article with
+  techniques to simulate mocking without a mock framework.
+
+*** Interactive interface to models                                    :epic:
+
+There are a number of interactive interfaces available such as
+Jupiter. It may be interesting to think of ways to generate the
+interactive interface automatically from a model.
+
+Links:
+
+- [[http://glench.github.io/fuzzyset.js/ui/][FuzzySet]]: A Human-Readable Interactive Representation of a Code
+  Library
+- [[https://github.com/QuantStack/xeus-cling][xeus-cling]]: C++ interface for Jupyter notebooks.
+
+*** Consider integrating a sqitch like approach                       :story:
+
+It would be nice to have a way to manage relational schemas, etc from
+within a dogen model. Sqitch seems to have an interesting approach,
+which may even suit ODB.
+
+Links:
+
+- https://metacpan.org/pod/sqitchtutorial
+
+*** Model Oriented Programming                                        :story:
+
+There is a type of programming called MOP - Model Oriented
+Programming. Umple seems to be the main language implementing
+MOP. Some of the ideas of MOP are quite interesting: to develop a
+modeling language that can be used just like regular code. This would
+be ideal for Dogen because we are using UML diagrams with lots of
+extensions to be ale to convey the full Dogen DSL. Instead, we could
+create a MOP lanugage that is the dogen DSL:
+
+: import "my_profile";
+: import "model_a";
+: import "model_b";
+:
+: traits {
+:     internal trait Definable {
+:         facet cpp.types {
+:             option default_constructor = 1;
+:         }
+:     }
+:
+:     internal trait Serialisable {
+:         comments "Model type can be serialised."
+:         facet cpp.serialisation.boost {
+:             option with_xml = 1;
+:         }
+:     }
+:
+:     internal trait SomeTrait {
+:         inherit Definable, Serialisable;
+;     }
+: }
+:
+: model my_model {
+:     name a;
+:     external_modules b.c;
+:     model_modules d.e;
+:     input_language cpp;
+:     output_language cpp; # or just language cpp;
+:     type generatable; # or proxy, defaults to generatable.
+:     target executable; # library
+:     using profile p1;
+:
+:     module a_module {
+:         using profile p2;
+:         enumeration my_enum {
+:             comments "My enumeration";
+:             type int;
+:             enumerators {
+:                 a = 1,
+:                 b = 2
+:             }
+:         }
+:
+:         public object my_object {
+:             immutable; # defaults to mutable
+:             comment "This is an object";
+:             using profile p2; # override global profile
+:             generation handcrafted;
+:             concepts c1, c2;
+:             parents o2;
+:             using traits types, serialisation, hashing; # using abstract facets, relies on mapping
+:             using traits types.cpp; # using concrete facets.
+:             public property p1 {
+:                 comments "my property";
+:                 type int;
+:             }
+:             public method a(in std::list<std::string> l) returns std::string;
+:         }
+:     }
+: }
+
+The language could have profiles as first class citizens and support
+includes. This would make sharing profiles across models much easier,
+and also defining a product (just include all models into the
+product).
+
+Notes:
+
+- its not obvious that there are a lot of advantages over plain
+  JSON. At present: 1) language could have support for comments, 2)
+  inclusion in JSON is not obvious 3) the syntax can be made
+  specifically to fit our DSL (for example, we could force that files
+  must start with =model=, or =product= or =profile= and not require
+  ={}= for these elements). An alternative to JSON which could be more
+  suitable is [[https://github.com/toml-lang/toml#user-content-example][TOML]].
+- creating a parser for the language will not be trivial.
+- on the plus side, we can then place the model definition with the
+  component itself. There is a nice symmetry with source code.
+- MOP then becomes the DSL for the methodology which is nice from a
+  MDE perspective.
+
+Links:
+
+- [[https://cruise.eecs.uottawa.ca/umple/][UMPLE Home]]
+
+*** Add support for entity framework                                  :story:
+
+It seems there is a C# entity framework which is some kind of ORM.
+
+Links:
+
+- [[https://docs.microsoft.com/en-us/ef/core/][Entity Framework Core Quick Overview]]
+
+*** Add dogen specific binary serialisation                           :story:
+
+Given we know the internals of the model types to serialise, there is
+nothing to stop us from serialising types directly instead of relying
+on third party serialisation APIs.
+
+Links:
+
+- [[https://legacy.gitbook.com/book/arobenko/comms-protocols-cpp/details][Guide to Implementing Communication Protocols in C++ (for Embedded
+  Systems)]]
+
+*** Add support for MARISA                                            :story:
+
+This seems like a useful data structure:
+
+- [[https://github.com/s-yata/marisa-trie][marisa-trie]]
+
 
 ** In next major release
 
@@ -9991,6 +9948,57 @@ symmetric for both use cases.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Add support for code coverage                                     :story:
+
+We started the work on code coverage but never finished it. At present
+it seems we don't even have a story detailing the current state of
+coverage in the backlog. From memory the problem was that the upload
+was too large and the coverage was including lots of files that should
+be ignored. We never got the upload to work. In the mean time, it
+seems that kcov is a better approach instead of using lcov, gcov, etc.
+
+Links:
+
+- https://github.com/SimonKagstrom/kcov
+
+*Previous understanding*
+
+Finish setting up coveralls
+
+Remaining issues:
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
+
+Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
+
+Notes:
+- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
+  broke Travis build]]
 
 *** Build on tags for Windows                                         :story:
 
