@@ -468,6 +468,17 @@ Problems:
   element. However, to make it properly extensible, the only way is to
   make it a unordered set of pointers.
 
+*** Create a =ci= folder in build                                     :story:
+
+We should use the same approach as nupic for organising the scripts: a
+top-level =ci= folder with folders per CI system. We should also
+follow their naming convention for the build scripts which seem to
+follow the CI events.
+
+Links:
+
+- https://github.com/numenta/nupic.core/tree/master/ci
+
 ** Deprecated
 *** CANCELLED Create a build script just for C#                       :story:
     CLOSED: [2018-10-04 Thu 17:50]
@@ -488,3 +499,108 @@ this story is no longer relevant.
 
 We need to create a new exoelement chain that uses the new exoelements
 to bootstrap a endomodel.
+
+*** CANCELLED Start documenting the theoretical aspects of Dogen      :story:
+    CLOSED: [2018-10-05 Fri 10:28]
+
+*Rationale*: this will be taken care of by the thesis.
+
+Up to now we have more or less coded Dogen as we went along; we
+haven't really spent a lot of time worrying about the theory behind
+the work we were carrying out. However, as we reached v1.0, the theory
+took center stage. We cannot proceed to the next phase of the product
+without a firm grasp of the theory. This story is a starting point so
+we can decide on how to break up the work.
+
+*** CANCELLED Sections to add to manual                               :story:
+    CLOSED: [2018-10-05 Fri 10:29]
+
+*Rationale*: this will be taken care of by the thesis.
+
+Random list of things that we need to have in manual:
+
+- Drivers/frontends: The importance of drivers to allow existing
+  frameworks to interoperate; eCore, MSVC, Dia, JSON.  Structural
+  variability at modeling level. Dia frontend: use of colours,
+  validation (checking of stereotypes), "on the impact of layout
+  quality to understanding UML diagrams", this constrains the size of
+  a model.
+- Stitch. Variability regions vs aspects (Oberweis paper "modeling
+  variability in template-based code generators"). Why we need both
+  feature modeling and variability regions / aspects: because features
+  are a high-level concept that is implemented using variability
+  regions. We need to map layers to facets and to our generation
+  model. Dependencies between features and variability regions.
+- External integration and its importance, cartridges. integration
+  with Clang, ODB, XML tool.
+- Agile and MDD: tight integration. Lightweight MDD with agile
+
+*** CANCELLED Use the in-memory interface of LibXml                   :story:
+    CLOSED: [2018-10-05 Fri 10:30]
+
+*Rationale*: we should just drop libxml altogether and use XSD tool.
+
+At present, our C++ wrappers on top of LibXml are using the file based
+interface. We should do in-memory processing of the XML file. Once
+this is in place, we can change the exogenous transformers to use
+strings rather than paths to files.
+
+*** CANCELLED Consider simplifying frontend testing                   :story:
+    CLOSED: [2018-10-05 Fri 11:01]
+
+*Rationale*: this will be resolved with the new diff based tests.
+
+At present we are outputting code for every supported frontend, and
+then checking they are binary identical. This is fine given that we
+only have two frontends. Once we had a visual studio frontend, it may
+make more sense to stop generating code for all frontends and simply
+diff the middle-end to ensure we generate an identical yarn model. We
+can continue to test end to end one of the frontends (dia).
+
+We had command line options available in the past that generated only
+a merged model. We need to look into the backlog for these.
+
+This is a problem specially in light of adding new backends because
+now we are code-generating the cross product of frontends and
+backends.
+
+*** CANCELLED Update dynamic section in manual                        :story:
+    CLOSED: [2018-10-05 Fri 11:08]
+
+*Rationale*: this will be taken care of by the thesis.
+
+We need to talk about the new fields, field templates, etc.
+
+*** CANCELLED Some test models do not build on run all specs          :story:
+    CLOSED: [2018-10-05 Fri 11:09]
+
+*Rationale*: should no longer be a problem after the repo splitting.
+
+For some reason we are not building some of the test models when doing
+a run all specs, in particular:
+
+- exception
+- comments
+
+this may be because we have no specs for them. We need to find a way
+to build them somehow.
+
+Merged stories:
+
+*Add test model sanitizer to test models target*
+
+At present if we build test models we don't seem to build the
+sanitizer.
+
+*** CANCELLED C++ workflow should perform a consistency check         :story:
+    CLOSED: [2018-10-05 Fri 11:11]
+
+*Rationale*: this will no longer be required when we implement proper
+feature model support.
+
+We should ensure that all facets and formatters available in the
+registrar have corresponding field definitions and vice-versa. This
+was originally to be done by some kind of "feature graph" class, but
+since we need to use this data for other purposes, the main workflow
+could take on this responsibility - or we could create some kind of
+"validator" class to which the workflow delegates.
