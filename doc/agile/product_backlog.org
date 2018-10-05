@@ -391,6 +391,153 @@ In summary:
   manipulator; if set, do not dereference the pointer. For equality do
   a pointer comparison, for io dump the address, etc.
 
+*** Hydrators provide no context when errors occur                    :story:
+
+We tried to parse a JSON file using the INI parser and got the
+following errors:
+
+: 2015-03-27 15:16:05.291132 [DEBUG] [formatters.modeline_group_hydrator] Reading file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/modeline_groups/emacs.json
+: 2015-03-27 15:16:05.291215 [ERROR] [formatters.modeline_group_hydrator] Failed to parse INI file: : <unspecified file>(1): '=' character not found in line
+: 2015-03-27 15:16:05.291933 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/formatters/src/types/modeline_group_hydrator.cpp(172): Throw in function dogen::formatters::modeline_group dogen::formatters::modeline_group_hydrator::hydrate(std::istream &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10formatters15hydration_errorEEE
+: std::exception::what: Failed to parse INI file: <unspecified file>(1): '=' character not found in line
+: [P12tag_workflow] = Code generation failure.
+
+The exception provides no context to the file being parsed. We need to
+catch the exception and augment it with the file name.
+
+*** Using types of non-referenced models produces bad error messages  :story:
+
+By mistake we made a reference to =dynamic::object= in the schema
+model, during the =dynamic= to =schema= refactoring. This resulted in
+the following, non-obvious, error message:
+
+: 2015-03-09 12:56:00.920766 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/sml/src/types/merger.cpp(120): Throw in function void dogen::sml::merger::update_references()
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen3sml13merging_errorEEE
+: std::exception::what: Cannot find target dependency: dynamic
+: [P12tag_workflow] = Code generation failure.
+
+What this is trying to say is that the =dynamic= model is not being
+referenced. We should make this a bit more obvious because it would be
+very difficult for the user to figure out what type is bringing in
+this dependency. It would make more sense to say "type X requires
+model Y, which is not part of the list of reference models" or
+something along these lines.
+
+*** Improve errors in dia objects                                     :story:
+
+At present when adding blank spaces in a dia object we get the
+following error:
+
+: 2014-11-09 23:05:58.936785 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::unordered_map<std::string, facet_settings>
+: 2014-11-09 23:05:58.938301 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
+: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
+: [P12tag_workflow] = Code generation failure.
+
+There is no clue as to which object caused the error. Add a class name
+and dia object ID to the exception.
+
+*** Improve error messages around dynamic extensions kvp's            :story:
+
+Consider a dynamic extension "kvp" without a value, in a dia diagram
+(model note):
+
+: #DOGEN dia.comment'
+
+At present the following error is triggered:
+
+: 2014-09-27 10:07:32.761795 [ERROR] [dia_to_sml.comments_parser] Expected separator on KVP.
+
+This provides very little context of what went wrong. Also, should we
+allow a "kvp" that has no value, where the value is assumed to be
+true. For cases like comment it would make life easier.
+
+*** Handling of unsupported dia objects                               :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to make use of Dia shapes that are
+not supported by dogen so that my diagrams can be as expressive as
+required.
+#+end_quote
+
+At present when we try to use a dia object that dogen knows nothing
+about we get an error; for example using a standard line results in:
+
+: 2014-09-10 08:09:43.480906 [ERROR] [dia_to_sml.processor] Invalid value for object type: Standard - Line
+: 2014-09-10 08:09:43.487060 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/processor.cpp(124): Throw in function dogen::dia_to_sml::object_types dogen::dia_to_sml::processor::parse_object_type(const std::string &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
+: std::exception::what: Invalid value for object type: Standard - Line
+
+However, it may make more sense to just ignore these. To do so we
+could relax the code in processor (object_types):
+
+:    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
+:    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
+
+We should also consider having a =strict= command line option to
+enable/disable this behaviour.
+
+*** Improve error message for blank types                             :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want a clear error message when I forget
+to supply a type for a property so that I don't spend ages searching
+the diagram for the missing type.
+#+end_quote
+
+If the user does not supply a type at all in Dia, dogen spits out a
+message that is not very informative:
+
+: Error: Failed to parse string: .
+
+The log file is not much better:
+
+: 2014-09-06 16:11:54.143249 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string:
+: 2014-09-06 16:11:54.150595 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
+: std::exception::what: Failed to parse string:
+: [P12tag_workflow] = Code generation failure.
+
+We should instead mention that the string was empty or blank. We also
+need to provide the property and class that contained this string. To
+reproduce this problem create an enumeration but remove the
+=enumeration= stereotype. This is a very common error when creating
+enumerations (forgetting to set the stereotype). We should supply some
+kind of clue ("did you mean to set the stereotype to enumeration?").
+
+*** Error in log files when reading in Dia model                      :story:
+
+For some reason the log file is full of errors like this:
+
+: 2014-01-20 18:28:31.219549 [ERROR] [dia_to_sml.processor] Did not find expected attribute value type: composite
+
+Presumably the errors are not fatal as code generation still
+works. Investigate the errors and tidy-up the log. Since the errors
+are not fatal we should at least downgrade them to warnings.
+
+*** Improve error messages for unconnected objects                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know exactly which object is not
+connected correctly so that I can fix it.
+#+end_quote
+
+At present when a Dia object is not connected we get the following
+error message to std out:
+
+: Error: Expected 2 connections but found: 1. See the log file for details.
+
+The log file is a bit more verbose but still not particularly helpful:
+
+: 2014-01-23 08:25:28.115363 [ERROR] [dia_to_sml.processor] Expected 2 connections but found: 1
+: 2014-01-23 08:25:28.118718 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/dia_to_sml/src/types/processor.cpp(166): Throw in function dogen::dia_to_sml::processed_object dogen::dia_to_sml::processor::process(const dogen::dia::object&)
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
+: std::exception::what: Expected 2 connections but found: 1
+: [P12tag_workflow] = Code generation failure.
+
+We should try to at least name the object that has the one connection
+to make the user's life easier.
 
 ** Required for V2
 
@@ -2347,10 +2494,53 @@ forth. For this tags are more appropriate. We have started to hack
 things slightly (such as =file_types=) but a generic solution for this
 would be preferable.
 
+*** The =types= facet should always be on                             :story:
+
+At present users are given the option to enable or disable the
+=domain= facet; this is not very wise because all facets depend on
+it. It must always be on. We should remove these options.
+
+In addition the facet is incorrectly named: when we performed the
+rename of =domain= to =types= we left the command-line facet. We
+should rename it to =types= too.
+
+We should probably create a notion of "mandatory" facets to make this
+more general.
+
+Actually, we did find [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-c-itself-as-a-front-end][one use case]] where types needs to be off.
+
+In general, this is a variation of the problem of the graph of
+dependencies between facets at the element level.
 
 ** In next few sprints
 
  Stories that we intend to look at in the very near future.
+
+*** Consider making fully generated files read-only                   :story:
+
+We could add emacs/vi tags to make fully generated files read-only -
+as opposed to partially generated files such as services, which are
+expected to be modified by the user. Example:
+
+: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
+
+There must be a vi equivalent. There is =view= but its not clear how
+to set it into a modeline. The alternative is to write the files as
+read only.
+
+: /* vim: tw=60: ts=2: view=t: set ro: */
+
+Requires changes  to =.vimrc=:
+
+: set modeline
+
+It would be even better if we could make parts of a file read only, so
+that only the protected regions could be written on.
+
+Links:
+
+- [[https://stackoverflow.com/questions/20023363/emacs-remove-region-read-only][emacs remove region read-only]]
+- [[https://www.emacswiki.org/emacs/FoldingMode][Folding mode]]
 
 *** Add additional reference directories                              :story:
 
@@ -2364,6 +2554,22 @@ directory.
 We could simply add a command line argument for reference directories;
 if the reference is not found in the target model directory, we would
 then try all available reference directories.
+
+Merged Stories:
+
+*Add additional data files directories*
+
+#+begin_quote
+*Story*: As a dogen user, I want dogen to use my own private data
+libraries so that I don't have to supply them as diagrams.
+#+end_quote
+
+Users should be able to provide directories for their own JSON
+models. We just need to add a new parameter to the knitter and
+transport it all the way to OM's workflow.
+
+In the future, when everything is a model, data file directories and
+reference directories will become one and the same.
 
 *** Add support for proper JSON serialisation in C++                  :story:
 
@@ -4221,7 +4427,7 @@ suitable in documentation:
 - *End Marker*: #>. Can also be specialised to "end X marker",
   e.g. end directive marker is #>.
 
-** In current major release
+** In the medium term
 
 The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
@@ -4235,32 +4441,6 @@ type. This should be easy to fix by extending the resolver to take in
 the internal module path of the context. We could even recurse up the
 internal module path, allowing for references to types in containing
 modules.
-
-*** Consider making fully generated files read-only                   :story:
-
-We could add emacs/vi tags to make fully generated files read-only -
-as opposed to partially generated files such as services, which are
-expected to be modified by the user. Example:
-
-: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
-
-There must be a vi equivalent. There is =view= but its not clear how
-to set it into a modeline. The alternative is to write the files as
-read only.
-
-: /* vim: tw=60: ts=2: view=t: set ro: */
-
-Requires changes  to =.vimrc=:
-
-: set modeline
-
-It would be even better if we could make parts of a file read only, so
-that only the protected regions could be written on.
-
-Links:
-
-- [[https://stackoverflow.com/questions/20023363/emacs-remove-region-read-only][emacs remove region read-only]]
-- [[https://www.emacswiki.org/emacs/FoldingMode][Folding mode]]
 
 *** Using default value with text collection throws                   :story:
 
@@ -4338,11 +4518,6 @@ on its own right.
   somewhere. Perhaps in relatable?
 - this should only be done after the UML profile for yarn.
 
-*** Implement module expander test                                    :story:
-
-We copied across the code for the module expander test from yarn json
-but didn't actually finished implementing it.
-
 *** Protect against double-initialisation                             :story:
 
 We need to look into static initialisation and make sure the code can
@@ -4375,66 +4550,10 @@ example =$(facet_name)= could be made to mean the facet name. With
 just support for this we could probably handle all of the use cases
 except for =postfix=.
 
-*** Consider using the same API as boost property tree in selector    :story:
-
-At present we have the type of the value in the method names in the
-selector, e.g. =get_text_content=. It would be better to have a =get=
-that takes in a template parameter, e.g. =get<text>=. However, in
-order to do this we need to have some kind of mapping between the
-schema value (=text=) and the raw value (=std::string=). This requires
-some template magic.
-
-Once this is done we can also make the API a bit more like the
-property tree API such as for example returning =boost::optional= for
-the cases where the field may not exist.
-
-We have started introducing =try_select...=. This was preferred to
-=get_optional= because we are not getting an optional but instead
-trying to get.
-
-*** Add dynamic consistency validation                                :story:
-
-We need to check that the default values supplied for a field are
-consistent with the field's type. This could be done with a
-=validate()= method in workflow.
-
-Actually since we can only create fields from JSON, we should just add
-a check there.
-
-*** Hydrators provide no context when errors occur                    :story:
-
-We tried to parse a JSON file using the INI parser and got the
-following errors:
-
-: 2015-03-27 15:16:05.291132 [DEBUG] [formatters.modeline_group_hydrator] Reading file: /home/marco/Development/DomainDrivenConsulting/output/dogen/clang-3.5/stage/bin/../data/modeline_groups/emacs.json
-: 2015-03-27 15:16:05.291215 [ERROR] [formatters.modeline_group_hydrator] Failed to parse INI file: : <unspecified file>(1): '=' character not found in line
-: 2015-03-27 15:16:05.291933 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/formatters/src/types/modeline_group_hydrator.cpp(172): Throw in function dogen::formatters::modeline_group dogen::formatters::modeline_group_hydrator::hydrate(std::istream &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10formatters15hydration_errorEEE
-: std::exception::what: Failed to parse INI file: <unspecified file>(1): '=' character not found in line
-: [P12tag_workflow] = Code generation failure.
-
-The exception provides no context to the file being parsed. We need to
-catch the exception and augment it with the file name.
-
-*** Using types of non-referenced models produces bad error messages  :story:
-
-By mistake we made a reference to =dynamic::object= in the schema
-model, during the =dynamic= to =schema= refactoring. This resulted in
-the following, non-obvious, error message:
-
-: 2015-03-09 12:56:00.920766 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/sml/src/types/merger.cpp(120): Throw in function void dogen::sml::merger::update_references()
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen3sml13merging_errorEEE
-: std::exception::what: Cannot find target dependency: dynamic
-: [P12tag_workflow] = Code generation failure.
-
-What this is trying to say is that the =dynamic= model is not being
-referenced. We should make this a bit more obvious because it would be
-very difficult for the user to figure out what type is bringing in
-this dependency. It would make more sense to say "type X requires
-model Y, which is not part of the list of reference models" or
-something along these lines.
-
 *** Nested external model path results in strange references          :story:
+
+Note: we have probably already implemented a solution for this, need
+to check the resolver.
 
 The external model path does not contribute to path resolution in a
 model. Up til now that has actually been a feature; it would have been
@@ -4472,35 +4591,6 @@ logging and the exception message.
 In addition we should be using =string_converter= for qnames now
 instead of io'ing them directly.
 
-*** Improve errors in dia objects                                     :story:
-
-At present when adding blank spaces in a dia object we get the
-following error:
-
-: 2014-11-09 23:05:58.936785 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::unordered_map<std::string, facet_settings>
-: 2014-11-09 23:05:58.938301 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
-: std::exception::what: Failed to parse string: std::unordered_map<std::string, facet_settings>
-: [P12tag_workflow] = Code generation failure.
-
-There is no clue as to which object caused the error. Add a class name
-and dia object ID to the exception.
-
-*** Improve error messages around dynamic extensions kvp's            :story:
-
-Consider a dynamic extension "kvp" without a value, in a dia diagram
-(model note):
-
-: #DOGEN dia.comment'
-
-At present the following error is triggered:
-
-: 2014-09-27 10:07:32.761795 [ERROR] [dia_to_sml.comments_parser] Expected separator on KVP.
-
-This provides very little context of what went wrong. Also, should we
-allow a "kvp" that has no value, where the value is assumed to be
-true. For cases like comment it would make life easier.
-
 *** Use of disabled facets in non-generatable types                   :story:
 
 #+begin_quote
@@ -4530,91 +4620,6 @@ if a facet is not supported in a system module and the user tries to
 make use of it, we should error. The user must then go and disable
 explicitly the facet on the affected object via the meta data. We
 should not silently disable facets.
-
-*** Handling of unsupported dia objects                               :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to make use of Dia shapes that are
-not supported by dogen so that my diagrams can be as expressive as
-required.
-#+end_quote
-
-At present when we try to use a dia object that dogen knows nothing
-about we get an error; for example using a standard line results in:
-
-: 2014-09-10 08:09:43.480906 [ERROR] [dia_to_sml.processor] Invalid value for object type: Standard - Line
-: 2014-09-10 08:09:43.487060 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/processor.cpp(124): Throw in function dogen::dia_to_sml::object_types dogen::dia_to_sml::processor::parse_object_type(const std::string &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
-: std::exception::what: Invalid value for object type: Standard - Line
-
-However, it may make more sense to just ignore these. To do so we
-could relax the code in processor (object_types):
-
-:    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-:    BOOST_THROW_EXCEPTION(processing_error(invalid_object_type + ot));
-
-We should also consider having a =strict= command line option to
-enable/disable this behaviour.
-
-*** Update manual with detailed model descriptions                     :epic:
-
-#+begin_quote
-*Story*: As a dogen developer, I want to read about the architecture
-of the application so that I don't have to spend a lot of time trying
-to understand the source code.
-#+end_quote
-
-We should add CRCs for the main classes, with an explanation of what
-each class does; we should also explain the separation of the
-transformation logic between the core model (e.g. =dia=) and the
-transformation model (e.g. =dia_to_sml=). We should describe what the
-workflow does in each model.
-
-We should only implement this story when all of the major refactoring
-has been done.
-
-*** Improve error message for blank types                             :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want a clear error message when I forget
-to supply a type for a property so that I don't spend ages searching
-the diagram for the missing type.
-#+end_quote
-
-If the user does not supply a type at all in Dia, dogen spits out a
-message that is not very informative:
-
-: Error: Failed to parse string: .
-
-The log file is not much better:
-
-: 2014-09-06 16:11:54.143249 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string:
-: 2014-09-06 16:11:54.150595 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(198): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &)
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
-: std::exception::what: Failed to parse string:
-: [P12tag_workflow] = Code generation failure.
-
-We should instead mention that the string was empty or blank. We also
-need to provide the property and class that contained this string. To
-reproduce this problem create an enumeration but remove the
-=enumeration= stereotype. This is a very common error when creating
-enumerations (forgetting to set the stereotype). We should supply some
-kind of clue ("did you mean to set the stereotype to enumeration?").
-
-*** The =types= facet should always be on                             :story:
-
-At present users are given the option to enable or disable the
-=domain= facet; this is not very wise because all facets depend on
-it. It must always be on. We should remove these options.
-
-In addition the facet is incorrectly named: when we performed the
-rename of =domain= to =types= we left the command-line facet. We
-should rename it to =types= too.
-
-We should probably create a notion of "mandatory" facets to make this
-more general.
-
-Actually, we did find [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-c-itself-as-a-front-end][one use case]] where types needs to be off.
 
 *** Allow for generation of class with the same name as package       :story:
 
@@ -4652,60 +4657,6 @@ The correct solution for this may be to have some tags that state that
 an object only has representations in certain facets. This is captured
 by this story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-facet-specific-types][Consider adding facet specific types]].
 
-*** Add tests for general settings factory                            :story:
-
-Some simple tests come to mind:
-
-- empty data files directory results in empty factory;
-- valid data files directory results in non-empty factory;
-- invalid data files directory results in exception;
-- more than one data files directory results in expected load;
-- creating annotation for test model types works as expected.
-- missing fields result in expected exceptions.
-
-*** Improve error messages for unconnected objects                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know exactly which object is not
-connected correctly so that I can fix it.
-#+end_quote
-
-At present when a Dia object is not connected we get the following
-error message to std out:
-
-: Error: Expected 2 connections but found: 1. See the log file for details.
-
-The log file is a bit more verbose but still not particularly helpful:
-
-: 2014-01-23 08:25:28.115363 [ERROR] [dia_to_sml.processor] Expected 2 connections but found: 1
-: 2014-01-23 08:25:28.118718 [FATAL] [dogen] Error: /home/marco/Development/kitanda/dogen/projects/dia_to_sml/src/types/processor.cpp(166): Throw in function dogen::dia_to_sml::processed_object dogen::dia_to_sml::processor::process(const dogen::dia::object&)
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml16processing_errorEEE
-: std::exception::what: Expected 2 connections but found: 1
-: [P12tag_workflow] = Code generation failure.
-
-We should try to at least name the object that has the one connection
-to make the user's life easier.
-
-*** Error in log files when reading in Dia model                      :story:
-
-For some reason the log file is full of errors like this:
-
-: 2014-01-20 18:28:31.219549 [ERROR] [dia_to_sml.processor] Did not find expected attribute value type: composite
-
-Presumably the errors are not fatal as code generation still
-works. Investigate the errors and tidy-up the log. Since the errors
-are not fatal we should at least downgrade them to warnings.
-
-*** Add tests for =general_settings_factory=                          :story:
-
-Tests:
-
-- missing licence
-- missing modeline
-- empty marker
-- different marker for two objects
-- consider moving generate preamble into annotation
-
 *** Feature models should always be tested by knit                     :epic:
 
 #+begin_quote
@@ -4732,28 +4683,11 @@ We are going to take the easy approach as we did for serialisation and
 make all the code artefacts American. Documentation etc is not that
 important.
 
-*** Create a new command line parameter for data files directories    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want dogen to use my own private data
-libraries so that I don't have to supply them as diagrams.
-#+end_quote
-
-Users should be able to provide directories for their own JSON
-models. We just need to add a new parameter to the knitter and
-transport it all the way to OM's workflow.
-
 *** Check packaging code for non-distro dependencies                  :story:
 
 We are manually copying a lot of shared objects from locally built
 third party libraries when creating packages, this should be replaced
 with appropriate dependencies (at least for Debian packages).
-
-*** Fix =cp= error on cmake with local third-party packages           :story:
-
-We are getting strange errors in cmake:
-
-: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
 *** Add support for operations                                        :story:
 
@@ -5236,7 +5170,7 @@ makefile if there are no implementation files generated.
 At present we are depending on the domain header but it seems we could
 depend only on the forward declarations.
 
-** Maybe in current major release
+** In the longer term
 
 If we have enough time and disposition, we may sneak some of these
 in. This release is all about getting the architecture right.
@@ -8317,7 +8251,6 @@ facet to support one or more or all of these. We can think of these as
 aspects that are enabled by the user at the model level (but possibly
 overridable at the element level).
 
-
 ** In next major release
 
 These stories are good candidates for the subsequent release. This
@@ -9864,6 +9797,12 @@ symmetric for both use cases.
 
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
+
+*** Fix =cp= error on cmake with local third-party packages           :story:
+
+We are getting strange errors in cmake:
+
+: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
 
 *** Fix issues with bintray windows uploads                           :story:
 

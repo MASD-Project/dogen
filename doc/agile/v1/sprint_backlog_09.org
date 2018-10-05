@@ -17,16 +17,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-04 Thu 17:56]
+#+CAPTION: Clock summary at [2018-10-05 Fri 11:25]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:46* |       |      |   0.0 |
+| *Total time*                                                                | *20:04* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:46   |       |      |   0.0 |
-| Active                                                                      |         | 17:46 |      |   0.0 |
+| Stories                                                                     | 20:04   |       |      |   0.0 |
+| Active                                                                      |         | 20:04 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       | 0:12 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       | 2:30 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
 | Create project for C# test model                                            |         |       | 5:23 |   0.0 |
 | Fix boost path serialisation errors                                         |         |       | 0:47 |   0.0 |
@@ -78,6 +78,7 @@ Due to the transition of organisations, we did not generate any binaries for thi
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-05 Fri 10:14]--[2018-10-05 Fri 11:25] =>  1:11
     CLOCK: [2018-10-05 Fri 09:06]--[2018-10-05 Fri 10:13] =>  1:07
     CLOCK: [2018-10-04 Thu 17:44]--[2018-10-04 Thu 17:56] =>  0:12
     :END:
@@ -604,3 +605,92 @@ was originally to be done by some kind of "feature graph" class, but
 since we need to use this data for other purposes, the main workflow
 could take on this responsibility - or we could create some kind of
 "validator" class to which the workflow delegates.
+
+*** CANCELLED Implement module expander test                          :story:
+    CLOSED: [2018-10-05 Fri 11:14]
+
+*Rationale*: code has changed quite a bit since then.
+
+We copied across the code for the module expander test from yarn json
+but didn't actually finished implementing it.
+
+*** CANCELLED Consider using the same API as boost property tree in selector :story:
+    CLOSED: [2018-10-05 Fri 11:14]
+
+*Rationale*: no longer required once we have proper feature support.
+
+At present we have the type of the value in the method names in the
+selector, e.g. =get_text_content=. It would be better to have a =get=
+that takes in a template parameter, e.g. =get<text>=. However, in
+order to do this we need to have some kind of mapping between the
+schema value (=text=) and the raw value (=std::string=). This requires
+some template magic.
+
+Once this is done we can also make the API a bit more like the
+property tree API such as for example returning =boost::optional= for
+the cases where the field may not exist.
+
+We have started introducing =try_select...=. This was preferred to
+=get_optional= because we are not getting an optional but instead
+trying to get.
+
+*** CANCELLED Add dynamic consistency validation                      :story:
+    CLOSED: [2018-10-05 Fri 11:15]
+
+*Rationale*: no longer required once we have proper feature support.
+
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+Actually since we can only create fields from JSON, we should just add
+a check there.
+
+*** CANCELLED Update manual with detailed model descriptions           :epic:
+    CLOSED: [2018-10-05 Fri 11:18]
+
+*Rationale*: this will be taken care of by the thesis.
+
+#+begin_quote
+*Story*: As a dogen developer, I want to read about the architecture
+of the application so that I don't have to spend a lot of time trying
+to understand the source code.
+#+end_quote
+
+We should add CRCs for the main classes, with an explanation of what
+each class does; we should also explain the separation of the
+transformation logic between the core model (e.g. =dia=) and the
+transformation model (e.g. =dia_to_sml=). We should describe what the
+workflow does in each model.
+
+We should only implement this story when all of the major refactoring
+has been done.
+
+*** CANCELLED Add tests for general settings factory                  :story:
+    CLOSED: [2018-10-05 Fri 11:21]
+
+*Rationale*: once these become part of the meta-model, most of these
+won't make any sense.
+
+Some simple tests come to mind:
+
+- empty data files directory results in empty factory;
+- valid data files directory results in non-empty factory;
+- invalid data files directory results in exception;
+- more than one data files directory results in expected load;
+- creating annotation for test model types works as expected.
+- missing fields result in expected exceptions.
+
+*** CANCELLED Add tests for =general_settings_factory=                :story:
+    CLOSED: [2018-10-05 Fri 11:21]
+
+*Rationale*: once these become part of the meta-model, most of these
+won't make any sense.
+
+Tests:
+
+- missing licence
+- missing modeline
+- empty marker
+- different marker for two objects
+- consider moving generate preamble into annotation
