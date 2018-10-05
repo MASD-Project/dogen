@@ -17,22 +17,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-05 Fri 11:36]
+#+CAPTION: Clock summary at [2018-10-05 Fri 15:41]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:14* |       |      |   0.0 |
+| *Total time*                                                                | *20:32* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:14   |       |      |   0.0 |
-| Active                                                                      |         | 20:14 |      |   0.0 |
+| Stories                                                                     | 20:32   |       |      |   0.0 |
+| Active                                                                      |         | 20:32 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       | 2:30 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       | 2:36 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
 | Create project for C# test model                                            |         |       | 5:23 |   0.0 |
 | Fix boost path serialisation errors                                         |         |       | 0:47 |   0.0 |
 | Create project for C++ test model                                           |         |       | 6:55 |   0.0 |
 | Update readme with information on reference models                          |         |       | 0:10 |   0.0 |
-| Remove test models from dogen project                                       |         |       | 1:01 |   0.0 |
+| Remove test models from dogen project                                       |         |       | 1:13 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -79,6 +79,7 @@ Due to the transition of organisations, we did not generate any binaries for thi
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-05 Fri 15:28]--[2018-10-05 Fri 15:34] =>  0:06
     CLOCK: [2018-10-05 Fri 10:14]--[2018-10-05 Fri 11:25] =>  1:11
     CLOCK: [2018-10-05 Fri 09:06]--[2018-10-05 Fri 10:13] =>  1:07
     CLOCK: [2018-10-04 Thu 17:44]--[2018-10-04 Thu 17:56] =>  0:12
@@ -233,8 +234,11 @@ It seems this model is also a LAM model. Add it to C#.
 We need to add some minor blurb about MASD and refer to the reference
 implementation.
 
-*** STARTED Remove test models from dogen project                     :story:
+*** COMPLETED Remove test models from dogen project                   :story:
+    CLOSED: [2018-10-05 Fri 15:27]
     :LOGBOOK:
+    CLOCK: [2018-10-05 Fri 15:35]--[2018-10-05 Fri 15:41] =>  0:06
+    CLOCK: [2018-10-05 Fri 15:21]--[2018-10-05 Fri 15:27] =>  0:06
     CLOCK: [2018-10-04 Thu 16:42]--[2018-10-04 Thu 17:43] =>  1:01
     :END:
 
@@ -246,76 +250,10 @@ all references to test models:
 - remove environment variables (WITH_CSHARP, WITH_CPP etc);
 - comment out generation tests for now (JSON and Dia).
 
-*** Split dogen testing from core                                     :story:
+*** Rename input models directory to models                           :story:
 
-At present we have tests in modeling that perform "code generation";
-that is, regenerate all dogen test models from JSON and Dia. These are
-boost unit tests. Due to this, we have welded the test models with the
-core models, which means that we cannot easily separate repos without
-a lot of hacks. However, if we were to generalise the problem: there
-is no reason why test models should be coupled with the core or
-treated specially; they are just an instance of a project with dogen
-models which can be used to validate dogen. A better approach is to
-move all this work to "system testing", done using the dogen binary
-rather than within unit tests. This would work as follows:
-
-- add a mode in dogen called "validation mode" or diagnostics, etc. In
-  this mode, dogen does not write files to the file system but instead
-  produces a number of "reports":
-  - a list of all validation errors, if any, in GCC format, pointing
-    to the original models.
-  - a set of diff files with all the differences, if any.
-  - a benchmark report.
-  - a top-level report with the project name, its git repo and the git
-    commit.
-- projects that wish to help dogen must have a well-defined target to
-  generate the reports for all models under test.
-- dogen project contains a script with a list of such projects and
-  their git repos. Every time we build dogen core we install the
-  package into the travis VM and run the reports.
-- a environment variable containing the path into which to write the
-  reports must be set before running dogen.
-- a git repo is created with all the reports, and a structure as
-  follows:
-  /repo
-      /branch
-          /dogen_commit
-              /summary for this commit
-              /project_a
-                  /summary for this commit
-                  /diffs
-                  /errors
-                  /benchmark data
-              /project_b
- ...
-- to avoid clashes, make the branches named after the build,
-  e.g. travis osx etc.
-- git clones are shallow (1 commit)
-- once all reports are generated into the git report repo, the build
-  commits the report. The comment is the dogen commit.
-- a travis build is triggered on the back of the commit. It checks the
-  latest commit. If the report is a pass the build is green, if its a
-  fail the build is red.
-- in an ideal world the system tests build is separate from the dogen
-  core build, and triggered from a bintray upload. However, as we do
-  not know how to do this yet, we can just run the system tests at the
-  end of the dogen build.
-- we should split the reporting work from the build separation. We
-  could have a simple build that just fails if there are any diffs to
-  start off with and worry about reporting later.
-
-With this approach we can have any number of projects contributing to
-validate dogen (including dogen itself). The only slight downside is
-that the models must always be up-to-date (e.g. if the user has
-changed the model but not regenerated, system tests will
-fail). Perhaps we could have different categories of test models:
-mandatory and optional. Mandatory must pass, optional do not
-contribute to the build failing. However, they still show up in the
-report.
-
-Links:
-
-- https://github.com/cubicdaiya/dtl
+We need to move the dogen project to the new directory layout whereby
+all models are kept in the =models= directory.
 
 *** Add basic "diff mode"                                             :story:
 
@@ -325,6 +263,26 @@ different. We can then use these flags to determine if tests pass. In
 the future we can extend this approach to include a proper diff of the
 files, but for now we just need a reliable way to run system tests
 again.
+
+*** Add reporting support to dogen model testing                      :story:
+
+Dogen should have a mode which generates a report for a run rather
+than code generate. The report could look like so:
+
+:              /project_a
+:                  /summary for this commit
+:                  /diffs
+:                  /errors
+:                  /benchmark data
+:                  /probing data
+:                  /log
+
+If the report was largely in HTML we could link it to the dogen docs
+and save it into git. This would make troubleshooting much easier. If
+the report contains the probing data it would be easier to figure out
+what went wrong. We should also keep track of the model that was
+generated (e.g. its location and git commit) so we can download it and
+reproduce it locally.
 
 *** Rework the tests using diff mode                                  :story:
 
@@ -486,6 +444,81 @@ Links:
 - https://github.com/numenta/nupic.core/tree/master/ci
 
 ** Deprecated
+*** CANCELLED Split dogen testing from core                           :story:
+    CLOSED: [2018-10-05 Fri 15:33]
+
+*Rationale*: this story was cleaned up and split into several stories.
+
+At present we have tests in modeling that perform "code generation";
+that is, regenerate all dogen test models from JSON and Dia. These are
+boost unit tests. Due to this, we have welded the test models with the
+core models, which means that we cannot easily separate repos without
+a lot of hacks. However, if we were to generalise the problem: there
+is no reason why test models should be coupled with the core or
+treated specially; they are just an instance of a project with dogen
+models which can be used to validate dogen. A better approach is to
+move all this work to "system testing", done using the dogen binary
+rather than within unit tests. This would work as follows:
+
+- add a mode in dogen called "validation mode" or diagnostics, etc. In
+  this mode, dogen does not write files to the file system but instead
+  produces a number of "reports":
+  - a list of all validation errors, if any, in GCC format, pointing
+    to the original models.
+  - a set of diff files with all the differences, if any.
+  - a benchmark report.
+  - a top-level report with the project name, its git repo and the git
+    commit.
+- projects that wish to help dogen must have a well-defined target to
+  generate the reports for all models under test.
+- dogen project contains a script with a list of such projects and
+  their git repos. Every time we build dogen core we install the
+  package into the travis VM and run the reports.
+- a environment variable containing the path into which to write the
+  reports must be set before running dogen.
+- a git repo is created with all the reports, and a structure as
+  follows:
+  /repo
+      /branch
+          /dogen_commit
+              /summary for this commit
+              /project_a
+                  /summary for this commit
+                  /diffs
+                  /errors
+                  /benchmark data
+              /project_b
+ ...
+- to avoid clashes, make the branches named after the build,
+  e.g. travis osx etc.
+- git clones are shallow (1 commit)
+- once all reports are generated into the git report repo, the build
+  commits the report. The comment is the dogen commit.
+- a travis build is triggered on the back of the commit. It checks the
+  latest commit. If the report is a pass the build is green, if its a
+  fail the build is red.
+- in an ideal world the system tests build is separate from the dogen
+  core build, and triggered from a bintray upload. However, as we do
+  not know how to do this yet, we can just run the system tests at the
+  end of the dogen build.
+- we should split the reporting work from the build separation. We
+  could have a simple build that just fails if there are any diffs to
+  start off with and worry about reporting later.
+
+With this approach we can have any number of projects contributing to
+validate dogen (including dogen itself). The only slight downside is
+that the models must always be up-to-date (e.g. if the user has
+changed the model but not regenerated, system tests will
+fail). Perhaps we could have different categories of test models:
+mandatory and optional. Mandatory must pass, optional do not
+contribute to the build failing. However, they still show up in the
+report.
+
+Links:
+
+- https://github.com/cubicdaiya/dtl
+
+
 *** CANCELLED Create a build script just for C#                       :story:
     CLOSED: [2018-10-04 Thu 17:50]
 
