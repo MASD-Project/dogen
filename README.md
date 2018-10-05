@@ -24,36 +24,51 @@
 
 # Overview
 
-**Dogen** is a suite of tools focusing on
-bringing [Model Driven Software Development](https://en.wikipedia.org/wiki/Model-driven_software_development) (MDSD)
-workflows to C++ development. In lay terms, our main objective is to
-automate the development process as much as possible: the user creates
-domain models according to one of the supported frontend formats and
-respecting a set of predefined restrictions; Dogen then uses this
-input to generate a source code representation of the model. At
-present the main frontend
-is [Dia](https://en.wikipedia.org/wiki/Dia_(software))
-([Dia test models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.dia/input)),
-but we also support JSON
-([JSON test models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.json/input)). Depending
+**Dogen** is the reference implementation of the MASD's project code
+generator. MASD - Model Assisted Software Development - is a new
+methodology for the development of software systems based on [MDE
+(Model Driven
+Engineering)](https://en.wikipedia.org/wiki/Model-driven_engineering). The
+theoretical framework for MASD is under development as part of my PhD
+thesis, and is not yet ready for public review. However, the
+development of Dogen remains as it always was, an open source project
+available to all.
+
+In lay terms, Dogen's objective is to automate the development process
+as much as possible: the user creates models in one of the supported
+frontend formats and respecting a set of predefined restrictions;
+Dogen then uses this input to generate a source code representation of
+the model. At present the main frontend is
+[Dia](https://en.wikipedia.org/wiki/Dia_(software)) ([Dia test
+models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.dia/input)),
+but we also support JSON ([JSON test
+models](https://github.com/MASD-Project/dogen/tree/master/test_data/yarn.json/input)). Depending
 on use cases and user demand, other frontends may follow.
 
 The generated code contains most of the functionality required from a
 typical C++ domain object such as serialisation, hashing, streaming
 and so on. Whilst we intend for the suite to be useful out of the box
 for most use cases, our end goal is to enable users to extend Dogen,
-adapting it to the vagaries of their specific needs.
+adapting it to the vagaries of their specific needs. Note that Dogen
+has experimental C# support, but it is not in feature parity with C++
+support.
 
-Note that Dogen has experimental C# support, but it is not in feature
-parity with C++ support.
+Dogen provides a reference implementation for each supported language,
+available on a separate git repo:
+
+- [C++ Reference Model](https://github.com/MASD-Project/cpp_ref_impl)
+- [C# Reference Model](https://github.com/MASD-Project/csharp_ref_impl)
+
+These are designed to give you a feel for how the generated code will
+look like, and they attempt to exercise all of Dogen's functionality.
 
 # Binary Packages
 
-Binary packages are available on
-[BinTray](https://bintray.com/masd-project/Dogen/), for
-Debian Linux, OSX and Windows - all in 64-bit. Packages are generated
-at the end of each sprint - with the exception of Windows, where we
-generate them on each commit due to a [problem with
+Binary packages are available for each release on
+[BinTray](https://bintray.com/masd-project/Dogen/), covering Debian
+Linux, OSX and Windows - 64-bit only. Packages are generated at the
+end of each sprint - with the exception of Windows, where we generate
+them on each commit due to a [problem with
 AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag).
 
 # Building From Source
@@ -72,9 +87,9 @@ you'll need a moderately recent compiler - such as GCC 6 or Clang
 3.7 - and Ninja or GNU Make. On Windows you'll need Visual Studio 2015
 or later.
 
-Once you have all dependencies installed and set up, you can then clone
-the repository and create the build directory, using the shell of your
-choice (ours is Bash):
+Once you have all dependencies installed and set up, you can then
+clone the repository and create the build directory, using the shell
+of your choice (ours is Bash):
 
 ```
 git clone git@github.com:MASD-Project/dogen.git
@@ -114,8 +129,8 @@ CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path 
 
 # Demo
 
-We don't really have a recent demo of Dogen, but this fairly old one
-should give you an idea of its workflow:
+We don't really have a recent demo of Dogen, but this very old one
+should at least give you an idea of its workflow:
 
 [![Alt text](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
 
