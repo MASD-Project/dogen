@@ -76,13 +76,9 @@ AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-trigge
 # Building From Source
 
 In order to build Dogen you will need a C++ toolchain. On Linux and
-OSX, you'll need a moderately recent compiler - such as [GCC
-6]((https://www.gnu.org/software/gcc/gcc-6)) or [Clang
-3.7]((https://www.gnu.org/software/gcc/gcc-6)) - and
-[Ninja](https://ninja-build.org/manual.html) or [GNU
-Make](https://www.gnu.org/software/make/). On Windows you'll need
-[Visual Studio
-2015]((https://visualstudio.microsoft.com/vs/older-downloads/)) or
+OSX, you'll need a moderately recent compiler - such as [GCC 6]((https://www.gnu.org/software/gcc/gcc-6)) or [Clang 3.7]((https://www.gnu.org/software/gcc/gcc-6)) - and
+[Ninja](https://ninja-build.org/manual.html) or [GNU Make](https://www.gnu.org/software/make/). On Windows you'll need
+[Visual Studio 2015]((https://visualstudio.microsoft.com/vs/older-downloads/)) or
 later. Note though that we try to always use the most recent releases
 with Dogen so, if you can, stick to those.
 
@@ -90,7 +86,7 @@ Dogen has the following additional dependencies, across all operative systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
-| Git    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/MASD-Project/dogen).               |
+| [Git](https://git-scm.com/)    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/MASD-Project/dogen).               |
 | [CMake](https://cmake.org/)  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
 | [Boost](https://boost.org)  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
