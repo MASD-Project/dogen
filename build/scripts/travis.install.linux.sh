@@ -27,7 +27,7 @@ output_location="/tmp/${package}"
 extract_dir="/tmp/dogen_deps"
 wget --no-check-certificate ${input_location} -O ${output_location}
 mkdir ${extract_dir}
-unzip ${output_location} -d ${extract_dir}
+unzip ${output_location} -d ${extract_dir} -q
 ls ${extract_dir}/*
 
 #
