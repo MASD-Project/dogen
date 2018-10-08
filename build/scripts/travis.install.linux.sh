@@ -19,22 +19,16 @@
 #
 
 #
-# deps
+# vcpkg dependencies
 #
-package="vcpkg-export-20181008-182335.zip"
-input_location="https://www.dropbox.com/s/6qobuvq66edi0ha/${package}?dl=0"
+package="vcpkg-export-20181008-225941.zip"
+input_location="https://www.dropbox.com/s/b32228hutgvt0tb/${package}?dl=0"
 output_location="/tmp/${package}"
 extract_dir="/tmp/dogen_deps"
 wget --no-check-certificate ${input_location} -O ${output_location}
 mkdir ${extract_dir}
 unzip -q ${output_location} -d ${extract_dir}
 ls ${extract_dir}/*
-
-#
-# common repos
-#
-sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-sudo apt-get update -qq
 
 #
 # clang
@@ -69,6 +63,8 @@ sudo apt-get install ninja-build
 #
 # cmake
 #
+sudo apt-get remove cmake
+
 cmake_name="cmake-3.12.0-Linux-x86_64"
 cmake_tar="${cmake_name}.tar.gz"
 cmake_input="https://cmake.org/files/v3.12/${cmake_tar}"
@@ -76,12 +72,9 @@ cmake_output="/tmp/${cmake_tar}"
 wget --no-check-certificate ${cmake_input} -O ${cmake_output}
 tar xf ${cmake_output} -C /tmp
 sudo cp -r /tmp/${cmake_name}/* /usr
+which cmake
+cmake --version
 rm -rf ${cmake_output} /tmp/${cmake_name}
-
-#
-# coverage
-#
-sudo pip install cpp-coveralls==0.3.12
 
 sudo apt-get clean
 echo "Cleaned cache."
