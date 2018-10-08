@@ -650,7 +650,6 @@ Its a bit silly to name classes =x_transform= and then to have their
 main method also called =transform=. We should rename these to
 something like =apply=.
 
-
 *** Remove exomodel remnants                                          :story:
 
 It seems we have removed the exomodel on the main, but a grep for it
@@ -988,7 +987,6 @@ it would make more sense to treat them as a initialisation step. This
 will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
-
 
 
 *** Add support for object templates that work cross-model            :story:
@@ -1455,6 +1453,11 @@ prefix it with the model name (e.g. =masd::licenses::gpl_v2=).
 In theory we should be able to load licences incrementally, as they
 are only needed for code generation. However, order of references will
 matter because we need to validate references to licences.
+
+We should also allow for both:
+
+- full licence: used later at the product level.
+- licence summary: used for preambles in files.
 
 *** Platform description models                                       :story:
 
@@ -2085,7 +2088,6 @@ In "Aspect-Oriented Model-Driven Software Product Line Engineering",
 Groher and Voelter name the top-level owner of transforms
 "transformator", in symmetry with the "generator". We could probably
 have these classes.
-
 
 *** Feature Models                                                    :story:
 

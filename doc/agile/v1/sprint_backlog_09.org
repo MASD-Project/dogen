@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-05 Fri 15:41]
+#+CAPTION: Clock summary at [2018-10-05 Fri 17:09]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:32* |       |      |   0.0 |
+| *Total time*                                                                | *21:57* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:32   |       |      |   0.0 |
-| Active                                                                      |         | 20:32 |      |   0.0 |
+| Stories                                                                     | 21:57   |       |      |   0.0 |
+| Active                                                                      |         | 21:57 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 2:36 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
@@ -33,6 +33,7 @@
 | Create project for C++ test model                                           |         |       | 6:55 |   0.0 |
 | Update readme with information on reference models                          |         |       | 0:10 |   0.0 |
 | Remove test models from dogen project                                       |         |       | 1:13 |   0.0 |
+| Recap of the current situation                                              |         |       | 1:25 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -250,6 +251,46 @@ all references to test models:
 - remove environment variables (WITH_CSHARP, WITH_CPP etc);
 - comment out generation tests for now (JSON and Dia).
 
+*** STARTED Recap of the current situation                            :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-05 Fri 15:41]--[2018-10-05 Fri 17:06] =>  1:25
+    :END:
+
+We have started a number of simultaneous refactors and now its very
+hard to understand where we are and where we are going. We need to go
+though the code and ascertain the state of the onion.
+
+Notes:
+
+- the external model refactoring seems to be complete.
+- the modeling model refactoring seems to have been tangled with the
+  formatters refactor. We have moved some but not all properties into
+  the modeling model but then we realised that some of them should
+  really be in the generation model. However, we then hit the usual
+  problem: how do we decorate element with the generation properties?
+  See the discussion in story "Create the =generation= model" for
+  details on why this is non-trivial. At that point we were left with
+  a series of not particularly ideal options:
+  - go forward and create a pair of element and generatable properties
+    and somehow fix all transforms. In a way this is what we had done
+    with the formatters, except that was after all of the transforms
+    had been applied.
+  - create the idea of "opaque properties" in the modeling model and
+    then unpack the opaque properties in the generation transforms.
+  - add the properties directly to the modeling model (to the element,
+    at least) but only populate them in the generation transforms.
+- the problem we are trying to solve seems to fall somewhere in
+  between the decorator pattern and the mixin pattern but its not
+  quite either.
+- this problem started because we wanted to make a clear separation
+  between modeling space and generation space; modeling space is not
+  aware of the archetype expansion. This makes sense to an extent: we
+  do not want to create dependencies between modeling space and
+  formatters (source of the cycles between components). However, we
+  also do not want to have to define all of the meta-model elements
+  again in order to attach the generatable properties.
+
+
 *** Rename input models directory to models                           :story:
 
 We need to move the dogen project to the new directory layout whereby
@@ -431,6 +472,15 @@ Problems:
   class =opaque_properties= and then have a container of these in
   element. However, to make it properly extensible, the only way is to
   make it a unordered set of pointers.
+- actually the right solution for this is to use multiple
+  inheritance. For each modeling element we need to create a
+  corresponding generation version of it, which is the combination of
+  the modeling element and a generation element base class. Them the
+  generation model is made up of pointers to generation elements and
+  it dispatches into generation elements descendants in the
+  formatter. The key point is to preserve the distinction between
+  modeling (single element) vs generation (projection across facet
+  space).
 
 *** Create a =ci= folder in build                                     :story:
 
