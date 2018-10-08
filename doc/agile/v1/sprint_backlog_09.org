@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-05 Fri 17:09]
+#+CAPTION: Clock summary at [2018-10-08 Mon 14:52]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:57* |       |      |   0.0 |
+| *Total time*                                                                | *29:24* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:57   |       |      |   0.0 |
-| Active                                                                      |         | 21:57 |      |   0.0 |
+| Stories                                                                     | 29:24   |       |      |   0.0 |
+| Active                                                                      |         | 29:24 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 2:36 |   0.0 |
 | Update readme to reflect org move                                           |         |       | 1:58 |   0.0 |
@@ -34,6 +34,7 @@
 | Update readme with information on reference models                          |         |       | 0:10 |   0.0 |
 | Remove test models from dogen project                                       |         |       | 1:13 |   0.0 |
 | Recap of the current situation                                              |         |       | 1:25 |   0.0 |
+| Investigate adding package management support to dogen                      |         |       | 7:27 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -290,6 +291,98 @@ Notes:
   also do not want to have to define all of the meta-model elements
   again in order to attach the generatable properties.
 
+*** STARTED Investigate adding package management support to dogen    :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-08 Mon 13:12]--[2018-10-08 Mon 14:52] =>  1:40
+    CLOCK: [2018-10-08 Mon 09:10]--[2018-10-08 Mon 12:05] =>  5:42
+    CLOCK: [2018-10-07 Sat 14:10]--[2018-10-07 Sat 17:02] =>  2:52
+    :END:
+
+
+At present we are building our deps manually and adding them to
+dropbox. This has worked ok in the past, but it does have a few
+problems:
+
+- upgrades are a bit of a nightmare; we just have to take a bit of
+  time of when we have to rebuild all deps, across all OSs and try to
+  remember what we did last time.
+- we end up not adding new deps just out of fear. For example, we are
+  not building or testing ODB on the build machine due to this.
+- we have two completely different setups, build machine and
+  development machine. For development machines we can rely on debian
+  testing because the boost packages are recent enough. On the build
+  machine we use our prebuilt binaries.
+
+In the past we have investigated using conan, but there were problems:
+we could never get it to work for all libraries on windows - there
+were subtle problems linking with boost that we couldn't get to the
+bottom of - and we ended up with a very confusing setup were some
+packages on windows are installed via conan but others come from our
+deps. This makes it hard for us to maintain and hard for new users to
+build and use dogen.
+
+The best solution at present appears to be vcpkg. It seems to take the
+ports approach - e.g. instead of supplying binaries, it compiles them
+for you - but it also allows exporting the current state of the
+packages:
+
+./vcpkg export --zip boost-coroutine2
+
+This means we can continue using our current dropbox setup, but rely
+on a vcpkg export instead. It also builds debug and release, and
+integrates seamlessly with CMake, requiring no changes at all to
+CMakeFiles (unlike conan). In addition, we can also use vcpkg for our
+private projects; we can create a copy of the project and add links to
+our private repos. Also, rebuilding is now trivial, and we can easily
+script it (e.g. update && export). This means we can pickup latest
+boost as soon as it is released.
+
+There are some limitations:
+
+- only builds static libaries. OK for now.
+- not all libraries are present. The coverage seems wide enough for
+  now (600 and growing).
+- not all libraries present build on all configurations. See [[https://github.com/Microsoft/vcpkg/issues/3436][this PR]].
+
+The best way of doing this is to actually CI the deps themselves. This
+would work as follows:
+
+- create travis/appveyor builds that build vcpkg, install the deps and
+  export them.
+- copy the export into drop box. See [[https://github.com/andreafabrizi/Dropbox-Uploader][Dropbox-Uploader]]
+- update dogen build path to pickup new dependencies, so its a
+  controlled exercise.
+- we should also have a "manual" setup of vcpkg for users, that builds
+  the packages locally.
+
+The great thing about this approach is that we can simply ocassionally
+do a pull from remote vcpkg projec to get latest, ensure it all builds
+correctly and then update dogen. The whole process is very simple and
+does not require having access to OSX and Windows boxes locally, etc.
+
+*** Upgrade to c++ 17                                                 :story:
+
+There are quite a few dependencies for this to happen:
+
+- on windows we need to somehow include =/std:c++latest=
+- we need to move to latest boost as it seems Boost 1.62 breaks on c++
+  17. We should wait until Beast is included in Boost before we do
+  this.
+- we need to install latest CMake, which is not available on nuget; so
+  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
+  unpack it. Only latest supports VS 2017. Then set the CMake
+  generator:
+
+:    $generator="Visual Studio 15 2017 Win64";
+
+- set the appveyor image:
+
+: image:
+:  - Visual Studio 2017
+
+- set the CMake version:
+
+:     set(CMAKE_CXX_STANDARD 14)
 
 *** Rename input models directory to models                           :story:
 

@@ -7220,30 +7220,6 @@ Links:
 
 - [[http://www.boost.org/doc/libs/1_65_1/libs/uuid/uuid.html][Uuid docs]]
 
-*** Upgrade to c++ 17                                                 :story:
-
-There are quite a few dependencies for this to happen:
-
-- on windows we need to somehow include =/std:c++latest=
-- we need to move to latest boost as it seems Boost 1.62 breaks on c++
-  17. We should wait until Beast is included in Boost before we do
-  this.
-- we need to install latest CMake, which is not available on nuget; so
-  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
-  unpack it. Only latest supports VS 2017. Then set the CMake
-  generator:
-
-:    $generator="Visual Studio 15 2017 Win64";
-
-- set the appveyor image:
-
-: image:
-:  - Visual Studio 2017
-
-- set the CMake version:
-
-:     set(CMAKE_CXX_STANDARD 14)
-
 *** Add support for inline namespaces                                 :story:
 
 Enable c++17. - windows requires cpp latest. Then fix inner namespaces
@@ -8252,6 +8228,15 @@ support BSON and JSON and boost serialisation. We may want the cache
 facet to support one or more or all of these. We can think of these as
 aspects that are enabled by the user at the model level (but possibly
 overridable at the element level).
+
+*** Add support for libnop                                            :story:
+
+Interesting serialisation format.
+
+Links:
+
+- https://github.com/google/libnop
+
 
 ** In next major release
 
@@ -11219,10 +11204,11 @@ a stable windows environment we will move to bustache.
 
 We should really move to one of these mustache implementations.
 
-See also:
+Links:
 
 - [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
 - [[https://github.com/no1msd/mstch][mstch]]
+- [[https://github.com/mrtazz/plustache][plustache]]
 
 *** Add support for XText                                             :story:
 
@@ -13429,6 +13415,7 @@ This project seems interesting:
 They seem to have added support for conan, appveyor, etc in an
 extensible way. We need to figure out if anything can be nicked for
 our infrastructure.
+
 *** Read A Concept Design for the STL                                 :story:
 
 It seems this paper has a lot of useful information for meta-modeling:
