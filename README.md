@@ -110,7 +110,7 @@ Once you have all dependencies set up, you can then
 clone the repository and create the build directory:
 
 ```
-git clone git@github.com:MASD-Project/dogen.git
+git clone https://github.com/MASD-Project/dogen.git
 cd dogen/build
 mkdir output
 cd output
@@ -147,6 +147,29 @@ accordingly:
 ```
 CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
 ```
+
+## Running Tests
+
+If you'd like to run the project tests, execute the target
+```run_all_tests``` or its abbreviation ```rat```.
+
+## Regenerating Models
+
+If you'd like to run Dogen to regenerate all of its models, you can do
+so by using the target ```knit_all``` or its abbreviation
+```ka```. This is useful, for example, to update the models to the
+latest version of Dogen, or just to see how Dogen works. By default
+Dogen uses the current built version, but you can also use
+another. For this you may need to tell CMake of its location by
+setting ```CMAKE_PROGRAM_PATH```:
+
+```
+CMAKE_PROGRAM_PATH=/path/to/dogen/binary cmake ../..
+```
+
+After regeneration, you can then use ```git diff``` to inspect the
+differences produced by regeneration, if any. The build directory
+contains all of the logs, under the directory ```log```.
 
 # Demo
 
