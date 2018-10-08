@@ -76,9 +76,13 @@ AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-trigge
 # Building From Source
 
 In order to build Dogen you will need a C++ toolchain. On Linux and
-OSX, you'll need a moderately recent compiler - such as [GCC 6]((https://www.gnu.org/software/gcc/gcc-6)) or [Clang 3.7]((https://www.gnu.org/software/gcc/gcc-6)) - and
-[Ninja](https://ninja-build.org/manual.html) or [GNU Make](https://www.gnu.org/software/make/). On Windows you'll need
-[Visual Studio 2015]((https://visualstudio.microsoft.com/vs/older-downloads/)) or
+OSX, you'll need a moderately recent compiler - such as [GCC
+6](https://www.gnu.org/software/gcc/gcc-6) or [Clang
+3.7](https://www.gnu.org/software/gcc/gcc-6) - and
+[Ninja](https://ninja-build.org/manual.html) or [GNU
+Make](https://www.gnu.org/software/make/). On Windows you'll need
+[Visual Studio
+2015](https://visualstudio.microsoft.com/vs/older-downloads/) or
 later. Note though that we try to always use the most recent releases
 with Dogen so, if you can, stick to those.
 
