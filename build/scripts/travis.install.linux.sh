@@ -63,7 +63,7 @@ sudo apt-get install ninja-build
 #
 # cmake
 #
-sudo apt-get remove cmake
+sudo rm -rf /usr/local/cmake-3.9.2
 
 cmake_name="cmake-3.12.0-Linux-x86_64"
 cmake_tar="${cmake_name}.tar.gz"
