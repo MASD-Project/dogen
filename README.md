@@ -75,23 +75,38 @@ AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-trigge
 
 # Building From Source
 
-Dogen has the following dependencies, across all operative systems:
+In order to build Dogen you will need a C++ toolchain. On Linux and
+OSX, you'll need a moderately recent compiler - such as [GCC
+6]((https://www.gnu.org/software/gcc/gcc-6)) or [Clang
+3.7]((https://www.gnu.org/software/gcc/gcc-6)) - and
+[Ninja](https://ninja-build.org/manual.html) or [GNU
+Make](https://www.gnu.org/software/make/). On Windows you'll need
+[Visual Studio
+2015]((https://visualstudio.microsoft.com/vs/older-downloads/)) or
+later. Note though that we try to always use the most recent releases
+with Dogen so, if you can, stick to those.
+
+Dogen has the following additional dependencies, across all operative systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
 | Git    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/MASD-Project/dogen).               |
-| CMake  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
-| Boost  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
-| ODB    | Optional  | Any recent.    | If you want to build the ORM examples, you need ODB. You will also need a backend such as Oracle, Postgres, etc.|
+| [CMake](https://cmake.org/)  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
+| [Boost](https://boost.org)  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
+| [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
 
-In addition, you will also need a build toolchain. On Linux and OSX,
-you'll need a moderately recent compiler - such as GCC 6 or Clang
-3.7 - and Ninja or GNU Make. On Windows you'll need Visual Studio 2015
-or later.
+Though Dogen should build fine with package manager supplied
+libraries - or even with hand-built dependencies - the easiest way to
+setup a development environment on all supported platforms is by using
+[vcpkg](https://github.com/Microsoft/vcpkg). Compile it as per [vcpkg
+documentation](https://github.com/Microsoft/vcpkg/blob/master/README.md),
+then run:
 
-Once you have all dependencies installed and set up, you can then
-clone the repository and create the build directory, using the shell
-of your choice (ours is Bash):
+```
+./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test
+```
+Once you have all dependencies set up, you can then
+clone the repository and create the build directory:
 
 ```
 git clone git@github.com:MASD-Project/dogen.git
@@ -103,26 +118,29 @@ cd output
 On Linux and OSX, you can build using GNU Make as follows:
 
 ```
-cmake ../..
-make -j5 # number of cores available
+cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../..
+make -j${CORES}
 ```
 
-Alternatively, you can use Ninja:
+Where ```PATH_TO_VCPKG_DIR``` is the directory in which you've
+downloaded and built vcpkg and ```CORES``` is the number of cores
+available on your machine. Alternatively, you can use Ninja:
 
 ```
-cmake ../.. -G Ninja
-ninja -j5 # number of cores available
+cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -G Ninja
+ninja -j${CORES}
 ```
 
 On Windows, the incantation is slightly different:
 
 ```
-cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 14 2015 Win64'
+cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 14 2015 Win64'
 cmake --build . --config Release --target ALL_BUILD
 ```
 
-Note that if you have installed Boost on a non-standard location, you
-need to set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
+If you are not using vcpkg, you can omit
+```-DCMAKE_TOOLCHAIN_FILE```. However if the dependencies are not on
+the standard paths, you must not forget to set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
 accordingly:
 
 ```
