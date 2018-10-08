@@ -69,9 +69,9 @@ sudo apt-get install ninja-build
 #
 # cmake
 #
-cmake_name="cmake-3.4.1-Linux-x86_64"
+cmake_name="cmake-3.12.0-Linux-x86_64"
 cmake_tar="${cmake_name}.tar.gz"
-cmake_input="https://cmake.org/files/v3.4/${cmake_tar}"
+cmake_input="https://cmake.org/files/v3.12/${cmake_tar}"
 cmake_output="/tmp/${cmake_tar}"
 wget --no-check-certificate ${cmake_input} -O ${cmake_output}
 tar xf ${cmake_output} -C /tmp
