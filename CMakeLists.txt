@@ -80,16 +80,12 @@ set(BOOST_ALL_DYN_LINK OFF)
 # these require patches.
 find_package(Boost 1.61 REQUIRED COMPONENTS
     system
-    chrono
     serialization
     date_time
-    thread
     log
     filesystem
     program_options
     unit_test_framework
-    regex
-    atomic
     )
 
 if (Boost_FOUND)
@@ -110,20 +106,10 @@ if (LIBXML2_FOUND)
     set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
 endif()
 
-# odb
-find_package(Oracle)
-if (ORACLE_FOUND)
-    find_package(ODB COMPONENTS boost oracle pgsql)
-    if (ODB_FOUND)
-        message(STATUS "Found odb...")
-
-        include_directories(SYSTEM ${ORACLE_INCLUDE_DIR} ${ODB_INCLUDE_DIRS})
-        set(LIBS ${LIBS} ${ORACLE_LIBRARY} ${ODB_LIBRARIES} ${Boost_LIBRARIES})
-    else()
-        message(STATUS "odb not found.")
-    endif()
-else()
-    message(STATUS "Oracle not found.")
+find_package(ZLIB REQUIRED)
+if (ZLIB_FOUND)
+    include_directories(SYSTEM ${ZLIB_INCLUDE_DIR})
+    set(LIBS ${LIBS} ${ZLIB_LIBRARY_DIR})
 endif()
 
 # rapidjson
