@@ -94,6 +94,7 @@ Dogen has the following additional dependencies, across all operative systems:
 | [CMake](https://cmake.org/)  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
 | [Boost](https://boost.org)  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
+| [Doxygen](http://www.doxygen.nl/) | Optional | Any recent | Required to build the source code documentation. |
 
 Though Dogen should build fine with package manager supplied
 libraries - or even with hand-built dependencies - the easiest way to
@@ -138,9 +139,9 @@ cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcp
 cmake --build . --config Release --target ALL_BUILD
 ```
 
-If you are not using vcpkg, you can omit
+If you are **not** using vcpkg, you can omit
 ```-DCMAKE_TOOLCHAIN_FILE```. However if the dependencies are not on
-the standard paths, you must not forget to set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
+the standard paths, you **must not** forget to set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
 accordingly:
 
 ```
