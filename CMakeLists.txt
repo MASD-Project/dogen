@@ -83,6 +83,7 @@ find_package(Boost 1.61 REQUIRED COMPONENTS
     serialization
     date_time
     log
+    thread
     filesystem
     program_options
     unit_test_framework
