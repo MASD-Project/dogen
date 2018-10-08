@@ -21,20 +21,13 @@
 #
 # deps
 #
-# dropbox="https://www.dropbox.com/s/trikqhe5uw3orjk/dogen_deps_gcc_5.3_linux_amd64_v9.tar.bz2?dl=0"
-# version=9
-# package="dogen_deps_gcc_5.3_linux_amd64_v${version}.tar.bz2"
-dropbox="https://www.dropbox.com/s/lco0kn2wsjbmpjf/hedgr_deps_ubuntu_14.04_amd64_v1.tgz?dl=0"
-version=1
-package="hedgr_deps_ubuntu_14.04_amd64_v${version}.tgz"
-input_location="${dropbox}/${package}"
+package="vcpkg-export-20181008-182335.zip"
+input_location="https://www.dropbox.com/s/6qobuvq66edi0ha/${package}?dl=0"
 output_location="/tmp/${package}"
 extract_dir="/tmp/dogen_deps"
 wget --no-check-certificate ${input_location} -O ${output_location}
 mkdir ${extract_dir}
-tar -xaf ${output_location} -C ${extract_dir}
-rm ${output_location}
-echo "Deleted ${output_location}"
+unzip ${output_location} -d ${extract_dir}
 ls ${extract_dir}/*
 
 #
