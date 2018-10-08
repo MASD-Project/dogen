@@ -31,6 +31,12 @@ unzip -q ${output_location} -d ${extract_dir}
 ls ${extract_dir}/*
 
 #
+# common repos
+#
+sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+sudo apt-get update -qq
+
+#
 # clang
 #
 if [ "$CXX" == "clang++" ]; then
