@@ -69,7 +69,7 @@ install:
 script:
   - JOBS=2
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
-        export CMAKE_TOOLCHAIN_FILE="/tmp/dogen-deps/vcpkg-export-20181008-182335/scripts/buildsystems/vcpkg.cmake"
+        export CMAKE_TOOLCHAIN_FILE="/tmp/dogen_deps/vcpkg-export-20181008-182335/scripts/buildsystems/vcpkg.cmake"
         export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/local";
     fi
