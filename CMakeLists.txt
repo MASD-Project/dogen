@@ -88,6 +88,8 @@ find_package(Boost 1.61 REQUIRED COMPONENTS
     program_options
     unit_test_framework
     regex
+    chrono
+    atomic
     )
 
 if (Boost_FOUND)
