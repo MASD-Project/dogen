@@ -23,8 +23,8 @@
 #
 vcpkg_folder="vcpkg-export-20181009-143329"
 vcpkg_package="${folder}.zip"
-vcpkg_input_location="https://www.dropbox.com/s/0muqncafml30iey/${package}?dl=0"
-vcpkg_output_location="/tmp/${package}"
+vcpkg_input_location="https://www.dropbox.com/s/0muqncafml30iey/${vcpkg_package}?dl=0"
+vcpkg_output_location="/tmp/${vcpkg_package}"
 vcpkg_extract_dir="/tmp/"
 vcpkg_final_folder="vcpkg-export"
 wget --no-check-certificate ${vcpkg_input_location} -O ${vcpkg_output_location}
