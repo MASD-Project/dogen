@@ -21,8 +21,8 @@
 #
 # vcpkg dependencies
 #
-package="vcpkg-export-20181008-225941.zip"
-input_location="https://www.dropbox.com/s/b32228hutgvt0tb/${package}?dl=0"
+package="vcpkg-export-20181009-135511.zip"
+input_location="https://www.dropbox.com/s/ys4q4rk2qeahzwi/${package}?dl=0"
 output_location="/tmp/${package}"
 extract_dir="/tmp/dogen_deps"
 wget --no-check-certificate ${input_location} -O ${output_location}
