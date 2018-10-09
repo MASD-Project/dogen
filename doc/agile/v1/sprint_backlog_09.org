@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-09 Tue 17:17]
+#+CAPTION: Clock summary at [2018-10-09 Tue 20:28]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *38:12* |       |       |   0.0 |
+| *Total time*                                                                | *39:52* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 38:12   |       |       |   0.0 |
-| Active                                                                      |         | 38:12 |       |   0.0 |
+| Stories                                                                     | 39:52   |       |       |   0.0 |
+| Active                                                                      |         | 39:52 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:36 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
@@ -34,7 +34,7 @@
 | Update readme with information on reference models                          |         |       |  0:10 |   0.0 |
 | Remove test models from dogen project                                       |         |       |  1:13 |   0.0 |
 | Recap of the current situation                                              |         |       |  1:25 |   0.0 |
-| Investigate adding package management support to dogen                      |         |       | 16:15 |   0.0 |
+| Investigate adding package management support to dogen                      |         |       | 17:55 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -293,6 +293,8 @@ Notes:
 
 *** STARTED Investigate adding package management support to dogen    :story:
     :LOGBOOK:
+    CLOCK: [2018-10-09 Tue 19:55]--[2018-10-09 Tue 20:28] =>  0:33
+    CLOCK: [2018-10-09 Tue 17:18]--[2018-10-09 Tue 18:25] =>  1:07
     CLOCK: [2018-10-09 Tue 16:40]--[2018-10-09 Tue 17:17] =>  0:37
     CLOCK: [2018-10-09 Tue 14:12]--[2018-10-09 Tue 16:05] =>  1:53
     CLOCK: [2018-10-09 Tue 13:49]--[2018-10-09 Tue 14:11] =>  0:22
