@@ -24,6 +24,8 @@ install:
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
   - ps: $env:Path += "$env:temp/cmake/bin"
+  - ps: $env:Path += "C:\Program Files\LLVM\bin"
+  - ps: clang-cl -v
 
 build_script:
   - ps: $build_type="$env:configuration";
