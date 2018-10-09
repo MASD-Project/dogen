@@ -30,7 +30,7 @@ write-host "URL: ${input_location}"
 write-host "Dogen deps: ${output_location}"
 mkdir ${extract_dir} | Out-Null
 cd ${extract_dir}
-7z x ../${package} > $null;
+7z x ${output_location} > $null;
 
 #
 # conan
@@ -46,5 +46,16 @@ conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-co
 #
 # cmake
 #
-cinst cmake --version 3.4.3
-cmake --version
+$cmake_zip="cmake-3.12.0-win64-x64.zip"
+$cmake_url="https://cmake.org/files/v3.12/${cmake_zip}"
+$cmake_extract_dir="$env:temp"
+$cmake_output_location="$env:temp/${cmake_zip}"
+
+appveyor DownloadFile ${cmake_url} -FileName ${cmake_output_location}
+
+write-host "URL: $cmake_url"
+write-host "CMake dir: $cmake_extract_dir"
+mkdir ${cmake_extract_dir} | Out-Null
+cd ${cmake_extract_dir}
+7z x ${cmake_output_location} > $null;
+${cmake_extract_dir}/cmake-3.12.0-win64-x64/bin/cmake --version
