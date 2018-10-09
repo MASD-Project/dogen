@@ -1,8 +1,11 @@
-version: 1.0.8.{build}
+version: 1.0.9.{build}
 
 branches:
     only:
         - master
+
+image:
+  - Visual Studio 2017
 
 environment:
   matrix:
@@ -20,6 +23,7 @@ clone_depth: 1
 install:
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
+  - ps: $env:Path += "$env:temp/cmake/bin"
 
 build_script:
   - ps: $build_type="$env:configuration";
@@ -34,7 +38,7 @@ build_script:
         }
 
 artifacts:
-  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.08-Windows-AMD64.msi
+  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
     name: x86_64 MSI
 
 notifications:
@@ -55,10 +59,10 @@ deploy:
     username: mcraveiro
     api_key:
       secure: aeW66aeBxn5W4wOnb5Ae9L1/dYRsAyWiJatWTpKPSwEgR1diIFPUUeSqQ4jTxeF8
-    subject: domaindrivenconsulting
+    subject: masd-project
     repo: Dogen
     package: Dogen
-    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.08-Windows-AMD64.msi
-    version: 1.0.08
+    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
+    version: 1.0.09
     publish: true
     override: true
