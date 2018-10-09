@@ -42,25 +42,27 @@ sudo apt-get update -qq
 # clang
 #
 if [ "$CXX" == "clang++" ]; then
+    version="7"
     server="http://apt.llvm.org/trusty/"
     sources="/etc/apt/sources.list"
     trusty="llvm-toolchain-trusty"
-    sudo sh -c "echo 'deb ${server} ${trusty}-7.0 main' >> ${sources}"
-    sudo sh -c "echo 'deb ${server} ${trusty}-7.0 main' >> ${sources}"
+    sudo sh -c "echo 'deb ${server} ${trusty}-${version} main' >> ${sources}"
+    sudo sh -c "echo 'deb ${server} ${trusty}-${version} main' >> ${sources}"
     wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
     sudo apt-get update -qq
 
-    sudo apt-get install --allow-unauthenticated -qq clang-7
-    which clang-7
-    export CXX="clang++-7" CC="clang-7"
+    sudo apt-get install --allow-unauthenticated -qq clang-${version}
+    which clang-${version}
+    export CXX="clang++-${version}" CC="clang-${version}"
 fi
 
 #
 # g++
 #
 if [ "$CXX" = "g++" ]; then
-    sudo apt-get install -qq g++-8
-    export CXX="g++-8" CC="gcc-8" GCOV="gcov-8"
+    version="8"
+    sudo apt-get install -qq g++-${version}
+    export CXX="g++-${version}" CC="gcc-${version}" GCOV="gcov-${version}"
 fi
 
 #
