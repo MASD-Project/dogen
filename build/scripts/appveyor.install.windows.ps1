@@ -58,7 +58,7 @@ write-host "CMake dir: ${cmake_extract_dir}"
 cd ${cmake_extract_dir}
 7z x ${cmake_output_location} > $null;
 Rename-Item -Path $cmake_extract_dir/cmake-3.12.0-win64-x64 -newName $cmake_extract_dir/cmake
-$cmake_extract_dir\cmake\bin\cmake --version
+".\$cmake_extract_dir\cmake\bin\cmake.exe" --version
 
 #
 # Clang
@@ -72,7 +72,7 @@ $clang_output_location="$env:temp/${clang_file}"
 appveyor DownloadFile ${clang_url} -FileName ${clang_output_location}
 write-host "URL: $clang_url"
 write-host "Clang dir: $clang_extract_dir"
-$clang_extract_dir\llvm-installer.exe /S /D=C:\"Program Files\LLVM"
+".\$clang_extract_dir\llvm-installer.exe" /S /D=C:\"Program Files\LLVM"
 
 #
 # Ninja
@@ -87,4 +87,4 @@ write-host "URL: $ninja_url"
 write-host "Ninja dir: $ninja_extract_dir"
 New-Item -ItemType directory -Path $ninja_extract_dir
 7z x $ninja_file -o $ninja_extract_dir > nul
-$ninja_extract_dir\ninja.exe -v
+".\$ninja_extract_dir\ninja.exe" -v
