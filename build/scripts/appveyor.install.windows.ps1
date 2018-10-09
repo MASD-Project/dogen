@@ -88,4 +88,4 @@ write-host "URL: $ninja_url"
 write-host "Ninja dir: $ninja_extract_dir"
 New-Item -ItemType directory -Path $ninja_extract_dir
 7z x $ninja_file -o $ninja_extract_dir > nul
-$ninja_extract_dir/ninja.exe -v
+./$ninja_extract_dir/ninja.exe -v
