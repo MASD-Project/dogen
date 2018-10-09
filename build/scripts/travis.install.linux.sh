@@ -29,8 +29,8 @@ vcpkg_extract_dir="/tmp/"
 vcpkg_final_folder="vcpkg-export"
 wget --no-check-certificate ${vcpkg_input_location} -O ${vcpkg_output_location}
 unzip -q ${vcpkg_output_location} -d ${vcpkg_extract_dir}
-mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/vcpkg_final_folder
-ls ${vcpkg_extract_dir}/vcpkg_final_folder
+mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/${vcpkg_final_folder}
+ls ${vcpkg_extract_dir}/${vcpkg_final_folder}
 
 #
 # common repos
