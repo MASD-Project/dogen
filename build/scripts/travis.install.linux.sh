@@ -21,14 +21,16 @@
 #
 # vcpkg dependencies
 #
-package="vcpkg-export-20181009-135511.zip"
-input_location="https://www.dropbox.com/s/ys4q4rk2qeahzwi/${package}?dl=0"
-output_location="/tmp/${package}"
-extract_dir="/tmp/dogen_deps"
-wget --no-check-certificate ${input_location} -O ${output_location}
-mkdir ${extract_dir}
-unzip -q ${output_location} -d ${extract_dir}
-ls ${extract_dir}/*
+vcpkg_folder="vcpkg-export-20181009-143329"
+vcpkg_package="${folder}.zip"
+vcpkg_input_location="https://www.dropbox.com/s/0muqncafml30iey/${package}?dl=0"
+vcpkg_output_location="/tmp/${package}"
+vcpkg_extract_dir="/tmp/"
+vcpkg_final_folder="vcpkg-export"
+wget --no-check-certificate ${vcpkg_input_location} -O ${vcpkg_output_location}
+unzip -q ${vcpkg_output_location} -d ${vcpkg_extract_dir}
+mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/vcpkg_final_folder
+ls ${vcpkg_extract_dir}/vcpkg_final_folder
 
 #
 # common repos
