@@ -58,4 +58,5 @@ write-host "CMake dir: $cmake_extract_dir"
 mkdir ${cmake_extract_dir} | Out-Null
 cd ${cmake_extract_dir}
 7z x ${cmake_output_location} > $null;
-${cmake_extract_dir}/cmake-3.12.0-win64-x64/bin/cmake --version
+Rename-Item -Path $cmake_extract_dir/cmake-3.12.0-win64-x64 -newName $cmake_extract_dir/cmake
+./$cmake_extract_dir/cmake/bin/cmake --version
