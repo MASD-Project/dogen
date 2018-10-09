@@ -21,9 +21,9 @@
 #
 # vcpkg dependencies
 #
-vcpkg_folder="vcpkg-export-20181009-143329"
+vcpkg_folder="vcpkg-export-20181009-164107"
 vcpkg_package="${vcpkg_folder}.zip"
-vcpkg_input_location="https://www.dropbox.com/s/g7plo6u70y4z6x9/${vcpkg_package}?dl=0"
+vcpkg_input_location="https://www.dropbox.com/s/1oqktqwtprt4cfu/${vcpkg_package}?dl=0"
 vcpkg_output_location="/tmp/${vcpkg_package}"
 vcpkg_extract_dir="/tmp/"
 vcpkg_final_folder="vcpkg-export"
@@ -45,14 +45,14 @@ if [ "$CXX" == "clang++" ]; then
     server="http://apt.llvm.org/trusty/"
     sources="/etc/apt/sources.list"
     trusty="llvm-toolchain-trusty"
-    sudo sh -c "echo 'deb ${server} ${trusty}-6.0 main' >> ${sources}"
-    sudo sh -c "echo 'deb ${server} ${trusty}-6.0 main' >> ${sources}"
+    sudo sh -c "echo 'deb ${server} ${trusty}-7.0 main' >> ${sources}"
+    sudo sh -c "echo 'deb ${server} ${trusty}-7.0 main' >> ${sources}"
     wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
     sudo apt-get update -qq
 
-    sudo apt-get install --allow-unauthenticated -qq clang-6.0
-    which clang-6.0
-    export CXX="clang++-6.0" CC="clang-6.0"
+    sudo apt-get install --allow-unauthenticated -qq clang-7
+    which clang-7
+    export CXX="clang++-7" CC="clang-7"
 fi
 
 #
