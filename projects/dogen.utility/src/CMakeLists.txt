@@ -30,7 +30,7 @@ set_target_properties(${name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
 target_link_libraries(${name}
-    PRIVATE ZLIB::ZLIB
+    ZLIB::ZLIB
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
