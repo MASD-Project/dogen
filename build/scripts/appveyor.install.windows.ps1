@@ -21,8 +21,13 @@
 # Top-level directories used by install
 #
 $top_level_dir="C:\third_party"
+New-Item -ItemType directory -Path $top_level_dir
+
 $installs_dir="$top_level_dir\installs"
+New-Item -ItemType directory -Path $installs_dir
+
 $downloads_dir="$top_level_dir\downloads"
+New-Item -ItemType directory -Path $installs_dir
 
 #
 # vcpkg
@@ -35,9 +40,9 @@ $vcpkg_installs_dir="$installs_dir"
 $vcpkg_final_folder="vcpkg-export"
 appveyor DownloadFile $vcpkg_input_location -FileName $vcpkg_downloads_location
 
-write-host "URL: $vcpkg_input_location"
-write-host "Download location: $vcpkg_downloads_location"
-cd $vcpkg_installs_dir
+Write-Host "URL: $vcpkg_input_location"
+Write-Host "Download location: $vcpkg_downloads_location"
+Set-Location -Path $vcpkg_installs_dir
 7z x $vcpkg_downloads_location > $null;
 Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir/$vcpkg_final_folder
 
@@ -53,8 +58,8 @@ $cmake_downloads_location="${downloads_dir}/${cmake_package}"
 
 appveyor DownloadFile $cmake_input_location -FileName $cmake_downloads_location
 
-write-host "URL: $cmake_input_location"
-write-host "Download location: $cmake_downloads_location"
+Write-Host "URL: $cmake_input_location"
+Write-Host "Download location: $cmake_downloads_location"
 cd $cmake_installs_dir
 7z x $cmake_downloads_location > $null;
 Rename-Item -Path $cmake_installs_dir\$cmake_folder -newName $cmake_installs_dir\cmake
@@ -69,9 +74,9 @@ $clang_installs_dir="$installs_dir"
 $clang_downloads_location="${downloads_dir}/${clang_package}"
 
 appveyor DownloadFile $clang_input_location -FileName $clang_downloads_location
-write-host "URL: $clang_input_location"
-write-host "Download location: $clang_downloads_location"
-cd $clang_downloads_location
+Write-Host "URL: $clang_input_location"
+Write-Host "Download location: $clang_downloads_location"
+Set-Location -Path $clang_downloads_location
 llvm-installer.exe /S /D=C:\"Program Files\LLVM"
 
 #
@@ -83,7 +88,7 @@ $ninja_installs_dir="$installs_dir"
 $ninja_downloads_location="${downloads_dir}/${ninja_package}"
 
 appveyor DownloadFile $ninja_input_location -FileName $ninja_downloads_location
-write-host "URL: $ninja_input_location"
-write-host "Download location: $ninja_downloads_location"
+Write-Host "URL: $ninja_input_location"
+Write-Host "Download location: $ninja_downloads_location"
 New-Item -ItemType directory -Path $ninja_installs_dir/Ninja
 7z x $ninja_downloads_location -o $ninja_installs_dir/Ninja > nul
