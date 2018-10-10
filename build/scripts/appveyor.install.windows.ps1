@@ -27,7 +27,7 @@ $installs_dir="$top_level_dir\installs"
 New-Item -ItemType directory -Path $installs_dir
 
 $downloads_dir="$top_level_dir\downloads"
-New-Item -ItemType directory -Path $installs_dir
+New-Item -ItemType directory -Path $downloads_dir
 
 #
 # vcpkg
