@@ -81,18 +81,15 @@ if (!(Test-Path -Path $build_type_dir)) {
 }
 
 cd ${build_type_dir}
-if ($build_type -eq "Release") {
-    conan install ${product_dir} -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86_64
-} elseif ($build_type -eq "Debug") {
-    conan install ${product_dir} -s compiler="Visual Studio" -s compiler.version=14 -s arch=x86_64 -s build_type=Debug -s compiler.runtime=MDd
-}
 
 #
 # CMake setup
 #
+$toolchain_file="c:\third_party\installs\vcpkg-export\scripts/buildsystems/vcpkg.cmake"
 $cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 $cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
+$cmake_defines="${cmake_defines} -DCMAKE_TOOLCHAIN_FILE=${toolchain_file}"
 
 #
 # Build

@@ -17,74 +17,73 @@
 # MA 02110-1301, USA.
 #
 
-$dropbox="https://www.dropbox.com/s/ntz6moq7kg9a8m7"
-$version=4
-$package="dogen_deps_vc14_windows_amd64_v${version}.7z"
-$input_location="${dropbox}/${package}"
-$output_location="$env:temp/${package}"
-$extract_dir="$env:temp/dogen_deps"
-
-build\scripts\wget.exe --quiet --no-check-certificate ${input_location} -O ${output_location}
-
-write-host "URL: ${input_location}"
-write-host "Dogen deps: ${output_location}"
-mkdir ${extract_dir} | Out-Null
-cd ${extract_dir}
-7z x ${output_location} > $null;
+#
+# Top-level directories used by install
+#
+$top_level_dir="C:\third_party"
+$installs_dir="$top_level_dir\installs"
+$downloads_dir="$top_level_dir\downloads"
 
 #
-# conan
+# vcpkg
 #
-write-host "Installing conan..."
-$env:PYTHON = "C:/Python27"
-$env:PATH += ";$env:PYTHON/Scripts"
-pip.exe install conan
-$env:PATH += ";C:\Program Files (x86)\Conan\conan"
-conan --version
-conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
+$vcpkg_folder="vcpkg-export-20181010-114151"
+$vcpkg_package="${vcpkg_folder}.zip"
+$vcpkg_input_location="https://www.dropbox.com/s/yui5t4w7mivgdi0/${vcpkg_package}?dl=0"
+$vcpkg_downloads_location="${downloads_dir}\${vcpkg_package}"
+$vcpkg_installs_dir="$installs_dir"
+$vcpkg_final_folder="vcpkg-export"
+appveyor DownloadFile $vcpkg_input_location -FileName $vcpkg_downloads_location
+
+write-host "URL: $vcpkg_input_location"
+write-host "Download location: $vcpkg_downloads_location"
+cd $vcpkg_installs_dir
+7z x $vcpkg_downloads_location > $null;
+Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir/$vcpkg_final_folder
 
 #
 # cmake
 #
-$cmake_zip="cmake-3.12.0-win64-x64.zip"
-$cmake_url="https://cmake.org/files/v3.12/${cmake_zip}"
-$cmake_extract_dir="$env:temp"
-$cmake_output_location="$env:temp/${cmake_zip}"
+$cmake_version="3.12"
+$cmake_folder="cmake-${cmake_version}.0-win64-x64"
+$cmake_package="${cmake_folder}.zip"
+$cmake_input_location="https://cmake.org/files/v${cmake_version}/${cmake_package}"
+$cmake_installs_dir="$installs_dir"
+$cmake_downloads_location="${downloads_dir}/${cmake_package}"
 
-appveyor DownloadFile ${cmake_url} -FileName ${cmake_output_location}
+appveyor DownloadFile $cmake_input_location -FileName $cmake_downloads_location
 
-write-host "URL: ${cmake_url}"
-write-host "CMake dir: ${cmake_extract_dir}"
-cd ${cmake_extract_dir}
-7z x ${cmake_output_location} > $null;
-Rename-Item -Path $cmake_extract_dir/cmake-3.12.0-win64-x64 -newName $cmake_extract_dir/cmake
-".\$cmake_extract_dir\cmake\bin\cmake.exe" --version
+write-host "URL: $cmake_input_location"
+write-host "Download location: $cmake_downloads_location"
+cd $cmake_installs_dir
+7z x $cmake_downloads_location > $null;
+Rename-Item -Path $cmake_installs_dir\$cmake_folder -newName $cmake_installs_dir\cmake
 
 #
 # Clang
 #
 $clang_version="7.0.0"
-$clang_file="LLVM-${clang_version}-win64.exe"
-$clang_url="http://releases.llvm.org/${clang_version}/$clang_file"
-$clang_extract_dir="$env:temp"
-$clang_output_location="$env:temp/${clang_file}"
+$clang_package="LLVM-${clang_version}-win64.exe"
+$clang_input_location="http://releases.llvm.org/${clang_version}/$clang_package"
+$clang_installs_dir="$installs_dir"
+$clang_downloads_location="${downloads_dir}/${clang_package}"
 
-appveyor DownloadFile ${clang_url} -FileName ${clang_output_location}
-write-host "URL: $clang_url"
-write-host "Clang dir: $clang_extract_dir"
-".\$clang_extract_dir\llvm-installer.exe" /S /D=C:\"Program Files\LLVM"
+appveyor DownloadFile $clang_input_location -FileName $clang_downloads_location
+write-host "URL: $clang_input_location"
+write-host "Download location: $clang_downloads_location"
+cd $clang_downloads_location
+llvm-installer.exe /S /D=C:\"Program Files\LLVM"
 
 #
 # Ninja
 #
-$ninja_file="ninja-win.zip"
-$ninja_url="https://github.com/ninja-build/ninja/releases/download/v1.6.0/$ninja_file"
-$ninja_extract_dir="$env:temp/Ninja"
-$ninja_output_location="$env:temp/$ninja_file"
+$ninja_package="ninja-win.zip"
+$ninja_input_location="https://github.com/ninja-build/ninja/releases/download/v1.6.0/${ninja_package}"
+$ninja_installs_dir="$installs_dir"
+$ninja_downloads_location="${downloads_dir}/${ninja_package}"
 
-appveyor DownloadFile $ninja_file -FileName $ninja_file
-write-host "URL: $ninja_url"
-write-host "Ninja dir: $ninja_extract_dir"
-New-Item -ItemType directory -Path $ninja_extract_dir
-7z x $ninja_file -o $ninja_extract_dir > nul
-".\$ninja_extract_dir\ninja.exe" -v
+appveyor DownloadFile $ninja_input_location -FileName $ninja_downloads_location
+write-host "URL: $ninja_input_location"
+write-host "Download location: $ninja_downloads_location"
+New-Item -ItemType directory -Path $ninja_installs_dir/Ninja
+7z x $ninja_downloads_location -o $ninja_installs_dir/Ninja > nul
