@@ -19,6 +19,9 @@
 #
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
+# Log CMake version. Useful for debugging CMake problems.
+message(STATUS "CMake Version: ${CMAKE_VERSION}")
+
 # ctest support
 enable_testing()
 
