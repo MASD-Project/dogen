@@ -6209,8 +6209,40 @@ swagger metamodel elements instead of relying on YAML because we could
 automatically generate them from the interface declaration (what is
 hard is the opposite).
 
+It appears there already exists a framework to add swagger support to
+C++: [[https://oatpp.io/][Oat++]]. The good news is the support looks pretty
+comprehensive. The bad news is they did not build it on top of ASIO
+and Best/Boost, but instead coded everything from scratch including
+coroutines etc. It also means we cannot use existing Dogen JSON
+support - they have their own DTO. This may not be an ideal end-state
+but it seems it is really easy to get something up and running
+quickly. We could just create the Swagger/OpenAPI yaml parser and then
+generate Oat++ code first. The parser would be useful for other
+backends. The templates themselves are probably easy to do (for
+Oat). The integration with the dogen interface should be very similar,
+regardless of the swagger backend (dispatch of the data coming in from
+HTTP and out of the service). The only difference is that we'd be
+relying on their DTO objects so we'd probably need two representations
+for each object - one as a proper domain model, and a second one as a
+oat DTO. We could conceivably code-generate conversion wrappers, given
+that the objects are identical from a meta-model perspective. Or we
+could talk to the Oat people and figure out if its possible to
+integrate other DTOs with Oat. It is also not clear how JWT would be
+handled - is it Oat's responsibility or the lower layers.
+
+Finally, it may also be worthwhile trying to "port" oat++ into
+Beast. That is, try to figure out how their [[https://github.com/oatpp/oatpp-swagger][swagger infrastructure]]
+would look like under Beast and copy across as required. They have
+already done all of the artwork, HTML etc so much can be reused. The
+good thing about the Dogen approach is that we do not need any
+run-time support (e.g. reflection, etc). All meta-data can be
+generated at compile time from the meta-model. In addition, we can
+place objects in the stack as much as possible and pre-generate JSON
+and reuse it.
+
 Links:
 
+- https://github.com/oatpp/oatpp
 - [[http://docs.servicestack.net/swagger-api][ServiceStack Swagger integration]]
 - [[http://radar.oreilly.com/2015/09/building-apis-with-swagger.html][Building APIs with Swagger]]
 - [[http://petstore.swagger.io/v2/swagger.json][Swagger JSON example]]
