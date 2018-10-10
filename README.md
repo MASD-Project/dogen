@@ -106,8 +106,10 @@ then run:
 ```
 ./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid
 ```
-Once you have all dependencies set up, you can then
-clone the repository and create the build directory:
+Warning: the default vcpkg triplet on windows [is
+32-bit](https://github.com/Microsoft/vcpkg/issues/1254). Once you have
+all dependencies set up, you can then  clone the repository and create
+the build directory:
 
 ```
 git clone https://github.com/MASD-Project/dogen.git
