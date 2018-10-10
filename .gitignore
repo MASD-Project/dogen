@@ -31,3 +31,7 @@ TestResult.xml
 *.coatidb
 *.coatiproject
 poly-stitch.elc
+
+# cquery
+.cquery_cached_index
+compile_commands.json
