@@ -70,11 +70,12 @@ Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir
 #
 $ninja_package="ninja-win.zip"
 $ninja_input_location="https://github.com/ninja-build/ninja/releases/download/v1.6.0/${ninja_package}"
-$ninja_installs_dir="$installs_dir"
+$ninja_installs_dir="$installs_dir\Ninja"
 $ninja_downloads_location="${downloads_dir}/${ninja_package}"
 
 appveyor DownloadFile $ninja_input_location -FileName $ninja_downloads_location
 Write-Host "URL: $ninja_input_location"
 Write-Host "Download location: $ninja_downloads_location"
-New-Item -ItemType directory -Path $ninja_installs_dir/Ninja
-7z x $ninja_downloads_location -o $ninja_installs_dir/Ninja > nul
+New-Item -ItemType directory -Path $ninja_installs_dir
+Set-Location -Path $ninja_installs_dir
+7z x $ninja_downloads_location > $null
