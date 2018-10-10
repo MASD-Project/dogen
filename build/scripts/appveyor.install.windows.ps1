@@ -38,7 +38,8 @@ $vcpkg_input_location="https://www.dropbox.com/s/yui5t4w7mivgdi0/${vcpkg_package
 $vcpkg_downloads_location="${downloads_dir}\${vcpkg_package}"
 $vcpkg_installs_dir="$installs_dir"
 $vcpkg_final_folder="vcpkg-export"
-appveyor DownloadFile $vcpkg_input_location -FileName $vcpkg_downloads_location
+# appveyor DownloadFile $vcpkg_input_location -FileName $vcpkg_downloads_location
+build\scripts\wget.exe --quiet --no-check-certificate $vcpkg_input_location -O $vcpkg_downloads_location
 
 Write-Host "URL: $vcpkg_input_location"
 Write-Host "Download location: $vcpkg_downloads_location"
