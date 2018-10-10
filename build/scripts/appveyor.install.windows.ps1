@@ -65,21 +65,6 @@ cd $cmake_installs_dir
 Rename-Item -Path $cmake_installs_dir\$cmake_folder -newName $cmake_installs_dir\cmake
 
 #
-# Clang
-#
-$clang_version="7.0.0"
-$clang_package="LLVM-${clang_version}-win64.exe"
-$clang_input_location="http://releases.llvm.org/${clang_version}/$clang_package"
-$clang_installs_dir="$installs_dir"
-$clang_downloads_location="${downloads_dir}/${clang_package}"
-
-appveyor DownloadFile $clang_input_location -FileName $clang_downloads_location
-Write-Host "URL: $clang_input_location"
-Write-Host "Download location: $clang_downloads_location"
-Set-Location -Path $clang_downloads_location
-llvm-installer.exe /S /D=C:\"Program Files\LLVM"
-
-#
 # Ninja
 #
 $ninja_package="ninja-win.zip"

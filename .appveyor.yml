@@ -26,7 +26,6 @@ install:
   - ps: $env:Path += "c:\third_party\installs\cmake\bin"
   - ps: $env:Path += "c:\third_party\installs\ninja\bin"
   - ps: $env:Path = "C:\Program Files\LLVM\bin;$env:Path"
-  - ps: clang-cl -v
 
 build_script:
   - ps: $build_type="$env:configuration";
