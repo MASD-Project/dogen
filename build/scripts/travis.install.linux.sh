@@ -21,7 +21,7 @@
 #
 # vcpkg dependencies
 #
-vcpkg_folder="vcpkg-export-20181009-164107"
+vcpkg_folder="vcpkg-export-20181011-135828"
 vcpkg_package="${vcpkg_folder}.zip"
 vcpkg_input_location="https://www.dropbox.com/s/1oqktqwtprt4cfu/${vcpkg_package}?dl=0"
 vcpkg_output_location="/tmp/${vcpkg_package}"
