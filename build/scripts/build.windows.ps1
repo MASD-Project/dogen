@@ -90,6 +90,7 @@ $cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 $cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
 $cmake_defines="${cmake_defines} -DCMAKE_TOOLCHAIN_FILE=${toolchain_file}"
+$cmake_defines="${cmake_defines} -DVCPKG_TARGET_TRIPLET=x64-windows-static"
 
 #
 # Build
