@@ -30,5 +30,9 @@ set_target_properties(${name}
   PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
 target_link_libraries(${name} utility formatting ${Boost_LIBRARIES})
+if (MSVC)
+    target_link_libraries(${name} bcrypt)
+endif()
+
 
 install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)
