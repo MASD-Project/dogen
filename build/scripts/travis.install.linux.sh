@@ -19,11 +19,14 @@
 #
 
 #
-# vcpkg dependencies
+# vcpkg dependencies. Important: when updating the package remember to
+# generate the dropbox link or else we will still point to the old
+# package.
 #
+vcpkg_dropbox_link="s/x774lnajro2jltx"
 vcpkg_folder="vcpkg-export-20181011-135828"
 vcpkg_package="${vcpkg_folder}.zip"
-vcpkg_input_location="https://www.dropbox.com/s/1oqktqwtprt4cfu/${vcpkg_package}?dl=0"
+vcpkg_input_location="https://www.dropbox.com/${vcpkg_dropbox_link}/${vcpkg_package}?dl=0"
 vcpkg_output_location="/tmp/${vcpkg_package}"
 vcpkg_extract_dir="/tmp"
 vcpkg_final_folder="vcpkg-export"
