@@ -41,6 +41,9 @@ write-host "* Product directory: ${product_dir}";
 if ($compiler -eq "msvc") {
     $generator="Visual Studio 15 2017 Win64";
     write-host "* compiler: ${compiler}";
+} elseif ($compiler -eq "clang-cl") {
+    $generator="Ninja";
+    write-host "* compiler: ${compiler}";
 } else {
     write-host "* Unrecognised compiler: ${compiler}";
     exit 1
@@ -91,6 +94,10 @@ $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 $cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
 $cmake_defines="${cmake_defines} -DCMAKE_TOOLCHAIN_FILE=${toolchain_file}"
 $cmake_defines="${cmake_defines} -DVCPKG_TARGET_TRIPLET=x64-windows-static"
+if ($compiler -eq "clang-cl") {
+    $cmake_defines="${cmake_defines} -DCMAKE_C_COMPILER=clang-cl.exe"
+    $cmake_defines="${cmake_defines} -DCMAKE_CXX_COMPILER=clang-cl.exe"
+}
 
 #
 # Build
