@@ -48,24 +48,6 @@ Set-Location -Path $vcpkg_installs_dir
 Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir/$vcpkg_final_folder
 
 #
-# cmake
-#
-# $cmake_version="3.12"
-# $cmake_folder="cmake-${cmake_version}.0-win64-x64"
-# $cmake_package="${cmake_folder}.zip"
-# $cmake_input_location="https://cmake.org/files/v${cmake_version}/${cmake_package}"
-# $cmake_installs_dir="$installs_dir"
-# $cmake_downloads_location="${downloads_dir}/${cmake_package}"
-
-# appveyor DownloadFile $cmake_input_location -FileName $cmake_downloads_location
-
-# Write-Host "URL: $cmake_input_location"
-# Write-Host "Download location: $cmake_downloads_location"
-# cd $cmake_installs_dir
-# 7z x $cmake_downloads_location > $null;
-# Rename-Item -Path $cmake_installs_dir\$cmake_folder -newName $cmake_installs_dir\cmake
-
-#
 # Ninja
 #
 $ninja_package="ninja-win.zip"

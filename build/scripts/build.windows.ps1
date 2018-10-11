@@ -85,7 +85,7 @@ cd ${build_type_dir}
 #
 # CMake setup
 #
-$toolchain_file="c:\third_party\installs\vcpkg-export\scripts/buildsystems/vcpkg.cmake"
+$toolchain_file="c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
 $cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 $cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
