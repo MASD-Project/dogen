@@ -35,7 +35,7 @@ for layer in dia.active_display().diagram.data.layers:
         elif "dogen::enumeration" in stereotype:
             object.properties["fill_colour"] = "Papaya Whip"
         elif "dogen::primitive" in stereotype:
-            object.properties["fill_colour"] = "Light Goldenrod Yellow"
+            object.properties["fill_colour"] = "Light Steel Blue"
         elif "dogen::exception" in stereotype:
             object.properties["fill_colour"] = "Peach Puff"
         elif "dogen::object_template" in stereotype:
