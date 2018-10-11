@@ -30,14 +30,20 @@ $downloads_dir="$top_level_dir\downloads"
 New-Item -ItemType directory -Path $downloads_dir
 
 #
-# vcpkg
+# vcpkg dependencies. Important: when updating the package remember to
+# generate the dropbox link or else we will still point to the old
+# package.
 #
-$vcpkg_folder="vcpkg-export-20181010-114151"
+$vcpkg_dropbox_link="s/5nfh9e0ifwbolmv"
+$vcpkg_folder="vcpkg-export-20181011-200956"
 $vcpkg_package="${vcpkg_folder}.zip"
-$vcpkg_input_location="https://www.dropbox.com/s/yui5t4w7mivgdi0/${vcpkg_package}?dl=0"
+$vcpkg_input_location="https://www.dropbox.com/${vcpkg_dropbox_link}/${vcpkg_package}?dl=0"
 $vcpkg_downloads_location="${downloads_dir}\${vcpkg_package}"
 $vcpkg_installs_dir="$installs_dir"
 $vcpkg_final_folder="vcpkg-export"
+
+# Note: we don't seem to be able to download from dropbox using DownloadFile 
+# so we use wget instead.
 # appveyor DownloadFile $vcpkg_input_location -FileName $vcpkg_downloads_location
 build\scripts\wget.exe --quiet --no-check-certificate $vcpkg_input_location -O $vcpkg_downloads_location
 
