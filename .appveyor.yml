@@ -28,7 +28,7 @@ clone_depth: 1
 install:
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
-  - ps: $env:Path += "C:\third_party\installs\Ninja"
+  - ps: $env:Path += ";C:\third_party\installs\Ninja"
   - ps: $env:CMAKE_TOOLCHAIN_FILE = "c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
 
 build_script:
@@ -36,7 +36,7 @@ build_script:
   - ps: $target = "ALL_BUILD run_windows_green_tests";
   - ps: $compiler = $env:compiler;
   - ps: cd $project_dir
-  - ps: C:\third_party\installs\Ninja\ninja.exe -v
+  - ps: ninja.exe -v
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $compiler -target $target
   - ps: if ($build_type -eq "Release" -and $compiler -eq "msvc") {
             cd $project_dir\build\output\$compiler\$build_type;
