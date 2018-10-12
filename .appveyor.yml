@@ -21,6 +21,10 @@ platform:
 
 clone_depth: 1
 
+install:
+  - ps: $project_dir="$pwd";
+  - ps: $env:Path += "c:\third_party\installs\ninja\bin"
+
 build_script:
   - ps: $build_type="$env:configuration";
   - ps: $third_party="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
