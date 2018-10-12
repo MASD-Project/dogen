@@ -75,14 +75,6 @@ if [[ ! -e $build_type_dir ]]; then
 fi
 
 #
-# Remove packages we won't test to save space.
-#
-rm ${build_type_dir}/stage/pkg/dogen_*_amd64-headers.deb
-rm ${build_type_dir}/stage/pkg/dogen_*_amd64-libraries.deb
-rm ${build_type_dir}/stage/pkg/dogen_*_amd64-tests.deb
-echo "Removed packages not required for testing."
-
-#
 # Test the package
 #
 sudo dpkg -i ${build_type_dir}/stage/pkg/dogen_*_amd64-applications.deb
