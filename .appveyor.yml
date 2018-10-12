@@ -10,7 +10,8 @@ image:
 environment:
   matrix:
     - compiler: msvc
-    - compiler: clang-cl
+    allow_failures:
+      - compiler: clang-cl
 
 configuration:
   - Release
@@ -23,6 +24,7 @@ clone_depth: 1
 
 install:
   - ps: $project_dir="$pwd";
+  - ps: .\build\scripts\appveyor.install.windows.ps1
   - ps: $env:Path += "c:\third_party\installs\ninja\bin"
 
 build_script:
@@ -31,10 +33,16 @@ build_script:
   - ps: $target = "ALL_BUILD run_windows_green_tests";
   - ps: $compiler = $env:compiler;
   - ps: cd $project_dir
+  - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $compiler -third_party $third_party -target $target
+  - ps: if ($build_type -eq "Release" -and $compiler -eq "msvc") {
+            cd $project_dir\build\output\$env:compiler\$build_type;
+            $env:Path += ";" + $env:WIX;
+            cpack -G WIX -C Release;
+        }
 
 artifacts:
-  - path: build/scripts/wget.exe
-    name: x86_64
+  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
+    name: x86_64 MSI
 
 notifications:
   - provider: Webhook
