@@ -39,8 +39,12 @@ before_build:
 
 build_script:
   - ps: $build_type="$env:configuration";
-  - ps: $target = "ALL_BUILD run_windows_green_tests";
   - ps: $compiler = $env:compiler;
+  - ps: if ($compiler -eq "msvc") {
+            $target = "ALL_BUILD run_windows_green_tests";
+        } elseif ($compiler -eq "clang-cl") {
+            $target = "all run_windows_green_tests";
+        }
   - ps: cd $project_dir
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $compiler -target $target
   - ps: if ($build_type -eq "Release" -and $compiler -eq "msvc") {
