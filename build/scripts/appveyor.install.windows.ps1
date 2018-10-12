@@ -57,7 +57,7 @@ Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir
 # Ninja
 #
 $ninja_package="ninja-win.zip"
-$ninja_input_location="https://github.com/ninja-build/ninja/releases/download/v1.6.0/${ninja_package}"
+$ninja_input_location="https://github.com/ninja-build/ninja/releases/download/v1.8.2/${ninja_package}"
 $ninja_installs_dir="$installs_dir\Ninja"
 $ninja_downloads_location="${downloads_dir}/${ninja_package}"
 
@@ -67,3 +67,4 @@ Write-Host "Download location: $ninja_downloads_location"
 New-Item -ItemType directory -Path $ninja_installs_dir | Out-Null
 Set-Location -Path $ninja_installs_dir | Out-Null
 7z x $ninja_downloads_location > $null
+dir $ninja_installs_dir
