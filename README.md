@@ -91,7 +91,6 @@ Dogen has the following additional dependencies, across all operative systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
-| [Git](https://git-scm.com/)    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/MASD-Project/dogen).               |
 | [CMake](https://cmake.org/)  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
 | [Boost](https://boost.org)  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
