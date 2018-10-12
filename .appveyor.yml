@@ -33,7 +33,7 @@ build_script:
   - ps: cd $project_dir
 
 artifacts:
-  - path: c:\third_party\installs\ninja\bin\ninja.exe
+  - path: build/scripts/wget.exe
     name: x86_64
 
 notifications:
@@ -57,7 +57,7 @@ deploy:
     subject: mcraveiro
     repo: Dogen
     package: Dogen
-    artifact: c:\third_party\installs\ninja\bin\ninja.exe
+    artifact: build/scripts/wget.exe
     version: 1.0.09
     publish: false
     override: true
