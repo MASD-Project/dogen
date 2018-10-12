@@ -1,6 +1,6 @@
 {
     "package": {
-        "name": "Dogen",
+        "name": "dogen",
         "repo": "main",
         "subject": "masd-project",
         "desc": "The MASD Code Generator.",
@@ -15,7 +15,7 @@
     },
     "version": {
         "name": "${DOGEN_VERSION}",
-        "desc": "Sprint ${DOGEN_MINOR_VERSION}",
+        "desc": "Sprint ${DOGEN_PATCH_VERSION}",
         "released": "${BUILD_DATE}",
         "vcs_tag": "v${DOGEN_VERSION}",
         "gpgSign": false
