@@ -408,6 +408,28 @@ dependency management.
 Jot down ideas on the separation between the API and the
 implementation in dogen products.
 
+*** Mapping of third-party dependencies                               :story:
+
+System models should follow the physical structure of
+dependencies. That is, we should not have a "boost" system model, but
+instead a boost-test etc. Each of these can then have mappings
+(e.g. vcpkg name, build2 name, etc). Users must declare these
+references just like they do with user models. Dogen can then create
+code for:
+
+- cmake targets, properly linking against libraries;
+- vcpkg install, at product level, by de-duplicating component
+  dependencies;
+- possibly distro dependencies.
+
+We should only have a mandatory dependency, which is the STL. In
+addition, we need different models for each version (e.g. c++ 03,
+etc). This makes it easier to include the right types.
+
+Note that each model must have an associated version. The version
+should be part of the file name. However, maybe we need to distinguish
+between TS version (11, 17, etc) from library version.
+
 *** Upgrade to c++ 17                                                 :story:
 
 There are quite a few dependencies for this to happen:
