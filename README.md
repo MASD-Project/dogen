@@ -12,7 +12,8 @@
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 [![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.08.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
-[![Download](https://api.bintray.com/packages/masd-project/Dogen/dogen/images/download.svg?version=v1.0.08)](https://bintray.com/masd-project/Dogen/dogen/v1.0.08)
+[ ![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.09) ](https://bintray.com/masd-project/main/dogen/1.0.09/link)
+[![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
 [![Language](https://img.shields.io/badge/language-c++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
 [![C++](https://img.shields.io/badge/std-c++14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B14)
 [![msvc2015](https://img.shields.io/badge/MSVC-2015-ff69b4.svg)](https://visualstudio.microsoft.com/vs/older-downloads/)
@@ -67,7 +68,7 @@ look like, and they attempt to exercise all of Dogen's functionality.
 # Binary Packages
 
 Binary packages are available for each release on
-[BinTray](https://bintray.com/masd-project/Dogen/), covering Debian
+[BinTray](https://bintray.com/masd-project/main/dogen), covering Debian
 Linux, OSX and Windows - 64-bit only. Packages are generated at the
 end of each sprint - with the exception of Windows, where we generate
 them on each commit due to a [problem with
