@@ -50,8 +50,8 @@ endmacro()
 #
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-if (CMAKE_CXX_COMPILER MATCHES ".*clang")
-    set(CMAKE_COMPILER_IS_CLANGXX 1)
+if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    set(CMAKE_COMPILER_IS_CLANGXX "TRUE")
 endif()
 
 if (UNIX)
@@ -64,11 +64,8 @@ if (UNIX)
     endif()
 endif()
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    set(CMAKE_COMPILER_IS_CLANGXX "TRUE")
-endif()
-
-if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
+if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
+        AND NOT "x${CMAKE_CXX_SIMULATE_ID}" STREQUAL "xMSVC")
     # enable as many warnings as possible
     set(warning_flags "-Wall -Wextra")
 
@@ -144,7 +141,8 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
             "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-enable-stdcall-fixup")
     endif()
 
-elseif(MSVC)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
+        CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
     if (${MSVC_VERSION} GREATER 1399) # 1400+ => VC2005+
         # cannot use incremental rebuild
         string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
