@@ -68,6 +68,10 @@ install:
 
 script:
   - JOBS=2
+  - export BUILD_PROVIDER=travis
+  - export BUILD_COMMIT=${TRAVIS_COMMIT}
+  - export BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
+  - export BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         export CMAKE_TOOLCHAIN_FILE="/tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake"
         export TARGET="package run_all_tests";

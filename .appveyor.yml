@@ -38,7 +38,11 @@ before_build:
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
-  - ps: $build_type="$env:configuration";
+  - ps: $env:BUILD_PROVIDER = "appveyor"
+  - ps: $env:BUILD_COMMIT = $env:APPVEYOR_REPO_COMMIT
+  - ps: $env:BUILD_NUMBER = $env:APPVEYOR_BUILD_VERSION
+  - ps: $env:BUILD_TIMESTAMP = Get-Date -format "yyyy/MM/dd HH:MM:SS"
+  - ps: $build_type = "$env:configuration";
   - ps: $compiler = $env:compiler;
   - ps: if ($compiler -eq "msvc") {
             $target = "ALL_BUILD run_windows_green_tests";

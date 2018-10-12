@@ -45,6 +45,7 @@ const std::string log_file_prefix("dogen.knitter.");
 const std::string more_information(
     "Try `dogen.knitter --help' for more information.");
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
+const std::string knitter_build_info(DOGEN_BUILD_INFO);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
 const std::string code_generation_failure("Code generation failure.");
@@ -70,8 +71,13 @@ void version() {
               << std::endl
               << "Copyright (C) 2012-2015 Marco Craveiro." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
-              << "<http://gnu.org/licenses/gpl.html>."
-              << std::endl;
+              << "<http://gnu.org/licenses/gpl.html>." << std::endl;
+
+    if (!knitter_build_info.empty()) {
+        std::cout << knitter_build_info << std::endl;
+        std::cout << "IMPORTANT: build details are NOT for security purposes."
+                  << std::endl;
+    }
 }
 
 }

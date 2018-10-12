@@ -165,16 +165,6 @@ file(GLOB_RECURSE all_dia_test_models ABSOLUTE
     "${CMAKE_SOURCE_DIR}/test_data/external.dia/input/*.dia")
 
 #
-# setup git
-#
-find_program(GIT_COMMAND NAMES git)
-if (GIT_COMMAND)
-    message(STATUS "Found git (${GIT_COMMAND})...")
-else()
-    message(FATAL_ERROR "git not found.")
-endif()
-
-#
 # setup pdflatex
 #
 find_program(PDFLATEX_COMMAND NAMES pdflatex)
@@ -203,14 +193,6 @@ else()
     message(STATUS "jq not found, disabling JSON validation.")
     set(WITH_JSON_VALIDATION "off")
 endif()
-
-# hash of the top commit
-execute_process(COMMAND ${GIT_COMMAND} rev-list -n 1 HEAD
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    ERROR_VARIABLE git_error
-    OUTPUT_VARIABLE CURRENT_GIT_COMMIT
-    RESULT_VARIABLE ret_var
-    OUTPUT_STRIP_TRAILING_WHITESPACE)
 
 #
 # useful vars
@@ -284,6 +266,35 @@ set(DOGEN_PATCH_VERSION 09)
 set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
 set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
+
+set(WITH_BUILD_INFO ON)
+set(DOGEN_BUILD_INFO "")
+
+if (NOT DEFINED ENV{BUILD_PROVIDER})
+    set(WITH_BUILD_INFO OFF)
+endif()
+
+if (NOT DEFINED ENV{BUILD_COMMIT})
+    set(WITH_BUILD_INFO OFF)
+endif()
+
+if (NOT DEFINED ENV{BUILD_NUMBER})
+    set(WITH_BUILD_INFO OFF)
+endif()
+
+if (NOT DEFINED ENV{BUILD_TIMESTAMP})
+    set(WITH_BUILD_INFO OFF)
+endif()
+
+if (WITH_BUILD_INFO)
+    set(DOGEN_BUILD_INFO "Build: Provider = '$ENV{BUILD_PROVIDER}'")
+    set(DOGEN_BUILD_INFO "${DOGEN_BUILD_INFO} Number = '$ENV{BUILD_NUMBER}'")
+    set(DOGEN_BUILD_INFO "${DOGEN_BUILD_INFO} Commit = '$ENV{BUILD_COMMIT}'")
+    set(DOGEN_BUILD_INFO "${DOGEN_BUILD_INFO} Timestamp = '$ENV{BUILD_TIMESTAMP}'")
+    message(STATUS "${DOGEN_BUILD_INFO}")
+else()
+    message(STATUS "Not adding build info.")
+endif()
 
 # debug
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
