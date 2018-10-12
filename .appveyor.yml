@@ -28,7 +28,7 @@ clone_depth: 1
 install:
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
-  - ps: $env:Path += "c:\third_party\installs\ninja\bin"
+  - ps: $env:CMAKE_MAKE_PROGRAM = "c:\third_party\installs\Ninja\ninja.exe"
   - ps: $env:CMAKE_TOOLCHAIN_FILE = "c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
 
 build_script:
