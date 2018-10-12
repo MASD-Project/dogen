@@ -68,7 +68,7 @@ deploy:
     subject: masd-project
     repo: main
     package: dogen
-    artifact: build/scripts/wget.exe
+    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
     version: 1.0.09
-    publish: false
+    publish: true
     override: true
