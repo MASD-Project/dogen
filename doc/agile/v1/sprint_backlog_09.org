@@ -17,26 +17,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-12 Fri 14:56]
+#+CAPTION: Clock summary at [2018-10-12 Fri 15:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *58:55* |       |       |   0.0 |
+| *Total time*                                                                | *59:01* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 58:55   |       |       |   0.0 |
-| Active                                                                      |         | 58:55 |       |   0.0 |
+| Stories                                                                     | 59:01   |       |       |   0.0 |
+| Active                                                                      |         | 59:01 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  2:36 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  2:42 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
 | Create project for C# test model                                            |         |       |  5:23 |   0.0 |
 | Fix boost path serialisation errors                                         |         |       |  0:47 |   0.0 |
 | Create project for C++ test model                                           |         |       |  6:55 |   0.0 |
 | Update readme with information on reference models                          |         |       |  0:10 |   0.0 |
 | Remove test models from dogen project                                       |         |       |  1:13 |   0.0 |
-| Recap of the current situation                                              |         |       |  1:25 |   0.0 |
-| Investigate adding package management support to dogen                      |         |       | 33:41 |   0.0 |
-| High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
 | Add commit info to version                                                  |         |       |  0:57 |   0.0 |
+| Investigate adding package management support to dogen                      |         |       | 11:10 |   0.0 |
+| Add vcpkg support to Linux builds                                           |         |       | 13:15 |   0.0 |
+| Add vcpkg support to windows builds                                         |         |       |  9:16 |   0.0 |
+| Recap of the current situation                                              |         |       |  1:25 |   0.0 |
+| High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -83,7 +85,8 @@ Due to the transition of organisations, we did not generate any binaries for thi
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
-    CLOCK: [2018-10-05 Fri 15:28]--[2018-10-05 Fri 15:34] =>  0:06
+    CLOCK: [2018-10-05 Fri 15:28]--[2018-10-05 Fri 15:40] =>  0:12
+    CLOCK: [2018-10-12 Fri 14:56]--[2018-10-12 Fri 14:34] => -0:22
     CLOCK: [2018-10-05 Fri 10:14]--[2018-10-05 Fri 11:25] =>  1:11
     CLOCK: [2018-10-05 Fri 09:06]--[2018-10-05 Fri 10:13] =>  1:07
     CLOCK: [2018-10-04 Thu 17:44]--[2018-10-04 Thu 17:56] =>  0:12
@@ -254,65 +257,27 @@ all references to test models:
 - remove environment variables (WITH_CSHARP, WITH_CPP etc);
 - comment out generation tests for now (JSON and Dia).
 
-*** STARTED Recap of the current situation                            :story:
+*** COMPLETED Add commit info to version                              :story:
+    CLOSED: [2018-10-12 Fri 15:06]
     :LOGBOOK:
-    CLOCK: [2018-10-05 Fri 15:41]--[2018-10-05 Fri 17:06] =>  1:25
+    CLOCK: [2018-10-12 Fri 13:58]--[2018-10-12 Fri 14:55] =>  0:57
     :END:
 
-We have started a number of simultaneous refactors and now its very
-hard to understand where we are and where we are going. We need to go
-though the code and ascertain the state of the onion.
+In the past we had the git commit SHA key on the version. This was
+useful, but caused the build to rebuild every time we committed
+locally. Since we only build the final binaries on tags, there wasn't
+much of a need for this so it was removed. However, we now build again
+on each commit so there is a requirement for it.
 
-Notes:
+To avoid the previous problems we should create some kind of macro
+that only adds the commit if we are building from the build machine;
+otherwise it just stamps something like "developer build". On the
+build machine we should also add a timestamp and if possible the
+travis/appveyor build number.
 
-- the external model refactoring seems to be complete.
-- the modeling model refactoring seems to have been tangled with the
-  formatters refactor. We have moved some but not all properties into
-  the modeling model but then we realised that some of them should
-  really be in the generation model. However, we then hit the usual
-  problem: how do we decorate element with the generation properties?
-  See the discussion in story "Create the =generation= model" for
-  details on why this is non-trivial. At that point we were left with
-  a series of not particularly ideal options:
-  - go forward and create a pair of element and generatable properties
-    and somehow fix all transforms. In a way this is what we had done
-    with the formatters, except that was after all of the transforms
-    had been applied.
-  - create the idea of "opaque properties" in the modeling model and
-    then unpack the opaque properties in the generation transforms.
-  - add the properties directly to the modeling model (to the element,
-    at least) but only populate them in the generation transforms.
-- the problem we are trying to solve seems to fall somewhere in
-  between the decorator pattern and the mixin pattern but its not
-  quite either.
-- this problem started because we wanted to make a clear separation
-  between modeling space and generation space; modeling space is not
-  aware of the archetype expansion. This makes sense to an extent: we
-  do not want to create dependencies between modeling space and
-  formatters (source of the cycles between components). However, we
-  also do not want to have to define all of the meta-model elements
-  again in order to attach the generatable properties.
-
-*** STARTED Investigate adding package management support to dogen    :story:
+*** COMPLETED Investigate adding package management support to dogen  :story:
+    CLOSED: [2018-10-12 Fri 15:34]
     :LOGBOOK:
-    CLOCK: [2018-10-12 Fri 13:30]--[2018-10-12 Fri 13:58] =>  0:28
-    CLOCK: [2018-10-12 Fri 11:19]--[2018-10-12 Fri 12:21] =>  1:02
-    CLOCK: [2018-10-12 Fri 09:30]--[2018-10-12 Fri 11:18] =>  1:48
-    CLOCK: [2018-10-11 Thu 21:49]--[2018-10-11 Thu 22:20] =>  0:31
-    CLOCK: [2018-10-11 Thu 20:12]--[2018-10-11 Thu 20:27] =>  0:15
-    CLOCK: [2018-10-11 Thu 14:05]--[2018-10-11 Thu 16:05] =>  2:00
-    CLOCK: [2018-10-11 Thu 09:12]--[2018-10-11 Thu 12:24] =>  6:53
-    CLOCK: [2018-10-10 Wed 17:12]--[2018-10-10 Wed 17:30] =>  0:18
-    CLOCK: [2018-10-10 Wed 15:29]--[2018-10-10 Wed 15:45] =>  0:16
-    CLOCK: [2018-10-10 Wed 14:12]--[2018-10-10 Wed 15:28] =>  1:16
-    CLOCK: [2018-10-10 Wed 09:06]--[2018-10-10 Wed 12:23] =>  3:17
-    CLOCK: [2018-10-09 Tue 20:29]--[2018-10-09 Tue 21:52] =>  1:23
-    CLOCK: [2018-10-09 Tue 19:55]--[2018-10-09 Tue 20:28] =>  0:33
-    CLOCK: [2018-10-09 Tue 17:18]--[2018-10-09 Tue 18:25] =>  1:07
-    CLOCK: [2018-10-09 Tue 16:40]--[2018-10-09 Tue 17:17] =>  0:37
-    CLOCK: [2018-10-09 Tue 14:12]--[2018-10-09 Tue 16:05] =>  1:53
-    CLOCK: [2018-10-09 Tue 13:49]--[2018-10-09 Tue 14:11] =>  0:22
-    CLOCK: [2018-10-09 Tue 10:51]--[2018-10-09 Tue 13:04] =>  2:13
     CLOCK: [2018-10-08 Mon 19:33]--[2018-10-08 Mon 19:48] =>  0:15
     CLOCK: [2018-10-08 Mon 19:12]--[2018-10-08 Mon 19:32] =>  0:20
     CLOCK: [2018-10-08 Mon 16:27]--[2018-10-08 Mon 18:25] =>  1:58
@@ -404,6 +369,95 @@ We'll spin this off as a separate story into the backlog for the
 future; even just building with vcpkg locally its an improvement in
 dependency management.
 
+Links:
+
+- [[https://github.com/Microsoft/vcpkg/issues/4447][Link error LNK2005 when linking against Boost.Test on Windows]]
+
+*** COMPLETED Add vcpkg support to Linux builds                       :story:
+    CLOSED: [2018-10-12 Fri 15:32]
+    :LOGBOOK:
+    CLOCK: [2018-10-10 Wed 17:12]--[2018-10-10 Wed 17:30] =>  0:18
+    CLOCK: [2018-10-10 Wed 15:29]--[2018-10-10 Wed 15:45] =>  0:16
+    CLOCK: [2018-10-10 Wed 14:12]--[2018-10-10 Wed 15:28] =>  1:16
+    CLOCK: [2018-10-10 Wed 09:06]--[2018-10-10 Wed 12:23] =>  3:17
+    CLOCK: [2018-10-09 Tue 20:29]--[2018-10-09 Tue 21:52] =>  1:23
+    CLOCK: [2018-10-09 Tue 19:55]--[2018-10-09 Tue 20:28] =>  0:33
+    CLOCK: [2018-10-09 Tue 17:18]--[2018-10-09 Tue 18:25] =>  1:07
+    CLOCK: [2018-10-09 Tue 16:40]--[2018-10-09 Tue 17:17] =>  0:37
+    CLOCK: [2018-10-09 Tue 14:12]--[2018-10-09 Tue 16:05] =>  1:53
+    CLOCK: [2018-10-09 Tue 13:49]--[2018-10-09 Tue 14:11] =>  0:22
+    CLOCK: [2018-10-09 Tue 10:51]--[2018-10-09 Tue 13:04] =>  2:13
+    :END:
+
+Following on from our investigation, we need to add vcpkg to the linux
+builds (clang and gcc). While we're there, update all the tools to
+latest in preparation to switching to C++ 17. We also need to fix the
+dropbox upload story as it was broken with the GitHub organisation
+changes. While we're there, we should upload releases on all commits
+rather than just on tags.
+
+*** COMPLETED Add vcpkg support to windows builds                     :story:
+    CLOSED: [2018-10-12 Fri 15:34]
+    :LOGBOOK:
+    CLOCK: [2018-10-12 Fri 13:30]--[2018-10-12 Fri 13:58] =>  0:28
+    CLOCK: [2018-10-12 Fri 11:19]--[2018-10-12 Fri 12:21] =>  1:02
+    CLOCK: [2018-10-12 Fri 09:30]--[2018-10-12 Fri 11:18] =>  1:48
+    CLOCK: [2018-10-11 Thu 21:49]--[2018-10-11 Thu 22:20] =>  0:31
+    CLOCK: [2018-10-11 Thu 20:12]--[2018-10-11 Thu 20:27] =>  0:15
+    CLOCK: [2018-10-11 Thu 14:05]--[2018-10-11 Thu 16:05] =>  2:00
+    CLOCK: [2018-10-11 Thu 09:12]--[2018-10-11 Thu 12:24] =>  6:53
+    :END:
+
+Following on from our investigation, we need to add vcpkg to the
+appveyor windows builds (msvc). While we're there, update visual
+studio and all the tools to latest in preparation to switching to
+C++ 17. Also try to add support for =clang-cl= if its easy.
+
+*** STARTED Add vcpkg support to osx builds                           :story:
+
+Following on from our investigation, we need to add vcpkg to the
+travis osx builds (clang). While we're there, update all the tools to
+latest in preparation to switching to C++ 17.
+
+*** STARTED Recap of the current situation                            :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-05 Fri 15:41]--[2018-10-05 Fri 17:06] =>  1:25
+    :END:
+
+We have started a number of simultaneous refactors and now its very
+hard to understand where we are and where we are going. We need to go
+though the code and ascertain the state of the onion.
+
+Notes:
+
+- the external model refactoring seems to be complete.
+- the modeling model refactoring seems to have been tangled with the
+  formatters refactor. We have moved some but not all properties into
+  the modeling model but then we realised that some of them should
+  really be in the generation model. However, we then hit the usual
+  problem: how do we decorate element with the generation properties?
+  See the discussion in story "Create the =generation= model" for
+  details on why this is non-trivial. At that point we were left with
+  a series of not particularly ideal options:
+  - go forward and create a pair of element and generatable properties
+    and somehow fix all transforms. In a way this is what we had done
+    with the formatters, except that was after all of the transforms
+    had been applied.
+  - create the idea of "opaque properties" in the modeling model and
+    then unpack the opaque properties in the generation transforms.
+  - add the properties directly to the modeling model (to the element,
+    at least) but only populate them in the generation transforms.
+- the problem we are trying to solve seems to fall somewhere in
+  between the decorator pattern and the mixin pattern but its not
+  quite either.
+- this problem started because we wanted to make a clear separation
+  between modeling space and generation space; modeling space is not
+  aware of the archetype expansion. This makes sense to an extent: we
+  do not want to create dependencies between modeling space and
+  formatters (source of the cycles between components). However, we
+  also do not want to have to define all of the meta-model elements
+  again in order to attach the generatable properties.
+
 *** STARTED High-level model thoughts                                 :story:
     :LOGBOOK:
     CLOCK: [2018-10-11 Thu 16:06]--[2018-10-11 Thu 18:26] =>  2:20
@@ -411,6 +465,17 @@ dependency management.
 
 Jot down ideas on the separation between the API and the
 implementation in dogen products.
+
+*** Finish adding support for clang-cl builds                         :story:
+
+We have added preliminary support for building with clang-cl on
+windows, but the build is not green. Most of the errors seem to be on
+boost.
+
+Links:
+
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
 
 *** Tidy-up dogen windows package                                     :story:
 
@@ -422,23 +487,6 @@ There are a few inconsistencies with the package:
   dogen installs.
 - package name is windows amd64. We should use the vcpkg triplets for
   simplicity (e.g. x64-windows).
-
-*** STARTED Add commit info to version                                :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-12 Fri 13:58]--[2018-10-12 Fri 14:55] =>  0:57
-    :END:
-
-In the past we had the git commit SHA key on the version. This was
-useful, but caused the build to rebuild every time we committed
-locally. Since we only build the final binaries on tags, there wasn't
-much of a need for this so it was removed. However, we now build again
-on each commit so there is a requirement for it.
-
-To avoid the previous problems we should create some kind of macro
-that only adds the commit if we are building from the build machine;
-otherwise it just stamps something like "developer build". On the
-build machine we should also add a timestamp and if possible the
-travis/appveyor build number.
 
 *** Mapping of third-party dependencies                               :story:
 
