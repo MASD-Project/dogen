@@ -106,7 +106,7 @@ write-host "* Starting build.";
 $command = "cmake ${product_dir} ${cmake_defines} -G '${generator}'";
 Invoke-Expression -Command $command
 if ($LastExitCode -ne 0) {
-    write-host "Error whilst configuring."
+    write-host "Error whilst configuring. Command: $command"
     exit 1
 }
 
