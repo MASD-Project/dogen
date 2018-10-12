@@ -77,12 +77,18 @@ Write-Host "Build directory: ${build_type_dir}"
 #
 # CMake setup
 #
-$toolchain_file="c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
 $cmake_defines="-DCMAKE_BUILD_TYPE=${build_type}"
 $cmake_defines="${cmake_defines} -DWITH_LATEX=OFF"
 $cmake_defines="${cmake_defines} -DWITH_MINIMAL_PACKAGING=ON"
-$cmake_defines="${cmake_defines} -DCMAKE_TOOLCHAIN_FILE=${toolchain_file}"
-$cmake_defines="${cmake_defines} -DVCPKG_TARGET_TRIPLET=x64-windows-static"
+
+# Handle vcpkg.
+if (Test-Path env:CMAKE_TOOLCHAIN_FILE)) {
+    $toolchain_file=$env:CMAKE_TOOLCHAIN_FILE
+    $cmake_defines="${cmake_defines} -DCMAKE_TOOLCHAIN_FILE=${toolchain_file}"
+    $cmake_defines="${cmake_defines} -DVCPKG_TARGET_TRIPLET=x64-windows-static"
+}
+
+# Handle clang-cl
 if ($compiler -eq "clang-cl") {
     $cmake_defines="${cmake_defines} -DCMAKE_C_COMPILER=clang-cl.exe"
     $cmake_defines="${cmake_defines} -DCMAKE_CXX_COMPILER=clang-cl.exe"

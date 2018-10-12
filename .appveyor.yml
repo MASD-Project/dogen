@@ -29,6 +29,7 @@ install:
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
   - ps: $env:Path += "c:\third_party\installs\ninja\bin"
+  - ps: $env:CMAKE_TOOLCHAIN_FILE = "c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
 
 build_script:
   - ps: $build_type="$env:configuration";
@@ -37,7 +38,7 @@ build_script:
   - ps: cd $project_dir
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $compiler -target $target
   - ps: if ($build_type -eq "Release" -and $compiler -eq "msvc") {
-            cd $project_dir\build\output\$env:compiler\$build_type;
+            cd $project_dir\build\output\$compiler\$build_type;
             $env:Path += ";" + $env:WIX;
             cpack -G WIX -C Release;
         }
