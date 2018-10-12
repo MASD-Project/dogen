@@ -19,7 +19,6 @@
 param (
     [string]$build_type = "Release",
     [string]$compiler = "msvc",
-    [string]$third_party = "",
     [string[]]$target = @()
 )
 
@@ -47,17 +46,6 @@ if ($compiler -eq "msvc") {
 } else {
     write-host "* Unrecognised compiler: ${compiler}";
     exit 1
-}
-
-#
-# Additional directory for includes and libs.
-#
-if ([string]::IsNullOrEmpty($third_party)) {
-    write-host "* Third party: NOT PROVIDED";
-} else {
-    write-host "* Third party: ${third_party}";
-    $env:CMAKE_INCLUDE_PATH="${third_party}\include";
-    $env:CMAKE_LIBRARY_PATH="${third_party}\lib";
 }
 
 #
