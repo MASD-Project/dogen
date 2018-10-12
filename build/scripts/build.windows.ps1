@@ -83,7 +83,8 @@ if (!(Test-Path -Path $build_type_dir)) {
     New-Item -ItemType directory -Path $build_type_dir | Out-Null
 }
 
-cd ${build_type_dir}
+Set-Location -Path ${build_type_dir} | Out-Null
+Write-Host "Build directory: ${build_type_dir}"
 
 #
 # CMake setup

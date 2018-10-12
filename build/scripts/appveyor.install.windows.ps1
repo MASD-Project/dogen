@@ -21,13 +21,13 @@
 # Top-level directories used by install
 #
 $top_level_dir="C:\third_party"
-New-Item -ItemType directory -Path $top_level_dir
+New-Item -ItemType directory -Path $top_level_dir | Out-Null
 
 $installs_dir="$top_level_dir\installs"
-New-Item -ItemType directory -Path $installs_dir
+New-Item -ItemType directory -Path $installs_dir | Out-Null
 
 $downloads_dir="$top_level_dir\downloads"
-New-Item -ItemType directory -Path $downloads_dir
+New-Item -ItemType directory -Path $downloads_dir | Out-Null
 
 #
 # vcpkg dependencies. Important: when updating the package remember to
@@ -49,9 +49,9 @@ build\scripts\wget.exe --quiet --no-check-certificate $vcpkg_input_location -O $
 
 Write-Host "URL: $vcpkg_input_location"
 Write-Host "Download location: $vcpkg_downloads_location"
-Set-Location -Path $vcpkg_installs_dir
+Set-Location -Path $vcpkg_installs_dir | Out-Null
 7z x $vcpkg_downloads_location > $null;
-Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir/$vcpkg_final_folder
+Rename-Item -Path $vcpkg_installs_dir/$vcpkg_folder -newName $vcpkg_installs_dir/$vcpkg_final_folder | Out-Null
 
 #
 # Ninja
@@ -64,6 +64,6 @@ $ninja_downloads_location="${downloads_dir}/${ninja_package}"
 appveyor DownloadFile $ninja_input_location -FileName $ninja_downloads_location
 Write-Host "URL: $ninja_input_location"
 Write-Host "Download location: $ninja_downloads_location"
-New-Item -ItemType directory -Path $ninja_installs_dir
-Set-Location -Path $ninja_installs_dir
+New-Item -ItemType directory -Path $ninja_installs_dir | Out-Null
+Set-Location -Path $ninja_installs_dir | Out-Null
 7z x $ninja_downloads_location > $null
