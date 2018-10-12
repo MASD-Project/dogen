@@ -11,10 +11,9 @@ environment:
   matrix:
     - compiler: msvc
 
-environment:
-  matrix:
-    allow_failures:
-      - compiler: clang-cl
+matrix:
+  allow_failures:
+    - compiler: clang-cl
 
 configuration:
   - Release
