@@ -21,27 +21,16 @@ platform:
 
 clone_depth: 1
 
-install:
-  - ps: $project_dir="$pwd";
-  - ps: .\build\scripts\appveyor.install.windows.ps1
-  - ps: $env:Path += "c:\third_party\installs\ninja\bin"
-
 build_script:
   - ps: $build_type="$env:configuration";
   - ps: $third_party="$env:temp\dogen_deps\dogen_deps_vc14_windows_amd64";
   - ps: $target = "ALL_BUILD run_windows_green_tests";
   - ps: $compiler = $env:compiler;
   - ps: cd $project_dir
-  - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $compiler -third_party $third_party -target $target
-  - ps: if ($build_type -eq "Release" -and $compiler -eq "msvc") {
-            cd $project_dir\build\output\$env:compiler\$build_type;
-            $env:Path += ";" + $env:WIX;
-            cpack -G WIX -C Release;
-        }
 
 artifacts:
-  - path: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
-    name: x86_64 MSI
+  - path: c:\third_party\installs\ninja\bin\ninja.exe
+    name: x86_64
 
 notifications:
   - provider: Webhook
@@ -64,7 +53,7 @@ deploy:
     subject: mcraveiro
     repo: Dogen
     package: Dogen
-    artifact: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
+    artifact: c:\third_party\installs\ninja\bin\ninja.exe
     version: 1.0.09
-    publish: true
+    publish: false
     override: true
