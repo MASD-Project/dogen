@@ -90,15 +90,15 @@ if (Test-Path env:CMAKE_TOOLCHAIN_FILE) {
 
 # Handle clang-cl
 if ($compiler -eq "clang-cl") {
-    $cmake_defines="${cmake_defines} -DCMAKE_C_COMPILER=clang-cl.exe"
-    $cmake_defines="${cmake_defines} -DCMAKE_CXX_COMPILER=clang-cl.exe"
+    $cmake_defines="${cmake_defines} -DCMAKE_C_COMPILER=clang-cl"
+    $cmake_defines="${cmake_defines} -DCMAKE_CXX_COMPILER=clang-cl"
 }
 
 #
 # Build
 #
 write-host "* Starting build.";
-$command = "cmake ${product_dir} ${cmake_defines} -G '${generator}'";
+$command = "cmake ${cmake_defines} -G '${generator}' ${product_dir}";
 Invoke-Expression -Command $command
 if ($LastExitCode -ne 0) {
     write-host "Error whilst configuring. Command: $command"
