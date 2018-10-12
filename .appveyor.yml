@@ -54,8 +54,8 @@ deploy:
     username: mcraveiro
     api_key:
       secure: aeW66aeBxn5W4wOnb5Ae9L1/dYRsAyWiJatWTpKPSwEgR1diIFPUUeSqQ4jTxeF8
-    subject: mcraveiro
-    repo: Dogen
+    subject: masd-project
+    repo: main
     package: Dogen
     artifact: build/scripts/wget.exe
     version: 1.0.09
