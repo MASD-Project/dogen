@@ -110,10 +110,10 @@ endif()
 ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY}
     OPTIONS "${cmake_defines}")
 
-if(NOT DEFINED number_of_jobs)
-  set(number_of_jobs 1)
+if(DEFINED number_of_jobs)
+    set(CTEST_BUILD_FLAGS -j${number_of_jobs})
 endif()
-set(CTEST_BUILD_FLAGS -j${number_of_jobs})
+
 ctest_build()
 
 ctest_test(RETURN_VALUE retval)
