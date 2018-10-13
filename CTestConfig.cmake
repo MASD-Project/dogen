@@ -18,16 +18,7 @@
 # MA 02110-1301, USA.
 #
 
-# set the site to the hostname. this shows up in the dashboard.
-site_name(DOGEN_SITE)
-set(SITE "${DOGEN_SITE}")
-set(CTEST_SITE "${DOGEN_SITE}")
-
-# project name
-set(CTEST_PROJECT_NAME "Dogen")
 set(CTEST_NIGHTLY_START_TIME "00:00:00 UTC")
-
-# kitware dashboard settings
 set(CTEST_PROJECT_NAME "dogen")
 set(CTEST_DROP_METHOD "http")
 set(CTEST_DROP_SITE "my.cdash.org")

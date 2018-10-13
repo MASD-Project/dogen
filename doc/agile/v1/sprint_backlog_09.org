@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-13 Sat 16:53]
+#+CAPTION: Clock summary at [2018-10-13 Sat 17:40]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *61:41* |       |       |   0.0 |
+| *Total time*                                                                | *62:27* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 61:41   |       |       |   0.0 |
-| Active                                                                      |         | 61:41 |       |   0.0 |
+| Stories                                                                     | 62:27   |       |       |   0.0 |
+| Active                                                                      |         | 62:27 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:42 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
@@ -39,7 +39,7 @@
 | Add vcpkg support to windows builds                                         |         |       |  9:16 |   0.0 |
 | Recap of the current situation                                              |         |       |  1:25 |   0.0 |
 | High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
-| Resurrect CDash agents                                                      |         |       |  2:40 |   0.0 |
+| Resurrect CDash agents                                                      |         |       |  3:26 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -469,6 +469,7 @@ implementation in dogen products.
 
 *** STARTED Resurrect CDash agents                                    :story:
     :LOGBOOK:
+    CLOCK: [2018-10-13 Sat 16:54]--[2018-10-13 Sat 17:40] =>  0:46
     CLOCK: [2018-10-13 Sat 14:44]--[2018-10-13 Sat 16:53] =>  2:09
     CLOCK: [2018-10-12 Fri 21:46]--[2018-10-12 Fri 22:17] =>  0:31
     :END:
@@ -485,6 +486,20 @@ this project:
 
 We can still have our own agents for the nightlies etc but at least
 this way all travis builds are pushing into CDash.
+
+Command line:
+
+: CMAKE_TOOLCHAIN_FILE=~/Development/DomainDrivenConsulting/masd/vcpkg/master/scripts/buildsystems/vcpkg.cmake ctest --extra-verbose --script ".ctest.cmake,configuration_type=Release,generator=Ninja,compiler=clang6,number_of_jobs=3"
+
+Links:
+
+- https://github.com/ned14/outcome/blob/develop/.ci.cmake
+- https://my.cdash.org/index.php?project=Boost.Outcome&date=2018-10-12
+- https://public.kitware.com/pipermail/cdash/2010-June/000819.html
+- https://github.com/ned14/quickcpplib/blob/master/cmakelib/QuickCppLibUtils.cmake
+- [[https://gitlab.kitware.com/zackgalbreath/cmake/commit/2cf643d2cba4a819108e0e284cd58cf356378df3][Example of sub-projects]]
+- [[https://github.com/Kitware/CDash/issues/732][GitHub issue with CDash problems]]
+- [[http://webcache.googleusercontent.com/search?q=cache:vEhBG9OAeSAJ:https://blog.kitware.com/cdash-integration-with-github/&hl=en&gl=uk&strip=1&vwsrc=0][CDash integration with GitHub]]
 
 *** Finish adding support for clang-cl builds                         :story:
 
