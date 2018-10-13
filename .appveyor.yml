@@ -10,11 +10,11 @@ image:
 environment:
   matrix:
     - compiler: clang-cl
-      MSVC_SETUP_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat
-      MSVC_SETUP_ARG: x86_amd64
-      GENERATOR: "Ninja"
+      msvc_setup_path: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat
+      msvc_setup_arg: x86_amd64
+      generator: Ninja
     - compiler: msvc
-      GENERATOR: "Visual Studio 15 2017 Win64"
+      generator: Visual Studio 15 2017 Win64
 
 matrix:
   allow_failures:
@@ -37,7 +37,7 @@ install:
   - ps: $env:CMAKE_TOOLCHAIN_FILE = "c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
 
 before_build:
-  - if DEFINED MSVC_SETUP_PATH call "%MSVC_SETUP_PATH%" %MSVC_SETUP_ARG%
+  - if DEFINED msvc_setup_path call "%msvc_setup_path%" %msvc_setup_arg%
   - cd %APPVEYOR_BUILD_FOLDER%
 
 build_script:
@@ -45,9 +45,7 @@ build_script:
   - ps: $env:BUILD_COMMIT = $env:APPVEYOR_REPO_COMMIT
   - ps: $env:BUILD_NUMBER = $env:APPVEYOR_BUILD_VERSION
   - ps: $env:BUILD_TIMESTAMP = Get-Date -format "yyyy/MM/dd HH:mm:ss"
-  - ps: $BUILD_TYPE = "$env:configuration";
-  - ps: $COMPILER = $env:compiler;
-  - ps: ctest --extra-verbose --script ".ctest.cmake,configuration_type=${BUILD_TYPE},generator=${GENERATOR},compiler=${COMPILER}";
+  - ps: ctest --extra-verbose --script ".ctest.cmake,configuration_type=$env:configuration,generator=$env:generator,compiler=$env:compiler";
 
 artifacts:
   - path: build/output/msvc/Release/stage/pkg/dogen-1.0.09-Windows-AMD64.msi
