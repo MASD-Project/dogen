@@ -13,9 +13,8 @@ environment:
       MSVC_SETUP_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat
       MSVC_SETUP_ARG: x86_amd64
       GENERATOR: "Ninja"
-
     - compiler: msvc
-      GENERATOR: "Visual Studio 15 2017 Win64";
+      GENERATOR: "Visual Studio 15 2017 Win64"
 
 matrix:
   allow_failures:
