@@ -68,7 +68,7 @@ install:
 
 script:
   - JOBS=2
-  - export BUILD_AGENT=travis
+  - export BUILD_PROVIDER=travis
   - export BUILD_COMMIT=${TRAVIS_COMMIT}
   - export BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
   - export BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
