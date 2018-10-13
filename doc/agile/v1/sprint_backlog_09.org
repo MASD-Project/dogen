@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-13 Sat 19:44]
+#+CAPTION: Clock summary at [2018-10-13 Sat 20:40]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *63:55* |       |       |   0.0 |
+| *Total time*                                                                | *64:05* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 63:55   |       |       |   0.0 |
-| Active                                                                      |         | 63:55 |       |   0.0 |
+| Stories                                                                     | 64:05   |       |       |   0.0 |
+| Active                                                                      |         | 64:05 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:42 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
@@ -40,7 +40,7 @@
 | Add vcpkg support to osx builds                                             |         |       |  1:13 |   0.0 |
 | Recap of the current situation                                              |         |       |  1:25 |   0.0 |
 | High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
-| Resurrect CDash agents                                                      |         |       |  3:41 |   0.0 |
+| Resurrect CDash agents                                                      |         |       |  3:51 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -474,6 +474,7 @@ implementation in dogen products.
 
 *** STARTED Resurrect CDash agents                                    :story:
     :LOGBOOK:
+    CLOCK: [2018-10-13 Sat 20:30]--[2018-10-13 Sat 20:40] =>  0:10
     CLOCK: [2018-10-13 Sat 19:28]--[2018-10-13 Sat 19:43] =>  0:15
     CLOCK: [2018-10-13 Sat 16:54]--[2018-10-13 Sat 17:40] =>  0:46
     CLOCK: [2018-10-13 Sat 14:44]--[2018-10-13 Sat 16:53] =>  2:09
