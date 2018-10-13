@@ -32,8 +32,7 @@ clone_depth: 1
 install:
   - ps: $project_dir="$pwd";
   - ps: .\build\scripts\appveyor.install.windows.ps1
-  - ps: $env:Path += ";C:\third_party\installs\Ninja"
-  - ps: $env:Path += ";" + $env:WIX;
+  - ps: $env:Path += ";C:\third_party\installs\Ninja;$env:WIX"
   - ps: $env:CMAKE_TOOLCHAIN_FILE = "c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
   - ps: $env:VCPKG_TARGET_TRIPLET = "x64-windows-static"
 

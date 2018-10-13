@@ -100,11 +100,11 @@ set(CTEST_BINARY_DIRECTORY
 ctest_start("Continuous")
 
 if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
-    set(cmake_defines "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
+    set(cmake_defines -DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE})
 endif()
 
 if(DEFINED ENV{VCPKG_TARGET_TRIPLET})
-    set(cmake_defines "${cmake_defines} -DVCPKG_TARGET_TRIPLET=$ENV{VCPKG_TARGET_TRIPLET}")
+    set(cmake_defines ${cmake_defines} -DVCPKG_TARGET_TRIPLET=$ENV{VCPKG_TARGET_TRIPLET})
 endif()
 
 ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY} OPTIONS ${cmake_defines})
