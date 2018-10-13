@@ -55,15 +55,15 @@ echo "* Product directory: ${product_dir}"
 compiler="$1"
 shift
 if [[ "x${compiler}" = "x" ]]; then
-    compiler="gcc";
+    compiler="gcc8";
     echo "* Compiler: ${compiler} (default)"
     export CC=gcc-8
     export CXX=g++-8
-elif [ "${compiler}" = "gcc" ]; then
+elif [ "${compiler}" = "gcc8" ]; then
     echo "* Compiler: ${compiler}"
     export CC=gcc-8
     export CXX=g++-8
-elif [ "${compiler}" = "clang" ]; then
+elif [ "${compiler}" = "clang7" ]; then
     echo "* Compiler: ${compiler}"
     export CC=clang-7
     export CXX=clang++-7

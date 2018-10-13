@@ -46,7 +46,7 @@ matrix:
       env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc8" GENERATOR="Ninja"
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Debug COMPILER="gcc8"
+      env: BUILD_TYPE=Debug COMPILER="gcc8" GENERATOR="Ninja"
     #
     # Linux Clang Builds
     #
@@ -84,7 +84,7 @@ script:
         export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
         if [[ $BUILD_TYPE == 'Release' ]]; then
             export TARGET="package";
-        fi
+        fi;
         ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET};
     fi
 
