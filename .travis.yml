@@ -43,19 +43,19 @@ matrix:
     #
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc" GENERATOR="Ninja"
+      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc8" GENERATOR="Ninja"
     - os: linux
       compiler: gcc
-      env: BUILD_TYPE=Debug COMPILER="gcc"
+      env: BUILD_TYPE=Debug COMPILER="gcc8"
     #
     # Linux Clang Builds
     #
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Release COMPILER="clang" GENERATOR="Ninja"
+      env: BUILD_TYPE=Release COMPILER="clang7" GENERATOR="Ninja"
     - os: linux
       compiler: clang
-      env: BUILD_TYPE=Debug COMPILER="clang"
+      env: BUILD_TYPE=Debug COMPILER="clang7" GENERATOR="Ninja"
 
 addons:
   apt:
@@ -76,7 +76,7 @@ script:
         export CMAKE_TOOLCHAIN_FILE="/tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake"
         export TARGET="package run_all_tests";
         export THIRD_PARTY="/tmp/dogen_deps/local";
-        ctest --extra-verbose --script ".ctest.cmake,configuration_type=Release${BUILD_TYPE},generator=${GENERATOR},compiler=${COMPILER},number_of_jobs=${JOBS}"
+        ctest --extra-verbose --script ".ctest.cmake,configuration_type=Release${BUILD_TYPE},generator=${GENERATOR},compiler=${COMPILER},number_of_jobs=${JOBS}";
         ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER};
     fi
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
@@ -85,7 +85,7 @@ script:
         if [[ $BUILD_TYPE == 'Release' ]]; then
             export TARGET="package";
         fi
-        ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET}
+        ${SCRIPTS_DIR}/build.${TRAVIS_OS_NAME}.sh ${BUILD_TYPE} ${JOBS} ${COMPILER} ${THIRD_PARTY} ${TARGET};
     fi
 
 # after_success:
