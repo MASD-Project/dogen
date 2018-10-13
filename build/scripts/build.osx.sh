@@ -68,23 +68,6 @@ else
 fi
 
 #
-# Additional directory for includes and libs.
-#
-third_party="$1"
-shift
-if [[ "x$third_party" = "x" ]]; then
-    third_party="";
-    echo "* Third party: NOT PROVIDED"
-else
-    echo "* Third party: ${third_party}"
-    export CMAKE_INCLUDE_PATH=${third_party}/include
-    export CMAKE_LIBRARY_PATH=${third_party}/lib
-    export DYLD_FALLBACK_LIBRARY_PATH=${third_party}/lib
-    echo "DYLD_FALLBACK_LIBRARY_PATH: $DYLD_FALLBACK_LIBRARY_PATH"
-    export PATH=${third_party}/bin:${PATH};
-fi
-
-#
 # Target
 #
 target="$*"
