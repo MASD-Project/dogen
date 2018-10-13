@@ -10167,21 +10167,6 @@ Or is the best practice that the user should choose how to link
 against boost in the same way it chooses to generate static or dynamic
 libraries internally for Dogen?
 
-*** Resurrect CDash agents                                            :story:
-
-CDash has bitrotted and is no longer working.
-
-- we need to get the build green on the Windows agent again.
-- we need to get the linux agent up and running again.
-
-Actually, the right thing to do is to connect CDash to travis like
-this project:
-
-- https://github.com/ned14/boost.outcome
-
-We can still have our own agents for the nightlies etc but at least
-this way all travis builds are pushing into CDash.
-
 *** Assorted improvements to CMake files                               :epic:
 
 It seems we are not using proper CMake idioms to pick up compiler
