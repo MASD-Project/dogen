@@ -83,10 +83,10 @@ script:
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
         export PATH=${THIRD_PARTY}/bin:${PATH};
     fi
-    ctest --extra-verbose --script ".ctest.cmake,configuration_type=${BUILD_TYPE},generator=${GENERATOR},compiler=${COMPILER},number_of_jobs=${JOBS}";
-    - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
+  - ctest --extra-verbose --script ".ctest.cmake,configuration_type=${BUILD_TYPE},generator=${GENERATOR},compiler=${COMPILER},number_of_jobs=${JOBS}";
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
         ${SCRIPTS_DIR}/test_package.linux.sh ${BUILD_TYPE} ${COMPILER};
-      fi
+    fi
 
 # after_success:
 #  - gcov --version
