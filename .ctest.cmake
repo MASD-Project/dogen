@@ -64,13 +64,18 @@ else()
 endif()
 
 set(CTEST_PROJECT_NAME "dogen")
-set(CTEST_SITE $ENV{COMPUTERNAME})
+if (DEFINED ENV{BUILD_AGENT})
+    set(CTEST_SITE $ENV{BUILD_AGENT})
+else()
+    set(CTEST_SITE $ENV{COMPUTERNAME})
+endif()
 set(CTEST_CMAKE_GENERATOR "${generator}")
 set(CTEST_CONFIGURATION_TYPE "${configuration_type}")
 set(CTEST_BUILD_NAME "${compiler}-${CMAKE_SYSTEM}-${CMAKE_SYSTEM_PROCESSOR}-${configuration_type}")
+set(CTEST_BUILD_TARGET "package")
 
 set(CTEST_SOURCE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
-set(build_folder "${CTEST_BUILD_NAME}/${CTEST_CONFIGURATION_TYPE}")
+set(build_folder "${compiler}/${CTEST_CONFIGURATION_TYPE}")
 set(CTEST_BINARY_DIRECTORY
   "${CMAKE_CURRENT_SOURCE_DIR}/build/output/${build_folder}")
 

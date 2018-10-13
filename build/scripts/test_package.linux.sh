@@ -39,18 +39,12 @@ echo "* Product directory: ${product_dir}"
 compiler="$1"
 shift
 if [[ "x${compiler}" = "x" ]]; then
-    compiler="gcc";
+    compiler="gcc8";
     echo "* Compiler: ${compiler} (default)"
-    export CC=gcc-6
-    export CXX=g++-6
-elif [ "${compiler}" = "gcc" ]; then
+elif [ "${compiler}" = "gcc8" ]; then
     echo "* Compiler: ${compiler}"
-    export CC=gcc-6
-    export CXX=g++-6
-elif [ "${compiler}" = "clang" ]; then
+elif [ "${compiler}" = "clang7" ]; then
     echo "* Compiler: ${compiler}"
-    export CC=clang-3.7
-    export CXX=clang++-3.7
 else
     echo "* Unrecognised compiler: ${compiler}"
     exit
@@ -60,19 +54,8 @@ fi
 # Setup directories
 #
 output_dir="${product_dir}/build/output";
-if [[ ! -e $output_dir ]]; then
-    mkdir $output_dir
-fi
-
 compiler_dir="${output_dir}/${compiler}";
-if [[ ! -e $compiler_dir ]]; then
-    mkdir $compiler_dir
-fi
-
 build_type_dir="${compiler_dir}/${build_type}";
-if [[ ! -e $build_type_dir ]]; then
-    mkdir $build_type_dir
-fi
 
 #
 # Test the package
