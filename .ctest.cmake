@@ -80,7 +80,6 @@ if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
     set(cmake_defines "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
 endif()
 
-# ctest_update()
 ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY} OPTIONS ${cmake_defines})
 
 if(NOT DEFINED number_of_jobs)
