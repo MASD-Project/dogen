@@ -82,6 +82,7 @@ if (DEFINED ENV{BUILD_PROVIDER})
 else()
     set(CTEST_SITE $ENV{COMPUTERNAME})
 endif()
+set(SITE "${CTEST_SITE}")
 set(CTEST_CMAKE_GENERATOR "${generator}")
 set(CTEST_CONFIGURATION_TYPE "${configuration_type}")
 set(CTEST_BUILD_NAME "${compiler}-${CMAKE_SYSTEM}-${CMAKE_SYSTEM_PROCESSOR}-${configuration_type}")
@@ -100,6 +101,10 @@ ctest_start("Continuous")
 
 if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
     set(cmake_defines "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
+endif()
+
+if(DEFINED ENV{VCPKG_TARGET_TRIPLET})
+    set(cmake_defines "${cmake_defines} -DVCPKG_TARGET_TRIPLET=$ENV{VCPKG_TARGET_TRIPLET}")
 endif()
 
 ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY} OPTIONS ${cmake_defines})

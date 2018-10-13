@@ -35,6 +35,7 @@ install:
   - ps: $env:Path += ";C:\third_party\installs\Ninja"
   - ps: $env:Path += ";" + $env:WIX;
   - ps: $env:CMAKE_TOOLCHAIN_FILE = "c:\third_party\installs\vcpkg-export\scripts\buildsystems\vcpkg.cmake"
+  - ps: $env:VCPKG_TARGET_TRIPLET = "x64-windows-static"
 
 before_build:
   - if DEFINED msvc_setup_path call "%msvc_setup_path%" %msvc_setup_arg%
