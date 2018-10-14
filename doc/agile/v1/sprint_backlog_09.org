@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-13 Sat 23:50]
+#+CAPTION: Clock summary at [2018-10-14 Sun 07:32]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *66:37* |       |       |   0.0 |
+| *Total time*                                                                | *67:01* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 66:37   |       |       |   0.0 |
-| Active                                                                      |         | 66:37 |       |   0.0 |
+| Stories                                                                     | 67:01   |       |       |   0.0 |
+| Active                                                                      |         | 67:01 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:42 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
@@ -37,7 +37,7 @@
 | Investigate adding package management support to dogen                      |         |       | 11:10 |   0.0 |
 | Add vcpkg support to Linux builds                                           |         |       | 13:15 |   0.0 |
 | Add vcpkg support to windows builds                                         |         |       |  9:16 |   0.0 |
-| Resurrect CDash agents                                                      |         |       |  6:23 |   0.0 |
+| Resurrect CDash agents                                                      |         |       |  6:47 |   0.0 |
 | Add vcpkg support to osx builds                                             |         |       |  1:13 |   0.0 |
 | Recap of the current situation                                              |         |       |  1:25 |   0.0 |
 | High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
@@ -418,6 +418,7 @@ C++ 17. Also try to add support for =clang-cl= if its easy.
 *** COMPLETED Resurrect CDash agents                                  :story:
     CLOSED: [2018-10-13 Sat 23:50]
     :LOGBOOK:
+    CLOCK: [2018-10-14 Sun 07:08]--[2018-10-14 Sun 07:32] =>  0:24
     CLOCK: [2018-10-13 Sat 23:12]--[2018-10-13 Sat 23:50] =>  0:38
     CLOCK: [2018-10-13 Sat 22:47]--[2018-10-13 Sat 23:11] =>  0:24
     CLOCK: [2018-10-13 Sat 22:30]--[2018-10-13 Sat 22:46] =>  0:16
@@ -449,6 +450,20 @@ this way all travis builds are pushing into CDash.
 Command line:
 
 : CMAKE_TOOLCHAIN_FILE=~/Development/DomainDrivenConsulting/masd/vcpkg/master/scripts/buildsystems/vcpkg.cmake ctest --extra-verbose --script ".ctest.cmake,configuration_type=Release,generator=Ninja,compiler=clang6,number_of_jobs=3"
+
+Given we cannot get the project/sub-project setup to work, we probably
+should just create multiple to-level projects:
+
+- MASD Project - Dogen
+- MASD Project - cpp_ref_impl
+
+This would probably give us 20 daily builds as well, whereas the
+sub-project setup seems to have a maximum limit of 10 altogether.
+
+Tickets:
+
+- https://github.com/Kitware/CDash/issues/732
+- https://github.com/Kitware/CDash/issues/733
 
 Links:
 
