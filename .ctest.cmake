@@ -96,7 +96,11 @@ set(build_folder "${compiler}/${CTEST_CONFIGURATION_TYPE}")
 set(CTEST_BINARY_DIRECTORY
   "${CMAKE_CURRENT_SOURCE_DIR}/build/output/${build_folder}")
 
+include(FindGit)
+set(CTEST_GIT_COMMAND "${GIT_EXECUTABLE}")
+
 ctest_start(${build_group})
+ctest_update()
 
 if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
     set(cmake_defines "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
