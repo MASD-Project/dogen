@@ -36,6 +36,9 @@ endif()
 set(CTEST_CUSTOM_MAXIMUM_PASSED_TEST_OUTPUT_SIZE 0)
 set(CTEST_CUSTOM_MAXIMUM_FAILED_TEST_OUTPUT_SIZE 0)
 
+if(NOT DEFINED build_group)
+    message(FATAL_ERROR "Build group parameter not defined.")
+endif()
 
 if(NOT DEFINED configuration_type)
     message(FATAL_ERROR "Configuration type parameter not defined.")
@@ -93,7 +96,7 @@ set(build_folder "${compiler}/${CTEST_CONFIGURATION_TYPE}")
 set(CTEST_BINARY_DIRECTORY
   "${CMAKE_CURRENT_SOURCE_DIR}/build/output/${build_folder}")
 
-ctest_start("Continuous")
+ctest_start(${build_group})
 
 if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
     set(cmake_defines "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
