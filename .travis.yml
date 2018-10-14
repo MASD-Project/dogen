@@ -88,9 +88,10 @@ script:
         ${SCRIPTS_DIR}/test_package.linux.sh ${configuration} ${compiler};
     fi
 
-# after_success:
-#  - gcov --version
-#  - coveralls --exclude-pattern '.*/tests/.*' --exclude-pattern '/tmp/dogen_deps/.*' --exclude-pattern '/usr/include/.*' --gcov-options '\-lp'
+after_success:
+  - if [[ ${configuration} == "Debug" && $TRAVIS_OS_NAME == 'linux' && ${compiler} == "clang7" ]]; then
+        /tmp/kcov --include-pattern dogen --coveralls-id=${TRAVIS_JOB_ID} ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/bin/ dogen.annotations.tests
+    fi
 
 notifications:
   email:

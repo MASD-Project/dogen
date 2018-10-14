@@ -89,5 +89,15 @@ which cmake
 cmake --version
 rm -rf ${cmake_output} /tmp/${cmake_name}
 
+#
+# kcov
+#
+kcov_input_location="https://www.dropbox.com/s/66rs4s4606a9iut/kcov?dl=0"
+kcov_output_location=/tmp
+wget --no-check-certificate ${kcov_input_location} -O ${kcov_output_location}
+
+#
+# Clean cache
+#
 sudo apt-get clean
 echo "Cleaned cache."
