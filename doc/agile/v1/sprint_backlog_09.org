@@ -532,6 +532,14 @@ Notes:
 Jot down ideas on the separation between the API and the
 implementation in dogen products.
 
+*** Rename debian package                                             :story:
+
+At present our package is called =dogen-applcations=. Since there will
+only be one dogen application/package, this is a confusion name. We
+should rename it. Names:
+
+- masd-dogen
+
 *** Finish adding support for clang-cl builds                         :story:
 
 We have added preliminary support for building with clang-cl on
@@ -613,6 +621,20 @@ different. We can then use these flags to determine if tests pass. In
 the future we can extend this approach to include a proper diff of the
 files, but for now we just need a reliable way to run system tests
 again.
+
+Actually the right solution for this is to see the processing as part
+of a chain:
+
+- out of the generator come a set of artefacts with operations (write,
+  merge, ignore)
+- these get joined with a transform that reads the state of the file
+  system. It then adds more operations: delete, etc. If there are no
+  diffs, it marks those files as skip.
+- the final step is a processor which gets that model and executes the
+  operations. This can then be replaced by a "reporter" that simply
+  states what the operations would be.
+
+Diff mode is using the report to see if there are any diffs.
 
 *** Add reporting support to dogen model testing                      :story:
 
