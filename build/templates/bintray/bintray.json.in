@@ -29,5 +29,6 @@
             { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-tests.deb" },
             { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg", "uploadPattern": "/${DOGEN_VERSION}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg" }
         ],
-    "publish": true
+    "publish": true,
+    "override": true
 }

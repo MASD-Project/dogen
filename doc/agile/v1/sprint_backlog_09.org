@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-14 Sun 07:32]
+#+CAPTION: Clock summary at [2018-10-14 Sun 07:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *67:01* |       |       |   0.0 |
+| *Total time*                                                                | *67:14* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 67:01   |       |       |   0.0 |
-| Active                                                                      |         | 67:01 |       |   0.0 |
+| Stories                                                                     | 67:14   |       |       |   0.0 |
+| Active                                                                      |         | 67:14 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:42 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
@@ -37,7 +37,7 @@
 | Investigate adding package management support to dogen                      |         |       | 11:10 |   0.0 |
 | Add vcpkg support to Linux builds                                           |         |       | 13:15 |   0.0 |
 | Add vcpkg support to windows builds                                         |         |       |  9:16 |   0.0 |
-| Resurrect CDash agents                                                      |         |       |  6:47 |   0.0 |
+| Resurrect CDash agents                                                      |         |       |  7:00 |   0.0 |
 | Add vcpkg support to osx builds                                             |         |       |  1:13 |   0.0 |
 | Recap of the current situation                                              |         |       |  1:25 |   0.0 |
 | High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
@@ -415,9 +415,9 @@ appveyor windows builds (msvc). While we're there, update visual
 studio and all the tools to latest in preparation to switching to
 C++ 17. Also try to add support for =clang-cl= if its easy.
 
-*** COMPLETED Resurrect CDash agents                                  :story:
-    CLOSED: [2018-10-13 Sat 23:50]
+*** STARTED Resurrect CDash agents                                    :story:
     :LOGBOOK:
+    CLOCK: [2018-10-14 Sun 07:33]--[2018-10-14 Sun 07:46] =>  0:13
     CLOCK: [2018-10-14 Sun 07:08]--[2018-10-14 Sun 07:32] =>  0:24
     CLOCK: [2018-10-13 Sat 23:12]--[2018-10-13 Sat 23:50] =>  0:38
     CLOCK: [2018-10-13 Sat 22:47]--[2018-10-13 Sat 23:11] =>  0:24
