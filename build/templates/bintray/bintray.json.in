@@ -23,12 +23,41 @@
 
     "files":
         [
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-applications.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-headers.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-libraries.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb", "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-tests.deb" },
-            { "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg", "uploadPattern": "/${DOGEN_VERSION}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg" }
+            {
+                "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-applications.deb",
+                "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-applications.deb"
+                "matrixParams": {
+                    "override": 1
+                }
+            },
+            {
+                "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-headers.deb",
+                "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-headers.deb"
+                "matrixParams": {
+                    "override": 1
+                }
+            },
+            {
+                "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-libraries.deb",
+                "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-libraries.deb"
+                "matrixParams": {
+                    "override": 1
+                }
+            },
+            {
+                "includePattern": "${DOGEN_PACKAGE_DIR}/dogen_${DOGEN_VERSION}_amd64-tests.deb",
+                "uploadPattern": "/${DOGEN_VERSION}/dogen_${DOGEN_VERSION}_amd64-tests.deb"
+                "matrixParams": {
+                    "override": 1
+                }
+            },
+            {
+                "includePattern": "${DOGEN_PACKAGE_DIR}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg",
+                "uploadPattern": "/${DOGEN_VERSION}/dogen-${DOGEN_VERSION}-Darwin-x86_64.dmg"
+                "matrixParams": {
+                    "override": 1
+                }
+            }
         ],
-    "publish": true,
-    "override": true
+    "publish": true
 }
