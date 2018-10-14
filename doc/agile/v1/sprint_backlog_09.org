@@ -17,16 +17,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-14 Sun 07:46]
+#+CAPTION: Clock summary at [2018-10-14 Sun 10:54]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *67:14* |       |       |   0.0 |
+| *Total time*                                                                | *67:26* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 67:14   |       |       |   0.0 |
-| Active                                                                      |         | 67:14 |       |   0.0 |
+| Stories                                                                     | 67:26   |       |       |   0.0 |
+| Active                                                                      |         | 67:26 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  2:42 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  2:54 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
 | Create project for C# test model                                            |         |       |  5:23 |   0.0 |
 | Fix boost path serialisation errors                                         |         |       |  0:47 |   0.0 |
@@ -87,6 +87,7 @@ Due to the transition of organisations, we did not generate any binaries for thi
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-14 Sun 10:42]--[2018-10-14 Sun 10:54] =>  0:12
     CLOCK: [2018-10-05 Fri 15:28]--[2018-10-05 Fri 15:40] =>  0:12
     CLOCK: [2018-10-12 Fri 14:56]--[2018-10-12 Fri 14:34] => -0:22
     CLOCK: [2018-10-05 Fri 10:14]--[2018-10-05 Fri 11:25] =>  1:11
@@ -532,6 +533,22 @@ Notes:
 Jot down ideas on the separation between the API and the
 implementation in dogen products.
 
+Notes:
+
+- we now have the notion of "distribution channels": UI/UX (wt, qt, gtk
+  mobile, etc), DX (swagger, boost asio, library itself).
+- the product API should not have any dependencies in terms of storage
+  mechanisms; it should have some kind of "model source" interface
+  that can then be implemented in terms of the filesystem, GH repo,
+  postgres database etc.
+- even though it does not make a lot of sense to have a model source
+  as part of the remoting API, for consistency reasons we should still
+  support it. That is, a code generation end point will merely call
+  some internal functions to source the models rather than call
+  another endpoint, and users probably don't really need something
+  that just reads a model and returns the injector version.
+- the distribution channels are a function of the product API.
+
 *** Rename debian package                                             :story:
 
 At present our package is called =dogen-applcations=. Since there will
@@ -635,6 +652,37 @@ of a chain:
   states what the operations would be.
 
 Diff mode is using the report to see if there are any diffs.
+
+*** dogen as a github integration                                     :story:
+
+Perhaps there are some useful services dogen could provide to users in
+terms of dogen integration. If, with every commit, we could regenerate
+the model and read the current state in github, we could then provide
+a status report:
+
+- the model does not build; red emblem. Some changes were made to the
+  model (or to dogen) that make the model invalid. User should take
+  action.
+- the model builds but generates files that are different from what's
+  checked in on github. yellow emblem. Provide a report with the
+  diffs. This can either be because the code generator has changed or
+  the user changed the model.
+- the model builds and generates exactly the same code; green emblem.
+
+With this approach we have two advantages:
+
+- we do not need to add projects as part of the dogen tests; the
+  service takes its place. We can still add a few as the core tests,
+  but we don't need to expand it much beyond reference implementation
+  and dogen itself.
+- we exercise dogen itself as well as the rest endpoint generation
+  code in a way that is actually useful to end users; it would be nice
+  to know immediately when something breaks.
+
+Notes:
+
+- we'll need some kind of way of dealing with tokens and secrets in
+  order to support private GH projects.
 
 *** Add reporting support to dogen model testing                      :story:
 
