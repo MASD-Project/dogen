@@ -107,8 +107,8 @@ then run:
 ```
 ./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid
 ```
-Warning: the default vcpkg triplet on windows [is
-32-bit](https://github.com/Microsoft/vcpkg/issues/1254). Once you have
+Very important: the default vcpkg triplet on windows [is
+32-bit dynamic](https://github.com/Microsoft/vcpkg/issues/1254) whereas we build with ```--triplet x64-windows-static```. If you are experiencing [weird and wonderful build errors](https://github.com/Microsoft/vcpkg/issues/4447), check your triplet. Once you have
 all dependencies set up, you can then  clone the repository and create
 the build directory:
 
