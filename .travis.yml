@@ -87,7 +87,7 @@ after_success:
        for test in ${tests}; do
            /tmp/kcov --include-pattern=/projects/ ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage ${test};
        done;
-       bash <(curl -s https://codecov.io/bash) -s ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage
+       bash <(curl -s https://codecov.io/bash) -s ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage;
     fi
 
 notifications:
