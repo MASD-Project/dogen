@@ -14,7 +14,7 @@
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
 [![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.08.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
-[ ![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.09) ](https://bintray.com/masd-project/main/dogen/1.0.09/link)
+[ ![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.10) ](https://bintray.com/masd-project/main/dogen/1.0.10/link)
 [![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
 [![Language](https://img.shields.io/badge/language-c++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
 [![C++](https://img.shields.io/badge/std-c++14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B14)
