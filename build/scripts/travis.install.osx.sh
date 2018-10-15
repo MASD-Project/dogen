@@ -23,8 +23,8 @@
 # generate the dropbox link or else we will still point to the old
 # package.
 #
-vcpkg_dropbox_link="s/pigzf8xbzm9dp6c"
-vcpkg_folder="vcpkg-export-20181015-160959"
+vcpkg_dropbox_link="s/157m811pl8cc0x3"
+vcpkg_folder="vcpkg-export-20181015-180030"
 vcpkg_package="${vcpkg_folder}.zip"
 vcpkg_input_location="https://www.dropbox.com/${vcpkg_dropbox_link}/${vcpkg_package}?dl=0"
 vcpkg_output_location="/tmp/${vcpkg_package}"
@@ -33,3 +33,9 @@ vcpkg_final_folder="vcpkg-export"
 curl -L -o ${vcpkg_output_location} ${vcpkg_input_location} 
 unzip -q ${vcpkg_output_location} -d ${vcpkg_extract_dir}
 mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/${vcpkg_final_folder}
+
+#
+# Clang
+#
+clang_input_location="http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-apple-darwin.tar.xz"
+vcpkg_output_location="/tmp/"
