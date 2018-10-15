@@ -93,8 +93,10 @@ rm -rf ${cmake_output} /tmp/${cmake_name}
 # kcov
 #
 kcov_input_location="https://www.dropbox.com/s/66rs4s4606a9iut/kcov?dl=0"
-kcov_output_location=/tmp
+kcov_output_location="/tmp/kcov"
 wget --no-check-certificate ${kcov_input_location} -O ${kcov_output_location}
+chmod +x ${kcov_output_location}
+${kcov_output_location} --version
 
 #
 # Clean cache
