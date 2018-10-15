@@ -1,0 +1,14 @@
+#+title: Release Checklist
+#+options: date:nil toc:nil author:nil num:nil
+
+1. Make a copy of current sprint backlog and name it current
+   sprint + 1.
+2. Close current sprint: close all open tasks, delete tasks we did not
+   work on, update clocks.
+3. Tag commit and sign it with key.
+4. Open new sprint, updating CMake version, README and appveyor
+   version. This should all be in one commit.
+5. Write up release notes, publish them in github.
+6. When tag build is finished, announce on gitter, twitter and linked
+   in.
+7. Update bintray with the correct release notes.
