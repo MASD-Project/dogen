@@ -44,9 +44,7 @@ sudo apt-get update -qq
 #
 # kcov deps
 #
-echo "before"
 sudo apt-get install -qq libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
-echo "after"
 
 #
 # clang
