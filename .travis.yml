@@ -55,7 +55,7 @@ matrix:
       env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous"
     - os: linux
       compiler: clang
-      env: configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous"
+      env: coverage=1 configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous"
 
 addons:
   apt:
@@ -83,8 +83,11 @@ script:
     fi
 
 after_success:
-  - if [[ ${configuration} == "Debug" && $TRAVIS_OS_NAME == 'linux' && ${compiler} == "clang7" ]]; then
-        /tmp/kcov --include-pattern=/projects/ --coveralls-id=${TRAVIS_JOB_ID} ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/bin/dogen.annotations.tests;
+  - if [[ "x${coverage}" == "x1" ]]; then
+       tests="`'ls' ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/bin/dogen.*.tests`";
+       for test in ${tests}; do
+                /tmp/kcov --include-pattern=/projects/ --coveralls-id=${TRAVIS_JOB_ID} ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage ${test};
+       done;
     fi
 
 notifications:
