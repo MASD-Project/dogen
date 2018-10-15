@@ -81,7 +81,7 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(empty_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("empty_dia_transforms_into_expected_model");
     const auto i(external_dia::expected_empty_dia_xml());
     const auto e(external_dia::expected_empty_external_xml());
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_model) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_model");
     const auto i(external_dia::expected_two_layers_with_objects_dia_xml());
     const auto e(external_dia::expected_two_layers_with_objects_external_xml());
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_model)
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("cpp_model_dia_transforms_into_expected_model");
     const auto i(external_dia::expected_cpp_model_dia_xml());
     const auto e(external_dia::expected_cpp_model_external_xml());
@@ -106,7 +106,7 @@ BOOST_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_model) {
 }
 
 
-BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("std_model_dia_transforms_into_expected_model");
     const auto i(external_dia::expected_std_model_dia_xml());
     const auto e(external_dia::expected_std_model_external_xml());
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_model) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("boost_model_dia_transforms_into_expected_model");
     const auto i(external_dia::expected_boost_model_dia_xml());
     const auto e(external_dia::expected_boost_model_external_xml());

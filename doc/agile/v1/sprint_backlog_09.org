@@ -17,14 +17,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-15 Mon 08:17]
+#+CAPTION: Clock summary at [2018-10-15 Mon 10:17]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *69:27* |       |       |   0.0 |
+| *Total time*                                                                | *71:26* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 69:27   |       |       |   0.0 |
-| Active                                                                      |         | 69:27 |       |   0.0 |
+| Stories                                                                     | 71:26   |       |       |   0.0 |
+| Active                                                                      |         | 71:26 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:30 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:54 |   0.0 |
 | Update readme to reflect org move                                           |         |       |  1:58 |   0.0 |
@@ -41,7 +41,7 @@
 | Add vcpkg support to osx builds                                             |         |       |  1:13 |   0.0 |
 | Recap of the current situation                                              |         |       |  1:25 |   0.0 |
 | High-level model thoughts                                                   |         |       |  2:20 |   0.0 |
-| Add support for kcov                                                        |         |       |  0:50 |   0.0 |
+| Add support for kcov                                                        |         |       |  2:49 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -558,12 +558,23 @@ Notes:
 
 *** STARTED Add support for kcov                                      :story:
     :LOGBOOK:
+    CLOCK: [2018-10-15 Mon 08:18]--[2018-10-15 Mon 10:17] =>  1:59
     CLOCK: [2018-10-15 Mon 08:02]--[2018-10-15 Mon 08:17] =>  0:15
     CLOCK: [2018-10-14 Sun 22:38]--[2018-10-14 Sun 22:50] =>  0:12
     CLOCK: [2018-10-14 Sun 22:14]--[2018-10-14 Sun 22:37] =>  0:23
     :END:
 
 Try to see how hard it is to integrate kcov with the current build.
+
+*** STARTED Ignore all failing tests                                  :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-15 Mon 10:18]--[2018-10-15 Mon 10:24] =>  0:06
+    :END:
+
+At present we have a number of tests that are commented out but appear
+as failing under cdash. This is very confusing. We need to mark them
+with the ignore macro. We should not waste time fixing the tests as
+they need to be re-written using the diff framework.
 
 *** Rename debian package                                             :story:
 

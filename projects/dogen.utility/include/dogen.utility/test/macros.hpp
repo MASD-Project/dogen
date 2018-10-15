@@ -38,6 +38,14 @@
 #undef DOGEN_COMPILE_BROKEN_CODE
 #endif
 
+/**
+ * @brief Macro for ignoring boost tests.
+ *
+ * This macro has two roles. First, it avoids commented out tests
+ * being picked up by CTest, resulting in test failures. Secondly, for
+ * non-cmmented out tests, it means we can still compile the code
+ * which means it bit-rots a bit less.
+ */
 #ifdef BOOST_IGNORE_AUTO_TEST_CASE
 #undef
 #endif
