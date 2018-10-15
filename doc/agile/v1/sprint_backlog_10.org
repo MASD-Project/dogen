@@ -13,17 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-15 Mon 11:54]
+#+CAPTION: Clock summary at [2018-10-15 Mon 16:29]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:46* |      |      |   0.0 |
+| *Total time*                                                                | *7:43* |      |      |   0.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:46   |      |      |   0.0 |
-| Active                                                                      |        | 3:46 |      |   0.0 |
+| Stories                                                                     | 7:43   |      |      |   0.0 |
+| Active                                                                      |        | 7:43 |      |   0.0 |
 | Edit release notes for previous sprint                                      |        |      | 1:05 |   0.0 |
 | Sprint and product backlog grooming                                         |        |      | 0:10 |   0.0 |
 | Create a document with release steps                                        |        |      | 0:11 |   0.0 |
+| Add vcpkg support to osx builds                                             |        |      | 3:00 |   0.0 |
+| Add support for kcov                                                        |        |      | 0:57 |   0.0 |
 | High-level model thoughts                                                   |        |      | 2:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -118,11 +120,49 @@ Updates to sprint and product backlog.
 We seem to now have a number of steps when releasing. Create a project
 document for this.
 
-*** Add vcpkg support to osx builds                                   :story:
+*** STARTED Add vcpkg support to osx builds                           :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-15 Mon 12:47]--[2018-10-15 Mon 15:31] =>  2:44
+    CLOCK: [2018-10-15 Mon 11:54]--[2018-10-15 Mon 12:10] =>  0:16
+    :END:
 
 Following on from our investigation, we need to add vcpkg to the
 travis osx builds (clang). While we're there, update all the tools to
 latest in preparation to switching to C++ 17.
+
+Notes:
+
+- it seems its not possible to move to XCode 10 without upgrading the
+  OS. This includes the Command Line tools only package as well.
+- an alternative is to install the LLVM + clang package supplied by
+  the LLVM project. The disadvantage is that we probably also need to
+  use this in travis because using two different versions of clang is
+  probably not the best idea. We could try and see what happens first,
+  but ultimately we'll end up having to install it on travis. The
+  binary is 300 MB, which is not ideal but should be ok.
+- vcpkg misbehaves a bit when used from clang7. [[https://github.com/Microsoft/vcpkg/issues/4476][Reported]] to
+  mothership.
+
+*** STARTED Add support for kcov                                      :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-15 Mon 16:05]--[2018-10-15 Mon 16:29] =>  0:24
+    CLOCK: [2018-10-15 Mon 15:31]--[2018-10-15 Mon 16:04] =>  0:33
+    :END:
+
+Try to see how hard it is to integrate kcov with the current build.
+
+Notes:
+
+- annoyingly, kcov has some binary dependencies rather than being a
+  stand alone binary:
+
+: apt-get install libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
+
+  as we could not figure out how to install just the SO's in travis,
+  we ended up installing the dev packages. These are a lot more than
+  what is actually required, but it'll do for now.
+- we seem to upload to coveralls, but nothing shows up on the
+  site. Try to manually generate coverage first.
 
 *** High-level model thoughts                                         :story:
     :LOGBOOK:
@@ -148,9 +188,9 @@ Notes:
   that just reads a model and returns the injector version.
 - the distribution channels are a function of the product API.
 
-*** Add support for kcov                                              :story:
+*** Windows MSI is very large                                         :story:
 
-Try to see how hard it is to integrate kcov with the current build.
+80 MB
 
 *** Ignore all failing tests                                          :story:
 

@@ -72,16 +72,10 @@ script:
   - export BUILD_COMMIT=${TRAVIS_COMMIT}
   - export BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
   - export BUILD_TIMESTAMP=`date "+%Y/%m/%d %H:%M:%S"`
-  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
-        export CMAKE_TOOLCHAIN_FILE="/tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake";
-    fi
+  - export CMAKE_TOOLCHAIN_FILE="/tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake";
   - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
-        export THIRD_PARTY="/tmp/dogen_deps/dogen_deps_clang_7_3_0_osx_amd64";
-        export CMAKE_INCLUDE_PATH=${THIRD_PARTY}/include;
-        export CMAKE_LIBRARY_PATH=${THIRD_PARTY}/lib;
         export DYLD_FALLBACK_LIBRARY_PATH=${THIRD_PARTY}/lib;
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
-        export PATH=${THIRD_PARTY}/bin:${PATH};
     fi
   - ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}";
   - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then

@@ -19,14 +19,17 @@
 #
 
 #
-# deps
+# vcpkg dependencies. Important: when updating the package remember to
+# generate the dropbox link or else we will still point to the old
+# package.
 #
-dropbox="https://www.dropbox.com/s/28uz0mqvih5g3su/"
-package="dogen_deps_clang_7_3_0_osx_amd64.tar.bz2"
-input_location="${dropbox}/${package}"
-output_location="/tmp/${package}"
-extract_dir="/tmp/dogen_deps"
-curl -L -o ${output_location} ${input_location}
-mkdir ${extract_dir}
-tar -zxf ${output_location} -C ${extract_dir}
-# HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
+vcpkg_dropbox_link="s/pigzf8xbzm9dp6c"
+vcpkg_folder="vcpkg-export-20181015-160959"
+vcpkg_package="${vcpkg_folder}.zip"
+vcpkg_input_location="https://www.dropbox.com/${vcpkg_dropbox_link}/${vcpkg_package}?dl=0"
+vcpkg_output_location="/tmp/${vcpkg_package}"
+vcpkg_extract_dir="/tmp"
+vcpkg_final_folder="vcpkg-export"
+curl -L -o ${vcpkg_input_location} ${vcpkg_output_location}
+unzip -q ${vcpkg_output_location} -d ${vcpkg_extract_dir}
+mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/${vcpkg_final_folder}
