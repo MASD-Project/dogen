@@ -12,7 +12,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/MASD-Project/dogen/badge.svg?branch=master)](https://coveralls.io/github/MASD-Project/dogen?branch=master)
 [![Build Dashboard](https://img.shields.io/badge/cdash-dashboard-blue.svg)](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
-[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.08.svg)](https://github.com/MASD-Project/dogen/commits/master)
+[![GitHub commits](https://img.shields.io/github/commits-since/MASD-Project/dogen/v1.0.09.svg)](https://github.com/MASD-Project/dogen/commits/master)
 [![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
 [ ![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.10) ](https://bintray.com/masd-project/main/dogen/1.0.10/link)
 [![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
