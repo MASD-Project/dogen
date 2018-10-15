@@ -86,7 +86,8 @@ Due to the transition of organisations, we did not generate any binaries for thi
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6354361007493775361][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-14 Sun 10:42]--[2018-10-14 Sun 10:54] =>  0:12
     CLOCK: [2018-10-05 Fri 15:28]--[2018-10-05 Fri 15:40] =>  0:12
@@ -417,7 +418,8 @@ appveyor windows builds (msvc). While we're there, update visual
 studio and all the tools to latest in preparation to switching to
 C++ 17. Also try to add support for =clang-cl= if its easy.
 
-*** STARTED Resurrect CDash agents                                    :story:
+*** COMPLETED Resurrect CDash agents                                  :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-14 Sun 21:14]--[2018-10-14 Sun 22:13] =>  0:59
     CLOCK: [2018-10-14 Sun 21:01]--[2018-10-14 Sun 21:13] =>  0:12
@@ -483,7 +485,8 @@ Links:
 - [[https://github.com/Kitware/CDash/issues/732][GitHub issue with CDash problems]]
 - [[http://webcache.googleusercontent.com/search?q=cache:vEhBG9OAeSAJ:https://blog.kitware.com/cdash-integration-with-github/&hl=en&gl=uk&strip=1&vwsrc=0][CDash integration with GitHub]]
 
-*** STARTED Add vcpkg support to osx builds                           :story:
+*** POSTPONED Add vcpkg support to osx builds                         :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-13 Sat 18:35]--[2018-10-13 Sat 19:28] =>  0:53
     CLOCK: [2018-10-13 Sat 17:41]--[2018-10-13 Sat 18:01] =>  0:20
@@ -493,7 +496,8 @@ Following on from our investigation, we need to add vcpkg to the
 travis osx builds (clang). While we're there, update all the tools to
 latest in preparation to switching to C++ 17.
 
-*** STARTED Recap of the current situation                            :story:
+*** COMPLETED Recap of the current situation                          :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-05 Fri 15:41]--[2018-10-05 Fri 17:06] =>  1:25
     :END:
@@ -532,7 +536,8 @@ Notes:
   also do not want to have to define all of the meta-model elements
   again in order to attach the generatable properties.
 
-*** STARTED High-level model thoughts                                 :story:
+*** CANCELLED High-level model thoughts                               :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-11 Thu 16:06]--[2018-10-11 Thu 18:26] =>  2:20
     :END:
@@ -556,7 +561,8 @@ Notes:
   that just reads a model and returns the injector version.
 - the distribution channels are a function of the product API.
 
-*** STARTED Add support for kcov                                      :story:
+*** POSTPONED Add support for kcov                                    :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-15 Mon 08:18]--[2018-10-15 Mon 10:17] =>  1:59
     CLOCK: [2018-10-15 Mon 08:02]--[2018-10-15 Mon 08:17] =>  0:15
@@ -566,7 +572,8 @@ Notes:
 
 Try to see how hard it is to integrate kcov with the current build.
 
-*** STARTED Ignore all failing tests                                  :story:
+*** POSTPONED Ignore all failing tests                                :story:
+    CLOSED: [2018-10-15 Mon 10:33]
     :LOGBOOK:
     CLOCK: [2018-10-15 Mon 10:18]--[2018-10-15 Mon 10:24] =>  0:06
     :END:
@@ -575,329 +582,6 @@ At present we have a number of tests that are commented out but appear
 as failing under cdash. This is very confusing. We need to mark them
 with the ignore macro. We should not waste time fixing the tests as
 they need to be re-written using the diff framework.
-
-*** Rename debian package                                             :story:
-
-At present our package is called =dogen-applcations=. Since there will
-only be one dogen application/package, this is a confusion name. We
-should rename it. Names:
-
-- masd-dogen
-
-*** Finish adding support for clang-cl builds                         :story:
-
-We have added preliminary support for building with clang-cl on
-windows, but the build is not green. Most of the errors seem to be on
-boost.
-
-Links:
-
-- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
-- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
-
-*** Tidy-up dogen windows package                                     :story:
-
-There are a few inconsistencies with the package:
-
-- dogen components have a strange structure:
-  "Dogen/runtime/dogen".
-- we should probably have a top-level umbrella for MASD, under which
-  dogen installs.
-- package name is windows amd64. We should use the vcpkg triplets for
-  simplicity (e.g. x64-windows).
-
-*** Mapping of third-party dependencies                               :story:
-
-System models should follow the physical structure of
-dependencies. That is, we should not have a "boost" system model, but
-instead a boost-test etc. Each of these can then have mappings
-(e.g. vcpkg name, build2 name, etc). Users must declare these
-references just like they do with user models. Dogen can then create
-code for:
-
-- cmake targets, properly linking against libraries;
-- vcpkg install, at product level, by de-duplicating component
-  dependencies;
-- possibly distro dependencies.
-
-We should only have a mandatory dependency, which is the STL. In
-addition, we need different models for each version (e.g. c++ 03,
-etc). This makes it easier to include the right types.
-
-Note that each model must have an associated version. The version
-should be part of the file name. However, maybe we need to distinguish
-between TS version (11, 17, etc) from library version.
-
-*** Upgrade to c++ 17                                                 :story:
-
-There are quite a few dependencies for this to happen:
-
-- on windows we need to somehow include =/std:c++latest=
-- we need to move to latest boost as it seems Boost 1.62 breaks on c++
-  17. We should wait until Beast is included in Boost before we do
-  this.
-- we need to install latest CMake, which is not available on nuget; so
-  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
-  unpack it. Only latest supports VS 2017. Then set the CMake
-  generator:
-
-:    $generator="Visual Studio 15 2017 Win64";
-
-- set the appveyor image:
-
-: image:
-:  - Visual Studio 2017
-
-- set the CMake version:
-
-:     set(CMAKE_CXX_STANDARD 14)
-
-*** Rename input models directory to models                           :story:
-
-We need to move the dogen project to the new directory layout whereby
-all models are kept in the =models= directory.
-
-*** Add basic "diff mode"                                             :story:
-
-We need a very simple way of checking all generated files in memory
-against what's in the file system and returning a flag if they are
-different. We can then use these flags to determine if tests pass. In
-the future we can extend this approach to include a proper diff of the
-files, but for now we just need a reliable way to run system tests
-again.
-
-Actually the right solution for this is to see the processing as part
-of a chain:
-
-- out of the generator come a set of artefacts with operations (write,
-  merge, ignore)
-- these get joined with a transform that reads the state of the file
-  system. It then adds more operations: delete, etc. If there are no
-  diffs, it marks those files as skip.
-- the final step is a processor which gets that model and executes the
-  operations. This can then be replaced by a "reporter" that simply
-  states what the operations would be.
-
-Diff mode is using the report to see if there are any diffs.
-
-*** dogen as a github integration                                     :story:
-
-Perhaps there are some useful services dogen could provide to users in
-terms of dogen integration. If, with every commit, we could regenerate
-the model and read the current state in github, we could then provide
-a status report:
-
-- the model does not build; red emblem. Some changes were made to the
-  model (or to dogen) that make the model invalid. User should take
-  action.
-- the model builds but generates files that are different from what's
-  checked in on github. yellow emblem. Provide a report with the
-  diffs. This can either be because the code generator has changed or
-  the user changed the model.
-- the model builds and generates exactly the same code; green emblem.
-
-With this approach we have two advantages:
-
-- we do not need to add projects as part of the dogen tests; the
-  service takes its place. We can still add a few as the core tests,
-  but we don't need to expand it much beyond reference implementation
-  and dogen itself.
-- we exercise dogen itself as well as the rest endpoint generation
-  code in a way that is actually useful to end users; it would be nice
-  to know immediately when something breaks.
-
-Notes:
-
-- we'll need some kind of way of dealing with tokens and secrets in
-  order to support private GH projects.
-
-*** Add reporting support to dogen model testing                      :story:
-
-Dogen should have a mode which generates a report for a run rather
-than code generate. The report could look like so:
-
-:              /project_a
-:                  /summary for this commit
-:                  /diffs
-:                  /errors
-:                  /benchmark data
-:                  /probing data
-:                  /log
-
-If the report was largely in HTML we could link it to the dogen docs
-and save it into git. This would make troubleshooting much easier. If
-the report contains the probing data it would be easier to figure out
-what went wrong. We should also keep track of the model that was
-generated (e.g. its location and git commit) so we can download it and
-reproduce it locally.
-
-*** Rework the tests using diff mode                                  :story:
-
-Once we have diff mode, we need to find some kind of workflow for
-tests:
-
-- each product is composed of a git URL and a list of models.
-- we git clone all repos as part of the build process.
-- directories and model locations are hard-coded in each test.
-- test runs against the model and hard-coded location, produces the
-  diff. Test asserts of the diff being non-zero.
-
-*** Fix the northwind model                                           :story:
-
-There are numerous problems with this model:
-
-- at present we have oracle support on ODB. Oracle libs are not
-  distributed with debian. If we do not find oracle we do not compile
-  northwind. This is not ideal. We should remove oracle support from
-  northwind, and install odb support in the build machine (hopefully
-  available as debs).
-- the tests are commented out and require a clean up.
-- the tests require a database to be up.
-
-Notes:
-
-- it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
-
-*** Simplify split configuration configuration                        :story:
-
-At present we have two separate command line parameters to configure
-the main output directory and the directory for header files. The
-second parameter is used for split configurations. The problem is that
-we now need to treat split configuration projects specially because of
-this. It makes more sense to force the header directory to be relative
-to the output path and make it a meta-data parameter.
-
-*** Update all stereotypes to masd                                    :story:
-
-We need to start distinguishing MASD from dogen. The profile for UML
-is part of MASD rather than dogen, so we should update all stereotypes
-to match. We need to make a decision regarding the "dia extensions" -
-its not clear if its MASD or dogen.
-
-*** Make "ignore regexes" a model property                            :story:
-
-At present we have a command line option:
-=--ignore-files-matching-regex=. It is used to ignore files in a
-project. However, the problem is, because it is a command line option,
-it must be supplied with each invocation of Dogen. This means that if
-we want to run dogen from outside the build system, we need to know
-what options were set in the build scripts or else we will have
-different results. This is a problem for testing. We should make it a
-meta-data option, which is supplied with each model and even more
-interesting, can be used with profiling. This means we can create
-profiles for specific purposes (ODB, lisp, etc) and then reuse them in
-different projects.
-
-*** Incorrect generation when changing external modules               :story:
-
-When fixing the C# projects, we updated the external modules, from
-=dogen::test_models= to =CSharpRefImpl=. Regenerating the model
-resulted in updated project files but the rest of the code did not
-change. It worked by using =-f=. It should have worked without forcing
-the write.
-
-*** Code coverage does not work for C#                                :story:
-
-It seems that using NUnit and OpenCov does not work. The main reason
-appears to be the use of shadow copying, which is no longer optional
-on NUnit 3.
-
-Links:
-
-- https://github.com/Ullink/gradle-opencover-plugin/issues/1
-- https://github.com/codecov/example-csharp/blob/master/appveyor.yml
-- https://www.appveyor.com/blog/2017/03/17/codecov/
-
-*** Improve comments on reference implementation                      :story:
-
-At present it is very difficult to understand what each model and/or
-each type does in the reference implementations. We need to add some
-comments to make it more obvious.
-
-*** Code generate C# models using msbuild                             :story:
-
-At present we did a quick hack to code generate in C#: a simple bash
-script that runs dogen. However, this is not how we expect the end
-user to consume it; there should be a msbuild target that:
-
-- detects the code generator;
-- contains the configuration (e.g. options, location of models);'
-- runs the code generator - possibly every time models change;
-- has a tailor target to generate JSON.
-
-*** Add project documentation                                         :story:
-
-We should be able to create a simple set of docs following on from the
-[[https://ned14.github.io/outcome/][outcome project]]. They seem to be using Hugo.
-
-Links:
-
-- https://github.com/foonathan/standardese
-- https://github.com/ned14/outcome/tree/develop/doc/src
-
-*** Create the =generation= model                                     :story:
-
-Create a new model called =generation= and move all code-generation
-related class to it.
-
-We need to create classes for element properties and make model have a
-collection that is a pair of element and element properties. We need a
-good name for this pair:
-
-- extended element
-- augmented element
-- decorated element: though not using the decorator pattern; also, we
-  already have decoration properties so this is confusing.
-
-Alternatively we could just call it =element= and make it contain a
-modeling element.
-
-Approach:
-
-- create a new generation model, copying across all of the meta-model
-  and transform classes from yarn. Get the model to transform from
-  endomodel to generation model.
-- augment formattables with the new element properties. Supply this
-  data via the context or assistant.
-
-Problems:
-
-- all of the transforms assume access to the modeling element means
-  access to the generation properties. However, with the introduction
-  of the generation element we now have a disconnect. For example, we
-  sometimes sort and bucket the elements, and then modify them; this
-  no longer works with generation elements because these are not
-  pointers. It would be easier to make the generation properties a
-  part of the element. This is an ongoing discussion we've had since
-  the days of formattables. However, in formattables we did write all
-  of the transforms to take into account the formattable contained
-  both the element and the formattable properties, whereas now we need
-  to update all transforms to fit this approach. This is a lot more
-  work. The quick hack is to slot in the properties directly into the
-  element as some kind of "opaque properties". We could create a base
-  class =opaque_properties= and then have a container of these in
-  element. However, to make it properly extensible, the only way is to
-  make it a unordered set of pointers.
-- actually the right solution for this is to use multiple
-  inheritance. For each modeling element we need to create a
-  corresponding generation version of it, which is the combination of
-  the modeling element and a generation element base class. Them the
-  generation model is made up of pointers to generation elements and
-  it dispatches into generation elements descendants in the
-  formatter. The key point is to preserve the distinction between
-  modeling (single element) vs generation (projection across facet
-  space).
-
-*** Create a =ci= folder in build                                     :story:
-
-We should use the same approach as nupic for organising the scripts: a
-top-level =ci= folder with folders per CI system. We should also
-follow their naming convention for the build scripts which seem to
-follow the CI events.
-
-Links:
-
-- https://github.com/numenta/nupic.core/tree/master/ci
 
 ** Deprecated
 *** CANCELLED Split dogen testing from core                           :story:
