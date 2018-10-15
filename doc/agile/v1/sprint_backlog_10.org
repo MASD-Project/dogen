@@ -1,0 +1,725 @@
+#+title: Sprint Backlog 09
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Finish addressing build issues; key thing is to get the tests
+  working again across the board.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2018-10-15 Mon 10:35]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *2:30* |      |      |   0.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 2:30   |      |      |   0.0 |
+| Active                                                                      |        | 2:30 |      |   0.0 |
+| Sprint and product backlog grooming                                         |        |      | 0:10 |   0.0 |
+| High-level model thoughts                                                   |        |      | 2:20 |   0.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** Edit release notes for previous sprint                            :story:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.08, "Caminhada"
+
+#+begin_src markdown
+![Caminhada](https://i2.wp.com/cookthebeans.com/wp-content/uploads/2017/03/img_5465.jpg) _Long walk towards a traditional village, Huambo, Angola. [(C) Ana Rocha 2017](https://cookthebeans.com/2017/03/09/benguela-huambo-bie-in-the-route-of-angolas-up-country)_.
+
+# Overview
+
+After a rather long hiatus of some nine months, Dogen development resumes once more. In truth, the break was only related to the open source aspect of the Dogen project; behind the scenes I have been hard at work on my PhD, which has morphed into an attempt to lay the theoretical foundations for all the software engineering that has been done with Dogen. Sadly, I cannot perform that work out in the open until the thesis or papers are published, so it is expected to remain closed for at least another year or two.
+
+On the bright side, after performing an extensive literature review of the field of [Model Driven Engineering](https://en.wikipedia.org/wiki/Model-driven_engineering) - the technical name used in academia for the field Dogen is in - a lot of what we have been trying to do has finally become clear. The down side is that, as a result of all of this theoretical work, very little has changed with regards to the code during this period. As such, this sprint contains only some minor analysis work that was done in parallel, and I am closing it just avoid conflating it with the new work going forward.
+
+The future for Dogen is bright, though. We are now starting the long road towards the very ambitious release that will be Dogen 2.0. The objective is to sync the code to match all of the work done on the theory side. This work as already started; you will not fail to notice that the repository has been moved to the _MASD project_ - Model Assisted Software Development.
+
+User visible changes
+================
+
+There are no user visible changes this sprint.
+
+Next Sprint
+===========
+
+The next few sprints will be extremely active, addressing a number of long standing issues such as moving test models outside of the main repo and concluding ongoing refactorings.
+
+Binaries
+======
+
+Due to the transition of organisations, we did not generate any binaries for this release. As there are no code changes, please use the binaries for the previous release ([v1.0.07](https://github.com/MASD-Project/dogen/releases/tag/v1.0.07)) or build Dogen from source. Source downloads are available at the top.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/948594830267043840][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6354361007493775361][LinkedIn]]
+- [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-15 Mon 10:25]--[2018-10-15 Mon 10:35] =>  0:10
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Add vcpkg support to osx builds                                   :story:
+
+Following on from our investigation, we need to add vcpkg to the
+travis osx builds (clang). While we're there, update all the tools to
+latest in preparation to switching to C++ 17.
+
+*** High-level model thoughts                                         :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-11 Thu 16:06]--[2018-10-11 Thu 18:26] =>  2:20
+    :END:
+
+Jot down ideas on the separation between the API and the
+implementation in dogen products.
+
+Notes:
+
+- we now have the notion of "distribution channels": UI/UX (wt, qt, gtk
+  mobile, etc), DX (swagger, boost asio, library itself).
+- the product API should not have any dependencies in terms of storage
+  mechanisms; it should have some kind of "model source" interface
+  that can then be implemented in terms of the filesystem, GH repo,
+  postgres database etc.
+- even though it does not make a lot of sense to have a model source
+  as part of the remoting API, for consistency reasons we should still
+  support it. That is, a code generation end point will merely call
+  some internal functions to source the models rather than call
+  another endpoint, and users probably don't really need something
+  that just reads a model and returns the injector version.
+- the distribution channels are a function of the product API.
+
+*** Add support for kcov                                              :story:
+
+Try to see how hard it is to integrate kcov with the current build.
+
+*** Ignore all failing tests                                          :story:
+
+At present we have a number of tests that are commented out but appear
+as failing under cdash. This is very confusing. We need to mark them
+with the ignore macro. We should not waste time fixing the tests as
+they need to be re-written using the diff framework.
+
+*** Rename debian package                                             :story:
+
+At present our package is called =dogen-applcations=. Since there will
+only be one dogen application/package, this is a confusion name. We
+should rename it. Names:
+
+- masd-dogen
+
+*** Finish adding support for clang-cl builds                         :story:
+
+We have added preliminary support for building with clang-cl on
+windows, but the build is not green. Most of the errors seem to be on
+boost.
+
+Links:
+
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
+
+*** Tidy-up dogen windows package                                     :story:
+
+There are a few inconsistencies with the package:
+
+- dogen components have a strange structure:
+  "Dogen/runtime/dogen".
+- we should probably have a top-level umbrella for MASD, under which
+  dogen installs.
+- package name is windows amd64. We should use the vcpkg triplets for
+  simplicity (e.g. x64-windows).
+
+*** Mapping of third-party dependencies                               :story:
+
+System models should follow the physical structure of
+dependencies. That is, we should not have a "boost" system model, but
+instead a boost-test etc. Each of these can then have mappings
+(e.g. vcpkg name, build2 name, etc). Users must declare these
+references just like they do with user models. Dogen can then create
+code for:
+
+- cmake targets, properly linking against libraries;
+- vcpkg install, at product level, by de-duplicating component
+  dependencies;
+- possibly distro dependencies.
+
+We should only have a mandatory dependency, which is the STL. In
+addition, we need different models for each version (e.g. c++ 03,
+etc). This makes it easier to include the right types.
+
+Note that each model must have an associated version. The version
+should be part of the file name. However, maybe we need to distinguish
+between TS version (11, 17, etc) from library version.
+
+*** Upgrade to c++ 17                                                 :story:
+
+There are quite a few dependencies for this to happen:
+
+- on windows we need to somehow include =/std:c++latest=
+- we need to move to latest boost as it seems Boost 1.62 breaks on c++
+  17. We should wait until Beast is included in Boost before we do
+  this.
+- we need to install latest CMake, which is not available on nuget; so
+  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
+  unpack it. Only latest supports VS 2017. Then set the CMake
+  generator:
+
+:    $generator="Visual Studio 15 2017 Win64";
+
+- set the appveyor image:
+
+: image:
+:  - Visual Studio 2017
+
+- set the CMake version:
+
+:     set(CMAKE_CXX_STANDARD 14)
+
+*** Rename input models directory to models                           :story:
+
+We need to move the dogen project to the new directory layout whereby
+all models are kept in the =models= directory.
+
+*** Add basic "diff mode"                                             :story:
+
+We need a very simple way of checking all generated files in memory
+against what's in the file system and returning a flag if they are
+different. We can then use these flags to determine if tests pass. In
+the future we can extend this approach to include a proper diff of the
+files, but for now we just need a reliable way to run system tests
+again.
+
+Actually the right solution for this is to see the processing as part
+of a chain:
+
+- out of the generator come a set of artefacts with operations (write,
+  merge, ignore)
+- these get joined with a transform that reads the state of the file
+  system. It then adds more operations: delete, etc. If there are no
+  diffs, it marks those files as skip.
+- the final step is a processor which gets that model and executes the
+  operations. This can then be replaced by a "reporter" that simply
+  states what the operations would be.
+
+Diff mode is using the report to see if there are any diffs.
+
+*** dogen as a github integration                                     :story:
+
+Perhaps there are some useful services dogen could provide to users in
+terms of dogen integration. If, with every commit, we could regenerate
+the model and read the current state in github, we could then provide
+a status report:
+
+- the model does not build; red emblem. Some changes were made to the
+  model (or to dogen) that make the model invalid. User should take
+  action.
+- the model builds but generates files that are different from what's
+  checked in on github. yellow emblem. Provide a report with the
+  diffs. This can either be because the code generator has changed or
+  the user changed the model.
+- the model builds and generates exactly the same code; green emblem.
+
+With this approach we have two advantages:
+
+- we do not need to add projects as part of the dogen tests; the
+  service takes its place. We can still add a few as the core tests,
+  but we don't need to expand it much beyond reference implementation
+  and dogen itself.
+- we exercise dogen itself as well as the rest endpoint generation
+  code in a way that is actually useful to end users; it would be nice
+  to know immediately when something breaks.
+
+Notes:
+
+- we'll need some kind of way of dealing with tokens and secrets in
+  order to support private GH projects.
+
+*** Add reporting support to dogen model testing                      :story:
+
+Dogen should have a mode which generates a report for a run rather
+than code generate. The report could look like so:
+
+:              /project_a
+:                  /summary for this commit
+:                  /diffs
+:                  /errors
+:                  /benchmark data
+:                  /probing data
+:                  /log
+
+If the report was largely in HTML we could link it to the dogen docs
+and save it into git. This would make troubleshooting much easier. If
+the report contains the probing data it would be easier to figure out
+what went wrong. We should also keep track of the model that was
+generated (e.g. its location and git commit) so we can download it and
+reproduce it locally.
+
+*** Rework the tests using diff mode                                  :story:
+
+Once we have diff mode, we need to find some kind of workflow for
+tests:
+
+- each product is composed of a git URL and a list of models.
+- we git clone all repos as part of the build process.
+- directories and model locations are hard-coded in each test.
+- test runs against the model and hard-coded location, produces the
+  diff. Test asserts of the diff being non-zero.
+
+*** Fix the northwind model                                           :story:
+
+There are numerous problems with this model:
+
+- at present we have oracle support on ODB. Oracle libs are not
+  distributed with debian. If we do not find oracle we do not compile
+  northwind. This is not ideal. We should remove oracle support from
+  northwind, and install odb support in the build machine (hopefully
+  available as debs).
+- the tests are commented out and require a clean up.
+- the tests require a database to be up.
+
+Notes:
+
+- it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
+
+*** Simplify split configuration configuration                        :story:
+
+At present we have two separate command line parameters to configure
+the main output directory and the directory for header files. The
+second parameter is used for split configurations. The problem is that
+we now need to treat split configuration projects specially because of
+this. It makes more sense to force the header directory to be relative
+to the output path and make it a meta-data parameter.
+
+*** Update all stereotypes to masd                                    :story:
+
+We need to start distinguishing MASD from dogen. The profile for UML
+is part of MASD rather than dogen, so we should update all stereotypes
+to match. We need to make a decision regarding the "dia extensions" -
+its not clear if its MASD or dogen.
+
+*** Make "ignore regexes" a model property                            :story:
+
+At present we have a command line option:
+=--ignore-files-matching-regex=. It is used to ignore files in a
+project. However, the problem is, because it is a command line option,
+it must be supplied with each invocation of Dogen. This means that if
+we want to run dogen from outside the build system, we need to know
+what options were set in the build scripts or else we will have
+different results. This is a problem for testing. We should make it a
+meta-data option, which is supplied with each model and even more
+interesting, can be used with profiling. This means we can create
+profiles for specific purposes (ODB, lisp, etc) and then reuse them in
+different projects.
+
+*** Incorrect generation when changing external modules               :story:
+
+When fixing the C# projects, we updated the external modules, from
+=dogen::test_models= to =CSharpRefImpl=. Regenerating the model
+resulted in updated project files but the rest of the code did not
+change. It worked by using =-f=. It should have worked without forcing
+the write.
+
+*** Code coverage does not work for C#                                :story:
+
+It seems that using NUnit and OpenCov does not work. The main reason
+appears to be the use of shadow copying, which is no longer optional
+on NUnit 3.
+
+Links:
+
+- https://github.com/Ullink/gradle-opencover-plugin/issues/1
+- https://github.com/codecov/example-csharp/blob/master/appveyor.yml
+- https://www.appveyor.com/blog/2017/03/17/codecov/
+
+*** Improve comments on reference implementation                      :story:
+
+At present it is very difficult to understand what each model and/or
+each type does in the reference implementations. We need to add some
+comments to make it more obvious.
+
+*** Code generate C# models using msbuild                             :story:
+
+At present we did a quick hack to code generate in C#: a simple bash
+script that runs dogen. However, this is not how we expect the end
+user to consume it; there should be a msbuild target that:
+
+- detects the code generator;
+- contains the configuration (e.g. options, location of models);'
+- runs the code generator - possibly every time models change;
+- has a tailor target to generate JSON.
+
+*** Add project documentation                                         :story:
+
+We should be able to create a simple set of docs following on from the
+[[https://ned14.github.io/outcome/][outcome project]]. They seem to be using Hugo.
+
+Links:
+
+- https://github.com/foonathan/standardese
+- https://github.com/ned14/outcome/tree/develop/doc/src
+
+*** Create the =generation= model                                     :story:
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
+
+Problems:
+
+- all of the transforms assume access to the modeling element means
+  access to the generation properties. However, with the introduction
+  of the generation element we now have a disconnect. For example, we
+  sometimes sort and bucket the elements, and then modify them; this
+  no longer works with generation elements because these are not
+  pointers. It would be easier to make the generation properties a
+  part of the element. This is an ongoing discussion we've had since
+  the days of formattables. However, in formattables we did write all
+  of the transforms to take into account the formattable contained
+  both the element and the formattable properties, whereas now we need
+  to update all transforms to fit this approach. This is a lot more
+  work. The quick hack is to slot in the properties directly into the
+  element as some kind of "opaque properties". We could create a base
+  class =opaque_properties= and then have a container of these in
+  element. However, to make it properly extensible, the only way is to
+  make it a unordered set of pointers.
+- actually the right solution for this is to use multiple
+  inheritance. For each modeling element we need to create a
+  corresponding generation version of it, which is the combination of
+  the modeling element and a generation element base class. Them the
+  generation model is made up of pointers to generation elements and
+  it dispatches into generation elements descendants in the
+  formatter. The key point is to preserve the distinction between
+  modeling (single element) vs generation (projection across facet
+  space).
+
+*** Create a =ci= folder in build                                     :story:
+
+We should use the same approach as nupic for organising the scripts: a
+top-level =ci= folder with folders per CI system. We should also
+follow their naming convention for the build scripts which seem to
+follow the CI events.
+
+Links:
+
+- https://github.com/numenta/nupic.core/tree/master/ci
+
+** Deprecated
+*** CANCELLED Split dogen testing from core                           :story:
+    CLOSED: [2018-10-05 Fri 15:33]
+
+*Rationale*: this story was cleaned up and split into several stories.
+
+At present we have tests in modeling that perform "code generation";
+that is, regenerate all dogen test models from JSON and Dia. These are
+boost unit tests. Due to this, we have welded the test models with the
+core models, which means that we cannot easily separate repos without
+a lot of hacks. However, if we were to generalise the problem: there
+is no reason why test models should be coupled with the core or
+treated specially; they are just an instance of a project with dogen
+models which can be used to validate dogen. A better approach is to
+move all this work to "system testing", done using the dogen binary
+rather than within unit tests. This would work as follows:
+
+- add a mode in dogen called "validation mode" or diagnostics, etc. In
+  this mode, dogen does not write files to the file system but instead
+  produces a number of "reports":
+  - a list of all validation errors, if any, in GCC format, pointing
+    to the original models.
+  - a set of diff files with all the differences, if any.
+  - a benchmark report.
+  - a top-level report with the project name, its git repo and the git
+    commit.
+- projects that wish to help dogen must have a well-defined target to
+  generate the reports for all models under test.
+- dogen project contains a script with a list of such projects and
+  their git repos. Every time we build dogen core we install the
+  package into the travis VM and run the reports.
+- a environment variable containing the path into which to write the
+  reports must be set before running dogen.
+- a git repo is created with all the reports, and a structure as
+  follows:
+  /repo
+      /branch
+          /dogen_commit
+              /summary for this commit
+              /project_a
+                  /summary for this commit
+                  /diffs
+                  /errors
+                  /benchmark data
+              /project_b
+ ...
+- to avoid clashes, make the branches named after the build,
+  e.g. travis osx etc.
+- git clones are shallow (1 commit)
+- once all reports are generated into the git report repo, the build
+  commits the report. The comment is the dogen commit.
+- a travis build is triggered on the back of the commit. It checks the
+  latest commit. If the report is a pass the build is green, if its a
+  fail the build is red.
+- in an ideal world the system tests build is separate from the dogen
+  core build, and triggered from a bintray upload. However, as we do
+  not know how to do this yet, we can just run the system tests at the
+  end of the dogen build.
+- we should split the reporting work from the build separation. We
+  could have a simple build that just fails if there are any diffs to
+  start off with and worry about reporting later.
+
+With this approach we can have any number of projects contributing to
+validate dogen (including dogen itself). The only slight downside is
+that the models must always be up-to-date (e.g. if the user has
+changed the model but not regenerated, system tests will
+fail). Perhaps we could have different categories of test models:
+mandatory and optional. Mandatory must pass, optional do not
+contribute to the build failing. However, they still show up in the
+report.
+
+Links:
+
+- https://github.com/cubicdaiya/dtl
+
+
+*** CANCELLED Create a build script just for C#                       :story:
+    CLOSED: [2018-10-04 Thu 17:50]
+
+*Rationale*: no longer needed after the split of reference models.
+
+At the moment we are doing C++ and C# on the same build script, making
+it really complex. It would be much easier to have a separate C# build
+script. We should also have a separate install script for C# so we
+don't have to waste time installing packages if we're not going to use
+them.
+
+*** CANCELLED Create a new exoelement chain                           :story:
+    CLOSED: [2018-10-04 Thu 17:54]
+
+*Rationale*: given the amount of churn the refactor stories have had,
+this story is no longer relevant.
+
+We need to create a new exoelement chain that uses the new exoelements
+to bootstrap a endomodel.
+
+*** CANCELLED Start documenting the theoretical aspects of Dogen      :story:
+    CLOSED: [2018-10-05 Fri 10:28]
+
+*Rationale*: this will be taken care of by the thesis.
+
+Up to now we have more or less coded Dogen as we went along; we
+haven't really spent a lot of time worrying about the theory behind
+the work we were carrying out. However, as we reached v1.0, the theory
+took center stage. We cannot proceed to the next phase of the product
+without a firm grasp of the theory. This story is a starting point so
+we can decide on how to break up the work.
+
+*** CANCELLED Sections to add to manual                               :story:
+    CLOSED: [2018-10-05 Fri 10:29]
+
+*Rationale*: this will be taken care of by the thesis.
+
+Random list of things that we need to have in manual:
+
+- Drivers/frontends: The importance of drivers to allow existing
+  frameworks to interoperate; eCore, MSVC, Dia, JSON.  Structural
+  variability at modeling level. Dia frontend: use of colours,
+  validation (checking of stereotypes), "on the impact of layout
+  quality to understanding UML diagrams", this constrains the size of
+  a model.
+- Stitch. Variability regions vs aspects (Oberweis paper "modeling
+  variability in template-based code generators"). Why we need both
+  feature modeling and variability regions / aspects: because features
+  are a high-level concept that is implemented using variability
+  regions. We need to map layers to facets and to our generation
+  model. Dependencies between features and variability regions.
+- External integration and its importance, cartridges. integration
+  with Clang, ODB, XML tool.
+- Agile and MDD: tight integration. Lightweight MDD with agile
+
+*** CANCELLED Use the in-memory interface of LibXml                   :story:
+    CLOSED: [2018-10-05 Fri 10:30]
+
+*Rationale*: we should just drop libxml altogether and use XSD tool.
+
+At present, our C++ wrappers on top of LibXml are using the file based
+interface. We should do in-memory processing of the XML file. Once
+this is in place, we can change the exogenous transformers to use
+strings rather than paths to files.
+
+*** CANCELLED Consider simplifying frontend testing                   :story:
+    CLOSED: [2018-10-05 Fri 11:01]
+
+*Rationale*: this will be resolved with the new diff based tests.
+
+At present we are outputting code for every supported frontend, and
+then checking they are binary identical. This is fine given that we
+only have two frontends. Once we had a visual studio frontend, it may
+make more sense to stop generating code for all frontends and simply
+diff the middle-end to ensure we generate an identical yarn model. We
+can continue to test end to end one of the frontends (dia).
+
+We had command line options available in the past that generated only
+a merged model. We need to look into the backlog for these.
+
+This is a problem specially in light of adding new backends because
+now we are code-generating the cross product of frontends and
+backends.
+
+*** CANCELLED Update dynamic section in manual                        :story:
+    CLOSED: [2018-10-05 Fri 11:08]
+
+*Rationale*: this will be taken care of by the thesis.
+
+We need to talk about the new fields, field templates, etc.
+
+*** CANCELLED Some test models do not build on run all specs          :story:
+    CLOSED: [2018-10-05 Fri 11:09]
+
+*Rationale*: should no longer be a problem after the repo splitting.
+
+For some reason we are not building some of the test models when doing
+a run all specs, in particular:
+
+- exception
+- comments
+
+this may be because we have no specs for them. We need to find a way
+to build them somehow.
+
+Merged stories:
+
+*Add test model sanitizer to test models target*
+
+At present if we build test models we don't seem to build the
+sanitizer.
+
+*** CANCELLED C++ workflow should perform a consistency check         :story:
+    CLOSED: [2018-10-05 Fri 11:11]
+
+*Rationale*: this will no longer be required when we implement proper
+feature model support.
+
+We should ensure that all facets and formatters available in the
+registrar have corresponding field definitions and vice-versa. This
+was originally to be done by some kind of "feature graph" class, but
+since we need to use this data for other purposes, the main workflow
+could take on this responsibility - or we could create some kind of
+"validator" class to which the workflow delegates.
+
+*** CANCELLED Implement module expander test                          :story:
+    CLOSED: [2018-10-05 Fri 11:14]
+
+*Rationale*: code has changed quite a bit since then.
+
+We copied across the code for the module expander test from yarn json
+but didn't actually finished implementing it.
+
+*** CANCELLED Consider using the same API as boost property tree in selector :story:
+    CLOSED: [2018-10-05 Fri 11:14]
+
+*Rationale*: no longer required once we have proper feature support.
+
+At present we have the type of the value in the method names in the
+selector, e.g. =get_text_content=. It would be better to have a =get=
+that takes in a template parameter, e.g. =get<text>=. However, in
+order to do this we need to have some kind of mapping between the
+schema value (=text=) and the raw value (=std::string=). This requires
+some template magic.
+
+Once this is done we can also make the API a bit more like the
+property tree API such as for example returning =boost::optional= for
+the cases where the field may not exist.
+
+We have started introducing =try_select...=. This was preferred to
+=get_optional= because we are not getting an optional but instead
+trying to get.
+
+*** CANCELLED Add dynamic consistency validation                      :story:
+    CLOSED: [2018-10-05 Fri 11:15]
+
+*Rationale*: no longer required once we have proper feature support.
+
+We need to check that the default values supplied for a field are
+consistent with the field's type. This could be done with a
+=validate()= method in workflow.
+
+Actually since we can only create fields from JSON, we should just add
+a check there.
+
+*** CANCELLED Update manual with detailed model descriptions           :epic:
+    CLOSED: [2018-10-05 Fri 11:18]
+
+*Rationale*: this will be taken care of by the thesis.
+
+#+begin_quote
+*Story*: As a dogen developer, I want to read about the architecture
+of the application so that I don't have to spend a lot of time trying
+to understand the source code.
+#+end_quote
+
+We should add CRCs for the main classes, with an explanation of what
+each class does; we should also explain the separation of the
+transformation logic between the core model (e.g. =dia=) and the
+transformation model (e.g. =dia_to_sml=). We should describe what the
+workflow does in each model.
+
+We should only implement this story when all of the major refactoring
+has been done.
+
+*** CANCELLED Add tests for general settings factory                  :story:
+    CLOSED: [2018-10-05 Fri 11:21]
+
+*Rationale*: once these become part of the meta-model, most of these
+won't make any sense.
+
+Some simple tests come to mind:
+
+- empty data files directory results in empty factory;
+- valid data files directory results in non-empty factory;
+- invalid data files directory results in exception;
+- more than one data files directory results in expected load;
+- creating annotation for test model types works as expected.
+- missing fields result in expected exceptions.
+
+*** CANCELLED Add tests for =general_settings_factory=                :story:
+    CLOSED: [2018-10-05 Fri 11:21]
+
+*Rationale*: once these become part of the meta-model, most of these
+won't make any sense.
+
+Tests:
+
+- missing licence
+- missing modeline
+- empty marker
+- different marker for two objects
+- consider moving generate preamble into annotation
