@@ -30,12 +30,13 @@ vcpkg_input_location="https://www.dropbox.com/${vcpkg_dropbox_link}/${vcpkg_pack
 vcpkg_output_location="/tmp/${vcpkg_package}"
 vcpkg_extract_dir="/tmp"
 vcpkg_final_folder="vcpkg-export"
-curl -L -o ${vcpkg_output_location} ${vcpkg_input_location} 
+curl -L -o ${vcpkg_output_location} ${vcpkg_input_location}
 unzip -q ${vcpkg_output_location} -d ${vcpkg_extract_dir}
 mv ${vcpkg_extract_dir}/${vcpkg_folder} ${vcpkg_extract_dir}/${vcpkg_final_folder}
+echo "vcpkg version: ${vcpkg_folder}"
 
 #
 # Clang
 #
-clang_input_location="http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-apple-darwin.tar.xz"
-vcpkg_output_location="/tmp/"
+# clang_input_location="http://releases.llvm.org/7.0.0/clang+llvm-7.0.0-x86_64-apple-darwin.tar.xz"
+# vcpkg_output_location="/tmp/"
