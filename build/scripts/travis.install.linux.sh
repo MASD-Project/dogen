@@ -42,6 +42,11 @@ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get update -qq
 
 #
+# kcov deps
+#
+sudo apt-get install libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
+
+#
 # clang
 #
 if [ "$CXX" == "clang++" ]; then
