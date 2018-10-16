@@ -85,7 +85,7 @@ after_success:
   - if [[ "x${coverage}" == "x1" ]]; then
        tests="`'ls' ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/bin/dogen.*.tests`";
        for test in ${tests}; do
-           /tmp/kcov --include-pattern=/projects/ ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage ${test};
+           /tmp/kcov --exclude-pattern=/tests/ --include-pattern=/projects/ --coveralls-id=${TRAVIS_JOB_ID} ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage ${test};
        done;
        bash <(curl -s https://codecov.io/bash) -s ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage;
     fi
