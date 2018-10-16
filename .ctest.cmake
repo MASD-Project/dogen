@@ -152,5 +152,5 @@ ctest_build()
 # CDash to see the testing status. Travis/AppVeyor just tells us
 # weather the build and packaging steps have worked or failed.
 #
-ctest_test(RETURN_VALUE retval)
+# ctest_test(RETURN_VALUE retval)
 ctest_submit()
