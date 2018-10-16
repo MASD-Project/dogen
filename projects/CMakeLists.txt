@@ -121,11 +121,10 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
     endif()
 
     # enable RTTI
-    # -fvisibility=hidden
     add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
     set(CMAKE_CXX_STANDARD 17)
     set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
-    set(other_flags "${other_flags} -fvisibility=default")
+    set(other_flags "${other_flags} -fvisibility=hidden")
 
     # set the flags
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${optimisation_flags}")
