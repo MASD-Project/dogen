@@ -267,7 +267,6 @@ At present we have a number of tests that are commented out but appear
 as failing under cdash. This is very confusing. We need to mark them
 with the ignore macro. We should not waste time fixing the tests as
 they need to be re-written using the diff framework.
-
 *** STARTED AppVeyor is not building on GitHub commits                :story:
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 11:11]--[2018-10-16 Tue 11:15] =>  0:04
@@ -279,6 +278,46 @@ notification but AppVeyor is refusing to build.
 Links:
 
 - [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Builds not triggering from GitHub commit]]
+
+*** STARTED CTest warnings seem to be clipped                         :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 13:26]--[2018-10-16 Tue 13:41] =>  0:15
+    :END:
+
+We seem to have 50 warnings on both OSX and linux builds, which is a
+bit of a coincidence. CTest is probably clipping the warnings.
+
+It is the default. Configured by
+=CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS=.
+
+Links:
+
+- [[https://cmake.org/cmake/help/v3.4/variable/CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS.html][CTest variable CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS]]
+- [[https://blog.kitware.com/ctest-performance-tip-use-ctestcustom-cmake-not-ctest/][CTest performance tip: Use CTestCustom.cmake, not .ctest]]
+
+*** Upgrade to c++ 17                                                 :story:
+
+There are quite a few dependencies for this to happen:
+
+- on windows we need to somehow include =/std:c++latest=
+- we need to move to latest boost as it seems Boost 1.62 breaks on c++
+  17. We should wait until Beast is included in Boost before we do
+  this.
+- we need to install latest CMake, which is not available on nuget; so
+  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
+  unpack it. Only latest supports VS 2017. Then set the CMake
+  generator:
+
+:    $generator="Visual Studio 15 2017 Win64";
+
+- set the appveyor image:
+
+: image:
+:  - Visual Studio 2017
+
+- set the CMake version:
+
+:     set(CMAKE_CXX_STANDARD 14)
 
 *** High-level model thoughts                                         :story:
     :LOGBOOK:
@@ -356,30 +395,6 @@ etc). This makes it easier to include the right types.
 Note that each model must have an associated version. The version
 should be part of the file name. However, maybe we need to distinguish
 between TS version (11, 17, etc) from library version.
-
-*** Upgrade to c++ 17                                                 :story:
-
-There are quite a few dependencies for this to happen:
-
-- on windows we need to somehow include =/std:c++latest=
-- we need to move to latest boost as it seems Boost 1.62 breaks on c++
-  17. We should wait until Beast is included in Boost before we do
-  this.
-- we need to install latest CMake, which is not available on nuget; so
-  we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
-  unpack it. Only latest supports VS 2017. Then set the CMake
-  generator:
-
-:    $generator="Visual Studio 15 2017 Win64";
-
-- set the appveyor image:
-
-: image:
-:  - Visual Studio 2017
-
-- set the CMake version:
-
-:     set(CMAKE_CXX_STANDARD 14)
 
 *** Rename input models directory to models                           :story:
 
