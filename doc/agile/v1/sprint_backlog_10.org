@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 12:30]
+#+CAPTION: Clock summary at [2018-10-16 Tue 13:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:13* |       |      |   0.0 |
+| *Total time*                                                                | *14:29* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:13   |       |      |   0.0 |
-| Active                                                                      |         | 14:13 |      |   0.0 |
+| Stories                                                                     | 14:29   |       |      |   0.0 |
+| Active                                                                      |         | 14:29 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
@@ -32,6 +32,8 @@
 | Travis badge is not red when build is failing                               |         |       | 0:14 |   0.0 |
 | Ignore all failing tests                                                    |         |       | 0:50 |   0.0 |
 | AppVeyor is not building on GitHub commits                                  |         |       | 0:04 |   0.0 |
+| CTest warnings seem to be clipped                                           |         |       | 0:15 |   0.0 |
+| Upgrade to c++ 17                                                           |         |       | 0:01 |   0.0 |
 | High-level model thoughts                                                   |         |       | 2:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -296,6 +298,9 @@ Links:
 - [[https://blog.kitware.com/ctest-performance-tip-use-ctestcustom-cmake-not-ctest/][CTest performance tip: Use CTestCustom.cmake, not .ctest]]
 
 *** Upgrade to c++ 17                                                 :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 13:42]--[2018-10-16 Tue 13:43] =>  0:01
+    :END:
 
 There are quite a few dependencies for this to happen:
 
@@ -318,6 +323,9 @@ There are quite a few dependencies for this to happen:
 - set the CMake version:
 
 :     set(CMAKE_CXX_STANDARD 14)
+
+We have now fulfilled all of these requirements, so try to move to
+C++17.
 
 *** High-level model thoughts                                         :story:
     :LOGBOOK:
