@@ -174,14 +174,19 @@ cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcp
 cmake --build . --config Release --target ALL_BUILD
 ```
 
-If you are **not** using vcpkg, you can omit
+---
+**Notes**
+
+On all platforms, if you are **not** using vcpkg, you can omit
 ```-DCMAKE_TOOLCHAIN_FILE```. However if the dependencies are not on
-the standard paths, you **must not** forget to set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
-accordingly:
+the standard paths, you must then set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
+accordingly, e.g.:
 
 ```
 CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
 ```
+
+---
 
 ## Running Tests
 
