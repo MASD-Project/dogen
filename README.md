@@ -17,11 +17,11 @@
 [![Contributors](https://img.shields.io/github/contributors/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/graphs/contributors)
 [ ![Binaries (Stable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg?version=1.0.09) ](https://bintray.com/masd-project/main/dogen/1.0.09/link)
 [![Binaries (Unstable)](https://api.bintray.com/packages/masd-project/main/dogen/images/download.svg) ](https://bintray.com/masd-project/main/dogen/_latestVersion)
-[![Language](https://img.shields.io/badge/language-c++-blue.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
-[![C++](https://img.shields.io/badge/std-c++14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B14)
-[![msvc2015](https://img.shields.io/badge/MSVC-2015-ff69b4.svg)](https://visualstudio.microsoft.com/vs/older-downloads/)
-[![gcc-6.3.0](https://img.shields.io/badge/GCC-6.3.0-ff69b4.svg)](https://www.gnu.org/software/gcc/gcc-6)
-[![clang-3.7](https://img.shields.io/badge/CLANG-3.7-ff69b4.svg)](http://releases.llvm.org/3.7.0/tools/clang/docs/ReleaseNotes.html)
+[![Language](https://img.shields.io/badge/Language-C++-cyan.svg)](https://www.openhub.net/p/dogen/analyses/latest/languages_summary)
+[![C++](https://img.shields.io/badge/std-C++17-cyan.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
+[![gcc-8](https://img.shields.io/badge/GCC-8-cyan.svg)](https://www.gnu.org/software/gcc/gcc-8)
+[![clang-7](https://img.shields.io/badge/CLANG-7-cyan.svg)](http://releases.llvm.org/7.0.0/tools/clang/docs/ReleaseNotes.html)
+[![msvc2017](https://img.shields.io/badge/MSVC-2017-cyan.svg)](https://visualstudio.microsoft.com/vs/whatsnew/)
 [![Coverity](https://img.shields.io/coverity/scan/16865.svg)](https://scan.coverity.com/projects/masd-project-dogen)
 [![Project Stats](https://www.openhub.net/p/dogen/widgets/project_thin_badge.gif)](https://www.openhub.net/p/dogen)
 
@@ -94,22 +94,22 @@ Where ```${VERSION}``` is your Dogen version such as ```1.0.10```.
 # Building From Source
 
 In order to build Dogen you will need a C++ toolchain. On Linux and
-OSX, you'll need a moderately recent compiler - such as [GCC
-6](https://www.gnu.org/software/gcc/gcc-6) or [Clang
-3.7](https://www.gnu.org/software/gcc/gcc-6) - and
+OSX, you'll need a recent compiler with C++ 17 support, such as [GCC
+8](https://www.gnu.org/software/gcc/gcc-8) or [Clang
+7](https://img.shields.io/badge/CLANG-7-cyan.svg) - and
 [Ninja](https://ninja-build.org/manual.html) or [GNU
 Make](https://www.gnu.org/software/make/). On Windows you'll need
 [Visual Studio
-2015](https://visualstudio.microsoft.com/vs/older-downloads/) or
-later. Note though that we try to always use the most recent releases
-with Dogen so, if you can, stick to those.
+2017](https://visualstudio.microsoft.com/vs/whatsnew/). Older
+compilers may work, but we try to always use the most recent releases
+with Dogen. So, if you can, stick to those.
 
 Dogen has the following additional dependencies, across all operative systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
 | [CMake](https://cmake.org/)  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
-| [Boost](https://boost.org)  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
+| [Boost](https://boost.org)  | Mandatory | 1.68 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
 | [Doxygen](http://www.doxygen.nl/) | Optional | Any recent | Required to build the source code documentation. |
 
@@ -170,7 +170,7 @@ ninja -j${CORES}
 On Windows, the incantation is slightly different:
 
 ```
-cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 14 2015 Win64'
+cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 15 2017 Win64'
 cmake --build . --config Release --target ALL_BUILD
 ```
 
