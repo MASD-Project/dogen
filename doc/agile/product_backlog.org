@@ -66,78 +66,6 @@ supported for all kernels. This is a bit trickier.
 We also need to check the existing code in stereotypes transform to
 stop trowing if compatibility flag is on.
 
-*** Sort out iconv on windows                                         :story:
-
-Latest conan packages seem to have changed how iconv is packaged. Output:
-
-: Get-ChildItem C:/Users/appveyor/.conan/data/libiconv/1.15/bincrafters/stable/package/f6bcf0d95fafcf303dfebe42c8562386d4cdbf69 -Recurse
-:
-    Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: d-----        1/25/2018   1:30 PM                bin
-: d-----        1/25/2018   1:30 PM                include
-: d-----        1/25/2018   1:30 PM                lib
-: d-----        1/25/2018   1:30 PM                licenses
-: d-----        1/25/2018   1:30 PM                share
-: -a----        1/25/2018   1:30 PM            466 conaninfo.txt
-: -a----        1/25/2018   1:30 PM           1308 conanmanifest.txt
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\bin
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM        1047040 iconv.exe
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\include
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM           9270 iconv.h
-: -a----        1/25/2018   1:30 PM           1512 libcharset.h
-: -a----        1/25/2018   1:30 PM           1319 localcharset.h
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\lib
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM            196 charset.alias
-: -a----        1/25/2018   1:30 PM           8030 charset.lib
-: -a----        1/25/2018   1:30 PM        1111174 iconv.lib
-: -a----        1/25/2018   1:30 PM           1106 libcharset.la
-: -a----        1/25/2018   1:30 PM           1100 libiconv.la
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\licenses
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM          25291 COPYING.LIB
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: d-----        1/25/2018   1:30 PM                doc
-: d-----        1/25/2018   1:30 PM                man
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\doc
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM           6438 iconv.1.html
-: -a----        1/25/2018   1:30 PM           6335 iconv.3.html
-: -a----        1/25/2018   1:30 PM           4399 iconvctl.3.html
-: -a----        1/25/2018   1:30 PM           2054 iconv_close.3.html
-: -a----        1/25/2018   1:30 PM           8489 iconv_open.3.html
-: -a----        1/25/2018   1:30 PM           3406 iconv_open_into.3.html
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\man
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: d-----        1/25/2018   1:30 PM                man1
-: d-----        1/25/2018   1:30 PM                man3
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\man\man1
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM           4231 iconv.1
-:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\man\man3
-: Mode                LastWriteTime         Length Name
-: ----                -------------         ------ ----
-: -a----        1/25/2018   1:30 PM           4239 iconv.3
-: -a----        1/25/2018   1:30 PM           2385 iconvctl.3
-: -a----        1/25/2018   1:30 PM           1044 iconv_close.3
-: -a----        1/25/2018   1:30 PM           4671 iconv_open.3
-: -a----        1/25/2018   1:30 PM           1822 iconv_open_into.3
-
-We have commented it out from CPack for now.
-
 *** C# inheritance requires ordering                                  :story:
 
 When we implement C# inheritance we must make sure we place the
@@ -3351,7 +3279,8 @@ entail:
   templates, valgrind, doxygen. For CTest we should also generate a
   "setup cron" and "setup windows scheduler" scripts. User can just
   run these from the build machine and it will start running CTest.
-- conan support: perhaps with just boost for now
+- vcpkg support: add "ports" code? user could point to vcpkg directory
+  and a ports directory is created.
 - agile with first sprint
 - README with emblems.
 
@@ -10103,10 +10032,16 @@ See:
 
 *** Build boost for MinGW                                             :story:
 
-At present our MinGW build is borked because we do not have a boost
-build. Create one and add it to DropBox or Conan.
+We do not have a MinGW build on windows. This could probably be easily
+added. Steps:
 
-In order to add support for appveyor we need to fix the path:
+- download and install =mingw= on the windows VM.
+- create a vcpkg package using =mingw=, and upload it to dropbox.
+- setup a new build on appveyor on the build matrix for mingw.
+
+Notes:
+
+- In order to add support for appveyor we need to fix the path:
 
 :  # Workaround for CMake not wanting sh.exe on PATH for MinGW
 :  - ps: PATH=%PATH%:C:\Program Files\Git\usr\bin;=%
@@ -13421,7 +13356,8 @@ This project seems interesting:
 
 They seem to have added support for conan, appveyor, etc in an
 extensible way. We need to figure out if anything can be nicked for
-our infrastructure.
+our infrastructure. This is also a useful template for when we
+code-generate products.
 
 *** Read A Concept Design for the STL                                 :story:
 

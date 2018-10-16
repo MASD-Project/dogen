@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 11:41]
+#+CAPTION: Clock summary at [2018-10-16 Tue 11:55]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:29* |       |      |   0.0 |
+| *Total time*                                                                | *13:42* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:29   |       |      |   0.0 |
-| Active                                                                      |         | 13:29 |      |   0.0 |
+| Stories                                                                     | 13:42   |       |      |   0.0 |
+| Active                                                                      |         | 13:42 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
@@ -28,6 +28,7 @@
 | Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
 | Build on tags for Windows                                                   |         |       | 0:09 |   0.0 |
 | Add vcpkg support to osx builds                                             |         |       | 5:17 |   0.0 |
+| Remove all references to conan                                              |         |       | 0:13 |   0.0 |
 | Ignore all failing tests                                                    |         |       | 0:33 |   0.0 |
 | AppVeyor is not building on GitHub commits                                  |         |       | 0:04 |   0.0 |
 | High-level model thoughts                                                   |         |       | 2:20 |   0.0 |
@@ -227,6 +228,16 @@ Links:
 
 - [[https://github.com/Microsoft/vcpkg/issues/4437][Error linking Boost on x86-osx]]
 - [[https://github.com/Microsoft/vcpkg/issues/4476][Building vcpkg on OSX using LLVM's clang]]
+
+*** COMPLETED Remove all references to conan                          :story:
+    CLOSED: [2018-10-16 Tue 11:54]
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 11:42]--[2018-10-16 Tue 11:55] =>  0:13
+    :END:
+
+We still have a number of places where we are doing things for conan
+(checking for its presence in CMake, stories etc). Delete all of
+those.
 
 *** STARTED Ignore all failing tests                                  :story:
     :LOGBOOK:
@@ -600,291 +611,77 @@ Links:
 - https://github.com/numenta/nupic.core/tree/master/ci
 
 ** Deprecated
-*** CANCELLED Split dogen testing from core                           :story:
-    CLOSED: [2018-10-05 Fri 15:33]
-
-*Rationale*: this story was cleaned up and split into several stories.
-
-At present we have tests in modeling that perform "code generation";
-that is, regenerate all dogen test models from JSON and Dia. These are
-boost unit tests. Due to this, we have welded the test models with the
-core models, which means that we cannot easily separate repos without
-a lot of hacks. However, if we were to generalise the problem: there
-is no reason why test models should be coupled with the core or
-treated specially; they are just an instance of a project with dogen
-models which can be used to validate dogen. A better approach is to
-move all this work to "system testing", done using the dogen binary
-rather than within unit tests. This would work as follows:
-
-- add a mode in dogen called "validation mode" or diagnostics, etc. In
-  this mode, dogen does not write files to the file system but instead
-  produces a number of "reports":
-  - a list of all validation errors, if any, in GCC format, pointing
-    to the original models.
-  - a set of diff files with all the differences, if any.
-  - a benchmark report.
-  - a top-level report with the project name, its git repo and the git
-    commit.
-- projects that wish to help dogen must have a well-defined target to
-  generate the reports for all models under test.
-- dogen project contains a script with a list of such projects and
-  their git repos. Every time we build dogen core we install the
-  package into the travis VM and run the reports.
-- a environment variable containing the path into which to write the
-  reports must be set before running dogen.
-- a git repo is created with all the reports, and a structure as
-  follows:
-  /repo
-      /branch
-          /dogen_commit
-              /summary for this commit
-              /project_a
-                  /summary for this commit
-                  /diffs
-                  /errors
-                  /benchmark data
-              /project_b
- ...
-- to avoid clashes, make the branches named after the build,
-  e.g. travis osx etc.
-- git clones are shallow (1 commit)
-- once all reports are generated into the git report repo, the build
-  commits the report. The comment is the dogen commit.
-- a travis build is triggered on the back of the commit. It checks the
-  latest commit. If the report is a pass the build is green, if its a
-  fail the build is red.
-- in an ideal world the system tests build is separate from the dogen
-  core build, and triggered from a bintray upload. However, as we do
-  not know how to do this yet, we can just run the system tests at the
-  end of the dogen build.
-- we should split the reporting work from the build separation. We
-  could have a simple build that just fails if there are any diffs to
-  start off with and worry about reporting later.
-
-With this approach we can have any number of projects contributing to
-validate dogen (including dogen itself). The only slight downside is
-that the models must always be up-to-date (e.g. if the user has
-changed the model but not regenerated, system tests will
-fail). Perhaps we could have different categories of test models:
-mandatory and optional. Mandatory must pass, optional do not
-contribute to the build failing. However, they still show up in the
-report.
-
-Links:
-
-- https://github.com/cubicdaiya/dtl
-
-
-*** CANCELLED Create a build script just for C#                       :story:
-    CLOSED: [2018-10-04 Thu 17:50]
-
-*Rationale*: no longer needed after the split of reference models.
-
-At the moment we are doing C++ and C# on the same build script, making
-it really complex. It would be much easier to have a separate C# build
-script. We should also have a separate install script for C# so we
-don't have to waste time installing packages if we're not going to use
-them.
-
-*** CANCELLED Create a new exoelement chain                           :story:
-    CLOSED: [2018-10-04 Thu 17:54]
-
-*Rationale*: given the amount of churn the refactor stories have had,
-this story is no longer relevant.
-
-We need to create a new exoelement chain that uses the new exoelements
-to bootstrap a endomodel.
-
-*** CANCELLED Start documenting the theoretical aspects of Dogen      :story:
-    CLOSED: [2018-10-05 Fri 10:28]
-
-*Rationale*: this will be taken care of by the thesis.
-
-Up to now we have more or less coded Dogen as we went along; we
-haven't really spent a lot of time worrying about the theory behind
-the work we were carrying out. However, as we reached v1.0, the theory
-took center stage. We cannot proceed to the next phase of the product
-without a firm grasp of the theory. This story is a starting point so
-we can decide on how to break up the work.
-
-*** CANCELLED Sections to add to manual                               :story:
-    CLOSED: [2018-10-05 Fri 10:29]
-
-*Rationale*: this will be taken care of by the thesis.
-
-Random list of things that we need to have in manual:
-
-- Drivers/frontends: The importance of drivers to allow existing
-  frameworks to interoperate; eCore, MSVC, Dia, JSON.  Structural
-  variability at modeling level. Dia frontend: use of colours,
-  validation (checking of stereotypes), "on the impact of layout
-  quality to understanding UML diagrams", this constrains the size of
-  a model.
-- Stitch. Variability regions vs aspects (Oberweis paper "modeling
-  variability in template-based code generators"). Why we need both
-  feature modeling and variability regions / aspects: because features
-  are a high-level concept that is implemented using variability
-  regions. We need to map layers to facets and to our generation
-  model. Dependencies between features and variability regions.
-- External integration and its importance, cartridges. integration
-  with Clang, ODB, XML tool.
-- Agile and MDD: tight integration. Lightweight MDD with agile
-
-*** CANCELLED Use the in-memory interface of LibXml                   :story:
-    CLOSED: [2018-10-05 Fri 10:30]
-
-*Rationale*: we should just drop libxml altogether and use XSD tool.
-
-At present, our C++ wrappers on top of LibXml are using the file based
-interface. We should do in-memory processing of the XML file. Once
-this is in place, we can change the exogenous transformers to use
-strings rather than paths to files.
-
-*** CANCELLED Consider simplifying frontend testing                   :story:
-    CLOSED: [2018-10-05 Fri 11:01]
-
-*Rationale*: this will be resolved with the new diff based tests.
-
-At present we are outputting code for every supported frontend, and
-then checking they are binary identical. This is fine given that we
-only have two frontends. Once we had a visual studio frontend, it may
-make more sense to stop generating code for all frontends and simply
-diff the middle-end to ensure we generate an identical yarn model. We
-can continue to test end to end one of the frontends (dia).
-
-We had command line options available in the past that generated only
-a merged model. We need to look into the backlog for these.
-
-This is a problem specially in light of adding new backends because
-now we are code-generating the cross product of frontends and
-backends.
-
-*** CANCELLED Update dynamic section in manual                        :story:
-    CLOSED: [2018-10-05 Fri 11:08]
-
-*Rationale*: this will be taken care of by the thesis.
-
-We need to talk about the new fields, field templates, etc.
-
-*** CANCELLED Some test models do not build on run all specs          :story:
-    CLOSED: [2018-10-05 Fri 11:09]
-
-*Rationale*: should no longer be a problem after the repo splitting.
-
-For some reason we are not building some of the test models when doing
-a run all specs, in particular:
-
-- exception
-- comments
-
-this may be because we have no specs for them. We need to find a way
-to build them somehow.
-
-Merged stories:
-
-*Add test model sanitizer to test models target*
-
-At present if we build test models we don't seem to build the
-sanitizer.
-
-*** CANCELLED C++ workflow should perform a consistency check         :story:
-    CLOSED: [2018-10-05 Fri 11:11]
-
-*Rationale*: this will no longer be required when we implement proper
-feature model support.
-
-We should ensure that all facets and formatters available in the
-registrar have corresponding field definitions and vice-versa. This
-was originally to be done by some kind of "feature graph" class, but
-since we need to use this data for other purposes, the main workflow
-could take on this responsibility - or we could create some kind of
-"validator" class to which the workflow delegates.
-
-*** CANCELLED Implement module expander test                          :story:
-    CLOSED: [2018-10-05 Fri 11:14]
-
-*Rationale*: code has changed quite a bit since then.
-
-We copied across the code for the module expander test from yarn json
-but didn't actually finished implementing it.
-
-*** CANCELLED Consider using the same API as boost property tree in selector :story:
-    CLOSED: [2018-10-05 Fri 11:14]
-
-*Rationale*: no longer required once we have proper feature support.
-
-At present we have the type of the value in the method names in the
-selector, e.g. =get_text_content=. It would be better to have a =get=
-that takes in a template parameter, e.g. =get<text>=. However, in
-order to do this we need to have some kind of mapping between the
-schema value (=text=) and the raw value (=std::string=). This requires
-some template magic.
-
-Once this is done we can also make the API a bit more like the
-property tree API such as for example returning =boost::optional= for
-the cases where the field may not exist.
-
-We have started introducing =try_select...=. This was preferred to
-=get_optional= because we are not getting an optional but instead
-trying to get.
-
-*** CANCELLED Add dynamic consistency validation                      :story:
-    CLOSED: [2018-10-05 Fri 11:15]
-
-*Rationale*: no longer required once we have proper feature support.
-
-We need to check that the default values supplied for a field are
-consistent with the field's type. This could be done with a
-=validate()= method in workflow.
-
-Actually since we can only create fields from JSON, we should just add
-a check there.
-
-*** CANCELLED Update manual with detailed model descriptions           :epic:
-    CLOSED: [2018-10-05 Fri 11:18]
-
-*Rationale*: this will be taken care of by the thesis.
-
-#+begin_quote
-*Story*: As a dogen developer, I want to read about the architecture
-of the application so that I don't have to spend a lot of time trying
-to understand the source code.
-#+end_quote
-
-We should add CRCs for the main classes, with an explanation of what
-each class does; we should also explain the separation of the
-transformation logic between the core model (e.g. =dia=) and the
-transformation model (e.g. =dia_to_sml=). We should describe what the
-workflow does in each model.
-
-We should only implement this story when all of the major refactoring
-has been done.
-
-*** CANCELLED Add tests for general settings factory                  :story:
-    CLOSED: [2018-10-05 Fri 11:21]
-
-*Rationale*: once these become part of the meta-model, most of these
-won't make any sense.
-
-Some simple tests come to mind:
-
-- empty data files directory results in empty factory;
-- valid data files directory results in non-empty factory;
-- invalid data files directory results in exception;
-- more than one data files directory results in expected load;
-- creating annotation for test model types works as expected.
-- missing fields result in expected exceptions.
-
-*** CANCELLED Add tests for =general_settings_factory=                :story:
-    CLOSED: [2018-10-05 Fri 11:21]
-
-*Rationale*: once these become part of the meta-model, most of these
-won't make any sense.
-
-Tests:
-
-- missing licence
-- missing modeline
-- empty marker
-- different marker for two objects
-- consider moving generate preamble into annotation
+*** CANCELLED Sort out iconv on windows                               :story:
+    CLOSED: [2018-10-16 Tue 11:49]
+
+*Rationale*: no longer needed now we're using vcpkg.
+
+Latest conan packages seem to have changed how iconv is packaged. Output:
+
+: Get-ChildItem C:/Users/appveyor/.conan/data/libiconv/1.15/bincrafters/stable/package/f6bcf0d95fafcf303dfebe42c8562386d4cdbf69 -Recurse
+:
+    Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: d-----        1/25/2018   1:30 PM                bin
+: d-----        1/25/2018   1:30 PM                include
+: d-----        1/25/2018   1:30 PM                lib
+: d-----        1/25/2018   1:30 PM                licenses
+: d-----        1/25/2018   1:30 PM                share
+: -a----        1/25/2018   1:30 PM            466 conaninfo.txt
+: -a----        1/25/2018   1:30 PM           1308 conanmanifest.txt
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\bin
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM        1047040 iconv.exe
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\include
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM           9270 iconv.h
+: -a----        1/25/2018   1:30 PM           1512 libcharset.h
+: -a----        1/25/2018   1:30 PM           1319 localcharset.h
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\lib
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM            196 charset.alias
+: -a----        1/25/2018   1:30 PM           8030 charset.lib
+: -a----        1/25/2018   1:30 PM        1111174 iconv.lib
+: -a----        1/25/2018   1:30 PM           1106 libcharset.la
+: -a----        1/25/2018   1:30 PM           1100 libiconv.la
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\licenses
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM          25291 COPYING.LIB
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: d-----        1/25/2018   1:30 PM                doc
+: d-----        1/25/2018   1:30 PM                man
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\doc
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM           6438 iconv.1.html
+: -a----        1/25/2018   1:30 PM           6335 iconv.3.html
+: -a----        1/25/2018   1:30 PM           4399 iconvctl.3.html
+: -a----        1/25/2018   1:30 PM           2054 iconv_close.3.html
+: -a----        1/25/2018   1:30 PM           8489 iconv_open.3.html
+: -a----        1/25/2018   1:30 PM           3406 iconv_open_into.3.html
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\man
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: d-----        1/25/2018   1:30 PM                man1
+: d-----        1/25/2018   1:30 PM                man3
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\man\man1
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM           4231 iconv.1
+:     Directory: C:\Users\appveyor\.conan\data\libiconv\1.15\bincrafters\stable\package\f6bcf0d95fafcf303dfebe42c8562386d4cdbf69\share\man\man3
+: Mode                LastWriteTime         Length Name
+: ----                -------------         ------ ----
+: -a----        1/25/2018   1:30 PM           4239 iconv.3
+: -a----        1/25/2018   1:30 PM           2385 iconvctl.3
+: -a----        1/25/2018   1:30 PM           1044 iconv_close.3
+: -a----        1/25/2018   1:30 PM           4671 iconv_open.3
+: -a----        1/25/2018   1:30 PM           1822 iconv_open_into.3
+
+We have commented it out from CPack for now.
