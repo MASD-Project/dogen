@@ -19,7 +19,10 @@
 #
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
-# handle input parameters to script.
+#
+# Handle input parameters to script. Define them as internal CMake
+# variables.
+#
 if(DEFINED CTEST_SCRIPT_ARG)
     # transform ctest script arguments of the form
     # script.ctest,var1=value1,var2=value2
@@ -32,10 +35,9 @@ if(DEFINED CTEST_SCRIPT_ARG)
     endforeach()
 endif()
 
-# no limits for test output
-set(CTEST_CUSTOM_MAXIMUM_PASSED_TEST_OUTPUT_SIZE 0)
-set(CTEST_CUSTOM_MAXIMUM_FAILED_TEST_OUTPUT_SIZE 0)
-
+#
+# Ensure all mandatory parameters have been set.
+#
 if(NOT DEFINED build_group)
     message(FATAL_ERROR "Build group parameter not defined.")
 endif()
@@ -52,7 +54,9 @@ if(NOT DEFINED compiler)
     message(FATAL_ERROR "Compiler parameter not defined.")
 endif()
 
-set(environment_vars "")
+#
+# Setup the environment for supported compilers.
+#
 if(${compiler} STREQUAL "gcc8")
     set(ENV{CC} "gcc-8")
     set(ENV{CXX} "g++-8")
@@ -79,7 +83,9 @@ else()
     message(FATAL_ERROR "Unrecognised compiler: ${compiler}")
 endif()
 
-set(CTEST_PROJECT_NAME "dogen")
+#
+# Setup CTest variables
+#
 if (DEFINED ENV{BUILD_PROVIDER})
     set(CTEST_SITE $ENV{BUILD_PROVIDER})
 else()
@@ -88,36 +94,61 @@ endif()
 set(SITE "${CTEST_SITE}")
 set(CTEST_CMAKE_GENERATOR "${generator}")
 set(CTEST_CONFIGURATION_TYPE "${configuration_type}")
-set(CTEST_BUILD_NAME "${compiler}-${CMAKE_SYSTEM}-${CMAKE_SYSTEM_PROCESSOR}-${configuration_type}")
-
+set(CTEST_BUILD_NAME
+    "${compiler}-${CMAKE_SYSTEM}-${CMAKE_SYSTEM_PROCESSOR}-${configuration_type}")
 set(CTEST_BUILD_TARGET "package")
 set(CTEST_SOURCE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 set(build_folder "${compiler}/${CTEST_CONFIGURATION_TYPE}")
 set(CTEST_BINARY_DIRECTORY
-  "${CMAKE_CURRENT_SOURCE_DIR}/build/output/${build_folder}")
+    "${CMAKE_CURRENT_SOURCE_DIR}/build/output/${build_folder}")
 
+if(DEFINED number_of_jobs)
+    set(CTEST_BUILD_FLAGS -j${number_of_jobs})
+endif()
+
+#
+# Ensure git is present. We need this for ctest update. In reality it
+# does nothing because of how Travis/AppVeyor work, but it just makes
+# the dashboard neater.
+#
 include(FindGit)
 set(CTEST_GIT_COMMAND "${GIT_EXECUTABLE}")
 
-ctest_start(${build_group})
-ctest_update()
+#
+# No limits for test output
+#
+set(CTEST_CUSTOM_MAXIMUM_PASSED_TEST_OUTPUT_SIZE 0)
+set(CTEST_CUSTOM_MAXIMUM_FAILED_TEST_OUTPUT_SIZE 0)
+
+#
+# Defines for CMake.
+#
+set(cmake_defines "")
+if(DEFINED minimal_packaging)
+    set(cmake_defines ${cmake_defines} "-DWITH_MINIMAL_PACKAGING=On")
+endif()
 
 if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
-    set(cmake_defines "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
+    set(cmake_defines ${cmake_defines} "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
 endif()
 
 if(DEFINED ENV{VCPKG_TARGET_TRIPLET})
     set(cmake_defines ${cmake_defines} "-DVCPKG_TARGET_TRIPLET=$ENV{VCPKG_TARGET_TRIPLET}")
 endif()
 
-ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY}
-    OPTIONS "${cmake_defines}")
-
-if(DEFINED number_of_jobs)
-    set(CTEST_BUILD_FLAGS -j${number_of_jobs})
-endif()
-
+#
+# Start the build
+#
+ctest_start(${build_group})
+ctest_update()
+ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY} OPTIONS "${cmake_defines}")
 ctest_build()
 
+#
+# Note: because we are doing nothing with the return value, the build
+# will be green even when tests fail. This is OK because we rely on
+# CDash to see the testing status. Travis/AppVeyor just tells us
+# weather the build and packaging steps have worked or failed.
+#
 ctest_test(RETURN_VALUE retval)
 ctest_submit()
