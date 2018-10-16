@@ -76,6 +76,20 @@ end of each sprint - with the exception of Windows, where we generate
 them on each commit due to a [problem with
 AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag).
 
+---
+**Important Notes**
+
+- The OSX installer provides you with a DMG. Once you open it in
+  Finder, it mounts under  ```/Volumes/```, e.g.:
+
+```
+/Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
+```
+
+  Where ```${VERSION}``` is your Dogen version such as ```1.0.10```.
+
+----
+
 # Building From Source
 
 In order to build Dogen you will need a C++ toolchain. On Linux and
