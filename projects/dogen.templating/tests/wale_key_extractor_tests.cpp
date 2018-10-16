@@ -87,7 +87,7 @@ const std::string invalid_key_1("{{123abc}}");
 
 }
 
-BOOST_AUTO_TEST_SUITE(key_extractor_tests)
+BOOST_AUTO_TEST_SUITE(wale_key_extractor_tests)
 
 BOOST_AUTO_TEST_CASE(string_with_no_keys_results_in_no_extracted_keys) {
     SETUP_TEST_LOG_SOURCE("string_with_no_keys_results_in_no_extracted_keys");

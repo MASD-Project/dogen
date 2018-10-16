@@ -43,7 +43,7 @@ using dogen::utility::test::contains_checker;
 using dogen::utility::test::asserter;
 using dogen::templating::stitch::instantiation_error;
 
-BOOST_AUTO_TEST_SUITE(workflow_tests)
+BOOST_AUTO_TEST_SUITE(stitch_workflow_tests)
 
 /*
 BOOST_IGNORE_AUTO_TEST_CASE(simple_template_results_in_expected_output) {

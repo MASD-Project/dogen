@@ -49,7 +49,7 @@ some contentcincosome content
 
 }
 
-BOOST_AUTO_TEST_SUITE(workflow_tests)
+BOOST_AUTO_TEST_SUITE(wale_formatter_tests)
 
 BOOST_AUTO_TEST_CASE(trivial_template_formats_correctly) {
     SETUP_TEST_LOG_SOURCE("trivial_template_formats_correctly");

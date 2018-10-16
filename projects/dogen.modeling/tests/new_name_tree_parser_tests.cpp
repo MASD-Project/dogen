@@ -85,7 +85,7 @@ bool check_parse(const std::string & s)
 }
 using dogen::modeling::helpers::parsing_error;
 
-BOOST_AUTO_TEST_SUITE(name_tree_parser_tests)
+BOOST_AUTO_TEST_SUITE(new_name_tree_parser_tests)
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_name) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_many_nested_scopes_produces_expected_name");

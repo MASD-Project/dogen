@@ -30,7 +30,7 @@ const std::string test_suite("wale_workflow_tests");
 
 }
 
-BOOST_AUTO_TEST_SUITE(workflow_tests)
+BOOST_AUTO_TEST_SUITE(wale_workflow_tests)
 
 BOOST_AUTO_TEST_CASE(wale_templates_in_data_produce_expected_instantiation) {
     SETUP_TEST_LOG_SOURCE("wale_templates_in_data_produce_expected_instantiation");

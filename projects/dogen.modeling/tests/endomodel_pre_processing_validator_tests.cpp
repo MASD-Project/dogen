@@ -57,7 +57,7 @@ using dogen::modeling::meta_model::languages;
 using dogen::modeling::helpers::endomodel_pre_processing_validator;
 
 
-BOOST_AUTO_TEST_SUITE(merger_tests)
+BOOST_AUTO_TEST_SUITE(endomodel_pre_processing_validator_tests)
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_incorrect_model_name_throws");

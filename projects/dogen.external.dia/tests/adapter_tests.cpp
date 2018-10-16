@@ -73,7 +73,7 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(adapter_tests)
 
-BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
+BOOST_IGNORE_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
 
     contains_checker<adaptation_error> cc(empty_name);
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     BOOST_CHECK_EXCEPTION(a.to_object(po), adaptation_error, cc);
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
     const adapter a(empty_context);
 
@@ -98,7 +98,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
     BOOST_CHECK(!o.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
 
     const adapter a(empty_context);
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_exception");
 
     const adapter a(empty_context);
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
 
     adapter a(empty_context);
@@ -144,7 +144,7 @@ BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     BOOST_CHECK(!m.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_elements");
 
     auto ctx(empty_context);
@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
     BOOST_CHECK(!o.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_elements) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_elements");
 
     auto ctx(empty_context);
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_elements) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_elements");
 
     auto ctx(empty_context);
@@ -240,7 +240,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
 
     const adapter a(empty_context);
@@ -261,7 +261,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     BOOST_CHECK_EXCEPTION(a.to_object(pos[1]), adaptation_error, cc);
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_elements");
 
     auto ctx(empty_context);
@@ -306,7 +306,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements
     BOOST_CHECK(!o.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_elements) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_elements");
 
     auto ctx(empty_context);
@@ -350,7 +350,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_elements) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_elements");
 
     auto ctx(empty_context);
@@ -394,7 +394,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     BOOST_CHECK(!e.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
 
     auto ctx(empty_context);
@@ -429,7 +429,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     BOOST_CHECK(!c.documentation().empty());
 }
 
-BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_object_with_one_attribute) {
+BOOST_IGNORE_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_object_with_one_attribute) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_one_attribute_transforms_into_object_with_one_attribute");
 
     auto ctx(empty_context);

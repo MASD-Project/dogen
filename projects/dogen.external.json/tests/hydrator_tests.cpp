@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(missing_elements_model_throws) {
     BOOST_CHECK_EXCEPTION(hydrate(missing_elements_model), hydration_error, c);
 }
 /*
-BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
 
     using namespace dogen::utility::filesystem;
@@ -245,7 +245,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
 */
 /*
 
-BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_std_model_hydrates_into_expected_model");
 
     using namespace dogen::utility::filesystem;
@@ -282,7 +282,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.modules().empty());
 }
 
-BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
+BOOST_IGNORE_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
     using namespace dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / hardware_model_path);

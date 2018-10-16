@@ -183,7 +183,7 @@ using dogen::utility::test::contains_checker;
 using dogen::templating::stitch::formatting_error;
 using dogen::templating::stitch::resolution_error;
 
-BOOST_AUTO_TEST_SUITE(formatter_tests)
+BOOST_AUTO_TEST_SUITE(stitch_formatter_tests)
 
 BOOST_AUTO_TEST_CASE(empty_text_template_results_in_empty_file) {
     SETUP_TEST_LOG_SOURCE("empty_text_template_results_in_empty_file");

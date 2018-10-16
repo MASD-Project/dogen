@@ -161,7 +161,7 @@ bool find_kvp(
 using dogen::utility::test::contains_checker;
 using dogen::templating::stitch::parsing_error;
 
-BOOST_AUTO_TEST_SUITE(parser_tests)
+BOOST_AUTO_TEST_SUITE(stitch_parser_tests)
 
 BOOST_AUTO_TEST_CASE(empty_string_results_in_empty_template) {
     SETUP_TEST_LOG_SOURCE("empty_string_results_in_empty_template");
