@@ -42,21 +42,14 @@ endif()
 
 project(dogen)
 
-# conan support
-if (EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-    message(STATUS "Setting up Conan support.")
-    set(FOUND_CONAN "true")
-    include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-    CONAN_BASIC_SETUP()
-else()
-    message(STATUS "Conan build file NOT found, skipping include.")
-    set(FOUND_CONAN "false")
-endif()
-
+#
 # add our own modules
+#
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 
+#
 # options
+#
 option(WITH_DOXYGEN "Build the project documentation" off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_PROFILING "Build the project with profiling support" off)
@@ -72,8 +65,7 @@ option(WITH_BENCHMARKS "Adds targets for running benchmarks" on)
 # threads
 find_package(Threads REQUIRED)
 
-# boost
-# force static linking for all libraries
+# boost. Force static linking for all libraries
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME ON)
