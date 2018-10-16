@@ -78,7 +78,7 @@ sprint rather than what is currently under development (see badges
 above).
 
 ---
-**Notes***
+**Notes**
 
 The OSX installer provides you with a DMG. Once you open it in Finder,
 it mounts under ```/Volumes/```, e.g.:
