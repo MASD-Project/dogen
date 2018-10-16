@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 09:59]
+#+CAPTION: Clock summary at [2018-10-16 Tue 10:31]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:57* |       |      |   0.0 |
+| *Total time*                                                                | *12:28* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:57   |       |      |   0.0 |
-| Active                                                                      |         | 11:57 |      |   0.0 |
-| Edit release notes for previous sprint                                      |         |       | 1:05 |   0.0 |
+| Stories                                                                     | 12:28   |       |      |   0.0 |
+| Active                                                                      |         | 12:28 |      |   0.0 |
+| Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
 | Add support for kcov                                                        |         |       | 3:09 |   0.0 |
+| Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
 | Add vcpkg support to osx builds                                             |         |       | 5:02 |   0.0 |
 | High-level model thoughts                                                   |         |       | 2:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -33,6 +34,7 @@
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2018-10-15 Mon 11:22]
     :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 10:26]--[2018-10-16 Tue 10:31] =>  0:05
     CLOCK: [2018-10-15 Mon 11:35]--[2018-10-15 Mon 11:54] =>  0:19
     CLOCK: [2018-10-15 Mon 10:36]--[2018-10-15 Mon 11:22] =>  0:46
     :END:
@@ -153,6 +155,37 @@ Links:
 - https://github.com/SimonKagstrom/kcov/blob/master/doc/codecov.md
 -
 
+*** COMPLETED Windows MSI is very large                               :story:
+    CLOSED: [2018-10-16 Tue 10:25]
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 09:59]--[2018-10-16 Tue 10:25] =>  0:26
+    :END:
+
+Package went from 5 MB to 80 MB over the last 3 days. The cause for
+this appears to be that we started including tests on the standard
+package.
+
+It seems we can no longer build off of a github commit on
+appveyor. [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Ticket raised]] with support.
+
+The problem is we removed =WITH_MINIMAL_PACKAGING= with the move to
+use CTest. We need to add it to the CTest script.
+
+*** COMPLETED Build on tags for Windows                               :story:
+    CLOSED: [2018-10-16 Tue 10:30]
+
+At present we are not building and deploying for tags on Windows. This
+is a major pain because it means we must remember to always push the
+tag separately. We need to setup appveyor correctly.
+
+It appears filtering on branches (master only) disables building on
+tags. We've now removed this.
+
+Links:
+
+- [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
+- [[https://help.appveyor.com/discussions/questions/2626-pushing-tag-does-not-trigger-build][Pushing tag does not trigger build]]
+
 *** STARTED Add vcpkg support to osx builds                           :story:
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 09:42]--[2018-10-16 Tue 09:58] =>  0:16
@@ -204,12 +237,6 @@ Notes:
   another endpoint, and users probably don't really need something
   that just reads a model and returns the injector version.
 - the distribution channels are a function of the product API.
-
-*** Windows MSI is very large                                         :story:
-
-Package went from 5 MB to 80 MB over the last 3 days. The cause for
-this appears to be that we started including tests on the standard
-package.
 
 *** Ignore all failing tests                                          :story:
 

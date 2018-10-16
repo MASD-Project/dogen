@@ -9885,16 +9885,6 @@ Notes:
 - problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
   broke Travis build]]
 
-*** Build on tags for Windows                                         :story:
-
-At present we are not building and deploying for tags on Windows. This
-is a major pain because it means we must remember to always push the
-tag separately. We need to setup appveyor correctly.
-
-Links:
-
-- [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
-
 *** Add prefetch support to ODB                                       :story:
 
 As per Boris email:
