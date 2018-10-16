@@ -70,23 +70,24 @@ look like, and they attempt to exercise all of Dogen's functionality.
 # Binary Packages
 
 Binary packages are available for each release on
-[BinTray](https://bintray.com/masd-project/main/dogen), covering Debian
-Linux, OSX and Windows - 64-bit only. Packages are generated at the
-end of each sprint - with the exception of Windows, where we generate
-them on each commit due to a [problem with
-AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag).
+[BinTray](https://bintray.com/masd-project/main/dogen), covering
+Debian Linux, OSX and Windows - 64-bit only. Packages are generated
+for each commit. Development is done from git master, so latest should
+always be greatest, but you may want to use packages from the previous
+sprint rather than what is currently under development (see badges
+above).
 
 ---
-**Important Notes**
+**Notes***
 
-- The OSX installer provides you with a DMG. Once you open it in
-  Finder, it mounts under  ```/Volumes/```, e.g.:
+The OSX installer provides you with a DMG. Once you open it in Finder,
+it mounts under ```/Volumes/```, e.g.:
 
 ```
 /Volumes/dogen-${VERSION}-Darwin-x86_64/dogen.app/Contents/Resources/bin
 ```
 
-  Where ```${VERSION}``` is your Dogen version such as ```1.0.10```.
+Where ```${VERSION}``` is your Dogen version such as ```1.0.10```.
 
 ----
 
@@ -124,7 +125,7 @@ then run:
 ```
 
 ---
-**Important Notes**
+**Notes**
 
 
 - The default vcpkg triplet on windows [is 32-bit
