@@ -17,6 +17,8 @@ environment:
 matrix:
   allow_failures:
     - compiler: clang-cl
+    - compiler: msvc
+      configuration: Debug
 
 configuration:
   - Release
