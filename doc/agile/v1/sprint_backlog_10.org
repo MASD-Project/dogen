@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 09:41]
+#+CAPTION: Clock summary at [2018-10-16 Tue 09:59]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:41* |       |      |   0.0 |
+| *Total time*                                                                | *11:57* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:41   |       |      |   0.0 |
-| Active                                                                      |         | 11:41 |      |   0.0 |
+| Stories                                                                     | 11:57   |       |      |   0.0 |
+| Active                                                                      |         | 11:57 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:05 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
-| Add vcpkg support to osx builds                                             |         |       | 4:46 |   0.0 |
 | Add support for kcov                                                        |         |       | 3:09 |   0.0 |
+| Add vcpkg support to osx builds                                             |         |       | 5:02 |   0.0 |
 | High-level model thoughts                                                   |         |       | 2:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -120,34 +120,8 @@ Updates to sprint and product backlog.
 We seem to now have a number of steps when releasing. Create a project
 document for this.
 
-*** STARTED Add vcpkg support to osx builds                           :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-16 Tue 09:28]--[2018-10-16 Tue 09:38] =>  0:10
-    CLOCK: [2018-10-15 Mon 22:50]--[2018-10-15 Mon 23:20] =>  0:30
-    CLOCK: [2018-10-15 Mon 17:58]--[2018-10-15 Mon 18:05] =>  0:07
-    CLOCK: [2018-10-15 Mon 16:30]--[2018-10-15 Mon 17:29] =>  0:59
-    CLOCK: [2018-10-15 Mon 12:47]--[2018-10-15 Mon 15:31] =>  2:44
-    CLOCK: [2018-10-15 Mon 11:54]--[2018-10-15 Mon 12:10] =>  0:16
-    :END:
-
-Following on from our investigation, we need to add vcpkg to the
-travis osx builds (clang). While we're there, update all the tools to
-latest in preparation to switching to C++ 17.
-
-Notes:
-
-- it seems its not possible to move to XCode 10 without upgrading the
-  OS. This includes the Command Line tools only package as well.
-- an alternative is to install the LLVM + clang package supplied by
-  the LLVM project. The disadvantage is that we probably also need to
-  use this in travis because using two different versions of clang is
-  probably not the best idea. We could try and see what happens first,
-  but ultimately we'll end up having to install it on travis. The
-  binary is 300 MB, which is not ideal but should be ok.
-- vcpkg misbehaves a bit when used from clang7. [[https://github.com/Microsoft/vcpkg/issues/4476][Reported]] to
-  mothership.
-
-*** STARTED Add support for kcov                                      :story:
+*** COMPLETED Add support for kcov                                    :story:
+    CLOSED: [2018-10-16 Tue 09:58]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 09:39]--[2018-10-16 Tue 09:41] =>  0:02
     CLOCK: [2018-10-15 Mon 22:50]--[2018-10-15 Mon 23:20] =>  0:30
@@ -173,6 +147,39 @@ Notes:
   what is actually required, but it'll do for now.
 - we seem to upload to coveralls, but nothing shows up on the
   site. Try to manually generate coverage first.
+
+Links:
+
+- https://github.com/SimonKagstrom/kcov/blob/master/doc/codecov.md
+-
+
+*** STARTED Add vcpkg support to osx builds                           :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 09:42]--[2018-10-16 Tue 09:58] =>  0:16
+    CLOCK: [2018-10-16 Tue 09:28]--[2018-10-16 Tue 09:38] =>  0:10
+    CLOCK: [2018-10-15 Mon 22:50]--[2018-10-15 Mon 23:20] =>  0:30
+    CLOCK: [2018-10-15 Mon 17:58]--[2018-10-15 Mon 18:05] =>  0:07
+    CLOCK: [2018-10-15 Mon 16:30]--[2018-10-15 Mon 17:29] =>  0:59
+    CLOCK: [2018-10-15 Mon 12:47]--[2018-10-15 Mon 15:31] =>  2:44
+    CLOCK: [2018-10-15 Mon 11:54]--[2018-10-15 Mon 12:10] =>  0:16
+    :END:
+
+Following on from our investigation, we need to add vcpkg to the
+travis osx builds (clang). While we're there, update all the tools to
+latest in preparation to switching to C++ 17.
+
+Notes:
+
+- it seems its not possible to move to XCode 10 without upgrading the
+  OS. This includes the Command Line tools only package as well.
+- an alternative is to install the LLVM + clang package supplied by
+  the LLVM project. The disadvantage is that we probably also need to
+  use this in travis because using two different versions of clang is
+  probably not the best idea. We could try and see what happens first,
+  but ultimately we'll end up having to install it on travis. The
+  binary is 300 MB, which is not ideal but should be ok.
+- vcpkg misbehaves a bit when used from clang7. [[https://github.com/Microsoft/vcpkg/issues/4476][Reported]] to
+  mothership.
 
 *** High-level model thoughts                                         :story:
     :LOGBOOK:
