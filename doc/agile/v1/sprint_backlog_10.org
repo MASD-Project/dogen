@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 13:43]
+#+CAPTION: Clock summary at [2018-10-16 Tue 15:33]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:29* |       |      |   0.0 |
+| *Total time*                                                                | *16:16* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:29   |       |      |   0.0 |
-| Active                                                                      |         | 14:29 |      |   0.0 |
+| Stories                                                                     | 16:16   |       |      |   0.0 |
+| Active                                                                      |         | 16:16 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
 | Add support for kcov                                                        |         |       | 3:09 |   0.0 |
-| Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
 | Build on tags for Windows                                                   |         |       | 0:09 |   0.0 |
 | Add vcpkg support to osx builds                                             |         |       | 5:17 |   0.0 |
 | Remove all references to conan                                              |         |       | 0:13 |   0.0 |
 | Travis badge is not red when build is failing                               |         |       | 0:14 |   0.0 |
 | Ignore all failing tests                                                    |         |       | 0:50 |   0.0 |
-| AppVeyor is not building on GitHub commits                                  |         |       | 0:04 |   0.0 |
 | CTest warnings seem to be clipped                                           |         |       | 0:15 |   0.0 |
-| Upgrade to c++ 17                                                           |         |       | 0:01 |   0.0 |
-| High-level model thoughts                                                   |         |       | 2:20 |   0.0 |
+| OSX build is producing a large number of warnings                           |         |       | 0:37 |   0.0 |
+| AppVeyor is not building on GitHub commits                                  |         |       | 0:04 |   0.0 |
+| Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
+| Upgrade to c++ 17                                                           |         |       | 0:11 |   0.0 |
+| High-level model thoughts                                                   |         |       | 3:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -162,22 +163,6 @@ Links:
 - https://github.com/SimonKagstrom/kcov/blob/master/doc/codecov.md
 -
 
-*** COMPLETED Windows MSI is very large                               :story:
-    CLOSED: [2018-10-16 Tue 10:25]
-    :LOGBOOK:
-    CLOCK: [2018-10-16 Tue 09:59]--[2018-10-16 Tue 10:25] =>  0:26
-    :END:
-
-Package went from 5 MB to 80 MB over the last 3 days. The cause for
-this appears to be that we started including tests on the standard
-package.
-
-It seems we can no longer build off of a github commit on
-appveyor. [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Ticket raised]] with support.
-
-The problem is we removed =WITH_MINIMAL_PACKAGING= with the move to
-use CTest. We need to add it to the CTest script.
-
 *** COMPLETED Build on tags for Windows                               :story:
     CLOSED: [2018-10-16 Tue 10:30]
     :LOGBOOK:
@@ -269,6 +254,42 @@ At present we have a number of tests that are commented out but appear
 as failing under cdash. This is very confusing. We need to mark them
 with the ignore macro. We should not waste time fixing the tests as
 they need to be re-written using the diff framework.
+
+*** COMPLETED CTest warnings seem to be clipped                       :story:
+    CLOSED: [2018-10-16 Tue 14:23]
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 13:26]--[2018-10-16 Tue 13:41] =>  0:15
+    :END:
+
+We seem to have 50 warnings on both OSX and linux builds, which is a
+bit of a coincidence. CTest is probably clipping the warnings.
+
+It is the default. Configured by
+=CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS=.
+
+Zero is not a good number - it removed all the warnings. Set it to a
+large but yet sensible number.
+
+Links:
+
+- [[https://cmake.org/cmake/help/v3.4/variable/CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS.html][CTest variable CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS]]
+- [[https://blog.kitware.com/ctest-performance-tip-use-ctestcustom-cmake-not-ctest/][CTest performance tip: Use CTestCustom.cmake, not .ctest]]
+*** STARTED OSX build is producing a large number of warnings         :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 14:56]--[2018-10-16 Tue 15:33] =>  0:37
+    :END:
+
+More on debug than release. Some of the warnings are related to
+visibility.
+
+Links:
+
+- [[https://stackoverflow.com/questions/8685045/xcode-with-boost-linkerid-warning-about-visibility-settings][xcode with boost : linker(Id) Warning about visibility settings]]
+- [[https://stackoverflow.com/questions/3276474/symbol-hiding-in-static-libraries-built-with-xcode/18949281#18949281][Symbol hiding in static libraries built with Xcode]]
+- [[https://stackoverflow.com/questions/36567072/why-do-i-get-ld-warning-direct-access-in-main-to-global-weak-symbol-in-this][Why do I get “ld: warning: direct access in _main to global weak
+  symbol” in this simple code?]]
+- [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
+
 *** STARTED AppVeyor is not building on GitHub commits                :story:
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 11:11]--[2018-10-16 Tue 11:15] =>  0:04
@@ -281,24 +302,27 @@ Links:
 
 - [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Builds not triggering from GitHub commit]]
 
-*** STARTED CTest warnings seem to be clipped                         :story:
+*** STARTED Windows MSI is very large                                 :story:
     :LOGBOOK:
-    CLOCK: [2018-10-16 Tue 13:26]--[2018-10-16 Tue 13:41] =>  0:15
+    CLOCK: [2018-10-16 Tue 09:59]--[2018-10-16 Tue 10:25] =>  0:26
     :END:
 
-We seem to have 50 warnings on both OSX and linux builds, which is a
-bit of a coincidence. CTest is probably clipping the warnings.
+Package went from 5 MB to 80 MB over the last 3 days. The cause for
+this appears to be that we started including tests on the standard
+package.
 
-It is the default. Configured by
-=CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS=.
+It seems we can no longer build off of a github commit on
+appveyor. [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Ticket raised]] with support.
 
-Links:
+The problem is we removed =WITH_MINIMAL_PACKAGING= with the move to
+use CTest. We need to add it to the CTest script.
 
-- [[https://cmake.org/cmake/help/v3.4/variable/CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS.html][CTest variable CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS]]
-- [[https://blog.kitware.com/ctest-performance-tip-use-ctestcustom-cmake-not-ctest/][CTest performance tip: Use CTestCustom.cmake, not .ctest]]
+When AppVeyor is back up, check to make sure the packages have
+returned to normal size.
 
-*** Upgrade to c++ 17                                                 :story:
+*** STARTED Upgrade to c++ 17                                         :story:
     :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 13:44]--[2018-10-16 Tue 13:54] =>  0:10
     CLOCK: [2018-10-16 Tue 13:42]--[2018-10-16 Tue 13:43] =>  0:01
     :END:
 
@@ -327,8 +351,9 @@ There are quite a few dependencies for this to happen:
 We have now fulfilled all of these requirements, so try to move to
 C++17.
 
-*** High-level model thoughts                                         :story:
+*** STARTED High-level model thoughts                                 :story:
     :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 13:55]--[2018-10-16 Tue 14:55] =>  1:27
     CLOCK: [2018-10-11 Thu 16:06]--[2018-10-11 Thu 18:26] =>  2:20
     :END:
 
@@ -350,6 +375,74 @@ Notes:
   another endpoint, and users probably don't really need something
   that just reads a model and returns the injector version.
 - the distribution channels are a function of the product API.
+
+*** Add basic "diff mode"                                             :story:
+
+We need a very simple way of checking all generated files in memory
+against what's in the file system and returning a flag if they are
+different. We can then use these flags to determine if tests pass. In
+the future we can extend this approach to include a proper diff of the
+files, but for now we just need a reliable way to run system tests
+again.
+
+Actually the right solution for this is to see the processing as part
+of a chain:
+
+- out of the generator come a set of artefacts with operations (write,
+  merge, ignore)
+- these get joined with a transform that reads the state of the file
+  system. It then adds more operations: delete, etc. If there are no
+  diffs, it marks those files as skip.
+- the final step is a processor which gets that model and executes the
+  operations. This can then be replaced by a "reporter" that simply
+  states what the operations would be.
+
+Diff mode is using the report to see if there are any diffs.
+
+Merged Stories:
+
+*Validation-only or dry-run mode*
+
+Both stitcher and knitter could do with a "dry-run" mode in which we'd
+do everything except for actually outputting.
+
+*For Knitter*
+
+It would be nice if one could just check if a dia diagram is valid for
+code generation, e.g. =--validate= or something along those lines.
+
+*For Stitch*
+
+We are interested in performing the parsing. This would be useful for
+example for a flymake mode in emacs.
+
+An additional feature of dry-run would be to run, generate the model
+and then produce a unified diff, e.g. tell me what you'd change. For
+this we'd have to link against a diff library. We need to
+automatically exclude non-overwrite files (or have an option to
+exclude/include them).
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][google Diff Match Patch library]]
+- [[https://github.com/cubicdaiya/dtl][DTL: Diff Template Library]]
+- [[https://stackoverflow.com/questions/1451694/is-there-a-way-to-diff-files-from-c][SO: Is there a way to diff files from C++?]]
+
+*Dry-run option to just diff with existing generated code*
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what has changed with the
+next code generation so that I can evaluate if the changes are as
+expected or not.
+#+end_quote
+
+It would be useful to have an option that would do everything except
+writing the files to disk; instead, it would diff them with the
+existing files and report if there are any differences. This would be
+useful to make sure the source code matches the latest version of the
+diagram.
+
+We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
 *** Rename debian package                                             :story:
 
@@ -408,29 +501,6 @@ between TS version (11, 17, etc) from library version.
 
 We need to move the dogen project to the new directory layout whereby
 all models are kept in the =models= directory.
-
-*** Add basic "diff mode"                                             :story:
-
-We need a very simple way of checking all generated files in memory
-against what's in the file system and returning a flag if they are
-different. We can then use these flags to determine if tests pass. In
-the future we can extend this approach to include a proper diff of the
-files, but for now we just need a reliable way to run system tests
-again.
-
-Actually the right solution for this is to see the processing as part
-of a chain:
-
-- out of the generator come a set of artefacts with operations (write,
-  merge, ignore)
-- these get joined with a transform that reads the state of the file
-  system. It then adds more operations: delete, etc. If there are no
-  diffs, it marks those files as skip.
-- the final step is a processor which gets that model and executes the
-  operations. This can then be replaced by a "reporter" that simply
-  states what the operations would be.
-
-Diff mode is using the report to see if there are any diffs.
 
 *** dogen as a github integration                                     :story:
 
@@ -519,13 +589,6 @@ we now need to treat split configuration projects specially because of
 this. It makes more sense to force the header directory to be relative
 to the output path and make it a meta-data parameter.
 
-*** Update all stereotypes to masd                                    :story:
-
-We need to start distinguishing MASD from dogen. The profile for UML
-is part of MASD rather than dogen, so we should update all stereotypes
-to match. We need to make a decision regarding the "dia extensions" -
-its not clear if its MASD or dogen.
-
 *** Make "ignore regexes" a model property                            :story:
 
 At present we have a command line option:
@@ -539,6 +602,13 @@ meta-data option, which is supplied with each model and even more
 interesting, can be used with profiling. This means we can create
 profiles for specific purposes (ODB, lisp, etc) and then reuse them in
 different projects.
+
+*** Update all stereotypes to masd                                    :story:
+
+We need to start distinguishing MASD from dogen. The profile for UML
+is part of MASD rather than dogen, so we should update all stereotypes
+to match. We need to make a decision regarding the "dia extensions" -
+its not clear if its MASD or dogen.
 
 *** Incorrect generation when changing external modules               :story:
 

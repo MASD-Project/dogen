@@ -4906,33 +4906,6 @@ of known warnings:
 We will probably soon need a way to enable/disable warnings. We could
 use a similar scheme as GCC: =-Wname= and =-Wno-name=.
 
-*** Validation-only or dry-run mode                                   :story:
-
-Both stitcher and knitter could do with a "dry-run" mode in which we'd
-do everything except for actually outputting.
-
-*For Knitter*
-
-It would be nice if one could just check if a dia diagram is valid for
-code generation, e.g. =--validate= or something along those lines.
-
-*For Stitch*
-
-We are interested in performing the parsing. This would be useful for
-example for a flymake mode in emacs.
-
-An additional feature of dry-run would be to run, generate the model
-and then produce a unified diff, e.g. tell me what you'd change. For
-this we'd have to link against a diff library. We need to
-automatically exclude non-overwrite files (or have an option to
-exclude/include them).
-
-Links:
-
-- [[https://github.com/google/diff-match-patch/tree/master/cpp][google Diff Match Patch library]]
-- [[https://github.com/cubicdaiya/dtl][DTL: Diff Template Library]]
-- [[https://stackoverflow.com/questions/1451694/is-there-a-way-to-diff-files-from-c][SO: Is there a way to diff files from C++?]]
-
 *** Partial matching of built-ins doesn't work for certain types      :story:
 
 We introduced a fix that allows users to create types that partially
@@ -7493,6 +7466,19 @@ We should probably also add GCC support.
 
 - [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
 
+*** Add export macros support for Linux                               :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to export types selectively so that I
+can control what external users can depend on.
+#+end_quote
+
+We've already looked into adding exports for Windows. There is also a
+GCC equivalent explained [[https://gcc.gnu.org/wiki/Visibility][here]].
+
+We should have some dynamic extensions to control the outputting of
+these.
+
 *** Add =targetver.h= support                                         :story:
 
 On windows we should be generating the targetver header.
@@ -8738,19 +8724,6 @@ analysis but the gist of it is that we could then map quantities to
 the most appropriate platform specific technology - in Java/C# create
 a type or use a int, in c++ use literals, etc.
 
-*** Add export macros support for Linux                               :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to export types selectively so that I
-can control what external users can depend on.
-#+end_quote
-
-We've already looked into adding exports for Windows. There is also a
-GCC equivalent explained [[https://gcc.gnu.org/wiki/Visibility][here]].
-
-We should have some dynamic extensions to control the outputting of
-these.
-
 *** Modeling of visitors in =cpp= can be improved                     :story:
 
 In the =cpp= model we are assuming that if the original parent was
@@ -9623,22 +9596,6 @@ because we may want to add one or more concrete methods to the ABC.
 
 We need support for operations for this to work. We also need support
 for pointers, references and const.
-
-*** Dry-run option to just diff with existing generated code           :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know what has changed with the
-next code generation so that I can evaluate if the changes are as
-expected or not.
-#+end_quote
-
-It would be useful to have an option that would do everything except
-writing the files to disk; instead, it would diff them with the
-existing files and report if there are any differences. This would be
-useful to make sure the source code matches the latest version of the
-diagram.
-
-We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
 *** Add support for private and protected attributes                  :story:
 
