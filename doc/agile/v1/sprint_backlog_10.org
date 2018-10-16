@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 15:48]
+#+CAPTION: Clock summary at [2018-10-16 Tue 17:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:30* |       |      |   0.0 |
+| *Total time*                                                                | *18:24* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:30   |       |      |   0.0 |
-| Active                                                                      |         | 16:30 |      |   0.0 |
+| Stories                                                                     | 18:24   |       |      |   0.0 |
+| Active                                                                      |         | 18:24 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
@@ -31,11 +31,11 @@
 | Travis badge is not red when build is failing                               |         |       | 0:14 |   0.0 |
 | Ignore all failing tests                                                    |         |       | 0:50 |   0.0 |
 | CTest warnings seem to be clipped                                           |         |       | 0:15 |   0.0 |
-| OSX build is producing a large number of warnings                           |         |       | 0:37 |   0.0 |
 | AppVeyor is not building on GitHub commits                                  |         |       | 0:04 |   0.0 |
-| Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
+| OSX build is producing a large number of warnings                           |         |       | 0:37 |   0.0 |
 | Upgrade to c++ 17                                                           |         |       | 0:25 |   0.0 |
-| High-level model thoughts                                                   |         |       | 3:20 |   0.0 |
+| Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
+| High-level model thoughts                                                   |         |       | 5:14 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -274,23 +274,9 @@ Links:
 
 - [[https://cmake.org/cmake/help/v3.4/variable/CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS.html][CTest variable CTEST_CUSTOM_MAXIMUM_NUMBER_OF_WARNINGS]]
 - [[https://blog.kitware.com/ctest-performance-tip-use-ctestcustom-cmake-not-ctest/][CTest performance tip: Use CTestCustom.cmake, not .ctest]]
-*** STARTED OSX build is producing a large number of warnings         :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-16 Tue 14:56]--[2018-10-16 Tue 15:33] =>  0:37
-    :END:
 
-More on debug than release. Some of the warnings are related to
-visibility.
-
-Links:
-
-- [[https://stackoverflow.com/questions/8685045/xcode-with-boost-linkerid-warning-about-visibility-settings][xcode with boost : linker(Id) Warning about visibility settings]]
-- [[https://stackoverflow.com/questions/3276474/symbol-hiding-in-static-libraries-built-with-xcode/18949281#18949281][Symbol hiding in static libraries built with Xcode]]
-- [[https://stackoverflow.com/questions/36567072/why-do-i-get-ld-warning-direct-access-in-main-to-global-weak-symbol-in-this][Why do I get “ld: warning: direct access in _main to global weak
-  symbol” in this simple code?]]
-- [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
-
-*** STARTED AppVeyor is not building on GitHub commits                :story:
+*** COMPLETED AppVeyor is not building on GitHub commits              :story:
+    CLOSED: [2018-10-16 Tue 17:34]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 11:11]--[2018-10-16 Tue 11:15] =>  0:04
     :END:
@@ -301,24 +287,23 @@ notification but AppVeyor is refusing to build.
 Links:
 
 - [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Builds not triggering from GitHub commit]]
-
-*** STARTED Windows MSI is very large                                 :story:
+*** STARTED OSX build is producing a large number of warnings         :story:
     :LOGBOOK:
-    CLOCK: [2018-10-16 Tue 09:59]--[2018-10-16 Tue 10:25] =>  0:26
+    CLOCK: [2018-10-16 Tue 14:56]--[2018-10-16 Tue 15:33] =>  0:37
     :END:
 
-Package went from 5 MB to 80 MB over the last 3 days. The cause for
-this appears to be that we started including tests on the standard
-package.
+More on debug than release. Some of the warnings are related to
+visibility.
 
-It seems we can no longer build off of a github commit on
-appveyor. [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Ticket raised]] with support.
+Setting visibility to hidden does not seem to make any difference.
 
-The problem is we removed =WITH_MINIMAL_PACKAGING= with the move to
-use CTest. We need to add it to the CTest script.
+Links:
 
-When AppVeyor is back up, check to make sure the packages have
-returned to normal size.
+- [[https://stackoverflow.com/questions/8685045/xcode-with-boost-linkerid-warning-about-visibility-settings][xcode with boost : linker(Id) Warning about visibility settings]]
+- [[https://stackoverflow.com/questions/3276474/symbol-hiding-in-static-libraries-built-with-xcode/18949281#18949281][Symbol hiding in static libraries built with Xcode]]
+- [[https://stackoverflow.com/questions/36567072/why-do-i-get-ld-warning-direct-access-in-main-to-global-weak-symbol-in-this][Why do I get “ld: warning: direct access in _main to global weak
+  symbol” in this simple code?]]
+- [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
 
 *** STARTED Upgrade to c++ 17                                         :story:
     :LOGBOOK:
@@ -352,8 +337,27 @@ There are quite a few dependencies for this to happen:
 We have now fulfilled all of these requirements, so try to move to
 C++17.
 
+*** STARTED Windows MSI is very large                                 :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 09:59]--[2018-10-16 Tue 10:25] =>  0:26
+    :END:
+
+Package went from 5 MB to 80 MB over the last 3 days. The cause for
+this appears to be that we started including tests on the standard
+package.
+
+It seems we can no longer build off of a github commit on
+appveyor. [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Ticket raised]] with support.
+
+The problem is we removed =WITH_MINIMAL_PACKAGING= with the move to
+use CTest. We need to add it to the CTest script.
+
+When AppVeyor is back up, check to make sure the packages have
+returned to normal size.
+
 *** STARTED High-level model thoughts                                 :story:
     :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 15:49]--[2018-10-16 Tue 17:43] =>  1:54
     CLOCK: [2018-10-16 Tue 13:55]--[2018-10-16 Tue 14:55] =>  1:27
     CLOCK: [2018-10-11 Thu 16:06]--[2018-10-11 Thu 18:26] =>  2:20
     :END:
