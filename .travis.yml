@@ -34,7 +34,7 @@ matrix:
 
   include:
     #
-    # OSX builds
+    # OSX Clang
     #
     - os: osx
       compiler: clang
@@ -45,7 +45,7 @@ matrix:
       osx_image: xcode10
       env: configuration=Debug compiler="clang" generator="Unix Makefiles" build_group="Continuous"
     #
-    # Linux GCC Builds
+    # Linux GCC
     #
     - os: linux
       compiler: gcc
@@ -54,7 +54,7 @@ matrix:
       compiler: gcc
       env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"
     #
-    # Linux Clang Builds
+    # Linux Clang
     #
     - os: linux
       compiler: clang
@@ -89,7 +89,7 @@ script:
 
 after_success:
   - if [[ "x${coverage}" == "x1" ]]; then
-       tests="`'ls' ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/bin/dogen.*.tests`";
+       tests="`'ls' ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/bin/*.tests`";
        for test in ${tests}; do
            /tmp/kcov --exclude-pattern=/tests/ --include-pattern=/projects/ --coveralls-id=${TRAVIS_JOB_ID} ${TRAVIS_BUILD_DIR}/build/output/${compiler}/${configuration}/stage/coverage ${test};
        done;

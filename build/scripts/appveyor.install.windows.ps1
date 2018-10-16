@@ -67,4 +67,3 @@ Write-Host "Download location: $ninja_downloads_location"
 New-Item -ItemType directory -Path $ninja_installs_dir | Out-Null
 Set-Location -Path $ninja_installs_dir | Out-Null
 7z x $ninja_downloads_location > $null
-

@@ -89,8 +89,8 @@ endif()
 if (DEFINED ENV{BUILD_PROVIDER})
     set(CTEST_SITE $ENV{BUILD_PROVIDER})
 else()
-    site_name(DOGEN_SITE)
-    set(CTEST_SITE "${DOGEN_SITE}")
+    site_name(APP_SITE)
+    set(CTEST_SITE "${APP_SITE}")
 endif()
 set(SITE "${CTEST_SITE}")
 set(CTEST_CMAKE_GENERATOR "${generator}")
@@ -108,7 +108,7 @@ if(DEFINED number_of_jobs)
 endif()
 
 #
-# No limits for test output
+# Set limits for test output
 #
 set(CTEST_CUSTOM_MAXIMUM_PASSED_TEST_OUTPUT_SIZE 0)
 set(CTEST_CUSTOM_MAXIMUM_FAILED_TEST_OUTPUT_SIZE 0)
@@ -123,11 +123,13 @@ if(DEFINED minimal_packaging)
 endif()
 
 if(DEFINED ENV{CMAKE_TOOLCHAIN_FILE})
-    set(cmake_defines ${cmake_defines} "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
+    set(cmake_defines ${cmake_defines}
+        "-DCMAKE_TOOLCHAIN_FILE=$ENV{CMAKE_TOOLCHAIN_FILE}")
 endif()
 
 if(DEFINED ENV{VCPKG_TARGET_TRIPLET})
-    set(cmake_defines ${cmake_defines} "-DVCPKG_TARGET_TRIPLET=$ENV{VCPKG_TARGET_TRIPLET}")
+    set(cmake_defines ${cmake_defines}
+        "-DVCPKG_TARGET_TRIPLET=$ENV{VCPKG_TARGET_TRIPLET}")
 endif()
 
 #
