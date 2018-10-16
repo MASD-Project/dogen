@@ -108,14 +108,6 @@ if(DEFINED number_of_jobs)
 endif()
 
 #
-# Ensure git is present. We need this for ctest update. In reality it
-# does nothing because of how Travis/AppVeyor work, but it just makes
-# the dashboard neater.
-#
-include(FindGit)
-set(CTEST_GIT_COMMAND "${GIT_EXECUTABLE}")
-
-#
 # No limits for test output
 #
 set(CTEST_CUSTOM_MAXIMUM_PASSED_TEST_OUTPUT_SIZE 0)
@@ -142,7 +134,6 @@ endif()
 # Start the build
 #
 ctest_start(${build_group})
-ctest_update()
 ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY} OPTIONS "${cmake_defines}")
 ctest_build()
 

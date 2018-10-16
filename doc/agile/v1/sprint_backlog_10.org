@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-16 Tue 17:44]
+#+CAPTION: Clock summary at [2018-10-16 Tue 20:06]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:24* |       |      |   0.0 |
+| *Total time*                                                                | *18:40* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:24   |       |      |   0.0 |
-| Active                                                                      |         | 18:24 |      |   0.0 |
+| Stories                                                                     | 18:40   |       |      |   0.0 |
+| Active                                                                      |         | 18:40 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       | 0:10 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       | 0:26 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
 | Add support for kcov                                                        |         |       | 3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       | 0:09 |   0.0 |
@@ -116,6 +116,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-16 Tue 19:50]--[2018-10-16 Tue 20:06] =>  0:16
     CLOCK: [2018-10-15 Mon 10:25]--[2018-10-15 Mon 10:35] =>  0:10
     :END:
 
@@ -287,7 +288,8 @@ notification but AppVeyor is refusing to build.
 Links:
 
 - [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Builds not triggering from GitHub commit]]
-*** STARTED OSX build is producing a large number of warnings         :story:
+*** CANCELLED OSX build is producing a large number of warnings       :story:
+    CLOSED: [2018-10-16 Tue 20:06]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 14:56]--[2018-10-16 Tue 15:33] =>  0:37
     :END:
@@ -297,6 +299,9 @@ visibility.
 
 Setting visibility to hidden does not seem to make any difference.
 
+We don't seem to have any good answers for this, so we'll leave it as
+is for now.
+
 Links:
 
 - [[https://stackoverflow.com/questions/8685045/xcode-with-boost-linkerid-warning-about-visibility-settings][xcode with boost : linker(Id) Warning about visibility settings]]
@@ -305,7 +310,8 @@ Links:
   symbol” in this simple code?]]
 - [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
 
-*** STARTED Upgrade to c++ 17                                         :story:
+*** COMPLETED Upgrade to c++ 17                                       :story:
+    CLOSED: [2018-10-16 Tue 20:06]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 15:34]--[2018-10-16 Tue 15:48] =>  0:14
     CLOCK: [2018-10-16 Tue 13:44]--[2018-10-16 Tue 13:54] =>  0:10
@@ -337,7 +343,8 @@ There are quite a few dependencies for this to happen:
 We have now fulfilled all of these requirements, so try to move to
 C++17.
 
-*** STARTED Windows MSI is very large                                 :story:
+*** COMPLETED Windows MSI is very large                               :story:
+    CLOSED: [2018-10-16 Tue 20:06]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 09:59]--[2018-10-16 Tue 10:25] =>  0:26
     :END:
