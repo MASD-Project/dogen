@@ -211,16 +211,16 @@ After regeneration, you can then use ```git diff``` to inspect the
 differences produced by regeneration, if any. The build directory
 contains all of the logs, under the directory ```log```.
 
-# Demo
+# Videos
 
-We don't really have a recent demo of Dogen, but this very old one
-should at least give you an idea of its workflow:
+We don't really have any recent videos for Dogen, but this very old
+one should at least give you an idea of its workflow:
 
 [![Alt text](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
 
 # Blog Posts
 
-Over time a number of assorted blog posts have been published on
+Over time, a number of assorted blog posts have been published on
 Dogen, mainly covering its development process:
 
 - **[Nerd Food: The Refactoring Quagmire](https://mcraveiro.blogspot.co.uk/2018/01/nerd-food-refactoring-quagmire.html)**: How we solved the "refactoring ad infinitum" problem in Dogen development.
