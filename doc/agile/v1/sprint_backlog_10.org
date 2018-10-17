@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-17 Wed 06:36]
+#+CAPTION: Clock summary at [2018-10-17 Wed 06:40]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:52* |       |      |   0.0 |
+| *Total time*                                                                | *20:55* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:52   |       |      |   0.0 |
-| Active                                                                      |         | 20:52 |      |   0.0 |
+| Stories                                                                     | 20:55   |       |      |   0.0 |
+| Active                                                                      |         | 20:55 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       | 0:26 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
@@ -36,8 +36,8 @@
 | Upgrade to c++ 17                                                           |         |       | 0:25 |   0.0 |
 | Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
 | Update c++ reference model build                                            |         |       | 1:43 |   0.0 |
+| Linking errors on windows for debug builds                                  |         |       | 0:11 |   0.0 |
 | High-level model thoughts                                                   |         |       | 5:14 |   0.0 |
-| Linking errors on windows for debug builds                                  |         |       | 0:08 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -383,6 +383,24 @@ model to match it:
 - removal of conan references if any
 - removal of third party
 
+*** COMPLETED Linking errors on windows for debug builds              :story:
+    CLOSED: [2018-10-17 Wed 06:40]
+    :LOGBOOK:
+    CLOCK: [2018-10-17 Wed 06:37]--[2018-10-17 Wed 06:40] =>  0:03
+    CLOCK: [2018-10-16 Tue 22:18]--[2018-10-16 Tue 22:26] =>  0:08
+    :END:
+
+It seems we are consistently having problems linking the debug builds
+on windows:
+
+: [00:43:42]   LINK : the 32-bit linker (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\bin\HostX86\x64\link.exe) failed to do memory mapped file I/O on `..\..\..\stage\bin\dogen.modeling.lib' and is going to restart linking with a 64-bit linker for better throughput
+
+It seems the error is with 32-bit linker.
+
+Links:
+
+- [[https://developercommunity.visualstudio.com/content/problem/160714/memory-error-for-linker-in-vs-155-x64.html][Memory error for linker in VS 15.5 x64]]
+
 *** STARTED High-level model thoughts                                 :story:
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 15:49]--[2018-10-16 Tue 17:43] =>  1:54
@@ -408,22 +426,6 @@ Notes:
   another endpoint, and users probably don't really need something
   that just reads a model and returns the injector version.
 - the distribution channels are a function of the product API.
-
-*** STARTED Linking errors on windows for debug builds                :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-16 Tue 22:18]--[2018-10-16 Tue 22:26] =>  0:08
-    :END:
-
-It seems we are consistently having problems linking the debug builds
-on windows:
-
-: [00:43:42]   LINK : the 32-bit linker (C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.15.26726\bin\HostX86\x64\link.exe) failed to do memory mapped file I/O on `..\..\..\stage\bin\dogen.modeling.lib' and is going to restart linking with a 64-bit linker for better throughput
-
-It seems the error is with 32-bit linker.
-
-Links:
-
-- [[https://developercommunity.visualstudio.com/content/problem/160714/memory-error-for-linker-in-vs-155-x64.html][Memory error for linker in VS 15.5 x64]]
 
 *** Add basic "diff mode"                                             :story:
 
