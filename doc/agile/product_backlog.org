@@ -4463,6 +4463,10 @@ directly. This is not ideal, because just like with singletons, we are
 hiding the dependencies. We should really pass the registrars in the
 initialise function so we can see the dependencies at the top-level.
 
+A second related problem is the lack of initialisation. We need to
+have some really meaningful exception that tells users when they
+forgot to initialise the framework.
+
 *** Field definition templates do not support facet specific defaults :story:
 
 At present we cannot use field definition templates for fields that

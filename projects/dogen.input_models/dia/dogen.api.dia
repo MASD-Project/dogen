@@ -80,7 +80,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#code_generator#</dia:string>
+        <dia:string>#generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#interface, handcrafted#</dia:string>
@@ -829,7 +829,7 @@
         <dia:point val="-15,-9.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.85,-10.05;-14.25,-7.7"/>
+        <dia:rectangle val="-21.85,-10.7;-14.25,-8.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1173,7 +1173,7 @@
         <dia:point val="-0.815,-16.7498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.5225,-17.4998;-0.065,-10.4"/>
+        <dia:rectangle val="-6.5225,-17.4998;-0.065,-11.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1693,7 +1693,7 @@
         <dia:point val="-14.6975,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.4475,-6.05;-6.2725,2.6"/>
+        <dia:rectangle val="-15.4475,-6.05;-6.2725,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1907,7 +1907,7 @@
         <dia:point val="11.7875,4.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.7475,3.85;12.5375,8.8"/>
+        <dia:rectangle val="-14.7475,3.85;12.5375,8.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
