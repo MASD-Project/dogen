@@ -9720,57 +9720,6 @@ At present we are doing a lot of hacks for windows:
 Ideally we want to reuse the Travis BinTray descriptor but AppVeyor
 does not support this directly.
 
-*** Add support for code coverage                                     :story:
-
-We started the work on code coverage but never finished it. At present
-it seems we don't even have a story detailing the current state of
-coverage in the backlog. From memory the problem was that the upload
-was too large and the coverage was including lots of files that should
-be ignored. We never got the upload to work. In the mean time, it
-seems that kcov is a better approach instead of using lcov, gcov, etc.
-
-Links:
-
-- https://github.com/SimonKagstrom/kcov
-
-*Previous understanding*
-
-Finish setting up coveralls
-
-Remaining issues:
-
-- we are generating far too much output. We need to keep it quieter or
-  we will break travis.
-- we are not filtering out non-project files from initial
-  processing. There must be a gcov option to ignore files.
-
-: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
-: ------------------------------------------------------------------------------
-: File '../../../../projects/quilt/spec/main.cpp'
-: Lines executed:62.50% of 8
-: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
-:
-: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
-: Lines executed:60.00% of 20
-: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
-  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
-  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
-- we should generate coverage from the clang debug build only since
-  that is the fastest build we have. We should use the clang coverage
-  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
-
-Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
-
-Notes:
-- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
-  broke Travis build]]
-
 *** Add prefetch support to ODB                                       :story:
 
 As per Boris email:
@@ -10014,6 +9963,75 @@ travis for this.
 - [[https://github.com/d-led/picojson_serializer/blob/master/.travis.yml][example .travis.yml]]
 
 We should upload a build whenever we tag a release.
+
+Patch:
+
+#+begin_example
++env:
++  global:
++    # COVERITY_SCAN_TOKEN
++    secure: "VwgaUWxbt+sGiYNlBWVOcAQOD6BNKYi2+T4Sco0FBddAClDRjOMHBEA4C2DUsK8dbKcihT+YPlz2CnAw/nIn3mn5cVy3Tf0X8ber06nRXMfKTOU84raX8bKNUCaU9tkiqdTeNLwchQutOk5Bgvbt5nRDUwEEOaCexh44vAIymzE="
++
+ matrix:
+   include:
+     #
+@@ -62,6 +67,32 @@ addons:
+     sources:
+       - ubuntu-toolchain-r-test
+
++addons:
++  coverity_scan:
++
++    # GitHub project metadata
++    # ** specific to your project **
++    project:
++      name: my_github/my_project
++      version: 1.0
++      description: My Project
++
++    # Where email notification of build analysis results will be sent
++    notification_email: marco.craveiro@gmail.com
++
++    # Commands to prepare for build_command
++    # ** likely specific to your build **
++    build_command_prepend: ./configure
++
++    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
++    # ** likely specific to your build **
++    build_command: make
++
++    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
++    # Take care in resource usage, and consider the build frequency allowances per
++    #   https://scan.coverity.com/faq#frequency
++    branch_pattern: coverity_scan
++
+ install:
+   - export SCRIPTS_DIR=${TRAVIS_BUILD_DIR}/build/scripts
+   - source ${SCRIPTS_DIR}/travis.install.${TRAVIS_OS_NAME}.sh
+@@ -106,6 +137,25 @@ notifications:
+     on_success: always
+     on_failure: always
+
++
++
++env:
++  global:
++
++   - COVERITY_SCAN_BRANCH_PATTERN="master"
++   - COVERITY_SCAN_NOTIFICATION_EMAIL="marco.craveiro@gmail.com"
++   - COVERITY_SCAN_BUILD_COMMAND_PREPEND="mkdir -p coverity-build && cd coverity-build && cmake .. && cd .."
++   - COVERITY_SCAN_BUILD_COMMAND="make -C coverity-build"
++   - COVERITY_SCAN_PROJECT_NAME="$TRAVIS_REPO_SLUG"
++
++
++before_script:
++    - mkdir -p coverity-build && cd coverity-build && cmake .. && cd ..
++    - if [[ "x${CC}" = "xclang" ]] ; then curl -s 'https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh' | bash || true ; fi
++
++
++
++
+#+end_example
 
 *** Link against boost dynamic libraries                              :story:
 
@@ -10570,7 +10588,7 @@ This seems like another interest dynamic analysis tool:
 
 [[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
 
-**** Add support for CPPCheck                                         :story:
+*** Add support for CPPCheck                                         :story:
 
 Seems like CPPCheck has a different take on dynamic analysis when
 compared to Valgrind. We should look into how hard it is to integrate

@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-17 Wed 06:40]
+#+CAPTION: Clock summary at [2018-10-17 Wed 09:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *20:55* |       |      |   0.0 |
+| *Total time*                                                                | *21:21* |       |      |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 20:55   |       |      |   0.0 |
-| Active                                                                      |         | 20:55 |      |   0.0 |
+| Stories                                                                     | 21:21   |       |      |   0.0 |
+| Active                                                                      |         | 21:21 |      |   0.0 |
 | Edit release notes for previous sprint                                      |         |       | 1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       | 0:26 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       | 0:46 |   0.0 |
 | Create a document with release steps                                        |         |       | 0:11 |   0.0 |
 | Add support for kcov                                                        |         |       | 3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       | 0:09 |   0.0 |
@@ -36,7 +36,7 @@
 | Upgrade to c++ 17                                                           |         |       | 0:25 |   0.0 |
 | Windows MSI is very large                                                   |         |       | 0:26 |   0.0 |
 | Update c++ reference model build                                            |         |       | 1:43 |   0.0 |
-| Linking errors on windows for debug builds                                  |         |       | 0:11 |   0.0 |
+| Linking errors on windows for debug builds                                  |         |       | 0:17 |   0.0 |
 | High-level model thoughts                                                   |         |       | 5:14 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -118,6 +118,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-17 Wed 09:31]--[2018-10-17 Wed 09:44] =>  0:13
+    CLOCK: [2018-10-17 Wed 06:47]--[2018-10-17 Wed 06:54] =>  0:07
     CLOCK: [2018-10-16 Tue 19:50]--[2018-10-16 Tue 20:06] =>  0:16
     CLOCK: [2018-10-15 Mon 10:25]--[2018-10-15 Mon 10:35] =>  0:10
     :END:
@@ -386,7 +388,7 @@ model to match it:
 *** COMPLETED Linking errors on windows for debug builds              :story:
     CLOSED: [2018-10-17 Wed 06:40]
     :LOGBOOK:
-    CLOCK: [2018-10-17 Wed 06:37]--[2018-10-17 Wed 06:40] =>  0:03
+    CLOCK: [2018-10-17 Wed 06:37]--[2018-10-17 Wed 06:46] =>  0:09
     CLOCK: [2018-10-16 Tue 22:18]--[2018-10-16 Tue 22:26] =>  0:08
     :END:
 
@@ -400,6 +402,60 @@ It seems the error is with 32-bit linker.
 Links:
 
 - [[https://developercommunity.visualstudio.com/content/problem/160714/memory-error-for-linker-in-vs-155-x64.html][Memory error for linker in VS 15.5 x64]]
+
+*** COMPLETED Add support for code coverage                           :story:
+    CLOSED: [2018-10-17 Wed 09:43]
+
+*Rationale*: implemented using kcov.
+
+We started the work on code coverage but never finished it. At present
+it seems we don't even have a story detailing the current state of
+coverage in the backlog. From memory the problem was that the upload
+was too large and the coverage was including lots of files that should
+be ignored. We never got the upload to work. In the mean time, it
+seems that kcov is a better approach instead of using lcov, gcov, etc.
+
+Links:
+
+- https://github.com/SimonKagstrom/kcov
+
+*Previous understanding*
+
+Finish setting up coveralls
+
+Remaining issues:
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
+
+Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
+
+Notes:
+- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
+  broke Travis build]]
 
 *** STARTED High-level model thoughts                                 :story:
     :LOGBOOK:
@@ -426,6 +482,20 @@ Notes:
   another endpoint, and users probably don't really need something
   that just reads a model and returns the injector version.
 - the distribution channels are a function of the product API.
+
+*** Update static strings to string views                             :story:
+
+Now we're on C++17 we can start making use of its new features. One
+low hanging fruit is string view. We use static strings quite a lot
+for logging etc. We can just replace these with string views.
+
+Links:
+
+- [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
+
+*** Create bitbbucket backups for reference implementation            :story:
+
+We should have all repos backed up.
 
 *** Add basic "diff mode"                                             :story:
 
