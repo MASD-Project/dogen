@@ -2,8 +2,7 @@
   "documentation": "Pleat provides relational database support for models.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "pleat",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.pleat",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",

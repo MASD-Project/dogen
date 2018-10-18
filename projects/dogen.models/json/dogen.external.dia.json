@@ -1,11 +1,10 @@
 {
-  "documentation": "Provides support for encoding and decoding external models.\n",
+  "documentation": "Provides support for encoding and decoding exogenous models.\n\nAn exogenous model is defined as:\n\n- a third-party format that is not owned or controlled by\n  Dogen, such as Dia\n- a Dogen format designed for interoperability (JSON).\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "external",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.external",
     "yarn.input_language": "cpp",
-    "yarn.reference": "probing.dia",
+    "yarn.reference": "dogen.probing.dia",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
     "quilt.cpp.visual_studio.project.enabled": "false",
@@ -19,14 +18,14 @@
       "fallback_element_type": "dogen::module"
     },
     {
-      "name": "transforms::codec_interface",
+      "name": "transforms::encoding_transform_interface",
       "stereotypes": [
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "transforms::codec_container",
+      "name": "transforms::registrar",
       "stereotypes": [
         "handcrafted"
       ],
@@ -41,53 +40,14 @@
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "transforms::codec_types",
-      "documentation": "Types of codecs supported.\n",
-      "stereotypes": [
-        "dogen::enumeration"
-      ],
-      "fallback_element_type": "dogen::object",
-      "attributes": [
-        {
-          "name": "encoder",
-          "type": "",
-          "documentation": "Has the ability to encode a model into a format.\n"
-        },
-        {
-          "name": "decoder",
-          "type": "",
-          "documentation": "Has the ability to decode a model from a format.\n"
-        },
-        {
-          "name": "encoder_decoder",
-          "type": "",
-          "documentation": "Has the ability to encode and decode a model from a format.\n"
-        }
-      ]
-    },
-    {
-      "name": "transforms::model_transform",
+      "name": "transforms::model_generation_chain",
       "stereotypes": [
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "transforms::encoding_error",
-      "stereotypes": [
-        "dogen::exception"
-      ],
-      "fallback_element_type": "dogen::object"
-    },
-    {
-      "name": "transforms::decoding_error",
-      "stereotypes": [
-        "dogen::exception"
-      ],
-      "fallback_element_type": "dogen::object"
-    },
-    {
-      "name": "transforms::model_to_model_transform",
+      "name": "transforms::model_to_model_chain",
       "stereotypes": [
         "handcrafted"
       ],
@@ -103,7 +63,8 @@
       "stereotypes": [
         "Nameable",
         "Documentable",
-        "Taggable"
+        "Taggable",
+        "Stereotypable"
       ],
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -158,10 +119,6 @@
           "type": "bool"
         },
         {
-          "name": "is_associative_container",
-          "type": "bool"
-        },
-        {
           "name": "is_floating_point",
           "type": "bool"
         }
@@ -203,7 +160,13 @@
       "stereotypes": [
         "dogen::object_template"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "stereotypes",
+          "type": "std::list<std::string>"
+        }
+      ]
     },
     {
       "name": "meta_model::Documentable",
@@ -255,7 +218,7 @@
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "transforms::context_factory",
+      "name": "transforms::decoding_transform_interface",
       "stereotypes": [
         "handcrafted"
       ],

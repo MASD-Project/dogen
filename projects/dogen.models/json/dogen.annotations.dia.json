@@ -2,8 +2,7 @@
   "documentation": "The Annotations model is responsible for managing run-time typed data.\n\nThe idea is to allow the meta-models to carry data over to the\nformatting process without necessarily knowing about this data, but\nyet imposing some constraints on the shape of the data.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "annotations",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.annotations",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
@@ -627,7 +626,7 @@
         {
           "name": "archetype_locations",
           "type": "std::list<archetype_location>",
-          "documentation": "All archetype locations for the archetypes owned by this transform, \nlisting all available backends, facets and archetypes.\n"
+          "documentation": "All archetype locations for the archetypes owned by this transform,\nlisting all available backends, facets and archetypes.\n"
         },
         {
           "name": "archetype_locations_by_meta_name",

@@ -1,8 +1,7 @@
 {
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "dart",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.dart",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",

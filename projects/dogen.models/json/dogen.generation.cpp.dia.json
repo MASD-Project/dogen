@@ -1,10 +1,9 @@
 {
-  "documentation": "CPP is the C++ backend in the quilt kernel.\n",
+  "documentation": "CPP is the C++ backend in the default generation kernel.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "quilt.cpp",
-    "yarn.external_modules": "dogen",
-    "yarn.reference": "annotations.dia",
+    "yarn.model_modules": "dogen.generation.cpp",
+    "yarn.reference": "dogen.probing.dia",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
@@ -693,23 +692,23 @@
     {
       "name": "fabric::registrar",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "leaves",
-          "type": "std::list<dogen::meta_model::name>",
+          "type": "std::list<modeling::meta_model::name>",
           "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
         },
         {
           "name": "model_dependencies",
-          "type": "std::list<dogen::meta_model::name>",
+          "type": "std::list<modeling::meta_model::name>",
           "documentation": "List of all models which the model depends on.\n"
         },
         {
           "name": "registrar_dependencies",
-          "type": "std::list<dogen::meta_model::name>",
+          "type": "std::list<modeling::meta_model::name>",
           "documentation": "Registrars on other models this registrar depends on.\n"
         }
       ]
@@ -717,7 +716,7 @@
     {
       "name": "fabric::forward_declarations",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -728,7 +727,7 @@
         },
         {
           "name": "underlying_element",
-          "type": "dogen::meta_model::name",
+          "type": "modeling::meta_model::name",
           "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\n"
         },
         {
@@ -754,13 +753,13 @@
     {
       "name": "fabric::master_header",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "inclusion_by_facet",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::meta_model::name>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<modeling::meta_model::name>>>"
         }
       ]
     },
@@ -788,7 +787,7 @@
     {
       "name": "fabric::cmakelists",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -817,7 +816,7 @@
     {
       "name": "fabric::common_odb_options",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -903,11 +902,11 @@
       "attributes": [
         {
           "name": "master_segment",
-          "type": "boost::shared_ptr<dogen::meta_model::element>"
+          "type": "boost::shared_ptr<modeling::meta_model::element>"
         },
         {
           "name": "all_segments",
-          "type": "std::list<boost::shared_ptr<dogen::meta_model::element>>"
+          "type": "std::list<boost::shared_ptr<modeling::meta_model::element>>"
         },
         {
           "name": "element_properties",
@@ -1010,7 +1009,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "dogen::meta_model::name"
+          "type": "modeling::meta_model::name"
         },
         {
           "name": "streaming_properties",
@@ -1717,7 +1716,7 @@
     {
       "name": "fabric::object_odb_options",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1766,7 +1765,7 @@
     {
       "name": "fabric::msbuild_targets",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1793,7 +1792,7 @@
     {
       "name": "fabric::visual_studio_project",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1814,7 +1813,7 @@
     {
       "name": "fabric::visual_studio_solution",
       "tagged_values": {
-        "yarn.generalization.parent": "dogen::meta_model::element"
+        "yarn.generalization.parent": "modeling::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [

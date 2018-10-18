@@ -161,10 +161,8 @@
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
         "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
         "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-        "quilt.cpp.io.class_header.secondary_inclusion_directive": "<sstream>",
         "quilt.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
         "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-        "quilt.cpp.io.primitive_header.secondary_inclusion_directive": "<sstream>",
         "quilt.cpp.io.primitive_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>"
       }
     }

@@ -1,0 +1,59 @@
+{
+  "documentation": "Provides file importing support for JSON.\n",
+  "tagged_values": {
+    "yarn.dia.comment": "true",
+    "yarn.model_modules": "dogen.external.json",
+    "yarn.reference": "dogen.external.dia",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen.disable_odb_cmake"
+  },
+  "elements": [
+    {
+      "name": "hydration_error",
+      "stereotypes": [
+        "dogen::exception"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "hydrator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "decoding_transform",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "encoding_transform",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "dehydrator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    }
+  ]
+}

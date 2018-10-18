@@ -1,9 +1,8 @@
 {
-  "documentation": "Provides formatting code applicable to all formatters.\n\nThis model is the repository of all formatting related code\nwhich is not language specific. Language-specific models can\nthen make use of it.\n",
+  "documentation": "Provides the basic formatting primitives.\n\nThis model is the repository of all formatting related code\nwhich is not language specific. Language-specific models can\nthen make use of it.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "formatters",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.formatting",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
@@ -401,7 +400,7 @@
         },
         {
           "name": "decoration_properties_",
-          "type": "boost::optional<formatters::decoration_properties>"
+          "type": "boost::optional<decoration_properties>"
         },
         {
           "name": "includes_",

@@ -2,8 +2,7 @@
   "documentation": "Houses classes common to all transformations.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "external",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.probing",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
@@ -18,17 +17,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
-      "attributes": [
-        {
-          "name": "builder_",
-          "type": "metrics_builder"
-        },
-        {
-          "name": "configuration_",
-          "type": "prober_configuration"
-        }
-      ]
+      "fallback_element_type": "dogen::object"
     },
     {
       "name": "metrics",

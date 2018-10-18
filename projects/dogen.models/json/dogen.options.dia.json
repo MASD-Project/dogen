@@ -2,8 +2,7 @@
   "documentation": "Stores the configuration options for Dogen applications.\n\nThe options model provides types to store general configuration\noptions for all the different Dogen applications, such as knitter,\netc.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "options",
-    "yarn.external_modules": "dogen",
+    "yarn.model_modules": "dogen.options",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
