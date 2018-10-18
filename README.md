@@ -27,7 +27,7 @@
 
 # Overview
 
-**Dogen** is the reference implementation of the MASD's project code
+**Dogen** is the reference implementation of the MASD Project code
 generator. MASD - Model Assisted Software Development - is a new
 methodology for the development of software systems based on [MDE
 (Model Driven
@@ -43,19 +43,19 @@ frontend formats and respecting a set of predefined restrictions;
 Dogen then uses this input to generate a source code representation of
 the model. At present the main frontend is
 [Dia](https://en.wikipedia.org/wiki/Dia_(software)), but we also
-support JSON. Depending on use cases and user demand, other frontends
-may follow.
+support [JSON](http://json.org/). Depending on use cases and user
+demand, other frontends may follow.
 
 The generated code contains most of the functionality required from a
 typical C++ domain object such as serialisation, hashing, streaming
-and so on. Whilst we intend for the suite to be useful out of the box
-for most use cases, our end goal is to enable users to extend Dogen,
-adapting it to the vagaries of their specific needs. Note that Dogen
-has experimental C# support, but it is not in feature parity with C++
-support.
+and so on. Whilst we intend for the application to be useful out of
+the box for most use cases, our end goal is to enable users to extend
+Dogen, adapting it to the vagaries of their specific needs. Note that
+Dogen has experimental C# support, but it is not in feature parity
+with C++ support.
 
 Dogen provides a reference implementation for each supported language,
-available on a separate git repo:
+available as a separate git repo:
 
 - [C++ Reference
   Implementation](https://github.com/MASD-Project/cpp_ref_impl). Models
@@ -109,7 +109,7 @@ Dogen has the following additional dependencies, across all operative systems:
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
 | [CMake](https://cmake.org/)  | Mandatory | 3.12 or later.  | Required to generate the build files.Earlier versions may also work.  |
-| [Boost](https://boost.org)  | Mandatory | 1.68 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
+| [Boost](https://boost.org)  | Mandatory | 1.68 or later. | Earlier versions may also work, but patches may be needed. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
 | [Doxygen](http://www.doxygen.nl/) | Optional | Any recent | Required to build the source code documentation. |
 
@@ -128,7 +128,7 @@ then run:
 **Notes**
 
 
-- The default vcpkg triplet on windows [is 32-bit
+- The default vcpkg triplet on Windows [is 32-bit
 dynamic](https://github.com/Microsoft/vcpkg/issues/1254) whereas we
 build with ```--triplet x64-windows-static```. If you are experiencing
 [weird and wonderful build
@@ -159,7 +159,7 @@ cd output
 On Linux and OSX, you can build using GNU Make as follows:
 
 ```
-cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../..
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../..
 make -j${CORES}
 ```
 
@@ -168,7 +168,7 @@ downloaded and built vcpkg and ```CORES``` is the number of cores
 available on your machine. Alternatively, you can use Ninja:
 
 ```
-cmake -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -G Ninja
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=${PATH_TO_VCPKG_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake ../.. -G Ninja
 ninja -j${CORES}
 ```
 
@@ -182,10 +182,9 @@ cmake --build . --config Release --target ALL_BUILD
 ---
 **Notes**
 
-On all platforms, if you are **not** using vcpkg, you can omit
-```-DCMAKE_TOOLCHAIN_FILE```. However if the dependencies are not on
-the standard paths, you must then set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
-accordingly, e.g.:
+If you are **not** using vcpkg, you can omit ```-DCMAKE_TOOLCHAIN_FILE```.
+However if the dependencies are not on the standard paths, you must then set
+```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH``` accordingly, e.g.:
 
 ```
 CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
