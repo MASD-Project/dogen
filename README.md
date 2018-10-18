@@ -187,8 +187,9 @@ On all platforms, if you are **not** using vcpkg, you can omit
 the standard paths, you must then set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
 accordingly, e.g.:
 
-``` CMAKE_INCLUDE_PATH=/my/boost/include/path
-CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..  ```
+```
+CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
+```
 
 ---
 
@@ -207,7 +208,9 @@ Dogen uses the current built version, but you can also use
 another. For this you may need to tell CMake of its location by
 setting ```CMAKE_PROGRAM_PATH```:
 
-``` CMAKE_PROGRAM_PATH=/path/to/dogen/binary cmake ../..  ```
+```
+CMAKE_PROGRAM_PATH=/path/to/dogen/binary cmake ../..
+```
 
 After regeneration, you can then use ```git diff``` to inspect the
 differences produced by regeneration, if any. The build directory
