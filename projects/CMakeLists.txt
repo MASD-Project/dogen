@@ -64,6 +64,11 @@ if (UNIX)
     endif()
 endif()
 
+#
+# Use C++ 17 on all compilers.
+#
+set(CMAKE_CXX_STANDARD 17)
+
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
         AND NOT "x${CMAKE_CXX_SIMULATE_ID}" STREQUAL "xMSVC")
     # enable as many warnings as possible
@@ -122,7 +127,6 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
 
     # enable RTTI
     add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
-    set(CMAKE_CXX_STANDARD 17)
     set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
     set(other_flags "${other_flags} -fvisibility=hidden")
 

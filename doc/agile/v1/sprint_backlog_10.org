@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-18 Thu 13:14]
+#+CAPTION: Clock summary at [2018-10-18 Thu 14:51]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *29:06* |       |       |   0.0 |
+| *Total time*                                                                | *29:23* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 29:06   |       |       |   0.0 |
-| Active                                                                      |         | 29:06 |       |   0.0 |
+| Stories                                                                     | 29:23   |       |       |   0.0 |
+| Active                                                                      |         | 29:23 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  0:46 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -41,7 +41,9 @@
 | Fix warnings on windows                                                     |         |       |  0:17 |   0.0 |
 | Fix warnings on OSX                                                         |         |       |  0:19 |   0.0 |
 | Read up on framework and API design                                         |         |       |  1:23 |   0.0 |
-| High-level model thoughts                                                   |         |       | 10:42 |   0.0 |
+| Design a top-level Dogen API                                                |         |       | 10:52 |   0.0 |
+| Update vcpkg with boost.di and visibility settings                          |         |       |  0:02 |   0.0 |
+| Check that C++ 17 is enabled on MSVC                                        |         |       |  0:05 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -505,8 +507,9 @@ spot real problems. We need to get rid of the spurious ones.
 Now that we are creating a top-level API for Dogen we should really
 read up on books about good API design.
 
-*** STARTED High-level model thoughts                                 :story:
+*** STARTED Design a top-level Dogen API                              :story:
     :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 14:32]--[2018-10-18 Thu 14:42] =>  0:10
     CLOCK: [2018-10-18 Thu 09:57]--[2018-10-18 Thu 13:14] =>  3:17
     CLOCK: [2018-10-18 Thu 09:10]--[2018-10-18 Thu 09:15] =>  0:05
     CLOCK: [2018-10-17 Wed 16:26]--[2018-10-17 Wed 18:01] =>  1:35
@@ -537,6 +540,24 @@ Notes:
 - according to the [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/][Framework Design Guidelines]], we should design the
   API from scenarios. We should create a specification document that
   can be added to the manual for this.
+
+*** STARTED Update vcpkg with boost.di and visibility settings        :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 14:43]--[2018-10-18 Thu 14:45] =>  0:02
+    :END:
+
+Work for the next vcpkg update:
+
+- pull in [[https://github.com/boost-experimental/di][boost.di]].
+- add flags as per visibility warnings story.
+
+*** STARTED Check that C++ 17 is enabled on MSVC                      :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 14:46]--[2018-10-18 Thu 14:51] =>  0:05
+    :END:
+
+When looking at the log files, there are no mentions of C++ 17. Ensure
+we are setting this for MSVC.
 
 *** Update static strings to string views                             :story:
 
