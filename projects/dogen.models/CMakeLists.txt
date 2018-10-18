@@ -27,7 +27,7 @@ if (WITH_JSON_VALIDATION)
         "${CMAKE_CURRENT_SOURCE_DIR}/${input_dir}"
         "${CMAKE_CURRENT_SOURCE_DIR}/${input_dir}/*.json")
 
-    set(target "input_models.json")
+    set(target "models.json")
     add_custom_target(validate_json_${target})
     add_dependencies(validate_all_json validate_json_${target})
 

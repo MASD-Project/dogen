@@ -207,7 +207,7 @@ include_directories(
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.input_models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external)

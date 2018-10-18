@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-18 Thu 17:06]
+#+CAPTION: Clock summary at [2018-10-18 Thu 17:17]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *31:39* |       |       |   0.0 |
+| *Total time*                                                                | *31:45* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 31:39   |       |       |   0.0 |
-| Active                                                                      |         | 31:39 |       |   0.0 |
+| Stories                                                                     | 31:45   |       |       |   0.0 |
+| Active                                                                      |         | 31:45 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  0:46 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -41,6 +41,7 @@
 | Update vcpkg with boost.di and visibility settings                          |         |       |  1:26 |   0.0 |
 | Check that C++ 17 is enabled on MSVC                                        |         |       |  0:22 |   0.0 |
 | Fix warnings on OSX                                                         |         |       |  0:34 |   0.0 |
+| Rename input models directory to just models                                |         |       |  0:06 |   0.0 |
 | Fix warnings on windows                                                     |         |       |  0:17 |   0.0 |
 | Read up on framework and API design                                         |         |       |  1:23 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 10:52 |   0.0 |
@@ -518,6 +519,15 @@ Notes:
 [[https://github.com/Microsoft/vcpkg/issues/4497][- Ticket raised]] with vcpkg.
 - updated vcpkg's boost with visibility hidden.
 
+*** COMPLETED Rename input models directory to just models            :story:
+    CLOSED: [2018-10-18 Thu 17:17]
+    :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 17:11]--[2018-10-18 Thu 17:17] =>  0:06
+    :END:
+
+Now we no longer have test models we can follow standard dogen
+conventions.
+
 *** STARTED Fix warnings on windows                                   :story:
     :LOGBOOK:
     CLOCK: [2018-10-17 Wed 13:47]--[2018-10-17 Wed 14:04] =>  0:17
@@ -584,11 +594,6 @@ Notes:
 Even after offloading all of the test models, we are still breaching
 Travis and AppVeyor limits. We need to figure out if we have any
 unused types and remove them.
-
-*** Rename input models directory to just models                      :story:
-
-Now we no longer have test models we can follow standard dogen
-conventions.
 
 *** Update static strings to string views                             :story:
 
