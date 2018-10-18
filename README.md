@@ -138,6 +138,11 @@ triplet.
 (e.g. remove it from the vpkg list above) or else you may see [some
 interesting linking
 errors](https://github.com/Microsoft/vcpkg/issues/4476) related to ```iconv```.
+- Remember that the recommended compiler for OSX is Homebrew's GCC. If
+  you do decide to use Clang, beware that for some reason [boost does
+  not
+  default](https://github.com/Microsoft/vcpkg/issues/4476#issuecomment-430175834)
+  to C++ 14. You'll need to add ```cxxstd=14```.
 
 ---
 
@@ -182,9 +187,8 @@ On all platforms, if you are **not** using vcpkg, you can omit
 the standard paths, you must then set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
 accordingly, e.g.:
 
-```
-CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
-```
+``` CMAKE_INCLUDE_PATH=/my/boost/include/path
+CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..  ```
 
 ---
 
@@ -203,9 +207,7 @@ Dogen uses the current built version, but you can also use
 another. For this you may need to tell CMake of its location by
 setting ```CMAKE_PROGRAM_PATH```:
 
-```
-CMAKE_PROGRAM_PATH=/path/to/dogen/binary cmake ../..
-```
+``` CMAKE_PROGRAM_PATH=/path/to/dogen/binary cmake ../..  ```
 
 After regeneration, you can then use ```git diff``` to inspect the
 differences produced by regeneration, if any. The build directory
