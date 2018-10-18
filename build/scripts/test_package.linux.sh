@@ -61,7 +61,7 @@ build_type_dir="${compiler_dir}/${build_type}";
 # Test the package
 #
 sudo dpkg -i ${build_type_dir}/stage/pkg/dogen_*_amd64-applications.deb
-cp ${product_dir}/projects/dogen.input_models/dia/hello_world.dia /tmp
+cp ${product_dir}/projects/dogen.models/dia/hello_world.dia /tmp
 cd /tmp
 /usr/bin/dogen.knitter --version
 /usr/bin/dogen.knitter -t hello_world.dia
