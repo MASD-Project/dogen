@@ -29,29 +29,21 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.utility/serialization/path.hpp"
 #include "dogen.generation/serialization/meta_model/formatting_styles_ser.hpp"
 #include "dogen.generation/serialization/meta_model/artefact_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
-template<typename Archive>
-inline void save(Archive& ar,
-    const boost::filesystem::path& p,
-    const unsigned int /*version*/) {
+template<class Archive>
+void serialize(Archive& ar, boost::filesystem::path& p, const unsigned int/*v*/)
+{
     std::string s;
-    s = p.generic_string();
+    if(Archive::is_saving::value)
+        s = p.generic_string();
     ar & boost::serialization::make_nvp("path", s);
-}
-
-template<typename Archive>
-inline void load(Archive& ar,
-    boost::filesystem::path& p,
-    const unsigned int /*version*/) {
-    std::string s;
-    ar & boost::serialization::make_nvp("path", s);
-    p = s;
+    if(Archive::is_loading::value)
+        p = s;
 }
 
 } }
