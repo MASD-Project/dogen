@@ -3,7 +3,9 @@
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "dogen.modeling",
-    "yarn.reference": "dogen.probing.dia",
+    "yarn.reference": "dogen.annotations.json",
+    "yarn.reference": "dogen.formatting.json",
+    "yarn.reference": "dogen.probing.json",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",

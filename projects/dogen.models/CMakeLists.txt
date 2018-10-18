@@ -66,7 +66,8 @@ if (DOGEN_TAILOR_EXECUTABLE)
         add_custom_target(tailor_${model_name}
           COMMENT "Tailoring ${model_name}."
           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-          COMMAND ${DOGEN_TAILOR_EXECUTABLE} --log-level=${DOGEN_LOG_LEVEL} --target ${model} --output ${output_dir}/${model_name}.json)
+          COMMAND ${DOGEN_TAILOR_EXECUTABLE} --log-level=${DOGEN_LOG_LEVEL}
+          --target ${model} --output ${output_dir}/${model_name}.json)
         add_dependencies(tailor_all tailor_${model_name})
     endforeach()
 endif()

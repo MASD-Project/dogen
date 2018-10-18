@@ -2,7 +2,11 @@
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "dogen.generation",
-    "yarn.reference": "dogen.formatting.dia",
+    "yarn.reference": "dogen.generation.json",
+    "yarn.reference": "dogen.annotations.json",
+    "yarn.reference": "dogen.modeling.json",
+    "yarn.reference": "dogen.probing.json",
+    "yarn.reference": "dogen.formatting.json",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
