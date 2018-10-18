@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-18 Thu 16:10]
+#+CAPTION: Clock summary at [2018-10-18 Thu 17:06]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *30:47* |       |       |   0.0 |
+| *Total time*                                                                | *31:39* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 30:47   |       |       |   0.0 |
-| Active                                                                      |         | 30:47 |       |   0.0 |
+| Stories                                                                     | 31:39   |       |       |   0.0 |
+| Active                                                                      |         | 31:39 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  0:46 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -39,11 +39,12 @@
 | Linking errors on windows for debug builds                                  |         |       |  0:17 |   0.0 |
 | Create bitbbucket backups for reference implementation                      |         |       |  0:18 |   0.0 |
 | Update vcpkg with boost.di and visibility settings                          |         |       |  1:26 |   0.0 |
+| Check that C++ 17 is enabled on MSVC                                        |         |       |  0:22 |   0.0 |
+| Fix warnings on OSX                                                         |         |       |  0:34 |   0.0 |
 | Fix warnings on windows                                                     |         |       |  0:17 |   0.0 |
-| Fix warnings on OSX                                                         |         |       |  0:19 |   0.0 |
 | Read up on framework and API design                                         |         |       |  1:23 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 10:52 |   0.0 |
-| Check that C++ 17 is enabled on MSVC                                        |         |       |  0:05 |   0.0 |
+| Reduce build times                                                          |         |       |  0:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -486,6 +487,37 @@ Work for the next vcpkg update:
 - add flags as per visibility warnings story.
 - update docs with all the workarounds.
 
+*** COMPLETED Check that C++ 17 is enabled on MSVC                    :story:
+    CLOSED: [2018-10-18 Thu 16:20]
+    :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 16:21]--[2018-10-18 Thu 16:29] =>  0:08
+    CLOCK: [2018-10-18 Thu 16:11]--[2018-10-18 Thu 16:20] =>  0:09
+    CLOCK: [2018-10-18 Thu 14:46]--[2018-10-18 Thu 14:51] =>  0:05
+    :END:
+
+When looking at the log files, there are no mentions of C++ 17. Ensure
+we are setting this for MSVC.
+
+We are now compiling with C++ 17, but builds are now longer than 1h
+and so are getting killed. We will leave it like that and hopefully
+find ways of reducing the build time - we are also close to the limit
+on Linux as well.
+
+*** COMPLETED Fix warnings on OSX                                     :story:
+    CLOSED: [2018-10-18 Thu 17:06]
+    :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 16:51]--[2018-10-18 Thu 17:06] =>  0:15
+    CLOCK: [2018-10-18 Thu 09:16]--[2018-10-18 Thu 09:35] =>  0:19
+    :END:
+
+We are seeing a lot of warnings on OSX which makes it difficult to
+spot real problems. We need to get rid of the spurious ones.
+
+Notes:
+
+[[https://github.com/Microsoft/vcpkg/issues/4497][- Ticket raised]] with vcpkg.
+- updated vcpkg's boost with visibility hidden.
+
 *** STARTED Fix warnings on windows                                   :story:
     :LOGBOOK:
     CLOCK: [2018-10-17 Wed 13:47]--[2018-10-17 Wed 14:04] =>  0:17
@@ -499,16 +531,6 @@ fix them.
 : dogen.generation.cpp\src\types\formatters\msbuild_targets_formatter.cpp(123): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
 : dogen.generation.cpp\src\types\formatters\test_data\class_implementation_formatter.cpp(212): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int'
 : dogen.generation.csharp\src\types\formatters\types\class_formatter.cpp(188): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
-
-*** STARTED Fix warnings on OSX                                       :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-18 Thu 09:16]--[2018-10-18 Thu 09:35] =>  0:19
-    :END:
-
-We are seeing a lot of warnings on OSX which makes it difficult to
-spot real problems. We need to get rid of the spurious ones.
-
-[[https://github.com/Microsoft/vcpkg/issues/4497][Ticket raised]] with vcpkg.
 
 *** STARTED Read up on framework and API design                       :story:
     :LOGBOOK:
@@ -554,13 +576,19 @@ Notes:
   API from scenarios. We should create a specification document that
   can be added to the manual for this.
 
-*** STARTED Check that C++ 17 is enabled on MSVC                      :story:
+*** STARTED Reduce build times                                        :story:
     :LOGBOOK:
-    CLOCK: [2018-10-18 Thu 14:46]--[2018-10-18 Thu 14:51] =>  0:05
+    CLOCK: [2018-10-18 Thu 16:30]--[2018-10-18 Thu 16:50] =>  0:36
     :END:
 
-When looking at the log files, there are no mentions of C++ 17. Ensure
-we are setting this for MSVC.
+Even after offloading all of the test models, we are still breaching
+Travis and AppVeyor limits. We need to figure out if we have any
+unused types and remove them.
+
+*** Rename input models directory to just models                      :story:
+
+Now we no longer have test models we can follow standard dogen
+conventions.
 
 *** Update static strings to string views                             :story:
 
