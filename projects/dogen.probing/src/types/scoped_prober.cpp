@@ -23,4 +23,7 @@
 namespace dogen {
 namespace probing {
 
+// dummy function to suppress ranlib warnings
+void scoped_prober() { }
+
 } }
