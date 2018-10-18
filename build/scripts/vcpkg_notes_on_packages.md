@@ -3,7 +3,7 @@
 Building:
 
 ```
-./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di
+./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit
 ```
 
 Add ```libodb libodb-pgsql```.
@@ -11,7 +11,7 @@ Add ```libodb libodb-pgsql```.
 Exporting:
 
 ```
-./vcpkg export libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di --zip
+./vcpkg export libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit --zip
 ```
 
 # Windows
@@ -19,7 +19,7 @@ Exporting:
 Building:
 
 ```
-./vcpkg install --triplet x64-windows-static libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di
+./vcpkg install --triplet x64-windows-static libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit
 ```
 
 Add ```libodb libodb-pgsql```.
@@ -27,7 +27,7 @@ Add ```libodb libodb-pgsql```.
 Exporting:
 
 ```
-./vcpkg export --triplet x64-windows-static libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di --zip
+./vcpkg export --triplet x64-windows-static libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit --zip
 ```
 
 # OSX
@@ -65,11 +65,11 @@ index a06cbae..834a459 100644
 Building (exclude ```libxml2```):
 
 ```
-./vcpkg install boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di
+./vcpkg install boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit
 ```
 
 Exporting:
 
 ```
-./vcpkg export boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di --zip
+./vcpkg export boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit --zip
 ```

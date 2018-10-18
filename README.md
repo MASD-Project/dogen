@@ -121,7 +121,7 @@ documentation](https://github.com/Microsoft/vcpkg/blob/master/README.md),
 then run:
 
 ```
-./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid
+./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit
 ```
 
 ---
