@@ -163,47 +163,6 @@ support is working (other than proxy models). We need to create a user
 level model that makes use of types from another model. In theory it
 should just work since we are using fully qualified names everywhere.
 
-*** Problems in tailor generation of dogen models                     :story:
-
-We converted all of dogen's models from dia into JSON using tailor and
-code-generated them to see if there were any differences.
-
-Issues to address:
-
-- problems with =quilt.cpp= and =yarn.dia= / =yarn.json=: the
-  conversion of the model path did not work as expected - we do not
-  know of the "."  separator. Fixed it manually and then it all worked
-  (minus CMakeLists, see below). We could possibly fix the builder to
-  automatically use the "." to separate model paths. Actually with the
-  latest changes we now seem to only be looking at the first model
-  module, so for =yarn.dia= we only have =yarn=.
-- CMakeLists were deleted on all models for some reason, even though
-  the annotations profile look correct.
-- in quilt we correctly generated the forward declarations for
-  registrar error and workflow error without including boost
-  exception. Not sure why that is, nor why it is that we are including
-  them for forward declarations.
-- Missing include of registrar serialisation in
-  =all_ser.hpp=. Instability in =registrar_ser.cpp=, but content is
-  correct otherwise.
-- =database.json= generated invalid JSON.
-- references in dia diagrams have the dia extension. This means that
-  they do not resolve when converted to JSON.
-
-"Script":
-
-#+begin_src
-rm *.json
-A="dia knit quilt.cpp wale yarn.json annotations formatters quilt yarn database options stitch yarn.dia"
-for a in $A; do /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/dogen.tailor -t $a.dia -o $a.json; done
-for a in $A; do /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/dogen.knitter -t ${a}.json --cpp-project-dir /home/marco/Development/DomainDrivenConsulting/dogen/projects --ignore-files-matching-regex .*/CMakeLists.txt --ignore-files-matching-regex .*/test/.* --ignore-files-matching-regex .*/tests/.* --verbose --delete-extra-files; done
-#+end_src
-
-In an ideal world, we should probably have a script that we run as
-part of =knit_and_stitch= that converts to tailor and then runs
-knitter on the models, so that we keep track of tailor breaks outside
-of JSON test models.
-
 *** Do not include algorithm if swap is disabled                      :story:
 
 At present we always include =algorithm= in types' class header - both

@@ -3,6 +3,7 @@
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "dogen.generation.csharp",
+    "yarn.reference": "dogen.generation.json",
     "yarn.reference": "dogen.options.json",
     "yarn.reference": "dogen.modeling.json",
     "yarn.reference": "dogen.formatting.json",
