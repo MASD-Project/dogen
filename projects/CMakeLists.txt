@@ -173,8 +173,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         # version of this library on release builds as well so we
         # need to ignore it. Not adding this to clang-cl as it
         # does not seem to recognise it.
-        set(CMAKE_CXX_FLAGS_RELEASE
-            "${CMAKE_CXX_FLAGS_RELEASE} /NODEFAULTLIB:libcmtd.lib")
+        set(CMAKE_LINKER_FLAGS ${CMAKE_LINKER_FLAGS}
+            /NODEFAULTLIB:\"libcmtd.lib\")
     endif()
 
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}" CACHE STRING "MSVC C Debug MT flags " FORCE)
