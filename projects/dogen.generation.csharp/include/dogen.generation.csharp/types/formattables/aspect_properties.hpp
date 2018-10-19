@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen.generation.csharp/serialization/formattables/aspect_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -46,13 +45,6 @@ public:
     aspect_properties(
         const bool is_floating_point,
         const bool requires_static_reference_equals);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::aspect_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::aspect_properties& v, unsigned int version);
 
 public:
     bool is_floating_point() const;

@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
-#include "dogen.generation.csharp/serialization/formattables/auxiliary_function_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -48,13 +47,6 @@ public:
     auxiliary_function_properties(
         const dogen::generation::csharp::formattables::auxiliary_function_types type,
         const std::string& name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::auxiliary_function_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::auxiliary_function_properties& v, unsigned int version);
 
 public:
     dogen::generation::csharp::formattables::auxiliary_function_types type() const;

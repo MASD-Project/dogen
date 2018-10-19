@@ -33,7 +33,6 @@
 #include "dogen.generation.csharp/types/formattables/formattable.hpp"
 #include "dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
-#include "dogen.generation.csharp/serialization/formattables/model_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -54,13 +53,6 @@ public:
         const std::list<std::string>& project_items,
         const std::unordered_map<std::string, dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
         const std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties>& assistant_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::model& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::model& v, unsigned int version);
 
 public:
     const dogen::modeling::meta_model::name& name() const;

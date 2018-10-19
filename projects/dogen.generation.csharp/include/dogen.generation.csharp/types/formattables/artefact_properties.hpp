@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.generation.csharp/serialization/formattables/artefact_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -54,13 +53,6 @@ public:
         const boost::filesystem::path& file_path,
         const boost::filesystem::path& relative_path,
         const std::list<std::string>& using_dependencies);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::artefact_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::artefact_properties& v, unsigned int version);
 
 public:
     bool enabled() const;

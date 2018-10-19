@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.generation.csharp/serialization/formattables/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -54,13 +53,6 @@ public:
         const std::string& name_tree_identifiable,
         const bool is_simple_type,
         const bool is_circular_dependency);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::helper_descriptor& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::helper_descriptor& v, unsigned int version);
 
 public:
     const std::string& family() const;

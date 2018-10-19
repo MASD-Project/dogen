@@ -29,7 +29,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.generation.csharp/types/formattables/element_properties.hpp"
-#include "dogen.generation.csharp/serialization/formattables/formattable_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -47,13 +46,6 @@ public:
     formattable(
         const dogen::generation::csharp::formattables::element_properties& element_properties,
         const boost::shared_ptr<dogen::modeling::meta_model::element>& element);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::formattable& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::formattable& v, unsigned int version);
 
 public:
     const dogen::generation::csharp::formattables::element_properties& element_properties() const;

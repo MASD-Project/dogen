@@ -30,7 +30,6 @@
 #include <unordered_map>
 #include "dogen.generation.csharp/types/formattables/locator_facet_configuration.hpp"
 #include "dogen.generation.csharp/types/formattables/locator_archetype_configuration.hpp"
-#include "dogen.generation.csharp/serialization/formattables/locator_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -52,13 +51,6 @@ public:
         const std::unordered_map<std::string, dogen::generation::csharp::formattables::locator_archetype_configuration>& archetype_configurations,
         const bool disable_facet_directories,
         const std::string& backend_directory_name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::locator_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::locator_configuration& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::generation::csharp::formattables::locator_facet_configuration>& facet_configurations() const;

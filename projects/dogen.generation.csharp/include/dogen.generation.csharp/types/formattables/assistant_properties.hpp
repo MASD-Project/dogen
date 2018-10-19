@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.generation.csharp/serialization/formattables/assistant_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -47,13 +46,6 @@ public:
     assistant_properties(
         const bool requires_assistance,
         const std::string& method_postfix);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::assistant_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::assistant_properties& v, unsigned int version);
 
 public:
     /**

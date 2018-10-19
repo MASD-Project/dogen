@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.generation.csharp/serialization/fabric/visual_studio_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -45,13 +44,6 @@ public:
     visual_studio_configuration(
         const std::string& project_solution_guid,
         const std::string& project_guid);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::fabric::visual_studio_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::fabric::visual_studio_configuration& v, unsigned int version);
 
 public:
     const std::string& project_solution_guid() const;

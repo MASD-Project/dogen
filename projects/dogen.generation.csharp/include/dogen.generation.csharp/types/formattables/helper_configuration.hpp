@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.csharp/serialization/formattables/helper_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -44,13 +43,6 @@ public:
 
 public:
     explicit helper_configuration(const std::unordered_map<std::string, std::string>& helper_families);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::csharp::formattables::helper_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::csharp::formattables::helper_configuration& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, std::string>& helper_families() const;
