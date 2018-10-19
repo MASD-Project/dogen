@@ -31,7 +31,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.templating/types/stitch/properties.hpp"
 #include "dogen.templating/types/stitch/text_template_body.hpp"
-#include "dogen.templating/serialization/stitch/text_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -56,13 +55,6 @@ public:
         const dogen::templating::stitch::properties& properties,
         const std::unordered_map<std::string, std::string>& variables,
         const dogen::templating::stitch::text_template_body& body);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::stitch::text_template& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::stitch::text_template& v, unsigned int version);
 
 public:
     /**

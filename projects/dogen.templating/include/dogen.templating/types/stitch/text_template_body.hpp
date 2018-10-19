@@ -30,7 +30,6 @@
 #include <utility>
 #include <algorithm>
 #include "dogen.templating/types/stitch/line.hpp"
-#include "dogen.templating/serialization/stitch/text_template_body_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -47,13 +46,6 @@ public:
     text_template_body(
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<dogen::templating::stitch::line>& lines);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::stitch::text_template_body& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::stitch::text_template_body& v, unsigned int version);
 
 public:
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;

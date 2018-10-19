@@ -29,7 +29,6 @@
 #include <boost/optional.hpp>
 #include "dogen.formatting/types/decoration_properties.hpp"
 #include "dogen.templating/types/stitch/stitching_properties.hpp"
-#include "dogen.templating/serialization/stitch/properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -48,13 +47,6 @@ public:
     properties(
         const boost::optional<dogen::formatting::decoration_properties>& decoration_properties,
         const dogen::templating::stitch::stitching_properties& stitching_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::stitch::properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::stitch::properties& v, unsigned int version);
 
 public:
     const boost::optional<dogen::formatting::decoration_properties>& decoration_properties() const;

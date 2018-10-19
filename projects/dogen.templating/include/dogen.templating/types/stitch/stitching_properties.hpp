@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.templating/serialization/stitch/stitching_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -53,13 +52,6 @@ public:
         const std::list<std::string>& containing_namespaces,
         const std::string& wale_template,
         const std::unordered_map<std::string, std::string>& wale_kvps);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::stitch::stitching_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::stitch::stitching_properties& v, unsigned int version);
 
 public:
     const std::string& stream_variable_name() const;

@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.templating/types/stitch/block_types.hpp"
-#include "dogen.templating/serialization/stitch/block_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -47,13 +46,6 @@ public:
     block(
         const dogen::templating::stitch::block_types type,
         const std::string& content);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::stitch::block& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::stitch::block& v, unsigned int version);
 
 public:
     dogen::templating::stitch::block_types type() const;

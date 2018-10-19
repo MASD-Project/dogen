@@ -28,7 +28,6 @@
 #include <list>
 #include <algorithm>
 #include "dogen.templating/types/stitch/block.hpp"
-#include "dogen.templating/serialization/stitch/line_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -43,13 +42,6 @@ public:
 
 public:
     explicit line(const std::list<dogen::templating::stitch::block>& blocks);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::stitch::line& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::stitch::line& v, unsigned int version);
 
 public:
     const std::list<dogen::templating::stitch::block>& blocks() const;

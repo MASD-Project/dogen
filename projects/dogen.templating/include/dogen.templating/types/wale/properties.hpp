@@ -30,7 +30,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen.templating/serialization/wale/properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -50,13 +49,6 @@ public:
         const boost::filesystem::path& template_path,
         const std::unordered_set<std::string>& expected_keys,
         const std::unordered_map<std::string, std::string>& supplied_kvps);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::wale::properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::wale::properties& v, unsigned int version);
 
 public:
     const boost::filesystem::path& template_path() const;

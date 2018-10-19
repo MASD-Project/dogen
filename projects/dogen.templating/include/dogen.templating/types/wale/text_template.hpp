@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.templating/types/wale/properties.hpp"
-#include "dogen.templating/serialization/wale/text_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace templating {
@@ -45,13 +44,6 @@ public:
     text_template(
         const dogen::templating::wale::properties& properties,
         const std::string& content);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::templating::wale::text_template& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::templating::wale::text_template& v, unsigned int version);
 
 public:
     const dogen::templating::wale::properties& properties() const;
