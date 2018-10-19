@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-19 Fri 11:45]
+#+CAPTION: Clock summary at [2018-10-19 Fri 12:18]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:22* |       |       |   0.0 |
+| *Total time*                                                                | *36:53* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:22   |       |       |   0.0 |
-| Active                                                                      |         | 36:22 |       |   0.0 |
+| Stories                                                                     | 36:53   |       |       |   0.0 |
+| Active                                                                      |         | 36:53 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  0:59 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
 | Add support for kcov                                                        |         |       |  3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       |  0:09 |   0.0 |
@@ -43,7 +43,7 @@
 | Fix warnings on OSX                                                         |         |       |  0:34 |   0.0 |
 | Rename input models directory to just models                                |         |       |  0:16 |   0.0 |
 | Get JSON models to generate again                                           |         |       |  0:57 |   0.0 |
-| Fix warnings on windows                                                     |         |       |  2:04 |   0.0 |
+| Fix warnings on windows                                                     |         |       |  2:32 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:05 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 11:40 |   0.0 |
 | Reduce build times                                                          |         |       |  0:20 |   0.0 |
@@ -127,6 +127,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 11:46]--[2018-10-19 Fri 11:49] =>  0:03
     CLOCK: [2018-10-18 Thu 20:23]--[2018-10-18 Thu 20:36] =>  0:13
     CLOCK: [2018-10-17 Wed 09:31]--[2018-10-17 Wed 09:44] =>  0:13
     CLOCK: [2018-10-17 Wed 06:47]--[2018-10-17 Wed 06:54] =>  0:07
@@ -548,6 +549,7 @@ Problems:
 
 *** STARTED Fix warnings on windows                                   :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 11:50]--[2018-10-19 Fri 12:18] =>  0:28
     CLOCK: [2018-10-19 Fri 11:29]--[2018-10-19 Fri 11:45] =>  0:16
     CLOCK: [2018-10-19 Fri 08:10]--[2018-10-19 Fri 09:27] =>  1:17
     CLOCK: [2018-10-18 Thu 18:12]--[2018-10-18 Thu 18:26] =>  0:14
@@ -582,6 +584,7 @@ Links:
 - [[https://msdn.microsoft.com/en-gb/library/abx4dbyh.aspx][CRT Library Features]]
 - [[https://cmake.org/pipermail/cmake/2009-October/032526.html][Problem ignoring libcmt.lib on Windows]]
 - [[https://stackoverflow.com/questions/18786690/cmake-for-def-and-nodefaultlib][CMAKE for /DEF and /NODEFAULTLIB]]
+- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
 
 *** STARTED Read up on framework and API design                       :story:
     :LOGBOOK:
@@ -699,6 +702,21 @@ We still need to support the old syntax for pre c++-17.
 
 We need to add a new standard to =quilt.cpp= and when its set to
 c++-17 we should automatically use inline namespaces.
+
+*** Create some basic naming guidelines                               :story:
+
+As per Framework Design Guidelines, we need some basic guidelines for
+naming in Dogen. We don't need to go overboard, we just need something
+to get us started and evolve it as we go along.
+
+Links:
+
+- [[https://isocpp.org/wiki/faq/coding-standards][C++ Coding Standards]]
+- [[http://wiki.c2.com/?CapitalizationRules][Capitalization Rules]]
+- [[https://en.wikipedia.org/wiki/Snake_case][Snake Case]]
+- [[http://cs.smu.ca/~porter/csc/ref/stl/naming_conventions.html][Naming Conventions for these STL Reference Pages]]
+- [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
+- [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
 
 *** Problems in tailor generation of dogen models                     :story:
 
