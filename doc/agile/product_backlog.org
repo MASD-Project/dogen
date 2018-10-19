@@ -445,57 +445,6 @@ that is then enriched for generation. This means we could have:
 - middleend/modeling
 - backend/generation
 
-*** Create a single binary for all of dogen                           :story:
-
-As per analysis, we need to create a single dogen binary, like so:
-
-: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
-
-Where =COMMAND= is:
-
-- =transform=: functionality that is currently in tailor.
-- =generate=: functionality that is currently in knitter.
-- =expand=: functionality that is currently in stitcher plus expansion
-  of wale templates.
-- =make=: functionality in darter: create project, structure etc.
-
-In order to support sub-commands we need to do a lot of hackery with
-program options:
-
-- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
-  processing with boost program_options
-- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
-
-*Merged Stories*
-
-We started off by creating lots of little executables: knitter,
-darter, tailor, stitcher. Each of these has its own project,
-command-line options etc. However, now that we are concentrating all
-of the domain knowledge in yarn, it seems less useful to have so many
-executables that are simply calling yarn transforms. Instead, it may
-make more sense to use an approach similar to git and have a
-"sub-command":
-
-: dogen knit
-: dogen tailor
-
-And so forth. Of course, we could also take this opportunity and clean
-up these names to making them more meaningful to end users. Perhaps:
-
-: dogen codegen
-: dogen transform
-
-Each of these sub-commands or modes would have their own set of
-associated options. We need to figure out how this is done using boost
-program options. We also need to spend a bit of time working out the
-sub-commands to make sure they make sense across the board.
-
-In terms of names, we can't really call the project "dogen". We should
-call it something allusive to the command line, such as cli. However,
-the final binary should be called dogen or perhaps, =dogen.cli=. This
-fits in with other binaries such as =dogen.web=, =dogen.http=,
-=dogen.gui= etc.
-
 *** Create the =orchestration= model                                  :story:
 
 Create a model with the top-level transforms.
@@ -7116,16 +7065,6 @@ strings.
 Links:
 
 - [[http://www.boost.org/doc/libs/1_65_1/libs/uuid/uuid.html][Uuid docs]]
-
-*** Add support for inline namespaces                                 :story:
-
-Enable c++17. - windows requires cpp latest. Then fix inner namespaces
-(e.g. a::b::c).
-
-We still need to support the old syntax for pre c++-17.
-
-We need to add a new standard to =quilt.cpp= and when its set to
-c++-17 we should automatically use inline namespaces.
 
 *** Add support for object cloning                                    :story:
 
