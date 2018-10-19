@@ -75,7 +75,8 @@ format(assistant& a, const formattables::helper_properties& hp) const {
     const auto ident(d.name_tree_identifiable());
 a.stream() << std::endl;
 a.stream() << qn << " create_" << ident << "(const unsigned int position) {" << std::endl;
-a.stream() << "    return static_cast<" << qn << ">(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);" << std::endl;
+a.stream() << "    const auto num(((position % 95) + 32) == 34 ? 35 : ((position % 95) + 32));" << std::endl;
+a.stream() << "    return static_cast<" << qn << ">(num);" << std::endl;
 a.stream() << "}" << std::endl;
 }
 } } } } }

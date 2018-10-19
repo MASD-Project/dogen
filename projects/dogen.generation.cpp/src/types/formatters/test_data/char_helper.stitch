@@ -19,7 +19,8 @@ format(assistant& a, const formattables::helper_properties& hp) const {
 #>
 
 <#= qn #> create_<#= ident #>(const unsigned int position) {
-    return static_cast<<#= qn #>>(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);
+    const auto num(((position % 95) + 32) == 34 ? 35 : ((position % 95) + 32));
+    return static_cast<<#= qn #>>(num);
 }
 <#+
 }
