@@ -51,7 +51,7 @@ it should just be:
 
 : dart.json
 
-*** Throw on unsupported stereotypes                                  :story:
+*** Throw on unsupported stereotypes for specific kernels             :story:
 
 In some cases we may support a feature in one language but not on
 others like say ORM at present. If a user requests ORM in a C# model,
@@ -497,21 +497,6 @@ of it.
 Once the =external= model has been created, we need to replace the
 legacy exomodel related transforms; and once that is done, we need to
 remove all of the legacy code.
-
-*** Exclude profiles from stereotypes processing                      :story:
-
-At present we are manually excluding profiles from the stereotypes
-transform. This was just a quick hack to get us going. We need to
-replace this with a call to annotations to get a list of profile names
-and exclude those.
-
-We should also rename =is_stereotype_handled_externally= to something
-more like "is profile" or "matches profile name".
-
-Actually the right thing may even be to just remove all of the profile
-stereotypes during annotations processing. However, we should wait
-until we complete the exomodel work since that will remove scribble
-groups, etc. Its all in the annotations transform.
 
 *** Generate file paths as a transform                                :story:
 

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-19 Fri 17:04]
+#+CAPTION: Clock summary at [2018-10-19 Fri 18:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:48* |       |       |   0.0 |
+| *Total time*                                                                | *42:24* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:48   |       |       |   0.0 |
-| Active                                                                      |         | 40:48 |       |   0.0 |
+| Stories                                                                     | 42:24   |       |       |   0.0 |
+| Active                                                                      |         | 42:24 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -47,7 +47,7 @@
 | Fix warnings on windows                                                     |         |       |  3:29 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:05 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 11:40 |   0.0 |
-| Reduce build times                                                          |         |       |  0:39 |   0.0 |
+| Reduce build times                                                          |         |       |  2:15 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -652,6 +652,8 @@ Notes:
 
 *** STARTED Reduce build times                                        :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 18:20]--[2018-10-19 Fri 18:46] =>  0:26
+    CLOCK: [2018-10-19 Fri 17:05]--[2018-10-19 Fri 18:15] =>  1:10
     CLOCK: [2018-10-19 Fri 16:40]--[2018-10-19 Fri 16:59] =>  0:19
     CLOCK: [2018-10-18 Thu 16:30]--[2018-10-18 Thu 16:50] =>  0:36
     :END:
@@ -716,6 +718,24 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** Consider creating a test build for all facets                     :story:
+
+In the past we had enabled a lot of facets on the dogen models to
+serve as part of the testing infrastructure. However, its no longer
+feasible to do this because the build is taking too long. However, the
+reference models just can't capture all of the complexity of a
+codebase like dogen's so we lost some testability with this move. What
+would be really nice is if we could create "test builds":
+
+- given a set of test models, copy them somewhere, generate a product
+  configuration with some kind of override that enables all facets
+  everywhere. some will just not come through like ORM.
+- build the product. all handcrafted code is now blank but all facets
+  are coming though.
+- this could be part of the ctest script, as a "mode" - product
+  generation test. Every time there is a commit to a product the build
+  kicks in.
 
 *** Add support for inline namespaces                                 :story:
 
@@ -838,7 +858,20 @@ Links:
 
 - [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
 
+*** Exclude profiles from stereotypes processing                      :story:
 
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
 
 *** Problems in tailor generation of dogen models                     :story:
 
@@ -1267,6 +1300,28 @@ This resulted in some puzzling errors:
 
 Ideally we should either warn and ignore or fail to process models
 with self-references.
+
+*** Handcrafted stereotype would not work on C# models
+
+At present we do not have any tests for C# models with handcrafted. If
+we did it would not work because the annotations only set the C++
+facets. Add a test for this and fix the annotation profile. The same
+problem will apply to all new profiles:
+
+- pretty printable
+- serialisable
+- hashable
+
+*** Update annotation profiles and stereotypes to masd namespace
+
+We should rename all annotation profiles and all stereotypes into the
+MASD namespace.
+
+We should also rename the artefact formatters to a compliant names,
+e.g. instead of =C# Artefact Formatter= maybe
+=dogen::csharp_artefact_formatter=. Note its dogen not MASD because
+these are dogen specific profiles. We need to create a model for
+dogen, separate from the MASD standard profile.
 
 ** Deprecated
 *** CANCELLED Sort out iconv on windows                               :story:
