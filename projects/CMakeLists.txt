@@ -166,16 +166,16 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
     foreach(flag_var CMAKE_C_FLAGS_DEBUG CMAKE_CXX_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE CMAKE_CXX_FLAGS_RELEASE CMAKE_C_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO CMAKE_CXX_FLAGS_RELWITHDEBINFO)
         string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
         string(REGEX REPLACE "/MDd" "/MTd" ${flag_var} "${${flag_var}}")
-
-        if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-            # For some reason CMake seems to be including the debug
-            # version of this library on release builds as well so we
-            # need to ignore it. Not adding this to clang-cl as it
-            # does not seem to recognise it.
-            set(CMAKE_CXX_FLAGS_RELEASE
-                "${CMAKE_CXX_FLAGS_RELEASE} /NODEFAULTLIB:\"libcmtd\"")
-        endif()
     endforeach(flag_var)
+
+    if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        # For some reason CMake seems to be including the debug
+        # version of this library on release builds as well so we
+        # need to ignore it. Not adding this to clang-cl as it
+        # does not seem to recognise it.
+        set(CMAKE_CXX_FLAGS_RELEASE
+            "${CMAKE_CXX_FLAGS_RELEASE} /NODEFAULTLIB:libcmtd.lib")
+    endif()
 
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}" CACHE STRING "MSVC C Debug MT flags " FORCE)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}" CACHE STRING "MSVC CXX Debug MT flags " FORCE)

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-19 Fri 12:26]
+#+CAPTION: Clock summary at [2018-10-19 Fri 14:36]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:00* |       |       |   0.0 |
+| *Total time*                                                                | *38:27* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:00   |       |       |   0.0 |
-| Active                                                                      |         | 37:00 |       |   0.0 |
+| Stories                                                                     | 38:27   |       |       |   0.0 |
+| Active                                                                      |         | 38:27 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -43,7 +43,8 @@
 | Fix warnings on OSX                                                         |         |       |  0:34 |   0.0 |
 | Rename input models directory to just models                                |         |       |  0:16 |   0.0 |
 | Get JSON models to generate again                                           |         |       |  0:57 |   0.0 |
-| Fix warnings on windows                                                     |         |       |  2:39 |   0.0 |
+| Update emacs programming setup                                              |         |       |  0:41 |   0.0 |
+| Fix warnings on windows                                                     |         |       |  3:25 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:05 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 11:40 |   0.0 |
 | Reduce build times                                                          |         |       |  0:20 |   0.0 |
@@ -177,7 +178,6 @@ Notes:
 Links:
 
 - https://github.com/SimonKagstrom/kcov/blob/master/doc/codecov.md
--
 
 *** COMPLETED Build on tags for Windows                               :story:
     CLOSED: [2018-10-16 Tue 10:30]
@@ -337,8 +337,8 @@ Links:
 There are quite a few dependencies for this to happen:
 
 - on windows we need to somehow include =/std:c++latest=
-- we need to move to latest boost as it seems Boost 1.62 breaks on c++
-  17. We should wait until Beast is included in Boost before we do
+- we need to move to latest boost as it seems Boost 1.62 breaks on
+  c++-17. We should wait until Beast is included in Boost before we do
   this.
 - we need to install latest CMake, which is not available on nuget; so
   we need to fetch the zip/msi from https://cmake.org/files/v3.10/ and
@@ -547,8 +547,21 @@ Problems:
 - we are removing the dependencies due to duplicates in JSON keys.
 - we are looking for .dia diagrams instead of .json for references.
 
+*** COMPLETED Update emacs programming setup                          :story:
+    CLOSED: [2018-10-19 Fri 14:12]
+    :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 13:31]--[2018-10-19 Fri 14:12] =>  0:41
+    :END:
+
+- it seems all of the cool kids have moved from [[https://github.com/Andersbakken/rtags][rtags]] to [[https://github.com/cquery-project/cquery][cquery]] and
+  LSP mode. Give it a go and see if it works better than rtags.
+- it also seems logview is no longer working properly; logs do not get
+  recognised properly.
+
 *** STARTED Fix warnings on windows                                   :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 14:13]--[2018-10-19 Fri 14:36] =>  0:23
+    CLOCK: [2018-10-19 Fri 12:27]--[2018-10-19 Fri 12:50] =>  0:23
     CLOCK: [2018-10-19 Fri 12:19]--[2018-10-19 Fri 12:26] =>  0:07
     CLOCK: [2018-10-19 Fri 11:50]--[2018-10-19 Fri 12:18] =>  0:28
     CLOCK: [2018-10-19 Fri 11:29]--[2018-10-19 Fri 11:45] =>  0:16
@@ -697,7 +710,7 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 *** Add support for inline namespaces                                 :story:
 
 Enable c++17. - windows requires cpp latest. Then fix inner namespaces
-(e.g. a::b::c).
+(e.g. =a::b::c=).
 
 We still need to support the old syntax for pre c++-17.
 
