@@ -36,7 +36,11 @@ namespace formatting {
  */
 class sequence_formatter {
 public:
-    explicit sequence_formatter(const unsigned int sequence_size);
+    template <typename SequenceSize>
+    explicit sequence_formatter(const SequenceSize sequence_size)
+        : position_(0),
+          sequence_size_(static_cast<unsigned int>(sequence_size)),
+          element_separator_(",") {}
 
 private:
     /**
@@ -115,7 +119,11 @@ public:
      */
     /**@{*/
     void reset();
-    void reset(const unsigned int sequence_size);
+    template <typename SequenceSize>
+    void reset(const SequenceSize sequence_size) {
+        sequence_size_ = static_cast<unsigned int>(sequence_size);
+        reset();
+    }
     /**@}*/
 
 private:

@@ -46,7 +46,9 @@ typedef dogen::utility::test_data::generator<int> int_generator;
 class finite_generator : public int_generator {
 public:
     finite_generator() : int_generator(100) { }
-    result_type next_term(const unsigned int position) { return (position); }
+    result_type next_term(const unsigned int position) {
+        return static_cast<result_type>(position);
+    }
 };
 
 typedef dogen::utility::test_data::sequence<finite_generator> finite_sequence;
@@ -57,7 +59,9 @@ typedef dogen::utility::test_data::sequence<finite_generator> finite_sequence;
 class infinite_generator : public int_generator {
 public:
     infinite_generator() : int_generator(0) { }
-    result_type next_term(const unsigned int position) { return (position); }
+    result_type next_term(const unsigned int position) {
+        return static_cast<result_type>(position);
+    }
 };
 
 typedef dogen::utility::test_data::sequence<

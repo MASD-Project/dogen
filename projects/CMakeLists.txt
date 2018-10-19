@@ -72,7 +72,7 @@ set(CMAKE_CXX_STANDARD 17)
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
         AND NOT "x${CMAKE_CXX_SIMULATE_ID}" STREQUAL "xMSVC")
     # enable as many warnings as possible
-    set(warning_flags "-Wall -Wextra")
+    set(warning_flags "-Wall -Wextra -Wconversion")
 
     if (CMAKE_COMPILER_IS_GNUCXX)
         set(warning_flags "${warning_flags} -Wno-maybe-uninitialized")

@@ -197,15 +197,15 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-std::string
-assistant::make_argument_name(const modeling::meta_model::attribute& attr) const {
+std::string assistant::
+make_argument_name(const modeling::meta_model::attribute& attr) const {
     auto r(attr.name().simple());
     if (r.empty()) {
         BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
         BOOST_THROW_EXCEPTION(formatting_error(attribute_with_no_simple_name));
     }
 
-    r[0] = std::tolower(r[0]);
+    r[0] = static_cast<char>(std::tolower(r[0]));
     return r;
 }
 

@@ -83,7 +83,8 @@ metrics_builder::create_metrics(const std::string& transform_id,
 
     using namespace std::chrono;
     auto now(time_point_cast<milliseconds>(system_clock::now()));
-    r->start(now.time_since_epoch().count());
+    const auto count(now.time_since_epoch().count());
+    r->start(static_cast<unsigned long>(count));
     return r;
 }
 
@@ -91,7 +92,8 @@ void metrics_builder::update_end() {
     ensure_stack_not_empty();
     using namespace std::chrono;
     auto now(time_point_cast<milliseconds>(system_clock::now()));
-    stack_.top()->end(now.time_since_epoch().count());
+    const auto count(now.time_since_epoch().count());
+    stack_.top()->end(static_cast<unsigned long>(count));
 }
 
 void metrics_builder::start(const std::string& transform_id,

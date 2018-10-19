@@ -68,7 +68,7 @@ type_params_transform::make_type_parameters(const type_group& tg,
     r.variable_number_of_parameters(s.get_boolean_content_or_default(vnp));
 
     const auto& tpc(tg.type_parameters_count);
-    r.count(s.get_number_content_or_default(tpc));
+    r.count(static_cast<unsigned int>(s.get_number_content_or_default(tpc)));
 
     const auto& aih(tg.type_parameters_always_in_heap);
     r.always_in_heap(s.get_boolean_content_or_default(aih));

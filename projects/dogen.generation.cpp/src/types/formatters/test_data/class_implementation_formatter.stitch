@@ -183,7 +183,7 @@ populate(const unsigned int position, result_type& v) {
                 const auto front(leaves.front());
                 leaves.pop_front();
                 unsigned int i(0);
-                unsigned int total(leaves.size());
+                const auto total(static_cast<unsigned int>(leaves.size()));
                 for (const auto& l : leaves) {
 #>
     if ((position % <#= total #>) == <#= i++ #>)

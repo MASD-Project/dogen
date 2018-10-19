@@ -36,9 +36,6 @@ const std::string comma(",");
 namespace dogen {
 namespace formatting {
 
-sequence_formatter::sequence_formatter(const unsigned int sequence_size)
-    : position_(0), sequence_size_(sequence_size), element_separator_(comma) {}
-
 bool sequence_formatter::is_first() const {
     return position_ == 0;
 }
@@ -137,11 +134,6 @@ void sequence_formatter::reset() {
     element_separator_ = comma;
     prefix_configuration_ = infix_configuration();
     postfix_configuration_ = infix_configuration();
-}
-
-void sequence_formatter::reset(const unsigned int sequence_size) {
-    sequence_size_ = sequence_size;
-    reset();
 }
 
 } }

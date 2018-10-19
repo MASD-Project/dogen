@@ -181,7 +181,7 @@ a.stream() << "    " << (found ? ": " : "") << out << std::endl;
             if (a.requires_manual_move_constructor()) {
 a.stream() << std::endl;
 a.stream() << sn << "::" << sn << "(" << sn << "&& rhs)" << std::endl;
-                unsigned int size(o.parents().size() + o.local_attributes().size());
+                const auto size(o.parents().size() + o.local_attributes().size());
 
                 dogen::formatting::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
@@ -221,7 +221,7 @@ a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make
                     }
                 }
 
-                int sequence_size(o.local_attributes().size() + o.parents().size());
+                auto sequence_size(o.local_attributes().size() + o.parents().size());
                 for (const auto pair : o.inherited_attributes()) {
                     const auto& pattrs(pair.second);
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);

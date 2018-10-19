@@ -130,7 +130,7 @@ a.stream() << "            return result;" << std::endl;
                 const auto front(leaves.front());
                 leaves.pop_front();
                 unsigned int i(0);
-                unsigned int total(leaves.size());
+                const auto total(static_cast<unsigned int>(leaves.size()));
                 for (const auto& l : leaves) {
 a.stream() << "            if ((position % " << total << ") == " << i++ << ")" << std::endl;
 a.stream() << "                return " << a.get_qualified_name(l) << "SequenceGenerator.Create(position);" << std::endl;

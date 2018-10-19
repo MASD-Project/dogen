@@ -123,7 +123,7 @@ format(const context& ctx, const modeling::meta_model::element& e) const {
 
 <#= sn #>::<#= sn #>(<#= sn #>&& rhs)
 <#+
-                unsigned int size(o.parents().size() + o.local_attributes().size());
+                const auto size(o.parents().size() + o.local_attributes().size());
 
                 dogen::formatting::sequence_formatter sf(size);
                 sf.prefix_configuration().first(": ").not_first("  ");
@@ -173,7 +173,7 @@ format(const context& ctx, const modeling::meta_model::element& e) const {
                     }
                 }
 
-                int sequence_size(o.local_attributes().size() + o.parents().size());
+                auto sequence_size(o.local_attributes().size() + o.parents().size());
                 for (const auto pair : o.inherited_attributes()) {
                     const auto& pattrs(pair.second);
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);

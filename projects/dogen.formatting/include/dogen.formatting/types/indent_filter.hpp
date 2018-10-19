@@ -85,7 +85,8 @@ private:
 
 public:
     template<typename Sink>
-    bool put(Sink& dest, int c) {
+    bool put(Sink& dest, int i) {
+        const char c(static_cast<char>(i));
         const char cr(0x0D);
         const char lf(0x0A);
 
@@ -161,7 +162,8 @@ public:
     static void push(boost::iostreams::filtering_ostream& s,
         const unsigned int indentation_size = 4) {
         s.push(indent_filter(indentation_size));
-        indent_filter* filter(s.component<indent_filter>(s.size() - 1));
+        const int pos(static_cast<int>(s.size()) - 1);
+        indent_filter* filter(s.component<indent_filter>(pos));
         s.pword(xdent<int>()()) = filter;
         filter->stream_ = &s;
     }
