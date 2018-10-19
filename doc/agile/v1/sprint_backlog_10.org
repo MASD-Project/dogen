@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-19 Fri 16:39]
+#+CAPTION: Clock summary at [2018-10-19 Fri 17:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:25* |       |       |   0.0 |
+| *Total time*                                                                | *40:48* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:25   |       |       |   0.0 |
-| Active                                                                      |         | 40:25 |       |   0.0 |
+| Stories                                                                     | 40:48   |       |       |   0.0 |
+| Active                                                                      |         | 40:48 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -44,10 +44,10 @@
 | Rename input models directory to just models                                |         |       |  0:16 |   0.0 |
 | Get JSON models to generate again                                           |         |       |  0:57 |   0.0 |
 | Update emacs programming setup                                              |         |       |  0:41 |   0.0 |
-| Fix warnings on windows                                                     |         |       |  3:25 |   0.0 |
+| Fix warnings on windows                                                     |         |       |  3:29 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:05 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 11:40 |   0.0 |
-| Reduce build times                                                          |         |       |  0:20 |   0.0 |
+| Reduce build times                                                          |         |       |  0:39 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -561,6 +561,7 @@ Problems:
 
 *** STARTED Fix warnings on windows                                   :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 17:00]--[2018-10-19 Fri 17:04] =>  0:04
     CLOCK: [2018-10-19 Fri 14:13]--[2018-10-19 Fri 14:36] =>  0:23
     CLOCK: [2018-10-19 Fri 12:27]--[2018-10-19 Fri 12:50] =>  0:23
     CLOCK: [2018-10-19 Fri 12:19]--[2018-10-19 Fri 12:26] =>  0:07
@@ -600,6 +601,7 @@ Links:
 - [[https://cmake.org/pipermail/cmake/2009-October/032526.html][Problem ignoring libcmt.lib on Windows]]
 - [[https://stackoverflow.com/questions/18786690/cmake-for-def-and-nodefaultlib][CMAKE for /DEF and /NODEFAULTLIB]]
 - [[https://stackoverflow.com/questions/11512795/ignoring-unknown-option-nodefaultliblibcmtd][“Ignoring unknown option /NODEFAULTLIB:LIBCMTD”]]
+- [[http://cmake.3232098.n2.nabble.com/CMAKE-EXE-LINKER-FLAGS-for-shared-libraries-td7087564.html][CMAKE_EXE_LINKER_FLAGS for shared libraries?]]
 
 *** STARTED Read up on framework and API design                       :story:
     :LOGBOOK:
@@ -650,12 +652,16 @@ Notes:
 
 *** STARTED Reduce build times                                        :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 16:40]--[2018-10-19 Fri 16:59] =>  0:19
     CLOCK: [2018-10-18 Thu 16:30]--[2018-10-18 Thu 16:50] =>  0:36
     :END:
 
 Even after offloading all of the test models, we are still breaching
 Travis and AppVeyor limits. We need to figure out if we have any
 unused types and remove them.
+
+The quickest thing to do is to disable: test data and hashing for all
+types in the main models except for =name=.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
