@@ -43,6 +43,9 @@ const std::string transform_id("yarn.transforms.stereotypes_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string stereotype_pretty_printable("dogen::pretty_printable");
+const std::string stereotype_serializable("dogen::serializable");
+const std::string stereotype_hashable("dogen::hashable");
 const std::string stereotype_handcrafted("handcrafted");
 const std::string stereotype_cpp_helper_formatter("C++ Helper Formatter");
 const std::string stereotype_cpp_artefact_formatter("C++ Artefact Formatter");
@@ -72,6 +75,9 @@ namespace transforms {
 bool stereotypes_transform::
 is_stereotype_handled_externally(const std::string& s) {
     return
+        s == stereotype_pretty_printable ||
+        s == stereotype_serializable ||
+        s == stereotype_hashable ||
         s == stereotype_handcrafted ||
         s == stereotype_cpp_helper_formatter ||
         s == stereotype_cpp_artefact_formatter ||

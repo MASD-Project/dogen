@@ -1,0 +1,40 @@
+{
+  "name": "dogen.pretty_printable",
+  "labels": [
+    "dogen::pretty_printable"
+  ],
+  "parents": [
+    "dogen.disable_all_facets"
+  ],
+  "scope": "root_module",
+  "templates": [
+    {
+      "name": {
+        "simple": "enabled",
+        "qualified": "quilt.cpp.types.enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt",
+        "backend": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "true"
+      ]
+    },
+    {
+      "name": {
+        "simple": "enabled",
+        "qualified": "quilt.cpp.io.enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt",
+        "backend": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "true"
+      ]
+    }
+  ]
+}
