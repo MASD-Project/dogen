@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
-#include "dogen.generation.cpp/serialization/formattables/helper_descriptor_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -61,13 +60,6 @@ public:
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
         const bool is_pointer);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::helper_descriptor& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::helper_descriptor& v, unsigned int version);
 
 public:
     const std::string& family() const;

@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.generation.cpp/serialization/formattables/directive_group_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -49,13 +48,6 @@ public:
     directive_group(
         const std::string& primary,
         const std::list<std::string>& secondary);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::directive_group& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::directive_group& v, unsigned int version);
 
 public:
     /**

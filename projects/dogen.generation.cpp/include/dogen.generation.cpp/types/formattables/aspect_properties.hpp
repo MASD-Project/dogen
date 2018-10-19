@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen.generation.cpp/serialization/formattables/aspect_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -47,13 +46,6 @@ public:
         const bool requires_manual_default_constructor,
         const bool requires_manual_move_constructor,
         const bool requires_stream_manipulators);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::aspect_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::aspect_properties& v, unsigned int version);
 
 public:
     bool requires_manual_default_constructor() const;

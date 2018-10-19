@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.generation.cpp/types/formattables/directive_group.hpp"
-#include "dogen.generation.cpp/serialization/formattables/directive_group_repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -45,13 +44,6 @@ public:
 
 public:
     explicit directive_group_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >& by_id);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::directive_group_repository& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::directive_group_repository& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >& by_id() const;

@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.cpp/serialization/formattables/odb_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -50,13 +49,6 @@ public:
         const bool is_value,
         const std::list<std::string>& top_level_odb_pragmas,
         const std::unordered_map<std::string, std::list<std::string> >& attribute_level_odb_pragmas);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::odb_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::odb_properties& v, unsigned int version);
 
 public:
     bool is_value() const;

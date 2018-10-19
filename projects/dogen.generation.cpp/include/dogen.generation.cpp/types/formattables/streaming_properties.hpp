@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.generation.cpp/serialization/formattables/streaming_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -48,13 +47,6 @@ public:
         const bool requires_quoting,
         const std::string& string_conversion_method,
         const bool remove_unprintable_characters);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::streaming_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::streaming_properties& v, unsigned int version);
 
 public:
     bool requires_quoting() const;

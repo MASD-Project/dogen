@@ -28,7 +28,6 @@
 #include <list>
 #include <algorithm>
 #include "dogen.generation.cpp/types/formattables/helper_descriptor.hpp"
-#include "dogen.generation.cpp/serialization/formattables/helper_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -49,13 +48,6 @@ public:
         const dogen::generation::cpp::formattables::helper_descriptor& current,
         const std::list<dogen::generation::cpp::formattables::helper_descriptor>& direct_descendants,
         const bool in_inheritance_relationship);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::helper_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::helper_properties& v, unsigned int version);
 
 public:
     const dogen::generation::cpp::formattables::helper_descriptor& current() const;

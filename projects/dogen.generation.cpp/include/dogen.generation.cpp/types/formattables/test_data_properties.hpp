@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.generation.cpp/serialization/formattables/test_data_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -47,13 +46,6 @@ public:
     test_data_properties(
         const unsigned int maximum_size,
         const std::string& prefix);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::test_data_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::test_data_properties& v, unsigned int version);
 
 public:
     unsigned int maximum_size() const;

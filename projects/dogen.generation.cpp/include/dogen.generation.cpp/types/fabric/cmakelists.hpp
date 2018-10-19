@@ -30,7 +30,6 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
-#include "dogen.generation.cpp/serialization/fabric/cmakelists_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -66,13 +65,6 @@ public:
         const std::string& header_file_extension,
         const std::string& implementation_file_extension,
         const dogen::generation::cpp::fabric::odb_targets& odb_targets);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::fabric::cmakelists& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::fabric::cmakelists& v, unsigned int version);
 
 public:
     using dogen::modeling::meta_model::element::accept;

@@ -30,7 +30,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.generation.cpp/types/formattables/element_properties.hpp"
-#include "dogen.generation.cpp/serialization/formattables/formattable_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -49,13 +48,6 @@ public:
         const boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment,
         const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& all_segments,
         const dogen::generation::cpp::formattables::element_properties& element_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::formattable& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::formattable& v, unsigned int version);
 
 public:
     const boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment() const;

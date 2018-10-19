@@ -30,7 +30,6 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/serialization/fabric/registrar_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -64,13 +63,6 @@ public:
         const std::list<dogen::modeling::meta_model::name>& leaves,
         const std::list<dogen::modeling::meta_model::name>& model_dependencies,
         const std::list<dogen::modeling::meta_model::name>& registrar_dependencies);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::fabric::registrar& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::fabric::registrar& v, unsigned int version);
 
 public:
     using dogen::modeling::meta_model::element::accept;

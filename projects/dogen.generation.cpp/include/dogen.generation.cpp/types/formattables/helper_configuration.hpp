@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
-#include "dogen.generation.cpp/serialization/formattables/helper_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -47,13 +46,6 @@ public:
     helper_configuration(
         const std::unordered_map<std::string, std::string>& helper_families,
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::helper_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::helper_configuration& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, std::string>& helper_families() const;

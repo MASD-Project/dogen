@@ -34,7 +34,6 @@
 #include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
-#include "dogen.generation.cpp/serialization/formattables/model_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -60,13 +59,6 @@ public:
         const std::list<std::string>& odb_databases,
         const std::string& odb_sql_name_case,
         const std::list<std::string>& project_items);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::model& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::model& v, unsigned int version);
 
 public:
     const dogen::modeling::meta_model::name& name() const;

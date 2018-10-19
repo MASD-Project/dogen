@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/serialization/fabric/visual_studio_solution_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -64,13 +63,6 @@ public:
         const std::string& project_solution_guid,
         const std::string& version,
         const std::string& project_name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::fabric::visual_studio_solution& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::fabric::visual_studio_solution& v, unsigned int version);
 
 public:
     using dogen::modeling::meta_model::element::accept;

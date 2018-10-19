@@ -29,7 +29,6 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.generation.cpp/serialization/fabric/odb_target_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -51,13 +50,6 @@ public:
         const std::string& types_file,
         const std::list<std::pair<std::string, std::string> >& move_parameters,
         const std::string& object_odb_options);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::fabric::odb_target& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::fabric::odb_target& v, unsigned int version);
 
 public:
     const std::string& name() const;

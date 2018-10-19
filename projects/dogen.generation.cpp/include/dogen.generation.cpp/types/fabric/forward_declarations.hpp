@@ -29,7 +29,6 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/serialization/fabric/forward_declarations_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -65,13 +64,6 @@ public:
         const bool is_enum,
         const dogen::modeling::meta_model::name& underlying_element,
         const bool is_exception);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::fabric::forward_declarations& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::fabric::forward_declarations& v, unsigned int version);
 
 public:
     using dogen::modeling::meta_model::element::accept;

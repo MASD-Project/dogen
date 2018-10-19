@@ -35,7 +35,6 @@
 #include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/test_data_properties.hpp"
-#include "dogen.generation.cpp/serialization/formattables/element_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -62,13 +61,6 @@ public:
         const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
         const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties,
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::cpp::formattables::element_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::cpp::formattables::element_properties& v, unsigned int version);
 
 public:
     const dogen::generation::cpp::formattables::aspect_properties& aspect_properties() const;
