@@ -173,7 +173,9 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         # version of this library on release builds as well so we
         # need to ignore it. Not adding this to clang-cl as it
         # does not seem to recognise it.
-        set(CMAKE_LINKER_FLAGS ${CMAKE_LINKER_FLAGS}
+        set(CMAKE_SHARED_LINKER_FLAGS ${CMAKE_SHARED_LINKER_FLAGS}
+            /NODEFAULTLIB:\"libcmtd.lib\")
+        set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS}
             /NODEFAULTLIB:\"libcmtd.lib\")
     endif()
 
