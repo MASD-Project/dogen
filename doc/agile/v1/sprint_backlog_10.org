@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-19 Fri 09:54]
+#+CAPTION: Clock summary at [2018-10-19 Fri 11:45]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *35:01* |       |       |   0.0 |
+| *Total time*                                                                | *36:22* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 35:01   |       |       |   0.0 |
-| Active                                                                      |         | 35:01 |       |   0.0 |
+| Stories                                                                     | 36:22   |       |       |   0.0 |
+| Active                                                                      |         | 36:22 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  0:59 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -43,9 +43,9 @@
 | Fix warnings on OSX                                                         |         |       |  0:34 |   0.0 |
 | Rename input models directory to just models                                |         |       |  0:16 |   0.0 |
 | Get JSON models to generate again                                           |         |       |  0:57 |   0.0 |
-| Fix warnings on windows                                                     |         |       |  1:48 |   0.0 |
-| Read up on framework and API design                                         |         |       |  1:48 |   0.0 |
-| Design a top-level Dogen API                                                |         |       | 10:52 |   0.0 |
+| Fix warnings on windows                                                     |         |       |  2:04 |   0.0 |
+| Read up on framework and API design                                         |         |       |  2:05 |   0.0 |
+| Design a top-level Dogen API                                                |         |       | 11:40 |   0.0 |
 | Reduce build times                                                          |         |       |  0:20 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -548,6 +548,7 @@ Problems:
 
 *** STARTED Fix warnings on windows                                   :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 11:29]--[2018-10-19 Fri 11:45] =>  0:16
     CLOCK: [2018-10-19 Fri 08:10]--[2018-10-19 Fri 09:27] =>  1:17
     CLOCK: [2018-10-18 Thu 18:12]--[2018-10-18 Thu 18:26] =>  0:14
     CLOCK: [2018-10-17 Wed 13:47]--[2018-10-17 Wed 14:04] =>  0:17
@@ -562,6 +563,8 @@ fix them.
 : dogen.generation.cpp\src\types\formatters\test_data\class_implementation_formatter.cpp(212): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int'
 : dogen.generation.csharp\src\types\formatters\types\class_formatter.cpp(188): warning C4267: 'argument': conversion from 'size_t' to 'const unsigned int', possible loss of data
 
+ warning LNK4098: defaultlib 'libcmtd.lib'
+
 Notes:
 
 - we need to add the same level of warnings on GCC so that we can see
@@ -574,9 +577,15 @@ Links:
   of data”?]]
 - [[https://stackoverflow.com/questions/2771538/why-doesnt-gcc-produce-a-warning-when-assigning-a-signed-literal-to-an-unsigned][Why doesn't GCC produce a warning when assigning a signed literal to
   an unsigned type?]]
+- [[https://cboard.cprogramming.com/cplusplus-programming/97754-warning-lnk4098-defaultlib-libcmtd-conflicts-use-other-libs.html][warning LNK4098: defaultlib "LIBCMTD" conflicts with use of other
+  libs]]
+- [[https://msdn.microsoft.com/en-gb/library/abx4dbyh.aspx][CRT Library Features]]
+- [[https://cmake.org/pipermail/cmake/2009-October/032526.html][Problem ignoring libcmt.lib on Windows]]
+- [[https://stackoverflow.com/questions/18786690/cmake-for-def-and-nodefaultlib][CMAKE for /DEF and /NODEFAULTLIB]]
 
 *** STARTED Read up on framework and API design                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 09:54]--[2018-10-19 Fri 10:11] =>  0:17
     CLOCK: [2018-10-19 Fri 09:28]--[2018-10-19 Fri 09:53] =>  0:25
     CLOCK: [2018-10-18 Thu 09:36]--[2018-10-18 Thu 09:56] =>  0:20
     CLOCK: [2018-10-17 Wed 14:05]--[2018-10-17 Wed 14:19] =>  0:14
@@ -588,6 +597,7 @@ read up on books about good API design.
 
 *** STARTED Design a top-level Dogen API                              :story:
     :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 10:12]--[2018-10-19 Fri 11:00] =>  0:48
     CLOCK: [2018-10-18 Thu 14:32]--[2018-10-18 Thu 14:42] =>  0:10
     CLOCK: [2018-10-18 Thu 09:57]--[2018-10-18 Thu 13:14] =>  3:17
     CLOCK: [2018-10-18 Thu 09:10]--[2018-10-18 Thu 09:15] =>  0:05
