@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-19 Fri 14:36]
+#+CAPTION: Clock summary at [2018-10-19 Fri 16:39]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *38:27* |       |       |   0.0 |
+| *Total time*                                                                | *40:25* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 38:27   |       |       |   0.0 |
-| Active                                                                      |         | 38:27 |       |   0.0 |
+| Stories                                                                     | 40:25   |       |       |   0.0 |
+| Active                                                                      |         | 40:25 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -48,6 +48,7 @@
 | Read up on framework and API design                                         |         |       |  2:05 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 11:40 |   0.0 |
 | Reduce build times                                                          |         |       |  0:20 |   0.0 |
+| Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -598,7 +599,7 @@ Links:
 - [[https://msdn.microsoft.com/en-gb/library/abx4dbyh.aspx][CRT Library Features]]
 - [[https://cmake.org/pipermail/cmake/2009-October/032526.html][Problem ignoring libcmt.lib on Windows]]
 - [[https://stackoverflow.com/questions/18786690/cmake-for-def-and-nodefaultlib][CMAKE for /DEF and /NODEFAULTLIB]]
-- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
+- [[https://stackoverflow.com/questions/11512795/ignoring-unknown-option-nodefaultliblibcmtd][“Ignoring unknown option /NODEFAULTLIB:LIBCMTD”]]
 
 *** STARTED Read up on framework and API design                       :story:
     :LOGBOOK:
@@ -656,7 +657,10 @@ Even after offloading all of the test models, we are still breaching
 Travis and AppVeyor limits. We need to figure out if we have any
 unused types and remove them.
 
-*** Create a single binary for all of dogen                           :story:
+*** STARTED Create a single binary for all of dogen                   :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-19 Fri 14:41]--[2018-10-19 Fri 16:39] =>  1:58
+    :END:
 
 As per analysis, we need to create a single dogen binary, like so:
 
@@ -731,6 +735,104 @@ Links:
 - [[http://cs.smu.ca/~porter/csc/ref/stl/naming_conventions.html][Naming Conventions for these STL Reference Pages]]
 - [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
 - [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
+- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
+
+*** Consider generating program options code                          :story:
+
+If there was a syntax to describe boost program options, we should be
+able to generate most of the code for it:
+
+- the code that initialises the options;
+- the domain objects that will store the options;
+- the copying of values from program options objects into domain
+  objects.
+
+This would mean that creating a command line tool would be a matter of
+just supplying an options file. We could then have a stereotype for
+this (name to be yet identified). Marking a type with this stereotype
+and supplying the appropriate meta-data so one could locate the
+options file would cause dogen to emit the program options binding
+code.
+
+A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
+the same syntax. We just need to have a well defined domain object for
+these. The aim would be to replace config.
+
+For models such as these, the dia representation is just overhead. It
+would be great if we could do it using just JSON.
+
+Actually even better would be if we could have a text file in docopt
+format and parse it and then use it to generate the code described
+above.
+
+Actually maybe we are just making this too complicated. We probably
+just need some very trivial meta-data extensions that express the
+required concept:
+
+- create a yarn element to model this new meta-class. We basically
+  need to model the structure of program options with option groups
+  and options.
+- define a stereotype for the new yarn elements, say
+  =CommandLineOptionGroup=.
+- for types facet we simply generate the regular c++ code. But in
+  addition, we also generate a new facet that: a) injects the
+  propertties into boost program options b) instantiates the c++
+  objects from boost program options.
+- this means that instead of creating a new meta-type, we need to
+  augment =yarn::object= with command line options stuff.
+
+Notes:
+
+- create stereotypes for options group, options; allow users to define
+  members of type options in options group. Or should the options just
+  be member variables? In which case we could have
+  =command_line::options= as the stereotype.
+- generate the options classes.
+- inject a hand-crafted validator or consider generating the validator
+  given the meta-data supplied by the user (mandatory, at most X
+  times, etc).
+- generate an options builder that takes on the building
+  responsibilities from the parser.
+- generate a parser that hooks the builder and copies data from the
+  options map into the options.
+- allow users to supply the help text and the version text as
+  parameters; these should probably be done in a similar way to what
+  we do with the modeline etc.
+- allow users to set default values in the options attributes and set
+  them in generated code. This is probably just adding default value
+  support to dogen, for which we have a separate story.
+- one very useful way in which to use program options is via
+  projections. That is a given model M0 defines the configuration and
+  a second model M1 defines the options parsing. In this case the
+  options defined in M0 already has the required shape:
+  - there is a top-level class housing all options, traditionally
+    called "configuration";
+  - the top-level class contains meta-data with the product blurb;
+  - attributes of that class can be annotated as "modes", "groups" or
+    nothing. A mode will result in a modal CLI interface. Groups
+    result in top-level groupings of options. Nothing means the
+    attribute must be of a simple type and will be a global option
+    (e.g. =help=, =version=, etc).
+  - attributes have a description, etc associated as meta-data. They
+    also have other useful annotations such as optional, mandatory
+    etc. These are used in validation. Interestingly this may mean we
+    can also automatically generate a validator.
+  - dogen generates in M1 a set of chained program option parsers
+    (assuming a modal interface; otherwise just one) which generate
+    the M0 options.
+  - in M1, users define a class with attribute
+    =masd::command_line_options=, associated with an options class.
+  - users can choose the "backend": boost program options, etc. Each
+    is implemented as a separate template.
+  - dogen generates a parser with an associated exception
+    (parser_validation_error). The exception is simply injected as a
+    type.
+
+Links:
+
+- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
+
+
 
 *** Problems in tailor generation of dogen models                     :story:
 
@@ -1235,3 +1337,35 @@ Latest conan packages seem to have changed how iconv is packaged. Output:
 : -a----        1/25/2018   1:30 PM           1822 iconv_open_into.3
 
 We have commented it out from CPack for now.
+*** CANCELLED Rename options to transformation request                :story:
+    CLOSED: [2018-10-19 Fri 14:54]
+
+*Rationale*: this will be cleaned up as part of the work on the
+product API.
+
+These are not really "options"; it is a request made into yarn to
+code-generate a model. We haven't yet got a proper name but it has to
+somehow involve the word "request". The best way is to visualise this
+as part of some API where may such requests can be made (and handled
+concurrently).
+
+This also means we need to split out the request from the context. We
+should have an initialisation phase where we construct the context and
+then we should be able to reuse the pipeline for many requests. This
+also means that the right place to put the transform metrics is in the
+request - not the context - given that these are request specific.
+
+The best way to go about it may be to have two contexts:
+
+- transformation context: const; loaded at start-up.
+- request context: request specific context, including probing and the
+  request itself.
+
+Then:
+
+- clients are responsible for setting up the transformation
+  context. This ensures we do it only once.
+- clients are also responsible for setting up the request context, but
+  they then do it for each request.
+
+Note also that a request should support multiple target models.

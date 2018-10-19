@@ -654,35 +654,6 @@ can use the correct clang format configuration. If a language is not
 supported by clang format (e.g. c#) we should just skip the files. The
 text model could group files by language.
 
-*** Rename options to transformation request                          :story:
-
-These are not really "options"; it is a request made into yarn to
-code-generate a model. We haven't yet got a proper name but it has to
-somehow involve the word "request". The best way is to visualise this
-as part of some API where may such requests can be made (and handled
-concurrently).
-
-This also means we need to split out the request from the context. We
-should have an initialisation phase where we construct the context and
-then we should be able to reuse the pipeline for many requests. This
-also means that the right place to put the transform metrics is in the
-request - not the context - given that these are request specific.
-
-The best way to go about it may be to have two contexts:
-
-- transformation context: const; loaded at start-up.
-- request context: request specific context, including probing and the
-  request itself.
-
-Then:
-
-- clients are responsible for setting up the transformation
-  context. This ensures we do it only once.
-- clients are also responsible for setting up the request context, but
-  they then do it for each request.
-
-Note also that a request should support multiple target models.
-
 *** Detect unqualified stereotypes                                    :story:
 
 If a user enters say =enumeration= instead of =yarn::enumeration= we
@@ -1965,6 +1936,14 @@ example, all test files can be =.test.cpp=. We can then use a regex to
 exclude these from the main binary, and exclude =main.cpp= from the
 tests. Or it may make sense to always create a static or shared
 library for all files excluding =main.cpp= and then link against it.
+
+Notes:
+
+- stereotype: classes annotated with =masd::entry_point= will only
+  have a =.cpp= and have main on it.
+- users can choose "themes"; for example masd orchestration theme
+  creates a main that includes orchestrator and executes it. Validator
+  ensures that there is such a class.
 
 Tasks:
 
@@ -10647,75 +10626,6 @@ cooler if we could directly upload the model into nuget after the
 build and supply the user with the nuget commands required to get the
 model. However, the only problem may be that we'd end up with a lot of
 dodgy code in nuget, so maybe this is not ideal.
-
-*** Consider generating program options code                          :story:
-
-If there was a syntax to describe boost program options, we should be
-able to generate most of the code for it:
-
-- the code that initialises the options;
-- the domain objects that will store the options;
-- the copying of values from program options objects into domain
-  objects.
-
-This would mean that creating a command line tool would be a matter of
-just supplying an options file. We could then have a stereotype for
-this (name to be yet identified). Marking a type with this stereotype
-and supplying the appropriate meta-data so one could locate the
-options file would cause dogen to emit the program options binding
-code.
-
-A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
-the same syntax. We just need to have a well defined domain object for
-these. The aim would be to replace config.
-
-For models such as these, the dia representation is just overhead. It
-would be great if we could do it using just JSON.
-
-Actually even better would be if we could have a text file in docopt
-format and parse it and then use it to generate the code described
-above.
-
-Actually maybe we are just making this too complicated. We probably
-just need some very trivial meta-data extensions that express the
-required concept:
-
-- create a yarn element to model this new meta-class. We basically
-  need to model the structure of program options with option groups
-  and options.
-- define a stereotype for the new yarn elements, say
-  =CommandLineOptionGroup=.
-- for types facet we simply generate the regular c++ code. But in
-  addition, we also generate a new facet that: a) injects the
-  propertties into boost program options b) instantiates the c++
-  objects from boost program options.
-- this means that instead of creating a new meta-type, we need to
-  augment =yarn::object= with command line options stuff.
-
-Notes:
-
-- create stereotypes for options group, options; allow users to define
-  members of type options in options group. Or should the options just
-  be member variables? In which case we could have
-  =command_line::options= as the stereotype.
-- generate the options classes.
-- inject a hand-crafted validator or consider generating the validator
-  given the meta-data supplied by the user (mandatory, at most X
-  times, etc).
-- generate an options builder that takes on the building
-  responsibilities from the parser.
-- generate a parser that hooks the builder and copies data from the
-  options map into the options.
-- allow users to supply the help text and the version text as
-  parameters; these should probably be done in a similar way to what
-  we do with the modeline etc.
-- allow users to set default values in the options attributes and set
-  them in generated code. This is probably just adding default value
-  support to dogen, for which we have a separate story.
-
-Links:
-
-- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
 
 *** Consider creating a TextUML frontend                              :story:
 
