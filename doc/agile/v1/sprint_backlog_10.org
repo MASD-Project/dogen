@@ -621,6 +621,8 @@ read up on books about good API design.
 
 *** STARTED Design a top-level Dogen API                              :story:
     :LOGBOOK:
+    CLOCK: [2018-10-20 Sat 07:48]--[2018-10-20 Sat 07:55] =>  0:07
+    CLOCK: [2018-10-20 Sat 07:02]--[2018-10-20 Sat 07:43] =>  0:46
     CLOCK: [2018-10-19 Fri 10:12]--[2018-10-19 Fri 11:00] =>  0:48
     CLOCK: [2018-10-18 Thu 14:32]--[2018-10-18 Thu 14:42] =>  0:10
     CLOCK: [2018-10-18 Thu 09:57]--[2018-10-18 Thu 13:14] =>  3:17
@@ -653,6 +655,29 @@ Notes:
 - according to the [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/][Framework Design Guidelines]], we should design the
   API from scenarios. We should create a specification document that
   can be added to the manual for this.
+
+Architecture vision:
+
+- there are two distinct notions of "generation": 1) code generation as
+  users understand it, that is product and component generation, end
+  to end; and 2) generation as a part of the pipeline. Since most
+  developers are familiar with "codegen", we can use that to signify
+  the top-level generation. This means the API should use this term,
+  and the high-level orchestrator should have the same name.
+- the development model is used by three stages in the pipeline:
+  expansion, reduction and generation. We should make the model stand
+  alone, containing all of the core modeling elements, and any helpers
+  that work only on those types. Then we create models for each
+  element in the pipeline; each of these models has an entry point
+  which is named after the model (perhaps =expander=, etc). These are
+  interfaces by means of DI.
+- however one slight snag with this approach is tha the model itself -
+  e.g. =expansion::meta_model::model= - is needed as we move from one
+  stage to the next; reduction needs to first convert the expansion
+  model, generation needs to first convert the reduction model and so
+  forth.
+- for generation we can use the "template approach", whereby the
+  generation element becomes a template.
 
 *** STARTED Reduce build times                                        :story:
     :LOGBOOK:
