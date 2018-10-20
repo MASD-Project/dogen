@@ -289,6 +289,7 @@ else()
 endif()
 
 # debug
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Building WITH DEBUG symbols...")
     set(DOGEN_VERSION "${DOGEN_VERSION}d")
