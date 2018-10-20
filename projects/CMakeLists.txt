@@ -168,7 +168,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         string(REGEX REPLACE "/MDd" "/MTd" ${flag_var} "${${flag_var}}")
     endforeach(flag_var)
 
-    if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" AND
+            CMAKE_BUILD_TYPE STREQUAL "Release")
         # For some reason CMake seems to be including the debug
         # version of this library on release builds as well so we
         # need to ignore it. Not adding this to clang-cl as it
