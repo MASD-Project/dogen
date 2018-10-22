@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.options/serialization/tailoring_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace options {
@@ -51,13 +50,6 @@ public:
         const boost::filesystem::path& output,
         const bool force_write,
         const boost::filesystem::path& log_directory);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::options::tailoring_options& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::options::tailoring_options& v, unsigned int version);
 
 public:
     /**

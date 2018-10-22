@@ -4189,13 +4189,13 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="35,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,-33.05;42.865,-29.95"/>
+        <dia:rectangle val="34.95,-33.05;43.25,-29.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="35,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4546,13 +4546,13 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="2,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,-33.05;9.865,-29.95"/>
+        <dia:rectangle val="1.95,-33.05;10.25,-29.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="2,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4798,7 +4798,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="2,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,-43.05;23.74,-34.05"/>
+        <dia:rectangle val="1.95,-43.05;26.05,-34.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4807,10 +4807,10 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="2,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.690000000000001"/>
+        <dia:real val="24.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.9000000000000004"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4832,7 +4832,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets_temp2#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

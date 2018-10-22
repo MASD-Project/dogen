@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.options/serialization/darting_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace options {
@@ -50,13 +49,6 @@ public:
         const bool force_write,
         const std::string& product_name,
         const boost::filesystem::path& log_directory);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::options::darting_options& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::options::darting_options& v, unsigned int version);
 
 public:
     /**

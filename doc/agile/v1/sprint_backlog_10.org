@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-22 Mon 15:03]
+#+CAPTION: Clock summary at [2018-10-22 Mon 16:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *51:09* |       |       |   0.0 |
+| *Total time*                                                                | *52:08* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 51:09   |       |       |   0.0 |
-| Active                                                                      |         | 51:09 |       |   0.0 |
+| Stories                                                                     | 52:08   |       |       |   0.0 |
+| Active                                                                      |         | 52:08 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -46,9 +46,9 @@
 | Update emacs programming setup                                              |         |       |  0:41 |   0.0 |
 | Fix warnings on windows                                                     |         |       |  4:15 |   0.0 |
 | Setup a secondary machine for development                                   |         |       |  1:04 |   0.0 |
+| Remove facets that are not being used                                       |         |       |  8:31 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:37 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 12:46 |   0.0 |
-| Remove facets that are not being used                                       |         |       |  7:32 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -626,6 +626,61 @@ The main machine is no longer coping with the load of C++ development
 plus cquery and google chrome. We need to setup a machine just to run
 the desktop processes and another to run the development environment.
 
+*** COMPLETED Remove facets that are not being used                   :story:
+    CLOSED: [2018-10-22 Mon 16:04]
+    :LOGBOOK:
+    CLOCK: [2018-10-22 Mon 15:39]--[2018-10-22 Mon 16:04] =>  0:25
+    CLOCK: [2018-10-22 Mon 15:04]--[2018-10-22 Mon 15:38] =>  0:34
+    CLOCK: [2018-10-22 Mon 14:35]--[2018-10-22 Mon 15:03] =>  0:28
+    CLOCK: [2018-10-22 Mon 12:44]--[2018-10-22 Mon 13:01] =>  0:17
+    CLOCK: [2018-10-22 Mon 12:38]--[2018-10-22 Mon 12:43] =>  0:05
+    CLOCK: [2018-10-22 Mon 12:23]--[2018-10-22 Mon 12:37] =>  0:14
+    CLOCK: [2018-10-22 Mon 11:35]--[2018-10-22 Mon 11:56] =>  0:21
+    CLOCK: [2018-10-22 Mon 11:03]--[2018-10-22 Mon 11:34] =>  0:31
+    CLOCK: [2018-10-22 Mon 09:41]--[2018-10-22 Mon 10:01] =>  0:20
+    CLOCK: [2018-10-22 Mon 09:21]--[2018-10-22 Mon 09:40] =>  0:19
+    CLOCK: [2018-10-22 Mon 08:12]--[2018-10-22 Mon 08:31] =>  0:19
+    CLOCK: [2018-10-21 Sun 12:39]--[2018-10-21 Sun 12:45] =>  0:06
+    CLOCK: [2018-10-20 Sat 20:56]--[2018-10-20 Sat 21:10] =>  0:14
+    CLOCK: [2018-10-19 Fri 22:23]--[2018-10-19 Fri 22:40] =>  0:17
+    CLOCK: [2018-10-19 Fri 22:06]--[2018-10-19 Fri 22:22] =>  0:16
+    CLOCK: [2018-10-19 Fri 20:31]--[2018-10-19 Fri 22:01] =>  1:30
+    CLOCK: [2018-10-19 Fri 18:20]--[2018-10-19 Fri 18:46] =>  0:26
+    CLOCK: [2018-10-19 Fri 17:05]--[2018-10-19 Fri 18:15] =>  1:10
+    CLOCK: [2018-10-19 Fri 16:40]--[2018-10-19 Fri 16:59] =>  0:19
+    CLOCK: [2018-10-18 Thu 16:30]--[2018-10-18 Thu 16:50] =>  0:36
+    :END:
+
+Even after offloading all of the test models, we are still breaching
+Travis and AppVeyor limits. We need to figure out if we have any
+unused types and remove them.
+
+The quickest thing to do is to disable: test data and hashing for all
+types in the main models except for =name=.
+
+Since even after removing serialisation from the generation models
+(cpp and csharp) we are still quite close to the edge, we need drastic
+measures: we need to stop generating test data and serialisation for
+all models. Test data was required for testing so we need to comment
+out all tests of the generated code. Serialisation was also used for
+some tests, though they have probably bit-rotted. We probably should
+use serialisation only for round-trip tests and not as a way of
+testing components as we did in the past. We should remove all tests
+that rely on serialisation, even including dia - it should be replaced
+by the XML tool anyway, so no point in paying the cost now. Or perhaps
+we can leave dia for last and do all other models.
+
+Problems:
+
+- external.json:
+
+: ../../../../projects/dogen.external.json/src/serialization/registrar_ser.cpp:29:10: fatal error: 'dogen.options/serialization/registrar_ser.hpp' file not found
+: #include "dogen.options/serialization/registrar_ser.hpp"
+
+Links:
+
+- [[https://blog.dachary.org/2014/02/09/figuring-out-why-ccache-misses/][figuring out why ccache misses]]
+
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
      CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
@@ -710,58 +765,6 @@ Architecture vision:
   forth.
 - for generation we can use the "template approach", whereby the
   generation element becomes a template.
-
-*** STARTED Remove facets that are not being used                     :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-22 Mon 14:35]--[2018-10-22 Mon 15:03] =>  0:28
-    CLOCK: [2018-10-22 Mon 12:44]--[2018-10-22 Mon 13:01] =>  0:17
-    CLOCK: [2018-10-22 Mon 12:38]--[2018-10-22 Mon 12:43] =>  0:05
-    CLOCK: [2018-10-22 Mon 12:23]--[2018-10-22 Mon 12:37] =>  0:14
-    CLOCK: [2018-10-22 Mon 11:35]--[2018-10-22 Mon 11:56] =>  0:21
-    CLOCK: [2018-10-22 Mon 11:03]--[2018-10-22 Mon 11:34] =>  0:31
-    CLOCK: [2018-10-22 Mon 09:41]--[2018-10-22 Mon 10:01] =>  0:20
-    CLOCK: [2018-10-22 Mon 09:21]--[2018-10-22 Mon 09:40] =>  0:19
-    CLOCK: [2018-10-22 Mon 08:12]--[2018-10-22 Mon 08:31] =>  0:19
-    CLOCK: [2018-10-21 Sun 12:39]--[2018-10-21 Sun 12:45] =>  0:06
-    CLOCK: [2018-10-20 Sat 20:56]--[2018-10-20 Sat 21:10] =>  0:14
-    CLOCK: [2018-10-19 Fri 22:23]--[2018-10-19 Fri 22:40] =>  0:17
-    CLOCK: [2018-10-19 Fri 22:06]--[2018-10-19 Fri 22:22] =>  0:16
-    CLOCK: [2018-10-19 Fri 20:31]--[2018-10-19 Fri 22:01] =>  1:30
-    CLOCK: [2018-10-19 Fri 18:20]--[2018-10-19 Fri 18:46] =>  0:26
-    CLOCK: [2018-10-19 Fri 17:05]--[2018-10-19 Fri 18:15] =>  1:10
-    CLOCK: [2018-10-19 Fri 16:40]--[2018-10-19 Fri 16:59] =>  0:19
-    CLOCK: [2018-10-18 Thu 16:30]--[2018-10-18 Thu 16:50] =>  0:36
-    :END:
-
-Even after offloading all of the test models, we are still breaching
-Travis and AppVeyor limits. We need to figure out if we have any
-unused types and remove them.
-
-The quickest thing to do is to disable: test data and hashing for all
-types in the main models except for =name=.
-
-Since even after removing serialisation from the generation models
-(cpp and csharp) we are still quite close to the edge, we need drastic
-measures: we need to stop generating test data and serialisation for
-all models. Test data was required for testing so we need to comment
-out all tests of the generated code. Serialisation was also used for
-some tests, though they have probably bit-rotted. We probably should
-use serialisation only for round-trip tests and not as a way of
-testing components as we did in the past. We should remove all tests
-that rely on serialisation, even including dia - it should be replaced
-by the XML tool anyway, so no point in paying the cost now. Or perhaps
-we can leave dia for last and do all other models.
-
-Problems:
-
-- external.json:
-
-: ../../../../projects/dogen.external.json/src/serialization/registrar_ser.cpp:29:10: fatal error: 'dogen.options/serialization/registrar_ser.hpp' file not found
-: #include "dogen.options/serialization/registrar_ser.hpp"
-
-Links:
-
-- [[https://blog.dachary.org/2014/02/09/figuring-out-why-ccache-misses/][figuring out why ccache misses]]
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:

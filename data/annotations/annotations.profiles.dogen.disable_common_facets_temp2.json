@@ -1,5 +1,5 @@
 {
-  "name": "dogen.disable_common_facets_temp",
+  "name": "dogen.disable_common_facets_temp2",
   "parents": [
     "dogen"
   ],
@@ -50,7 +50,7 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "quilt.cpp.serialization.enabled"
+        "qualified": "quilt.cpp.hash.enabled"
       },
       "archetype_location": {
         "kernel": "quilt",

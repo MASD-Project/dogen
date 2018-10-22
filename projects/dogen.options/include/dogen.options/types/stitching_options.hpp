@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.options/serialization/stitching_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace options {
@@ -51,13 +50,6 @@ public:
         const bool force_write,
         const boost::filesystem::path& log_directory,
         const bool compatibility_mode);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::options::stitching_options& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::options::stitching_options& v, unsigned int version);
 
 public:
     /**
