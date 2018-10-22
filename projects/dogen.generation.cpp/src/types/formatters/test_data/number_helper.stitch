@@ -1,6 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::test_data #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/cpp/scoped_namespace_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/number_helper.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>

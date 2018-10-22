@@ -23,7 +23,6 @@
 #include "dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/io/associative_container_helper.hpp"
-#include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
 
 namespace dogen {
 namespace generation {
