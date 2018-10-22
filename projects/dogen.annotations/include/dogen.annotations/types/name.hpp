@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.annotations/serialization/name_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -46,13 +45,6 @@ public:
     name(
         const std::string& simple,
         const std::string& qualified);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::name& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::name& v, unsigned int version);
 
 public:
     /**

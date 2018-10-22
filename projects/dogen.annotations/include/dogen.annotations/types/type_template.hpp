@@ -33,7 +33,6 @@
 #include "dogen.annotations/types/value_types.hpp"
 #include "dogen.annotations/types/template_kinds.hpp"
 #include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/serialization/type_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -58,13 +57,6 @@ public:
         const dogen::annotations::archetype_location& archetype_location,
         const boost::shared_ptr<dogen::annotations::value>& default_value,
         const dogen::annotations::template_kinds kind);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::type_template& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::type_template& v, unsigned int version);
 
 public:
     /**

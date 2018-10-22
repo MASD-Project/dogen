@@ -68,7 +68,7 @@
         <dia:point val="-49,-118"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.05,-118.05;-21.1,-104.25"/>
+        <dia:rectangle val="-49.05,-118.05;-21.1,-105.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="12.9"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -108,7 +108,7 @@ yet imposing some constraints on the shape of the data.
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets_temp#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -133,13 +133,13 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="133,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.95,-45.05;140.865,-41.95"/>
+        <dia:rectangle val="132.95,-45.05;141.25,-41.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="133,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -925,13 +925,13 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="23,-80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.95,-80.05;31.635,-73.15"/>
+        <dia:rectangle val="22.95,-80.05;32.02,-73.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="23,-80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -1557,13 +1557,13 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="18,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,-45.05;26.635,-36.55"/>
+        <dia:rectangle val="17.95,-45.05;27.02,-36.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="18,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -1829,13 +1829,13 @@ yet imposing some constraints on the shape of the data.
         <dia:point val="-29,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,-45.05;-21.135,-41.95"/>
+        <dia:rectangle val="-29.05,-45.05;-20.75,-41.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-29,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4044,13 +4044,13 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="157,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="156.95,-78.05;164.865,-74.95"/>
+        <dia:rectangle val="156.95,-78.05;165.25,-74.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="157,-78"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4154,13 +4154,13 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="-43,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.05,-45.05;-35.135,-41.95"/>
+        <dia:rectangle val="-43.05,-45.05;-34.75,-41.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-43,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4789,13 +4789,13 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:point val="-29,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.05,-96.05;-20.365,-89.15"/>
+        <dia:rectangle val="-29.05,-96.05;-19.98,-89.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-29,-96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -6249,17 +6249,17 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="136.907,-41.9504"/>
+        <dia:point val="137.089,-41.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.702,-42.0004;137.757,-32.0004"/>
+        <dia:rectangle val="117.702,-42.0064;137.939,-32.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="136.907,-41.9504"/>
-        <dia:point val="136.907,-37"/>
+        <dia:point val="137.089,-41.9504"/>
+        <dia:point val="137.054,-37"/>
         <dia:point val="117.752,-37"/>
         <dia:point val="117.752,-32.0504"/>
       </dia:attribute>
@@ -7700,7 +7700,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.2425,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.3456,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7708,8 +7708,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.2925,-50"/>
-        <dia:point val="22.2925,-45.0502"/>
+        <dia:point val="22.3961,-50"/>
+        <dia:point val="22.4439,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9977,13 +9977,13 @@ associated properties.#</dia:string>
         <dia:point val="78,-80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="77.95,-80.05;85.865,-76.95"/>
+        <dia:rectangle val="77.95,-80.05;86.25,-76.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="78,-80"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>

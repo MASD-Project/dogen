@@ -30,7 +30,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/serialization/text_collection_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -48,13 +47,6 @@ public:
 
 public:
     explicit text_collection(const std::list<std::string>& content);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::text_collection& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::text_collection& v, unsigned int version);
 
 public:
     using value::accept;

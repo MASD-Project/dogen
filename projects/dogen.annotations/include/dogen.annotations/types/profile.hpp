@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_set>
 #include "dogen.annotations/types/entry_template.hpp"
-#include "dogen.annotations/serialization/profile_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -48,13 +47,6 @@ public:
         const std::list<std::string>& parents,
         const std::unordered_set<std::string>& labels,
         const std::list<dogen::annotations::entry_template>& templates);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::profile& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::profile& v, unsigned int version);
 
 public:
     const std::string& name() const;

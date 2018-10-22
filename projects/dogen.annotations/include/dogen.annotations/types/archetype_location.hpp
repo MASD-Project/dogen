@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.annotations/serialization/archetype_location_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -52,13 +51,6 @@ public:
         const std::string& backend,
         const std::string& facet,
         const std::string& archetype);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::archetype_location& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location& v, unsigned int version);
 
 public:
     /**

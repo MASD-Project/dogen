@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/serialization/archetype_locations_group_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -46,13 +45,6 @@ public:
     archetype_locations_group(
         const std::list<dogen::annotations::archetype_location>& archetype_locations,
         const std::unordered_map<std::string, std::string>& canonical_archetype_locations);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::archetype_locations_group& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_locations_group& v, unsigned int version);
 
 public:
     /**

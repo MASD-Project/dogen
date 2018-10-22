@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen.annotations/types/archetype_locations_group.hpp"
-#include "dogen.annotations/serialization/archetype_location_repository_parts_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -49,13 +48,6 @@ public:
         const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family,
         const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::archetype_location_repository_parts& v, unsigned int version);
 
 public:
     /**

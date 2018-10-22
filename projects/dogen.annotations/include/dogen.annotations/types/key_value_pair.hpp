@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/serialization/key_value_pair_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -45,13 +44,6 @@ public:
 
 public:
     explicit key_value_pair(const std::unordered_map<std::string, std::string>& content);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::key_value_pair& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::key_value_pair& v, unsigned int version);
 
 public:
     using value::accept;

@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.annotations/types/profile.hpp"
-#include "dogen.annotations/serialization/profile_repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -43,13 +42,6 @@ public:
 
 public:
     explicit profile_repository(const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::profile_repository& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::profile_repository& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name() const;

@@ -28,7 +28,6 @@
 #include <algorithm>
 #include "dogen.annotations/types/profile.hpp"
 #include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/serialization/profiler_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -47,13 +46,6 @@ public:
         const dogen::annotations::profile& profile,
         const dogen::annotations::annotation& annotation,
         const bool merged);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::profiler_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::profiler_configuration& v, unsigned int version);
 
 public:
     const dogen::annotations::profile& profile() const;

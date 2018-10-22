@@ -28,7 +28,6 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.annotations/types/value_visitor_fwd.hpp"
-#include "dogen.annotations/serialization/value_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -44,13 +43,6 @@ public:
     value& operator=(const value&) = default;
 
     virtual ~value() noexcept = 0;
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::value& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::value& v, unsigned int version);
 
 public:
     virtual void accept(const value_visitor& v) const = 0;

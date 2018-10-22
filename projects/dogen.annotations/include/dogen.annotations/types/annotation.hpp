@@ -31,7 +31,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.annotations/types/value_fwd.hpp"
 #include "dogen.annotations/types/scope_types.hpp"
-#include "dogen.annotations/serialization/annotation_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -52,13 +51,6 @@ public:
     annotation(
         const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values,
         const dogen::annotations::scope_types scope);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::annotation& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::annotation& v, unsigned int version);
 
 public:
     /**

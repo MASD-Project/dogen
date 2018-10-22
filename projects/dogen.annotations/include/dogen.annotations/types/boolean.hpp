@@ -28,7 +28,6 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/serialization/boolean_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -48,13 +47,6 @@ public:
 
 public:
     explicit boolean(const bool content);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::boolean& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::boolean& v, unsigned int version);
 
 public:
     using value::accept;

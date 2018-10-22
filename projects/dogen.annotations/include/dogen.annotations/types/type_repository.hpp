@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/serialization/type_repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace annotations {
@@ -50,13 +49,6 @@ public:
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name,
         const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name,
         const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::annotations::type_repository& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::annotations::type_repository& v, unsigned int version);
 
 public:
     /**
