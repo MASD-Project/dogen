@@ -19,41 +19,41 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/canned_tests.hpp"
-#include "dogen.modeling/types/all.hpp"
-#include "dogen.modeling/io/all_io.hpp"
-#include "dogen.modeling/test_data/all_td.hpp"
+// #include "dogen.utility/test/logging.hpp"
+// #include "dogen.utility/test/canned_tests.hpp"
+// #include "dogen.modeling/types/all.hpp"
+// #include "dogen.modeling/io/all_io.hpp"
+// #include "dogen.modeling/test_data/all_td.hpp"
 
-namespace {
+// namespace {
 
-const std::string empty;
-const std::string test_module("yarn");
-const std::string test_suite("io_tests");
+// const std::string empty;
+// const std::string test_module("yarn");
+// const std::string test_suite("io_tests");
 
-}
+// }
 
-using namespace dogen::modeling::helpers;
-using namespace dogen::modeling::meta_model;
-using namespace dogen::utility::test;
+// using namespace dogen::modeling::helpers;
+// using namespace dogen::modeling::meta_model;
+// using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(io_tests)
 
-BOOST_AUTO_TEST_CASE(validate_io) {
-    SETUP_TEST_LOG("validate_io");
+// BOOST_IGNORE_AUTO_TEST_CASE(validate_io) {
+//     SETUP_TEST_LOG("validate_io");
 
-    test_io<origin_types_generator>();
-    test_io<name_tree_generator>();
-    test_io<node_generator>();
-    test_io<attribute_generator>();
-    test_io<name_generator>();
-    test_io<builtin_generator>();
-    test_io<enumerator_generator>();
-    test_io<enumeration_generator>();
-    test_io<module_generator>();
-    test_io<object_generator>();
-    test_io<object_template_generator>();
-    test_io<endomodel_generator>();
-}
+//     test_io<origin_types_generator>();
+//     test_io<name_tree_generator>();
+//     test_io<node_generator>();
+//     test_io<attribute_generator>();
+//     test_io<name_generator>();
+//     test_io<builtin_generator>();
+//     test_io<enumerator_generator>();
+//     test_io<enumeration_generator>();
+//     test_io<module_generator>();
+//     test_io<object_generator>();
+//     test_io<object_template_generator>();
+//     test_io<endomodel_generator>();
+// }
 
 BOOST_AUTO_TEST_SUITE_END()

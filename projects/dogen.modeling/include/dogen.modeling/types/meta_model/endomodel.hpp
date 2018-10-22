@@ -45,7 +45,6 @@
 #include "dogen.modeling/types/meta_model/enumeration_fwd.hpp"
 #include "dogen.modeling/types/meta_model/object_template_fwd.hpp"
 #include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
-#include "dogen.modeling/serialization/meta_model/endomodel_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -84,13 +83,6 @@ public:
         const dogen::modeling::meta_model::languages input_language,
         const std::list<dogen::modeling::meta_model::languages>& output_languages,
         const boost::optional<dogen::modeling::meta_model::orm_model_properties>& orm_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::endomodel& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::endomodel& v, unsigned int version);
 
 public:
     /**

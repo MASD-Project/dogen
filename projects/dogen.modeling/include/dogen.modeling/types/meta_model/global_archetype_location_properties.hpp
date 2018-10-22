@@ -32,7 +32,6 @@
 #include "dogen.modeling/types/meta_model/backend_properties.hpp"
 #include "dogen.modeling/types/meta_model/archetype_properties.hpp"
 #include "dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
-#include "dogen.modeling/serialization/meta_model/global_archetype_location_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -51,13 +50,6 @@ public:
         const std::unordered_map<std::string, dogen::modeling::meta_model::facet_properties>& facet_properties,
         const std::unordered_map<std::string, dogen::modeling::meta_model::archetype_properties>& archetype_properties,
         const std::unordered_map<std::string, dogen::modeling::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::global_archetype_location_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::global_archetype_location_properties& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::modeling::meta_model::backend_properties>& backend_properties() const;

@@ -18,46 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#include <unordered_map>
+// #include <unordered_map>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/canned_tests.hpp"
-#include "dogen.modeling/types/all.hpp"
-#include "dogen.modeling/io/all_io.hpp"
-#include "dogen.modeling/test_data/all_td.hpp"
+// #include "dogen.utility/io/unordered_map_io.hpp"
+// #include "dogen.utility/test/asserter.hpp"
+// #include "dogen.utility/test/logging.hpp"
+// #include "dogen.utility/test/canned_tests.hpp"
+// #include "dogen.modeling/types/all.hpp"
+// #include "dogen.modeling/io/all_io.hpp"
+// #include "dogen.modeling/test_data/all_td.hpp"
 
-namespace {
+// namespace {
 
-const std::string empty;
-const std::string test_module("yarn");
-const std::string test_suite("equality_tests");
+// const std::string empty;
+// const std::string test_module("yarn");
+// const std::string test_suite("equality_tests");
 
-}
+// }
 
-using namespace dogen::modeling::helpers;
-using namespace dogen::modeling::meta_model;
-using dogen::utility::test::asserter;
-using namespace dogen::utility::test;
+// using namespace dogen::modeling::helpers;
+// using namespace dogen::modeling::meta_model;
+// using dogen::utility::test::asserter;
+// using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(equality_tests)
 
-BOOST_AUTO_TEST_CASE(validate_equality) {
-    SETUP_TEST_LOG("validate_equality");
+// BOOST_IGNORE_AUTO_TEST_CASE(validate_equality) {
+//     SETUP_TEST_LOG("validate_equality");
 
-    test_equality<origin_types_generator>();
-    test_equality<name_tree_generator>();
-    test_equality<node_generator>();
-    test_equality<attribute_generator>();
-    test_equality<name_generator>();
-    test_equality<builtin_generator>();
-    test_equality<enumerator_generator>();
-    test_equality<enumeration_generator>();
-    test_equality<module_generator>();
-    test_equality<object_generator>();
-    test_equality<object_template_generator>();
-    test_equality<endomodel_generator>();
-}
+//     test_equality<origin_types_generator>();
+//     test_equality<name_tree_generator>();
+//     test_equality<node_generator>();
+//     test_equality<attribute_generator>();
+//     test_equality<name_generator>();
+//     test_equality<builtin_generator>();
+//     test_equality<enumerator_generator>();
+//     test_equality<enumeration_generator>();
+//     test_equality<module_generator>();
+//     test_equality<object_generator>();
+//     test_equality<object_template_generator>();
+//     test_equality<endomodel_generator>();
+// }
 
 BOOST_AUTO_TEST_SUITE_END()

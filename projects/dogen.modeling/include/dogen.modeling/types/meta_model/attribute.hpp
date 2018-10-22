@@ -32,7 +32,6 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 #include "dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
-#include "dogen.modeling/serialization/meta_model/attribute_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -62,13 +61,6 @@ public:
         const bool is_immutable,
         const bool is_fluent,
         const boost::optional<dogen::modeling::meta_model::orm_attribute_properties>& orm_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::attribute& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::attribute& v, unsigned int version);
 
 public:
     /**

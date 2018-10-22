@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/serialization/meta_model/orm_module_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -42,13 +41,6 @@ public:
 
 public:
     explicit orm_module_properties(const std::string& schema_name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::orm_module_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::orm_module_properties& v, unsigned int version);
 
 public:
     /**

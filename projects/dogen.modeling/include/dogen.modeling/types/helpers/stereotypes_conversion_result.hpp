@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
-#include "dogen.modeling/serialization/helpers/stereotypes_conversion_result_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -50,13 +49,6 @@ public:
     stereotypes_conversion_result(
         const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::stereotypes_conversion_result& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::stereotypes_conversion_result& v, unsigned int version);
 
 public:
     const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes() const;

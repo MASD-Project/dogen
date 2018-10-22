@@ -32,7 +32,6 @@
 #include <boost/optional.hpp>
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.modeling/types/meta_model/orm_module_properties.hpp"
-#include "dogen.modeling/serialization/meta_model/module_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -75,13 +74,6 @@ public:
         const bool is_root,
         const bool is_global_module,
         const boost::optional<dogen::modeling::meta_model::orm_module_properties>& orm_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::module& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::module& v, unsigned int version);
 
 public:
     using element::accept;

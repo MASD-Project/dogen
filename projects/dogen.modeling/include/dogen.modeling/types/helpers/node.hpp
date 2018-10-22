@@ -30,7 +30,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/helpers/node_fwd.hpp"
-#include "dogen.modeling/serialization/helpers/node_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -53,13 +52,6 @@ public:
         const boost::shared_ptr<dogen::modeling::helpers::node>& parent,
         const dogen::modeling::meta_model::name& data,
         const std::list<boost::shared_ptr<dogen::modeling::helpers::node> >& children);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::node& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::node& v, unsigned int version);
 
 public:
     /**

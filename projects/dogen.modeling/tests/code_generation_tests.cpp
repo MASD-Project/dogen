@@ -18,30 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#include <memory>
-#include <boost/filesystem.hpp>
+// #include <memory>
+// #include <boost/filesystem.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/unit_test_monitor.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/test/macros.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test_data/external_dia.hpp"
-#include "dogen.utility/test_data/external_json.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.dia/io/diagram_io.hpp"
-#include "dogen.modeling/test/mock_options_factory.hpp"
-#include "dogen.modeling/types/transforms/options.hpp"
-#include "dogen.modeling/types/transforms/context_factory.hpp"
-#include "dogen.modeling/types/transforms/code_generation_chain.hpp"
-#include "dogen.modeling/io/meta_model/model_io.hpp"
-#include "dogen.dia/serialization/diagram_ser.hpp"
-#include "dogen.modeling/serialization/meta_model/model_ser.hpp"
-#include "dogen.dia/test/dia_file_asserter.hpp"
-#include "dogen.modeling/test/yarn_file_asserter.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+// #include <boost/algorithm/string/predicate.hpp>
+// #include <boost/algorithm/string/replace.hpp>
+// #include "dogen.utility/test_data/validating_resolver.hpp"
+// #include "dogen.utility/filesystem/file.hpp"
+// #include "dogen.utility/test/macros.hpp"
+// #include "dogen.utility/test/asserter.hpp"
+// #include "dogen.utility/test_data/external_dia.hpp"
+// #include "dogen.utility/test_data/external_json.hpp"
+// #include "dogen.utility/test/logging.hpp"
+// #include "dogen.dia/io/diagram_io.hpp"
+// #include "dogen.modeling/test/mock_options_factory.hpp"
+// #include "dogen.modeling/types/transforms/options.hpp"
+// #include "dogen.modeling/types/transforms/context_factory.hpp"
+// #include "dogen.modeling/types/transforms/code_generation_chain.hpp"
+// #include "dogen.modeling/io/meta_model/model_io.hpp"
+// #include "dogen.dia/serialization/diagram_ser.hpp"
+// #include "dogen.modeling/serialization/meta_model/model_ser.hpp"
+// #include "dogen.dia/test/dia_file_asserter.hpp"
+// #include "dogen.modeling/test/yarn_file_asserter.hpp"
+// #include "dogen.utility/test/exception_checkers.hpp"
 
 /*
  * Comment these out as required if testing only one frontend. These

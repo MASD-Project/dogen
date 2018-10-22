@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/serialization/meta_model/facet_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -48,13 +47,6 @@ public:
         const bool overwrite,
         const std::string& directory,
         const std::string& postfix);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::facet_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::facet_properties& v, unsigned int version);
 
 public:
     /**

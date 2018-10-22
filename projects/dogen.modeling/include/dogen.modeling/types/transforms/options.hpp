@@ -29,7 +29,6 @@
 #include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/serialization/transforms/options_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -63,13 +62,6 @@ public:
         const bool probe_all,
         const boost::filesystem::path& probe_directory,
         const bool probe_use_short_names);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::transforms::options& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::transforms::options& v, unsigned int version);
 
 public:
     /**

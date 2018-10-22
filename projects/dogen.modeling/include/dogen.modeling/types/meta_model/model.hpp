@@ -42,7 +42,6 @@
 #include "dogen.modeling/types/meta_model/locator_properties.hpp"
 #include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
 #include "dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
-#include "dogen.modeling/serialization/meta_model/model_fwd_ser.hpp"
 #include "dogen.modeling/types/meta_model/global_archetype_location_properties.hpp"
 
 namespace dogen {
@@ -79,13 +78,6 @@ public:
         const std::unordered_set<dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element,
         const dogen::modeling::meta_model::locator_properties& locator_properties,
         const dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::model& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::model& v, unsigned int version);
 
 public:
     /**

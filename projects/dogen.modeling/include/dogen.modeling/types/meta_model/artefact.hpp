@@ -29,7 +29,6 @@
 #include <vector>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/serialization/meta_model/artefact_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -55,13 +54,6 @@ public:
         const std::string& content,
         const bool overwrite,
         const std::vector<boost::filesystem::path>& dependencies);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::artefact& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::artefact& v, unsigned int version);
 
 public:
     /**

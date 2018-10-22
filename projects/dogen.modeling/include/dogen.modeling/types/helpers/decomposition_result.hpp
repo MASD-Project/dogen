@@ -31,7 +31,6 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/serialization/helpers/decomposition_result_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -50,13 +49,6 @@ public:
         const std::list<std::pair<std::string, dogen::modeling::meta_model::name> >& meta_names,
         const std::list<std::pair<std::string, dogen::modeling::meta_model::name_tree> >& name_trees,
         const std::list<std::pair<std::string, dogen::modeling::meta_model::name> >& injected_names);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::decomposition_result& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::decomposition_result& v, unsigned int version);
 
 public:
     const std::list<std::pair<std::string, dogen::modeling::meta_model::name> >& names() const;

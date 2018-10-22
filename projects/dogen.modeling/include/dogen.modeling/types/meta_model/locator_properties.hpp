@@ -32,7 +32,6 @@
 #include "dogen.modeling/types/meta_model/directory_structure_styles.hpp"
 #include "dogen.modeling/types/meta_model/archetype_family_properties.hpp"
 #include "dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
-#include "dogen.modeling/serialization/meta_model/locator_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -56,13 +55,6 @@ public:
         const std::unordered_map<std::string, dogen::modeling::meta_model::archetype_family_properties>& archetype_family_properties,
         const bool force_backend_directory,
         const bool disable_facet_directories);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::locator_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::locator_properties& v, unsigned int version);
 
 public:
     dogen::modeling::meta_model::directory_structure_styles directory_structure_style() const;

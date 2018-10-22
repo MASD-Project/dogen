@@ -31,7 +31,6 @@
 #include "dogen.modeling/types/meta_model/location.hpp"
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
-#include "dogen.modeling/serialization/meta_model/name_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -66,13 +65,6 @@ public:
         const std::map<dogen::modeling::meta_model::languages, std::string>& qualified,
         const dogen::modeling::meta_model::location& location,
         const std::string& identifiable);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::name& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::name& v, unsigned int version);
 
 public:
     /**

@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/serialization/meta_model/backend_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -49,13 +48,6 @@ public:
     backend_properties(
         const bool enabled,
         const std::string& directory);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::backend_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::backend_properties& v, unsigned int version);
 
 public:
     /**

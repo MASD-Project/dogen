@@ -30,7 +30,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/serialization/helpers/mapping_context_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -48,13 +47,6 @@ public:
         const std::unordered_map<std::string, dogen::modeling::meta_model::name>& translations,
         const std::unordered_set<std::string>& erasures,
         const std::unordered_map<std::string, dogen::modeling::meta_model::name>& injections);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::mapping_context& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::mapping_context& v, unsigned int version);
 
 public:
     const std::unordered_map<std::string, dogen::modeling::meta_model::name>& translations() const;

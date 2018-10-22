@@ -26,7 +26,6 @@
 #endif
 
 #include <algorithm>
-#include "dogen.modeling/serialization/meta_model/type_parameters_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -46,13 +45,6 @@ public:
         const bool variable_number_of_parameters,
         const unsigned int count,
         const bool always_in_heap);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::type_parameters& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::type_parameters& v, unsigned int version);
 
 public:
     bool variable_number_of_parameters() const;

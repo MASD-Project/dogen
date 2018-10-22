@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include "dogen.modeling/serialization/transforms/configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -47,13 +46,6 @@ public:
     configuration(
         const std::unordered_set<std::string>& enabled_backends,
         const bool enable_backend_directories);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::transforms::configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::transforms::configuration& v, unsigned int version);
 
 public:
     const std::unordered_set<std::string>& enabled_backends() const;

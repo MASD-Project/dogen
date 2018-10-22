@@ -31,7 +31,6 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.modeling/types/meta_model/enumerator.hpp"
-#include "dogen.modeling/serialization/meta_model/enumeration_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -72,13 +71,6 @@ public:
         const bool use_implementation_defined_underlying_element,
         const bool use_implementation_defined_enumerator_values,
         const bool add_invalid_enumerator);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::enumeration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::enumeration& v, unsigned int version);
 
 public:
     using element::accept;

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-22 Mon 09:40]
+#+CAPTION: Clock summary at [2018-10-22 Mon 11:34]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *47:49* |       |       |   0.0 |
+| *Total time*                                                                | *49:44* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 47:49   |       |       |   0.0 |
-| Active                                                                      |         | 47:49 |       |   0.0 |
+| Stories                                                                     | 49:44   |       |       |   0.0 |
+| Active                                                                      |         | 49:44 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -45,9 +45,10 @@
 | Get JSON models to generate again                                           |         |       |  0:57 |   0.0 |
 | Update emacs programming setup                                              |         |       |  0:41 |   0.0 |
 | Fix warnings on windows                                                     |         |       |  4:15 |   0.0 |
+| Setup a secondary machine for development                                   |         |       |  1:04 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:37 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 12:46 |   0.0 |
-| Reduce build times                                                          |         |       |  5:16 |   0.0 |
+| Reduce build times                                                          |         |       |  6:07 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -615,6 +616,16 @@ Links:
 - [[https://cmake.org/pipermail/cmake/2012-March/049621.html][how to determine debug or release mode?]]
 - [[https://stackoverflow.com/questions/24460486/cmake-build-type-not-being-used-in-cmakelists-txt][CMAKE_BUILD_TYPE not being used in CMakeLists.txt]]
 
+*** COMPLETED Setup a secondary machine for development               :story:
+    CLOSED: [2018-10-22 Mon 11:34]
+    :LOGBOOK:
+    CLOCK: [2018-10-22 Mon 10:01]--[2018-10-22 Mon 11:05] =>  1:04
+    :END:
+
+The main machine is no longer coping with the load of C++ development
+plus cquery and google chrome. We need to setup a machine just to run
+the desktop processes and another to run the development environment.
+
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
      CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
@@ -702,6 +713,8 @@ Architecture vision:
 
 *** STARTED Reduce build times                                        :story:
     :LOGBOOK:
+    CLOCK: [2018-10-22 Mon 11:03]--[2018-10-22 Mon 11:34] =>  0:31
+    CLOCK: [2018-10-22 Mon 09:41]--[2018-10-22 Mon 10:01] =>  0:20
     CLOCK: [2018-10-22 Mon 09:21]--[2018-10-22 Mon 09:40] =>  0:19
     CLOCK: [2018-10-22 Mon 08:12]--[2018-10-22 Mon 08:31] =>  0:19
     CLOCK: [2018-10-21 Sun 12:39]--[2018-10-21 Sun 12:45] =>  0:06
@@ -798,6 +811,37 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** New approach to model testsing                                    :story:
+
+In the beginning we generated all models with all facets, even the
+dogen core models. The idea was to test the generator even though
+these facets were not useful for the product. This was really useful
+because the dogen models are much more realistic than the test models
+and due to this we picked up a number of bugs. However, we have now
+hit the maximum build times on travis and we need to start removing
+all ballast. This will mean we lose these valuable tests. The
+alternative is to create these tests on the fly:
+
+- create a new override flag that forces all facets to be emitted.
+- create a new test facet with templates that are dependent on the
+  enabled facets; each test tests the dependent facet.
+- create a ctest nightly build that generates code using these new
+  facets, compiles it and runs all tests.
+- we need some meta-data to "ignore" some modeling elements for
+  certain facets such as composition which are known to be broken. Or
+  maybe we should just leave the tests as red so we know.
+- the tests should be designed not to use templates etc to make the
+  debug dumps really obvious (unlike the existing tests). It may even
+  make more sense to test each type individually so that when the test
+  fails its really obvious:
+
+: MY_TYPE_serialisation_roundtrips_correctly
+
+  this way when we look at CDash we know exactly which types failed to
+  serialise.
+
+During the transition phase, we will remove all of the existing tests.
 
 *** Add support for multiple profile binds per modeling element       :story:
 

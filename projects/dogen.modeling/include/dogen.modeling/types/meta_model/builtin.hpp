@@ -28,7 +28,6 @@
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/serialization/meta_model/builtin_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -67,13 +66,6 @@ public:
         const bool is_floating_point,
         const bool can_be_enumeration_underlier,
         const bool can_be_primitive_underlier);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::builtin& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::builtin& v, unsigned int version);
 
 public:
     using element::accept;

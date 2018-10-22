@@ -31,7 +31,6 @@
 #include <boost/optional.hpp>
 #include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
 #include "dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
-#include "dogen.modeling/serialization/meta_model/orm_attribute_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -55,13 +54,6 @@ public:
         const boost::optional<bool>& is_nullable,
         const std::unordered_map<dogen::modeling::meta_model::orm_database_systems, std::string>& type_overrides,
         const bool is_composite);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::orm_attribute_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::orm_attribute_properties& v, unsigned int version);
 
 public:
     /**

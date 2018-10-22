@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include "dogen.modeling/serialization/helpers/indices_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -48,13 +47,6 @@ public:
         const std::unordered_set<std::string>& primitive_underliers,
         const std::unordered_set<std::string>& enumeration_underliers,
         const std::unordered_set<std::string>& abstract_elements);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::indices& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::indices& v, unsigned int version);
 
 public:
     const std::unordered_set<std::string>& objects_always_in_heap() const;

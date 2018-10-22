@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/serialization/meta_model/element_archetype_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -44,13 +43,6 @@ public:
     element_archetype(
         const std::string& element,
         const std::string& archetype);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::element_archetype& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::element_archetype& v, unsigned int version);
 
 public:
     const std::string& element() const;

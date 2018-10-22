@@ -32,7 +32,6 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
-#include "dogen.modeling/serialization/helpers/mapping_set_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -54,13 +53,6 @@ public:
         const std::string& name,
         const std::unordered_map<dogen::modeling::meta_model::languages, std::unordered_map<std::string, dogen::modeling::meta_model::name> >& by_language_agnostic_id,
         const std::unordered_map<dogen::modeling::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::mapping_set& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::mapping_set& v, unsigned int version);
 
 public:
     const std::string& name() const;

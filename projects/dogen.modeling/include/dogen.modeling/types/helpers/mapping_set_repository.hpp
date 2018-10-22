@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.modeling/types/helpers/mapping_set.hpp"
-#include "dogen.modeling/serialization/helpers/mapping_set_repository_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -49,13 +48,6 @@ public:
     mapping_set_repository(
         const dogen::modeling::helpers::mapping_set& default_mapping_set,
         const std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>& by_name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::mapping_set_repository& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::mapping_set_repository& v, unsigned int version);
 
 public:
     const dogen::modeling::helpers::mapping_set& default_mapping_set() const;

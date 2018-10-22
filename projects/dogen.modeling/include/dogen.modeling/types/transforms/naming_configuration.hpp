@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/serialization/transforms/naming_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -44,13 +43,6 @@ public:
     naming_configuration(
         const std::string& external_modules,
         const std::string& model_modules);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::transforms::naming_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::transforms::naming_configuration& v, unsigned int version);
 
 public:
     const std::string& external_modules() const;

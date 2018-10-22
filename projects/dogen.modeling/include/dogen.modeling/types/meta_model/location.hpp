@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/serialization/meta_model/location_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -69,13 +68,6 @@ public:
         const std::list<std::string>& model_modules,
         const std::list<std::string>& internal_modules,
         const std::string& element);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::location& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::location& v, unsigned int version);
 
 public:
     /**

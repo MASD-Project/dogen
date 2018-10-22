@@ -18,42 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/canned_tests.hpp"
-#include "dogen.modeling/types/all.hpp"
-#include "dogen.modeling/hash/all_hash.hpp"
-#include "dogen.modeling/io/all_io.hpp"
-#include "dogen.modeling/test_data/all_td.hpp"
+// #include <boost/test/unit_test.hpp>
+// #include "dogen.utility/test/logging.hpp"
+// #include "dogen.utility/test/canned_tests.hpp"
+// #include "dogen.modeling/types/all.hpp"
+// #include "dogen.modeling/hash/all_hash.hpp"
+// #include "dogen.modeling/io/all_io.hpp"
+// #include "dogen.modeling/test_data/all_td.hpp"
 
-namespace {
+// namespace {
 
-const std::string empty;
-const std::string test_module("yarn");
-const std::string test_suite("move_copy_assignment_tests");
+// const std::string empty;
+// const std::string test_module("yarn");
+// const std::string test_suite("move_copy_assignment_tests");
 
-}
+// }
 
-using namespace dogen::modeling::helpers;
-using namespace dogen::modeling::meta_model;
-using namespace dogen::utility::test;
+// using namespace dogen::modeling::helpers;
+// using namespace dogen::modeling::meta_model;
+// using namespace dogen::utility::test;
 
-BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)
+// BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)
 
-BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
-    SETUP_TEST_LOG("validate_move_assignment_copy");
+// BOOST_IGNORE_AUTO_TEST_CASE(validate_move_assignment_copy) {
+//     SETUP_TEST_LOG("validate_move_assignment_copy");
 
-    test_move_assignment_copy<origin_types_generator>();
-    test_move_assignment_copy<name_tree_generator>();
-    test_move_assignment_copy<attribute_generator>();
-    test_move_assignment_copy<name_generator>();
-    test_move_assignment_copy<builtin_generator>();
-    test_move_assignment_copy<enumerator_generator>();
-    test_move_assignment_copy<enumeration_generator>();
-    test_move_assignment_copy<module_generator>();
-    test_move_assignment_copy<object_generator>();
-    test_move_assignment_copy<object_template_generator>();
-    test_move_assignment_copy<endomodel_generator>();
-}
+//     test_move_assignment_copy<origin_types_generator>();
+//     test_move_assignment_copy<name_tree_generator>();
+//     test_move_assignment_copy<attribute_generator>();
+//     test_move_assignment_copy<name_generator>();
+//     test_move_assignment_copy<builtin_generator>();
+//     test_move_assignment_copy<enumerator_generator>();
+//     test_move_assignment_copy<enumeration_generator>();
+//     test_move_assignment_copy<module_generator>();
+//     test_move_assignment_copy<object_generator>();
+//     test_move_assignment_copy<object_template_generator>();
+//     test_move_assignment_copy<endomodel_generator>();
+// }
 
-BOOST_AUTO_TEST_SUITE_END()
+// BOOST_AUTO_TEST_SUITE_END()

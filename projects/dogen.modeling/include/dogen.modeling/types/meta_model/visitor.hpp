@@ -31,7 +31,6 @@
 #include <boost/optional.hpp>
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/serialization/meta_model/visitor_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -68,13 +67,6 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
         const std::list<dogen::modeling::meta_model::name>& visits,
         const boost::optional<dogen::modeling::meta_model::name>& parent);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::meta_model::visitor& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::meta_model::visitor& v, unsigned int version);
 
 public:
     using element::accept;

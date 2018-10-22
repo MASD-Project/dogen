@@ -29,7 +29,6 @@
 #include <boost/optional.hpp>
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/helpers/mapping_actions.hpp"
-#include "dogen.modeling/serialization/helpers/mapping_value_fwd_ser.hpp"
 
 namespace dogen {
 namespace modeling {
@@ -53,13 +52,6 @@ public:
     mapping_value(
         const dogen::modeling::helpers::mapping_actions mapping_action,
         const boost::optional<dogen::modeling::meta_model::name>& default_name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::modeling::helpers::mapping_value& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::modeling::helpers::mapping_value& v, unsigned int version);
 
 public:
     dogen::modeling::helpers::mapping_actions mapping_action() const;
