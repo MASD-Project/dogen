@@ -307,6 +307,11 @@ bool assistant::is_cpp_standard_98() const {
     return context_.model().cpp_standard() == cpp_standards::cpp_98;
 }
 
+bool assistant::is_cpp_standard_17() const {
+    using formattables::cpp_standards;
+    return context_.model().cpp_standard() == cpp_standards::cpp_17;
+}
+
 bool assistant::supports_defaulted_functions() const {
     return !is_cpp_standard_98();
 }
@@ -374,7 +379,7 @@ dogen::formatting::cpp::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return dogen::formatting::cpp::scoped_namespace_formatter(
         stream(), ns, false/*create_anonymous_namespace*/,
-        true/*add_new_line*/);
+        true/*add_new_line*/, is_cpp_standard_17()/*nested namespace*/);
 }
 
 void assistant::

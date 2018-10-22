@@ -2255,20 +2255,6 @@ Ideally we should have:
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
 
-*** Rename hash and serialization facets                              :story:
-
-We originally called our support for =std::hash= just =hash= and our
-support for =boost::serialization= just =serialization=. The problem
-is:
-
-- we may want to also support =boost::hash=.
-- we may want to support other serialisation types.
-
-We should rename these. Perhaps:
-
-- =std_hash=
-- =boost_serialization=: a tad verbose, but quite explicit.
-
 *** Consider renaming test data to sequence                           :story:
 
 Test data is a strange name. We need something slightly more idiomatic

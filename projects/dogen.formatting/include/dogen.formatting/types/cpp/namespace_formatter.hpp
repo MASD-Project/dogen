@@ -39,7 +39,7 @@ namespace cpp {
 class namespace_formatter {
 public:
     explicit namespace_formatter(const bool create_anonymous_namespace = true,
-        const bool add_new_line = false);
+        const bool add_new_line = false,  const bool nested_namespace = false);
 
 public:
     /**
@@ -66,6 +66,7 @@ public:
 private:
     const bool create_anonymous_namespace_;
     const bool add_new_line_;
+    const bool nested_namespace_;
 };
 
 } } }

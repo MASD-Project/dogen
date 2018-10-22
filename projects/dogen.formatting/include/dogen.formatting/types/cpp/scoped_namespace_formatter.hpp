@@ -42,7 +42,8 @@ public:
     scoped_namespace_formatter(
         std::ostream& s, const std::list<std::string>& ns,
         const bool create_anonymous_namespace = true,
-        const bool add_new_line = false);
+        const bool add_new_line = false,
+        const bool nested_namespace = false);
 
     ~scoped_namespace_formatter();
 

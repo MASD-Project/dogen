@@ -27,9 +27,10 @@ namespace cpp {
 
 scoped_namespace_formatter::scoped_namespace_formatter(
     std::ostream& s, const std::list<std::string>& ns,
-    const bool create_anonymous_namespace, const bool add_new_line) :
+    const bool create_anonymous_namespace, const bool add_new_line,
+    const bool nested_namespace) :
     stream_(s), namespaces_(ns),
-    formatter_(create_anonymous_namespace, add_new_line) {
+    formatter_(create_anonymous_namespace, add_new_line, nested_namespace) {
     formatter_.format_begin(stream_, namespaces_);
 }
 

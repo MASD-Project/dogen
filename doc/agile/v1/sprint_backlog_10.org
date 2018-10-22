@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-22 Mon 16:04]
+#+CAPTION: Clock summary at [2018-10-22 Mon 18:22]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *52:08* |       |       |   0.0 |
+| *Total time*                                                                | *54:23* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 52:08   |       |       |   0.0 |
-| Active                                                                      |         | 52:08 |       |   0.0 |
+| Stories                                                                     | 54:23   |       |       |   0.0 |
+| Active                                                                      |         | 54:23 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -34,12 +34,12 @@
 | AppVeyor is not building on GitHub commits                                  |         |       |  0:04 |   0.0 |
 | OSX build is producing a large number of warnings                           |         |       |  0:37 |   0.0 |
 | Upgrade to c++ 17                                                           |         |       |  0:25 |   0.0 |
+| Check that C++ 17 is enabled on MSVC                                        |         |       |  0:22 |   0.0 |
 | Windows MSI is very large                                                   |         |       |  0:26 |   0.0 |
-| Update c++ reference model build                                            |         |       |  1:43 |   0.0 |
+| Update c++ reference implementation build                                   |         |       |  1:43 |   0.0 |
 | Linking errors on windows for debug builds                                  |         |       |  0:17 |   0.0 |
 | Create bitbbucket backups for reference implementation                      |         |       |  0:18 |   0.0 |
 | Update vcpkg with boost.di and visibility settings                          |         |       |  1:26 |   0.0 |
-| Check that C++ 17 is enabled on MSVC                                        |         |       |  0:22 |   0.0 |
 | Fix warnings on OSX                                                         |         |       |  0:34 |   0.0 |
 | Rename input models directory to just models                                |         |       |  0:16 |   0.0 |
 | Get JSON models to generate again                                           |         |       |  0:57 |   0.0 |
@@ -47,8 +47,10 @@
 | Fix warnings on windows                                                     |         |       |  4:15 |   0.0 |
 | Setup a secondary machine for development                                   |         |       |  1:04 |   0.0 |
 | Remove facets that are not being used                                       |         |       |  8:31 |   0.0 |
+| Design a top-level Dogen API                                                |         |       | 13:53 |   0.0 |
 | Read up on framework and API design                                         |         |       |  2:37 |   0.0 |
-| Design a top-level Dogen API                                                |         |       | 12:46 |   0.0 |
+| Update dogen namespaces to match the new specification                      |         |       |  0:15 |   0.0 |
+| Add support for nested namespaces                                           |         |       |  0:53 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -181,6 +183,60 @@ Links:
 
 - https://github.com/SimonKagstrom/kcov/blob/master/doc/codecov.md
 
+*** COMPLETED Add support for code coverage                           :story:
+    CLOSED: [2018-10-17 Wed 09:43]
+
+*Rationale*: implemented using kcov.
+
+We started the work on code coverage but never finished it. At present
+it seems we don't even have a story detailing the current state of
+coverage in the backlog. From memory the problem was that the upload
+was too large and the coverage was including lots of files that should
+be ignored. We never got the upload to work. In the mean time, it
+seems that kcov is a better approach instead of using lcov, gcov, etc.
+
+Links:
+
+- https://github.com/SimonKagstrom/kcov
+
+*Previous understanding*
+
+Finish setting up coveralls
+
+Remaining issues:
+
+- we are generating far too much output. We need to keep it quieter or
+  we will break travis.
+- we are not filtering out non-project files from initial
+  processing. There must be a gcov option to ignore files.
+
+: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
+: ------------------------------------------------------------------------------
+: File '../../../../projects/quilt/spec/main.cpp'
+: Lines executed:62.50% of 8
+: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
+:
+: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
+: Lines executed:60.00% of 20
+: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
+
+See also:
+
+- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
+- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
+
+Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
+
+Notes:
+- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
+  broke Travis build]]
+
 *** COMPLETED Build on tags for Windows                               :story:
     CLOSED: [2018-10-16 Tue 10:30]
     :LOGBOOK:
@@ -306,8 +362,8 @@ notification but AppVeyor is refusing to build.
 Links:
 
 - [[https://help.appveyor.com/discussions/problems/17480-builds-not-triggering-from-github-commit][Builds not triggering from GitHub commit]]
-*** CANCELLED OSX build is producing a large number of warnings       :story:
-    CLOSED: [2018-10-16 Tue 20:06]
+*** COMPLETED OSX build is producing a large number of warnings       :story:
+    CLOSED: [2018-10-22 Mon 16:34]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 14:56]--[2018-10-16 Tue 15:33] =>  0:37
     :END:
@@ -315,10 +371,13 @@ Links:
 More on debug than release. Some of the warnings are related to
 visibility.
 
-Setting visibility to hidden does not seem to make any difference.
+Notes:
 
-We don't seem to have any good answers for this, so we'll leave it as
-is for now.
+- setting visibility to hidden does not seem to make any difference.
+- we don't seem to have any good answers for this, so we'll leave it
+  as is for now.
+- this was finally resolved by rebuilding boost with the same
+  visibility settings.
 
 Links:
 
@@ -327,6 +386,7 @@ Links:
 - [[https://stackoverflow.com/questions/36567072/why-do-i-get-ld-warning-direct-access-in-main-to-global-weak-symbol-in-this][Why do I get “ld: warning: direct access in _main to global weak
   symbol” in this simple code?]]
 - [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
+- [[https://github.com/Microsoft/vcpkg/issues/4497][Boost linker warnings on OSX]]
 
 *** COMPLETED Upgrade to c++ 17                                       :story:
     CLOSED: [2018-10-16 Tue 20:06]
@@ -361,6 +421,22 @@ There are quite a few dependencies for this to happen:
 We have now fulfilled all of these requirements, so try to move to
 C++17.
 
+*** COMPLETED Check that C++ 17 is enabled on MSVC                    :story:
+    CLOSED: [2018-10-18 Thu 16:20]
+    :LOGBOOK:
+    CLOCK: [2018-10-18 Thu 16:21]--[2018-10-18 Thu 16:29] =>  0:08
+    CLOCK: [2018-10-18 Thu 16:11]--[2018-10-18 Thu 16:20] =>  0:09
+    CLOCK: [2018-10-18 Thu 14:46]--[2018-10-18 Thu 14:51] =>  0:05
+    :END:
+
+When looking at the log files, there are no mentions of C++ 17. Ensure
+we are setting this for MSVC.
+
+We are now compiling with C++ 17, but builds are now longer than 1h
+and so are getting killed. We will leave it like that and hopefully
+find ways of reducing the build time - we are also close to the limit
+on Linux as well.
+
 *** COMPLETED Windows MSI is very large                               :story:
     CLOSED: [2018-10-16 Tue 20:06]
     :LOGBOOK:
@@ -380,7 +456,7 @@ use CTest. We need to add it to the CTest script.
 When AppVeyor is back up, check to make sure the packages have
 returned to normal size.
 
-*** COMPLETED Update c++ reference model build                        :story:
+*** COMPLETED Update c++ reference implementation build               :story:
     CLOSED: [2018-10-16 Tue 22:14]
     :LOGBOOK:
     CLOCK: [2018-10-16 Tue 20:07]--[2018-10-16 Tue 21:50] =>  1:43
@@ -416,60 +492,6 @@ Links:
 
 - [[https://developercommunity.visualstudio.com/content/problem/160714/memory-error-for-linker-in-vs-155-x64.html][Memory error for linker in VS 15.5 x64]]
 
-*** COMPLETED Add support for code coverage                           :story:
-    CLOSED: [2018-10-17 Wed 09:43]
-
-*Rationale*: implemented using kcov.
-
-We started the work on code coverage but never finished it. At present
-it seems we don't even have a story detailing the current state of
-coverage in the backlog. From memory the problem was that the upload
-was too large and the coverage was including lots of files that should
-be ignored. We never got the upload to work. In the mean time, it
-seems that kcov is a better approach instead of using lcov, gcov, etc.
-
-Links:
-
-- https://github.com/SimonKagstrom/kcov
-
-*Previous understanding*
-
-Finish setting up coveralls
-
-Remaining issues:
-
-- we are generating far too much output. We need to keep it quieter or
-  we will break travis.
-- we are not filtering out non-project files from initial
-  processing. There must be a gcov option to ignore files.
-
-: Process: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc-5/Debug/projects/quilt/spec/CMakeFiles/quilt.spec.dir/main.cpp.gcda
-: ------------------------------------------------------------------------------
-: File '../../../../projects/quilt/spec/main.cpp'
-: Lines executed:62.50% of 8
-: Creating '^#^#^#^#projects#quilt#spec#main.cpp.gcov'
-:
-: File '/usr/local/personal/include/boost/smart_ptr/detail/sp_counted_impl.hpp'
-: Lines executed:60.00% of 20
-: Creating '#usr#local#personal#include#boost#smart_ptr#detail#sp_counted_impl.hpp.gcov'
-
-See also:
-
-- [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
-- [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
-- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
-  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
-  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
-- we should generate coverage from the clang debug build only since
-  that is the fastest build we have. We should use the clang coverage
-  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
-
-Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
-
-Notes:
-- problems with python dependencies: [[https://github.com/micropython/micropython/issues/3246][cpp-coveralls 0.4.0 came and
-  broke Travis build]]
-
 *** COMPLETED Create bitbbucket backups for reference implementation  :story:
     CLOSED: [2018-10-17 Wed 10:03]
     :LOGBOOK:
@@ -492,22 +514,6 @@ Work for the next vcpkg update:
 - pull in [[https://github.com/boost-experimental/di][boost.di]].
 - add flags as per visibility warnings story.
 - update docs with all the workarounds.
-
-*** COMPLETED Check that C++ 17 is enabled on MSVC                    :story:
-    CLOSED: [2018-10-18 Thu 16:20]
-    :LOGBOOK:
-    CLOCK: [2018-10-18 Thu 16:21]--[2018-10-18 Thu 16:29] =>  0:08
-    CLOCK: [2018-10-18 Thu 16:11]--[2018-10-18 Thu 16:20] =>  0:09
-    CLOCK: [2018-10-18 Thu 14:46]--[2018-10-18 Thu 14:51] =>  0:05
-    :END:
-
-When looking at the log files, there are no mentions of C++ 17. Ensure
-we are setting this for MSVC.
-
-We are now compiling with C++ 17, but builds are now longer than 1h
-and so are getting killed. We will leave it like that and hopefully
-find ways of reducing the build time - we are also close to the limit
-on Linux as well.
 
 *** COMPLETED Fix warnings on OSX                                     :story:
     CLOSED: [2018-10-18 Thu 17:06]
@@ -681,33 +687,10 @@ Links:
 
 - [[https://blog.dachary.org/2014/02/09/figuring-out-why-ccache-misses/][figuring out why ccache misses]]
 
-*** STARTED Read up on framework and API design                       :story:
-     :LOGBOOK:
-     CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
-     CLOCK: [2018-10-19 Fri 09:54]--[2018-10-19 Fri 10:11] =>  0:17
-     CLOCK: [2018-10-19 Fri 09:28]--[2018-10-19 Fri 09:53] =>  0:25
-     CLOCK: [2018-10-18 Thu 09:36]--[2018-10-18 Thu 09:56] =>  0:20
-     CLOCK: [2018-10-17 Wed 14:05]--[2018-10-17 Wed 14:19] =>  0:14
-     CLOCK: [2018-10-17 Wed 10:03]--[2018-10-17 Wed 10:52] =>  0:49
-     :END:
-
-Now that we are creating a top-level API for Dogen we should really
-read up on books about good API design.
-
-Namespacing guideline:
-
-- company | project
-- product | technology
-- feature
-- subnamespace
-
-So in our case, =masd::dogen= and =masd::cpp_ref_impl=. We are
-violating the guideline on no abbreviations with ref_impl but
-=cpp_reference_implementation= seems a tad long.
-
-*** STARTED Design a top-level Dogen API                              :story:
+*** COMPLETED Design a top-level Dogen API                            :story:
+    CLOSED: [2018-10-22 Mon 17:12]
     :LOGBOOK:
-    CLOCK: [2018-10-22 Mon 16:05]
+    CLOCK: [2018-10-22 Mon 16:05]--[2018-10-22 Mon 17:12] =>  1:07
     CLOCK: [2018-10-22 Mon 09:03]--[2018-10-22 Mon 09:21] =>  0:18
     CLOCK: [2018-10-20 Sat 07:48]--[2018-10-20 Sat 07:55] =>  0:07
     CLOCK: [2018-10-20 Sat 07:02]--[2018-10-20 Sat 07:43] =>  0:46
@@ -766,6 +749,76 @@ Architecture vision:
   forth.
 - for generation we can use the "template approach", whereby the
   generation element becomes a template.
+- following on from FDG, we will from now on name all models:
+  ORGANISATION.PRODUCT.COMPONENT, where ORGANISATION is the top-level
+  umbrella organisation (e.g. MASD), PRODUCT is the individual product
+  (e.g. dogen) and the component is the library or executable.
+
+*** STARTED Read up on framework and API design                       :story:
+     :LOGBOOK:
+     CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
+     CLOCK: [2018-10-19 Fri 09:54]--[2018-10-19 Fri 10:11] =>  0:17
+     CLOCK: [2018-10-19 Fri 09:28]--[2018-10-19 Fri 09:53] =>  0:25
+     CLOCK: [2018-10-18 Thu 09:36]--[2018-10-18 Thu 09:56] =>  0:20
+     CLOCK: [2018-10-17 Wed 14:05]--[2018-10-17 Wed 14:19] =>  0:14
+     CLOCK: [2018-10-17 Wed 10:03]--[2018-10-17 Wed 10:52] =>  0:49
+     :END:
+
+Now that we are creating a top-level API for Dogen we should really
+read up on books about good API design.
+
+Namespacing guideline:
+
+- company | project
+- product | technology
+- feature
+- subnamespace
+
+So in our case, =masd::dogen= and =masd::cpp_ref_impl=. We are
+violating the guideline on no abbreviations with ref_impl but
+=cpp_reference_implementation= seems a tad long.
+
+*** STARTED Update dogen namespaces to match the new specification    :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-22 Mon 17:13]--[2018-10-22 Mon 17:28] =>  0:15
+    :END:
+
+Following on [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces][from FDG]], we will from now on name all models:
+
+: ORGANISATION.PRODUCT.COMPONENT
+
+Where ORGANISATION is the top-level umbrella organisation (e.g. MASD),
+PRODUCT is the individual product (e.g. dogen) and the component is
+the library or executable.
+
+There have been many discussions on this topic, and there are many
+pluses and minuses, but one important point is that we need a
+consistent approach, and this is as supported by FDG.
+
+We will update the model modules rather than external modules so that
+the directory names follow the same naming convention.
+
+We need to update one model at a time.
+
+*** STARTED Add support for nested namespaces
+    :LOGBOOK:
+    CLOCK: [2018-10-22 Mon 17:35]--[2018-10-22 Mon 18:22] =>  0:47
+    CLOCK: [2018-10-22 Mon 17:28]--[2018-10-22 Mon 17:34] =>  0:06
+    :END:
+
+Enable c++17. - windows requires cpp latest. Then fix inner namespaces
+(e.g. =a::b::c=).
+
+We still need to support the old syntax for pre c++-17.
+
+We need to add a new standard to =generator.cpp= and when its set to
+c++-17 we should automatically use nested namespaces.
+
+Links:
+
+- [[https://stackoverflow.com/questions/11358425/is-there-a-better-way-to-express-nested-namespaces-in-c-within-the-header][Is there a better way to express nested namespaces in C++ within the header]]
+- [[https://en.cppreference.com/w/cpp/language/namespace][C++ Namespaces]]
+- [[http://www.nuonsoft.com/blog/2017/08/01/c17-nested-namespaces/][C++17: Nested Namespaces]]
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
@@ -820,6 +873,10 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** Update ref impl namespaces to match the new specification         :story:
+
+Perform the namespace update to the reference implementation.
 
 *** New approach to model testsing                                    :story:
 
@@ -950,16 +1007,6 @@ Conclusions:
   generate products.
 - as facets are enabled, tests are automatically generated for them.
 - build the result and run all tests.
-
-*** Add support for inline namespaces                                 :story:
-
-Enable c++17. - windows requires cpp latest. Then fix inner namespaces
-(e.g. =a::b::c=).
-
-We still need to support the old syntax for pre c++-17.
-
-We need to add a new standard to =quilt.cpp= and when its set to
-c++-17 we should automatically use inline namespaces.
 
 *** Create some basic naming guidelines                               :story:
 
@@ -1525,6 +1572,24 @@ problem will apply to all new profiles:
 - pretty printable
 - serialisable
 - hashable
+
+*** Rename facets                                                     :story:
+
+We originally called our support for =std::hash= just =hash= and our
+support for =boost::serialization= just =serialization=. The problem
+is:
+
+- we may want to also support =boost::hash=.
+- we may want to support other serialisation types.
+
+We should rename these. Perhaps:
+
+- =std_hash=
+- =boost_serialization=: a tad verbose, but quite explicit.
+
+In addition, =io= is very misleading as the facet is not supposed to
+do I/O proper (e.g. serialisation) but more pretty-printing or debug
+dumping. So perhaps =pretty_print=.
 
 *** Update annotation profiles and stereotypes to masd namespace
 

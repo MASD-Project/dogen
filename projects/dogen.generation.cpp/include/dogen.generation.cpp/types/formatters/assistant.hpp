@@ -181,6 +181,11 @@ public:
     bool is_cpp_standard_98() const;
 
     /**
+     * @brief If true, the current standard is set to c++ 17.
+     */
+    bool is_cpp_standard_17() const;
+
+    /**
      * @brief If true, the current standard supports defaulted
      * functions.
      */

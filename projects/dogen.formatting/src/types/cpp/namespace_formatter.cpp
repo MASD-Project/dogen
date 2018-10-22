@@ -19,11 +19,13 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen.formatting/types/cpp/namespace_formatter.hpp"
 
 namespace {
 
 const std::string empty;
+const std::string separator("::");
 
 }
 
@@ -32,9 +34,10 @@ namespace formatting {
 namespace cpp {
 
 namespace_formatter::namespace_formatter(
-    const bool create_anonymous_namespace, const bool add_new_line)
+    const bool create_anonymous_namespace, const bool add_new_line,
+    const bool nested_namespace)
     : create_anonymous_namespace_(create_anonymous_namespace),
-      add_new_line_(add_new_line) {}
+      add_new_line_(add_new_line), nested_namespace_(nested_namespace) {}
 
 void namespace_formatter::
 format_begin(std::ostream& s, const std::string& ns) const {
@@ -68,6 +71,12 @@ format_begin(std::ostream& s, const std::list<std::string>& ns) const {
         return;
     }
 
+    if (nested_namespace_) {
+        const auto joined_ns(boost::algorithm::join(ns, separator));
+        s << "namespace " << joined_ns << " {" << std::endl;
+        return;
+    }
+
     for (auto n : ns)
         format_begin(s, n);
 }
@@ -79,6 +88,16 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
 
     if (ns.empty()) {
         format_end(s, empty);
+        return;
+    }
+
+    if (nested_namespace_) {
+        const auto joined_ns(boost::algorithm::join(ns, separator));
+        format_end(s, joined_ns);
+
+        if (add_new_line_)
+            s << std::endl;
+
         return;
     }
 
