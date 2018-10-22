@@ -34,7 +34,8 @@ enum class cpp_standards : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     cpp_98 = 1,
     cpp_11 = 2,
-    cpp_14 = 3
+    cpp_14 = 3,
+    cpp_17 = 4
 };
 
 } } } }

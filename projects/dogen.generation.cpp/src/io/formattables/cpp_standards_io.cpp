@@ -45,6 +45,9 @@ std::ostream& operator<<(std::ostream& s, const cpp_standards& v) {
     case cpp_standards::cpp_14:
         attr = "\"cpp_14\"";
         break;
+    case cpp_standards::cpp_17:
+        attr = "\"cpp_17\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for cpp_standards");
     }
