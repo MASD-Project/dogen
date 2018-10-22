@@ -1,0 +1,66 @@
+{
+  "name": "dogen.disable_common_facets_temp",
+  "parents": [
+    "dogen"
+  ],
+  "scope": "root_module",
+  "templates": [
+    {
+      "name": {
+        "simple": "enabled",
+        "qualified": "quilt.cpp.cmake.enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt",
+        "backend": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "false"
+      ]
+    },
+    {
+      "name": {
+        "simple": "enabled",
+        "qualified": "quilt.cpp.odb.enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt",
+        "backend": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "false"
+      ]
+    },
+    {
+      "name": {
+        "simple": "enabled",
+        "qualified": "quilt.cpp.test_data.enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt",
+        "backend": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "false"
+      ]
+    },
+      {
+      "name": {
+        "simple": "enabled",
+        "qualified": "quilt.cpp.serialization.enabled"
+      },
+      "archetype_location": {
+        "kernel": "quilt",
+        "backend": "quilt.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "false"
+      ]
+    }
+
+  ]
+}
