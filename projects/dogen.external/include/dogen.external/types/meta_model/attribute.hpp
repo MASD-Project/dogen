@@ -29,7 +29,6 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.external/serialization/meta_model/attribute_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {
@@ -49,13 +48,6 @@ public:
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::string>& stereotypes,
         const std::string& type);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::external::meta_model::attribute& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::external::meta_model::attribute& v, unsigned int version);
 
 public:
     const std::string& name() const;

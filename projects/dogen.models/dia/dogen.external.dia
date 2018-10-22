@@ -647,13 +647,13 @@
         <dia:point val="66,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,33.95;73.865,37.05"/>
+        <dia:rectangle val="65.95,33.95;74.25,37.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="66,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -902,7 +902,7 @@
         <dia:point val="-22,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-22.05,-12.05;2.05,4.15"/>
+        <dia:rectangle val="-22.05,-12.05;2.05,3.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -914,7 +914,7 @@
         <dia:real val="24.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.100000000000001"/>
+        <dia:real val="15.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -945,7 +945,7 @@ An exogenous model is defined as:
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -2378,13 +2378,13 @@ for Java, etc.#</dia:string>
         <dia:point val="13,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.95,-8.05;23.175,-4.35"/>
+        <dia:rectangle val="12.95,-8.05;23.56,-4.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="13,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="10.51"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -3218,7 +3218,7 @@ for Java, etc.#</dia:string>
         <dia:point val="41.755,51.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.005,50.65;46.2,59.6"/>
+        <dia:rectangle val="41.005,50.65;46.2,58.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3290,7 +3290,7 @@ for Java, etc.#</dia:string>
         <dia:point val="21.725,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,51.35;22.475,59.6"/>
+        <dia:rectangle val="16.95,51.35;22.475,58.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3362,7 +3362,7 @@ for Java, etc.#</dia:string>
         <dia:point val="21.725,61.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.975,60.85;34.2,69.6"/>
+        <dia:rectangle val="20.975,60.85;34.2,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3434,7 +3434,7 @@ for Java, etc.#</dia:string>
         <dia:point val="58.7625,62.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.69,61.65;59.5125,69.6"/>
+        <dia:rectangle val="43.69,61.65;59.5125,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3506,7 +3506,7 @@ for Java, etc.#</dia:string>
         <dia:point val="38.87,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.3275,51.35;39.62,69.6"/>
+        <dia:rectangle val="29.3275,51.35;39.62,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3578,7 +3578,7 @@ for Java, etc.#</dia:string>
         <dia:point val="80.83,51.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.82,50.65;81.58,75.8"/>
+        <dia:rectangle val="38.82,50.65;81.58,75.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3650,7 +3650,7 @@ for Java, etc.#</dia:string>
         <dia:point val="10,40.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.25,40.05;29.5775,48.6"/>
+        <dia:rectangle val="9.25,40.05;29.5775,47.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

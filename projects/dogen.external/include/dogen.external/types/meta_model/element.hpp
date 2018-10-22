@@ -30,7 +30,6 @@
 #include <utility>
 #include <algorithm>
 #include "dogen.external/types/meta_model/attribute.hpp"
-#include "dogen.external/serialization/meta_model/element_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {
@@ -63,13 +62,6 @@ public:
         const bool is_default_enumeration_type,
         const bool is_associative_container,
         const bool is_floating_point);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::external::meta_model::element& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::external::meta_model::element& v, unsigned int version);
 
 public:
     const std::string& name() const;
