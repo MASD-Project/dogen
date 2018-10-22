@@ -1588,7 +1588,7 @@
         <dia:point val="-35,-10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-35.05,-10.05;-15.57,-2.65"/>
+        <dia:rectangle val="-35.05,-10.05;-15.57,-1.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1600,7 +1600,7 @@
         <dia:real val="19.380000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.2999999999999998"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -1621,7 +1621,8 @@
 - Error parsing model. Which type caused it.
 - Error outputting model.
 - Error outputting tracing.
-- Could not write to output directory.#</dia:string>
+- Could not write to output directory.
+- Output directory is a file.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -1643,16 +1644,16 @@
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="-15.62,-6.35"/>
+        <dia:point val="-15.62,-5.95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-15.6862,-9.28492;-9.78919,-6.28381"/>
+        <dia:rectangle val="-15.6875,-9.27741;-9.76982,-5.88249"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-15.62,-6.35"/>
+        <dia:point val="-15.62,-5.95"/>
         <dia:point val="-10,-8.9"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -1668,7 +1669,7 @@
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-12.81,-7.125"/>
+        <dia:point val="-12.81,-6.925"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O11" connection="4"/>
@@ -8319,7 +8320,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Weaving failures:
+            <dia:string>#Conversion failures:
 
 - Target could not be found, openend.
 - Unsupported model type.

@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen.generation/types/meta_model/formatting_styles.hpp"
-#include "dogen.generation/serialization/meta_model/artefact_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -55,13 +54,6 @@ public:
         const std::list<std::string>& dependencies,
         const dogen::generation::meta_model::formatting_styles formatting_style,
         const std::string& formatting_input);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::meta_model::artefact_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::meta_model::artefact_properties& v, unsigned int version);
 
 public:
     bool enabled() const;

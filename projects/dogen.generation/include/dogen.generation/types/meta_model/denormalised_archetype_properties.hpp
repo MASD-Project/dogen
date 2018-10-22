@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.generation/serialization/meta_model/denormalised_archetype_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -56,13 +55,6 @@ public:
         const bool archetype_enabled,
         const boost::optional<bool>& archetype_overwrite,
         const std::string& archetype_postfix);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::meta_model::denormalised_archetype_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::meta_model::denormalised_archetype_properties& v, unsigned int version);
 
 public:
     bool backend_enabled() const;

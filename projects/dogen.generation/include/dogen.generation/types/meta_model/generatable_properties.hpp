@@ -33,7 +33,6 @@
 #include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 #include "dogen.generation/types/meta_model/artefact_properties.hpp"
 #include "dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
-#include "dogen.generation/serialization/meta_model/generatable_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -55,13 +54,6 @@ public:
         const dogen::formatting::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::meta_model::generatable_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::meta_model::generatable_properties& v, unsigned int version);
 
 public:
     void to_stream(std::ostream& s) const override;

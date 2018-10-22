@@ -29,7 +29,6 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen.generation/types/meta_model/artefact.hpp"
-#include "dogen.generation/serialization/meta_model/text_model_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -46,13 +45,6 @@ public:
     text_model(
         const std::list<dogen::generation::meta_model::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::meta_model::text_model& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::meta_model::text_model& v, unsigned int version);
 
 public:
     const std::list<dogen::generation::meta_model::artefact>& artefacts() const;

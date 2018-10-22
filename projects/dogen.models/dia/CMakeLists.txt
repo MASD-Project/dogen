@@ -24,6 +24,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
         set(target ${model})
         set(target_ext ${target}.${frontend})
         set(target_path ${models_dir}/${target_ext})
+        message(STATUS knit_${target_ext})
         add_custom_target(knit_${target_ext}
             COMMENT "Knitting ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}

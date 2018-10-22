@@ -28,7 +28,6 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen.generation/types/meta_model/path_contribution_types.hpp"
-#include "dogen.generation/serialization/meta_model/intra_backend_segment_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -53,13 +52,6 @@ public:
         const dogen::generation::meta_model::path_contribution_types model_modules,
         const dogen::generation::meta_model::path_contribution_types internal_modules,
         const dogen::generation::meta_model::path_contribution_types facet);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::meta_model::intra_backend_segment_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::meta_model::intra_backend_segment_properties& v, unsigned int version);
 
 public:
     /**

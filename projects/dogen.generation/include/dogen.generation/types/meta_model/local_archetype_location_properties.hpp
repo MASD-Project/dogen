@@ -27,7 +27,6 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.generation/serialization/meta_model/local_archetype_location_properties_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -48,13 +47,6 @@ public:
         const boost::optional<bool>& archetype_enabled,
         const boost::optional<bool>& facet_overwrite,
         const boost::optional<bool>& archetype_overwrite);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::meta_model::local_archetype_location_properties& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::meta_model::local_archetype_location_properties& v, unsigned int version);
 
 public:
     const boost::optional<bool>& facet_enabled() const;

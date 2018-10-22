@@ -28,7 +28,6 @@
 #include <string>
 #include <algorithm>
 #include "dogen.generation/types/meta_model/formatting_styles.hpp"
-#include "dogen.generation/serialization/transforms/formatting_configuration_fwd_ser.hpp"
 
 namespace dogen {
 namespace generation {
@@ -47,13 +46,6 @@ public:
     formatting_configuration(
         const dogen::generation::meta_model::formatting_styles style,
         const std::string& input);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::generation::transforms::formatting_configuration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::generation::transforms::formatting_configuration& v, unsigned int version);
 
 public:
     dogen::generation::meta_model::formatting_styles style() const;
