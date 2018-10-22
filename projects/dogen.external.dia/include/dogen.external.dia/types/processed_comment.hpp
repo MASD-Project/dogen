@@ -29,7 +29,6 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.external.dia/serialization/processed_comment_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {
@@ -54,13 +53,6 @@ public:
         const bool applicable_to_parent_object,
         const std::string& original_content,
         const std::string& external_modules);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::external::dia::processed_comment& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::external::dia::processed_comment& v, unsigned int version);
 
 public:
     /**

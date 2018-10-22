@@ -33,7 +33,6 @@
 #include "dogen.external.dia/types/dia_object_types.hpp"
 #include "dogen.external.dia/types/processed_comment.hpp"
 #include "dogen.external.dia/types/processed_attribute.hpp"
-#include "dogen.external.dia/serialization/processed_object_fwd_ser.hpp"
 
 namespace dogen {
 namespace external {
@@ -63,13 +62,6 @@ public:
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
         const std::list<dogen::external::dia::processed_attribute>& attributes);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::external::dia::processed_object& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::external::dia::processed_object& v, unsigned int version);
 
 public:
     /**
