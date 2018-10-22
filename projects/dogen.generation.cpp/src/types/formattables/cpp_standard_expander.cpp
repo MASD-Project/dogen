@@ -34,6 +34,7 @@ lg(logger_factory("generation.cpp.formattables.cpp_standard_expander"));
 const std::string cpp_98("c++-98");
 const std::string cpp_11("c++-11");
 const std::string cpp_14("c++-14");
+const std::string cpp_17("c++-17");
 
 const std::string invalid_standard("Standard is invalid or unsupported: ");
 
@@ -50,8 +51,10 @@ cpp_standard_expander::to_cpp_standard(const std::string& s) const {
         return cpp_standards::cpp_98;
     else if (s == cpp_11)
         return cpp_standards::cpp_11;
-    if (s == cpp_14)
+    else if (s == cpp_14)
         return cpp_standards::cpp_14;
+    else if (s == cpp_17)
+        return cpp_standards::cpp_17;
 
     BOOST_LOG_SEV(lg, error) << invalid_standard << s;
     BOOST_THROW_EXCEPTION(expansion_error(invalid_standard + s));
