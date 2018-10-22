@@ -2,7 +2,6 @@
 <#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::serialization #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency="dogen.utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/registrar.hpp" #>
 <#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>

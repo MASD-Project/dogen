@@ -29,7 +29,6 @@
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/registrar.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 

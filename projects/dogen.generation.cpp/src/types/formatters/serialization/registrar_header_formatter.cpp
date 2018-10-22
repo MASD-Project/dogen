@@ -25,7 +25,6 @@
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/registrar.hpp"
-#include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
 
 namespace dogen {
 namespace generation {
