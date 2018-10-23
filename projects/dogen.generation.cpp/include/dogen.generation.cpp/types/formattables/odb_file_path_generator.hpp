@@ -27,10 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class odb_file_path_generator final {
 public:
@@ -48,6 +45,6 @@ public:
 
 };
 
-} } } }
+}
 
 #endif

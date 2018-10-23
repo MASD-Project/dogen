@@ -42,10 +42,7 @@
 #include "dogen.generation.cpp/types/formatters/registrar.hpp"
 #include "dogen.generation.cpp/types/formatters/stitch_formatter.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 /**
  * @brief Generates all files for the supplied entity.
@@ -85,6 +82,6 @@ private:
     const stitch_formatter stitch_formatter_;
 };
 
-} } } }
+}
 
 #endif

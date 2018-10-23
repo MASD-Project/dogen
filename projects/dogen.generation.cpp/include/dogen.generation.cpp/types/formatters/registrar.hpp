@@ -37,10 +37,8 @@
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+
+namespace dogen::generation::cpp::formatters {
 
 /**
  * @brief Manages formatter registration.
@@ -144,6 +142,6 @@ inline void register_helper_formatter(registrar& rg) {
     rg.register_helper_formatter(f);
 }
 
-} } } }
+}
 
 #endif

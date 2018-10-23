@@ -20,11 +20,8 @@
  */
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
 
-} } } }
+}

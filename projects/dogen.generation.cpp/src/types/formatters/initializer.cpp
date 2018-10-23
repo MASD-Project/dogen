@@ -31,10 +31,7 @@
 #include "dogen.generation.cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<visual_studio_solution_formatter>(rg);
@@ -51,4 +48,4 @@ void initializer::initialize(registrar& rg) {
     serialization::initializer::initialize(rg);
 }
 
-} } } }
+}

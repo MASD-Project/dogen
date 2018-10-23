@@ -49,10 +49,7 @@ const std::string formatter_not_found_for_type(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 namespace {
 
@@ -198,4 +195,4 @@ master_header_factory::make(const formatters::repository& frp,
     return r;
 }
 
-} } } }
+}

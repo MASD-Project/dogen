@@ -35,10 +35,7 @@
 #include "dogen.generation.cpp/types/formattables/element_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 /**
  * @brief Supplies additional information required for formatting.
@@ -80,6 +77,6 @@ private:
     helpers_;
 };
 
-} } } }
+}
 
 #endif

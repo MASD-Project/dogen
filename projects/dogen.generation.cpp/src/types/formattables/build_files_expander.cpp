@@ -50,10 +50,7 @@ const std::string missing_qualified_name(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 bool odb_target_comparer(
     const fabric::odb_target& lhs, const fabric::odb_target& rhs) {
@@ -249,4 +246,4 @@ void build_files_expander::expand(const locator& l, model& fm) const {
     }
 }
 
-} } } }
+}

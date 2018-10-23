@@ -27,10 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class repository_factory final {
 public:
@@ -48,6 +45,6 @@ public:
 
 };
 
-} } } }
+}
 
 #endif

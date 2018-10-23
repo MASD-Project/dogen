@@ -28,15 +28,11 @@
 #include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::cpp::formatters::io {
 
 void inserter_implementation_helper(
     assistant& a, const modeling::meta_model::object& o, const bool inside_class);
 
-} } } } }
+}
 
 #endif

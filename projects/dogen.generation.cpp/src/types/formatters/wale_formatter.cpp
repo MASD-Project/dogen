@@ -35,10 +35,7 @@ const std::string missing_input("Missing formatting input");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 bool wale_formatter::is_header(const inclusion_support_types ist) const {
     return
@@ -82,4 +79,4 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     return a.make_artefact();
 }
 
-} } } }
+}

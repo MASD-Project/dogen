@@ -36,10 +36,7 @@ static logger lg(logger_factory("generation.cpp.formattables.aspect_expander"));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s, const aspect_expander::type_group& v) {
@@ -235,4 +232,4 @@ expand(const annotations::type_repository& atrp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }
 
-} } } }
+}

@@ -20,14 +20,10 @@
  */
 #include "dogen.generation.cpp/types/formatters/rapidjson/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace rapidjson {
+namespace dogen::generation::cpp::formatters::rapidjson {
 
 bool initializer::operator==(const initializer& /*rhs*/) const {
     return true;
 }
 
-} } } } }
+}

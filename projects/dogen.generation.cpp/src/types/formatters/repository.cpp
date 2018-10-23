@@ -22,10 +22,7 @@
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::unordered_map<
     std::string,
@@ -80,4 +77,4 @@ const std::unordered_map<
     return helper_formatters_;
 }
 
-} } } }
+}

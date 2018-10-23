@@ -29,16 +29,13 @@
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class facet_directory_expander {
 public:
     void expand(const locator& l, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

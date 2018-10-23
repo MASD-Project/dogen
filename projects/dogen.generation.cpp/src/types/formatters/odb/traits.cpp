@@ -22,11 +22,7 @@
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace odb {
+namespace dogen::generation::cpp::formatters::odb {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".odb");
@@ -73,4 +69,4 @@ std::string traits::primitive_header_archetype() {
     return r;
 }
 
-} } } } }
+}

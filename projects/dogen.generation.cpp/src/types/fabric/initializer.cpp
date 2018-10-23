@@ -22,13 +22,10 @@
 #include "dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen.generation.cpp/types/fabric/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 void initializer::initialize() {
     modeling::transforms::register_dynamic_transform<dynamic_transform>();
 }
 
-} } } }
+}

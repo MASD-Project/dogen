@@ -32,10 +32,7 @@
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class streaming_expander {
 private:
@@ -58,6 +55,6 @@ public:
     void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

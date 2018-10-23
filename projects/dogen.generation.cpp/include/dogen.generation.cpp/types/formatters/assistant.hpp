@@ -45,10 +45,7 @@
 #include "dogen.generation.cpp/types/formatters/context.hpp"
 #include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 /**
  * @brief Provides a number of utilities to formatters.
@@ -411,6 +408,6 @@ private:
     const bool requires_header_guard_;
 };
 
-} } } }
+}
 
 #endif

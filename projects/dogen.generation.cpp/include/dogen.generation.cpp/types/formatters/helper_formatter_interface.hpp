@@ -30,10 +30,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant_fwd.hpp"
 #include "dogen.generation.cpp/types/formattables/helper_properties_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class helper_formatter_interface {
 public:
@@ -54,6 +51,6 @@ public:
         const formattables::helper_properties& hp) const = 0;
 };
 
-} } } }
+}
 
 #endif

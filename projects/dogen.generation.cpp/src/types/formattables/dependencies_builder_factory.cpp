@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 dependencies_builder_factory::dependencies_builder_factory(
     const directive_group_repository& dgrp,
@@ -37,4 +34,4 @@ dependencies_builder dependencies_builder_factory::make() const {
         enabled_archetype_for_element_);
 }
 
-} } } }
+}

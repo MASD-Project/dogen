@@ -30,10 +30,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class master_header_factory final {
 public:
@@ -42,6 +39,6 @@ public:
         const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

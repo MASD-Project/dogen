@@ -27,10 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 /**
  * @brief All inclusions for implementation-level dependencies in
@@ -75,6 +72,6 @@ struct inclusion_constants {
     };
 };
 
-} } } }
+}
 
 #endif

@@ -93,10 +93,7 @@ bool include_directive_comparer(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 directive_group_repository inclusion_expander::
 create_directive_groups(const annotations::type_repository& atrp,
@@ -252,4 +249,4 @@ void inclusion_expander::expand(const annotations::type_repository& atrp,
     populate_inclusion_dependencies(frp, df, fbls);
 }
 
-} } } }
+}

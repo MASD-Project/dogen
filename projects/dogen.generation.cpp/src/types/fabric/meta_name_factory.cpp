@@ -21,10 +21,7 @@
 #include "dogen.modeling/types/helpers/name_builder.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 modeling::meta_model::location meta_name_factory::make_location() {
     modeling::meta_model::location r;
@@ -88,4 +85,4 @@ modeling::meta_model::name meta_name_factory::make_forward_declarations_name() {
     return r;
 }
 
-} } } }
+}

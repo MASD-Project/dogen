@@ -27,11 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace odb {
+namespace dogen::generation::cpp::formatters::odb {
 
 struct traits {
     /**
@@ -85,6 +81,6 @@ struct traits {
     static std::string primitive_implementation_archetype();
 };
 
-} } } } }
+}
 
 #endif

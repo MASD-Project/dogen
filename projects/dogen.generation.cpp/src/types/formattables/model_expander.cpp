@@ -31,10 +31,7 @@
 #include "dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
 #include "dogen.generation.cpp/types/formattables/model_expander.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 void model_expander::
 expand_streaming(const annotations::type_repository& atrp, model& fm) const {
@@ -146,4 +143,4 @@ void model_expander::expand(
     expand_build_files(l, fm);
 }
 
-} } } }
+}

@@ -26,9 +26,7 @@
 #include "dogen.generation.cpp/types/model_to_text_model_transform.hpp"
 #include "dogen.generation.cpp/types/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
+namespace dogen::generation::cpp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
@@ -36,4 +34,4 @@ void initializer::initialize() {
     modeling::transforms::register_transform<model_to_text_model_transform>();
 }
 
-} } }
+}

@@ -36,10 +36,7 @@
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class workflow {
 private:
@@ -61,6 +58,6 @@ public:
         const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

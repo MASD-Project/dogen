@@ -27,10 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class test_data_properties_expander final {
 public:
@@ -48,6 +45,6 @@ public:
 
 };
 
-} } } }
+}
 
 #endif

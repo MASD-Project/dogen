@@ -36,10 +36,7 @@
 #include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen.generation.cpp/types/formatters/context.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class artefact_formatter_interface {
 public:
@@ -108,6 +105,6 @@ public:
     format(const context& ctx, const modeling::meta_model::element& e) const = 0;
 };
 
-} } } }
+}
 
 #endif

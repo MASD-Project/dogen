@@ -28,10 +28,7 @@
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class canonical_archetype_expander {
 private:
@@ -43,6 +40,6 @@ public:
     void expand(const formatters::repository& frp, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

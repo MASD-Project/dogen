@@ -30,10 +30,7 @@ static logger lg(logger_factory("generation.cpp.formattables.workflow"));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 model workflow::make_model(const formatters::repository& frp,
     const modeling::meta_model::model& m) const {
@@ -62,4 +59,4 @@ model workflow::execute(
     return r;
 }
 
-} } } }
+}

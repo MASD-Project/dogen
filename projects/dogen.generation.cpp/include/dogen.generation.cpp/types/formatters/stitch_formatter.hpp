@@ -33,10 +33,7 @@
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class stitch_formatter final {
 public:
@@ -56,6 +53,6 @@ private:
     const templating::stitch::instantiator instantiator_;
 };
 
-} } } }
+}
 
 #endif

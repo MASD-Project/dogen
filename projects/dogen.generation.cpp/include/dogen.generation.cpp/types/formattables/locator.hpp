@@ -37,10 +37,7 @@
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/locator_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief Generates paths for project items, given qualified name.
@@ -286,6 +283,6 @@ private:
     const bool split_mode_;
 };
 
-} } } }
+}
 
 #endif

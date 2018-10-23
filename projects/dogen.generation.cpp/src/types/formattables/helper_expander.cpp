@@ -56,10 +56,7 @@ const std::string empty_identifiable(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class helper_properties_generator : public modeling::meta_model::element_visitor {
 public:
@@ -435,4 +432,4 @@ void helper_expander::expand(const annotations::type_repository& atrp,
     populate_helper_properties(cfg, frp, fm.formattables());
 }
 
-} } } }
+}

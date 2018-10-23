@@ -27,9 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
+namespace dogen::generation::cpp {
 
 /**
  * @brief Constants for all the top-level meta-data keys for the C++
@@ -225,6 +223,6 @@ struct traits {
     };
 };
 
-} } }
+}
 
 #endif

@@ -83,10 +83,7 @@ const std::string helpless_family("No registered helpers found for family: ");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>
@@ -717,4 +714,4 @@ modeling::meta_model::artefact assistant::make_artefact() const {
     return r;
 }
 
-} } } }
+}

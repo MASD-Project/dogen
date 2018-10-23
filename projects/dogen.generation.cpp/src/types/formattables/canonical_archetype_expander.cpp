@@ -34,10 +34,7 @@ lg(logger_factory("generation.cpp.formattables.canonical_archetype_expander"));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 void canonical_archetype_expander::expand(const formatters::repository& frp,
     formattables::element_properties& eprops,
@@ -97,4 +94,4 @@ expand(const formatters::repository& frp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }
 
-} } } }
+}

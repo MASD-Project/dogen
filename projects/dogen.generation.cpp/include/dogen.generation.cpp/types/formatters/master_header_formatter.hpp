@@ -27,10 +27,7 @@
 
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class master_header_formatter final : public artefact_formatter_interface {
 public:
@@ -64,6 +61,6 @@ private:
 
 };
 
-} } } }
+}
 
 #endif

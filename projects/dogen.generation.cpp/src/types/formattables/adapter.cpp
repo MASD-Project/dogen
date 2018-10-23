@@ -52,10 +52,7 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::string
 adapter::to_odb_database(const modeling::meta_model::orm_database_systems ds) {
@@ -197,4 +194,4 @@ model adapter::adapt(const formatters::repository& frp,
     return r;
 }
 
-} } } }
+}

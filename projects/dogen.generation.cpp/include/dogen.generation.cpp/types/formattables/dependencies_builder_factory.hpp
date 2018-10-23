@@ -34,10 +34,7 @@
 #include "dogen.generation.cpp/types/formattables/dependencies_builder.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief Creates inclusion dependencies builders.
@@ -70,6 +67,6 @@ private:
     enabled_archetype_for_element_;
 };
 
-} } } }
+}
 
 #endif

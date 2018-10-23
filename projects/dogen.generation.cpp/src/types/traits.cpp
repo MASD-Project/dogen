@@ -20,9 +20,7 @@
  */
 #include "dogen.generation.cpp/types/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
+namespace dogen::generation::cpp {
 
 std::string traits::kernel() {
     static std::string r("quilt");
@@ -225,4 +223,4 @@ std::string traits::cpp::aspect::requires_stream_manipulators() {
     return r;
 }
 
-} } }
+}

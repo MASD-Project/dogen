@@ -29,10 +29,7 @@ static logger lg(logger_factory("quit.cpp.formatters.reducer"));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 void reducer::reduce(model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Starting reduction.";
@@ -52,4 +49,4 @@ void reducer::reduce(model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Reduced size: " << fm.formattables().size();
 }
 
-} } } }
+}

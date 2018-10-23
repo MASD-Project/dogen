@@ -33,10 +33,7 @@
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class model_expander {
 private:
@@ -81,6 +78,6 @@ public:
         const formatters::repository& frp, const locator& l, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formatters/context.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 context::context(
     const std::unordered_set<modeling::meta_model::element_archetype>&
@@ -58,4 +55,4 @@ context::helpers() const {
     return helpers_;
 }
 
-} } } }
+}

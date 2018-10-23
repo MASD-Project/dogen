@@ -22,11 +22,7 @@
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::cpp::formatters::types {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".types");
@@ -88,4 +84,4 @@ std::string traits::primitive_implementation_archetype() {
     return r;
 }
 
-} } } } }
+}

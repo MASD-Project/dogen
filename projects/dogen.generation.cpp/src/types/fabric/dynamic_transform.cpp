@@ -36,10 +36,7 @@ static logger lg(logger_factory(id));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 bool dynamic_transform::
 requires_expansion(const modeling::meta_model::model& m) const {
@@ -81,4 +78,4 @@ void dynamic_transform::transform(const modeling::transforms::context& ctx,
     expand_decoration(dpf, m);
 }
 
-} } } }
+}

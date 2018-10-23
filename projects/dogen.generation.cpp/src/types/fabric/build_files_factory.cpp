@@ -40,10 +40,7 @@ const std::string msbuild_targets_name("msbuild_targets");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element> build_files_factory::
 make_cmakelists(const modeling::meta_model::model& m) const {
@@ -87,4 +84,4 @@ make(const modeling::meta_model::model& m) const {
     return r;
 }
 
-} } } }
+}

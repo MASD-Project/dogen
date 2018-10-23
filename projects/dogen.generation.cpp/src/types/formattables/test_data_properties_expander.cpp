@@ -20,13 +20,10 @@
  */
 #include "dogen.generation.cpp/types/formattables/test_data_properties_expander.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 bool test_data_properties_expander::operator==(const test_data_properties_expander& /*rhs*/) const {
     return true;
 }
 
-} } } }
+}

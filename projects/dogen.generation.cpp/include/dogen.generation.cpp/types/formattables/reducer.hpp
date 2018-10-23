@@ -27,16 +27,13 @@
 
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class reducer {
 public:
     void reduce(model& fm) const;
 };
 
-} } } }
+}
 
 #endif

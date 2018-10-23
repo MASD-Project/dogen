@@ -53,10 +53,7 @@ const std::string value_pragma("value");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class updator : public fabric::element_visitor {
 public:
@@ -340,4 +337,4 @@ void odb_expander::expand(const annotations::type_repository& atrp,
     BOOST_LOG_SEV(lg, debug) << "Finished expanding odb properties. ";
 }
 
-} } } }
+}

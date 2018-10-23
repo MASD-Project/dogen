@@ -28,13 +28,10 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const repository& rp);
 
-} } } }
+}
 
 #endif

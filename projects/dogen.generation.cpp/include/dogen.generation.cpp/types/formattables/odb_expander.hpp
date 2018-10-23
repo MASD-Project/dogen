@@ -33,10 +33,7 @@
 #include "dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class odb_expander {
 private:
@@ -54,6 +51,6 @@ public:
         model& fm) const;
 };
 
-} } } }
+}
 
 #endif

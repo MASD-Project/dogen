@@ -28,10 +28,7 @@
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 #include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class dynamic_transform final :
         public modeling::transforms::dynamic_transform_interface {
@@ -53,6 +50,6 @@ public:
         modeling::meta_model::model& m) const override;
 };
 
-} } } }
+}
 
 #endif

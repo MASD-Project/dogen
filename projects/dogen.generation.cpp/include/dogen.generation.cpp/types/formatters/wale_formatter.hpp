@@ -30,10 +30,7 @@
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class wale_formatter final {
 private:
@@ -45,6 +42,6 @@ public:
         const context& ctx, const modeling::meta_model::element& e) const;
 };
 
-} } } }
+}
 
 #endif

@@ -20,11 +20,8 @@
  */
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 helper_formatter_interface::~helper_formatter_interface() noexcept { }
 
-} } } }
+}

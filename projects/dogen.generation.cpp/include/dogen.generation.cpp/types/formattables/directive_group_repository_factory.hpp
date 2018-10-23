@@ -37,10 +37,7 @@
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class directive_group_repository_factory final {
 private:
@@ -108,6 +105,6 @@ public:
         const std::unordered_map<std::string, formattable>& formattables) const;
 };
 
-} } } }
+}
 
 #endif

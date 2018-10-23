@@ -41,9 +41,7 @@ const std::string dot(".");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
+namespace dogen::generation::cpp {
 
 model_to_text_model_transform::~model_to_text_model_transform() noexcept { }
 
@@ -182,4 +180,4 @@ model_to_text_model_transform::transform(const modeling::transforms::context& ct
     return r;
 }
 
-} } }
+}

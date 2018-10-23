@@ -31,10 +31,7 @@
 #include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class cpp_standard_expander final {
 private:
@@ -55,6 +52,6 @@ public:
         const annotations::annotation& ra, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

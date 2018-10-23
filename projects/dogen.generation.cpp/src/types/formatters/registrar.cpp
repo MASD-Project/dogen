@@ -55,10 +55,7 @@ const std::string null_helper_formatter("Formatter helper supplied is null");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 void registrar::
 validate(std::shared_ptr<artefact_formatter_interface> f) const {
@@ -292,4 +289,4 @@ registrar::helper_formatters() const {
     return formatter_repository_.helper_formatters();
 }
 
-} } } }
+}

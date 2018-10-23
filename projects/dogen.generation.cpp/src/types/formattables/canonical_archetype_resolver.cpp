@@ -38,10 +38,7 @@ const std::string missing_canonical_archetype(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 canonical_archetype_resolver::canonical_archetype_resolver(
     const std::unordered_map<std::string, formattable>& formattables)
@@ -84,4 +81,4 @@ std::string canonical_archetype_resolver::resolve(const std::string& element_id,
     return r;
 }
 
-} } } }
+}

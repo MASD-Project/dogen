@@ -27,10 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 struct traits {
     /**
@@ -54,6 +51,6 @@ struct traits {
     static std::string canonical_archetype(const std::string& facet);
 };
 
-} } } }
+}
 
 #endif

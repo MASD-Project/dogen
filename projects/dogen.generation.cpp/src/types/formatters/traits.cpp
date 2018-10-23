@@ -27,10 +27,7 @@ const std::string canonical_archetype_postfix(".canonical_archetype");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::string traits::
 master_header_archetype(const std::string& facet) {
@@ -91,4 +88,4 @@ std::string traits::visual_studio_project_guid() {
     return r;
 }
 
-} } } }
+}

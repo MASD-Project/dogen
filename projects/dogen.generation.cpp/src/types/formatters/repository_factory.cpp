@@ -20,13 +20,10 @@
  */
 #include "dogen.generation.cpp/types/formatters/repository_factory.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 bool repository_factory::operator==(const repository_factory& /*rhs*/) const {
     return true;
 }
 
-} } } }
+}

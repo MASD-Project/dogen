@@ -31,10 +31,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class registrar_factory final {
 private:
@@ -46,6 +43,6 @@ public:
     make(const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

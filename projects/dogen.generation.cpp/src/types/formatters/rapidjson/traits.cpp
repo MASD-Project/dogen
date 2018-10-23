@@ -20,14 +20,10 @@
  */
 #include "dogen.generation.cpp/types/formatters/rapidjson/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace rapidjson {
+namespace dogen::generation::cpp::formatters::rapidjson {
 
 bool traits::operator==(const traits& /*rhs*/) const {
     return true;
 }
 
-} } } } }
+}

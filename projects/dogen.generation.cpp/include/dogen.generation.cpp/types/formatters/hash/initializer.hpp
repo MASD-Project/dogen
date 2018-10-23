@@ -27,11 +27,7 @@
 
 #include "dogen.generation.cpp/types/formatters/registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace hash {
+namespace dogen::generation::cpp::formatters::hash {
 
 /**
  * @brief Initialises the serialization facet.
@@ -41,6 +37,6 @@ public:
     static void initialize(registrar& rg);
 };
 
-} } } } }
+}
 
 #endif

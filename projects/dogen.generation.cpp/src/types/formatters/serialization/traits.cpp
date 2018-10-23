@@ -22,11 +22,7 @@
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace serialization {
+namespace dogen::generation::cpp::formatters::serialization {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".serialization");
@@ -83,4 +79,4 @@ std::string traits::primitive_implementation_archetype() {
     return r;
 }
 
-} } } } }
+}

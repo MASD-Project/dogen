@@ -25,10 +25,7 @@
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.cpp/io/formatters/repository_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 template<typename Containee>
 inline std::ostream& to_stream(std::ostream& s, const std::string& key,
@@ -96,4 +93,4 @@ std::ostream& operator<<(std::ostream& s, const repository& rp) {
     return s;
 }
 
-} } } }
+}

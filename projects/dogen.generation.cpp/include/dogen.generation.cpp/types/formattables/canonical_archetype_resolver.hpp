@@ -29,10 +29,7 @@
 #include <unordered_map>
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief If given an archetype in canonical form and an element id,
@@ -57,6 +54,6 @@ private:
     const std::unordered_map<std::string, formattable>& formattables_;
 };
 
-} } } }
+}
 
 #endif

@@ -32,10 +32,7 @@
 #include "dogen.modeling/types/meta_model/model.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class odb_options_factory final {
 private:
@@ -49,6 +46,6 @@ public:
     make(const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

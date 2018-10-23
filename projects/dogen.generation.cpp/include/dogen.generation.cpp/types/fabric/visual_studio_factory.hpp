@@ -34,10 +34,7 @@
 #include "dogen.modeling/types/meta_model/model.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class visual_studio_factory final {
 private:
@@ -76,6 +73,6 @@ public:
         const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

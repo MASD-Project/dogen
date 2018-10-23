@@ -27,11 +27,7 @@
 
 #include "dogen.generation.cpp/types/formatters/registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace odb {
+namespace dogen::generation::cpp::formatters::odb {
 
 /**
  * @brief Initialises the odb facet.
@@ -41,6 +37,6 @@ public:
     static void initialize(registrar& rg);
 };
 
-} } } } }
+}
 
 #endif

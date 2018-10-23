@@ -40,10 +40,7 @@ const std::string invalid_standard("Standard is invalid or unsupported: ");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 cpp_standards
 cpp_standard_expander::to_cpp_standard(const std::string& s) const {
@@ -85,4 +82,4 @@ expand(const annotations::type_repository& atrp,
     BOOST_LOG_SEV(lg, debug) << "Finished expanding C++ standard.";
 }
 
-} } } }
+}

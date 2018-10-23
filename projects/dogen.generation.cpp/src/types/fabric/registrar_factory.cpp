@@ -35,10 +35,7 @@ const std::string simple_name("registrar");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 boost::shared_ptr<fabric::registrar> registrar_factory::
 make(const modeling::meta_model::name& model_name) const {
@@ -87,4 +84,4 @@ registrar_factory::make(const modeling::meta_model::model& m) const {
     return r;
 }
 
-} } } }
+}

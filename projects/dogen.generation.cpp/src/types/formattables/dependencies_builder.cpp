@@ -48,10 +48,7 @@ const std::string archetype_not_found("Cannot find archetype name: ");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 dependencies_builder::dependencies_builder(
     const directive_group_repository& dgrp,
@@ -140,4 +137,4 @@ std::list<std::string> dependencies_builder::build() {
     return dependencies_;
 }
 
-} } } }
+}

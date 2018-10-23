@@ -28,11 +28,7 @@
 #include "dogen.generation.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace odb {
+namespace dogen::generation::cpp::formatters::odb {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());
@@ -44,4 +40,4 @@ void initializer::initialize(registrar& rg) {
     register_formatter<object_odb_options_formatter>(rg);
 }
 
-} } } } }
+}

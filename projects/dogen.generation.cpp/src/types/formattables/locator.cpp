@@ -50,10 +50,7 @@ const std::string missing_backend_directory(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 locator::locator(
     const boost::filesystem::path& output_directory_path,
@@ -556,4 +553,4 @@ locator::facet_directories() const {
     return r;
 }
 
-} } } }
+}

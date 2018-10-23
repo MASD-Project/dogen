@@ -40,10 +40,7 @@ const std::string invalid_formatting_style("Invalid formatting style");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 
@@ -160,4 +157,4 @@ execute(const std::unordered_set<modeling::meta_model::element_archetype>&
     return r;
 }
 
-} } } }
+}

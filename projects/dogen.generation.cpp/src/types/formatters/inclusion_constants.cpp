@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::string inclusion_constants::std::string() {
     static ::std::string r("<string>");
@@ -120,4 +117,4 @@ std::string inclusion_constants::boost::exception::info() {
     return r;
 }
 
-} } } }
+}

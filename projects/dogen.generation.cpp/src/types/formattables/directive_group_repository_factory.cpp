@@ -59,10 +59,7 @@ const std::string secondary_without_primary(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s,
     const directive_group_repository_factory::
@@ -418,4 +415,4 @@ make(const annotations::type_repository& atrp,
     return r;
 }
 
-} } } }
+}

@@ -36,10 +36,7 @@ const std::string stitch_extension(".stitch");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 stitch_formatter::stitch_formatter(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
@@ -88,4 +85,4 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     return r;
 }
 
-} } } }
+}

@@ -30,10 +30,7 @@
 #include "dogen.modeling/types/meta_model/model.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class forward_declarations_factory final {
 public:
@@ -41,6 +38,6 @@ public:
     make(const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

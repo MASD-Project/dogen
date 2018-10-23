@@ -25,16 +25,13 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class initializer {
 public:
     static void initialize();
 };
 
-} } } }
+}
 
 #endif

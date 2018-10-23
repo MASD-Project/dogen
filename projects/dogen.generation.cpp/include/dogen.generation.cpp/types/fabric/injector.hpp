@@ -31,10 +31,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.modeling/types/meta_model/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class injector {
 public:
@@ -63,6 +60,6 @@ public:
         modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

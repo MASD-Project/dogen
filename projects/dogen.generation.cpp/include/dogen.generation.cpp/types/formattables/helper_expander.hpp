@@ -33,10 +33,7 @@
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class helper_expander {
 private:
@@ -66,6 +63,6 @@ public:
         const formatters::repository& frp, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

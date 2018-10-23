@@ -27,11 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace rapidjson {
+namespace dogen::generation::cpp::formatters::rapidjson {
 
 class initializer final {
 public:
@@ -49,6 +45,6 @@ public:
 
 };
 
-} } } } }
+}
 
 #endif

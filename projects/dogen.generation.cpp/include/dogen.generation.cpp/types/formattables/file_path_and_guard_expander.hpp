@@ -30,10 +30,7 @@
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class file_path_and_guard_expander {
 public:
@@ -41,6 +38,6 @@ public:
         model& fm) const;
 };
 
-} } } }
+}
 
 #endif

@@ -40,9 +40,7 @@
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
+namespace dogen::generation::cpp {
 
 /**
  * @brief Implements a C++ model to text transform.
@@ -129,6 +127,6 @@ public:
         const modeling::meta_model::model& m) const override;
 };
 
-} } }
+}
 
 #endif

@@ -39,10 +39,7 @@ static logger lg(logger_factory(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class generator final : public modeling::meta_model::element_visitor {
 private:
@@ -107,4 +104,4 @@ make(const modeling::meta_model::model& m) const {
     return r;
 }
 
-} } } }
+}

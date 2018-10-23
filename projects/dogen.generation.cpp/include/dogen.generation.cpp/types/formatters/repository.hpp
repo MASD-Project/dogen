@@ -33,10 +33,7 @@
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class registrar;
 
@@ -130,6 +127,6 @@ private:
     helper_formatters_;
 };
 
-} } } }
+}
 
 #endif

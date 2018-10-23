@@ -28,16 +28,13 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class header_guard_factory final {
 public:
     static std::string make(const boost::filesystem::path& p);
 };
 
-} } } }
+}
 
 #endif

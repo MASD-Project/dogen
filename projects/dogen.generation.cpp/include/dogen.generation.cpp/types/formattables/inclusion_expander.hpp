@@ -36,10 +36,7 @@
 #include "dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief Generates all inclusion dependencies.
@@ -94,6 +91,6 @@ public:
         const formatters::repository& frp, const locator& l, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

@@ -35,10 +35,7 @@ static logger lg(logger_factory("generation.cpp.formattables.streaming_expander"
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s,
     const streaming_expander::type_group& v) {
@@ -140,4 +137,4 @@ expand(const annotations::type_repository& atrp, model& fm) const {
                              << "Result: "<< fm.streaming_properties();
 }
 
-} } } }
+}

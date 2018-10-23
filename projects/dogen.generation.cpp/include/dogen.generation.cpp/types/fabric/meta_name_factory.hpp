@@ -28,10 +28,7 @@
 #include <string>
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class meta_name_factory final {
 private:
@@ -52,6 +49,6 @@ public:
     static modeling::meta_model::name make_forward_declarations_name();
 };
 
-} } } }
+}
 
 #endif

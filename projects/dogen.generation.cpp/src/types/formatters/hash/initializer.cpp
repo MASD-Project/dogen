@@ -39,11 +39,7 @@
 #include "dogen.generation.cpp/types/formatters/hash/variant_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace hash {
+namespace dogen::generation::cpp::formatters::hash {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());
@@ -66,4 +62,4 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<variant_helper>(rg);
 }
 
-} } } } }
+}

@@ -39,10 +39,7 @@ static logger lg(logger_factory(id));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 injector::~injector() noexcept {}
 
@@ -113,4 +110,4 @@ void injector::inject(const annotations::type_repository& atrp,
     inject_forward_declarations(m);
 }
 
-} } } }
+}

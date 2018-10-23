@@ -35,10 +35,7 @@
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief Provides a number of useful transformations in the
@@ -64,6 +61,6 @@ public:
         const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

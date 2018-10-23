@@ -40,10 +40,7 @@ const std::string common_odb_options_name("common");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element> odb_options_factory::
 make(const modeling::meta_model::name& n,
@@ -119,4 +116,4 @@ odb_options_factory::make(const modeling::meta_model::model& m) const {
     return r;
 }
 
-} } } }
+}

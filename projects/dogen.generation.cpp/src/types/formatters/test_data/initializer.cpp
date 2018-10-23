@@ -45,11 +45,7 @@
 #include "dogen.generation.cpp/types/formatters/test_data/variant_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());
@@ -78,4 +74,4 @@ void initializer::initialize(registrar& rg) {
     register_helper_formatter<variant_helper>(rg);
 }
 
-} } } } }
+}

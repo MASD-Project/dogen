@@ -51,10 +51,7 @@ const std::string odb_modeline_name("odb");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class decoration_updater : public element_visitor {
 public:
@@ -104,4 +101,4 @@ expand(const dogen::formatting::decoration_properties_factory& dpf,
     BOOST_LOG_SEV(lg, debug) << "Finished populating decoration properties.";
 }
 
-} } } }
+}
