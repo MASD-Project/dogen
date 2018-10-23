@@ -20,8 +20,7 @@
  */
 #include "dogen.options/types/darting_options.hpp"
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 darting_options::darting_options()
     : force_write_(static_cast<bool>(0)) { }
@@ -119,4 +118,4 @@ void darting_options::log_directory(const boost::filesystem::path&& v) {
     log_directory_ = std::move(v);
 }
 
-} }
+}

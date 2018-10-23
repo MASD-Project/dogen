@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 class stitching_options;
 
-} }
+}
 
 #endif

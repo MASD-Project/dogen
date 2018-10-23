@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.options/types/tailoring_options.hpp"
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::options::tailoring_options& v);
 
-} }
+}
 
 #endif

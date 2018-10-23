@@ -29,8 +29,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 class darting_options final {
 public:
@@ -91,7 +90,7 @@ private:
     boost::filesystem::path log_directory_;
 };
 
-} }
+}
 
 namespace std {
 

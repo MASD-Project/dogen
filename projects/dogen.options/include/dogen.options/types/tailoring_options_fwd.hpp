@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 class tailoring_options;
 
-} }
+}
 
 #endif

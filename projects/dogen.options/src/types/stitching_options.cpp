@@ -20,8 +20,7 @@
  */
 #include "dogen.options/types/stitching_options.hpp"
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 stitching_options::stitching_options()
     : force_write_(static_cast<bool>(0)),
@@ -133,4 +132,4 @@ void stitching_options::compatibility_mode(const bool v) {
     compatibility_mode_ = v;
 }
 
-} }
+}

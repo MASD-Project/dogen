@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.options/types/darting_options.hpp"
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::options::darting_options& v);
 
-} }
+}
 
 #endif

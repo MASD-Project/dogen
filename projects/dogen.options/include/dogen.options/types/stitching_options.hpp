@@ -29,8 +29,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 class stitching_options final {
 public:
@@ -104,7 +103,7 @@ private:
     bool compatibility_mode_;
 };
 
-} }
+}
 
 namespace std {
 

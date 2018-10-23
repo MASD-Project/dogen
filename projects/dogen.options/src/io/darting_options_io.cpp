@@ -31,8 +31,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace options {
+namespace dogen::options {
 
 std::ostream& operator<<(std::ostream& s, const darting_options& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -51,4 +50,4 @@ std::ostream& operator<<(std::ostream& s, const darting_options& v) {
     return(s);
 }
 
-} }
+}
