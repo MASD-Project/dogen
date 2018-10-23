@@ -105,9 +105,7 @@ dogen::dia::connection create_connection(const std::string& id) {
 
 }
 
-namespace dogen {
-namespace dia {
-namespace test {
+namespace dogen::dia::test {
 
 std::string mock_object_factory::to_oject_id(const unsigned int number) {
     return object_prefix + boost::lexical_cast<std::string>(number);
@@ -269,5 +267,4 @@ make_first_degree_cycle(unsigned int number) {
     return r;
 }
 
-
-} } }
+}

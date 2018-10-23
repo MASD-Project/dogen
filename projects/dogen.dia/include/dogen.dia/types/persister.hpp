@@ -28,8 +28,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.dia/types/diagram.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Persists a diagram to a file.
@@ -48,6 +47,6 @@ public:
     void persist(const dia::diagram& d, const boost::filesystem::path& p) const;
 };
 
-} }
+}
 
 #endif

@@ -91,8 +91,7 @@ const bool skip_whitespace(true);
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 class hydrator_impl {
 public:
@@ -433,4 +432,4 @@ diagram hydrator::hydrate(boost::filesystem::path file_name) {
     return h.hydrate();
 }
 
-} }
+}

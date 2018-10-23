@@ -25,9 +25,7 @@
 #include "dogen.dia/serialization/diagram_ser.hpp"
 #include "dogen.dia/test/diagram_serialization_helper.hpp"
 
-namespace dogen {
-namespace dia {
-namespace test {
+namespace dogen::dia::test {
 
 void diagram_serialization_helper::to_xml(std::ostream& s, const diagram& d) {
     boost::archive::xml_oarchive a(s);
@@ -43,4 +41,4 @@ diagram diagram_serialization_helper::from_xml(std::istream& s) {
     return r;
 }
 
-} } }
+}

@@ -30,9 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.dia/types/diagram.hpp"
 
-namespace dogen {
-namespace dia {
-namespace test {
+namespace dogen::dia::test {
 
 /**
  * @brief Test bed for the creation of serialisation helpers.
@@ -54,6 +52,6 @@ public:
     static diagram from_xml(std::istream& s);
 };
 
-} } }
+}
 
 #endif

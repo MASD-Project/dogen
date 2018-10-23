@@ -28,9 +28,7 @@
 #include "dogen.dia/types/diagram.hpp"
 #include "dogen.utility/test/file_asserter.hpp"
 
-namespace dogen {
-namespace dia {
-namespace test {
+namespace dogen::dia::test {
 
 class dia_file_asserter : public utility::test::file_asserter {
 public:
@@ -51,6 +49,6 @@ public:
         boost::filesystem::path actual) const override;
 };
 
-} } }
+}
 
 #endif

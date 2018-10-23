@@ -28,14 +28,13 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.dia/types/diagram.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 class hydrator {
 public:
     diagram hydrate(boost::filesystem::path file_name);
 };
 
-} }
+}
 
 #endif

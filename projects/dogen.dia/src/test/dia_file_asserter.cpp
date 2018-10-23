@@ -29,7 +29,7 @@
 
 using namespace dogen::utility::log;
 
-namespace  {
+namespace {
 
 logger lg(logger_factory("dia.dia_file_asserter"));
 
@@ -39,9 +39,7 @@ const std::string file_is_not_assertable(
 
 }
 
-namespace dogen {
-namespace dia {
-namespace test {
+namespace dogen::dia::test {
 
 bool dia_file_asserter::is_assertable(boost::filesystem::path path) const {
     return (path.extension().string() == dia_xml_extension);
@@ -55,9 +53,10 @@ dia::diagram dia_file_asserter::read_xml(boost::filesystem::path path) const {
 bool dia_file_asserter::assert_file(boost::filesystem::path expected,
     boost::filesystem::path actual) const {
 
-    if (!is_assertable(expected) || !is_assertable(actual))
-        BOOST_THROW_EXCEPTION(dogen::utility::exception::exception(file_is_not_assertable));
-
+    if (!is_assertable(expected) || !is_assertable(actual)) {
+        using dogen::utility::exception::exception;
+        BOOST_THROW_EXCEPTION(exception(file_is_not_assertable));
+    }
 
     const auto e(read_xml(expected));
     const auto a(read_xml(actual));
@@ -75,4 +74,4 @@ bool dia_file_asserter::assert_file(boost::filesystem::path expected,
     return false;
 }
 
-} } }
+}

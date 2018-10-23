@@ -28,9 +28,7 @@
 #include <array>
 #include "dogen.dia/types/object.hpp"
 
-namespace dogen {
-namespace dia {
-namespace test {
+namespace dogen::dia::test {
 
 /**
  * @brief Generates mock dia objects that are more realistic than the
@@ -138,6 +136,6 @@ public:
     make_first_degree_cycle(unsigned int number = 0);
 };
 
-} } }
+}
 
 #endif

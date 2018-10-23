@@ -37,8 +37,7 @@ const std::string unsupported_extension("Extension is not supported: ");
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 void persister::
 persist(const dia::diagram& d, const boost::filesystem::path& p) const {
@@ -53,4 +52,4 @@ persist(const dia::diagram& d, const boost::filesystem::path& p) const {
     xml_serialize<diagram>(p, d);
 }
 
-} }
+}
