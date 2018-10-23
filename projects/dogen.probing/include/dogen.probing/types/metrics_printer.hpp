@@ -29,8 +29,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.probing/types/metrics.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class metrics_printer final {
 private:
@@ -44,6 +43,6 @@ public:
         const boost::shared_ptr<const metrics> tm);
 };
 
-} }
+}
 
 #endif

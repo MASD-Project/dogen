@@ -35,8 +35,7 @@ const unsigned int txt_fill_size(4);
 
 }
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 void metrics_printer::print(std::ostream& o, unsigned int fill_level,
     const bool disable_guids_in_stats, const bool use_org_mode,
@@ -78,4 +77,4 @@ print(const bool disable_guids_in_stats, const bool use_org_mode,
     return r;
 }
 
-} }
+}

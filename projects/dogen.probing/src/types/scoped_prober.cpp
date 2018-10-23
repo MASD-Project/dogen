@@ -20,10 +20,9 @@
  */
 #include "dogen.probing/types/scoped_prober.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 // dummy function to suppress ranlib warnings
 void scoped_prober() { }
 
-} }
+}

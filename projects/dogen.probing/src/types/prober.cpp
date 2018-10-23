@@ -50,8 +50,7 @@ const std::string unexpected_empty("The stack must not be empty.");
 
 }
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 prober::prober(const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
@@ -304,6 +303,4 @@ void prober::end_probing() const {
     utility::filesystem::write(probe_directory_ / fn, s);
 }
 
-
-
-} }
+}

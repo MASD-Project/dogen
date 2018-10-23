@@ -29,8 +29,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.probing/types/prober.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class scoped_chain_prober final {
 public:
@@ -146,6 +145,6 @@ private:
     const prober& prober_;
 };
 
-} }
+}
 
 #endif

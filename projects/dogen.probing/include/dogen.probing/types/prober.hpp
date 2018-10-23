@@ -34,8 +34,7 @@
 #include "dogen.probing/types/metrics.hpp"
 #include "dogen.probing/types/metrics_builder.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class prober final {
 public:
@@ -149,6 +148,6 @@ private:
     const boost::filesystem::path probe_directory_;
 };
 
-} }
+}
 
 #endif

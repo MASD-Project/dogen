@@ -44,9 +44,7 @@ const std::string unmatch_start_end(
 
 }
 
-
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 metrics_builder::
 metrics_builder(const std::string& log_level, const bool writing_probe_data) {
@@ -135,4 +133,4 @@ boost::shared_ptr<metrics> metrics_builder::build() {
     return stack_.top();
 }
 
-} }
+}

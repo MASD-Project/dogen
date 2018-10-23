@@ -30,8 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.probing/types/metrics_fwd.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class metrics_builder final {
 public:
@@ -58,6 +57,6 @@ private:
     std::stack<boost::shared_ptr<metrics>> stack_;
 };
 
-} }
+}
 
 #endif
