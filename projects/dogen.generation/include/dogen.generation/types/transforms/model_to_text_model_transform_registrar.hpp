@@ -32,9 +32,7 @@
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
 #include "dogen.generation/types/transforms/model_to_text_model_transform_interface_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class model_to_text_model_transform_registrar final {
 public:
@@ -66,7 +64,7 @@ private:
     std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> > transforms_by_language__;
 };
 
-} } }
+}
 
 namespace std {
 

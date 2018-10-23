@@ -55,9 +55,7 @@ const std::string expected_one_output_language(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 namespace {
 
@@ -200,4 +198,4 @@ transform(const context& ctx, const
     return r;
 }
 
-} } }
+}

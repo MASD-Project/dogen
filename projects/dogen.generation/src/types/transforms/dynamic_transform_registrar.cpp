@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/dynamic_transform_registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool dynamic_transform_registrar::operator==(const dynamic_transform_registrar& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/generability_transform.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool generability_transform::operator==(const generability_transform& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

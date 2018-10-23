@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/formatting_transform.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool formatting_transform::operator==(const formatting_transform& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

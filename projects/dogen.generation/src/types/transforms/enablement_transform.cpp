@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/enablement_transform.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool enablement_transform::operator==(const enablement_transform& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

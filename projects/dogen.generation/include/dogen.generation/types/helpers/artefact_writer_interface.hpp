@@ -28,9 +28,7 @@
 #include <list>
 #include "dogen.generation/types/meta_model/artefact.hpp"
 
-namespace dogen {
-namespace generation {
-namespace helpers {
+namespace dogen::generation::helpers {
 
 /**
  * @brief Class with the ability to write artefacts into some storage
@@ -48,6 +46,6 @@ public:
     write(const std::list<meta_model::artefact>& artefacts) const = 0;
 };
 
-} } }
+}
 
 #endif

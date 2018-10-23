@@ -20,10 +20,8 @@
  */
 #include "dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace helpers {
+namespace dogen::generation::helpers {
 
 artefact_writer_interface::~artefact_writer_interface() noexcept { }
 
-} } }
+}

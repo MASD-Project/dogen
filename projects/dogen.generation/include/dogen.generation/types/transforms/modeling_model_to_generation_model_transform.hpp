@@ -30,10 +30,7 @@
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 
-
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class modeling_model_to_generation_model_transform final {
 private:
@@ -47,6 +44,6 @@ public:
         const std::list<modeling::meta_model::endomodel>& ems);
 };
 
-} } }
+}
 
 #endif

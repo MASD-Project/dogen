@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/locator_properties_transform.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool locator_properties_transform::operator==(const locator_properties_transform& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

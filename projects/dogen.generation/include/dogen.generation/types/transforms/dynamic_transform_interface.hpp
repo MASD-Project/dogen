@@ -27,9 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class dynamic_transform_interface final {
 public:
@@ -47,6 +45,6 @@ public:
 
 };
 
-} } }
+}
 
 #endif

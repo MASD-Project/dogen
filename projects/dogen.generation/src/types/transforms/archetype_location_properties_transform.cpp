@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool archetype_location_properties_transform::operator==(const archetype_location_properties_transform& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/artefact_properties_transform.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool artefact_properties_transform::operator==(const artefact_properties_transform& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/model_to_text_model_transform_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool model_to_text_model_transform_interface::operator==(const model_to_text_model_transform_interface& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

@@ -37,9 +37,7 @@
 #include "dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 /**
  * @brief Context for transformations.
@@ -110,6 +108,6 @@ private:
     const boost::shared_ptr<helpers::artefact_writer_interface> writer_;
 };
 
-} } }
+}
 
 #endif

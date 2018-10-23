@@ -20,12 +20,10 @@
  */
 #include "dogen.generation/types/transforms/dynamic_transforms_chain.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 bool dynamic_transforms_chain::operator==(const dynamic_transforms_chain& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

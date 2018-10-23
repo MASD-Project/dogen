@@ -28,9 +28,7 @@
 #include <iosfwd>
 #include "dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace helpers {
+namespace dogen::generation::helpers {
 
 /**
  * @brief Writes the artefacts into a user-supplied stream,
@@ -47,6 +45,6 @@ private:
     std::ostream& stream_;
 };
 
-} } }
+}
 
 #endif

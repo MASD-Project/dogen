@@ -20,8 +20,7 @@
  */
 #include "dogen.generation/types/traits.hpp"
 
-namespace dogen {
-namespace generation {
+namespace dogen::generation {
 
 std::string traits::enabled() {
     static std::string r("enabled");
@@ -89,4 +88,4 @@ std::string traits::force_backend_directory() {
     return r;
 }
 
-} }
+}

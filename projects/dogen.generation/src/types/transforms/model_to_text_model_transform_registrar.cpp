@@ -30,9 +30,7 @@ const std::shared_ptr<dogen::generation::transforms::model_to_text_model_transfo
 
 }
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 model_to_text_model_transform_registrar::model_to_text_model_transform_registrar(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_)
     : transforms_by_language__(transforms_by_language_) { }
@@ -68,4 +66,4 @@ void model_to_text_model_transform_registrar::transforms_by_language_(const std:
     transforms_by_language__ = std::move(v);
 }
 
-} } }
+}

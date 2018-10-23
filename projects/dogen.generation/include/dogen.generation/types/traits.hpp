@@ -27,8 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
+namespace dogen::generation {
 
 struct traits {
     static std::string enabled();
@@ -46,6 +45,6 @@ struct traits {
     static std::string force_backend_directory();
 };
 
-} }
+}
 
 #endif
