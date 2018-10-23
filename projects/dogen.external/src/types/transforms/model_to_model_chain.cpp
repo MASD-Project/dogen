@@ -37,9 +37,7 @@ const std::string transform_not_supported("Cannot transform into: ");
 
 }
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 boost::tuple<decoding_transform_interface&, encoding_transform_interface&>
 model_to_model_chain::obtain_transforms(
@@ -83,4 +81,4 @@ void model_to_model_chain::transform(const transforms::context& ctx,
     tuple.get<1>().transform(ctx, src, dst_path);
 }
 
-} } }
+}

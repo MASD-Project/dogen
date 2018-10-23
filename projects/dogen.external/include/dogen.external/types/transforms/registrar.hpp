@@ -31,9 +31,7 @@
 #include "dogen.external/types/transforms/decoding_transform_interface.hpp"
 #include "dogen.external/types/transforms/encoding_transform_interface.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 class registrar final {
 public:
@@ -109,6 +107,6 @@ private:
     decoding_transforms_;
 };
 
-} } }
+}
 
 #endif

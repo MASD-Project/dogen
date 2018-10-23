@@ -20,10 +20,8 @@
  */
 #include "dogen.external/types/transforms/encoding_transform_interface.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 encoding_transform_interface::~encoding_transform_interface() noexcept {}
 
-} } }
+}

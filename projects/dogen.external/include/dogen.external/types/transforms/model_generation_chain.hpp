@@ -30,9 +30,7 @@
 #include "dogen.external/types/transforms/registrar.hpp"
 #include "dogen.external/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 /**
  * @brief Given the location of a supported exogenous model, it
@@ -90,6 +88,6 @@ inline void register_decoding_transform() {
 }
 
 
-} } }
+}
 
 #endif

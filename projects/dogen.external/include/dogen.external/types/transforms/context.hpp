@@ -28,9 +28,7 @@
 #include <algorithm>
 #include "dogen.probing/types/prober.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 class context final {
 public:
@@ -43,6 +41,6 @@ private:
     dogen::probing::prober prober_;
 };
 
-} } }
+}
 
 #endif

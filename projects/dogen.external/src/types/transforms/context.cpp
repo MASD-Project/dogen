@@ -20,9 +20,7 @@
  */
 #include "dogen.external/types/transforms/context.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 context::context(const dogen::probing::prober& prober)
     : prober_(prober) { }
@@ -31,4 +29,4 @@ const dogen::probing::prober& context::prober() const {
     return prober_;
 }
 
-} } }
+}

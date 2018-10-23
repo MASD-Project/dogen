@@ -41,9 +41,7 @@ const std::string null_transform("Transform supplied is null.");
 
 }
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 void registrar::validate() {
     /*
@@ -191,4 +189,4 @@ registrar::decoding_transform_for_path(const boost::filesystem::path& p) {
     return decoding_transform_for_extension(ext);
 }
 
-} } }
+}

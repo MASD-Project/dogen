@@ -33,9 +33,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 std::shared_ptr<registrar> model_generation_chain::registrar_;
 
@@ -73,4 +71,4 @@ transform(const context& ctx, const boost::filesystem::path& p) {
     return r;
 }
 
-} } }
+}

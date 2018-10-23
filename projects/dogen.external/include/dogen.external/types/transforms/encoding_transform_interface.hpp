@@ -30,9 +30,7 @@
 #include "dogen.external/types/meta_model/model.hpp"
 #include "dogen.external/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 /**
  * @brief Transform that converts models in our external model
@@ -70,7 +68,6 @@ public:
         const boost::filesystem::path& p) = 0;
 };
 
-
-} } }
+}
 
 #endif
