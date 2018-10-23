@@ -174,7 +174,7 @@ modeling::meta_model::artefact formatter::format(const text_template& tt) const 
 
         dogen::formatting::cpp::scoped_namespace_formatter snf(
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
-            true/*add_new_line_*/);
+            true/*add_new_line_*/, true/*nested_namespaces*/);
 
         for (const auto& l : tt.body().lines()) {
             if (l.blocks().empty()) {
