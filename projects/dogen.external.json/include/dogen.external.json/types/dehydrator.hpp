@@ -35,9 +35,7 @@
 #include "dogen.external/types/meta_model/attribute.hpp"
 #include "dogen.external/types/meta_model/model.hpp"
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 class dehydrator final {
 private:
@@ -62,6 +60,6 @@ public:
         const boost::filesystem::path& p);
 };
 
-} } }
+}
 
 #endif

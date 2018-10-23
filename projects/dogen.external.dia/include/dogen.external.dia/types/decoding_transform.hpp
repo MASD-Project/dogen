@@ -34,9 +34,7 @@
 #include "dogen.external.dia/types/processed_object.hpp"
 #include "dogen.external/types/transforms/decoding_transform_interface.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 class decoding_transform final
     : public external::transforms::decoding_transform_interface {
@@ -67,6 +65,6 @@ public:
     transform(const transforms::context& ctx, const boost::filesystem::path& p);
 };
 
-} } }
+}
 
 #endif

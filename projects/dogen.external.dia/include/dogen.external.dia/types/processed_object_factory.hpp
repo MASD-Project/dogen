@@ -35,9 +35,7 @@
 #include "dogen.external.dia/types/processed_object_fwd.hpp"
 #include "dogen.external.dia/types/processed_comment_fwd.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Processes dia objects into an intermediate format.
@@ -107,6 +105,6 @@ public:
     static std::list<processed_object> make(const dogen::dia::diagram& d);
 };
 
-} } }
+}
 
 #endif

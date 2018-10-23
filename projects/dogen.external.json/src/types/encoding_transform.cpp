@@ -34,9 +34,7 @@ const std::string extension(".json");
 
 }
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 encoding_transform::~encoding_transform() noexcept {}
 
@@ -53,4 +51,4 @@ transform(const transforms::context& ctx, const meta_model::model& m,
     dehydrator::dehydrate(m, p);
 }
 
-} } }
+}

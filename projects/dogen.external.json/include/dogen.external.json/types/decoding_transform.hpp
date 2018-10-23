@@ -29,9 +29,7 @@
 #include "dogen.external/types/meta_model/model.hpp"
 #include "dogen.external/types/transforms/decoding_transform_interface.hpp"
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 class decoding_transform final
     : public transforms::decoding_transform_interface {
@@ -47,6 +45,6 @@ public:
         const boost::filesystem::path& p);
 };
 
-} } }
+}
 
 #endif

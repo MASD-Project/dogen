@@ -28,9 +28,7 @@
 #include "dogen.external/types/meta_model/model.hpp"
 #include "dogen.external/types/transforms/encoding_transform_interface.hpp"
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 class encoding_transform final
     : public transforms::encoding_transform_interface {
@@ -46,6 +44,6 @@ public:
         const meta_model::model& m, const boost::filesystem::path& p);
 };
 
-} } }
+}
 
 #endif

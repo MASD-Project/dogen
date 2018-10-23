@@ -20,10 +20,8 @@
  */
 #include "dogen.external.dia/types/visitor.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 visitor::visitor(builder& builder) : builder_(builder) {}
 
-} } }
+}

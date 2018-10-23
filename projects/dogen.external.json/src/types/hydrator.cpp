@@ -62,9 +62,7 @@ const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 std::string
 hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
@@ -226,4 +224,4 @@ hydrator::hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} } }
+}

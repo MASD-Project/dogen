@@ -31,9 +31,7 @@
 #include <boost/graph/adjacency_list.hpp>
 #include "dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Graph of dependencies between dia objects.
@@ -168,6 +166,6 @@ private:
     std::unordered_set<std::string> connected_ids_;
 };
 
-} } }
+}
 
 #endif

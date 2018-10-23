@@ -52,9 +52,7 @@ const std::string to_dia_support_unavailable(
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 inline bool is_not_relevant(const processed_object& po) {
     const auto ot(po.dia_object_type());
@@ -145,4 +143,4 @@ transform(const external::transforms::context& ctx,
     return r;
 }
 
-} } }
+}

@@ -31,9 +31,7 @@
 #include "dogen.external.dia/types/processed_object.hpp"
 #include "dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Transforms Dia objects into their external counterpart.
@@ -73,6 +71,6 @@ public:
         const std::list<std::string>& parents);
 };
 
-} } }
+}
 
 #endif

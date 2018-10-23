@@ -81,10 +81,7 @@ create_processed_attribute(const unsigned int n) {
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
-namespace test {
+namespace dogen::external::dia::test {
 
 std::string mock_processed_object_factory::to_oject_id(const unsigned int n) {
     return object_prefix + boost::lexical_cast<std::string>(n);
@@ -285,4 +282,4 @@ make_first_degree_cycle(unsigned int n) {
     return r;
 }
 
-} } } }
+}

@@ -22,12 +22,10 @@
 #include "dogen.external.dia/types/decoding_transform.hpp"
 #include "dogen.external.dia/types/initializer.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 void initializer::initialize() {
     external::transforms::register_decoding_transform<decoding_transform>();
 }
 
-} } }
+}

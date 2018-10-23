@@ -23,13 +23,11 @@
 #include "dogen.external.json/types/decoding_transform.hpp"
 #include "dogen.external.json/types/initializer.hpp"
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 void initializer::initialize() {
     transforms::register_encoding_transform<encoding_transform>();
     transforms::register_decoding_transform<decoding_transform>();
 }
 
-} } }
+}

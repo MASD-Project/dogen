@@ -40,9 +40,7 @@ const std::string separator_not_found("Expected separator on KVP.");
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 processed_comment processed_comment_factory::make(const std::string& c) {
     processed_comment r;
@@ -97,4 +95,4 @@ processed_comment processed_comment_factory::make(const std::string& c) {
     return r;
 }
 
-} } }
+}

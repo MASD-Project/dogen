@@ -38,9 +38,7 @@ const std::string package_not_mapped("Dia package ID is not mapped: ");
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 builder::builder(const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids) : parent_id_to_child_ids_(parent_id_to_child_ids) {}
@@ -214,4 +212,4 @@ external::meta_model::model builder::build() {
     return model_;
 }
 
-} } }
+}

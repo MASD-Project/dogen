@@ -34,9 +34,7 @@ const std::string no_uml_type("No UML type.");
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 void validator::validate_uml(const processed_object& po) {
     /*
@@ -57,4 +55,4 @@ void validator::validate(const std::list<processed_object>& pos) {
         validate(po);
 }
 
-} } }
+}

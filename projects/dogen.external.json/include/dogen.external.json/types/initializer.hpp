@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 /**
  * @brief Initialises all of the static state in this model.
@@ -37,6 +35,6 @@ public:
     static void initialize();
 };
 
-} } }
+}
 
 #endif

@@ -41,9 +41,7 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Detects cycles in the graph.
@@ -222,4 +220,4 @@ void grapher::generate() {
     BOOST_LOG_SEV(lg, debug) << "Generated graph.";
 }
 
-} } }
+}

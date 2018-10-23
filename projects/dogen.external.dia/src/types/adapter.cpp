@@ -38,9 +38,7 @@ const std::string empty_dia_name("Dia name is empty.");
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 void adapter::validate_dia_name(const std::string& n) {
     if (n.empty()) {
@@ -112,4 +110,4 @@ adapt(const processed_object& po, const std::string& contained_by,
     return r;
 }
 
-} } }
+}

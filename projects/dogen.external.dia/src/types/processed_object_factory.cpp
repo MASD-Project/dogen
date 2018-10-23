@@ -113,9 +113,7 @@ boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::string processed_object_factory::
 parse_string_attribute(const dogen::dia::attribute& a) {
@@ -336,4 +334,4 @@ processed_object_factory::make(const dogen::dia::diagram& d) {
     return r;
 }
 
-} } }
+}

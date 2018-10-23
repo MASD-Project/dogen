@@ -28,9 +28,7 @@
 #include <string>
 #include "dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Validates the consistency of the processed object.
@@ -75,6 +73,6 @@ public:
     static void validate(const std::list<processed_object>& pos);
 };
 
-} } }
+}
 
 #endif

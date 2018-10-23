@@ -31,9 +31,7 @@
 #include "dogen.external.dia/types/grapher.hpp"
 #include "dogen.external.dia/types/builder.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 class visitor : public boost::default_dfs_visitor {
 public:
@@ -56,6 +54,7 @@ public:
 private:
     builder& builder_;
 };
-} } }
+
+}
 
 #endif

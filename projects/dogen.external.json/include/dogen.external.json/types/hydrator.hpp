@@ -33,9 +33,7 @@
 #include "dogen.external/types/meta_model/element.hpp"
 #include "dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 class hydrator final {
 private:
@@ -100,6 +98,6 @@ public:
     external::meta_model::model hydrate(const boost::filesystem::path& p) const;
 };
 
-} } }
+}
 
 #endif

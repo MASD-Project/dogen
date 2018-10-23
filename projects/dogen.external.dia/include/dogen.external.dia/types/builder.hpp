@@ -32,9 +32,7 @@
 #include "dogen.external/types/meta_model/model.hpp"
 #include "dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Builds a external model from dia processed objects.
@@ -111,6 +109,6 @@ private:
     external::meta_model::model model_;
 };
 
-} } }
+}
 
 #endif

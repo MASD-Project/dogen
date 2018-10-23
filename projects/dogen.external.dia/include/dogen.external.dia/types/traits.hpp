@@ -27,9 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 struct traits {
     /**
@@ -48,6 +46,6 @@ struct traits {
     static std::string external_modules();
 };
 
-} } }
+}
 
 #endif

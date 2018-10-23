@@ -20,9 +20,7 @@
  */
 #include "dogen.external.dia/types/traits.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::string traits::comment() {
     static std::string r("yarn.dia.comment");
@@ -34,4 +32,4 @@ std::string traits::external_modules() {
     return r;
 }
 
-} } }
+}

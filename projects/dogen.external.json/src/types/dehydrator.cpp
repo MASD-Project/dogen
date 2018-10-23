@@ -35,9 +35,7 @@ const std::string invalid_enumerator("invalid");
 
 }
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 std::string dehydrator::tidy_up_string(std::string s) {
     boost::replace_all(s, "\r", "\\r");
@@ -239,4 +237,4 @@ void dehydrator::dehydrate(const external::meta_model::model& m,
     utility::filesystem::write_file_content(p, s);
 }
 
-} } }
+}

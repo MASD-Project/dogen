@@ -30,9 +30,7 @@
 #include <utility>
 #include "dogen.external.dia/types/processed_comment.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Processes comments in dia diagrams.
@@ -59,6 +57,6 @@ public:
     static processed_comment make(const std::string& c);
 };
 
-} } }
+}
 
 #endif
