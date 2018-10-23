@@ -38,6 +38,22 @@ namespace cpp {
  */
 class namespace_formatter {
 public:
+    /**
+     * @brief Creates a namespace formatter.
+     *
+     * @param create_anonymous_namespace if true, and the supplied
+     * parameters are empty, creates an anoynymous namespace. Else,
+     * ignores the namespace.
+     *
+     * FIXME: we should really handle anonymous namespaces separately,
+     * rather than via create_anonymous_namespace - e.g.
+     * format_begin_anonymous(std::ostream& s);
+     *
+     * @param add_new_line If true, adds a new line at the end.
+     *
+     * @param nested_namespace If true, nests namespaces using C++ 17
+     * syntax. If false, creates multiple lines per namespace.
+     */
     explicit namespace_formatter(const bool create_anonymous_namespace = true,
         const bool add_new_line = false,  const bool nested_namespace = false);
 

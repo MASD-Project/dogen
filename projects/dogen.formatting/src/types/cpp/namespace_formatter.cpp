@@ -59,6 +59,9 @@ format_end(std::ostream& s, const std::string& ns) const {
         return;
 
     s << "}"; // no space and no std::endl by design
+
+    if (add_new_line_)
+        s << std::endl;
 }
 
 void namespace_formatter::
@@ -106,7 +109,7 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
         if (!first)
             s << " ";
 
-        format_end(s, n);
+        s << "}"; // no space and no std::endl by design
         first = false;
     }
 
