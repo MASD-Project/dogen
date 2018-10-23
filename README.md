@@ -111,7 +111,6 @@ Dogen has the following additional dependencies, across all operative systems:
 | [CMake](https://cmake.org/)  | Mandatory | 3.12 or later.  | Required to generate the build files.Earlier versions may also work.  |
 | [Boost](https://boost.org)  | Mandatory | 1.68 or later. | Earlier versions may also work, but patches may be needed. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
-| [Doxygen](http://www.doxygen.nl/) | Optional | Any recent | Required to build the source code documentation. |
 
 Though Dogen should build fine with package manager supplied
 libraries - or even with hand-built dependencies - the easiest way to
