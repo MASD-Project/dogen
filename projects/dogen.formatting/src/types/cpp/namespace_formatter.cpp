@@ -58,7 +58,7 @@ format_end(std::ostream& s, const std::string& ns) const {
     if (!create_anonymous_namespace_ && ns.empty())
         return;
 
-    s << "}"; // no space and no std::endl by design
+    s << "}";
 
     if (add_new_line_)
         s << std::endl;
@@ -96,7 +96,7 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
 
     if (nested_namespace_) {
         const auto joined_ns(boost::algorithm::join(ns, separator));
-        format_end(s, joined_ns);
+        s << "}";
 
         if (add_new_line_)
             s << std::endl;
@@ -109,7 +109,7 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
         if (!first)
             s << " ";
 
-        s << "}"; // no space and no std::endl by design
+        s << "}";
         first = false;
     }
 
