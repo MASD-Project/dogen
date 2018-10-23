@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @brief Stores the configuration options for Dogen applications.
  *
@@ -34,9 +32,7 @@ namespace dogen {
  * options for all the different Dogen applications, such as knitter,
  * etc.
  */
-namespace options {
-}
-
+namespace dogen::options {
 }
 
 #endif
