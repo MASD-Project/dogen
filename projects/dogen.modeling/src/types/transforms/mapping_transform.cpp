@@ -33,9 +33,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 bool mapping_transform::is_mappable(const meta_model::languages from,
     const meta_model::languages to) {
@@ -54,4 +52,4 @@ meta_model::endomodel mapping_transform::transform(const context& ctx,
     return r;
 }
 
-} } }
+}

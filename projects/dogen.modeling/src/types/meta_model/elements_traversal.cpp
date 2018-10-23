@@ -20,11 +20,9 @@
  */
 #include "dogen.modeling/types/meta_model/elements_traversal.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 // dummy function to suppress ranlib warnings
 void elements_traversal() { }
 
-} } }
+}

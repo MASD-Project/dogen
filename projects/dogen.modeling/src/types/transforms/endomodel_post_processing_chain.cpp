@@ -46,9 +46,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void endomodel_post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
@@ -136,4 +134,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_chain(em);
 }
 
-} } }
+}

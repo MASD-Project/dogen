@@ -33,9 +33,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void resolver_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
@@ -45,4 +43,4 @@ void resolver_transform::transform(const context& ctx,
     stp.end_transform(em);
 }
 
-} } }
+}

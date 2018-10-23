@@ -21,9 +21,7 @@
 #include "dogen.modeling/types/transforms/context_factory.hpp"
 #include "dogen.modeling/test/mock_context_factory.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 transforms::context mock_context_factory::make() {
     dogen::modeling::transforms::options o;
@@ -32,4 +30,4 @@ transforms::context mock_context_factory::make() {
     return r;
 }
 
-} } }
+}

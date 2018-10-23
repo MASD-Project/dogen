@@ -40,9 +40,7 @@ const std::string library_dir("library");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream&
 operator<<(std::ostream& s, const reference_paths_extractor::type_group& v) {
@@ -146,4 +144,4 @@ reference_paths_extractor::extract(const transforms::context& ctx,
     return r;
 }
 
-} } }
+}

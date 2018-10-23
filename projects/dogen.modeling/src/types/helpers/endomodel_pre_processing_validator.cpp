@@ -47,9 +47,7 @@ const std::string nullable_primary_key(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class validator {
 public:
@@ -234,4 +232,4 @@ validate(const meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }
 
-} } }
+}

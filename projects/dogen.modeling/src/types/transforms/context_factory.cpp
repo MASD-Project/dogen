@@ -45,9 +45,7 @@ const std::string duplicate_segment("Duplicat segment: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::unordered_map<std::string,
                    meta_model::intra_backend_segment_properties>
@@ -144,4 +142,4 @@ context context_factory::make(const options& o, const bool enable_validation) {
     return r;
 }
 
-} } }
+}

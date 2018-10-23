@@ -30,9 +30,7 @@
 #include "dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Factory that creates transformation contexts.
@@ -54,6 +52,6 @@ public:
     make(const options& o, const bool enable_validation = true);
 };
 
-} } }
+}
 
 #endif

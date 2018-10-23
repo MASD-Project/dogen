@@ -27,8 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace modeling {
+namespace dogen::modeling {
 
 struct traits {
     static std::string enabled();
@@ -86,6 +85,6 @@ struct traits {
     };
 };
 
-} }
+}
 
 #endif

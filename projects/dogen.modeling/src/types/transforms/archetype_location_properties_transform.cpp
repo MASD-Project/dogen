@@ -56,9 +56,7 @@ const std::string archetype_not_found("Could not find archetype: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 inline std::ostream& operator<<(std::ostream& s,
     const archetype_location_properties_transform::backend_type_group& v) {
@@ -488,4 +486,4 @@ transform(const context& ctx, meta_model::model& m) {
     populate_local_archetype_location_properties(atrp, alrp, m);
 }
 
-} } }
+}

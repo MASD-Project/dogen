@@ -35,9 +35,7 @@
 #include "dogen.modeling/types/helpers/mapping_actions.hpp"
 #include "dogen.modeling/types/helpers/mapping.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class mappings_hydrator final {
 private:
@@ -57,6 +55,6 @@ public:
     std::list<mapping> hydrate(const boost::filesystem::path& p) const;
 };
 
-} } }
+}
 
 #endif

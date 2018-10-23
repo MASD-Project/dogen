@@ -54,9 +54,7 @@ const std::string expected_one_output_language(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 namespace {
 
@@ -178,4 +176,4 @@ transform(const context& ctx, const std::list<meta_model::endomodel>& ems) {
     return r;
 }
 
-} } }
+}

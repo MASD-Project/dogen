@@ -71,9 +71,7 @@ const location empty_location = location();
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 template<typename Element>
 inline void
@@ -261,4 +259,4 @@ transform(const context& ctx, const external::meta_model::model& m) {
     return r;
 }
 
-} } }
+}

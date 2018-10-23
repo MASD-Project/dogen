@@ -48,9 +48,7 @@ const std::string mappings_dir("mappings");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::unordered_map<std::string, std::list<mapping>>
 mapping_set_repository_factory::
@@ -176,4 +174,4 @@ mapping_set_repository mapping_set_repository_factory::make(
     return create_repository(mappings);
 }
 
-} } }
+}

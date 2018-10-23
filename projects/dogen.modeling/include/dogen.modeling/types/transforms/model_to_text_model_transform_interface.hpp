@@ -40,9 +40,7 @@
 #include "dogen.modeling/types/transforms/context.hpp"
 
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Performs a model to text transformation of a meta-model,
@@ -114,6 +112,6 @@ public:
         const meta_model::model& m) const = 0;
 };
 
-} } }
+}
 
 #endif

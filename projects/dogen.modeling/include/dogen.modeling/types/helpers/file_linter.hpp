@@ -31,9 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.modeling/types/meta_model/text_model.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class file_linter final {
 private:
@@ -73,6 +71,6 @@ public:
         const meta_model::text_model& tm);
 };
 
-} } }
+}
 
 #endif

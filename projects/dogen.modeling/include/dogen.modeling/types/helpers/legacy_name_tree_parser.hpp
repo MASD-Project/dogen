@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/location.hpp"
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Parses identifiers according to a well-defined syntax, and
@@ -59,6 +57,6 @@ private:
     const meta_model::languages language_;
 };
 
-} } }
+}
 
 #endif

@@ -44,9 +44,7 @@ const std::string meta_name_not_found("Meta-name not found: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 bool enablement_transform::
 is_element_disabled(const modeling::meta_model::element& e) {
@@ -317,4 +315,4 @@ transform(const context& ctx, meta_model::model& m) {
     stp.end_transform(m);
 }
 
-} } }
+}

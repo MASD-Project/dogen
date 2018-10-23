@@ -48,9 +48,7 @@ const std::string model_already_has_global_module(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 template<typename AssociativeContainerOfContainable>
 inline void add_containing_module_to_non_contained_entities(
@@ -111,4 +109,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

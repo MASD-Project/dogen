@@ -30,9 +30,7 @@
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/types/helpers/pretty_printer.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class identifiable_and_qualified_builder final {
 public:
@@ -59,6 +57,6 @@ private:
     pretty_printer cpp_pp_;
 };
 
-} } }
+}
 
 #endif

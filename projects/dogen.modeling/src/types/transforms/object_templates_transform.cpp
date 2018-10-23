@@ -49,10 +49,7 @@ const std::string object_template_not_found(
 
 }
 
-namespace dogen {
-namespace modeling {
-
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Add comparable support for names.
@@ -67,7 +64,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 }
 
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::object& object_templates_transform::
 find_object(const meta_model::name& n, meta_model::endomodel& em) {
@@ -278,4 +275,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

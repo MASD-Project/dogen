@@ -48,9 +48,7 @@ const std::string invalid_style("Formatting style is not valid:");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::ostream&
 operator<<(std::ostream& s, const formatting_transform::type_group& v) {
@@ -171,4 +169,4 @@ transform(const context& ctx, meta_model::model& m) {
     stp.end_transform(m);
 }
 
-} } }
+}

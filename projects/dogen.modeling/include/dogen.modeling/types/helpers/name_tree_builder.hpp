@@ -34,9 +34,7 @@
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 #include "dogen.modeling/types/helpers/node.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Creates a name tree as directed by the external caller.
@@ -110,6 +108,6 @@ private:
     boost::shared_ptr<node> current_;
 };
 
-} } }
+}
 
 #endif

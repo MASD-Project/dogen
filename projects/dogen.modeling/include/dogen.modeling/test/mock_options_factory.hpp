@@ -29,9 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 /**
  * @brief Creates instances of setting classes for testing.
@@ -55,6 +53,6 @@ public:
         const std::string log_level = std::string("info"));
 };
 
-} } }
+}
 
 #endif

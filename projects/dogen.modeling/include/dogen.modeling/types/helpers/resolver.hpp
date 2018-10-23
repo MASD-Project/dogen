@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Resolves type references within a model.
@@ -182,6 +180,6 @@ public:
     static void resolve(const indices& idx, meta_model::endomodel& im);
 };
 
-} } }
+}
 
 #endif

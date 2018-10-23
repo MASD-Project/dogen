@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/helpers/mapping_value.hpp"
 #include "dogen.modeling/types/helpers/mapping.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class mappings_validator final {
 private:
@@ -46,6 +44,6 @@ public:
         std::list<mapping>>& mappings_by_set_name) const;
 };
 
-} } }
+}
 
 #endif

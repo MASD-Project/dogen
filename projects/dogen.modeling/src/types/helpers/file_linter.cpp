@@ -40,9 +40,7 @@ auto lg(logger_factory("yarn.helpers.file_linter"));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::set<boost::filesystem::path> file_linter::
 obtain_expected_files(const meta_model::text_model& tm) {
@@ -146,4 +144,4 @@ lint(const std::vector<std::string>& patterns,
     return r;
 }
 
-} } }
+}

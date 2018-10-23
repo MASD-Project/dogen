@@ -40,9 +40,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 bool generability_transform::is_generatable(const meta_model::element& e) {
     const auto ot(e.origin_type());
@@ -67,4 +65,4 @@ transform(const context& ctx, meta_model::model& m) {
     stp.end_transform(m);
 }
 
-} } }
+}

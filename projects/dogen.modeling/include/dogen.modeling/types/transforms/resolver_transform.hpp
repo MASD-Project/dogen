@@ -31,9 +31,7 @@
 #include "dogen.modeling/types/transforms/context.hpp"
 #include "dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class resolver_transform final {
 public:
@@ -41,6 +39,6 @@ public:
         meta_model::endomodel& em);
 };
 
-} } }
+}
 
 #endif

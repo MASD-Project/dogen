@@ -34,9 +34,7 @@ const std::string empty_internal_modules("Internal modules cannot be empty.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 meta_model::name name_factory::build_model_name(const std::string& model_name,
     const std::string& external_modules) const {
@@ -259,4 +257,4 @@ meta_model::name name_factory::build_attribute_name(
     return b.build();
 }
 
-} } }
+}

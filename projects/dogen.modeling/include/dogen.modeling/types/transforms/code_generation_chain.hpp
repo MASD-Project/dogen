@@ -28,9 +28,7 @@
 #include "dogen.modeling/types/transforms/context.hpp"
 #include "dogen.modeling/types/meta_model/text_model.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Responsible for transforming a high-level representation of
@@ -72,6 +70,6 @@ public:
     static void transform(const context& ctx);
 };
 
-} } }
+}
 
 #endif

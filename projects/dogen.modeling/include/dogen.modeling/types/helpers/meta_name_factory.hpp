@@ -28,9 +28,7 @@
 #include <string>
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class meta_name_factory final {
 private:
@@ -52,6 +50,6 @@ public:
     static meta_model::name make_visitor_name();
 };
 
-} } }
+}
 
 #endif

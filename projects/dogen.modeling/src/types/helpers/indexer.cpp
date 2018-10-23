@@ -32,9 +32,7 @@ auto lg(logger_factory("yarn.helpers.indexer"));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 indices indexer::index(meta_model::endomodel& m) {
     indices r;
@@ -78,4 +76,4 @@ indices indexer::index(meta_model::endomodel& m) {
     return r;
 }
 
-} } }
+}

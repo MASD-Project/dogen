@@ -29,9 +29,7 @@
 #include "dogen.modeling/types/meta_model/model.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Creates all of the artefact properties for all of the
@@ -45,6 +43,6 @@ public:
     static void transform(const context& ctx, meta_model::model& m);
 };
 
-} } }
+}
 
 #endif

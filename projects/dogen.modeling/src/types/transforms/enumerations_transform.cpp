@@ -57,9 +57,7 @@ const std::string missing_default(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
@@ -334,4 +332,4 @@ void enumerations_transform::transform(const context& ctx,
     stp.end_transform(em);
 }
 
-} } }
+}

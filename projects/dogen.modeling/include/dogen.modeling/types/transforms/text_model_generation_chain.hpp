@@ -28,15 +28,13 @@
 #include "dogen.modeling/types/transforms/context.hpp"
 #include "dogen.modeling/types/meta_model/text_model.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class text_model_generation_chain final {
 public:
     static meta_model::text_model transform(const context& ctx);
 };
 
-} } }
+}
 
 #endif

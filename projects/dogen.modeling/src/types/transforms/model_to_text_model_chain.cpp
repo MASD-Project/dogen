@@ -43,9 +43,7 @@ const std::string disabled_transform(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::shared_ptr<model_to_text_model_transform_registrar>
 model_to_text_model_chain::registrar_;
@@ -203,4 +201,4 @@ transform(const context& ctx, const std::list<meta_model::model>& models) {
     return r;
 }
 
-} } }
+}

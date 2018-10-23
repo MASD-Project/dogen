@@ -28,9 +28,7 @@
 #include "dogen.modeling/types/transforms/context.hpp"
 #include "dogen.modeling/types/meta_model/model.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class generability_transform final {
 private:
@@ -41,6 +39,6 @@ public:
     static void transform(const context& ctx, meta_model::model& m);
 };
 
-} } }
+}
 
 #endif

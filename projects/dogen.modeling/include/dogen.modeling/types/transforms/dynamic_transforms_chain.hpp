@@ -33,9 +33,7 @@
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class dynamic_transforms_chain final {
 private:
@@ -70,6 +68,6 @@ inline void register_dynamic_transform() {
     rg.register_dynamic_transform(t);
 }
 
-} } }
+}
 
 #endif

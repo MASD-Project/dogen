@@ -42,9 +42,7 @@
 #include "dogen.modeling/types/meta_model/letter_cases.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class orm_transform final {
 private:
@@ -110,6 +108,6 @@ public:
     static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
-} } }
+}
 
 #endif

@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief The endomodel generation chain is a top-level transformation
@@ -46,6 +44,6 @@ public:
     static std::list<meta_model::endomodel> transform(const context& ctx);
 };
 
-} } }
+}
 
 #endif

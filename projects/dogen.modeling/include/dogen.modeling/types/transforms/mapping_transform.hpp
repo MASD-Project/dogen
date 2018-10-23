@@ -29,9 +29,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class mapping_transform final {
 public:
@@ -42,6 +40,6 @@ public:
         const meta_model::endomodel& src, const meta_model::languages to);
 };
 
-} } }
+}
 
 #endif

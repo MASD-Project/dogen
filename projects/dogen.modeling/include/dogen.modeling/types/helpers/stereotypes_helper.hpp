@@ -31,9 +31,7 @@
 #include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
 #include "dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Converts well-known stereotypes from and to strings.
@@ -92,6 +90,6 @@ public:
         const std::list<meta_model::static_stereotypes>& ss) const;
 };
 
-} } }
+}
 
 #endif

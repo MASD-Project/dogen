@@ -34,9 +34,7 @@ const std::string qn_missing("Could not find qualified name for language: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 identifiable_and_qualified_builder::
 identifiable_and_qualified_builder() : csharp_pp_(separators::dots),
@@ -92,4 +90,4 @@ build(const meta_model::name& n, const bool model_name_mode) {
     return build();
 }
 
-} } }
+}

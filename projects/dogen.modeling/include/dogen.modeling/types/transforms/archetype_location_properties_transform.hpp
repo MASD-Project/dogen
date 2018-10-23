@@ -36,9 +36,7 @@
 #include "dogen.modeling/types/meta_model/archetype_properties.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class archetype_location_properties_transform final {
 private:
@@ -132,6 +130,6 @@ public:
     static void transform(const context& ctx, meta_model::model& m);
 };
 
-} } }
+}
 
 #endif

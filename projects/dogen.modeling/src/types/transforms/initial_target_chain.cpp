@@ -39,9 +39,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {
@@ -81,4 +79,4 @@ initial_target_chain::transform(const context& ctx) {
     return r;
 }
 
-} } }
+}

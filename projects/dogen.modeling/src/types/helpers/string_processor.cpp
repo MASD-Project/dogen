@@ -37,9 +37,7 @@ const std::string scope_operator("::");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::string string_processor::to_identifiable(const std::string& s) {
     std::string r(s);
@@ -58,4 +56,4 @@ std::string string_processor::to_identifiable(const std::string& s) {
     return r;
 }
 
-} } }
+}

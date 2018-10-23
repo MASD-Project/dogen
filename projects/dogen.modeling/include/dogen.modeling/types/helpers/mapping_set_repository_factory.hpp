@@ -36,9 +36,7 @@
 #include "dogen.modeling/types/helpers/mapping_value.hpp"
 #include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class mapping_set_repository_factory final {
 private:
@@ -71,6 +69,6 @@ public:
         const std::vector<boost::filesystem::path>& dirs) const;
 };
 
-} } }
+}
 
 #endif

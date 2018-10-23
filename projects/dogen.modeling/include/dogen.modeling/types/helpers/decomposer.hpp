@@ -40,9 +40,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/helpers/decomposition_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Collect the names of all elements and attributes, for
@@ -91,6 +89,6 @@ private:
     decomposition_result result_;
 };
 
-} } }
+}
 
 #endif

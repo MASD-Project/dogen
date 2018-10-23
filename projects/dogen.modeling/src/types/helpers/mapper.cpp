@@ -48,9 +48,7 @@ const std::string unexpected_number_of__children("Expected exactly one child.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
@@ -255,4 +253,4 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
     return r;
 }
 
-} } }
+}

@@ -30,9 +30,7 @@ auto lg(logger_factory("yarn.helpers.decomposer"));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 void decomposer::add_name(const std::string& owner, const meta_model::name& n) {
     result_.names().push_back(std::make_pair(owner, n));
@@ -140,4 +138,4 @@ decomposer::decompose(const meta_model::endomodel& em) {
     return dc.result();
 }
 
-} } }
+}

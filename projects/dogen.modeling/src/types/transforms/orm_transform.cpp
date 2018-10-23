@@ -70,9 +70,7 @@ const std::string duplicate_database_system(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::orm_database_systems orm_transform::
 to_orm_database_system(const std::string& s) {
@@ -509,4 +507,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

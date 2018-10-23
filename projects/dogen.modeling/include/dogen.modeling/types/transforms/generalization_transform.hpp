@@ -34,9 +34,7 @@
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 #include "dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class generalization_transform final {
 private:
@@ -69,6 +67,6 @@ public:
         meta_model::endomodel& em);
 };
 
-} } }
+}
 
 #endif

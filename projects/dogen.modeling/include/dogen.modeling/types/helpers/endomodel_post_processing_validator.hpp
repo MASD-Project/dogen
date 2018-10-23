@@ -36,9 +36,7 @@
 #include "dogen.modeling/types/helpers/indices.hpp"
 #include "dogen.modeling/types/helpers/decomposition_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class endomodel_post_processing_validator final {
 private:
@@ -72,6 +70,6 @@ public:
     static void validate(const indices& idx, const meta_model::endomodel& im);
 };
 
-} } }
+}
 
 #endif

@@ -49,9 +49,7 @@ std::string create_hacked_contents(const std::string file_name) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 filesystem_writer::filesystem_writer(const bool force_write)
     : force_write_(force_write) {}
@@ -157,4 +155,4 @@ write(const std::list<meta_model::artefact>& files) const {
     BOOST_LOG_SEV(lg, info) << "Finished writing files: " << files;
 }
 
-} } }
+}

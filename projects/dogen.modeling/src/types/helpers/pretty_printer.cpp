@@ -39,9 +39,7 @@ const std::string empty_child("Attempt to add an empty child.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 pretty_printer::pretty_printer()
     : has_children_(false), last_child_had_children_(false),
@@ -176,4 +174,4 @@ void pretty_printer::clear() {
     stream_.str("");
 }
 
-} } }
+}

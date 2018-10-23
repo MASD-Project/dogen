@@ -35,9 +35,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Expands all enumerations in model.
@@ -96,6 +94,6 @@ public:
     static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
-} } }
+}
 
 #endif

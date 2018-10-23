@@ -28,9 +28,7 @@
 #include "dogen.modeling/types/meta_model/model.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class model_post_processing_chain final {
 public:
@@ -38,6 +36,6 @@ public:
     static void transform(const context& ctx, meta_model::model& m);
 };
 
-} } }
+}
 
 #endif

@@ -35,9 +35,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
@@ -80,4 +78,4 @@ meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     return r;
 }
 
-} } }
+}

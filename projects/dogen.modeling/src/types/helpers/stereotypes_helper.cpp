@@ -52,9 +52,7 @@ const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 using meta_model::static_stereotypes;
 
@@ -175,4 +173,4 @@ extract_non_element_types(const std::list<static_stereotypes>& ss) const {
     return r;
 }
 
-} } }
+}

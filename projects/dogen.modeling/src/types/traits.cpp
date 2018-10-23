@@ -20,8 +20,7 @@
  */
 #include "dogen.modeling/types/traits.hpp"
 
-namespace dogen {
-namespace modeling {
+namespace dogen::modeling {
 
 std::string traits::enabled() {
     static std::string r("enabled");
@@ -203,4 +202,4 @@ std::string traits::orm::is_composite() {
     return r;
 }
 
-} }
+}

@@ -47,9 +47,7 @@
 #include "dogen.modeling/types/meta_model/object_template.hpp"
 #include "dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class new_adapter final {
 public:
@@ -166,6 +164,6 @@ private:
     const annotations::annotation_factory& annotation_factory_;
 };
 
-} } }
+}
 
 #endif

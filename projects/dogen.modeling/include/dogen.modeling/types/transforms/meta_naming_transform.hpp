@@ -28,9 +28,7 @@
 #include "dogen.modeling/types/meta_model/endomodel_fwd.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Updates the meta-names of all of the yarn meta-model
@@ -49,6 +47,6 @@ public:
     static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
-} } }
+}
 
 #endif

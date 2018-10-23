@@ -27,15 +27,13 @@
 
 #include <string>
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class string_processor {
 public:
     static std::string to_identifiable(const std::string& s);
 };
 
-} } }
+}
 
 #endif

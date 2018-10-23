@@ -42,9 +42,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 bool endomodel_pre_processing_chain::is_language_relevant(
     const std::unordered_set<meta_model::languages>& relevant_languages,
@@ -139,4 +137,4 @@ bool endomodel_pre_processing_chain::try_transform(const context& ctx,
     return true;
 }
 
-} } }
+}

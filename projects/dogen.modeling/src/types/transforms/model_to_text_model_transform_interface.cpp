@@ -20,11 +20,9 @@
  */
 #include "dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 model_to_text_model_transform_interface::
 ~model_to_text_model_transform_interface() noexcept {}
 
-} } }
+}

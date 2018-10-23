@@ -71,9 +71,7 @@ const std::string underlying_element_conflict(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 parsing_transform::type_group parsing_transform::make_type_group(
     const annotations::type_repository& atrp) {
@@ -304,4 +302,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

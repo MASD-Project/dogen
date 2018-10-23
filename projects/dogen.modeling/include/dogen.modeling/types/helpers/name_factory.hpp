@@ -28,9 +28,7 @@
 #include <string>
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Creates names with all the fields filled in.
@@ -124,6 +122,6 @@ public:
         const std::string& simple_name) const;
 };
 
-} } }
+}
 
 #endif

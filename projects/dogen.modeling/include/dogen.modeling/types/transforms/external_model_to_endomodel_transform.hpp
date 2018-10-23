@@ -41,9 +41,7 @@
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 #include "dogen.modeling/types/transforms/naming_configuration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class external_model_to_endomodel_transform final {
 private:
@@ -76,6 +74,6 @@ public:
     transform(const context& ctx, const external::meta_model::model& m);
 };
 
-} } }
+}
 
 #endif

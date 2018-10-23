@@ -37,9 +37,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 type_params_transform::type_group type_params_transform::
 make_type_group(const annotations::type_repository& atrp) {
@@ -96,4 +94,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

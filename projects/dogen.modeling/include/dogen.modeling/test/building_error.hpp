@@ -28,9 +28,7 @@
 #include <boost/exception/info.hpp>
 #include <string>
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 /**
  * @brief An error has occurred while injecting types.
@@ -50,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

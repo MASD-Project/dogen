@@ -37,9 +37,7 @@ const std::string empty_internal_modules("Internal modules are empty.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 void location_builder::external_modules(const std::string& em) {
     if (em.empty())
@@ -99,4 +97,4 @@ meta_model::location location_builder::build() {
     return location_;
 }
 
-} } }
+}

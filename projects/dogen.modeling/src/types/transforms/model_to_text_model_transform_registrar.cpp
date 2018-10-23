@@ -37,9 +37,7 @@ const std::string language_taken("Transform already registered for language: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void model_to_text_model_transform_registrar::
 register_transform(std::shared_ptr<model_to_text_model_transform_interface> t) {
@@ -86,4 +84,4 @@ model_to_text_model_transform_registrar::transforms_by_language() const {
     return transforms_by_language_;
 }
 
-} } }
+}

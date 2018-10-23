@@ -27,15 +27,13 @@
 
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 class mock_context_factory {
 public:
     static transforms::context make();
 };
 
-} } }
+}
 
 #endif

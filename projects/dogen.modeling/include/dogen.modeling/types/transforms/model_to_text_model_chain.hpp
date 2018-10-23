@@ -37,9 +37,7 @@
 #include "dogen.modeling/types/transforms/configuration.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class model_to_text_model_chain final {
 private:
@@ -94,6 +92,6 @@ inline void register_transform() {
     rg.register_transform(t);
 }
 
-} } }
+}
 
 #endif

@@ -43,9 +43,7 @@ const std::string non_absolute_target("Target path is not absolute: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::unordered_set<meta_model::languages> references_chain::
 obtain_relevant_languages(const meta_model::endomodel& target) {
@@ -125,4 +123,4 @@ transform(const context& ctx, const meta_model::endomodel& target) {
     return r;
 }
 
-} } }
+}

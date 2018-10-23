@@ -37,9 +37,7 @@
 #include "dogen.modeling/types/helpers/mapping_context.hpp"
 #include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class mapper final {
 public:
@@ -90,6 +88,6 @@ private:
     const mapping_set_repository& mapping_set_repository_;
 };
 
-} } }
+}
 
 #endif

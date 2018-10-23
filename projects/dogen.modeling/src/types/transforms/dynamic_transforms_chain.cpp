@@ -37,9 +37,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::shared_ptr<dynamic_transform_registrar>
 dynamic_transforms_chain::registrar_;
@@ -76,4 +74,4 @@ transform(const context& ctx, meta_model::model& m) {
     stp.end_chain(m);
 }
 
-} } }
+}

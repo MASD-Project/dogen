@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/formatting_styles.hpp"
 #include "dogen.modeling/types/transforms/formatting_configuration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class formatting_transform final {
 private:
@@ -65,6 +63,6 @@ public:
     static void transform(const context& ctx, meta_model::model& m);
 };
 
-} } }
+}
 
 #endif

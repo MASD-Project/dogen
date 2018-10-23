@@ -117,9 +117,7 @@ const std::string invalid_empty_id("Name must have a non-empty id.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 template<typename Container>
 inline void check_not_in_container(const Container& c, const std::string& str,
@@ -413,4 +411,4 @@ validate(const indices& idx, const meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }
 
-} } }
+}

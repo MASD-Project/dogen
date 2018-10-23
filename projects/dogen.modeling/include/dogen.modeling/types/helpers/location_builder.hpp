@@ -29,9 +29,7 @@
 #include <string>
 #include "dogen.modeling/types/meta_model/location.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Builds a location.
@@ -54,6 +52,6 @@ private:
     meta_model::location location_;
 };
 
-} } }
+}
 
 #endif

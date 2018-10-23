@@ -43,9 +43,7 @@ const std::string unexpected_simple_name("Simple name is not expected.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 name_builder::name_builder(const bool model_name_mode)
     : model_name_mode_(model_name_mode) { }
@@ -170,4 +168,4 @@ meta_model::name name_builder::build(const std::string& names) {
     return build(names_as_list);
 }
 
-} } }
+}

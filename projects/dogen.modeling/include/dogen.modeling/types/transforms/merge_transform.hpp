@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Combines a number of intermediate models into a single
@@ -71,6 +69,6 @@ public:
         const std::list<meta_model::endomodel>& refs);
 };
 
-} } }
+}
 
 #endif

@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/test/mock_options_factory.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 transforms::options mock_options_factory::make_knitting_options(
     const boost::filesystem::path& target,
@@ -38,4 +36,4 @@ transforms::options mock_options_factory::make_knitting_options(
     return r;
 }
 
-} } }
+}

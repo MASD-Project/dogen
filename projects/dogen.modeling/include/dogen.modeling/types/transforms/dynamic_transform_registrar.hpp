@@ -29,9 +29,7 @@
 #include <memory>
 #include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class dynamic_transform_registrar final {
 public:
@@ -60,6 +58,6 @@ private:
     std::list<std::shared_ptr<const dynamic_transform_interface>> transforms_;
 };
 
-} } }
+}
 
 #endif

@@ -45,9 +45,7 @@ const std::string duplicate_archetype("Duplicate archetype: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void artefact_properties_transform::
 update_element(const context& ctx, meta_model::element& e) {
@@ -99,4 +97,4 @@ transform(const context& ctx, meta_model::model& m) {
     stp.end_transform(m);
 }
 
-} } }
+}

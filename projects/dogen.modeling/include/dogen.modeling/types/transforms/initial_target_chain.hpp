@@ -29,9 +29,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Obtains the target model from a source, as per the supplied
@@ -42,6 +40,6 @@ public:
     static meta_model::endomodel transform(const context& ctx);
 };
 
-} } }
+}
 
 #endif

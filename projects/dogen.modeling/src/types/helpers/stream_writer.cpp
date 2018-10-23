@@ -29,9 +29,7 @@ const std::string content("Content: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 stream_writer::stream_writer(std::ostream& s) : stream_(s) {}
 
@@ -42,4 +40,4 @@ void stream_writer::write(const std::list<meta_model::artefact>& files) const {
     }
 }
 
-} } }
+}

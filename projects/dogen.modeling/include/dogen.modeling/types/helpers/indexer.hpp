@@ -29,15 +29,13 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class indexer final {
 public:
     static indices index(meta_model::endomodel& m);
 };
 
-} } }
+}
 
 #endif

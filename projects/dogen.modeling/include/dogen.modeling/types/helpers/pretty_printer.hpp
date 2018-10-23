@@ -30,9 +30,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/helpers/separators.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class pretty_printer {
 public:
@@ -64,6 +62,6 @@ private:
     const separators separator_;
 };
 
-} } }
+}
 
 #endif

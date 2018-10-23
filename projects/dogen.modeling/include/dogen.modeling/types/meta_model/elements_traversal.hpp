@@ -35,9 +35,7 @@
 #include "dogen.modeling/types/meta_model/module.hpp"
 #include "dogen.modeling/types/meta_model/object_template.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Performs a traversal across all elements in an intermediate
@@ -219,6 +217,6 @@ inline void shared_elements_traversal(meta_model::endomodel& m,
 }
 /**@}*/
 
-} } }
+}
 
 #endif

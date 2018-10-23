@@ -29,9 +29,7 @@
 #include <string>
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class name_flattener final {
 public:
@@ -44,6 +42,6 @@ private:
     const bool detect_model_name_;
 };
 
-} } }
+}
 
 #endif

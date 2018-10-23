@@ -44,9 +44,7 @@ const std::string unexpected_default_value(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 void mappings_validator::
 validate(const meta_model::languages l, const mapping_value& mv) const {
@@ -141,4 +139,4 @@ void mappings_validator::validate(const std::unordered_map<std::string,
     BOOST_LOG_SEV(lg, debug) << "Finished mappings validation.";
 }
 
-} } }
+}

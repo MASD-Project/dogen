@@ -114,9 +114,7 @@ std::string module_name(const unsigned int i) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 namespace {
 
@@ -1589,4 +1587,4 @@ object_with_group_of_attributes_of_different_types(
     return r;
 }
 
-} } }
+}

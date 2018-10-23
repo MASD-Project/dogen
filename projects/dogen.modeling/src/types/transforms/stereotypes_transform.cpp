@@ -68,9 +68,7 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 bool stereotypes_transform::
 is_stereotype_handled_externally(const std::string& s) {
@@ -473,4 +471,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

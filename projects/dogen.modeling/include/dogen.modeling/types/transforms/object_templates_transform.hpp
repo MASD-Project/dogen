@@ -30,9 +30,7 @@
 #include "dogen.modeling/types/transforms/context.hpp"
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Transform that specialises in indexing
@@ -156,6 +154,6 @@ public:
     static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
-} } }
+}
 
 #endif

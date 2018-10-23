@@ -27,15 +27,13 @@
 
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class endomodel_pre_processing_validator final {
 public:
     static void validate(const meta_model::endomodel& im);
 };
 
-} } }
+}
 
 #endif

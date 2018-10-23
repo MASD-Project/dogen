@@ -66,9 +66,7 @@ const std::string duplicate_language("Language mapped more than once: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapping_actions
 mappings_hydrator::to_mapping_action(const std::string& s) const {
@@ -199,4 +197,4 @@ mappings_hydrator::hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} } }
+}

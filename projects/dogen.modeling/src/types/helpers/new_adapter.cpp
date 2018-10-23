@@ -43,9 +43,7 @@ const scope_types property_scope(scope_types::property);
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 new_adapter::new_adapter(const annotations::annotation_factory& f)
     : annotation_factory_(f) {}
@@ -241,4 +239,4 @@ new_adapter::to_builtin(const meta_model::location& l,
     return r;
 }
 
-} } }
+}

@@ -42,9 +42,7 @@ auto lg(logger_factory("yarn.helpers.name_tree_builder"));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 name_tree_builder::name_tree_builder()
     : root_(new node), current_(root_) {}
@@ -161,4 +159,4 @@ meta_model::name_tree name_tree_builder::build() {
     return r;
 }
 
-} } }
+}

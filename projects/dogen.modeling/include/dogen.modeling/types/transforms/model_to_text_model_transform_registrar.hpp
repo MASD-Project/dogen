@@ -34,9 +34,7 @@
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Keeps track of all the available model to text model
@@ -78,6 +76,6 @@ private:
     transforms_by_language_;
 };
 
-} } }
+}
 
 #endif

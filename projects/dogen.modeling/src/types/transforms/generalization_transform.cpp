@@ -47,10 +47,7 @@ const std::string incompatible_is_final(
 
 }
 
-namespace dogen {
-namespace modeling {
-
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
@@ -58,7 +55,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 }
 
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 generalization_transform::type_group generalization_transform::make_type_group(
     const annotations::type_repository& atrp) {
@@ -259,4 +256,4 @@ void generalization_transform::transform(const context& ctx,
     stp.end_transform(em);
 }
 
-} } }
+}

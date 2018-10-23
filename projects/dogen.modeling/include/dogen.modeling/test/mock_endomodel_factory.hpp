@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.annotations/types/annotation.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace test {
+namespace dogen::modeling::test {
 
 /**
  * @brief Generates mock intermediate models.
@@ -577,6 +575,6 @@ private:
     annotation_function_type annotation_function_;
 };
 
-} } }
+}
 
 #endif

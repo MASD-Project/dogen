@@ -27,15 +27,13 @@
 
 #include "dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class options_validator final {
 public:
     static void validate(const options& s);
 };
 
-} } }
+}
 
 #endif

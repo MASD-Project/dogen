@@ -39,9 +39,7 @@
 #include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
 #include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Context for all transformations.
@@ -145,6 +143,6 @@ private:
     const boost::shared_ptr<helpers::artefact_writer_interface> writer_;
 };
 
-} } }
+}
 
 #endif

@@ -49,9 +49,7 @@ const std::string object_template_not_found(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::object& attributes_transform::
 find_object(const meta_model::name& n, meta_model::endomodel& em) {
@@ -243,4 +241,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

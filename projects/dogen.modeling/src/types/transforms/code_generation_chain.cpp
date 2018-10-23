@@ -35,9 +35,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void code_generation_chain::
 write(const context& ctx, const meta_model::text_model& tm) {
@@ -86,4 +84,4 @@ void code_generation_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, info) << "Finished code generation.";
 }
 
-} } }
+}

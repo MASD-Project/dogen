@@ -21,9 +21,7 @@
 #include "dogen.modeling/types/helpers/name_builder.hpp"
 #include "dogen.modeling/types/helpers/meta_name_factory.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 meta_model::location meta_name_factory::make_location() {
     meta_model::location r;
@@ -96,4 +94,4 @@ meta_model::name meta_name_factory::make_visitor_name() {
     return r;
 }
 
-} } }
+}

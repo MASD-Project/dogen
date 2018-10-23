@@ -29,15 +29,13 @@
 #include "dogen.modeling/types/meta_model/model.hpp"
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class model_generation_chain final {
 public:
     static std::list<meta_model::model> transform(const context& ctx);
 };
 
-} } }
+}
 
 #endif

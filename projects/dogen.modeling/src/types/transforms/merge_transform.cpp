@@ -44,9 +44,7 @@ void copy(const ElementAssociativeContainer& src,
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void merge_transform::merge(const meta_model::endomodel& src,
     meta_model::endomodel& dst) {
@@ -118,4 +116,4 @@ merge_transform::transform(const context& ctx,
     return r;
 }
 
-} } }
+}

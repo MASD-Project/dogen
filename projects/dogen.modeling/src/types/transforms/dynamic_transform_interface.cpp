@@ -20,10 +20,8 @@
  */
 #include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 dynamic_transform_interface::~dynamic_transform_interface() noexcept { }
 
-} } }
+}

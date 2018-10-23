@@ -28,9 +28,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Writes artefacts as files into the filesystem.
@@ -71,6 +69,6 @@ private:
     const bool force_write_;
 };
 
-} } }
+}
 
 #endif

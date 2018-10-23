@@ -201,9 +201,7 @@ struct grammar : qi::grammar<Iterator> {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 legacy_name_tree_parser::
 legacy_name_tree_parser(const meta_model::languages language)
@@ -229,4 +227,4 @@ meta_model::name_tree legacy_name_tree_parser::parse(const std::string& s) const
     return r;
 }
 
-} } }
+}

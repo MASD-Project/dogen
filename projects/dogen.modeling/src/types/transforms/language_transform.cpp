@@ -47,9 +47,7 @@ const std::string unsupported_lanugage("Language is not supported: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::languages language_transform::to_language(const std::string& s) {
     using meta_model::languages;
@@ -143,4 +141,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

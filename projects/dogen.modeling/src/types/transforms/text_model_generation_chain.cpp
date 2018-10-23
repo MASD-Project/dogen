@@ -34,9 +34,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 meta_model::text_model
 text_model_generation_chain::transform(const context& ctx) {
@@ -58,4 +56,4 @@ text_model_generation_chain::transform(const context& ctx) {
     return r;
 }
 
-} } }
+}

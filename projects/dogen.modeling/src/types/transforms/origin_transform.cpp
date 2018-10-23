@@ -51,9 +51,7 @@ const std::string target_cannot_be_proxy(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 namespace {
 
@@ -136,4 +134,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     stp.end_transform(em);
 }
 
-} } }
+}

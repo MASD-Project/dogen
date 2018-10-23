@@ -56,9 +56,7 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 bool resolver::
 is_floating_point(const meta_model::endomodel& im,
@@ -674,4 +672,4 @@ void resolver::resolve(const indices& idx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }
 
-} } }
+}

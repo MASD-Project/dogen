@@ -45,9 +45,7 @@ const std::string missing_module("Could not find module: ");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 namespace {
 
@@ -237,4 +235,4 @@ transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Finished modules transform.";
 }
 
-} } }
+}

@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/name_flattener.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 name_flattener::name_flattener(const bool detect_model_name)
     : detect_model_name_(detect_model_name) {}
@@ -57,4 +55,4 @@ name_flattener::flatten(const meta_model::name& n) const {
     return r;
 }
 
-} } }
+}

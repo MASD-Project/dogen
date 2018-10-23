@@ -31,9 +31,7 @@
 #include "dogen.modeling/types/meta_model/location.hpp"
 #include "dogen.modeling/types/helpers/location_builder.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Builds a name.
@@ -90,6 +88,6 @@ private:
     location_builder location_builder_;
 };
 
-} } }
+}
 
 #endif

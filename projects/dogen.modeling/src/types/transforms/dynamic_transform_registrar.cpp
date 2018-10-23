@@ -34,9 +34,7 @@ const std::string null_frontend("Frontend supplied is null.");
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void dynamic_transform_registrar::register_dynamic_transform(
     std::shared_ptr<const dynamic_transform_interface> dt) {
@@ -70,4 +68,4 @@ dynamic_transform_registrar::dynamic_transforms() const {
     return transforms_;
 }
 
-} } }
+}

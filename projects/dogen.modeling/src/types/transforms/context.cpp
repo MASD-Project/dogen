@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 context::context(
         const std::vector<boost::filesystem::path>& data_directories,
@@ -91,4 +89,4 @@ const helpers::artefact_writer_interface& context::artefact_writer() const {
     return *writer_;
 }
 
-} } }
+}

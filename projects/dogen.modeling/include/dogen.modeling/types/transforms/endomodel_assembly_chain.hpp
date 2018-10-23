@@ -30,9 +30,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief Merges target and references and post-processes the result.
@@ -45,6 +43,6 @@ public:
         const std::list<meta_model::endomodel>& refs);
 };
 
-} } }
+}
 
 #endif

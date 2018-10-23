@@ -38,9 +38,7 @@ const std::string non_absolute_output(
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 void options_validator::validate(const options& o) {
     BOOST_LOG_SEV(lg, info) << "Validating options: " << o;
@@ -92,4 +90,4 @@ void options_validator::validate(const options& o) {
     BOOST_LOG_SEV(lg, info) << "Options are valid.";
 }
 
-} } }
+}

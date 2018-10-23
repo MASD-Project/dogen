@@ -34,9 +34,7 @@
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 #include "dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class reference_paths_extractor final {
 private:
@@ -67,6 +65,6 @@ public:
         const meta_model::endomodel& target);
 };
 
-} } }
+}
 
 #endif
