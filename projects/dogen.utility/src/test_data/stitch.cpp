@@ -35,9 +35,7 @@ path input_complex_template_stitch("stitch/input/complex_template.stitch");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path stitch::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -63,4 +61,4 @@ path stitch::input_complex_template_stitch() {
     return validating_resolver::resolve(::input_complex_template_stitch);
 }
 
-} } }
+}

@@ -38,9 +38,7 @@ const std::string dot(".");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 std::string read_file_content(std::istream& s) {
     s.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -168,4 +166,4 @@ void remove(const std::list<boost::filesystem::path>& files) {
     }
 }
 
-} } }
+}

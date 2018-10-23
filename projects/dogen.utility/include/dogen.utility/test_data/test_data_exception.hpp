@@ -27,9 +27,7 @@
 
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 class exception : public dogen::utility::exception::exception {
 public:
@@ -43,6 +41,6 @@ public:
     virtual ~exception() throw() {}
 };
 
-} } }
+}
 
 #endif

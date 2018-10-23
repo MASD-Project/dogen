@@ -27,9 +27,7 @@
 
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 class exception : public dogen::utility::exception::exception {
 public:
@@ -43,6 +41,6 @@ public:
     virtual ~exception() throw() {}
 };
 
-} } }
+}
 
 #endif

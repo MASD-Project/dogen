@@ -26,11 +26,9 @@ const std::string file_not_found("File not found: ");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 file_not_found::file_not_found(std::string message)
     : dogen::utility::exception::exception(::file_not_found + message) { }
 
-} } }
+}

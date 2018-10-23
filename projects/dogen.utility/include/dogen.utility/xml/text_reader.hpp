@@ -31,9 +31,7 @@
 #include "dogen.utility/xml/exception.hpp"
 #include "dogen.utility/xml/node_types.hpp"
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 /**
  * @brief Represents a reader that provides fast, non-cached,
@@ -266,6 +264,6 @@ text_reader::get_attribute<int>(const std::string& name) const {
     return get_attribute_as_int(name);
 }
 
-} } }
+}
 
 #endif

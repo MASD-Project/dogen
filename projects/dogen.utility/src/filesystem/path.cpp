@@ -58,9 +58,7 @@ const boost::filesystem::path in_share_dogen_dir("../share/dogen/data");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 boost::filesystem::path executable_directory() {
 #if defined __APPLE__
@@ -137,4 +135,4 @@ boost::filesystem::path data_files_directory() {
     BOOST_THROW_EXCEPTION(file_not_found(s.str()));
 }
 
-} } }
+}

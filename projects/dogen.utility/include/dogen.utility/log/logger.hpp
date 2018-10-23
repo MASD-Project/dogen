@@ -30,9 +30,7 @@
 #include <boost/log/sources/severity_channel_logger.hpp>
 #include "dogen.utility/log/severity_level.hpp"
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 typedef boost::log::sources::severity_channel_logger<
     severity_level,
@@ -41,6 +39,6 @@ typedef boost::log::sources::severity_channel_logger<
 
 logger logger_factory(std::string component_name);
 
-} } }
+}
 
 #endif

@@ -28,9 +28,6 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-
 /**
  * @namespace dogen::utility::test_data
  *
@@ -95,8 +92,6 @@ namespace utility {
  * (e.g. rebase_TEST_DATA_SET_NAME).
  *
  */
-namespace test_data {
-
-} } }
+namespace dogen::utility::test_data { }
 
 #endif

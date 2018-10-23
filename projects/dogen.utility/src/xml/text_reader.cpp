@@ -112,9 +112,7 @@ bool string_to_bool(const std::string& value) {
 
 }
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 /**
  * @brief Pimpl implementation of the reader.
@@ -439,4 +437,4 @@ void text_reader::close() {
     return impl_->close();
 }
 
-} } }
+}

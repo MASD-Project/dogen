@@ -28,13 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace utility {
-
-/**
- * @brief
- */
-namespace exception {
+namespace dogen::utility::exception {
 
 /**
  * @brief base class for all exceptions within dogen.
@@ -64,6 +58,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

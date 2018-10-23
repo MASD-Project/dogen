@@ -28,9 +28,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/log/scoped_life_cycle_manager.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 void log_if_test_has_failed();
 
@@ -42,7 +40,7 @@ scoped_life_cycle_manager_factory(std::string test_module,
 boost::filesystem::path probing_directory_path(std::string test_module,
     std::string test_suite, std::string function_name);
 
-} } }
+}
 
 #ifdef SETUP_TEST_LOG
 #undef SETUP_TEST_LOG

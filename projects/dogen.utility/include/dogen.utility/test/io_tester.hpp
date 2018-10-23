@@ -30,9 +30,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/test/json_validator.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 /**
  * @brief Ensures the inserter operator produces valid JSON.
@@ -55,6 +53,6 @@ public:
     }
 };
 
-} } }
+}
 
 #endif

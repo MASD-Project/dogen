@@ -29,9 +29,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/jsonify_io.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 /**
  * @brief Provides tests for different aspects of equality of domain
@@ -88,6 +86,6 @@ public:
     }
 };
 
-} } }
+}
 
 #endif

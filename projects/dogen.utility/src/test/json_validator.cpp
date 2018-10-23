@@ -48,9 +48,7 @@ struct json_grammar : qi::grammar<Iterator, Skipper> {
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 bool json_validator::validate(std::istream& s) {
     boost::spirit::istream_iterator it(s);
@@ -64,4 +62,4 @@ bool json_validator::validate(std::istream& s) {
     return ok && it == end;
 }
 
-} } }
+}

@@ -30,9 +30,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 /**
  * @brief Error occurred during container generation.
@@ -78,6 +76,6 @@ generate_vector(const unsigned int size = 0) {
     return(container);
 }
 
-} } }
+}
 
 #endif

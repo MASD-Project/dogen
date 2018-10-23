@@ -31,9 +31,7 @@ const std::string error_level("error");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 severity_level to_severity_level(const std::string& s) {
     if (s == trace_level)
@@ -52,4 +50,4 @@ severity_level to_severity_level(const std::string& s) {
         invalid_enum_value("Invalid or unexpected severity level: " + s));
 }
 
-} } }
+}

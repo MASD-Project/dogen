@@ -33,9 +33,7 @@ path input_northwind_ascii_sql("northwind/input/northwind_ascii.sql");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path northwind::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -54,4 +52,4 @@ path northwind::input_northwind_ascii_sql() {
 }
 
 
-} } }
+}

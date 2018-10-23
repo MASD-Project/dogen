@@ -32,9 +32,7 @@ const std::string relative_path_to_td_dir("../test_data");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 boost::filesystem::path resolver::test_data_directory() {
     const auto ed(filesystem::executable_directory());
@@ -55,4 +53,4 @@ resolver::resolve(boost::filesystem::path relative) {
     return r;
 }
 
-} } }
+}

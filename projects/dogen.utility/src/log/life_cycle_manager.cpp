@@ -42,9 +42,7 @@ const std::string time_stamp_format("%Y-%m-%d %H:%M:%S.%f");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 void life_cycle_manager::create_file_backend(
     boost::filesystem::path file_name, const severity_level severity) {
@@ -118,4 +116,4 @@ void life_cycle_manager::shutdown() {
     core->remove_all_sinks();
 }
 
-} } }
+}

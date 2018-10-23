@@ -28,9 +28,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.utility/test/file_asserter.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 class bytewise_file_asserter : public file_asserter {
 public:
@@ -48,6 +46,6 @@ public:
         boost::filesystem::path actual) const override;
 };
 
-} } }
+}
 
 #endif

@@ -35,9 +35,7 @@ inline void translate(const boost::exception& e) {
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 exception_fixture::exception_fixture() {
     using boost::exception;
@@ -45,4 +43,4 @@ exception_fixture::exception_fixture() {
     unit_test_monitor.register_exception_translator<exception>(&translate);
 }
 
-} } }
+}

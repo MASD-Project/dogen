@@ -20,11 +20,9 @@
  */
 #include "dogen.utility/filesystem/io_error.hpp"
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 io_error::io_error(std::string message)
     : dogen::utility::exception::exception(message) { }
 
-} } }
+}

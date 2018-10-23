@@ -29,9 +29,7 @@
 #include "dogen.utility/test/logging.hpp"
 #include "dogen.utility/io/jsonify_io.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 template<typename Entity, typename Sequence>
 class less_than_tester {
@@ -71,6 +69,6 @@ public:
     }
 };
 
-} } }
+}
 
 #endif

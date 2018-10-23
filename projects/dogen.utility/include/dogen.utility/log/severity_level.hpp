@@ -30,9 +30,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/exception/invalid_enum_value.hpp"
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 /**
  * @brief Logging severity.
@@ -75,6 +73,6 @@ operator<<(std::basic_ostream<CharT, TraitsT>& stream, severity_level level) {
     return stream;
 }
 
-} } }
+}
 
 #endif

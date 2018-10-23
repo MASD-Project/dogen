@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.utility/xml/node_types.hpp"
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, node_types value);
 
-} } }
+}
 
 #endif

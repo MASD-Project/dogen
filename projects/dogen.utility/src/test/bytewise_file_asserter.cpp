@@ -22,9 +22,7 @@
 #include "dogen.utility/filesystem/file.hpp"
 #include "dogen.utility/test/bytewise_file_asserter.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 bool bytewise_file_asserter::is_assertable(boost::filesystem::path) const {
     return true;
@@ -55,4 +53,4 @@ assert_file(boost::filesystem::path expected,
     return false;
 }
 
-} } }
+}

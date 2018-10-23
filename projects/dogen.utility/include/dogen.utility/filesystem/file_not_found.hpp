@@ -27,9 +27,7 @@
 
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 /**
  * @brief A file requested by the user could not be located.
@@ -46,6 +44,6 @@ public:
     virtual ~file_not_found() throw() {}
 };
 
-} } }
+}
 
 #endif

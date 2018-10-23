@@ -27,9 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 class external_dia {
 public:
@@ -104,6 +102,6 @@ public:
     static boost::filesystem::path actual_csharp_model_external_xml();
 };
 
-} } }
+}
 
 #endif

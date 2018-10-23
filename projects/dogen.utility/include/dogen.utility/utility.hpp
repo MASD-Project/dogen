@@ -25,14 +25,11 @@
 # pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @namespace dogen::utility
  *
  * @brief Miscellaneous utility classes and macros.
  */
-namespace utility {
-} }
+namespace dogen::utility { }
 
 #endif

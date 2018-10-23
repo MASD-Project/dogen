@@ -27,9 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 class external_json {
 public:
@@ -68,6 +66,6 @@ public:
     static boost::filesystem::path actual();
 };
 
-} } }
+}
 
 #endif

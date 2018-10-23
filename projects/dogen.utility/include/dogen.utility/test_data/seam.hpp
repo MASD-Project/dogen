@@ -27,9 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 class seam {
 public:
@@ -54,6 +52,6 @@ public:
 
 };
 
-} } }
+}
 
 #endif

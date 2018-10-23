@@ -31,9 +31,7 @@
 #include "dogen.utility/test/xml_serialization_helper.hpp"
 #include "dogen.utility/test/file_asserter.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 class asserter {
 public:
@@ -210,6 +208,6 @@ public:
         const std::string& actual);
 };
 
-} } }
+}
 
 #endif

@@ -20,13 +20,11 @@
  */
 #include "dogen.utility/log/logger.hpp"
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 logger logger_factory(std::string component_name) {
     using namespace boost::log;
     return logger(keywords::channel = component_name);
 }
 
-} } }
+}

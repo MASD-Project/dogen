@@ -131,9 +131,7 @@ path actual_csharp_model_external_xml(
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path external_dia::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -375,4 +373,4 @@ path external_dia::actual_csharp_model_external_xml() {
     return resolver::resolve(::actual_csharp_model_external_xml);
 }
 
-} } }
+}

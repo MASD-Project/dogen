@@ -36,9 +36,7 @@
 
 template<typename Archive> void register_types(Archive& ar);
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 /**
  * @brief Reads in the file given by path and deserialises it.
@@ -82,6 +80,6 @@ void xml_serialize(boost::filesystem::path path, Entity entity) {
     BOOST_LOG_SEV(lg, debug) << "Created file.";
 }
 
-} } }
+}
 
 #endif

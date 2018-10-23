@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 /**
  * @brief Base class for generators.
@@ -51,6 +49,6 @@ private:
     const unsigned int length_;
 };
 
-} } }
+}
 
 #endif

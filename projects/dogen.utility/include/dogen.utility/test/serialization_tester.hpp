@@ -39,9 +39,7 @@
 
 template<typename Archive> void register_types(Archive& ar);
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 template<typename T>
 void check(const T& a, const T& b) {
@@ -161,6 +159,6 @@ public:
     }
 };
 
-} } }
+}
 
 #endif

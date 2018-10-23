@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-#include <ostream>
 #include <string>
+#include <ostream>
 
-namespace dogen {
-namespace utility {
-namespace streaming {
-
-namespace detail {
+namespace dogen::utility::streaming::detail {
 
 template<typename Target>
 class json_number_type {
@@ -74,11 +70,9 @@ private:
     const Target& target_;
 };
 
-} } } }
+}
 
-namespace dogen {
-namespace utility {
-namespace streaming {
+namespace dogen::utility::streaming {
 
 /**
  * @brief String handling.
@@ -155,7 +149,9 @@ jsonify(const Insertee& insertee) {
     return(detail::json_complex_type<Insertee>(insertee));
 }
 
-namespace detail {
+}
+
+namespace dogen::utility::streaming::detail {
 
 template<typename Target>
 inline std::ostream&
@@ -185,6 +181,6 @@ operator<<(std::ostream& stream, const json_complex_type<Target>& target) {
     return(stream);
 }
 
-} } } }
+}
 
 #endif

@@ -38,9 +38,7 @@ const std::string multiple_delimiters("String has more than one delimiter: ");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace string {
+namespace dogen::utility::string {
 
 std::list<std::string> splitter::split_scoped(const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "Parsing scoped name: " << n;
@@ -103,4 +101,4 @@ std::list<std::string> splitter::split_csv(const std::string& n) {
     return r;
 }
 
-} } }
+}

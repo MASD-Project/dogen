@@ -34,9 +34,7 @@ const std::string error_message("Invalid or unexpected object type");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace serialization {
+namespace dogen::utility::serialization {
 
 std::ostream& operator<<(std::ostream& stream, archive_types value) {
     switch (value) {
@@ -54,4 +52,4 @@ std::ostream& operator<<(std::ostream& stream, archive_types value) {
     BOOST_THROW_EXCEPTION(utility::exception::invalid_enum_value(error_message));
 }
 
-} } }
+}

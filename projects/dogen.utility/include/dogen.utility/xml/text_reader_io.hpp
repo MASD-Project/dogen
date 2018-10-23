@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.utility/xml/text_reader.hpp"
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, const text_reader& value);
 
-} } }
+}
 
 #endif

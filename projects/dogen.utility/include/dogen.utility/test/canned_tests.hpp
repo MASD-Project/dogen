@@ -33,9 +33,7 @@
 #include "dogen.utility/test/equality_tester.hpp"
 #include "dogen.utility/test/serialization_tester.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 template<typename Sequence>
 void test_equality() {
@@ -104,6 +102,6 @@ void test_io() {
         inserter_operator_produces_valid_json(seq());
 }
 
-} } }
+}
 
 #endif

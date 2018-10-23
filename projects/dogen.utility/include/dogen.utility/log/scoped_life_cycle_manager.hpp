@@ -27,9 +27,7 @@
 
 #include "dogen.utility/log/life_cycle_manager.hpp"
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 class scoped_life_cycle_manager {
 public:
@@ -49,6 +47,6 @@ private:
     life_cycle_manager manager_;
 };
 
-} } }
+}
 
 #endif

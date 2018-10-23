@@ -46,11 +46,10 @@ const std::string end_entity("end_entity");
 const std::string xml_declaration("xml_declaration");
 
 const std::string error_message("Invalid or unexpected node type");
+
 }
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, node_types value) {
     switch (value) {
@@ -78,4 +77,4 @@ std::ostream& operator<<(std::ostream& stream, node_types value) {
     BOOST_THROW_EXCEPTION(dogen::utility::exception::invalid_enum_value(error_message));
 }
 
-} } }
+}

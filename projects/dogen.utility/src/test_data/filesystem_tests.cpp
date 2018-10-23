@@ -47,12 +47,9 @@ const path expected_some_file_txt("filesystem_tests/expected/some_file.txt");
 const path expected_file_to_overwrite_txt(
     "filesystem_tests/expected/file_to_overwrite.txt");
 
-
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path filesystem_tests::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -99,4 +96,4 @@ path filesystem_tests::actual_file_to_overwrite_txt() {
     return resolver::resolve(::actual_file_to_overwrite_txt);
 }
 
-} } }
+}

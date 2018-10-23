@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 /**
  * @brief A given set of XML data is modeled as a tree of
@@ -61,6 +59,6 @@ enum class node_types : unsigned int {
     xml_declaration = 17 ///< The XML declaration
 };
 
-} } }
+}
 
 #endif

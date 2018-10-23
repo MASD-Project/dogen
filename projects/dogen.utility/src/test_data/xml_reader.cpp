@@ -54,9 +54,7 @@ const path actual("xml_reader/actual");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path xml_reader::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -134,4 +132,4 @@ path xml_reader::actual() {
     return validating_resolver::resolve(::actual);
 }
 
-} } }
+}

@@ -35,9 +35,7 @@
 #include "dogen.utility/filesystem/io_error.hpp"
 
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 /**
  * @brief Returns the contents of the file.
@@ -107,6 +105,6 @@ boost::filesystem::path find_file_recursively_upwards(
  */
 void remove(const std::list<boost::filesystem::path>& files);
 
-} } }
+}
 
 #endif

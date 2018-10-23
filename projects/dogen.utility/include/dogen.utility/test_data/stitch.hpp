@@ -27,9 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 class stitch {
 public:
@@ -49,6 +47,6 @@ public:
     static boost::filesystem::path input_complex_template_stitch();
 };
 
-} } }
+}
 
 #endif

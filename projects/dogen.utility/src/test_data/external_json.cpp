@@ -59,9 +59,7 @@ path actual("external.json/actual");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path external_json::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -157,4 +155,4 @@ path external_json::actual() {
     return validating_resolver::resolve(::actual);
 }
 
-} } }
+}

@@ -27,9 +27,7 @@
 
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 /**
  * @brief An error occurred whilst reading or writing.
@@ -46,6 +44,6 @@ public:
     virtual ~io_error() throw() {}
 };
 
-} } }
+}
 
 #endif

@@ -28,9 +28,7 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen.utility/log/logger.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 /**
  * @brief Provides tests for copy construction, as well as move and
@@ -105,6 +103,6 @@ public:
     }
 };
 
-} } }
+}
 
 #endif

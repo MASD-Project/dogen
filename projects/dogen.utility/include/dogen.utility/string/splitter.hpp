@@ -30,9 +30,7 @@
 #include <unordered_set>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace utility {
-namespace string {
+namespace dogen::utility::string {
 
 class splitting_error : public virtual std::exception,
                         public virtual boost::exception {
@@ -75,6 +73,6 @@ public:
     static std::list<std::string> split_csv(const std::string& n);
 };
 
-} } }
+}
 
 #endif

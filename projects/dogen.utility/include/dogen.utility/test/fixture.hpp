@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 /**
  * @brief Translates boost expcetions by dumping diagnostic
@@ -37,6 +35,6 @@ struct exception_fixture {
     exception_fixture();
 };
 
-} } }
+}
 
 #endif

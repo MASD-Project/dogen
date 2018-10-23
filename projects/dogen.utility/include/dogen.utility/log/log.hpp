@@ -25,14 +25,9 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace utility {
-
 /**
  * @brief Dogen logging.
  */
-namespace log {
-
-} } }
+namespace dogen::utility::log { }
 
 #endif

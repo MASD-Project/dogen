@@ -28,9 +28,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 /**
  * @brief Attempting to generate more terms that those on the
@@ -100,6 +98,6 @@ private:
     generator_type generator_;
 };
 
-} } }
+}
 
 #endif

@@ -27,15 +27,13 @@
 
 #include <iosfwd>
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 class json_validator {
 public:
     static bool validate(std::istream& s);
 };
 
-} } }
+}
 
 #endif

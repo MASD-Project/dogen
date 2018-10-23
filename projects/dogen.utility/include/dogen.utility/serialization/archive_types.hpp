@@ -27,9 +27,7 @@
 
 #include <iosfwd>
 
-namespace dogen {
-namespace utility {
-namespace serialization {
+namespace dogen::utility::serialization {
 
 /**
  * @brief Boost serialisation archive types.
@@ -43,6 +41,6 @@ enum class archive_types : unsigned int {
 
 std::ostream& operator<<(std::ostream& stream, archive_types value);
 
-} } }
+}
 
 #endif

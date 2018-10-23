@@ -61,9 +61,7 @@ const path expected_empty_file_txt("tds_test_good/expected/empty_file.txt");
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path tds_test_good::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -141,4 +139,4 @@ path tds_test_good::actual_empty_file_txt() {
     return validating_resolver::resolve(::expected_empty_file_txt);
 }
 
-} } }
+}

@@ -30,9 +30,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/jsonify_io.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 template<typename Sequence>
 class hash_tester {
@@ -80,6 +78,6 @@ public:
     }
 };
 
-} } }
+}
 
 #endif

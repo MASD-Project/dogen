@@ -27,9 +27,7 @@
 
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace utility {
-namespace exception {
+namespace dogen::utility::exception {
 
 /**
  * @brief The exception thrown when an enum has an unexpected value.
@@ -56,6 +54,6 @@ public:
     virtual ~invalid_enum_value() throw() {}
 };
 
-} } }
+}
 
 #endif

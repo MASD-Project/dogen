@@ -20,9 +20,7 @@
  */
 #include "dogen.utility/log/scoped_life_cycle_manager.hpp"
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 scoped_life_cycle_manager::scoped_life_cycle_manager(std::string file_name,
     severity_level severity, bool log_to_console) {
@@ -33,4 +31,4 @@ scoped_life_cycle_manager::~scoped_life_cycle_manager() {
     manager_.shutdown();
 }
 
-} } }
+}

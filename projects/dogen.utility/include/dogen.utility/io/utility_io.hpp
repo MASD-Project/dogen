@@ -25,17 +25,12 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace utility {
-
 /**
  * @brief Overloads for general objects (stl, boost, etc) to support
  * the inserter operator.
  *
  * Used only for debugging purposes.
  */
-namespace streaming {
-
-} } }
+namespace dogen::utility::streaming { }
 
 #endif

@@ -89,9 +89,7 @@ bool compare_paths(
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 dogen::utility::log::logger asserter::lg_(
     dogen::utility::log::logger_factory("utility.test.asserter"));
@@ -202,4 +200,4 @@ assert_contains(const std::string& expected, const std::string& actual) {
     return handle_assert(boost::contains(actual, expected), contains);
 }
 
-} } }
+}

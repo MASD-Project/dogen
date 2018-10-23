@@ -28,9 +28,7 @@
 #include <memory>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 class file_asserter {
 public:
@@ -51,6 +49,6 @@ public:
         boost::filesystem::path actual) const = 0;
 };
 
-} } }
+}
 
 #endif

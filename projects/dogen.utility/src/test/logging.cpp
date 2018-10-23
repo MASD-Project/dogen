@@ -23,9 +23,7 @@
 #include <boost/test/results_collector.hpp>
 #include "dogen.utility/test/logging.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 void log_if_test_has_failed() {
     using namespace dogen::utility::log;
@@ -58,4 +56,4 @@ boost::filesystem::path probing_directory_path(std::string test_module,
     return s.str();
 }
 
-} } }
+}

@@ -28,9 +28,7 @@
 #include <string>
 #include "dogen.utility/test/asserter.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 template<typename Exception>
 class contains_checker {
@@ -46,6 +44,6 @@ private:
     const std::string expected_;
 };
 
-} } }
+}
 
 #endif

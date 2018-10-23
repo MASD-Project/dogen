@@ -28,9 +28,7 @@
 #include "dogen.utility/io/jsonify_io.hpp"
 #include "dogen.utility/log/logger.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test {
+namespace dogen::utility::test {
 
 /**
  * @brief Requirements for object construction.
@@ -90,6 +88,6 @@ public:
     // complete_constructed_object_matches_properties_set_object() = 0;
 };
 
-} } }
+}
 
 #endif

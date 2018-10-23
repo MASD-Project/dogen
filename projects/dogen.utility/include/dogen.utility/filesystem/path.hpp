@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace filesystem {
+namespace dogen::utility::filesystem {
 
 /**
  * @brief Returns the full path to the directory containing the
@@ -61,6 +59,6 @@ boost::filesystem::path executable_directory();
  */
 boost::filesystem::path data_files_directory();
 
-} } }
+}
 
 #endif

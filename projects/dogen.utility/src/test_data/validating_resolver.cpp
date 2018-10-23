@@ -25,9 +25,7 @@
 #include "dogen.utility/test_data/resolver.hpp"
 #include "dogen.utility/test_data/validating_resolver.hpp"
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 boost::filesystem::path
 validating_resolver::resolve(boost::filesystem::path relative) {
@@ -39,4 +37,4 @@ validating_resolver::resolve(boost::filesystem::path relative) {
     BOOST_THROW_EXCEPTION(file_not_found(r.string()));
 }
 
-} } }
+}

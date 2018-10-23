@@ -46,9 +46,7 @@ path actual_complex_template_stitch_cpp(
 
 }
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 path seam::data_set() {
     return validating_resolver::resolve(::data_set);
@@ -86,4 +84,4 @@ path seam::actual_complex_template_stitch_cpp() {
     return resolver::resolve(::actual_complex_template_stitch_cpp);
 }
 
-} } }
+}

@@ -31,9 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.utility/log/severity_level.hpp"
 
-namespace dogen {
-namespace utility {
-namespace log {
+namespace dogen::utility::log {
 
 /**
  * @brief Manages the starting and stopping of logging for an
@@ -86,6 +84,6 @@ public:
     void shutdown();
 };
 
-} } }
+}
 
 #endif

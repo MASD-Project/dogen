@@ -24,9 +24,7 @@
 #include "dogen.utility/xml/node_types_io.hpp"
 #include "dogen.utility/xml/text_reader_io.hpp"
 
-namespace dogen {
-namespace utility {
-namespace xml {
+namespace dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, const text_reader& value) {
     boost::io::ios_flags_saver ifs(stream);
@@ -41,4 +39,4 @@ std::ostream& operator<<(std::ostream& stream, const text_reader& value) {
                   << " }";
 }
 
-} } }
+}

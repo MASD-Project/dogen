@@ -27,9 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace utility {
-namespace test_data {
+namespace dogen::utility::test_data {
 
 /**
  * @brief Manages the location of all files in the XML Reader test
@@ -60,6 +58,6 @@ public:
     static boost::filesystem::path actual_file_to_overwrite_txt();
 };
 
-} } }
+}
 
 #endif

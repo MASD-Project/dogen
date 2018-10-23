@@ -33,9 +33,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/filesystem/file_not_found.hpp"
 
-namespace dogen {
-namespace utility {
-namespace serialization {
+namespace dogen::utility::serialization {
 
 /**
  * @brief Reads in the file given by path and deserialises it.
@@ -62,6 +60,6 @@ void xml_serialize(boost::filesystem::path p, Entity e) {
     oa << BOOST_SERIALIZATION_NVP(e);
 }
 
-} } }
+}
 
 #endif
