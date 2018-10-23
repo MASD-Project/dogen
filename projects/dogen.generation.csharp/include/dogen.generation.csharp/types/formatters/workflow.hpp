@@ -31,10 +31,7 @@
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 #include "dogen.generation.csharp/types/formatters/registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class workflow final {
 public:
@@ -55,6 +52,6 @@ private:
     static std::shared_ptr<csharp::formatters::registrar> registrar_;
 };
 
-} } } }
+}
 
 #endif

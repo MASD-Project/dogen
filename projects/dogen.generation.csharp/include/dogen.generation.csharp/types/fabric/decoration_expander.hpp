@@ -29,10 +29,7 @@
 #include "dogen.formatting/types/decoration_properties_factory.hpp"
 #include "dogen.modeling/types/meta_model/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 class decoration_expander final {
 public:
@@ -40,6 +37,6 @@ public:
         modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

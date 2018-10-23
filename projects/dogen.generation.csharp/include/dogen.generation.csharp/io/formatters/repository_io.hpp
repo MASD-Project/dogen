@@ -28,13 +28,10 @@
 #include <iosfwd>
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const repository& v);
 
-} } } }
+}
 
 #endif

@@ -27,11 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::csharp::formatters::io {
 
 class traits final {
 public:
@@ -61,6 +57,6 @@ public:
     static std::string assistant_archetype();
 };
 
-} } } } }
+}
 
 #endif

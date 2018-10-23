@@ -27,11 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::csharp::formatters::test_data {
 
 struct traits final {
     /**
@@ -60,6 +56,6 @@ struct traits final {
     static std::string assistant_archetype();
 };
 
-} } } } }
+}
 
 #endif

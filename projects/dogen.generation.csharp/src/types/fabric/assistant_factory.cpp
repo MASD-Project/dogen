@@ -30,10 +30,7 @@ const std::string assistant_name("Assistant");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element>
 assistant_factory::make(const modeling::meta_model::model& m) const {
@@ -48,4 +45,4 @@ assistant_factory::make(const modeling::meta_model::model& m) const {
     return r;
 }
 
-} } } }
+}

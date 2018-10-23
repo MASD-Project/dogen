@@ -25,10 +25,7 @@
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_expander.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 assistant_expander::type_group assistant_expander::
 make_type_group(const annotations::type_repository& atrp) const {
@@ -88,4 +85,4 @@ expand(const annotations::type_repository& atrp, model& fm) const {
     }
 }
 
-} } } }
+}

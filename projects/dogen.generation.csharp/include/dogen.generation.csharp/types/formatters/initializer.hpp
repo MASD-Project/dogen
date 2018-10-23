@@ -27,16 +27,13 @@
 
 #include "dogen.generation.csharp/types/formatters/registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class initializer final {
 public:
     static void initialize(registrar& rg);
 };
 
-} } } }
+}
 
 #endif

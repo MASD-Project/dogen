@@ -27,11 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::csharp::formatters::io {
 
 /**
  * @brief Initialises the types facet.
@@ -41,6 +37,6 @@ public:
     static void initialize(registrar& r);
 };
 
-} } } } }
+}
 
 #endif

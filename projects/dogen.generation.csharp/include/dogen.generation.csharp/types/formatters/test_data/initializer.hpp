@@ -27,11 +27,7 @@
 
 #include "dogen.generation.csharp/types/formatters/registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::csharp::formatters::test_data {
 
 /**
  * @brief Initialises the types facet.
@@ -41,6 +37,6 @@ public:
     static void initialize(registrar& r);
 };
 
-} } } } }
+}
 
 #endif

@@ -35,10 +35,7 @@ const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 injector::~injector() noexcept {}
 
@@ -82,4 +79,4 @@ void injector::inject(const annotations::type_repository& atrp,
     inject_assistant(m);
 }
 
-} } } }
+}

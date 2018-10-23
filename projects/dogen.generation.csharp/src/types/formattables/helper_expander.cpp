@@ -40,7 +40,8 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.csharp.formattables.helper_expander"));
+static logger
+lg(logger_factory("generation.csharp.formattables.helper_expander"));
 
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string descriptor_expected(
@@ -51,12 +52,10 @@ const std::string empty_identifiable(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
-class helper_properties_generator : public modeling::meta_model::element_visitor {
+class helper_properties_generator
+    : public modeling::meta_model::element_visitor {
 public:
     helper_properties_generator(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff);
@@ -371,4 +370,4 @@ void helper_expander::expand(const annotations::type_repository& atrp,
     BOOST_LOG_SEV(lg, debug) << "Finished helper expansion.";
 }
 
-} } } }
+}

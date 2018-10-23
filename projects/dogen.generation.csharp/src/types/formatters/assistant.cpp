@@ -53,10 +53,7 @@ const std::string attribute_with_no_simple_name(
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>
@@ -304,4 +301,4 @@ modeling::meta_model::artefact assistant::make_artefact() const {
     return r;
 }
 
-} } } }
+}

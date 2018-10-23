@@ -44,10 +44,7 @@ const std::string sln_extension(".sln");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 visual_studio_factory::type_group visual_studio_factory::make_type_group(
     const annotations::type_repository& atrp) const {
@@ -159,4 +156,4 @@ make(const annotations::type_repository& atrp,
     return r;
 }
 
-} } } }
+}

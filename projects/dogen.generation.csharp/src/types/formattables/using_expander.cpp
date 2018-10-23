@@ -20,13 +20,10 @@
  */
 #include "dogen.generation.csharp/types/formattables/using_expander.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 bool using_expander::operator==(const using_expander& /*rhs*/) const {
     return true;
 }
 
-} } } }
+}

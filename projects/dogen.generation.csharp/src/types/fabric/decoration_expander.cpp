@@ -43,10 +43,7 @@ const std::string xml_modeline_name("xml");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 class decoration_updater : public element_visitor {
 public:
@@ -91,4 +88,4 @@ expand(const dogen::formatting::decoration_properties_factory& dpf,
     BOOST_LOG_SEV(lg, debug) << "Finished populating decoration properties.";
 }
 
-} } } }
+}

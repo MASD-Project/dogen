@@ -38,10 +38,7 @@
 #include "dogen.generation.csharp/types/formattables/locator_configuration.hpp"
 
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class locator final {
 private:
@@ -138,6 +135,6 @@ private:
     const boost::filesystem::path project_path_;
 };
 
-} } } }
+}
 
 #endif

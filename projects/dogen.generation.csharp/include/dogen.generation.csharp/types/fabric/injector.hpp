@@ -31,10 +31,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.modeling/types/meta_model/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 class injector {
 public:
@@ -45,7 +42,8 @@ private:
         modeling::meta_model::model& m) const;
 
     void add_elements(
-        const std::list<boost::shared_ptr<modeling::meta_model::element>>& elements,
+        const std::list<
+        boost::shared_ptr<modeling::meta_model::element>>& elements,
         modeling::meta_model::model& m) const;
 
 private:
@@ -59,6 +57,6 @@ public:
         modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

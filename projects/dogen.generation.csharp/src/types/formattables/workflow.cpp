@@ -31,10 +31,7 @@ static logger lg(logger_factory("generation.csharp.formattables.workflow"));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 model workflow:: make_model(const formatters::repository& frp,
     const modeling::meta_model::model& m) const {
@@ -69,4 +66,4 @@ model workflow::execute(
     return r;
 }
 
-} } } }
+}

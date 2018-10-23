@@ -20,11 +20,8 @@
  */
 #include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
 
-} } } }
+}

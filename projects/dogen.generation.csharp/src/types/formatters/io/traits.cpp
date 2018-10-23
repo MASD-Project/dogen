@@ -21,11 +21,7 @@
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/io/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::csharp::formatters::io {
 
 std::string traits::facet() {
     static std::string r(csharp::traits::backend() + ".io");
@@ -52,4 +48,4 @@ std::string traits::assistant_archetype() {
     return r;
 }
 
-} } } } }
+}

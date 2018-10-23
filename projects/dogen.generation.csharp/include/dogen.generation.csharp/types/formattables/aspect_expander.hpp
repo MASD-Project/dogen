@@ -29,16 +29,13 @@
 #include "dogen.annotations/types/type_repository.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class aspect_expander final {
 public:
     void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

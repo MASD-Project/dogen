@@ -42,10 +42,7 @@ static logger lg(logger_factory("generation.csharp.formattables.aspect_expander"
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class aspect_properties_generator : public modeling::meta_model::element_visitor {
 private:
@@ -148,4 +145,4 @@ expand(const annotations::type_repository& atrp, model& fm) const {
     fm.aspect_properties(g.result());
 }
 
-} } } }
+}

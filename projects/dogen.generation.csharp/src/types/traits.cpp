@@ -20,9 +20,7 @@
  */
 #include "dogen.generation.csharp/types/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 std::string traits::kernel() {
     static std::string r("quilt");
@@ -94,4 +92,4 @@ std::string traits::csharp::assistant::method_postfix() {
     return r;
 }
 
-} } }
+}

@@ -27,10 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 struct traits final {
     static std::string visual_studio_facet();
@@ -38,6 +35,6 @@ struct traits final {
     static std::string visual_studio_solution_archetype();
 };
 
-} } } }
+}
 
 #endif

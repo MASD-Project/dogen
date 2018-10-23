@@ -28,10 +28,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formatters.workflow"));
 
 }
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+
+namespace dogen::generation::csharp::formatters {
 
 std::shared_ptr<csharp::formatters::registrar> workflow::registrar_;
 
@@ -88,4 +86,4 @@ workflow::execute(const formattables::model& fm) const {
     return r;
 }
 
-} } } }
+}

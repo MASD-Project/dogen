@@ -33,10 +33,7 @@
 #include "dogen.generation.csharp/types/formattables/formattable.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class helper_expander final {
 private:
@@ -67,6 +64,6 @@ public:
 
 };
 
-} } } }
+}
 
 #endif

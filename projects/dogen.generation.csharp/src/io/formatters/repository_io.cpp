@@ -25,10 +25,7 @@
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.csharp/io/formatters/repository_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 template<typename Containee>
 inline std::ostream& to_stream(std::ostream& s, const std::string& key,
@@ -96,4 +93,4 @@ std::ostream& operator<<(std::ostream& s, const repository& rp) {
     return s;
 }
 
-} } } }
+}

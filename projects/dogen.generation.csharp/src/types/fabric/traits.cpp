@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/fabric/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 std::string traits::visual_studio_project_solution_guid() {
     static std::string r("quilt.csharp.visual_studio.project_solution_guid");
@@ -35,4 +32,4 @@ std::string traits::visual_studio_project_guid() {
     return r;
 }
 
-} } } }
+}

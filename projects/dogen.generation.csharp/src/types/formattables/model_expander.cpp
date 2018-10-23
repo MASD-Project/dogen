@@ -26,10 +26,7 @@
 #include "dogen.generation.csharp/types/formattables/helper_expander.hpp"
 #include "dogen.generation.csharp/types/formattables/model_expander.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 void model_expander::expand_file_paths(
     const formatters::repository& frp, const locator& l, model& fm) const {
@@ -93,4 +90,4 @@ void model_expander::expand(
     expand_project_items(fm);
 }
 
-} } } }
+}

@@ -28,10 +28,7 @@
 #include <string>
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 class meta_name_factory final {
 private:
@@ -47,6 +44,6 @@ public:
     static modeling::meta_model::name make_visual_studio_solution_name();
 };
 
-} } } }
+}
 
 #endif

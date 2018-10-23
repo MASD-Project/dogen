@@ -40,9 +40,7 @@ const std::string dot(".");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 model_to_text_model_transform::~model_to_text_model_transform() noexcept { }
 
@@ -152,4 +150,4 @@ model_to_text_model_transform::transform(const modeling::transforms::context& ct
     return r;
 }
 
-} } }
+}

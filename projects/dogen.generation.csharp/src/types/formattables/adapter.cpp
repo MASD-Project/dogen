@@ -32,10 +32,7 @@ static logger lg(logger_factory("generation.csharp.formattables.adapter"));
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::unordered_map<std::string, formattable> adapter::adapt(
     const formatters::repository& frp, const modeling::meta_model::model& m) const {
@@ -90,4 +87,4 @@ std::unordered_map<std::string, formattable> adapter::adapt(
     return r;
 }
 
-} } } }
+}

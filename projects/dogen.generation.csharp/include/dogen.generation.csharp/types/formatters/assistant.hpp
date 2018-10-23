@@ -42,10 +42,7 @@
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class assistant final {
 public:
@@ -161,6 +158,6 @@ private:
     const annotations::archetype_location archetype_location_;
 };
 
-} } } }
+}
 
 #endif

@@ -42,9 +42,7 @@
 #include "dogen.generation.csharp/types/formattables/locator.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 /**
  * @brief Manages the c# backend.
@@ -103,6 +101,6 @@ public:
         const modeling::meta_model::model& m) const override;
 };
 
-} } }
+}
 
 #endif

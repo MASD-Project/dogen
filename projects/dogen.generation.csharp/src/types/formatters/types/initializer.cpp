@@ -27,11 +27,7 @@
 #include "dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp"
 #include "dogen.generation.csharp/types/formatters/types/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::csharp::formatters::types {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);
@@ -42,4 +38,4 @@ void initializer::initialize(registrar& rg) {
     register_formatter_helper<floating_point_number_helper>(rg);
 }
 
-} } } } }
+}

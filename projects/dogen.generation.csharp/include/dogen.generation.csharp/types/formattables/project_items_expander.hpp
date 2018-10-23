@@ -29,10 +29,7 @@
 #include <unordered_set>
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class project_items_expander final {
 private:
@@ -43,6 +40,6 @@ public:
     void expand(model& fm) const;
 };
 
-} } } }
+}
 
 #endif

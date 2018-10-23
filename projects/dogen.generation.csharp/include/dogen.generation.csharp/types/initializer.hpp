@@ -27,9 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 /**
  * @brief Initialises all of the static state in this model.
@@ -39,6 +37,6 @@ public:
     static void initialize();
 };
 
-} } }
+}
 
 #endif

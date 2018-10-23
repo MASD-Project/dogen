@@ -31,10 +31,7 @@
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::unordered_set<std::string>
 project_items_expander::meta_names_for_project_items() {
@@ -87,4 +84,4 @@ void project_items_expander::expand(model& fm) const {
         fm.project_items().push_back(p);
 }
 
-} } } }
+}

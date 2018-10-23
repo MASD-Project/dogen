@@ -30,10 +30,7 @@
 #include "dogen.generation.csharp/types/formattables/locator.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class file_path_expander final {
 public:
@@ -41,6 +38,6 @@ public:
         model& fm) const;
 };
 
-} } } }
+}
 
 #endif

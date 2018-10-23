@@ -31,10 +31,7 @@
 #include "dogen.generation.csharp/types/formattables/element_properties.hpp"
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class context final {
 public:
@@ -64,6 +61,6 @@ private:
         helpers_;
 };
 
-} } } }
+}
 
 #endif

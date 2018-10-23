@@ -27,10 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class using_expander final {
 public:
@@ -48,6 +45,6 @@ public:
 
 };
 
-} } } }
+}
 
 #endif

@@ -35,10 +35,7 @@ const std::string module_name("Properties");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element> assembly_info_factory::
 make(const modeling::meta_model::model& m) const {
@@ -57,4 +54,4 @@ make(const modeling::meta_model::model& m) const {
     return r;
 }
 
-} } } }
+}

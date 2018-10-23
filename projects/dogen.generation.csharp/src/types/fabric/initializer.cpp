@@ -22,13 +22,10 @@
 #include "dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen.generation.csharp/types/fabric/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 void initializer::initialize() {
     modeling::transforms::register_dynamic_transform<dynamic_transform>();
 }
 
-} } } }
+}

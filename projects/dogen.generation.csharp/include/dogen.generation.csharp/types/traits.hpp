@@ -27,9 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 /**
  * @brief Constants for all the top-level meta-data keys for the C#
@@ -112,6 +110,6 @@ struct traits {
     };
 };
 
-} } }
+}
 
 #endif

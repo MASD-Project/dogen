@@ -30,10 +30,7 @@
 #include "dogen.generation.csharp/types/formatters/assistant_fwd.hpp"
 #include "dogen.generation.csharp/types/formattables/helper_properties_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class helper_formatter_interface {
 public:
@@ -52,6 +49,6 @@ public:
         const formattables::helper_properties& hp) const = 0;
 };
 
-} } } }
+}
 
 #endif

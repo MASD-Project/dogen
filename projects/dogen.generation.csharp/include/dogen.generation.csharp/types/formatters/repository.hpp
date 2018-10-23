@@ -33,10 +33,7 @@
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface_fwd.hpp"
 #include "dogen.generation.csharp/types/formatters/artefact_formatter_interface_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 /**
  * @brief Repository for all formatters.
@@ -128,6 +125,6 @@ private:
     helper_formatters_;
 };
 
-} } } }
+}
 
 #endif

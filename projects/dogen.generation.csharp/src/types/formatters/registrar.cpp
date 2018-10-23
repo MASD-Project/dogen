@@ -45,10 +45,7 @@ const std::string empty_family("Family cannot be empty.");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 void registrar::validate() const {
     /*
@@ -180,4 +177,4 @@ registrar::archetype_location_repository_parts() const {
     return archetype_location_repository_parts_;
 }
 
-} } } }
+}

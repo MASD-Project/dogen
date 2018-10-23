@@ -25,9 +25,7 @@
 #include "dogen.generation.csharp/types/model_to_text_model_transform.hpp"
 #include "dogen.generation.csharp/types/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
@@ -35,4 +33,4 @@ void initializer::initialize() {
     modeling::transforms::register_transform<model_to_text_model_transform>();
 }
 
-} } }
+}

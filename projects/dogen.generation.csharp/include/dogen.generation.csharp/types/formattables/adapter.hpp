@@ -31,10 +31,7 @@
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
 #include "dogen.generation.csharp/types/formattables/formattable.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 /**
  * @brief Provides a number of useful transformations in the
@@ -50,6 +47,6 @@ public:
         const modeling::meta_model::model& m) const;
 };
 
-} } } }
+}
 
 #endif

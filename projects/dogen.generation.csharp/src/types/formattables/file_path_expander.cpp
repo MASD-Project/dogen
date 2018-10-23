@@ -34,10 +34,7 @@ const std::string missing_archetype("Archetype not found: ");
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 void file_path_expander::
 expand(const formatters::repository& frp, const locator& l, model& fm) const {
@@ -78,4 +75,4 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
     }
 }
 
-} } } }
+}

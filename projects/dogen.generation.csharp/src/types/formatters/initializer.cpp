@@ -26,10 +26,7 @@
 #include "dogen.generation.csharp/types/formatters/test_data/initializer.hpp"
 #include "dogen.generation.csharp/types/formatters/initializer.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<visual_studio_project_formatter>(rg);
@@ -39,4 +36,4 @@ void initializer::initialize(registrar& rg) {
     io::initializer::initialize(rg);
 }
 
-} } } }
+}

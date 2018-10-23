@@ -27,16 +27,13 @@
 
 #include <string>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 struct traits final {
     static std::string visual_studio_project_solution_guid();
     static std::string visual_studio_project_guid();
 };
 
-} } } }
+}
 
 #endif

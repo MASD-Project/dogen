@@ -36,10 +36,7 @@
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 /**
  * @brief Manages formatter registration.
@@ -115,6 +112,6 @@ inline void register_formatter_helper(registrar& rg) {
     rg.register_formatter_helper(f);
 }
 
-} } } }
+}
 
 #endif

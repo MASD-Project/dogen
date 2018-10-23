@@ -32,10 +32,7 @@
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class assistant_expander final {
 private:
@@ -53,6 +50,6 @@ public:
     void expand(const annotations::type_repository& atrp, model& fm) const;
 };
 
-} } } }
+}
 
 #endif

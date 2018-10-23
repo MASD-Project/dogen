@@ -35,10 +35,7 @@
 #include "dogen.generation.csharp/types/formattables/locator.hpp"
 #include "dogen.generation.csharp/types/formatters/context.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class artefact_formatter_interface {
 public:
@@ -91,6 +88,6 @@ public:
     format(const context& ctx, const modeling::meta_model::element& e) const = 0;
 };
 
-} } } }
+}
 
 #endif
