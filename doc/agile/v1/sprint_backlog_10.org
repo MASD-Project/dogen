@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-23 Tue 11:44]
+#+CAPTION: Clock summary at [2018-10-23 Tue 12:10]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *57:54* |       |       |   0.0 |
+| *Total time*                                                                | *58:19* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 57:54   |       |       |   0.0 |
-| Active                                                                      |         | 57:54 |       |   0.0 |
+| Stories                                                                     | 58:19   |       |       |   0.0 |
+| Active                                                                      |         | 58:19 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -50,7 +50,7 @@
 | Design a top-level Dogen API                                                |         |       | 14:46 |   0.0 |
 | Read up on framework and API design                                         |         |       |  3:39 |   0.0 |
 | Update dogen namespaces to match the new specification                      |         |       |  0:15 |   0.0 |
-| Add support for nested namespaces                                           |         |       |  2:29 |   0.0 |
+| Add support for nested namespaces                                           |         |       |  2:54 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -804,6 +804,7 @@ We need to update one model at a time.
 
 *** STARTED Add support for nested namespaces                         :story:
     :LOGBOOK:
+    CLOCK: [2018-10-23 Tue 11:45]--[2018-10-23 Tue 12:10] =>  0:25
     CLOCK: [2018-10-23 Tue 11:34]--[2018-10-23 Tue 11:44] =>  0:10
     CLOCK: [2018-10-23 Tue 10:45]--[2018-10-23 Tue 11:33] =>  0:48
     CLOCK: [2018-10-22 Mon 19:43]--[2018-10-22 Mon 19:57] =>  0:14

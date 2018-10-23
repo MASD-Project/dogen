@@ -88,13 +88,20 @@ format(const context& ctx, const modeling::meta_model::element& e) const {
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
-            const auto ns(a.make_namespaces(m.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+            if (a.requires_nested_namespaces()) {
+                a.comment(m.documentation());
+                const auto ns(a.make_namespaces(e.name(),
+                        false/*detect_model_name*/));
+                auto snf(a.make_scoped_namespace_formatter(ns));
+            } else {
+                const auto ns(a.make_namespaces(m.name()));
+                auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-            a.comment(m.documentation());
+                a.comment(m.documentation());
 a.stream() << "namespace " << m.name().simple() << " {" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+            }
         } // snf
 a.stream() << std::endl;
     } // sbf

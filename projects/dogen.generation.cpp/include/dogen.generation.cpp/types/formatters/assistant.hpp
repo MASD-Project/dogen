@@ -199,6 +199,11 @@ public:
 
 public:
     /**
+     * @brief If true, the current element requires nested namespaces.
+     */
+    bool requires_nested_namespaces() const;
+
+    /**
      * @brief If true, the current element requires a manually
      * implemented default constructor.
      */
@@ -233,7 +238,8 @@ public:
      * @brief returns the c++ namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const modeling::meta_model::name& n) const;
+    make_namespaces(const modeling::meta_model::name& n,
+        const bool detect_model_name = true) const;
 
  public:
     /**

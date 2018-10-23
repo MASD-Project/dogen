@@ -268,8 +268,9 @@ make_getter_setter_name(const modeling::meta_model::attribute& attr) const {
 }
 
 std::list<std::string>
-assistant::make_namespaces(const modeling::meta_model::name& n) const {
-    modeling::helpers::name_flattener nf;
+assistant::make_namespaces(const modeling::meta_model::name& n,
+    const bool detect_model_name) const {
+    modeling::helpers::name_flattener nf(detect_model_name);
     return nf.flatten(n);
 }
 
@@ -314,6 +315,10 @@ bool assistant::is_cpp_standard_17() const {
 
 bool assistant::supports_defaulted_functions() const {
     return !is_cpp_standard_98();
+}
+
+bool assistant::requires_nested_namespaces() const {
+    return is_cpp_standard_17();
 }
 
 bool assistant::requires_manual_default_constructor() const {
@@ -379,7 +384,7 @@ dogen::formatting::cpp::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return dogen::formatting::cpp::scoped_namespace_formatter(
         stream(), ns, false/*create_anonymous_namespace*/,
-        true/*add_new_line*/, is_cpp_standard_17()/*nested namespace*/);
+        true/*add_new_line*/, requires_nested_namespaces());
 }
 
 void assistant::
