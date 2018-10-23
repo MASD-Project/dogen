@@ -32,11 +32,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 std::string enum_implementation_formatter::static_id() {
     return traits::enum_implementation_archetype();
@@ -129,4 +125,4 @@ a.stream() << std::endl;
     return a.make_artefact();
 }
 
-} } } } }
+}

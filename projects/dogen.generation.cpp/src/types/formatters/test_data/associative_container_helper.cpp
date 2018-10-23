@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/associative_container_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 std::string associative_container_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -88,4 +84,4 @@ a.stream() << "    }" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-} } } } }
+}

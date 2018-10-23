@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/domain_type_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 std::string domain_type_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -93,4 +89,4 @@ a.stream() << "    return " << qn << "_generator::create" << (is_pointer ? "_ptr
 a.stream() << "}" << std::endl;
     }
 }
-} } } } }
+}

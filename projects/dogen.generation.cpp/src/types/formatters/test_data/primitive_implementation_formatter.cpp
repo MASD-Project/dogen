@@ -32,11 +32,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 std::string primitive_implementation_formatter::static_id() {
     return traits::primitive_implementation_archetype();
@@ -177,4 +173,4 @@ a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } } }
+}

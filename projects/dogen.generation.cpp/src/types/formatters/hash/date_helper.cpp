@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace hash {
+namespace dogen::generation::cpp::formatters::hash {
 
 std::string date_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -79,4 +75,4 @@ a.stream() << "    combine(seed, v.modjulian_day());" << std::endl;
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-} } } } }
+}

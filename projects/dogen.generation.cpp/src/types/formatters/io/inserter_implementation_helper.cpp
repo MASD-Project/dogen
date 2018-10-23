@@ -21,11 +21,7 @@
 #include "dogen.formatting/types/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::cpp::formatters::io {
 
 void inserter_implementation_helper(
     assistant& a, const modeling::meta_model::object& o, const bool inside_class) {
@@ -88,4 +84,4 @@ a.stream() << "    s << \" }\";" << std::endl;
     if (!inside_class)
 a.stream() << "    return(s);" << std::endl;
 }
-} } } } }
+}

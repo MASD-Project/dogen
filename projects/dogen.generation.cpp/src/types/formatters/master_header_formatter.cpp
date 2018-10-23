@@ -28,10 +28,7 @@
 #include "dogen.formatting/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)
     : archetype_location_(cpp::traits::kernel(), cpp::traits::backend(),
@@ -101,4 +98,4 @@ a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } }
+}

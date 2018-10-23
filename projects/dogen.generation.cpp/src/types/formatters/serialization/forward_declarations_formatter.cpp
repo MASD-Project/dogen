@@ -30,11 +30,7 @@
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.modeling/types/meta_model/object.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace serialization {
+namespace dogen::generation::cpp::formatters::serialization {
 
 std::string forward_declarations_formatter::static_id() {
     return traits::forward_declarations_archetype();
@@ -119,4 +115,4 @@ a.stream() << std::endl;
     return a.make_artefact();
 }
 
-} } } } }
+}

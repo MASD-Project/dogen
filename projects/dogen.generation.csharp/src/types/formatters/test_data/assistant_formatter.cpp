@@ -26,11 +26,7 @@
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.formatting/types/sequence_formatter.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::csharp::formatters::test_data {
 
 std::string assistant_formatter::static_id() {
     return traits::assistant_archetype();
@@ -278,4 +274,4 @@ a.stream() << "    }" << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } } }
+}

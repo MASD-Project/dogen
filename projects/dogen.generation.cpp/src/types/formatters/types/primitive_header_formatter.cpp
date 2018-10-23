@@ -28,11 +28,7 @@
 #include "dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "dogen.modeling/types/meta_model/primitive.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::cpp::formatters::types {
 
 std::string primitive_header_formatter::static_id() {
     return traits::primitive_header_archetype();
@@ -242,4 +238,4 @@ a.stream() << std::endl;
     return a.make_artefact();
 }
 
-} } } } }
+}

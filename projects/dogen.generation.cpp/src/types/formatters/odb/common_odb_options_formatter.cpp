@@ -35,11 +35,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace odb {
+namespace dogen::generation::cpp::formatters::odb {
 
 std::string common_odb_options_formatter::static_id() {
     return traits::common_odb_options_archetype();
@@ -148,4 +144,4 @@ a.stream() << "# --include-regex-trace" << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } } }
+}

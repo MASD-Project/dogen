@@ -24,11 +24,7 @@
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
 #include "dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::csharp::formatters::io {
 
 std::string enumerable_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -75,4 +71,4 @@ a.stream() << "            " << qn << " epsilon = Math.Max(Math.Abs(lhs), Math.A
 a.stream() << "            return Math.Abs(lhs - rhs) <= epsilon;" << std::endl;
 a.stream() << "        }" << std::endl;
 }
-} } } } }
+}

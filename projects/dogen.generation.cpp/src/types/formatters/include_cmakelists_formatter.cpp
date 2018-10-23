@@ -32,10 +32,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::string include_cmakelists_formatter::static_id() {
     return traits::include_cmakelists_archetype();
@@ -111,4 +108,4 @@ a.stream() << "    FILES_MATCHING PATTERN \"*." << c.header_file_extension() << 
     } // sbf
     return a.make_artefact();
 }
-} } } }
+}

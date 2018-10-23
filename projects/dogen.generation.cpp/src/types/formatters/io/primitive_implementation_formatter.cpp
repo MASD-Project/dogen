@@ -35,11 +35,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::cpp::formatters::io {
 
 std::string primitive_implementation_formatter::static_id() {
     return traits::primitive_implementation_archetype();
@@ -153,4 +149,4 @@ a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } } }
+}

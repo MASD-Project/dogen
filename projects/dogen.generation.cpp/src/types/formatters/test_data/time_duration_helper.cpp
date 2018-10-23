@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/time_duration_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 std::string time_duration_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -81,4 +77,4 @@ a.stream() << "    time_duration r(hour, 2, 3);" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-} } } } }
+}

@@ -31,10 +31,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::string source_cmakelists_formatter::static_id() {
     return traits::source_cmakelists_archetype();
@@ -164,4 +161,4 @@ a.stream() << "add_dependencies(" << targets.main_target_name() << " " << target
     } // sbf
         return a.make_artefact();
 }
-} } } }
+}

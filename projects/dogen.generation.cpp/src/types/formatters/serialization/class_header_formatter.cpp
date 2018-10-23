@@ -29,11 +29,7 @@
 #include "dogen.modeling/types/meta_model/object.hpp"
 #include "dogen.formatting/types/sequence_formatter.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace serialization {
+namespace dogen::generation::cpp::formatters::serialization {
 
 std::string class_header_formatter::static_id() {
     return traits::class_header_archetype();
@@ -139,4 +135,4 @@ a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } } }
+}

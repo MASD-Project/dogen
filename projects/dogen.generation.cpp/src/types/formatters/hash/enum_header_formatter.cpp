@@ -29,11 +29,7 @@
 #include "dogen.modeling/types/meta_model/enumeration.hpp"
 #include "dogen.formatting/types/sequence_formatter.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace hash {
+namespace dogen::generation::cpp::formatters::hash {
 
 std::string enum_header_formatter::static_id() {
     return traits::enum_header_archetype();
@@ -109,4 +105,4 @@ a.stream() << std::endl;
     return a.make_artefact();
 }
 
-} } } } }
+}

@@ -33,11 +33,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::cpp::formatters::types {
 
 std::string class_implementation_formatter::static_id() {
     return traits::class_implementation_archetype();
@@ -478,4 +474,4 @@ a.stream() << std::endl;
     return a.make_artefact();
 }
 
-} } } } }
+}

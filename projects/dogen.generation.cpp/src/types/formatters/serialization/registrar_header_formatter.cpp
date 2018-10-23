@@ -26,11 +26,7 @@
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/registrar.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace serialization {
+namespace dogen::generation::cpp::formatters::serialization {
 
 std::string registrar_header_formatter::static_id() {
     return traits::registrar_header_archetype();
@@ -101,4 +97,4 @@ a.stream() << std::endl;
     return a.make_artefact();
 }
 
-} } } } }
+}

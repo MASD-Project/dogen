@@ -28,10 +28,7 @@
 #include "dogen.formatting/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 std::string visual_studio_project_formatter::static_id() {
     return traits::visual_studio_project_archetype();
@@ -117,4 +114,4 @@ a.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\"
 a.stream() << "</Project>" << std::endl;
     return a.make_artefact();
 }
-} } } }
+}

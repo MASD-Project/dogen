@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace hash {
+namespace dogen::generation::cpp::formatters::hash {
 
 std::string variant_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -95,4 +91,4 @@ a.stream() << "    boost::apply_visitor(vis, v);" << std::endl;
 a.stream() << "    return vis.hash;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-} } } } }
+}

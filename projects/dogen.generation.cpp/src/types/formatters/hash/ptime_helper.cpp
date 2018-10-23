@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace hash {
+namespace dogen::generation::cpp::formatters::hash {
 
 std::string ptime_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -81,4 +77,4 @@ a.stream() << "    seed = static_cast<std::size_t>(d.total_seconds());" << std::
 a.stream() << "    return seed;" << std::endl;
 a.stream() << "}" << std::endl;
 }
-} } } } }
+}

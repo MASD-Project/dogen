@@ -30,10 +30,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::string visual_studio_solution_formatter::static_id() {
     return traits::visual_studio_solution_archetype();
@@ -119,4 +116,4 @@ a.stream() << "    EndGlobalSection" << std::endl;
 a.stream() << "EndGlobal" << std::endl;
     return a.make_artefact();
 }
-} } } }
+}

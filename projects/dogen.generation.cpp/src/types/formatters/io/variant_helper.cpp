@@ -24,11 +24,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/io/variant_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::cpp::formatters::io {
 
 std::string variant_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -110,4 +106,4 @@ a.stream() << std::endl;
     }
 a.stream() << std::endl;
 }
-} } } } }
+}

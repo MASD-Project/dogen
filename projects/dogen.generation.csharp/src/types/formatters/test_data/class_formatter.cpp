@@ -26,11 +26,7 @@
 #include "dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "dogen.modeling/types/meta_model/object.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::csharp::formatters::test_data {
 
 std::string class_formatter::static_id() {
     return traits::class_archetype();
@@ -221,4 +217,4 @@ a.stream() << "    }" << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } } }
+}

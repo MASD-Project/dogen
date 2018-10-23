@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/char_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 std::string char_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -78,4 +74,4 @@ a.stream() << "    const auto num(((position % 95) + 32) == 34 ? 35 : ((position
 a.stream() << "    return static_cast<" << qn << ">(num);" << std::endl;
 a.stream() << "}" << std::endl;
 }
-} } } } }
+}

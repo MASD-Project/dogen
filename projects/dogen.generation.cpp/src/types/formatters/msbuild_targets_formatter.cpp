@@ -30,10 +30,7 @@
 #include "dogen.utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::string msbuild_targets_formatter::static_id() {
     return traits::msbuild_targets_archetype();
@@ -147,4 +144,4 @@ a.stream() << "</Project>" << std::endl;
     } // sbf
     return a.make_artefact();
 }
-} } } }
+}

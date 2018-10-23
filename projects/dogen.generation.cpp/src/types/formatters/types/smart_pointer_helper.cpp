@@ -23,11 +23,7 @@
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::cpp::formatters::types {
 
 std::string smart_pointer_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +
@@ -83,4 +79,4 @@ a.stream() << std::endl;
 a.stream() << std::endl;
 }
 
-} } } } }
+}
