@@ -31,9 +31,7 @@
 #include <algorithm>
 #include "dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 /**
  * @brief Represents an element from an external model.
@@ -158,7 +156,7 @@ private:
     bool is_floating_point_;
 };
 
-} } }
+}
 
 namespace std {
 

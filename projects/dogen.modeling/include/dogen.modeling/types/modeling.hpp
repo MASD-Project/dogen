@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @brief Yarn is the Dogen meta-model.
  *
@@ -58,9 +56,7 @@ namespace dogen {
  * @li to provide all the information required to build the final model
  * and to build it.
  */
-namespace modeling {
-}
-
+namespace dogen::modeling {
 }
 
 #endif

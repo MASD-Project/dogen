@@ -30,10 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const test_data_properties& v) {
     s << " { "
@@ -44,4 +41,4 @@ std::ostream& operator<<(std::ostream& s, const test_data_properties& v) {
     return(s);
 }
 
-} } } }
+}

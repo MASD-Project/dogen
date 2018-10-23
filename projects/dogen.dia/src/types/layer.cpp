@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/layer.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 layer::layer()
     : visible_(static_cast<bool>(0)),
@@ -106,4 +105,4 @@ void layer::objects(const std::vector<dogen::dia::object>&& v) {
     objects_ = std::move(v);
 }
 
-} }
+}

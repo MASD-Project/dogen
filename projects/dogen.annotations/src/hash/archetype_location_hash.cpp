@@ -30,8 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t archetype_location_hasher::hash(const archetype_location& v) {
     std::size_t seed(0);
@@ -44,4 +43,4 @@ std::size_t archetype_location_hasher::hash(const archetype_location& v) {
     return seed;
 }
 
-} }
+}

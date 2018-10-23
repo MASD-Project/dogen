@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace csharp {
+namespace dogen::generation::csharp {
 
 class model_to_text_model_transform;
 
-} } }
+}
 
 #endif

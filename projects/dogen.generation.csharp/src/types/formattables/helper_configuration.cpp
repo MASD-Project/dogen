@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/helper_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 helper_configuration::helper_configuration(const std::unordered_map<std::string, std::string>& helper_families)
     : helper_families_(helper_families) { }
@@ -59,4 +56,4 @@ void helper_configuration::helper_families(const std::unordered_map<std::string,
     helper_families_ = std::move(v);
 }
 
-} } } }
+}

@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/mapping_set.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapping_set::mapping_set(
     const std::string& name,
@@ -99,4 +97,4 @@ void mapping_set::erasures_by_language(const std::unordered_map<dogen::modeling:
     erasures_by_language_ = std::move(v);
 }
 
-} } }
+}

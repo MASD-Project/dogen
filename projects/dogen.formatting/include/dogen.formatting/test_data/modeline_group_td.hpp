@@ -27,8 +27,7 @@
 
 #include "dogen.formatting/types/modeline_group.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class modeline_group_generator {
 public:
@@ -48,6 +47,6 @@ public:
     static result_type* create_ptr(const unsigned int position);
 };
 
-} }
+}
 
 #endif

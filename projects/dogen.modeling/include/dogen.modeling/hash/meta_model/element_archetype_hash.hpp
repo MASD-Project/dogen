@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/element_archetype.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct element_archetype_hasher {
 public:
     static std::size_t hash(const element_archetype& v);
 };
 
-} } }
+}
 
 namespace std {
 

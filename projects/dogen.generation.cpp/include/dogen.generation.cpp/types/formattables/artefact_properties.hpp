@@ -30,10 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class artefact_properties final {
 public:
@@ -82,7 +79,7 @@ private:
     std::list<std::string> inclusion_dependencies_;
 };
 
-} } } }
+}
 
 namespace std {
 

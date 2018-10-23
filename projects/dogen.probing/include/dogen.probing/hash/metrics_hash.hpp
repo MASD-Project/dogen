@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.probing/types/metrics.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 struct metrics_hasher {
 public:
     static std::size_t hash(const metrics& v);
 };
 
-} }
+}
 
 namespace std {
 

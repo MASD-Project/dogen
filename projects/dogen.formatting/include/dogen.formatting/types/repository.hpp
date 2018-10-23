@@ -31,8 +31,7 @@
 #include "dogen.formatting/types/modeline_group.hpp"
 #include "dogen.formatting/serialization/repository_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class repository final {
 public:
@@ -79,7 +78,7 @@ private:
     std::unordered_map<std::string, std::string> licence_texts_;
 };
 
-} }
+}
 
 namespace std {
 

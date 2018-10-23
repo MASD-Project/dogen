@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/stitch/properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 properties::properties(properties&& rhs)
     : decoration_properties_(std::move(rhs.decoration_properties_)),
@@ -83,4 +81,4 @@ void properties::stitching_properties(const dogen::templating::stitch::stitching
     stitching_properties_ = std::move(v);
 }
 
-} } }
+}

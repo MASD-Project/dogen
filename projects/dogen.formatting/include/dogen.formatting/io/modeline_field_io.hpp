@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.formatting/types/modeline_field.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::formatting::modeline_field& v);
 
-} }
+}
 
 #endif

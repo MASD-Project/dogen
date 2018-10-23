@@ -20,9 +20,7 @@
  */
 #include "dogen.external/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 element::element()
     : can_be_primitive_underlier_(static_cast<bool>(0)),
@@ -259,4 +257,4 @@ void element::is_floating_point(const bool v) {
     is_floating_point_ = v;
 }
 
-} } }
+}

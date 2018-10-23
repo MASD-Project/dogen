@@ -86,9 +86,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const decomposition_result& v) {
     s << " { "
@@ -101,4 +99,4 @@ std::ostream& operator<<(std::ostream& s, const decomposition_result& v) {
     return(s);
 }
 
-} } }
+}

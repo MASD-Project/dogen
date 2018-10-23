@@ -25,10 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 enum class cpp_standards : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -38,6 +35,6 @@ enum class cpp_standards : unsigned int {
     cpp_17 = 4
 };
 
-} } } }
+}
 
 #endif

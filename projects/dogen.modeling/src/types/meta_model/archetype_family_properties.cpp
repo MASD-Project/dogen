@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/archetype_family_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 archetype_family_properties::archetype_family_properties(const std::string& extension)
     : extension_(extension) { }
@@ -58,4 +56,4 @@ void archetype_family_properties::extension(const std::string&& v) {
     extension_ = std::move(v);
 }
 
-} } }
+}

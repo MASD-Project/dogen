@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/child_node.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 child_node::child_node(const std::string& parent)
     : parent_(parent) { }
@@ -57,4 +56,4 @@ void child_node::parent(const std::string&& v) {
     parent_ = std::move(v);
 }
 
-} }
+}

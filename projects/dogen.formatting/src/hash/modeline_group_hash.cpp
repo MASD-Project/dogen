@@ -40,8 +40,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_formatting_modeline(c
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t modeline_group_hasher::hash(const modeline_group& v) {
     std::size_t seed(0);
@@ -52,4 +51,4 @@ std::size_t modeline_group_hasher::hash(const modeline_group& v) {
     return seed;
 }
 
-} }
+}

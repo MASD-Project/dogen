@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class locator_archetype_configuration final {
 public:
@@ -78,7 +75,7 @@ private:
     std::string archetype_postfix_;
 };
 
-} } } }
+}
 
 namespace std {
 

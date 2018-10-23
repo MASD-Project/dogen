@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace helpers {
+namespace dogen::generation::helpers {
 
 class writing_error;
 
-} } }
+}
 
 #endif

@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/transforms/formatting_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 formatting_configuration::formatting_configuration()
     : style_(static_cast<dogen::generation::meta_model::formatting_styles>(0)) { }
@@ -74,4 +72,4 @@ void formatting_configuration::input(const std::string&& v) {
     input_ = std::move(v);
 }
 
-} } }
+}

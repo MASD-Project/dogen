@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.dia/types/diagram_data.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::dia::diagram_data& v);
 
-} }
+}
 
 #endif

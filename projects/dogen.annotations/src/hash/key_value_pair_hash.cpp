@@ -40,8 +40,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t key_value_pair_hasher::hash(const key_value_pair& v) {
     std::size_t seed(0);
@@ -52,4 +51,4 @@ std::size_t key_value_pair_hasher::hash(const key_value_pair& v) {
     return seed;
 }
 
-} }
+}

@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.annotations/types/profile_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::annotations::profile_repository& v);
 
-} }
+}
 
 #endif

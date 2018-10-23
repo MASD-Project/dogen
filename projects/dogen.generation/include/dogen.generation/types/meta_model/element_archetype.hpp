@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 class element_archetype final {
 public:
@@ -70,7 +68,7 @@ private:
     std::string archetype_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Different kinds of contributions that can be made to the final path computation.
@@ -39,6 +37,6 @@ enum class path_contribution_types : unsigned int {
     as_path_components = 3 ///< The item contributes a single folder to the path, as a delimited string.
 };
 
-} } }
+}
 
 #endif

@@ -25,10 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 enum class auxiliary_function_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -36,6 +33,6 @@ enum class auxiliary_function_types : unsigned int {
     helper = 2 ///< The auxiliary function is supplied by a helper.
 };
 
-} } } }
+}
 
 #endif

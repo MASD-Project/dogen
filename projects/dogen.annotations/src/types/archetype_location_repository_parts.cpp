@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/archetype_location_repository_parts.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 archetype_location_repository_parts::archetype_location_repository_parts(
     const std::list<dogen::annotations::archetype_location>& archetype_locations,
@@ -118,4 +117,4 @@ void archetype_location_repository_parts::archetype_locations_by_intra_backend_s
     archetype_locations_by_intra_backend_segment_ = std::move(v);
 }
 
-} }
+}

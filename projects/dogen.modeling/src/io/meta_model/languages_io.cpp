@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.modeling/io/meta_model/languages_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const languages& v) {
     s << "{ " << "\"__type__\": " << "\"languages\", " << "\"value\": ";
@@ -51,4 +49,4 @@ std::ostream& operator<<(std::ostream& s, const languages& v) {
     return s;
 }
 
-} } }
+}

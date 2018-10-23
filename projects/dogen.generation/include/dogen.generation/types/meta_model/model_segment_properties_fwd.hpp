@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 class model_segment_properties;
 
-} } }
+}
 
 #endif

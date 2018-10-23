@@ -29,9 +29,7 @@ const boost::shared_ptr<dogen::modeling::helpers::node>& rhs) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 node::node(
     const boost::shared_ptr<dogen::modeling::helpers::node>& parent,
@@ -108,4 +106,4 @@ void node::children(const std::list<boost::shared_ptr<dogen::modeling::helpers::
     children_ = std::move(v);
 }
 
-} } }
+}

@@ -22,13 +22,11 @@
 #include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.modeling/io/meta_model/exception_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const exception& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

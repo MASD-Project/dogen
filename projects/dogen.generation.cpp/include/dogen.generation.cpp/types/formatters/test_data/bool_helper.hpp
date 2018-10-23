@@ -28,11 +28,7 @@
 #include <algorithm>
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 class bool_helper : public helper_formatter_interface {
 public:
@@ -47,6 +43,6 @@ public:
         const formattables::helper_properties& hc) const override;
 };
 
-} } } } }
+}
 
 #endif

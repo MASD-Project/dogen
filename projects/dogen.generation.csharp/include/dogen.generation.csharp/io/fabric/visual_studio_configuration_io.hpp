@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.csharp/types/fabric/visual_studio_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::csharp::fabric::visual_studio_configuration& v);
 
-} } } }
+}
 
 #endif

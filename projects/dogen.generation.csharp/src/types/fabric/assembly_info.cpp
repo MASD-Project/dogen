@@ -23,10 +23,7 @@
 #include "dogen.generation.csharp/types/fabric/assembly_info.hpp"
 #include "dogen.generation.csharp/types/fabric/element_visitor.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 assembly_info::assembly_info(
     const dogen::modeling::meta_model::name& name,
@@ -116,4 +113,4 @@ assembly_info& assembly_info::operator=(assembly_info other) {
     return *this;
 }
 
-} } } }
+}

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/attribute_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 attribute_properties::attribute_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties)
     : auxiliary_function_properties_(auxiliary_function_properties) { }
@@ -59,4 +56,4 @@ void attribute_properties::auxiliary_function_properties(const std::unordered_ma
     auxiliary_function_properties_ = std::move(v);
 }
 
-} } } }
+}

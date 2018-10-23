@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/decomposition_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 decomposition_result::decomposition_result(
     const std::list<std::pair<std::string, dogen::modeling::meta_model::name> >& names,
@@ -119,4 +117,4 @@ void decomposition_result::injected_names(const std::list<std::pair<std::string,
     injected_names_ = std::move(v);
 }
 
-} } }
+}

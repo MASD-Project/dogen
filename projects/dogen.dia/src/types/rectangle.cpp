@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/rectangle.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 rectangle::rectangle(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void rectangle::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

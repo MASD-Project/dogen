@@ -61,8 +61,7 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 decoration_properties_generator::decoration_properties_generator() : position_(0) { }
 
@@ -93,4 +92,4 @@ decoration_properties_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

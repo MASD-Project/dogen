@@ -30,8 +30,7 @@
 #include "dogen.dia/types/attribute.hpp"
 #include "dogen.dia/serialization/diagram_data_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Represents a all the data associated with a diagram.
@@ -78,7 +77,7 @@ private:
     std::vector<dogen::dia::attribute> attributes_;
 };
 
-} }
+}
 
 namespace std {
 

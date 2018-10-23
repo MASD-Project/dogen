@@ -50,9 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
@@ -66,4 +64,4 @@ std::ostream& operator<<(std::ostream& s, const text_template& v) {
     return(s);
 }
 
-} } }
+}

@@ -40,9 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::modeli
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 enumeration::enumeration()
     : use_implementation_defined_underlying_element_(static_cast<bool>(0)),
@@ -214,4 +212,4 @@ void enumeration::add_invalid_enumerator(const bool v) {
     add_invalid_enumerator_ = v;
 }
 
-} } }
+}

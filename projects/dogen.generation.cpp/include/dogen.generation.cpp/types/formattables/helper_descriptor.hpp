@@ -31,10 +31,7 @@
 #include <boost/optional.hpp>
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class helper_descriptor final {
 public:
@@ -133,7 +130,7 @@ private:
     bool is_pointer_;
 };
 
-} } } }
+}
 
 namespace std {
 

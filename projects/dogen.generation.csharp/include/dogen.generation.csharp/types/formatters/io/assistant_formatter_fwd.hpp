@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::csharp::formatters::io {
 
 class assistant_formatter;
 
-} } } } }
+}
 
 #endif

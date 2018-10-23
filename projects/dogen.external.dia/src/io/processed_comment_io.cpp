@@ -58,9 +58,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::ostream& operator<<(std::ostream& s, const processed_comment& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -80,4 +78,4 @@ std::ostream& operator<<(std::ostream& s, const processed_comment& v) {
     return(s);
 }
 
-} } }
+}

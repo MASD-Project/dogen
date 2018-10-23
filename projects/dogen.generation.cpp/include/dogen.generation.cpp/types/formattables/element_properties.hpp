@@ -36,10 +36,7 @@
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/test_data_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief All of the properties associated with an element.
@@ -112,7 +109,7 @@ private:
     std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
 };
 
-} } } }
+}
 
 namespace std {
 

@@ -52,9 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const node& v) {
     s << " { "
@@ -66,4 +64,4 @@ std::ostream& operator<<(std::ostream& s, const node& v) {
     return(s);
 }
 
-} } }
+}

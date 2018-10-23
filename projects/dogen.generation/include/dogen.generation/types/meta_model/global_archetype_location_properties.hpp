@@ -33,9 +33,7 @@
 #include "dogen.generation/types/meta_model/archetype_properties.hpp"
 #include "dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 class global_archetype_location_properties final {
 public:
@@ -89,7 +87,7 @@ private:
     std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties> denormalised_archetype_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

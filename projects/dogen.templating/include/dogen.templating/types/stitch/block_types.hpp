@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 enum class block_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -37,6 +35,6 @@ enum class block_types : unsigned int {
     variable_block = 4
 };
 
-} } }
+}
 
 #endif

@@ -31,9 +31,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.modeling/types/meta_model/formatting_styles.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class artefact_properties final {
 public:
@@ -99,7 +97,7 @@ private:
     std::string formatting_input_;
 };
 
-} } }
+}
 
 namespace std {
 

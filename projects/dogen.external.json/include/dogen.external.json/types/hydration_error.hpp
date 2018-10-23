@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 class hydration_error : public virtual std::exception, public virtual boost::exception {
 public:
@@ -47,6 +45,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

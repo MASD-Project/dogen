@@ -30,9 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::size_t naming_configuration_hasher::hash(const naming_configuration& v) {
     std::size_t seed(0);
@@ -43,4 +41,4 @@ std::size_t naming_configuration_hasher::hash(const naming_configuration& v) {
     return seed;
 }
 
-} } }
+}

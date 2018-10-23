@@ -50,9 +50,7 @@ inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_orm_database
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t orm_attribute_properties_hasher::hash(const orm_attribute_properties& v) {
     std::size_t seed(0);
@@ -66,4 +64,4 @@ std::size_t orm_attribute_properties_hasher::hash(const orm_attribute_properties
     return seed;
 }
 
-} } }
+}

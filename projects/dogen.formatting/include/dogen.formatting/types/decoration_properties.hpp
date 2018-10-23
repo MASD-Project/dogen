@@ -32,8 +32,7 @@
 #include "dogen.formatting/types/modeline.hpp"
 #include "dogen.formatting/serialization/decoration_properties_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Configuration pertaining to file decoration.
@@ -119,7 +118,7 @@ private:
     std::string code_generation_marker_;
 };
 
-} }
+}
 
 namespace std {
 

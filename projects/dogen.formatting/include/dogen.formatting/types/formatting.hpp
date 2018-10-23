@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @brief Provides the basic formatting primitives.
  *
@@ -34,9 +32,7 @@ namespace dogen {
  * which is not language specific. Language-specific models can
  * then make use of it.
  */
-namespace formatting {
-}
-
+namespace dogen::formatting {
 }
 
 #endif

@@ -30,9 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.generation/types/meta_model/artefact.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 class text_model final {
 public:
@@ -72,7 +70,7 @@ private:
     std::list<boost::filesystem::path> managed_directories_;
 };
 
-} } }
+}
 
 namespace std {
 

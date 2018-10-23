@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/enumeration.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 enumeration::enumeration(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void enumeration::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

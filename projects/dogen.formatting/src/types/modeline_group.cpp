@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/modeline_group.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline_group::modeline_group(
     const std::string& name,
@@ -78,4 +77,4 @@ void modeline_group::modelines(const std::unordered_map<std::string, dogen::form
     modelines_ = std::move(v);
 }
 
-} }
+}

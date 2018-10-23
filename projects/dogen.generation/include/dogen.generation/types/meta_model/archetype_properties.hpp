@@ -29,9 +29,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 /**
  * @brief Archetype level properties, applicable to all instances of this archetype.
@@ -93,7 +91,7 @@ private:
     std::string postfix_;
 };
 
-} } }
+}
 
 namespace std {
 

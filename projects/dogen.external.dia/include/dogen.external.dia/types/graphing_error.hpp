@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief An error has occurred while building the dia object graph.
@@ -50,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

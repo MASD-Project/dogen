@@ -31,8 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t number_hasher::hash(const number& v) {
     std::size_t seed(0);
@@ -43,4 +42,4 @@ std::size_t number_hasher::hash(const number& v) {
     return seed;
 }
 
-} }
+}

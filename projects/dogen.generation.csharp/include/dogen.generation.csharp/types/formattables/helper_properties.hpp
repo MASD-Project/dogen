@@ -29,10 +29,7 @@
 #include <algorithm>
 #include "dogen.generation.csharp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class helper_properties final {
 public:
@@ -79,7 +76,7 @@ private:
     bool in_inheritance_relationship_;
 };
 
-} } } }
+}
 
 namespace std {
 

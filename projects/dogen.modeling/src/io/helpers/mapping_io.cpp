@@ -50,9 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping& v) {
     s << " { "
@@ -63,4 +61,4 @@ std::ostream& operator<<(std::ostream& s, const mapping& v) {
     return(s);
 }
 
-} } }
+}

@@ -53,8 +53,7 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 repository_generator::repository_generator() : position_(0) { }
 
@@ -83,4 +82,4 @@ repository_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

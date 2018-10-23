@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 enum class spacing_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -36,6 +35,6 @@ enum class spacing_types : unsigned int {
     left_and_right_space = 4
 };
 
-} }
+}
 
 #endif

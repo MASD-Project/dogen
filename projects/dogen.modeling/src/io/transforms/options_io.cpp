@@ -45,9 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::ostream& operator<<(std::ostream& s, const options& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -77,4 +75,4 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
     return(s);
 }
 
-} } }
+}

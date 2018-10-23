@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class local_archetype_location_properties;
 
-} } }
+}
 
 #endif

@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.templating/types/stitch/block.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 class line final {
 public:
@@ -63,7 +61,7 @@ private:
     std::list<dogen::templating::stitch::block> blocks_;
 };
 
-} } }
+}
 
 namespace std {
 

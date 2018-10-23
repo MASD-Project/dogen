@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/enumeration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct enumeration_hasher {
 public:
     static std::size_t hash(const enumeration& v);
 };
 
-} } }
+}
 
 namespace std {
 

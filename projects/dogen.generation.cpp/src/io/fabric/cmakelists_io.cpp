@@ -24,14 +24,11 @@
 #include "dogen.generation.cpp/io/fabric/cmakelists_io.hpp"
 #include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const cmakelists& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } } }
+}

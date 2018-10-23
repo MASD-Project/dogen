@@ -46,10 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 common_odb_options::common_odb_options(
     const dogen::modeling::meta_model::name& name,
@@ -183,4 +180,4 @@ void common_odb_options::databases(const std::list<std::string>&& v) {
     databases_ = std::move(v);
 }
 
-} } } }
+}

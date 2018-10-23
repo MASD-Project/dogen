@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.annotations/io/template_kinds_io.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const template_kinds& v) {
     s << "{ " << "\"__type__\": " << "\"template_kinds\", " << "\"value\": ";
@@ -56,4 +55,4 @@ std::ostream& operator<<(std::ostream& s, const template_kinds& v) {
     return s;
 }
 
-} }
+}

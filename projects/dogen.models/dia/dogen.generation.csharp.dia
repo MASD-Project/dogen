@@ -105,6 +105,7 @@
 #DOGEN yarn.reference=dogen.probing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false

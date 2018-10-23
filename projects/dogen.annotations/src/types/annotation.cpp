@@ -30,8 +30,7 @@ const boost::shared_ptr<dogen::annotations::value>& rhs) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 annotation::annotation()
     : scope_(static_cast<dogen::annotations::scope_types>(0)) { }
@@ -83,4 +82,4 @@ void annotation::scope(const dogen::annotations::scope_types v) {
     scope_ = v;
 }
 
-} }
+}

@@ -32,8 +32,7 @@
 #include "dogen.annotations/types/template_kinds.hpp"
 #include "dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class entry_template final {
 public:
@@ -87,7 +86,7 @@ private:
     dogen::annotations::template_kinds kind_;
 };
 
-} }
+}
 
 namespace std {
 

@@ -23,8 +23,7 @@
 #include "dogen.annotations/types/number.hpp"
 #include "dogen.annotations/types/value_visitor.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 number::number()
     : content_(static_cast<int>(0)) { }
@@ -91,4 +90,4 @@ void number::content(const int v) {
     content_ = v;
 }
 
-} }
+}

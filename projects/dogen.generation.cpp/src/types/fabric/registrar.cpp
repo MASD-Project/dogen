@@ -38,10 +38,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::modeling
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 registrar::registrar(
     const dogen::modeling::meta_model::name& name,
@@ -196,4 +193,4 @@ void registrar::registrar_dependencies(const std::list<dogen::modeling::meta_mod
     registrar_dependencies_ = std::move(v);
 }
 
-} } } }
+}

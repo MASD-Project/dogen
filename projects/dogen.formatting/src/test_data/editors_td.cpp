@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/test_data/editors_td.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 editors_generator::editors_generator() : position_(0) { }
 void editors_generator::
@@ -41,4 +40,4 @@ editors_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

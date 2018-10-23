@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class dynamic_transforms_chain;
 
-} } }
+}
 
 #endif

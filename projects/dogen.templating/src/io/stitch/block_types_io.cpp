@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.templating/io/stitch/block_types_io.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const block_types& v) {
     s << "{ " << "\"__type__\": " << "\"block_types\", " << "\"value\": ";
@@ -54,4 +52,4 @@ std::ostream& operator<<(std::ostream& s, const block_types& v) {
     return s;
 }
 
-} } }
+}

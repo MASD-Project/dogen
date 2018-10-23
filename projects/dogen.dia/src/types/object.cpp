@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/object.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 object::object()
     : version_(static_cast<int>(0)) { }
@@ -161,4 +160,4 @@ void object::attributes(const std::vector<dogen::dia::attribute>&& v) {
     attributes_ = std::move(v);
 }
 
-} }
+}

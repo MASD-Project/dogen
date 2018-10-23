@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 orm_attribute_properties::orm_attribute_properties()
     : is_primary_key_(static_cast<bool>(0)),
@@ -134,4 +132,4 @@ void orm_attribute_properties::is_composite(const bool v) {
     is_composite_ = v;
 }
 
-} } }
+}

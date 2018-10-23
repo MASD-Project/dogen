@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief A fatal error has occurred while adapting a Dia model object
@@ -51,6 +49,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

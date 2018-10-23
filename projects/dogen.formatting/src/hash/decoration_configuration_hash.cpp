@@ -48,8 +48,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t decoration_configuration_hasher::hash(const decoration_configuration& v) {
     std::size_t seed(0);
@@ -65,4 +64,4 @@ std::size_t decoration_configuration_hasher::hash(const decoration_configuration
     return seed;
 }
 
-} }
+}

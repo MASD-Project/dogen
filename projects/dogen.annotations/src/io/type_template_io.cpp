@@ -43,8 +43,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const type_template& v) {
     s << " { "
@@ -59,4 +58,4 @@ std::ostream& operator<<(std::ostream& s, const type_template& v) {
     return(s);
 }
 
-} }
+}

@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Available separators to be used by the pretty printer.
@@ -39,6 +37,6 @@ enum class separators : unsigned int {
     dots = 3 ///< Separate name elements with a '.'.
 };
 
-} } }
+}
 
 #endif

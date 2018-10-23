@@ -23,13 +23,11 @@
 #include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.modeling/io/meta_model/visitor_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const visitor& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

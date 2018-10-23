@@ -31,9 +31,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const block& v) {
     s << " { "
@@ -44,4 +42,4 @@ std::ostream& operator<<(std::ostream& s, const block& v) {
     return(s);
 }
 
-} } }
+}

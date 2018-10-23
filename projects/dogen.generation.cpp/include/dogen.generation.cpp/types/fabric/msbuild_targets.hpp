@@ -30,10 +30,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class msbuild_targets final : public dogen::modeling::meta_model::element {
 public:
@@ -94,7 +91,7 @@ private:
     dogen::generation::cpp::fabric::odb_targets odb_targets_;
 };
 
-} } } }
+}
 
 namespace std {
 

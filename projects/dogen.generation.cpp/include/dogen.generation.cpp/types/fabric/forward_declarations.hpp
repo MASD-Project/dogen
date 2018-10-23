@@ -30,10 +30,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class forward_declarations final : public dogen::modeling::meta_model::element {
 public:
@@ -117,7 +114,7 @@ private:
     bool is_exception_;
 };
 
-} } } }
+}
 
 namespace std {
 

@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/string.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 string::string(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void string::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

@@ -46,9 +46,7 @@
 #include "dogen.modeling/types/meta_model/object_template_fwd.hpp"
 #include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Intermediate representation of a yarn model.
@@ -274,7 +272,7 @@ private:
     boost::optional<dogen::modeling::meta_model::orm_model_properties> orm_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -33,9 +33,7 @@
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Consistent unit of mapping that can be used to translate a model from a language to
@@ -86,7 +84,7 @@ private:
     std::unordered_map<dogen::modeling::meta_model::languages, std::unordered_set<std::string> > erasures_by_language_;
 };
 
-} } }
+}
 
 namespace std {
 

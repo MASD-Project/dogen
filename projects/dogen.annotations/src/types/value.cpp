@@ -21,8 +21,7 @@
 #include <ostream>
 #include "dogen.annotations/types/value.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 void value::to_stream(std::ostream& s) const {
     s << " { "
@@ -36,4 +35,4 @@ bool value::compare(const value& /*rhs*/) const {
     return true;
 }
 
-} }
+}

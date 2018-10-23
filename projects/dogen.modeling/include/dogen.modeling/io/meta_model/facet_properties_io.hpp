@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.modeling/types/meta_model/facet_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::modeling::meta_model::facet_properties& v);
 
-} } }
+}
 
 #endif

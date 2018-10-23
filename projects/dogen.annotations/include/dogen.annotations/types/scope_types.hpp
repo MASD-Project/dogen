@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Where can a field appear.
@@ -42,6 +41,6 @@ enum class scope_types : unsigned int {
     operation = 7 ///< Field can only appear on an operation in an entity.
 };
 
-} }
+}
 
 #endif

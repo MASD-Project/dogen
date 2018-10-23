@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::templating::wale::text_template& v);
 
-} } }
+}
 
 #endif

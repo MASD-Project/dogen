@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/helpers/mapping_value.hpp"
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Stores the mapping of a key (the element id) to its values, organised by language.
@@ -87,7 +85,7 @@ private:
     std::unordered_map<dogen::modeling::meta_model::languages, dogen::modeling::helpers::mapping_value> by_language_;
 };
 
-} } }
+}
 
 namespace std {
 

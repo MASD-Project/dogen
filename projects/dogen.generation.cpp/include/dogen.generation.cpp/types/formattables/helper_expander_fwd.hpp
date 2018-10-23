@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class helper_expander;
 
-} } } }
+}
 
 #endif

@@ -26,13 +26,11 @@
 #include "dogen.generation/io/meta_model/generatable_properties_io.hpp"
 #include "dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const generatable_properties& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

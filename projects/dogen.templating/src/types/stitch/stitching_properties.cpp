@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/stitch/stitching_properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 stitching_properties::stitching_properties(stitching_properties&& rhs)
     : stream_variable_name_(std::move(rhs.stream_variable_name_)),
@@ -167,4 +165,4 @@ void stitching_properties::wale_kvps(const std::unordered_map<std::string, std::
     wale_kvps_ = std::move(v);
 }
 
-} } }
+}

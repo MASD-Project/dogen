@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Models need to declare upfront the programming language they will target.
@@ -39,6 +37,6 @@ enum class languages : unsigned int {
     language_agnostic = 3
 };
 
-} } }
+}
 
 #endif

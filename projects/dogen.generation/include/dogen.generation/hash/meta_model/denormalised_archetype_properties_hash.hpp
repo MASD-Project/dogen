@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 struct denormalised_archetype_properties_hasher {
 public:
     static std::size_t hash(const denormalised_archetype_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

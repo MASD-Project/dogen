@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 element_archetype::element_archetype(
     const std::string& element,
@@ -79,4 +77,4 @@ void element_archetype::archetype(const std::string&& v) {
     archetype_ = std::move(v);
 }
 
-} } }
+}

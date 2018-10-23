@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Represents a visitor in the GOF visitor design pattern.
@@ -112,7 +110,7 @@ private:
     boost::optional<dogen::modeling::meta_model::name> parent_;
 };
 
-} } }
+}
 
 namespace std {
 

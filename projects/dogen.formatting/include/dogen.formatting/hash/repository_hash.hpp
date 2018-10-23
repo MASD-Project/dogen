@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.formatting/types/repository.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 struct repository_hasher {
 public:
     static std::size_t hash(const repository& v);
 };
 
-} }
+}
 
 namespace std {
 

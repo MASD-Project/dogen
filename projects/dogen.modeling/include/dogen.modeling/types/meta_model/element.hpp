@@ -42,9 +42,7 @@
 #include "dogen.modeling/types/meta_model/opaque_properties_fwd.hpp"
 #include "dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Represents a generic modeling construct.
@@ -250,6 +248,6 @@ inline bool operator==(const element& lhs, const element& rhs) {
     return lhs.equals(rhs);
 }
 
-} } }
+}
 
 #endif

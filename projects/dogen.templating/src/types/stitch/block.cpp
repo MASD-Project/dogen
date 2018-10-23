@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/stitch/block.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 block::block()
     : type_(static_cast<dogen::templating::stitch::block_types>(0)) { }
@@ -74,4 +72,4 @@ void block::content(const std::string&& v) {
     content_ = std::move(v);
 }
 
-} } }
+}

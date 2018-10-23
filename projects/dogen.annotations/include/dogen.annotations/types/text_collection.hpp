@@ -31,8 +31,7 @@
 #include <algorithm>
 #include "dogen.annotations/types/value.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Field can hold a collection of text values.
@@ -86,7 +85,7 @@ private:
     std::list<std::string> content_;
 };
 
-} }
+}
 
 namespace std {
 

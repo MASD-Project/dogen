@@ -49,8 +49,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t repository_hasher::hash(const repository& v) {
     std::size_t seed(0);
@@ -61,4 +60,4 @@ std::size_t repository_hasher::hash(const repository& v) {
     return seed;
 }
 
-} }
+}

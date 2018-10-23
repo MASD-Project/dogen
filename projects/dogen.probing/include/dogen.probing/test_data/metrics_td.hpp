@@ -27,8 +27,7 @@
 
 #include "dogen.probing/types/metrics.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class metrics_generator {
 public:
@@ -48,6 +47,6 @@ public:
     static result_type* create_ptr(const unsigned int position);
 };
 
-} }
+}
 
 #endif

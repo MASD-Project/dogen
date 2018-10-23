@@ -31,9 +31,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::ostream& operator<<(std::ostream& s, const processed_attribute& v) {
     s << " { "
@@ -45,4 +43,4 @@ std::ostream& operator<<(std::ostream& s, const processed_attribute& v) {
     return(s);
 }
 
-} } }
+}

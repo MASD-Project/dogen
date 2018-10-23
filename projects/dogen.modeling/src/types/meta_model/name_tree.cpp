@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 name_tree::name_tree()
     : are_children_opaque_(static_cast<bool>(0)),
@@ -173,4 +171,4 @@ void name_tree::is_floating_point(const bool v) {
     is_floating_point_ = v;
 }
 
-} } }
+}

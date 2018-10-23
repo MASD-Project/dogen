@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Properties related to the backend.
@@ -83,7 +81,7 @@ private:
     std::string directory_;
 };
 
-} } }
+}
 
 namespace std {
 

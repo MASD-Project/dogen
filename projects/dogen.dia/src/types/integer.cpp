@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/integer.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 integer::integer(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void integer::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

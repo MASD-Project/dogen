@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief The object profile is not valid.
@@ -50,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Supported editors for modelines.
@@ -39,6 +38,6 @@ enum class editors : unsigned int {
     ex = 4 ///< The old ex editor.
 };
 
-} }
+}
 
 #endif

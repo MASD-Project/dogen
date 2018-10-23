@@ -28,13 +28,10 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const inclusion_support_types& v);
 
-} } } }
+}
 
 #endif

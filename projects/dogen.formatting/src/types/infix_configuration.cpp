@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/infix_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 infix_configuration::infix_configuration(
     const std::string& first,
@@ -126,4 +125,4 @@ infix_configuration& infix_configuration::last(const std::string&& v) {
     return *this;
 }
 
-} }
+}

@@ -38,9 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t location_hasher::hash(const location& v) {
     std::size_t seed(0);
@@ -53,4 +51,4 @@ std::size_t location_hasher::hash(const location& v) {
     return seed;
 }
 
-} } }
+}

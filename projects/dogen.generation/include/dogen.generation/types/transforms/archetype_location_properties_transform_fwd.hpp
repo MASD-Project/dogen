@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class archetype_location_properties_transform;
 
-} } }
+}
 
 #endif

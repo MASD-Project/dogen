@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class dynamic_transform_registrar;
 
-} } }
+}
 
 #endif

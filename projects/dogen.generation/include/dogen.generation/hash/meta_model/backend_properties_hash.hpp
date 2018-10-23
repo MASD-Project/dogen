@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.generation/types/meta_model/backend_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 struct backend_properties_hasher {
 public:
     static std::size_t hash(const backend_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

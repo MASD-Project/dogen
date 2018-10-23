@@ -31,9 +31,7 @@
 #include <algorithm>
 #include "dogen.templating/types/stitch/line.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 class text_template_body final {
 public:
@@ -73,7 +71,7 @@ private:
     std::list<dogen::templating::stitch::line> lines_;
 };
 
-} } }
+}
 
 namespace std {
 

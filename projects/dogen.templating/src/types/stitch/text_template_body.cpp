@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/stitch/text_template_body.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 text_template_body::text_template_body(
     const std::list<std::pair<std::string, std::string> >& tagged_values,
@@ -79,4 +77,4 @@ void text_template_body::lines(const std::list<dogen::templating::stitch::line>&
     lines_ = std::move(v);
 }
 
-} } }
+}

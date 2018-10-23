@@ -28,11 +28,7 @@
 #include <algorithm>
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::csharp::formatters::io {
 
 class enumerable_helper : public helper_formatter_interface {
 public:
@@ -45,6 +41,6 @@ public:
         const formattables::helper_properties& hc) const override;
 };
 
-} } } } }
+}
 
 #endif

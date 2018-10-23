@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.formatting/types/repository.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::formatting::repository& v);
 
-} }
+}
 
 #endif

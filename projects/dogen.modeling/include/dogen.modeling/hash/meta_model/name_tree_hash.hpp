@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct name_tree_hasher {
 public:
     static std::size_t hash(const name_tree& v);
 };
 
-} } }
+}
 
 namespace std {
 

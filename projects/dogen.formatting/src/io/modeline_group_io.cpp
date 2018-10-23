@@ -49,8 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const modeline_group& v) {
     s << " { "
@@ -61,4 +60,4 @@ std::ostream& operator<<(std::ostream& s, const modeline_group& v) {
     return(s);
 }
 
-} }
+}

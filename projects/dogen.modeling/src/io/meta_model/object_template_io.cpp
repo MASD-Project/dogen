@@ -25,13 +25,11 @@
 #include "dogen.modeling/io/meta_model/attribute_io.hpp"
 #include "dogen.modeling/io/meta_model/object_template_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const object_template& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

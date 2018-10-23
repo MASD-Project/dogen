@@ -46,8 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::o
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const layer& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -66,4 +65,4 @@ std::ostream& operator<<(std::ostream& s, const layer& v) {
     return(s);
 }
 
-} }
+}

@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.dia/types/child_node.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::dia::child_node& v);
 
-} }
+}
 
 #endif

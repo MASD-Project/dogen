@@ -21,13 +21,11 @@
 #include <ostream>
 #include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const opaque_properties& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

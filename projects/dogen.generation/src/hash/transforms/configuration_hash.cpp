@@ -38,9 +38,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
 
 }
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 std::size_t configuration_hasher::hash(const configuration& v) {
     std::size_t seed(0);
@@ -51,4 +49,4 @@ std::size_t configuration_hasher::hash(const configuration& v) {
     return seed;
 }
 
-} } }
+}

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 visual_studio_configuration::visual_studio_configuration(
     const std::string& project_solution_guid,
@@ -80,4 +77,4 @@ void visual_studio_configuration::project_guid(const std::string&& v) {
     project_guid_ = std::move(v);
 }
 
-} } } }
+}

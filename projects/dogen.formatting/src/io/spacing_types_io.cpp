@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.formatting/io/spacing_types_io.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const spacing_types& v) {
     s << "{ " << "\"__type__\": " << "\"spacing_types\", " << "\"value\": ";
@@ -53,4 +52,4 @@ std::ostream& operator<<(std::ostream& s, const spacing_types& v) {
     return s;
 }
 
-} }
+}

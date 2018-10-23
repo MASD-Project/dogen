@@ -30,9 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class options final {
 public:
@@ -230,7 +228,7 @@ private:
     bool probe_use_short_names_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -31,8 +31,7 @@
 #include <unordered_map>
 #include "dogen.annotations/types/type.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class type_repository final {
 public:
@@ -130,7 +129,7 @@ private:
     std::unordered_map<std::string, dogen::annotations::type> partially_matchable_types_;
 };
 
-} }
+}
 
 namespace std {
 

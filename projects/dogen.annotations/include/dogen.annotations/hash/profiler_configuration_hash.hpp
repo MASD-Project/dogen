@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.annotations/types/profiler_configuration.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 struct profiler_configuration_hasher {
 public:
     static std::size_t hash(const profiler_configuration& v);
 };
 
-} }
+}
 
 namespace std {
 

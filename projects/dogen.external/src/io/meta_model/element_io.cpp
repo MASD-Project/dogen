@@ -87,9 +87,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::external
 
 }
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const element& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -117,4 +115,4 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
     return(s);
 }
 
-} } }
+}

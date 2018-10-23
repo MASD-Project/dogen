@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,
@@ -139,4 +137,4 @@ void indices::abstract_elements(const std::unordered_set<std::string>&& v) {
     abstract_elements_ = std::move(v);
 }
 
-} } }
+}

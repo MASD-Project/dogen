@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace io {
+namespace dogen::generation::cpp::formatters::io {
 
 class ptree_helper;
 
-} } } } }
+}
 
 #endif

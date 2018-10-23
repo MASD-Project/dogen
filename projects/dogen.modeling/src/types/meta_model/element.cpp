@@ -162,9 +162,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 element::element()
     : origin_type_(static_cast<dogen::modeling::meta_model::origin_types>(0)),
@@ -478,4 +476,4 @@ void element::opaque_properties(const std::unordered_map<std::string, boost::sha
     opaque_properties_ = std::move(v);
 }
 
-} } }
+}

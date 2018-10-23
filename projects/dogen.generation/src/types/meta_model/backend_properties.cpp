@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/meta_model/backend_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 backend_properties::backend_properties()
     : enabled_(static_cast<bool>(0)) { }
@@ -74,4 +72,4 @@ void backend_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
 }
 
-} } }
+}

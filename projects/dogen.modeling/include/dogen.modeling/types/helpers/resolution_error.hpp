@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief An error occurred while trying to resolve a type.
@@ -50,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

@@ -46,9 +46,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -66,4 +64,4 @@ std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
     return(s);
 }
 
-} } }
+}

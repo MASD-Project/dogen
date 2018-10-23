@@ -25,13 +25,11 @@ namespace {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t opaque_properties_hasher::hash(const opaque_properties&) {
     std::size_t seed(0);
     return seed;
 }
 
-} } }
+}

@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::external::meta_model::attribute& v);
 
-} } }
+}
 
 #endif

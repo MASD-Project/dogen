@@ -44,8 +44,7 @@ inline std::size_t hash_std_list_boost_shared_ptr_dogen_probing_metrics(const st
 
 }
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 std::size_t metrics_hasher::hash(const metrics& v) {
     std::size_t seed(0);
@@ -60,4 +59,4 @@ std::size_t metrics_hasher::hash(const metrics& v) {
     return seed;
 }
 
-} }
+}

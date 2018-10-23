@@ -29,9 +29,7 @@
 #include <algorithm>
 #include <unordered_set>
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class indices final {
 public:
@@ -92,7 +90,7 @@ private:
     std::unordered_set<std::string> abstract_elements_;
 };
 
-} } }
+}
 
 namespace std {
 

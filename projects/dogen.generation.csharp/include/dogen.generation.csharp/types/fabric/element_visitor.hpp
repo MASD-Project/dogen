@@ -31,10 +31,7 @@
 #include "dogen.generation.csharp/types/fabric/visual_studio_project_fwd.hpp"
 #include "dogen.generation.csharp/types/fabric/visual_studio_solution_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 /**
  * @brief Visitor for element
@@ -89,6 +86,6 @@ public:
 
 inline element_visitor::~element_visitor() noexcept { }
 
-} } } }
+}
 
 #endif

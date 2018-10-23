@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 enum class formatting_styles : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -36,6 +34,6 @@ enum class formatting_styles : unsigned int {
     stitch = 3
 };
 
-} } }
+}
 
 #endif

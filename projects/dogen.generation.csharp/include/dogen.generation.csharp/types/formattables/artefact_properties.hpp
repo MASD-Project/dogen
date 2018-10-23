@@ -30,10 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class artefact_properties final {
 public:
@@ -94,7 +91,7 @@ private:
     std::list<std::string> using_dependencies_;
 };
 
-} } } }
+}
 
 namespace std {
 

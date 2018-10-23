@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 enum class value_types : unsigned int;
 
-} }
+}
 
 #endif

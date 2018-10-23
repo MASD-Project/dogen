@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::external::dia::processed_attribute& v);
 
-} } }
+}
 
 #endif

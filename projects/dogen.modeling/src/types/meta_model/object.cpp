@@ -104,9 +104,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 object::object()
     : is_immutable_(static_cast<bool>(0)),
@@ -701,4 +699,4 @@ void object::orm_properties(const boost::optional<dogen::modeling::meta_model::o
     orm_properties_ = std::move(v);
 }
 
-} } }
+}

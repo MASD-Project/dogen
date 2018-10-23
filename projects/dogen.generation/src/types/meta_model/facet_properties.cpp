@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/meta_model/facet_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 facet_properties::facet_properties()
     : enabled_(static_cast<bool>(0)),
@@ -107,4 +105,4 @@ void facet_properties::postfix(const std::string&& v) {
     postfix_ = std::move(v);
 }
 
-} } }
+}

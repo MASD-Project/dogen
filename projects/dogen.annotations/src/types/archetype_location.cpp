@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 archetype_location::archetype_location(
     const std::string& kernel,
@@ -118,4 +117,4 @@ void archetype_location::archetype(const std::string&& v) {
     archetype_ = std::move(v);
 }
 
-} }
+}

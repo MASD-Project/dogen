@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.annotations/types/type_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::annotations::type_repository& v);
 
-} }
+}
 
 #endif

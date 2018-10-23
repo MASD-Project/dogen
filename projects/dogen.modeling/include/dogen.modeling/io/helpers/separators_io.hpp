@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.modeling/types/helpers/separators.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const separators& v);
 
-} } }
+}
 
 #endif

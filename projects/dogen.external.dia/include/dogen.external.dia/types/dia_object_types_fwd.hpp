@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 enum class dia_object_types : unsigned int;
 
-} } }
+}
 
 #endif

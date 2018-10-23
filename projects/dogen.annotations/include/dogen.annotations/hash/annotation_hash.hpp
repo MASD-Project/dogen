@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.annotations/types/annotation.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 struct annotation_hasher {
 public:
     static std::size_t hash(const annotation& v);
 };
 
-} }
+}
 
 namespace std {
 

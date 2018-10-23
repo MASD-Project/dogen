@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/element_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 element_properties::element_properties(element_properties&& rhs)
     : aspect_properties_(std::move(rhs.aspect_properties_)),
@@ -168,4 +165,4 @@ void element_properties::attribute_level_test_data_properties(const std::unorder
     attribute_level_test_data_properties_ = std::move(v);
 }
 
-} } } }
+}

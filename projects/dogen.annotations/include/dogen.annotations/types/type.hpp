@@ -33,8 +33,7 @@
 #include "dogen.annotations/types/value_types.hpp"
 #include "dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Defines the domain of values.
@@ -126,7 +125,7 @@ private:
     bool is_partially_matchable_;
 };
 
-} }
+}
 
 namespace std {
 

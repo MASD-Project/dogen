@@ -50,9 +50,7 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_letter_cases(co
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t orm_model_properties_hasher::hash(const orm_model_properties& v) {
     std::size_t seed(0);
@@ -64,4 +62,4 @@ std::size_t orm_model_properties_hasher::hash(const orm_model_properties& v) {
     return seed;
 }
 
-} } }
+}

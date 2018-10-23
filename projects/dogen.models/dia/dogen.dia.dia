@@ -4828,6 +4828,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
 #DOGEN yarn.model_modules=dogen.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false

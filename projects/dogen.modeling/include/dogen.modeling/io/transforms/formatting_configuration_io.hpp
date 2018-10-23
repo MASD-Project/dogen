@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.modeling/types/transforms/formatting_configuration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::modeling::transforms::formatting_configuration& v);
 
-} } }
+}
 
 #endif

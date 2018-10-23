@@ -30,8 +30,7 @@
 #include <unordered_map>
 #include "dogen.annotations/types/profile.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class profile_repository final {
 public:
@@ -63,7 +62,7 @@ private:
     std::unordered_map<std::string, dogen::annotations::profile> profiles_by_name_;
 };
 
-} }
+}
 
 namespace std {
 

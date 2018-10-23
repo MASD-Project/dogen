@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.external.dia/types/processed_comment.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 class processed_attribute final {
 public:
@@ -93,7 +91,7 @@ private:
     dogen::external::dia::processed_comment comment_;
 };
 
-} } }
+}
 
 namespace std {
 

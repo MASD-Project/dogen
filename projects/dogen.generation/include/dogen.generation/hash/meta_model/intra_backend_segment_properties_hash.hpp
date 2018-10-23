@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 struct intra_backend_segment_properties_hasher {
 public:
     static std::size_t hash(const intra_backend_segment_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

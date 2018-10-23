@@ -57,8 +57,7 @@ std::list<dogen::formatting::modeline_field> create_std_list_dogen_formatting_mo
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline_generator::modeline_generator() : position_(0) { }
 
@@ -89,4 +88,4 @@ modeline_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

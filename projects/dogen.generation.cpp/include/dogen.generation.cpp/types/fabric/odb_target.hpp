@@ -30,10 +30,7 @@
 #include <utility>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class odb_target final {
 public:
@@ -101,7 +98,7 @@ private:
     std::string object_odb_options_;
 };
 
-} } } }
+}
 
 namespace std {
 

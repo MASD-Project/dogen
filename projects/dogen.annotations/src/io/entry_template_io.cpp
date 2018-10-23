@@ -47,8 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const entry_template& v) {
     s << " { "
@@ -61,4 +60,4 @@ std::ostream& operator<<(std::ostream& s, const entry_template& v) {
     return(s);
 }
 
-} }
+}

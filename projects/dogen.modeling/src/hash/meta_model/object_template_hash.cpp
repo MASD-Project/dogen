@@ -58,9 +58,7 @@ inline std::size_t hash_std_list_dogen_modeling_meta_model_name(const std::list<
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t object_template_hasher::hash(const object_template& v) {
     std::size_t seed(0);
@@ -78,4 +76,4 @@ std::size_t object_template_hasher::hash(const object_template& v) {
     return seed;
 }
 
-} } }
+}

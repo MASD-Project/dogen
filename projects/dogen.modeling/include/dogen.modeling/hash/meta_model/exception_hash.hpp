@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/exception.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct exception_hasher {
 public:
     static std::size_t hash(const exception& v);
 };
 
-} } }
+}
 
 namespace std {
 

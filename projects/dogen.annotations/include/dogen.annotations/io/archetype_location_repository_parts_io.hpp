@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.annotations/types/archetype_location_repository_parts.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::annotations::archetype_location_repository_parts& v);
 
-} }
+}
 
 #endif

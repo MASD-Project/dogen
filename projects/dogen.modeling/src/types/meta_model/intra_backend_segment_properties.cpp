@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 intra_backend_segment_properties::intra_backend_segment_properties()
     : external_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)),
@@ -141,4 +139,4 @@ void intra_backend_segment_properties::facet(const dogen::modeling::meta_model::
     facet_ = v;
 }
 
-} } }
+}

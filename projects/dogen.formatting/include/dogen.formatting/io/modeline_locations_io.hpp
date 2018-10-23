@@ -28,11 +28,10 @@
 #include <iosfwd>
 #include "dogen.formatting/types/modeline_locations.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const modeline_locations& v);
 
-} }
+}
 
 #endif

@@ -49,10 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const attribute_properties& v) {
     s << " { "
@@ -62,4 +59,4 @@ std::ostream& operator<<(std::ostream& s, const attribute_properties& v) {
     return(s);
 }
 
-} } } }
+}

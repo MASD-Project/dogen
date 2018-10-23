@@ -63,9 +63,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 module::module()
     : is_root_(static_cast<bool>(0)),
@@ -231,4 +229,4 @@ void module::orm_properties(const boost::optional<dogen::modeling::meta_model::o
     orm_properties_ = std::move(v);
 }
 
-} } }
+}

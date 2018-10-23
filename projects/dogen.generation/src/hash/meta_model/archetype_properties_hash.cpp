@@ -40,9 +40,7 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::size_t archetype_properties_hasher::hash(const archetype_properties& v) {
     std::size_t seed(0);
@@ -54,4 +52,4 @@ std::size_t archetype_properties_hasher::hash(const archetype_properties& v) {
     return seed;
 }
 
-} } }
+}

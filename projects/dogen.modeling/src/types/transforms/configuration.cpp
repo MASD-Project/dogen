@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/transforms/configuration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 configuration::configuration()
     : enable_backend_directories_(static_cast<bool>(0)) { }
@@ -74,4 +72,4 @@ void configuration::enable_backend_directories(const bool v) {
     enable_backend_directories_ = v;
 }
 
-} } }
+}

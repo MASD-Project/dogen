@@ -70,9 +70,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 generatable_properties::generatable_properties(
     const dogen::formatting::decoration_properties& decoration_properties,
@@ -171,4 +169,4 @@ void generatable_properties::archetype_location_properties(const std::unordered_
     archetype_location_properties_ = std::move(v);
 }
 
-} } }
+}

@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/helpers/mapping_context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 struct mapping_context_hasher {
 public:
     static std::size_t hash(const mapping_context& v);
 };
 
-} } }
+}
 
 namespace std {
 

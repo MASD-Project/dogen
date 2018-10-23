@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.modeling/io/meta_model/letter_cases_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const letter_cases& v) {
     s << "{ " << "\"__type__\": " << "\"letter_cases\", " << "\"value\": ";
@@ -48,4 +46,4 @@ std::ostream& operator<<(std::ostream& s, const letter_cases& v) {
     return s;
 }
 
-} } }
+}

@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.formatting/types/licence.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 struct licence_hasher {
 public:
     static std::size_t hash(const licence& v);
 };
 
-} }
+}
 
 namespace std {
 

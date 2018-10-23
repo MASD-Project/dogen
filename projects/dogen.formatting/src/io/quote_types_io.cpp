@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.formatting/io/quote_types_io.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const quote_types& v) {
     s << "{ " << "\"__type__\": " << "\"quote_types\", " << "\"value\": ";
@@ -47,4 +46,4 @@ std::ostream& operator<<(std::ostream& s, const quote_types& v) {
     return s;
 }
 
-} }
+}

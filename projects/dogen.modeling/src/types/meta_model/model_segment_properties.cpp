@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/model_segment_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 model_segment_properties::model_segment_properties()
     : external_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)),
@@ -87,4 +85,4 @@ void model_segment_properties::model_modules(const dogen::modeling::meta_model::
     model_modules_ = v;
 }
 
-} } }
+}

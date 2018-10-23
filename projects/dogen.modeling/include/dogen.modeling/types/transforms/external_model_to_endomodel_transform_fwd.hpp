@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class external_model_to_endomodel_transform;
 
-} } }
+}
 
 #endif

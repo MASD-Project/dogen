@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Supported styles of comments.
@@ -41,6 +40,6 @@ enum class comment_styles : unsigned int {
     xml_style = 6
 };
 
-} }
+}
 
 #endif

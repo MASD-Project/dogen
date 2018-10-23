@@ -60,8 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 std::ostream& operator<<(std::ostream& s, const metrics& v) {
     s << " { "
@@ -76,4 +75,4 @@ std::ostream& operator<<(std::ostream& s, const metrics& v) {
     return(s);
 }
 
-} }
+}

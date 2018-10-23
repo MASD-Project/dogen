@@ -41,8 +41,7 @@
 #include "dogen.dia/types/enumeration.hpp"
 #include "dogen.dia/serialization/attribute_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Attribute in a Dia diagram.
@@ -102,7 +101,7 @@ private:
     std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> > values_;
 };
 
-} }
+}
 
 namespace std {
 

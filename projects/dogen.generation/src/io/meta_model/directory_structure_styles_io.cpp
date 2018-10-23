@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const directory_structure_styles& v) {
     s << "{ " << "\"__type__\": " << "\"directory_structure_styles\", " << "\"value\": ";
@@ -51,4 +49,4 @@ std::ostream& operator<<(std::ostream& s, const directory_structure_styles& v) {
     return s;
 }
 
-} } }
+}

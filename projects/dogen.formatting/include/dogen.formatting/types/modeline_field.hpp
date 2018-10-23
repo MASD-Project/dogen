@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.formatting/serialization/modeline_field_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Entry in a modeline.
@@ -90,7 +89,7 @@ private:
     std::string value_;
 };
 
-} }
+}
 
 namespace std {
 

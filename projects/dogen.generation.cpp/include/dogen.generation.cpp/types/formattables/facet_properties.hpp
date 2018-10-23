@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class facet_properties final {
 public:
@@ -71,7 +68,7 @@ private:
     bool enabled_;
 };
 
-} } } }
+}
 
 namespace std {
 

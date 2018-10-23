@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.formatting/io/comment_styles_io.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
     s << "{ " << "\"__type__\": " << "\"comment_styles\", " << "\"value\": ";
@@ -59,4 +58,4 @@ std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
     return s;
 }
 
-} }
+}

@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.modeling/types/meta_model/enumerator.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Defines a bounded set of logically related values for a built-in type
@@ -148,7 +146,7 @@ private:
     bool add_invalid_enumerator_;
 };
 
-} } }
+}
 
 namespace std {
 

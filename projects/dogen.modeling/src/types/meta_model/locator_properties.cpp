@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/locator_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 locator_properties::locator_properties()
     : directory_structure_style_(static_cast<dogen::modeling::meta_model::directory_structure_styles>(0)),
@@ -160,4 +158,4 @@ void locator_properties::disable_facet_directories(const bool v) {
     disable_facet_directories_ = v;
 }
 
-} } }
+}

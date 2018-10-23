@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::cpp::formattables::locator_facet_configuration& v);
 
-} } } }
+}
 
 #endif

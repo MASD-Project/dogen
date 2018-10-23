@@ -32,8 +32,7 @@
 #include "dogen.probing/types/metrics_fwd.hpp"
 #include "dogen.probing/serialization/metrics_fwd_ser.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class metrics final {
 public:
@@ -106,7 +105,7 @@ private:
     std::list<boost::shared_ptr<dogen::probing::metrics> > children_;
 };
 
-} }
+}
 
 namespace std {
 

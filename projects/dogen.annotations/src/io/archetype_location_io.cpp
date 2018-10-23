@@ -30,8 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const archetype_location& v) {
     s << " { "
@@ -44,4 +43,4 @@ std::ostream& operator<<(std::ostream& s, const archetype_location& v) {
     return(s);
 }
 
-} }
+}

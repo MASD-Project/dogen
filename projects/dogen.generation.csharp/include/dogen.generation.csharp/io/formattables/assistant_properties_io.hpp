@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::csharp::formattables::assistant_properties& v);
 
-} } } }
+}
 
 #endif

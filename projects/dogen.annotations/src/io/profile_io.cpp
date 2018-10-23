@@ -73,8 +73,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotati
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const profile& v) {
     s << " { "
@@ -87,4 +86,4 @@ std::ostream& operator<<(std::ostream& s, const profile& v) {
     return(s);
 }
 
-} }
+}

@@ -24,14 +24,11 @@
 #include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.generation.cpp/io/fabric/forward_declarations_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const forward_declarations& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } } }
+}

@@ -30,9 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Artefact in a text model.
@@ -114,7 +112,7 @@ private:
     std::vector<boost::filesystem::path> dependencies_;
 };
 
-} } }
+}
 
 namespace std {
 

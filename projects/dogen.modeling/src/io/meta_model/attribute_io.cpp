@@ -50,9 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -75,4 +73,4 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
     return(s);
 }
 
-} } }
+}

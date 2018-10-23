@@ -38,9 +38,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping_value& v) {
     s << " { "
@@ -51,4 +49,4 @@ std::ostream& operator<<(std::ostream& s, const mapping_value& v) {
     return(s);
 }
 
-} } }
+}

@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/modeline_field.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline_field::modeline_field(
     const std::string& name,
@@ -78,4 +77,4 @@ void modeline_field::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const static_stereotypes& v);
 
-} } }
+}
 
 #endif

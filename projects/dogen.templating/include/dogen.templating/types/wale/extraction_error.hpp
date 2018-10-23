@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 /**
  * @brief An error occurred whilst extracting a key.
@@ -50,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

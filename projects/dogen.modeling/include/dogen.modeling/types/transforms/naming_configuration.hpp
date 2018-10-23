@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class naming_configuration final {
 public:
@@ -70,7 +68,7 @@ private:
     std::string model_modules_;
 };
 
-} } }
+}
 
 namespace std {
 

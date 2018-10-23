@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.annotations/types/key_value_pair.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::annotations::key_value_pair& v);
 
-} }
+}
 
 #endif

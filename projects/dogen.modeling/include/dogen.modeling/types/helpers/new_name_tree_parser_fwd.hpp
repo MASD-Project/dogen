@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class new_name_tree_parser;
 
-} } }
+}
 
 #endif

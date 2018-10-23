@@ -40,8 +40,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_profile(c
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t profile_repository_hasher::hash(const profile_repository& v) {
     std::size_t seed(0);
@@ -50,4 +49,4 @@ std::size_t profile_repository_hasher::hash(const profile_repository& v) {
     return seed;
 }
 
-} }
+}

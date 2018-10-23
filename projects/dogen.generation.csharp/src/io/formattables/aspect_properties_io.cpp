@@ -22,10 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -42,4 +39,4 @@ std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
     return(s);
 }
 
-} } } }
+}

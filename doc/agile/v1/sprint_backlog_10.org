@@ -757,6 +757,7 @@ Architecture vision:
 
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
+     CLOCK: [2018-10-23 Tue 13:07]--[2018-10-23 Tue 13:23] =>  0:16
      CLOCK: [2018-10-23 Tue 08:48]--[2018-10-23 Tue 09:50] =>  1:02
      CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
      CLOCK: [2018-10-19 Fri 09:54]--[2018-10-19 Fri 10:11] =>  0:17
@@ -804,6 +805,8 @@ We need to update one model at a time.
 
 *** STARTED Add support for nested namespaces                         :story:
     :LOGBOOK:
+    CLOCK: [2018-10-23 Tue 13:01]--[2018-10-23 Tue 13:05] =>  0:04
+    CLOCK: [2018-10-23 Tue 12:46]--[2018-10-23 Tue 13:00] =>  0:14
     CLOCK: [2018-10-23 Tue 11:45]--[2018-10-23 Tue 12:10] =>  0:25
     CLOCK: [2018-10-23 Tue 11:34]--[2018-10-23 Tue 11:44] =>  0:10
     CLOCK: [2018-10-23 Tue 10:45]--[2018-10-23 Tue 11:33] =>  0:48

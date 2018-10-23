@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/type_parameters.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 type_parameters::type_parameters()
     : variable_number_of_parameters_(static_cast<bool>(0)),
@@ -80,4 +78,4 @@ void type_parameters::always_in_heap(const bool v) {
     always_in_heap_ = v;
 }
 
-} } }
+}

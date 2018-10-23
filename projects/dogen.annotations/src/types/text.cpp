@@ -32,8 +32,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 text::text(const std::string& content)
     : dogen::annotations::value(),
@@ -105,4 +104,4 @@ void text::content(const std::string&& v) {
     content_ = std::move(v);
 }
 
-} }
+}

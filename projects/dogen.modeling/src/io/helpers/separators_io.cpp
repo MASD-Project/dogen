@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.modeling/io/helpers/separators_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const separators& v) {
     s << "{ " << "\"__type__\": " << "\"separators\", " << "\"value\": ";
@@ -51,4 +49,4 @@ std::ostream& operator<<(std::ostream& s, const separators& v) {
     return s;
 }
 
-} } }
+}

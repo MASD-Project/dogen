@@ -31,9 +31,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
@@ -44,4 +42,4 @@ std::ostream& operator<<(std::ostream& s, const text_template& v) {
     return(s);
 }
 
-} } }
+}

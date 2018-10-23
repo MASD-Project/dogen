@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Represents a value type that is built-in at the hardware level.
@@ -130,7 +128,7 @@ private:
     bool can_be_primitive_underlier_;
 };
 
-} } }
+}
 
 namespace std {
 

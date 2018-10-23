@@ -31,8 +31,7 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 infix_configuration_generator::infix_configuration_generator() : position_(0) { }
 
@@ -63,4 +62,4 @@ infix_configuration_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.formatting/types/infix_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::formatting::infix_configuration& v);
 
-} }
+}
 
 #endif

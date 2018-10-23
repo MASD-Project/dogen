@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.modeling/io/meta_model/origin_types_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const origin_types& v) {
     s << "{ " << "\"__type__\": " << "\"origin_types\", " << "\"value\": ";
@@ -54,4 +52,4 @@ std::ostream& operator<<(std::ostream& s, const origin_types& v) {
     return s;
 }
 
-} } }
+}

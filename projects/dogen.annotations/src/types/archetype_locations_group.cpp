@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/archetype_locations_group.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 archetype_locations_group::archetype_locations_group(
     const std::list<dogen::annotations::archetype_location>& archetype_locations,
@@ -78,4 +77,4 @@ void archetype_locations_group::canonical_archetype_locations(const std::unorder
     canonical_archetype_locations_ = std::move(v);
 }
 
-} }
+}

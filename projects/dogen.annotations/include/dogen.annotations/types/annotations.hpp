@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @brief The Annotations model is responsible for managing run-time typed data.
  *
@@ -34,9 +32,7 @@ namespace dogen {
  * formatting process without necessarily knowing about this data, but
  * yet imposing some constraints on the shape of the data.
  */
-namespace annotations {
-}
-
+namespace dogen::annotations {
 }
 
 #endif

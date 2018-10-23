@@ -46,8 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 text_collection::text_collection(const std::list<std::string>& content)
     : dogen::annotations::value(),
@@ -119,4 +118,4 @@ void text_collection::content(const std::list<std::string>&& v) {
     content_ = std::move(v);
 }
 
-} }
+}

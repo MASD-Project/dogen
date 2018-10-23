@@ -23,9 +23,7 @@
 #include "dogen.modeling/types/meta_model/exception.hpp"
 #include "dogen.modeling/types/meta_model/element_visitor.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 exception::exception(
     const dogen::modeling::meta_model::name& name,
@@ -103,4 +101,4 @@ exception& exception::operator=(exception other) {
     return *this;
 }
 
-} } }
+}

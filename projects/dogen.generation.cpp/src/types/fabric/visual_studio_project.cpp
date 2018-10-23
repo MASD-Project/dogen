@@ -32,10 +32,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 visual_studio_project::visual_studio_project(
     const dogen::modeling::meta_model::name& name,
@@ -190,4 +187,4 @@ void visual_studio_project::tools_version(const std::string&& v) {
     tools_version_ = std::move(v);
 }
 
-} } } }
+}

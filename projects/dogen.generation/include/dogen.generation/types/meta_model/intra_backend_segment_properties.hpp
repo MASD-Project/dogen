@@ -29,9 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.generation/types/meta_model/path_contribution_types.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 class intra_backend_segment_properties final {
 public:
@@ -128,7 +126,7 @@ private:
     dogen::generation::meta_model::path_contribution_types facet_;
 };
 
-} } }
+}
 
 namespace std {
 

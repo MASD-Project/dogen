@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class type_templates_hydrator;
 
-} }
+}
 
 #endif

@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class modeling_model_to_generation_model_transform;
 
-} } }
+}
 
 #endif

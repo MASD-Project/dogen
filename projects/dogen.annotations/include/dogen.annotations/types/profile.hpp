@@ -31,8 +31,7 @@
 #include <unordered_set>
 #include "dogen.annotations/types/entry_template.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class profile final {
 public:
@@ -86,7 +85,7 @@ private:
     std::list<dogen::annotations::entry_template> templates_;
 };
 
-} }
+}
 
 namespace std {
 

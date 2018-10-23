@@ -31,10 +31,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const assistant_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -51,4 +48,4 @@ std::ostream& operator<<(std::ostream& s, const assistant_properties& v) {
     return(s);
 }
 
-} } } }
+}

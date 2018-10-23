@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/languages.hpp"
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Name of an element in modeling space.
@@ -144,7 +142,7 @@ private:
     std::string identifiable_;
 };
 
-} } }
+}
 
 namespace std {
 

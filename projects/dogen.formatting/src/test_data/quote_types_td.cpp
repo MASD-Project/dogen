@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/test_data/quote_types_td.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 quote_types_generator::quote_types_generator() : position_(0) { }
 void quote_types_generator::
@@ -41,4 +40,4 @@ quote_types_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

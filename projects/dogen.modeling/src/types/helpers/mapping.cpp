@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/mapping.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapping::mapping(
     const std::string& lam_id,
@@ -79,4 +77,4 @@ void mapping::by_language(const std::unordered_map<dogen::modeling::meta_model::
     by_language_ = std::move(v);
 }
 
-} } }
+}

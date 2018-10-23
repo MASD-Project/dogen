@@ -30,9 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const archetype_family_properties& v) {
     s << " { "
@@ -42,4 +40,4 @@ std::ostream& operator<<(std::ostream& s, const archetype_family_properties& v) 
     return(s);
 }
 
-} } }
+}

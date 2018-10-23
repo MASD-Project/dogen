@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class locator_facet_configuration final {
 public:
@@ -71,7 +68,7 @@ private:
     std::string postfix_;
 };
 
-} } } }
+}
 
 namespace std {
 

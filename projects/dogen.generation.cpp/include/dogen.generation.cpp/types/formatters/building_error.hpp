@@ -28,10 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 /**
  * @brief An error occurred whilst the factory was building.
@@ -51,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } } }
+}
 
 #endif

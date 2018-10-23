@@ -45,9 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::ostream& operator<<(std::ostream& s, const configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -64,4 +62,4 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
     return(s);
 }
 
-} } }
+}

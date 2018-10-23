@@ -31,8 +31,7 @@
 #include <unordered_map>
 #include "dogen.annotations/types/value.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class key_value_pair final : public dogen::annotations::value {
 public:
@@ -78,7 +77,7 @@ private:
     std::unordered_map<std::string, std::string> content_;
 };
 
-} }
+}
 
 namespace std {
 

@@ -67,10 +67,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const directive_group_repository& v) {
     s << " { "
@@ -80,4 +77,4 @@ std::ostream& operator<<(std::ostream& s, const directive_group_repository& v) {
     return(s);
 }
 
-} } } }
+}

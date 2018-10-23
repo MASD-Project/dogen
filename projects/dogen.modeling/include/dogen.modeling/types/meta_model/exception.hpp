@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Represents an exception which can be thrown.
@@ -86,7 +84,7 @@ public:
 
 };
 
-} } }
+}
 
 namespace std {
 

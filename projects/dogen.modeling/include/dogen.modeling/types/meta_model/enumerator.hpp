@@ -30,9 +30,7 @@
 #include "dogen.annotations/types/annotation.hpp"
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief One of a set of valid values that an enumeration can assume.
@@ -117,7 +115,7 @@ private:
     std::string value_;
 };
 
-} } }
+}
 
 namespace std {
 

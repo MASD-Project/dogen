@@ -4898,6 +4898,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
 #DOGEN yarn.reference=dogen.formatting.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false

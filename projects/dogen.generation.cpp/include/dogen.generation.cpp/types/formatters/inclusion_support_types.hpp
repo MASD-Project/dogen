@@ -25,10 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 enum class inclusion_support_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -37,6 +34,6 @@ enum class inclusion_support_types : unsigned int {
     canonical_support = 3 ///< This formatter exports a regular inclusion directive and is the default for its facet///< and element.
 };
 
-} } } }
+}
 
 #endif

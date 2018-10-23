@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class decomposition_result final {
 public:
@@ -88,7 +86,7 @@ private:
     std::list<std::pair<std::string, dogen::modeling::meta_model::name> > injected_names_;
 };
 
-} } }
+}
 
 namespace std {
 

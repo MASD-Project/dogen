@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/location.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct location_hasher {
 public:
     static std::size_t hash(const location& v);
 };
 
-} } }
+}
 
 namespace std {
 

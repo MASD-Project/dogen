@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class odb_target;
 
-} } } }
+}
 
 #endif

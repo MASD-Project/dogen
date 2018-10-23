@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.annotations/types/key_value_pair.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 struct key_value_pair_hasher {
 public:
     static std::size_t hash(const key_value_pair& v);
 };
 
-} }
+}
 
 namespace std {
 

@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.probing/types/metrics.hpp"
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::probing::metrics& v);
 
-} }
+}
 
 #endif

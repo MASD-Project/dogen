@@ -28,11 +28,7 @@
 #include <algorithm>
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::cpp::formatters::types {
 
 class smart_pointer_helper : public helper_formatter_interface {
 public:
@@ -47,6 +43,6 @@ public:
         const formattables::helper_properties& hc) const override;
 };
 
-} } } } }
+}
 
 #endif

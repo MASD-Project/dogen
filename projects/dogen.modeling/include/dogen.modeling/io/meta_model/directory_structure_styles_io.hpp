@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.modeling/types/meta_model/directory_structure_styles.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const directory_structure_styles& v);
 
-} } }
+}
 
 #endif

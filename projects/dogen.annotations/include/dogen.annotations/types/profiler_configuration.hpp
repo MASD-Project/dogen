@@ -29,8 +29,7 @@
 #include "dogen.annotations/types/profile.hpp"
 #include "dogen.annotations/types/annotation.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class profiler_configuration final {
 public:
@@ -77,7 +76,7 @@ private:
     bool merged_;
 };
 
-} }
+}
 
 namespace std {
 

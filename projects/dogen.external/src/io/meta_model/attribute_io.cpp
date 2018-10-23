@@ -71,9 +71,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
@@ -87,4 +85,4 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
     return(s);
 }
 
-} } }
+}

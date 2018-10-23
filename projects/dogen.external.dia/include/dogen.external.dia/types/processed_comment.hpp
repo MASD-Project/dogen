@@ -30,9 +30,7 @@
 #include <utility>
 #include <algorithm>
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Contains the same content as the original dia comment, but split by type of data.
@@ -121,7 +119,7 @@ private:
     std::string external_modules_;
 };
 
-} } }
+}
 
 namespace std {
 

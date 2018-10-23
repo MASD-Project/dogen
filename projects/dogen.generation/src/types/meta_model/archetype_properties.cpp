@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/meta_model/archetype_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 archetype_properties::archetype_properties()
     : enabled_(static_cast<bool>(0)) { }
@@ -99,4 +97,4 @@ void archetype_properties::postfix(const std::string&& v) {
     postfix_ = std::move(v);
 }
 
-} } }
+}

@@ -50,8 +50,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 decoration_configuration_generator::decoration_configuration_generator() : position_(0) { }
 
@@ -85,4 +84,4 @@ decoration_configuration_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

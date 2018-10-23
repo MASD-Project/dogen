@@ -37,9 +37,7 @@
 #include "dogen.modeling/types/meta_model/type_parameters.hpp"
 #include "dogen.modeling/types/meta_model/orm_object_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Representation of the class notion in the OOP paradigm.
@@ -399,7 +397,7 @@ private:
     boost::optional<dogen::modeling::meta_model::orm_object_properties> orm_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

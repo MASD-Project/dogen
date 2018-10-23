@@ -28,9 +28,7 @@
 #include <iosfwd>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Base class for any properties that are not known to modeling.
@@ -63,6 +61,6 @@ inline bool operator==(const opaque_properties& lhs, const opaque_properties& rh
     return lhs.equals(rhs);
 }
 
-} } }
+}
 
 #endif

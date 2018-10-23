@@ -28,8 +28,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.dia/serialization/registrar_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 template<typename Archive>
 void register_types(Archive&) {
@@ -47,4 +46,4 @@ template void register_types(boost::archive::binary_iarchive&);
 template void register_types(boost::archive::xml_oarchive&);
 template void register_types(boost::archive::xml_iarchive&);
 
-} }
+}

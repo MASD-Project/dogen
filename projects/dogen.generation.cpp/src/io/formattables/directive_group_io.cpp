@@ -44,10 +44,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const directive_group& v) {
     s << " { "
@@ -58,4 +55,4 @@ std::ostream& operator<<(std::ostream& s, const directive_group& v) {
     return(s);
 }
 
-} } } }
+}

@@ -31,8 +31,7 @@
 #include <unordered_map>
 #include "dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class archetype_locations_group final {
 public:
@@ -83,7 +82,7 @@ private:
     std::unordered_map<std::string, std::string> canonical_archetype_locations_;
 };
 
-} }
+}
 
 namespace std {
 

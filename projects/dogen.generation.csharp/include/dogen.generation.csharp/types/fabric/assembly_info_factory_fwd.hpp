@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 class assembly_info_factory;
 
-} } } }
+}
 
 #endif

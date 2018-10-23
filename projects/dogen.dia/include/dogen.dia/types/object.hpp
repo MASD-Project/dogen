@@ -34,8 +34,7 @@
 #include "dogen.dia/types/connection.hpp"
 #include "dogen.dia/serialization/object_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Represents a Dia object.
@@ -145,7 +144,7 @@ private:
     std::vector<dogen::dia::attribute> attributes_;
 };
 
-} }
+}
 
 namespace std {
 

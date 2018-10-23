@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct local_archetype_location_properties_hasher {
 public:
     static std::size_t hash(const local_archetype_location_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

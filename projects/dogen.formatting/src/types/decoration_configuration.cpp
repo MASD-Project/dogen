@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/decoration_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 decoration_configuration::decoration_configuration(decoration_configuration&& rhs)
     : generate_decoration_(std::move(rhs.generate_decoration_)),
@@ -187,4 +186,4 @@ void decoration_configuration::marker_message(const std::string&& v) {
     marker_message_ = std::move(v);
 }
 
-} }
+}

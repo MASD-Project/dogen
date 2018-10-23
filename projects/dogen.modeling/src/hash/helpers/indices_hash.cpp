@@ -38,9 +38,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t indices_hasher::hash(const indices& v) {
     std::size_t seed(0);
@@ -54,4 +52,4 @@ std::size_t indices_hasher::hash(const indices& v) {
     return seed;
 }
 
-} } }
+}

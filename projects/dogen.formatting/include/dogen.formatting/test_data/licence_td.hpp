@@ -27,8 +27,7 @@
 
 #include "dogen.formatting/types/licence.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class licence_generator {
 public:
@@ -48,6 +47,6 @@ public:
     static result_type* create_ptr(const unsigned int position);
 };
 
-} }
+}
 
 #endif

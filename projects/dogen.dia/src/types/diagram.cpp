@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/diagram.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 diagram::diagram(
     const dogen::dia::diagram_data& diagram_data,
@@ -78,4 +77,4 @@ void diagram::layers(const std::vector<dogen::dia::layer>&& v) {
     layers_ = std::move(v);
 }
 
-} }
+}

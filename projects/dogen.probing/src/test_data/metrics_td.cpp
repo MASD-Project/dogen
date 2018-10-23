@@ -55,8 +55,7 @@ std::list<boost::shared_ptr<dogen::probing::metrics> > create_std_list_boost_sha
 
 }
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 metrics_generator::metrics_generator() : position_(0) { }
 
@@ -89,4 +88,4 @@ metrics_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

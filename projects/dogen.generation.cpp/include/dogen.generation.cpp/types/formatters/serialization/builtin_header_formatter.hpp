@@ -28,11 +28,7 @@
 #include <algorithm>
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace serialization {
+namespace dogen::generation::cpp::formatters::serialization {
 
 class builtin_header_formatter final : public artefact_formatter_interface {
 public:
@@ -64,6 +60,6 @@ public:
         const modeling::meta_model::element& e) const override;
 };
 
-} } } } }
+}
 
 #endif

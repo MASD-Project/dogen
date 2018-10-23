@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Location in the file to place the modeline.
@@ -37,6 +36,6 @@ enum class modeline_locations : unsigned int {
     bottom = 2 ///< Very last line in file.
 };
 
-} }
+}
 
 #endif

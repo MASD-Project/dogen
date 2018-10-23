@@ -31,8 +31,7 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline_field_generator::modeline_field_generator() : position_(0) { }
 
@@ -61,4 +60,4 @@ modeline_field_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

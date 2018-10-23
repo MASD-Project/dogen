@@ -40,9 +40,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_helpers_mapp
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t mapping_set_repository_hasher::hash(const mapping_set_repository& v) {
     std::size_t seed(0);
@@ -53,4 +51,4 @@ std::size_t mapping_set_repository_hasher::hash(const mapping_set_repository& v)
     return seed;
 }
 
-} } }
+}

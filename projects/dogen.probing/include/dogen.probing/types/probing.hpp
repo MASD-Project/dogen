@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @brief Houses classes common to all transformations.
  */
-namespace probing {
-}
-
+namespace dogen::probing {
 }
 
 #endif

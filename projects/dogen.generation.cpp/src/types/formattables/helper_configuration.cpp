@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/helper_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 helper_configuration::helper_configuration(
     const std::unordered_map<std::string, std::string>& helper_families,
@@ -80,4 +77,4 @@ void helper_configuration::streaming_properties(const std::unordered_map<std::st
     streaming_properties_ = std::move(v);
 }
 
-} } } }
+}

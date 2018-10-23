@@ -33,8 +33,7 @@
 #include "dogen.formatting/types/modeline_locations.hpp"
 #include "dogen.formatting/serialization/modeline_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Fields representing editor variables for emacs, vi, etc.
@@ -125,7 +124,7 @@ private:
     std::list<dogen::formatting::modeline_field> fields_;
 };
 
-} }
+}
 
 namespace std {
 

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/locator_facet_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 locator_facet_configuration::locator_facet_configuration(
     const std::string& directory,
@@ -80,4 +77,4 @@ void locator_facet_configuration::postfix(const std::string&& v) {
     postfix_ = std::move(v);
 }
 
-} } } }
+}

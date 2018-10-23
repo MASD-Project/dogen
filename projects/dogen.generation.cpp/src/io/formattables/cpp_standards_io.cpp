@@ -23,10 +23,7 @@
 #include <stdexcept>
 #include "dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const cpp_standards& v) {
     s << "{ " << "\"__type__\": " << "\"cpp_standards\", " << "\"value\": ";
@@ -55,4 +52,4 @@ std::ostream& operator<<(std::ostream& s, const cpp_standards& v) {
     return s;
 }
 
-} } } }
+}

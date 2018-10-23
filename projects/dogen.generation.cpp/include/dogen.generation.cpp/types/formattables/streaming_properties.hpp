@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class streaming_properties final {
 public:
@@ -76,7 +73,7 @@ private:
     bool remove_unprintable_characters_;
 };
 
-} } } }
+}
 
 namespace std {
 

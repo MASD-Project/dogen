@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-
 /**
  * @brief External.Dia is a unidirectional transformation model that transforms
  * Dia @e diagram into an external @e model.
@@ -123,9 +120,7 @@ namespace external {
  *
  * @li @b immutable: only getters will be generated for each property.
  */
-namespace dia {
+namespace dogen::external::dia {
 }
-
-} }
 
 #endif

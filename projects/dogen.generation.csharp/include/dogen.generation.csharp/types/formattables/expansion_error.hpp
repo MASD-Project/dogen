@@ -28,10 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 /**
  * @brief An error occurred whilst performing model expansion.
@@ -51,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } } }
+}
 
 #endif

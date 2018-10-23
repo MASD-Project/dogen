@@ -31,9 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 std::size_t formatting_configuration_hasher::hash(const formatting_configuration& v) {
     std::size_t seed(0);
@@ -44,4 +42,4 @@ std::size_t formatting_configuration_hasher::hash(const formatting_configuration
     return seed;
 }
 
-} } }
+}

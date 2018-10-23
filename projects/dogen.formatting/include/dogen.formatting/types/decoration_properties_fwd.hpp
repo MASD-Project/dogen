@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class decoration_properties;
 
-} }
+}
 
 #endif

@@ -65,9 +65,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const orm_attribute_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -87,4 +85,4 @@ std::ostream& operator<<(std::ostream& s, const orm_attribute_properties& v) {
     return(s);
 }
 
-} } }
+}

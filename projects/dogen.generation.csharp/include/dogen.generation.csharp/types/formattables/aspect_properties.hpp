@@ -27,10 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class aspect_properties final {
 public:
@@ -68,7 +65,7 @@ private:
     bool requires_static_reference_equals_;
 };
 
-} } } }
+}
 
 namespace std {
 

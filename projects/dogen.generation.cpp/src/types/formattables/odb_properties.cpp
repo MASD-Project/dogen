@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/odb_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 odb_properties::odb_properties()
     : is_value_(static_cast<bool>(0)) { }
@@ -95,4 +92,4 @@ void odb_properties::attribute_level_odb_pragmas(const std::unordered_map<std::s
     attribute_level_odb_pragmas_ = std::move(v);
 }
 
-} } } }
+}

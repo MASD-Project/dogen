@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/formatting_styles.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 class formatting_configuration final {
 public:
@@ -71,7 +69,7 @@ private:
     std::string input_;
 };
 
-} } }
+}
 
 namespace std {
 

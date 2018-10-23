@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/global_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 global_archetype_location_properties::global_archetype_location_properties(
     const std::unordered_map<std::string, dogen::modeling::meta_model::backend_properties>& backend_properties,
@@ -119,4 +117,4 @@ void global_archetype_location_properties::denormalised_archetype_properties(con
     denormalised_archetype_properties_ = std::move(v);
 }
 
-} } }
+}

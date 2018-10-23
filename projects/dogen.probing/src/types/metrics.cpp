@@ -29,8 +29,7 @@ const boost::shared_ptr<dogen::probing::metrics>& rhs) {
 
 }
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 metrics::metrics()
     : start_(static_cast<unsigned long>(0)),
@@ -155,4 +154,4 @@ void metrics::children(const std::list<boost::shared_ptr<dogen::probing::metrics
     children_ = std::move(v);
 }
 
-} }
+}

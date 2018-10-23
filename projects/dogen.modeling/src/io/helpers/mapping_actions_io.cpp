@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.modeling/io/helpers/mapping_actions_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping_actions& v) {
     s << "{ " << "\"__type__\": " << "\"mapping_actions\", " << "\"value\": ";
@@ -48,4 +46,4 @@ std::ostream& operator<<(std::ostream& s, const mapping_actions& v) {
     return s;
 }
 
-} } }
+}

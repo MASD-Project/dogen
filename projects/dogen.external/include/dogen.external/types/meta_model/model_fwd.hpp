@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 class model;
 
-} } }
+}
 
 #endif

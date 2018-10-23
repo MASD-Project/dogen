@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.annotations/types/boolean.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 struct boolean_hasher {
 public:
     static std::size_t hash(const boolean& v);
 };
 
-} }
+}
 
 namespace std {
 

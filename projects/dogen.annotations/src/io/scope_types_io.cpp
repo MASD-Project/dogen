@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.annotations/io/scope_types_io.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const scope_types& v) {
     s << "{ " << "\"__type__\": " << "\"scope_types\", " << "\"value\": ";
@@ -62,4 +61,4 @@ std::ostream& operator<<(std::ostream& s, const scope_types& v) {
     return s;
 }
 
-} }
+}

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 model::model(
     const dogen::modeling::meta_model::name& name,
@@ -140,4 +137,4 @@ void model::assistant_properties(const std::unordered_map<std::string, dogen::ge
     assistant_properties_ = std::move(v);
 }
 
-} } } }
+}

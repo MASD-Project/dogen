@@ -28,8 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief An error occurred whilst tryng to persist a Dia diagram.
@@ -49,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} }
+}
 
 #endif

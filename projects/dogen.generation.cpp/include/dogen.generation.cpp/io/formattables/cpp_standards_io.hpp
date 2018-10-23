@@ -28,13 +28,10 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const cpp_standards& v);
 
-} } } }
+}
 
 #endif

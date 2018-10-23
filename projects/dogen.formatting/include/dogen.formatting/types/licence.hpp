@@ -30,8 +30,7 @@
 #include <algorithm>
 #include "dogen.formatting/serialization/licence_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Licence which the file is released under.
@@ -91,7 +90,7 @@ private:
     std::string text_;
 };
 
-} }
+}
 
 namespace std {
 

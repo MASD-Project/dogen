@@ -62,9 +62,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
@@ -76,4 +74,4 @@ std::ostream& operator<<(std::ostream& s, const properties& v) {
     return(s);
 }
 
-} } }
+}

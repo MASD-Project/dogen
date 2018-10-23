@@ -31,10 +31,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class common_odb_options final : public dogen::modeling::meta_model::element {
 public:
@@ -102,7 +99,7 @@ private:
     std::list<std::string> databases_;
 };
 
-} } } }
+}
 
 namespace std {
 

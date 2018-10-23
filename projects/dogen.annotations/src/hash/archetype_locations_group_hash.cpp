@@ -48,8 +48,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t archetype_locations_group_hasher::hash(const archetype_locations_group& v) {
     std::size_t seed(0);
@@ -60,4 +59,4 @@ std::size_t archetype_locations_group_hasher::hash(const archetype_locations_gro
     return seed;
 }
 
-} }
+}

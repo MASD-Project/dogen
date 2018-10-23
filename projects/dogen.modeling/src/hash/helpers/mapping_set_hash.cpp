@@ -67,9 +67,7 @@ inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_languages_st
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t mapping_set_hasher::hash(const mapping_set& v) {
     std::size_t seed(0);
@@ -81,4 +79,4 @@ std::size_t mapping_set_hasher::hash(const mapping_set& v) {
     return seed;
 }
 
-} } }
+}

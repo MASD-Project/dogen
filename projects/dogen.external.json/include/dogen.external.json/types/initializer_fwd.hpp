@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-namespace json {
+namespace dogen::external::json {
 
 class initializer;
 
-} } }
+}
 
 #endif

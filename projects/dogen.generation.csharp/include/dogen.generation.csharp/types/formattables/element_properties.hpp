@@ -33,10 +33,7 @@
 #include "dogen.generation.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.csharp/types/formattables/attribute_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 /**
  * @brief All of the properties associated with an element.
@@ -86,7 +83,7 @@ private:
     std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties> attribute_properties_;
 };
 
-} } } }
+}
 
 namespace std {
 

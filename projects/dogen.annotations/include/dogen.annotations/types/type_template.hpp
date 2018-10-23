@@ -34,8 +34,7 @@
 #include "dogen.annotations/types/template_kinds.hpp"
 #include "dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Defines a template that can be used to instantiate types.
@@ -132,7 +131,7 @@ private:
     dogen::annotations::template_kinds kind_;
 };
 
-} }
+}
 
 namespace std {
 

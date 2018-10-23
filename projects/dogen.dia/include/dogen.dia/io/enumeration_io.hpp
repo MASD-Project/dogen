@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.dia/types/enumeration.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::dia::enumeration& v);
 
-} }
+}
 
 #endif

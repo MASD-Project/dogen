@@ -28,8 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief An error occurred whilst trying to hydrate field definitions.
@@ -49,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} }
+}
 
 #endif

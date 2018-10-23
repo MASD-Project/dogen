@@ -80,9 +80,7 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_orm_object_prop
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t object_hasher::hash(const object& v) {
     std::size_t seed(0);
@@ -120,4 +118,4 @@ std::size_t object_hasher::hash(const object& v) {
     return seed;
 }
 
-} } }
+}

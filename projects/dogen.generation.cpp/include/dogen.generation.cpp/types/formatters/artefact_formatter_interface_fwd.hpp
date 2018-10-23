@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
+namespace dogen::generation::cpp::formatters {
 
 class artefact_formatter_interface;
 
-} } } }
+}
 
 #endif

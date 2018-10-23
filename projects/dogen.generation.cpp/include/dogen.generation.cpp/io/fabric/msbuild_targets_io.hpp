@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::cpp::fabric::msbuild_targets& v);
 
-} } } }
+}
 
 #endif

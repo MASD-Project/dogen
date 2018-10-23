@@ -39,10 +39,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
@@ -53,4 +50,4 @@ std::ostream& operator<<(std::ostream& s, const formattable& v) {
     return(s);
 }
 
-} } } }
+}

@@ -63,8 +63,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -83,4 +82,4 @@ std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
     return(s);
 }
 
-} }
+}

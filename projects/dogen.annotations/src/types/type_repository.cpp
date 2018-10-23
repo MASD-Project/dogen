@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/type_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 type_repository::type_repository(
     const std::list<dogen::annotations::type>& all_types,
@@ -158,4 +157,4 @@ void type_repository::partially_matchable_types(const std::unordered_map<std::st
     partially_matchable_types_ = std::move(v);
 }
 
-} }
+}

@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/stitch/line.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 line::line(const std::list<dogen::templating::stitch::block>& blocks)
     : blocks_(blocks) { }
@@ -58,4 +56,4 @@ void line::blocks(const std::list<dogen::templating::stitch::block>&& v) {
     blocks_ = std::move(v);
 }
 
-} } }
+}

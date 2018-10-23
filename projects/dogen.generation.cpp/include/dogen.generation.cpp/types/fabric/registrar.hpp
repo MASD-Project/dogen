@@ -31,10 +31,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class registrar final : public dogen::modeling::meta_model::element {
 public:
@@ -124,7 +121,7 @@ private:
     std::list<dogen::modeling::meta_model::name> registrar_dependencies_;
 };
 
-} } } }
+}
 
 namespace std {
 

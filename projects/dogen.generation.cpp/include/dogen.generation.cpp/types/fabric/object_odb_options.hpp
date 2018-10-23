@@ -31,10 +31,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class object_odb_options final : public dogen::modeling::meta_model::element {
 public:
@@ -109,7 +106,7 @@ private:
     std::string header_guard_prefix_;
 };
 
-} } } }
+}
 
 namespace std {
 

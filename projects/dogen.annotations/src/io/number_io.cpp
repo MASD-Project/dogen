@@ -22,12 +22,11 @@
 #include "dogen.annotations/io/value_io.hpp"
 #include "dogen.annotations/io/number_io.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const number& v) {
     v.to_stream(s);
     return(s);
 }
 
-} }
+}

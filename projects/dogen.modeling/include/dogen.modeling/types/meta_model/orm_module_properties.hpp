@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class orm_module_properties final {
 public:
@@ -67,7 +65,7 @@ private:
     std::string schema_name_;
 };
 
-} } }
+}
 
 namespace std {
 

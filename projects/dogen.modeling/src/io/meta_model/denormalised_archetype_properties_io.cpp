@@ -46,9 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const denormalised_archetype_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -72,4 +70,4 @@ std::ostream& operator<<(std::ostream& s, const denormalised_archetype_propertie
     return(s);
 }
 
-} } }
+}

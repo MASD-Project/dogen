@@ -53,10 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
@@ -68,4 +65,4 @@ std::ostream& operator<<(std::ostream& s, const formattable& v) {
     return(s);
 }
 
-} } } }
+}

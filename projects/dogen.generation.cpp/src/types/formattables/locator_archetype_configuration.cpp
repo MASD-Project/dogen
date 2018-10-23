@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/locator_archetype_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 locator_archetype_configuration::locator_archetype_configuration(
     const std::string& facet_directory,
@@ -100,4 +97,4 @@ void locator_archetype_configuration::archetype_postfix(const std::string&& v) {
     archetype_postfix_ = std::move(v);
 }
 
-} } } }
+}

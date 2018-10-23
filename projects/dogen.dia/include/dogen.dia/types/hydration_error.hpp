@@ -28,8 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief An error occurred while reading a diagram.
@@ -49,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} }
+}
 
 #endif

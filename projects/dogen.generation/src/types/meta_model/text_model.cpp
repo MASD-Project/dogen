@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/meta_model/text_model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 text_model::text_model(
     const std::list<dogen::generation::meta_model::artefact>& artefacts,
@@ -79,4 +77,4 @@ void text_model::managed_directories(const std::list<boost::filesystem::path>&& 
     managed_directories_ = std::move(v);
 }
 
-} } }
+}

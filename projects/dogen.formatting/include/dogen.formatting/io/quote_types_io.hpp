@@ -28,11 +28,10 @@
 #include <iosfwd>
 #include "dogen.formatting/types/quote_types.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const quote_types& v);
 
-} }
+}
 
 #endif

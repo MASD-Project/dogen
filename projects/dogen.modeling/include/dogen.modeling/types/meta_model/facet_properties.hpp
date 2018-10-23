@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class facet_properties final {
 public:
@@ -97,7 +95,7 @@ private:
     std::string postfix_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -31,8 +31,7 @@
 #include <boost/optional.hpp>
 #include "dogen.formatting/serialization/decoration_configuration_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class decoration_configuration final {
 public:
@@ -116,7 +115,7 @@ private:
     std::string marker_message_;
 };
 
-} }
+}
 
 namespace std {
 

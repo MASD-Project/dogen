@@ -28,8 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Location of an archetype or set of archetypes in the hierarchical artchetype space.
@@ -110,7 +109,7 @@ private:
     std::string archetype_;
 };
 
-} }
+}
 
 namespace std {
 

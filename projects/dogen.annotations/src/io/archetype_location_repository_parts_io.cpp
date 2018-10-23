@@ -82,8 +82,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const archetype_location_repository_parts& v) {
     s << " { "
@@ -96,4 +95,4 @@ std::ostream& operator<<(std::ostream& s, const archetype_location_repository_pa
     return(s);
 }
 
-} }
+}

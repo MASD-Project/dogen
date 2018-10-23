@@ -33,8 +33,7 @@
 #include "dogen.dia/types/composite_fwd.hpp"
 #include "dogen.dia/serialization/composite_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Attribute value which is made up of other attributes.
@@ -106,7 +105,7 @@ private:
     boost::shared_ptr<dogen::dia::composite> inner_composite_;
 };
 
-} }
+}
 
 namespace std {
 

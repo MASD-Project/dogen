@@ -28,10 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 /**
  * @brief An error occurred whilst formatting.
@@ -51,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } } }
+}
 
 #endif

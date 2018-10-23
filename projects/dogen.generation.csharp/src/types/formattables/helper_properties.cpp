@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 helper_properties::helper_properties()
     : in_inheritance_relationship_(static_cast<bool>(0)) { }
@@ -95,4 +92,4 @@ void helper_properties::in_inheritance_relationship(const bool v) {
     in_inheritance_relationship_ = v;
 }
 
-} } } }
+}

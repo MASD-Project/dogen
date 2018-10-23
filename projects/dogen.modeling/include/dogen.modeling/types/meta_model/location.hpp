@@ -29,9 +29,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Identifies a hierarchy of containment within the modeling space.
@@ -139,7 +137,7 @@ private:
     std::string element_;
 };
 
-} } }
+}
 
 namespace std {
 

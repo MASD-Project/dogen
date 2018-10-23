@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Identifier for the type of Dia object.
@@ -43,6 +41,6 @@ enum class dia_object_types : unsigned int {
     uml_realization = 7 ///< UML Realization
 };
 
-} } }
+}
 
 #endif

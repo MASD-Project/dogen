@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.annotations/types/value.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Field can hold a Boolean value.
@@ -79,7 +78,7 @@ private:
     bool content_;
 };
 
-} }
+}
 
 namespace std {
 

@@ -31,10 +31,7 @@
 #include "dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
 #include "dogen.generation.cpp/types/formattables/locator_archetype_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class locator_configuration final {
 public:
@@ -116,7 +113,7 @@ private:
     std::string backend_directory_name_;
 };
 
-} } } }
+}
 
 namespace std {
 

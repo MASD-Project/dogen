@@ -44,9 +44,7 @@
 #include "dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.modeling/types/meta_model/global_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Modeling model.
@@ -218,7 +216,7 @@ private:
     dogen::modeling::meta_model::global_archetype_location_properties global_archetype_location_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

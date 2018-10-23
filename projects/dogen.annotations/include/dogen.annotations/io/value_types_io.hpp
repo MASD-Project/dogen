@@ -28,11 +28,10 @@
 #include <iosfwd>
 #include "dogen.annotations/types/value_types.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const value_types& v);
 
-} }
+}
 
 #endif

@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/enumerator.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 enumerator::enumerator(
     const std::string& documentation,
@@ -119,4 +117,4 @@ void enumerator::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} } }
+}

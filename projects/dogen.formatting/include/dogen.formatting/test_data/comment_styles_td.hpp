@@ -27,8 +27,7 @@
 
 #include "dogen.formatting/types/comment_styles.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class comment_styles_generator {
 public:
@@ -46,6 +45,6 @@ private:
     unsigned int position_;
 };
 
-} }
+}
 
 #endif

@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 decoration_properties::decoration_properties()
     : generate_decoration_(static_cast<bool>(0)) { }
@@ -119,4 +118,4 @@ void decoration_properties::code_generation_marker(const std::string&& v) {
     code_generation_marker_ = std::move(v);
 }
 
-} }
+}

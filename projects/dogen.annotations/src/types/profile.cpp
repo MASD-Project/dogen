@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/profile.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 profile::profile(
     const std::string& name,
@@ -118,4 +117,4 @@ void profile::templates(const std::list<dogen::annotations::entry_template>&& v)
     templates_ = std::move(v);
 }
 
-} }
+}

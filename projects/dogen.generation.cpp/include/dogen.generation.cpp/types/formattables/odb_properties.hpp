@@ -30,10 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class odb_properties final {
 public:
@@ -80,7 +77,7 @@ private:
     std::unordered_map<std::string, std::list<std::string> > attribute_level_odb_pragmas_;
 };
 
-} } } }
+}
 
 namespace std {
 

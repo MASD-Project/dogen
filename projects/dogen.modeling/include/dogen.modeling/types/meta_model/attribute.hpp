@@ -33,9 +33,7 @@
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 #include "dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Represents an attribute in an object.
@@ -161,7 +159,7 @@ private:
     boost::optional<dogen::modeling::meta_model::orm_attribute_properties> orm_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -58,8 +58,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t archetype_location_repository_parts_hasher::hash(const archetype_location_repository_parts& v) {
     std::size_t seed(0);
@@ -72,4 +71,4 @@ std::size_t archetype_location_repository_parts_hasher::hash(const archetype_loc
     return seed;
 }
 
-} }
+}

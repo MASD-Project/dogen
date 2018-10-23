@@ -31,9 +31,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/helpers/node_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Node in a tree of names.
@@ -100,7 +98,7 @@ private:
     std::list<boost::shared_ptr<dogen::modeling::helpers::node> > children_;
 };
 
-} } }
+}
 
 namespace std {
 

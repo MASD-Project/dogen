@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.formatting/serialization/infix_configuration_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Configuration to use for a given infix in sequence formatter.
@@ -110,7 +109,7 @@ private:
     std::string last_;
 };
 
-} }
+}
 
 namespace std {
 

@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.formatting/types/decoration_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::formatting::decoration_configuration& v);
 
-} }
+}
 
 #endif

@@ -21,9 +21,7 @@
 #include <ostream>
 #include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 void opaque_properties::to_stream(std::ostream& s) const {
     s << " { "
@@ -37,4 +35,4 @@ bool opaque_properties::compare(const opaque_properties& /*rhs*/) const {
     return true;
 }
 
-} } }
+}

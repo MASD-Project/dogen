@@ -47,9 +47,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t stereotypes_conversion_result_hasher::hash(const stereotypes_conversion_result& v) {
     std::size_t seed(0);
@@ -60,4 +58,4 @@ std::size_t stereotypes_conversion_result_hasher::hash(const stereotypes_convers
     return seed;
 }
 
-} } }
+}

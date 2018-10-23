@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/licence.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 licence::licence(
     const std::list<std::string>& copyright_notices,
@@ -78,4 +77,4 @@ void licence::text(const std::string&& v) {
     text_ = std::move(v);
 }
 
-} }
+}

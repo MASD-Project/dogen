@@ -31,13 +31,11 @@
 #include "dogen.modeling/io/meta_model/artefact_properties_io.hpp"
 #include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const element& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

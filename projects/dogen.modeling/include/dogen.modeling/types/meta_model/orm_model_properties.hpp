@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/letter_cases.hpp"
 #include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class orm_model_properties final {
 public:
@@ -83,7 +81,7 @@ private:
     boost::optional<dogen::modeling::meta_model::letter_cases> letter_case_;
 };
 
-} } }
+}
 
 namespace std {
 

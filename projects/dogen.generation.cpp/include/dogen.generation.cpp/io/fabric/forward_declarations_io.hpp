@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/fabric/forward_declarations.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::cpp::fabric::forward_declarations& v);
 
-} } } }
+}
 
 #endif

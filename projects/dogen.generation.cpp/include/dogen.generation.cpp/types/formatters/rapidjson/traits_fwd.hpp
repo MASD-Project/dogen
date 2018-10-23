@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace rapidjson {
+namespace dogen::generation::cpp::formatters::rapidjson {
 
 class traits;
 
-} } } } }
+}
 
 #endif

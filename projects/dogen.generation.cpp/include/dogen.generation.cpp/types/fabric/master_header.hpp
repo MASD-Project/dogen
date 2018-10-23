@@ -33,10 +33,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class master_header final : public dogen::modeling::meta_model::element {
 public:
@@ -97,7 +94,7 @@ private:
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::modeling::meta_model::name> > > inclusion_by_facet_;
 };
 
-} } } }
+}
 
 namespace std {
 

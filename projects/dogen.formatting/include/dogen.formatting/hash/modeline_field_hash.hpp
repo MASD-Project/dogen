@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.formatting/types/modeline_field.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 struct modeline_field_hasher {
 public:
     static std::size_t hash(const modeline_field& v);
 };
 
-} }
+}
 
 namespace std {
 

@@ -44,9 +44,7 @@
 #include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.generation/types/meta_model/global_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 /**
  * @brief Yarn model.
@@ -208,7 +206,7 @@ private:
     dogen::generation::meta_model::global_archetype_location_properties global_archetype_location_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

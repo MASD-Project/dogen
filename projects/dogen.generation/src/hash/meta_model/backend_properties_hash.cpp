@@ -30,9 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::size_t backend_properties_hasher::hash(const backend_properties& v) {
     std::size_t seed(0);
@@ -43,4 +41,4 @@ std::size_t backend_properties_hasher::hash(const backend_properties& v) {
     return seed;
 }
 
-} } }
+}

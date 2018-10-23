@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct orm_primitive_properties_hasher {
 public:
     static std::size_t hash(const orm_primitive_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

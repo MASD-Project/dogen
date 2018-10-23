@@ -25,15 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-
 /**
  * @brief CSharp is the c# model in the default generation kernel.
  */
-namespace csharp {
+namespace dogen::generation::csharp {
 }
-
-} }
 
 #endif

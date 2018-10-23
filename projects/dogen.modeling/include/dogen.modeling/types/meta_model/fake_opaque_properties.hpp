@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/opaque_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Temporary class used only to trigger inheritance generation.
@@ -59,6 +57,6 @@ public:
 
 };
 
-} } }
+}
 
 #endif

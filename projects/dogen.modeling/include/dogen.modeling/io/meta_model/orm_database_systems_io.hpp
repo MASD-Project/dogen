@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const orm_database_systems& v);
 
-} } }
+}
 
 #endif

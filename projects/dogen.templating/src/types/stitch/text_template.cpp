@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 text_template::text_template(text_template&& rhs)
     : input_path_(std::move(rhs.input_path_)),
@@ -146,4 +144,4 @@ void text_template::body(const dogen::templating::stitch::text_template_body&& v
     body_ = std::move(v);
 }
 
-} } }
+}

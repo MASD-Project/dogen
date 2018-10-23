@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/connection.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 connection::connection(
     const std::string& handle,
@@ -98,4 +97,4 @@ void connection::connection_slot(const std::string&& v) {
     connection_slot_ = std::move(v);
 }
 
-} }
+}

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 streaming_properties::streaming_properties()
     : requires_quoting_(static_cast<bool>(0)),
@@ -88,4 +85,4 @@ void streaming_properties::remove_unprintable_characters(const bool v) {
     remove_unprintable_characters_ = v;
 }
 
-} } } }
+}

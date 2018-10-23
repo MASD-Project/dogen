@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.csharp/types/formattables/helper_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::csharp::formattables::helper_configuration& v);
 
-} } } }
+}
 
 #endif

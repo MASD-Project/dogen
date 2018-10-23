@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace probing {
+namespace dogen::probing {
 
 class metrics;
 
-} }
+}
 
 #endif

@@ -34,9 +34,7 @@
 #include "dogen.modeling/types/meta_model/enumeration_fwd.hpp"
 #include "dogen.modeling/types/meta_model/object_template_fwd.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Visitor for element
@@ -129,6 +127,6 @@ public:
 
 inline element_visitor::~element_visitor() noexcept { }
 
-} } }
+}
 
 #endif

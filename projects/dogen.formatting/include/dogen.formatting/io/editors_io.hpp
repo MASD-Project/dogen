@@ -28,11 +28,10 @@
 #include <iosfwd>
 #include "dogen.formatting/types/editors.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const editors& v);
 
-} }
+}
 
 #endif

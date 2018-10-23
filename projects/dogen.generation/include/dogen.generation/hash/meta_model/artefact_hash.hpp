@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.generation/types/meta_model/artefact.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 struct artefact_hasher {
 public:
     static std::size_t hash(const artefact& v);
 };
 
-} } }
+}
 
 namespace std {
 

@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.dia/serialization/connection_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Connection between entities in a Dia diagram.
@@ -105,7 +104,7 @@ private:
     std::string connection_slot_;
 };
 
-} }
+}
 
 namespace std {
 

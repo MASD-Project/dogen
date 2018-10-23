@@ -39,8 +39,7 @@ const boost::shared_ptr<dogen::dia::composite>& rhs) {
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 composite::composite(
     const std::string& type,
@@ -117,4 +116,4 @@ void composite::inner_composite(const boost::shared_ptr<dogen::dia::composite>&&
     inner_composite_ = std::move(v);
 }
 
-} }
+}

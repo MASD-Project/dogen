@@ -29,10 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class helper_configuration final {
 public:
@@ -64,7 +61,7 @@ private:
     std::unordered_map<std::string, std::string> helper_families_;
 };
 
-} } } }
+}
 
 namespace std {
 

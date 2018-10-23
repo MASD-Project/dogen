@@ -102,9 +102,7 @@ inline std::size_t hash_std_unordered_set_dogen_generation_meta_model_element_ar
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
@@ -127,4 +125,4 @@ std::size_t model_hasher::hash(const model& v) {
     return seed;
 }
 
-} } }
+}

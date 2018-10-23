@@ -31,9 +31,7 @@
 #include <unordered_set>
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 class mapping_context final {
 public:
@@ -80,7 +78,7 @@ private:
     std::unordered_map<std::string, dogen::modeling::meta_model::name> injections_;
 };
 
-} } }
+}
 
 namespace std {
 

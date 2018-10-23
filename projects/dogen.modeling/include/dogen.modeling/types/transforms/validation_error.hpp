@@ -28,9 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 /**
  * @brief An error occurred when validating options.
@@ -50,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } }
+}
 
 #endif

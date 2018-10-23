@@ -39,8 +39,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 licence_generator::licence_generator() : position_(0) { }
 
@@ -69,4 +68,4 @@ licence_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

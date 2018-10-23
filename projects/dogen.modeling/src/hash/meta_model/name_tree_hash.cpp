@@ -49,9 +49,7 @@ inline std::size_t hash_std_map_dogen_modeling_meta_model_languages_std_string(c
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t name_tree_hasher::hash(const name_tree& v) {
     std::size_t seed(0);
@@ -68,4 +66,4 @@ std::size_t name_tree_hasher::hash(const name_tree& v) {
     return seed;
 }
 
-} } }
+}

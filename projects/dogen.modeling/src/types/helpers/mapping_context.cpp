@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/mapping_context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapping_context::mapping_context(
     const std::unordered_map<std::string, dogen::modeling::meta_model::name>& translations,
@@ -99,4 +97,4 @@ void mapping_context::injections(const std::unordered_map<std::string, dogen::mo
     injections_ = std::move(v);
 }
 
-} } }
+}

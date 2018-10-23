@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 enum class mapping_actions : unsigned int;
 
-} } }
+}
 
 #endif

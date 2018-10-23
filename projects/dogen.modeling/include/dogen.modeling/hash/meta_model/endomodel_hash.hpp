@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/endomodel.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct endomodel_hasher {
 public:
     static std::size_t hash(const endomodel& v);
 };
 
-} } }
+}
 
 namespace std {
 

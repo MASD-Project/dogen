@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/boolean.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 boolean::boolean(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void boolean::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

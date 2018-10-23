@@ -55,8 +55,7 @@ inline std::size_t hash_std_list_dogen_annotations_entry_template(const std::lis
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t profile_hasher::hash(const profile& v) {
     std::size_t seed(0);
@@ -69,4 +68,4 @@ std::size_t profile_hasher::hash(const profile& v) {
     return seed;
 }
 
-} }
+}

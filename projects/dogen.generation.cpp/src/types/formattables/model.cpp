@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 model::model()
     : cpp_standard_(static_cast<dogen::generation::cpp::formattables::cpp_standards>(0)) { }
@@ -195,4 +192,4 @@ void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
 }
 
-} } } }
+}

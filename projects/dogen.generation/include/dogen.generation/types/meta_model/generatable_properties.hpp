@@ -34,9 +34,7 @@
 #include "dogen.generation/types/meta_model/artefact_properties.hpp"
 #include "dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 /**
  * @brief Element properties related to code generation.
@@ -93,7 +91,7 @@ private:
     std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties> archetype_location_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -30,10 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const visual_studio_configuration& v) {
     s << " { "
@@ -44,4 +41,4 @@ std::ostream& operator<<(std::ostream& s, const visual_studio_configuration& v) 
     return(s);
 }
 
-} } } }
+}

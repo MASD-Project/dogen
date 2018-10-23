@@ -34,9 +34,7 @@
 #include "dogen.modeling/types/meta_model/name_tree.hpp"
 #include "dogen.modeling/hash/meta_model/languages_hash.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Adds support for name composition as a tree-like structure.
@@ -165,7 +163,7 @@ private:
     bool is_floating_point_;
 };
 
-} } }
+}
 
 namespace std {
 

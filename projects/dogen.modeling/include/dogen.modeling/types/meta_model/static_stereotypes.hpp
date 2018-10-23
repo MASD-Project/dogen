@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Lists all stereotypes defined in the yarn UML profile.
@@ -48,6 +46,6 @@ enum class static_stereotypes : unsigned int {
     orm_value = 12
 };
 
-} } }
+}
 
 #endif

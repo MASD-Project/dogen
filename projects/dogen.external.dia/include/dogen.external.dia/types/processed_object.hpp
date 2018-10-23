@@ -34,9 +34,7 @@
 #include "dogen.external.dia/types/processed_comment.hpp"
 #include "dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 /**
  * @brief Representation of a dia object after first stage processing.
@@ -160,7 +158,7 @@ private:
     std::list<dogen::external::dia::processed_attribute> attributes_;
 };
 
-} } }
+}
 
 namespace std {
 

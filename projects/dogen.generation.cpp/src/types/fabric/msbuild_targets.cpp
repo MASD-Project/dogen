@@ -24,10 +24,7 @@
 #include "dogen.generation.cpp/types/fabric/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 msbuild_targets::msbuild_targets(
     const dogen::modeling::meta_model::name& name,
@@ -140,4 +137,4 @@ void msbuild_targets::odb_targets(const dogen::generation::cpp::fabric::odb_targ
     odb_targets_ = std::move(v);
 }
 
-} } } }
+}

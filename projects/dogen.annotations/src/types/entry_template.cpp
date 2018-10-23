@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/entry_template.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 entry_template::entry_template()
     : kind_(static_cast<dogen::annotations::template_kinds>(0)) { }
@@ -113,4 +112,4 @@ void entry_template::kind(const dogen::annotations::template_kinds v) {
     kind_ = v;
 }
 
-} }
+}

@@ -100,9 +100,7 @@ const boost::shared_ptr<dogen::modeling::meta_model::visitor>& rhs) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 endomodel::endomodel()
     : origin_type_(static_cast<dogen::modeling::meta_model::origin_types>(0)),
@@ -466,4 +464,4 @@ void endomodel::orm_properties(const boost::optional<dogen::modeling::meta_model
     orm_properties_ = std::move(v);
 }
 
-} } }
+}

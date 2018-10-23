@@ -28,9 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class local_archetype_location_properties final {
 public:
@@ -86,7 +84,7 @@ private:
     boost::optional<bool> archetype_overwrite_;
 };
 
-} } }
+}
 
 namespace std {
 

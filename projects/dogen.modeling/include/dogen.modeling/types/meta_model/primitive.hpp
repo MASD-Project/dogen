@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/attribute.hpp"
 #include "dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Defines an element created by the user to wrap another element, most likely a built-in.
@@ -144,7 +142,7 @@ private:
     boost::optional<dogen::modeling::meta_model::orm_primitive_properties> orm_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -44,9 +44,7 @@ inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v)
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 std::size_t options_hasher::hash(const options& v) {
     std::size_t seed(0);
@@ -70,4 +68,4 @@ std::size_t options_hasher::hash(const options& v) {
     return seed;
 }
 
-} } }
+}

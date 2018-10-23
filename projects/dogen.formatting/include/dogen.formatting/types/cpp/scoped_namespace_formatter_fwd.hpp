@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 class scoped_namespace_formatter;
 
-} } }
+}
 
 #endif

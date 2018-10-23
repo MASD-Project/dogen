@@ -28,8 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Name of the field description or field.
@@ -82,7 +81,7 @@ private:
     std::string qualified_;
 };
 
-} }
+}
 
 namespace std {
 

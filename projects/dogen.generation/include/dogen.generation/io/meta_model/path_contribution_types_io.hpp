@@ -28,12 +28,10 @@
 #include <iosfwd>
 #include "dogen.generation/types/meta_model/path_contribution_types.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const path_contribution_types& v);
 
-} } }
+}
 
 #endif

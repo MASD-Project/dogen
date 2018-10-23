@@ -23,14 +23,11 @@
 #include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 #include "dogen.generation.cpp/io/fabric/msbuild_targets_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const msbuild_targets& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } } }
+}

@@ -31,9 +31,7 @@
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class properties final {
 public:
@@ -82,7 +80,7 @@ private:
     std::unordered_map<std::string, std::string> supplied_kvps_;
 };
 
-} } }
+}
 
 namespace std {
 

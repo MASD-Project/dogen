@@ -30,8 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const modeline_field& v) {
     s << " { "
@@ -42,4 +41,4 @@ std::ostream& operator<<(std::ostream& s, const modeline_field& v) {
     return(s);
 }
 
-} }
+}

@@ -20,9 +20,7 @@
  */
 #include "dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 processed_attribute::processed_attribute(
     const std::string& name,
@@ -99,4 +97,4 @@ void processed_attribute::comment(const dogen::external::dia::processed_comment&
     comment_ = std::move(v);
 }
 
-} } }
+}

@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/real.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 real::real(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void real::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

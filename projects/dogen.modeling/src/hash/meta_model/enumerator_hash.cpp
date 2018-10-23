@@ -32,9 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t enumerator_hasher::hash(const enumerator& v) {
     std::size_t seed(0);
@@ -47,4 +45,4 @@ std::size_t enumerator_hasher::hash(const enumerator& v) {
     return seed;
 }
 
-} } }
+}

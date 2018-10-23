@@ -22,9 +22,7 @@
 #include "dogen.modeling/io/meta_model/path_contribution_types_io.hpp"
 #include "dogen.modeling/io/meta_model/intra_backend_segment_properties_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const intra_backend_segment_properties& v) {
     s << " { "
@@ -39,4 +37,4 @@ std::ostream& operator<<(std::ostream& s, const intra_backend_segment_properties
     return(s);
 }
 
-} } }
+}

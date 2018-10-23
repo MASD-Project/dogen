@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/attribute.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 attribute::attribute()
     : is_immutable_(static_cast<bool>(0)),
@@ -197,4 +195,4 @@ void attribute::orm_properties(const boost::optional<dogen::modeling::meta_model
     orm_properties_ = std::move(v);
 }
 
-} } }
+}

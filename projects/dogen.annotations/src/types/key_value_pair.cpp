@@ -50,8 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 key_value_pair::key_value_pair(const std::unordered_map<std::string, std::string>& content)
     : dogen::annotations::value(),
@@ -123,4 +122,4 @@ void key_value_pair::content(const std::unordered_map<std::string, std::string>&
     content_ = std::move(v);
 }
 
-} }
+}

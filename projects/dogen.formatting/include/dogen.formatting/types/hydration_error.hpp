@@ -28,8 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class hydration_error : public virtual std::exception, public virtual boost::exception {
 public:
@@ -46,6 +45,6 @@ private:
     const std::string message_;
 };
 
-} }
+}
 
 #endif

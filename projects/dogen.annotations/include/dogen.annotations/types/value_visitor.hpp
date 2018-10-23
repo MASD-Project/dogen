@@ -31,8 +31,7 @@
 #include "dogen.annotations/types/key_value_pair_fwd.hpp"
 #include "dogen.annotations/types/text_collection_fwd.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Visitor for value
@@ -95,6 +94,6 @@ public:
 
 inline value_visitor::~value_visitor() noexcept { }
 
-} }
+}
 
 #endif

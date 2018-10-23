@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 enum class path_contribution_types : unsigned int;
 
-} } }
+}
 
 #endif

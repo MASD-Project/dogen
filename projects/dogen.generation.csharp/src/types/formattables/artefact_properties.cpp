@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/artefact_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 artefact_properties::artefact_properties()
     : enabled_(static_cast<bool>(0)),
@@ -135,4 +132,4 @@ void artefact_properties::using_dependencies(const std::list<std::string>&& v) {
     using_dependencies_ = std::move(v);
 }
 
-} } } }
+}

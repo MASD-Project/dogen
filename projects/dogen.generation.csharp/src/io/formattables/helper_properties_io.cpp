@@ -37,10 +37,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generati
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -58,4 +55,4 @@ std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     return(s);
 }
 
-} } } }
+}

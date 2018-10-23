@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.generation/types/meta_model/text_model.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 struct text_model_hasher {
 public:
     static std::size_t hash(const text_model& v);
 };
 
-} } }
+}
 
 namespace std {
 

@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.modeling/types/helpers/decomposition_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::modeling::helpers::decomposition_result& v);
 
-} } }
+}
 
 #endif

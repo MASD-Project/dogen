@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/artefact_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 artefact_properties::artefact_properties()
     : enabled_(static_cast<bool>(0)),
@@ -148,4 +146,4 @@ void artefact_properties::formatting_input(const std::string&& v) {
     formatting_input_ = std::move(v);
 }
 
-} } }
+}

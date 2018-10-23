@@ -34,10 +34,7 @@
 #include "dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class model final {
 public:
@@ -98,7 +95,7 @@ private:
     std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties> assistant_properties_;
 };
 
-} } } }
+}
 
 namespace std {
 

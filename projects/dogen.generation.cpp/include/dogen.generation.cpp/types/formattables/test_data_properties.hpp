@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class test_data_properties final {
 public:
@@ -71,7 +68,7 @@ private:
     std::string prefix_;
 };
 
-} } } }
+}
 
 namespace std {
 

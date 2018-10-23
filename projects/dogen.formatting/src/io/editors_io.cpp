@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.formatting/io/editors_io.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const editors& v) {
     s << "{ " << "\"__type__\": " << "\"editors\", " << "\"value\": ";
@@ -53,4 +52,4 @@ std::ostream& operator<<(std::ostream& s, const editors& v) {
     return s;
 }
 
-} }
+}

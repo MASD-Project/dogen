@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.annotations/types/entry_template.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 struct entry_template_hasher {
 public:
     static std::size_t hash(const entry_template& v);
 };
 
-} }
+}
 
 namespace std {
 

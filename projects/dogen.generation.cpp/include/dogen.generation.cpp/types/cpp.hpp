@@ -25,15 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-
 /**
  * @brief CPP is the C++ backend in the default generation kernel.
  */
-namespace cpp {
+namespace dogen::generation::cpp {
 }
-
-} }
 
 #endif

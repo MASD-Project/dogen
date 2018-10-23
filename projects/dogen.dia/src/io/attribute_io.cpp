@@ -116,8 +116,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::varian
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
@@ -128,4 +127,4 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
     return(s);
 }
 
-} }
+}

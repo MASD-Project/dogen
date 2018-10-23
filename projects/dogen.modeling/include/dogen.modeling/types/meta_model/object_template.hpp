@@ -34,9 +34,7 @@
 #include "dogen.modeling/hash/meta_model/name_hash.hpp"
 #include "dogen.modeling/types/meta_model/attribute.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Represents a structural template for yarn objects.
@@ -186,7 +184,7 @@ private:
     bool is_child_;
 };
 
-} } }
+}
 
 namespace std {
 

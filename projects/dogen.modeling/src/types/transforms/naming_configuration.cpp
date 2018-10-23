@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/transforms/naming_configuration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 naming_configuration::naming_configuration(
     const std::string& external_modules,
@@ -79,4 +77,4 @@ void naming_configuration::model_modules(const std::string&& v) {
     model_modules_ = std::move(v);
 }
 
-} } }
+}

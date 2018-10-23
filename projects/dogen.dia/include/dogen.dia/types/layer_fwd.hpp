@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 class layer;
 
-} }
+}
 
 #endif

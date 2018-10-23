@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/point.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 point::point(const std::string& value)
     : value_(value) { }
@@ -57,4 +56,4 @@ void point::value(const std::string&& v) {
     value_ = std::move(v);
 }
 
-} }
+}

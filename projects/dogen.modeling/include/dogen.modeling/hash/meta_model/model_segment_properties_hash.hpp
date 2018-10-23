@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/model_segment_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct model_segment_properties_hasher {
 public:
     static std::size_t hash(const model_segment_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

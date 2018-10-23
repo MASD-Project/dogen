@@ -20,9 +20,7 @@
  */
 #include "dogen.external/types/meta_model/model.hpp"
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 model::model(
     const std::string& name,
@@ -139,4 +137,4 @@ void model::elements(const std::list<dogen::external::meta_model::element>&& v) 
     elements_ = std::move(v);
 }
 
-} } }
+}

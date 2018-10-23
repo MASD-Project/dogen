@@ -23,8 +23,7 @@
 #include <stdexcept>
 #include "dogen.annotations/io/value_types_io.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const value_types& v) {
     s << "{ " << "\"__type__\": " << "\"value_types\", " << "\"value\": ";
@@ -56,4 +55,4 @@ std::ostream& operator<<(std::ostream& s, const value_types& v) {
     return s;
 }
 
-} }
+}

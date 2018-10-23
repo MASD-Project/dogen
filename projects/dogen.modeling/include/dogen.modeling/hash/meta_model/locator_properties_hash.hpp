@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/locator_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct locator_properties_hasher {
 public:
     static std::size_t hash(const locator_properties& v);
 };
 
-} } }
+}
 
 namespace std {
 

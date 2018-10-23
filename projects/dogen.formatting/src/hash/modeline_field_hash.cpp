@@ -30,8 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t modeline_field_hasher::hash(const modeline_field& v) {
     std::size_t seed(0);
@@ -42,4 +41,4 @@ std::size_t modeline_field_hasher::hash(const modeline_field& v) {
     return seed;
 }
 
-} }
+}

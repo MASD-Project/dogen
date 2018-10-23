@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief What values can a field hold.
@@ -40,6 +39,6 @@ enum class value_types : unsigned int {
     key_value_pair = 5
 };
 
-} }
+}
 
 #endif

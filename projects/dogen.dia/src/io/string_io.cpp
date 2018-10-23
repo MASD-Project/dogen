@@ -30,8 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const string& v) {
     s << " { "
@@ -41,4 +40,4 @@ std::ostream& operator<<(std::ostream& s, const string& v) {
     return(s);
 }
 
-} }
+}

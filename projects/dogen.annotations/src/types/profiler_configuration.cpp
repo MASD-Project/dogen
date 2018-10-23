@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/profiler_configuration.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 profiler_configuration::profiler_configuration()
     : merged_(static_cast<bool>(0)) { }
@@ -93,4 +92,4 @@ void profiler_configuration::merged(const bool v) {
     merged_ = v;
 }
 
-} }
+}

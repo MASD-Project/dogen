@@ -30,10 +30,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const locator_archetype_configuration& v) {
     s << " { "
@@ -45,4 +42,4 @@ std::ostream& operator<<(std::ostream& s, const locator_archetype_configuration&
     return(s);
 }
 
-} } } }
+}

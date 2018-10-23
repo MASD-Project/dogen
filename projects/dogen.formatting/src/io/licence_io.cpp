@@ -44,8 +44,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const licence& v) {
     s << " { "
@@ -56,4 +55,4 @@ std::ostream& operator<<(std::ostream& s, const licence& v) {
     return(s);
 }
 
-} }
+}

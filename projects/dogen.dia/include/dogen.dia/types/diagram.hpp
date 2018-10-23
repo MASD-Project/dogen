@@ -31,8 +31,7 @@
 #include "dogen.dia/types/diagram_data.hpp"
 #include "dogen.dia/serialization/diagram_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Represents a diagram in Dia.
@@ -92,7 +91,7 @@ private:
     std::vector<dogen::dia::layer> layers_;
 };
 
-} }
+}
 
 namespace std {
 

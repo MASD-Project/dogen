@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.dia/serialization/font_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Represents a font in a diagram.
@@ -87,7 +86,7 @@ private:
     std::string name_;
 };
 
-} }
+}
 
 namespace std {
 

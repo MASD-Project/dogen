@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/directive_group.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 directive_group::directive_group(
     const std::string& primary,
@@ -80,4 +77,4 @@ void directive_group::secondary(const std::list<std::string>&& v) {
     secondary_ = std::move(v);
 }
 
-} } } }
+}

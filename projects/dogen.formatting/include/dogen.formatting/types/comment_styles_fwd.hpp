@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 enum class comment_styles : unsigned int;
 
-} }
+}
 
 #endif

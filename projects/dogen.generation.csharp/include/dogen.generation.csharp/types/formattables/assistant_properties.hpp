@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class assistant_properties final {
 public:
@@ -81,7 +78,7 @@ private:
     std::string method_postfix_;
 };
 
-} } } }
+}
 
 namespace std {
 

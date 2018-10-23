@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 orm_model_properties::orm_model_properties(orm_model_properties&& rhs)
     : database_systems_(std::move(rhs.database_systems_)),
@@ -104,4 +102,4 @@ void orm_model_properties::letter_case(const boost::optional<dogen::modeling::me
     letter_case_ = std::move(v);
 }
 
-} } }
+}

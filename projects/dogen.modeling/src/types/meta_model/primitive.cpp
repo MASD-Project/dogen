@@ -41,9 +41,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 primitive::primitive()
     : is_nullable_(static_cast<bool>(0)),
@@ -224,4 +222,4 @@ void primitive::orm_properties(const boost::optional<dogen::modeling::meta_model
     orm_properties_ = std::move(v);
 }
 
-} } }
+}

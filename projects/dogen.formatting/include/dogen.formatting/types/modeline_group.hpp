@@ -31,8 +31,7 @@
 #include "dogen.formatting/types/modeline.hpp"
 #include "dogen.formatting/serialization/modeline_group_fwd_ser.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Group of modelines, logically associated.
@@ -95,7 +94,7 @@ private:
     std::unordered_map<std::string, dogen::formatting::modeline> modelines_;
 };
 
-} }
+}
 
 namespace std {
 

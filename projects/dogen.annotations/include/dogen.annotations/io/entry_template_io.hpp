@@ -28,13 +28,12 @@
 #include <iosfwd>
 #include "dogen.annotations/types/entry_template.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::annotations::entry_template& v);
 
-} }
+}
 
 #endif

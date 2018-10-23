@@ -29,10 +29,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class helper_descriptor final {
 public:
@@ -112,7 +109,7 @@ private:
     bool is_circular_dependency_;
 };
 
-} } } }
+}
 
 namespace std {
 

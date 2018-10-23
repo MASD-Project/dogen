@@ -33,9 +33,7 @@
 #include "dogen.modeling/types/meta_model/archetype_family_properties.hpp"
 #include "dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class locator_properties final {
 public:
@@ -122,7 +120,7 @@ private:
     bool disable_facet_directories_;
 };
 
-} } }
+}
 
 namespace std {
 

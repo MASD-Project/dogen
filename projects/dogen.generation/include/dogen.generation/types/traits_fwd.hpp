@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
+namespace dogen::generation {
 
 class traits;
 
-} }
+}
 
 #endif

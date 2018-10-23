@@ -52,9 +52,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_generation_meta_model
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::size_t generatable_properties_hasher::hash(const generatable_properties& v) {
     std::size_t seed(0);
@@ -68,4 +66,4 @@ std::size_t generatable_properties_hasher::hash(const generatable_properties& v)
     return seed;
 }
 
-} } }
+}

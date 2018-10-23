@@ -28,11 +28,7 @@
 #include <algorithm>
 #include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::csharp::formatters::test_data {
 
 class class_formatter final : public artefact_formatter_interface {
 public:
@@ -56,6 +52,6 @@ public:
         const modeling::meta_model::element& e) const override;
 };
 
-} } } } }
+}
 
 #endif

@@ -30,9 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t orm_module_properties_hasher::hash(const orm_module_properties& v) {
     std::size_t seed(0);
@@ -41,4 +39,4 @@ std::size_t orm_module_properties_hasher::hash(const orm_module_properties& v) {
     return seed;
 }
 
-} } }
+}

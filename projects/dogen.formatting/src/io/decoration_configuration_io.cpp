@@ -60,8 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -83,4 +82,4 @@ std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
     return(s);
 }
 
-} }
+}

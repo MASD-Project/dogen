@@ -22,14 +22,11 @@
 #include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.generation.csharp/io/fabric/assembly_info_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const assembly_info& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } } }
+}

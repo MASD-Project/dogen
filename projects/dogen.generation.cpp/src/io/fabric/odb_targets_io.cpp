@@ -45,10 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generati
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const odb_targets& v) {
     s << " { "
@@ -60,4 +57,4 @@ std::ostream& operator<<(std::ostream& s, const odb_targets& v) {
     return(s);
 }
 
-} } } }
+}

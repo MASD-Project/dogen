@@ -44,9 +44,7 @@ inline std::size_t hash_std_vector_boost_filesystem_path(const std::vector<boost
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t artefact_hasher::hash(const artefact& v) {
     std::size_t seed(0);
@@ -59,4 +57,4 @@ std::size_t artefact_hasher::hash(const artefact& v) {
     return seed;
 }
 
-} } }
+}

@@ -33,10 +33,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 cmakelists::cmakelists(
     const dogen::modeling::meta_model::name& name,
@@ -233,4 +230,4 @@ void cmakelists::odb_targets(const dogen::generation::cpp::fabric::odb_targets&&
     odb_targets_ = std::move(v);
 }
 
-} } } }
+}

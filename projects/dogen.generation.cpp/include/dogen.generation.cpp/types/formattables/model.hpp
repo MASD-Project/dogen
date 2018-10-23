@@ -35,10 +35,7 @@
 #include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class model final {
 public:
@@ -120,7 +117,7 @@ private:
     std::list<std::string> project_items_;
 };
 
-} } } }
+}
 
 namespace std {
 

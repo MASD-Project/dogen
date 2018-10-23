@@ -30,8 +30,7 @@ const boost::shared_ptr<dogen::annotations::value>& rhs) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 type::type()
     : value_type_(static_cast<dogen::annotations::value_types>(0)),
@@ -149,4 +148,4 @@ void type::is_partially_matchable(const bool v) {
     is_partially_matchable_ = v;
 }
 
-} }
+}

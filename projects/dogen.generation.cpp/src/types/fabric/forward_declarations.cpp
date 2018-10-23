@@ -25,10 +25,7 @@
 #include "dogen.generation.cpp/types/fabric/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/forward_declarations.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 forward_declarations::forward_declarations()
     : is_enum_(static_cast<bool>(0)),
@@ -177,4 +174,4 @@ void forward_declarations::is_exception(const bool v) {
     is_exception_ = v;
 }
 
-} } } }
+}

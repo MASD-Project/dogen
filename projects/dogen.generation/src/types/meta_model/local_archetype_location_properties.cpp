@@ -20,9 +20,7 @@
  */
 #include "dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 local_archetype_location_properties::local_archetype_location_properties(local_archetype_location_properties&& rhs)
     : facet_enabled_(std::move(rhs.facet_enabled_)),
@@ -125,4 +123,4 @@ void local_archetype_location_properties::archetype_overwrite(const boost::optio
     archetype_overwrite_ = std::move(v);
 }
 
-} } }
+}

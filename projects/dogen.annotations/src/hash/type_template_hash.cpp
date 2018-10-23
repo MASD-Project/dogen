@@ -42,8 +42,7 @@ inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::sh
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t type_template_hasher::hash(const type_template& v) {
     std::size_t seed(0);
@@ -58,4 +57,4 @@ std::size_t type_template_hasher::hash(const type_template& v) {
     return seed;
 }
 
-} }
+}

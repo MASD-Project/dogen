@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class value;
 
-} }
+}
 
 #endif

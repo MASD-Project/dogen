@@ -30,10 +30,7 @@
 #include <unordered_map>
 #include "dogen.generation.cpp/types/formattables/directive_group.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class directive_group_repository final {
 public:
@@ -65,7 +62,7 @@ private:
     std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> > by_id_;
 };
 
-} } } }
+}
 
 namespace std {
 

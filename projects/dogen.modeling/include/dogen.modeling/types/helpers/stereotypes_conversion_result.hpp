@@ -30,9 +30,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Aggregates the result of parsing a CSV string with well-known stereotypes and user
@@ -76,7 +74,7 @@ private:
     std::list<std::string> dynamic_stereotypes_;
 };
 
-} } }
+}
 
 namespace std {
 

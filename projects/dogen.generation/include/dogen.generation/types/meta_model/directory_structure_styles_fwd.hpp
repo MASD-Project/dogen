@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 enum class directory_structure_styles : unsigned int;
 
-} } }
+}
 
 #endif

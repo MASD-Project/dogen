@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.dia/serialization/child_node_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Represents a child_node in a diagram.
@@ -82,7 +81,7 @@ private:
     std::string parent_;
 };
 
-} }
+}
 
 namespace std {
 

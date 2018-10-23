@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/repository.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 repository::repository(
     const std::unordered_map<std::string, dogen::formatting::modeline_group>& modeline_groups,
@@ -78,4 +77,4 @@ void repository::licence_texts(const std::unordered_map<std::string, std::string
     licence_texts_ = std::move(v);
 }
 
-} }
+}

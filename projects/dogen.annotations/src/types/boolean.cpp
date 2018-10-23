@@ -24,8 +24,7 @@
 #include "dogen.annotations/types/boolean.hpp"
 #include "dogen.annotations/types/value_visitor.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 boolean::boolean()
     : content_(static_cast<bool>(0)) { }
@@ -98,4 +97,4 @@ void boolean::content(const bool v) {
     content_ = v;
 }
 
-} }
+}

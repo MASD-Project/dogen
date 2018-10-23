@@ -106,9 +106,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const global_archetype_location_properties& v) {
     s << " { "
@@ -121,4 +119,4 @@ std::ostream& operator<<(std::ostream& s, const global_archetype_location_proper
     return(s);
 }
 
-} } }
+}

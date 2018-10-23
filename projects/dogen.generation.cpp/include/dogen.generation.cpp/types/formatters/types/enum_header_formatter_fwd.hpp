@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::cpp::formatters::types {
 
 class enum_header_formatter;
 
-} } } } }
+}
 
 #endif

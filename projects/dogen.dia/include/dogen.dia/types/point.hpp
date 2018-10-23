@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.dia/serialization/point_fwd_ser.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 /**
  * @brief Represents a point in a diagram.
@@ -77,7 +76,7 @@ private:
     std::string value_;
 };
 
-} }
+}
 
 namespace std {
 

@@ -30,9 +30,7 @@
 #include "dogen.formatting/types/decoration_properties.hpp"
 #include "dogen.templating/types/stitch/stitching_properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 class properties final {
 public:
@@ -74,7 +72,7 @@ private:
     dogen::templating::stitch::stitching_properties stitching_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

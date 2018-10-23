@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapping_set_repository::mapping_set_repository(
     const dogen::modeling::helpers::mapping_set& default_mapping_set,
@@ -79,4 +77,4 @@ void mapping_set_repository::by_name(const std::unordered_map<std::string, dogen
     by_name_ = std::move(v);
 }
 
-} } }
+}

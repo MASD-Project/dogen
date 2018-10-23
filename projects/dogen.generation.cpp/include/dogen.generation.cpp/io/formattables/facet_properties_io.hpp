@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::cpp::formattables::facet_properties& v);
 
-} } } }
+}
 
 #endif

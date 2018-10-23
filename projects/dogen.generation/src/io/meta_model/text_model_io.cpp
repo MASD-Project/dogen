@@ -50,9 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const text_model& v) {
     s << " { "
@@ -63,4 +61,4 @@ std::ostream& operator<<(std::ostream& s, const text_model& v) {
     return(s);
 }
 
-} } }
+}

@@ -25,15 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-
 /**
  * @brief Provides file importing support for JSON.
  */
-namespace json {
+namespace dogen::external::json {
 }
-
-} }
 
 #endif

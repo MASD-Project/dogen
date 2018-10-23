@@ -31,10 +31,7 @@
 #include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.generation.cpp/types/formattables/element_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class formattable final {
 public:
@@ -81,7 +78,7 @@ private:
     dogen::generation::cpp::formattables::element_properties element_properties_;
 };
 
-} } } }
+}
 
 namespace std {
 

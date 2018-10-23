@@ -29,10 +29,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief Represents the group of inclusion directives associated with a name and an archetype.
@@ -85,7 +82,7 @@ private:
     std::list<std::string> secondary_;
 };
 
-} } } }
+}
 
 namespace std {
 

@@ -29,10 +29,7 @@
 #include <algorithm>
 #include "dogen.generation.cpp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class helper_properties final {
 public:
@@ -79,7 +76,7 @@ private:
     bool in_inheritance_relationship_;
 };
 
-} } } }
+}
 
 namespace std {
 

@@ -20,9 +20,7 @@
  */
 #include "dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 processed_object::processed_object()
     : dia_object_type_(static_cast<dogen::external::dia::dia_object_types>(0)) { }
@@ -204,4 +202,4 @@ void processed_object::attributes(const std::list<dogen::external::dia::processe
     attributes_ = std::move(v);
 }
 
-} } }
+}

@@ -32,9 +32,7 @@
 #include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
 #include "dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class orm_attribute_properties final {
 public:
@@ -120,7 +118,7 @@ private:
     bool is_composite_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::cpp::fabric::visual_studio_project& v);
 
-} } } }
+}
 
 #endif

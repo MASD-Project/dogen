@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 aspect_properties::aspect_properties()
     : is_floating_point_(static_cast<bool>(0)),
@@ -68,4 +65,4 @@ void aspect_properties::requires_static_reference_equals(const bool v) {
     requires_static_reference_equals_ = v;
 }
 
-} } } }
+}

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/test_data_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 test_data_properties::test_data_properties()
     : maximum_size_(static_cast<unsigned int>(0)) { }
@@ -75,4 +72,4 @@ void test_data_properties::prefix(const std::string&& v) {
     prefix_ = std::move(v);
 }
 
-} } } }
+}

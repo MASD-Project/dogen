@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 auxiliary_function_properties::auxiliary_function_properties()
     : type_(static_cast<dogen::generation::csharp::formattables::auxiliary_function_types>(0)) { }
@@ -75,4 +72,4 @@ void auxiliary_function_properties::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-} } } }
+}

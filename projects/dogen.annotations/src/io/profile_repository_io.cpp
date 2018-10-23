@@ -49,8 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const profile_repository& v) {
     s << " { "
@@ -60,4 +59,4 @@ std::ostream& operator<<(std::ostream& s, const profile_repository& v) {
     return(s);
 }
 
-} }
+}

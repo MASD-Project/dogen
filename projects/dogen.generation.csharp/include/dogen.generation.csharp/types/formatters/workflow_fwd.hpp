@@ -25,13 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
+namespace dogen::generation::csharp::formatters {
 
 class workflow;
 
-} } } }
+}
 
 #endif

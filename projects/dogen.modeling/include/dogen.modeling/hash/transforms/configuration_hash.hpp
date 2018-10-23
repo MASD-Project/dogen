@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/transforms/configuration.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 struct configuration_hasher {
 public:
     static std::size_t hash(const configuration& v);
 };
 
-} } }
+}
 
 namespace std {
 

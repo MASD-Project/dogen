@@ -30,9 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t facet_properties_hasher::hash(const facet_properties& v) {
     std::size_t seed(0);
@@ -45,4 +43,4 @@ std::size_t facet_properties_hasher::hash(const facet_properties& v) {
     return seed;
 }
 
-} } }
+}

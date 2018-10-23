@@ -47,8 +47,7 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_anno
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t annotation_hasher::hash(const annotation& v) {
     std::size_t seed(0);
@@ -59,4 +58,4 @@ std::size_t annotation_hasher::hash(const annotation& v) {
     return seed;
 }
 
-} }
+}

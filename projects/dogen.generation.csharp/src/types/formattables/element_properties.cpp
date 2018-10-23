@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/element_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 element_properties::element_properties(
     const std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>& artefact_properties,
@@ -100,4 +97,4 @@ void element_properties::attribute_properties(const std::unordered_map<std::stri
     attribute_properties_ = std::move(v);
 }
 
-} } } }
+}

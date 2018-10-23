@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 struct indices_hasher {
 public:
     static std::size_t hash(const indices& v);
 };
 
-} } }
+}
 
 namespace std {
 

@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/profile_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 profile_repository::profile_repository(const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name)
     : profiles_by_name_(profiles_by_name) { }
@@ -57,4 +56,4 @@ void profile_repository::profiles_by_name(const std::unordered_map<std::string, 
     profiles_by_name_ = std::move(v);
 }
 
-} }
+}

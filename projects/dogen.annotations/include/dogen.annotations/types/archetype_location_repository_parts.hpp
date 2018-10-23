@@ -32,8 +32,7 @@
 #include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen.annotations/types/archetype_locations_group.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class archetype_location_repository_parts final {
 public:
@@ -114,7 +113,7 @@ private:
     std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > archetype_locations_by_intra_backend_segment_;
 };
 
-} }
+}
 
 namespace std {
 

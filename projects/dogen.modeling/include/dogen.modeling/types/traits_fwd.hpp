@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
+namespace dogen::modeling {
 
 class traits;
 
-} }
+}
 
 #endif

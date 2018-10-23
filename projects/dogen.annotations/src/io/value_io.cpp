@@ -21,12 +21,11 @@
 #include <ostream>
 #include "dogen.annotations/io/value_io.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const value& v) {
     v.to_stream(s);
     return(s);
 }
 
-} }
+}

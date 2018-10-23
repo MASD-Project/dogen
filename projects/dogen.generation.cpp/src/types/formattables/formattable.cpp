@@ -30,10 +30,7 @@ const boost::shared_ptr<dogen::modeling::meta_model::element>& rhs) {
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 formattable::formattable(
     const boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment,
@@ -110,4 +107,4 @@ void formattable::element_properties(const dogen::generation::cpp::formattables:
     element_properties_ = std::move(v);
 }
 
-} } } }
+}

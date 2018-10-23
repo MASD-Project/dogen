@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/font.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 font::font(
     const std::string& family,
@@ -98,4 +97,4 @@ void font::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-} }
+}

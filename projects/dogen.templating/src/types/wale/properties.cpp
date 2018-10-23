@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/wale/properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 properties::properties(properties&& rhs)
     : template_path_(std::move(rhs.template_path_)),
@@ -104,4 +102,4 @@ void properties::supplied_kvps(const std::unordered_map<std::string, std::string
     supplied_kvps_ = std::move(v);
 }
 
-} } }
+}

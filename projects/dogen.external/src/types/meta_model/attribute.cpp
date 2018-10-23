@@ -20,9 +20,7 @@
  */
 #include "dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 attribute::attribute(
     const std::string& name,
@@ -139,4 +137,4 @@ void attribute::type(const std::string&& v) {
     type_ = std::move(v);
 }
 
-} } }
+}

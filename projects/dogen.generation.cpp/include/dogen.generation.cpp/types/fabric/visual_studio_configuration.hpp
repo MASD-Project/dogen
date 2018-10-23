@@ -28,10 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 class visual_studio_configuration final {
 public:
@@ -71,7 +68,7 @@ private:
     std::string project_guid_;
 };
 
-} } } }
+}
 
 namespace std {
 

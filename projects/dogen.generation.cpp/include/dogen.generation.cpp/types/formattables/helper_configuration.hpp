@@ -30,10 +30,7 @@
 #include <unordered_map>
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class helper_configuration final {
 public:
@@ -73,7 +70,7 @@ private:
     std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
 };
 
-} } } }
+}
 
 namespace std {
 

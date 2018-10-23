@@ -30,9 +30,7 @@
 #include <utility>
 #include <algorithm>
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 class attribute final {
 public:
@@ -102,7 +100,7 @@ private:
     std::string type_;
 };
 
-} } }
+}
 
 namespace std {
 

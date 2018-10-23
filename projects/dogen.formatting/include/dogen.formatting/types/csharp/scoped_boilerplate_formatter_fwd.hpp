@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 class scoped_boilerplate_formatter;
 
-} } }
+}
 
 #endif

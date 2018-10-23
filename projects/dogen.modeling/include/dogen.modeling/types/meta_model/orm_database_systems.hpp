@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 enum class orm_database_systems : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -38,6 +36,6 @@ enum class orm_database_systems : unsigned int {
     sqllite = 5
 };
 
-} } }
+}
 
 #endif

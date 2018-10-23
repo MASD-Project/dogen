@@ -30,9 +30,7 @@
 #include "dogen.modeling/types/meta_model/name.hpp"
 #include "dogen.modeling/types/helpers/mapping_actions.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Value of a mapping.
@@ -77,7 +75,7 @@ private:
     boost::optional<dogen::modeling::meta_model::name> default_name_;
 };
 
-} } }
+}
 
 namespace std {
 

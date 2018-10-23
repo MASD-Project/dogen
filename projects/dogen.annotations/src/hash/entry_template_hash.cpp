@@ -41,8 +41,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t entry_template_hasher::hash(const entry_template& v) {
     std::size_t seed(0);
@@ -55,4 +54,4 @@ std::size_t entry_template_hasher::hash(const entry_template& v) {
     return seed;
 }
 
-} }
+}

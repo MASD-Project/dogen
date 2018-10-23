@@ -37,9 +37,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t intra_backend_segment_properties_hasher::hash(const intra_backend_segment_properties& v) {
     std::size_t seed(0);
@@ -54,4 +52,4 @@ std::size_t intra_backend_segment_properties_hasher::hash(const intra_backend_se
     return seed;
 }
 
-} } }
+}

@@ -25,13 +25,11 @@
 #include "dogen.modeling/io/meta_model/primitive_io.hpp"
 #include "dogen.modeling/io/meta_model/orm_primitive_properties_io.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const primitive& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } }
+}

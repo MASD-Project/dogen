@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace serialization {
+namespace dogen::generation::cpp::formatters::serialization {
 
 class primitive_implementation_formatter;
 
-} } } } }
+}
 
 #endif

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 artefact_properties::artefact_properties(artefact_properties&& rhs)
     : file_path_(std::move(rhs.file_path_)),
@@ -105,4 +102,4 @@ void artefact_properties::inclusion_dependencies(const std::list<std::string>&& 
     inclusion_dependencies_ = std::move(v);
 }
 
-} } } }
+}

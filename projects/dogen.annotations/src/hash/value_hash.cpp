@@ -25,12 +25,11 @@ namespace {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t value_hasher::hash(const value&) {
     std::size_t seed(0);
     return seed;
 }
 
-} }
+}

@@ -28,10 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class resolution_error : public virtual std::exception, public virtual boost::exception {
 public:
@@ -48,6 +45,6 @@ private:
     const std::string message_;
 };
 
-} } } }
+}
 
 #endif

@@ -61,10 +61,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ge
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -90,4 +87,4 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     return(s);
 }
 
-} } } }
+}

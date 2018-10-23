@@ -20,9 +20,7 @@
  */
 #include "dogen.external.dia/types/processed_comment.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 processed_comment::processed_comment()
     : applicable_to_parent_object_(static_cast<bool>(0)) { }
@@ -134,4 +132,4 @@ void processed_comment::external_modules(const std::string&& v) {
     external_modules_ = std::move(v);
 }
 
-} } }
+}

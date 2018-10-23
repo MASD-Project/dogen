@@ -41,8 +41,7 @@ inline std::size_t hash_std_list_dogen_formatting_modeline_field(const std::list
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t modeline_hasher::hash(const modeline& v) {
     std::size_t seed(0);
@@ -55,4 +54,4 @@ std::size_t modeline_hasher::hash(const modeline& v) {
     return seed;
 }
 
-} }
+}

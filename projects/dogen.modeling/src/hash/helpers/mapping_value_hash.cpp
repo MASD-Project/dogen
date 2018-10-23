@@ -42,9 +42,7 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_name(const boos
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t mapping_value_hasher::hash(const mapping_value& v) {
     std::size_t seed(0);
@@ -55,4 +53,4 @@ std::size_t mapping_value_hasher::hash(const mapping_value& v) {
     return seed;
 }
 
-} } }
+}

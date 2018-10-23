@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.modeling/types/meta_model/path_contribution_types.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Properties related to the model segment of the path.
@@ -97,7 +95,7 @@ private:
     dogen::modeling::meta_model::path_contribution_types model_modules_;
 };
 
-} } }
+}
 
 namespace std {
 

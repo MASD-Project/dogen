@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace external {
-namespace transforms {
+namespace dogen::external::transforms {
 
 class transformation_error;
 
-} } }
+}
 
 #endif

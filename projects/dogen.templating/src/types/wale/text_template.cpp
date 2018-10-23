@@ -20,9 +20,7 @@
  */
 #include "dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 text_template::text_template(
     const dogen::templating::wale::properties& properties,
@@ -79,4 +77,4 @@ void text_template::content(const std::string&& v) {
     content_ = std::move(v);
 }
 
-} } }
+}

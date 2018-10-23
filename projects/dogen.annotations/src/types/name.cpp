@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/name.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 name::name(
     const std::string& simple,
@@ -78,4 +77,4 @@ void name::qualified(const std::string&& v) {
     qualified_ = std::move(v);
 }
 
-} }
+}

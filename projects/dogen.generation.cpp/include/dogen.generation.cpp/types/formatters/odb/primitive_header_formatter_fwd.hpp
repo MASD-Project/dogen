@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace odb {
+namespace dogen::generation::cpp::formatters::odb {
 
 class primitive_header_formatter;
 
-} } } } }
+}
 
 #endif

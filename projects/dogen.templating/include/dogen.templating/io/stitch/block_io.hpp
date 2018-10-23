@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.templating/types/stitch/block.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::templating::stitch::block& v);
 
-} } }
+}
 
 #endif

@@ -27,9 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class type_parameters final {
 public:
@@ -72,7 +70,7 @@ private:
     bool always_in_heap_;
 };
 
-} } }
+}
 
 namespace std {
 

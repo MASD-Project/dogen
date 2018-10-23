@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/helpers/decomposition_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 struct decomposition_result_hasher {
 public:
     static std::size_t hash(const decomposition_result& v);
 };
 
-} } }
+}
 
 namespace std {
 

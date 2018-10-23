@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/primitive.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct primitive_hasher {
 public:
     static std::size_t hash(const primitive& v);
 };
 
-} } }
+}
 
 namespace std {
 

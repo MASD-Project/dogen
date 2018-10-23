@@ -27,8 +27,7 @@
 
 #include "dogen.formatting/types/infix_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class infix_configuration_generator {
 public:
@@ -48,6 +47,6 @@ public:
     static result_type* create_ptr(const unsigned int position);
 };
 
-} }
+}
 
 #endif

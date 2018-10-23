@@ -40,9 +40,7 @@ const boost::shared_ptr<dogen::modeling::meta_model::module>& rhs) {
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 model::model()
     : has_generatable_types_(static_cast<bool>(0)),
@@ -336,4 +334,4 @@ void model::global_archetype_location_properties(const dogen::modeling::meta_mod
     global_archetype_location_properties_ = std::move(v);
 }
 
-} } }
+}

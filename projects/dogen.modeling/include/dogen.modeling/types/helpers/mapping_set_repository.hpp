@@ -30,9 +30,7 @@
 #include <unordered_map>
 #include "dogen.modeling/types/helpers/mapping_set.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 /**
  * @brief Stores all available mapping sets.
@@ -75,7 +73,7 @@ private:
     std::unordered_map<std::string, dogen::modeling::helpers::mapping_set> by_name_;
 };
 
-} } }
+}
 
 namespace std {
 

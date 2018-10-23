@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.templating/types/stitch/block_types.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 class block final {
 public:
@@ -71,7 +69,7 @@ private:
     std::string content_;
 };
 
-} } }
+}
 
 namespace std {
 

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/locator_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 locator_configuration::locator_configuration()
     : disable_facet_directories_(static_cast<bool>(0)) { }
@@ -115,4 +112,4 @@ void locator_configuration::backend_directory_name(const std::string&& v) {
     backend_directory_name_ = std::move(v);
 }
 
-} } } }
+}

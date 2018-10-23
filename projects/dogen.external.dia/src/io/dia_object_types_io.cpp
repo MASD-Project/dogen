@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.external.dia/io/dia_object_types_io.hpp"
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::ostream& operator<<(std::ostream& s, const dia_object_types& v) {
     s << "{ " << "\"__type__\": " << "\"dia_object_types\", " << "\"value\": ";
@@ -63,4 +61,4 @@ std::ostream& operator<<(std::ostream& s, const dia_object_types& v) {
     return s;
 }
 
-} } }
+}

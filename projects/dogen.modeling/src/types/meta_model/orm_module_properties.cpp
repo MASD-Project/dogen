@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/orm_module_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 orm_module_properties::orm_module_properties(const std::string& schema_name)
     : schema_name_(schema_name) { }
@@ -58,4 +56,4 @@ void orm_module_properties::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
 }
 
-} } }
+}

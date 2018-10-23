@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/helpers/node.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 struct node_hasher {
 public:
     static std::size_t hash(const node& v);
 };
 
-} } }
+}
 
 namespace std {
 

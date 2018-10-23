@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 odb_target::odb_target(
     const std::string& name,
@@ -160,4 +157,4 @@ void odb_target::object_odb_options(const std::string&& v) {
     object_odb_options_ = std::move(v);
 }
 
-} } } }
+}

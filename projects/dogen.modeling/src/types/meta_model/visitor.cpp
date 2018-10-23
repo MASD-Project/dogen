@@ -53,9 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 visitor::visitor(visitor&& rhs)
     : dogen::modeling::meta_model::element(
@@ -183,4 +181,4 @@ void visitor::parent(const boost::optional<dogen::modeling::meta_model::name>&& 
     parent_ = std::move(v);
 }
 
-} } }
+}

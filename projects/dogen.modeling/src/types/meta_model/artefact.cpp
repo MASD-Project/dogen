@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/artefact.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 artefact::artefact()
     : overwrite_(static_cast<bool>(0)) { }
@@ -120,4 +118,4 @@ void artefact::dependencies(const std::vector<boost::filesystem::path>&& v) {
     dependencies_ = std::move(v);
 }
 
-} } }
+}

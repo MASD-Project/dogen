@@ -29,9 +29,7 @@
 #include <algorithm>
 #include <unordered_set>
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 class configuration final {
 public:
@@ -71,7 +69,7 @@ private:
     bool enable_backend_directories_;
 };
 
-} } }
+}
 
 namespace std {
 

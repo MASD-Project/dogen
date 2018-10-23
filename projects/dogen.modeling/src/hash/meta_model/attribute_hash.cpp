@@ -44,9 +44,7 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_orm_attribute_p
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t attribute_hasher::hash(const attribute& v) {
     std::size_t seed(0);
@@ -63,4 +61,4 @@ std::size_t attribute_hasher::hash(const attribute& v) {
     return seed;
 }
 
-} } }
+}

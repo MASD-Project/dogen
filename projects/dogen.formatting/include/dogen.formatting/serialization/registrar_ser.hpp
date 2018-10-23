@@ -25,12 +25,11 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 template<typename Archive>
 void register_types(Archive& ar);
 
-} }
+}
 
 #endif

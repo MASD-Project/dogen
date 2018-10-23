@@ -32,8 +32,7 @@
 #include "dogen.annotations/types/value_fwd.hpp"
 #include "dogen.annotations/types/scope_types.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Represents an annotation that can be associated with an external object.
@@ -81,7 +80,7 @@ private:
     dogen::annotations::scope_types scope_;
 };
 
-} }
+}
 
 namespace std {
 

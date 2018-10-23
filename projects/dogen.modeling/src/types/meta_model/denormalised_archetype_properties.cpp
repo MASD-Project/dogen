@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 denormalised_archetype_properties::denormalised_archetype_properties()
     : backend_enabled_(static_cast<bool>(0)),
@@ -204,4 +202,4 @@ void denormalised_archetype_properties::archetype_postfix(const std::string&& v)
     archetype_postfix_ = std::move(v);
 }
 
-} } }
+}

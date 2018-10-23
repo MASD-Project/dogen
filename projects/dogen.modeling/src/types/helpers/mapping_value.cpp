@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/mapping_value.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 mapping_value::mapping_value()
     : mapping_action_(static_cast<dogen::modeling::helpers::mapping_actions>(0)) { }
@@ -78,4 +76,4 @@ void mapping_value::default_name(const boost::optional<dogen::modeling::meta_mod
     default_name_ = std::move(v);
 }
 
-} } }
+}

@@ -28,16 +28,14 @@
 #include <functional>
 #include "dogen.modeling/types/meta_model/object_template.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 struct object_template_hasher {
 public:
     static std::size_t hash(const object_template& v);
 };
 
-} } }
+}
 
 namespace std {
 

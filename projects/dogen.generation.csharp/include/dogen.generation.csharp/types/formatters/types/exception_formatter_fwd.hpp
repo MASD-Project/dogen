@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formatters {
-namespace types {
+namespace dogen::generation::csharp::formatters::types {
 
 class exception_formatter;
 
-} } } } }
+}
 
 #endif

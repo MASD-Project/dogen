@@ -23,10 +23,7 @@
 #include <stdexcept>
 #include "dogen.generation.csharp/io/formattables/auxiliary_function_types_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const auxiliary_function_types& v) {
     s << "{ " << "\"__type__\": " << "\"auxiliary_function_types\", " << "\"value\": ";
@@ -49,4 +46,4 @@ std::ostream& operator<<(std::ostream& s, const auxiliary_function_types& v) {
     return s;
 }
 
-} } } }
+}

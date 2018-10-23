@@ -24,9 +24,7 @@
 #include "dogen.modeling/types/meta_model/builtin.hpp"
 #include "dogen.modeling/types/meta_model/element_visitor.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 builtin::builtin()
     : is_default_enumeration_type_(static_cast<bool>(0)),
@@ -170,4 +168,4 @@ void builtin::can_be_primitive_underlier(const bool v) {
     can_be_primitive_underlier_ = v;
 }
 
-} } }
+}

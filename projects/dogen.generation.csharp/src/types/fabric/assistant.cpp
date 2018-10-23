@@ -23,10 +23,7 @@
 #include "dogen.generation.csharp/types/fabric/assistant.hpp"
 #include "dogen.generation.csharp/types/fabric/element_visitor.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 assistant::assistant(
     const dogen::modeling::meta_model::name& name,
@@ -116,4 +113,4 @@ assistant& assistant::operator=(assistant other) {
     return *this;
 }
 
-} } } }
+}

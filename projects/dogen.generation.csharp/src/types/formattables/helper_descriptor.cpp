@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 helper_descriptor::helper_descriptor()
     : is_simple_type_(static_cast<bool>(0)),
@@ -188,4 +185,4 @@ void helper_descriptor::is_circular_dependency(const bool v) {
     is_circular_dependency_ = v;
 }
 
-} } } }
+}

@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation/types/transforms/formatting_configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::transforms::formatting_configuration& v);
 
-} } }
+}
 
 #endif

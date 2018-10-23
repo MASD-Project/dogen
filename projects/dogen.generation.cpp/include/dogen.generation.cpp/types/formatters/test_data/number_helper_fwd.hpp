@@ -25,14 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formatters {
-namespace test_data {
+namespace dogen::generation::cpp::formatters::test_data {
 
 class number_helper;
 
-} } } } }
+}
 
 #endif

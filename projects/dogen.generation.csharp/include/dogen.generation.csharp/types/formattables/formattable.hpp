@@ -30,10 +30,7 @@
 #include "dogen.modeling/types/meta_model/element_fwd.hpp"
 #include "dogen.generation.csharp/types/formattables/element_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class formattable final {
 public:
@@ -73,7 +70,7 @@ private:
     boost::shared_ptr<dogen::modeling::meta_model::element> element_;
 };
 
-} } } }
+}
 
 namespace std {
 

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 helper_descriptor::helper_descriptor()
     : is_simple_type_(static_cast<bool>(0)),
@@ -247,4 +244,4 @@ void helper_descriptor::is_pointer(const bool v) {
     is_pointer_ = v;
 }
 
-} } } }
+}

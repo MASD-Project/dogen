@@ -97,9 +97,7 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_mode
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::size_t element_hasher::hash(const element& v) {
     std::size_t seed(0);
@@ -122,4 +120,4 @@ std::size_t element_hasher::hash(const element& v) {
     return seed;
 }
 
-} } }
+}

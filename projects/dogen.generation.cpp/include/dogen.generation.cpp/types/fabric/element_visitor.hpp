@@ -36,10 +36,7 @@
 #include "dogen.generation.cpp/types/fabric/visual_studio_project_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_solution_fwd.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 /**
  * @brief Visitor for element
@@ -144,6 +141,6 @@ public:
 
 inline element_visitor::~element_visitor() noexcept { }
 
-} } } }
+}
 
 #endif

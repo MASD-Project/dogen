@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/diagram_data.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 diagram_data::diagram_data(const std::vector<dogen::dia::attribute>& attributes)
     : attributes_(attributes) { }
@@ -57,4 +56,4 @@ void diagram_data::attributes(const std::vector<dogen::dia::attribute>&& v) {
     attributes_ = std::move(v);
 }
 
-} }
+}

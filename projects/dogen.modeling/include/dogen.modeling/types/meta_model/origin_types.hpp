@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief What originated the model element.
@@ -40,6 +38,6 @@ enum class origin_types : unsigned int {
     not_yet_determined = 4 ///< The origin of the element is not yet known
 };
 
-} } }
+}
 
 #endif

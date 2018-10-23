@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace transforms {
+namespace dogen::modeling::transforms {
 
 options::options()
     : delete_extra_files_(static_cast<bool>(0)),
@@ -302,4 +300,4 @@ void options::probe_use_short_names(const bool v) {
     probe_use_short_names_ = v;
 }
 
-} } }
+}

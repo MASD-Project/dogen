@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 orm_primitive_properties::orm_primitive_properties()
     : generate_mapping_(static_cast<bool>(0)) { }
@@ -99,4 +97,4 @@ void orm_primitive_properties::letter_case(const boost::optional<dogen::modeling
     letter_case_ = std::move(v);
 }
 
-} } }
+}

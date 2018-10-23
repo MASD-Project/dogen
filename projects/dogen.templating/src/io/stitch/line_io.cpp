@@ -36,9 +36,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::templati
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const line& v) {
     s << " { "
@@ -48,4 +46,4 @@ std::ostream& operator<<(std::ostream& s, const line& v) {
     return(s);
 }
 
-} } }
+}

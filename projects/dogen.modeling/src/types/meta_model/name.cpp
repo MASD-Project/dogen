@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 name::name(
     const std::string& id,
@@ -139,4 +137,4 @@ void name::identifiable(const std::string&& v) {
     identifiable_ = std::move(v);
 }
 
-} } }
+}

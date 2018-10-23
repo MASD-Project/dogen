@@ -27,8 +27,7 @@
 
 #include "dogen.formatting/types/modeline_locations.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class modeline_locations_generator {
 public:
@@ -46,6 +45,6 @@ private:
     unsigned int position_;
 };
 
-} }
+}
 
 #endif

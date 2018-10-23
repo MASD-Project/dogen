@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 enum class template_kinds : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -37,6 +36,6 @@ enum class template_kinds : unsigned int {
     archetype_template = 5 ///< This field applies to all archetypes.
 };
 
-} }
+}
 
 #endif

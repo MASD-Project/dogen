@@ -20,8 +20,7 @@
  */
 #include "dogen.dia/types/attribute.hpp"
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 attribute::attribute(
     const std::string& name,
@@ -78,4 +77,4 @@ void attribute::values(const std::vector<boost::variant<dogen::dia::color, dogen
     values_ = std::move(v);
 }
 
-} }
+}

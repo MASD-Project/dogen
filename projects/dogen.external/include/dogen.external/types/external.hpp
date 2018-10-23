@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-namespace dogen {
-
 /**
  * @brief Provides support for encoding and decoding exogenous models.
  *
@@ -36,9 +34,7 @@ namespace dogen {
  *   Dogen, such as Dia
  * - a Dogen format designed for interoperability (JSON).
  */
-namespace external {
-}
-
+namespace dogen::external {
 }
 
 #endif

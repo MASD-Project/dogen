@@ -75,9 +75,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::external
 
 }
 
-namespace dogen {
-namespace external {
-namespace dia {
+namespace dogen::external::dia {
 
 std::ostream& operator<<(std::ostream& s, const processed_object& v) {
     s << " { "
@@ -94,4 +92,4 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
     return(s);
 }
 
-} } }
+}

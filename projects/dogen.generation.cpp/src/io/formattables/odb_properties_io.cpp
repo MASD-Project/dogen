@@ -63,10 +63,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const odb_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -84,4 +81,4 @@ std::ostream& operator<<(std::ostream& s, const odb_properties& v) {
     return(s);
 }
 
-} } } }
+}

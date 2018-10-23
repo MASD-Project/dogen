@@ -46,10 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 object_odb_options::object_odb_options(
     const dogen::modeling::meta_model::name& name,
@@ -204,4 +201,4 @@ void object_odb_options::header_guard_prefix(const std::string&& v) {
     header_guard_prefix_ = std::move(v);
 }
 
-} } } }
+}

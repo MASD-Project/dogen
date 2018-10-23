@@ -32,9 +32,7 @@
 #include "dogen.templating/types/stitch/properties.hpp"
 #include "dogen.templating/types/stitch/text_template_body.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Domain representation of a stitch template.
@@ -125,7 +123,7 @@ private:
     dogen::templating::stitch::text_template_body body_;
 };
 
-} } }
+}
 
 namespace std {
 

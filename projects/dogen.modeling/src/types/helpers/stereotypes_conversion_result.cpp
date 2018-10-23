@@ -20,9 +20,7 @@
  */
 #include "dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 stereotypes_conversion_result::stereotypes_conversion_result(
     const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
@@ -79,4 +77,4 @@ void stereotypes_conversion_result::dynamic_stereotypes(const std::list<std::str
     dynamic_stereotypes_ = std::move(v);
 }
 
-} } }
+}

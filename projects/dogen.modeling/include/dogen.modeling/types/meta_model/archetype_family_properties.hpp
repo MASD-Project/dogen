@@ -28,9 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Properties pertaining to families of archetypes, related to the path computation.
@@ -70,7 +68,7 @@ private:
     std::string extension_;
 };
 
-} } }
+}
 
 namespace std {
 

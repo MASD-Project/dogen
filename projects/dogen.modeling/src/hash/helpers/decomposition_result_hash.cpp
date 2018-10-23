@@ -64,9 +64,7 @@ inline std::size_t hash_std_list_std_pair_std_string_dogen_modeling_meta_model_n
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
     std::size_t seed(0);
@@ -79,4 +77,4 @@ std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
     return seed;
 }
 
-} } }
+}

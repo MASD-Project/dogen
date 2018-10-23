@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation/types/transforms/configuration.hpp"
 
-namespace dogen {
-namespace generation {
-namespace transforms {
+namespace dogen::generation::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::transforms::configuration& v);
 
-} } }
+}
 
 #endif

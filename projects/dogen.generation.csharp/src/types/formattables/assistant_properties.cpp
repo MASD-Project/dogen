@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 assistant_properties::assistant_properties()
     : requires_assistance_(static_cast<bool>(0)) { }
@@ -75,4 +72,4 @@ void assistant_properties::method_postfix(const std::string&& v) {
     method_postfix_ = std::move(v);
 }
 
-} } } }
+}

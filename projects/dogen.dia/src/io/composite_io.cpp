@@ -77,8 +77,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const composite& v) {
     s << " { "
@@ -90,4 +89,4 @@ std::ostream& operator<<(std::ostream& s, const composite& v) {
     return(s);
 }
 
-} }
+}

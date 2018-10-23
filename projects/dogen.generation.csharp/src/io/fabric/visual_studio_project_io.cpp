@@ -23,14 +23,11 @@
 #include "dogen.modeling/io/meta_model/element_io.hpp"
 #include "dogen.generation.csharp/io/fabric/visual_studio_project_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace fabric {
+namespace dogen::generation::csharp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const visual_studio_project& v) {
     v.to_stream(s);
     return(s);
 }
 
-} } } }
+}

@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 aspect_properties::aspect_properties()
     : requires_manual_default_constructor_(static_cast<bool>(0)),
@@ -81,4 +78,4 @@ void aspect_properties::requires_stream_manipulators(const bool v) {
     requires_stream_manipulators_ = v;
 }
 
-} } } }
+}

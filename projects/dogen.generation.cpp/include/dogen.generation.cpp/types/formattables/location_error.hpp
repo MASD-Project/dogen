@@ -28,10 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 /**
  * @brief An error occurred while the locator was creating a path.
@@ -51,6 +48,6 @@ private:
     const std::string message_;
 };
 
-} } } }
+}
 
 #endif

@@ -30,8 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t infix_configuration_hasher::hash(const infix_configuration& v) {
     std::size_t seed(0);
@@ -44,4 +43,4 @@ std::size_t infix_configuration_hasher::hash(const infix_configuration& v) {
     return seed;
 }
 
-} }
+}

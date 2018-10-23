@@ -45,9 +45,7 @@ inline std::size_t hash_std_list_boost_shared_ptr_dogen_modeling_helpers_node(co
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::size_t node_hasher::hash(const node& v) {
     std::size_t seed(0);
@@ -59,4 +57,4 @@ std::size_t node_hasher::hash(const node& v) {
     return seed;
 }
 
-} } }
+}

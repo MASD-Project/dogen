@@ -28,15 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::cpp::fabric::odb_target& v);
 
-} } } }
+}
 
 #endif

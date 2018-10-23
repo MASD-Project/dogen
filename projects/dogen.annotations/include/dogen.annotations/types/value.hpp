@@ -29,8 +29,7 @@
 #include <algorithm>
 #include "dogen.annotations/types/value_visitor_fwd.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Base class of all value types.
@@ -69,6 +68,6 @@ inline bool operator==(const value& lhs, const value& rhs) {
     return lhs.equals(rhs);
 }
 
-} }
+}
 
 #endif

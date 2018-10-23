@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.modeling/types/helpers/mapping_context.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace helpers {
+namespace dogen::modeling::helpers {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::modeling::helpers::mapping_context& v);
 
-} } }
+}
 
 #endif

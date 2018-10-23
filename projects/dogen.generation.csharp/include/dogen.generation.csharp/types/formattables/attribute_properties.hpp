@@ -30,10 +30,7 @@
 #include <unordered_map>
 #include "dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class attribute_properties final {
 public:
@@ -65,7 +62,7 @@ private:
     std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties> auxiliary_function_properties_;
 };
 
-} } } }
+}
 
 namespace std {
 

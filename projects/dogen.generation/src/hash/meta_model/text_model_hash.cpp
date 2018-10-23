@@ -53,9 +53,7 @@ inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::fi
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::size_t text_model_hasher::hash(const text_model& v) {
     std::size_t seed(0);
@@ -66,4 +64,4 @@ std::size_t text_model_hasher::hash(const text_model& v) {
     return seed;
 }
 
-} } }
+}

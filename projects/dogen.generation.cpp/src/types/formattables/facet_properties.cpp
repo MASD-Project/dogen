@@ -20,10 +20,7 @@
  */
 #include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 facet_properties::facet_properties()
     : enabled_(static_cast<bool>(0)) { }
@@ -75,4 +72,4 @@ void facet_properties::enabled(const bool v) {
     enabled_ = v;
 }
 
-} } } }
+}

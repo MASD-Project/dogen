@@ -28,14 +28,12 @@
 #include <iosfwd>
 #include "dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
      const dogen::generation::meta_model::denormalised_archetype_properties& v);
 
-} } }
+}
 
 #endif

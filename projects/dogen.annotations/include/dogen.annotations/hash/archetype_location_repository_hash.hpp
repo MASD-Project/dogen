@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 struct archetype_location_repository_hasher {
 public:
     static std::size_t hash(const archetype_location_repository& v);
 };
 
-} }
+}
 
 namespace std {
 

@@ -31,9 +31,7 @@
 #include <algorithm>
 #include "dogen.external/types/meta_model/element.hpp"
 
-namespace dogen {
-namespace external {
-namespace meta_model {
+namespace dogen::external::meta_model {
 
 /**
  * @brief Represents an external model.
@@ -106,7 +104,7 @@ private:
     std::list<dogen::external::meta_model::element> elements_;
 };
 
-} } }
+}
 
 namespace std {
 

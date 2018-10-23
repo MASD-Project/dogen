@@ -27,8 +27,7 @@
 
 #include "dogen.formatting/types/quote_types.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class quote_types_generator {
 public:
@@ -46,6 +45,6 @@ private:
     unsigned int position_;
 };
 
-} }
+}
 
 #endif

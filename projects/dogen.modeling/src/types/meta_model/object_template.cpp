@@ -72,9 +72,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::modeling
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 object_template::object_template()
     : is_immutable_(static_cast<bool>(0)),
@@ -288,4 +286,4 @@ void object_template::is_child(const bool v) {
     is_child_ = v;
 }
 
-} } }
+}

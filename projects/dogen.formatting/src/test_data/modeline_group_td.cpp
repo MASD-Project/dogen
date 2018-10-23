@@ -45,8 +45,7 @@ std::unordered_map<std::string, dogen::formatting::modeline> create_std_unordere
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline_group_generator::modeline_group_generator() : position_(0) { }
 
@@ -75,4 +74,4 @@ modeline_group_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

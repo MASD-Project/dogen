@@ -30,8 +30,7 @@ const boost::shared_ptr<dogen::annotations::value>& rhs) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 type_template::type_template()
     : value_type_(static_cast<dogen::annotations::value_types>(0)),
@@ -149,4 +148,4 @@ void type_template::kind(const dogen::annotations::template_kinds v) {
     kind_ = v;
 }
 
-} }
+}

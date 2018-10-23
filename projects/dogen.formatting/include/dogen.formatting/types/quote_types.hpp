@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Types of quotes that can be used in streaming.
@@ -37,6 +36,6 @@ enum class quote_types : unsigned int {
     double_quote = 2
 };
 
-} }
+}
 
 #endif

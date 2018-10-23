@@ -50,9 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::map<dogen::modeling:
 
 }
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const name& v) {
     s << " { "
@@ -66,4 +64,4 @@ std::ostream& operator<<(std::ostream& s, const name& v) {
     return(s);
 }
 
-} } }
+}

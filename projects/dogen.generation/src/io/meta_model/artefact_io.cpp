@@ -45,9 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesy
 
 }
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const artefact& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -66,4 +64,4 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
     return(s);
 }
 
-} } }
+}

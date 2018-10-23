@@ -52,8 +52,7 @@ inline std::size_t hash_boost_optional_dogen_formatting_licence(const boost::opt
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::size_t decoration_properties_hasher::hash(const decoration_properties& v) {
     std::size_t seed(0);
@@ -66,4 +65,4 @@ std::size_t decoration_properties_hasher::hash(const decoration_properties& v) {
     return seed;
 }
 
-} }
+}

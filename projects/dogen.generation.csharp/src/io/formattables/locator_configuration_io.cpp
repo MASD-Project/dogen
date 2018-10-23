@@ -69,10 +69,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -91,4 +88,4 @@ std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
     return(s);
 }
 
-} } } }
+}

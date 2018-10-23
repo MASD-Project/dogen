@@ -28,11 +28,10 @@
 #include <iosfwd>
 #include "dogen.formatting/types/spacing_types.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const spacing_types& v);
 
-} }
+}
 
 #endif

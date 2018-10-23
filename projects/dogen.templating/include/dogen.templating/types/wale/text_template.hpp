@@ -29,9 +29,7 @@
 #include <algorithm>
 #include "dogen.templating/types/wale/properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class text_template final {
 public:
@@ -71,7 +69,7 @@ private:
     std::string content_;
 };
 
-} } }
+}
 
 namespace std {
 

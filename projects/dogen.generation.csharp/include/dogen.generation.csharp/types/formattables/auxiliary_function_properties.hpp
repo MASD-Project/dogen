@@ -29,10 +29,7 @@
 #include <algorithm>
 #include "dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
 
-namespace dogen {
-namespace generation {
-namespace csharp {
-namespace formattables {
+namespace dogen::generation::csharp::formattables {
 
 class auxiliary_function_properties final {
 public:
@@ -72,7 +69,7 @@ private:
     std::string name_;
 };
 
-} } } }
+}
 
 namespace std {
 

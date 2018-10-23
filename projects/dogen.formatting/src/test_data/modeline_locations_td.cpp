@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/test_data/modeline_locations_td.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline_locations_generator::modeline_locations_generator() : position_(0) { }
 void modeline_locations_generator::
@@ -41,4 +40,4 @@ modeline_locations_generator::operator()() {
     return create(position_++);
 }
 
-} }
+}

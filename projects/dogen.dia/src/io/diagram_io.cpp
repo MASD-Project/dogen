@@ -37,8 +37,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::l
 
 }
 
-namespace dogen {
-namespace dia {
+namespace dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const diagram& v) {
     s << " { "
@@ -49,4 +48,4 @@ std::ostream& operator<<(std::ostream& s, const diagram& v) {
     return(s);
 }
 
-} }
+}

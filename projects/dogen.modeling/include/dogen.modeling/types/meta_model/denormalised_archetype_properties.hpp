@@ -29,9 +29,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 class denormalised_archetype_properties final {
 public:
@@ -116,7 +114,7 @@ private:
     std::string archetype_postfix_;
 };
 
-} } }
+}
 
 namespace std {
 

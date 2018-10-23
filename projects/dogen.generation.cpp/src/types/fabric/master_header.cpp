@@ -83,10 +83,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace fabric {
+namespace dogen::generation::cpp::fabric {
 
 master_header::master_header(
     const dogen::modeling::meta_model::name& name,
@@ -199,4 +196,4 @@ void master_header::inclusion_by_facet(const std::unordered_map<std::string, std
     inclusion_by_facet_ = std::move(v);
 }
 
-} } } }
+}

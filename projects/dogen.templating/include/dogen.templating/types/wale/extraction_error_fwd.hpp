@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class extraction_error;
 
-} } }
+}
 
 #endif

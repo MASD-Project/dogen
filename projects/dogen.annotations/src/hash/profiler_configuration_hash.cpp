@@ -32,8 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::size_t profiler_configuration_hasher::hash(const profiler_configuration& v) {
     std::size_t seed(0);
@@ -45,4 +44,4 @@ std::size_t profiler_configuration_hasher::hash(const profiler_configuration& v)
     return seed;
 }
 
-} }
+}

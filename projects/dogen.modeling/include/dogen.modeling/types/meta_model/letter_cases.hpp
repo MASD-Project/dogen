@@ -25,9 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 enum class letter_cases : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
@@ -35,6 +33,6 @@ enum class letter_cases : unsigned int {
     lower_case = 2
 };
 
-} } }
+}
 
 #endif

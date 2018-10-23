@@ -27,10 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen {
-namespace generation {
-namespace cpp {
-namespace formattables {
+namespace dogen::generation::cpp::formattables {
 
 class aspect_properties final {
 public:
@@ -73,7 +70,7 @@ private:
     bool requires_stream_manipulators_;
 };
 
-} } } }
+}
 
 namespace std {
 

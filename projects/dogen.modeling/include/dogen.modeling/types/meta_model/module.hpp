@@ -33,9 +33,7 @@
 #include "dogen.modeling/types/meta_model/element.hpp"
 #include "dogen.modeling/types/meta_model/orm_module_properties.hpp"
 
-namespace dogen {
-namespace modeling {
-namespace meta_model {
+namespace dogen::modeling::meta_model {
 
 /**
  * @brief Container for other modeling elements.
@@ -137,7 +135,7 @@ private:
     boost::optional<dogen::modeling::meta_model::orm_module_properties> orm_properties_;
 };
 
-} } }
+}
 
 namespace std {
 

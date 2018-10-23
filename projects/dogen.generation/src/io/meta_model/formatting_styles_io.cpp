@@ -23,9 +23,7 @@
 #include <stdexcept>
 #include "dogen.generation/io/meta_model/formatting_styles_io.hpp"
 
-namespace dogen {
-namespace generation {
-namespace meta_model {
+namespace dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const formatting_styles& v) {
     s << "{ " << "\"__type__\": " << "\"formatting_styles\", " << "\"value\": ";
@@ -51,4 +49,4 @@ std::ostream& operator<<(std::ostream& s, const formatting_styles& v) {
     return s;
 }
 
-} } }
+}

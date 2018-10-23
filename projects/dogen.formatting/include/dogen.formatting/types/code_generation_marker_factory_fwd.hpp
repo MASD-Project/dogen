@@ -25,11 +25,10 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class code_generation_marker_factory;
 
-} }
+}
 
 #endif

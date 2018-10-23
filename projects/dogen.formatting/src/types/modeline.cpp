@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/modeline.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 modeline::modeline()
     : editor_(static_cast<dogen::formatting::editors>(0)),
@@ -106,4 +105,4 @@ void modeline::fields(const std::list<dogen::formatting::modeline_field>&& v) {
     fields_ = std::move(v);
 }
 
-} }
+}

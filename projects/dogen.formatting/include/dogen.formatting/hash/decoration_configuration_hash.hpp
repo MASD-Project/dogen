@@ -28,15 +28,14 @@
 #include <functional>
 #include "dogen.formatting/types/decoration_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 struct decoration_configuration_hasher {
 public:
     static std::size_t hash(const decoration_configuration& v);
 };
 
-} }
+}
 
 namespace std {
 
