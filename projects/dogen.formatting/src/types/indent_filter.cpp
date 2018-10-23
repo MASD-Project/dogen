@@ -29,7 +29,4 @@ auto lg(logger_factory("formatting.hydration_workflow"));
 
 }
 
-namespace dogen {
-namespace formatting {
-
-} }
+namespace dogen::formatting { }

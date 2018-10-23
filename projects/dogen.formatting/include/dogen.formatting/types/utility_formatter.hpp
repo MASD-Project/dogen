@@ -30,8 +30,7 @@
 #include "dogen.formatting/types/quote_types.hpp"
 #include "dogen.formatting/types/spacing_types.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Mixed grab-bag of formatting utilities.
@@ -100,6 +99,6 @@ public:
     std::ostream& stream_;
 };
 
-} }
+}
 
 #endif

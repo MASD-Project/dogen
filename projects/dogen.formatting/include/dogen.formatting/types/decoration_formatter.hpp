@@ -29,8 +29,7 @@
 #include "dogen.formatting/types/comment_styles.hpp"
 #include "dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class decoration_formatter {
 private:
@@ -62,6 +61,6 @@ public:
         const decoration_properties& dc) const;
 };
 
-} }
+}
 
 #endif

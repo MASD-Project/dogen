@@ -29,9 +29,7 @@
 #include <iosfwd>
 #include <string>
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 /**
  * @brief Formats C++ namespaces.
@@ -85,6 +83,6 @@ private:
     const bool nested_namespace_;
 };
 
-} } }
+}
 
 #endif

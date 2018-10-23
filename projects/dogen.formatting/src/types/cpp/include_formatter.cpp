@@ -29,9 +29,7 @@ const std::string include("#include ");
 
 }
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 void include_formatter::
 format(std::ostream& s, const std::list<std::string>& includes) const {
@@ -42,4 +40,4 @@ format(std::ostream& s, const std::list<std::string>& includes) const {
         s << dogen::formatting::manage_blank_lines << std::endl;
 }
 
-} } }
+}

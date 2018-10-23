@@ -40,8 +40,7 @@
 #include <boost/iostreams/concepts.hpp>
 #include <boost/iostreams/operations.hpp>
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Store a pointer to the indenter filter.
@@ -295,7 +294,7 @@ private:
 
 typedef basic_negative_indenter_scope<char> negative_indenter_scope;
 
-} }
+}
 
 /**
  * @brief Helper operators that wrap the manipulators.

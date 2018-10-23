@@ -28,9 +28,7 @@
 #include <list>
 #include <iosfwd>
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 /**
  * @brief Generates preprocessor include statements.
@@ -40,6 +38,6 @@ public:
     void format(std::ostream& s, const std::list<std::string>& includes) const;
 };
 
-} } }
+}
 
 #endif

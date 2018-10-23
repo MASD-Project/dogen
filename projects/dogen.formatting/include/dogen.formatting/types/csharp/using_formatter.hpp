@@ -28,9 +28,7 @@
 #include <list>
 #include <iosfwd>
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 /**
  * @brief Generates using statements.
@@ -40,6 +38,6 @@ public:
     void format(std::ostream& s, const std::list<std::string>& usings) const;
 };
 
-} } }
+}
 
 #endif

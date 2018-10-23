@@ -29,9 +29,7 @@ const std::string dot(".");
 
 }
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 namespace_formatter::namespace_formatter(const bool add_new_line)
     : add_new_line_(add_new_line) {}
@@ -61,4 +59,4 @@ format_end(std::ostream& s, const std::list<std::string>& /*ns*/) const {
         s << std::endl;
 }
 
-} } }
+}

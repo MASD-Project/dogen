@@ -29,8 +29,7 @@
 #include <string>
 #include "dogen.formatting/types/modeline.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Creates a modeline, ready to be wrapped in comments.
@@ -90,6 +89,6 @@ public:
     void format(std::ostream& s, const modeline& m) const;
 };
 
-} }
+}
 
 #endif

@@ -32,9 +32,7 @@
 #include "dogen.formatting/types/decoration_properties.hpp"
 #include "dogen.formatting/types/cpp/boilerplate_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 /**
  * @brief RAII wrapper around the boilerplate formatter.
@@ -57,6 +55,6 @@ private:
     const boilerplate_formatter formatter_;
 };
 
-} } }
+}
 
 #endif

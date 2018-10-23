@@ -24,9 +24,7 @@
 #include "dogen.formatting/types/cpp/header_guard_formatter.hpp"
 #include "dogen.formatting/types/cpp/boilerplate_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 boilerplate_formatter::boilerplate_formatter(
     const bool generate_preamble, const bool generate_header_guards)
@@ -93,4 +91,4 @@ format_end(std::ostream& s, const decoration_properties& dc,
     format_guards_end(s, header_guard);
 }
 
-} } }
+}

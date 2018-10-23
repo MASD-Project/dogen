@@ -23,9 +23,7 @@
 #include "dogen.formatting/types/indent_filter.hpp"
 #include "dogen.formatting/types/csharp/using_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 void using_formatter::
 format(std::ostream& s, const std::list<std::string>& usings) const {
@@ -36,4 +34,4 @@ format(std::ostream& s, const std::list<std::string>& usings) const {
         s << dogen::formatting::manage_blank_lines << std::endl;
 }
 
-} } }
+}

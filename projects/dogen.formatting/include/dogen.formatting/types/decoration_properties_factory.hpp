@@ -35,8 +35,7 @@
 #include "dogen.formatting/types/decoration_configuration.hpp"
 #include "dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Creates the decoration configuration.
@@ -162,6 +161,6 @@ private:
     const boost::optional<std::string> default_marker_;
 };
 
-} }
+}
 
 #endif

@@ -40,8 +40,7 @@ const std::string modeline_not_found("Modeline not found: ");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 decoration_properties_factory::
 decoration_properties_factory(const annotations::type_repository& drp,
@@ -264,4 +263,4 @@ decoration_properties decoration_properties_factory::make(
     return make(modeline_name, dc);
 }
 
-} }
+}

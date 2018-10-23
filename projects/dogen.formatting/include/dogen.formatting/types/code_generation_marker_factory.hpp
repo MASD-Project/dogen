@@ -27,8 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class code_generation_marker_factory {
 public:
@@ -51,6 +50,6 @@ private:
     const std::string message_;
 };
 
-} }
+}
 
 #endif

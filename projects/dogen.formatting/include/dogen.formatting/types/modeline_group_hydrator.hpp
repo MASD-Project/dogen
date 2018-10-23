@@ -33,8 +33,7 @@
 #include "dogen.formatting/types/modeline_field.hpp"
 #include "dogen.formatting/types/modeline_group.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Hydrates a modeline group in a stream.
@@ -76,6 +75,6 @@ public:
     modeline_group hydrate(const boost::filesystem::path& p) const;
 };
 
-} }
+}
 
 #endif

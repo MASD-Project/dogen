@@ -27,8 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 struct traits {
     struct decoration {
@@ -83,6 +82,6 @@ struct traits {
     };
 };
 
-} }
+}
 
 #endif

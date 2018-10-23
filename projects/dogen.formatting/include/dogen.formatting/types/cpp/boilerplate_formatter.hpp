@@ -30,9 +30,7 @@
 #include <string>
 #include "dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 /**
  * @brief Formats all of the boilerplate content in a C++ file such as
@@ -111,6 +109,6 @@ private:
     const bool generate_header_guards_;
 };
 
-} } }
+}
 
 #endif

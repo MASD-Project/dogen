@@ -33,8 +33,7 @@
 #include "dogen.formatting/types/modeline_group.hpp"
 #include "dogen.formatting/types/repository.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Generates the formatter's repositotry by hydrating all
@@ -69,6 +68,6 @@ public:
     make(const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 
-} }
+}
 
 #endif

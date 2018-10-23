@@ -40,9 +40,7 @@ const std::string separator("_");
 
 }
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 void header_guard_formatter::
 format_begin(std::ostream& s, const std::string& header_guard) {
@@ -67,4 +65,4 @@ format_end(std::ostream& s, const std::string& header_guard) {
     s << endif << std::endl;
 }
 
-} } }
+}

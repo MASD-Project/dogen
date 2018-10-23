@@ -20,8 +20,7 @@
  */
 #include "dogen.formatting/types/traits.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::string traits::decoration::generate_decoration() {
     static std::string r("decoration.generate_decoration");
@@ -58,4 +57,4 @@ std::string traits::decoration::code_generation_marker::message() {
     return r;
 }
 
-} }
+}

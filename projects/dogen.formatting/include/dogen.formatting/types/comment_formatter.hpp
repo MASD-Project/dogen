@@ -30,8 +30,7 @@
 #include <iosfwd>
 #include "dogen.formatting/types/comment_styles.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Formats input according to commenting options.
@@ -161,6 +160,6 @@ private:
     const bool last_line_is_blank_;
 };
 
-} }
+}
 
 #endif

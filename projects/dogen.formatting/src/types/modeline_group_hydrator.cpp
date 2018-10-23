@@ -65,8 +65,7 @@ const std::string location_bottom_value("bottom");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 editors modeline_group_hydrator::to_editor(const std::string value) const {
     if (value == editor_emacs_value)
@@ -198,4 +197,4 @@ hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} }
+}

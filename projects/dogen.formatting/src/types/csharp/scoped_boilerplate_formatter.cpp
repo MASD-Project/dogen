@@ -21,9 +21,7 @@
 #include <ostream>
 #include "dogen.formatting/types/csharp/scoped_boilerplate_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 scoped_boilerplate_formatter::scoped_boilerplate_formatter(std::ostream& s,
     const boost::optional<decoration_properties>& odp,
@@ -45,4 +43,4 @@ scoped_boilerplate_formatter::~scoped_boilerplate_formatter() {
     formatter_.format_end(stream_, dc);
 }
 
-} } }
+}

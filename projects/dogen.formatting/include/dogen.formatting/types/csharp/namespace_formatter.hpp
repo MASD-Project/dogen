@@ -29,9 +29,7 @@
 #include <iosfwd>
 #include <string>
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 /**
  * @brief Formats C# namespaces.
@@ -66,6 +64,6 @@ private:
     const bool add_new_line_;
 };
 
-} } }
+}
 
 #endif

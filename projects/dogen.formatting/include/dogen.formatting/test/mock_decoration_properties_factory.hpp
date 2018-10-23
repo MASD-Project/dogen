@@ -32,9 +32,7 @@
 #include "dogen.formatting/types/modeline_locations.hpp"
 #include "dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace test {
+namespace dogen::formatting::test {
 
 class mock_decoration_properties_factory {
 public:
@@ -87,6 +85,6 @@ public:
     decoration_properties make_empty_decoration_properties() const;
 };
 
-} } }
+}
 
 #endif

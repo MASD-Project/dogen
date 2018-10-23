@@ -31,8 +31,7 @@ const std::string generation_timestamp("Generation timestamp: ");
 }
 
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 code_generation_marker_factory::code_generation_marker_factory()
     : add_date_time_(false), add_warning_(false) { }
@@ -63,4 +62,4 @@ std::string code_generation_marker_factory::make() const {
     return s.str();
 }
 
-} }
+}

@@ -28,9 +28,7 @@
 #include <iosfwd>
 #include <string>
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 /**
  * @brief Generates C++ header guards.
@@ -49,6 +47,6 @@ public:
     void format_end(std::ostream& s, const std::string& header_guard);
 };
 
-} } }
+}
 
 #endif

@@ -23,9 +23,7 @@
 #include "dogen.formatting/types/csharp/using_formatter.hpp"
 #include "dogen.formatting/types/csharp/boilerplate_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 boilerplate_formatter::boilerplate_formatter(
     const bool generate_preamble)
@@ -66,4 +64,4 @@ format_end(std::ostream& s, const decoration_properties& dc) const {
     format_postamble(s, dc);
 }
 
-} } }
+}

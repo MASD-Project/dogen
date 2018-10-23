@@ -29,8 +29,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Hydrates the licence text from a stream or file.
@@ -54,6 +53,6 @@ public:
     std::string hydrate(const boost::filesystem::path& p) const;
 };
 
-} }
+}
 
 #endif

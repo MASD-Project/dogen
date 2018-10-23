@@ -33,8 +33,7 @@ const std::string comma(",");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 bool sequence_formatter::is_first() const {
     return position_ == 0;
@@ -136,4 +135,4 @@ void sequence_formatter::reset() {
     postfix_configuration_ = infix_configuration();
 }
 
-} }
+}

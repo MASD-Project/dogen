@@ -32,9 +32,7 @@
 #include "dogen.formatting/types/decoration_properties.hpp"
 #include "dogen.formatting/types/csharp/boilerplate_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 /**
  * @brief RAII wrapper around the boilerplate formatter.
@@ -55,6 +53,6 @@ private:
     const boilerplate_formatter formatter_;
 };
 
-} } }
+}
 
 #endif

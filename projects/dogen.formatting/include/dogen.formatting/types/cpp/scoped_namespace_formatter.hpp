@@ -30,9 +30,7 @@
 #include <string>
 #include "dogen.formatting/types/cpp/namespace_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 /**
  * @brief RAII wrapper around the namespaces formatter.
@@ -53,6 +51,6 @@ private:
     const namespace_formatter formatter_;
 };
 
-} } }
+}
 
 #endif

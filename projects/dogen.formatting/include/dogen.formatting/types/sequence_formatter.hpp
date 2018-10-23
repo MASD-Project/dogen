@@ -28,8 +28,7 @@
 #include <string>
 #include "dogen.formatting/types/infix_configuration.hpp"
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 /**
  * @brief Helper to format sequences.
@@ -134,6 +133,6 @@ private:
     infix_configuration postfix_configuration_;
 };
 
-} }
+}
 
 #endif

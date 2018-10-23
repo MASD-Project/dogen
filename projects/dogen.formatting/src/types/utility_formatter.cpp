@@ -43,8 +43,7 @@ const std::string unsupported_quote_type("Invalid or unsupported quote type: ");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 class space_scope {
 public:
@@ -149,4 +148,4 @@ void utility_formatter::insert_end_line(const unsigned int n) const {
         stream_ << std::endl;
 }
 
-} }
+}

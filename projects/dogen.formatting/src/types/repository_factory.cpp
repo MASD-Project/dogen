@@ -40,8 +40,7 @@ const std::string licence_dir("licences");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::vector<boost::filesystem::path>
 repository_factory::create_directory_list(
@@ -120,4 +119,4 @@ repository repository_factory::make(
     return r;
 }
 
-} }
+}

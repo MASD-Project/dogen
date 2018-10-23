@@ -30,9 +30,7 @@
 #include <string>
 #include "dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 /**
  * @brief Formats all of the boilerplate content in a C# file such as
@@ -93,6 +91,6 @@ private:
     const bool generate_preamble_;
 };
 
-} } }
+}
 
 #endif

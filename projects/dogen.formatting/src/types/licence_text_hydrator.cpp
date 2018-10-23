@@ -34,8 +34,7 @@ const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 std::string licence_text_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Reading stream.";
@@ -60,4 +59,4 @@ hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} }
+}

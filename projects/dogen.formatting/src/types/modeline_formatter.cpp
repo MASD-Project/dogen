@@ -45,8 +45,7 @@ const std::string unsupported_modeline("Modeline is not supported.");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 bool modeline_formatter::is_vim(const modeline& m) const {
     return m.editor() == editors::vim;
@@ -118,4 +117,4 @@ void modeline_formatter::format(std::ostream& s, const modeline& m) const {
     BOOST_THROW_EXCEPTION(formatting_error(unsupported_modeline));
 }
 
-} }
+}

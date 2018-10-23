@@ -21,9 +21,7 @@
 #include <ostream>
 #include "dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 scoped_namespace_formatter::scoped_namespace_formatter(
     std::ostream& s, const std::list<std::string>& ns,
@@ -36,4 +34,4 @@ scoped_namespace_formatter::~scoped_namespace_formatter() {
     formatter_.format_end(stream_, namespaces_);
 }
 
-} } }
+}

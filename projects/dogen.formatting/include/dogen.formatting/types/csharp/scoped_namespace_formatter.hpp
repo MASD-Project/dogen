@@ -30,9 +30,7 @@
 #include <string>
 #include "dogen.formatting/types/csharp/namespace_formatter.hpp"
 
-namespace dogen {
-namespace formatting {
-namespace csharp {
+namespace dogen::formatting::csharp {
 
 /**
  * @brief RAII wrapper around the namespaces formatter.
@@ -51,6 +49,6 @@ private:
     const namespace_formatter formatter_;
 };
 
-} } }
+}
 
 #endif

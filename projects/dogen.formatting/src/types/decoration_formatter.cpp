@@ -34,8 +34,7 @@ const bool documenting_previous_identifier(true);
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 void decoration_formatter::
 add_modeline(std::list<std::string>& content, const modeline& m) const {
@@ -146,4 +145,4 @@ void decoration_formatter::format_postamble(std::ostream& s,
     }
 }
 
-} }
+}

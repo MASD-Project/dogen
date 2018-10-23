@@ -29,9 +29,7 @@ const std::string separator("::");
 
 }
 
-namespace dogen {
-namespace formatting {
-namespace cpp {
+namespace dogen::formatting::cpp {
 
 namespace_formatter::namespace_formatter(
     const bool create_anonymous_namespace, const bool add_new_line,
@@ -117,4 +115,4 @@ format_end(std::ostream& s, const std::list<std::string>& ns) const {
         s << std::endl;
 }
 
-} } }
+}

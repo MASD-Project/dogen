@@ -30,9 +30,7 @@ const std::string empty_header_guard;
 
 }
 
-namespace dogen {
-namespace formatting {
-namespace test {
+namespace dogen::formatting::test {
 
 modeline mock_decoration_properties_factory::
 make_modeline(const modeline_locations l) const {
@@ -124,4 +122,4 @@ make_empty_decoration_properties() const {
     return decoration_properties(true/*generate_preamble*/, m, l, mk);
 }
 
-} } }
+}

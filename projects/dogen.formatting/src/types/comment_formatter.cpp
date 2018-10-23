@@ -55,8 +55,7 @@ const std::string unsupported_style("Style is not supported: ");
 
 }
 
-namespace dogen {
-namespace formatting {
+namespace dogen::formatting {
 
 comment_formatter::comment_formatter()
     : start_on_first_line_(false),
@@ -308,4 +307,4 @@ void comment_formatter::format_doxygen_end_block(std::ostream& s,
     format_doxygen_block(s, block_end, content);
 }
 
-} }
+}
