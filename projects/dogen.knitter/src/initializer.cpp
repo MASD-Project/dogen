@@ -24,8 +24,7 @@
 #include "dogen.external.dia/types/initializer.hpp"
 #include "dogen.knitter/initializer.hpp"
 
-namespace dogen {
-namespace knitter {
+namespace dogen::knitter {
 
 void initializer::initialize() {
     dogen::external::json::initializer::initialize();
@@ -34,4 +33,4 @@ void initializer::initialize() {
     dogen::generation::cpp::initializer::initialize();
 }
 
-} }
+}

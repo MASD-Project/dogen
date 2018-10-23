@@ -32,8 +32,7 @@
 #include <boost/program_options.hpp>
 #include "dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen {
-namespace knitter {
+namespace dogen::knitter {
 
 /**
  * @brief Creates a optionsuration from a set of command line arguments
@@ -85,6 +84,6 @@ private:
     std::function<void()> version_function_;
 };
 
-} }
+}
 
 #endif

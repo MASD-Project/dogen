@@ -29,8 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen {
-namespace knitter {
+namespace dogen::knitter {
 
 /**
  * @brief Encapsulates the entire knitter tool workflow.
@@ -94,6 +93,6 @@ private:
     boost::filesystem::path log_path_;
 };
 
-} }
+}
 
 #endif

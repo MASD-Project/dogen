@@ -74,8 +74,7 @@ const std::string default_probe_directory("probe");
 
 }
 
-namespace dogen {
-namespace knitter {
+namespace dogen::knitter {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)
@@ -320,4 +319,4 @@ boost::optional<modeling::transforms::options> program_options_parser::parse() {
     return make_knitting_options(vm);
 }
 
-} }
+}

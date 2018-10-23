@@ -25,8 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace knitter {
+namespace dogen::knitter {
 
 /**
  * @brief Initialises the model.
@@ -35,6 +34,6 @@ struct initializer {
     static void initialize();
 };
 
-} }
+}
 
 #endif
