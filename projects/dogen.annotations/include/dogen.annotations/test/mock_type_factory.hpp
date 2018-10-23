@@ -25,9 +25,7 @@
 #include "dogen.annotations/types/value_types.hpp"
 #include "dogen.annotations/types/type.hpp"
 
-namespace dogen {
-namespace annotations {
-namespace test {
+namespace dogen::annotations::test {
 
 /**
  * @brief Generates field definitions.
@@ -69,6 +67,6 @@ public:
         value_types vt = value_types::text) const;
 };
 
-} } }
+}
 
 #endif

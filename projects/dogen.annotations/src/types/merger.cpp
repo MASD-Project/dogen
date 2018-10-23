@@ -20,8 +20,7 @@
  */
 #include "dogen.annotations/types/merger.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 annotation merger::merge(const annotation& lhs, const annotation& rhs) const {
     annotation r(lhs);
@@ -31,4 +30,4 @@ annotation merger::merge(const annotation& lhs, const annotation& rhs) const {
     return r;
 }
 
-} }
+}

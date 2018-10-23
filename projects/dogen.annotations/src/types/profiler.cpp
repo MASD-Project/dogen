@@ -57,8 +57,7 @@ const std::string empty_label("Profile has an empty label: ");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::vector<boost::filesystem::path> profiler::to_profile_directories(
     const std::vector<boost::filesystem::path>& data_dirs) const {
@@ -353,4 +352,4 @@ profiler::generate(const std::vector<boost::filesystem::path>& data_dirs,
     return r;
 }
 
-} }
+}

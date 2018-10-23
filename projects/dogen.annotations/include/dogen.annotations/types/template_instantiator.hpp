@@ -37,8 +37,7 @@
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class template_instantiator {
 public:
@@ -94,6 +93,6 @@ private:
     const archetype_location_repository& repository_;
 };
 
-} }
+}
 
 #endif

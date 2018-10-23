@@ -67,8 +67,7 @@ const std::string template_has_no_untyped_value(
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
     if (s == template_kind_instance)
@@ -213,4 +212,4 @@ profile profile_hydrator::hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} }
+}

@@ -32,8 +32,7 @@
 #include "dogen.annotations/types/value.hpp"
 #include "dogen.annotations/types/annotation.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Performs a number of simple queries over the annotations
@@ -228,6 +227,6 @@ private:
     const annotation& annotation_;
 };
 
-} }
+}
 
 #endif

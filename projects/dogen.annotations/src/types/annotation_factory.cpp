@@ -62,8 +62,7 @@ const std::string default_root("default.root_module");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 annotation_factory::annotation_factory(
     const std::vector<boost::filesystem::path>& data_dirs,
@@ -359,4 +358,4 @@ annotation annotation_factory::make(
     return r;
 }
 
-} }
+}

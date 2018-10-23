@@ -53,8 +53,7 @@ const std::string duplicate_key("Duplicate key in kvp: ");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 entry_selector::entry_selector(const annotation& a) : annotation_(a) { }
 
@@ -319,4 +318,4 @@ get_kvp_content(const type& t) const {
     return get_kvp_content(t.name().qualified());
 }
 
-} }
+}

@@ -30,8 +30,7 @@
 #include "dogen.annotations/types/type.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Performs a set of canned queries over a repository.
@@ -123,6 +122,6 @@ private:
     const type_repository& repository_;
 };
 
-} }
+}
 
 #endif

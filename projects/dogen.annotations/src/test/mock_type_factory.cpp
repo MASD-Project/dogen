@@ -20,9 +20,7 @@
  */
 #include "dogen.annotations/test/mock_type_factory.hpp"
 
-namespace dogen {
-namespace annotations {
-namespace test {
+namespace dogen::annotations::test {
 
 type mock_type_factory::containing_namespaces() const {
     type r;
@@ -82,4 +80,4 @@ type mock_type_factory::make_type(const std::string n, value_types vt) const {
     return r;
 }
 
-} } }
+}

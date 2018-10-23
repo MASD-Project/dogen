@@ -34,8 +34,7 @@
 #include "dogen.annotations/types/entry_template.hpp"
 #include "dogen.annotations/types/profile.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class profile_hydrator {
 private:
@@ -57,6 +56,6 @@ public:
 
 };
 
-} }
+}
 
 #endif

@@ -27,14 +27,13 @@
 
 #include "dogen.annotations/types/annotation.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class merger {
 public:
     annotation merge(const annotation& lhs, const annotation& rhs) const;
 };
 
-} }
+}
 
 #endif

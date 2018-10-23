@@ -68,8 +68,7 @@ private:
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 int value_factory::to_int(const std::string& s) const {
     try {
@@ -174,4 +173,4 @@ boost::shared_ptr<value> value_factory::make(const type& t,
     return make_kvp(v);
 }
 
-} }
+}

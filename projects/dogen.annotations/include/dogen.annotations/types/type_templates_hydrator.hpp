@@ -37,8 +37,7 @@
 #include "dogen.annotations/types/archetype_location.hpp"
 #include "dogen.annotations/types/type_template.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Reads field definitions from a well-defined JSON
@@ -96,6 +95,6 @@ public:
     std::list<type_template> hydrate(const boost::filesystem::path& p) const;
 };
 
-} }
+}
 
 #endif

@@ -37,8 +37,7 @@ const std::string no_fields_for_model("Could not find any fields for model: ");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 type_repository_selector::type_repository_selector(const type_repository& rp)
     : repository_(rp) {}
@@ -113,4 +112,4 @@ select_type_by_backend_name(const std::string& n) const {
     return i->second;
 }
 
-} }
+}

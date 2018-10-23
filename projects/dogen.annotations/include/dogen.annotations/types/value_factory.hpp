@@ -32,8 +32,7 @@
 #include "dogen.annotations/types/value.hpp"
 #include "dogen.annotations/types/type.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Builds a value from raw data.
@@ -119,6 +118,6 @@ public:
         const std::unordered_map<std::string, std::string>& v) const;
 };
 
-} }
+}
 
 #endif

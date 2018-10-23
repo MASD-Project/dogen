@@ -57,8 +57,7 @@ const std::string missing_kernel("Recursive templates must supply the kernel.");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 template_instantiator::
 template_instantiator(const archetype_location_repository& alrp)
@@ -462,4 +461,4 @@ instantiate(const type_repository& trp, const entry_template& et) const {
     return r;
 }
 
-} }
+}

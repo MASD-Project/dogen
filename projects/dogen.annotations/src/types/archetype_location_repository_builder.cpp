@@ -38,8 +38,7 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 void archetype_location_repository_builder::
 validate(const std::list<archetype_location>& als) const {
@@ -204,4 +203,4 @@ archetype_location_repository_builder::build() {
     return repository_;
 }
 
-} }
+}

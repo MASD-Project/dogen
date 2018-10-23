@@ -40,8 +40,7 @@ const std::string empty_family("Family cannot be empty.");
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 void archetype_location_repository_parts_builder::
 validate(const std::string& meta_name, const std::string& family,
@@ -118,4 +117,4 @@ archetype_location_repository_parts_builder::build() {
     return parts_;
 }
 
-} }
+}

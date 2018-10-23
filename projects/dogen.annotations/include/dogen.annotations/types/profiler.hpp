@@ -37,8 +37,7 @@
 #include "dogen.annotations/types/type_repository.hpp"
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class profiler {
 private:
@@ -75,6 +74,6 @@ public:
         const type_repository& trp) const;
 };
 
-} }
+}
 
 #endif

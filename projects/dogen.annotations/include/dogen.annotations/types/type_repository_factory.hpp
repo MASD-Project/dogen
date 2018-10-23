@@ -34,8 +34,7 @@
 #include "dogen.annotations/types/type_template.hpp"
 #include "dogen.annotations/types/type.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Produces a repository.
@@ -72,6 +71,6 @@ public:
         const std::vector<boost::filesystem::path>& data_dirs) const;
 };
 
-} }
+}
 
 #endif

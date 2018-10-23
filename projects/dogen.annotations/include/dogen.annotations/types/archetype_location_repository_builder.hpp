@@ -31,8 +31,7 @@
 #include "dogen.annotations/types/archetype_location_repository_parts.hpp"
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 class archetype_location_repository_builder final {
 private:
@@ -59,6 +58,6 @@ private:
     archetype_location_repository repository_;
 };
 
-} }
+}
 
 #endif

@@ -46,8 +46,7 @@ const std::string duplicate_qualified_name(
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 std::list<type_template> type_repository_factory::hydrate_templates(
     const std::vector<boost::filesystem::path>& data_dirs) const {
@@ -145,4 +144,4 @@ type_repository type_repository_factory::make(
     return r;
 }
 
-} }
+}

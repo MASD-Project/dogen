@@ -34,9 +34,7 @@ const std::string duplicate_qualified_name(
 
 }
 
-namespace dogen {
-namespace annotations {
-namespace test {
+namespace dogen::annotations::test {
 
 void mock_type_repository_factory::add_type(
     const type& t, type_repository& trp) const {
@@ -68,4 +66,4 @@ make(const std::list<type>& additional_types) {
     return r;
 }
 
-} } }
+}

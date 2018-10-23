@@ -25,9 +25,7 @@
 #include "dogen.annotations/types/type.hpp"
 #include "dogen.annotations/types/type_repository.hpp"
 
-namespace dogen {
-namespace annotations {
-namespace test {
+namespace dogen::annotations::test {
 
 /**
  * @brief Generates a mock type repository with a number of types in
@@ -50,6 +48,6 @@ public:
         std::list<type> {});
 };
 
-} } }
+}
 
 #endif

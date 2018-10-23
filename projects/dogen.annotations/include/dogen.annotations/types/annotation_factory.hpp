@@ -37,8 +37,7 @@
 #include "dogen.annotations/types/type_repository.hpp"
 #include "dogen.annotations/types/archetype_location_repository.hpp"
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 /**
  * @brief Produces an annotation object from raw data.
@@ -149,6 +148,6 @@ private:
     const bool compatibility_mode_;
 };
 
-} }
+}
 
 #endif

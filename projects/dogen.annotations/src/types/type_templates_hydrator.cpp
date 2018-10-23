@@ -83,8 +83,7 @@ const std::string invalid_template_kind(
 
 }
 
-namespace dogen {
-namespace annotations {
+namespace dogen::annotations {
 
 scope_types type_templates_hydrator::to_scope_type(const std::string& s) const {
     if (s == scope_any)
@@ -251,4 +250,4 @@ hydrate(const boost::filesystem::path& p) const {
     return r;
 }
 
-} }
+}
