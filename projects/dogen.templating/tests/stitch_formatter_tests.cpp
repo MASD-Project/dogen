@@ -145,10 +145,9 @@ const std::string with_decoration_properties(R"(/* -*- a_field: a_value -*-
 stream_ << "This is line numnber: 0" << std::endl;
 )");
 
-const std::string with_containing_namespaces(R"(namespace first {
-namespace second {
+const std::string with_containing_namespaces(R"(namespace first::second {
 stream_ << "This is line numnber: 0" << std::endl;
-} }
+}
 )");
 
 const std::string empty_lines(R"(stream_ << std::endl;
