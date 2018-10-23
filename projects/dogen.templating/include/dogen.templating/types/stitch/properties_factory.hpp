@@ -33,9 +33,7 @@
 #include "dogen.templating/types/stitch/stitching_properties.hpp"
 #include "dogen.templating/types/stitch/properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Creates the settings bundle.
@@ -69,6 +67,6 @@ private:
     const dogen::formatting::repository& formatting_repository_;
 };
 
-} } }
+}
 
 #endif

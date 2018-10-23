@@ -39,9 +39,7 @@ const std::string eol_before_close("Reached EOL before finding close markers");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 enum states {
     waiting_first_open,
@@ -131,4 +129,4 @@ key_extractor::extract(const std::string& s) const {
     return r;
 }
 
-} } }
+}

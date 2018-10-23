@@ -28,9 +28,7 @@ const std::string postfix("}}");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 std::string formatter::wrap_key(const std::string& key) const {
     return prefix + key + postfix;
@@ -46,4 +44,4 @@ std::string formatter::format(const text_template& tt) const {
     return r;
 }
 
-} } }
+}

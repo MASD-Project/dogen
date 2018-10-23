@@ -27,15 +27,13 @@
 
 #include "dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class validator final {
 public:
     void validate(const text_template& tt) const;
 };
 
-} } }
+}
 
 #endif

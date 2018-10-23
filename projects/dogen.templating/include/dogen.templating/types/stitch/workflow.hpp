@@ -39,9 +39,7 @@
 #include "dogen.templating/types/stitch/properties.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Performs the stitch workflow.
@@ -131,6 +129,6 @@ private:
     const bool compatibility_mode_;
 };
 
-} } }
+}
 
 #endif

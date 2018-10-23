@@ -35,9 +35,7 @@
 #include "dogen.templating/types/stitch/properties_factory.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Provides file name information on errors.
@@ -91,6 +89,6 @@ private:
     const properties_factory properties_factory_;
 };
 
-} } }
+}
 
 #endif

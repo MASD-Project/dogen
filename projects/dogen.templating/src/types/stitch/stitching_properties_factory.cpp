@@ -37,9 +37,7 @@ const std::string field_definition_not_found(
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 stitching_properties_factory::
 stitching_properties_factory(const annotations::type_repository& arp)
@@ -156,4 +154,4 @@ make(const annotations::annotation& a) const {
     return r;
 }
 
-} } }
+}

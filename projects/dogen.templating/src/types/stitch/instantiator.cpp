@@ -45,12 +45,11 @@ const std::string duplicate_variable("Attempt to insert duplicate variable: ");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
-    const annotations::annotation_factory& af, const dogen::formatting::repository& frp)
+    const annotations::annotation_factory& af,
+    const dogen::formatting::repository& frp)
     : annotation_factory_(af), properties_factory_(atrp, frp) {}
 
 boost::filesystem::path
@@ -190,4 +189,4 @@ instantiator::instantiate(const boost::filesystem::path& input_path) const {
     return r;
 }
 
-} } }
+}

@@ -32,9 +32,7 @@ const std::string key_not_found("Key not found: ");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 resolver::resolver(const std::unordered_map<std::string, std::string>& kvps)
     : kvps_(kvps) {}
@@ -48,4 +46,4 @@ std::string resolver::resolve(const std::string& k) const {
     return i->second;
 }
 
-} } }
+}

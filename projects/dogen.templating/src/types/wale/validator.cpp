@@ -34,9 +34,7 @@ const std::string key_error("Expected key not supplied: ");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 void validator::validate(const text_template& tt) const {
     std::unordered_set<std::string> s;
@@ -61,4 +59,4 @@ void validator::validate(const text_template& tt) const {
     }
 }
 
-} } }
+}

@@ -53,9 +53,7 @@ const std::string error_in_file("Failed to parse file: ");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 workflow::workflow(const bool compatibility_mode)
     : compatibility_mode_(compatibility_mode) {}
@@ -166,4 +164,4 @@ void workflow::execute(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow.";
 }
 
-} } }
+}

@@ -32,9 +32,7 @@
 #include "dogen.templating/types/stitch/text_template.hpp"
 #include "dogen.templating/types/stitch/resolver.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Format a text template into a file.
@@ -92,6 +90,6 @@ public:
     modeling::meta_model::artefact format(const text_template& tt) const;
 };
 
-} } }
+}
 
 #endif

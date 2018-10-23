@@ -38,9 +38,7 @@ const std::string standard_control_block("unsigned int i");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace test {
+namespace dogen::templating::test {
 
 using namespace stitch;
 
@@ -363,4 +361,4 @@ make_with_variable(const std::string& k, const std::string& v) const {
     return r;
 }
 
-} } }
+}

@@ -27,9 +27,7 @@
 
 #include <unordered_map>
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 class resolver final {
 public:
@@ -42,6 +40,6 @@ private:
     const std::unordered_map<std::string, std::string>& kvps_;
 };
 
-} } }
+}
 
 #endif

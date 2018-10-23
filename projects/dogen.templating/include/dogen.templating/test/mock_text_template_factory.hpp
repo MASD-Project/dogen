@@ -27,9 +27,7 @@
 
 #include "dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace test {
+namespace dogen::templating::test {
 
 /**
  * @brief Generates text templates for testing purposes.
@@ -249,6 +247,6 @@ public:
     make_with_variable(const std::string& k, const std::string& v) const;
 };
 
-} } }
+}
 
 #endif

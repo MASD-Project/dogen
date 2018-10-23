@@ -29,9 +29,7 @@
 #include <locale>
 #include <unordered_set>
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class key_extractor final {
 public:
@@ -48,6 +46,6 @@ private:
     std::locale locale_;
 };
 
-} } }
+}
 
 #endif

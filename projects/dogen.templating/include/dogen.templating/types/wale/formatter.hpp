@@ -28,9 +28,7 @@
 #include <string>
 #include "dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class formatter final {
 private:
@@ -40,6 +38,6 @@ public:
     std::string format(const text_template& tt) const;
 };
 
-} } }
+}
 
 #endif

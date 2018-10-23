@@ -74,9 +74,7 @@ const bool do_trim(true);
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 block parser::create_block(const block_types bt, const std::string& c,
     const bool trim) const {
@@ -377,4 +375,4 @@ text_template_body parser::parse(const std::string& s) const {
     return r;
 }
 
-} } }
+}

@@ -53,9 +53,7 @@ const std::string unsupported_block_type("Block type is unsupported: ");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 void formatter::format_text_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
@@ -198,4 +196,4 @@ modeling::meta_model::artefact formatter::format(const text_template& tt) const 
     return r;
 }
 
-} } }
+}

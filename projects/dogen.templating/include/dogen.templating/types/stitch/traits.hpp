@@ -27,9 +27,7 @@
 
 #include <string>
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 struct traits {
     /**
@@ -71,6 +69,6 @@ struct traits {
     static std::string wale_kvp();
 };
 
-} } }
+}
 
 #endif

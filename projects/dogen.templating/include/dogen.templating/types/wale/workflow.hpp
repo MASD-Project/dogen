@@ -32,9 +32,7 @@
 #include "dogen.templating/types/wale/properties.hpp"
 #include "dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 class workflow final {
 private:
@@ -61,6 +59,6 @@ public:
         const std::unordered_map<std::string, std::string>& kvps) const;
 };
 
-} } }
+}
 
 #endif

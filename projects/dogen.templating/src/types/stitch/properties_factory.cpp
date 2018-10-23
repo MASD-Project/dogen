@@ -28,9 +28,7 @@ const std::string cpp_modeline_name("cpp");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 properties_factory::properties_factory(const annotations::type_repository& atrp,
     const dogen::formatting::repository& frp)
@@ -58,4 +56,4 @@ properties_factory::make(const annotations::annotation& a) const {
     return r;
 }
 
-} } }
+}

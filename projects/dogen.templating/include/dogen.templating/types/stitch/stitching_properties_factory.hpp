@@ -33,9 +33,7 @@
 #include "dogen.annotations/types/type_repository.hpp"
 #include "dogen.templating/types/stitch/stitching_properties.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Creates the stitching settings.
@@ -107,6 +105,6 @@ private:
     const type_group type_group_;
 };
 
-} } }
+}
 
 #endif

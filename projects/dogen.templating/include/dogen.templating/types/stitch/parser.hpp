@@ -31,9 +31,7 @@
 #include "dogen.templating/types/stitch/block.hpp"
 #include "dogen.templating/types/stitch/text_template_body.hpp"
 
-namespace dogen {
-namespace templating {
-namespace stitch {
+namespace dogen::templating::stitch {
 
 /**
  * @brief Provides line number information on errors.
@@ -101,6 +99,6 @@ public:
     text_template_body parse(const std::string& s) const;
 };
 
-} } }
+}
 
 #endif

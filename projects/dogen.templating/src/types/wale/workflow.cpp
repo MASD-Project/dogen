@@ -37,9 +37,7 @@ const std::string wale_dir("wale");
 
 }
 
-namespace dogen {
-namespace templating {
-namespace wale {
+namespace dogen::templating::wale {
 
 properties workflow::create_properties(
     const boost::filesystem::path& template_path,
@@ -111,4 +109,4 @@ std::string workflow::execute(const boost::filesystem::path& template_path,
     return r;
 }
 
-} } }
+}
