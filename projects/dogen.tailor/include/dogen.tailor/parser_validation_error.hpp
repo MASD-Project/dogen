@@ -27,8 +27,7 @@
 
 #include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen {
-namespace tailor {
+namespace dogen::tailor {
 
 /**
  * @brief A fatal error has occurred during option parsing.
@@ -42,6 +41,6 @@ public:
     virtual ~parser_validation_error() throw() {}
 };
 
-} }
+}
 
 #endif

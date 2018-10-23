@@ -73,8 +73,7 @@ void version() {
 
 }
 
-namespace dogen {
-namespace tailor {
+namespace dogen::tailor {
 
 workflow::workflow() : can_log_(false) { }
 
@@ -194,4 +193,4 @@ int workflow::execute(const int argc, const char* argv[]) {
     return 0;
 }
 
-} }
+}

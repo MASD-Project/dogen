@@ -29,8 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.options/types/tailoring_options.hpp"
 
-namespace dogen {
-namespace tailor {
+namespace dogen::tailor {
 
 /**
  * @brief Encapsulates the entire tailor tool workflow.
@@ -94,6 +93,6 @@ private:
     boost::filesystem::path log_path_;
 };
 
-} }
+}
 
 #endif

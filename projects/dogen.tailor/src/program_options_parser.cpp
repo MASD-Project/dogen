@@ -48,8 +48,7 @@ const std::string default_log_directory("log");
 
 }
 
-namespace dogen {
-namespace tailor {
+namespace dogen::tailor {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)
@@ -196,4 +195,4 @@ boost::optional<options::tailoring_options> program_options_parser::parse() {
     return boost::optional<options::tailoring_options>(r);
 }
 
-} }
+}

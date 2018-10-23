@@ -33,8 +33,7 @@
 #include <boost/program_options.hpp>
 #include "dogen.options/types/tailoring_options.hpp"
 
-namespace dogen {
-namespace tailor {
+namespace dogen::tailor {
 
 /**
  * @brief Creates a optionsuration from a set of command line arguments
@@ -87,6 +86,6 @@ private:
     const boost::filesystem::path current_path_;
 };
 
-} }
+}
 
 #endif
