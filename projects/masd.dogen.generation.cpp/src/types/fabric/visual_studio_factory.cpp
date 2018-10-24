@@ -34,7 +34,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
         "quit.cpp.fabric.visual_studio_project_factory"));
 
@@ -44,7 +44,7 @@ const std::string sln_extension(".sln");
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 visual_studio_factory::type_group visual_studio_factory::make_type_group(
     const annotations::type_repository& atrp) const {

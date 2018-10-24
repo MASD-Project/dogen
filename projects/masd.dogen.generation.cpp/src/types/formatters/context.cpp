@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/context.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 context::context(
     const std::unordered_set<modeling::meta_model::element_archetype>&

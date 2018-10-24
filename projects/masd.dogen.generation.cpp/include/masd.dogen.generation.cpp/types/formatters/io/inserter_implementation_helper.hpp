@@ -28,7 +28,7 @@
 #include "masd.dogen.modeling/types/meta_model/object.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 void inserter_implementation_helper(
     assistant& a, const modeling::meta_model::object& o, const bool inside_class);

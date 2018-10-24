@@ -33,7 +33,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.registrar"));
 
 const std::string no_file_formatters("File formatters repository is empty.");
@@ -55,7 +55,7 @@ const std::string null_helper_formatter("Formatter helper supplied is null");
 
 }
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 void registrar::
 validate(std::shared_ptr<artefact_formatter_interface> f) const {

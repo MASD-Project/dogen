@@ -42,7 +42,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/stitch_formatter.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 /**
  * @brief Generates all files for the supplied entity.

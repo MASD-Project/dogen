@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class initializer {
 public:

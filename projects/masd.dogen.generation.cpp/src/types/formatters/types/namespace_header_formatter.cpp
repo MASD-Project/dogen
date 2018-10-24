@@ -26,7 +26,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/module.hpp"
 
-namespace dogen::generation::cpp::formatters::types {
+namespace masd::dogen::generation::cpp::formatters::types {
 
 std::string namespace_header_formatter::static_id() {
     return traits::namespace_header_archetype();

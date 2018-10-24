@@ -41,7 +41,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.fabric.decoration_expander"));
 
 const std::string cpp_modeline_name("cpp");
@@ -51,7 +51,7 @@ const std::string odb_modeline_name("odb");
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class decoration_updater : public element_visitor {
 public:

@@ -33,7 +33,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class odb_expander {
 private:

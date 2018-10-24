@@ -28,14 +28,14 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.wale_formatter"));
 
 const std::string missing_input("Missing formatting input");
 
 }
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 bool wale_formatter::is_header(const inclusion_support_types ist) const {
     return

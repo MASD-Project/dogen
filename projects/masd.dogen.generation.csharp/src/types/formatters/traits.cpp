@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.csharp/types/formatters/traits.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 std::string traits::visual_studio_facet() {
     static std::string r("quilt.csharp.visual_studio");

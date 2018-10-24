@@ -28,7 +28,7 @@
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)
     : archetype_location_(cpp::traits::kernel(), cpp::traits::backend(),

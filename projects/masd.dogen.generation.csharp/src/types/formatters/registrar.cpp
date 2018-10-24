@@ -28,7 +28,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formatters.registrar"));
 
 const std::string no_file_formatters("File formatters repository is empty.");
@@ -45,7 +45,7 @@ const std::string empty_family("Family cannot be empty.");
 
 }
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 void registrar::validate() const {
     /*

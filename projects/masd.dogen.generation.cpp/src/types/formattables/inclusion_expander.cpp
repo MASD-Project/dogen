@@ -30,7 +30,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.inclusion_expander"));
 
 const char angle_bracket('<');
@@ -50,7 +50,7 @@ bool include_directive_comparer(
 
     if (lhs.empty() || rhs.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_include_directive;
-        using dogen::generation::cpp::formattables::expansion_error;
+        using masd::dogen::generation::cpp::formattables::expansion_error;
         BOOST_THROW_EXCEPTION(expansion_error(empty_include_directive));
     }
 
@@ -93,7 +93,7 @@ bool include_directive_comparer(
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 directive_group_repository inclusion_expander::
 create_directive_groups(const annotations::type_repository& atrp,

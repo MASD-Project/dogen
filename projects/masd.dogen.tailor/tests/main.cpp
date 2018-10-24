@@ -22,5 +22,5 @@
 #include <boost/test/included/unit_test.hpp>
 #include "masd.dogen.utility/test/fixture.hpp"
 
-using namespace dogen::utility::test;
+using namespace masd::dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);

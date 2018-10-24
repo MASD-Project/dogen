@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/repository_factory.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 bool repository_factory::operator==(const repository_factory& /*rhs*/) const {
     return true;

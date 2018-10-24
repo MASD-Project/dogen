@@ -27,7 +27,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.stitch_formatter"));
 
 const std::string empty;
@@ -36,7 +36,7 @@ const std::string stitch_extension(".stitch");
 
 }
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 stitch_formatter::stitch_formatter(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,

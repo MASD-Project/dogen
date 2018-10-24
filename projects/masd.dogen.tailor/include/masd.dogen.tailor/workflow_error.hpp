@@ -32,10 +32,10 @@ namespace dogen::tailor {
 /**
  * @brief A fatal error has occurred during option parsing.
  */
-class workflow_error : public utility::exception::exception {
+class workflow_error : public masd::dogen::utility::exception::exception {
 public:
     workflow_error(std::string message)
-        : utility::exception::exception(message) { }
+        : masd::dogen::utility::exception::exception(message) { }
     workflow_error() { }
 
     virtual ~workflow_error() throw() {}

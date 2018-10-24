@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::generation::cpp::formatters::types {
+namespace masd::dogen::generation::cpp::formatters::types {
 
 struct traits {
     /**

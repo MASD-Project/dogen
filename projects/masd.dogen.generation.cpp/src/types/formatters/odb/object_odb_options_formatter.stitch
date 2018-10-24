@@ -51,7 +51,7 @@ object_odb_options_formatter::inclusion_support_type() const {
 
 boost::filesystem::path object_odb_options_formatter::inclusion_path(
     const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     static logger lg(logger_factory(
             "generation.cpp.formatters.odb.object_odb_options_formatter"));
 

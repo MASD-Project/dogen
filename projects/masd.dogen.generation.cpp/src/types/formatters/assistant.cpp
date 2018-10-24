@@ -45,7 +45,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.assistant"));
 
 const std::string empty;
@@ -83,7 +83,7 @@ const std::string helpless_family("No registered helpers found for family: ");
 
 }
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>

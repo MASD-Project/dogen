@@ -40,7 +40,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.build_files_expander"));
 
 const std::string separator("_");
@@ -50,7 +50,7 @@ const std::string missing_qualified_name(
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 bool odb_target_comparer(
     const fabric::odb_target& lhs, const fabric::odb_target& rhs) {

@@ -40,7 +40,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.odb_expander"));
 
 const std::string empty_column_attribute("column(\"\")");
@@ -53,7 +53,7 @@ const std::string value_pragma("value");
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class updator : public fabric::element_visitor {
 public:

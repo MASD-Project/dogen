@@ -29,7 +29,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/object.hpp"
 
-namespace dogen::generation::cpp::formatters::odb {
+namespace masd::dogen::generation::cpp::formatters::odb {
 
 std::string class_header_formatter::static_id() {
     return traits::class_header_archetype();

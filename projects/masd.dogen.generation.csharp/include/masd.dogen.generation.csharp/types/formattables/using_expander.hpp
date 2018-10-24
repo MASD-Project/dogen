@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_USING_EXPANDER_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_USING_EXPANDER_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_USING_EXPANDER_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_USING_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class using_expander final {
 public:

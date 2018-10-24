@@ -22,7 +22,7 @@
 #include "masd.dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/initializer.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 void initializer::initialize() {
     modeling::transforms::register_dynamic_transform<dynamic_transform>();

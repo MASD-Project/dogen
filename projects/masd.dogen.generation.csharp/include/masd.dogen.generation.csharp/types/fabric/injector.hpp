@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FABRIC_INJECTOR_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FABRIC_INJECTOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_INJECTOR_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_INJECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include "masd.dogen.modeling/types/meta_model/element.hpp"
 #include "masd.dogen.modeling/types/meta_model/model.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 class injector {
 public:

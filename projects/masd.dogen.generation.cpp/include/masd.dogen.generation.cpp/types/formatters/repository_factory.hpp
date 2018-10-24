@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 class repository_factory final {
 public:

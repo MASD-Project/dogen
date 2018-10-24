@@ -21,7 +21,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 std::unordered_map<
     std::string,

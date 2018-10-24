@@ -33,13 +33,13 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
         "quit.cpp.fabric.forward_declarations_factory"));
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class generator final : public modeling::meta_model::element_visitor {
 private:

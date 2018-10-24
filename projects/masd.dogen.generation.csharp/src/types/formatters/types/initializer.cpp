@@ -27,7 +27,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/types/initializer.hpp"
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);

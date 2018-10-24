@@ -30,7 +30,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::string visual_studio_solution_formatter::static_id() {
     return traits::visual_studio_solution_archetype();
@@ -69,8 +69,8 @@ visual_studio_solution_formatter::inclusion_support_type() const {
 boost::filesystem::path visual_studio_solution_formatter::inclusion_path(
     const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
 
-    using namespace dogen::utility::log;
-    using namespace dogen::generation::cpp::formatters;
+    using namespace masd::dogen::utility::log;
+    using namespace masd::dogen::generation::cpp::formatters;
     static logger lg(logger_factory(static_id()));
 
     static const std::string not_supported("Inclusion path is not supported: ");

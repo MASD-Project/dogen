@@ -27,7 +27,7 @@
 
 #include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 /**
  * @brief Initialises the test data facet.

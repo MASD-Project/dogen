@@ -35,7 +35,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/element_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 /**
  * @brief Supplies additional information required for formatting.

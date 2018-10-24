@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_IO_INITIALIZER_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_IO_INITIALIZER_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_IO_INITIALIZER_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_IO_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::csharp::formatters::io {
+namespace masd::dogen::generation::csharp::formatters::io {
 
 /**
  * @brief Initialises the types facet.

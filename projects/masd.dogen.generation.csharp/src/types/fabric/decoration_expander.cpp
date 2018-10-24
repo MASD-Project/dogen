@@ -35,7 +35,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.fabric.decoration_expander"));
 
 const std::string cs_modeline_name("cs");
@@ -43,7 +43,7 @@ const std::string xml_modeline_name("xml");
 
 }
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 class decoration_updater : public element_visitor {
 public:

@@ -32,7 +32,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.locator"));
 
 const std::string empty;
@@ -50,7 +50,7 @@ const std::string missing_backend_directory(
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 locator::locator(
     const boost::filesystem::path& output_directory_path,

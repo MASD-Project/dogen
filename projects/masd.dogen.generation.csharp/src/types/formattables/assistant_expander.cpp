@@ -25,7 +25,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/assistant_expander.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 assistant_expander::type_group assistant_expander::
 make_type_group(const annotations::type_repository& atrp) const {

@@ -28,14 +28,14 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.fabric.injector"));
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
 }
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 injector::~injector() noexcept {}
 

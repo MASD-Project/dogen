@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".test_data");

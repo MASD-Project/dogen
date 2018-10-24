@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
 

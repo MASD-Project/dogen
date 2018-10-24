@@ -27,7 +27,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger
 lg(logger_factory("generation.cpp.formattables.cpp_standard_expander"));
 
@@ -40,7 +40,7 @@ const std::string invalid_standard("Standard is invalid or unsupported: ");
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 cpp_standards
 cpp_standard_expander::to_cpp_standard(const std::string& s) const {

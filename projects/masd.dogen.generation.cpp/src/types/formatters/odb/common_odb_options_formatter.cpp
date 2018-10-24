@@ -35,7 +35,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
 
-namespace dogen::generation::cpp::formatters::odb {
+namespace masd::dogen::generation::cpp::formatters::odb {
 
 std::string common_odb_options_formatter::static_id() {
     return traits::common_odb_options_archetype();
@@ -70,7 +70,7 @@ common_odb_options_formatter::inclusion_support_type() const {
 
 boost::filesystem::path common_odb_options_formatter::inclusion_path(
     const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     static logger
         lg(logger_factory("generation.cpp.formatters.odb.common_odb_options_formatter"));
 

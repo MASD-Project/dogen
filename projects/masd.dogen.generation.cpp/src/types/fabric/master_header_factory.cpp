@@ -40,7 +40,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("generation.cpp.fabric.master_header_factory"));
 
 const std::string master_header_name("all");
@@ -49,7 +49,7 @@ const std::string formatter_not_found_for_type(
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 namespace {
 

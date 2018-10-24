@@ -38,12 +38,13 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("tailor"));
+
 const std::string log_file_prefix("masd.dogen.tailor.");
 const std::string more_information(
     "Try `dogen.tailor --help' for more information.");
-const std::string tailor_product("Dogen Tailor v" MASD_DOGEN_VERSION);
+const std::string tailor_product("Dogen Tailor v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
 const std::string log_file_msg("See the log file for details: ");
@@ -78,27 +79,28 @@ namespace dogen::tailor {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const dogen::options::tailoring_options& o) {
+initialise_model_name(const masd::dogen::options::tailoring_options& o) {
     const boost::filesystem::path& p(o.target());
     model_name_ = p.stem().filename().string();
 }
 
-boost::optional<options::tailoring_options> workflow::
+boost::optional<masd::dogen::options::tailoring_options> workflow::
 generate_tailoring_options(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
 
-    boost::optional<options::tailoring_options> r(p.parse());
+    boost::optional<masd::dogen::options::tailoring_options> r(p.parse());
     if (!r)
         return r;
 
     return r;
 }
 
-void workflow::initialise_logging(const options::tailoring_options& to) {
+void workflow::
+initialise_logging(const masd::dogen::options::tailoring_options& to) {
     const auto dir(to.log_directory());
-    const auto sev(utility::log::to_severity_level(to.log_level()));
+    const auto sev(masd::dogen::utility::log::to_severity_level(to.log_level()));
     const std::string log_file_name(log_file_prefix + model_name_ + ".log");
     log_path_ = dir / log_file_name;
 
@@ -107,18 +109,20 @@ void workflow::initialise_logging(const options::tailoring_options& to) {
     can_log_ = true;
 }
 
-void workflow::tailor(const options::tailoring_options& to) const {
+void workflow::tailor(const masd::dogen::options::tailoring_options& to) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
-    external::json::initializer::initialize();
-    external::dia::initializer::initialize();
+    masd::dogen::external::json::initializer::initialize();
+    masd::dogen::external::dia::initializer::initialize();
 
-    modeling::transforms::options o;
+    masd::dogen::modeling::transforms::options o;
     o.target(to.target());
-    using namespace modeling::transforms;
+
+    using namespace masd::dogen::modeling::transforms;
     const auto ctx(context_factory::make(o, false/*enable_validation*/));
-    const external::transforms::context ext_ctx(ctx.prober());
-    using namespace external::transforms;
+    const masd::dogen::external::transforms::context ext_ctx(ctx.prober());
+
+    using namespace masd::dogen::external::transforms;
     model_to_model_chain::transform(ext_ctx, o.target(), to.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";

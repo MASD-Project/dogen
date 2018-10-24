@@ -31,12 +31,12 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.aspect_expander"));
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s, const aspect_expander::type_group& v) {

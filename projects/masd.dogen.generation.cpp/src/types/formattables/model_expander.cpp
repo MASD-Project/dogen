@@ -31,7 +31,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model_expander.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 void model_expander::
 expand_streaming(const annotations::type_repository& atrp, model& fm) const {

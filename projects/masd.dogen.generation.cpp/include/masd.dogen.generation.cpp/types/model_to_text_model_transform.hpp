@@ -40,7 +40,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 
 /**
  * @brief Implements a C++ model to text transform.

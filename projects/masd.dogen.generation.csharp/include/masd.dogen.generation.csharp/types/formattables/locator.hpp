@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_LOCATOR_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_LOCATOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_LOCATOR_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_LOCATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/locator_configuration.hpp"
 
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class locator final {
 private:

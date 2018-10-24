@@ -26,7 +26,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
         "generation.csharp.formattables.file_path_expander"));
 
@@ -34,7 +34,7 @@ const std::string missing_archetype("Archetype not found: ");
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 void file_path_expander::
 expand(const formatters::repository& frp, const locator& l, model& fm) const {

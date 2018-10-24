@@ -28,7 +28,7 @@
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 std::string visual_studio_solution_formatter::static_id() {
     return traits::visual_studio_solution_archetype();

@@ -26,7 +26,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/primitive.hpp"
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 std::string primitive_formatter::static_id() {
     return traits::primitive_archetype();

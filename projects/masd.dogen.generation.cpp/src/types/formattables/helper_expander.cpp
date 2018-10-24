@@ -44,7 +44,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.helper_expander"));
 
 const std::string qn_missing("Could not find qualified name for language.");
@@ -56,7 +56,7 @@ const std::string empty_identifiable(
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class helper_properties_generator : public modeling::meta_model::element_visitor {
 public:

@@ -29,7 +29,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 std::string enum_header_formatter::static_id() {
     return traits::enum_header_archetype();

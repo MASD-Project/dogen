@@ -41,7 +41,7 @@ const std::string empty;
 const std::string test_module("yarn");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
-const auto cpp(dogen::modeling::meta_model::languages::cpp);
+const auto cpp(masd::dogen::modeling::meta_model::languages::cpp);
 
 name_tree make(const masd::dogen::modeling::meta_model::name& n) {
     name_tree r;

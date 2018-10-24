@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/model_to_text_model_transform.hpp"
 #include "masd.dogen.generation.cpp/types/initializer.hpp"
 
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());

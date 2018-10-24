@@ -28,7 +28,7 @@
 #include <string>
 #include "masd.dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class meta_name_factory final {
 private:

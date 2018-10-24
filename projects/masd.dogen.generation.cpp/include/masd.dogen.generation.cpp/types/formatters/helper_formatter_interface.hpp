@@ -30,7 +30,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/helper_properties_fwd.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 class helper_formatter_interface {
 public:

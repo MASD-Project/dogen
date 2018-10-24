@@ -30,9 +30,10 @@
 
 namespace {
 
-const std::string transform_id(dogen::generation::csharp::traits::backend());
+const std::string
+transform_id(masd::dogen::generation::csharp::traits::backend());
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string empty;
@@ -40,7 +41,7 @@ const std::string dot(".");
 
 }
 
-namespace dogen::generation::csharp {
+namespace masd::dogen::generation::csharp {
 
 model_to_text_model_transform::~model_to_text_model_transform() noexcept { }
 

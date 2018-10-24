@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
 
-namespace dogen::generation::cpp::formatters::hash {
+namespace masd::dogen::generation::cpp::formatters::hash {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".hash");

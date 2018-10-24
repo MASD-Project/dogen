@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 
-namespace dogen::generation::csharp::formatters::io {
+namespace masd::dogen::generation::csharp::formatters::io {
 
 std::string assistant_formatter::static_id() {
     return traits::assistant_archetype();

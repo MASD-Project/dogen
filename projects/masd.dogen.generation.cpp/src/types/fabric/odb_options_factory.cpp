@@ -33,14 +33,14 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.fabric.odb_options_factory"));
 
 const std::string common_odb_options_name("common");
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element> odb_options_factory::
 make(const modeling::meta_model::name& n,

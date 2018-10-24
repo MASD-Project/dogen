@@ -30,7 +30,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.dependencies_builder"));
 
 const auto empty_list = std::list<std::string> {};
@@ -48,7 +48,7 @@ const std::string archetype_not_found("Cannot find archetype name: ");
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 dependencies_builder::dependencies_builder(
     const directive_group_repository& dgrp,

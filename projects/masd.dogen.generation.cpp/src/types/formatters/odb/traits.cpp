@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/odb/traits.hpp"
 
-namespace dogen::generation::cpp::formatters::odb {
+namespace masd::dogen::generation::cpp::formatters::odb {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".odb");

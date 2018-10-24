@@ -42,25 +42,26 @@ private:
     /**
      * @brief Sets up the model name from the options.
      */
-    void initialise_model_name(const dogen::options::tailoring_options& o);
+    void initialise_model_name(
+        const masd::dogen::options::tailoring_options& o);
 
 private:
     /**
      * @brief Given the main arguments, generates the tailoring options.
      */
-    boost::optional<dogen::options::tailoring_options>
+    boost::optional<masd::dogen::options::tailoring_options>
     generate_tailoring_options(const int argc, const char* argv[]) const;
 
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging(const dogen::options::tailoring_options& to);
+    void initialise_logging(const masd::dogen::options::tailoring_options& to);
 
     /**
      * @brief Executes the workflow for the given the application
      * options.
      */
-    void tailor(const dogen::options::tailoring_options& to) const;
+    void tailor(const masd::dogen::options::tailoring_options& to) const;
 
 private:
      /**

@@ -24,12 +24,12 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formatters.reducer"));
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 void reducer::reduce(model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Starting reduction.";

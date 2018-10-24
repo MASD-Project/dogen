@@ -31,7 +31,7 @@
 #include "masd.dogen.modeling/types/meta_model/element.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class registrar_factory final {
 private:

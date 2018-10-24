@@ -26,7 +26,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
         "generation.cpp.formattables.canonical_archetype_resolver"));
 
@@ -38,7 +38,7 @@ const std::string missing_canonical_archetype(
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 canonical_archetype_resolver::canonical_archetype_resolver(
     const std::unordered_map<std::string, formattable>& formattables)

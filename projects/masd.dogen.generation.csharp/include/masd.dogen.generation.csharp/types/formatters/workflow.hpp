@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_WORKFLOW_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_WORKFLOW_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_WORKFLOW_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 class workflow final {
 public:

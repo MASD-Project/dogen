@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/test_data/initializer.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/initializer.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<visual_studio_project_formatter>(rg);

@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/registrar.hpp"
 
-namespace dogen::generation::cpp::formatters::serialization {
+namespace masd::dogen::generation::cpp::formatters::serialization {
 
 std::string registrar_header_formatter::static_id() {
     return traits::registrar_header_archetype();

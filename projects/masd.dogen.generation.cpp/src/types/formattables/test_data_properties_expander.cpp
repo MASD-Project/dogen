@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formattables/test_data_properties_expander.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 bool test_data_properties_expander::operator==(const test_data_properties_expander& /*rhs*/) const {
     return true;

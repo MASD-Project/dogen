@@ -27,7 +27,7 @@
 
 #include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 
-namespace dogen::generation::cpp::formatters::odb {
+namespace masd::dogen::generation::cpp::formatters::odb {
 
 /**
  * @brief Initialises the odb facet.

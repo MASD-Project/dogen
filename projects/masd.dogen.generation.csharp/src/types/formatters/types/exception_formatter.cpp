@@ -26,7 +26,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/exception.hpp"
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 std::string exception_formatter::static_id() {
     return traits::exception_archetype();

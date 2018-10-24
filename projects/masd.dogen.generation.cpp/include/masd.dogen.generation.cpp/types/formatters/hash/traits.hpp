@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::generation::cpp::formatters::hash {
+namespace masd::dogen::generation::cpp::formatters::hash {
 
 struct traits {
     /**

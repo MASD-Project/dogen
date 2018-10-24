@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 
 std::string traits::kernel() {
     static std::string r("quilt");

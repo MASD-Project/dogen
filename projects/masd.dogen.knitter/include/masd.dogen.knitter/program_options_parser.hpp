@@ -30,7 +30,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
-#include "dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
 
 namespace masd::dogen::knitter {
 

@@ -28,7 +28,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class canonical_archetype_expander {
 private:

@@ -21,7 +21,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/io/traits.hpp"
 
-namespace dogen::generation::csharp::formatters::io {
+namespace masd::dogen::generation::csharp::formatters::io {
 
 std::string traits::facet() {
     static std::string r(csharp::traits::backend() + ".io");

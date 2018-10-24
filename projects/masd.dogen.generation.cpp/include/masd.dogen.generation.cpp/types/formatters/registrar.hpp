@@ -38,7 +38,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 /**
  * @brief Manages formatter registration.

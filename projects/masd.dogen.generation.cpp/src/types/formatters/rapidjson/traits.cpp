@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/rapidjson/traits.hpp"
 
-namespace dogen::generation::cpp::formatters::rapidjson {
+namespace masd::dogen::generation::cpp::formatters::rapidjson {
 
 bool traits::operator==(const traits& /*rhs*/) const {
     return true;

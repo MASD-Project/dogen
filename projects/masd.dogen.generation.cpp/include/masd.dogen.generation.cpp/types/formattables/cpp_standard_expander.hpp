@@ -31,7 +31,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class cpp_standard_expander final {
 private:

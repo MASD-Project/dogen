@@ -37,12 +37,12 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formattables.aspect_expander"));
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class aspect_properties_generator : public modeling::meta_model::element_visitor {
 private:

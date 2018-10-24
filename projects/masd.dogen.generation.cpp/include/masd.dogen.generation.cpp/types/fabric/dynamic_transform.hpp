@@ -28,7 +28,7 @@
 #include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 #include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class dynamic_transform final :
         public modeling::transforms::dynamic_transform_interface {

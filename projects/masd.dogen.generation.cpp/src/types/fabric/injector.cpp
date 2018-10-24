@@ -34,12 +34,12 @@ namespace {
 
 const std::string id("generation.cpp.fabric.injector");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(id));
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 injector::~injector() noexcept {}
 

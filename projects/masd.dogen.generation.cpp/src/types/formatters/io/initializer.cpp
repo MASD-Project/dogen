@@ -38,7 +38,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/io/variant_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/initializer.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());

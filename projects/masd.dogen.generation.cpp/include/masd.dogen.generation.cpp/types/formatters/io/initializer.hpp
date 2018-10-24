@@ -27,7 +27,7 @@
 
 #include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 /**
  * @brief Initialises the io facet.

@@ -22,18 +22,18 @@
 #include <boost/throw_exception.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/version.hpp"
-#include "dogen.utility/log/life_cycle_manager.hpp"
-#include "dogen.utility/log/severity_level.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/types/formatting_error.hpp"
-#include "dogen.modeling/types/transforms/options.hpp"
-#include "dogen.modeling/types/transforms/context_factory.hpp"
-#include "dogen.modeling/types/transforms/code_generation_chain.hpp"
-#include "dogen.knitter/initializer.hpp"
-#include "dogen.knitter/workflow_error.hpp"
-#include "dogen.knitter/program_options_parser.hpp"
-#include "dogen.knitter/parser_validation_error.hpp"
-#include "dogen.knitter/workflow.hpp"
+#include "masd.dogen.utility/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/log/severity_level.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/types/formatting_error.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
+#include "masd.dogen.modeling/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.knitter/initializer.hpp"
+#include "masd.dogen.knitter/workflow_error.hpp"
+#include "masd.dogen.knitter/program_options_parser.hpp"
+#include "masd.dogen.knitter/parser_validation_error.hpp"
+#include "masd.dogen.knitter/workflow.hpp"
 
 typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
 
@@ -56,7 +56,7 @@ const std::string errors_msg(" finished with errors.");
  * @brief Print the program's help text.
  */
 void help(const std::string& d) {
-    std::cout << "Dogen Knitter." << std::endl
+    std::cout << "MASD Dogen Knitter." << std::endl
               << "Model driven engineering tool to generate source code "
               << std::endl << "from supported input models."
               << std::endl << std::endl << d << std::endl;

@@ -30,7 +30,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formattables.locator"));
 
 const std::string empty;
@@ -42,7 +42,7 @@ const std::string missing_archetype_configuration(
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 locator::locator(const boost::filesystem::path& output_directory_path,
     const annotations::type_repository& atrp, const formatters::repository& frp,

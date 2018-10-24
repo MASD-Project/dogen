@@ -24,7 +24,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
 #include "masd.dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 std::string floating_point_number_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

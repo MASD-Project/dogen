@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class odb_file_path_generator final {
 public:

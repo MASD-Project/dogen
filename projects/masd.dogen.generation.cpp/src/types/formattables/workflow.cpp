@@ -25,12 +25,12 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.workflow"));
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 model workflow::make_model(const formatters::repository& frp,
     const modeling::meta_model::model& m) const {

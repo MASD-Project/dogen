@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const repository& rp);
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_IO_FORMATTERS_REPOSITORY_IO_HPP
-#define DOGEN_GENERATION_CSHARP_IO_FORMATTERS_REPOSITORY_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTERS_REPOSITORY_IO_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTERS_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const repository& v);
 

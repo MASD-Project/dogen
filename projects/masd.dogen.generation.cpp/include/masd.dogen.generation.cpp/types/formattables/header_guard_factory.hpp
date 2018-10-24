@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class header_guard_factory final {
 public:

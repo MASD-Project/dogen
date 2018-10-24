@@ -27,7 +27,7 @@ const std::string canonical_archetype_postfix(".canonical_archetype");
 
 }
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::string traits::
 master_header_archetype(const std::string& facet) {

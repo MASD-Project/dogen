@@ -21,7 +21,7 @@
 #include "masd.dogen.modeling/types/helpers/name_builder.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 modeling::meta_model::location meta_name_factory::make_location() {
     modeling::meta_model::location r;

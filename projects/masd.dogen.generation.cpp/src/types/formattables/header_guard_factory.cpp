@@ -30,7 +30,7 @@ const std::string separator("_");
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::string header_guard_factory::make(const boost::filesystem::path& p) {
     bool is_first(true);

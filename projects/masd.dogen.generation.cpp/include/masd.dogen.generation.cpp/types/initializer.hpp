@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 
 /**
  * @brief Initialises all of the static state in this model.

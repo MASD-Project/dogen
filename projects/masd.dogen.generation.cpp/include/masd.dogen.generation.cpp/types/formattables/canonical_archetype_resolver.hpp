@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 /**
  * @brief If given an archetype in canonical form and an element id,

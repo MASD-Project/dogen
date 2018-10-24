@@ -32,7 +32,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.formatters.workflow"));
 
 const std::string archetype_not_found("Archetype not found: ");
@@ -40,7 +40,7 @@ const std::string invalid_formatting_style("Invalid formatting style");
 
 }
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 

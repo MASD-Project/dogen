@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/io/initializer.hpp"
 
-namespace dogen::generation::csharp::formatters::io {
+namespace masd::dogen::generation::csharp::formatters::io {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);

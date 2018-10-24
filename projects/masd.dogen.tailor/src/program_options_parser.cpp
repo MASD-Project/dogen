@@ -155,9 +155,9 @@ void program_options_parser::version_function(std::function<void()> value) {
     version_function_ = value;
 }
 
-options::tailoring_options program_options_parser::
+masd::dogen::options::tailoring_options program_options_parser::
 transform_options(const variables_map& vm) const {
-    options::tailoring_options r;
+    masd::dogen::options::tailoring_options r;
 
     if (vm.count(log_level_arg) == 0)
         r.log_level(info_level);
@@ -184,15 +184,16 @@ transform_options(const variables_map& vm) const {
     return r;
 }
 
-boost::optional<options::tailoring_options> program_options_parser::parse() {
+boost::optional<masd::dogen::options::tailoring_options>
+program_options_parser::parse() {
     auto optional_vm(variables_map_factory());
 
     if (!optional_vm)
-        return boost::optional<options::tailoring_options>();
+        return boost::optional<masd::dogen::options::tailoring_options>();
 
     const boost::program_options::variables_map vm(*optional_vm);
     const auto r(transform_options(vm));
-    return boost::optional<options::tailoring_options>(r);
+    return boost::optional<masd::dogen::options::tailoring_options>(r);
 }
 
 }

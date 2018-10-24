@@ -23,7 +23,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/pair_helper.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 std::string pair_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

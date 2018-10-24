@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 dependencies_builder_factory::dependencies_builder_factory(
     const directive_group_repository& dgrp,

@@ -30,7 +30,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/visitor.hpp"
 
-namespace dogen::generation::cpp::formatters::types {
+namespace masd::dogen::generation::cpp::formatters::types {
 
 std::string visitor_header_formatter::static_id() {
     return traits::visitor_header_archetype();

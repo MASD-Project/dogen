@@ -174,7 +174,7 @@ format(const masd::dogen::templating::stitch::text_template& tt) {
 }
 
 using masd::dogen::utility::test::asserter;
-dogen::templating::test::mock_text_template_factory factory;
+masd::dogen::templating::test::mock_text_template_factory factory;
 
 }
 

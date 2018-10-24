@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formattables/odb_file_path_generator.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 bool odb_file_path_generator::operator==(const odb_file_path_generator& /*rhs*/) const {
     return true;

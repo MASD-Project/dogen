@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formattables/facet_directory_expander.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 void facet_directory_expander::expand(const locator& l, model& fm) const {
     for (const auto& pair : l.facet_directories()) {

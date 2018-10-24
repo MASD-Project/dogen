@@ -34,7 +34,7 @@
 #include "masd.dogen.modeling/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class visual_studio_factory final {
 private:

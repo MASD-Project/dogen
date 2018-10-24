@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/assistant_fwd.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/helper_properties_fwd.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 class helper_formatter_interface {
 public:

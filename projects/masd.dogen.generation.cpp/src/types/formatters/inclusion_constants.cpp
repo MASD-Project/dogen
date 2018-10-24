@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::string inclusion_constants::std::string() {
     static ::std::string r("<string>");

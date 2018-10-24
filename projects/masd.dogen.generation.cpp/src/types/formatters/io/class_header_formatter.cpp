@@ -29,7 +29,7 @@
 #include "masd.dogen.modeling/types/meta_model/object.hpp"
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 std::string class_header_formatter::static_id() {
     return traits::class_header_archetype();

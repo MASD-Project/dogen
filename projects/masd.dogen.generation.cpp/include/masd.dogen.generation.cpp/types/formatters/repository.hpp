@@ -33,7 +33,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface_fwd.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 class registrar;
 

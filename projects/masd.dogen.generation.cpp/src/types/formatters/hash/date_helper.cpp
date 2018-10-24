@@ -23,7 +23,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
 
-namespace dogen::generation::cpp::formatters::hash {
+namespace masd::dogen::generation::cpp::formatters::hash {
 
 std::string date_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

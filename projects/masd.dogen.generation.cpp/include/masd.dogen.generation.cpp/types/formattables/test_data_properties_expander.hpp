@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class test_data_properties_expander final {
 public:

@@ -30,7 +30,7 @@
 #include "masd.dogen.modeling/types/meta_model/element.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class master_header_factory final {
 public:

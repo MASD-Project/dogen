@@ -31,7 +31,7 @@
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::unordered_set<std::string>
 project_items_expander::meta_names_for_project_items() {

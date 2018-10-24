@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::unordered_map<
     std::string,

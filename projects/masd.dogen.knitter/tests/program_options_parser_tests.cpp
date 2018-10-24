@@ -21,11 +21,11 @@
 #include <vector>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.modeling/io/transforms/options_io.hpp"
-#include "dogen.knitter/program_options_parser.hpp"
-#include "dogen.knitter/parser_validation_error.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.modeling/io/transforms/options_io.hpp"
+#include "masd.dogen.knitter/program_options_parser.hpp"
+#include "masd.dogen.knitter/parser_validation_error.hpp"
 
 using namespace masd::dogen::utility::log;
 
@@ -88,7 +88,7 @@ version_mock version_mock_factory(bool& called) {
     return version_mock(called);
 }
 
-dogen::knitter::program_options_parser setup_parser(
+masd::dogen::knitter::program_options_parser setup_parser(
     std::vector<std::string> options,
     bool& help_called,
     bool& version_called) {
@@ -126,7 +126,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     BOOST_CHECK(!version);
 }
 
-dogen::modeling::transforms::options
+masd::dogen::modeling::transforms::options
 check_valid_arguments(std::vector<std::string> options) {
     bool help(false);
     bool version(false);

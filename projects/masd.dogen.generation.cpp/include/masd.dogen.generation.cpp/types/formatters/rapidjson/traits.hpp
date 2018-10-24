@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::cpp::formatters::rapidjson {
+namespace masd::dogen::generation::cpp::formatters::rapidjson {
 
 class traits final {
 public:

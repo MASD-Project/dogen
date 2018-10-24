@@ -24,7 +24,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/optional_helper.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 std::string optional_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

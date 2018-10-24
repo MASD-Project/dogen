@@ -48,12 +48,12 @@ const std::string missing_output_dir("You must supply the output directory");
 const std::string target_is_relative("Target path is not absolute");
 const std::string output_dir_is_relative("The output directory path is not");
 
-dogen::modeling::transforms::options target_only() {
+masd::dogen::modeling::transforms::options target_only() {
     using masd::dogen::modeling::test::mock_options_factory;
     return mock_options_factory::make_knitting_options(absolute_target);
 }
 
-dogen::modeling::transforms::options target_and_project_dir(
+masd::dogen::modeling::transforms::options target_and_project_dir(
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir) {
     using masd::dogen::modeling::test::mock_options_factory;

@@ -22,7 +22,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/traits.hpp"
 
-namespace dogen::generation::cpp::formatters::serialization {
+namespace masd::dogen::generation::cpp::formatters::serialization {
 
 std::string traits::facet() {
     static std::string r(cpp::traits::backend() + ".serialization");

@@ -25,7 +25,7 @@
 #include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "masd.dogen.generation.csharp/io/formatters/repository_io.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 template<typename Containee>
 inline std::ostream& to_stream(std::ostream& s, const std::string& key,

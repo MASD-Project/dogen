@@ -27,7 +27,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/builtin.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 std::string builtin_header_formatter::static_id() {
     return traits::builtin_header_archetype();

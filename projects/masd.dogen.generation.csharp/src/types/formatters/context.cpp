@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.csharp/types/formatters/context.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 context::context(const formattables::element_properties& element_properties,
     const formattables::model& fm,

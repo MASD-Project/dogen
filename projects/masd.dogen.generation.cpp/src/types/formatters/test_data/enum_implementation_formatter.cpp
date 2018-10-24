@@ -32,7 +32,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 std::string enum_implementation_formatter::static_id() {
     return traits::enum_implementation_archetype();
@@ -68,7 +68,7 @@ inclusion_support_types enum_implementation_formatter::inclusion_support_type() 
 boost::filesystem::path enum_implementation_formatter::inclusion_path(
     const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
 
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     static logger lg(
         logger_factory(enum_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");

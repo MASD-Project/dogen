@@ -23,7 +23,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 
-namespace dogen::generation::cpp::formatters::hash {
+namespace masd::dogen::generation::cpp::formatters::hash {
 
 std::string associative_container_helper::id() const {
     static auto r(std::string("<") + traits::facet() + std::string(">") +

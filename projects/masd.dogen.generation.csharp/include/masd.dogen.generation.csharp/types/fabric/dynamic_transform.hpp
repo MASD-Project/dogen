@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 #include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 class dynamic_transform final :
         public modeling::transforms::dynamic_transform_interface {

@@ -30,7 +30,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formatters.assistant"));
 
 const std::string empty;
@@ -53,7 +53,7 @@ const std::string attribute_with_no_simple_name(
 
 }
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>

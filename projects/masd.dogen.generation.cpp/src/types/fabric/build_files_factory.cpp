@@ -32,7 +32,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.fabric"));
 
 const std::string cmakelists_name("CMakeLists");
@@ -40,7 +40,7 @@ const std::string msbuild_targets_name("msbuild_targets");
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element> build_files_factory::
 make_cmakelists(const modeling::meta_model::model& m) const {

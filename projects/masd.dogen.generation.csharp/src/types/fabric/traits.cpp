@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.generation.csharp/types/fabric/traits.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 std::string traits::visual_studio_project_solution_guid() {
     static std::string r("quilt.csharp.visual_studio.project_solution_guid");

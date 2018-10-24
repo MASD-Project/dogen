@@ -35,7 +35,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 /**
  * @brief Helps in building the inclusion dependencies for a given

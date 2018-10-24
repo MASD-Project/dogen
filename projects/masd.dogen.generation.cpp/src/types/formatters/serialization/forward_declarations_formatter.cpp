@@ -30,7 +30,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.modeling/types/meta_model/object.hpp"
 
-namespace dogen::generation::cpp::formatters::serialization {
+namespace masd::dogen::generation::cpp::formatters::serialization {
 
 std::string forward_declarations_formatter::static_id() {
     return traits::forward_declarations_archetype();

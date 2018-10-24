@@ -26,12 +26,12 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formattables.workflow"));
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 model workflow:: make_model(const formatters::repository& frp,
     const modeling::meta_model::model& m) const {

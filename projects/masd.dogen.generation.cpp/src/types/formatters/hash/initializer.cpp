@@ -39,7 +39,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/hash/variant_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/hash/initializer.hpp"
 
-namespace dogen::generation::cpp::formatters::hash {
+namespace masd::dogen::generation::cpp::formatters::hash {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());

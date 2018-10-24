@@ -45,7 +45,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/test_data/variant_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/test_data/initializer.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());

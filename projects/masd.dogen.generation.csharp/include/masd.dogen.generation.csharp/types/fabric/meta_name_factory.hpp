@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FABRIC_META_NAME_FACTORY_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FABRIC_META_NAME_FACTORY_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_META_NAME_FACTORY_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_META_NAME_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include "masd.dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 class meta_name_factory final {
 private:

@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::generation::cpp::formatters::serialization {
+namespace masd::dogen::generation::cpp::formatters::serialization {
 
 struct traits {
     /**

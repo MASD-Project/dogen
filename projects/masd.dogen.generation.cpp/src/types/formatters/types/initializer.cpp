@@ -33,7 +33,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/types/initializer.hpp"
 
-namespace dogen::generation::cpp::formatters::types {
+namespace masd::dogen::generation::cpp::formatters::types {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());

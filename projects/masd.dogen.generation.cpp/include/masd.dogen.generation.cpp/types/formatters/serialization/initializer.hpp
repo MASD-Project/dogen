@@ -27,7 +27,7 @@
 
 #include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 
-namespace dogen::generation::cpp::formatters::serialization {
+namespace masd::dogen::generation::cpp::formatters::serialization {
 
 /**
  * @brief Initialises the serialization facet.

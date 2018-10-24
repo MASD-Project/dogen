@@ -30,7 +30,7 @@
 #include "masd.dogen.modeling/types/meta_model/model.hpp"
 #include "masd.dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class forward_declarations_factory final {
 public:

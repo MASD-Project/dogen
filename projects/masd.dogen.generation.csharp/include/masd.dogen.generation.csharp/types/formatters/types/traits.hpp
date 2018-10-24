@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_TRAITS_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_TRAITS_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_TRAITS_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 struct traits final {
     /**

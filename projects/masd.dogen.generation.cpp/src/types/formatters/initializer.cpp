@@ -31,7 +31,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/serialization/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/initializer.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<visual_studio_solution_formatter>(rg);

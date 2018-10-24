@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 
 /**
  * @brief Constants for all the top-level meta-data keys for the C++

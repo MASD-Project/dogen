@@ -29,7 +29,7 @@
 #include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 
-namespace dogen::generation::cpp::formatters::odb {
+namespace masd::dogen::generation::cpp::formatters::odb {
 
 std::string enum_header_formatter::static_id() {
     return traits::enum_header_archetype();

@@ -32,7 +32,7 @@
 #include "masd.dogen.modeling/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class odb_options_factory final {
 private:

@@ -24,12 +24,12 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.formatters.workflow"));
 
 }
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 std::shared_ptr<csharp::formatters::registrar> workflow::registrar_;
 

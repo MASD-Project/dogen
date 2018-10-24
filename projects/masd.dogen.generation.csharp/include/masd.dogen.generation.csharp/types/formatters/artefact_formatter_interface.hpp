@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/context.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace masd::dogen::generation::csharp::formatters {
 
 class artefact_formatter_interface {
 public:

@@ -27,7 +27,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.csharp.fabric.assembly_info_factory"));
 
 const std::string simple_name("AssemblyInfo");
@@ -35,7 +35,7 @@ const std::string module_name("Properties");
 
 }
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 boost::shared_ptr<modeling::meta_model::element> assembly_info_factory::
 make(const modeling::meta_model::model& m) const {

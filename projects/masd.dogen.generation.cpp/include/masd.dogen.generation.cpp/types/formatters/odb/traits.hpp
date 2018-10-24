@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::generation::cpp::formatters::odb {
+namespace masd::dogen::generation::cpp::formatters::odb {
 
 struct traits {
     /**

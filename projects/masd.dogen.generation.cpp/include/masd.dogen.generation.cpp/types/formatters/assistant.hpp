@@ -45,7 +45,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/context.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 /**
  * @brief Provides a number of utilities to formatters.

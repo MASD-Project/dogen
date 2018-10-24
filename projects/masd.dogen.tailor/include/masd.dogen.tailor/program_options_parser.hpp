@@ -69,7 +69,8 @@ private:
     typedef boost::program_options::variables_map variables_map;
     boost::optional<variables_map> variables_map_factory() const;
 
-    options::tailoring_options transform_options(const variables_map& vm) const;
+    masd::dogen::options::tailoring_options
+    transform_options(const variables_map& vm) const;
 
 public:
     void help_function(std::function<void(std::string)> value);
@@ -77,7 +78,7 @@ public:
 
 
 public:
-    boost::optional<options::tailoring_options> parse();
+    boost::optional<masd::dogen::options::tailoring_options> parse();
 
 private:
     const std::vector<std::string> arguments_;

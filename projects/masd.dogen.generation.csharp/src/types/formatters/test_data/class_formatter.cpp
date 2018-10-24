@@ -26,7 +26,7 @@
 #include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/object.hpp"
 
-namespace dogen::generation::csharp::formatters::test_data {
+namespace masd::dogen::generation::csharp::formatters::test_data {
 
 std::string class_formatter::static_id() {
     return traits::class_archetype();

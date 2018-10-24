@@ -36,7 +36,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/context.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 class artefact_formatter_interface {
 public:

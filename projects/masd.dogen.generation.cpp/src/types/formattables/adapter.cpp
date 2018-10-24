@@ -31,7 +31,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.formattables.adapter"));
 
 const std::string mysql("mysql");
@@ -52,7 +52,7 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::string
 adapter::to_odb_database(const modeling::meta_model::orm_database_systems ds) {

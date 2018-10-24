@@ -35,7 +35,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 std::string primitive_implementation_formatter::static_id() {
     return traits::primitive_implementation_archetype();
@@ -71,7 +71,7 @@ inclusion_support_types primitive_implementation_formatter::inclusion_support_ty
 boost::filesystem::path primitive_implementation_formatter::inclusion_path(
     const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
 
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     static logger lg(
         logger_factory(primitive_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");

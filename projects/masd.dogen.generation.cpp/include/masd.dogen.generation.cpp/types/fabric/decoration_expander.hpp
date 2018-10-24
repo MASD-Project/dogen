@@ -29,7 +29,7 @@
 #include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
 #include "masd.dogen.modeling/types/meta_model/model.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class decoration_expander final {
 public:

@@ -28,14 +28,14 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.fabric.registrar_factory"));
 
 const std::string simple_name("registrar");
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 boost::shared_ptr<fabric::registrar> registrar_factory::
 make(const modeling::meta_model::name& model_name) const {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_PROJECT_ITEMS_EXPANDER_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_PROJECT_ITEMS_EXPANDER_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_PROJECT_ITEMS_EXPANDER_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_PROJECT_ITEMS_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <unordered_set>
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class project_items_expander final {
 private:

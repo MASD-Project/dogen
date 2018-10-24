@@ -33,7 +33,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 class stitch_formatter final {
 public:

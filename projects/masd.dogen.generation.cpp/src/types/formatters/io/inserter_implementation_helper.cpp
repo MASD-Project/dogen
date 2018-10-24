@@ -21,7 +21,7 @@
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 void inserter_implementation_helper(
     assistant& a, const modeling::meta_model::object& o, const bool inside_class) {

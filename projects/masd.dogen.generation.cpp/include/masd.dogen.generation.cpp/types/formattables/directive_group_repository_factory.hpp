@@ -37,7 +37,7 @@
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class directive_group_repository_factory final {
 private:

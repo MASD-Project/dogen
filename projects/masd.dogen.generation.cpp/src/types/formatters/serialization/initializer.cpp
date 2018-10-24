@@ -32,7 +32,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/serialization/path_helper.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/serialization/initializer.hpp"
 
-namespace dogen::generation::cpp::formatters::serialization {
+namespace masd::dogen::generation::cpp::formatters::serialization {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());

@@ -31,12 +31,12 @@ namespace {
 
 const std::string id("generation.cpp.fabric.dynamic_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(id));
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 bool dynamic_transform::
 requires_expansion(const modeling::meta_model::model& m) const {

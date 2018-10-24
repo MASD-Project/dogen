@@ -32,10 +32,11 @@ namespace dogen::tailor {
 /**
  * @brief A fatal error has occurred during option parsing.
  */
-class parser_validation_error : public utility::exception::exception {
+class parser_validation_error
+    : public masd::dogen::utility::exception::exception {
 public:
     parser_validation_error(std::string message)
-        : utility::exception::exception(message) { }
+        : masd::dogen::utility::exception::exception(message) { }
     parser_validation_error() { }
 
     virtual ~parser_validation_error() throw() {}

@@ -46,7 +46,7 @@ const std::string empty;
 const std::string test_module("yarn");
 const std::string test_suite("name_tree_parser_tests");
 
-const auto cpp(dogen::modeling::meta_model::languages::cpp);
+const auto cpp(masd::dogen::modeling::meta_model::languages::cpp);
 
 const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = masd::dogen::modeling::meta_model::location();

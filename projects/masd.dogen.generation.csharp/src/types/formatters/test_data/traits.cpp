@@ -21,7 +21,7 @@
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/test_data/traits.hpp"
 
-namespace dogen::generation::csharp::formatters::test_data {
+namespace masd::dogen::generation::csharp::formatters::test_data {
 
 std::string traits::facet() {
     static std::string r(csharp::traits::backend() + ".test_data");

@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/initializer.hpp"
-#include "dogen.generation.cpp/types/initializer.hpp"
-#include "dogen.external.json/types/initializer.hpp"
-#include "dogen.external.dia/types/initializer.hpp"
-#include "dogen.knitter/initializer.hpp"
+#include "masd.dogen.generation.csharp/types/initializer.hpp"
+#include "masd.dogen.generation.cpp/types/initializer.hpp"
+#include "masd.dogen.external.json/types/initializer.hpp"
+#include "masd.dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.knitter/initializer.hpp"
 
 namespace masd::dogen::knitter {
 
