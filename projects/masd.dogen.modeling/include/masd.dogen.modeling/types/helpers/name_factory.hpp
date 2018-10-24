@@ -74,7 +74,8 @@ public:
      * @brief Given a simple name for an element and the name of the
      * module it is located in, creates the element name.
      */
-    meta_model::name build_element_in_module(const meta_model::name& module_name,
+    meta_model::name build_element_in_module(
+        const meta_model::name& module_name,
         const std::string& simple_name) const;
 
     /**

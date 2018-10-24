@@ -211,7 +211,17 @@ meta_model::name resolver::resolve_name_with_internal_modules(
 
     /*
      * FIXME: major hack to get external modules to model modules
-     * conversion to work.
+     * FIXME: conversion to work.
+     *
+     * Note that this hack works at present by sheer luck: we are
+     * using the model name as an internal module: e.g. for a
+     * reference to probing::prober, we set probing to the internal
+     * module. Since the produced ID matches the string for the
+     * correct type (even though its not in the model module as it
+     * should be), we resolve it. Once we resolve it, we use the
+     * resolved name, which is formulated correctly. This is all one
+     * humongous hack and needs to be replaced with list comparisons
+     * (already backloged).
      */
     BOOST_LOG_SEV(lg, debug) << "Resolving using hacked name: " << im.name();
     if (!im.name().location().model_modules().empty()) {

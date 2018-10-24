@@ -192,8 +192,16 @@ meta_model::name name_factory::build_hacked_combined_element_name(
 
     const auto& l(model_name.location());
     if (!l.model_modules().empty()) {
-        auto mm(partial_element_name.location().model_modules());
-        mm.push_front(l.model_modules().front());
+        /*
+         * We start with all of the model modules of the model
+         * name. Of these we discard the last one - the actual model
+         * name.
+         */
+        auto mm(l.model_modules());
+        mm.pop_back();
+        if (mm.size() == 3)
+            mm.pop_back();
+
         b.model_modules(mm);
     } else
         b.model_modules(partial_element_name.location().model_modules());
