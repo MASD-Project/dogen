@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_FORMATTER_HPP
-#define DOGEN_FORMATTERS_TYPES_DECORATION_FORMATTER_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_DECORATION_FORMATTER_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_DECORATION_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.formatting/types/comment_styles.hpp"
-#include "dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.formatting/types/comment_styles.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 class decoration_formatter {
 private:

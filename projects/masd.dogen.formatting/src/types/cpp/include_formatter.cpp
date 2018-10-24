@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/filesystem/path.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.formatting/types/cpp/include_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.formatting/types/cpp/include_formatter.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ const std::string include("#include ");
 
 }
 
-namespace dogen::formatting::cpp {
+namespace masd::dogen::formatting::cpp {
 
 void include_formatter::
 format(std::ostream& s, const std::list<std::string>& includes) const {
@@ -37,7 +37,7 @@ format(std::ostream& s, const std::list<std::string>& includes) const {
         s << include << inc << std::endl;
 
     if (!includes.empty())
-        s << dogen::formatting::manage_blank_lines << std::endl;
+        s << masd::dogen::formatting::manage_blank_lines << std::endl;
 }
 
 }

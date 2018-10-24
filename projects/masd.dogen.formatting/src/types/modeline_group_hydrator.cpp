@@ -21,14 +21,14 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.formatting/types/hydration_error.hpp"
-#include "dogen.formatting/types/modeline_group_hydrator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.formatting/types/hydration_error.hpp"
+#include "masd.dogen.formatting/types/modeline_group_hydrator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("formatting.modeline_group_hydrator"));
 
 const std::string invalid_json_file("Failed to parse JSON file: ");
@@ -65,7 +65,7 @@ const std::string location_bottom_value("bottom");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 editors modeline_group_hydrator::to_editor(const std::string value) const {
     if (value == editor_emacs_value)

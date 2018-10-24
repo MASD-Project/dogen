@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen.formatting/types/code_generation_marker_factory.hpp"
+#include "masd.dogen.formatting/types/code_generation_marker_factory.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ const std::string generation_timestamp("Generation timestamp: ");
 }
 
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 code_generation_marker_factory::code_generation_marker_factory()
     : add_date_time_(false), add_warning_(false) { }

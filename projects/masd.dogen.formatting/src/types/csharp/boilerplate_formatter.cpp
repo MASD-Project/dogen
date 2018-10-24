@@ -19,11 +19,11 @@
  *
  */
 #include <ostream>
-#include "dogen.formatting/types/decoration_formatter.hpp"
-#include "dogen.formatting/types/csharp/using_formatter.hpp"
-#include "dogen.formatting/types/csharp/boilerplate_formatter.hpp"
+#include "masd.dogen.formatting/types/decoration_formatter.hpp"
+#include "masd.dogen.formatting/types/csharp/using_formatter.hpp"
+#include "masd.dogen.formatting/types/csharp/boilerplate_formatter.hpp"
 
-namespace dogen::formatting::csharp {
+namespace masd::dogen::formatting::csharp {
 
 boilerplate_formatter::boilerplate_formatter(
     const bool generate_preamble)

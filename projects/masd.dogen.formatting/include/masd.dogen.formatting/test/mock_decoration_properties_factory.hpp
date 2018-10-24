@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TEST_MOCK_DECORATION_PROPERTIES_FACTORY_HPP
-#define DOGEN_FORMATTERS_TEST_MOCK_DECORATION_PROPERTIES_FACTORY_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TEST_MOCK_DECORATION_PROPERTIES_FACTORY_HPP
+#define MASD_DOGEN_FORMATTNG_TEST_MOCK_DECORATION_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,12 +27,12 @@
 
 #include <list>
 #include <string>
-#include "dogen.formatting/types/licence.hpp"
-#include "dogen.formatting/types/modeline.hpp"
-#include "dogen.formatting/types/modeline_locations.hpp"
-#include "dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.formatting/types/licence.hpp"
+#include "masd.dogen.formatting/types/modeline.hpp"
+#include "masd.dogen.formatting/types/modeline_locations.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen::formatting::test {
+namespace masd::dogen::formatting::test {
 
 class mock_decoration_properties_factory {
 public:

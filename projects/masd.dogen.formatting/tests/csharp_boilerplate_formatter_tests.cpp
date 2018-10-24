@@ -19,14 +19,14 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.formatting/test/mock_decoration_properties_factory.hpp"
-#include "dogen.formatting/types/csharp/boilerplate_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.formatting/test/mock_decoration_properties_factory.hpp"
+#include "masd.dogen.formatting/types/csharp/boilerplate_formatter.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string test_module("formatting");
 const std::string test_suite("csharp_boilerplate_formatter_tests");
 const std::string empty;
 
-dogen::formatting::test::mock_decoration_properties_factory factory_;
+masd::dogen::formatting::test::mock_decoration_properties_factory factory_;
 const bool generate_premable(true);
 
 const std::string modeline_top(R"(// -*- a_field: a_value -*-
@@ -134,16 +134,16 @@ using System.Linq
 using ICSharpCode.NRefactory.Editor
 )");
 
-std::string format(const dogen::formatting::decoration_properties& dc,
+std::string format(const masd::dogen::formatting::decoration_properties& dc,
     const std::list<std::string>& usings,
     const bool generate_premable = true) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::formatting::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::formatting::csharp::boilerplate_formatter f(generate_premable);
+    masd::dogen::formatting::csharp::boilerplate_formatter f(generate_premable);
     f.format_begin(fo, dc, usings);
     f.format_end(fo, dc);
     return s.str();
@@ -151,9 +151,9 @@ std::string format(const dogen::formatting::decoration_properties& dc,
 
 }
 
-using namespace dogen::formatting;
-using namespace dogen::utility::test;
-using dogen::utility::test::asserter;
+using namespace masd::dogen::formatting;
+using namespace masd::dogen::utility::test;
+using masd::dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(csharp_boilerplate_formatter_tests)
 

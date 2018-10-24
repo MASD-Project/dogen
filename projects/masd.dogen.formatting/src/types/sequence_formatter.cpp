@@ -19,13 +19,13 @@
  *
  */
 #include <sstream>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/io/infix_configuration_io.hpp"
-#include "dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/io/infix_configuration_io.hpp"
+#include "masd.dogen.formatting/types/sequence_formatter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("formatting.sequence_formatter"));
 
 const std::string empty;
@@ -33,7 +33,7 @@ const std::string comma(",");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 bool sequence_formatter::is_first() const {
     return position_ == 0;

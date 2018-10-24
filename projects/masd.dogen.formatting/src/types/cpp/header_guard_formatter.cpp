@@ -21,8 +21,8 @@
 #include <ostream>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.formatting/types/cpp/header_guard_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.formatting/types/cpp/header_guard_formatter.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ const std::string separator("_");
 
 }
 
-namespace dogen::formatting::cpp {
+namespace masd::dogen::formatting::cpp {
 
 void header_guard_formatter::
 format_begin(std::ostream& s, const std::string& header_guard) {
@@ -54,7 +54,7 @@ format_begin(std::ostream& s, const std::string& header_guard) {
       << msvc_line_1 << std::endl
       << msvc_line_2 << std::endl
       << msvc_line_3 << std::endl
-      << dogen::formatting::manage_blank_lines << std::endl;
+      << masd::dogen::formatting::manage_blank_lines << std::endl;
 }
 
 void header_guard_formatter::

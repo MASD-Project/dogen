@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_DECORATION_PROPERTIES_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_DECORATION_PROPERTIES_FACTORY_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_DECORATION_PROPERTIES_FACTORY_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_DECORATION_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,15 +27,15 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatting/types/licence.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.formatting/types/modeline_group.hpp"
-#include "dogen.formatting/types/decoration_configuration.hpp"
-#include "dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.formatting/types/licence.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.formatting/types/decoration_configuration.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Creates the decoration configuration.

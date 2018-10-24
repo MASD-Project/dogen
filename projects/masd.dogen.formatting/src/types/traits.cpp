@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/traits.hpp"
+#include "masd.dogen.formatting/types/traits.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::string traits::decoration::generate_decoration() {
     static std::string r("decoration.generate_decoration");

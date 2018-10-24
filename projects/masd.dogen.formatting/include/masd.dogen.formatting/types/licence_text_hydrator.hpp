@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_LICENCE_HYDRATOR_HPP
-#define DOGEN_FORMATTERS_TYPES_LICENCE_HYDRATOR_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_LICENCE_HYDRATOR_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_LICENCE_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Hydrates the licence text from a stream or file.

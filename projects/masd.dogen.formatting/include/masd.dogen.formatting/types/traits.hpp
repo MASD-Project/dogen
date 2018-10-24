@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_TRAITS_HPP
-#define DOGEN_FORMATTERS_TYPES_TRAITS_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_TRAITS_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 struct traits {
     struct decoration {

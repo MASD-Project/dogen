@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_CSHARP_BOILERPLATE_FORMATTER_HPP
-#define DOGEN_FORMATTERS_TYPES_CSHARP_BOILERPLATE_FORMATTER_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_CSHARP_BOILERPLATE_FORMATTER_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_CSHARP_BOILERPLATE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen::formatting::csharp {
+namespace masd::dogen::formatting::csharp {
 
 /**
  * @brief Formats all of the boilerplate content in a C# file such as

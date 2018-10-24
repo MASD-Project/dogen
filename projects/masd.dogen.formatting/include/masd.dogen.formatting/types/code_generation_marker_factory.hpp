@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_CODE_GENERATION_MARKER_FACTORY_HPP
-#define DOGEN_FORMATTERS_TYPES_CODE_GENERATION_MARKER_FACTORY_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_CODE_GENERATION_MARKER_FACTORY_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_CODE_GENERATION_MARKER_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 class code_generation_marker_factory {
 public:

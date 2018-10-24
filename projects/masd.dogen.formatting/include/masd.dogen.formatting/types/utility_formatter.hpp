@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_UTILITY_FORMATTER_HPP
-#define DOGEN_FORMATTERS_TYPES_UTILITY_FORMATTER_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_UTILITY_FORMATTER_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_UTILITY_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <string>
 #include <ostream>
-#include "dogen.formatting/types/quote_types.hpp"
-#include "dogen.formatting/types/spacing_types.hpp"
+#include "masd.dogen.formatting/types/quote_types.hpp"
+#include "masd.dogen.formatting/types/spacing_types.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Mixed grab-bag of formatting utilities.

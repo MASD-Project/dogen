@@ -19,18 +19,18 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.formatting/types/traits.hpp"
-#include "dogen.formatting/types/repository_factory.hpp"
-#include "dogen.formatting/types/code_generation_marker_factory.hpp"
-#include "dogen.formatting/types/building_error.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.formatting/types/traits.hpp"
+#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.formatting/types/code_generation_marker_factory.hpp"
+#include "masd.dogen.formatting/types/building_error.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("formatting.decoration_properties_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
@@ -40,7 +40,7 @@ const std::string modeline_not_found("Modeline not found: ");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 decoration_properties_factory::
 decoration_properties_factory(const annotations::type_repository& drp,

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_MODELINE_GROUP_HYDRATOR_HPP
-#define DOGEN_FORMATTERS_TYPES_MODELINE_GROUP_HYDRATOR_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_MODELINE_GROUP_HYDRATOR_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_MODELINE_GROUP_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,10 @@
 #include <istream>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen.formatting/types/modeline_field.hpp"
-#include "dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.formatting/types/modeline_field.hpp"
+#include "masd.dogen.formatting/types/modeline_group.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Hydrates a modeline group in a stream.

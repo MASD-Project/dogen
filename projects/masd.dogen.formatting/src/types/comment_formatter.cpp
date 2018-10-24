@@ -23,14 +23,14 @@
 #include <boost/throw_exception.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/io/comment_styles_io.hpp"
-#include "dogen.formatting/types/comment_formatter.hpp"
-#include "dogen.formatting/types/formatting_error.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/io/comment_styles_io.hpp"
+#include "masd.dogen.formatting/types/comment_formatter.hpp"
+#include "masd.dogen.formatting/types/formatting_error.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("formatting.comment_formatter"));
 
 const std::string empty;
@@ -55,7 +55,7 @@ const std::string unsupported_style("Style is not supported: ");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 comment_formatter::comment_formatter()
     : start_on_first_line_(false),

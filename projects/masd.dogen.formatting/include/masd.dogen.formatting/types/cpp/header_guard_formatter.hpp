@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_CPP_HEADER_GUARD_FORMATTER_HPP
-#define DOGEN_FORMATTERS_TYPES_CPP_HEADER_GUARD_FORMATTER_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_CPP_HEADER_GUARD_FORMATTER_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_CPP_HEADER_GUARD_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <string>
 
-namespace dogen::formatting::cpp {
+namespace masd::dogen::formatting::cpp {
 
 /**
  * @brief Generates C++ header guards.

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_HYDRATION_WORKFLOW_HPP
-#define DOGEN_FORMATTERS_TYPES_HYDRATION_WORKFLOW_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_HYDRATION_WORKFLOW_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_HYDRATION_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,10 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.formatting/types/modeline_group.hpp"
-#include "dogen.formatting/types/repository.hpp"
+#include "masd.dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Generates the formatter's repositotry by hydrating all

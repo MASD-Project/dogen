@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/filesystem/path.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.formatting/types/csharp/using_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.formatting/types/csharp/using_formatter.hpp"
 
-namespace dogen::formatting::csharp {
+namespace masd::dogen::formatting::csharp {
 
 void using_formatter::
 format(std::ostream& s, const std::list<std::string>& usings) const {
@@ -31,7 +31,7 @@ format(std::ostream& s, const std::list<std::string>& usings) const {
         s << "using " <<  u<< std::endl;
 
     if (!usings.empty())
-        s << dogen::formatting::manage_blank_lines << std::endl;
+        s << masd::dogen::formatting::manage_blank_lines << std::endl;
 }
 
 }

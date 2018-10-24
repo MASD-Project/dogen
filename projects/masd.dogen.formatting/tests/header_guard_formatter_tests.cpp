@@ -19,12 +19,12 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.formatting/types/cpp/header_guard_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.formatting/types/cpp/header_guard_formatter.hpp"
 
 namespace {
 
@@ -46,8 +46,8 @@ const std::string with_guard(R"(#ifndef A_FILE_HPP
 
 }
 
-using namespace dogen::utility::test;
-using dogen::utility::test::asserter;
+using namespace masd::dogen::utility::test;
+using masd::dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(header_guard_formatter_tests)
 
@@ -57,10 +57,10 @@ BOOST_AUTO_TEST_CASE(non_empty_path_produces_expected_header_guards) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::formatting::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::formatting::cpp::header_guard_formatter f;
+    masd::dogen::formatting::cpp::header_guard_formatter f;
     f.format_begin(fo, non_empty_guard);
     f.format_end(fo, non_empty_guard);
     const auto r(s.str());
@@ -74,10 +74,10 @@ BOOST_AUTO_TEST_CASE(empty_path_produces_no_header_guards) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::formatting::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::formatting::cpp::header_guard_formatter f;
+    masd::dogen::formatting::cpp::header_guard_formatter f;
     f.format_begin(s, empty_guard);
     f.format_end(s, empty_guard);
     const auto r(s.str());

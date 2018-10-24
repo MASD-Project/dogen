@@ -20,12 +20,12 @@
  */
 #include <istream>
 #include <boost/filesystem/fstream.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.formatting/types/hydration_error.hpp"
-#include "dogen.formatting/types/licence_text_hydrator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.formatting/types/hydration_error.hpp"
+#include "masd.dogen.formatting/types/licence_text_hydrator.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::string licence_text_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Reading stream.";

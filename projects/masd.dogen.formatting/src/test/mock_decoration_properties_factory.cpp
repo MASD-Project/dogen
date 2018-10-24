@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.formatting/test/mock_decoration_properties_factory.hpp"
+#include "masd.dogen.formatting/test/mock_decoration_properties_factory.hpp"
 
 namespace  {
 
@@ -30,7 +30,7 @@ const std::string empty_header_guard;
 
 }
 
-namespace dogen::formatting::test {
+namespace masd::dogen::formatting::test {
 
 modeline mock_decoration_properties_factory::
 make_modeline(const modeline_locations l) const {

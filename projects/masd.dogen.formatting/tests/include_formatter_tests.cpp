@@ -19,13 +19,13 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.formatting/types/cpp/include_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.formatting/types/cpp/include_formatter.hpp"
 
 namespace {
 
@@ -42,8 +42,8 @@ const std::string with_includes(R"(#include <win32/system_inc_1>
 
 }
 
-using namespace dogen::utility::test;
-using dogen::utility::test::asserter;
+using namespace masd::dogen::utility::test;
+using masd::dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(include_formatter_tests)
 
@@ -62,10 +62,10 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::formatting::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::formatting::cpp::include_formatter f;
+    masd::dogen::formatting::cpp::include_formatter f;
     f.format(fo, includes);
     BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -77,10 +77,10 @@ BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::formatting::indent_filter::push(fo, 4);
     fo.push(s);
 
-    dogen::formatting::cpp::include_formatter f;
+    masd::dogen::formatting::cpp::include_formatter f;
     f.format(fo, empty_includes);
     BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";

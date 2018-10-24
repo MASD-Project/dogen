@@ -21,14 +21,14 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/io/quote_types_io.hpp"
-#include "dogen.formatting/types/formatting_error.hpp"
-#include "dogen.formatting/types/utility_formatter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/io/quote_types_io.hpp"
+#include "masd.dogen.formatting/types/formatting_error.hpp"
+#include "masd.dogen.formatting/types/utility_formatter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("formatting.utility?formatter"));
 
 const std::string space(" ");
@@ -43,7 +43,7 @@ const std::string unsupported_quote_type("Invalid or unsupported quote type: ");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 class space_scope {
 public:

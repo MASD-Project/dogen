@@ -20,15 +20,15 @@
  */
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/canned_tests.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.formatting/types/modeline_group_hydrator.hpp"
-#include "dogen.formatting/io/modeline_group_io.hpp"
-#include "dogen.formatting/types/hydration_error.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/canned_tests.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.formatting/types/modeline_group_hydrator.hpp"
+#include "masd.dogen.formatting/io/modeline_group_io.hpp"
+#include "masd.dogen.formatting/types/hydration_error.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 
@@ -132,18 +132,22 @@ const std::string no_fields_message("Modeline must have at least");
 
 }
 
-using namespace dogen::formatting;
-using namespace dogen::utility::test;
-using dogen::utility::test::contains_checker;
+using masd::dogen::formatting::hydration_error;
+using masd::dogen::formatting::modeline_group_hydrator;
+using masd::dogen::formatting::editors;
+using masd::dogen::formatting::modeline_locations;
+using namespace masd::dogen::formatting;
+using namespace masd::dogen::utility::test;
+using namespace masd::dogen::utility::filesystem;
+using masd::dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(modeline_group_hydrator_tests)
 
 BOOST_AUTO_TEST_CASE(hydrating_emacs_modeline_group_results_in_expected_modelines) {
     SETUP_TEST_LOG_SOURCE("hydrating_emacs_modeline_group_results_in_expected_modelines");
-    using namespace dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / emacs_modeline_group);
     boost::filesystem::ifstream s(p);
-    dogen::formatting::modeline_group_hydrator h;
+    modeline_group_hydrator h;
     const auto r(h.hydrate(s));
 
     BOOST_LOG_SEV(lg, debug) << "modeline group: " << r;
@@ -153,8 +157,8 @@ BOOST_AUTO_TEST_CASE(hydrating_emacs_modeline_group_results_in_expected_modeline
 
         const auto& modeline(pair.second);
         BOOST_CHECK(!modeline.fields().empty());
-        BOOST_CHECK(modeline.editor() == dogen::formatting::editors::emacs);
-        BOOST_CHECK(modeline.location() == dogen::formatting::modeline_locations::top);
+        BOOST_CHECK(modeline.editor() == editors::emacs);
+        BOOST_CHECK(modeline.location() == modeline_locations::top);
 
         // value  may be empty so nothing can be said about it.
         for (const auto& fields : modeline.fields())
@@ -166,63 +170,58 @@ BOOST_AUTO_TEST_CASE(supplying_invalid_json_file_throws) {
     SETUP_TEST_LOG_SOURCE("supplying_invalid_json_file_throws");
 
     std::istringstream s(invalid_json_file);
-    using namespace dogen::utility::filesystem;
-
-    dogen::formatting::modeline_group_hydrator h;
-    contains_checker<dogen::formatting::hydration_error> c(invalid_file_message);
-    BOOST_CHECK_EXCEPTION(h.hydrate(s), dogen::formatting::hydration_error, c);
+    modeline_group_hydrator h;
+    contains_checker<hydration_error> c(invalid_file_message);
+    BOOST_CHECK_EXCEPTION(h.hydrate(s), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_editor_throws) {
     SETUP_TEST_LOG_SOURCE("not_supplying_editor_throws");
 
     std::istringstream s(no_editor);
-    using namespace dogen::utility::filesystem;
-
-    dogen::formatting::modeline_group_hydrator h;
-    contains_checker<dogen::formatting::hydration_error> c(no_editor_message);
-    BOOST_CHECK_EXCEPTION(h.hydrate(s), dogen::formatting::hydration_error, c);
+    modeline_group_hydrator h;
+    contains_checker<hydration_error> c(no_editor_message);
+    BOOST_CHECK_EXCEPTION(h.hydrate(s), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_unsupported_editor_throws) {
     SETUP_TEST_LOG_SOURCE("supplying_unsupported_editor_throws");
 
     std::istringstream s(unsupported_editor);
-    dogen::formatting::modeline_group_hydrator h;
-    contains_checker<dogen::formatting::hydration_error> c(unsupported_editor_message);
-    BOOST_CHECK_EXCEPTION(h.hydrate(s), dogen::formatting::hydration_error, c);
+    modeline_group_hydrator h;
+    contains_checker<hydration_error> c(unsupported_editor_message);
+    BOOST_CHECK_EXCEPTION(h.hydrate(s), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_location_results_in_a_valid_location) {
     SETUP_TEST_LOG_SOURCE("not_supplying_location_results_in_a_valid_location");
 
     std::istringstream s(no_location);
-    dogen::formatting::modeline_group_hydrator h;
+    modeline_group_hydrator h;
     const auto r(h.hydrate(s));
 
     BOOST_LOG_SEV(lg, debug) << "modeline group: " << r;
     BOOST_CHECK(r.modelines().size() == 1);
     const auto& ml(r.modelines().begin()->second);
-    BOOST_CHECK(ml.location() !=
-       dogen::formatting::modeline_locations::invalid);
+    BOOST_CHECK(ml.location() != modeline_locations::invalid);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_invalid_location_throws) {
     SETUP_TEST_LOG_SOURCE("supplying_invalid_location_throws");
 
     std::istringstream s(invalid_location);
-    dogen::formatting::modeline_group_hydrator h;
-    contains_checker<dogen::formatting::hydration_error> c(invalid_location_message);
-    BOOST_CHECK_EXCEPTION(h.hydrate(s), dogen::formatting::hydration_error, c);
+    modeline_group_hydrator h;
+    contains_checker<hydration_error> c(invalid_location_message);
+    BOOST_CHECK_EXCEPTION(h.hydrate(s), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(supplying_no_fields_throws) {
     SETUP_TEST_LOG_SOURCE("supplying_no_fields_throws");
 
     std::istringstream s(no_fields);
-    dogen::formatting::modeline_group_hydrator h;
-    contains_checker<dogen::formatting::hydration_error> c(no_fields_message);
-    BOOST_CHECK_EXCEPTION(h.hydrate(s), dogen::formatting::hydration_error, c);
+    modeline_group_hydrator h;
+    contains_checker<hydration_error> c(no_fields_message);
+    BOOST_CHECK_EXCEPTION(h.hydrate(s), hydration_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

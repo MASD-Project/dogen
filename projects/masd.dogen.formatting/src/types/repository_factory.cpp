@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.formatting/io/repository_io.hpp"
-#include "dogen.formatting/io/modeline_group_io.hpp"
-#include "dogen.formatting/types/modeline_group_hydrator.hpp"
-#include "dogen.formatting/types/licence_text_hydrator.hpp"
-#include "dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.formatting/io/repository_io.hpp"
+#include "masd.dogen.formatting/io/modeline_group_io.hpp"
+#include "masd.dogen.formatting/types/modeline_group_hydrator.hpp"
+#include "masd.dogen.formatting/types/licence_text_hydrator.hpp"
+#include "masd.dogen.formatting/types/repository_factory.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -40,7 +40,7 @@ const std::string licence_dir("licences");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::vector<boost::filesystem::path>
 repository_factory::create_directory_list(

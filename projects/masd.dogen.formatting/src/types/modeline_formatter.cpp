@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/io/modeline_io.hpp"
-#include "dogen.formatting/types/formatting_error.hpp"
-#include "dogen.formatting/types/modeline_formatter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/io/modeline_io.hpp"
+#include "masd.dogen.formatting/types/formatting_error.hpp"
+#include "masd.dogen.formatting/types/modeline_formatter.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -45,7 +45,7 @@ const std::string unsupported_modeline("Modeline is not supported.");
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 bool modeline_formatter::is_vim(const modeline& m) const {
     return m.editor() == editors::vim;

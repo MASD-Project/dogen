@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
 
-namespace dogen::formatting::csharp {
+namespace masd::dogen::formatting::csharp {
 
 scoped_namespace_formatter::scoped_namespace_formatter(
     std::ostream& s, const std::list<std::string>& ns,

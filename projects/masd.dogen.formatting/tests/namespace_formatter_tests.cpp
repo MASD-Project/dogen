@@ -20,12 +20,12 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.formatting/types/cpp/namespace_formatter.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.formatting/types/cpp/namespace_formatter.hpp"
 
 namespace {
 
@@ -63,8 +63,8 @@ const std::string empty_namespace_default_configuration_begin(R"(namespace {
 
 }
 
-using namespace dogen::utility::test;
-using dogen::utility::test::asserter;
+using namespace masd::dogen::utility::test;
+using masd::dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(namespace_formatter_tests)
 
@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(single_namespace_with_default_configuration_generates_expec
     BOOST_LOG_SEV(lg, debug) << "Input: " << single_namespace;
 
     std::ostringstream s;
-    dogen::formatting::cpp::namespace_formatter nsf;
+    masd::dogen::formatting::cpp::namespace_formatter nsf;
     nsf.format_begin(s, single_namespace);
     const auto beg(s.str());
     BOOST_CHECK(asserter::assert_equals_marker(
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(multiple_namespaces_with_default_configuration_generates_ex
     BOOST_LOG_SEV(lg, debug) << "Input: " << multiple_namespaces;
 
     std::ostringstream s;
-    dogen::formatting::cpp::namespace_formatter nsf;
+    masd::dogen::formatting::cpp::namespace_formatter nsf;
     nsf.format_begin(s, multiple_namespaces);
     const auto beg(s.str());
 
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(empy_namespace_with_default_configuration_generates_expecte
     SETUP_TEST_LOG_SOURCE("empty_namespace_with_default_configuration_generates_expected_cpp_namespaces");
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/);
     nsf.format_begin(s, empty);
     const auto beg(s.str());
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE(empy_namespaces_with_default_configuration_generates_expect
     SETUP_TEST_LOG_SOURCE("empty_namespaces_with_default_configuration_generates_expected_cpp_namespaces");
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/);
 
     const std::list<std::string> empty_list;
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(empy_namespace_with_anonymous_namespaces_off_generates_expe
     SETUP_TEST_LOG_SOURCE("empty_namespace_with_anonymous_namespaces_off_generates_expected_cpp_namespaces");
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(false/*anonymous_namespace*/);
     nsf.format_begin(s, empty);
     const auto beg(s.str());
@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(empy_namespaces_with_anonymous_namespaces_off_generates_exp
     SETUP_TEST_LOG_SOURCE("empty_namespaces_with_anonymous_namespaces_off_generates_expected_cpp_namespaces");
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(false/*anonymous_namespace*/);
 
     const std::list<std::string> empty_list;
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_CASE(empy_namespace_with_new_line_generates_expected_cpp_namespa
     SETUP_TEST_LOG_SOURCE("empty_namespace_with_new_line_generates_expected_cpp_namespaces");
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
     nsf.format_begin(s, empty);
     const auto beg(s.str());
@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(empy_namespaces_with_new_line_generates_expected_cpp_namesp
     SETUP_TEST_LOG_SOURCE("empty_namespaces_with_new_line_generates_expected_cpp_namespaces");
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
 
     const std::list<std::string> empty_list;
@@ -217,7 +217,7 @@ BOOST_AUTO_TEST_CASE(single_namespace_with_new_line_generates_expected_cpp_names
     BOOST_LOG_SEV(lg, debug) << "Input: " << single_namespace;
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
     nsf.format_begin(s, single_namespace);
     const auto beg(s.str());
@@ -236,7 +236,7 @@ BOOST_AUTO_TEST_CASE(multiple_namespaces_with_new_line_generates_expected_cpp_na
     BOOST_LOG_SEV(lg, debug) << "Input: " << multiple_namespaces;
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
 
     namespace_formatter nsf(true/*anonymous_namespace*/, true/*add_new_line*/);
     nsf.format_begin(s, multiple_namespaces);
@@ -256,7 +256,7 @@ BOOST_AUTO_TEST_CASE(single_namespace_with_nested_namespaces_generates_expected_
     BOOST_LOG_SEV(lg, debug) << "Input: " << single_namespace;
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/, false/*add_new_line*/,
         true/*nested_namespaces*/);
     nsf.format_begin(s, single_namespace);
@@ -276,7 +276,7 @@ BOOST_AUTO_TEST_CASE(multiple_namespaces_with_nested_namespaces_generates_expect
     BOOST_LOG_SEV(lg, debug) << "Input: " << multiple_namespaces;
 
     std::ostringstream s;
-    using dogen::formatting::cpp::namespace_formatter;
+    using masd::dogen::formatting::cpp::namespace_formatter;
     namespace_formatter nsf(true/*anonymous_namespace*/, false/*add_new_line*/,
         true/*nested_namespaces*/);
     nsf.format_begin(s, multiple_namespaces);

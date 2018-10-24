@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_SEQUENCE_FORMATTER_HPP
-#define DOGEN_FORMATTERS_TYPES_SEQUENCE_FORMATTER_HPP
+#ifndef MASD_DOGEN_FORMATTNG_TYPES_SEQUENCE_FORMATTER_HPP
+#define MASD_DOGEN_FORMATTNG_TYPES_SEQUENCE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.formatting/types/infix_configuration.hpp"
+#include "masd.dogen.formatting/types/infix_configuration.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Helper to format sequences.

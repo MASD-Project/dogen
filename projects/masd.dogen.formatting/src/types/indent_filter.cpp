@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -29,4 +29,4 @@ auto lg(logger_factory("formatting.hydration_workflow"));
 
 }
 
-namespace dogen::formatting { }
+namespace masd::dogen::formatting { }
