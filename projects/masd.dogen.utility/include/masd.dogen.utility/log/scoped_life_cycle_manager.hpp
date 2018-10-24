@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_LOG_SCOPED_LIFE_CYCLE_MANAGER_HPP
-#define DOGEN_UTILITY_LOG_SCOPED_LIFE_CYCLE_MANAGER_HPP
+#ifndef MASD_DOGEN_UTILITY_LOG_SCOPED_LIFE_CYCLE_MANAGER_HPP
+#define MASD_DOGEN_UTILITY_LOG_SCOPED_LIFE_CYCLE_MANAGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/log/life_cycle_manager.hpp"
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 class scoped_life_cycle_manager {
 public:

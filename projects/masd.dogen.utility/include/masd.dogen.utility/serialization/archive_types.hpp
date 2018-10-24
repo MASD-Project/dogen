@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_SERIALIZATION_ARCHIVE_TYPES_HPP
-#define DOGEN_UTILITY_SERIALIZATION_ARCHIVE_TYPES_HPP
+#ifndef MASD_DOGEN_UTILITY_SERIALIZATION_ARCHIVE_TYPES_HPP
+#define MASD_DOGEN_UTILITY_SERIALIZATION_ARCHIVE_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 
-namespace dogen::utility::serialization {
+namespace masd::dogen::utility::serialization {
 
 /**
  * @brief Boost serialisation archive types.

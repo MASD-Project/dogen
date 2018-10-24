@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_UTILITY_HPP
-#define DOGEN_UTILITY_UTILITY_HPP
+#ifndef MASD_DOGEN_UTILITY_UTILITY_HPP
+#define MASD_DOGEN_UTILITY_UTILITY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
 #endif
 
 /**
- * @namespace dogen::utility
+ * @namespace masd::dogen::utility
  *
  * @brief Miscellaneous utility classes and macros.
  */
-namespace dogen::utility { }
+namespace masd::dogen::utility { }
 
 #endif

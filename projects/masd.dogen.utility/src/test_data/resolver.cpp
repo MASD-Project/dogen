@@ -21,9 +21,9 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/test_data/test_data_exception.hpp"
-#include "dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/test_data/test_data_exception.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ const std::string relative_path_to_td_dir("../test_data");
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 boost::filesystem::path resolver::test_data_directory() {
     const auto ed(filesystem::executable_directory());

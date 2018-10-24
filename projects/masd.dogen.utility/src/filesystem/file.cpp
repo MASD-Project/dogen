@@ -21,14 +21,14 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file_not_found.hpp"
-#include "dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
-auto lg(dogen::utility::log::logger_factory("utility.filesystem.file"));
+using namespace masd::dogen::utility::log;
+auto lg(logger_factory("utility.filesystem.file"));
 
 const std::string invalid_directory("Not a directory: ");
 const std::string file_not_found("File not found: ");
@@ -38,7 +38,7 @@ const std::string dot(".");
 
 }
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 std::string read_file_content(std::istream& s) {
     s.exceptions(std::ifstream::failbit | std::ifstream::badbit);

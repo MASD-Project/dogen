@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_EQUALITY_TESTER_HPP
-#define DOGEN_UTILITY_TEST_EQUALITY_TESTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_EQUALITY_TESTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_EQUALITY_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 /**
  * @brief Provides tests for different aspects of equality of domain
@@ -44,7 +44,7 @@ public:
     static void
     identical_objects_are_equal(const entity_type& a, const entity_type& b) {
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.equality_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
@@ -57,7 +57,7 @@ public:
 
     static void an_object_is_equal_to_itself(const entity_type& a) {
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.equality_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
 
@@ -75,7 +75,7 @@ public:
     static void
     distinct_objects_are_unequal(const entity_type& a, const entity_type& b) {
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.equality_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);

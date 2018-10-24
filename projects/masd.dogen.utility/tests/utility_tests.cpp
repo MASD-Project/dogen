@@ -24,18 +24,18 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/jsonify_io.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.utility/io/pair_io.hpp"
-#include "dogen.utility/io/map_io.hpp"
-#include "dogen.utility/io/array_io.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/log/life_cycle_manager.hpp"
-#include "dogen.utility/log/scoped_life_cycle_manager.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/exception/utility_exception.hpp"
-#include "dogen.utility/test/json_validator.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/io/pair_io.hpp"
+#include "masd.dogen.utility/io/map_io.hpp"
+#include "masd.dogen.utility/io/array_io.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/log/scoped_life_cycle_manager.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/test/json_validator.hpp"
 
 namespace this_is_a_test {
 
@@ -78,10 +78,12 @@ operator<<(std::ostream& stream, const complex_type& insertee) {
     return(stream);
 }
 
-class test_exception_class : public dogen::utility::exception::exception {
+using masd::dogen::utility::exception::exception;
+
+class test_exception_class : public exception {
 public:
     test_exception_class(const char* message) :
-        dogen::utility::exception::exception(message) { }
+        exception::exception(message) { }
 };
 
 const std::string test_suite("utility_tests");
@@ -98,11 +100,14 @@ std::string log_file_name(std::string function, unsigned int postfix = 0) {
 
 }
 
+using masd::dogen::utility::test::json_validator;
+using masd::dogen::utility::streaming::jsonify;
+using namespace masd::dogen::utility::log;
+
 BOOST_AUTO_TEST_SUITE(utility_tests)
 
 BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
     // exericise 1: write a simple type to log file.
-    using namespace dogen::utility::log;
     life_cycle_manager lcm;
     lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 1),
         severity_level::debug);
@@ -136,7 +141,6 @@ BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
 }
 
 BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
-    using namespace dogen::utility::log;
     logger lg(logger_factory(test_suite));
 
     {
@@ -192,7 +196,7 @@ BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_standard_exception) {
     SETUP_TEST_LOG_SOURCE("exception_shall_be_usable_as_a_standard_exception");
     const std::string message("test message");
     try {
-        throw(dogen::utility::exception::exception(message.c_str()));
+        throw(exception(message.c_str()));
         BOOST_FAIL("dogen::utility::exception::exception not thrown.");
     } catch(const std::exception& e) {
         const std::string what(e.what());
@@ -207,8 +211,7 @@ BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_boost_exception) {
     SETUP_TEST_LOG_SOURCE("exception_shall_be_usable_as_a_boost_exception");
     const std::string message("test message");
     try {
-        BOOST_THROW_EXCEPTION(
-            dogen::utility::exception::exception(message.c_str()));
+        BOOST_THROW_EXCEPTION(exception(message.c_str()));
         BOOST_FAIL("dogen::utility::exception::exception not thrown.");
     } catch(const boost::exception& e) {
         BOOST_LOG_SEV(lg, debug) << "Exception thrown as expected. diagnostic: "
@@ -246,7 +249,6 @@ BOOST_AUTO_TEST_CASE(exercise_pair_inserter) {
 
 BOOST_AUTO_TEST_CASE(exercise_jsonify_inserter) {
     SETUP_TEST_LOG_SOURCE("exercise_jsonify_inserter");
-    using dogen::utility::streaming::jsonify;
 
     // exercise 1: strings
     BOOST_LOG_SEV(lg, debug) << "std::string: "
@@ -278,7 +280,7 @@ BOOST_AUTO_TEST_CASE(valid_json_parses_successfully) {
 
     std::stringstream s;
     s << "{ \"__type__\": \"class_b\", \"prop_0\":  { \"__type__\": \"class_a\", \"prop_0\": 0, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 1, \"version\": 2 } }, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 0, \"version\": 1 } }";
-    BOOST_CHECK(dogen::utility::test::json_validator::validate(s));
+    BOOST_CHECK(json_validator::validate(s));
 }
 
 BOOST_AUTO_TEST_CASE(invalid_json_fails_to_parse) {
@@ -286,7 +288,7 @@ BOOST_AUTO_TEST_CASE(invalid_json_fails_to_parse) {
 
     std::stringstream s;
     s << "{ \"__type__\": \"class_b\", \"prop_0\":  { \"__type__\": \"class_a\", \"prop_0\": 0, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 1, \"version\": 2 } }, \"versioned_key\":  { \"__type__\": \"versioned_key\", \"id\": 0, \"version\": 1";
-    BOOST_CHECK(!dogen::utility::test::json_validator::validate(s));
+    BOOST_CHECK(!json_validator::validate(s));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

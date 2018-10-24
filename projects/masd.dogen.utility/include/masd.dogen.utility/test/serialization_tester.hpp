@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_SERIALIZATION_TESTER_HPP
-#define DOGEN_UTILITY_TEST_SERIALIZATION_TESTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_SERIALIZATION_TESTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_SERIALIZATION_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,12 +34,12 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
-#include "dogen.utility/io/jsonify_io.hpp"
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 
 template<typename Archive> void register_types(Archive& ar);
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 template<typename T>
 void check(const T& a, const T& b) {
@@ -54,7 +54,7 @@ void check(const boost::shared_ptr<T>& a, const boost::shared_ptr<T>& b) {
 template<typename T>
 void dump(dogen::utility::log::logger& lg, const T& a, const std::string& msg) {
     using dogen::utility::streaming::jsonify;
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     BOOST_LOG_SEV(lg, debug) << msg << jsonify(a);
 }
 
@@ -63,7 +63,7 @@ void dump(dogen::utility::log::logger& lg, const boost::shared_ptr<T>& a,
     const std::string& msg) {
 
     if (!a) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg, debug) << msg << "<empty>";
         return;
     }
@@ -92,7 +92,7 @@ private:
     template<typename InputArchive, typename OutputArchive>
     static void roundtrip_produces_the_same_entity(const entity_type& a) {
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.serialization_tester"));
         dump(lg, a, "original: ");
         std::ostringstream os;
@@ -121,7 +121,7 @@ public:
      */
     static void xml_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace boost::archive;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "XML serialization: ";
         roundtrip_produces_the_same_entity<xml_iarchive, xml_oarchive>(a);
@@ -132,7 +132,7 @@ public:
      */
     static void text_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace boost::archive;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "text serialization: ";
         roundtrip_produces_the_same_entity<text_iarchive, text_oarchive>(a);
@@ -143,7 +143,7 @@ public:
      */
     static void binary_roundtrip_produces_the_same_entity(const entity_type& a) {
         using namespace boost::archive;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.serialization_tester"));
         BOOST_LOG_SEV(lg, debug) << "binary serialization: ";
         roundtrip_produces_the_same_entity<binary_iarchive, binary_oarchive>(a);

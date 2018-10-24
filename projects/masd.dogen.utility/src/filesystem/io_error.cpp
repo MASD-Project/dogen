@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/filesystem/io_error.hpp"
+#include "masd.dogen.utility/filesystem/io_error.hpp"
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 io_error::io_error(std::string message)
     : dogen::utility::exception::exception(message) { }

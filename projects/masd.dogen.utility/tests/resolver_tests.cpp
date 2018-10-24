@@ -23,12 +23,12 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/tds_test_good.hpp"
-#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/tds_test_good.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
 
 namespace {
 
@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_SUITE(resolver_tests)
 
 BOOST_AUTO_TEST_CASE(resolver_returns_test_data_directory_for_empty_paths) {
     SETUP_TEST_LOG_SOURCE("resolver_returns_test_data_directory_for_empty_paths");
-    using dogen::utility::test_data::resolver;
+    using masd::dogen::utility::test_data::resolver;
     const auto r(resolver::resolve(boost::filesystem::path()));
 
     BOOST_LOG_SEV(lg, info) << "path: " << r.string();
@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(resolver_returns_test_data_directory_for_empty_paths) {
 
 BOOST_AUTO_TEST_CASE(resolver_returns_absolute_path_for_relative_path) {
     SETUP_TEST_LOG_SOURCE("resolver_returns_absolute_path_for_relative_path");
-    using dogen::utility::test_data::resolver;
+    using masd::dogen::utility::test_data::resolver;
     const auto r(resolver::resolve(good_dataset));
 
     BOOST_LOG_SEV(lg, info) << "path: " << r.string();
@@ -66,8 +66,8 @@ BOOST_AUTO_TEST_CASE(resolver_returns_absolute_path_for_relative_path) {
 
 BOOST_AUTO_TEST_CASE(resolver_does_not_throw_for_non_existent_paths) {
     SETUP_TEST_LOG_SOURCE("resolver_does_not_throw_for_non_existent_paths");
-    using dogen::utility::test_data::resolver;
-    using dogen::utility::test_data::tds_test_good;
+    using masd::dogen::utility::test_data::resolver;
+    using masd::dogen::utility::test_data::tds_test_good;
     const auto r(resolver::resolve(tds_test_good::non_existent_file()));
 
     BOOST_LOG_SEV(lg, info) << "path: " << r.string();
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(resolver_does_not_throw_for_non_existent_paths) {
 
 BOOST_AUTO_TEST_CASE(validating_resolver_returns_test_data_directory_for_empty_paths) {
     SETUP_TEST_LOG_SOURCE("validating_resolver_returns_test_data_directory_for_empty_paths");
-    using dogen::utility::test_data::validating_resolver;
+    using masd::dogen::utility::test_data::validating_resolver;
     const auto r(validating_resolver::resolve(boost::filesystem::path()));
 
     BOOST_LOG_SEV(lg, info) << "path: " << r.string();
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(validating_resolver_returns_test_data_directory_for_empty_p
 
 BOOST_AUTO_TEST_CASE(validating_resolver_returns_absolute_path_for_relative_path) {
     SETUP_TEST_LOG_SOURCE("validating_resolver_returns_absolute_path_for_relative_path");
-    using dogen::utility::test_data::validating_resolver;
+    using masd::dogen::utility::test_data::validating_resolver;
     const auto r(validating_resolver::resolve(good_dataset));
 
     BOOST_LOG_SEV(lg, info) << "path: " << r.string();
@@ -97,12 +97,12 @@ BOOST_AUTO_TEST_CASE(validating_resolver_returns_absolute_path_for_relative_path
 
 BOOST_AUTO_TEST_CASE(validating_resolver_throws_for_non_existent_paths) {
     SETUP_TEST_LOG_SOURCE("validating_resolver_throws_for_non_existent_paths");
-    using dogen::utility::test_data::tds_test_good;
+    using masd::dogen::utility::test_data::tds_test_good;
     const auto i(tds_test_good::non_existent_file());
     BOOST_LOG_SEV(lg, info) << "input path: " << i.string();
 
-    using dogen::utility::test_data::validating_resolver;
-    using dogen::utility::filesystem::file_not_found;
+    using masd::dogen::utility::test_data::validating_resolver;
+    using masd::dogen::utility::filesystem::file_not_found;
 
     BOOST_CHECK_EXCEPTION(
         validating_resolver::resolve(i),

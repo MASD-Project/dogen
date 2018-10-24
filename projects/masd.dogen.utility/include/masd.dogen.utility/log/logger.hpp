@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_LOG_LOGGER_HPP
-#define DOGEN_UTILITY_LOG_LOGGER_HPP
+#ifndef MASD_DOGEN_UTILITY_LOG_LOGGER_HPP
+#define MASD_DOGEN_UTILITY_LOG_LOGGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <boost/log/sources/record_ostream.hpp>
 #include <boost/log/sources/severity_channel_logger.hpp>
-#include "dogen.utility/log/severity_level.hpp"
+#include "masd.dogen.utility/log/severity_level.hpp"
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 typedef boost::log::sources::severity_channel_logger<
     severity_level,

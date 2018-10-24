@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_EXCEPTION_CHECKERS_HPP
-#define DOGEN_UTILITY_TEST_EXCEPTION_CHECKERS_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_EXCEPTION_CHECKERS_HPP
+#define MASD_DOGEN_UTILITY_TEST_EXCEPTION_CHECKERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 template<typename Exception>
 class contains_checker {

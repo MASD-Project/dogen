@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_TEST_DATA_HPP
-#define DOGEN_UTILITY_TEST_DATA_TEST_DATA_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_DATA_TEST_DATA_HPP
+#define MASD_DOGEN_UTILITY_TEST_DATA_TEST_DATA_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 # pragma once
@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 
 /**
- * @namespace dogen::utility::test_data
+ * @namespace masd::dogen::utility::test_data
  *
  * @brief Contains dogen's static factories and helpers to access
  * test data, as well as management of test data sets.
@@ -92,6 +92,6 @@
  * (e.g. rebase_TEST_DATA_SET_NAME).
  *
  */
-namespace dogen::utility::test_data { }
+namespace masd::dogen::utility::test_data { }
 
 #endif

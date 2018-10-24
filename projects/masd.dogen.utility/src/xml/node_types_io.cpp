@@ -21,8 +21,8 @@
 #include <string>
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/exception/invalid_enum_value.hpp"
-#include "dogen.utility/xml/node_types_io.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/xml/node_types_io.hpp"
 
 namespace {
 
@@ -49,7 +49,7 @@ const std::string error_message("Invalid or unexpected node type");
 
 }
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, node_types value) {
     switch (value) {

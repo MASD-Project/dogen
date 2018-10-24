@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_MOVE_ASSIGNMENT_COPY_TESTER_HPP
-#define DOGEN_UTILITY_TEST_MOVE_ASSIGNMENT_COPY_TESTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_MOVE_ASSIGNMENT_COPY_TESTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_MOVE_ASSIGNMENT_COPY_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 /**
  * @brief Provides tests for copy construction, as well as move and
@@ -45,7 +45,7 @@ public:
      * state.
      */
     static void moved_objects_are_equal(const entity_type& a) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.move_assignment_copy"));
         BOOST_LOG_SEV(lg, debug) << "a: " << a;
 
@@ -66,7 +66,7 @@ public:
      * their state.
      */
     static void assigned_objects_are_equal(const entity_type& a) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.move_assignment_copy"));
         BOOST_LOG_SEV(lg, debug) << "a: " << a;
 
@@ -87,7 +87,7 @@ public:
      * state.
      */
     static void copy_constructed_objects_are_equal(const entity_type& a) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.move_assignment_copy"));
         BOOST_LOG_SEV(lg, debug) << "a: " << a;
 

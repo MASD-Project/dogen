@@ -21,12 +21,12 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/test/results_collector.hpp>
-#include "dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 void log_if_test_has_failed() {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory("utility.test"));
 
     namespace ut = boost::unit_test;
@@ -44,7 +44,7 @@ scoped_life_cycle_manager_factory(std::string test_module,
     stream << "log/" << test_module << "/" << test_suite
            << "/" << function_name;
 
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     return scoped_life_cycle_manager(stream.str());
 }
 

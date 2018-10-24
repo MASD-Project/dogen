@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_EXCEPTION_EXCEPTION_HPP
-#define DOGEN_UTILITY_EXCEPTION_EXCEPTION_HPP
+#ifndef MASD_DOGEN_UTILITY_EXCEPTION_EXCEPTION_HPP
+#define MASD_DOGEN_UTILITY_EXCEPTION_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::utility::exception {
+namespace masd::dogen::utility::exception {
 
 /**
  * @brief base class for all exceptions within dogen.

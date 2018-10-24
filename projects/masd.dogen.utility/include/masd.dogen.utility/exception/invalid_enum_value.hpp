@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_EXCEPTION_INVALID_ENUM_VALUE_HPP
-#define DOGEN_UTILITY_EXCEPTION_INVALID_ENUM_VALUE_HPP
+#ifndef MASD_DOGEN_UTILITY_EXCEPTION_INVALID_ENUM_VALUE_HPP
+#define MASD_DOGEN_UTILITY_EXCEPTION_INVALID_ENUM_VALUE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen::utility::exception {
+namespace masd::dogen::utility::exception {
 
 /**
  * @brief The exception thrown when an enum has an unexpected value.

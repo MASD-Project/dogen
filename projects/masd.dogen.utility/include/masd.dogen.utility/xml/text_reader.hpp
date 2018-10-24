@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_XML_TEXT_READER_HPP
-#define DOGEN_UTILITY_XML_TEXT_READER_HPP
+#ifndef MASD_DOGEN_UTILITY_XML_TEXT_READER_HPP
+#define MASD_DOGEN_UTILITY_XML_TEXT_READER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <utility>
 #include <boost/filesystem/path.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/xml/exception.hpp"
-#include "dogen.utility/xml/node_types.hpp"
+#include "masd.dogen.utility/xml/exception.hpp"
+#include "masd.dogen.utility/xml/node_types.hpp"
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 /**
  * @brief Represents a reader that provides fast, non-cached,

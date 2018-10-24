@@ -23,13 +23,13 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test_data/xml_reader.hpp"
-#include "dogen.utility/test_data/test_data.hpp"
-#include "dogen.utility/test_data/generate_container.hpp"
-#include "dogen.utility/test_data/generator.hpp"
-#include "dogen.utility/test_data/sequence.hpp"
-#include "dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test_data/xml_reader.hpp"
+#include "masd.dogen.utility/test_data/test_data.hpp"
+#include "masd.dogen.utility/test_data/generate_container.hpp"
+#include "masd.dogen.utility/test_data/generator.hpp"
+#include "masd.dogen.utility/test_data/sequence.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ const std::string test_suite("generators_tests");
 
 const std::string non_existent_file_name("non_existent_file");
 
-typedef dogen::utility::test_data::generator<int> int_generator;
+typedef masd::dogen::utility::test_data::generator<int> int_generator;
 
 /**
  * @brief Generator with a fixed number of terms.
@@ -51,7 +51,7 @@ public:
     }
 };
 
-typedef dogen::utility::test_data::sequence<finite_generator> finite_sequence;
+typedef masd::dogen::utility::test_data::sequence<finite_generator> finite_sequence;
 
 /**
  * @brief Generator for which there is always a next term.
@@ -64,11 +64,15 @@ public:
     }
 };
 
-typedef dogen::utility::test_data::sequence<
+typedef masd::dogen::utility::test_data::sequence<
     infinite_generator>
 infinite_sequence;
 
 }
+
+using masd::dogen::utility::test_data::generate_vector;
+using masd::dogen::utility::test_data::sequence_exhausted;
+using masd::dogen::utility::test_data::container_generation_error;
 
 BOOST_AUTO_TEST_SUITE(generators_tests)
 
@@ -137,7 +141,7 @@ BOOST_AUTO_TEST_CASE(generate_n_cannot_create_more_terms_than_sequence_length) {
     try {
         std::generate_n(std::back_inserter(terms), beyond_end, sequence);
         BOOST_FAIL("Expected sequence_exhausted exception to be thrown.");
-    } catch (const dogen::utility::test_data::sequence_exhausted& e) {
+    } catch (const sequence_exhausted& e) {
         BOOST_LOG_SEV(lg, info) << "Exception thrown as expected: " << e.what();
         BOOST_CHECK(true);
     }
@@ -149,7 +153,6 @@ BOOST_AUTO_TEST_CASE(generate_n_cannot_create_more_terms_than_sequence_length) {
  */
 BOOST_AUTO_TEST_CASE(generate_vector_can_create_all_terms_in_finite_sequence) {
     SETUP_TEST_LOG_SOURCE("generate_vector_can_create_all_terms_in_finite_sequence");
-    using dogen::utility::test_data::generate_vector;
     finite_sequence sequence;
     std::vector<finite_sequence::result_type>
         terms(generate_vector<finite_sequence>());
@@ -166,7 +169,6 @@ BOOST_AUTO_TEST_CASE(generate_vector_can_create_subset_of_terms_in_finite_sequen
     finite_sequence sequence;
     const unsigned int half_size(sequence.length() / 2);
 
-    using dogen::utility::test_data::generate_vector;
     std::vector<finite_sequence::result_type>
         terms(generate_vector<finite_sequence>(half_size));
     BOOST_CHECK(terms.size() == half_size);
@@ -182,7 +184,6 @@ BOOST_AUTO_TEST_CASE(generate_vector_can_create_subset_of_terms_in_infinite_sequ
     infinite_sequence sequence;
     const unsigned int size(10);
 
-    using dogen::utility::test_data::generate_vector;
     std::vector<infinite_sequence::result_type>
         terms(generate_vector<infinite_sequence>(size));
     BOOST_CHECK(terms.size() == size);
@@ -199,11 +200,10 @@ BOOST_AUTO_TEST_CASE(generate_vector_cannot_create_more_terms_than_sequence_leng
     const unsigned int beyond_end(sequence.length() + 1);
 
     try {
-        using dogen::utility::test_data::generate_vector;
         std::vector<infinite_sequence::result_type>
             terms(generate_vector<finite_sequence>(beyond_end));
         BOOST_FAIL("Expected container_generation_error exception.");
-    } catch (const dogen::utility::test_data::container_generation_error& e) {
+    } catch (const container_generation_error& e) {
         BOOST_LOG_SEV(lg, info) << "Exception thrown as expected: " << e.what();
         BOOST_CHECK(true);
     }
@@ -217,11 +217,10 @@ BOOST_AUTO_TEST_CASE(generate_vector_throws_when_generating_all_terms_for_infini
     SETUP_TEST_LOG_SOURCE("generate_vector_throws_when_generating_all_terms_for_infinite_sequence");
     infinite_sequence sequence;
     try {
-        using dogen::utility::test_data::generate_vector;
         std::vector<infinite_sequence::result_type>
             terms(generate_vector<infinite_sequence>());
         BOOST_FAIL("Expected container_generation_error exception.");
-    } catch (const dogen::utility::test_data::container_generation_error& e) {
+    } catch (const container_generation_error& e) {
         BOOST_LOG_SEV(lg, info) << "Exception thrown as expected: " << e.what();
         BOOST_CHECK(true);
     }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_HASH_LIST_HASH_HPP
-#define DOGEN_UTILITY_HASH_LIST_HASH_HPP
+#ifndef MASD_DOGEN_UTILITY_HASH_LIST_HASH_HPP
+#define MASD_DOGEN_UTILITY_HASH_LIST_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <list>
 #include <functional>
-#include "dogen.utility/hash/combine.hpp"
+#include "masd.dogen.utility/hash/combine.hpp"
 
 namespace std {
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_FILESYSTEM_FILE_HPP
-#define DOGEN_UTILITY_FILESYSTEM_FILE_HPP
+#ifndef MASD_DOGEN_UTILITY_FILESYSTEM_FILE_HPP
+#define MASD_DOGEN_UTILITY_FILESYSTEM_FILE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,10 +32,10 @@
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "dogen.utility/filesystem/io_error.hpp"
+#include "masd.dogen.utility/filesystem/io_error.hpp"
 
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 /**
  * @brief Returns the contents of the file.

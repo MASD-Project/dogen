@@ -21,10 +21,10 @@
 #include <ostream>
 #include <iomanip>
 #include <boost/io/ios_state.hpp>
-#include "dogen.utility/xml/node_types_io.hpp"
-#include "dogen.utility/xml/text_reader_io.hpp"
+#include "masd.dogen.utility/xml/node_types_io.hpp"
+#include "masd.dogen.utility/xml/text_reader_io.hpp"
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, const text_reader& value) {
     boost::io::ios_flags_saver ifs(stream);

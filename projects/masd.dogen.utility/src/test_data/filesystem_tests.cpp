@@ -20,10 +20,10 @@
  */
 #include <string>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/test_data.hpp"
-#include "dogen.utility/test_data/filesystem_tests.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/test_data.hpp"
+#include "masd.dogen.utility/test_data/filesystem_tests.hpp"
 
 using boost::filesystem::path;
 
@@ -49,7 +49,7 @@ const path expected_file_to_overwrite_txt(
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 path filesystem_tests::data_set() {
     return validating_resolver::resolve(::data_set);

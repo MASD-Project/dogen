@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/seam.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/seam.hpp"
 
 using boost::filesystem::path;
 
@@ -46,7 +46,7 @@ path actual_complex_template_stitch_cpp(
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 path seam::data_set() {
     return validating_resolver::resolve(::data_set);

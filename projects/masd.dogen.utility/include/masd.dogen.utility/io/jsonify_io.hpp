@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_JSONIFY_IO_HPP
-#define DOGEN_UTILITY_IO_JSONIFY_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_JSONIFY_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_JSONIFY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <ostream>
 
-namespace dogen::utility::streaming::detail {
+namespace masd::dogen::utility::streaming::detail {
 
 template<typename Target>
 class json_number_type {
@@ -72,7 +72,7 @@ private:
 
 }
 
-namespace dogen::utility::streaming {
+namespace masd::dogen::utility::streaming {
 
 /**
  * @brief String handling.
@@ -151,7 +151,7 @@ jsonify(const Insertee& insertee) {
 
 }
 
-namespace dogen::utility::streaming::detail {
+namespace masd::dogen::utility::streaming::detail {
 
 template<typename Target>
 inline std::ostream&

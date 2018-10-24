@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_SERIALIZATION_HELPER_HPP
-#define DOGEN_UTILITY_TEST_SERIALIZATION_HELPER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_SERIALIZATION_HELPER_HPP
+#define MASD_DOGEN_UTILITY_TEST_SERIALIZATION_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,20 +30,20 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include <boost/filesystem/operations.hpp>
-#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
 
 template<typename Archive> void register_types(Archive& ar);
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 /**
  * @brief Reads in the file given by path and deserialises it.
  */
 template<typename Entity>
 Entity xml_deserialize(boost::filesystem::path path) {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory("utility.test.xml_deserialize"));
     BOOST_LOG_SEV(lg, debug) << "Reading file: " << path.string();
 
@@ -69,7 +69,7 @@ Entity xml_deserialize(boost::filesystem::path path) {
  */
 template<typename Entity>
 void xml_serialize(boost::filesystem::path path, Entity entity) {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory("utility.test.xml_serialize"));
     BOOST_LOG_SEV(lg, debug) << "Creating file: " << path.string();
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_HASH_TESTER_HPP
-#define DOGEN_UTILITY_TEST_HASH_TESTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_HASH_TESTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_HASH_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <functional>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 template<typename Sequence>
 class hash_tester {
@@ -45,7 +45,7 @@ public:
         const entity_type b(a);
 
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.hash_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
@@ -64,7 +64,7 @@ public:
         const entity_type b(sequence());
 
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.hash_tester"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);

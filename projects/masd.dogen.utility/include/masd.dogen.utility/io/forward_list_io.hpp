@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
-#define DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_FORWARD_LIST_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <ostream>
 #include <forward_list>
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
 namespace std {
 
@@ -36,7 +36,7 @@ inline ostream& operator<<(ostream& s, const forward_list<Containee>& l) {
     s << "[ ";
     for(auto i(l.cbegin()); i != l.cend(); ++i) {
         if (i != l.cbegin()) s << ", ";
-        s << dogen::utility::streaming::jsonify(*i);
+        s << masd::dogen::utility::streaming::jsonify(*i);
     }
     s << " ]";
     return(s);

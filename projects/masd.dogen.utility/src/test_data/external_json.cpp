@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/external_json.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/external_json.hpp"
 
 using boost::filesystem::path;
 
@@ -59,7 +59,7 @@ path actual("external.json/actual");
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 path external_json::data_set() {
     return validating_resolver::resolve(::data_set);

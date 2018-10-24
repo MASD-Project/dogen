@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_HASH_COMBINE_HPP
-#define DOGEN_UTILITY_HASH_COMBINE_HPP
+#ifndef MASD_DOGEN_UTILITY_HASH_COMBINE_HPP
+#define MASD_DOGEN_UTILITY_HASH_COMBINE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <functional>
 
-namespace dogen::utility::hash {
+namespace masd::dogen::utility::hash {
 
 template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value)

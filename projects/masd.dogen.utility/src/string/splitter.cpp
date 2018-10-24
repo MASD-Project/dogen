@@ -22,13 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include <boost/range/algorithm.hpp>
 #include <boost/algorithm/string/trim.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/string/splitter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("utility.string.splitter"));
 
 const char* comma_delimiter = ",";
@@ -38,7 +38,7 @@ const std::string multiple_delimiters("String has more than one delimiter: ");
 
 }
 
-namespace dogen::utility::string {
+namespace masd::dogen::utility::string {
 
 std::list<std::string> splitter::split_scoped(const std::string& n) {
     BOOST_LOG_SEV(lg, debug) << "Parsing scoped name: " << n;

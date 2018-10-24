@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_DATA_GENERATOR_HPP
-#define DOGEN_UTILITY_TEST_DATA_GENERATOR_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_DATA_GENERATOR_HPP
+#define MASD_DOGEN_UTILITY_TEST_DATA_GENERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 /**
  * @brief Base class for generators.

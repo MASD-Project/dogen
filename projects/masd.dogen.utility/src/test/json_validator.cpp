@@ -22,7 +22,7 @@
 #include <istream>
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/support_istream_iterator.hpp>
-#include "dogen.utility/test/json_validator.hpp"
+#include "masd.dogen.utility/test/json_validator.hpp"
 
 namespace {
 
@@ -48,7 +48,7 @@ struct json_grammar : qi::grammar<Iterator, Skipper> {
 
 }
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 bool json_validator::validate(std::istream& s) {
     boost::spirit::istream_iterator it(s);

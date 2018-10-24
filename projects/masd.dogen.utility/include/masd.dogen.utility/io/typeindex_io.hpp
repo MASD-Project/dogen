@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_TYPE_INDEX_IO_HPP
-#define DOGEN_UTILITY_IO_TYPE_INDEX_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_TYPE_INDEX_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_TYPE_INDEX_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,12 +27,12 @@
 
 #include <ostream>
 #include <typeindex>
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
 namespace std {
 
 inline ostream& operator<<(ostream& s, const type_index& ti) {
-    using dogen::utility::streaming::jsonify;
+    using masd::dogen::utility::streaming::jsonify;
     s << "{ \"type\": \"" << jsonify(ti.name()) << "\" } ";
     return s;
 }

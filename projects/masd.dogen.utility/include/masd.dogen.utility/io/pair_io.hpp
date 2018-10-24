@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_PAIR_IO_HPP
-#define DOGEN_UTILITY_IO_PAIR_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_PAIR_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_PAIR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,13 +27,13 @@
 
 #include <ostream>
 #include <utility>
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
 namespace std {
 
 template<typename Key, typename Value>
 inline ostream& operator<<(ostream& stream, const pair<Key, Value>& pair) {
-    using dogen::utility::streaming::jsonify;
+    using masd::dogen::utility::streaming::jsonify;
     stream << "{ \"key\": " << jsonify(pair.first)
            << ", \"value\": " << jsonify(pair.second) << " }";
     return(stream);

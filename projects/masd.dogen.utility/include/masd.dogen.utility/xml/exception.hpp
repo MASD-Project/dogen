@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_XML_EXCEPTION_HPP
-#define DOGEN_UTILITY_XML_EXCEPTION_HPP
+#ifndef MASD_DOGEN_UTILITY_XML_EXCEPTION_HPP
+#define MASD_DOGEN_UTILITY_XML_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 class exception : public dogen::utility::exception::exception {
 public:

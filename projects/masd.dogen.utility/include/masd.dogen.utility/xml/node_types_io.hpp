@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_XML_NODE_TYPE_IO_HPP
-#define DOGEN_UTILITY_XML_NODE_TYPE_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_XML_NODE_TYPE_IO_HPP
+#define MASD_DOGEN_UTILITY_XML_NODE_TYPE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.utility/xml/node_types.hpp"
+#include "masd.dogen.utility/xml/node_types.hpp"
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, node_types value);
 

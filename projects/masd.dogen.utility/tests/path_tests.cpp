@@ -23,10 +23,10 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_SUITE(path_tests)
 BOOST_AUTO_TEST_CASE(path_to_executable_returns_expected_results) {
     SETUP_TEST_LOG_SOURCE("path_to_executable_returns_expected_results");
 
-    const auto p(dogen::utility::filesystem::executable_directory());
+    const auto p(masd::dogen::utility::filesystem::executable_directory());
     BOOST_LOG_SEV(lg, info) << "input path: " << p.string();
     BOOST_CHECK(true);
 }
@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(path_to_executable_returns_expected_results) {
 BOOST_AUTO_TEST_CASE(path_to_data_directory_returns_expected_results) {
     SETUP_TEST_LOG_SOURCE("path_to_data_directory_returns_expected_results");
 
-    const auto p(dogen::utility::filesystem::data_files_directory());
+    const auto p(masd::dogen::utility::filesystem::data_files_directory());
     BOOST_LOG_SEV(lg, info) << "input path: " << p.string();
     BOOST_CHECK(true);
 }

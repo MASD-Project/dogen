@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/severity_level.hpp"
-#include "dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/log/severity_level.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ const std::string error_level("error");
 
 }
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 severity_level to_severity_level(const std::string& s) {
     if (s == trace_level)

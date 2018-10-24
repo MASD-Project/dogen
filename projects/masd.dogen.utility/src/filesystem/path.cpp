@@ -30,8 +30,8 @@
 #include <windows.h>
 #endif
 #include "dogen/version.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
 
 #ifdef __APPLE__
 extern "C" int _NSGetExecutablePath(char* buf, unsigned int * bufsize);
@@ -58,7 +58,7 @@ const boost::filesystem::path in_share_dogen_dir("../share/dogen/data");
 
 }
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 boost::filesystem::path executable_directory() {
 #if defined __APPLE__

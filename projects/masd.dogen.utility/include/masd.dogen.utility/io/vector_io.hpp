@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_VECTOR_IO_HPP
-#define DOGEN_UTILITY_IO_VECTOR_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_VECTOR_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_VECTOR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <vector>
 #include <ostream>
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
 namespace std {
 
@@ -38,7 +38,7 @@ inline ostream& operator<<(ostream& stream, const vector<Containee>& vector) {
         i != vector.end();
         ++i) {
         if (i != vector.begin()) stream << ", ";
-        stream << dogen::utility::streaming::jsonify(*i);
+        stream << masd::dogen::utility::streaming::jsonify(*i);
     }
     stream << " ]";
     return(stream);

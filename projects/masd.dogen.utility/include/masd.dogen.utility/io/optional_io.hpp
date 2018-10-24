@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_OPTIONAL_IO_HPP
-#define DOGEN_UTILITY_IO_OPTIONAL_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_OPTIONAL_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_OPTIONAL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <ostream>
 #include <boost/optional.hpp>
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
 namespace std {
 
 template<typename T>
 inline ostream&
 operator<<(ostream& stream, const boost::optional<T>& optional) {
-    using dogen::utility::streaming::jsonify;
+    using masd::dogen::utility::streaming::jsonify;
     if (optional)
         return stream << *optional;
 

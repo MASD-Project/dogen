@@ -23,9 +23,9 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test_data/xml_reader.hpp"
-#include "dogen.utility/test_data/external_dia.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test_data/xml_reader.hpp"
+#include "masd.dogen.utility/test_data/external_dia.hpp"
 
 namespace {
 
@@ -53,7 +53,7 @@ const std::string class_namespace_file_diaxml(
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << data_set << " main directory: " << path;
     BOOST_CHECK(path.is_absolute());
@@ -63,7 +63,7 @@ void test_main_directory(boost::filesystem::path path, std::string data_set) {
 }
 
 void test_non_existent_file(boost::filesystem::path path, std::string extension) {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "Non-existent file:" << path;
     BOOST_CHECK(path.is_absolute());
@@ -73,7 +73,7 @@ void test_non_existent_file(boost::filesystem::path path, std::string extension)
 }
 
 void test_valid_file(boost::filesystem::path path, std::string postfix) {
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "File:" << path;
     BOOST_CHECK(path.is_absolute());
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_SUITE(test_data_set_tests)
 
 BOOST_AUTO_TEST_CASE(xml_reader_passes_sanity_checks) {
     SETUP_TEST_LOG("xml_reader_passes_sanity_checks");
-    using dogen::utility::test_data::xml_reader;
+    using masd::dogen::utility::test_data::xml_reader;
 
     test_main_directory(xml_reader::data_set(), xml_reader_dir);
     test_main_directory(xml_reader::input(), xml_reader_input_dir);
@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(xml_reader_passes_sanity_checks) {
 
 BOOST_AUTO_TEST_CASE(external_dia_passes_sanity_checks) {
     SETUP_TEST_LOG("external_dia_passes_sanity_checks");
-    using dogen::utility::test_data::external_dia;
+    using masd::dogen::utility::test_data::external_dia;
     test_main_directory(external_dia::data_set(), external_dia_dir);
     test_main_directory(external_dia::input(), external_dia_input_dir);
     test_main_directory(external_dia::expected(), external_dia_expected_dir);

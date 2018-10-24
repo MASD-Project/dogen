@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_SHARED_PTR_IO_HPP
-#define DOGEN_UTILITY_IO_SHARED_PTR_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_SHARED_PTR_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_SHARED_PTR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,13 +27,13 @@
 
 #include <boost/shared_ptr.hpp>
 #include <ostream>
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
 namespace boost {
 
 template<typename T>
 inline std::ostream& operator<<(std::ostream& s, const shared_ptr<T>& p) {
-    using dogen::utility::streaming::jsonify;
+    using masd::dogen::utility::streaming::jsonify;
     if (p)
         s << *p;
     else

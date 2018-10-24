@@ -24,12 +24,12 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/xml/exception.hpp"
-#include "dogen.utility/xml/text_reader.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/xml/exception.hpp"
+#include "masd.dogen.utility/xml/text_reader.hpp"
 
-using namespace dogen::utility::log;
-using dogen::utility::xml::exception;
+using namespace masd::dogen::utility::log;
+using masd::dogen::utility::xml::exception;
 
 namespace {
 
@@ -112,7 +112,7 @@ bool string_to_bool(const std::string& value) {
 
 }
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 /**
  * @brief Pimpl implementation of the reader.

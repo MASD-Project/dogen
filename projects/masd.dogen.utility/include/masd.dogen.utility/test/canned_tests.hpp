@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_CANNED_TESTS_HPP
-#define DOGEN_UTILITY_TEST_CANNED_TESTS_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_CANNED_TESTS_HPP
+#define MASD_DOGEN_UTILITY_TEST_CANNED_TESTS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/io_tester.hpp"
-#include "dogen.utility/test/hash_tester.hpp"
-#include "dogen.utility/test/move_assignment_copy_tester.hpp"
-#include "dogen.utility/test/equality_tester.hpp"
-#include "dogen.utility/test/serialization_tester.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/io_tester.hpp"
+#include "masd.dogen.utility/test/hash_tester.hpp"
+#include "masd.dogen.utility/test/move_assignment_copy_tester.hpp"
+#include "masd.dogen.utility/test/equality_tester.hpp"
+#include "masd.dogen.utility/test/serialization_tester.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 template<typename Sequence>
 void test_equality() {

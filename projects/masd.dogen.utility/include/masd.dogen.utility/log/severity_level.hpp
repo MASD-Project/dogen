@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_LOG_SEVERITY_LEVEL_HPP
-#define DOGEN_UTILITY_LOG_SEVERITY_LEVEL_HPP
+#ifndef MASD_DOGEN_UTILITY_LOG_SEVERITY_LEVEL_HPP
+#define MASD_DOGEN_UTILITY_LOG_SEVERITY_LEVEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 /**
  * @brief Logging severity.

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_SERIALIZATION_XML_HELPER_HPP
-#define DOGEN_UTILITY_SERIALIZATION_XML_HELPER_HPP
+#ifndef MASD_DOGEN_UTILITY_SERIALIZATION_XML_HELPER_HPP
+#define MASD_DOGEN_UTILITY_SERIALIZATION_XML_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,9 +31,9 @@
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
 
-namespace dogen::utility::serialization {
+namespace masd::dogen::utility::serialization {
 
 /**
  * @brief Reads in the file given by path and deserialises it.

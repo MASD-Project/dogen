@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/northwind.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/northwind.hpp"
 
 using boost::filesystem::path;
 
@@ -33,7 +33,7 @@ path input_northwind_ascii_sql("northwind/input/northwind_ascii.sql");
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 path northwind::data_set() {
     return validating_resolver::resolve(::data_set);

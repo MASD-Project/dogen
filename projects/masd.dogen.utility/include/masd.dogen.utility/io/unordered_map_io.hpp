@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_IO_UNORDERED_MAP_IO_HPP
-#define DOGEN_UTILITY_IO_UNORDERED_MAP_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_IO_UNORDERED_MAP_IO_HPP
+#define MASD_DOGEN_UTILITY_IO_UNORDERED_MAP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <ostream>
 #include <unordered_map>
-#include "dogen.utility/io/pair_io.hpp"
+#include "masd.dogen.utility/io/pair_io.hpp"
 
 namespace std {
 

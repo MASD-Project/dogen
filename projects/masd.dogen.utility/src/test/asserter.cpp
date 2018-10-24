@@ -31,12 +31,12 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/io/set_io.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.utility/serialization/xml_helper.hpp"
-#include "dogen.utility/test/bytewise_file_asserter.hpp"
-#include "dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/io/set_io.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/serialization/xml_helper.hpp"
+#include "masd.dogen.utility/test/bytewise_file_asserter.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
 
 using boost::filesystem::path;
 
@@ -67,8 +67,8 @@ bool compare_paths(
     const auto a(normalise(actual_tuple.get<0>(), actual_tuple.get<1>()));
     const auto e(normalise(expected_tuple.get<0>(), expected_tuple.get<1>()));
 
-    using namespace dogen::utility::log;
-    auto lg(dogen::utility::test::asserter::logger());
+    using namespace masd::dogen::utility::log;
+    auto lg(masd::dogen::utility::test::asserter::logger());
     BOOST_LOG_SEV(lg, debug) << "actual paths: " << a;
     BOOST_LOG_SEV(lg, debug) << "expected paths: " << e;
     if (a != e) {
@@ -89,13 +89,12 @@ bool compare_paths(
 
 }
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
-dogen::utility::log::logger asserter::lg_(
-    dogen::utility::log::logger_factory("utility.test.asserter"));
+using namespace masd::dogen::utility::log;
+logger asserter::lg_(logger_factory("utility.test.asserter"));
 
 bool asserter::handle_assert(const bool result, const std::string& assertion) {
-    using namespace dogen::utility::log;
     if (!result)
         BOOST_LOG_SEV(lg_, error) << assertion << " failed.";
     else
@@ -105,7 +104,6 @@ bool asserter::handle_assert(const bool result, const std::string& assertion) {
 
 void asserter::
 log_strings(const std::string& expected, const std::string& actual) {
-    using namespace dogen::utility::log;
     BOOST_LOG_SEV(lg_, debug) << "expected: <start>"
                               << (expected.empty() ? empty_marker : expected)
                               << "<end>";
@@ -129,7 +127,7 @@ bool asserter::assert_directory(const boost::filesystem::path& expected_path,
     const boost::filesystem::path& actual_path,
     const std::vector<file_asserter::shared_ptr>& file_asserters) {
 
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     BOOST_LOG_SEV(lg_, debug) << "expected directory: " << expected_path;
     BOOST_LOG_SEV(lg_, debug) << "actual directory: " << actual_path;
 

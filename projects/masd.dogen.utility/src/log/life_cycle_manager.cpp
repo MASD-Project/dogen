@@ -28,8 +28,8 @@
 #include <boost/log/core.hpp>
 #include <boost/core/null_deleter.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen.utility/exception/invalid_enum_value.hpp"
-#include "dogen.utility/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/log/life_cycle_manager.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ const std::string time_stamp_format("%Y-%m-%d %H:%M:%S.%f");
 
 }
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 void life_cycle_manager::create_file_backend(
     boost::filesystem::path file_name, const severity_level severity) {

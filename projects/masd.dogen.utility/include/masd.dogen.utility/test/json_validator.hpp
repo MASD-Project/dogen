@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_JSON_VALIDATOR_HPP
-#define DOGEN_UTILITY_TEST_JSON_VALIDATOR_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_JSON_VALIDATOR_HPP
+#define MASD_DOGEN_UTILITY_TEST_JSON_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 class json_validator {
 public:

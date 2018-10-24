@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_ASSERTER_HPP
-#define DOGEN_UTILITY_TEST_ASSERTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_ASSERTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_ASSERTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,11 +27,11 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/test/xml_serialization_helper.hpp"
-#include "dogen.utility/test/file_asserter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/test/xml_serialization_helper.hpp"
+#include "masd.dogen.utility/test/file_asserter.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 class asserter {
 public:
@@ -65,7 +65,7 @@ public:
      */
     template<typename Entity>
     static bool assert_object(const Entity& expected, const Entity& actual) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "expected: '" << expected << "'";
         BOOST_LOG_SEV(lg_, debug) << "  actual: '" << actual << "'";
         return handle_assert(expected == actual, "assert object");
@@ -87,7 +87,7 @@ public:
         const Entity& actual) {
 
         using dogen::utility::test::xml_serialize;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
 
         if (rebase_mode) {
             BOOST_LOG_SEV(lg_, warn) << "In rebase mode. Actual: "
@@ -103,12 +103,12 @@ public:
         xml_serialize(actual_path, actual);
 
         using dogen::utility::test::xml_deserialize;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Reading expected: "
                                   << expected_path.string();
 
         const auto expected(xml_deserialize<Entity>(expected_path));
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "diff -u " << expected_path.string()
                                   << " " << actual_path.string();
 
@@ -178,7 +178,7 @@ public:
      */
     template<typename Entity>
     static bool assert_equals(const Entity& expected, const Entity& actual) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "expected: " << expected;
         BOOST_LOG_SEV(lg_, debug) << "actual: " << actual;
         return handle_assert(expected == actual, "assert equals");

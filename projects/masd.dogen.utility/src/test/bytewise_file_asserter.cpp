@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/test/bytewise_file_asserter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/test/bytewise_file_asserter.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 bool bytewise_file_asserter::is_assertable(boost::filesystem::path) const {
     return true;
@@ -35,7 +35,7 @@ assert_file(boost::filesystem::path expected,
     const std::string expected_content(read_file_content(expected));
     const std::string actual_content(read_file_content(actual));
 
-    using namespace dogen::utility::log;
+    using namespace masd::dogen::utility::log;
     logger lg(logger_factory("utility.test.bytewise_file_asserter"));
 
 

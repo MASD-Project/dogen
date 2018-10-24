@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/exception/invalid_enum_value.hpp"
-#include "dogen.utility/serialization/archive_types.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/serialization/archive_types.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string error_message("Invalid or unexpected object type");
 
 }
 
-namespace dogen::utility::serialization {
+namespace masd::dogen::utility::serialization {
 
 std::ostream& operator<<(std::ostream& stream, archive_types value) {
     switch (value) {

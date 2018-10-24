@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
-#define DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
+#ifndef MASD_DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
+#define MASD_DOGEN_UTILITY_FILESYSTEM_IO_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 /**
  * @brief An error occurred whilst reading or writing.

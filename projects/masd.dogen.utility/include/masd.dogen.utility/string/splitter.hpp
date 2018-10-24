@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_STRING_SPLITTER_HPP
-#define DOGEN_UTILITY_STRING_SPLITTER_HPP
+#ifndef MASD_DOGEN_UTILITY_STRING_SPLITTER_HPP
+#define MASD_DOGEN_UTILITY_STRING_SPLITTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/exception/info.hpp>
 
-namespace dogen::utility::string {
+namespace masd::dogen::utility::string {
 
 class splitting_error : public virtual std::exception,
                         public virtual boost::exception {

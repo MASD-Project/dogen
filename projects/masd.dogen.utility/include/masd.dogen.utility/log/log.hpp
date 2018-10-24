@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_LOG_LOG_HPP
-#define DOGEN_UTILITY_LOG_LOG_HPP
+#ifndef MASD_DOGEN_UTILITY_LOG_LOG_HPP
+#define MASD_DOGEN_UTILITY_LOG_LOG_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,6 +28,6 @@
 /**
  * @brief Dogen logging.
  */
-namespace dogen::utility::log { }
+namespace masd::dogen::utility::log { }
 
 #endif

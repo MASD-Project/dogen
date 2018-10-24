@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_LOG_LIFE_CYCLE_MANAGER_HPP
-#define DOGEN_UTILITY_LOG_LIFE_CYCLE_MANAGER_HPP
+#ifndef MASD_DOGEN_UTILITY_LOG_LIFE_CYCLE_MANAGER_HPP
+#define MASD_DOGEN_UTILITY_LOG_LIFE_CYCLE_MANAGER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.utility/log/severity_level.hpp"
+#include "masd.dogen.utility/log/severity_level.hpp"
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 /**
  * @brief Manages the starting and stopping of logging for an

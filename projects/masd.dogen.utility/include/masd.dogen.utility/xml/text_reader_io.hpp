@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_XML_TEXT_READER_IO_HPP
-#define DOGEN_UTILITY_XML_TEXT_READER_IO_HPP
+#ifndef MASD_DOGEN_UTILITY_XML_TEXT_READER_IO_HPP
+#define MASD_DOGEN_UTILITY_XML_TEXT_READER_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.utility/xml/text_reader.hpp"
+#include "masd.dogen.utility/xml/text_reader.hpp"
 
-namespace dogen::utility::xml {
+namespace masd::dogen::utility::xml {
 
 std::ostream& operator<<(std::ostream& stream, const text_reader& value);
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_FILESYSTEM_PATH_HPP
-#define DOGEN_UTILITY_FILESYSTEM_PATH_HPP
+#ifndef MASD_DOGEN_UTILITY_FILESYSTEM_PATH_HPP
+#define MASD_DOGEN_UTILITY_FILESYSTEM_PATH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 /**
  * @brief Returns the full path to the directory containing the

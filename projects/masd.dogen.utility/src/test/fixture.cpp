@@ -22,7 +22,7 @@
 #include <boost/exception/info.hpp>
 #include <boost/test/unit_test_monitor.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen.utility/test/fixture.hpp"
+#include "masd.dogen.utility/test/fixture.hpp"
 
 namespace  {
 
@@ -35,7 +35,7 @@ inline void translate(const boost::exception& e) {
 
 }
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 exception_fixture::exception_fixture() {
     using boost::exception;

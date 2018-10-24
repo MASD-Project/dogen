@@ -24,16 +24,22 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/macros.hpp"
-#include "dogen.utility/test_data/test_data.hpp"
-#include "dogen.utility/test_data/xml_reader.hpp"
-#include "dogen.utility/xml/exception.hpp"
-#include "dogen.utility/exception/invalid_enum_value.hpp"
-#include "dogen.utility/xml/text_reader.hpp"
-#include "dogen.utility/xml/text_reader_io.hpp"
-#include "dogen.utility/xml/node_types.hpp"
-#include "dogen.utility/xml/node_types_io.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/macros.hpp"
+#include "masd.dogen.utility/test_data/test_data.hpp"
+#include "masd.dogen.utility/test_data/xml_reader.hpp"
+#include "masd.dogen.utility/xml/exception.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.utility/xml/text_reader.hpp"
+#include "masd.dogen.utility/xml/text_reader_io.hpp"
+#include "masd.dogen.utility/xml/node_types.hpp"
+#include "masd.dogen.utility/xml/node_types_io.hpp"
+
+using namespace masd::dogen::utility::log;
+using masd::dogen::utility::xml::exception;
+using masd::dogen::utility::xml::node_types;
+using masd::dogen::utility::xml::text_reader;
+using masd::dogen::utility::test_data::xml_reader;
 
 namespace {
 
@@ -89,19 +95,15 @@ const std::string message_error_file_not_regular(
 /**
  * @brief Performs n-consecutive reads. Each read must return true.
  */
-void read_n_times(dogen::utility::xml::text_reader& reader, int n) {
-    using namespace dogen::utility::log;
+void read_n_times(text_reader& reader, int n) {
     logger lg(logger_factory(test_suite));
     for (int i = 0; i < n; ++i)
         BOOST_CHECK(reader.read());
     BOOST_LOG_SEV(lg, debug) << reader;
 }
 
-bool check_xml_exception(
-    const dogen::utility::xml::exception& exception,
+bool check_xml_exception(const exception& exception,
     std::string expected_message) {
-
-    using namespace dogen::utility;
     return boost::starts_with(exception.what(), expected_message);
 }
 
@@ -113,9 +115,7 @@ void check_invalid_filename(
     boost::filesystem::path path, std::string message) {
 
     using namespace std::placeholders;
-    BOOST_CHECK_EXCEPTION(
-        dogen::utility::xml::text_reader reader(path),
-        dogen::utility::xml::exception,
+    BOOST_CHECK_EXCEPTION(text_reader reader(path), exception,
         std::bind(check_xml_exception, _1, message)
         );
 }
@@ -127,26 +127,19 @@ void check_invalid_filename(
  * FIXME: commented out since the only test using it is ignored at
  * present.
  */
-/*void check_invalid_content(
-    dogen::utility::xml::text_reader& reader, std::string message) {
+/*void check_invalid_content(text_reader& reader, std::string message) {
 
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
-    BOOST_CHECK_EXCEPTION(
-        reader.read(),
-        exception,
-        std::bind(check_xml_exception, _1, message)
-        );
+    BOOST_CHECK_EXCEPTION(reader.read(), exception,
+        std::bind(check_xml_exception, _1, message));
 }*/
 
 /**
  * @brief Checks the state of the reader before reading the first
  * element.
  */
-void check_before_first_element(dogen::utility::xml::text_reader& reader) {
-    using dogen::utility::xml::node_types;
+void check_before_first_element(text_reader& reader) {
     BOOST_CHECK(reader.node_type() == node_types::none);
-    using namespace dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << reader;
 }
@@ -155,13 +148,10 @@ void check_before_first_element(dogen::utility::xml::text_reader& reader) {
  * @brief Reads the current element and checks the state of the reader
  * after the read.
  */
-void check_element(dogen::utility::xml::text_reader& reader,
-    dogen::utility::xml::node_types node_type,
+void check_element(text_reader& reader, node_types node_type,
     std::string name = std::string()) {
 
     BOOST_CHECK(reader.read());
-
-    using namespace dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << reader;
 
@@ -173,14 +163,12 @@ void check_element(dogen::utility::xml::text_reader& reader,
  * @brief Checks the state of the reader after reading past the last
  * element.
  */
-void check_after_last_element(dogen::utility::xml::text_reader& reader) {
+void check_after_last_element(masd::dogen::utility::xml::text_reader& reader) {
     BOOST_CHECK(!reader.read());
 
-    using namespace dogen::utility::log;
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << reader;
-
-    BOOST_CHECK(reader.node_type() == dogen::utility::xml::node_types::none);
+    BOOST_CHECK(reader.node_type() == node_types::none);
 }
 
 }
@@ -189,14 +177,12 @@ BOOST_AUTO_TEST_SUITE(xml_tests)
 
 BOOST_AUTO_TEST_CASE(text_reader_throws_if_file_does_not_exist) {
     SETUP_TEST_LOG("text_reader_throws_if_file_does_not_exist");
-    using dogen::utility::test_data::xml_reader;
     boost::filesystem::path path(xml_reader::non_existent_file());
     check_invalid_filename(path, message_error_file_not_found);
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_throws_if_file_name_is_a_directory) {
     SETUP_TEST_LOG("text_reader_throws_if_file_name_is_a_directory");
-    using dogen::utility::test_data::xml_reader;
     const boost::filesystem::path path(xml_reader::data_set());
     check_invalid_filename(path, message_error_file_not_regular);
 }
@@ -206,65 +192,46 @@ BOOST_AUTO_TEST_CASE(text_reader_throws_if_file_name_is_a_directory) {
 // error.
 // BOOST_IGNORE_AUTO_TEST_CASE(text_reader_throws_if_file_is_empty) {
 //     SETUP_TEST_LOG("text_reader_throws_if_file_is_empty");
-//     using dogen::utility::test_data::xml_reader;
-//     dogen::utility::xml::text_reader reader(xml_reader::input_empty_file());
+//     text_reader reader(xml_reader::input_empty_file());
 //     check_invalid_content(reader, message_error_read_node);
 // }
 
 BOOST_AUTO_TEST_CASE(text_reader_parses_file_one_node_inlined) {
     SETUP_TEST_LOG("text_reader_parses_file_one_node_inlined");
-    using dogen::utility::test_data::xml_reader;
-    dogen::utility::xml::text_reader reader(xml_reader::input_one_node_inlined());
-
+    text_reader reader(xml_reader::input_one_node_inlined());
     check_before_first_element(reader);
-
-    using dogen::utility::xml::node_types;
     check_element(reader, node_types::element, label_simple_node);
     check_element(reader, node_types::end_element, label_simple_node);
-
     check_after_last_element(reader);
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_parses_file_one_node_indented) {
     SETUP_TEST_LOG("text_reader_parses_file_one_node_indented");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     check_before_first_element(reader);
-
-    using dogen::utility::xml::node_types;
     check_element(reader, node_types::element, label_simple_node);
     check_element(reader, node_types::significant_whitespace, label_text);
     check_element(reader, node_types::end_element, label_simple_node);
-
     check_after_last_element(reader);
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_parses_file_one_node_self_closing) {
     SETUP_TEST_LOG("text_reader_parses_file_one_node_self_closing");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_self_closing());
 
     check_before_first_element(reader);
-
-    using dogen::utility::xml::node_types;
     check_element(reader, node_types::element, label_simple_node);
-    BOOST_CHECK(reader.is_empty());
 
+    BOOST_CHECK(reader.is_empty());
     check_after_last_element(reader);
 }
 
 BOOST_AUTO_TEST_CASE(nodes_that_are_not_self_closing_are_not_empty) {
     SETUP_TEST_LOG("nodes_that_are_not_self_closing_are_not_empty");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     check_before_first_element(reader);
-
-    using dogen::utility::xml::node_types;
     check_element(reader, node_types::element, label_simple_node);
     BOOST_CHECK(!reader.is_empty());
 
@@ -279,24 +246,17 @@ BOOST_AUTO_TEST_CASE(nodes_that_are_not_self_closing_are_not_empty) {
 
 BOOST_AUTO_TEST_CASE(text_reader_parses_file_xml_declaration_one_node_indented) {
     SETUP_TEST_LOG("text_reader_parses_file_xml_declaration_one_node_indented");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_xml_declaration_one_node_indented());
 
     check_before_first_element(reader);
-
-    using dogen::utility::xml::node_types;
     check_element(reader, node_types::element, label_simple_node);
     check_element(reader, node_types::significant_whitespace, label_text);
     check_element(reader, node_types::end_element, label_simple_node);
-
     check_after_last_element(reader);
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_indented_string_value_correctly) {
     SETUP_TEST_LOG_SOURCE("text_reader_reads_indented_string_value_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_string_value_indented());
 
     BOOST_CHECK(reader.read());
@@ -307,14 +267,11 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_indented_string_value_correctly) {
 
     const std::string expected(label_text_info_nl);
     const std::string actual(reader.value_as_string());
-
     BOOST_CHECK(expected == actual);
 }
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_inlined_string_value_correctly) {
     SETUP_TEST_LOG_SOURCE("text_reader_reads_inlined_string_value_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_string_value_inlined());
 
     BOOST_CHECK(reader.read());
@@ -330,8 +287,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_inlined_string_value_correctly) {
 
 BOOST_AUTO_TEST_CASE(text_reader_identifies_nodes_with_values_correctly) {
     SETUP_TEST_LOG_SOURCE("text_reader_identifies_nodes_with_values_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_string_value_indented());
 
     auto check_value([&](bool expects_value) {
@@ -348,8 +303,6 @@ BOOST_AUTO_TEST_CASE(text_reader_identifies_nodes_with_values_correctly) {
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_boolean_values_correctly) {
     SETUP_TEST_LOG_SOURCE("text_reader_reads_boolean_values_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_boolean_values());
 
     read_n_times(reader, 4);
@@ -359,7 +312,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_boolean_values_correctly) {
     BOOST_CHECK(!reader.value_as_boolean());
 
     read_n_times(reader, 4);
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.value_as_boolean(),
@@ -376,8 +328,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_boolean_values_correctly) {
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_double_values_correctly) {
     SETUP_TEST_LOG("text_reader_reads_double_values_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_double_values());
 
     auto check_value([&](double expected) {
@@ -391,7 +341,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_double_values_correctly) {
     check_value(-12345);
 
     read_n_times(reader, 4);
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.value_as_double(), // this is a string
@@ -401,8 +350,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_double_values_correctly) {
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_int_values_correctly) {
     SETUP_TEST_LOG("text_reader_reads_int_values_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_int_values());
 
     auto check_value([&](int expected) {
@@ -415,7 +362,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_int_values_correctly) {
 
     auto check_errors([&]() {
             read_n_times(reader, 4);
-            using dogen::utility::xml::exception;
             using namespace std::placeholders;
             BOOST_CHECK_EXCEPTION(
                 reader.value_as_int(),
@@ -432,8 +378,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_int_values_correctly) {
 
 BOOST_AUTO_TEST_CASE(text_reader_reads_long_values_correctly) {
     SETUP_TEST_LOG("text_reader_reads_long_values_correctly");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_long_values());
 
     auto check_value([&](long expected) {
@@ -446,7 +390,6 @@ BOOST_AUTO_TEST_CASE(text_reader_reads_long_values_correctly) {
 
     auto check_errors([&]() {
             read_n_times(reader, 4);
-            using dogen::utility::xml::exception;
             using namespace std::placeholders;
             BOOST_CHECK_EXCEPTION(
                 reader.value_as_long(),
@@ -466,8 +409,6 @@ BOOST_AUTO_TEST_CASE(text_reader_cannot_be_copied) {
 
     // to run these test cases un-comment each scenario and verify
     // that the code does not compile as expected.
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader1(xml_reader::input_one_node_indented());
 
 #ifdef DOGEN_COMPILE_BROKEN_CODE
@@ -486,8 +427,6 @@ BOOST_AUTO_TEST_CASE(text_reader_cannot_be_copied) {
 
 BOOST_AUTO_TEST_CASE(has_attribute_returns_true_for_existent_attributes) {
     SETUP_TEST_LOG("has_attribute_returns_true_for_existent_attributes");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_node_with_attributes());
 
     read_n_times(reader, 3);
@@ -496,8 +435,6 @@ BOOST_AUTO_TEST_CASE(has_attribute_returns_true_for_existent_attributes) {
 
 BOOST_AUTO_TEST_CASE(has_attribute_returns_false_for_non_existent_attributes) {
     SETUP_TEST_LOG("has_attribute_returns_false_for_non_existent_attributes");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_node_with_attributes());
 
     read_n_times(reader, 3);
@@ -507,8 +444,6 @@ BOOST_AUTO_TEST_CASE(has_attribute_returns_false_for_non_existent_attributes) {
 
 BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
     SETUP_TEST_LOG_SOURCE("getting_existent_attributes_returns_expected_values");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_node_with_attributes());
 
     auto check_string_attribute([&](std::string name, std::string expected) {
@@ -545,7 +480,6 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
     check_bool_attribute(label_first_attribute_2, true);
     check_bool_attribute(label_second_attribute_2, false);
 
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute_as_boolean(label_third_attribute_2),
@@ -577,7 +511,6 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
     check_int_attribute(label_first_attribute_3, 13);
     check_int_attribute(label_second_attribute_3, -15);
 
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute_as_int(label_third_attribute_3),
@@ -597,13 +530,10 @@ BOOST_AUTO_TEST_CASE(getting_existent_attributes_returns_expected_values) {
 
 BOOST_AUTO_TEST_CASE(getting_non_existent_attributes_throws) {
     SETUP_TEST_LOG("getting_non_existent_attributes_throws");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     read_n_times(reader, 3);
 
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.get_attribute_as_string(label_non_existent_attribute),
@@ -613,8 +543,6 @@ BOOST_AUTO_TEST_CASE(getting_non_existent_attributes_throws) {
 
 BOOST_AUTO_TEST_CASE(closing_an_open_text_reader_does_not_throw) {
     SETUP_TEST_LOG_SOURCE("closing_an_open_text_reader_does_not_throw");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     read_n_times(reader, 2);
@@ -624,8 +552,6 @@ BOOST_AUTO_TEST_CASE(closing_an_open_text_reader_does_not_throw) {
 
 BOOST_AUTO_TEST_CASE(closing_a_closed_text_reader_does_not_throw) {
     SETUP_TEST_LOG("closing_a_closed_text_reader_does_not_throw");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     read_n_times(reader, 2);
@@ -635,12 +561,9 @@ BOOST_AUTO_TEST_CASE(closing_a_closed_text_reader_does_not_throw) {
 
 BOOST_AUTO_TEST_CASE(reading_from_a_closed_text_reader_throws) {
     SETUP_TEST_LOG("reading_from_a_closed_text_reader_throws");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
     reader.close();
 
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.read(),
@@ -650,8 +573,6 @@ BOOST_AUTO_TEST_CASE(reading_from_a_closed_text_reader_throws) {
 
 BOOST_AUTO_TEST_CASE(skipping_root_node_does_not_throw) {
     SETUP_TEST_LOG("skipping_root_node_does_not_throw");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_three_nested_elements());
 
     BOOST_CHECK(reader.read());
@@ -661,8 +582,6 @@ BOOST_AUTO_TEST_CASE(skipping_root_node_does_not_throw) {
 
 BOOST_AUTO_TEST_CASE(skipping_node_goes_to_next_same_level_node) {
     SETUP_TEST_LOG("skipping_node_goes_to_next_same_level_node");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_three_nested_elements());
 
     read_n_times(reader, 3);
@@ -678,8 +597,6 @@ BOOST_AUTO_TEST_CASE(skipping_node_goes_to_next_same_level_node) {
 
 BOOST_AUTO_TEST_CASE(value_template_methods_are_equivalent_to_as_methods) {
     SETUP_TEST_LOG_SOURCE("value_template_methods_are_equivalent_to_as_methods");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_values_of_all_types());
 
     read_n_times(reader, 4);
@@ -715,8 +632,6 @@ BOOST_AUTO_TEST_CASE(value_template_methods_are_equivalent_to_as_methods) {
 
 BOOST_AUTO_TEST_CASE(value_template_method_with_invalid_type_throws) {
     SETUP_TEST_LOG_SOURCE("value_template_method_with_invalid_type_throws");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_string_value_inlined());
     read_n_times(reader, 2);
 
@@ -726,7 +641,6 @@ BOOST_AUTO_TEST_CASE(value_template_method_with_invalid_type_throws) {
                              << actual;
     BOOST_CHECK(actual == expected);
 
-    using dogen::utility::xml::exception;
     using namespace std::placeholders;
     BOOST_CHECK_EXCEPTION(
         reader.value<std::ostringstream>(),
@@ -737,11 +651,8 @@ BOOST_AUTO_TEST_CASE(value_template_method_with_invalid_type_throws) {
 BOOST_AUTO_TEST_CASE(reading_with_skip_whitespace_reads_all_expected_elements) {
     SETUP_TEST_LOG_SOURCE("reading_with_skip_whitespace_reads_all_expected_elements");
     const bool skip_ws(true);
-    using dogen::utility::xml::text_reader;
-    using dogen::utility::test_data::xml_reader;
     text_reader reader(xml_reader::input_node_with_attributes(), skip_ws);
 
-    using dogen::utility::xml::node_types;
     auto check_element([&](std::string name, node_types node_type) {
             BOOST_CHECK(reader.read());
             BOOST_LOG_SEV(lg, debug) << reader;
@@ -770,8 +681,6 @@ BOOST_AUTO_TEST_CASE(reading_with_skip_whitespace_reads_all_expected_elements) {
 BOOST_AUTO_TEST_CASE(skipping_with_skip_whitespace_skips_all_expected_elements) {
     SETUP_TEST_LOG_SOURCE("skipping_with_skip_whitespace_skips_all_expected_elements");
     const bool skip_ws(true);
-    using dogen::utility::xml::text_reader;
-    using dogen::utility::test_data::xml_reader;
     text_reader reader(xml_reader::input_three_nested_elements(), skip_ws);
 
     read_n_times(reader, 2);
@@ -787,8 +696,6 @@ BOOST_AUTO_TEST_CASE(skipping_with_skip_whitespace_skips_all_expected_elements) 
 
 BOOST_AUTO_TEST_CASE(is_end_element_is_true_for_end_elements_false_otherwise) {
     SETUP_TEST_LOG("is_end_element_is_true_for_end_elements_false_otherwise");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     BOOST_CHECK(reader.read());
@@ -806,8 +713,6 @@ BOOST_AUTO_TEST_CASE(is_end_element_is_true_for_end_elements_false_otherwise) {
 
 BOOST_AUTO_TEST_CASE(is_start_element_is_true_for_start_elements_false_otherwise) {
     SETUP_TEST_LOG("is_start_element_is_true_for_start_elements_false_otherwise");
-    using dogen::utility::test_data::xml_reader;
-    using dogen::utility::xml::text_reader;
     text_reader reader(xml_reader::input_one_node_indented());
 
     BOOST_CHECK(reader.read());

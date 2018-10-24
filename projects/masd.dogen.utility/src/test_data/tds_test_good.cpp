@@ -20,10 +20,10 @@
  */
 #include <string>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/test_data.hpp"
-#include "dogen.utility/test_data/tds_test_good.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/test_data.hpp"
+#include "masd.dogen.utility/test_data/tds_test_good.hpp"
 
 using boost::filesystem::path;
 
@@ -61,7 +61,7 @@ const path expected_empty_file_txt("tds_test_good/expected/empty_file.txt");
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 path tds_test_good::data_set() {
     return validating_resolver::resolve(::data_set);

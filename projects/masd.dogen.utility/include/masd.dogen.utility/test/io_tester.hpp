@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_IO_TESTER_HPP
-#define DOGEN_UTILITY_TEST_IO_TESTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_IO_TESTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_IO_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/test/json_validator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/test/json_validator.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 /**
  * @brief Ensures the inserter operator produces valid JSON.
@@ -42,7 +42,7 @@ public:
 
 public:
     static void inserter_operator_produces_valid_json(const Entity& a) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.io_tester"));
         BOOST_LOG_SEV(lg, debug) << "json: " << a;
 

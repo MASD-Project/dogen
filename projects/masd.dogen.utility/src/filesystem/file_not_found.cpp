@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/filesystem/file_not_found.hpp"
+#include "masd.dogen.utility/filesystem/file_not_found.hpp"
 
 namespace {
 
@@ -26,7 +26,7 @@ const std::string file_not_found("File not found: ");
 
 }
 
-namespace dogen::utility::filesystem {
+namespace masd::dogen::utility::filesystem {
 
 file_not_found::file_not_found(std::string message)
     : dogen::utility::exception::exception(::file_not_found + message) { }

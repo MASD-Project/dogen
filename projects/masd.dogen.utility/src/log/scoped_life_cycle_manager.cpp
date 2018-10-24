@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/scoped_life_cycle_manager.hpp"
+#include "masd.dogen.utility/log/scoped_life_cycle_manager.hpp"
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 scoped_life_cycle_manager::scoped_life_cycle_manager(std::string file_name,
     severity_level severity, bool log_to_console) {

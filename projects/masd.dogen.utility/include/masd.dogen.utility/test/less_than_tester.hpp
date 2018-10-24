@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UTILITY_TEST_LESS_THAN_TESTER_HPP
-#define DOGEN_UTILITY_TEST_LESS_THAN_TESTER_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_LESS_THAN_TESTER_HPP
+#define MASD_DOGEN_UTILITY_TEST_LESS_THAN_TESTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/jsonify_io.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/jsonify_io.hpp"
 
-namespace dogen::utility::test {
+namespace masd::dogen::utility::test {
 
 template<typename Entity, typename Sequence>
 class less_than_tester {
@@ -44,7 +44,7 @@ public:
         const entity_type b(a);
 
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.less_than"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);
@@ -59,7 +59,7 @@ public:
         const entity_type b(sequence());
 
         using dogen::utility::streaming::jsonify;
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         logger lg(logger_factory("utility.test.less_than"));
         BOOST_LOG_SEV(lg, debug) << "a: " << jsonify(a);
         BOOST_LOG_SEV(lg, debug) << "b: " << jsonify(b);

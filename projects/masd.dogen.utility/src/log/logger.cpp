@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 
-namespace dogen::utility::log {
+namespace masd::dogen::utility::log {
 
 logger logger_factory(std::string component_name) {
     using namespace boost::log;

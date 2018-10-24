@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/test_data/resolver.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/stitch.hpp"
+#include "masd.dogen.utility/test_data/resolver.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/stitch.hpp"
 
 using boost::filesystem::path;
 
@@ -35,7 +35,7 @@ path input_complex_template_stitch("stitch/input/complex_template.stitch");
 
 }
 
-namespace dogen::utility::test_data {
+namespace masd::dogen::utility::test_data {
 
 path stitch::data_set() {
     return validating_resolver::resolve(::data_set);
