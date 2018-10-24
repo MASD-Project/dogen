@@ -1,10 +1,11 @@
 {
-  "documentation": "Provids the top-level API to the dogen product.\n",
+  "documentation": "Provides the top-level API for the dogen product.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "dogen",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
+    "quilt.cpp.standard": "c++-17",
     "quilt.cpp.msbuild.enabled": "false",
     "quilt.cpp.visual_studio.project.enabled": "false",
     "quilt.cpp.visual_studio.solution.enabled": "false",
@@ -13,10 +14,7 @@
   },
   "elements": [
     {
-      "name": "file",
-      "stereotypes": [
-        "component"
-      ],
+      "name": "artefact",
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
@@ -33,33 +31,30 @@
         },
         {
           "name": "operation",
-          "type": "file_operations"
-        },
-        {
-          "name": "reason",
-          "type": "reasons"
+          "type": "operation"
         }
       ]
     },
     {
-      "name": "fileset",
-      "stereotypes": [
-        "dogen::component"
-      ],
+      "name": "artefact_container",
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "name",
-          "type": ""
+          "type": "std::string"
         },
         {
-          "name": "files",
-          "type": "std::list<file>"
+          "name": "type",
+          "type": "artefact_group_type"
+        },
+        {
+          "name": "artefacts",
+          "type": "std::list<artefact>"
         }
       ]
     },
     {
-      "name": "code_generation_failure",
+      "name": "generation_exception",
       "stereotypes": [
         "dogen::exception"
       ],
@@ -74,8 +69,16 @@
       "attributes": [
         {
           "name": "generation",
-          "type": "generation_configuration",
+          "type": "boost::optional<generation_configuration>",
           "documentation": "Configuration for code generation.\n"
+        },
+        {
+          "name": "weaving",
+          "type": "boost::optional<weaving_configuration>"
+        },
+        {
+          "name": "conversion",
+          "type": "boost::optional<conversion_configuration>"
         },
         {
           "name": "tracing",
@@ -94,7 +97,7 @@
       ]
     },
     {
-      "name": "tracing_levels",
+      "name": "tracing_level",
       "documentation": "Available levels for tracing transformation.\n",
       "stereotypes": [
         "dogen::enumeration"
@@ -123,23 +126,23 @@
       "attributes": [
         {
           "name": "level",
-          "type": "tracing_levels",
+          "type": "tracing_level",
           "documentation": "Dump all available probing information about transforms.\n"
         },
         {
           "name": "format",
-          "type": "tracing_formats",
+          "type": "tracing_format",
           "documentation": "Format to use when writting trace files.\n"
         },
         {
-          "name": "disable_guids",
+          "name": "enable_guids",
           "type": "bool",
-          "documentation": "Disable guids in probe stats, to make comparisons easier.\n"
+          "documentation": "Enable GUIDs in probe stats.\n\nDisabling GUIDs makes comparisons easier.\n"
         }
       ]
     },
     {
-      "name": "tracing_formats",
+      "name": "tracing_format",
       "documentation": "Available formats for tracing transformations.\n",
       "stereotypes": [
         "dogen::enumeration"
@@ -170,12 +173,22 @@
       "attributes": [
         {
           "name": "level",
-          "type": "log_levels"
+          "type": "log_level"
+        },
+        {
+          "name": "file_name",
+          "type": "std::string",
+          "documentation": "Name of the file to log into.\n"
+        },
+        {
+          "name": "output_to_console",
+          "type": "bool",
+          "documentation": "If true, dumps the log into the console.\n"
         }
       ]
     },
     {
-      "name": "log_levels",
+      "name": "log_level",
       "documentation": "Available levels for logging.\n",
       "stereotypes": [
         "dogen::enumeration"
@@ -235,19 +248,14 @@
           "documentation": "Always write files, even when there are no differences.\n"
         },
         {
-          "name": "compatibility_mode",
+          "name": "enable_compatibility_mode",
           "type": "bool",
           "documentation": "Attempt to process inputs, ignoring certain types of errors.\n"
-        },
-        {
-          "name": "enable_diffing",
-          "type": "bool",
-          "documentation": "If true, creates diffs for generated files.\n"
         }
       ]
     },
     {
-      "name": "filesysem_generator",
+      "name": "filesystem_generator",
       "stereotypes": [
         "handcrafted"
       ],
@@ -278,7 +286,7 @@
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "fileset_types",
+      "name": "artefact_group_type",
       "stereotypes": [
         "dogen::enumeration"
       ],
@@ -334,19 +342,23 @@
       ]
     },
     {
-      "name": "file_operations",
-      "documentation": "Operation to perform to file.\n",
+      "name": "operation_type",
+      "documentation": "Operation to perform to a given artefact.\n",
       "stereotypes": [
         "dogen::enumeration"
       ],
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
-          "name": "ignore",
+          "name": "create",
           "type": ""
         },
         {
           "name": "overwrite",
+          "type": ""
+        },
+        {
+          "name": "ignore",
           "type": ""
         },
         {
@@ -356,7 +368,7 @@
       ]
     },
     {
-      "name": "operation_reasons",
+      "name": "operation_reason",
       "documentation": "Reasons for performing an operation.\n",
       "stereotypes": [
         "dogen::enumeration"
@@ -364,19 +376,19 @@
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
-          "name": "force_overwrite",
-          "type": ""
-        },
-        {
-          "name": "unexpected_file",
-          "type": ""
-        },
-        {
           "name": "new_generated_file",
           "type": ""
         },
         {
           "name": "changed_generated_file",
+          "type": ""
+        },
+        {
+          "name": "force_overwrite_enabled",
+          "type": ""
+        },
+        {
+          "name": "file_is_not_expected",
           "type": ""
         }
       ]
@@ -405,6 +417,163 @@
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "filesystem_weaver",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "in_memory_weaver",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "weaving_exception",
+      "stereotypes": [
+        "dogen::exception"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "conversion_exception",
+      "stereotypes": [
+        "dogen::exception"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "weaving_style",
+      "documentation": "Style of the weaving to perform.\n",
+      "stereotypes": [
+        "dogen::enumeration"
+      ],
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "stitch",
+          "type": ""
+        },
+        {
+          "name": "wale",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "weaving_configuration",
+      "documentation": "Configuration for weaving.\n",
+      "stereotypes": [
+        "dogen::fluent",
+        "Outputable"
+      ],
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "weaving_style",
+          "documentation": "What style of weaving to perform.\n"
+        }
+      ]
+    },
+    {
+      "name": "activity",
+      "documentation": "What activity should the configuration be validated against or build for.\n",
+      "stereotypes": [
+        "dogen::enumeration"
+      ],
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "generate",
+          "type": ""
+        },
+        {
+          "name": "weave",
+          "type": ""
+        },
+        {
+          "name": "convert",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "configuration_validator",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "conversion_configuration",
+      "documentation": "Configuration for the model conversion.\n",
+      "stereotypes": [
+        "dogen::fluent",
+        "Outputable"
+      ],
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "destination_type",
+          "type": "std::string",
+          "documentation": "Type of the model to convert into.\n\nMust be supported by Dogen.\n"
+        },
+        {
+          "name": "destination_file_name",
+          "type": "std::string",
+          "documentation": "Name of the file to output to, when outputting to a file.\n\nIf not supplied, defaults to the source file name, with the appropriate extension\nfor the destination type.\n"
+        }
+      ]
+    },
+    {
+      "name": "operation",
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "operation_type"
+        },
+        {
+          "name": "reason",
+          "type": "operation_reason"
+        }
+      ]
+    },
+    {
+      "name": "archive_type",
+      "stereotypes": [
+        "dogen::enumeration"
+      ],
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "zip",
+          "type": ""
+        },
+        {
+          "name": "tar",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "archive",
+      "fallback_element_type": "dogen::object",
+      "attributes": [
+        {
+          "name": "content",
+          "type": "std::string"
+        },
+        {
+          "name": "type",
+          "type": "archive_type"
+        }
+      ]
     }
   ]
 }
