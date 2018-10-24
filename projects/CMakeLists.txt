@@ -37,7 +37,7 @@ macro(add_boost_tests test_module)
             # string(REPLACE "tests/" "" test_suite ${test_suite})
 
             set(tests_cmd
-                ${stage_bin_dir}/dogen.${test_module}.tests)
+                ${stage_bin_dir}/masd.dogen.${test_module}.tests)
             add_test(${test_module}/${test_suite}/${test_name}
                 ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
                 ${tests_cmd} --run_test=${test_suite}/${test_name})
