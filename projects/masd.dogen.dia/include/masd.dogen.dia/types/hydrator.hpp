@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_HYDRATOR_HPP
-#define DOGEN_DIA_TYPES_HYDRATOR_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_HYDRATOR_HPP
+#define MASD_DOGEN_DIA_TYPES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.dia/types/diagram.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 class hydrator {
 public:

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TEST_DIA_FILE_ASSERTER_HPP
-#define DOGEN_DIA_TEST_DIA_FILE_ASSERTER_HPP
+#ifndef MASD_DOGEN_DIA_TEST_DIA_FILE_ASSERTER_HPP
+#define MASD_DOGEN_DIA_TEST_DIA_FILE_ASSERTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.dia/types/diagram.hpp"
-#include "dogen.utility/test/file_asserter.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
+#include "masd.dogen.utility/test/file_asserter.hpp"
 
-namespace dogen::dia::test {
+namespace masd::dogen::dia::test {
 
 class dia_file_asserter : public utility::test::file_asserter {
 public:

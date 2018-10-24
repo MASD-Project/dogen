@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TEST_DIAGRAM_SERIALIZATION_HELPER_HPP
-#define DOGEN_DIA_TEST_DIAGRAM_SERIALIZATION_HELPER_HPP
+#ifndef MASD_DOGEN_DIA_TEST_DIAGRAM_SERIALIZATION_HELPER_HPP
+#define MASD_DOGEN_DIA_TEST_DIAGRAM_SERIALIZATION_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <ostream>
 #include <istream>
 #include <boost/filesystem/path.hpp>
-#include "dogen.dia/types/diagram.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
 
-namespace dogen::dia::test {
+namespace masd::dogen::dia::test {
 
 /**
  * @brief Test bed for the creation of serialisation helpers.

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TEST_MOCK_OBJECT_FACTORY_HPP
-#define DOGEN_DIA_TEST_MOCK_OBJECT_FACTORY_HPP
+#ifndef MASD_DOGEN_DIA_TEST_MOCK_OBJECT_FACTORY_HPP
+#define MASD_DOGEN_DIA_TEST_MOCK_OBJECT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <array>
-#include "dogen.dia/types/object.hpp"
+#include "masd.dogen.dia/types/object.hpp"
 
-namespace dogen::dia::test {
+namespace masd::dogen::dia::test {
 
 /**
  * @brief Generates mock dia objects that are more realistic than the

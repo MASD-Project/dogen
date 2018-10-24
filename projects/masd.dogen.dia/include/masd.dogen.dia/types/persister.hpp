@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_PERSISTER_HPP
-#define DOGEN_DIA_TYPES_PERSISTER_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_PERSISTER_HPP
+#define MASD_DOGEN_DIA_TYPES_PERSISTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.dia/types/diagram.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Persists a diagram to a file.

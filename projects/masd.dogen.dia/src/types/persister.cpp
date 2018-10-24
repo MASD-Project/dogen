@@ -19,13 +19,13 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.dia/serialization/diagram_ser.hpp"
-#include "dogen.utility/serialization/xml_helper.hpp"
-#include "dogen.dia/types/persister_error.hpp"
-#include "dogen.dia/types/persister.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.dia/serialization/diagram_ser.hpp"
+#include "masd.dogen.utility/serialization/xml_helper.hpp"
+#include "masd.dogen.dia/types/persister_error.hpp"
+#include "masd.dogen.dia/types/persister.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -37,7 +37,7 @@ const std::string unsupported_extension("Extension is not supported: ");
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 void persister::
 persist(const dia::diagram& d, const boost::filesystem::path& p) const {
@@ -48,7 +48,7 @@ persist(const dia::diagram& d, const boost::filesystem::path& p) const {
             persister_error(unsupported_extension + extension));
     }
 
-    using dogen::utility::serialization::xml_serialize;
+    using masd::dogen::utility::serialization::xml_serialize;
     xml_serialize<diagram>(p, d);
 }
 

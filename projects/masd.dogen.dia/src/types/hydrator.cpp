@@ -20,30 +20,30 @@
  */
 #include <string>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/xml/text_reader.hpp"
-#include "dogen.utility/xml/node_types_io.hpp"
-#include "dogen.dia/types/hydration_error.hpp"
-#include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/rectangle.hpp"
-#include "dogen.dia/types/boolean.hpp"
-#include "dogen.dia/types/color.hpp"
-#include "dogen.dia/types/enumeration.hpp"
-#include "dogen.dia/types/font.hpp"
-#include "dogen.dia/types/integer.hpp"
-#include "dogen.dia/types/point.hpp"
-#include "dogen.dia/types/real.hpp"
-#include "dogen.dia/types/string.hpp"
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/child_node.hpp"
-#include "dogen.dia/types/connection.hpp"
-#include "dogen.dia/types/object.hpp"
-#include "dogen.dia/types/hydrator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/xml/text_reader.hpp"
+#include "masd.dogen.utility/xml/node_types_io.hpp"
+#include "masd.dogen.dia/types/hydration_error.hpp"
+#include "masd.dogen.dia/types/composite.hpp"
+#include "masd.dogen.dia/types/rectangle.hpp"
+#include "masd.dogen.dia/types/boolean.hpp"
+#include "masd.dogen.dia/types/color.hpp"
+#include "masd.dogen.dia/types/enumeration.hpp"
+#include "masd.dogen.dia/types/font.hpp"
+#include "masd.dogen.dia/types/integer.hpp"
+#include "masd.dogen.dia/types/point.hpp"
+#include "masd.dogen.dia/types/real.hpp"
+#include "masd.dogen.dia/types/string.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/types/child_node.hpp"
+#include "masd.dogen.dia/types/connection.hpp"
+#include "masd.dogen.dia/types/object.hpp"
+#include "masd.dogen.dia/types/hydrator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
-auto lg(dogen::utility::log::logger_factory("dia.hydrator"));
+using namespace masd::dogen::utility::log;
+auto lg(masd::dogen::utility::log::logger_factory("dia.hydrator"));
 
 // exception messages
 const std::string unexpected_element("Unexpected element: ");
@@ -91,7 +91,7 @@ const bool skip_whitespace(true);
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 class hydrator_impl {
 public:

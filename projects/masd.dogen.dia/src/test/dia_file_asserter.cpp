@@ -19,15 +19,15 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/serialization/xml_helper.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/exception/utility_exception.hpp"
-#include "dogen.dia/serialization/diagram_ser.hpp"
-#include "dogen.dia/io/diagram_io.hpp"
-#include "dogen.dia/test/dia_file_asserter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/serialization/xml_helper.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.dia/serialization/diagram_ser.hpp"
+#include "masd.dogen.dia/io/diagram_io.hpp"
+#include "masd.dogen.dia/test/dia_file_asserter.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -39,14 +39,14 @@ const std::string file_is_not_assertable(
 
 }
 
-namespace dogen::dia::test {
+namespace masd::dogen::dia::test {
 
 bool dia_file_asserter::is_assertable(boost::filesystem::path path) const {
     return (path.extension().string() == dia_xml_extension);
 }
 
 dia::diagram dia_file_asserter::read_xml(boost::filesystem::path path) const {
-    using dogen::utility::serialization::xml_deserialize;
+    using masd::dogen::utility::serialization::xml_deserialize;
     return xml_deserialize<dia::diagram>(path);
 }
 
@@ -54,7 +54,7 @@ bool dia_file_asserter::assert_file(boost::filesystem::path expected,
     boost::filesystem::path actual) const {
 
     if (!is_assertable(expected) || !is_assertable(actual)) {
-        using dogen::utility::exception::exception;
+        using masd::dogen::utility::exception::exception;
         BOOST_THROW_EXCEPTION(exception(file_is_not_assertable));
     }
 

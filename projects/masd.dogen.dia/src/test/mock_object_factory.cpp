@@ -20,14 +20,14 @@
  */
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.dia/types/connection.hpp"
-#include "dogen.dia/types/child_node.hpp"
-#include "dogen.dia/test/mock_object_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.dia/types/connection.hpp"
+#include "masd.dogen.dia/types/child_node.hpp"
+#include "masd.dogen.dia/test/mock_object_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("dia.test.mock_object_factory"));
 
 const std::string empty;
@@ -48,64 +48,66 @@ const std::string dia_string("string");
 const std::string enumeration_stereotype("#enumeration#");
 const std::string invalid_stereotype("Invalid stereotype: ");
 
-dogen::dia::attribute
+masd::dogen::dia::attribute
 create_string_attribute(const std::string& name, const std::string& value) {
-    dogen::dia::attribute r;
+    masd::dogen::dia::attribute r;
     r.name(name);
 
     std::ostringstream s;
     s << "#" << value << "#";
 
-    dogen::dia::string v;
+    masd::dogen::dia::string v;
     v.value(s.str());
     r.values().push_back(v);
 
     return r;
 }
 
-dogen::dia::object
+masd::dogen::dia::object
 create_object(const std::string& type, const unsigned int number) {
-    dogen::dia::object r;
-    r.id(dogen::dia::test::mock_object_factory::to_oject_id(number));
+    masd::dogen::dia::object r;
+    r.id(masd::dogen::dia::test::mock_object_factory::to_oject_id(number));
     r.type(type);
     return r;
 }
 
-void create_name_attribute(dogen::dia::object& o, const std::string& value) {
+void create_name_attribute(masd::dogen::dia::object& o,
+    const std::string& value) {
     o.attributes().push_back(create_string_attribute(dia_name, value));
 }
 
-void create_name_attribute(dogen::dia::object& o, const unsigned int number) {
+void create_name_attribute(masd::dogen::dia::object& o, const unsigned int number) {
     std::ostringstream s;
     s << "name_" << number;
     create_name_attribute(o, s.str());
 }
 
-void create_comment_attribute(dogen::dia::object& o) {
+void create_comment_attribute(masd::dogen::dia::object& o) {
     const auto sa(create_string_attribute(dia_comment, dia_comment_value));
     o.attributes().push_back(sa);
 }
 
-void create_stereotype_attribute(dogen::dia::object& o, const std::string st) {
+void create_stereotype_attribute(masd::dogen::dia::object& o,
+    const std::string st) {
     o.attributes().push_back(create_string_attribute(dia_stereotype, st));
 }
 
-dogen::dia::object
+masd::dogen::dia::object
 create_named_object(const std::string& type, const unsigned int number) {
-    dogen::dia::object r(create_object(type, number));
+    masd::dogen::dia::object r(create_object(type, number));
     create_name_attribute(r, number);
     return r;
 }
 
-dogen::dia::connection create_connection(const std::string& id) {
-    dogen::dia::connection r;
+masd::dogen::dia::connection create_connection(const std::string& id) {
+    masd::dogen::dia::connection r;
     r.to(id);
     return r;
 }
 
 }
 
-namespace dogen::dia::test {
+namespace masd::dogen::dia::test {
 
 std::string mock_object_factory::to_oject_id(const unsigned int number) {
     return object_prefix + boost::lexical_cast<std::string>(number);
@@ -116,20 +118,20 @@ object mock_object_factory::make_uml_note(const unsigned int number) {
     ss << "#DOGEN yarn.dia.comment=true" << std::endl << std::endl
        << "this is a comment." << std::endl;
 
-    dogen::dia::string s(ss.str());
+    masd::dogen::dia::string s(ss.str());
     boost::shared_ptr<dogen::dia::attribute> ap(new dogen::dia::attribute);
     ap->values().push_back(s);
     ap->name(dia_string);
 
-    dogen::dia::composite c;
+    masd::dogen::dia::composite c;
     c.type(dia_text);
     c.value().push_back(ap);
 
-    dogen::dia::attribute a;
+    masd::dogen::dia::attribute a;
     a.name(dia_text);
     a.values().push_back(c);
 
-    dogen::dia::object r(create_object(uml_note, number));
+    masd::dogen::dia::object r(create_object(uml_note, number));
     r.attributes().push_back(a);
     create_stereotype_attribute(r, empty);
     return r;

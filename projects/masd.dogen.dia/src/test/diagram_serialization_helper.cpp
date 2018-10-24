@@ -21,11 +21,11 @@
 #include <boost/throw_exception.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/xml_iarchive.hpp>
-#include "dogen.dia/serialization/registrar_ser.hpp"
-#include "dogen.dia/serialization/diagram_ser.hpp"
-#include "dogen.dia/test/diagram_serialization_helper.hpp"
+#include "masd.dogen.dia/serialization/registrar_ser.hpp"
+#include "masd.dogen.dia/serialization/diagram_ser.hpp"
+#include "masd.dogen.dia/test/diagram_serialization_helper.hpp"
 
-namespace dogen::dia::test {
+namespace masd::dogen::dia::test {
 
 void diagram_serialization_helper::to_xml(std::ostream& s, const diagram& d) {
     boost::archive::xml_oarchive a(s);
