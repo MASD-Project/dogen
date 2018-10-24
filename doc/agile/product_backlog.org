@@ -2470,67 +2470,6 @@ there are two different kinds of exomodels: proxyness is a fundamental
 property of an exomodel. If we do this we can then do the mapping in
 flight as we transform from exomodel to endomodel.
 
-*** Rewrite name resolution in terms of lists                         :story:
-
-Even since we did the external modules / model modules change we broke
-code generation; this is because we do not go up the model modules
-during name resolution. We did a quick hack to fix this but it needs
-to be done properly.
-
-Let's walk through a simple example:. Name cames in as:
-
-- model module: =probing=
-- simple: =prober=
-
-We are in model:
-
-- model module: =dogen.external=
-
-Expected behaviour is to try all combinations of model modules:
-
-- =dogen.external.probing=
-- =dogen.probing
-- =probing=
-
-This highlights a fundamental problem with resolution: we view the
-{external, model internal} modules as if they are separate entities
-but in reality, for the purposes of resolution, there is only one
-thing that is relevant: the module path. If it matches because of
-{external, model internal} modules, well that is not relevant to
-resolution. Other users of =name= do need to know this information
-(for example to  generate directories or file names) but not the
-resolver.
-
-Interestingly, because we are only looking for an id, it doesn't
-really matter how we get to it (in terms of the internal composition
-of the name), as long as it matches bitwise. This means we can look at
-the process slightly differently:
-
-- start off with the name as the user provided it. Extract all strings
-  from it to create a list, in order: external, model, internal,
-  simple. Try to resolve that. Call it user list.
-- then create a second list from model / context: external, model,
-  internal. Call it model list.
-- try concantenating model list and user list, pretty printing and
-  resolving it. If it fails, pop model list and concatenate again. Try
-  until model list is empty.
-
-Tasks:
-
-- first add a quick hack just to get the code generator working
-  again. For example, take the first model module of the model and try
-  resolving with that. Then worry about fixing this properly.
-- split the conversion of name into list from pretty printer. Printer
-  should merely take a string or list of strings and do its thing. We
-  need to find a good location for this method, since (for now) we
-  cannot place it in the right location which is the name class
-  itself.
-- change resolver to obtain the lists as per above. The to list
-  machinery can be used for this, though we need to handle model names
-  somehow. We can copy the =model_name_mode= logic from printer.
-- drop all of the logic in resolver at present and use the list logic
-  as per above. Do not check references, etc.
-
 *** Add support for "ad-hoc" probing                                  :story:
 
 We have a set of inputs supplied to the prober called "initial

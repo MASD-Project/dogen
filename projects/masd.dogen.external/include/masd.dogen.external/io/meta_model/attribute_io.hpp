@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_IO_META_MODEL_ATTRIBUTE_IO_HPP
-#define DOGEN_EXTERNAL_IO_META_MODEL_ATTRIBUTE_IO_HPP
+#ifndef MASD_DOGEN_EXTERNAL_IO_META_MODEL_ATTRIBUTE_IO_HPP
+#define MASD_DOGEN_EXTERNAL_IO_META_MODEL_ATTRIBUTE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.external/types/meta_model/attribute.hpp"
+#include "masd.dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen::external::meta_model {
+namespace masd::dogen::external::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::external::meta_model::attribute& v);
+     const masd::dogen::external::meta_model::attribute& v);
 
 }
 

@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_IO_ALL_IO_HPP
-#define DOGEN_EXTERNAL_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_EXTERNAL_IO_ALL_IO_HPP
+#define MASD_DOGEN_EXTERNAL_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.external/io/meta_model/model_io.hpp"
-#include "dogen.external/io/meta_model/element_io.hpp"
-#include "dogen.external/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.external/io/meta_model/element_io.hpp"
+#include "masd.dogen.external/io/meta_model/attribute_io.hpp"
 
 #endif

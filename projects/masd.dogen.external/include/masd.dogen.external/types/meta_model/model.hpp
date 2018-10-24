@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_META_MODEL_MODEL_HPP
-#define DOGEN_EXTERNAL_TYPES_META_MODEL_MODEL_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_META_MODEL_MODEL_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_META_MODEL_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.external/types/meta_model/element.hpp"
 
-namespace dogen::external::meta_model {
+namespace masd::dogen::external::meta_model {
 
 /**
  * @brief Represents an external model.
@@ -49,7 +49,7 @@ public:
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::string>& stereotypes,
-        const std::list<dogen::external::meta_model::element>& elements);
+        const std::list<masd::dogen::external::meta_model::element>& elements);
 
 public:
     const std::string& name() const;
@@ -81,10 +81,10 @@ public:
     void stereotypes(const std::list<std::string>& v);
     void stereotypes(const std::list<std::string>&& v);
 
-    const std::list<dogen::external::meta_model::element>& elements() const;
-    std::list<dogen::external::meta_model::element>& elements();
-    void elements(const std::list<dogen::external::meta_model::element>& v);
-    void elements(const std::list<dogen::external::meta_model::element>&& v);
+    const std::list<masd::dogen::external::meta_model::element>& elements() const;
+    std::list<masd::dogen::external::meta_model::element>& elements();
+    void elements(const std::list<masd::dogen::external::meta_model::element>& v);
+    void elements(const std::list<masd::dogen::external::meta_model::element>&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -101,7 +101,7 @@ private:
     std::string documentation_;
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<std::string> stereotypes_;
-    std::list<dogen::external::meta_model::element> elements_;
+    std::list<masd::dogen::external::meta_model::element> elements_;
 };
 
 }
@@ -110,8 +110,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::external::meta_model::model& lhs,
-    dogen::external::meta_model::model& rhs) {
+    masd::dogen::external::meta_model::model& lhs,
+    masd::dogen::external::meta_model::model& rhs) {
     lhs.swap(rhs);
 }
 

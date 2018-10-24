@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.external/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.external/io/meta_model/attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -71,11 +71,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::external::meta_model {
+namespace masd::dogen::external::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::external::meta_model::attribute\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::external::meta_model::attribute\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "

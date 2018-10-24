@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_META_MODEL_ELEMENT_HPP
-#define DOGEN_EXTERNAL_TYPES_META_MODEL_ELEMENT_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_META_MODEL_ELEMENT_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_META_MODEL_ELEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.external/types/meta_model/attribute.hpp"
+#include "masd.dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen::external::meta_model {
+namespace masd::dogen::external::meta_model {
 
 /**
  * @brief Represents an element from an external model.
@@ -52,7 +52,7 @@ public:
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const std::list<std::string>& stereotypes,
         const std::list<std::string>& parents,
-        const std::list<dogen::external::meta_model::attribute>& attributes,
+        const std::list<masd::dogen::external::meta_model::attribute>& attributes,
         const std::string& fallback_element_type,
         const bool can_be_primitive_underlier,
         const bool in_global_module,
@@ -96,10 +96,10 @@ public:
     void parents(const std::list<std::string>& v);
     void parents(const std::list<std::string>&& v);
 
-    const std::list<dogen::external::meta_model::attribute>& attributes() const;
-    std::list<dogen::external::meta_model::attribute>& attributes();
-    void attributes(const std::list<dogen::external::meta_model::attribute>& v);
-    void attributes(const std::list<dogen::external::meta_model::attribute>&& v);
+    const std::list<masd::dogen::external::meta_model::attribute>& attributes() const;
+    std::list<masd::dogen::external::meta_model::attribute>& attributes();
+    void attributes(const std::list<masd::dogen::external::meta_model::attribute>& v);
+    void attributes(const std::list<masd::dogen::external::meta_model::attribute>&& v);
 
     /**
      * @brief Stereotype conveying element type, to be used when none is provided with the
@@ -146,7 +146,7 @@ private:
     std::list<std::pair<std::string, std::string> > tagged_values_;
     std::list<std::string> stereotypes_;
     std::list<std::string> parents_;
-    std::list<dogen::external::meta_model::attribute> attributes_;
+    std::list<masd::dogen::external::meta_model::attribute> attributes_;
     std::string fallback_element_type_;
     bool can_be_primitive_underlier_;
     bool in_global_module_;
@@ -162,8 +162,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::external::meta_model::element& lhs,
-    dogen::external::meta_model::element& rhs) {
+    masd::dogen::external::meta_model::element& lhs,
+    masd::dogen::external::meta_model::element& rhs) {
     lhs.swap(rhs);
 }
 

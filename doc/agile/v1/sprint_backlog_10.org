@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-24 Wed 09:31]
+#+CAPTION: Clock summary at [2018-10-24 Wed 13:15]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *63:32* |       |       |   0.0 |
+| *Total time*                                                                | *66:29* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 63:32   |       |       |   0.0 |
-| Active                                                                      |         | 63:32 |       |   0.0 |
+| Stories                                                                     | 66:29   |       |       |   0.0 |
+| Active                                                                      |         | 66:29 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:23 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -50,7 +50,7 @@
 | Design a top-level Dogen API                                                |         |       | 14:46 |   0.0 |
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
 | Read up on framework and API design                                         |         |       |  4:34 |   0.0 |
-| Update dogen namespaces to match the new specification                      |         |       |  0:42 |   0.0 |
+| Update dogen namespaces to match the new specification                      |         |       |  3:39 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -845,6 +845,8 @@ names.
 
 *** STARTED Update dogen namespaces to match the new specification    :story:
     :LOGBOOK:
+    CLOCK: [2018-10-24 Wed 12:48]--[2018-10-24 Wed 13:15] =>  0:27
+    CLOCK: [2018-10-24 Wed 09:32]--[2018-10-24 Wed 12:02] =>  2:30
     CLOCK: [2018-10-24 Wed 09:04]--[2018-10-24 Wed 09:31] =>  0:27
     CLOCK: [2018-10-22 Mon 17:13]--[2018-10-22 Mon 17:28] =>  0:15
     :END:
@@ -919,6 +921,67 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** Rewrite name resolution in terms of lists                         :story:
+
+Even since we did the external modules / model modules change we broke
+code generation; this is because we do not go up the model modules
+during name resolution. We did a quick hack to fix this but it needs
+to be done properly.
+
+Let's walk through a simple example:. Name cames in as:
+
+- model module: =probing=
+- simple: =prober=
+
+We are in model:
+
+- model module: =dogen.external=
+
+Expected behaviour is to try all combinations of model modules:
+
+- =dogen.external.probing=
+- =dogen.probing
+- =probing=
+
+This highlights a fundamental problem with resolution: we view the
+{external, model, internal} modules as if they are separate entities
+but in reality, for the purposes of resolution, there is only one
+thing that is relevant: the module path. If it matches because of
+{external, model, internal} modules, well that is not relevant to
+resolution. Other users of =name= do need to know this information
+(for example to generate directories or file names) but not the
+resolver.
+
+Interestingly, because we are only looking for an id, it doesn't
+really matter how we get to it (in terms of the internal composition
+of the name), as long as it matches bitwise. This means we can look at
+the process slightly differently:
+
+- start off with the name as the user provided it. Extract all strings
+  from it to create a list, in order: external, model, internal,
+  simple. Try to resolve that. Call it user list.
+- then create a second list from model / context: external, model,
+  internal. Call it model list.
+- try concantenating model list and user list, pretty printing and
+  resolving it. If it fails, pop model list and concatenate again. Try
+  until model list is empty.
+
+Tasks:
+
+- first add a quick hack just to get the code generator working
+  again. For example, take the first model module of the model and try
+  resolving with that. Then worry about fixing this properly.
+- split the conversion of name into list from pretty printer. Printer
+  should merely take a string or list of strings and do its thing. We
+  need to find a good location for this method, since (for now) we
+  cannot place it in the right location which is the name class
+  itself.
+- change resolver to obtain the lists as per above. The to list
+  machinery can be used for this, though we need to handle model names
+  somehow. We can copy the =model_name_mode= logic from printer.
+- drop all of the logic in resolver at present and use the list logic
+  as per above. Do not check references, etc.
 
 *** Implement the new dogen product API                               :story:
 

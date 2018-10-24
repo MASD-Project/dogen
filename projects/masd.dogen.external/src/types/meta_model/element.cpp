@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.external/types/meta_model/element.hpp"
 
-namespace dogen::external::meta_model {
+namespace masd::dogen::external::meta_model {
 
 element::element()
     : can_be_primitive_underlier_(static_cast<bool>(0)),
@@ -36,7 +36,7 @@ element::element(
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::string>& stereotypes,
     const std::list<std::string>& parents,
-    const std::list<dogen::external::meta_model::attribute>& attributes,
+    const std::list<masd::dogen::external::meta_model::attribute>& attributes,
     const std::string& fallback_element_type,
     const bool can_be_primitive_underlier,
     const bool in_global_module,
@@ -177,19 +177,19 @@ void element::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::list<dogen::external::meta_model::attribute>& element::attributes() const {
+const std::list<masd::dogen::external::meta_model::attribute>& element::attributes() const {
     return attributes_;
 }
 
-std::list<dogen::external::meta_model::attribute>& element::attributes() {
+std::list<masd::dogen::external::meta_model::attribute>& element::attributes() {
     return attributes_;
 }
 
-void element::attributes(const std::list<dogen::external::meta_model::attribute>& v) {
+void element::attributes(const std::list<masd::dogen::external::meta_model::attribute>& v) {
     attributes_ = v;
 }
 
-void element::attributes(const std::list<dogen::external::meta_model::attribute>&& v) {
+void element::attributes(const std::list<masd::dogen::external::meta_model::attribute>&& v) {
     attributes_ = std::move(v);
 }
 

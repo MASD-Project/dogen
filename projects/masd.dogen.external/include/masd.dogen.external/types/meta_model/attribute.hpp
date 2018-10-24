@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_META_MODEL_ATTRIBUTE_HPP
-#define DOGEN_EXTERNAL_TYPES_META_MODEL_ATTRIBUTE_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_META_MODEL_ATTRIBUTE_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_META_MODEL_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <utility>
 #include <algorithm>
 
-namespace dogen::external::meta_model {
+namespace masd::dogen::external::meta_model {
 
 class attribute final {
 public:
@@ -106,8 +106,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::external::meta_model::attribute& lhs,
-    dogen::external::meta_model::attribute& rhs) {
+    masd::dogen::external::meta_model::attribute& lhs,
+    masd::dogen::external::meta_model::attribute& rhs) {
     lhs.swap(rhs);
 }
 
