@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen.formatting/types/decoration_properties.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
 
 namespace dogen::generation::csharp::fabric {
 

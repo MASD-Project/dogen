@@ -19,14 +19,14 @@
  *
  */
 #include <cctype>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/types/indent_filter.hpp"
-#include "dogen.formatting/types/comment_formatter.hpp"
-#include "dogen.modeling/types/helpers/name_flattener.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
-#include "dogen.generation.csharp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.csharp/types/formatters/assistant.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.formatting/types/comment_formatter.hpp"
+#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/formatting_error.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
 
 namespace {
 

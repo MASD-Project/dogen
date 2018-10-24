@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
-#include "dogen.generation.csharp/types/formattables/aspect_expander.hpp"
-#include "dogen.generation.csharp/types/formattables/assistant_expander.hpp"
-#include "dogen.generation.csharp/types/formattables/reducer.hpp"
-#include "dogen.generation.csharp/types/formattables/file_path_expander.hpp"
-#include "dogen.generation.csharp/types/formattables/helper_expander.hpp"
-#include "dogen.generation.csharp/types/formattables/model_expander.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/project_items_expander.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/aspect_expander.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/assistant_expander.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/reducer.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/file_path_expander.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_expander.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model_expander.hpp"
 
 namespace dogen::generation::csharp::formattables {
 

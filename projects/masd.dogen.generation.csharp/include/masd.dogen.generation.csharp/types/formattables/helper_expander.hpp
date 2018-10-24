@@ -27,11 +27,11 @@
 
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
-#include "dogen.generation.csharp/types/formattables/helper_configuration.hpp"
-#include "dogen.generation.csharp/types/formattables/formattable.hpp"
-#include "dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_configuration.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
 namespace dogen::generation::csharp::formattables {
 

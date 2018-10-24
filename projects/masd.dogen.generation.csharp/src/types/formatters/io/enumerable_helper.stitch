@@ -1,10 +1,10 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::generation::csharp::formatters::io #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/csharp/scoped_namespace_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/io/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formattables/helper_properties.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/io/enumerable_helper.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/csharp/scoped_namespace_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/formatters/io/enumerable_helper.hpp" #>
 <#@ stitch.wale.template=csharp_helper_formatter_implementation.wale #>
 <#@ stitch.wale.kvp.helper.family=Enumerable #>
 <#@ stitch.wale.kvp.class.simple_name=enumerable_helper #>

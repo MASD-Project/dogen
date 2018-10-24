@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/registrar.hpp"
-#include "dogen.generation.csharp/types/formatters/types/class_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/types/primitive_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/types/enum_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/types/exception_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/types/builtin_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp"
-#include "dogen.generation.csharp/types/formatters/types/initializer.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/class_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/primitive_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/enum_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/exception_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/builtin_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/initializer.hpp"
 
 namespace dogen::generation::csharp::formatters::types {
 

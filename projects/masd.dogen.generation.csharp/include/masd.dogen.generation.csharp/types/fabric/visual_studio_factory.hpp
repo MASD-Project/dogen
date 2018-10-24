@@ -27,12 +27,12 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_configuration.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/visual_studio_configuration.hpp"
 
 namespace dogen::generation::csharp::fabric {
 

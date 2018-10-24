@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/fabric/dynamic_transform.hpp"
-#include "dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
-#include "dogen.generation.csharp/types/fabric/initializer.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/dynamic_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/initializer.hpp"
 
 namespace dogen::generation::csharp::fabric {
 

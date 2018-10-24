@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/registrar.hpp"
-#include "dogen.generation.csharp/types/formatters/io/enumerable_helper.hpp"
-#include "dogen.generation.csharp/types/formatters/io/primitive_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/io/class_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/io/enum_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/io/initializer.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/enumerable_helper.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/primitive_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/class_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/enum_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/initializer.hpp"
 
 namespace dogen::generation::csharp::formatters::io {
 

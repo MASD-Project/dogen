@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation.csharp/types/formatters/io/traits.hpp"
+#include "masd.dogen.generation.csharp/types/traits.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/io/traits.hpp"
 
 namespace dogen::generation::csharp::formatters::io {
 

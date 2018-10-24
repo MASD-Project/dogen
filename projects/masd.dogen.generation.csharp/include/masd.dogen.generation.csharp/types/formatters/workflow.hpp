@@ -27,9 +27,9 @@
 
 #include <list>
 #include <memory>
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.generation.csharp/types/formattables/model.hpp"
-#include "dogen.generation.csharp/types/formatters/registrar.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

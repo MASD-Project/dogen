@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
-#include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
 namespace dogen::generation::csharp::fabric {
 

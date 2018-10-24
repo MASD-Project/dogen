@@ -20,16 +20,16 @@
  */
 #include <set>
 #include <algorithm>
-#include"dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include"dogen.modeling/types/meta_model/object.hpp"
-#include"dogen.modeling/types/meta_model/visitor.hpp"
-#include"dogen.modeling/types/meta_model/builtin.hpp"
-#include"dogen.modeling/types/meta_model/exception.hpp"
-#include"dogen.modeling/types/meta_model/enumeration.hpp"
-#include"dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.generation.csharp/types/fabric/assistant.hpp"
-#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
+#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/assistant.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
 namespace dogen::generation::csharp::formattables {
 

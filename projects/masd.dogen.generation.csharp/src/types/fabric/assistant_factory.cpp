@@ -19,10 +19,10 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.generation.csharp/types/fabric/assistant.hpp"
-#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.csharp/types/fabric/assistant_factory.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/assistant.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/assistant_factory.hpp"
 
 namespace {
 

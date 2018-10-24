@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

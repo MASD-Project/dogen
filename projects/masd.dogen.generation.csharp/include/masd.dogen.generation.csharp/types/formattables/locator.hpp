@@ -30,12 +30,12 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
-#include "dogen.generation.csharp/types/formattables/locator_configuration.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator_configuration.hpp"
 
 
 namespace dogen::generation::csharp::formattables {

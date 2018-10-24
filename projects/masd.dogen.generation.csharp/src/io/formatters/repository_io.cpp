@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen.generation.csharp/io/formatters/repository_io.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/io/formatters/repository_io.hpp"
 
 namespace dogen::generation::csharp::formatters {
 
@@ -85,7 +85,7 @@ inline std::ostream& to_stream(std::ostream& s,
 
 std::ostream& operator<<(std::ostream& s, const repository& rp) {
     s << "{ " << "\"__type__\": "
-      << "\"dogen::generation::cpp::formatters::container\", ";
+      << "\"masd::dogen::generation::cpp::formatters::container\", ";
     to_stream(s, rp.stock_artefact_formatters_by_meta_name());
     to_stream(s, "stock_artefact_formatters", rp.stock_artefact_formatters());
     to_stream(s, rp.helper_formatters());

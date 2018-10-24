@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
 
 namespace dogen::generation::csharp::fabric {
 

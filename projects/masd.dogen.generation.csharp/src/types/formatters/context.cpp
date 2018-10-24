@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/context.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/context.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

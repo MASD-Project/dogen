@@ -19,19 +19,19 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/types/meta_model/object_template.hpp"
-#include "dogen.modeling/types/meta_model/builtin.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/types/meta_model/exception.hpp"
-#include "dogen.modeling/types/meta_model/visitor.hpp"
-#include "dogen.generation.csharp/types/fabric/assistant.hpp"
-#include "dogen.generation.csharp/types/fabric/element_visitor.hpp"
-#include "dogen.generation.csharp/types/fabric/decoration_expander.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/assistant.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/decoration_expander.hpp"
 
 namespace {
 

@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

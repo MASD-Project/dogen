@@ -28,19 +28,19 @@
 #include <sstream>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.formatting/types/csharp/scoped_boilerplate_formatter.hpp"
-#include "dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/attribute.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.generation.csharp/types/formatters/context.hpp"
-#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
-#include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.formatting/types/csharp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.formatting/types/csharp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/context.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/assistant_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

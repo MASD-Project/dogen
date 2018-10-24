@@ -19,14 +19,14 @@
  *
  */
 #include <boost/algorithm/string/join.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation.csharp/types/formattables/workflow.hpp"
-#include "dogen.generation.csharp/types/formatters/workflow.hpp"
-#include "dogen.generation.csharp/types/formattables/locator.hpp"
-#include "dogen.generation.csharp/types/model_to_text_model_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.generation.csharp/types/traits.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/workflow.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/workflow.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.csharp/types/model_to_text_model_transform.hpp"
 
 namespace {
 

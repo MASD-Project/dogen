@@ -27,9 +27,9 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.generation.csharp/types/formattables/model.hpp"
-#include "dogen.generation.csharp/types/formattables/element_properties.hpp"
-#include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/element_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

@@ -28,12 +28,12 @@
 #include <string>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.csharp/types/formattables/locator.hpp"
-#include "dogen.generation.csharp/types/formatters/context.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/context.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

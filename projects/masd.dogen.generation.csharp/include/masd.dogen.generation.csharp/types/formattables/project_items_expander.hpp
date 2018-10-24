@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_set>
-#include "dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
 namespace dogen::generation::csharp::formattables {
 

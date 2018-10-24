@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation.csharp/types/formattables/assistant_expander.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.generation.csharp/types/traits.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/assistant_expander.hpp"
 
 namespace dogen::generation::csharp::formattables {
 

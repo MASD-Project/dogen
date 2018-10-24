@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/types/builtin_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/assistant.hpp"
-#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/builtin_formatter.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/types/traits.hpp"
+#include "masd.dogen.generation.csharp/types/traits.hpp"
+#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
 
 namespace dogen::generation::csharp::formatters::types {
 

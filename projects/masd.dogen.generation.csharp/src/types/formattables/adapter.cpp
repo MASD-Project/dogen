@@ -19,11 +19,11 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.generation.csharp/types/formattables/artefact_properties.hpp"
-#include "dogen.generation.csharp/types/formattables/adaptation_error.hpp"
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.csharp/types/formattables/adapter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/adaptation_error.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/adapter.hpp"
 
 namespace {
 

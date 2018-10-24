@@ -31,16 +31,16 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
-#include "dogen.generation.csharp/types/formattables/locator.hpp"
-#include "dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
 namespace dogen::generation::csharp {
 

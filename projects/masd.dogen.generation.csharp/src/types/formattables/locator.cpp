@@ -20,13 +20,13 @@
  */
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation.csharp/types/formattables/location_error.hpp"
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.csharp/types/formattables/locator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.generation.csharp/types/traits.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/location_error.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 
 namespace {
 

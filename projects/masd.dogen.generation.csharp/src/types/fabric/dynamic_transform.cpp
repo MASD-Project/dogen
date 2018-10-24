@@ -19,13 +19,13 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.generation.csharp/types/fabric/injector.hpp"
-#include "dogen.generation.csharp/types/fabric/decoration_expander.hpp"
-#include "dogen.generation.csharp/types/fabric/dynamic_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/injector.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/decoration_expander.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/dynamic_transform.hpp"
 
 namespace {
 

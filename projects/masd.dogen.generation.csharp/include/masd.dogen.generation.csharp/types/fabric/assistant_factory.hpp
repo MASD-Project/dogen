@@ -27,8 +27,8 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
 
 namespace dogen::generation::csharp::fabric {
 

@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
-#include "dogen.generation.csharp/types/formattables/locator.hpp"
-#include "dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
 namespace dogen::generation::csharp::formattables {
 

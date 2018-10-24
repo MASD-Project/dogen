@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
-#include "dogen.generation.csharp/types/formatters/workflow.hpp"
-#include "dogen.generation.csharp/types/formatters/initializer.hpp"
-#include "dogen.generation.csharp/types/fabric/initializer.hpp"
-#include "dogen.generation.csharp/types/model_to_text_model_transform.hpp"
-#include "dogen.generation.csharp/types/initializer.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/workflow.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/initializer.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/initializer.hpp"
+#include "masd.dogen.generation.csharp/types/model_to_text_model_transform.hpp"
+#include "masd.dogen.generation.csharp/types/initializer.hpp"
 
 namespace dogen::generation::csharp {
 

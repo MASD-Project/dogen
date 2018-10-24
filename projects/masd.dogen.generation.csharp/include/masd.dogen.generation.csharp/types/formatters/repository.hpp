@@ -30,8 +30,8 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.generation.csharp/types/formatters/helper_formatter_interface_fwd.hpp"
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface_fwd.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface_fwd.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface_fwd.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

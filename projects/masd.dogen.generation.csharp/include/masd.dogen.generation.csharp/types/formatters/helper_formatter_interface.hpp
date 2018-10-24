@@ -27,8 +27,8 @@
 
 #include <list>
 #include <string>
-#include "dogen.generation.csharp/types/formatters/assistant_fwd.hpp"
-#include "dogen.generation.csharp/types/formattables/helper_properties_fwd.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/assistant_fwd.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_properties_fwd.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

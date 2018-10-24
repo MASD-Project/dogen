@@ -29,12 +29,12 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/types/archetype_locations_group.hpp"
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
-#include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

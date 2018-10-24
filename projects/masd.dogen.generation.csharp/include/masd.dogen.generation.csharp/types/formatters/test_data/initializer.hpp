@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.generation.csharp/types/formatters/registrar.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
 
 namespace dogen::generation::csharp::formatters::test_data {
 

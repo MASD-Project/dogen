@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.generation.csharp/types/formattables/model.hpp"
-#include "dogen.generation.csharp/types/formattables/locator.hpp"
-#include "dogen.generation.csharp/types/formatters/repository.hpp"
-#include "dogen.generation.csharp/types/formattables/formattable.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
 
 namespace dogen::generation::csharp::formattables {
 
