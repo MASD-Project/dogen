@@ -19,17 +19,17 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/io/meta_model/model_io.hpp"
-#include "dogen.external/types/transforms/transformation_error.hpp"
-#include "dogen.external.json/types/hydrator.hpp"
-#include "dogen.external.json/types/decoding_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.external/types/transforms/transformation_error.hpp"
+#include "masd.dogen.external.json/types/hydrator.hpp"
+#include "masd.dogen.external.json/types/decoding_transform.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 const std::string transform_id("external.json.decoding_transform");
 auto lg(logger_factory(transform_id));
 
@@ -37,7 +37,7 @@ const std::string extension(".json");
 
 }
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 decoding_transform::~decoding_transform() noexcept {}
 

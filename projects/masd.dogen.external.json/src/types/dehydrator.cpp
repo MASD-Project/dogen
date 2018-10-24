@@ -19,14 +19,14 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.formatting/types/utility_formatter.hpp"
-#include "dogen.external.json/types/dehydrator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.formatting/types/utility_formatter.hpp"
+#include "masd.dogen.external.json/types/dehydrator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("external.json.dehydrator"));
 
 const std::string scope("::");
@@ -35,7 +35,7 @@ const std::string invalid_enumerator("invalid");
 
 }
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 std::string dehydrator::tidy_up_string(std::string s) {
     boost::replace_all(s, "\r", "\\r");

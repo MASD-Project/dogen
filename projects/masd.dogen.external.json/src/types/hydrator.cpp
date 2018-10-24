@@ -22,15 +22,15 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.external.json/types/hydration_error.hpp"
-#include "dogen.external.json/types/hydrator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.external.json/types/hydration_error.hpp"
+#include "masd.dogen.external.json/types/hydrator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("external.json.hydrator"));
 
 const std::string empty;
@@ -62,7 +62,7 @@ const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 std::string
 hydrator::read_documentation(const boost::property_tree::ptree& pt) const {

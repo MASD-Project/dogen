@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_HPP
-#define DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_HPP
+#define MASD_DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 class decoding_transform final
     : public transforms::decoding_transform_interface {

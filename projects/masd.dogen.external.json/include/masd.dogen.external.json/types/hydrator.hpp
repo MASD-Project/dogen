@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_JSON_TYPES_HYDRATOR_HPP
-#define DOGEN_EXTERNAL_JSON_TYPES_HYDRATOR_HPP
+#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_HYDRATOR_HPP
+#define MASD_DOGEN_EXTERNAL_JSON_TYPES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external/types/meta_model/element.hpp"
-#include "dogen.external/types/meta_model/attribute.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.external/types/meta_model/attribute.hpp"
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 class hydrator final {
 private:

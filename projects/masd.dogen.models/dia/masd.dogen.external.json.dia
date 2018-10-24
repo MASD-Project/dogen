@@ -68,7 +68,7 @@
         <dia:point val="18,-2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="17.95,-2.05;39.74,11.75"/>
+        <dia:rectangle val="17.95,-2.05;39.74,12.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="14.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -97,7 +97,7 @@
             <dia:string>#Provides file importing support for JSON.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.external.json
+#DOGEN yarn.model_modules=masd.dogen.external.json
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.formatting.dia
 #DOGEN yarn.reference=masd.dogen.options.dia

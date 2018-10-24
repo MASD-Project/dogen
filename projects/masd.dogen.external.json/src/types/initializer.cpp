@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.external/types/transforms/model_generation_chain.hpp"
-#include "dogen.external.json/types/encoding_transform.hpp"
-#include "dogen.external.json/types/decoding_transform.hpp"
-#include "dogen.external.json/types/initializer.hpp"
+#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.external.json/types/encoding_transform.hpp"
+#include "masd.dogen.external.json/types/decoding_transform.hpp"
+#include "masd.dogen.external.json/types/initializer.hpp"
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 void initializer::initialize() {
     transforms::register_encoding_transform<encoding_transform>();

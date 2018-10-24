@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_JSON_TYPES_ALL_HPP
-#define DOGEN_EXTERNAL_JSON_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_ALL_HPP
+#define MASD_DOGEN_EXTERNAL_JSON_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.external.json/types/json.hpp"
-#include "dogen.external.json/types/hydrator.hpp"
-#include "dogen.external.json/types/dehydrator.hpp"
-#include "dogen.external.json/types/initializer.hpp"
-#include "dogen.external.json/types/hydration_error.hpp"
-#include "dogen.external.json/types/decoding_transform.hpp"
-#include "dogen.external.json/types/encoding_transform.hpp"
+#include "masd.dogen.external.json/types/json.hpp"
+#include "masd.dogen.external.json/types/hydrator.hpp"
+#include "masd.dogen.external.json/types/dehydrator.hpp"
+#include "masd.dogen.external.json/types/initializer.hpp"
+#include "masd.dogen.external.json/types/hydration_error.hpp"
+#include "masd.dogen.external.json/types/decoding_transform.hpp"
+#include "masd.dogen.external.json/types/encoding_transform.hpp"
 
 #endif

@@ -21,18 +21,18 @@
 #include <sstream>
 #include <boost/test/unit_test.hpp>
 #include <boost/filesystem/fstream.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/test/mock_type_factory.hpp"
-#include "dogen.annotations/test/mock_type_repository_factory.hpp"
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external/io/meta_model/model_io.hpp"
-#include "dogen.external.json/types/hydration_error.hpp"
-#include "dogen.external.json/types/hydrator.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/test/mock_type_factory.hpp"
+#include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.external.json/types/hydration_error.hpp"
+#include "masd.dogen.external.json/types/hydrator.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 
@@ -114,13 +114,12 @@ const std::string empty_elements_model(R"({
 }
 )");
 
-
-dogen::external::meta_model::model hydrate(std::istream& s) {
-    dogen::external::json::hydrator h;
+masd::dogen::external::meta_model::model hydrate(std::istream& s) {
+    masd::dogen::external::json::hydrator h;
     return h.hydrate(s);
 }
 
-dogen::external::meta_model::model
+masd::dogen::external::meta_model::model
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
@@ -128,8 +127,8 @@ hydrate(const std::string& content) {
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::external::json::hydration_error;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::external::json::hydration_error;
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 
@@ -229,7 +228,7 @@ BOOST_AUTO_TEST_CASE(missing_elements_model_throws) {
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_boost_model_hydrates_into_expected_model");
 
-    using namespace dogen::utility::filesystem;
+    using namespace masd::dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / cpp_boost_model_path);
     const auto m(hydrate(p));
 
@@ -248,7 +247,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("cpp_std_model_hydrates_into_expected_model");
 
-    using namespace dogen::utility::filesystem;
+    using namespace masd::dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / cpp_std_model_path);
     const auto m(hydrate(p));
 
@@ -284,7 +283,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
 
 BOOST_IGNORE_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     SETUP_TEST_LOG_SOURCE("hardware_model_hydrates_into_expected_model");
-    using namespace dogen::utility::filesystem;
+    using namespace masd::dogen::utility::filesystem;
     boost::filesystem::path p(data_files_directory() / hardware_model_path);
     const auto m(hydrate(p));
 

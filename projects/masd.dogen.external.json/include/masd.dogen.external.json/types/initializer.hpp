@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_JSON_TYPES_INITIALIZER_HPP
-#define DOGEN_EXTERNAL_JSON_TYPES_INITIALIZER_HPP
+#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_INITIALIZER_HPP
+#define MASD_DOGEN_EXTERNAL_JSON_TYPES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::external::json {
+namespace masd::dogen::external::json {
 
 /**
  * @brief Initialises all of the static state in this model.
