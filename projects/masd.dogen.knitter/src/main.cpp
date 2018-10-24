@@ -18,29 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNITTER_PARSER_VALIDATION_ERROR_HPP
-#define DOGEN_KNITTER_PARSER_VALIDATION_ERROR_HPP
+#include "dogen.knitter/workflow.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen.utility/exception/utility_exception.hpp"
-
-namespace dogen::knitter {
-
-/**
- * @brief A fatal error has occurred during option parsing.
- */
-class parser_validation_error : public utility::exception::exception {
-public:
-    parser_validation_error(std::string message)
-        : utility::exception::exception(message) { }
-    parser_validation_error() { }
-
-    virtual ~parser_validation_error() throw() {}
-};
-
+int main(const int argc, const char* argv[]) {
+    masd::dogen::knitter::workflow w;
+    return w.execute(argc, argv);
 }
-
-#endif

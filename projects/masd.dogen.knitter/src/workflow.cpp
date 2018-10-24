@@ -39,7 +39,7 @@ typedef boost::error_info<struct tag_workflow, std::string> errmsg_workflow;
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("knitter"));
 const std::string log_file_prefix("dogen.knitter.");
 const std::string more_information(
@@ -82,7 +82,7 @@ void version() {
 
 }
 
-namespace dogen::knitter {
+namespace masd::dogen::knitter {
 
 workflow::workflow() : can_log_(false) { }
 
@@ -123,7 +123,7 @@ void workflow::knit(const modeling::transforms::options& o) const {
         using namespace modeling::transforms;
         const auto ctx(context_factory::make(o));
         code_generation_chain::transform(ctx);
-    } catch(const dogen::formatting::formatting_error& e) {
+    } catch(const masd::dogen::formatting::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);

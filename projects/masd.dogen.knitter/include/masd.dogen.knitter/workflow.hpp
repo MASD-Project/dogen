@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNITTER_WORKFLOW_HPP
-#define DOGEN_KNITTER_WORKFLOW_HPP
+#ifndef MASD_DOGEN_KNITTER_WORKFLOW_HPP
+#define MASD_DOGEN_KNITTER_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen::knitter {
+namespace masd::dogen::knitter {
 
 /**
  * @brief Encapsulates the entire knitter tool workflow.

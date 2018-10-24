@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNITTER_INITIALIZER_HPP
-#define DOGEN_KNITTER_INITIALIZER_HPP
+#ifndef MASD_DOGEN_KNITTER_INITIALIZER_HPP
+#define MASD_DOGEN_KNITTER_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::knitter {
+namespace masd::dogen::knitter {
 
 /**
  * @brief Initialises the model.

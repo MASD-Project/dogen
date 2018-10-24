@@ -18,9 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.knitter/workflow.hpp"
+#include "dogen.generation.csharp/types/initializer.hpp"
+#include "dogen.generation.cpp/types/initializer.hpp"
+#include "dogen.external.json/types/initializer.hpp"
+#include "dogen.external.dia/types/initializer.hpp"
+#include "dogen.knitter/initializer.hpp"
 
-int main(const int argc, const char* argv[]) {
-    dogen::knitter::workflow w;
-    return w.execute(argc, argv);
+namespace masd::dogen::knitter {
+
+void initializer::initialize() {
+    masd::dogen::external::json::initializer::initialize();
+    masd::dogen::external::dia::initializer::initialize();
+    masd::dogen::generation::csharp::initializer::initialize();
+    masd::dogen::generation::cpp::initializer::initialize();
+}
+
 }

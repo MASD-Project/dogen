@@ -18,19 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/initializer.hpp"
-#include "dogen.generation.cpp/types/initializer.hpp"
-#include "dogen.external.json/types/initializer.hpp"
-#include "dogen.external.dia/types/initializer.hpp"
-#include "dogen.knitter/initializer.hpp"
+#ifndef MASD_DOGEN_KNITTER_WORKFLOW_ERROR_HPP
+#define MASD_DOGEN_KNITTER_WORKFLOW_ERROR_HPP
 
-namespace dogen::knitter {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void initializer::initialize() {
-    dogen::external::json::initializer::initialize();
-    dogen::external::dia::initializer::initialize();
-    dogen::generation::csharp::initializer::initialize();
-    dogen::generation::cpp::initializer::initialize();
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace masd::dogen::knitter {
+
+class workflow_error : public virtual std::exception, public virtual boost::exception {
+public:
+    workflow_error() = default;
+    ~workflow_error() noexcept = default;
+
+public:
+    explicit workflow_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
 }
 
-}
+#endif

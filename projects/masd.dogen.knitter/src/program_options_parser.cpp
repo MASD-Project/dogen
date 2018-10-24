@@ -74,7 +74,7 @@ const std::string default_probe_directory("probe");
 
 }
 
-namespace dogen::knitter {
+namespace masd::dogen::knitter {
 
 program_options_parser::
 program_options_parser(std::vector<std::string> arguments)

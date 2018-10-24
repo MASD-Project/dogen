@@ -27,7 +27,7 @@
 #include "dogen.knitter/program_options_parser.hpp"
 #include "dogen.knitter/parser_validation_error.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -95,7 +95,7 @@ dogen::knitter::program_options_parser setup_parser(
 
     logger lg(logger_factory(test_suite));
     BOOST_LOG_SEV(lg, debug) << "options as vector: " << options;
-    dogen::knitter::program_options_parser r(options);
+    masd::dogen::knitter::program_options_parser r(options);
     r.help_function(help_mock_factory(help_called));
     r.version_function(version_mock_factory(version_called));
     return r;
@@ -106,7 +106,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     bool version(false);
     auto parser(setup_parser(options, help, version));
 
-    using dogen::knitter::parser_validation_error;
+    using masd::dogen::knitter::parser_validation_error;
     auto lambda([&](const parser_validation_error& e) -> bool {
             const std::string msg(e.what());
             logger lg(logger_factory(test_suite));
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_CASE(supplying_help_argument_with_no_help_function_results_in_no
     const std::vector<std::string> o = { help_arg };
     BOOST_LOG_SEV(lg, debug) << "options: " << o;
 
-    dogen::knitter::program_options_parser parser(o);
+    masd::dogen::knitter::program_options_parser parser(o);
     parser.version_function(version_mock_factory(version));
     const auto r(parser.parse());
 
@@ -198,7 +198,7 @@ BOOST_AUTO_TEST_CASE(supplying_version_argument_with_no_version_function_results
     const std::vector<std::string> o = { version_arg };
     BOOST_LOG_SEV(lg, debug) << "options: " << o;
 
-    dogen::knitter::program_options_parser parser(o);
+    masd::dogen::knitter::program_options_parser parser(o);
     parser.help_function(help_mock_factory(help));
     const auto r(parser.parse());
 

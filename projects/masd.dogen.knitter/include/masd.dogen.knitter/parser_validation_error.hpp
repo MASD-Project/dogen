@@ -18,31 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_KNITTER_WORKFLOW_ERROR_HPP
-#define DOGEN_KNITTER_WORKFLOW_ERROR_HPP
+#ifndef MASD_DOGEN_KNITTER_PARSER_VALIDATION_ERROR_HPP
+#define MASD_DOGEN_KNITTER_PARSER_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
+#include "dogen.utility/exception/utility_exception.hpp"
 
-namespace dogen::knitter {
+namespace masd::dogen::knitter {
 
-class workflow_error : public virtual std::exception, public virtual boost::exception {
+/**
+ * @brief A fatal error has occurred during option parsing.
+ */
+class parser_validation_error : public utility::exception::exception {
 public:
-    workflow_error() = default;
-    ~workflow_error() noexcept = default;
+    parser_validation_error(std::string message)
+        : utility::exception::exception(message) { }
+    parser_validation_error() { }
 
-public:
-    explicit workflow_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
+    virtual ~parser_validation_error() throw() {}
 };
 
 }
