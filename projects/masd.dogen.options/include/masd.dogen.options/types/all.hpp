@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_ALL_HPP
-#define DOGEN_OPTIONS_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_OPTIONS_TYPES_ALL_HPP
+#define MASD_DOGEN_OPTIONS_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.options/types/options.hpp"
-#include "dogen.options/types/darting_options.hpp"
-#include "dogen.options/types/stitching_options.hpp"
-#include "dogen.options/types/tailoring_options.hpp"
+#include "masd.dogen.options/types/options.hpp"
+#include "masd.dogen.options/types/darting_options.hpp"
+#include "masd.dogen.options/types/stitching_options.hpp"
+#include "masd.dogen.options/types/tailoring_options.hpp"
 
 #endif

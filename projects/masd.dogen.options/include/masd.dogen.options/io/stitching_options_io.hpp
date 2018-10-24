@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_IO_STITCHING_OPTIONS_IO_HPP
-#define DOGEN_OPTIONS_IO_STITCHING_OPTIONS_IO_HPP
+#ifndef MASD_DOGEN_OPTIONS_IO_STITCHING_OPTIONS_IO_HPP
+#define MASD_DOGEN_OPTIONS_IO_STITCHING_OPTIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.options/types/stitching_options.hpp"
+#include "masd.dogen.options/types/stitching_options.hpp"
 
-namespace dogen::options {
+namespace masd::dogen::options {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::options::stitching_options& v);
+     const masd::dogen::options::stitching_options& v);
 
 }
 

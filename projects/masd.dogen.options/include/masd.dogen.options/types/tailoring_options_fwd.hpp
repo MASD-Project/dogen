@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_FWD_HPP
-#define DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_FWD_HPP
+#ifndef MASD_DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_FWD_HPP
+#define MASD_DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::options {
+namespace masd::dogen::options {
 
 class tailoring_options;
 

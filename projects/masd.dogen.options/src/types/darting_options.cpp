@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.options/types/darting_options.hpp"
+#include "masd.dogen.options/types/darting_options.hpp"
 
-namespace dogen::options {
+namespace masd::dogen::options {
 
 darting_options::darting_options()
     : force_write_(static_cast<bool>(0)) { }

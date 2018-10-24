@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.options/io/stitching_options_io.hpp"
+#include "masd.dogen.options/io/stitching_options_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,7 +31,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::options {
+namespace masd::dogen::options {
 
 std::ostream& operator<<(std::ostream& s, const stitching_options& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -41,7 +41,7 @@ std::ostream& operator<<(std::ostream& s, const stitching_options& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::options::stitching_options\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::options::stitching_options\"" << ", "
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"force_write\": " << v.force_write() << ", "

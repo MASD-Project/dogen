@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_HPP
-#define DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_HPP
+#ifndef MASD_DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_HPP
+#define MASD_DOGEN_OPTIONS_TYPES_TAILORING_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::options {
+namespace masd::dogen::options {
 
 class tailoring_options final {
 public:
@@ -103,8 +103,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::options::tailoring_options& lhs,
-    dogen::options::tailoring_options& rhs) {
+    masd::dogen::options::tailoring_options& lhs,
+    masd::dogen::options::tailoring_options& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_OPTIONS_IO_ALL_IO_HPP
-#define DOGEN_OPTIONS_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_OPTIONS_IO_ALL_IO_HPP
+#define MASD_DOGEN_OPTIONS_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.options/io/darting_options_io.hpp"
-#include "dogen.options/io/stitching_options_io.hpp"
-#include "dogen.options/io/tailoring_options_io.hpp"
+#include "masd.dogen.options/io/darting_options_io.hpp"
+#include "masd.dogen.options/io/stitching_options_io.hpp"
+#include "masd.dogen.options/io/tailoring_options_io.hpp"
 
 #endif
