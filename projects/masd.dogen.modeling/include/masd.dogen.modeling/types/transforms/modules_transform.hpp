@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Generates all of the modules implied by the defined types.

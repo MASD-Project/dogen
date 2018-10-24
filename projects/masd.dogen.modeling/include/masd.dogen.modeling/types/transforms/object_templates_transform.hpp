@@ -27,10 +27,10 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Transform that specialises in indexing

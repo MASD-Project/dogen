@@ -29,12 +29,12 @@
 #include <string>
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/location.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/types/helpers/node.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/location.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/helpers/node.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Creates a name tree as directed by the external caller.

@@ -25,14 +25,14 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/helpers/name_builder.hpp"
-#include "dogen.modeling/types/helpers/hydration_error.hpp"
-#include "dogen.modeling/types/helpers/mappings_hydrator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.modeling/types/helpers/hydration_error.hpp"
+#include "masd.dogen.modeling/types/helpers/mappings_hydrator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.mapping_hydrator"));
 
 const std::string empty;
@@ -66,7 +66,7 @@ const std::string duplicate_language("Language mapped more than once: ");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 mapping_actions
 mappings_hydrator::to_mapping_action(const std::string& s) const {

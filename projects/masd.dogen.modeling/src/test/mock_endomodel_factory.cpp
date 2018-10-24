@@ -24,23 +24,23 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/exception/utility_exception.hpp"
-#include "dogen.annotations/types/value_factory.hpp"
-#include "dogen.modeling/types/meta_model/exception.hpp"
-#include "dogen.modeling/types/meta_model/object_template.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
-#include "dogen.modeling/types/helpers/name_builder.hpp"
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/builtin.hpp"
-#include "dogen.modeling/types/helpers/building_error.hpp"
-#include "dogen.modeling/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/exception/utility_exception.hpp"
+#include "masd.dogen.annotations/types/value_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.modeling/types/helpers/building_error.hpp"
+#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("yarn.mock_endomodel_factory"));
 
 const std::string model_name_prefix("some_model_");
@@ -114,7 +114,7 @@ std::string module_name(const unsigned int i) {
 
 }
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 namespace {
 

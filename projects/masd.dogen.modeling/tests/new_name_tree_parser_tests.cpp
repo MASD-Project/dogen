@@ -20,25 +20,25 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
 
 /*
-#include "dogen.modeling/types/name_builder.hpp"
-#include "dogen.modeling/types/name_factory.hpp"
-#include "dogen.modeling/types/endomodel.hpp"
-#include "dogen.modeling/types/parsing_error.hpp"
-#include "dogen.modeling/io/name_tree_io.hpp"
-#include "dogen.modeling/io/name_io.hpp"
-#include "dogen.modeling/types/merging_error.hpp"
-#include "dogen.modeling/types/name_tree_parser.hpp"
-#include "dogen.modeling/types/merger.hpp"*/
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.modeling/types/helpers/new_name_tree_parser.hpp"
+#include "masd.dogen.modeling/types/name_builder.hpp"
+#include "masd.dogen.modeling/types/name_factory.hpp"
+#include "masd.dogen.modeling/types/endomodel.hpp"
+#include "masd.dogen.modeling/types/parsing_error.hpp"
+#include "masd.dogen.modeling/io/name_tree_io.hpp"
+#include "masd.dogen.modeling/io/name_io.hpp"
+#include "masd.dogen.modeling/types/merging_error.hpp"
+#include "masd.dogen.modeling/types/name_tree_parser.hpp"
+#include "masd.dogen.modeling/types/merger.hpp"*/
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.modeling/types/helpers/new_name_tree_parser.hpp"
 
-using dogen::utility::test::asserter;
+using masd::dogen::utility::test::asserter;
 
 namespace  {
 
@@ -49,7 +49,7 @@ const std::string test_suite("name_tree_parser_tests");
 const auto cpp(dogen::modeling::meta_model::languages::cpp);
 
 const auto top_level_modules = std::unordered_set<std::string>();
-const auto model_location = dogen::modeling::meta_model::location();
+const auto model_location = masd::dogen::modeling::meta_model::location();
 
 
 
@@ -83,7 +83,7 @@ bool check_parse(const std::string & s)
 }
 
 }
-using dogen::modeling::helpers::parsing_error;
+using masd::dogen::modeling::helpers::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(new_name_tree_parser_tests)
 
@@ -425,17 +425,17 @@ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_name_trees");
 /*
-    dogen::modeling::name_tree e;
-    dogen::modeling::name_factory nf;
+    masd::dogen::modeling::name_tree e;
+    masd::dogen::modeling::name_factory nf;
     e.current(nf.build_element_name("type"));
 
-    dogen::modeling::name_tree c;
+    masd::dogen::modeling::name_tree c;
     c.current(nf.build_element_name("abc"));
 
     e.children(std::list<dogen::modeling::name_tree> { c });
 
     const std::string s("type<abc>");
-    dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
+    masd::dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
@@ -443,14 +443,14 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_name_trees");
 /*
-    dogen::modeling::name_tree e;
-    dogen::modeling::name_factory nf;
+    masd::dogen::modeling::name_tree e;
+    masd::dogen::modeling::name_factory nf;
     e.current(nf.build_element_name("type"));
 
-    dogen::modeling::name_tree c;
+    masd::dogen::modeling::name_tree c;
     c.current(nf.build_element_name("abc"));
 
-    dogen::modeling::name_tree d;
+    masd::dogen::modeling::name_tree d;
     d.current(nf.build_element_name("cde"));
 
     e.children(std::list<dogen::modeling::name_tree> { c, d });
@@ -458,18 +458,18 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
     const std::string s("type<abc,cde>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
+    masd::dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
 
 BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_name_trees");
- /*   dogen::modeling::name_tree e;
-    dogen::modeling::name_factory nf;
+ /*   masd::dogen::modeling::name_tree e;
+    masd::dogen::modeling::name_factory nf;
     e.current(nf.build_element_name("std", "vector"));
 
-    dogen::modeling::name_tree c;
+    masd::dogen::modeling::name_tree c;
     c.current(nf.build_element_name("std", "string"));
 
     e.children(std::list<dogen::modeling::name_tree> { c });
@@ -477,7 +477,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     const std::string s("std::vector<std::string>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
+    masd::dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
@@ -485,11 +485,11 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
 BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_builtin_produces_expected_name_trees");
 /*
-    dogen::modeling::name_tree e;
-    dogen::modeling::name_factory nf;
+    masd::dogen::modeling::name_tree e;
+    masd::dogen::modeling::name_factory nf;
     e.current(nf.build_element_name("std", "vector"));
 
-    dogen::modeling::name_tree c;
+    masd::dogen::modeling::name_tree c;
     c.current(nf.build_element_name("unsigned int"));
 
     e.children(std::list<dogen::modeling::name_tree> { c });
@@ -497,7 +497,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
     const std::string s("std::vector<unsigned int>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
+    masd::dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
@@ -505,15 +505,15 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
 BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_unordered_map_produces_expected_name_trees");
 /*
-    dogen::modeling::name_tree e;
+    masd::dogen::modeling::name_tree e;
 
-    dogen::modeling::name_factory nf;
+    masd::dogen::modeling::name_factory nf;
     e.current(nf.build_element_name("std", "unordered_map"));
 
-    dogen::modeling::name_tree c;
+    masd::dogen::modeling::name_tree c;
     c.current(nf.build_element_name("std", "string"));
 
-    dogen::modeling::name_tree d;
+    masd::dogen::modeling::name_tree d;
     d.current(nf.build_element_name("my", "type"));
 
     e.children(std::list<dogen::modeling::name_tree> { c, d });
@@ -521,7 +521,7 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
     const std::string s1("std::unordered_map<std::string,my::type>");
     BOOST_LOG_SEV(lg, info) << "input: " << s1;
 
-    dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
+    masd::dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a1(ntp.parse(s1));
     BOOST_CHECK(asserter::assert_equals(e, a1));
 
@@ -535,14 +535,14 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
 BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_shared_ptr_produces_expected_name_trees");
 
-  /*  dogen::modeling::name_tree e;
-    dogen::modeling::name_factory nf;
+  /*  masd::dogen::modeling::name_tree e;
+    masd::dogen::modeling::name_factory nf;
     e.current(nf.build_element_name("std", "vector"));
 
-    dogen::modeling::name_tree c;
+    masd::dogen::modeling::name_tree c;
     c.current(nf.build_element_name("std", "shared_ptr"));
 
-    dogen::modeling::name_tree d;
+    masd::dogen::modeling::name_tree d;
     d.current(nf.build_element_name("std", "string"));
 
     c.children(std::list<dogen::modeling::name_tree> { d });
@@ -551,7 +551,7 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
     const std::string s("std::vector<std::shared_ptr<std::string>>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
+    masd::dogen::modeling::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));*/
 }

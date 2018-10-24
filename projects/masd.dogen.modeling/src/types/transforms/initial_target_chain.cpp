@@ -19,27 +19,27 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/model_generation_chain.hpp"
-#include "dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
-// #include "dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
-// #include "dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
-#include "dogen.modeling/types/transforms/initial_target_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "masd.dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
+// #include "masd.dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/initial_target_chain.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.initial_target_chain");
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {

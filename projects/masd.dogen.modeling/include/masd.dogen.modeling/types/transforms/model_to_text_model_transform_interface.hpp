@@ -30,17 +30,17 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/archetype_locations_group.hpp"
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/meta_model/text_model.hpp"
-#include "dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
-#include "dogen.modeling/types/transforms/options.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
+#include "masd.dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Performs a model to text transformation of a meta-model,

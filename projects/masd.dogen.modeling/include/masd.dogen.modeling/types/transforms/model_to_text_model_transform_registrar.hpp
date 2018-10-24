@@ -30,11 +30,11 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Keeps track of all the available model to text model

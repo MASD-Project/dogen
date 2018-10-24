@@ -29,19 +29,19 @@
 #include <iosfwd>
 #include <vector>
 #include <unordered_map>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.modeling/types/helpers/new_adapter.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/location.hpp"
-#include "dogen.modeling/types/meta_model/attribute.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
-#include "dogen.modeling/types/transforms/naming_configuration.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/helpers/new_adapter.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/location.hpp"
+#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.modeling/types/transforms/naming_configuration.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class external_model_to_endomodel_transform final {
 private:

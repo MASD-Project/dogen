@@ -19,12 +19,12 @@
  *
  */
 #include <boost/algorithm/string.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/helpers/string_processor.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/helpers/string_processor.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.string_processor"));
 
 const std::string empty;
@@ -37,7 +37,7 @@ const std::string scope_operator("::");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::string string_processor::to_identifiable(const std::string& s) {
     std::string r(s);

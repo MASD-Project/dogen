@@ -27,10 +27,10 @@
 
 #include <string>
 #include <sstream>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/helpers/separators.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/helpers/separators.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class pretty_printer {
 public:

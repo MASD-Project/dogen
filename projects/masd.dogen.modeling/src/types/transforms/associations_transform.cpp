@@ -22,25 +22,25 @@
 #include <list>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/associations_transform.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/associations_transform.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.associations_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 void associations_transform::remove_duplicates(
     std::list<meta_model::name>& names,

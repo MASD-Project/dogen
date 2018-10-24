@@ -19,12 +19,12 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/test_data/validating_resolver.hpp"
-#include "dogen.utility/test_data/tds_test_good.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.modeling/types/helpers/file_linter.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/test_data/validating_resolver.hpp"
+#include "masd.dogen.utility/test_data/tds_test_good.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.modeling/types/helpers/file_linter.hpp"
 
 namespace  {
 
@@ -43,16 +43,16 @@ const std::list<boost::filesystem::path> managed_directories() {
     return r;
 }
 
-const dogen::modeling::meta_model::artefact
+const masd::dogen::modeling::meta_model::artefact
 to_artefact(const boost::filesystem::path& p) {
-    dogen::modeling::meta_model::artefact r;
+    masd::dogen::modeling::meta_model::artefact r;
     r.path(p);
     return r;
 }
 
-const dogen::modeling::meta_model::text_model
+const masd::dogen::modeling::meta_model::text_model
 create_model(const std::list<boost::filesystem::path>& files) {
-    dogen::modeling::meta_model::text_model r;
+    masd::dogen::modeling::meta_model::text_model r;
     r.managed_directories(managed_directories());
     for(const auto& f : files)
         r.artefacts().push_back(to_artefact(f));
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_SUITE(file_linter_tests)
 
 BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_linter_does_not_find_extra_files) {
     SETUP_TEST_LOG("when_all_files_are_present_file_linter_does_not_find_extra_files");
-    using dogen::utility::test_data::tds_test_good;
+    using masd::dogen::utility::test_data::tds_test_good;
     const std::list<boost::filesystem::path> files = {
         tds_test_good::expected_file_1_txt(),
         tds_test_good::expected_file_2_txt(),
@@ -76,14 +76,14 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_file_linter_does_not_find_extra_
     };
     const auto tm(create_model(files));
 
-    using dogen::modeling::helpers::file_linter;
+    using masd::dogen::modeling::helpers::file_linter;
     const auto result(file_linter::lint(ignored_files, tm));
     BOOST_CHECK(result.empty());
 }
 
 BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_files) {
     SETUP_TEST_LOG("when_extra_files_are_present_file_linter_finds_the_extra_files");
-    using dogen::utility::test_data::tds_test_good;
+    using masd::dogen::utility::test_data::tds_test_good;
     const std::list<boost::filesystem::path> files = {
         tds_test_good::expected_test_serializer_xmltst(),
         tds_test_good::expected_test_serializer_2_xmltst(),
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_fi
     };
     const auto tm(create_model(files));
 
-    using dogen::modeling::helpers::file_linter;
+    using masd::dogen::modeling::helpers::file_linter;
     const auto result(file_linter::lint(ignored_files, tm));
 
     BOOST_CHECK(result.size() == 2);
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_file_linter_finds_the_extra_fi
 
 BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
     SETUP_TEST_LOG("ignored_files_are_not_deleted");
-    using dogen::utility::test_data::tds_test_good;
+    using masd::dogen::utility::test_data::tds_test_good;
     const std::list<boost::filesystem::path> files = {
         tds_test_good::expected_test_serializer_xmltst(),
         tds_test_good::expected_test_serializer_2_xmltst(),
@@ -113,7 +113,7 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
     const auto tm(create_model(files));
 
     const std::vector<std::string> ignores({".*/file_1.*"});
-    using dogen::modeling::helpers::file_linter;
+    using masd::dogen::modeling::helpers::file_linter;
     const auto result(file_linter::lint(ignores, tm));
 
     BOOST_CHECK([&]{

@@ -27,16 +27,16 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.annotations/types/archetype_locations_group.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "dogen.modeling/types/meta_model/artefact_properties.hpp"
-#include "dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
-#include "dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class enablement_transform final {
 private:

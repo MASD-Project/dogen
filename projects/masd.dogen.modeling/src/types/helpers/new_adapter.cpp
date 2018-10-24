@@ -20,30 +20,30 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.modeling/io/meta_model/location_io.hpp"
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.modeling/types/helpers/name_builder.hpp"
-#include "dogen.modeling/types/helpers/adaptation_error.hpp"
-#include "dogen.modeling/types/helpers/new_adapter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.modeling/types/helpers/adaptation_error.hpp"
+#include "masd.dogen.modeling/types/helpers/new_adapter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("yarn.helpers.new_adapter"));
 
 const std::string empty_name("Name is empty.");
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
 
-using dogen::annotations::scope_types;
+using masd::dogen::annotations::scope_types;
 const scope_types entity_scope(scope_types::entity);
 const scope_types root_scope(scope_types::root_module);
 const scope_types property_scope(scope_types::property);
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 new_adapter::new_adapter(const annotations::annotation_factory& f)
     : annotation_factory_(f) {}

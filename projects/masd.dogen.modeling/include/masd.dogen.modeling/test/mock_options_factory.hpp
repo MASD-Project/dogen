@@ -27,9 +27,9 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 /**
  * @brief Creates instances of setting classes for testing.

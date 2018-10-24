@@ -29,15 +29,15 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/types/meta_model/attribute.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/helpers/mapping_context.hpp"
-#include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_context.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class mapper final {
 public:

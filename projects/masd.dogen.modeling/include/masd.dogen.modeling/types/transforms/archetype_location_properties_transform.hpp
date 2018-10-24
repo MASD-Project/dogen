@@ -27,16 +27,16 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "dogen.modeling/types/meta_model/backend_properties.hpp"
-#include "dogen.modeling/types/meta_model/facet_properties.hpp"
-#include "dogen.modeling/types/meta_model/archetype_properties.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.modeling/types/meta_model/backend_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/facet_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/archetype_properties.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class archetype_location_properties_transform final {
 private:

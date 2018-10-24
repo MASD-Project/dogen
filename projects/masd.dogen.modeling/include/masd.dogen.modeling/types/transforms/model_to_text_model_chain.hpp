@@ -28,16 +28,16 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.modeling/types/meta_model/text_model.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
-#include "dogen.modeling/types/transforms/configuration.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.modeling/types/transforms/configuration.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class model_to_text_model_chain final {
 private:

@@ -19,20 +19,20 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/builtin.hpp"
-#include "dogen.modeling/types/meta_model/visitor.hpp"
-#include "dogen.modeling/types/meta_model/exception.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
-#include "dogen.modeling/types/meta_model/object_template.hpp"
-#include "dogen.modeling/types/helpers/validation_error.hpp"
-#include "dogen.modeling/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
+#include "masd.dogen.modeling/types/helpers/validation_error.hpp"
+#include "masd.dogen.modeling/types/helpers/endomodel_pre_processing_validator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.endomodel_pre_processing_validator"));
 
 const std::string multiple_inheritance_not_supported(
@@ -47,7 +47,7 @@ const std::string nullable_primary_key(
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class validator {
 public:

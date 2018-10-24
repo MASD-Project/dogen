@@ -29,9 +29,9 @@
 #include <list>
 #include <vector>
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/types/meta_model/text_model.hpp"
+#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class file_linter final {
 private:

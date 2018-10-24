@@ -26,13 +26,13 @@
 #endif
 
 #include <string>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/meta_model/formatting_styles.hpp"
-#include "dogen.modeling/types/transforms/formatting_configuration.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/meta_model/formatting_styles.hpp"
+#include "masd.dogen.modeling/types/transforms/formatting_configuration.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class formatting_transform final {
 private:

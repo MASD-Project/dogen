@@ -27,9 +27,9 @@
 
 #include <list>
 #include <memory>
-#include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class dynamic_transform_registrar final {
 public:

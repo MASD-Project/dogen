@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 context::context(
         const std::vector<boost::filesystem::path>& data_directories,
@@ -28,7 +28,7 @@ context::context(
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
-        const dogen::formatting::repository& frp,
+        const masd::dogen::formatting::repository& frp,
         const probing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
@@ -71,7 +71,7 @@ const helpers::mapping_set_repository& context::mapping_repository() const {
     return mapping_repository_;
 }
 
-const dogen::formatting::repository& context::formatting_repository() const {
+const masd::dogen::formatting::repository& context::formatting_repository() const {
     return formatting_repository_;
 }
 

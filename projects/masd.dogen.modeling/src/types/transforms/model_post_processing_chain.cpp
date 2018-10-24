@@ -18,29 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/io/meta_model/model_io.hpp"
-#include "dogen.modeling/types/transforms/generability_transform.hpp"
-#include "dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
-#include "dogen.modeling/types/transforms/artefact_properties_transform.hpp"
-#include "dogen.modeling/types/transforms/enablement_transform.hpp"
-#include "dogen.modeling/types/transforms/formatting_transform.hpp"
-#include "dogen.modeling/types/transforms/archetype_location_properties_transform.hpp"
-#include "dogen.modeling/types/transforms/locator_properties_transform.hpp"
-#include "dogen.modeling/types/transforms/model_post_processing_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
+#include "masd.dogen.modeling/types/transforms/generability_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/artefact_properties_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/enablement_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/formatting_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/archetype_location_properties_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/locator_properties_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
     "yarn.transforms.model_post_processing_chain");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {

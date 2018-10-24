@@ -21,41 +21,41 @@
 #include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/builtin.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/visitor.hpp"
-#include "dogen.modeling/types/meta_model/exception.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
-#include "dogen.modeling/types/meta_model/object_template.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/location_io.hpp"
-#include "dogen.external/io/meta_model/model_io.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/io/helpers/stereotypes_conversion_result_io.hpp"
-#include "dogen.modeling/types/helpers/name_builder.hpp"
-#include "dogen.modeling/types/helpers/location_builder.hpp"
-#include "dogen.modeling/types/helpers/stereotypes_helper.hpp"
-#include "dogen.modeling/types/helpers/stereotypes_helper.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
+#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.modeling/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.modeling/types/helpers/location_builder.hpp"
+#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
     "yarn.transforms.external_model_to_endomodel_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string duplicate_element("Element id already exists: ");
@@ -66,12 +66,12 @@ const std::string invalid_element_type(
 const std::string too_many_yarn_types(
     "Attempting to set the yarn type more than once.");
 
-using dogen::modeling::meta_model::location;
+using masd::dogen::modeling::meta_model::location;
 const location empty_location = location();
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 template<typename Element>
 inline void

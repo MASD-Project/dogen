@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/transforms/type_params_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/type_params_transform.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.type_params_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 type_params_transform::type_group type_params_transform::
 make_type_group(const annotations::type_repository& atrp) {

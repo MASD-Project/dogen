@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/endomodel_fwd.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel_fwd.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Updates the meta-names of all of the yarn meta-model

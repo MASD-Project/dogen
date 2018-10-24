@@ -20,20 +20,20 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.modeling/types/helpers/parsing_error.hpp"
-#include "dogen.modeling/io/meta_model/name_tree_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/types/helpers/legacy_name_tree_parser.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.modeling/types/helpers/parsing_error.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/types/helpers/legacy_name_tree_parser.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
 
-using dogen::utility::test::asserter;
-using dogen::modeling::meta_model::name_tree;
-using dogen::modeling::helpers::legacy_name_tree_parser;
-using dogen::modeling::helpers::name_factory;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::modeling::meta_model::name_tree;
+using masd::dogen::modeling::helpers::legacy_name_tree_parser;
+using masd::dogen::modeling::helpers::name_factory;
 
 namespace  {
 
@@ -43,7 +43,7 @@ const std::string test_suite("legacy_name_tree_parser_tests");
 
 const auto cpp(dogen::modeling::meta_model::languages::cpp);
 
-name_tree make(const dogen::modeling::meta_model::name& n) {
+name_tree make(const masd::dogen::modeling::meta_model::name& n) {
     name_tree r;
     r.current(n);
     return r;
@@ -60,7 +60,7 @@ bool test_builtin(const std::string& s) {
 
 }
 
-using dogen::modeling::helpers::parsing_error;
+using masd::dogen::modeling::helpers::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(legacy_name_tree_parser_tests)
 

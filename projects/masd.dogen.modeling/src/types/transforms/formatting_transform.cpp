@@ -19,23 +19,23 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/io/meta_model/model_io.hpp"
-#include "dogen.modeling/io/meta_model/formatting_styles_io.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/formatting_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/formatting_transform.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.formatting_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string stock_style("stock");
@@ -48,12 +48,12 @@ const std::string invalid_style("Formatting style is not valid:");
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::ostream&
 operator<<(std::ostream& s, const formatting_transform::type_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "\"__type__\": " << "\"masd::dogen::quilt::cpp::formattables::"
       << "formatting_transform::type_group\"" << ", "
       << "\"formatting_style\": " << v.formatting_style << ", "
       << "\"formatting_input\": " << v.formatting_input

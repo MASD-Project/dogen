@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/meta_model/text_model.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class text_model_generation_chain final {
 public:

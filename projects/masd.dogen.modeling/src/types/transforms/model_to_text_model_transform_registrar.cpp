@@ -20,14 +20,14 @@
  */
 #include <sstream>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/transforms/registrar_error.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/transforms/registrar_error.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(
         "yarn.meta_model.model_to_text_model_transform_registrar"));
 
@@ -37,7 +37,7 @@ const std::string language_taken("Transform already registered for language: ");
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 void model_to_text_model_transform_registrar::
 register_transform(std::shared_ptr<model_to_text_model_transform_interface> t) {

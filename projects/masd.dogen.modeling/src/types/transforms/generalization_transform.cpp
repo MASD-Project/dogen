@@ -19,26 +19,26 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.utility/io/optional_io.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/helpers/resolver.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/generalization_transform.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/io/optional_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/helpers/resolver.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/generalization_transform.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.generalization_transforms");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string parent_not_found("Could not find parent: ");
@@ -47,7 +47,7 @@ const std::string incompatible_is_final(
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
@@ -55,7 +55,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 generalization_transform::type_group generalization_transform::make_type_group(
     const annotations::type_repository& atrp) {

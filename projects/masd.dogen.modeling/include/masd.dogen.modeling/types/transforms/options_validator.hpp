@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class options_validator final {
 public:

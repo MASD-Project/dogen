@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/helpers/validation_error.hpp"
-#include "dogen.modeling/types/helpers/mappings_validator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/helpers/validation_error.hpp"
+#include "masd.dogen.modeling/types/helpers/mappings_validator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.mappings_validator"));
 
 const std::string lam_id_prefix("<lam>");
@@ -44,7 +44,7 @@ const std::string unexpected_default_value(
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 void mappings_validator::
 validate(const meta_model::languages l, const mapping_value& mv) const {

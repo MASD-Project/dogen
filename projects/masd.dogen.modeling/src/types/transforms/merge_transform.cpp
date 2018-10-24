@@ -19,17 +19,17 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/transforms/merge_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/transforms/merge_transform.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.merge_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 /**
@@ -44,7 +44,7 @@ void copy(const ElementAssociativeContainer& src,
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 void merge_transform::merge(const meta_model::endomodel& src,
     meta_model::endomodel& dst) {

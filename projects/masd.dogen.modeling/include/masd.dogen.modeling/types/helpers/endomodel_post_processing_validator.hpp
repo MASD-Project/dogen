@@ -30,13 +30,13 @@
 #include <string>
 #include <utility>
 #include <unordered_set>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/helpers/indices.hpp"
-#include "dogen.modeling/types/helpers/decomposition_result.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/helpers/indices.hpp"
+#include "masd.dogen.modeling/types/helpers/decomposition_result.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class endomodel_post_processing_validator final {
 private:

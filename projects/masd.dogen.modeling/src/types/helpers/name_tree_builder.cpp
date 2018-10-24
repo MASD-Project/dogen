@@ -24,25 +24,25 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/location_io.hpp"
-#include "dogen.modeling/io/meta_model/name_tree_io.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/helpers/name_builder.hpp"
-#include "dogen.modeling/types/helpers/building_error.hpp"
-#include "dogen.modeling/types/helpers/name_tree_builder.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.modeling/types/helpers/building_error.hpp"
+#include "masd.dogen.modeling/types/helpers/name_tree_builder.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.name_tree_builder"));
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 name_tree_builder::name_tree_builder()
     : root_(new node), current_(root_) {}

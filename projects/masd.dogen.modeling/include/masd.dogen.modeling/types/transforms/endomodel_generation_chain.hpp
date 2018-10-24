@@ -27,12 +27,12 @@
 
 #include <list>
 #include <iosfwd>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief The endomodel generation chain is a top-level transformation

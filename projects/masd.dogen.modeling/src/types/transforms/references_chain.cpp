@@ -18,32 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/helpers/reference_paths_extractor.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/model_generation_chain.hpp"
-#include "dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
-// #include "dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
-// #include "dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
-#include "dogen.modeling/types/transforms/references_chain.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/helpers/reference_paths_extractor.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "masd.dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
+// #include "masd.dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/references_chain.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.references_chain");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string non_absolute_target("Target path is not absolute: ");
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::unordered_set<meta_model::languages> references_chain::
 obtain_relevant_languages(const meta_model::endomodel& target) {

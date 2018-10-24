@@ -28,14 +28,14 @@
 #include <list>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/visitor.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/hash/meta_model/location_hash.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/hash/meta_model/location_hash.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Locates objects with stereotypes and performs the required

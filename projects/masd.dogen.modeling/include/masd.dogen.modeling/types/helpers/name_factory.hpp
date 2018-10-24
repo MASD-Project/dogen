@@ -26,9 +26,9 @@
 #endif
 
 #include <string>
-#include "dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Creates names with all the fields filled in.

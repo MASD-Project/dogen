@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 model_to_text_model_transform_interface::
 ~model_to_text_model_transform_interface() noexcept {}

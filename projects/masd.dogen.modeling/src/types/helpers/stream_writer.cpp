@@ -19,7 +19,7 @@
  *
  */
 #include <iostream>
-#include "dogen.modeling/types/helpers/stream_writer.hpp"
+#include "masd.dogen.modeling/types/helpers/stream_writer.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ const std::string content("Content: ");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 stream_writer::stream_writer(std::ostream& s) : stream_(s) {}
 

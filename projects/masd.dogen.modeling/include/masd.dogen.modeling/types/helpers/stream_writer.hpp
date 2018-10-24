@@ -26,9 +26,9 @@
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Writes the artefacts into a user-supplied stream,

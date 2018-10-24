@@ -30,12 +30,12 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/helpers/mapping_actions.hpp"
-#include "dogen.modeling/types/helpers/mapping.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_actions.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class mappings_hydrator final {
 private:

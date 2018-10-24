@@ -21,31 +21,31 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/types/type_repository_factory.hpp"
-#include "dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "dogen.formatting/types/repository_factory.hpp"
-#include "dogen.probing/types/prober.hpp"
-#include "dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
-#include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
-#include "dogen.modeling/types/helpers/filesystem_writer.hpp"
-#include "dogen.modeling/types/transforms/building_error.hpp"
-#include "dogen.modeling/types/transforms/options_validator.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
-#include "dogen.modeling/types/transforms/context_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.annotations/types/type_repository_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.probing/types/prober.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.modeling/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.modeling/types/transforms/building_error.hpp"
+#include "masd.dogen.modeling/types/transforms/options_validator.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.transforms.context_factory"));
 
 const std::string duplicate_segment("Duplicat segment: ");
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::unordered_map<std::string,
                    meta_model::intra_backend_segment_properties>

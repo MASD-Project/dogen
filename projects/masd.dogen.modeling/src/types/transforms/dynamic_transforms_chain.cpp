@@ -19,25 +19,25 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/types/repository_factory.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/io/meta_model/model_io.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.dynamic_transforms_chain");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::shared_ptr<dynamic_transform_registrar>
 dynamic_transforms_chain::registrar_;
@@ -52,7 +52,7 @@ dynamic_transform_registrar& dynamic_transforms_chain::registrar() {
 dogen::formatting::decoration_properties_factory
 dynamic_transforms_chain::create_decoration_properties_factory(
     const context& ctx, const annotations::annotation& ra) {
-    using dogen::formatting::decoration_properties_factory;
+    using masd::dogen::formatting::decoration_properties_factory;
     decoration_properties_factory
         r(ctx.type_repository(), ctx.formatting_repository(), ra);
     return r;

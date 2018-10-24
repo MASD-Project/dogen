@@ -26,10 +26,10 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Obtains the target model from a source, as per the supplied

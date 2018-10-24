@@ -28,11 +28,11 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/helpers/mapping_value.hpp"
-#include "dogen.modeling/types/helpers/mapping.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_value.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class mappings_validator final {
 private:

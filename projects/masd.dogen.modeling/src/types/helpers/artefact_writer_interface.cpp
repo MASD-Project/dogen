@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 artefact_writer_interface::~artefact_writer_interface() noexcept { }
 

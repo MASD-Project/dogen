@@ -26,9 +26,9 @@
 #endif
 
 #include <list>
-#include "dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Class with the ability to write artefacts into some storage

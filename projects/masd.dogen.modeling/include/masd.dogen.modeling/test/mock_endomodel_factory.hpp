@@ -29,10 +29,10 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 /**
  * @brief Generates mock intermediate models.

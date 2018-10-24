@@ -24,24 +24,24 @@
 #include <boost/test/unit_test_monitor.hpp>
 // #include <boost/algorithm/string/predicate.hpp>
 // #include <boost/algorithm/string/replace.hpp>
-// #include "dogen.utility/test_data/validating_resolver.hpp"
-// #include "dogen.utility/filesystem/file.hpp"
-// #include "dogen.utility/test/macros.hpp"
-// #include "dogen.utility/test/asserter.hpp"
-// #include "dogen.utility/test_data/external_dia.hpp"
-// #include "dogen.utility/test_data/external_json.hpp"
-// #include "dogen.utility/test/logging.hpp"
-// #include "dogen.dia/io/diagram_io.hpp"
-// #include "dogen.modeling/test/mock_options_factory.hpp"
-// #include "dogen.modeling/types/transforms/options.hpp"
-// #include "dogen.modeling/types/transforms/context_factory.hpp"
-// #include "dogen.modeling/types/transforms/code_generation_chain.hpp"
-// #include "dogen.modeling/io/meta_model/model_io.hpp"
-// #include "dogen.dia/serialization/diagram_ser.hpp"
-// #include "dogen.modeling/serialization/meta_model/model_ser.hpp"
-// #include "dogen.dia/test/dia_file_asserter.hpp"
-// #include "dogen.modeling/test/yarn_file_asserter.hpp"
-// #include "dogen.utility/test/exception_checkers.hpp"
+// #include "masd.dogen.utility/test_data/validating_resolver.hpp"
+// #include "masd.dogen.utility/filesystem/file.hpp"
+// #include "masd.dogen.utility/test/macros.hpp"
+// #include "masd.dogen.utility/test/asserter.hpp"
+// #include "masd.dogen.utility/test_data/external_dia.hpp"
+// #include "masd.dogen.utility/test_data/external_json.hpp"
+// #include "masd.dogen.utility/test/logging.hpp"
+// #include "masd.dogen.dia/io/diagram_io.hpp"
+// #include "masd.dogen.modeling/test/mock_options_factory.hpp"
+// #include "masd.dogen.modeling/types/transforms/options.hpp"
+// #include "masd.dogen.modeling/types/transforms/context_factory.hpp"
+// #include "masd.dogen.modeling/types/transforms/code_generation_chain.hpp"
+// #include "masd.dogen.modeling/io/meta_model/model_io.hpp"
+// #include "masd.dogen.dia/serialization/diagram_ser.hpp"
+// #include "masd.dogen.modeling/serialization/meta_model/model_ser.hpp"
+// #include "masd.dogen.dia/test/dia_file_asserter.hpp"
+// #include "masd.dogen.modeling/test/yarn_file_asserter.hpp"
+// #include "masd.dogen.utility/test/exception_checkers.hpp"
 
 /*
  * Comment these out as required if testing only one frontend. These
@@ -52,8 +52,8 @@
 // #define ENABLE_JSON_TESTS
 // #define ENABLE_CSHARP_TESTS
 
-// using dogen::utility::test_data::external_dia;
-// using dogen::utility::test_data::external_json;
+// using masd::dogen::utility::test_data::external_dia;
+// using masd::dogen::utility::test_data::external_json;
 
 // namespace  {
 
@@ -79,7 +79,7 @@
 // struct test_configuration {
 //     boost::filesystem::path expected;
 //     boost::filesystem::path actual;
-//     dogen::modeling::transforms::options options;
+//     masd::dogen::modeling::transforms::options options;
 // };
 
 // test_configuration make_test_configuration(const std::string& model_name,
@@ -88,11 +88,11 @@
 //     const boost::filesystem::path& probing_directory_path) {
 //     test_configuration r;
 
-//     using dogen::utility::test_data::validating_resolver;
+//     using masd::dogen::utility::test_data::validating_resolver;
 //     r.expected = validating_resolver::resolve(model_name + ::expected);
 //     r.actual = validating_resolver::resolve(model_name + actual_dir);
 
-//     using dogen::modeling::test::mock_options_factory;
+//     using masd::dogen::modeling::test::mock_options_factory;
 //     r.options = mock_options_factory::make_knitting_options(target, r.actual);
 
 //     if (enable_probing_globally || enable_probing) {
@@ -144,9 +144,9 @@
 //     // boost::filesystem::remove_all(tc.actual);
 //     // boost::filesystem::create_directory(tc.actual);
 //     const auto ctx(dogen::modeling::transforms::context_factory::make(tc.options));
-//     dogen::modeling::transforms::code_generation_chain::transform(ctx);
+//     masd::dogen::modeling::transforms::code_generation_chain::transform(ctx);
 
-//     using dogen::utility::test::asserter;
+//     using masd::dogen::utility::test::asserter;
 //     return asserter::assert_directory(tc.expected, tc.actual);
 // }
 
@@ -169,7 +169,7 @@
 
 // }
 
-// using dogen::utility::test::contains_checker;
+// using masd::dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(code_generator_tests)
 

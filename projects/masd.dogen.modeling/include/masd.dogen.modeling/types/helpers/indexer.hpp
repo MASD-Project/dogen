@@ -26,10 +26,10 @@
 #endif
 
 #include <unordered_set>
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/helpers/indices.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class indexer final {
 public:

@@ -26,18 +26,18 @@
 #endif
 
 #include <string>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/types/meta_model/attribute.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Expands all encoded representations that require parsing

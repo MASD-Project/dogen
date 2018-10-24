@@ -20,16 +20,16 @@
  */
 #include <sstream>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.modeling/io/meta_model/location_io.hpp"
-#include "dogen.modeling/types/helpers/building_error.hpp"
-#include "dogen.modeling/types/helpers/location_builder.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
+#include "masd.dogen.modeling/types/helpers/building_error.hpp"
+#include "masd.dogen.modeling/types/helpers/location_builder.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.location_builder"));
 
 const std::string empty_model_modules("Model modules are empty.");
@@ -37,7 +37,7 @@ const std::string empty_internal_modules("Internal modules are empty.");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 void location_builder::external_modules(const std::string& em) {
     if (em.empty())

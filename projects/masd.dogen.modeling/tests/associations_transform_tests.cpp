@@ -20,16 +20,16 @@
  */
 #include <array>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/io/meta_model/object_io.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/test/mock_context_factory.hpp"
-#include "dogen.modeling/test/mock_endomodel_factory.hpp"
-#include "dogen.modeling/types/transforms/associations_transform.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/io/meta_model/object_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/test/mock_context_factory.hpp"
+#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.modeling/types/transforms/associations_transform.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ const std::string test_module("yarn");
 const std::string test_suite("associations_transform_tests");
 const std::string object_not_found("Object not found in");
 
-using dogen::modeling::test::mock_endomodel_factory;
+using masd::dogen::modeling::test::mock_endomodel_factory;
 
 /* @note tagging should make no difference to tests, and not having tags
  * makes the model dumps easier to understand.
@@ -53,15 +53,15 @@ const mock_endomodel_factory factory(flags);
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::utility::test::asserter;
-using dogen::modeling::meta_model::origin_types;
-using dogen::modeling::transforms::associations_transform;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::modeling::meta_model::origin_types;
+using masd::dogen::modeling::transforms::associations_transform;
 using object_types =
-    dogen::modeling::test::mock_endomodel_factory::object_types;
+    masd::dogen::modeling::test::mock_endomodel_factory::object_types;
 using attribute_types =
-    dogen::modeling::test::mock_endomodel_factory::attribute_types;
-using dogen::modeling::test::mock_context_factory;
+    masd::dogen::modeling::test::mock_endomodel_factory::attribute_types;
+using masd::dogen::modeling::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(associations_transform_tests)
 

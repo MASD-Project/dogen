@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::modeling {
+namespace masd::dogen::modeling {
 
 struct traits {
     static std::string enabled();

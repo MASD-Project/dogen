@@ -27,9 +27,9 @@
 
 #include <list>
 #include <string>
-#include "dogen.modeling/types/meta_model/location.hpp"
+#include "masd.dogen.modeling/types/meta_model/location.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Builds a location.

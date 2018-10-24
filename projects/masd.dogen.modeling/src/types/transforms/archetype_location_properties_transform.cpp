@@ -19,33 +19,33 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/optional_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/io/meta_model/model_io.hpp"
-#include "dogen.modeling/io/meta_model/element_archetype_io.hpp"
-#include "dogen.modeling/io/meta_model/backend_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/facet_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/archetype_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/optional_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_archetype_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/backend_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/facet_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/archetype_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
 
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/archetype_location_properties_transform.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/archetype_location_properties_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
     "yarn.transforms.archetype_location_properties_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string type_group_not_found(
@@ -56,7 +56,7 @@ const std::string archetype_not_found("Could not find archetype: ");
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 inline std::ostream& operator<<(std::ostream& s,
     const archetype_location_properties_transform::backend_type_group& v) {

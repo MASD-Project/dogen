@@ -21,26 +21,26 @@
 #include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/types/helpers/resolver.hpp"
-#include "dogen.modeling/types/helpers/name_builder.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/helpers/stereotypes_helper.hpp"
-#include "dogen.modeling/types/meta_model/orm_object_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
-#include "dogen.modeling/types/transforms/stereotypes_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.modeling/types/helpers/resolver.hpp"
+#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
+#include "masd.dogen.modeling/types/transforms/stereotypes_transform.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.stereotypes_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string stereotype_pretty_printable("dogen::pretty_printable");
@@ -68,7 +68,7 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 bool stereotypes_transform::
 is_stereotype_handled_externally(const std::string& s) {

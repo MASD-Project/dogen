@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 dynamic_transform_interface::~dynamic_transform_interface() noexcept { }
 

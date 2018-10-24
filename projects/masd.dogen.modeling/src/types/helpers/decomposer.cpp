@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/elements_traversal.hpp"
-#include "dogen.modeling/io/helpers/decomposition_result_io.hpp"
-#include "dogen.modeling/types/helpers/decomposer.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/elements_traversal.hpp"
+#include "masd.dogen.modeling/io/helpers/decomposition_result_io.hpp"
+#include "masd.dogen.modeling/types/helpers/decomposer.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.decomposer"));
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 void decomposer::add_name(const std::string& owner, const meta_model::name& n) {
     result_.names().push_back(std::make_pair(owner, n));

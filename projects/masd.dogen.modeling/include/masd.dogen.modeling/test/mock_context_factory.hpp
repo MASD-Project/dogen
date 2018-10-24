@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 class mock_context_factory {
 public:

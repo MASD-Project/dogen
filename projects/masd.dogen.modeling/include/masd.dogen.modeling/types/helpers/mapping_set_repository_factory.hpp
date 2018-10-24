@@ -30,13 +30,13 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/helpers/mapping.hpp"
-#include "dogen.modeling/types/helpers/mapping_set.hpp"
-#include "dogen.modeling/types/helpers/mapping_value.hpp"
-#include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_value.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class mapping_set_repository_factory final {
 private:

@@ -20,19 +20,19 @@
  */
 #include <array>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/object_template.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/io/meta_model/object_io.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/test/mock_context_factory.hpp"
-#include "dogen.modeling/test/mock_endomodel_factory.hpp"
-#include "dogen.modeling/types/transforms/object_templates_transform.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/object_io.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/test/mock_context_factory.hpp"
+#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.modeling/types/transforms/object_templates_transform.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ const std::string test_suite("object_templates_transform_tests");
 const std::string object_template_not_found("Object template not found");
 const std::string object_not_found("Object not found in model");
 
-using dogen::modeling::test::mock_endomodel_factory;
+using masd::dogen::modeling::test::mock_endomodel_factory;
 
 /* @note tagging should make no difference to tests, and not having tags
  * makes the model dumps easier to understand.
@@ -58,16 +58,16 @@ const mock_endomodel_factory factory(flags);
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::modeling::transforms::transformation_error;
-using dogen::utility::test::asserter;
-using dogen::modeling::transforms::object_templates_transform;
-using dogen::modeling::meta_model::origin_types;
-using object_types = dogen::modeling::test::mock_endomodel_factory::
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::modeling::transforms::transformation_error;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::modeling::transforms::object_templates_transform;
+using masd::dogen::modeling::meta_model::origin_types;
+using object_types = masd::dogen::modeling::test::mock_endomodel_factory::
     object_types;
-using attribute_types = dogen::modeling::test::mock_endomodel_factory::
+using attribute_types = masd::dogen::modeling::test::mock_endomodel_factory::
     attribute_types;
-using dogen::modeling::test::mock_context_factory;
+using masd::dogen::modeling::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(object_templates_transform_tests)
 

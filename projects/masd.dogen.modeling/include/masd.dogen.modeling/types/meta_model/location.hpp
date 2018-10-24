@@ -74,7 +74,7 @@ public:
      * It is sometimes useful to create a model within a set of existing modules. In this
      * case, the model does not own the existing modules and they are considered
      * "external" to the model. This is useful, for example, when declaring a model
-     * within a larger project such as @e dogen::yarn. In this case, @e dogen is the
+     * within a larger project such as @e masd::dogen::yarn. In this case, @e dogen is the
      * external module.
      */
     /**@{*/

@@ -25,22 +25,22 @@
 #include <boost/range/algorithm.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/range/algorithm/set_algorithm.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/set_io.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.modeling/types/helpers/file_linter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/set_io.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.modeling/types/helpers/file_linter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.file_linter"));
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::set<boost::filesystem::path> file_linter::
 obtain_expected_files(const meta_model::text_model& tm) {

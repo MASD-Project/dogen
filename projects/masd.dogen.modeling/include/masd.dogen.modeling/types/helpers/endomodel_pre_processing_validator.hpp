@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class endomodel_pre_processing_validator final {
 public:

@@ -19,21 +19,21 @@
  *
  */
 #include <boost/lexical_cast.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.model_to_text_model_chain");
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string unsupported_language(
@@ -43,7 +43,7 @@ const std::string disabled_transform(
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::shared_ptr<model_to_text_model_transform_registrar>
 model_to_text_model_chain::registrar_;

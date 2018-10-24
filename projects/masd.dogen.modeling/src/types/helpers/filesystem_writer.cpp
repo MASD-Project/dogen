@@ -22,15 +22,15 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.modeling/io/meta_model/artefact_io.hpp"
-#include "dogen.modeling/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.modeling/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.modeling/types/helpers/filesystem_writer.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("formatting.filesystem_writer"));
 
 const std::string using_dir_message("Using directory: ");
@@ -49,7 +49,7 @@ std::string create_hacked_contents(const std::string file_name) {
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 filesystem_writer::filesystem_writer(const bool force_write)
     : force_write_(force_write) {}
@@ -75,7 +75,7 @@ bool filesystem_writer::requires_writing(const meta_model::artefact& f) const {
      * Perform a binary diff of the file content; if it has changed,
      * we need to write.
      */
-    using dogen::utility::filesystem::read_file_content;
+    using masd::dogen::utility::filesystem::read_file_content;
     const std::string existing_content(read_file_content(f.path()));
     if (existing_content == f.content()) {
         BOOST_LOG_SEV(lg, trace) << "File contents have not changed, "
@@ -110,7 +110,7 @@ void filesystem_writer::write_empty_file(const meta_model::artefact& f) const {
     const auto fn(f.path().stem().generic_string());
     const auto hc(create_hacked_contents(fn));
 
-    using dogen::utility::filesystem::write_file_content;
+    using masd::dogen::utility::filesystem::write_file_content;
     if (boost::ends_with(gs, ".cpp"))
         write_file_content(f.path(), hc);
     else
@@ -135,7 +135,7 @@ void filesystem_writer::write(const meta_model::artefact& f) const {
         return;
     }
 
-    using dogen::utility::filesystem::write_file_content;
+    using masd::dogen::utility::filesystem::write_file_content;
     if (requires_writing(f)) {
         BOOST_LOG_SEV(lg, debug) << "File requires writing. Content: ";
         write_file_content(f.path(), f.content());

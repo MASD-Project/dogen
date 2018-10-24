@@ -19,14 +19,14 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/io/transforms/options_io.hpp"
-#include "dogen.modeling/types/transforms/validation_error.hpp"
-#include "dogen.modeling/types/transforms/options_validator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/io/transforms/options_io.hpp"
+#include "masd.dogen.modeling/types/transforms/validation_error.hpp"
+#include "masd.dogen.modeling/types/transforms/options_validator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.transforms.options_validator"));
 
 const std::string missing_target("Mandatory parameter target is missing");
@@ -38,7 +38,7 @@ const std::string non_absolute_output(
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 void options_validator::validate(const options& o) {
     BOOST_LOG_SEV(lg, info) << "Validating options: " << o;

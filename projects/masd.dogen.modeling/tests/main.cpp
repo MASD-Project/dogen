@@ -20,12 +20,12 @@
  */
 #define BOOST_TEST_MODULE yarn_tests
 #include <boost/test/included/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/fixture.hpp"
-#include "dogen.generation.csharp/types/initializer.hpp"
-#include "dogen.generation.cpp/types/initializer.hpp"
-#include "dogen.external.json/types/initializer.hpp"
-#include "dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/fixture.hpp"
+#include "masd.dogen.generation.csharp/types/initializer.hpp"
+#include "masd.dogen.generation.cpp/types/initializer.hpp"
+#include "masd.dogen.external.json/types/initializer.hpp"
+#include "masd.dogen.external.dia/types/initializer.hpp"
 
 namespace  {
 
@@ -35,15 +35,15 @@ const std::string test_module("modeling");
 struct initializer {
     initializer() {
         SETUP_TEST_LOG("initializer");
-        dogen::external::json::initializer::initialize();
-        dogen::external::dia::initializer::initialize();
-        dogen::generation::csharp::initializer::initialize();
-        dogen::generation::cpp::initializer::initialize();
+        masd::dogen::external::json::initializer::initialize();
+        masd::dogen::external::dia::initializer::initialize();
+        masd::dogen::generation::csharp::initializer::initialize();
+        masd::dogen::generation::cpp::initializer::initialize();
     }
 };
 
 }
 
-using namespace dogen::utility::test;
+using namespace masd::dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);
 BOOST_GLOBAL_FIXTURE(initializer);

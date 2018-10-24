@@ -22,24 +22,24 @@
 #include <array>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/test/mock_context_factory.hpp"
-#include "dogen.modeling/test/mock_endomodel_factory.hpp"
-#include "dogen.modeling/types/transforms/merge_transform.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/test/mock_context_factory.hpp"
+#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.modeling/types/transforms/merge_transform.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
 const std::string test_suite("merge_transform_tests");
 
-using dogen::modeling::test::mock_endomodel_factory;
+using masd::dogen::modeling::test::mock_endomodel_factory;
 const mock_endomodel_factory::flags flags;
 const mock_endomodel_factory factory(flags);
 
@@ -54,11 +54,11 @@ const std::string too_many_targets("Only one target expected.");
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::modeling::meta_model::origin_types;
-using dogen::modeling::meta_model::endomodel;
-using dogen::modeling::transforms::merge_transform;
-using dogen::modeling::test::mock_context_factory;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::modeling::meta_model::origin_types;
+using masd::dogen::modeling::meta_model::endomodel;
+using masd::dogen::modeling::transforms::merge_transform;
+using masd::dogen::modeling::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(merge_transform_tests)
 

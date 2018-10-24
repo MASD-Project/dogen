@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class string_processor {
 public:

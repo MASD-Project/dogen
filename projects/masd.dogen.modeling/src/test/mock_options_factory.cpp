@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/test/mock_options_factory.hpp"
+#include "masd.dogen.modeling/test/mock_options_factory.hpp"
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 transforms::options mock_options_factory::make_knitting_options(
     const boost::filesystem::path& target,

@@ -26,11 +26,11 @@
 #endif
 
 #include <list>
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class endomodel_to_model_transform final {
 private:

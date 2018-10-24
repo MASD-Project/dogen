@@ -25,12 +25,12 @@
 #pragma once
 #endif
 
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.modeling/types/transforms/options.hpp"
-#include "dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Factory that creates transformation contexts.

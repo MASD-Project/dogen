@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/context_factory.hpp"
-#include "dogen.modeling/test/mock_context_factory.hpp"
+#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
+#include "masd.dogen.modeling/test/mock_context_factory.hpp"
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 transforms::context mock_context_factory::make() {
-    dogen::modeling::transforms::options o;
-    using dogen::modeling::transforms::context_factory;
+    masd::dogen::modeling::transforms::options o;
+    using masd::dogen::modeling::transforms::context_factory;
     const auto r(context_factory::make(o, false/*enable_validation*/));
     return r;
 }

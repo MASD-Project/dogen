@@ -21,22 +21,22 @@
 #include <array>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/io/meta_model/object_io.hpp"
-#include "dogen.modeling/test/mock_context_factory.hpp"
-#include "dogen.modeling/test/mock_endomodel_factory.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/transforms/transformation_error.hpp"
-#include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
-#include "dogen.modeling/types/transforms/stereotypes_transform.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/object_io.hpp"
+#include "masd.dogen.modeling/test/mock_context_factory.hpp"
+#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
+#include "masd.dogen.modeling/types/meta_model/static_stereotypes.hpp"
+#include "masd.dogen.modeling/types/transforms/stereotypes_transform.hpp"
 
 namespace {
 
-using dogen::modeling::test::mock_endomodel_factory;
+using masd::dogen::modeling::test::mock_endomodel_factory;
 const mock_endomodel_factory::flags flags;
 const mock_endomodel_factory factory(flags);
 
@@ -48,12 +48,12 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 
 }
 
-using dogen::modeling::meta_model::static_stereotypes;
-using dogen::utility::test::contains_checker;
-using dogen::modeling::transforms::transformation_error;
-using dogen::utility::test::asserter;
-using dogen::modeling::transforms::stereotypes_transform;
-using dogen::modeling::test::mock_context_factory;
+using masd::dogen::modeling::meta_model::static_stereotypes;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::modeling::transforms::transformation_error;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::modeling::transforms::stereotypes_transform;
+using masd::dogen::modeling::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(stereotypes_transform_tests)
 

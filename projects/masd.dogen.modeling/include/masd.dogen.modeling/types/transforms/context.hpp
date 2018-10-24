@@ -29,17 +29,17 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.probing/types/prober.hpp"
-#include "dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
-#include "dogen.modeling/types/transforms/options.hpp"
-#include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
-#include "dogen.modeling/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.probing/types/prober.hpp"
+#include "masd.dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 /**
  * @brief Context for all transformations.
@@ -61,7 +61,7 @@ public:
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
-        const dogen::formatting::repository& frp,
+        const masd::dogen::formatting::repository& frp,
         const probing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
@@ -108,7 +108,7 @@ public:
     /**
      * @brief Repository with formatter data.
      */
-    const dogen::formatting::repository& formatting_repository() const;
+    const masd::dogen::formatting::repository& formatting_repository() const;
 
     /*
      * @brief Returns the transform probe.
@@ -135,7 +135,7 @@ private:
     const annotations::type_repository type_repository_;
         const annotations::annotation_factory annotation_factory_;
     const helpers::mapping_set_repository mapping_repository_;
-    const dogen::formatting::repository formatting_repository_;
+    const masd::dogen::formatting::repository formatting_repository_;
     const probing::prober prober_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>

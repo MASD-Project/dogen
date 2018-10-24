@@ -30,19 +30,19 @@
 #include <vector>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_object_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_module_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
-#include "dogen.modeling/types/meta_model/letter_cases.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_module_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class orm_transform final {
 private:

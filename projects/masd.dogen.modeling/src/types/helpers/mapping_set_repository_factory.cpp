@@ -19,24 +19,24 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/io/helpers/mapping_io.hpp"
-#include "dogen.modeling/io/helpers/mapping_set_io.hpp"
-#include "dogen.modeling/io/helpers/mapping_set_repository_io.hpp"
-#include "dogen.modeling/io/helpers/mapping_actions_io.hpp"
-#include "dogen.modeling/types/helpers/building_error.hpp"
-#include "dogen.modeling/types/helpers/mappings_hydrator.hpp"
-#include "dogen.modeling/types/helpers/mappings_validator.hpp"
-#include "dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
-#include "dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_set_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_set_repository_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_actions_io.hpp"
+#include "masd.dogen.modeling/types/helpers/building_error.hpp"
+#include "masd.dogen.modeling/types/helpers/mappings_hydrator.hpp"
+#include "masd.dogen.modeling/types/helpers/mappings_validator.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.mapping_set_repository_factory"));
 
 const std::string duplicate_lam_id("Duplicate language agnostic id: ");
@@ -48,7 +48,7 @@ const std::string mappings_dir("mappings");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::unordered_map<std::string, std::list<mapping>>
 mapping_set_repository_factory::
@@ -62,7 +62,7 @@ obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
         BOOST_LOG_SEV(lg, trace) << "Mapping directory: "
                                  << mdir.generic_string();
 
-        using namespace dogen::utility::filesystem;
+        using namespace masd::dogen::utility::filesystem;
         const auto files(find_files(mdir));
 
         BOOST_LOG_SEV(lg, trace) << "Found " << files.size()

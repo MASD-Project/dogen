@@ -22,17 +22,17 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.utility/exception/invalid_enum_value.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.utility/exception/invalid_enum_value.hpp"
+#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.stereotypes_transform");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string stereotype_object("dogen::object");
@@ -52,7 +52,7 @@ const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 using meta_model::static_stereotypes;
 
@@ -135,7 +135,7 @@ to_string(const static_stereotypes ss) const {
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
         BOOST_LOG_SEV(lg, error) << unsupported_stereotype << s;
-        using dogen::utility::exception::invalid_enum_value;
+        using masd::dogen::utility::exception::invalid_enum_value;
         BOOST_THROW_EXCEPTION(invalid_enum_value(unsupported_stereotype + s));
     } }
 }

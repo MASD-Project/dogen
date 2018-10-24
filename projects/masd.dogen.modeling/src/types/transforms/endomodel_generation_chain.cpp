@@ -19,33 +19,33 @@
  *
  */
 #include <ostream>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/transforms/initial_target_chain.hpp"
-#include "dogen.modeling/types/transforms/references_chain.hpp"
-#include "dogen.modeling/types/transforms/endomodel_assembly_chain.hpp"
-#include "dogen.modeling/types/transforms/endomodel_post_processing_chain.hpp"
-#include "dogen.modeling/types/transforms/endomodel_generation_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/transforms/initial_target_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/references_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/endomodel_assembly_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/endomodel_post_processing_chain.hpp"
+#include "masd.dogen.modeling/types/transforms/endomodel_generation_chain.hpp"
 
 namespace {
 
 const std::string transform_id("yarn.transforms.endomodel_generation_chain");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {

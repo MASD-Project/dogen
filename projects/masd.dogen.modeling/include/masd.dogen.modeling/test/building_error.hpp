@@ -28,7 +28,7 @@
 #include <boost/exception/info.hpp>
 #include <string>
 
-namespace dogen::modeling::test {
+namespace masd::dogen::modeling::test {
 
 /**
  * @brief An error has occurred while injecting types.

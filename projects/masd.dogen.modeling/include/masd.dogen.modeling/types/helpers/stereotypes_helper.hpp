@@ -28,10 +28,10 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
-#include "dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
+#include "masd.dogen.modeling/types/meta_model/static_stereotypes.hpp"
+#include "masd.dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Converts well-known stereotypes from and to strings.

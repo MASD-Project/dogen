@@ -20,13 +20,13 @@
  */
 // #include <unordered_map>
 #include <boost/test/unit_test.hpp>
-// #include "dogen.utility/io/unordered_map_io.hpp"
-// #include "dogen.utility/test/asserter.hpp"
-// #include "dogen.utility/test/logging.hpp"
-// #include "dogen.utility/test/canned_tests.hpp"
-// #include "dogen.modeling/types/all.hpp"
-// #include "dogen.modeling/io/all_io.hpp"
-// #include "dogen.modeling/test_data/all_td.hpp"
+// #include "masd.dogen.utility/io/unordered_map_io.hpp"
+// #include "masd.dogen.utility/test/asserter.hpp"
+// #include "masd.dogen.utility/test/logging.hpp"
+// #include "masd.dogen.utility/test/canned_tests.hpp"
+// #include "masd.dogen.modeling/types/all.hpp"
+// #include "masd.dogen.modeling/io/all_io.hpp"
+// #include "masd.dogen.modeling/test_data/all_td.hpp"
 
 // namespace {
 
@@ -36,10 +36,10 @@
 
 // }
 
-// using namespace dogen::modeling::helpers;
-// using namespace dogen::modeling::meta_model;
-// using dogen::utility::test::asserter;
-// using namespace dogen::utility::test;
+// using namespace masd::dogen::modeling::helpers;
+// using namespace masd::dogen::modeling::meta_model;
+// using masd::dogen::utility::test::asserter;
+// using namespace masd::dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(equality_tests)
 

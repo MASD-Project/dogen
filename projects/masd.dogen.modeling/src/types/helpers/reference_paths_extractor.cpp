@@ -19,34 +19,34 @@
  *
  */
 #include <ostream>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.modeling/types/traits.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/types/transforms/context.hpp"
-#include "dogen.modeling/types/helpers/reference_paths_extractor.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/helpers/reference_paths_extractor.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("yarn.helpers.reference_paths_extractor"));
 
 const std::string library_dir("library");
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream&
 operator<<(std::ostream& s, const reference_paths_extractor::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::"
+      << "\"__type__\": " << "\"masd::dogen::modeling::"
       << "descriptor_factory::type_group\"" << ", "
       << "\"references\": " << v.reference
       << " }";
@@ -96,7 +96,7 @@ obtain_paths_to_system_models(const transforms::context& ctx) {
     for (const auto& dir : library_dirs) {
         BOOST_LOG_SEV(lg, trace) << "Directory: " << dir.generic_string();
 
-        using namespace dogen::utility::filesystem;
+        using namespace masd::dogen::utility::filesystem;
         const auto files(find_files(dir));
         BOOST_LOG_SEV(lg, trace) << "Found " << files.size()
                                  << " paths to library models.";

@@ -26,12 +26,12 @@
 #endif
 
 #include <string>
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class dynamic_transform_interface {
 public:
@@ -43,7 +43,7 @@ public:
 public:
     virtual std::string id() const = 0;
     virtual void transform(const context& ctx,
-        const dogen::formatting::decoration_properties_factory& dpf,
+        const masd::dogen::formatting::decoration_properties_factory& dpf,
         meta_model::model& m) const = 0;
 };
 
