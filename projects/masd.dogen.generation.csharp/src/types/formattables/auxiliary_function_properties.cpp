@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 auxiliary_function_properties::auxiliary_function_properties()
-    : type_(static_cast<dogen::generation::csharp::formattables::auxiliary_function_types>(0)) { }
+    : type_(static_cast<masd::dogen::generation::csharp::formattables::auxiliary_function_types>(0)) { }
 
 auxiliary_function_properties::auxiliary_function_properties(
-    const dogen::generation::csharp::formattables::auxiliary_function_types type,
+    const masd::dogen::generation::csharp::formattables::auxiliary_function_types type,
     const std::string& name)
     : type_(type),
       name_(name) { }
@@ -48,11 +48,11 @@ auxiliary_function_properties& auxiliary_function_properties::operator=(auxiliar
     return *this;
 }
 
-dogen::generation::csharp::formattables::auxiliary_function_types auxiliary_function_properties::type() const {
+masd::dogen::generation::csharp::formattables::auxiliary_function_types auxiliary_function_properties::type() const {
     return type_;
 }
 
-void auxiliary_function_properties::type(const dogen::generation::csharp::formattables::auxiliary_function_types v) {
+void auxiliary_function_properties::type(const masd::dogen::generation::csharp::formattables::auxiliary_function_types v) {
     type_ = v;
 }
 

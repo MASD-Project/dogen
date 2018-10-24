@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/element_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/artefact_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/attribute_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/element_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/artefact_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/attribute_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,7 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generation::csharp::formattables::helper_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::generation::csharp::formattables::helper_properties>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,7 +67,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generati
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -83,11 +83,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::element_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::element_properties\"" << ", "
       << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"attribute_properties\": " << v.attribute_properties()

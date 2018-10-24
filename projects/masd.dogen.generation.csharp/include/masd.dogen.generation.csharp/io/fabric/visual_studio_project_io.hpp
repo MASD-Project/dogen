@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_IO_FABRIC_VISUAL_STUDIO_PROJECT_IO_HPP
-#define DOGEN_GENERATION_CSHARP_IO_FABRIC_VISUAL_STUDIO_PROJECT_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_IO_FABRIC_VISUAL_STUDIO_PROJECT_IO_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_IO_FABRIC_VISUAL_STUDIO_PROJECT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.csharp/types/fabric/visual_studio_project.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/visual_studio_project.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::csharp::fabric::visual_studio_project& v);
+     const masd::dogen::generation::csharp::fabric::visual_studio_project& v);
 
 }
 

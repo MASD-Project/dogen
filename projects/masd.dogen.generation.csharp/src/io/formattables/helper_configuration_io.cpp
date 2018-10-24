@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/helper_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -48,11 +48,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::helper_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::helper_configuration\"" << ", "
       << "\"helper_families\": " << v.helper_families()
       << " }";
     return(s);

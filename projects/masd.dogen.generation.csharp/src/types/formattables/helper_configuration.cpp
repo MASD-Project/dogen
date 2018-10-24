@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/helper_configuration.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_configuration.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 helper_configuration::helper_configuration(const std::unordered_map<std::string, std::string>& helper_families)
     : helper_families_(helper_families) { }

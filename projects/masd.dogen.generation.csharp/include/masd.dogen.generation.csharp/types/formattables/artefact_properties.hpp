@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ARTEFACT_PROPERTIES_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ARTEFACT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ARTEFACT_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ARTEFACT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class artefact_properties final {
 public:
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::artefact_properties& lhs,
-    dogen::generation::csharp::formattables::artefact_properties& rhs) {
+    masd::dogen::generation::csharp::formattables::artefact_properties& lhs,
+    masd::dogen::generation::csharp::formattables::artefact_properties& rhs) {
     lhs.swap(rhs);
 }
 

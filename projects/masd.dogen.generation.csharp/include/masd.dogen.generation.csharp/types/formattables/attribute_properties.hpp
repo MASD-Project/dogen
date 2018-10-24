@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ATTRIBUTE_PROPERTIES_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ATTRIBUTE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ATTRIBUTE_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ATTRIBUTE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/auxiliary_function_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class attribute_properties final {
 public:
@@ -40,13 +40,13 @@ public:
     ~attribute_properties() = default;
 
 public:
-    explicit attribute_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties);
+    explicit attribute_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties);
 
 public:
-    const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties() const;
-    std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties();
-    void auxiliary_function_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& v);
-    void auxiliary_function_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties();
+    void auxiliary_function_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& v);
+    void auxiliary_function_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>&& v);
 
 public:
     bool operator==(const attribute_properties& rhs) const;
@@ -59,7 +59,7 @@ public:
     attribute_properties& operator=(attribute_properties other);
 
 private:
-    std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties> auxiliary_function_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties> auxiliary_function_properties_;
 };
 
 }
@@ -68,8 +68,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::attribute_properties& lhs,
-    dogen::generation::csharp::formattables::attribute_properties& rhs) {
+    masd::dogen::generation::csharp::formattables::attribute_properties& lhs,
+    masd::dogen::generation::csharp::formattables::attribute_properties& rhs) {
     lhs.swap(rhs);
 }
 

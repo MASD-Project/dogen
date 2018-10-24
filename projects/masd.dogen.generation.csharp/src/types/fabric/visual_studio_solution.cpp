@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.csharp/types/fabric/element_visitor.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_solution.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/visual_studio_solution.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,28 +32,28 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 visual_studio_solution::visual_studio_solution(
-    const dogen::modeling::meta_model::name& name,
+    const masd::dogen::modeling::meta_model::name& name,
     const std::string& documentation,
-    const dogen::annotations::annotation& annotation,
-    const dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+    const masd::dogen::formatting::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
     const std::string& project_guid,
     const std::string& project_solution_guid,
     const std::string& version,
     const std::string& project_name)
-    : dogen::modeling::meta_model::element(
+    : masd::dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -73,28 +73,28 @@ visual_studio_solution::visual_studio_solution(
       version_(version),
       project_name_(project_name) { }
 
-void visual_studio_solution::accept(const dogen::modeling::meta_model::element_visitor& v) const {
+void visual_studio_solution::accept(const masd::dogen::modeling::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void visual_studio_solution::accept(dogen::modeling::meta_model::element_visitor& v) const {
+void visual_studio_solution::accept(masd::dogen::modeling::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void visual_studio_solution::accept(const dogen::modeling::meta_model::element_visitor& v) {
+void visual_studio_solution::accept(const masd::dogen::modeling::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void visual_studio_solution::accept(dogen::modeling::meta_model::element_visitor& v) {
+void visual_studio_solution::accept(masd::dogen::modeling::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -103,9 +103,9 @@ void visual_studio_solution::accept(dogen::modeling::meta_model::element_visitor
 
 void visual_studio_solution::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::fabric::visual_studio_solution\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::fabric::visual_studio_solution\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::modeling::meta_model::element::to_stream(s);
     s << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
@@ -115,7 +115,7 @@ void visual_studio_solution::to_stream(std::ostream& s) const {
 }
 
 void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
-    dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::modeling::meta_model::element::swap(other);
 
     using std::swap;
     swap(project_guid_, other.project_guid_);
@@ -124,14 +124,14 @@ void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
     swap(project_name_, other.project_name_);
 }
 
-bool visual_studio_solution::equals(const dogen::modeling::meta_model::element& other) const {
+bool visual_studio_solution::equals(const masd::dogen::modeling::meta_model::element& other) const {
     const visual_studio_solution* const p(dynamic_cast<const visual_studio_solution* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool visual_studio_solution::operator==(const visual_studio_solution& rhs) const {
-    return dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
         version_ == rhs.version_ &&

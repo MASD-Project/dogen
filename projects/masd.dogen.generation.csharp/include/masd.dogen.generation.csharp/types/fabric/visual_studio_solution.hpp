@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_SOLUTION_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_SOLUTION_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_SOLUTION_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FABRIC_VISUAL_STUDIO_SOLUTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
-class visual_studio_solution final : public dogen::modeling::meta_model::element {
+class visual_studio_solution final : public masd::dogen::modeling::meta_model::element {
 public:
     visual_studio_solution() = default;
     visual_studio_solution(const visual_studio_solution&) = default;
@@ -42,32 +42,32 @@ public:
 
 public:
     visual_studio_solution(
-        const dogen::modeling::meta_model::name& name,
+        const masd::dogen::modeling::meta_model::name& name,
         const std::string& documentation,
-        const dogen::annotations::annotation& annotation,
-        const dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
         const std::string& project_guid,
         const std::string& project_solution_guid,
         const std::string& version,
         const std::string& project_name);
 
 public:
-    using dogen::modeling::meta_model::element::accept;
+    using masd::dogen::modeling::meta_model::element::accept;
 
-    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -99,7 +99,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(visual_studio_solution& other) noexcept;
@@ -118,8 +118,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::fabric::visual_studio_solution& lhs,
-    dogen::generation::csharp::fabric::visual_studio_solution& rhs) {
+    masd::dogen::generation::csharp::fabric::visual_studio_solution& lhs,
+    masd::dogen::generation::csharp::fabric::visual_studio_solution& rhs) {
     lhs.swap(rhs);
 }
 

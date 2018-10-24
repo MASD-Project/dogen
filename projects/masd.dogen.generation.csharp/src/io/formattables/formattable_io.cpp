@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.csharp/io/formattables/formattable_io.hpp"
-#include "dogen.generation.csharp/io/formattables/element_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::modeling::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -39,11 +39,11 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::formattable\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::formattable\"" << ", "
       << "\"element_properties\": " << v.element_properties() << ", "
       << "\"element\": " << v.element()
       << " }";

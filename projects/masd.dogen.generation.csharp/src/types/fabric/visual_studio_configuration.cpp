@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/fabric/visual_studio_configuration.hpp"
+#include "masd.dogen.generation.csharp/types/fabric/visual_studio_configuration.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 visual_studio_configuration::visual_studio_configuration(
     const std::string& project_solution_guid,

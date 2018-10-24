@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
-#define DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_HELPER_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::csharp::formattables::helper_properties& v);
+     const masd::dogen::generation::csharp::formattables::helper_properties& v);
 
 }
 

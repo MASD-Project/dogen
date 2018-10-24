@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_FWD_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_FWD_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::csharp::formatters::test_data {
+namespace masd::dogen::generation::csharp::formatters::test_data {
 
 class assistant_formatter;
 

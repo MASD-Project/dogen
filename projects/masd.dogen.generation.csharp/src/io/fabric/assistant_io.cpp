@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.csharp/io/fabric/assistant_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/assistant_io.hpp"
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const assistant& v) {
     v.to_stream(s);

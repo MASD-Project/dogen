@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/model.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 model::model(
-    const dogen::modeling::meta_model::name& name,
-    const std::unordered_map<std::string, dogen::generation::csharp::formattables::formattable>& formattables,
+    const masd::dogen::modeling::meta_model::name& name,
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
-    const std::unordered_map<std::string, dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
-    const std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties>& assistant_properties)
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties)
     : name_(name),
       formattables_(formattables),
       project_items_(project_items),
@@ -57,35 +57,35 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::modeling::meta_model::name& model::name() const {
+const masd::dogen::modeling::meta_model::name& model::name() const {
     return name_;
 }
 
-dogen::modeling::meta_model::name& model::name() {
+masd::dogen::modeling::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::modeling::meta_model::name& v) {
+void model::name(const masd::dogen::modeling::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::modeling::meta_model::name&& v) {
+void model::name(const masd::dogen::modeling::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::csharp::formattables::formattable>& model::formattables() const {
+const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& model::formattables() const {
     return formattables_;
 }
 
-std::unordered_map<std::string, dogen::generation::csharp::formattables::formattable>& model::formattables() {
+std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& model::formattables() {
     return formattables_;
 }
 
-void model::formattables(const std::unordered_map<std::string, dogen::generation::csharp::formattables::formattable>& v) {
+void model::formattables(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& v) {
     formattables_ = v;
 }
 
-void model::formattables(const std::unordered_map<std::string, dogen::generation::csharp::formattables::formattable>&& v) {
+void model::formattables(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
 }
 
@@ -105,35 +105,35 @@ void model::project_items(const std::list<std::string>&& v) {
     project_items_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::csharp::formattables::aspect_properties>& model::aspect_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& model::aspect_properties() const {
     return aspect_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::csharp::formattables::aspect_properties>& model::aspect_properties() {
+std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& model::aspect_properties() {
     return aspect_properties_;
 }
 
-void model::aspect_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::aspect_properties>& v) {
+void model::aspect_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& v) {
     aspect_properties_ = v;
 }
 
-void model::aspect_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::aspect_properties>&& v) {
+void model::aspect_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>&& v) {
     aspect_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties>& model::assistant_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& model::assistant_properties() const {
     return assistant_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties>& model::assistant_properties() {
+std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& model::assistant_properties() {
     return assistant_properties_;
 }
 
-void model::assistant_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties>& v) {
+void model::assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& v) {
     assistant_properties_ = v;
 }
 
-void model::assistant_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::assistant_properties>&& v) {
+void model::assistant_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>&& v) {
     assistant_properties_ = std::move(v);
 }
 

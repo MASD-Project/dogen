@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_FLOATING_POINT_NUMBER_HELPER_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_FLOATING_POINT_NUMBER_HELPER_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_FLOATING_POINT_NUMBER_HELPER_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_FLOATING_POINT_NUMBER_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 class floating_point_number_helper : public helper_formatter_interface {
 public:

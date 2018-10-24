@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/fabric/visual_studio_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/visual_studio_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::csharp::fabric {
+namespace masd::dogen::generation::csharp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const visual_studio_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::fabric::visual_studio_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::fabric::visual_studio_configuration\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(v.project_solution_guid()) << "\"" << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(v.project_guid()) << "\""
       << " }";

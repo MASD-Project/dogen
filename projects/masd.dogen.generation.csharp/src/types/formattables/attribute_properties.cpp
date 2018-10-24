@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/attribute_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/attribute_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
-attribute_properties::attribute_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties)
+attribute_properties::attribute_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& auxiliary_function_properties)
     : auxiliary_function_properties_(auxiliary_function_properties) { }
 
 void attribute_properties::swap(attribute_properties& other) noexcept {
@@ -40,19 +40,19 @@ attribute_properties& attribute_properties::operator=(attribute_properties other
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& attribute_properties::auxiliary_function_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& attribute_properties::auxiliary_function_properties() const {
     return auxiliary_function_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& attribute_properties::auxiliary_function_properties() {
+std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& attribute_properties::auxiliary_function_properties() {
     return auxiliary_function_properties_;
 }
 
-void attribute_properties::auxiliary_function_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& v) {
+void attribute_properties::auxiliary_function_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& v) {
     auxiliary_function_properties_ = v;
 }
 
-void attribute_properties::auxiliary_function_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>&& v) {
+void attribute_properties::auxiliary_function_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>&& v) {
     auxiliary_function_properties_ = std::move(v);
 }
 

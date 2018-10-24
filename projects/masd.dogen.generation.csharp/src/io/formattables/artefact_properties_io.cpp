@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/artefact_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/artefact_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::artefact_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::artefact_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "

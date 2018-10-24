@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_AUXILIARY_FUNCTION_PROPERTIES_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_AUXILIARY_FUNCTION_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_AUXILIARY_FUNCTION_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_AUXILIARY_FUNCTION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class auxiliary_function_properties final {
 public:
@@ -42,12 +42,12 @@ public:
 
 public:
     auxiliary_function_properties(
-        const dogen::generation::csharp::formattables::auxiliary_function_types type,
+        const masd::dogen::generation::csharp::formattables::auxiliary_function_types type,
         const std::string& name);
 
 public:
-    dogen::generation::csharp::formattables::auxiliary_function_types type() const;
-    void type(const dogen::generation::csharp::formattables::auxiliary_function_types v);
+    masd::dogen::generation::csharp::formattables::auxiliary_function_types type() const;
+    void type(const masd::dogen::generation::csharp::formattables::auxiliary_function_types v);
 
     const std::string& name() const;
     std::string& name();
@@ -65,7 +65,7 @@ public:
     auxiliary_function_properties& operator=(auxiliary_function_properties other);
 
 private:
-    dogen::generation::csharp::formattables::auxiliary_function_types type_;
+    masd::dogen::generation::csharp::formattables::auxiliary_function_types type_;
     std::string name_;
 };
 
@@ -75,8 +75,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::auxiliary_function_properties& lhs,
-    dogen::generation::csharp::formattables::auxiliary_function_properties& rhs) {
+    masd::dogen::generation::csharp::formattables::auxiliary_function_properties& lhs,
+    masd::dogen::generation::csharp::formattables::auxiliary_function_properties& rhs) {
     lhs.swap(rhs);
 }
 

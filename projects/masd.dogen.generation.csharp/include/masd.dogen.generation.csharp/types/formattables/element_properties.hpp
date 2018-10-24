@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.csharp/types/formattables/artefact_properties.hpp"
-#include "dogen.generation.csharp/types/formattables/attribute_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/attribute_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 /**
  * @brief All of the properties associated with an element.
@@ -47,25 +47,25 @@ public:
 
 public:
     element_properties(
-        const std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>& artefact_properties,
-        const std::list<dogen::generation::csharp::formattables::helper_properties>& helper_properties,
-        const std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties>& attribute_properties);
+        const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties>& artefact_properties,
+        const std::list<masd::dogen::generation::csharp::formattables::helper_properties>& helper_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties>& attribute_properties);
 
 public:
-    const std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>& artefact_properties() const;
-    std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties>& artefact_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties>&& v);
 
-    const std::list<dogen::generation::csharp::formattables::helper_properties>& helper_properties() const;
-    std::list<dogen::generation::csharp::formattables::helper_properties>& helper_properties();
-    void helper_properties(const std::list<dogen::generation::csharp::formattables::helper_properties>& v);
-    void helper_properties(const std::list<dogen::generation::csharp::formattables::helper_properties>&& v);
+    const std::list<masd::dogen::generation::csharp::formattables::helper_properties>& helper_properties() const;
+    std::list<masd::dogen::generation::csharp::formattables::helper_properties>& helper_properties();
+    void helper_properties(const std::list<masd::dogen::generation::csharp::formattables::helper_properties>& v);
+    void helper_properties(const std::list<masd::dogen::generation::csharp::formattables::helper_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties>& attribute_properties() const;
-    std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties>& attribute_properties();
-    void attribute_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties>& v);
-    void attribute_properties(const std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties>& attribute_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties>& attribute_properties();
+    void attribute_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties>& v);
+    void attribute_properties(const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties>&& v);
 
 public:
     bool operator==(const element_properties& rhs) const;
@@ -78,9 +78,9 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    std::unordered_map<std::string, dogen::generation::csharp::formattables::artefact_properties> artefact_properties_;
-    std::list<dogen::generation::csharp::formattables::helper_properties> helper_properties_;
-    std::unordered_map<std::string, dogen::generation::csharp::formattables::attribute_properties> attribute_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::artefact_properties> artefact_properties_;
+    std::list<masd::dogen::generation::csharp::formattables::helper_properties> helper_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::attribute_properties> attribute_properties_;
 };
 
 }
@@ -89,8 +89,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::element_properties& lhs,
-    dogen::generation::csharp::formattables::element_properties& rhs) {
+    masd::dogen::generation::csharp::formattables::element_properties& lhs,
+    masd::dogen::generation::csharp::formattables::element_properties& rhs) {
     lhs.swap(rhs);
 }
 

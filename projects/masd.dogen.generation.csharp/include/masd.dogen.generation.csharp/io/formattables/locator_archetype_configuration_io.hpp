@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_IO_HPP
-#define DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.csharp/types/formattables/locator_archetype_configuration.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator_archetype_configuration.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::csharp::formattables::locator_archetype_configuration& v);
+     const masd::dogen::generation::csharp::formattables::locator_archetype_configuration& v);
 
 }
 

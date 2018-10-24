@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_CSHARP_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_CSHARP_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_CSHARP_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_CSHARP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 /**
  * @brief CSharp is the c# model in the default generation kernel.
  */
-namespace dogen::generation::csharp {
+namespace masd::dogen::generation::csharp {
 }
 
 #endif

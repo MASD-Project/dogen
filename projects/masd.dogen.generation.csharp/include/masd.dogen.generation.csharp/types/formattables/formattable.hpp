@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_FORMATTABLE_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_FORMATTABLE_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_FORMATTABLE_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_FORMATTABLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/element_fwd.hpp"
-#include "dogen.generation.csharp/types/formattables/element_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_fwd.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/element_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class formattable final {
 public:
@@ -41,19 +41,19 @@ public:
 
 public:
     formattable(
-        const dogen::generation::csharp::formattables::element_properties& element_properties,
-        const boost::shared_ptr<dogen::modeling::meta_model::element>& element);
+        const masd::dogen::generation::csharp::formattables::element_properties& element_properties,
+        const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& element);
 
 public:
-    const dogen::generation::csharp::formattables::element_properties& element_properties() const;
-    dogen::generation::csharp::formattables::element_properties& element_properties();
-    void element_properties(const dogen::generation::csharp::formattables::element_properties& v);
-    void element_properties(const dogen::generation::csharp::formattables::element_properties&& v);
+    const masd::dogen::generation::csharp::formattables::element_properties& element_properties() const;
+    masd::dogen::generation::csharp::formattables::element_properties& element_properties();
+    void element_properties(const masd::dogen::generation::csharp::formattables::element_properties& v);
+    void element_properties(const masd::dogen::generation::csharp::formattables::element_properties&& v);
 
-    const boost::shared_ptr<dogen::modeling::meta_model::element>& element() const;
-    boost::shared_ptr<dogen::modeling::meta_model::element>& element();
-    void element(const boost::shared_ptr<dogen::modeling::meta_model::element>& v);
-    void element(const boost::shared_ptr<dogen::modeling::meta_model::element>&& v);
+    const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& element() const;
+    boost::shared_ptr<masd::dogen::modeling::meta_model::element>& element();
+    void element(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v);
+    void element(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -66,8 +66,8 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    dogen::generation::csharp::formattables::element_properties element_properties_;
-    boost::shared_ptr<dogen::modeling::meta_model::element> element_;
+    masd::dogen::generation::csharp::formattables::element_properties element_properties_;
+    boost::shared_ptr<masd::dogen::modeling::meta_model::element> element_;
 };
 
 }
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::formattable& lhs,
-    dogen::generation::csharp::formattables::formattable& rhs) {
+    masd::dogen::generation::csharp::formattables::formattable& lhs,
+    masd::dogen::generation::csharp::formattables::formattable& rhs) {
     lhs.swap(rhs);
 }
 

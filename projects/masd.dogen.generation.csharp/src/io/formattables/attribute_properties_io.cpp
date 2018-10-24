@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/attribute_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/auxiliary_function_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/attribute_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/auxiliary_function_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::csharp::formattables::auxiliary_function_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::auxiliary_function_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,11 +49,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const attribute_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::attribute_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::attribute_properties\"" << ", "
       << "\"auxiliary_function_properties\": " << v.auxiliary_function_properties()
       << " }";
     return(s);

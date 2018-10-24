@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/aspect_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 aspect_properties::aspect_properties()
     : is_floating_point_(static_cast<bool>(0)),

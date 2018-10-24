@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/helper_descriptor_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_descriptor_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const helper_descriptor& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::helper_descriptor\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::helper_descriptor\"" << ", "
       << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
       << "\"namespaces\": " << v.namespaces() << ", "
       << "\"name_identifiable\": " << "\"" << tidy_up_string(v.name_identifiable()) << "\"" << ", "

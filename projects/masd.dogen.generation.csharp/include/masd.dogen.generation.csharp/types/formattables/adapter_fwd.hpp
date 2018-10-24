@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ADAPTER_FWD_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ADAPTER_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ADAPTER_FWD_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_ADAPTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class adapter;
 

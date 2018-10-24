@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_AUXILIARY_FUNCTION_TYPES_IO_HPP
-#define DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_AUXILIARY_FUNCTION_TYPES_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_AUXILIARY_FUNCTION_TYPES_IO_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_IO_FORMATTABLES_AUXILIARY_FUNCTION_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/auxiliary_function_types.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const auxiliary_function_types& v);
 

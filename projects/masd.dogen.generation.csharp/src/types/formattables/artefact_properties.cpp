@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/artefact_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 artefact_properties::artefact_properties()
     : enabled_(static_cast<bool>(0)),

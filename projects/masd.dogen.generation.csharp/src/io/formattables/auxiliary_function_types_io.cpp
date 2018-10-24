@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.generation.csharp/io/formattables/auxiliary_function_types_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/auxiliary_function_types_io.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const auxiliary_function_types& v) {
     s << "{ " << "\"__type__\": " << "\"auxiliary_function_types\", " << "\"value\": ";

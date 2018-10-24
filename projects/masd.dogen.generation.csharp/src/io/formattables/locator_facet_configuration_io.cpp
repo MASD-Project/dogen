@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/locator_facet_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_facet_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const locator_facet_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::locator_facet_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::locator_facet_configuration\"" << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
       << " }";

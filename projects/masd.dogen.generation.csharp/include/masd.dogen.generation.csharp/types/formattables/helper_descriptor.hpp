@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class helper_descriptor final {
 public:
@@ -115,8 +115,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::helper_descriptor& lhs,
-    dogen::generation::csharp::formattables::helper_descriptor& rhs) {
+    masd::dogen::generation::csharp::formattables::helper_descriptor& lhs,
+    masd::dogen::generation::csharp::formattables::helper_descriptor& rhs) {
     lhs.swap(rhs);
 }
 

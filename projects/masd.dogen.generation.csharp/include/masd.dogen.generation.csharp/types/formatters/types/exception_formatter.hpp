@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_EXCEPTION_FORMATTER_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_EXCEPTION_FORMATTER_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_EXCEPTION_FORMATTER_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TYPES_EXCEPTION_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen::generation::csharp::formatters::types {
+namespace masd::dogen::generation::csharp::formatters::types {
 
 class exception_formatter final : public artefact_formatter_interface {
 public:

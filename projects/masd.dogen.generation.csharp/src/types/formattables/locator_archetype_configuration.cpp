@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/locator_archetype_configuration.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/locator_archetype_configuration.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 locator_archetype_configuration::locator_archetype_configuration(
     const std::string& facet_directory,

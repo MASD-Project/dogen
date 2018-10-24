@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 assistant_properties::assistant_properties()
     : requires_assistance_(static_cast<bool>(0)) { }

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formattables/helper_descriptor.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 helper_descriptor::helper_descriptor()
     : is_simple_type_(static_cast<bool>(0)),

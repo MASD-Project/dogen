@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_EXPANSION_ERROR_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_EXPANSION_ERROR_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_EXPANSION_ERROR_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_EXPANSION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 /**
  * @brief An error occurred whilst performing model expansion.

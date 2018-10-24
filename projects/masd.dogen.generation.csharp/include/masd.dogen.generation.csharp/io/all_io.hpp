@@ -18,33 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_IO_ALL_IO_HPP
-#define DOGEN_GENERATION_CSHARP_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_IO_ALL_IO_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.generation.csharp/io/fabric/assistant_io.hpp"
-#include "dogen.generation.csharp/io/formattables/model_io.hpp"
-#include "dogen.generation.csharp/io/fabric/assembly_info_io.hpp"
-#include "dogen.generation.csharp/io/formatters/repository_io.hpp"
-#include "dogen.generation.csharp/io/formattables/formattable_io.hpp"
-#include "dogen.generation.csharp/io/fabric/visual_studio_project_io.hpp"
-#include "dogen.generation.csharp/io/fabric/visual_studio_solution_io.hpp"
-#include "dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/helper_descriptor_io.hpp"
-#include "dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/element_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/artefact_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/assistant_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/attribute_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/helper_configuration_io.hpp"
-#include "dogen.generation.csharp/io/fabric/visual_studio_configuration_io.hpp"
-#include "dogen.generation.csharp/io/formattables/locator_configuration_io.hpp"
-#include "dogen.generation.csharp/io/formattables/auxiliary_function_types_io.hpp"
-#include "dogen.generation.csharp/io/formattables/locator_facet_configuration_io.hpp"
-#include "dogen.generation.csharp/io/formattables/auxiliary_function_properties_io.hpp"
-#include "dogen.generation.csharp/io/formattables/locator_archetype_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/assistant_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/model_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/assembly_info_io.hpp"
+#include "masd.dogen.generation.csharp/io/formatters/repository_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/visual_studio_project_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/visual_studio_solution_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_descriptor_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/element_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/artefact_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/assistant_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/attribute_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/helper_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/fabric/visual_studio_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/auxiliary_function_types_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_facet_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/auxiliary_function_properties_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_archetype_configuration_io.hpp"
 
 #endif

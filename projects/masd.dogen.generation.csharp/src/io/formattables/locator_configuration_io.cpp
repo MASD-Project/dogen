@@ -21,9 +21,9 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.csharp/io/formattables/locator_configuration_io.hpp"
-#include "dogen.generation.csharp/io/formattables/locator_facet_configuration_io.hpp"
-#include "dogen.generation.csharp/io/formattables/locator_archetype_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_facet_configuration_io.hpp"
+#include "masd.dogen.generation.csharp/io/formattables/locator_archetype_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::csharp::formattables::locator_facet_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::locator_facet_configuration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,7 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::csharp::formattables::locator_archetype_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::locator_archetype_configuration>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -69,7 +69,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& s, const locator_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::csharp::formattables::locator_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::csharp::formattables::locator_configuration\"" << ", "
       << "\"facet_configurations\": " << v.facet_configurations() << ", "
       << "\"archetype_configurations\": " << v.archetype_configurations() << ", "
       << "\"disable_facet_directories\": " << v.disable_facet_directories() << ", "

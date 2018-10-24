@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class helper_configuration final {
 public:
@@ -67,8 +67,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::helper_configuration& lhs,
-    dogen::generation::csharp::formattables::helper_configuration& rhs) {
+    masd::dogen::generation::csharp::formattables::helper_configuration& lhs,
+    masd::dogen::generation::csharp::formattables::helper_configuration& rhs) {
     lhs.swap(rhs);
 }
 

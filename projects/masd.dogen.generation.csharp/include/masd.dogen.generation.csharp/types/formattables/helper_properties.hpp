@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_PROPERTIES_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CSHARP_TYPES_FORMATTABLES_HELPER_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.generation.csharp/types/formattables/helper_descriptor.hpp"
+#include "masd.dogen.generation.csharp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen::generation::csharp::formattables {
+namespace masd::dogen::generation::csharp::formattables {
 
 class helper_properties final {
 public:
@@ -42,20 +42,20 @@ public:
 
 public:
     helper_properties(
-        const dogen::generation::csharp::formattables::helper_descriptor& current,
-        const std::list<dogen::generation::csharp::formattables::helper_descriptor>& direct_descendants,
+        const masd::dogen::generation::csharp::formattables::helper_descriptor& current,
+        const std::list<masd::dogen::generation::csharp::formattables::helper_descriptor>& direct_descendants,
         const bool in_inheritance_relationship);
 
 public:
-    const dogen::generation::csharp::formattables::helper_descriptor& current() const;
-    dogen::generation::csharp::formattables::helper_descriptor& current();
-    void current(const dogen::generation::csharp::formattables::helper_descriptor& v);
-    void current(const dogen::generation::csharp::formattables::helper_descriptor&& v);
+    const masd::dogen::generation::csharp::formattables::helper_descriptor& current() const;
+    masd::dogen::generation::csharp::formattables::helper_descriptor& current();
+    void current(const masd::dogen::generation::csharp::formattables::helper_descriptor& v);
+    void current(const masd::dogen::generation::csharp::formattables::helper_descriptor&& v);
 
-    const std::list<dogen::generation::csharp::formattables::helper_descriptor>& direct_descendants() const;
-    std::list<dogen::generation::csharp::formattables::helper_descriptor>& direct_descendants();
-    void direct_descendants(const std::list<dogen::generation::csharp::formattables::helper_descriptor>& v);
-    void direct_descendants(const std::list<dogen::generation::csharp::formattables::helper_descriptor>&& v);
+    const std::list<masd::dogen::generation::csharp::formattables::helper_descriptor>& direct_descendants() const;
+    std::list<masd::dogen::generation::csharp::formattables::helper_descriptor>& direct_descendants();
+    void direct_descendants(const std::list<masd::dogen::generation::csharp::formattables::helper_descriptor>& v);
+    void direct_descendants(const std::list<masd::dogen::generation::csharp::formattables::helper_descriptor>&& v);
 
     bool in_inheritance_relationship() const;
     void in_inheritance_relationship(const bool v);
@@ -71,8 +71,8 @@ public:
     helper_properties& operator=(helper_properties other);
 
 private:
-    dogen::generation::csharp::formattables::helper_descriptor current_;
-    std::list<dogen::generation::csharp::formattables::helper_descriptor> direct_descendants_;
+    masd::dogen::generation::csharp::formattables::helper_descriptor current_;
+    std::list<masd::dogen::generation::csharp::formattables::helper_descriptor> direct_descendants_;
     bool in_inheritance_relationship_;
 };
 
@@ -82,8 +82,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::csharp::formattables::helper_properties& lhs,
-    dogen::generation::csharp::formattables::helper_properties& rhs) {
+    masd::dogen::generation::csharp::formattables::helper_properties& lhs,
+    masd::dogen::generation::csharp::formattables::helper_properties& rhs) {
     lhs.swap(rhs);
 }
 
