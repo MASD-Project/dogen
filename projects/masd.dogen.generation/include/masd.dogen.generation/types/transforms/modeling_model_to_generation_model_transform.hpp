@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include "dogen.modeling/types/meta_model/endomodel.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 class modeling_model_to_generation_model_transform final {
 private:

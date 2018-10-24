@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.generation/types/transforms/model_generation_chain.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 bool model_generation_chain::operator==(const model_generation_chain& /*rhs*/) const {
     return true;

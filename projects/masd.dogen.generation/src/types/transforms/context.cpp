@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/context.hpp"
+#include "masd.dogen.generation/types/transforms/context.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 context::context(
     const std::vector<boost::filesystem::path>& data_directories,
     const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
-    const dogen::formatting::repository& frp,
+    const masd::dogen::formatting::repository& frp,
     const probing::prober& prober,
     const std::unordered_map<std::string,
     meta_model::intra_backend_segment_properties>&
@@ -56,7 +56,7 @@ const annotations::annotation_factory& context::annotation_factory() const {
     return annotation_factory_;
 }
 
-const dogen::formatting::repository& context::formatting_repository() const {
+const masd::dogen::formatting::repository& context::formatting_repository() const {
     return formatting_repository_;
 }
 

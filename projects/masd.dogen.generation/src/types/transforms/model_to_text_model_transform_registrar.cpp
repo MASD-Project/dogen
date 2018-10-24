@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/model_to_text_model_transform_interface.hpp"
-#include "dogen.generation/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 namespace std {
 
-inline bool operator==(const std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface>& lhs,
-const std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface>& rhs) {
+inline bool operator==(const std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface>& lhs,
+const std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
-model_to_text_model_transform_registrar::model_to_text_model_transform_registrar(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_)
+model_to_text_model_transform_registrar::model_to_text_model_transform_registrar(const std::unordered_map<masd::dogen::modeling::meta_model::languages, std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_)
     : transforms_by_language__(transforms_by_language_) { }
 
 void model_to_text_model_transform_registrar::swap(model_to_text_model_transform_registrar& other) noexcept {
@@ -50,19 +50,19 @@ model_to_text_model_transform_registrar& model_to_text_model_transform_registrar
     return *this;
 }
 
-const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& model_to_text_model_transform_registrar::transforms_by_language_() const {
+const std::unordered_map<masd::dogen::modeling::meta_model::languages, std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface> >& model_to_text_model_transform_registrar::transforms_by_language_() const {
     return transforms_by_language__;
 }
 
-std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& model_to_text_model_transform_registrar::transforms_by_language_() {
+std::unordered_map<masd::dogen::modeling::meta_model::languages, std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface> >& model_to_text_model_transform_registrar::transforms_by_language_() {
     return transforms_by_language__;
 }
 
-void model_to_text_model_transform_registrar::transforms_by_language_(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& v) {
+void model_to_text_model_transform_registrar::transforms_by_language_(const std::unordered_map<masd::dogen::modeling::meta_model::languages, std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface> >& v) {
     transforms_by_language__ = v;
 }
 
-void model_to_text_model_transform_registrar::transforms_by_language_(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >&& v) {
+void model_to_text_model_transform_registrar::transforms_by_language_(const std::unordered_map<masd::dogen::modeling::meta_model::languages, std::shared_ptr<masd::dogen::generation::transforms::model_to_text_model_transform_interface> >&& v) {
     transforms_by_language__ = std::move(v);
 }
 

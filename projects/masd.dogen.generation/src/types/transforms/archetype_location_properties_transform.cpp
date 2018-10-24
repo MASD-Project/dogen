@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
+#include "masd.dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 bool archetype_location_properties_transform::operator==(const archetype_location_properties_transform& /*rhs*/) const {
     return true;

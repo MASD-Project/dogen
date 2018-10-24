@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_CONTEXT_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_CONTEXT_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CONTEXT_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,15 +29,15 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.probing/types/prober.hpp"
-#include "dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
-#include "dogen.generation/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.probing/types/prober.hpp"
+#include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 /**
  * @brief Context for transformations.
@@ -47,7 +47,7 @@ class context final {
         const std::vector<boost::filesystem::path>& data_directories,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const dogen::formatting::repository& frp,
+        const masd::dogen::formatting::repository& frp,
         const probing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
@@ -76,7 +76,7 @@ public:
     /**
      * @brief Repository with formatter data.
      */
-    const dogen::formatting::repository& formatting_repository() const;
+    const masd::dogen::formatting::repository& formatting_repository() const;
 
     /*
      * @brief Returns the transform probe.
@@ -100,7 +100,7 @@ private:
     archetype_location_repository_;
     const annotations::type_repository type_repository_;
         const annotations::annotation_factory annotation_factory_;
-    const dogen::formatting::repository formatting_repository_;
+    const masd::dogen::formatting::repository formatting_repository_;
     const probing::prober prober_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>

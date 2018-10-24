@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/artefact_properties_transform.hpp"
+#include "masd.dogen.generation/types/transforms/artefact_properties_transform.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 bool artefact_properties_transform::operator==(const artefact_properties_transform& /*rhs*/) const {
     return true;

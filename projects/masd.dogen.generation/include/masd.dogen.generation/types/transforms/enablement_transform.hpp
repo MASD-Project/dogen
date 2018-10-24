@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 class enablement_transform final {
 public:

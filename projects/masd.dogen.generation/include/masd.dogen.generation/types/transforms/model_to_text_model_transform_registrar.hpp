@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <memory>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/hash/meta_model/languages_hash.hpp"
-#include "dogen.generation/types/transforms/model_to_text_model_transform_interface_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface_fwd.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 class model_to_text_model_transform_registrar final {
 public:
@@ -70,8 +70,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::transforms::model_to_text_model_transform_registrar& lhs,
-    dogen::generation::transforms::model_to_text_model_transform_registrar& rhs) {
+    masd::dogen::generation::transforms::model_to_text_model_transform_registrar& lhs,
+    masd::dogen::generation::transforms::model_to_text_model_transform_registrar& rhs) {
     lhs.swap(rhs);
 }
 

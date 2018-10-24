@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 class model_to_text_model_chain final {
 public:
