@@ -18,44 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_SCOPED_PROBER_HPP
-#define DOGEN_PROBING_TYPES_SCOPED_PROBER_HPP
+#ifndef MASD_DOGEN_PROBING_TYPES_SCOPED_PROBER_HPP
+#define MASD_DOGEN_PROBING_TYPES_SCOPED_PROBER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/prober.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/prober.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 class scoped_chain_prober final {
 public:
-    scoped_chain_prober(dogen::utility::log::logger& lg,
+    scoped_chain_prober(masd::dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id, const prober& tp)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
         prober_.start_chain(id);
     }
 
-    scoped_chain_prober(dogen::utility::log::logger& lg,
+    scoped_chain_prober(masd::dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
         prober_.start_chain(id, model_id);
     }
 
     template<typename Input>
-    scoped_chain_prober(dogen::utility::log::logger& lg,
+    scoped_chain_prober(masd::dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description
                                   << ". Model: " << model_id;
         prober_.start_chain(id, model_id, input);
@@ -64,7 +64,7 @@ public:
     template<typename Output>
     void end_chain(const Output& output) {
         prober_.end_chain(output);
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
         dismiss_ = true;
     }
@@ -75,45 +75,45 @@ public:
 
         try {
             prober_.end_chain();
-            using namespace dogen::utility::log;
+            using namespace masd::dogen::utility::log;
             BOOST_LOG_SEV(lg_, debug) << "Finished " << description_<< ".";
         } catch (...) {}
     }
 
 private:
     const std::string description_;
-    dogen::utility::log::logger& lg_;
+    masd::dogen::utility::log::logger& lg_;
     bool dismiss_;
     const prober& prober_;
 };
 
 class scoped_transform_prober final {
 public:
-    scoped_transform_prober(dogen::utility::log::logger& lg,
+    scoped_transform_prober(masd::dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
         prober_.start_transform(id, model_id);
     }
 
     template<typename Input>
-    scoped_transform_prober(dogen::utility::log::logger& lg,
+    scoped_transform_prober(masd::dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const prober& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
         prober_.start_transform(id, "", input);
     }
 
     template<typename Input>
-    scoped_transform_prober(dogen::utility::log::logger& lg,
+    scoped_transform_prober(masd::dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id,
         const std::string& model_id, const prober& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), prober_(tp) {
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description
                                   << ". Model: " << model_id;
         prober_.start_transform(id, model_id, input);
@@ -122,7 +122,7 @@ public:
     template<typename Output>
     void end_transform(const Output& output) {
         prober_.end_transform(output);
-        using namespace dogen::utility::log;
+        using namespace masd::dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
         dismiss_ = true;
     }
@@ -133,14 +133,14 @@ public:
 
         try {
             prober_.end_transform();
-            using namespace dogen::utility::log;
+            using namespace masd::dogen::utility::log;
             BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
         } catch (...) {}
     }
 
 private:
     const std::string description_;
-    dogen::utility::log::logger& lg_;
+    masd::dogen::utility::log::logger& lg_;
     bool dismiss_;
     const prober& prober_;
 };

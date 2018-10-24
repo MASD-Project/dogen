@@ -20,12 +20,12 @@
  */
 #include <sstream>
 #include <iomanip>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/metrics_printer.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/metrics_printer.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("probing.metrics_printer"));
 
 const char org_mode_filler('*');
@@ -35,7 +35,7 @@ const unsigned int txt_fill_size(4);
 
 }
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 void metrics_printer::print(std::ostream& o, unsigned int fill_level,
     const bool disable_guids_in_stats, const bool use_org_mode,

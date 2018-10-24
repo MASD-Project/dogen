@@ -26,14 +26,14 @@
 #include <boost/throw_exception.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include "dogen/version.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/metrics.hpp"
-#include "dogen.probing/types/probing_error.hpp"
-#include "dogen.probing/types/metrics_builder.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/metrics.hpp"
+#include "masd.dogen.probing/types/probing_error.hpp"
+#include "masd.dogen.probing/types/metrics_builder.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("probing.metrics_builder"));
 
 const std::string root_id("root");
@@ -44,7 +44,7 @@ const std::string unmatch_start_end(
 
 }
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 metrics_builder::
 metrics_builder(const std::string& log_level, const bool writing_probe_data) {

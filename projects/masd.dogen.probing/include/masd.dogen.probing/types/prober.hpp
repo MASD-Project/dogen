@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_PROBER_HPP
-#define DOGEN_PROBING_TYPES_PROBER_HPP
+#ifndef MASD_DOGEN_PROBING_TYPES_PROBER_HPP
+#define MASD_DOGEN_PROBING_TYPES_PROBER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,13 +28,13 @@
 #include <stack>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.probing/types/metrics.hpp"
-#include "dogen.probing/types/metrics_builder.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.probing/types/metrics.hpp"
+#include "masd.dogen.probing/types/metrics_builder.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 class prober final {
 public:

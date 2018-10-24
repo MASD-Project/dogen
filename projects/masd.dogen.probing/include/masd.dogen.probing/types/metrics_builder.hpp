@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_METRICS_BUILDER_HPP
-#define DOGEN_PROBING_TYPES_METRICS_BUILDER_HPP
+#ifndef MASD_DOGEN_PROBING_TYPES_METRICS_BUILDER_HPP
+#define MASD_DOGEN_PROBING_TYPES_METRICS_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <stack>
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include "dogen.probing/types/metrics_fwd.hpp"
+#include "masd.dogen.probing/types/metrics_fwd.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 class metrics_builder final {
 public:

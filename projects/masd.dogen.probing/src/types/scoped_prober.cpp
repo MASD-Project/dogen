@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 // dummy function to suppress ranlib warnings
 void scoped_prober() { }
