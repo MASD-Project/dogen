@@ -1,5 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=dogen::generation::csharp::formatters::types #>
+<#@ stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::types #>
 <#@ stitch.inclusion_dependency="masd.dogen.modeling/types/meta_model/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.modeling/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>

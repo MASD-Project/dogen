@@ -69,7 +69,7 @@ inclusion_support_types primitive_implementation_formatter::inclusion_support_ty
 boost::filesystem::path primitive_implementation_formatter::inclusion_path(
     const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
 
-    using namespace masd::dogen::utility::log;
+    using namespace dogen::utility::log;
     static logger lg(
         logger_factory(primitive_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");

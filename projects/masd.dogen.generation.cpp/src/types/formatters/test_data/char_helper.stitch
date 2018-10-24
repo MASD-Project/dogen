@@ -1,5 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::test_data #>
+<#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::test_data #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/char_helper.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>

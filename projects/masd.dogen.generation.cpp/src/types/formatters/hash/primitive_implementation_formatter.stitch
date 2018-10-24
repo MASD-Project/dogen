@@ -1,5 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
-<#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::hash #>
+<#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::hash #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.modeling/types/meta_model/primitive.hpp" #>
