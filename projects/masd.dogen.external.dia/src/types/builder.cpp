@@ -19,16 +19,16 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/pair_io.hpp"
-#include "dogen.external.dia/types/building_error.hpp"
-#include "dogen.external.dia/types/adapter.hpp"
-#include "dogen.external.dia/types/builder.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/pair_io.hpp"
+#include "masd.dogen.external.dia/types/building_error.hpp"
+#include "masd.dogen.external.dia/types/adapter.hpp"
+#include "masd.dogen.external.dia/types/builder.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("external.dia.builder"));
 
 const std::string empty_contained_by;
@@ -38,7 +38,7 @@ const std::string package_not_mapped("Dia package ID is not mapped: ");
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 builder::builder(const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids) : parent_id_to_child_ids_(parent_id_to_child_ids) {}

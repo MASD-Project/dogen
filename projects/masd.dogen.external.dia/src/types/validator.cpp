@@ -19,22 +19,22 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.external.dia/types/validation_error.hpp"
-#include "dogen.external.dia/types/validator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.external.dia/types/validation_error.hpp"
+#include "masd.dogen.external.dia/types/validator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("external.dia.validator"));
 
 const std::string no_uml_type("No UML type.");
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 void validator::validate_uml(const processed_object& po) {
     /*

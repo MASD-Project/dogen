@@ -20,14 +20,14 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.external.dia/types/validator.hpp"
-#include "dogen.external.dia/io/processed_object_io.hpp"
-#include "dogen.external.dia/types/validation_error.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.external.dia/types/validator.hpp"
+#include "masd.dogen.external.dia/io/processed_object_io.hpp"
+#include "masd.dogen.external.dia/types/validation_error.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
 
-using dogen::utility::test::asserter;
+using masd::dogen::utility::test::asserter;
 
 namespace  {
 
@@ -40,16 +40,16 @@ const std::string invalid_stereotypes("Stereotypes can only be used with yarn");
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::external::dia::validation_error;
-using dogen::external::dia::dia_object_types;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::external::dia::validation_error;
+using masd::dogen::external::dia::dia_object_types;
 
 BOOST_AUTO_TEST_SUITE(validator_tests)
 
 BOOST_AUTO_TEST_CASE(default_processed_object_throws) {
     SETUP_TEST_LOG_SOURCE("default_processed_object_throws");
-    dogen::external::dia::validator v;
-    dogen::external::dia::processed_object po;
+    masd::dogen::external::dia::validator v;
+    masd::dogen::external::dia::processed_object po;
     BOOST_LOG_SEV(lg, debug) << "input: " << po;
     BOOST_CHECK_THROW(v.validate(po), validation_error);
 }
@@ -57,8 +57,8 @@ BOOST_AUTO_TEST_CASE(default_processed_object_throws) {
 BOOST_AUTO_TEST_CASE(setting_only_one_uml_type_validates) {
     SETUP_TEST_LOG_SOURCE("setting_only_one_uml_type_validates");
 
-    dogen::external::dia::validator v;
-    dogen::external::dia::processed_object po;
+    masd::dogen::external::dia::validator v;
+    masd::dogen::external::dia::processed_object po;
     po.dia_object_type(dia_object_types::uml_class);
     BOOST_LOG_SEV(lg, debug) << "input: " << po;
     v.validate(po);

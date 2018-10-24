@@ -23,14 +23,14 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.external.dia/io/dia_object_types_io.hpp"
-#include "dogen.external.dia/types/graphing_error.hpp"
-#include "dogen.external.dia/types/grapher.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.external.dia/io/dia_object_types_io.hpp"
+#include "masd.dogen.external.dia/types/graphing_error.hpp"
+#include "masd.dogen.external.dia/types/grapher.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("external.dia.grapher"));
 
 const std::string empty;
@@ -41,7 +41,7 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 /**
  * @brief Detects cycles in the graph.

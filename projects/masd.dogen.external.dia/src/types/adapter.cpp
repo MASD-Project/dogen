@@ -19,15 +19,15 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.external.dia/types/adaptation_error.hpp"
-#include "dogen.external.dia/types/adapter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.external.dia/types/adaptation_error.hpp"
+#include "masd.dogen.external.dia/types/adapter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("external.dia.adapter"));
 
 const std::string name_delimiter("::");
@@ -38,7 +38,7 @@ const std::string empty_dia_name("Dia name is empty.");
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 void adapter::validate_dia_name(const std::string& n) {
     if (n.empty()) {

@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.external/types/meta_model/element.hpp"
-#include "dogen.external/types/meta_model/attribute.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
-#include "dogen.external.dia/types/processed_attribute.hpp"
+#include "masd.dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.external/types/meta_model/attribute.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 /**
  * @brief Transforms Dia objects into their external counterpart.

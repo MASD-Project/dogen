@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_DECODING_TRANSFORM_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_DECODING_TRANSFORM_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_DECODING_TRANSFORM_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_DECODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <list>
 #include <string>
-#include "dogen.dia/types/diagram_fwd.hpp"
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external.dia/types/grapher.hpp"
-#include "dogen.external.dia/types/validator.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
-#include "dogen.external/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.dia/types/diagram_fwd.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external.dia/types/grapher.hpp"
+#include "masd.dogen.external.dia/types/validator.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 class decoding_transform final
     : public external::transforms::decoding_transform_interface {
@@ -49,7 +49,7 @@ private:
      */
 
     std::list<processed_object>
-    obtain_processed_objects(const dogen::dia::diagram& d) const;
+    obtain_processed_objects(const masd::dogen::dia::diagram& d) const;
 
     /**
      * @brief Transforms the entire graph of processed objects into an

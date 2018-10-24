@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen.external/types/meta_model/element.hpp"
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 /**
  * @brief Builds a external model from dia processed objects.

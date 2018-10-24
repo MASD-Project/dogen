@@ -22,26 +22,26 @@
 #include <boost/graph/depth_first_search.hpp>
 #include <boost/range/algorithm_ext/erase.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.dia/types/hydrator.hpp"
-#include "dogen.dia/types/persister.hpp"
-#include "dogen.dia/io/diagram_io.hpp"
-#include "dogen.dia/types/diagram.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/io/meta_model/model_io.hpp"
-#include "dogen.external/types/transforms/transformation_error.hpp"
-#include "dogen.external.dia/types/builder.hpp"
-#include "dogen.external.dia/types/visitor.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
-#include "dogen.external.dia/types/processed_comment.hpp"
-#include "dogen.external.dia/types/processed_object_factory.hpp"
-#include "dogen.external.dia/types/decoding_transform.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.dia/types/hydrator.hpp"
+#include "masd.dogen.dia/types/persister.hpp"
+#include "masd.dogen.dia/io/diagram_io.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.external/types/transforms/transformation_error.hpp"
+#include "masd.dogen.external.dia/types/builder.hpp"
+#include "masd.dogen.external.dia/types/visitor.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_comment.hpp"
+#include "masd.dogen.external.dia/types/processed_object_factory.hpp"
+#include "masd.dogen.external.dia/types/decoding_transform.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 const std::string transform_id("external.dia.decoding_transform");
 auto lg(logger_factory(transform_id));
 
@@ -52,7 +52,7 @@ const std::string to_dia_support_unavailable(
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 inline bool is_not_relevant(const processed_object& po) {
     const auto ot(po.dia_object_type());
@@ -68,7 +68,7 @@ inline bool is_not_relevant(const processed_object& po) {
 decoding_transform::~decoding_transform() noexcept {}
 
 std::list<processed_object> decoding_transform::
-obtain_processed_objects(const dogen::dia::diagram& d) const {
+obtain_processed_objects(const masd::dogen::dia::diagram& d) const {
     BOOST_LOG_SEV(lg, debug) << "Converting diagram into processed objects.";
 
     /*
@@ -126,7 +126,7 @@ transform(const external::transforms::context& ctx,
     const boost::filesystem::path& p) {
 
     BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
-    dogen::dia::hydrator h;
+    masd::dogen::dia::hydrator h;
     const auto diagram(h.hydrate(p));
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 

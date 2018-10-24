@@ -23,24 +23,24 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/erase.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.dia/types/object.hpp"
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/diagram.hpp"
-#include "dogen.external.dia/io/dia_object_types_io.hpp"
-#include "dogen.external.dia/io/processed_object_io.hpp"
-#include "dogen.external.dia/types/building_error.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
-#include "dogen.external.dia/types/processed_comment_factory.hpp"
-#include "dogen.external.dia/types/processed_object_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.dia/types/object.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/types/composite.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
+#include "masd.dogen.external.dia/io/dia_object_types_io.hpp"
+#include "masd.dogen.external.dia/io/processed_object_io.hpp"
+#include "masd.dogen.external.dia/types/building_error.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_comment_factory.hpp"
+#include "masd.dogen.external.dia/types/processed_object_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("external.dia.processed_object_factory"));
 
 const std::string dia_string("string");
@@ -92,7 +92,7 @@ get_attribute_value(const Variant& v, const std::string& desc) {
     } catch (const boost::bad_get&) {
         BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
 
-        using dogen::external::dia::building_error;
+        using masd::dogen::external::dia::building_error;
         BOOST_THROW_EXCEPTION(
             building_error(unexpected_attribute_value_type + desc));
     }
@@ -113,10 +113,10 @@ boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 std::string processed_object_factory::
-parse_string_attribute(const dogen::dia::attribute& a) {
+parse_string_attribute(const masd::dogen::dia::attribute& a) {
     const auto values(a.values());
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
@@ -126,7 +126,7 @@ parse_string_attribute(const dogen::dia::attribute& a) {
                 boost::lexical_cast<std::string>(values.size())));
     }
 
-    using dogen::dia::string;
+    using masd::dogen::dia::string;
     const auto v(get_attribute_value<string>(values.front(), dia_string));
     std::string name(v.value());
     boost::erase_first(name, hash_character);
@@ -136,7 +136,7 @@ parse_string_attribute(const dogen::dia::attribute& a) {
 }
 
 processed_comment processed_object_factory::
-create_processed_comment(const dogen::dia::attribute& a) {
+create_processed_comment(const masd::dogen::dia::attribute& a) {
     const auto s(parse_string_attribute(a));
     return processed_comment_factory::make(s);
 }
@@ -169,7 +169,7 @@ parse_object_type(const std::string& ot) {
 }
 
 void processed_object_factory::
-parse_connections(const dogen::dia::object& o, processed_object& po) {
+parse_connections(const masd::dogen::dia::object& o, processed_object& po) {
     /*
      * If there are no connections we have no work to do.
      */
@@ -205,7 +205,7 @@ parse_connections(const dogen::dia::object& o, processed_object& po) {
 }
 
 void processed_object_factory::
-parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
+parse_as_dia_text(const masd::dogen::dia::attribute a, processed_object& po) {
     if (a.values().size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
                                  << "have a single value but found "
@@ -214,7 +214,7 @@ parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
     }
 
 
-    using dogen::dia::composite;
+    using masd::dogen::dia::composite;
     const auto c(try_get_attribute_value<composite>(a.values().front()));
     if (!c)
         return;
@@ -238,7 +238,7 @@ parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
 }
 
 void  processed_object_factory::parse_as_class_attributes(
-    const dogen::dia::attribute a, processed_object& po) {
+    const masd::dogen::dia::attribute a, processed_object& po) {
 
     const auto& values(a.values());
     if (values.empty()) {
@@ -247,7 +247,7 @@ void  processed_object_factory::parse_as_class_attributes(
     }
 
     for (const auto& v : values) {
-        using dogen::dia::composite;
+        using masd::dogen::dia::composite;
         const auto& c(get_attribute_value<composite>(v, dia_composite));
         if (c.type() != dia_uml_attribute) {
             BOOST_LOG_SEV(lg, error) << "Expected composite type "
@@ -292,7 +292,7 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
 }
 
 void processed_object_factory::
-parse_attributes(const dogen::dia::object& o, processed_object& po) {
+parse_attributes(const masd::dogen::dia::object& o, processed_object& po) {
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             po.name(parse_string_attribute(a));
@@ -307,7 +307,7 @@ parse_attributes(const dogen::dia::object& o, processed_object& po) {
     }
 }
 
-processed_object processed_object_factory::make(const dogen::dia::object& o) {
+processed_object processed_object_factory::make(const masd::dogen::dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
     processed_object r;
@@ -325,7 +325,7 @@ processed_object processed_object_factory::make(const dogen::dia::object& o) {
 }
 
 std::list<processed_object>
-processed_object_factory::make(const dogen::dia::diagram& d) {
+processed_object_factory::make(const masd::dogen::dia::diagram& d) {
     std::list<processed_object> r;
     for (const auto& l : d.layers()) {
         for (const auto& o : l.objects())

@@ -20,16 +20,16 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/io/pair_io.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.external.dia/types/building_error.hpp"
-#include "dogen.external.dia/io/processed_comment_io.hpp"
-#include "dogen.external.dia/types/processed_comment_factory.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/io/pair_io.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.external.dia/types/building_error.hpp"
+#include "masd.dogen.external.dia/io/processed_comment_io.hpp"
+#include "masd.dogen.external.dia/types/processed_comment_factory.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
 
-using dogen::utility::test::asserter;
+using masd::dogen::utility::test::asserter;
 
 namespace  {
 
@@ -67,13 +67,13 @@ const std::string no_sep_msg("Expected separator");
 
 }
 
-using dogen::external::dia::building_error;
+using masd::dogen::external::dia::building_error;
 
 BOOST_AUTO_TEST_SUITE(processed_comment_factory_tests)
 
 BOOST_AUTO_TEST_CASE(empty_comments_result_in_empty_documentation_and_tagged_values) {
     SETUP_TEST_LOG_SOURCE("empty_comments_result_in_empty_documentation_and_tagged_values");
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(empty));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(single_line_comment_without_end_line_results_in_expected_do
     SETUP_TEST_LOG_SOURCE("single_line_comment_without_end_line_results_in_expected_documentation_and_emtpy_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << line_1;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(line_1));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE(single_line_comment_with_end_line_results_in_expected_docum
     os << line_1 << std::endl;
     BOOST_LOG_SEV(lg, info) << "input: " << os.str();
 
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(os.str()));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_results_in_expected_documentation_and_em
        << line_3 << std::endl;
 
     BOOST_LOG_SEV(lg, info) << "input: " << os.str();
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(os.str()));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_no_end_line_results_in_e
     SETUP_TEST_LOG_SOURCE("comment_with_valid_instruction_and_no_end_line_results_in_empty_documentation_and_expected_key_value_pair");
 
     BOOST_LOG_SEV(lg, info) << "input: " << instruction_1;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(instruction_1));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE(comment_with_valid_instruction_and_end_line_results_in_empt
     os << instruction_1 << std::endl;
     BOOST_LOG_SEV(lg, info) << "input: " << os.str();
 
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(os.str()));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -200,7 +200,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_key_throws) {
     SETUP_TEST_LOG_SOURCE("comment_with_instruction_with_no_key_throws");
 
     BOOST_LOG_SEV(lg, info) << "input: " << instruction_with_no_key;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     BOOST_CHECK_THROW(f.make(instruction_with_no_key), building_error);
 }
 
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_with_no_value_throws) {
     SETUP_TEST_LOG_SOURCE("comment_with_instruction_with_no_value_throws");
 
     BOOST_LOG_SEV(lg, info) << "input: " << instruction_with_no_value;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     BOOST_CHECK_THROW(f.make(instruction_with_no_key), building_error);
 }
 
@@ -216,7 +216,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_but_no_key_value_pair_throw
     SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_but_no_key_value_pair_throws");
 
     BOOST_LOG_SEV(lg, info) << "input: " << empty_instruction;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     BOOST_CHECK_THROW(f.make(empty_instruction), building_error);
 }
 
@@ -224,7 +224,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_glued_to_key_and_value_crea
     SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_glued_to_key_and_value_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << marker_without_space;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(marker_without_space));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -243,7 +243,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_preceded_by_leading_space_c
     SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_preceded_by_leading_space_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << marker_with_leading_space;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(marker_with_leading_space));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_CASE(comment_with_instruction_marker_in_lower_case_creates_docum
     SETUP_TEST_LOG_SOURCE("comment_with_instruction_marker_in_lower_case_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << marker_in_lower_case;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(marker_in_lower_case));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -281,7 +281,7 @@ BOOST_AUTO_TEST_CASE(comment_with_unknown_marker_creates_documentation_and_empty
     SETUP_TEST_LOG_SOURCE("comment_with_unknown_marker_creates_documentation_and_empty_tagged_values");
 
     BOOST_LOG_SEV(lg, info) << "input: " << unknown_marker;
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(unknown_marker));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_CASE(multi_line_comment_with_instruction_results_in_expected_doc
        << line_3 << std::endl;
 
     BOOST_LOG_SEV(lg, info) << "input: " << os.str();
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(os.str()));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 
@@ -340,7 +340,7 @@ BOOST_AUTO_TEST_CASE(comment_with_multiple_instructions_results_in_empty_documen
        << instruction_3 << std::endl << instruction_1 << std::endl;
 
     BOOST_LOG_SEV(lg, info) << "input: " << os.str();
-    dogen::external::dia::processed_comment_factory f;
+    masd::dogen::external::dia::processed_comment_factory f;
     const auto r(f.make(os.str()));
     BOOST_LOG_SEV(lg, info) << "result: " << r;
 

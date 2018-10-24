@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_GRAPHER_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_GRAPHER_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_GRAPHER_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_GRAPHER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/graph/adjacency_list.hpp>
-#include "dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 /**
  * @brief Graph of dependencies between dia objects.

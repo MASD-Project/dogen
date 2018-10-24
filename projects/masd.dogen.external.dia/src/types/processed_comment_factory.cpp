@@ -22,12 +22,12 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.external.dia/types/traits.hpp"
-#include "dogen.external.dia/types/building_error.hpp"
-#include "dogen.external.dia/types/processed_comment_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.external.dia/types/traits.hpp"
+#include "masd.dogen.external.dia/types/building_error.hpp"
+#include "masd.dogen.external.dia/types/processed_comment_factory.hpp"
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 
 namespace {
 
@@ -40,7 +40,7 @@ const std::string separator_not_found("Expected separator on KVP.");
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 processed_comment processed_comment_factory::make(const std::string& c) {
     processed_comment r;

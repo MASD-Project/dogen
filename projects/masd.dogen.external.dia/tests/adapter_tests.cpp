@@ -23,22 +23,22 @@
 #include <initializer_list>
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.modeling/io/meta_model/object_io.hpp"
-#include "dogen.modeling/io/meta_model/enumeration_io.hpp"
-#include "dogen.modeling/io/meta_model/module_io.hpp"
-#include "dogen.modeling/io/meta_model/exception_io.hpp"
-#include "dogen.external.dia/types/adapter.hpp"
-#include "dogen.external.dia/types/adaptation_error.hpp"
-#include "dogen.external.dia/io/context_io.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
-#include "dogen.external.dia/test/mock_processed_object_factory.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.modeling/io/meta_model/object_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/enumeration_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/module_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/exception_io.hpp"
+#include "masd.dogen.external.dia/types/adapter.hpp"
+#include "masd.dogen.external.dia/types/adaptation_error.hpp"
+#include "masd.dogen.external.dia/io/context_io.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/test/mock_processed_object_factory.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
 
-using namespace dogen::external::dia;
-using dogen::utility::test::asserter;
-using mock_factory = dogen::external::dia::test::mock_processed_object_factory;
+using namespace masd::dogen::external::dia;
+using masd::dogen::utility::test::asserter;
+using mock_factory = masd::dogen::external::dia::test::mock_processed_object_factory;
 
 namespace  {
 
@@ -68,8 +68,8 @@ dogen::annotations::scribble_group empty_scribble_group;
 
 }
 
-using dogen::external::dia::adaptation_error;
-using dogen::utility::test::contains_checker;
+using masd::dogen::external::dia::adaptation_error;
+using masd::dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(adapter_tests)
 

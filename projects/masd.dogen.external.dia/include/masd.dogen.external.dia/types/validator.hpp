@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_VALIDATOR_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_VALIDATOR_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_VALIDATOR_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 /**
  * @brief Validates the consistency of the processed object.

@@ -18,7 +18,7 @@
 # MA 02110-1301, USA.
 #
 set(name "external.dia")
-set(binary_name "dogen.${name}")
+set(binary_name "masd.dogen.${name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"

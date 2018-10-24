@@ -20,12 +20,12 @@
  */
 #include <string>
 #include <boost/lexical_cast.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.external.dia/test/mock_processed_object_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.external.dia/test/mock_processed_object_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("dia.mock_processed_object_factory"));
 
 const std::string empty;
@@ -43,11 +43,11 @@ const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string unsigned_int("unsigned int");
 
-using dogen::external::dia::processed_object;
-using dogen::external::dia::processed_attribute;
-using dogen::external::dia::test::mock_processed_object_factory;
+using masd::dogen::external::dia::processed_object;
+using masd::dogen::external::dia::processed_attribute;
+using masd::dogen::external::dia::test::mock_processed_object_factory;
 
-processed_object create_object(const dogen::external::dia::dia_object_types ot,
+processed_object create_object(const masd::dogen::external::dia::dia_object_types ot,
     const unsigned int n) {
     processed_object r;
     r.id(mock_processed_object_factory::to_oject_id(n));
@@ -62,7 +62,7 @@ std::string name(const unsigned int n) {
 }
 
 processed_object
-create_named_object(const dogen::external::dia::dia_object_types ot,
+create_named_object(const masd::dogen::external::dia::dia_object_types ot,
     const unsigned int n) {
     processed_object r(create_object(ot, n));
     r.name(name(n));
@@ -81,7 +81,7 @@ create_processed_attribute(const unsigned int n) {
 
 }
 
-namespace dogen::external::dia::test {
+namespace masd::dogen::external::dia::test {
 
 std::string mock_processed_object_factory::to_oject_id(const unsigned int n) {
     return object_prefix + boost::lexical_cast<std::string>(n);

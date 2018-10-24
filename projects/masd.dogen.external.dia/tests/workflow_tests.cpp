@@ -23,28 +23,28 @@
 #include <sstream>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/xml_serialization_helper.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test_data/external_dia.hpp"
-#include "dogen.dia/io/diagram_io.hpp"
-#include "dogen.modeling/types/meta_model/exomodel.hpp"
-#include "dogen.modeling/io/meta_model/exomodel_io.hpp"
-#include "dogen.modeling/serialization/meta_model/exomodel_ser.hpp"
-#include "dogen.modeling/test/mock_context_factory.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.dia/test/diagram_serialization_helper.hpp"
-#include "dogen.modeling/serialization/registrar_ser.hpp"
-#include "dogen.annotations/test/mock_type_repository_factory.hpp"
-#include "dogen.external.dia/types/workflow.hpp"
+#include "masd.dogen.utility/test/xml_serialization_helper.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test_data/external_dia.hpp"
+#include "masd.dogen.dia/io/diagram_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/exomodel.hpp"
+#include "masd.dogen.modeling/io/meta_model/exomodel_io.hpp"
+#include "masd.dogen.modeling/serialization/meta_model/exomodel_ser.hpp"
+#include "masd.dogen.modeling/test/mock_context_factory.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.dia/test/diagram_serialization_helper.hpp"
+#include "masd.dogen.modeling/serialization/registrar_ser.hpp"
+#include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
+#include "masd.dogen.external.dia/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
-    dogen::modeling::register_types<Archive>(ar);
+    masd::dogen::modeling::register_types<Archive>(ar);
 }
 
-using namespace dogen::external::dia;
-using dogen::utility::test::asserter;
-using dogen::modeling::test::mock_context_factory;
+using namespace masd::dogen::external::dia;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::modeling::test::mock_context_factory;
 
 namespace  {
 
@@ -57,14 +57,14 @@ bool test_workflow(
     boost::filesystem::path actual_path) {
 
     boost::filesystem::ifstream s(input_path);
-    using dogen::dia::test::diagram_serialization_helper;
+    using masd::dogen::dia::test::diagram_serialization_helper;
     const auto i(diagram_serialization_helper::from_xml(s));
 
-    using namespace dogen::annotations::test;
+    using namespace masd::dogen::annotations::test;
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     const auto actual(workflow::execute(i));
-    const dogen::modeling::transforms::context ctx(mock_context_factory::make());
+    const masd::dogen::modeling::transforms::context ctx(mock_context_factory::make());
 
     *
      * Set to true to rebase. Note that you still need to run the
@@ -76,8 +76,8 @@ bool test_workflow(
 
 }
 
-using dogen::utility::test_data::external_dia;
-using dogen::utility::test::contains_checker;
+using masd::dogen::utility::test_data::external_dia;
+using masd::dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
