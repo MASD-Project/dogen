@@ -22,8 +22,8 @@
 #include <istream>
 #include <iterator>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.annotations/io/type_template_io.hpp"
 #include "masd.dogen.annotations/types/type_templates_hydrator.hpp"
 
@@ -70,6 +70,10 @@ hydrate(const std::string& content) {
 
 }
 
+using masd::dogen::annotations::scope_types;
+using masd::dogen::annotations::value_types;
+using masd::dogen::annotations::template_kinds;
+
 BOOST_AUTO_TEST_SUITE(type_templates_hydrator_tests)
 
 BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
@@ -88,13 +92,13 @@ BOOST_AUTO_TEST_CASE(trivial_type_template_hydrates_into_expected_collection) {
     BOOST_CHECK(tt.archetype_location().facet() == facet);
     BOOST_CHECK(tt.archetype_location().archetype() == archetype);
 
-    const auto st(dogen::annotations::scope_types::not_applicable);
+    const auto st(scope_types::not_applicable);
     BOOST_CHECK(tt.scope() == st);
 
-    const auto vt(dogen::annotations::value_types::boolean);
+    const auto vt(value_types::boolean);
     BOOST_CHECK(tt.value_type() == vt);
 
-    const auto tk(dogen::annotations::template_kinds::instance);
+    const auto tk(template_kinds::instance);
     BOOST_CHECK(tt.kind() == tk);
 }
 

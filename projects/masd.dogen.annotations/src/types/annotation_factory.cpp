@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/erase.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/io/annotation_io.hpp"
 #include "masd.dogen.annotations/io/scope_types_io.hpp"
@@ -39,7 +39,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.annotation_factory"));
 
 const std::string empty;

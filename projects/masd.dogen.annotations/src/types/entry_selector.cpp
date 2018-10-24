@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/text.hpp"
 #include "masd.dogen.annotations/types/number.hpp"
 #include "masd.dogen.annotations/types/boolean.hpp"
@@ -33,7 +33,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("annotations.entry_selector"));
 
 const std::string tagged_value_not_found("Tagged value not found: ");

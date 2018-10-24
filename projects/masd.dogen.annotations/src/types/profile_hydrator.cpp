@@ -23,13 +23,13 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/hydration_error.hpp"
 #include "masd.dogen.annotations/types/profile_hydrator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("annotations.type_templates_hydrator"));
 
 const std::string empty;

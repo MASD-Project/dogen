@@ -20,11 +20,11 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
 #include "masd.dogen.annotations/io/template_kinds_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_io.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
@@ -37,7 +37,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.template_instantiator"));
 
 const std::string empty;

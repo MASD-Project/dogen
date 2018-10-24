@@ -21,11 +21,11 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/set_io.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/io/vector_io.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/set_io.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/io/vector_io.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
 #include "masd.dogen.annotations/io/type_repository_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_io.hpp"
 #include "masd.dogen.annotations/types/template_instantiator.hpp"
@@ -35,7 +35,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.type_repository_factory"));
 
 const std::string annotations_dir("annotations");

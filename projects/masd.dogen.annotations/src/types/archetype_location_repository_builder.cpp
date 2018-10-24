@@ -19,14 +19,14 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/building_error.hpp"
 #include "masd.dogen.annotations/io/archetype_location_repository_io.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger
 lg(logger_factory("annotations.archetype_location_repository_builder"));
 

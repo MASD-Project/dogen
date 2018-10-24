@@ -19,15 +19,16 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/building_error.hpp"
 #include "masd.dogen.annotations/test/mock_type_factory.hpp"
 #include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("annotations.test.mock_type_repository_factory"));
+using namespace masd::dogen::utility::log;
+static logger
+lg(logger_factory("annotations.test.mock_type_repository_factory"));
 
 const std::string duplicate_qualified_name(
     "Qualified name defined more than once: ");

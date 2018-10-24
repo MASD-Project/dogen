@@ -19,13 +19,13 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/selection_error.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.type_repository_selector"));
 
 const std::string dot(".");

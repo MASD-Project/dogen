@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/io/value_types_io.hpp"
 #include "masd.dogen.annotations/io/template_kinds_io.hpp"
 #include "masd.dogen.annotations/types/value_factory.hpp"
@@ -32,7 +32,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("annotations.type_templates_hydrator"));
 
 const std::string empty;

@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/io/value_types_io.hpp"
 #include "masd.dogen.annotations/types/building_error.hpp"
 #include "masd.dogen.annotations/types/text.hpp"
@@ -33,7 +33,7 @@
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("annotations.value_factory"));
 
 const std::string invalid_numeric_value(
