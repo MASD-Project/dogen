@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-23 Tue 17:38]
+#+CAPTION: Clock summary at [2018-10-24 Wed 09:31]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *62:05* |       |       |   0.0 |
+| *Total time*                                                                | *63:32* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 62:05   |       |       |   0.0 |
-| Active                                                                      |         | 62:05 |       |   0.0 |
+| Stories                                                                     | 63:32   |       |       |   0.0 |
+| Active                                                                      |         | 63:32 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  1:02 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  1:23 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
 | Add support for kcov                                                        |         |       |  3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       |  0:09 |   0.0 |
@@ -48,9 +48,9 @@
 | Setup a secondary machine for development                                   |         |       |  1:04 |   0.0 |
 | Remove facets that are not being used                                       |         |       |  8:31 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 14:46 |   0.0 |
-| Read up on framework and API design                                         |         |       |  3:55 |   0.0 |
-| Update dogen namespaces to match the new specification                      |         |       |  0:15 |   0.0 |
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
+| Read up on framework and API design                                         |         |       |  4:34 |   0.0 |
+| Update dogen namespaces to match the new specification                      |         |       |  0:42 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -132,6 +132,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-24 Wed 08:03]--[2018-10-24 Wed 08:24] =>  0:21
     CLOCK: [2018-10-19 Fri 11:46]--[2018-10-19 Fri 11:49] =>  0:03
     CLOCK: [2018-10-18 Thu 20:23]--[2018-10-18 Thu 20:36] =>  0:13
     CLOCK: [2018-10-17 Wed 09:31]--[2018-10-17 Wed 09:44] =>  0:13
@@ -755,55 +756,8 @@ Architecture vision:
   umbrella organisation (e.g. MASD), PRODUCT is the individual product
   (e.g. dogen) and the component is the library or executable.
 
-*** STARTED Read up on framework and API design                       :story:
-     :LOGBOOK:
-     CLOCK: [2018-10-23 Tue 13:07]--[2018-10-23 Tue 13:23] =>  0:16
-     CLOCK: [2018-10-23 Tue 08:48]--[2018-10-23 Tue 09:50] =>  1:02
-     CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
-     CLOCK: [2018-10-19 Fri 09:54]--[2018-10-19 Fri 10:11] =>  0:17
-     CLOCK: [2018-10-19 Fri 09:28]--[2018-10-19 Fri 09:53] =>  0:25
-     CLOCK: [2018-10-18 Thu 09:36]--[2018-10-18 Thu 09:56] =>  0:20
-     CLOCK: [2018-10-17 Wed 14:05]--[2018-10-17 Wed 14:19] =>  0:14
-     CLOCK: [2018-10-17 Wed 10:03]--[2018-10-17 Wed 10:52] =>  0:49
-     :END:
-
-Now that we are creating a top-level API for Dogen we should really
-read up on books about good API design.
-
-Namespacing guideline:
-
-- company | project
-- product | technology
-- feature
-- subnamespace
-
-So in our case, =masd::dogen= and =masd::cpp_ref_impl=. We are
-violating the guideline on no abbreviations with ref_impl but
-=cpp_reference_implementation= seems a tad long.
-
-*** STARTED Update dogen namespaces to match the new specification    :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-22 Mon 17:13]--[2018-10-22 Mon 17:28] =>  0:15
-    :END:
-
-Following on [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces][from FDG]], we will from now on name all models:
-
-: ORGANISATION.PRODUCT.COMPONENT
-
-Where ORGANISATION is the top-level umbrella organisation (e.g. MASD),
-PRODUCT is the individual product (e.g. dogen) and the component is
-the library or executable.
-
-There have been many discussions on this topic, and there are many
-pluses and minuses, but one important point is that we need a
-consistent approach, and this is as supported by FDG.
-
-We will update the model modules rather than external modules so that
-the directory names follow the same naming convention.
-
-We need to update one model at a time.
-
-*** STARTED Add support for nested namespaces                         :story:
+*** COMPLETED Add support for nested namespaces                       :story:
+    CLOSED: [2018-10-24 Wed 09:13]
     :LOGBOOK:
     CLOCK: [2018-10-23 Tue 17:02]--[2018-10-23 Tue 17:38] =>  0:36
     CLOCK: [2018-10-23 Tue 16:53]--[2018-10-23 Tue 17:01] =>  0:08
@@ -849,6 +803,68 @@ Links:
 - [[https://stackoverflow.com/questions/11358425/is-there-a-better-way-to-express-nested-namespaces-in-c-within-the-header][Is there a better way to express nested namespaces in C++ within the header]]
 - [[https://en.cppreference.com/w/cpp/language/namespace][C++ Namespaces]]
 - [[http://www.nuonsoft.com/blog/2017/08/01/c17-nested-namespaces/][C++17: Nested Namespaces]]
+
+*** STARTED Read up on framework and API design                       :story:
+     :LOGBOOK:
+     CLOCK: [2018-10-24 Wed 08:24]--[2018-10-24 Wed 09:03] =>  0:39
+     CLOCK: [2018-10-23 Tue 13:07]--[2018-10-23 Tue 13:23] =>  0:16
+     CLOCK: [2018-10-23 Tue 08:48]--[2018-10-23 Tue 09:50] =>  1:02
+     CLOCK: [2018-10-22 Mon 08:30]--[2018-10-22 Mon 09:02] =>  0:32
+     CLOCK: [2018-10-19 Fri 09:54]--[2018-10-19 Fri 10:11] =>  0:17
+     CLOCK: [2018-10-19 Fri 09:28]--[2018-10-19 Fri 09:53] =>  0:25
+     CLOCK: [2018-10-18 Thu 09:36]--[2018-10-18 Thu 09:56] =>  0:20
+     CLOCK: [2018-10-17 Wed 14:05]--[2018-10-17 Wed 14:19] =>  0:14
+     CLOCK: [2018-10-17 Wed 10:03]--[2018-10-17 Wed 10:52] =>  0:49
+     :END:
+
+Now that we are creating a top-level API for Dogen we should really
+read up on books about good API design.
+
+Namespacing guideline:
+
+- company | project
+- product | technology
+- feature
+- subnamespace
+
+So in our case, =masd::dogen= and =masd::cpp_ref_impl=. We are
+violating the guideline on no abbreviations with ref_impl but
+=cpp_reference_implementation= seems a tad long.
+
+It seems we have several types of classes:
+
+- interfaces
+- abstract base classes
+- values
+- objects where data dominates and behaviours are small or trivial
+- objects where behaviour dominates and data is small or trivial
+- static classes
+
+These should be identifiable at the meta-model level, with appropriate
+names.
+
+*** STARTED Update dogen namespaces to match the new specification    :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-24 Wed 09:04]--[2018-10-24 Wed 09:31] =>  0:27
+    CLOCK: [2018-10-22 Mon 17:13]--[2018-10-22 Mon 17:28] =>  0:15
+    :END:
+
+Following on [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces][from FDG]], we will from now on name all models:
+
+: ORGANISATION.PRODUCT.COMPONENT
+
+Where ORGANISATION is the top-level umbrella organisation (e.g. MASD),
+PRODUCT is the individual product (e.g. dogen) and the component is
+the library or executable.
+
+There have been many discussions on this topic, and there are many
+pluses and minuses, but one important point is that we need a
+consistent approach, and this is as supported by FDG.
+
+We will update the model modules rather than external modules so that
+the directory names follow the same naming convention.
+
+We need to update one model at a time.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
@@ -903,6 +919,31 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** Implement the new dogen product API                               :story:
+
+Now we've designed a clean top-level API for the product, we need to
+code-generate it and implement it in terms of the existing code.
+
+*** Remove hello world model                                          :story:
+
+ It is confusing to have it mixed up with product models. Use a regular
+ dogen model to test the package. We could have it on the reference
+ model as a stand alone example, or we could create a "hello dogen"
+ product for a trivial example of dogen usage.
+
+*** Move from doxygen to standardese                                  :story:
+
+We should try to use standardese to generate the documentation for
+dogen. Seems easier to use and CMake friendly. Also, it seems more c++
+compliant because it uses libclang.
+
+Once the move is done, we should update dogen to generate comments in
+either markup via a meta-data parameter (documentation markup?).
+
+Links:
+
+- https://github.com/foonathan/standardese
 
 *** Update ref impl namespaces to match the new specification         :story:
 
@@ -1592,7 +1633,7 @@ This resulted in some puzzling errors:
 Ideally we should either warn and ignore or fail to process models
 with self-references.
 
-*** Handcrafted stereotype would not work on C# models
+*** Handcrafted stereotype would not work on C# models                :story:
 
 At present we do not have any tests for C# models with handcrafted. If
 we did it would not work because the annotations only set the C++
@@ -1621,7 +1662,7 @@ In addition, =io= is very misleading as the facet is not supposed to
 do I/O proper (e.g. serialisation) but more pretty-printing or debug
 dumping. So perhaps =pretty_print=.
 
-*** Update annotation profiles and stereotypes to masd namespace
+*** Update annotation profiles and stereotypes to masd namespace      :story:
 
 We should rename all annotation profiles and all stereotypes into the
 MASD namespace.
@@ -1631,6 +1672,30 @@ e.g. instead of =C# Artefact Formatter= maybe
 =dogen::csharp_artefact_formatter=. Note its dogen not MASD because
 these are dogen specific profiles. We need to create a model for
 dogen, separate from the MASD standard profile.
+
+*** Consider adding collections at the meta-model level               :story:
+
+A very common pattern we've observed is the creation of "container"
+classes that have a member which is a container (say
+=std::list<some_type>=) and a set of properties associated with that
+container (name, description, etc). We then expose the underlying type
+to users directly. However, perhaps it would make more sense to create
+a new meta-type (collection? container?) with associated meta-data; in
+C++, it would translate to the creation of a class obeying C++
+collection concepts such as iterators etc.
+
+Once this is in place we get code that expresses the high-level domain
+concepts but its still pluggable into the STL machinery such as
+algorithms, ranges, etc.
+
+This also addresses somewhat the annoying issue with pretty printing
+of STL containers because most of the time we would have a domain type
+for the STL collection. The approach is akin to C#'s idea of
+inheriting from collections, except here we use composition.
+
+This also means we can transparently change the underlying collection;
+though it would force a recompile, no code should break (e.g. from
+list to vector or array).
 
 ** Deprecated
 *** CANCELLED Sort out iconv on windows                               :story:

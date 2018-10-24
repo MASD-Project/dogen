@@ -16,15 +16,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
-set(frontend "dia")
-set(models_dir "${projects_dir}/dogen.models/${frontend}")
+set(frontend "json")
+set(models_dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
 if (DOGEN_KNITTER_EXECUTABLE)
     foreach(model ${models})
         set(target ${model})
         set(target_ext ${target}.${frontend})
         set(target_path ${models_dir}/${target_ext})
-        message(STATUS knit_${target_ext})
         add_custom_target(knit_${target_ext}
             COMMENT "Knitting ${target_ext} model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}

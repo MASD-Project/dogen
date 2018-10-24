@@ -134,7 +134,7 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=dogen.templating
-#DOGEN yarn.reference=dogen.formatting.dia
+#DOGEN yarn.reference=masd.dogen.formatting.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
