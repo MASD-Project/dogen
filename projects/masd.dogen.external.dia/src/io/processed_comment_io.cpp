@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.external.dia/io/processed_comment_io.hpp"
+#include "masd.dogen.external.dia/io/processed_comment_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -58,7 +58,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 std::ostream& operator<<(std::ostream& s, const processed_comment& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -68,7 +68,7 @@ std::ostream& operator<<(std::ostream& s, const processed_comment& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::external::dia::processed_comment\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::external::dia::processed_comment\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"applicable_to_parent_object\": " << v.applicable_to_parent_object() << ", "

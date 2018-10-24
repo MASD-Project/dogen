@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_DIA_OBJECT_TYPES_FWD_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_DIA_OBJECT_TYPES_FWD_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_DIA_OBJECT_TYPES_FWD_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_DIA_OBJECT_TYPES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 enum class dia_object_types : unsigned int;
 

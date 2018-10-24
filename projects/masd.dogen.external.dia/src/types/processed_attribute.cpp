@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.external.dia/types/processed_attribute.hpp"
+#include "masd.dogen.external.dia/types/processed_attribute.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 processed_attribute::processed_attribute(
     const std::string& name,
     const std::string& type,
-    const dogen::external::dia::processed_comment& comment)
+    const masd::dogen::external::dia::processed_comment& comment)
     : name_(name),
       type_(type),
       comment_(comment) { }
@@ -81,19 +81,19 @@ void processed_attribute::type(const std::string&& v) {
     type_ = std::move(v);
 }
 
-const dogen::external::dia::processed_comment& processed_attribute::comment() const {
+const masd::dogen::external::dia::processed_comment& processed_attribute::comment() const {
     return comment_;
 }
 
-dogen::external::dia::processed_comment& processed_attribute::comment() {
+masd::dogen::external::dia::processed_comment& processed_attribute::comment() {
     return comment_;
 }
 
-void processed_attribute::comment(const dogen::external::dia::processed_comment& v) {
+void processed_attribute::comment(const masd::dogen::external::dia::processed_comment& v) {
     comment_ = v;
 }
 
-void processed_attribute::comment(const dogen::external::dia::processed_comment&& v) {
+void processed_attribute::comment(const masd::dogen::external::dia::processed_comment&& v) {
     comment_ = std::move(v);
 }
 

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_IO_PROCESSED_OBJECT_IO_HPP
-#define DOGEN_EXTERNAL_DIA_IO_PROCESSED_OBJECT_IO_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_IO_PROCESSED_OBJECT_IO_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_IO_PROCESSED_OBJECT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::external::dia::processed_object& v);
+     const masd::dogen::external::dia::processed_object& v);
 
 }
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.external.dia/types/processed_comment.hpp"
+#include "masd.dogen.external.dia/types/processed_comment.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 processed_comment::processed_comment()
     : applicable_to_parent_object_(static_cast<bool>(0)) { }

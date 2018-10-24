@@ -18,31 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_ALL_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_ALL_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.external.dia/types/dia.hpp"
-#include "dogen.external.dia/types/traits.hpp"
-#include "dogen.external.dia/types/adapter.hpp"
-#include "dogen.external.dia/types/builder.hpp"
-#include "dogen.external.dia/types/grapher.hpp"
-#include "dogen.external.dia/types/visitor.hpp"
-#include "dogen.external.dia/types/validator.hpp"
-#include "dogen.external.dia/types/initializer.hpp"
-#include "dogen.external.dia/types/building_error.hpp"
-#include "dogen.external.dia/types/graphing_error.hpp"
-#include "dogen.external.dia/types/adaptation_error.hpp"
-#include "dogen.external.dia/types/dia_object_types.hpp"
-#include "dogen.external.dia/types/processed_object.hpp"
-#include "dogen.external.dia/types/validation_error.hpp"
-#include "dogen.external.dia/types/processed_comment.hpp"
-#include "dogen.external.dia/types/decoding_transform.hpp"
-#include "dogen.external.dia/types/processed_attribute.hpp"
-#include "dogen.external.dia/types/processed_object_factory.hpp"
-#include "dogen.external.dia/types/processed_comment_factory.hpp"
+#include "masd.dogen.external.dia/types/dia.hpp"
+#include "masd.dogen.external.dia/types/traits.hpp"
+#include "masd.dogen.external.dia/types/adapter.hpp"
+#include "masd.dogen.external.dia/types/builder.hpp"
+#include "masd.dogen.external.dia/types/grapher.hpp"
+#include "masd.dogen.external.dia/types/visitor.hpp"
+#include "masd.dogen.external.dia/types/validator.hpp"
+#include "masd.dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.external.dia/types/building_error.hpp"
+#include "masd.dogen.external.dia/types/graphing_error.hpp"
+#include "masd.dogen.external.dia/types/adaptation_error.hpp"
+#include "masd.dogen.external.dia/types/dia_object_types.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/validation_error.hpp"
+#include "masd.dogen.external.dia/types/processed_comment.hpp"
+#include "masd.dogen.external.dia/types/decoding_transform.hpp"
+#include "masd.dogen.external.dia/types/processed_attribute.hpp"
+#include "masd.dogen.external.dia/types/processed_object_factory.hpp"
+#include "masd.dogen.external.dia/types/processed_comment_factory.hpp"
 
 #endif

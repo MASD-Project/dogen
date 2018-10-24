@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.external.dia/types/processed_object.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 processed_object::processed_object()
-    : dia_object_type_(static_cast<dogen::external::dia::dia_object_types>(0)) { }
+    : dia_object_type_(static_cast<masd::dogen::external::dia::dia_object_types>(0)) { }
 
 processed_object::processed_object(processed_object&& rhs)
     : id_(std::move(rhs.id_)),
@@ -38,12 +38,12 @@ processed_object::processed_object(processed_object&& rhs)
 processed_object::processed_object(
     const std::string& id,
     const std::string& name,
-    const dogen::external::dia::dia_object_types dia_object_type,
+    const masd::dogen::external::dia::dia_object_types dia_object_type,
     const std::string& stereotypes,
-    const dogen::external::dia::processed_comment& comment,
+    const masd::dogen::external::dia::processed_comment& comment,
     const std::string& child_node_id,
     const boost::optional<std::pair<std::string, std::string> >& connection,
-    const std::list<dogen::external::dia::processed_attribute>& attributes)
+    const std::list<masd::dogen::external::dia::processed_attribute>& attributes)
     : id_(id),
       name_(name),
       dia_object_type_(dia_object_type),
@@ -114,11 +114,11 @@ void processed_object::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-dogen::external::dia::dia_object_types processed_object::dia_object_type() const {
+masd::dogen::external::dia::dia_object_types processed_object::dia_object_type() const {
     return dia_object_type_;
 }
 
-void processed_object::dia_object_type(const dogen::external::dia::dia_object_types v) {
+void processed_object::dia_object_type(const masd::dogen::external::dia::dia_object_types v) {
     dia_object_type_ = v;
 }
 
@@ -138,19 +138,19 @@ void processed_object::stereotypes(const std::string&& v) {
     stereotypes_ = std::move(v);
 }
 
-const dogen::external::dia::processed_comment& processed_object::comment() const {
+const masd::dogen::external::dia::processed_comment& processed_object::comment() const {
     return comment_;
 }
 
-dogen::external::dia::processed_comment& processed_object::comment() {
+masd::dogen::external::dia::processed_comment& processed_object::comment() {
     return comment_;
 }
 
-void processed_object::comment(const dogen::external::dia::processed_comment& v) {
+void processed_object::comment(const masd::dogen::external::dia::processed_comment& v) {
     comment_ = v;
 }
 
-void processed_object::comment(const dogen::external::dia::processed_comment&& v) {
+void processed_object::comment(const masd::dogen::external::dia::processed_comment&& v) {
     comment_ = std::move(v);
 }
 
@@ -186,19 +186,19 @@ void processed_object::connection(const boost::optional<std::pair<std::string, s
     connection_ = std::move(v);
 }
 
-const std::list<dogen::external::dia::processed_attribute>& processed_object::attributes() const {
+const std::list<masd::dogen::external::dia::processed_attribute>& processed_object::attributes() const {
     return attributes_;
 }
 
-std::list<dogen::external::dia::processed_attribute>& processed_object::attributes() {
+std::list<masd::dogen::external::dia::processed_attribute>& processed_object::attributes() {
     return attributes_;
 }
 
-void processed_object::attributes(const std::list<dogen::external::dia::processed_attribute>& v) {
+void processed_object::attributes(const std::list<masd::dogen::external::dia::processed_attribute>& v) {
     attributes_ = v;
 }
 
-void processed_object::attributes(const std::list<dogen::external::dia::processed_attribute>&& v) {
+void processed_object::attributes(const std::list<masd::dogen::external::dia::processed_attribute>&& v) {
     attributes_ = std::move(v);
 }
 

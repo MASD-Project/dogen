@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_ATTRIBUTE_HPP
-#define DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_ATTRIBUTE_HPP
+#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_ATTRIBUTE_HPP
+#define MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.external.dia/types/processed_comment.hpp"
+#include "masd.dogen.external.dia/types/processed_comment.hpp"
 
-namespace dogen::external::dia {
+namespace masd::dogen::external::dia {
 
 class processed_attribute final {
 public:
@@ -42,7 +42,7 @@ public:
     processed_attribute(
         const std::string& name,
         const std::string& type,
-        const dogen::external::dia::processed_comment& comment);
+        const masd::dogen::external::dia::processed_comment& comment);
 
 public:
     /**
@@ -69,10 +69,10 @@ public:
      * @brief Any comments associated with the property.
      */
     /**@{*/
-    const dogen::external::dia::processed_comment& comment() const;
-    dogen::external::dia::processed_comment& comment();
-    void comment(const dogen::external::dia::processed_comment& v);
-    void comment(const dogen::external::dia::processed_comment&& v);
+    const masd::dogen::external::dia::processed_comment& comment() const;
+    masd::dogen::external::dia::processed_comment& comment();
+    void comment(const masd::dogen::external::dia::processed_comment& v);
+    void comment(const masd::dogen::external::dia::processed_comment&& v);
     /**@}*/
 
 public:
@@ -88,7 +88,7 @@ public:
 private:
     std::string name_;
     std::string type_;
-    dogen::external::dia::processed_comment comment_;
+    masd::dogen::external::dia::processed_comment comment_;
 };
 
 }
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::external::dia::processed_attribute& lhs,
-    dogen::external::dia::processed_attribute& rhs) {
+    masd::dogen::external::dia::processed_attribute& lhs,
+    masd::dogen::external::dia::processed_attribute& rhs) {
     lhs.swap(rhs);
 }
 
