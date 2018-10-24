@@ -2,7 +2,6 @@
   "tagged_values": {
     "yarn.dia.comment": "true",
     "yarn.model_modules": "masd.dogen.generation",
-    "yarn.model_modules": "masd.dogen.generation",
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.modeling.json",
     "yarn.reference": "masd.dogen.probing.json",
