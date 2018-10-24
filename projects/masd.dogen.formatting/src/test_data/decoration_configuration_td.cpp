@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.formatting/test_data/decoration_configuration_td.hpp"
+#include "masd.dogen.formatting/test_data/decoration_configuration_td.hpp"
 
 namespace {
 
@@ -50,7 +50,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 decoration_configuration_generator::decoration_configuration_generator() : position_(0) { }
 

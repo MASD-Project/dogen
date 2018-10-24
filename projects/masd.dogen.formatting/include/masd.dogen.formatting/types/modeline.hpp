@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_MODELINE_HPP
-#define DOGEN_FORMATTING_TYPES_MODELINE_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_MODELINE_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_MODELINE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,12 +28,12 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.formatting/types/editors.hpp"
-#include "dogen.formatting/types/modeline_field.hpp"
-#include "dogen.formatting/types/modeline_locations.hpp"
-#include "dogen.formatting/serialization/modeline_fwd_ser.hpp"
+#include "masd.dogen.formatting/types/editors.hpp"
+#include "masd.dogen.formatting/types/modeline_field.hpp"
+#include "masd.dogen.formatting/types/modeline_locations.hpp"
+#include "masd.dogen.formatting/serialization/modeline_fwd_ser.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Fields representing editor variables for emacs, vi, etc.
@@ -59,16 +59,16 @@ public:
 public:
     modeline(
         const std::string& name,
-        const dogen::formatting::editors editor,
-        const dogen::formatting::modeline_locations location,
-        const std::list<dogen::formatting::modeline_field>& fields);
+        const masd::dogen::formatting::editors editor,
+        const masd::dogen::formatting::modeline_locations location,
+        const std::list<masd::dogen::formatting::modeline_field>& fields);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatting::modeline& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::modeline& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatting::modeline& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::modeline& v, unsigned int version);
 
 public:
     /**
@@ -85,26 +85,26 @@ public:
      * @brief The modeline will use the syntax for this editor.
      */
     /**@{*/
-    dogen::formatting::editors editor() const;
-    void editor(const dogen::formatting::editors v);
+    masd::dogen::formatting::editors editor() const;
+    void editor(const masd::dogen::formatting::editors v);
     /**@}*/
 
     /**
      * @brief Where to place the modeline.
      */
     /**@{*/
-    dogen::formatting::modeline_locations location() const;
-    void location(const dogen::formatting::modeline_locations v);
+    masd::dogen::formatting::modeline_locations location() const;
+    void location(const masd::dogen::formatting::modeline_locations v);
     /**@}*/
 
     /**
      * @brief List of all the parameters in the preamble, in order of appearence.
      */
     /**@{*/
-    const std::list<dogen::formatting::modeline_field>& fields() const;
-    std::list<dogen::formatting::modeline_field>& fields();
-    void fields(const std::list<dogen::formatting::modeline_field>& v);
-    void fields(const std::list<dogen::formatting::modeline_field>&& v);
+    const std::list<masd::dogen::formatting::modeline_field>& fields() const;
+    std::list<masd::dogen::formatting::modeline_field>& fields();
+    void fields(const std::list<masd::dogen::formatting::modeline_field>& v);
+    void fields(const std::list<masd::dogen::formatting::modeline_field>&& v);
     /**@}*/
 
 public:
@@ -119,9 +119,9 @@ public:
 
 private:
     std::string name_;
-    dogen::formatting::editors editor_;
-    dogen::formatting::modeline_locations location_;
-    std::list<dogen::formatting::modeline_field> fields_;
+    masd::dogen::formatting::editors editor_;
+    masd::dogen::formatting::modeline_locations location_;
+    std::list<masd::dogen::formatting::modeline_field> fields_;
 };
 
 }
@@ -130,8 +130,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatting::modeline& lhs,
-    dogen::formatting::modeline& rhs) {
+    masd::dogen::formatting::modeline& lhs,
+    masd::dogen::formatting::modeline& rhs) {
     lhs.swap(rhs);
 }
 

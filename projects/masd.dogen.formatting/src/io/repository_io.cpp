@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.formatting/io/repository_io.hpp"
-#include "dogen.formatting/io/modeline_group_io.hpp"
+#include "masd.dogen.formatting/io/repository_io.hpp"
+#include "masd.dogen.formatting/io/modeline_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::formatting::modeline_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,11 +67,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatting::repository\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::formatting::repository\"" << ", "
       << "\"modeline_groups\": " << v.modeline_groups() << ", "
       << "\"licence_texts\": " << v.licence_texts()
       << " }";

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_DECORATION_CONFIGURATION_HPP
-#define DOGEN_FORMATTING_TYPES_DECORATION_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_DECORATION_CONFIGURATION_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_DECORATION_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.formatting/serialization/decoration_configuration_fwd_ser.hpp"
+#include "masd.dogen.formatting/serialization/decoration_configuration_fwd_ser.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 class decoration_configuration final {
 public:
@@ -54,10 +54,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatting::decoration_configuration& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::decoration_configuration& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatting::decoration_configuration& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::decoration_configuration& v, unsigned int version);
 
 public:
     const boost::optional<bool>& generate_decoration() const;
@@ -121,8 +121,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatting::decoration_configuration& lhs,
-    dogen::formatting::decoration_configuration& rhs) {
+    masd::dogen::formatting::decoration_configuration& lhs,
+    masd::dogen::formatting::decoration_configuration& rhs) {
     lhs.swap(rhs);
 }
 

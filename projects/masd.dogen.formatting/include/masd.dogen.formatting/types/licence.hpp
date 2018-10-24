@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_LICENCE_HPP
-#define DOGEN_FORMATTING_TYPES_LICENCE_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_LICENCE_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_LICENCE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.formatting/serialization/licence_fwd_ser.hpp"
+#include "masd.dogen.formatting/serialization/licence_fwd_ser.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Licence which the file is released under.
@@ -49,10 +49,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatting::licence& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::licence& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatting::licence& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::licence& v, unsigned int version);
 
 public:
     /**
@@ -96,8 +96,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatting::licence& lhs,
-    dogen::formatting::licence& rhs) {
+    masd::dogen::formatting::licence& lhs,
+    masd::dogen::formatting::licence& rhs) {
     lhs.swap(rhs);
 }
 

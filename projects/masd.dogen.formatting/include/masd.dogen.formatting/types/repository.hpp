@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_REPOSITORY_HPP
-#define DOGEN_FORMATTING_TYPES_REPOSITORY_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_REPOSITORY_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.formatting/types/modeline_group.hpp"
-#include "dogen.formatting/serialization/repository_fwd_ser.hpp"
+#include "masd.dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.formatting/serialization/repository_fwd_ser.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 class repository final {
 public:
@@ -42,21 +42,21 @@ public:
 
 public:
     repository(
-        const std::unordered_map<std::string, dogen::formatting::modeline_group>& modeline_groups,
+        const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& modeline_groups,
         const std::unordered_map<std::string, std::string>& licence_texts);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatting::repository& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::repository& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatting::repository& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::repository& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::formatting::modeline_group>& modeline_groups() const;
-    std::unordered_map<std::string, dogen::formatting::modeline_group>& modeline_groups();
-    void modeline_groups(const std::unordered_map<std::string, dogen::formatting::modeline_group>& v);
-    void modeline_groups(const std::unordered_map<std::string, dogen::formatting::modeline_group>&& v);
+    const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& modeline_groups() const;
+    std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& modeline_groups();
+    void modeline_groups(const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& v);
+    void modeline_groups(const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>&& v);
 
     const std::unordered_map<std::string, std::string>& licence_texts() const;
     std::unordered_map<std::string, std::string>& licence_texts();
@@ -74,7 +74,7 @@ public:
     repository& operator=(repository other);
 
 private:
-    std::unordered_map<std::string, dogen::formatting::modeline_group> modeline_groups_;
+    std::unordered_map<std::string, masd::dogen::formatting::modeline_group> modeline_groups_;
     std::unordered_map<std::string, std::string> licence_texts_;
 };
 
@@ -84,8 +84,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatting::repository& lhs,
-    dogen::formatting::repository& rhs) {
+    masd::dogen::formatting::repository& lhs,
+    masd::dogen::formatting::repository& rhs) {
     lhs.swap(rhs);
 }
 

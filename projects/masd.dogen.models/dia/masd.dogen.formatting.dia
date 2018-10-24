@@ -1574,13 +1574,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-21,-52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,-52.05;-13.135,-48.95"/>
+        <dia:rectangle val="-21.05,-52.05;-12.75,-48.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-21,-52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1826,13 +1826,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-67,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-67.05,-38.05;-58.365,-31.95"/>
+        <dia:rectangle val="-67.05,-38.05;-57.98,-31.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-67,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -2734,13 +2734,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="-27,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-27.05,-5.05;-18.925,-1.95"/>
+        <dia:rectangle val="-27.05,-5.05;-18.75,-1.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-27,-5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.0250000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3218,13 +3218,13 @@ For example, one may choose to have a set of modelines for @e emacs , or for
         <dia:point val="20,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.95,-5.05;28.635,2.65"/>
+        <dia:rectangle val="19.95,-5.05;29.02,2.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="20,-5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.6000000000000005"/>
@@ -4397,7 +4397,7 @@ which is not language specific. Language-specific models can
 then make use of it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.formatting
+#DOGEN yarn.model_modules=masd.dogen.formatting
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -4623,13 +4623,13 @@ then make use of it.
         <dia:point val="48.6667,-63.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.6167,-63.8;56.5317,-60.7"/>
+        <dia:rectangle val="48.6167,-63.8;56.9167,-60.7"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48.6667,-63.75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5973,13 +5973,13 @@ then make use of it.
         <dia:point val="23,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.95,17.95;31.635,22.45"/>
+        <dia:rectangle val="22.95,17.95;32.02,22.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="23,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -6201,13 +6201,13 @@ then make use of it.
         <dia:point val="41,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,17.95;49.635,24.05"/>
+        <dia:rectangle val="40.95,17.95;50.02,24.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="41,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -7369,13 +7369,13 @@ then make use of it.
         <dia:point val="115,-23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,-23.05;147.89,-13.15"/>
+        <dia:rectangle val="114.95,-23.05;143.27,-13.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="115,-23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.8000000000000007"/>

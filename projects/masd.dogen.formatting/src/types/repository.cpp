@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/repository.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 repository::repository(
-    const std::unordered_map<std::string, dogen::formatting::modeline_group>& modeline_groups,
+    const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& modeline_groups,
     const std::unordered_map<std::string, std::string>& licence_texts)
     : modeline_groups_(modeline_groups),
       licence_texts_(licence_texts) { }
@@ -45,19 +45,19 @@ repository& repository::operator=(repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::formatting::modeline_group>& repository::modeline_groups() const {
+const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& repository::modeline_groups() const {
     return modeline_groups_;
 }
 
-std::unordered_map<std::string, dogen::formatting::modeline_group>& repository::modeline_groups() {
+std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& repository::modeline_groups() {
     return modeline_groups_;
 }
 
-void repository::modeline_groups(const std::unordered_map<std::string, dogen::formatting::modeline_group>& v) {
+void repository::modeline_groups(const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& v) {
     modeline_groups_ = v;
 }
 
-void repository::modeline_groups(const std::unordered_map<std::string, dogen::formatting::modeline_group>&& v) {
+void repository::modeline_groups(const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>&& v) {
     modeline_groups_ = std::move(v);
 }
 

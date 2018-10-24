@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_DECORATION_PROPERTIES_HPP
-#define DOGEN_FORMATTING_TYPES_DECORATION_PROPERTIES_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_DECORATION_PROPERTIES_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_DECORATION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.formatting/types/licence.hpp"
-#include "dogen.formatting/types/modeline.hpp"
-#include "dogen.formatting/serialization/decoration_properties_fwd_ser.hpp"
+#include "masd.dogen.formatting/types/licence.hpp"
+#include "masd.dogen.formatting/types/modeline.hpp"
+#include "masd.dogen.formatting/serialization/decoration_properties_fwd_ser.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Configuration pertaining to file decoration.
@@ -51,16 +51,16 @@ public:
 public:
     decoration_properties(
         const bool generate_decoration,
-        const boost::optional<dogen::formatting::modeline>& modeline,
-        const boost::optional<dogen::formatting::licence>& licence,
+        const boost::optional<masd::dogen::formatting::modeline>& modeline,
+        const boost::optional<masd::dogen::formatting::licence>& licence,
         const std::string& code_generation_marker);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatting::decoration_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::decoration_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatting::decoration_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::decoration_properties& v, unsigned int version);
 
 public:
     /**
@@ -75,20 +75,20 @@ public:
      * @brief Modeline to use in this file, if any.
      */
     /**@{*/
-    const boost::optional<dogen::formatting::modeline>& modeline() const;
-    boost::optional<dogen::formatting::modeline>& modeline();
-    void modeline(const boost::optional<dogen::formatting::modeline>& v);
-    void modeline(const boost::optional<dogen::formatting::modeline>&& v);
+    const boost::optional<masd::dogen::formatting::modeline>& modeline() const;
+    boost::optional<masd::dogen::formatting::modeline>& modeline();
+    void modeline(const boost::optional<masd::dogen::formatting::modeline>& v);
+    void modeline(const boost::optional<masd::dogen::formatting::modeline>&& v);
     /**@}*/
 
     /**
      * @brief Licence to use in this file, if any.
      */
     /**@{*/
-    const boost::optional<dogen::formatting::licence>& licence() const;
-    boost::optional<dogen::formatting::licence>& licence();
-    void licence(const boost::optional<dogen::formatting::licence>& v);
-    void licence(const boost::optional<dogen::formatting::licence>&& v);
+    const boost::optional<masd::dogen::formatting::licence>& licence() const;
+    boost::optional<masd::dogen::formatting::licence>& licence();
+    void licence(const boost::optional<masd::dogen::formatting::licence>& v);
+    void licence(const boost::optional<masd::dogen::formatting::licence>&& v);
     /**@}*/
 
     /**
@@ -113,8 +113,8 @@ public:
 
 private:
     bool generate_decoration_;
-    boost::optional<dogen::formatting::modeline> modeline_;
-    boost::optional<dogen::formatting::licence> licence_;
+    boost::optional<masd::dogen::formatting::modeline> modeline_;
+    boost::optional<masd::dogen::formatting::licence> licence_;
     std::string code_generation_marker_;
 };
 
@@ -124,8 +124,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatting::decoration_properties& lhs,
-    dogen::formatting::decoration_properties& rhs) {
+    masd::dogen::formatting::decoration_properties& lhs,
+    masd::dogen::formatting::decoration_properties& rhs) {
     lhs.swap(rhs);
 }
 

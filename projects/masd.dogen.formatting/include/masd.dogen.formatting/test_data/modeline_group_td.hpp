@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TEST_DATA_MODELINE_GROUP_TD_HPP
-#define DOGEN_FORMATTING_TEST_DATA_MODELINE_GROUP_TD_HPP
+#ifndef MASD_DOGEN_FORMATTING_TEST_DATA_MODELINE_GROUP_TD_HPP
+#define MASD_DOGEN_FORMATTING_TEST_DATA_MODELINE_GROUP_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.formatting/types/modeline_group.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 class modeline_group_generator {
 public:
     modeline_group_generator();
 
 public:
-    typedef dogen::formatting::modeline_group result_type;
+    typedef masd::dogen::formatting::modeline_group result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

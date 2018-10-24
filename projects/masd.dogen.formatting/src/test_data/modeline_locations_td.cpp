@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/test_data/modeline_locations_td.hpp"
+#include "masd.dogen.formatting/test_data/modeline_locations_td.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 modeline_locations_generator::modeline_locations_generator() : position_(0) { }
 void modeline_locations_generator::

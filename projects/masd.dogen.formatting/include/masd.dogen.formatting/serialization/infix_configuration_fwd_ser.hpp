@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_SERIALIZATION_INFIX_CONFIGURATION_FWD_SER_HPP
-#define DOGEN_FORMATTING_SERIALIZATION_INFIX_CONFIGURATION_FWD_SER_HPP
+#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_INFIX_CONFIGURATION_FWD_SER_HPP
+#define MASD_DOGEN_FORMATTING_SERIALIZATION_INFIX_CONFIGURATION_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.formatting/types/infix_configuration_fwd.hpp"
+#include "masd.dogen.formatting/types/infix_configuration_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::formatting::infix_configuration& v, unsigned int version);
+void save(Archive& ar, const masd::dogen::formatting::infix_configuration& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::formatting::infix_configuration& v, unsigned int version);
+void load(Archive& ar, masd::dogen::formatting::infix_configuration& v, unsigned int version);
 
 } }
 

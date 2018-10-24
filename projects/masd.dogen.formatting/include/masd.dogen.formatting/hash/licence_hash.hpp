@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_HASH_LICENCE_HASH_HPP
-#define DOGEN_FORMATTING_HASH_LICENCE_HASH_HPP
+#ifndef MASD_DOGEN_FORMATTING_HASH_LICENCE_HASH_HPP
+#define MASD_DOGEN_FORMATTING_HASH_LICENCE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.formatting/types/licence.hpp"
+#include "masd.dogen.formatting/types/licence.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 struct licence_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::formatting::licence> {
+struct hash<masd::dogen::formatting::licence> {
 public:
-    size_t operator()(const dogen::formatting::licence& v) const {
-        return dogen::formatting::licence_hasher::hash(v);
+    size_t operator()(const masd::dogen::formatting::licence& v) const {
+        return masd::dogen::formatting::licence_hasher::hash(v);
     }
 };
 

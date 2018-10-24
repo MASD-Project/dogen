@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_HASH_DECORATION_CONFIGURATION_HASH_HPP
-#define DOGEN_FORMATTING_HASH_DECORATION_CONFIGURATION_HASH_HPP
+#ifndef MASD_DOGEN_FORMATTING_HASH_DECORATION_CONFIGURATION_HASH_HPP
+#define MASD_DOGEN_FORMATTING_HASH_DECORATION_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.formatting/types/decoration_configuration.hpp"
+#include "masd.dogen.formatting/types/decoration_configuration.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 struct decoration_configuration_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::formatting::decoration_configuration> {
+struct hash<masd::dogen::formatting::decoration_configuration> {
 public:
-    size_t operator()(const dogen::formatting::decoration_configuration& v) const {
-        return dogen::formatting::decoration_configuration_hasher::hash(v);
+    size_t operator()(const masd::dogen::formatting::decoration_configuration& v) const {
+        return masd::dogen::formatting::decoration_configuration_hasher::hash(v);
     }
 };
 

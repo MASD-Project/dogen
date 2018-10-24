@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/test_data/comment_styles_td.hpp"
+#include "masd.dogen.formatting/test_data/comment_styles_td.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 comment_styles_generator::comment_styles_generator() : position_(0) { }
 void comment_styles_generator::

@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_IO_ALL_IO_HPP
-#define DOGEN_FORMATTING_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_FORMATTING_IO_ALL_IO_HPP
+#define MASD_DOGEN_FORMATTING_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.formatting/io/editors_io.hpp"
-#include "dogen.formatting/io/licence_io.hpp"
-#include "dogen.formatting/io/modeline_io.hpp"
-#include "dogen.formatting/io/repository_io.hpp"
-#include "dogen.formatting/io/quote_types_io.hpp"
-#include "dogen.formatting/io/spacing_types_io.hpp"
-#include "dogen.formatting/io/comment_styles_io.hpp"
-#include "dogen.formatting/io/modeline_field_io.hpp"
-#include "dogen.formatting/io/modeline_group_io.hpp"
-#include "dogen.formatting/io/modeline_locations_io.hpp"
-#include "dogen.formatting/io/infix_configuration_io.hpp"
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.formatting/io/decoration_configuration_io.hpp"
+#include "masd.dogen.formatting/io/editors_io.hpp"
+#include "masd.dogen.formatting/io/licence_io.hpp"
+#include "masd.dogen.formatting/io/modeline_io.hpp"
+#include "masd.dogen.formatting/io/repository_io.hpp"
+#include "masd.dogen.formatting/io/quote_types_io.hpp"
+#include "masd.dogen.formatting/io/spacing_types_io.hpp"
+#include "masd.dogen.formatting/io/comment_styles_io.hpp"
+#include "masd.dogen.formatting/io/modeline_field_io.hpp"
+#include "masd.dogen.formatting/io/modeline_group_io.hpp"
+#include "masd.dogen.formatting/io/modeline_locations_io.hpp"
+#include "masd.dogen.formatting/io/infix_configuration_io.hpp"
+#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.formatting/io/decoration_configuration_io.hpp"
 
 #endif

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/hash/infix_configuration_hash.hpp"
+#include "masd.dogen.formatting/hash/infix_configuration_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::size_t infix_configuration_hasher::hash(const infix_configuration& v) {
     std::size_t seed(0);

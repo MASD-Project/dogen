@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.formatting/io/quote_types_io.hpp"
+#include "masd.dogen.formatting/io/quote_types_io.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const quote_types& v) {
     s << "{ " << "\"__type__\": " << "\"quote_types\", " << "\"value\": ";

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/hash/licence_hash.hpp"
-#include "dogen.formatting/hash/modeline_hash.hpp"
-#include "dogen.formatting/hash/decoration_properties_hash.hpp"
+#include "masd.dogen.formatting/hash/licence_hash.hpp"
+#include "masd.dogen.formatting/hash/modeline_hash.hpp"
+#include "masd.dogen.formatting/hash/decoration_properties_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_formatting_modeline(const boost::optional<dogen::formatting::modeline>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_formatting_modeline(const boost::optional<masd::dogen::formatting::modeline>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -40,7 +40,7 @@ inline std::size_t hash_boost_optional_dogen_formatting_modeline(const boost::op
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_formatting_licence(const boost::optional<dogen::formatting::licence>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_formatting_licence(const boost::optional<masd::dogen::formatting::licence>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -52,14 +52,14 @@ inline std::size_t hash_boost_optional_dogen_formatting_licence(const boost::opt
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::size_t decoration_properties_hasher::hash(const decoration_properties& v) {
     std::size_t seed(0);
 
     combine(seed, v.generate_decoration());
-    combine(seed, hash_boost_optional_dogen_formatting_modeline(v.modeline()));
-    combine(seed, hash_boost_optional_dogen_formatting_licence(v.licence()));
+    combine(seed, hash_boost_optional_masd_dogen_formatting_modeline(v.modeline()));
+    combine(seed, hash_boost_optional_masd_dogen_formatting_licence(v.licence()));
     combine(seed, v.code_generation_marker());
 
     return seed;

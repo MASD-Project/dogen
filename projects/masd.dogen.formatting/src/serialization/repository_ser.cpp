@@ -29,15 +29,15 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.formatting/serialization/repository_ser.hpp"
-#include "dogen.formatting/serialization/modeline_group_ser.hpp"
+#include "masd.dogen.formatting/serialization/repository_ser.hpp"
+#include "masd.dogen.formatting/serialization/modeline_group_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::formatting::repository& v,
+    const masd::dogen::formatting::repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("modeline_groups", v.modeline_groups_);
     ar << make_nvp("licence_texts", v.licence_texts_);
@@ -45,7 +45,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::formatting::repository& v,
+    masd::dogen::formatting::repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("modeline_groups", v.modeline_groups_);
     ar >> make_nvp("licence_texts", v.licence_texts_);
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::formatting::repository& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::formatting::repository& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const masd::dogen::formatting::repository& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, masd::dogen::formatting::repository& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::formatting::repository& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::formatting::repository& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const masd::dogen::formatting::repository& v, unsigned int version);
+template void load(archive::text_iarchive& ar, masd::dogen::formatting::repository& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::formatting::repository& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::formatting::repository& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const masd::dogen::formatting::repository& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, masd::dogen::formatting::repository& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::formatting::repository& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::formatting::repository& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const masd::dogen::formatting::repository& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, masd::dogen::formatting::repository& v, unsigned int version);
 
 } }

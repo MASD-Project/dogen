@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_QUOTE_TYPES_HPP
-#define DOGEN_FORMATTING_TYPES_QUOTE_TYPES_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_QUOTE_TYPES_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_QUOTE_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Types of quotes that can be used in streaming.

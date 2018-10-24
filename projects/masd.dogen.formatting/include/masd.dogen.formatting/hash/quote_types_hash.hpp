@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_HASH_QUOTE_TYPES_HASH_HPP
-#define DOGEN_FORMATTING_HASH_QUOTE_TYPES_HASH_HPP
+#ifndef MASD_DOGEN_FORMATTING_HASH_QUOTE_TYPES_HASH_HPP
+#define MASD_DOGEN_FORMATTING_HASH_QUOTE_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.formatting/types/quote_types.hpp"
+#include "masd.dogen.formatting/types/quote_types.hpp"
 
 namespace std {
 
 template<>
-struct hash<dogen::formatting::quote_types> {
+struct hash<masd::dogen::formatting::quote_types> {
 public:
-    size_t operator()(const dogen::formatting::quote_types& v) const {
+    size_t operator()(const masd::dogen::formatting::quote_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

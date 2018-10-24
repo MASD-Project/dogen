@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/decoration_configuration.hpp"
+#include "masd.dogen.formatting/types/decoration_configuration.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 decoration_configuration::decoration_configuration(decoration_configuration&& rhs)
     : generate_decoration_(std::move(rhs.generate_decoration_)),

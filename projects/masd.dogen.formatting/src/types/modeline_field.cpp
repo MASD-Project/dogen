@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/modeline_field.hpp"
+#include "masd.dogen.formatting/types/modeline_field.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 modeline_field::modeline_field(
     const std::string& name,

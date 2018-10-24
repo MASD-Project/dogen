@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_SERIALIZATION_EDITORS_SER_HPP
-#define DOGEN_FORMATTING_SERIALIZATION_EDITORS_SER_HPP
+#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_EDITORS_SER_HPP
+#define MASD_DOGEN_FORMATTING_SERIALIZATION_EDITORS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "dogen.formatting/types/editors.hpp"
+#include "masd.dogen.formatting/types/editors.hpp"
 
 template<class Archive>
-void serialize(Archive& ar, dogen::formatting::editors& v, unsigned int /*version*/){
+void serialize(Archive& ar, masd::dogen::formatting::editors& v, unsigned int /*version*/){
     using boost::serialization::make_nvp;
     ar & make_nvp("editors", v);
 }

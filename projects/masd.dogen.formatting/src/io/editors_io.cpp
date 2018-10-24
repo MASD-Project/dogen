@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.formatting/io/editors_io.hpp"
+#include "masd.dogen.formatting/io/editors_io.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const editors& v) {
     s << "{ " << "\"__type__\": " << "\"editors\", " << "\"value\": ";

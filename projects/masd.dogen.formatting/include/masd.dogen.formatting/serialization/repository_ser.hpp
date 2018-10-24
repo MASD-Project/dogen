@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_SERIALIZATION_REPOSITORY_SER_HPP
-#define DOGEN_FORMATTING_SERIALIZATION_REPOSITORY_SER_HPP
+#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_REPOSITORY_SER_HPP
+#define MASD_DOGEN_FORMATTING_SERIALIZATION_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen.formatting/types/repository.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::formatting::repository)
+BOOST_SERIALIZATION_SPLIT_FREE(masd::dogen::formatting::repository)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::formatting::repository& v, unsigned int version);
+void save(Archive& ar, const masd::dogen::formatting::repository& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::formatting::repository& v, unsigned int version);
+void load(Archive& ar, masd::dogen::formatting::repository& v, unsigned int version);
 
 } }
 

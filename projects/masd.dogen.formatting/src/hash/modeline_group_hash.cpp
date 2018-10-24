@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/hash/modeline_hash.hpp"
-#include "dogen.formatting/hash/modeline_group_hash.hpp"
+#include "masd.dogen.formatting/hash/modeline_hash.hpp"
+#include "masd.dogen.formatting/hash/modeline_group_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_formatting_modeline(const std::unordered_map<std::string, dogen::formatting::modeline>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_formatting_modeline(const std::unordered_map<std::string, masd::dogen::formatting::modeline>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -40,13 +40,13 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_formatting_modeline(c
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::size_t modeline_group_hasher::hash(const modeline_group& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, hash_std_unordered_map_std_string_dogen_formatting_modeline(v.modelines()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_formatting_modeline(v.modelines()));
 
     return seed;
 }

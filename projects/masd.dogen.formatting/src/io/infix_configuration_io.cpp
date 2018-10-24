@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.formatting/io/infix_configuration_io.hpp"
+#include "masd.dogen.formatting/io/infix_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const infix_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatting::infix_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::formatting::infix_configuration\"" << ", "
       << "\"first\": " << "\"" << tidy_up_string(v.first()) << "\"" << ", "
       << "\"not_first\": " << "\"" << tidy_up_string(v.not_first()) << "\"" << ", "
       << "\"not_last\": " << "\"" << tidy_up_string(v.not_last()) << "\"" << ", "

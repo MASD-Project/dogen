@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.formatting/test_data/infix_configuration_td.hpp"
+#include "masd.dogen.formatting/test_data/infix_configuration_td.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 infix_configuration_generator::infix_configuration_generator() : position_(0) { }
 

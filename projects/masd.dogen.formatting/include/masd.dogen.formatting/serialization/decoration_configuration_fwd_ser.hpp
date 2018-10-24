@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_SERIALIZATION_DECORATION_CONFIGURATION_FWD_SER_HPP
-#define DOGEN_FORMATTING_SERIALIZATION_DECORATION_CONFIGURATION_FWD_SER_HPP
+#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_DECORATION_CONFIGURATION_FWD_SER_HPP
+#define MASD_DOGEN_FORMATTING_SERIALIZATION_DECORATION_CONFIGURATION_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.formatting/types/decoration_configuration_fwd.hpp"
+#include "masd.dogen.formatting/types/decoration_configuration_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::formatting::decoration_configuration& v, unsigned int version);
+void save(Archive& ar, const masd::dogen::formatting::decoration_configuration& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::formatting::decoration_configuration& v, unsigned int version);
+void load(Archive& ar, masd::dogen::formatting::decoration_configuration& v, unsigned int version);
 
 } }
 

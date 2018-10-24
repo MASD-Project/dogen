@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.formatting/io/spacing_types_io.hpp"
+#include "masd.dogen.formatting/io/spacing_types_io.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const spacing_types& v) {
     s << "{ " << "\"__type__\": " << "\"spacing_types\", " << "\"value\": ";

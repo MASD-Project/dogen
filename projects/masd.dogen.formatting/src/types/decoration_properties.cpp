@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 decoration_properties::decoration_properties()
     : generate_decoration_(static_cast<bool>(0)) { }
@@ -33,8 +33,8 @@ decoration_properties::decoration_properties(decoration_properties&& rhs)
 
 decoration_properties::decoration_properties(
     const bool generate_decoration,
-    const boost::optional<dogen::formatting::modeline>& modeline,
-    const boost::optional<dogen::formatting::licence>& licence,
+    const boost::optional<masd::dogen::formatting::modeline>& modeline,
+    const boost::optional<masd::dogen::formatting::licence>& licence,
     const std::string& code_generation_marker)
     : generate_decoration_(generate_decoration),
       modeline_(modeline),
@@ -70,35 +70,35 @@ void decoration_properties::generate_decoration(const bool v) {
     generate_decoration_ = v;
 }
 
-const boost::optional<dogen::formatting::modeline>& decoration_properties::modeline() const {
+const boost::optional<masd::dogen::formatting::modeline>& decoration_properties::modeline() const {
     return modeline_;
 }
 
-boost::optional<dogen::formatting::modeline>& decoration_properties::modeline() {
+boost::optional<masd::dogen::formatting::modeline>& decoration_properties::modeline() {
     return modeline_;
 }
 
-void decoration_properties::modeline(const boost::optional<dogen::formatting::modeline>& v) {
+void decoration_properties::modeline(const boost::optional<masd::dogen::formatting::modeline>& v) {
     modeline_ = v;
 }
 
-void decoration_properties::modeline(const boost::optional<dogen::formatting::modeline>&& v) {
+void decoration_properties::modeline(const boost::optional<masd::dogen::formatting::modeline>&& v) {
     modeline_ = std::move(v);
 }
 
-const boost::optional<dogen::formatting::licence>& decoration_properties::licence() const {
+const boost::optional<masd::dogen::formatting::licence>& decoration_properties::licence() const {
     return licence_;
 }
 
-boost::optional<dogen::formatting::licence>& decoration_properties::licence() {
+boost::optional<masd::dogen::formatting::licence>& decoration_properties::licence() {
     return licence_;
 }
 
-void decoration_properties::licence(const boost::optional<dogen::formatting::licence>& v) {
+void decoration_properties::licence(const boost::optional<masd::dogen::formatting::licence>& v) {
     licence_ = v;
 }
 
-void decoration_properties::licence(const boost::optional<dogen::formatting::licence>&& v) {
+void decoration_properties::licence(const boost::optional<masd::dogen::formatting::licence>&& v) {
     licence_ = std::move(v);
 }
 

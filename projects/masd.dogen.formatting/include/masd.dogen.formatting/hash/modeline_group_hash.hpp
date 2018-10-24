@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_HASH_MODELINE_GROUP_HASH_HPP
-#define DOGEN_FORMATTING_HASH_MODELINE_GROUP_HASH_HPP
+#ifndef MASD_DOGEN_FORMATTING_HASH_MODELINE_GROUP_HASH_HPP
+#define MASD_DOGEN_FORMATTING_HASH_MODELINE_GROUP_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.formatting/types/modeline_group.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 struct modeline_group_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::formatting::modeline_group> {
+struct hash<masd::dogen::formatting::modeline_group> {
 public:
-    size_t operator()(const dogen::formatting::modeline_group& v) const {
-        return dogen::formatting::modeline_group_hasher::hash(v);
+    size_t operator()(const masd::dogen::formatting::modeline_group& v) const {
+        return masd::dogen::formatting::modeline_group_hasher::hash(v);
     }
 };
 

@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/hash/editors_hash.hpp"
-#include "dogen.formatting/hash/modeline_hash.hpp"
-#include "dogen.formatting/hash/modeline_field_hash.hpp"
-#include "dogen.formatting/hash/modeline_locations_hash.hpp"
+#include "masd.dogen.formatting/hash/editors_hash.hpp"
+#include "masd.dogen.formatting/hash/modeline_hash.hpp"
+#include "masd.dogen.formatting/hash/modeline_field_hash.hpp"
+#include "masd.dogen.formatting/hash/modeline_locations_hash.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_formatting_modeline_field(const std::list<dogen::formatting::modeline_field>& v) {
+inline std::size_t hash_std_list_masd_dogen_formatting_modeline_field(const std::list<masd::dogen::formatting::modeline_field>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -41,7 +41,7 @@ inline std::size_t hash_std_list_dogen_formatting_modeline_field(const std::list
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::size_t modeline_hasher::hash(const modeline& v) {
     std::size_t seed(0);
@@ -49,7 +49,7 @@ std::size_t modeline_hasher::hash(const modeline& v) {
     combine(seed, v.name());
     combine(seed, v.editor());
     combine(seed, v.location());
-    combine(seed, hash_std_list_dogen_formatting_modeline_field(v.fields()));
+    combine(seed, hash_std_list_masd_dogen_formatting_modeline_field(v.fields()));
 
     return seed;
 }

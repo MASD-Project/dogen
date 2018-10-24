@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_HASH_EDITORS_HASH_HPP
-#define DOGEN_FORMATTING_HASH_EDITORS_HASH_HPP
+#ifndef MASD_DOGEN_FORMATTING_HASH_EDITORS_HASH_HPP
+#define MASD_DOGEN_FORMATTING_HASH_EDITORS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.formatting/types/editors.hpp"
+#include "masd.dogen.formatting/types/editors.hpp"
 
 namespace std {
 
 template<>
-struct hash<dogen::formatting::editors> {
+struct hash<masd::dogen::formatting::editors> {
 public:
-    size_t operator()(const dogen::formatting::editors& v) const {
+    size_t operator()(const masd::dogen::formatting::editors& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

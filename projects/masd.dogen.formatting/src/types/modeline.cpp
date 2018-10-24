@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/modeline.hpp"
+#include "masd.dogen.formatting/types/modeline.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 modeline::modeline()
-    : editor_(static_cast<dogen::formatting::editors>(0)),
-      location_(static_cast<dogen::formatting::modeline_locations>(0)) { }
+    : editor_(static_cast<masd::dogen::formatting::editors>(0)),
+      location_(static_cast<masd::dogen::formatting::modeline_locations>(0)) { }
 
 modeline::modeline(
     const std::string& name,
-    const dogen::formatting::editors editor,
-    const dogen::formatting::modeline_locations location,
-    const std::list<dogen::formatting::modeline_field>& fields)
+    const masd::dogen::formatting::editors editor,
+    const masd::dogen::formatting::modeline_locations location,
+    const std::list<masd::dogen::formatting::modeline_field>& fields)
     : name_(name),
       editor_(editor),
       location_(location),
@@ -73,35 +73,35 @@ void modeline::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-dogen::formatting::editors modeline::editor() const {
+masd::dogen::formatting::editors modeline::editor() const {
     return editor_;
 }
 
-void modeline::editor(const dogen::formatting::editors v) {
+void modeline::editor(const masd::dogen::formatting::editors v) {
     editor_ = v;
 }
 
-dogen::formatting::modeline_locations modeline::location() const {
+masd::dogen::formatting::modeline_locations modeline::location() const {
     return location_;
 }
 
-void modeline::location(const dogen::formatting::modeline_locations v) {
+void modeline::location(const masd::dogen::formatting::modeline_locations v) {
     location_ = v;
 }
 
-const std::list<dogen::formatting::modeline_field>& modeline::fields() const {
+const std::list<masd::dogen::formatting::modeline_field>& modeline::fields() const {
     return fields_;
 }
 
-std::list<dogen::formatting::modeline_field>& modeline::fields() {
+std::list<masd::dogen::formatting::modeline_field>& modeline::fields() {
     return fields_;
 }
 
-void modeline::fields(const std::list<dogen::formatting::modeline_field>& v) {
+void modeline::fields(const std::list<masd::dogen::formatting::modeline_field>& v) {
     fields_ = v;
 }
 
-void modeline::fields(const std::list<dogen::formatting::modeline_field>&& v) {
+void modeline::fields(const std::list<masd::dogen::formatting::modeline_field>&& v) {
     fields_ = std::move(v);
 }
 

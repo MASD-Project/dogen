@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_SERIALIZATION_SPACING_TYPES_SER_HPP
-#define DOGEN_FORMATTING_SERIALIZATION_SPACING_TYPES_SER_HPP
+#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_SPACING_TYPES_SER_HPP
+#define MASD_DOGEN_FORMATTING_SERIALIZATION_SPACING_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "dogen.formatting/types/spacing_types.hpp"
+#include "masd.dogen.formatting/types/spacing_types.hpp"
 
 template<class Archive>
-void serialize(Archive& ar, dogen::formatting::spacing_types& v, unsigned int /*version*/){
+void serialize(Archive& ar, masd::dogen::formatting::spacing_types& v, unsigned int /*version*/){
     using boost::serialization::make_nvp;
     ar & make_nvp("spacing_types", v);
 }

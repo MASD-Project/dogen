@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen.formatting/test_data/repository_td.hpp"
-#include "dogen.formatting/test_data/modeline_group_td.hpp"
+#include "masd.dogen.formatting/test_data/repository_td.hpp"
+#include "masd.dogen.formatting/test_data/modeline_group_td.hpp"
 
 namespace {
 
@@ -30,15 +30,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::formatting::modeline_group
-create_dogen_formatting_modeline_group(const unsigned int position) {
-    return dogen::formatting::modeline_group_generator::create(position);
+masd::dogen::formatting::modeline_group
+create_masd_dogen_formatting_modeline_group(const unsigned int position) {
+    return masd::dogen::formatting::modeline_group_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::formatting::modeline_group> create_std_unordered_map_std_string_dogen_formatting_modeline_group(unsigned int position) {
-    std::unordered_map<std::string, dogen::formatting::modeline_group> r;
+std::unordered_map<std::string, masd::dogen::formatting::modeline_group> create_std_unordered_map_std_string_masd_dogen_formatting_modeline_group(unsigned int position) {
+    std::unordered_map<std::string, masd::dogen::formatting::modeline_group> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_formatting_modeline_group(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_formatting_modeline_group(position + i)));
     }
     return r;
 }
@@ -53,13 +53,13 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 repository_generator::repository_generator() : position_(0) { }
 
 void repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.modeline_groups(create_std_unordered_map_std_string_dogen_formatting_modeline_group(position + 0));
+    v.modeline_groups(create_std_unordered_map_std_string_masd_dogen_formatting_modeline_group(position + 0));
     v.licence_texts(create_std_unordered_map_std_string_std_string(position + 1));
 }
 

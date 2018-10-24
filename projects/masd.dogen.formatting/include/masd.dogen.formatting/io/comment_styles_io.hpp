@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_IO_COMMENT_STYLES_IO_HPP
-#define DOGEN_FORMATTING_IO_COMMENT_STYLES_IO_HPP
+#ifndef MASD_DOGEN_FORMATTING_IO_COMMENT_STYLES_IO_HPP
+#define MASD_DOGEN_FORMATTING_IO_COMMENT_STYLES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.formatting/types/comment_styles.hpp"
+#include "masd.dogen.formatting/types/comment_styles.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const comment_styles& v);
 

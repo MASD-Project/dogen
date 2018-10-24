@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_FORMATTING_HPP
-#define DOGEN_FORMATTING_TYPES_FORMATTING_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_FORMATTING_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_FORMATTING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
  * which is not language specific. Language-specific models can
  * then make use of it.
  */
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 }
 
 #endif

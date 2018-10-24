@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.formatting/io/modeline_field_io.hpp"
+#include "masd.dogen.formatting/io/modeline_field_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::ostream& operator<<(std::ostream& s, const modeline_field& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::formatting::modeline_field\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::formatting::modeline_field\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";

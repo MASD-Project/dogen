@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_HASH_INFIX_CONFIGURATION_HASH_HPP
-#define DOGEN_FORMATTING_HASH_INFIX_CONFIGURATION_HASH_HPP
+#ifndef MASD_DOGEN_FORMATTING_HASH_INFIX_CONFIGURATION_HASH_HPP
+#define MASD_DOGEN_FORMATTING_HASH_INFIX_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.formatting/types/infix_configuration.hpp"
+#include "masd.dogen.formatting/types/infix_configuration.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 struct infix_configuration_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::formatting::infix_configuration> {
+struct hash<masd::dogen::formatting::infix_configuration> {
 public:
-    size_t operator()(const dogen::formatting::infix_configuration& v) const {
-        return dogen::formatting::infix_configuration_hasher::hash(v);
+    size_t operator()(const masd::dogen::formatting::infix_configuration& v) const {
+        return masd::dogen::formatting::infix_configuration_hasher::hash(v);
     }
 };
 

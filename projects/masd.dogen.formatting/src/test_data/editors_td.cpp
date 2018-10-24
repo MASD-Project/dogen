@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/test_data/editors_td.hpp"
+#include "masd.dogen.formatting/test_data/editors_td.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 editors_generator::editors_generator() : position_(0) { }
 void editors_generator::

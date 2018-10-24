@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/hash/decoration_configuration_hash.hpp"
+#include "masd.dogen.formatting/hash/decoration_configuration_hash.hpp"
 
 namespace {
 
@@ -48,7 +48,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 std::size_t decoration_configuration_hasher::hash(const decoration_configuration& v) {
     std::size_t seed(0);

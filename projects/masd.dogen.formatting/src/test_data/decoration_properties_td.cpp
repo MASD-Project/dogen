@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen.formatting/test_data/licence_td.hpp"
-#include "dogen.formatting/test_data/modeline_td.hpp"
-#include "dogen.formatting/test_data/decoration_properties_td.hpp"
+#include "masd.dogen.formatting/test_data/licence_td.hpp"
+#include "masd.dogen.formatting/test_data/modeline_td.hpp"
+#include "masd.dogen.formatting/test_data/decoration_properties_td.hpp"
 
 namespace {
 
@@ -29,27 +29,27 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-dogen::formatting::modeline
-create_dogen_formatting_modeline(const unsigned int position) {
-    return dogen::formatting::modeline_generator::create(position);
+masd::dogen::formatting::modeline
+create_masd_dogen_formatting_modeline(const unsigned int position) {
+    return masd::dogen::formatting::modeline_generator::create(position);
 }
 
-boost::optional<dogen::formatting::modeline>
-create_boost_optional_dogen_formatting_modeline(unsigned int position) {
-    boost::optional<dogen::formatting::modeline> r(
-        create_dogen_formatting_modeline(position));
+boost::optional<masd::dogen::formatting::modeline>
+create_boost_optional_masd_dogen_formatting_modeline(unsigned int position) {
+    boost::optional<masd::dogen::formatting::modeline> r(
+        create_masd_dogen_formatting_modeline(position));
     return r;
 }
 
-dogen::formatting::licence
-create_dogen_formatting_licence(const unsigned int position) {
-    return dogen::formatting::licence_generator::create(position);
+masd::dogen::formatting::licence
+create_masd_dogen_formatting_licence(const unsigned int position) {
+    return masd::dogen::formatting::licence_generator::create(position);
 }
 
-boost::optional<dogen::formatting::licence>
-create_boost_optional_dogen_formatting_licence(unsigned int position) {
-    boost::optional<dogen::formatting::licence> r(
-        create_dogen_formatting_licence(position));
+boost::optional<masd::dogen::formatting::licence>
+create_boost_optional_masd_dogen_formatting_licence(unsigned int position) {
+    boost::optional<masd::dogen::formatting::licence> r(
+        create_masd_dogen_formatting_licence(position));
     return r;
 }
 
@@ -61,15 +61,15 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 decoration_properties_generator::decoration_properties_generator() : position_(0) { }
 
 void decoration_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_decoration(create_bool(position + 0));
-    v.modeline(create_boost_optional_dogen_formatting_modeline(position + 1));
-    v.licence(create_boost_optional_dogen_formatting_licence(position + 2));
+    v.modeline(create_boost_optional_masd_dogen_formatting_modeline(position + 1));
+    v.licence(create_boost_optional_masd_dogen_formatting_licence(position + 2));
     v.code_generation_marker(create_std_string(position + 3));
 }
 

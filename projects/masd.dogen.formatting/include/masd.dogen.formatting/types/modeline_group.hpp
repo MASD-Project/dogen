@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTING_TYPES_MODELINE_GROUP_HPP
-#define DOGEN_FORMATTING_TYPES_MODELINE_GROUP_HPP
+#ifndef MASD_DOGEN_FORMATTING_TYPES_MODELINE_GROUP_HPP
+#define MASD_DOGEN_FORMATTING_TYPES_MODELINE_GROUP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.formatting/types/modeline.hpp"
-#include "dogen.formatting/serialization/modeline_group_fwd_ser.hpp"
+#include "masd.dogen.formatting/types/modeline.hpp"
+#include "masd.dogen.formatting/serialization/modeline_group_fwd_ser.hpp"
 
-namespace dogen::formatting {
+namespace masd::dogen::formatting {
 
 /**
  * @brief Group of modelines, logically associated.
@@ -49,14 +49,14 @@ public:
 public:
     modeline_group(
         const std::string& name,
-        const std::unordered_map<std::string, dogen::formatting::modeline>& modelines);
+        const std::unordered_map<std::string, masd::dogen::formatting::modeline>& modelines);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::formatting::modeline_group& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::modeline_group& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::formatting::modeline_group& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::modeline_group& v, unsigned int version);
 
 public:
     /**
@@ -73,10 +73,10 @@ public:
      * @brief All the modelines for this group.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::formatting::modeline>& modelines() const;
-    std::unordered_map<std::string, dogen::formatting::modeline>& modelines();
-    void modelines(const std::unordered_map<std::string, dogen::formatting::modeline>& v);
-    void modelines(const std::unordered_map<std::string, dogen::formatting::modeline>&& v);
+    const std::unordered_map<std::string, masd::dogen::formatting::modeline>& modelines() const;
+    std::unordered_map<std::string, masd::dogen::formatting::modeline>& modelines();
+    void modelines(const std::unordered_map<std::string, masd::dogen::formatting::modeline>& v);
+    void modelines(const std::unordered_map<std::string, masd::dogen::formatting::modeline>&& v);
     /**@}*/
 
 public:
@@ -91,7 +91,7 @@ public:
 
 private:
     std::string name_;
-    std::unordered_map<std::string, dogen::formatting::modeline> modelines_;
+    std::unordered_map<std::string, masd::dogen::formatting::modeline> modelines_;
 };
 
 }
@@ -100,8 +100,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::formatting::modeline_group& lhs,
-    dogen::formatting::modeline_group& rhs) {
+    masd::dogen::formatting::modeline_group& lhs,
+    masd::dogen::formatting::modeline_group& rhs) {
     lhs.swap(rhs);
 }
 
