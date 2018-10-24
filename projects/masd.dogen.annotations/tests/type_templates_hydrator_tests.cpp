@@ -56,13 +56,13 @@ const std::string trivial_type_template(R"([
     }
 ])");
 
-std::list<dogen::annotations::type_template>
+std::list<masd::dogen::annotations::type_template>
 hydrate(std::istream& s) {
-    dogen::annotations::type_templates_hydrator h;
+    masd::dogen::annotations::type_templates_hydrator h;
     return h.hydrate(s);
 }
 
-std::list<dogen::annotations::type_template>
+std::list<masd::dogen::annotations::type_template>
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
