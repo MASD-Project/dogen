@@ -20,17 +20,17 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/types/boolean.hpp"
-#include "dogen.annotations/types/value_visitor.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/types/boolean.hpp"
+#include "masd.dogen.annotations/types/value_visitor.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 boolean::boolean()
     : content_(static_cast<bool>(0)) { }
 
 boolean::boolean(const bool content)
-    : dogen::annotations::value(),
+    : masd::dogen::annotations::value(),
       content_(content) { }
 
 void boolean::accept(const value_visitor& v) const {
@@ -57,29 +57,29 @@ void boolean::to_stream(std::ostream& s) const {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::boolean\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::boolean\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::annotations::value::to_stream(s);
+    masd::dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void boolean::swap(boolean& other) noexcept {
-    dogen::annotations::value::swap(other);
+    masd::dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
 }
 
-bool boolean::equals(const dogen::annotations::value& other) const {
+bool boolean::equals(const masd::dogen::annotations::value& other) const {
     const boolean* const p(dynamic_cast<const boolean* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool boolean::operator==(const boolean& rhs) const {
-    return dogen::annotations::value::compare(rhs) &&
+    return masd::dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

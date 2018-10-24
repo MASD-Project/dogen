@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_VALUE_VISITOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_VALUE_VISITOR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_VALUE_VISITOR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_VALUE_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.annotations/types/text_fwd.hpp"
-#include "dogen.annotations/types/number_fwd.hpp"
-#include "dogen.annotations/types/boolean_fwd.hpp"
-#include "dogen.annotations/types/key_value_pair_fwd.hpp"
-#include "dogen.annotations/types/text_collection_fwd.hpp"
+#include "masd.dogen.annotations/types/text_fwd.hpp"
+#include "masd.dogen.annotations/types/number_fwd.hpp"
+#include "masd.dogen.annotations/types/boolean_fwd.hpp"
+#include "masd.dogen.annotations/types/key_value_pair_fwd.hpp"
+#include "masd.dogen.annotations/types/text_collection_fwd.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Visitor for value
@@ -42,53 +42,53 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::annotations::boolean
+     * @brief Accept visits for type masd::dogen::annotations::boolean
      */
     /**@{*/
-    virtual void visit(const dogen::annotations::boolean&) const { }
-    virtual void visit(const dogen::annotations::boolean&) { }
-    virtual void visit(dogen::annotations::boolean&) const { }
-    virtual void visit(dogen::annotations::boolean&) { }
+    virtual void visit(const masd::dogen::annotations::boolean&) const { }
+    virtual void visit(const masd::dogen::annotations::boolean&) { }
+    virtual void visit(masd::dogen::annotations::boolean&) const { }
+    virtual void visit(masd::dogen::annotations::boolean&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::annotations::key_value_pair
+     * @brief Accept visits for type masd::dogen::annotations::key_value_pair
      */
     /**@{*/
-    virtual void visit(const dogen::annotations::key_value_pair&) const { }
-    virtual void visit(const dogen::annotations::key_value_pair&) { }
-    virtual void visit(dogen::annotations::key_value_pair&) const { }
-    virtual void visit(dogen::annotations::key_value_pair&) { }
+    virtual void visit(const masd::dogen::annotations::key_value_pair&) const { }
+    virtual void visit(const masd::dogen::annotations::key_value_pair&) { }
+    virtual void visit(masd::dogen::annotations::key_value_pair&) const { }
+    virtual void visit(masd::dogen::annotations::key_value_pair&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::annotations::number
+     * @brief Accept visits for type masd::dogen::annotations::number
      */
     /**@{*/
-    virtual void visit(const dogen::annotations::number&) const { }
-    virtual void visit(const dogen::annotations::number&) { }
-    virtual void visit(dogen::annotations::number&) const { }
-    virtual void visit(dogen::annotations::number&) { }
+    virtual void visit(const masd::dogen::annotations::number&) const { }
+    virtual void visit(const masd::dogen::annotations::number&) { }
+    virtual void visit(masd::dogen::annotations::number&) const { }
+    virtual void visit(masd::dogen::annotations::number&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::annotations::text
+     * @brief Accept visits for type masd::dogen::annotations::text
      */
     /**@{*/
-    virtual void visit(const dogen::annotations::text&) const { }
-    virtual void visit(const dogen::annotations::text&) { }
-    virtual void visit(dogen::annotations::text&) const { }
-    virtual void visit(dogen::annotations::text&) { }
+    virtual void visit(const masd::dogen::annotations::text&) const { }
+    virtual void visit(const masd::dogen::annotations::text&) { }
+    virtual void visit(masd::dogen::annotations::text&) const { }
+    virtual void visit(masd::dogen::annotations::text&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::annotations::text_collection
+     * @brief Accept visits for type masd::dogen::annotations::text_collection
      */
     /**@{*/
-    virtual void visit(const dogen::annotations::text_collection&) const { }
-    virtual void visit(const dogen::annotations::text_collection&) { }
-    virtual void visit(dogen::annotations::text_collection&) const { }
-    virtual void visit(dogen::annotations::text_collection&) { }
+    virtual void visit(const masd::dogen::annotations::text_collection&) const { }
+    virtual void visit(const masd::dogen::annotations::text_collection&) { }
+    virtual void visit(masd::dogen::annotations::text_collection&) const { }
+    virtual void visit(masd::dogen::annotations::text_collection&) { }
     /**@}*/
 };
 

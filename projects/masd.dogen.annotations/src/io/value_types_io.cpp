@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.annotations/io/value_types_io.hpp"
+#include "masd.dogen.annotations/io/value_types_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const value_types& v) {
     s << "{ " << "\"__type__\": " << "\"value_types\", " << "\"value\": ";

@@ -18,34 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_ALL_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_ALL_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_ALL_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_ALL_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.annotations/hash/name_hash.hpp"
-#include "dogen.annotations/hash/text_hash.hpp"
-#include "dogen.annotations/hash/type_hash.hpp"
-#include "dogen.annotations/hash/value_hash.hpp"
-#include "dogen.annotations/hash/number_hash.hpp"
-#include "dogen.annotations/hash/boolean_hash.hpp"
-#include "dogen.annotations/hash/profile_hash.hpp"
-#include "dogen.annotations/hash/annotation_hash.hpp"
-#include "dogen.annotations/hash/scope_types_hash.hpp"
-#include "dogen.annotations/hash/value_types_hash.hpp"
-#include "dogen.annotations/hash/type_template_hash.hpp"
-#include "dogen.annotations/hash/entry_template_hash.hpp"
-#include "dogen.annotations/hash/key_value_pair_hash.hpp"
-#include "dogen.annotations/hash/template_kinds_hash.hpp"
-#include "dogen.annotations/hash/text_collection_hash.hpp"
-#include "dogen.annotations/hash/type_repository_hash.hpp"
-#include "dogen.annotations/hash/archetype_location_hash.hpp"
-#include "dogen.annotations/hash/profile_repository_hash.hpp"
-#include "dogen.annotations/hash/profiler_configuration_hash.hpp"
-#include "dogen.annotations/hash/archetype_locations_group_hash.hpp"
-#include "dogen.annotations/hash/archetype_location_repository_hash.hpp"
-#include "dogen.annotations/hash/archetype_location_repository_parts_hash.hpp"
+#include "masd.dogen.annotations/hash/name_hash.hpp"
+#include "masd.dogen.annotations/hash/text_hash.hpp"
+#include "masd.dogen.annotations/hash/type_hash.hpp"
+#include "masd.dogen.annotations/hash/value_hash.hpp"
+#include "masd.dogen.annotations/hash/number_hash.hpp"
+#include "masd.dogen.annotations/hash/boolean_hash.hpp"
+#include "masd.dogen.annotations/hash/profile_hash.hpp"
+#include "masd.dogen.annotations/hash/annotation_hash.hpp"
+#include "masd.dogen.annotations/hash/scope_types_hash.hpp"
+#include "masd.dogen.annotations/hash/value_types_hash.hpp"
+#include "masd.dogen.annotations/hash/type_template_hash.hpp"
+#include "masd.dogen.annotations/hash/entry_template_hash.hpp"
+#include "masd.dogen.annotations/hash/key_value_pair_hash.hpp"
+#include "masd.dogen.annotations/hash/template_kinds_hash.hpp"
+#include "masd.dogen.annotations/hash/text_collection_hash.hpp"
+#include "masd.dogen.annotations/hash/type_repository_hash.hpp"
+#include "masd.dogen.annotations/hash/archetype_location_hash.hpp"
+#include "masd.dogen.annotations/hash/profile_repository_hash.hpp"
+#include "masd.dogen.annotations/hash/profiler_configuration_hash.hpp"
+#include "masd.dogen.annotations/hash/archetype_locations_group_hash.hpp"
+#include "masd.dogen.annotations/hash/archetype_location_repository_hash.hpp"
+#include "masd.dogen.annotations/hash/archetype_location_repository_parts_hash.hpp"
 
 #endif

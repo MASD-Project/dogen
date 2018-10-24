@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/entry_template.hpp"
+#include "masd.dogen.annotations/types/entry_template.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 entry_template::entry_template()
-    : kind_(static_cast<dogen::annotations::template_kinds>(0)) { }
+    : kind_(static_cast<masd::dogen::annotations::template_kinds>(0)) { }
 
 entry_template::entry_template(
-    const dogen::annotations::name& name,
-    const dogen::annotations::archetype_location& archetype_location,
+    const masd::dogen::annotations::name& name,
+    const masd::dogen::annotations::archetype_location& archetype_location,
     const std::list<std::string>& untyped_value,
-    const dogen::annotations::template_kinds kind)
+    const masd::dogen::annotations::template_kinds kind)
     : name_(name),
       archetype_location_(archetype_location),
       untyped_value_(untyped_value),
@@ -56,35 +56,35 @@ entry_template& entry_template::operator=(entry_template other) {
     return *this;
 }
 
-const dogen::annotations::name& entry_template::name() const {
+const masd::dogen::annotations::name& entry_template::name() const {
     return name_;
 }
 
-dogen::annotations::name& entry_template::name() {
+masd::dogen::annotations::name& entry_template::name() {
     return name_;
 }
 
-void entry_template::name(const dogen::annotations::name& v) {
+void entry_template::name(const masd::dogen::annotations::name& v) {
     name_ = v;
 }
 
-void entry_template::name(const dogen::annotations::name&& v) {
+void entry_template::name(const masd::dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::annotations::archetype_location& entry_template::archetype_location() const {
+const masd::dogen::annotations::archetype_location& entry_template::archetype_location() const {
     return archetype_location_;
 }
 
-dogen::annotations::archetype_location& entry_template::archetype_location() {
+masd::dogen::annotations::archetype_location& entry_template::archetype_location() {
     return archetype_location_;
 }
 
-void entry_template::archetype_location(const dogen::annotations::archetype_location& v) {
+void entry_template::archetype_location(const masd::dogen::annotations::archetype_location& v) {
     archetype_location_ = v;
 }
 
-void entry_template::archetype_location(const dogen::annotations::archetype_location&& v) {
+void entry_template::archetype_location(const masd::dogen::annotations::archetype_location&& v) {
     archetype_location_ = std::move(v);
 }
 
@@ -104,11 +104,11 @@ void entry_template::untyped_value(const std::list<std::string>&& v) {
     untyped_value_ = std::move(v);
 }
 
-dogen::annotations::template_kinds entry_template::kind() const {
+masd::dogen::annotations::template_kinds entry_template::kind() const {
     return kind_;
 }
 
-void entry_template::kind(const dogen::annotations::template_kinds v) {
+void entry_template::kind(const masd::dogen::annotations::template_kinds v) {
     kind_ = v;
 }
 

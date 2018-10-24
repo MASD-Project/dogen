@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/profiler_configuration.hpp"
+#include "masd.dogen.annotations/types/profiler_configuration.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 profiler_configuration::profiler_configuration()
     : merged_(static_cast<bool>(0)) { }
 
 profiler_configuration::profiler_configuration(
-    const dogen::annotations::profile& profile,
-    const dogen::annotations::annotation& annotation,
+    const masd::dogen::annotations::profile& profile,
+    const masd::dogen::annotations::annotation& annotation,
     const bool merged)
     : profile_(profile),
       annotation_(annotation),
@@ -52,35 +52,35 @@ profiler_configuration& profiler_configuration::operator=(profiler_configuration
     return *this;
 }
 
-const dogen::annotations::profile& profiler_configuration::profile() const {
+const masd::dogen::annotations::profile& profiler_configuration::profile() const {
     return profile_;
 }
 
-dogen::annotations::profile& profiler_configuration::profile() {
+masd::dogen::annotations::profile& profiler_configuration::profile() {
     return profile_;
 }
 
-void profiler_configuration::profile(const dogen::annotations::profile& v) {
+void profiler_configuration::profile(const masd::dogen::annotations::profile& v) {
     profile_ = v;
 }
 
-void profiler_configuration::profile(const dogen::annotations::profile&& v) {
+void profiler_configuration::profile(const masd::dogen::annotations::profile&& v) {
     profile_ = std::move(v);
 }
 
-const dogen::annotations::annotation& profiler_configuration::annotation() const {
+const masd::dogen::annotations::annotation& profiler_configuration::annotation() const {
     return annotation_;
 }
 
-dogen::annotations::annotation& profiler_configuration::annotation() {
+masd::dogen::annotations::annotation& profiler_configuration::annotation() {
     return annotation_;
 }
 
-void profiler_configuration::annotation(const dogen::annotations::annotation& v) {
+void profiler_configuration::annotation(const masd::dogen::annotations::annotation& v) {
     annotation_ = v;
 }
 
-void profiler_configuration::annotation(const dogen::annotations::annotation&& v) {
+void profiler_configuration::annotation(const masd::dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
 }
 

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_KEY_VALUE_PAIR_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_KEY_VALUE_PAIR_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_KEY_VALUE_PAIR_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_KEY_VALUE_PAIR_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/key_value_pair.hpp"
+#include "masd.dogen.annotations/types/key_value_pair.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct key_value_pair_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::key_value_pair> {
+struct hash<masd::dogen::annotations::key_value_pair> {
 public:
-    size_t operator()(const dogen::annotations::key_value_pair& v) const {
-        return dogen::annotations::key_value_pair_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::key_value_pair& v) const {
+        return masd::dogen::annotations::key_value_pair_hasher::hash(v);
     }
 };
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/value_hash.hpp"
-#include "dogen.annotations/hash/key_value_pair_hash.hpp"
+#include "masd.dogen.annotations/hash/value_hash.hpp"
+#include "masd.dogen.annotations/hash/key_value_pair_hash.hpp"
 
 namespace {
 
@@ -40,12 +40,12 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t key_value_pair_hasher::hash(const key_value_pair& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::annotations::value&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::annotations::value&>(v));
 
     combine(seed, hash_std_unordered_map_std_string_std_string(v.content()));
     return seed;

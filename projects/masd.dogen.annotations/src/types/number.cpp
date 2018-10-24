@@ -19,17 +19,17 @@
  *
  */
 #include <ostream>
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/types/number.hpp"
-#include "dogen.annotations/types/value_visitor.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/types/number.hpp"
+#include "masd.dogen.annotations/types/value_visitor.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 number::number()
     : content_(static_cast<int>(0)) { }
 
 number::number(const int content)
-    : dogen::annotations::value(),
+    : masd::dogen::annotations::value(),
       content_(content) { }
 
 void number::accept(const value_visitor& v) const {
@@ -50,29 +50,29 @@ void number::accept(value_visitor& v) {
 
 void number::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::number\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::number\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::annotations::value::to_stream(s);
+    masd::dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void number::swap(number& other) noexcept {
-    dogen::annotations::value::swap(other);
+    masd::dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
 }
 
-bool number::equals(const dogen::annotations::value& other) const {
+bool number::equals(const masd::dogen::annotations::value& other) const {
     const number* const p(dynamic_cast<const number* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool number::operator==(const number& rhs) const {
-    return dogen::annotations::value::compare(rhs) &&
+    return masd::dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

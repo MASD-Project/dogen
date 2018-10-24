@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/value_hash.hpp"
-#include "dogen.annotations/hash/annotation_hash.hpp"
-#include "dogen.annotations/hash/scope_types_hash.hpp"
+#include "masd.dogen.annotations/hash/value_hash.hpp"
+#include "masd.dogen.annotations/hash/annotation_hash.hpp"
+#include "masd.dogen.annotations/hash/scope_types_hash.hpp"
 
 namespace {
 
@@ -30,29 +30,29 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_annotations_value(const boost::shared_ptr<dogen::annotations::value>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_annotations_value(const boost::shared_ptr<masd::dogen::annotations::value>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_annotations_value(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_annotations_value(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_annotations_value(i.second));
     }
     return seed;
 }
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t annotation_hasher::hash(const annotation& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_annotations_value(v.tagged_values()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_annotations_value(v.tagged_values()));
     combine(seed, v.scope());
 
     return seed;

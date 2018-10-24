@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_REPOSITORY_PARTS_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_REPOSITORY_PARTS_IO_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_REPOSITORY_PARTS_IO_HPP
+#define MASD_DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATION_REPOSITORY_PARTS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::annotations::archetype_location_repository_parts& v);
+     const masd::dogen::annotations::archetype_location_repository_parts& v);
 
 }
 

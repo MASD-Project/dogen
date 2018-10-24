@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_BOOLEAN_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_BOOLEAN_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_BOOLEAN_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_BOOLEAN_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/boolean.hpp"
+#include "masd.dogen.annotations/types/boolean.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct boolean_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::boolean> {
+struct hash<masd::dogen::annotations::boolean> {
 public:
-    size_t operator()(const dogen::annotations::boolean& v) const {
-        return dogen::annotations::boolean_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::boolean& v) const {
+        return masd::dogen::annotations::boolean_hasher::hash(v);
     }
 };
 

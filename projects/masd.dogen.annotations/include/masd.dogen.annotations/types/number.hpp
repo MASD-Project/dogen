@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_NUMBER_HPP
-#define DOGEN_ANNOTATIONS_TYPES_NUMBER_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_NUMBER_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_NUMBER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Field can hold numbers.
  */
-class number final : public dogen::annotations::value {
+class number final : public masd::dogen::annotations::value {
 public:
     number(const number&) = default;
     number(number&&) = default;
@@ -68,7 +68,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::annotations::value& other) const override;
+    bool equals(const masd::dogen::annotations::value& other) const override;
 
 public:
     void swap(number& other) noexcept;
@@ -84,8 +84,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::number& lhs,
-    dogen::annotations::number& rhs) {
+    masd::dogen::annotations::number& lhs,
+    masd::dogen::annotations::number& rhs) {
     lhs.swap(rhs);
 }
 

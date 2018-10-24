@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.annotations/io/profile_io.hpp"
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.annotations/io/profiler_configuration_io.hpp"
+#include "masd.dogen.annotations/io/profile_io.hpp"
+#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.annotations/io/profiler_configuration_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const profiler_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -34,7 +34,7 @@ std::ostream& operator<<(std::ostream& s, const profiler_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::profiler_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::profiler_configuration\"" << ", "
       << "\"profile\": " << v.profile() << ", "
       << "\"annotation\": " << v.annotation() << ", "
       << "\"merged\": " << v.merged()

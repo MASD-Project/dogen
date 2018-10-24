@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_PROFILE_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_PROFILE_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_PROFILE_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_PROFILE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/profile.hpp"
+#include "masd.dogen.annotations/types/profile.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct profile_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::profile> {
+struct hash<masd::dogen::annotations::profile> {
 public:
-    size_t operator()(const dogen::annotations::profile& v) const {
-        return dogen::annotations::profile_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::profile& v) const {
+        return masd::dogen::annotations::profile_hasher::hash(v);
     }
 };
 

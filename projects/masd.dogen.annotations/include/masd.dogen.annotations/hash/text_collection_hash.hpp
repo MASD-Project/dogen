@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_TEXT_COLLECTION_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_TEXT_COLLECTION_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_TEXT_COLLECTION_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_TEXT_COLLECTION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/text_collection.hpp"
+#include "masd.dogen.annotations/types/text_collection.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct text_collection_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::text_collection> {
+struct hash<masd::dogen::annotations::text_collection> {
 public:
-    size_t operator()(const dogen::annotations::text_collection& v) const {
-        return dogen::annotations::text_collection_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::text_collection& v) const {
+        return masd::dogen::annotations::text_collection_hasher::hash(v);
     }
 };
 

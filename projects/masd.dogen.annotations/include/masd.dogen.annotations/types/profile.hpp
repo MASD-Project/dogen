@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILE_HPP
-#define DOGEN_ANNOTATIONS_TYPES_PROFILE_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include "dogen.annotations/types/entry_template.hpp"
+#include "masd.dogen.annotations/types/entry_template.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class profile final {
 public:
@@ -45,7 +45,7 @@ public:
         const std::string& name,
         const std::list<std::string>& parents,
         const std::unordered_set<std::string>& labels,
-        const std::list<dogen::annotations::entry_template>& templates);
+        const std::list<masd::dogen::annotations::entry_template>& templates);
 
 public:
     const std::string& name() const;
@@ -63,10 +63,10 @@ public:
     void labels(const std::unordered_set<std::string>& v);
     void labels(const std::unordered_set<std::string>&& v);
 
-    const std::list<dogen::annotations::entry_template>& templates() const;
-    std::list<dogen::annotations::entry_template>& templates();
-    void templates(const std::list<dogen::annotations::entry_template>& v);
-    void templates(const std::list<dogen::annotations::entry_template>&& v);
+    const std::list<masd::dogen::annotations::entry_template>& templates() const;
+    std::list<masd::dogen::annotations::entry_template>& templates();
+    void templates(const std::list<masd::dogen::annotations::entry_template>& v);
+    void templates(const std::list<masd::dogen::annotations::entry_template>&& v);
 
 public:
     bool operator==(const profile& rhs) const;
@@ -82,7 +82,7 @@ private:
     std::string name_;
     std::list<std::string> parents_;
     std::unordered_set<std::string> labels_;
-    std::list<dogen::annotations::entry_template> templates_;
+    std::list<masd::dogen::annotations::entry_template> templates_;
 };
 
 }
@@ -91,8 +91,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::profile& lhs,
-    dogen::annotations::profile& rhs) {
+    masd::dogen::annotations::profile& lhs,
+    masd::dogen::annotations::profile& rhs) {
     lhs.swap(rhs);
 }
 

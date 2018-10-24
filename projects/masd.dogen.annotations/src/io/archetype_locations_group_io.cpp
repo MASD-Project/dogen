@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/archetype_location_io.hpp"
-#include "dogen.annotations/io/archetype_locations_group_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/archetype_locations_group_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::archetype_location>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::annotations::archetype_location>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,11 +63,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const archetype_locations_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::archetype_locations_group\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::archetype_locations_group\"" << ", "
       << "\"archetype_locations\": " << v.archetype_locations() << ", "
       << "\"canonical_archetype_locations\": " << v.canonical_archetype_locations()
       << " }";

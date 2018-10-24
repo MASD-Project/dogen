@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_INSTANTIATION_ERROR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_INSTANTIATION_ERROR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_INSTANTIATION_ERROR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_INSTANTIATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief An error occurred whilst trying to instantiate a field definition template.

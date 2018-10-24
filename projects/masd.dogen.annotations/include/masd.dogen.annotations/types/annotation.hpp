@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATION_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ANNOTATION_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATION_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.annotations/types/value_fwd.hpp"
-#include "dogen.annotations/types/scope_types.hpp"
+#include "masd.dogen.annotations/types/value_fwd.hpp"
+#include "masd.dogen.annotations/types/scope_types.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Represents an annotation that can be associated with an external object.
@@ -48,22 +48,22 @@ public:
 
 public:
     annotation(
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values,
-        const dogen::annotations::scope_types scope);
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& tagged_values,
+        const masd::dogen::annotations::scope_types scope);
 
 public:
     /**
      * @brief All tagged values in this annotation. Each entry is a key-value-pair of id and value.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values();
-    void tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v);
-    void tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& tagged_values() const;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& tagged_values();
+    void tagged_values(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& v);
+    void tagged_values(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >&& v);
     /**@}*/
 
-    dogen::annotations::scope_types scope() const;
-    void scope(const dogen::annotations::scope_types v);
+    masd::dogen::annotations::scope_types scope() const;
+    void scope(const masd::dogen::annotations::scope_types v);
 
 public:
     bool operator==(const annotation& rhs) const;
@@ -76,8 +76,8 @@ public:
     annotation& operator=(annotation other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> > tagged_values_;
-    dogen::annotations::scope_types scope_;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> > tagged_values_;
+    masd::dogen::annotations::scope_types scope_;
 };
 
 }
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::annotation& lhs,
-    dogen::annotations::annotation& rhs) {
+    masd::dogen::annotations::annotation& lhs,
+    masd::dogen::annotations::annotation& rhs) {
     lhs.swap(rhs);
 }
 

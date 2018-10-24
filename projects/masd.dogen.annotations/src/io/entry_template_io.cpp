@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/name_io.hpp"
-#include "dogen.annotations/io/entry_template_io.hpp"
-#include "dogen.annotations/io/template_kinds_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/name_io.hpp"
+#include "masd.dogen.annotations/io/entry_template_io.hpp"
+#include "masd.dogen.annotations/io/template_kinds_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -47,11 +47,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const entry_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::entry_template\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::entry_template\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"archetype_location\": " << v.archetype_location() << ", "
       << "\"untyped_value\": " << v.untyped_value() << ", "

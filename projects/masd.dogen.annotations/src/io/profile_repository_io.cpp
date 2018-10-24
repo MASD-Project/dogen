@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/profile_io.hpp"
-#include "dogen.annotations/io/profile_repository_io.hpp"
+#include "masd.dogen.annotations/io/profile_io.hpp"
+#include "masd.dogen.annotations/io/profile_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::profile>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::annotations::profile>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,11 +49,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const profile_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::profile_repository\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::profile_repository\"" << ", "
       << "\"profiles_by_name\": " << v.profiles_by_name()
       << " }";
     return(s);

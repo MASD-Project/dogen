@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Location of an archetype or set of archetypes in the hierarchical artchetype space.
@@ -115,8 +115,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::archetype_location& lhs,
-    dogen::annotations::archetype_location& rhs) {
+    masd::dogen::annotations::archetype_location& lhs,
+    masd::dogen::annotations::archetype_location& rhs) {
     lhs.swap(rhs);
 }
 

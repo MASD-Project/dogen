@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class type_repository final {
 public:
@@ -42,72 +42,72 @@ public:
 
 public:
     type_repository(
-        const std::list<dogen::annotations::type>& all_types,
-        const std::unordered_map<std::string, dogen::annotations::type>& types_by_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name,
-        const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types);
+        const std::list<masd::dogen::annotations::type>& all_types,
+        const std::unordered_map<std::string, masd::dogen::annotations::type>& types_by_name,
+        const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_facet_name,
+        const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_formatter_name,
+        const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_backend_name,
+        const std::unordered_map<std::string, masd::dogen::annotations::type>& partially_matchable_types);
 
 public:
     /**
      * @brief All the types available, without categorisation.
      */
     /**@{*/
-    const std::list<dogen::annotations::type>& all_types() const;
-    std::list<dogen::annotations::type>& all_types();
-    void all_types(const std::list<dogen::annotations::type>& v);
-    void all_types(const std::list<dogen::annotations::type>&& v);
+    const std::list<masd::dogen::annotations::type>& all_types() const;
+    std::list<masd::dogen::annotations::type>& all_types();
+    void all_types(const std::list<masd::dogen::annotations::type>& v);
+    void all_types(const std::list<masd::dogen::annotations::type>&& v);
     /**@}*/
 
     /**
      * @brief Types by qualified name.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::type>& types_by_name() const;
-    std::unordered_map<std::string, dogen::annotations::type>& types_by_name();
-    void types_by_name(const std::unordered_map<std::string, dogen::annotations::type>& v);
-    void types_by_name(const std::unordered_map<std::string, dogen::annotations::type>&& v);
+    const std::unordered_map<std::string, masd::dogen::annotations::type>& types_by_name() const;
+    std::unordered_map<std::string, masd::dogen::annotations::type>& types_by_name();
+    void types_by_name(const std::unordered_map<std::string, masd::dogen::annotations::type>& v);
+    void types_by_name(const std::unordered_map<std::string, masd::dogen::annotations::type>&& v);
     /**@}*/
 
     /**
      * @brief Types by facet names, for all models.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_facet_name();
-    void types_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
-    void types_by_facet_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_facet_name() const;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_facet_name();
+    void types_by_facet_name(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& v);
+    void types_by_facet_name(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >&& v);
     /**@}*/
 
     /**
      * @brief Types by formatter names, for all models.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_formatter_name();
-    void types_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
-    void types_by_formatter_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_formatter_name() const;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_formatter_name();
+    void types_by_formatter_name(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& v);
+    void types_by_formatter_name(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >&& v);
     /**@}*/
 
     /**
      * @brief Types by backend name.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> >& types_by_backend_name();
-    void types_by_backend_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v);
-    void types_by_backend_name(const std::unordered_map<std::string, std::list<dogen::annotations::type> >&& v);
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_backend_name() const;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& types_by_backend_name();
+    void types_by_backend_name(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& v);
+    void types_by_backend_name(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >&& v);
     /**@}*/
 
     /**
      * @brief Types which can be partially matched.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types() const;
-    std::unordered_map<std::string, dogen::annotations::type>& partially_matchable_types();
-    void partially_matchable_types(const std::unordered_map<std::string, dogen::annotations::type>& v);
-    void partially_matchable_types(const std::unordered_map<std::string, dogen::annotations::type>&& v);
+    const std::unordered_map<std::string, masd::dogen::annotations::type>& partially_matchable_types() const;
+    std::unordered_map<std::string, masd::dogen::annotations::type>& partially_matchable_types();
+    void partially_matchable_types(const std::unordered_map<std::string, masd::dogen::annotations::type>& v);
+    void partially_matchable_types(const std::unordered_map<std::string, masd::dogen::annotations::type>&& v);
     /**@}*/
 
 public:
@@ -121,12 +121,12 @@ public:
     type_repository& operator=(type_repository other);
 
 private:
-    std::list<dogen::annotations::type> all_types_;
-    std::unordered_map<std::string, dogen::annotations::type> types_by_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_facet_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_formatter_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::type> > types_by_backend_name_;
-    std::unordered_map<std::string, dogen::annotations::type> partially_matchable_types_;
+    std::list<masd::dogen::annotations::type> all_types_;
+    std::unordered_map<std::string, masd::dogen::annotations::type> types_by_name_;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::type> > types_by_facet_name_;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::type> > types_by_formatter_name_;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::type> > types_by_backend_name_;
+    std::unordered_map<std::string, masd::dogen::annotations::type> partially_matchable_types_;
 };
 
 }
@@ -135,8 +135,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::type_repository& lhs,
-    dogen::annotations::type_repository& rhs) {
+    masd::dogen::annotations::type_repository& lhs,
+    masd::dogen::annotations::type_repository& rhs) {
     lhs.swap(rhs);
 }
 

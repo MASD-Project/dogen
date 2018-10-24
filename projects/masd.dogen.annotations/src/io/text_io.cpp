@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/text_io.hpp"
-#include "dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/io/text_io.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const text& v) {
     v.to_stream(s);

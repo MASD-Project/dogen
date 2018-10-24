@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATIONS_GROUP_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATIONS_GROUP_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATIONS_GROUP_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATIONS_GROUP_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct archetype_locations_group_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::archetype_locations_group> {
+struct hash<masd::dogen::annotations::archetype_locations_group> {
 public:
-    size_t operator()(const dogen::annotations::archetype_locations_group& v) const {
-        return dogen::annotations::archetype_locations_group_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::archetype_locations_group& v) const {
+        return masd::dogen::annotations::archetype_locations_group_hasher::hash(v);
     }
 };
 

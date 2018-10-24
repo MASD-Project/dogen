@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/profile_hash.hpp"
-#include "dogen.annotations/hash/profile_repository_hash.hpp"
+#include "masd.dogen.annotations/hash/profile_hash.hpp"
+#include "masd.dogen.annotations/hash/profile_repository_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_profile(const std::unordered_map<std::string, dogen::annotations::profile>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_annotations_profile(const std::unordered_map<std::string, masd::dogen::annotations::profile>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -40,12 +40,12 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_profile(c
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t profile_repository_hasher::hash(const profile_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_profile(v.profiles_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_annotations_profile(v.profiles_by_name()));
     return seed;
 }
 

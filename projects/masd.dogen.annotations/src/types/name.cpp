@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/name.hpp"
+#include "masd.dogen.annotations/types/name.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 name::name(
     const std::string& simple,

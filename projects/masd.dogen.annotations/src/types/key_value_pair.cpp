@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/types/value_visitor.hpp"
-#include "dogen.annotations/types/key_value_pair.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/types/value_visitor.hpp"
+#include "masd.dogen.annotations/types/key_value_pair.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,10 +50,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 key_value_pair::key_value_pair(const std::unordered_map<std::string, std::string>& content)
-    : dogen::annotations::value(),
+    : masd::dogen::annotations::value(),
       content_(content) { }
 
 void key_value_pair::accept(const value_visitor& v) const {
@@ -74,29 +74,29 @@ void key_value_pair::accept(value_visitor& v) {
 
 void key_value_pair::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::key_value_pair\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::key_value_pair\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::annotations::value::to_stream(s);
+    masd::dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void key_value_pair::swap(key_value_pair& other) noexcept {
-    dogen::annotations::value::swap(other);
+    masd::dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
 }
 
-bool key_value_pair::equals(const dogen::annotations::value& other) const {
+bool key_value_pair::equals(const masd::dogen::annotations::value& other) const {
     const key_value_pair* const p(dynamic_cast<const key_value_pair* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool key_value_pair::operator==(const key_value_pair& rhs) const {
-    return dogen::annotations::value::compare(rhs) &&
+    return masd::dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

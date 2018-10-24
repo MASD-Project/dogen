@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const archetype_location& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::archetype_location\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::archetype_location\"" << ", "
       << "\"kernel\": " << "\"" << tidy_up_string(v.kernel()) << "\"" << ", "
       << "\"backend\": " << "\"" << tidy_up_string(v.backend()) << "\"" << ", "
       << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "

@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.annotations/io/template_kinds_io.hpp"
+#include "masd.dogen.annotations/io/template_kinds_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const template_kinds& v) {
     s << "{ " << "\"__type__\": " << "\"template_kinds\", " << "\"value\": ";

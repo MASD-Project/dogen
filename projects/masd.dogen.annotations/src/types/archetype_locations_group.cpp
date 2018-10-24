@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 archetype_locations_group::archetype_locations_group(
-    const std::list<dogen::annotations::archetype_location>& archetype_locations,
+    const std::list<masd::dogen::annotations::archetype_location>& archetype_locations,
     const std::unordered_map<std::string, std::string>& canonical_archetype_locations)
     : archetype_locations_(archetype_locations),
       canonical_archetype_locations_(canonical_archetype_locations) { }
@@ -45,19 +45,19 @@ archetype_locations_group& archetype_locations_group::operator=(archetype_locati
     return *this;
 }
 
-const std::list<dogen::annotations::archetype_location>& archetype_locations_group::archetype_locations() const {
+const std::list<masd::dogen::annotations::archetype_location>& archetype_locations_group::archetype_locations() const {
     return archetype_locations_;
 }
 
-std::list<dogen::annotations::archetype_location>& archetype_locations_group::archetype_locations() {
+std::list<masd::dogen::annotations::archetype_location>& archetype_locations_group::archetype_locations() {
     return archetype_locations_;
 }
 
-void archetype_locations_group::archetype_locations(const std::list<dogen::annotations::archetype_location>& v) {
+void archetype_locations_group::archetype_locations(const std::list<masd::dogen::annotations::archetype_location>& v) {
     archetype_locations_ = v;
 }
 
-void archetype_locations_group::archetype_locations(const std::list<dogen::annotations::archetype_location>&& v) {
+void archetype_locations_group::archetype_locations(const std::list<masd::dogen::annotations::archetype_location>&& v) {
     archetype_locations_ = std::move(v);
 }
 

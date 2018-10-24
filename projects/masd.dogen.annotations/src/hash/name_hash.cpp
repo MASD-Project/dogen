@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/name_hash.hpp"
+#include "masd.dogen.annotations/hash/name_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t name_hasher::hash(const name& v) {
     std::size_t seed(0);

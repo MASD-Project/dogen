@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILER_CONFIGURATION_HPP
-#define DOGEN_ANNOTATIONS_TYPES_PROFILER_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_PROFILER_CONFIGURATION_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_PROFILER_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.annotations/types/profile.hpp"
-#include "dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/profile.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class profiler_configuration final {
 public:
@@ -42,20 +42,20 @@ public:
 
 public:
     profiler_configuration(
-        const dogen::annotations::profile& profile,
-        const dogen::annotations::annotation& annotation,
+        const masd::dogen::annotations::profile& profile,
+        const masd::dogen::annotations::annotation& annotation,
         const bool merged);
 
 public:
-    const dogen::annotations::profile& profile() const;
-    dogen::annotations::profile& profile();
-    void profile(const dogen::annotations::profile& v);
-    void profile(const dogen::annotations::profile&& v);
+    const masd::dogen::annotations::profile& profile() const;
+    masd::dogen::annotations::profile& profile();
+    void profile(const masd::dogen::annotations::profile& v);
+    void profile(const masd::dogen::annotations::profile&& v);
 
-    const dogen::annotations::annotation& annotation() const;
-    dogen::annotations::annotation& annotation();
-    void annotation(const dogen::annotations::annotation& v);
-    void annotation(const dogen::annotations::annotation&& v);
+    const masd::dogen::annotations::annotation& annotation() const;
+    masd::dogen::annotations::annotation& annotation();
+    void annotation(const masd::dogen::annotations::annotation& v);
+    void annotation(const masd::dogen::annotations::annotation&& v);
 
     bool merged() const;
     void merged(const bool v);
@@ -71,8 +71,8 @@ public:
     profiler_configuration& operator=(profiler_configuration other);
 
 private:
-    dogen::annotations::profile profile_;
-    dogen::annotations::annotation annotation_;
+    masd::dogen::annotations::profile profile_;
+    masd::dogen::annotations::annotation annotation_;
     bool merged_;
 };
 
@@ -82,8 +82,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::profiler_configuration& lhs,
-    dogen::annotations::profiler_configuration& rhs) {
+    masd::dogen::annotations::profiler_configuration& lhs,
+    masd::dogen::annotations::profiler_configuration& rhs) {
     lhs.swap(rhs);
 }
 

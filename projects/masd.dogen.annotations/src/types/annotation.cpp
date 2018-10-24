@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::annotations::value>& lhs,
-const boost::shared_ptr<dogen::annotations::value>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::annotations::value>& lhs,
+const boost::shared_ptr<masd::dogen::annotations::value>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 annotation::annotation()
-    : scope_(static_cast<dogen::annotations::scope_types>(0)) { }
+    : scope_(static_cast<masd::dogen::annotations::scope_types>(0)) { }
 
 annotation::annotation(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& tagged_values,
-    const dogen::annotations::scope_types scope)
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& tagged_values,
+    const masd::dogen::annotations::scope_types scope)
     : tagged_values_(tagged_values),
       scope_(scope) { }
 
@@ -58,27 +58,27 @@ annotation& annotation::operator=(annotation other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::tagged_values() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& annotation::tagged_values() const {
     return tagged_values_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& annotation::tagged_values() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& annotation::tagged_values() {
     return tagged_values_;
 }
 
-void annotation::tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >& v) {
+void annotation::tagged_values(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >& v) {
     tagged_values_ = v;
 }
 
-void annotation::tagged_values(const std::unordered_map<std::string, boost::shared_ptr<dogen::annotations::value> >&& v) {
+void annotation::tagged_values(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::annotations::value> >&& v) {
     tagged_values_ = std::move(v);
 }
 
-dogen::annotations::scope_types annotation::scope() const {
+masd::dogen::annotations::scope_types annotation::scope() const {
     return scope_;
 }
 
-void annotation::scope(const dogen::annotations::scope_types v) {
+void annotation::scope(const masd::dogen::annotations::scope_types v) {
     scope_ = v;
 }
 

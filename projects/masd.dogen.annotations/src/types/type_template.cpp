@@ -18,32 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/types/type_template.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/type_template.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::annotations::value>& lhs,
-const boost::shared_ptr<dogen::annotations::value>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::annotations::value>& lhs,
+const boost::shared_ptr<masd::dogen::annotations::value>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 type_template::type_template()
-    : value_type_(static_cast<dogen::annotations::value_types>(0)),
-      scope_(static_cast<dogen::annotations::scope_types>(0)),
-      kind_(static_cast<dogen::annotations::template_kinds>(0)) { }
+    : value_type_(static_cast<masd::dogen::annotations::value_types>(0)),
+      scope_(static_cast<masd::dogen::annotations::scope_types>(0)),
+      kind_(static_cast<masd::dogen::annotations::template_kinds>(0)) { }
 
 type_template::type_template(
-    const dogen::annotations::name& name,
-    const dogen::annotations::value_types value_type,
-    const dogen::annotations::scope_types scope,
-    const dogen::annotations::archetype_location& archetype_location,
-    const boost::shared_ptr<dogen::annotations::value>& default_value,
-    const dogen::annotations::template_kinds kind)
+    const masd::dogen::annotations::name& name,
+    const masd::dogen::annotations::value_types value_type,
+    const masd::dogen::annotations::scope_types scope,
+    const masd::dogen::annotations::archetype_location& archetype_location,
+    const boost::shared_ptr<masd::dogen::annotations::value>& default_value,
+    const masd::dogen::annotations::template_kinds kind)
     : name_(name),
       value_type_(value_type),
       scope_(scope),
@@ -76,75 +76,75 @@ type_template& type_template::operator=(type_template other) {
     return *this;
 }
 
-const dogen::annotations::name& type_template::name() const {
+const masd::dogen::annotations::name& type_template::name() const {
     return name_;
 }
 
-dogen::annotations::name& type_template::name() {
+masd::dogen::annotations::name& type_template::name() {
     return name_;
 }
 
-void type_template::name(const dogen::annotations::name& v) {
+void type_template::name(const masd::dogen::annotations::name& v) {
     name_ = v;
 }
 
-void type_template::name(const dogen::annotations::name&& v) {
+void type_template::name(const masd::dogen::annotations::name&& v) {
     name_ = std::move(v);
 }
 
-dogen::annotations::value_types type_template::value_type() const {
+masd::dogen::annotations::value_types type_template::value_type() const {
     return value_type_;
 }
 
-void type_template::value_type(const dogen::annotations::value_types v) {
+void type_template::value_type(const masd::dogen::annotations::value_types v) {
     value_type_ = v;
 }
 
-dogen::annotations::scope_types type_template::scope() const {
+masd::dogen::annotations::scope_types type_template::scope() const {
     return scope_;
 }
 
-void type_template::scope(const dogen::annotations::scope_types v) {
+void type_template::scope(const masd::dogen::annotations::scope_types v) {
     scope_ = v;
 }
 
-const dogen::annotations::archetype_location& type_template::archetype_location() const {
+const masd::dogen::annotations::archetype_location& type_template::archetype_location() const {
     return archetype_location_;
 }
 
-dogen::annotations::archetype_location& type_template::archetype_location() {
+masd::dogen::annotations::archetype_location& type_template::archetype_location() {
     return archetype_location_;
 }
 
-void type_template::archetype_location(const dogen::annotations::archetype_location& v) {
+void type_template::archetype_location(const masd::dogen::annotations::archetype_location& v) {
     archetype_location_ = v;
 }
 
-void type_template::archetype_location(const dogen::annotations::archetype_location&& v) {
+void type_template::archetype_location(const masd::dogen::annotations::archetype_location&& v) {
     archetype_location_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::annotations::value>& type_template::default_value() const {
+const boost::shared_ptr<masd::dogen::annotations::value>& type_template::default_value() const {
     return default_value_;
 }
 
-boost::shared_ptr<dogen::annotations::value>& type_template::default_value() {
+boost::shared_ptr<masd::dogen::annotations::value>& type_template::default_value() {
     return default_value_;
 }
 
-void type_template::default_value(const boost::shared_ptr<dogen::annotations::value>& v) {
+void type_template::default_value(const boost::shared_ptr<masd::dogen::annotations::value>& v) {
     default_value_ = v;
 }
 
-void type_template::default_value(const boost::shared_ptr<dogen::annotations::value>&& v) {
+void type_template::default_value(const boost::shared_ptr<masd::dogen::annotations::value>&& v) {
     default_value_ = std::move(v);
 }
 
-dogen::annotations::template_kinds type_template::kind() const {
+masd::dogen::annotations::template_kinds type_template::kind() const {
     return kind_;
 }
 
-void type_template::kind(const dogen::annotations::template_kinds v) {
+void type_template::kind(const masd::dogen::annotations::template_kinds v) {
     kind_ = v;
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/type_hash.hpp"
-#include "dogen.annotations/hash/type_repository_hash.hpp"
+#include "masd.dogen.annotations/hash/type_hash.hpp"
+#include "masd.dogen.annotations/hash/type_repository_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_annotations_type(const std::list<dogen::annotations::type>& v) {
+inline std::size_t hash_std_list_masd_dogen_annotations_type(const std::list<masd::dogen::annotations::type>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -37,7 +37,7 @@ inline std::size_t hash_std_list_dogen_annotations_type(const std::list<dogen::a
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_type(const std::unordered_map<std::string, dogen::annotations::type>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_annotations_type(const std::unordered_map<std::string, masd::dogen::annotations::type>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -46,28 +46,28 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_type(cons
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_type(const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_masd_dogen_annotations_type(const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_dogen_annotations_type(i.second));
+        combine(seed, hash_std_list_masd_dogen_annotations_type(i.second));
     }
     return seed;
 }
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t type_repository_hasher::hash(const type_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_annotations_type(v.all_types()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_type(v.types_by_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_facet_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_formatter_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_type(v.types_by_backend_name()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_type(v.partially_matchable_types()));
+    combine(seed, hash_std_list_masd_dogen_annotations_type(v.all_types()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_annotations_type(v.types_by_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_masd_dogen_annotations_type(v.types_by_facet_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_masd_dogen_annotations_type(v.types_by_formatter_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_masd_dogen_annotations_type(v.types_by_backend_name()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_annotations_type(v.partially_matchable_types()));
 
     return seed;
 }

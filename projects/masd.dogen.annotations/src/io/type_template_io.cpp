@@ -19,17 +19,17 @@
  *
  */
 #include <ostream>
-#include "dogen.annotations/io/name_io.hpp"
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/io/scope_types_io.hpp"
-#include "dogen.annotations/io/value_types_io.hpp"
-#include "dogen.annotations/io/type_template_io.hpp"
-#include "dogen.annotations/io/template_kinds_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/name_io.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/io/scope_types_io.hpp"
+#include "masd.dogen.annotations/io/value_types_io.hpp"
+#include "masd.dogen.annotations/io/type_template_io.hpp"
+#include "masd.dogen.annotations/io/template_kinds_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::annotations::value>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::annotations::value>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -43,11 +43,11 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const type_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::type_template\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::type_template\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"scope\": " << v.scope() << ", "

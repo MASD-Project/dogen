@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.annotations/io/scope_types_io.hpp"
+#include "masd.dogen.annotations/io/scope_types_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const scope_types& v) {
     s << "{ " << "\"__type__\": " << "\"scope_types\", " << "\"value\": ";

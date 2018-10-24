@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_VALUE_TYPES_HPP
-#define DOGEN_ANNOTATIONS_TYPES_VALUE_TYPES_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_VALUE_TYPES_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_VALUE_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief What values can a field hold.

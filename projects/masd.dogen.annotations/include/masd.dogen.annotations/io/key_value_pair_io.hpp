@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_KEY_VALUE_PAIR_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_KEY_VALUE_PAIR_IO_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_IO_KEY_VALUE_PAIR_IO_HPP
+#define MASD_DOGEN_ANNOTATIONS_IO_KEY_VALUE_PAIR_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.annotations/types/key_value_pair.hpp"
+#include "masd.dogen.annotations/types/key_value_pair.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::annotations::key_value_pair& v);
+     const masd::dogen::annotations::key_value_pair& v);
 
 }
 

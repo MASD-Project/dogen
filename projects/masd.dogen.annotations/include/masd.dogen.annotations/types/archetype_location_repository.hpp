@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class archetype_location_repository final {
 public:
@@ -44,19 +44,19 @@ public:
 
 public:
     archetype_location_repository(
-        const std::list<dogen::annotations::archetype_location>& archetype_locations,
+        const std::list<masd::dogen::annotations::archetype_location>& archetype_locations,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-        const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
-        const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family,
+        const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
+        const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_family,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet,
-        const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment);
+        const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment);
 
 public:
-    const std::list<dogen::annotations::archetype_location>& archetype_locations() const;
-    std::list<dogen::annotations::archetype_location>& archetype_locations();
-    void archetype_locations(const std::list<dogen::annotations::archetype_location>& v);
-    void archetype_locations(const std::list<dogen::annotations::archetype_location>&& v);
+    const std::list<masd::dogen::annotations::archetype_location>& archetype_locations() const;
+    std::list<masd::dogen::annotations::archetype_location>& archetype_locations();
+    void archetype_locations(const std::list<masd::dogen::annotations::archetype_location>& v);
+    void archetype_locations(const std::list<masd::dogen::annotations::archetype_location>&& v);
 
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name() const;
     std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name();
@@ -68,10 +68,10 @@ public:
     void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
-    const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name() const;
-    std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name();
-    void archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v);
-    void archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>&& v);
+    const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name() const;
+    std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name();
+    void archetype_locations_by_meta_name(const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& v);
+    void archetype_locations_by_meta_name(const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>&& v);
 
     /**
      * @brief All archetype locations for a given family.
@@ -80,10 +80,10 @@ public:
      * properties such as file extensions.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family();
-    void archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v);
-    void archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v);
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_family() const;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_family();
+    void archetype_locations_by_family(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& v);
+    void archetype_locations_by_family(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >&& v);
     /**@}*/
 
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& archetypes_by_backend_by_facet() const;
@@ -98,10 +98,10 @@ public:
      * associated properties.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment() const;
-    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment();
-    void archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v);
-    void archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v);
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment() const;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment();
+    void archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& v);
+    void archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >&& v);
     /**@}*/
 
 public:
@@ -115,13 +115,13 @@ public:
     archetype_location_repository& operator=(archetype_location_repository other);
 
 private:
-    std::list<dogen::annotations::archetype_location> archetype_locations_;
+    std::list<masd::dogen::annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
-    std::unordered_map<std::string, dogen::annotations::archetype_locations_group> archetype_locations_by_meta_name_;
-    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > archetype_locations_by_family_;
+    std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group> archetype_locations_by_meta_name_;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> > archetype_locations_by_family_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > archetypes_by_backend_by_facet_;
-    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > archetype_locations_by_intra_backend_segment_;
+    std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> > archetype_locations_by_intra_backend_segment_;
 };
 
 }
@@ -130,8 +130,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::archetype_location_repository& lhs,
-    dogen::annotations::archetype_location_repository& rhs) {
+    masd::dogen::annotations::archetype_location_repository& lhs,
+    masd::dogen::annotations::archetype_location_repository& rhs) {
     lhs.swap(rhs);
 }
 

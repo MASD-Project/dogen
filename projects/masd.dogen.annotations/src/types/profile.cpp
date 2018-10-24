@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/profile.hpp"
+#include "masd.dogen.annotations/types/profile.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 profile::profile(
     const std::string& name,
     const std::list<std::string>& parents,
     const std::unordered_set<std::string>& labels,
-    const std::list<dogen::annotations::entry_template>& templates)
+    const std::list<masd::dogen::annotations::entry_template>& templates)
     : name_(name),
       parents_(parents),
       labels_(labels),
@@ -101,19 +101,19 @@ void profile::labels(const std::unordered_set<std::string>&& v) {
     labels_ = std::move(v);
 }
 
-const std::list<dogen::annotations::entry_template>& profile::templates() const {
+const std::list<masd::dogen::annotations::entry_template>& profile::templates() const {
     return templates_;
 }
 
-std::list<dogen::annotations::entry_template>& profile::templates() {
+std::list<masd::dogen::annotations::entry_template>& profile::templates() {
     return templates_;
 }
 
-void profile::templates(const std::list<dogen::annotations::entry_template>& v) {
+void profile::templates(const std::list<masd::dogen::annotations::entry_template>& v) {
     templates_ = v;
 }
 
-void profile::templates(const std::list<dogen::annotations::entry_template>&& v) {
+void profile::templates(const std::list<masd::dogen::annotations::entry_template>&& v) {
     templates_ = std::move(v);
 }
 

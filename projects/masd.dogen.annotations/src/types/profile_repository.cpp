@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/profile_repository.hpp"
+#include "masd.dogen.annotations/types/profile_repository.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
-profile_repository::profile_repository(const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name)
+profile_repository::profile_repository(const std::unordered_map<std::string, masd::dogen::annotations::profile>& profiles_by_name)
     : profiles_by_name_(profiles_by_name) { }
 
 void profile_repository::swap(profile_repository& other) noexcept {
@@ -40,19 +40,19 @@ profile_repository& profile_repository::operator=(profile_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::annotations::profile>& profile_repository::profiles_by_name() const {
+const std::unordered_map<std::string, masd::dogen::annotations::profile>& profile_repository::profiles_by_name() const {
     return profiles_by_name_;
 }
 
-std::unordered_map<std::string, dogen::annotations::profile>& profile_repository::profiles_by_name() {
+std::unordered_map<std::string, masd::dogen::annotations::profile>& profile_repository::profiles_by_name() {
     return profiles_by_name_;
 }
 
-void profile_repository::profiles_by_name(const std::unordered_map<std::string, dogen::annotations::profile>& v) {
+void profile_repository::profiles_by_name(const std::unordered_map<std::string, masd::dogen::annotations::profile>& v) {
     profiles_by_name_ = v;
 }
 
-void profile_repository::profiles_by_name(const std::unordered_map<std::string, dogen::annotations::profile>&& v) {
+void profile_repository::profiles_by_name(const std::unordered_map<std::string, masd::dogen::annotations::profile>&& v) {
     profiles_by_name_ = std::move(v);
 }
 

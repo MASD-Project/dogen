@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_TYPE_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_TYPE_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_TYPE_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_TYPE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct type_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::type> {
+struct hash<masd::dogen::annotations::type> {
 public:
-    size_t operator()(const dogen::annotations::type& v) const {
-        return dogen::annotations::type_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::type& v) const {
+        return masd::dogen::annotations::type_hasher::hash(v);
     }
 };
 

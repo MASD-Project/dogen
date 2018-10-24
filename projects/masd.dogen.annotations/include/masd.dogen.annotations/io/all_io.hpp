@@ -18,34 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_ALL_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_IO_ALL_IO_HPP
+#define MASD_DOGEN_ANNOTATIONS_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.annotations/io/name_io.hpp"
-#include "dogen.annotations/io/text_io.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/io/number_io.hpp"
-#include "dogen.annotations/io/boolean_io.hpp"
-#include "dogen.annotations/io/profile_io.hpp"
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.annotations/io/scope_types_io.hpp"
-#include "dogen.annotations/io/value_types_io.hpp"
-#include "dogen.annotations/io/type_template_io.hpp"
-#include "dogen.annotations/io/entry_template_io.hpp"
-#include "dogen.annotations/io/key_value_pair_io.hpp"
-#include "dogen.annotations/io/template_kinds_io.hpp"
-#include "dogen.annotations/io/text_collection_io.hpp"
-#include "dogen.annotations/io/type_repository_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
-#include "dogen.annotations/io/profile_repository_io.hpp"
-#include "dogen.annotations/io/profiler_configuration_io.hpp"
-#include "dogen.annotations/io/archetype_locations_group_io.hpp"
-#include "dogen.annotations/io/archetype_location_repository_io.hpp"
-#include "dogen.annotations/io/archetype_location_repository_parts_io.hpp"
+#include "masd.dogen.annotations/io/name_io.hpp"
+#include "masd.dogen.annotations/io/text_io.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/io/number_io.hpp"
+#include "masd.dogen.annotations/io/boolean_io.hpp"
+#include "masd.dogen.annotations/io/profile_io.hpp"
+#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.annotations/io/scope_types_io.hpp"
+#include "masd.dogen.annotations/io/value_types_io.hpp"
+#include "masd.dogen.annotations/io/type_template_io.hpp"
+#include "masd.dogen.annotations/io/entry_template_io.hpp"
+#include "masd.dogen.annotations/io/key_value_pair_io.hpp"
+#include "masd.dogen.annotations/io/template_kinds_io.hpp"
+#include "masd.dogen.annotations/io/text_collection_io.hpp"
+#include "masd.dogen.annotations/io/type_repository_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/profile_repository_io.hpp"
+#include "masd.dogen.annotations/io/profiler_configuration_io.hpp"
+#include "masd.dogen.annotations/io/archetype_locations_group_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_repository_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_repository_parts_io.hpp"
 
 #endif

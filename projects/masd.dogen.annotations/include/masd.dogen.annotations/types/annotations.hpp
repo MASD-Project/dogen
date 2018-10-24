@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
  * formatting process without necessarily knowing about this data, but
  * yet imposing some constraints on the shape of the data.
  */
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 }
 
 #endif

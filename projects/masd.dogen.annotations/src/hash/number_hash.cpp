@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/value_hash.hpp"
-#include "dogen.annotations/hash/number_hash.hpp"
+#include "masd.dogen.annotations/hash/value_hash.hpp"
+#include "masd.dogen.annotations/hash/number_hash.hpp"
 
 namespace {
 
@@ -31,12 +31,12 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t number_hasher::hash(const number& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::annotations::value&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::annotations::value&>(v));
 
     combine(seed, v.content());
     return seed;

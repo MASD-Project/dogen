@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/value_hash.hpp"
-#include "dogen.annotations/hash/text_collection_hash.hpp"
+#include "masd.dogen.annotations/hash/value_hash.hpp"
+#include "masd.dogen.annotations/hash/text_collection_hash.hpp"
 
 namespace {
 
@@ -39,12 +39,12 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t text_collection_hasher::hash(const text_collection& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::annotations::value&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::annotations::value&>(v));
 
     combine(seed, hash_std_list_std_string(v.content()));
     return seed;

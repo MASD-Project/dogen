@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 archetype_location::archetype_location(
     const std::string& kernel,

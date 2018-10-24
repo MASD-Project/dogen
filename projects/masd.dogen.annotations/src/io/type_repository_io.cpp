@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/io/type_repository_io.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/io/type_repository_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::type>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::annotations::type>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -47,7 +47,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::type>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::annotations::type>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -65,7 +65,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::annotations::type> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<masd::dogen::annotations::type> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -81,11 +81,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const type_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::type_repository\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::type_repository\"" << ", "
       << "\"all_types\": " << v.all_types() << ", "
       << "\"types_by_name\": " << v.types_by_name() << ", "
       << "\"types_by_facet_name\": " << v.types_by_facet_name() << ", "

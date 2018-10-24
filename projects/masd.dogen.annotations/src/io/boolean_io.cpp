@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/io/boolean_io.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/io/boolean_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const boolean& v) {
     v.to_stream(s);

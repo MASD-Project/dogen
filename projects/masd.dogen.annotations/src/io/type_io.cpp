@@ -20,16 +20,16 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.annotations/io/name_io.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/io/scope_types_io.hpp"
-#include "dogen.annotations/io/value_types_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/name_io.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/io/scope_types_io.hpp"
+#include "masd.dogen.annotations/io/value_types_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::annotations::value>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::annotations::value>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -43,7 +43,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const type& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& s, const type& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::type\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::type\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"scope\": " << v.scope() << ", "

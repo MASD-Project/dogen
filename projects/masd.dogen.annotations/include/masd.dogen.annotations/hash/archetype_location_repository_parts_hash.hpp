@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_REPOSITORY_PARTS_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_REPOSITORY_PARTS_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_REPOSITORY_PARTS_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_ARCHETYPE_LOCATION_REPOSITORY_PARTS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 struct archetype_location_repository_parts_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::annotations::archetype_location_repository_parts> {
+struct hash<masd::dogen::annotations::archetype_location_repository_parts> {
 public:
-    size_t operator()(const dogen::annotations::archetype_location_repository_parts& v) const {
-        return dogen::annotations::archetype_location_repository_parts_hasher::hash(v);
+    size_t operator()(const masd::dogen::annotations::archetype_location_repository_parts& v) const {
+        return masd::dogen::annotations::archetype_location_repository_parts_hasher::hash(v);
     }
 };
 

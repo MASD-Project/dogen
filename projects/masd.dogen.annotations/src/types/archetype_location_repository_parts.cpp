@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 archetype_location_repository_parts::archetype_location_repository_parts(
-    const std::list<dogen::annotations::archetype_location>& archetype_locations,
-    const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
-    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_family,
-    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment)
+    const std::list<masd::dogen::annotations::archetype_location>& archetype_locations,
+    const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name,
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_family,
+    const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_locations_by_intra_backend_segment)
     : archetype_locations_(archetype_locations),
       archetype_locations_by_meta_name_(archetype_locations_by_meta_name),
       archetype_locations_by_family_(archetype_locations_by_family),
@@ -53,67 +53,67 @@ archetype_location_repository_parts& archetype_location_repository_parts::operat
     return *this;
 }
 
-const std::list<dogen::annotations::archetype_location>& archetype_location_repository_parts::archetype_locations() const {
+const std::list<masd::dogen::annotations::archetype_location>& archetype_location_repository_parts::archetype_locations() const {
     return archetype_locations_;
 }
 
-std::list<dogen::annotations::archetype_location>& archetype_location_repository_parts::archetype_locations() {
+std::list<masd::dogen::annotations::archetype_location>& archetype_location_repository_parts::archetype_locations() {
     return archetype_locations_;
 }
 
-void archetype_location_repository_parts::archetype_locations(const std::list<dogen::annotations::archetype_location>& v) {
+void archetype_location_repository_parts::archetype_locations(const std::list<masd::dogen::annotations::archetype_location>& v) {
     archetype_locations_ = v;
 }
 
-void archetype_location_repository_parts::archetype_locations(const std::list<dogen::annotations::archetype_location>&& v) {
+void archetype_location_repository_parts::archetype_locations(const std::list<masd::dogen::annotations::archetype_location>&& v) {
     archetype_locations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_location_repository_parts::archetype_locations_by_meta_name() const {
+const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& archetype_location_repository_parts::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_location_repository_parts::archetype_locations_by_meta_name() {
+std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& archetype_location_repository_parts::archetype_locations_by_meta_name() {
     return archetype_locations_by_meta_name_;
 }
 
-void archetype_location_repository_parts::archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v) {
+void archetype_location_repository_parts::archetype_locations_by_meta_name(const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>& v) {
     archetype_locations_by_meta_name_ = v;
 }
 
-void archetype_location_repository_parts::archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>&& v) {
+void archetype_location_repository_parts::archetype_locations_by_meta_name(const std::unordered_map<std::string, masd::dogen::annotations::archetype_locations_group>&& v) {
     archetype_locations_by_meta_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_family() const {
+const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
-std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_family() {
+std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_family() {
     return archetype_locations_by_family_;
 }
 
-void archetype_location_repository_parts::archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+void archetype_location_repository_parts::archetype_locations_by_family(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& v) {
     archetype_locations_by_family_ = v;
 }
 
-void archetype_location_repository_parts::archetype_locations_by_family(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v) {
+void archetype_location_repository_parts::archetype_locations_by_family(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >&& v) {
     archetype_locations_by_family_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_intra_backend_segment() const {
+const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_intra_backend_segment() const {
     return archetype_locations_by_intra_backend_segment_;
 }
 
-std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_intra_backend_segment() {
+std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& archetype_location_repository_parts::archetype_locations_by_intra_backend_segment() {
     return archetype_locations_by_intra_backend_segment_;
 }
 
-void archetype_location_repository_parts::archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+void archetype_location_repository_parts::archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >& v) {
     archetype_locations_by_intra_backend_segment_ = v;
 }
 
-void archetype_location_repository_parts::archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v) {
+void archetype_location_repository_parts::archetype_locations_by_intra_backend_segment(const std::unordered_map<std::string, std::list<masd::dogen::annotations::archetype_location> >&& v) {
     archetype_locations_by_intra_backend_segment_ = std::move(v);
 }
 

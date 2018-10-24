@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/archetype_location_hash.hpp"
+#include "masd.dogen.annotations/hash/archetype_location_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t archetype_location_hasher::hash(const archetype_location& v) {
     std::size_t seed(0);

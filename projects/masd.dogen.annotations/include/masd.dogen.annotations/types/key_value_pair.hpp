@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_KEY_VALUE_PAIR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_KEY_VALUE_PAIR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_KEY_VALUE_PAIR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_KEY_VALUE_PAIR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
-class key_value_pair final : public dogen::annotations::value {
+class key_value_pair final : public masd::dogen::annotations::value {
 public:
     key_value_pair() = default;
     key_value_pair(const key_value_pair&) = default;
@@ -67,7 +67,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::annotations::value& other) const override;
+    bool equals(const masd::dogen::annotations::value& other) const override;
 
 public:
     void swap(key_value_pair& other) noexcept;
@@ -83,8 +83,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::key_value_pair& lhs,
-    dogen::annotations::key_value_pair& rhs) {
+    masd::dogen::annotations::key_value_pair& lhs,
+    masd::dogen::annotations::key_value_pair& rhs) {
     lhs.swap(rhs);
 }
 

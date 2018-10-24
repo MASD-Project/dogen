@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.annotations/types/profile.hpp"
+#include "masd.dogen.annotations/types/profile.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class profile_repository final {
 public:
@@ -40,13 +40,13 @@ public:
     ~profile_repository() = default;
 
 public:
-    explicit profile_repository(const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name);
+    explicit profile_repository(const std::unordered_map<std::string, masd::dogen::annotations::profile>& profiles_by_name);
 
 public:
-    const std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name() const;
-    std::unordered_map<std::string, dogen::annotations::profile>& profiles_by_name();
-    void profiles_by_name(const std::unordered_map<std::string, dogen::annotations::profile>& v);
-    void profiles_by_name(const std::unordered_map<std::string, dogen::annotations::profile>&& v);
+    const std::unordered_map<std::string, masd::dogen::annotations::profile>& profiles_by_name() const;
+    std::unordered_map<std::string, masd::dogen::annotations::profile>& profiles_by_name();
+    void profiles_by_name(const std::unordered_map<std::string, masd::dogen::annotations::profile>& v);
+    void profiles_by_name(const std::unordered_map<std::string, masd::dogen::annotations::profile>&& v);
 
 public:
     bool operator==(const profile_repository& rhs) const;
@@ -59,7 +59,7 @@ public:
     profile_repository& operator=(profile_repository other);
 
 private:
-    std::unordered_map<std::string, dogen::annotations::profile> profiles_by_name_;
+    std::unordered_map<std::string, masd::dogen::annotations::profile> profiles_by_name_;
 };
 
 }
@@ -68,8 +68,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::profile_repository& lhs,
-    dogen::annotations::profile_repository& rhs) {
+    masd::dogen::annotations::profile_repository& lhs,
+    masd::dogen::annotations::profile_repository& rhs) {
     lhs.swap(rhs);
 }
 

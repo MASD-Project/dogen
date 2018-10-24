@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATIONS_GROUP_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATIONS_GROUP_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATIONS_GROUP_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATIONS_GROUP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class archetype_locations_group final {
 public:
@@ -42,7 +42,7 @@ public:
 
 public:
     archetype_locations_group(
-        const std::list<dogen::annotations::archetype_location>& archetype_locations,
+        const std::list<masd::dogen::annotations::archetype_location>& archetype_locations,
         const std::unordered_map<std::string, std::string>& canonical_archetype_locations);
 
 public:
@@ -50,10 +50,10 @@ public:
      * @brief All archetype locations that belong to this group.
      */
     /**@{*/
-    const std::list<dogen::annotations::archetype_location>& archetype_locations() const;
-    std::list<dogen::annotations::archetype_location>& archetype_locations();
-    void archetype_locations(const std::list<dogen::annotations::archetype_location>& v);
-    void archetype_locations(const std::list<dogen::annotations::archetype_location>&& v);
+    const std::list<masd::dogen::annotations::archetype_location>& archetype_locations() const;
+    std::list<masd::dogen::annotations::archetype_location>& archetype_locations();
+    void archetype_locations(const std::list<masd::dogen::annotations::archetype_location>& v);
+    void archetype_locations(const std::list<masd::dogen::annotations::archetype_location>&& v);
     /**@}*/
 
     /**
@@ -78,7 +78,7 @@ public:
     archetype_locations_group& operator=(archetype_locations_group other);
 
 private:
-    std::list<dogen::annotations::archetype_location> archetype_locations_;
+    std::list<masd::dogen::annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string, std::string> canonical_archetype_locations_;
 };
 
@@ -88,8 +88,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::archetype_locations_group& lhs,
-    dogen::annotations::archetype_locations_group& rhs) {
+    masd::dogen::annotations::archetype_locations_group& lhs,
+    masd::dogen::annotations::archetype_locations_group& rhs) {
     lhs.swap(rhs);
 }
 

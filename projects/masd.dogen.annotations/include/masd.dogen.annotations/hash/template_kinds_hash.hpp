@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_HASH_TEMPLATE_KINDS_HASH_HPP
-#define DOGEN_ANNOTATIONS_HASH_TEMPLATE_KINDS_HASH_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_HASH_TEMPLATE_KINDS_HASH_HPP
+#define MASD_DOGEN_ANNOTATIONS_HASH_TEMPLATE_KINDS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.annotations/types/template_kinds.hpp"
+#include "masd.dogen.annotations/types/template_kinds.hpp"
 
 namespace std {
 
 template<>
-struct hash<dogen::annotations::template_kinds> {
+struct hash<masd::dogen::annotations::template_kinds> {
 public:
-    size_t operator()(const dogen::annotations::template_kinds& v) const {
+    size_t operator()(const masd::dogen::annotations::template_kinds& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

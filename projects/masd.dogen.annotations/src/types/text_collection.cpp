@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/types/value_visitor.hpp"
-#include "dogen.annotations/types/text_collection.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/types/value_visitor.hpp"
+#include "masd.dogen.annotations/types/text_collection.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,10 +46,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 text_collection::text_collection(const std::list<std::string>& content)
-    : dogen::annotations::value(),
+    : masd::dogen::annotations::value(),
       content_(content) { }
 
 void text_collection::accept(const value_visitor& v) const {
@@ -70,29 +70,29 @@ void text_collection::accept(value_visitor& v) {
 
 void text_collection::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::text_collection\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::annotations::text_collection\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::annotations::value::to_stream(s);
+    masd::dogen::annotations::value::to_stream(s);
     s << ", "
       << "\"content\": " << content_
       << " }";
 }
 
 void text_collection::swap(text_collection& other) noexcept {
-    dogen::annotations::value::swap(other);
+    masd::dogen::annotations::value::swap(other);
 
     using std::swap;
     swap(content_, other.content_);
 }
 
-bool text_collection::equals(const dogen::annotations::value& other) const {
+bool text_collection::equals(const masd::dogen::annotations::value& other) const {
     const text_collection* const p(dynamic_cast<const text_collection* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool text_collection::operator==(const text_collection& rhs) const {
-    return dogen::annotations::value::compare(rhs) &&
+    return masd::dogen::annotations::value::compare(rhs) &&
         content_ == rhs.content_;
 }
 

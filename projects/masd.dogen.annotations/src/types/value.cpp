@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 void value::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::value\"" << " }";
+      << "\"__type__\": " << "\"masd::dogen::annotations::value\"" << " }";
 }
 
 void value::swap(value&) noexcept {

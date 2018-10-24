@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TEXT_COLLECTION_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TEXT_COLLECTION_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_TEXT_COLLECTION_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_TEXT_COLLECTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,14 +29,14 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Field can hold a collection of text values.
  */
-class text_collection final : public dogen::annotations::value {
+class text_collection final : public masd::dogen::annotations::value {
 public:
     text_collection() = default;
     text_collection(const text_collection&) = default;
@@ -75,7 +75,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::annotations::value& other) const override;
+    bool equals(const masd::dogen::annotations::value& other) const override;
 
 public:
     void swap(text_collection& other) noexcept;
@@ -91,8 +91,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::text_collection& lhs,
-    dogen::annotations::text_collection& rhs) {
+    masd::dogen::annotations::text_collection& lhs,
+    masd::dogen::annotations::text_collection& rhs) {
     lhs.swap(rhs);
 }
 

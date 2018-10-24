@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_NAME_HPP
-#define DOGEN_ANNOTATIONS_TYPES_NAME_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_NAME_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Name of the field description or field.
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::annotations::name& lhs,
-    dogen::annotations::name& rhs) {
+    masd::dogen::annotations::name& lhs,
+    masd::dogen::annotations::name& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_IO_SCOPE_TYPES_IO_HPP
-#define DOGEN_ANNOTATIONS_IO_SCOPE_TYPES_IO_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_IO_SCOPE_TYPES_IO_HPP
+#define MASD_DOGEN_ANNOTATIONS_IO_SCOPE_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.annotations/types/scope_types.hpp"
+#include "masd.dogen.annotations/types/scope_types.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const scope_types& v);
 

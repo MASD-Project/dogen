@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/value_hash.hpp"
+#include "masd.dogen.annotations/hash/value_hash.hpp"
 
 namespace {
 
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t value_hasher::hash(const value&) {
     std::size_t seed(0);

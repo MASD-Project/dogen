@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/profile_hash.hpp"
-#include "dogen.annotations/hash/annotation_hash.hpp"
-#include "dogen.annotations/hash/profiler_configuration_hash.hpp"
+#include "masd.dogen.annotations/hash/profile_hash.hpp"
+#include "masd.dogen.annotations/hash/annotation_hash.hpp"
+#include "masd.dogen.annotations/hash/profiler_configuration_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::size_t profiler_configuration_hasher::hash(const profiler_configuration& v) {
     std::size_t seed(0);

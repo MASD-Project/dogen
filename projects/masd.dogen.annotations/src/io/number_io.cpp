@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
-#include "dogen.annotations/io/value_io.hpp"
-#include "dogen.annotations/io/number_io.hpp"
+#include "masd.dogen.annotations/io/value_io.hpp"
+#include "masd.dogen.annotations/io/number_io.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::ostream& operator<<(std::ostream& s, const number& v) {
     v.to_stream(s);
