@@ -1,13 +1,8 @@
 {
-  "documentation": "Provides file importing support for JSON.\n",
+  "documentation": "Provides the top-level API for the dogen product.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "masd.dogen.external.json",
-    "yarn.reference": "masd.dogen.annotations.json",
-    "yarn.reference": "masd.dogen.formatting.json",
-    "yarn.reference": "masd.dogen.options.json",
-    "yarn.reference": "masd.dogen.probing.json",
-    "yarn.reference": "masd.dogen.external.json",
+    "yarn.model_modules": "dogen.cli",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.standard": "c++-17",
@@ -15,48 +10,64 @@
     "quilt.cpp.visual_studio.project.enabled": "false",
     "quilt.cpp.visual_studio.solution.enabled": "false",
     "quilt.csharp.enabled": "false",
-    "annotations.profile": "dogen.disable_common_facets"
+    "annotations.profile": "dogen.disable_odb_cmake"
   },
   "elements": [
     {
-      "name": "hydration_error",
+      "name": "parser_validation_error",
+      "documentation": "A fatal error has occurred during option parsing.\n",
       "stereotypes": [
         "dogen::exception"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "initializer",
+      "name": "orchestrator",
       "stereotypes": [
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "hydrator",
+      "name": "command_line_parser",
       "stereotypes": [
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "decoding_transform",
+      "name": "program_options_parser",
+      "parents": [
+        "command_line_parser"
+      ],
       "stereotypes": [
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "encoding_transform",
+      "name": "injector_factory",
       "stereotypes": [
         "handcrafted"
       ],
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "dehydrator",
+      "name": "main",
       "stereotypes": [
         "handcrafted"
+      ],
+      "tagged_values": {
+        "quilt.cpp.types.class_header.enabled": "false",
+        "quilt.cpp.types.forward_declarations.enabled": "false"
+      },
+      "fallback_element_type": "dogen::object"
+    },
+    {
+      "name": "orchestration_error",
+      "documentation": "A fatal error has occurred during orchestration.\n",
+      "stereotypes": [
+        "dogen::exception"
       ],
       "fallback_element_type": "dogen::object"
     }

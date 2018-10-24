@@ -61,7 +61,7 @@
         "false"
       ]
     },
-      {
+    {
       "name": {
         "simple": "enabled",
         "qualified": "quilt.cpp.serialization.enabled"
@@ -75,6 +75,5 @@
         "false"
       ]
     }
-
   ]
 }
