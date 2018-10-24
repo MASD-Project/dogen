@@ -64,7 +64,7 @@
       },
       "template_kind": "instance",
       "untyped_value": [
-        "dogen::generation::cpp::formatters"
+        "masd::dogen::generation::cpp::formatters"
       ]
     }
   ]
