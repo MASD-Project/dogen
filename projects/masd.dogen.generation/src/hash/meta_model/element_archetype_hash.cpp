@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::size_t element_archetype_hasher::hash(const element_archetype& v) {
     std::size_t seed(0);

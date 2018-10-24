@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_HASH_META_MODEL_TEXT_MODEL_HASH_HPP
-#define DOGEN_GENERATION_HASH_META_MODEL_TEXT_MODEL_HASH_HPP
+#ifndef MASD_DOGEN_GENERATION_HASH_META_MODEL_TEXT_MODEL_HASH_HPP
+#define MASD_DOGEN_GENERATION_HASH_META_MODEL_TEXT_MODEL_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.generation/types/meta_model/text_model.hpp"
+#include "masd.dogen.generation/types/meta_model/text_model.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 struct text_model_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::generation::meta_model::text_model> {
+struct hash<masd::dogen::generation::meta_model::text_model> {
 public:
-    size_t operator()(const dogen::generation::meta_model::text_model& v) const {
-        return dogen::generation::meta_model::text_model_hasher::hash(v);
+    size_t operator()(const masd::dogen::generation::meta_model::text_model& v) const {
+        return masd::dogen::generation::meta_model::text_model_hasher::hash(v);
     }
 };
 

@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
-#include "dogen.generation/io/meta_model/path_contribution_types_io.hpp"
-#include "dogen.generation/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/path_contribution_types_io.hpp"
+#include "masd.dogen.generation/io/meta_model/intra_backend_segment_properties_io.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const intra_backend_segment_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::meta_model::intra_backend_segment_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::meta_model::intra_backend_segment_properties\"" << ", "
       << "\"override_parent_path\": " << "\"" << v.override_parent_path().generic_string() << "\"" << ", "
       << "\"path_segment\": " << "\"" << v.path_segment().generic_string() << "\"" << ", "
       << "\"external_modules\": " << v.external_modules() << ", "

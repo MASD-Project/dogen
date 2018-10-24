@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_HASH_TRANSFORMS_CONFIGURATION_HASH_HPP
-#define DOGEN_GENERATION_HASH_TRANSFORMS_CONFIGURATION_HASH_HPP
+#ifndef MASD_DOGEN_GENERATION_HASH_TRANSFORMS_CONFIGURATION_HASH_HPP
+#define MASD_DOGEN_GENERATION_HASH_TRANSFORMS_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.generation/types/transforms/configuration.hpp"
+#include "masd.dogen.generation/types/transforms/configuration.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 struct configuration_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::generation::transforms::configuration> {
+struct hash<masd::dogen::generation::transforms::configuration> {
 public:
-    size_t operator()(const dogen::generation::transforms::configuration& v) const {
-        return dogen::generation::transforms::configuration_hasher::hash(v);
+    size_t operator()(const masd::dogen::generation::transforms::configuration& v) const {
+        return masd::dogen::generation::transforms::configuration_hasher::hash(v);
     }
 };
 

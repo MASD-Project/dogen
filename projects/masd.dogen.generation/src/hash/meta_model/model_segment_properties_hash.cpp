@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/hash/meta_model/path_contribution_types_hash.hpp"
-#include "dogen.generation/hash/meta_model/model_segment_properties_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/path_contribution_types_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/model_segment_properties_hash.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::size_t model_segment_properties_hasher::hash(const model_segment_properties& v) {
     std::size_t seed(0);

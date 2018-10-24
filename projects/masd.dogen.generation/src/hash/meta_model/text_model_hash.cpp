@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/hash/meta_model/artefact_hash.hpp"
-#include "dogen.generation/hash/meta_model/text_model_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/artefact_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/text_model_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_generation_meta_model_artefact(const std::list<dogen::generation::meta_model::artefact>& v) {
+inline std::size_t hash_std_list_masd_dogen_generation_meta_model_artefact(const std::list<masd::dogen::generation::meta_model::artefact>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -53,12 +53,12 @@ inline std::size_t hash_std_list_boost_filesystem_path(const std::list<boost::fi
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::size_t text_model_hasher::hash(const text_model& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_generation_meta_model_artefact(v.artefacts()));
+    combine(seed, hash_std_list_masd_dogen_generation_meta_model_artefact(v.artefacts()));
     combine(seed, hash_std_list_boost_filesystem_path(v.managed_directories()));
 
     return seed;

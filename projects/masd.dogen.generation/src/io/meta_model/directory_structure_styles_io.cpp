@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
+#include "masd.dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const directory_structure_styles& v) {
     s << "{ " << "\"__type__\": " << "\"directory_structure_styles\", " << "\"value\": ";

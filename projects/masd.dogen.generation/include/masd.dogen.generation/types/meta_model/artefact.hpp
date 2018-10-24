@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 /**
  * @brief Artefact in a text model.
@@ -118,8 +118,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::meta_model::artefact& lhs,
-    dogen::generation::meta_model::artefact& rhs) {
+    masd::dogen::generation::meta_model::artefact& lhs,
+    masd::dogen::generation::meta_model::artefact& rhs) {
     lhs.swap(rhs);
 }
 

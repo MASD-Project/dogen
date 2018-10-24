@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_FWD_HPP
-#define DOGEN_GENERATION_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_FWD_HPP
+#define MASD_DOGEN_GENERATION_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::helpers {
+namespace masd::dogen::generation::helpers {
 
 class artefact_writer_interface;
 

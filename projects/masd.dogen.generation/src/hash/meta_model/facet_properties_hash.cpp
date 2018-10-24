@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/hash/meta_model/facet_properties_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/facet_properties_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::size_t facet_properties_hasher::hash(const facet_properties& v) {
     std::size_t seed(0);

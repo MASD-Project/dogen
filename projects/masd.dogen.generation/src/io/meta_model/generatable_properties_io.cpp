@@ -20,13 +20,13 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.generation/io/meta_model/artefact_properties_io.hpp"
-#include "dogen.generation/io/meta_model/generatable_properties_io.hpp"
-#include "dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const generatable_properties& v) {
     v.to_stream(s);

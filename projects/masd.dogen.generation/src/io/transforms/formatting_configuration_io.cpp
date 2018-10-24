@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation/io/meta_model/formatting_styles_io.hpp"
-#include "dogen.generation/io/transforms/formatting_configuration_io.hpp"
+#include "masd.dogen.generation/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.generation/io/transforms/formatting_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,11 +31,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 std::ostream& operator<<(std::ostream& s, const formatting_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::transforms::formatting_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::transforms::formatting_configuration\"" << ", "
       << "\"style\": " << v.style() << ", "
       << "\"input\": " << "\"" << tidy_up_string(v.input()) << "\""
       << " }";

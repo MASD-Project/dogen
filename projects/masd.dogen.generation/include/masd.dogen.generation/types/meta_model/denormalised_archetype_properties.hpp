@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 class denormalised_archetype_properties final {
 public:
@@ -120,8 +120,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::meta_model::denormalised_archetype_properties& lhs,
-    dogen::generation::meta_model::denormalised_archetype_properties& rhs) {
+    masd::dogen::generation::meta_model::denormalised_archetype_properties& lhs,
+    masd::dogen::generation::meta_model::denormalised_archetype_properties& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_PROPERTIES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_ARTEFACT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.generation/types/meta_model/formatting_styles.hpp"
+#include "masd.dogen.generation/types/meta_model/formatting_styles.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 class artefact_properties final {
 public:
@@ -50,7 +50,7 @@ public:
         const bool overwrite,
         const boost::filesystem::path& file_path,
         const std::list<std::string>& dependencies,
-        const dogen::generation::meta_model::formatting_styles formatting_style,
+        const masd::dogen::generation::meta_model::formatting_styles formatting_style,
         const std::string& formatting_input);
 
 public:
@@ -70,8 +70,8 @@ public:
     void dependencies(const std::list<std::string>& v);
     void dependencies(const std::list<std::string>&& v);
 
-    dogen::generation::meta_model::formatting_styles formatting_style() const;
-    void formatting_style(const dogen::generation::meta_model::formatting_styles v);
+    masd::dogen::generation::meta_model::formatting_styles formatting_style() const;
+    void formatting_style(const masd::dogen::generation::meta_model::formatting_styles v);
 
     const std::string& formatting_input() const;
     std::string& formatting_input();
@@ -93,7 +93,7 @@ private:
     bool overwrite_;
     boost::filesystem::path file_path_;
     std::list<std::string> dependencies_;
-    dogen::generation::meta_model::formatting_styles formatting_style_;
+    masd::dogen::generation::meta_model::formatting_styles formatting_style_;
     std::string formatting_input_;
 };
 
@@ -103,8 +103,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::meta_model::artefact_properties& lhs,
-    dogen::generation::meta_model::artefact_properties& rhs) {
+    masd::dogen::generation::meta_model::artefact_properties& lhs,
+    masd::dogen::generation::meta_model::artefact_properties& rhs) {
     lhs.swap(rhs);
 }
 

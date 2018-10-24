@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/hash/decoration_properties_hash.hpp"
-#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
-#include "dogen.generation/hash/meta_model/artefact_properties_hash.hpp"
-#include "dogen.generation/hash/meta_model/generatable_properties_hash.hpp"
-#include "dogen.generation/hash/meta_model/local_archetype_location_properties_hash.hpp"
+#include "masd.dogen.formatting/hash/decoration_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/artefact_properties_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/generatable_properties_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_generation_meta_model_artefact_properties(const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_generation_meta_model_artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -41,7 +41,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_generation_meta_model
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_generation_meta_model_local_archetype_location_properties(const std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_generation_meta_model_local_archetype_location_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -52,16 +52,16 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_generation_meta_model
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::size_t generatable_properties_hasher::hash(const generatable_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::modeling::meta_model::opaque_properties&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::opaque_properties&>(v));
 
     combine(seed, v.decoration_properties());
-    combine(seed, hash_std_unordered_map_std_string_dogen_generation_meta_model_artefact_properties(v.artefact_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_generation_meta_model_local_archetype_location_properties(v.archetype_location_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_generation_meta_model_artefact_properties(v.artefact_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_generation_meta_model_local_archetype_location_properties(v.archetype_location_properties()));
 
     return seed;
 }

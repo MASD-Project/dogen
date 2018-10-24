@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/configuration.hpp"
+#include "masd.dogen.generation/types/transforms/configuration.hpp"
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 configuration::configuration()
     : enable_backend_directories_(static_cast<bool>(0)) { }

@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation/io/meta_model/path_contribution_types_io.hpp"
-#include "dogen.generation/io/meta_model/model_segment_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/path_contribution_types_io.hpp"
+#include "masd.dogen.generation/io/meta_model/model_segment_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,11 +31,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const model_segment_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::meta_model::model_segment_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::meta_model::model_segment_properties\"" << ", "
       << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
       << "\"external_modules\": " << v.external_modules() << ", "
       << "\"model_modules\": " << v.model_modules()

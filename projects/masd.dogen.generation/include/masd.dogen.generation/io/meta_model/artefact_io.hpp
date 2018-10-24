@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_IO_META_MODEL_ARTEFACT_IO_HPP
-#define DOGEN_GENERATION_IO_META_MODEL_ARTEFACT_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_IO_META_MODEL_ARTEFACT_IO_HPP
+#define MASD_DOGEN_GENERATION_IO_META_MODEL_ARTEFACT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation/types/meta_model/artefact.hpp"
+#include "masd.dogen.generation/types/meta_model/artefact.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::meta_model::artefact& v);
+     const masd::dogen::generation::meta_model::artefact& v);
 
 }
 

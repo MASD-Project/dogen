@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_GENERATABLE_PROPERTIES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_GENERATABLE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_GENERATABLE_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_GENERATABLE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,17 +29,17 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.formatting/types/decoration_properties.hpp"
-#include "dogen.modeling/types/meta_model/opaque_properties.hpp"
-#include "dogen.generation/types/meta_model/artefact_properties.hpp"
-#include "dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/opaque_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 /**
  * @brief Element properties related to code generation.
  */
-class generatable_properties final : public dogen::modeling::meta_model::opaque_properties {
+class generatable_properties final : public masd::dogen::modeling::meta_model::opaque_properties {
 public:
     generatable_properties() = default;
     generatable_properties(const generatable_properties&) = default;
@@ -49,28 +49,28 @@ public:
 
 public:
     generatable_properties(
-        const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties);
+        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties);
 
 public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const dogen::formatting::decoration_properties& decoration_properties() const;
-    dogen::formatting::decoration_properties& decoration_properties();
-    void decoration_properties(const dogen::formatting::decoration_properties& v);
-    void decoration_properties(const dogen::formatting::decoration_properties&& v);
+    const masd::dogen::formatting::decoration_properties& decoration_properties() const;
+    masd::dogen::formatting::decoration_properties& decoration_properties();
+    void decoration_properties(const masd::dogen::formatting::decoration_properties& v);
+    void decoration_properties(const masd::dogen::formatting::decoration_properties&& v);
 
-    const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& artefact_properties() const;
-    std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties() const;
-    std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties();
-    void archetype_location_properties(const std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>& v);
-    void archetype_location_properties(const std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties();
+    void archetype_location_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& v);
+    void archetype_location_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>&& v);
 
 public:
     bool operator==(const generatable_properties& rhs) const;
@@ -79,16 +79,16 @@ public:
     }
 
 public:
-    bool equals(const dogen::modeling::meta_model::opaque_properties& other) const override;
+    bool equals(const masd::dogen::modeling::meta_model::opaque_properties& other) const override;
 
 public:
     void swap(generatable_properties& other) noexcept;
     generatable_properties& operator=(generatable_properties other);
 
 private:
-    dogen::formatting::decoration_properties decoration_properties_;
-    std::unordered_map<std::string, dogen::generation::meta_model::artefact_properties> artefact_properties_;
-    std::unordered_map<std::string, dogen::generation::meta_model::local_archetype_location_properties> archetype_location_properties_;
+    masd::dogen::formatting::decoration_properties decoration_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties> artefact_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties> archetype_location_properties_;
 };
 
 }
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::meta_model::generatable_properties& lhs,
-    dogen::generation::meta_model::generatable_properties& rhs) {
+    masd::dogen::generation::meta_model::generatable_properties& lhs,
+    masd::dogen::generation::meta_model::generatable_properties& rhs) {
     lhs.swap(rhs);
 }
 

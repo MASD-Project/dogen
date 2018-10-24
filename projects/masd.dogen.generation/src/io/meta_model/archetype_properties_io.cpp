@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation/io/meta_model/archetype_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/archetype_properties_io.hpp"
 
 namespace boost {
 
@@ -46,7 +46,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -56,7 +56,7 @@ std::ostream& operator<<(std::ostream& s, const archetype_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::meta_model::archetype_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::meta_model::archetype_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""

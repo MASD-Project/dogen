@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_CONFIGURATION_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CONFIGURATION_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_set>
 
-namespace dogen::generation::transforms {
+namespace masd::dogen::generation::transforms {
 
 class configuration final {
 public:
@@ -75,8 +75,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::transforms::configuration& lhs,
-    dogen::generation::transforms::configuration& rhs) {
+    masd::dogen::generation::transforms::configuration& lhs,
+    masd::dogen::generation::transforms::configuration& rhs) {
     lhs.swap(rhs);
 }
 

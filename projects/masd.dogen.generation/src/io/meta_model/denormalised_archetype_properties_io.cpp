@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation/io/meta_model/denormalised_archetype_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/denormalised_archetype_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const denormalised_archetype_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -56,7 +56,7 @@ std::ostream& operator<<(std::ostream& s, const denormalised_archetype_propertie
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::meta_model::denormalised_archetype_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::meta_model::denormalised_archetype_properties\"" << ", "
       << "\"backend_enabled\": " << v.backend_enabled() << ", "
       << "\"backend_directory\": " << "\"" << tidy_up_string(v.backend_directory()) << "\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "

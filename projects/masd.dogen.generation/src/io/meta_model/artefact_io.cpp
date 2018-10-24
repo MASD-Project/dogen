@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.generation/io/meta_model/artefact_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesy
 
 }
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const artefact& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::meta_model::artefact\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::meta_model::artefact\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"overwrite\": " << v.overwrite() << ", "

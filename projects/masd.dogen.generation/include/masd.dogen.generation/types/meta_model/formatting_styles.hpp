@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_FORMATTING_STYLES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_FORMATTING_STYLES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_FORMATTING_STYLES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_FORMATTING_STYLES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 enum class formatting_styles : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

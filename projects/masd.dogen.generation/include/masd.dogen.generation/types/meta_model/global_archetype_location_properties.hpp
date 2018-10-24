@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,12 +28,12 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation/types/meta_model/facet_properties.hpp"
-#include "dogen.generation/types/meta_model/backend_properties.hpp"
-#include "dogen.generation/types/meta_model/archetype_properties.hpp"
-#include "dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/facet_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/backend_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/archetype_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 class global_archetype_location_properties final {
 public:
@@ -44,31 +44,31 @@ public:
 
 public:
     global_archetype_location_properties(
-        const std::unordered_map<std::string, dogen::generation::meta_model::backend_properties>& backend_properties,
-        const std::unordered_map<std::string, dogen::generation::meta_model::facet_properties>& facet_properties,
-        const std::unordered_map<std::string, dogen::generation::meta_model::archetype_properties>& archetype_properties,
-        const std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties);
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::backend_properties>& backend_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::facet_properties>& facet_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::archetype_properties>& archetype_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties);
 
 public:
-    const std::unordered_map<std::string, dogen::generation::meta_model::backend_properties>& backend_properties() const;
-    std::unordered_map<std::string, dogen::generation::meta_model::backend_properties>& backend_properties();
-    void backend_properties(const std::unordered_map<std::string, dogen::generation::meta_model::backend_properties>& v);
-    void backend_properties(const std::unordered_map<std::string, dogen::generation::meta_model::backend_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::meta_model::backend_properties>& backend_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::backend_properties>& backend_properties();
+    void backend_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::backend_properties>& v);
+    void backend_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::backend_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::meta_model::facet_properties>& facet_properties() const;
-    std::unordered_map<std::string, dogen::generation::meta_model::facet_properties>& facet_properties();
-    void facet_properties(const std::unordered_map<std::string, dogen::generation::meta_model::facet_properties>& v);
-    void facet_properties(const std::unordered_map<std::string, dogen::generation::meta_model::facet_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::meta_model::facet_properties>& facet_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::facet_properties>& facet_properties();
+    void facet_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::facet_properties>& v);
+    void facet_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::facet_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::meta_model::archetype_properties>& archetype_properties() const;
-    std::unordered_map<std::string, dogen::generation::meta_model::archetype_properties>& archetype_properties();
-    void archetype_properties(const std::unordered_map<std::string, dogen::generation::meta_model::archetype_properties>& v);
-    void archetype_properties(const std::unordered_map<std::string, dogen::generation::meta_model::archetype_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::meta_model::archetype_properties>& archetype_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::archetype_properties>& archetype_properties();
+    void archetype_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::archetype_properties>& v);
+    void archetype_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::archetype_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties() const;
-    std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties();
-    void denormalised_archetype_properties(const std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties>& v);
-    void denormalised_archetype_properties(const std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::denormalised_archetype_properties>& denormalised_archetype_properties();
+    void denormalised_archetype_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::denormalised_archetype_properties>& v);
+    void denormalised_archetype_properties(const std::unordered_map<std::string, masd::dogen::generation::meta_model::denormalised_archetype_properties>&& v);
 
 public:
     bool operator==(const global_archetype_location_properties& rhs) const;
@@ -81,10 +81,10 @@ public:
     global_archetype_location_properties& operator=(global_archetype_location_properties other);
 
 private:
-    std::unordered_map<std::string, dogen::generation::meta_model::backend_properties> backend_properties_;
-    std::unordered_map<std::string, dogen::generation::meta_model::facet_properties> facet_properties_;
-    std::unordered_map<std::string, dogen::generation::meta_model::archetype_properties> archetype_properties_;
-    std::unordered_map<std::string, dogen::generation::meta_model::denormalised_archetype_properties> denormalised_archetype_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::backend_properties> backend_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::facet_properties> facet_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::archetype_properties> archetype_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::meta_model::denormalised_archetype_properties> denormalised_archetype_properties_;
 };
 
 }
@@ -93,8 +93,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::meta_model::global_archetype_location_properties& lhs,
-    dogen::generation::meta_model::global_archetype_location_properties& rhs) {
+    masd::dogen::generation::meta_model::global_archetype_location_properties& lhs,
+    masd::dogen::generation::meta_model::global_archetype_location_properties& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,33 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_IO_ALL_IO_HPP
-#define DOGEN_GENERATION_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_IO_ALL_IO_HPP
+#define MASD_DOGEN_GENERATION_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.generation/io/meta_model/artefact_io.hpp"
-#include "dogen.generation/io/meta_model/text_model_io.hpp"
-#include "dogen.generation/io/transforms/configuration_io.hpp"
-#include "dogen.generation/io/meta_model/facet_properties_io.hpp"
-#include "dogen.generation/io/meta_model/element_archetype_io.hpp"
-#include "dogen.generation/io/meta_model/formatting_styles_io.hpp"
-#include "dogen.generation/io/meta_model/backend_properties_io.hpp"
-#include "dogen.generation/io/meta_model/locator_properties_io.hpp"
-#include "dogen.generation/io/meta_model/artefact_properties_io.hpp"
-#include "dogen.generation/io/meta_model/archetype_properties_io.hpp"
-#include "dogen.generation/io/meta_model/generatable_properties_io.hpp"
-#include "dogen.generation/io/meta_model/path_contribution_types_io.hpp"
-#include "dogen.generation/io/meta_model/model_segment_properties_io.hpp"
-#include "dogen.generation/io/transforms/formatting_configuration_io.hpp"
-#include "dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
-#include "dogen.generation/io/meta_model/archetype_family_properties_io.hpp"
-#include "dogen.generation/io/meta_model/intra_backend_segment_properties_io.hpp"
-#include "dogen.generation/io/meta_model/denormalised_archetype_properties_io.hpp"
-#include "dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
-#include "dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/model_io.hpp"
+#include "masd.dogen.generation/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.generation/io/meta_model/text_model_io.hpp"
+#include "masd.dogen.generation/io/transforms/configuration_io.hpp"
+#include "masd.dogen.generation/io/meta_model/facet_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
+#include "masd.dogen.generation/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.generation/io/meta_model/backend_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/locator_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/archetype_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/path_contribution_types_io.hpp"
+#include "masd.dogen.generation/io/meta_model/model_segment_properties_io.hpp"
+#include "masd.dogen.generation/io/transforms/formatting_configuration_io.hpp"
+#include "masd.dogen.generation/io/meta_model/directory_structure_styles_io.hpp"
+#include "masd.dogen.generation/io/meta_model/archetype_family_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/denormalised_archetype_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
 
 #endif

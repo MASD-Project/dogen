@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_PATH_CONTRIBUTION_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 /**
  * @brief Different kinds of contributions that can be made to the final path computation.

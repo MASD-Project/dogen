@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 local_archetype_location_properties::local_archetype_location_properties(local_archetype_location_properties&& rhs)
     : facet_enabled_(std::move(rhs.facet_enabled_)),

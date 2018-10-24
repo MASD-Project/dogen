@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_HASH_META_MODEL_PATH_CONTRIBUTION_TYPES_HASH_HPP
-#define DOGEN_GENERATION_HASH_META_MODEL_PATH_CONTRIBUTION_TYPES_HASH_HPP
+#ifndef MASD_DOGEN_GENERATION_HASH_META_MODEL_PATH_CONTRIBUTION_TYPES_HASH_HPP
+#define MASD_DOGEN_GENERATION_HASH_META_MODEL_PATH_CONTRIBUTION_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.generation/types/meta_model/path_contribution_types.hpp"
+#include "masd.dogen.generation/types/meta_model/path_contribution_types.hpp"
 
 namespace std {
 
 template<>
-struct hash<dogen::generation::meta_model::path_contribution_types> {
+struct hash<masd::dogen::generation::meta_model::path_contribution_types> {
 public:
-    size_t operator()(const dogen::generation::meta_model::path_contribution_types& v) const {
+    size_t operator()(const masd::dogen::generation::meta_model::path_contribution_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

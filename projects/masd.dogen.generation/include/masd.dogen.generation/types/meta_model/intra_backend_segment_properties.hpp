@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_HPP
-#define DOGEN_GENERATION_TYPES_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_TYPES_META_MODEL_INTRA_BACKEND_SEGMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen.generation/types/meta_model/path_contribution_types.hpp"
+#include "masd.dogen.generation/types/meta_model/path_contribution_types.hpp"
 
-namespace dogen::generation::meta_model {
+namespace masd::dogen::generation::meta_model {
 
 class intra_backend_segment_properties final {
 public:
@@ -46,10 +46,10 @@ public:
     intra_backend_segment_properties(
         const boost::filesystem::path& override_parent_path,
         const boost::filesystem::path& path_segment,
-        const dogen::generation::meta_model::path_contribution_types external_modules,
-        const dogen::generation::meta_model::path_contribution_types model_modules,
-        const dogen::generation::meta_model::path_contribution_types internal_modules,
-        const dogen::generation::meta_model::path_contribution_types facet);
+        const masd::dogen::generation::meta_model::path_contribution_types external_modules,
+        const masd::dogen::generation::meta_model::path_contribution_types model_modules,
+        const masd::dogen::generation::meta_model::path_contribution_types internal_modules,
+        const masd::dogen::generation::meta_model::path_contribution_types facet);
 
 public:
     /**
@@ -79,32 +79,32 @@ public:
      * @brief What kind of contribution do the external modules make to the final path.
      */
     /**@{*/
-    dogen::generation::meta_model::path_contribution_types external_modules() const;
-    void external_modules(const dogen::generation::meta_model::path_contribution_types v);
+    masd::dogen::generation::meta_model::path_contribution_types external_modules() const;
+    void external_modules(const masd::dogen::generation::meta_model::path_contribution_types v);
     /**@}*/
 
     /**
      * @brief What kind of contribution do the model modules make to the final path.
      */
     /**@{*/
-    dogen::generation::meta_model::path_contribution_types model_modules() const;
-    void model_modules(const dogen::generation::meta_model::path_contribution_types v);
+    masd::dogen::generation::meta_model::path_contribution_types model_modules() const;
+    void model_modules(const masd::dogen::generation::meta_model::path_contribution_types v);
     /**@}*/
 
     /**
      * @brief What kind of contribution do the internal modules make to the final path.
      */
     /**@{*/
-    dogen::generation::meta_model::path_contribution_types internal_modules() const;
-    void internal_modules(const dogen::generation::meta_model::path_contribution_types v);
+    masd::dogen::generation::meta_model::path_contribution_types internal_modules() const;
+    void internal_modules(const masd::dogen::generation::meta_model::path_contribution_types v);
     /**@}*/
 
     /**
      * @brief What kind of contribution does the facet make to the final path.
      */
     /**@{*/
-    dogen::generation::meta_model::path_contribution_types facet() const;
-    void facet(const dogen::generation::meta_model::path_contribution_types v);
+    masd::dogen::generation::meta_model::path_contribution_types facet() const;
+    void facet(const masd::dogen::generation::meta_model::path_contribution_types v);
     /**@}*/
 
 public:
@@ -120,10 +120,10 @@ public:
 private:
     boost::filesystem::path override_parent_path_;
     boost::filesystem::path path_segment_;
-    dogen::generation::meta_model::path_contribution_types external_modules_;
-    dogen::generation::meta_model::path_contribution_types model_modules_;
-    dogen::generation::meta_model::path_contribution_types internal_modules_;
-    dogen::generation::meta_model::path_contribution_types facet_;
+    masd::dogen::generation::meta_model::path_contribution_types external_modules_;
+    masd::dogen::generation::meta_model::path_contribution_types model_modules_;
+    masd::dogen::generation::meta_model::path_contribution_types internal_modules_;
+    masd::dogen::generation::meta_model::path_contribution_types facet_;
 };
 
 }
@@ -132,8 +132,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::meta_model::intra_backend_segment_properties& lhs,
-    dogen::generation::meta_model::intra_backend_segment_properties& rhs) {
+    masd::dogen::generation::meta_model::intra_backend_segment_properties& lhs,
+    masd::dogen::generation::meta_model::intra_backend_segment_properties& rhs) {
     lhs.swap(rhs);
 }
 

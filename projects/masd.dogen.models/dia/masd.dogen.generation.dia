@@ -4864,7 +4864,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:point val="5,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.95,21.95;28.665,33.35"/>
+        <dia:rectangle val="4.95,21.95;28.665,34.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4876,7 +4876,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="23.615000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.300000000000001"/>
+        <dia:real val="12.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -4891,7 +4891,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.generation
+#DOGEN yarn.model_modules=masd.dogen.generation
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.modeling.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
