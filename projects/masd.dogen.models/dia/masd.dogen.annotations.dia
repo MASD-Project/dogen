@@ -101,7 +101,7 @@ formatting process without necessarily knowing about this data, but
 yet imposing some constraints on the shape of the data.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.annotations
+#DOGEN yarn.model_modules=masd.dogen.annotations
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -6250,17 +6250,17 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="137.097,-41.9504"/>
+        <dia:point val="137.099,-41.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.702,-42.0018;137.947,-32.0004"/>
+        <dia:rectangle val="117.702,-42.0007;137.949,-32.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="137.097,-41.9504"/>
-        <dia:point val="137.089,-37"/>
+        <dia:point val="137.099,-41.9504"/>
+        <dia:point val="137.097,-37"/>
         <dia:point val="117.752,-37"/>
         <dia:point val="117.752,-32.0504"/>
       </dia:attribute>
@@ -7701,7 +7701,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.3937,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="22.4159,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7709,8 +7709,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="22.4439,-50"/>
-        <dia:point val="22.466,-45.0502"/>
+        <dia:point val="22.466,-50"/>
+        <dia:point val="22.4762,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
