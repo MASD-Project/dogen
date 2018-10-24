@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 class stitching_properties final {
 public:
@@ -107,8 +107,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::stitch::stitching_properties& lhs,
-    dogen::templating::stitch::stitching_properties& rhs) {
+    masd::dogen::templating::stitch::stitching_properties& lhs,
+    masd::dogen::templating::stitch::stitching_properties& rhs) {
     lhs.swap(rhs);
 }
 

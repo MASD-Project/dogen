@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/stitch/text_template.hpp"
+#include "masd.dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 text_template::text_template(text_template&& rhs)
     : input_path_(std::move(rhs.input_path_)),
@@ -32,9 +32,9 @@ text_template::text_template(text_template&& rhs)
 text_template::text_template(
     const boost::filesystem::path& input_path,
     const boost::filesystem::path& output_path,
-    const dogen::templating::stitch::properties& properties,
+    const masd::dogen::templating::stitch::properties& properties,
     const std::unordered_map<std::string, std::string>& variables,
-    const dogen::templating::stitch::text_template_body& body)
+    const masd::dogen::templating::stitch::text_template_body& body)
     : input_path_(input_path),
       output_path_(output_path),
       properties_(properties),
@@ -96,19 +96,19 @@ void text_template::output_path(const boost::filesystem::path&& v) {
     output_path_ = std::move(v);
 }
 
-const dogen::templating::stitch::properties& text_template::properties() const {
+const masd::dogen::templating::stitch::properties& text_template::properties() const {
     return properties_;
 }
 
-dogen::templating::stitch::properties& text_template::properties() {
+masd::dogen::templating::stitch::properties& text_template::properties() {
     return properties_;
 }
 
-void text_template::properties(const dogen::templating::stitch::properties& v) {
+void text_template::properties(const masd::dogen::templating::stitch::properties& v) {
     properties_ = v;
 }
 
-void text_template::properties(const dogen::templating::stitch::properties&& v) {
+void text_template::properties(const masd::dogen::templating::stitch::properties&& v) {
     properties_ = std::move(v);
 }
 
@@ -128,19 +128,19 @@ void text_template::variables(const std::unordered_map<std::string, std::string>
     variables_ = std::move(v);
 }
 
-const dogen::templating::stitch::text_template_body& text_template::body() const {
+const masd::dogen::templating::stitch::text_template_body& text_template::body() const {
     return body_;
 }
 
-dogen::templating::stitch::text_template_body& text_template::body() {
+masd::dogen::templating::stitch::text_template_body& text_template::body() {
     return body_;
 }
 
-void text_template::body(const dogen::templating::stitch::text_template_body& v) {
+void text_template::body(const masd::dogen::templating::stitch::text_template_body& v) {
     body_ = v;
 }
 
-void text_template::body(const dogen::templating::stitch::text_template_body&& v) {
+void text_template::body(const masd::dogen::templating::stitch::text_template_body&& v) {
     body_ = std::move(v);
 }
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/wale/properties.hpp"
+#include "masd.dogen.templating/types/wale/properties.hpp"
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 properties::properties(properties&& rhs)
     : template_path_(std::move(rhs.template_path_)),

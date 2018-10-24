@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.templating/io/stitch/properties_io.hpp"
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.templating/io/stitch/stitching_properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/properties_io.hpp"
+#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/stitching_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatting::decoration_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::formatting::decoration_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -38,11 +38,11 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::fo
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::stitch::properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::stitch::properties\"" << ", "
       << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"stitching_properties\": " << v.stitching_properties()
       << " }";

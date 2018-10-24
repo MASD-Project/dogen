@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.templating/io/wale/properties_io.hpp"
-#include "dogen.templating/io/wale/text_template_io.hpp"
+#include "masd.dogen.templating/io/wale/properties_io.hpp"
+#include "masd.dogen.templating/io/wale/text_template_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,11 +31,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::wale::text_template\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::wale::text_template\"" << ", "
       << "\"properties\": " << v.properties() << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\""
       << " }";

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.templating/io/wale/properties_io.hpp"
+#include "masd.dogen.templating/io/wale/properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -62,11 +62,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 std::ostream& operator<<(std::ostream& s, const properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::wale::properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::wale::properties\"" << ", "
       << "\"template_path\": " << "\"" << v.template_path().generic_string() << "\"" << ", "
       << "\"expected_keys\": " << v.expected_keys() << ", "
       << "\"supplied_kvps\": " << v.supplied_kvps()

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_FORMATTING_ERROR_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_FORMATTING_ERROR_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_FORMATTING_ERROR_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_FORMATTING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief An error occurred whilst formatting.

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_IO_STITCH_LINE_IO_HPP
-#define DOGEN_TEMPLATING_IO_STITCH_LINE_IO_HPP
+#ifndef MASD_DOGEN_TEMPLATING_IO_STITCH_LINE_IO_HPP
+#define MASD_DOGEN_TEMPLATING_IO_STITCH_LINE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.templating/types/stitch/line.hpp"
+#include "masd.dogen.templating/types/stitch/line.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::templating::stitch::line& v);
+     const masd::dogen::templating::stitch::line& v);
 
 }
 

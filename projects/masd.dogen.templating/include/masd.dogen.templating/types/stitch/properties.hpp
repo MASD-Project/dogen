@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.formatting/types/decoration_properties.hpp"
-#include "dogen.templating/types/stitch/stitching_properties.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 class properties final {
 public:
@@ -43,19 +43,19 @@ public:
 
 public:
     properties(
-        const boost::optional<dogen::formatting::decoration_properties>& decoration_properties,
-        const dogen::templating::stitch::stitching_properties& stitching_properties);
+        const boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties,
+        const masd::dogen::templating::stitch::stitching_properties& stitching_properties);
 
 public:
-    const boost::optional<dogen::formatting::decoration_properties>& decoration_properties() const;
-    boost::optional<dogen::formatting::decoration_properties>& decoration_properties();
-    void decoration_properties(const boost::optional<dogen::formatting::decoration_properties>& v);
-    void decoration_properties(const boost::optional<dogen::formatting::decoration_properties>&& v);
+    const boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties() const;
+    boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties();
+    void decoration_properties(const boost::optional<masd::dogen::formatting::decoration_properties>& v);
+    void decoration_properties(const boost::optional<masd::dogen::formatting::decoration_properties>&& v);
 
-    const dogen::templating::stitch::stitching_properties& stitching_properties() const;
-    dogen::templating::stitch::stitching_properties& stitching_properties();
-    void stitching_properties(const dogen::templating::stitch::stitching_properties& v);
-    void stitching_properties(const dogen::templating::stitch::stitching_properties&& v);
+    const masd::dogen::templating::stitch::stitching_properties& stitching_properties() const;
+    masd::dogen::templating::stitch::stitching_properties& stitching_properties();
+    void stitching_properties(const masd::dogen::templating::stitch::stitching_properties& v);
+    void stitching_properties(const masd::dogen::templating::stitch::stitching_properties&& v);
 
 public:
     bool operator==(const properties& rhs) const;
@@ -68,8 +68,8 @@ public:
     properties& operator=(properties other);
 
 private:
-    boost::optional<dogen::formatting::decoration_properties> decoration_properties_;
-    dogen::templating::stitch::stitching_properties stitching_properties_;
+    boost::optional<masd::dogen::formatting::decoration_properties> decoration_properties_;
+    masd::dogen::templating::stitch::stitching_properties stitching_properties_;
 };
 
 }
@@ -78,8 +78,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::stitch::properties& lhs,
-    dogen::templating::stitch::properties& rhs) {
+    masd::dogen::templating::stitch::properties& lhs,
+    masd::dogen::templating::stitch::properties& rhs) {
     lhs.swap(rhs);
 }
 

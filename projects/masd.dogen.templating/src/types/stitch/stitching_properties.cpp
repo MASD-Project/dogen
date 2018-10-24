@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/stitch/stitching_properties.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 stitching_properties::stitching_properties(stitching_properties&& rhs)
     : stream_variable_name_(std::move(rhs.stream_variable_name_)),

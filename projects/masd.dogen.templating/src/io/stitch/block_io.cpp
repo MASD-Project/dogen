@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.templating/io/stitch/block_io.hpp"
-#include "dogen.templating/io/stitch/block_types_io.hpp"
+#include "masd.dogen.templating/io/stitch/block_io.hpp"
+#include "masd.dogen.templating/io/stitch/block_types_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,11 +31,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const block& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::stitch::block\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::stitch::block\"" << ", "
       << "\"type\": " << v.type() << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\""
       << " }";

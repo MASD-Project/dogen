@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.templating/types/stitch/properties.hpp"
-#include "dogen.templating/types/stitch/text_template_body.hpp"
+#include "masd.dogen.templating/types/stitch/properties.hpp"
+#include "masd.dogen.templating/types/stitch/text_template_body.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief Domain representation of a stitch template.
@@ -50,9 +50,9 @@ public:
     text_template(
         const boost::filesystem::path& input_path,
         const boost::filesystem::path& output_path,
-        const dogen::templating::stitch::properties& properties,
+        const masd::dogen::templating::stitch::properties& properties,
         const std::unordered_map<std::string, std::string>& variables,
-        const dogen::templating::stitch::text_template_body& body);
+        const masd::dogen::templating::stitch::text_template_body& body);
 
 public:
     /**
@@ -79,10 +79,10 @@ public:
      * @brief Properties of the template.
      */
     /**@{*/
-    const dogen::templating::stitch::properties& properties() const;
-    dogen::templating::stitch::properties& properties();
-    void properties(const dogen::templating::stitch::properties& v);
-    void properties(const dogen::templating::stitch::properties&& v);
+    const masd::dogen::templating::stitch::properties& properties() const;
+    masd::dogen::templating::stitch::properties& properties();
+    void properties(const masd::dogen::templating::stitch::properties& v);
+    void properties(const masd::dogen::templating::stitch::properties&& v);
     /**@}*/
 
     /**
@@ -99,10 +99,10 @@ public:
      * @brief Body of the text template.
      */
     /**@{*/
-    const dogen::templating::stitch::text_template_body& body() const;
-    dogen::templating::stitch::text_template_body& body();
-    void body(const dogen::templating::stitch::text_template_body& v);
-    void body(const dogen::templating::stitch::text_template_body&& v);
+    const masd::dogen::templating::stitch::text_template_body& body() const;
+    masd::dogen::templating::stitch::text_template_body& body();
+    void body(const masd::dogen::templating::stitch::text_template_body& v);
+    void body(const masd::dogen::templating::stitch::text_template_body&& v);
     /**@}*/
 
 public:
@@ -118,9 +118,9 @@ public:
 private:
     boost::filesystem::path input_path_;
     boost::filesystem::path output_path_;
-    dogen::templating::stitch::properties properties_;
+    masd::dogen::templating::stitch::properties properties_;
     std::unordered_map<std::string, std::string> variables_;
-    dogen::templating::stitch::text_template_body body_;
+    masd::dogen::templating::stitch::text_template_body body_;
 };
 
 }
@@ -129,8 +129,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::stitch::text_template& lhs,
-    dogen::templating::stitch::text_template& rhs) {
+    masd::dogen::templating::stitch::text_template& lhs,
+    masd::dogen::templating::stitch::text_template& rhs) {
     lhs.swap(rhs);
 }
 

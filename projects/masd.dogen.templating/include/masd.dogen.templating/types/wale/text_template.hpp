@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_TEXT_TEMPLATE_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_TEXT_TEMPLATE_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_WALE_TEXT_TEMPLATE_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_WALE_TEXT_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.templating/types/wale/properties.hpp"
+#include "masd.dogen.templating/types/wale/properties.hpp"
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 class text_template final {
 public:
@@ -40,14 +40,14 @@ public:
 
 public:
     text_template(
-        const dogen::templating::wale::properties& properties,
+        const masd::dogen::templating::wale::properties& properties,
         const std::string& content);
 
 public:
-    const dogen::templating::wale::properties& properties() const;
-    dogen::templating::wale::properties& properties();
-    void properties(const dogen::templating::wale::properties& v);
-    void properties(const dogen::templating::wale::properties&& v);
+    const masd::dogen::templating::wale::properties& properties() const;
+    masd::dogen::templating::wale::properties& properties();
+    void properties(const masd::dogen::templating::wale::properties& v);
+    void properties(const masd::dogen::templating::wale::properties&& v);
 
     const std::string& content() const;
     std::string& content();
@@ -65,7 +65,7 @@ public:
     text_template& operator=(text_template other);
 
 private:
-    dogen::templating::wale::properties properties_;
+    masd::dogen::templating::wale::properties properties_;
     std::string content_;
 };
 
@@ -75,8 +75,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::wale::text_template& lhs,
-    dogen::templating::wale::text_template& rhs) {
+    masd::dogen::templating::wale::text_template& lhs,
+    masd::dogen::templating::wale::text_template& rhs) {
     lhs.swap(rhs);
 }
 

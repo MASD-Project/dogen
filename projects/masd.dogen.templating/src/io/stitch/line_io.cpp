@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "dogen.templating/io/stitch/line_io.hpp"
-#include "dogen.templating/io/stitch/block_io.hpp"
+#include "masd.dogen.templating/io/stitch/line_io.hpp"
+#include "masd.dogen.templating/io/stitch/block_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::templating::stitch::block>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::templating::stitch::block>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -36,11 +36,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::templati
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const line& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::stitch::line\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::stitch::line\"" << ", "
       << "\"blocks\": " << v.blocks()
       << " }";
     return(s);

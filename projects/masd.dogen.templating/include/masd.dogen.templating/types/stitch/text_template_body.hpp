@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_BODY_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_BODY_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_BODY_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_TEXT_TEMPLATE_BODY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.templating/types/stitch/line.hpp"
+#include "masd.dogen.templating/types/stitch/line.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 class text_template_body final {
 public:
@@ -43,7 +43,7 @@ public:
 public:
     text_template_body(
         const std::list<std::pair<std::string, std::string> >& tagged_values,
-        const std::list<dogen::templating::stitch::line>& lines);
+        const std::list<masd::dogen::templating::stitch::line>& lines);
 
 public:
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -51,10 +51,10 @@ public:
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
     void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
 
-    const std::list<dogen::templating::stitch::line>& lines() const;
-    std::list<dogen::templating::stitch::line>& lines();
-    void lines(const std::list<dogen::templating::stitch::line>& v);
-    void lines(const std::list<dogen::templating::stitch::line>&& v);
+    const std::list<masd::dogen::templating::stitch::line>& lines() const;
+    std::list<masd::dogen::templating::stitch::line>& lines();
+    void lines(const std::list<masd::dogen::templating::stitch::line>& v);
+    void lines(const std::list<masd::dogen::templating::stitch::line>&& v);
 
 public:
     bool operator==(const text_template_body& rhs) const;
@@ -68,7 +68,7 @@ public:
 
 private:
     std::list<std::pair<std::string, std::string> > tagged_values_;
-    std::list<dogen::templating::stitch::line> lines_;
+    std::list<masd::dogen::templating::stitch::line> lines_;
 };
 
 }
@@ -77,8 +77,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::stitch::text_template_body& lhs,
-    dogen::templating::stitch::text_template_body& rhs) {
+    masd::dogen::templating::stitch::text_template_body& lhs,
+    masd::dogen::templating::stitch::text_template_body& rhs) {
     lhs.swap(rhs);
 }
 

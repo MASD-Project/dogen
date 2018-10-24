@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_FWD_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_FWD_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_FWD_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 class workflow;
 

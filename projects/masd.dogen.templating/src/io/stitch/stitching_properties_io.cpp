@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.templating/io/stitch/stitching_properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/stitching_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -62,11 +62,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const stitching_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::stitch::stitching_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::stitch::stitching_properties\"" << ", "
       << "\"stream_variable_name\": " << "\"" << tidy_up_string(v.stream_variable_name()) << "\"" << ", "
       << "\"relative_output_directory\": " << "\"" << v.relative_output_directory().generic_string() << "\"" << ", "
       << "\"inclusion_dependencies\": " << v.inclusion_dependencies() << ", "

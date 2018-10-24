@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_PROPERTIES_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_WALE_PROPERTIES_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_WALE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 class properties final {
 public:
@@ -86,8 +86,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::wale::properties& lhs,
-    dogen::templating::wale::properties& rhs) {
+    masd::dogen::templating::wale::properties& lhs,
+    masd::dogen::templating::wale::properties& rhs) {
     lhs.swap(rhs);
 }
 

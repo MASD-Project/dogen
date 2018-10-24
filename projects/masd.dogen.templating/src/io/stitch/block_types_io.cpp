@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.templating/io/stitch/block_types_io.hpp"
+#include "masd.dogen.templating/io/stitch/block_types_io.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const block_types& v) {
     s << "{ " << "\"__type__\": " << "\"block_types\", " << "\"value\": ";

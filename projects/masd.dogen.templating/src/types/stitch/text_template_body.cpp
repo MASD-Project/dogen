@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/stitch/text_template_body.hpp"
+#include "masd.dogen.templating/types/stitch/text_template_body.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 text_template_body::text_template_body(
     const std::list<std::pair<std::string, std::string> >& tagged_values,
-    const std::list<dogen::templating::stitch::line>& lines)
+    const std::list<masd::dogen::templating::stitch::line>& lines)
     : tagged_values_(tagged_values),
       lines_(lines) { }
 
@@ -61,19 +61,19 @@ void text_template_body::tagged_values(const std::list<std::pair<std::string, st
     tagged_values_ = std::move(v);
 }
 
-const std::list<dogen::templating::stitch::line>& text_template_body::lines() const {
+const std::list<masd::dogen::templating::stitch::line>& text_template_body::lines() const {
     return lines_;
 }
 
-std::list<dogen::templating::stitch::line>& text_template_body::lines() {
+std::list<masd::dogen::templating::stitch::line>& text_template_body::lines() {
     return lines_;
 }
 
-void text_template_body::lines(const std::list<dogen::templating::stitch::line>& v) {
+void text_template_body::lines(const std::list<masd::dogen::templating::stitch::line>& v) {
     lines_ = v;
 }
 
-void text_template_body::lines(const std::list<dogen::templating::stitch::line>&& v) {
+void text_template_body::lines(const std::list<masd::dogen::templating::stitch::line>&& v) {
     lines_ = std::move(v);
 }
 

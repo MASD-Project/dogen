@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_LINE_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_LINE_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_LINE_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_LINE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.templating/types/stitch/block.hpp"
+#include "masd.dogen.templating/types/stitch/block.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 class line final {
 public:
@@ -39,13 +39,13 @@ public:
     ~line() = default;
 
 public:
-    explicit line(const std::list<dogen::templating::stitch::block>& blocks);
+    explicit line(const std::list<masd::dogen::templating::stitch::block>& blocks);
 
 public:
-    const std::list<dogen::templating::stitch::block>& blocks() const;
-    std::list<dogen::templating::stitch::block>& blocks();
-    void blocks(const std::list<dogen::templating::stitch::block>& v);
-    void blocks(const std::list<dogen::templating::stitch::block>&& v);
+    const std::list<masd::dogen::templating::stitch::block>& blocks() const;
+    std::list<masd::dogen::templating::stitch::block>& blocks();
+    void blocks(const std::list<masd::dogen::templating::stitch::block>& v);
+    void blocks(const std::list<masd::dogen::templating::stitch::block>&& v);
 
 public:
     bool operator==(const line& rhs) const;
@@ -58,7 +58,7 @@ public:
     line& operator=(line other);
 
 private:
-    std::list<dogen::templating::stitch::block> blocks_;
+    std::list<masd::dogen::templating::stitch::block> blocks_;
 };
 
 }
@@ -67,8 +67,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::stitch::line& lhs,
-    dogen::templating::stitch::line& rhs) {
+    masd::dogen::templating::stitch::line& lhs,
+    masd::dogen::templating::stitch::line& rhs) {
     lhs.swap(rhs);
 }
 

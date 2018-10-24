@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.templating/io/stitch/line_io.hpp"
-#include "dogen.templating/io/stitch/text_template_body_io.hpp"
+#include "masd.dogen.templating/io/stitch/line_io.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -60,7 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::templating::stitch::line>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::templating::stitch::line>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -72,11 +72,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::templati
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const text_template_body& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::stitch::text_template_body\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::stitch::text_template_body\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"lines\": " << v.lines()
       << " }";

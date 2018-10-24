@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.templating/io/stitch/properties_io.hpp"
-#include "dogen.templating/io/stitch/text_template_io.hpp"
-#include "dogen.templating/io/stitch/text_template_body_io.hpp"
+#include "masd.dogen.templating/io/stitch/properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_io.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,11 +50,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::ostream& operator<<(std::ostream& s, const text_template& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::templating::stitch::text_template\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::templating::stitch::text_template\"" << ", "
       << "\"input_path\": " << "\"" << v.input_path().generic_string() << "\"" << ", "
       << "\"output_path\": " << "\"" << v.output_path().generic_string() << "\"" << ", "
       << "\"properties\": " << v.properties() << ", "

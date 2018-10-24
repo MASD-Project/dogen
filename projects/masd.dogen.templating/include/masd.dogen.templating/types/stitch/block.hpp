@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.templating/types/stitch/block_types.hpp"
+#include "masd.dogen.templating/types/stitch/block_types.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 class block final {
 public:
@@ -42,12 +42,12 @@ public:
 
 public:
     block(
-        const dogen::templating::stitch::block_types type,
+        const masd::dogen::templating::stitch::block_types type,
         const std::string& content);
 
 public:
-    dogen::templating::stitch::block_types type() const;
-    void type(const dogen::templating::stitch::block_types v);
+    masd::dogen::templating::stitch::block_types type() const;
+    void type(const masd::dogen::templating::stitch::block_types v);
 
     const std::string& content() const;
     std::string& content();
@@ -65,7 +65,7 @@ public:
     block& operator=(block other);
 
 private:
-    dogen::templating::stitch::block_types type_;
+    masd::dogen::templating::stitch::block_types type_;
     std::string content_;
 };
 
@@ -75,8 +75,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::templating::stitch::block& lhs,
-    dogen::templating::stitch::block& rhs) {
+    masd::dogen::templating::stitch::block& lhs,
+    masd::dogen::templating::stitch::block& rhs) {
     lhs.swap(rhs);
 }
 

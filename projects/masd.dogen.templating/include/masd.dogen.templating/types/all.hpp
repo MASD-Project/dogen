@@ -18,42 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_ALL_HPP
-#define DOGEN_TEMPLATING_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_ALL_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.templating/types/stitch/line.hpp"
-#include "dogen.templating/types/stitch/block.hpp"
-#include "dogen.templating/types/stitch/parser.hpp"
-#include "dogen.templating/types/stitch/traits.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
-#include "dogen.templating/types/wale/formatter.hpp"
-#include "dogen.templating/types/wale/validator.hpp"
-#include "dogen.templating/types/stitch/resolver.hpp"
-#include "dogen.templating/types/stitch/workflow.hpp"
-#include "dogen.templating/types/wale/properties.hpp"
-#include "dogen.templating/types/stitch/formatter.hpp"
-#include "dogen.templating/types/stitch/properties.hpp"
-#include "dogen.templating/types/stitch/block_types.hpp"
-#include "dogen.templating/types/wale/key_extractor.hpp"
-#include "dogen.templating/types/wale/text_template.hpp"
-#include "dogen.templating/types/stitch/instantiator.hpp"
-#include "dogen.templating/types/stitch/parsing_error.hpp"
-#include "dogen.templating/types/stitch/text_template.hpp"
-#include "dogen.templating/types/stitch/building_error.hpp"
-#include "dogen.templating/types/stitch/workflow_error.hpp"
-#include "dogen.templating/types/wale/extraction_error.hpp"
-#include "dogen.templating/types/wale/formatting_error.hpp"
-#include "dogen.templating/types/wale/validation_error.hpp"
-#include "dogen.templating/types/stitch/formatting_error.hpp"
-#include "dogen.templating/types/stitch/resolution_error.hpp"
-#include "dogen.templating/types/stitch/properties_factory.hpp"
-#include "dogen.templating/types/stitch/text_template_body.hpp"
-#include "dogen.templating/types/stitch/instantiation_error.hpp"
-#include "dogen.templating/types/stitch/stitching_properties.hpp"
-#include "dogen.templating/types/stitch/stitching_properties_factory.hpp"
+#include "masd.dogen.templating/types/stitch/line.hpp"
+#include "masd.dogen.templating/types/stitch/block.hpp"
+#include "masd.dogen.templating/types/stitch/parser.hpp"
+#include "masd.dogen.templating/types/stitch/traits.hpp"
+#include "masd.dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.templating/types/wale/formatter.hpp"
+#include "masd.dogen.templating/types/wale/validator.hpp"
+#include "masd.dogen.templating/types/stitch/resolver.hpp"
+#include "masd.dogen.templating/types/stitch/workflow.hpp"
+#include "masd.dogen.templating/types/wale/properties.hpp"
+#include "masd.dogen.templating/types/stitch/formatter.hpp"
+#include "masd.dogen.templating/types/stitch/properties.hpp"
+#include "masd.dogen.templating/types/stitch/block_types.hpp"
+#include "masd.dogen.templating/types/wale/key_extractor.hpp"
+#include "masd.dogen.templating/types/wale/text_template.hpp"
+#include "masd.dogen.templating/types/stitch/instantiator.hpp"
+#include "masd.dogen.templating/types/stitch/parsing_error.hpp"
+#include "masd.dogen.templating/types/stitch/text_template.hpp"
+#include "masd.dogen.templating/types/stitch/building_error.hpp"
+#include "masd.dogen.templating/types/stitch/workflow_error.hpp"
+#include "masd.dogen.templating/types/wale/extraction_error.hpp"
+#include "masd.dogen.templating/types/wale/formatting_error.hpp"
+#include "masd.dogen.templating/types/wale/validation_error.hpp"
+#include "masd.dogen.templating/types/stitch/formatting_error.hpp"
+#include "masd.dogen.templating/types/stitch/resolution_error.hpp"
+#include "masd.dogen.templating/types/stitch/properties_factory.hpp"
+#include "masd.dogen.templating/types/stitch/text_template_body.hpp"
+#include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties_factory.hpp"
 
 #endif

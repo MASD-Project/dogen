@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/wale/text_template.hpp"
+#include "masd.dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 text_template::text_template(
-    const dogen::templating::wale::properties& properties,
+    const masd::dogen::templating::wale::properties& properties,
     const std::string& content)
     : properties_(properties),
       content_(content) { }
@@ -45,19 +45,19 @@ text_template& text_template::operator=(text_template other) {
     return *this;
 }
 
-const dogen::templating::wale::properties& text_template::properties() const {
+const masd::dogen::templating::wale::properties& text_template::properties() const {
     return properties_;
 }
 
-dogen::templating::wale::properties& text_template::properties() {
+masd::dogen::templating::wale::properties& text_template::properties() {
     return properties_;
 }
 
-void text_template::properties(const dogen::templating::wale::properties& v) {
+void text_template::properties(const masd::dogen::templating::wale::properties& v) {
     properties_ = v;
 }
 
-void text_template::properties(const dogen::templating::wale::properties&& v) {
+void text_template::properties(const masd::dogen::templating::wale::properties&& v) {
     properties_ = std::move(v);
 }
 

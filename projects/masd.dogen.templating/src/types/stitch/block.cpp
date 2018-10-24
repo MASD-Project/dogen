@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/stitch/block.hpp"
+#include "masd.dogen.templating/types/stitch/block.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 block::block()
-    : type_(static_cast<dogen::templating::stitch::block_types>(0)) { }
+    : type_(static_cast<masd::dogen::templating::stitch::block_types>(0)) { }
 
 block::block(
-    const dogen::templating::stitch::block_types type,
+    const masd::dogen::templating::stitch::block_types type,
     const std::string& content)
     : type_(type),
       content_(content) { }
@@ -48,11 +48,11 @@ block& block::operator=(block other) {
     return *this;
 }
 
-dogen::templating::stitch::block_types block::type() const {
+masd::dogen::templating::stitch::block_types block::type() const {
     return type_;
 }
 
-void block::type(const dogen::templating::stitch::block_types v) {
+void block::type(const masd::dogen::templating::stitch::block_types v) {
     type_ = v;
 }
 

@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/stitch/line.hpp"
+#include "masd.dogen.templating/types/stitch/line.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
-line::line(const std::list<dogen::templating::stitch::block>& blocks)
+line::line(const std::list<masd::dogen::templating::stitch::block>& blocks)
     : blocks_(blocks) { }
 
 void line::swap(line& other) noexcept {
@@ -40,19 +40,19 @@ line& line::operator=(line other) {
     return *this;
 }
 
-const std::list<dogen::templating::stitch::block>& line::blocks() const {
+const std::list<masd::dogen::templating::stitch::block>& line::blocks() const {
     return blocks_;
 }
 
-std::list<dogen::templating::stitch::block>& line::blocks() {
+std::list<masd::dogen::templating::stitch::block>& line::blocks() {
     return blocks_;
 }
 
-void line::blocks(const std::list<dogen::templating::stitch::block>& v) {
+void line::blocks(const std::list<masd::dogen::templating::stitch::block>& v) {
     blocks_ = v;
 }
 
-void line::blocks(const std::list<dogen::templating::stitch::block>&& v) {
+void line::blocks(const std::list<masd::dogen::templating::stitch::block>&& v) {
     blocks_ = std::move(v);
 }
 

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_IO_ALL_IO_HPP
-#define DOGEN_TEMPLATING_IO_ALL_IO_HPP
+#ifndef MASD_DOGEN_TEMPLATING_IO_ALL_IO_HPP
+#define MASD_DOGEN_TEMPLATING_IO_ALL_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.templating/io/stitch/line_io.hpp"
-#include "dogen.templating/io/stitch/block_io.hpp"
-#include "dogen.templating/io/wale/properties_io.hpp"
-#include "dogen.templating/io/stitch/properties_io.hpp"
-#include "dogen.templating/io/stitch/block_types_io.hpp"
-#include "dogen.templating/io/wale/text_template_io.hpp"
-#include "dogen.templating/io/stitch/text_template_io.hpp"
-#include "dogen.templating/io/stitch/text_template_body_io.hpp"
-#include "dogen.templating/io/stitch/stitching_properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/line_io.hpp"
+#include "masd.dogen.templating/io/stitch/block_io.hpp"
+#include "masd.dogen.templating/io/wale/properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/properties_io.hpp"
+#include "masd.dogen.templating/io/stitch/block_types_io.hpp"
+#include "masd.dogen.templating/io/wale/text_template_io.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_io.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
+#include "masd.dogen.templating/io/stitch/stitching_properties_io.hpp"
 
 #endif

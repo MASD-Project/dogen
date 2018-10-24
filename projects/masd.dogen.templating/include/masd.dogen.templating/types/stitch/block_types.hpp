@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_TYPES_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_TYPES_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_TYPES_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_BLOCK_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 enum class block_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
