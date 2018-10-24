@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.probing/hash/metrics_hash.hpp"
+#include "masd.dogen.probing/hash/metrics_hash.hpp"
 
 namespace {
 
@@ -28,23 +28,23 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_probing_metrics(const boost::shared_ptr<dogen::probing::metrics>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_probing_metrics(const boost::shared_ptr<masd::dogen::probing::metrics>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_probing_metrics(const std::list<boost::shared_ptr<dogen::probing::metrics> >& v) {
+inline std::size_t hash_std_list_boost_shared_ptr_masd_dogen_probing_metrics(const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_probing_metrics(i));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_probing_metrics(i));
     }
     return seed;
 }
 
 }
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 std::size_t metrics_hasher::hash(const metrics& v) {
     std::size_t seed(0);
@@ -54,7 +54,7 @@ std::size_t metrics_hasher::hash(const metrics& v) {
     combine(seed, v.guid());
     combine(seed, v.start());
     combine(seed, v.end());
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_probing_metrics(v.children()));
+    combine(seed, hash_std_list_boost_shared_ptr_masd_dogen_probing_metrics(v.children()));
 
     return seed;
 }

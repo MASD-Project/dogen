@@ -26,9 +26,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.probing/serialization/registrar_ser.hpp"
+#include "masd.dogen.probing/serialization/registrar_ser.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 template<typename Archive>
 void register_types(Archive&) {

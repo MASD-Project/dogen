@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.probing/types/metrics.hpp"
+#include "masd.dogen.probing/types/metrics.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::probing::metrics>& lhs,
-const boost::shared_ptr<dogen::probing::metrics>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::probing::metrics>& lhs,
+const boost::shared_ptr<masd::dogen::probing::metrics>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 metrics::metrics()
     : start_(static_cast<unsigned long>(0)),
@@ -41,7 +41,7 @@ metrics::metrics(
     const std::string& guid,
     const unsigned long start,
     const unsigned long end,
-    const std::list<boost::shared_ptr<dogen::probing::metrics> >& children)
+    const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& children)
     : transform_id_(transform_id),
       model_id_(model_id),
       guid_(guid),
@@ -138,19 +138,19 @@ void metrics::end(const unsigned long v) {
     end_ = v;
 }
 
-const std::list<boost::shared_ptr<dogen::probing::metrics> >& metrics::children() const {
+const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& metrics::children() const {
     return children_;
 }
 
-std::list<boost::shared_ptr<dogen::probing::metrics> >& metrics::children() {
+std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& metrics::children() {
     return children_;
 }
 
-void metrics::children(const std::list<boost::shared_ptr<dogen::probing::metrics> >& v) {
+void metrics::children(const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& v) {
     children_ = v;
 }
 
-void metrics::children(const std::list<boost::shared_ptr<dogen::probing::metrics> >&& v) {
+void metrics::children(const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >&& v) {
     children_ = std::move(v);
 }
 

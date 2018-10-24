@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.probing/test_data/metrics_td.hpp"
+#include "masd.dogen.probing/test_data/metrics_td.hpp"
 
 namespace {
 
@@ -33,29 +33,29 @@ unsigned long create_unsigned_long(const unsigned int position) {
     return static_cast<unsigned long>(position);
 }
 
-dogen::probing::metrics*
-create_dogen_probing_metrics_ptr(const unsigned int) {
+masd::dogen::probing::metrics*
+create_masd_dogen_probing_metrics_ptr(const unsigned int) {
     return nullptr;
 }
 
-boost::shared_ptr<dogen::probing::metrics>
-create_boost_shared_ptr_dogen_probing_metrics(unsigned int position) {
-    boost::shared_ptr<dogen::probing::metrics> r(
-        create_dogen_probing_metrics_ptr(position));
+boost::shared_ptr<masd::dogen::probing::metrics>
+create_boost_shared_ptr_masd_dogen_probing_metrics(unsigned int position) {
+    boost::shared_ptr<masd::dogen::probing::metrics> r(
+        create_masd_dogen_probing_metrics_ptr(position));
     return r;
 }
 
-std::list<boost::shared_ptr<dogen::probing::metrics> > create_std_list_boost_shared_ptr_dogen_probing_metrics(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::probing::metrics> > r;
+std::list<boost::shared_ptr<masd::dogen::probing::metrics> > create_std_list_boost_shared_ptr_masd_dogen_probing_metrics(unsigned int position) {
+    std::list<boost::shared_ptr<masd::dogen::probing::metrics> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_boost_shared_ptr_dogen_probing_metrics(position + i));
+        r.push_back(create_boost_shared_ptr_masd_dogen_probing_metrics(position + i));
     }
     return r;
 }
 
 }
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 metrics_generator::metrics_generator() : position_(0) { }
 
@@ -66,7 +66,7 @@ populate(const unsigned int position, result_type& v) {
     v.guid(create_std_string(position + 2));
     v.start(create_unsigned_long(position + 3));
     v.end(create_unsigned_long(position + 4));
-    v.children(create_std_list_boost_shared_ptr_dogen_probing_metrics(position + 5));
+    v.children(create_std_list_boost_shared_ptr_masd_dogen_probing_metrics(position + 5));
 }
 
 metrics_generator::result_type

@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_PROBING_ERROR_FWD_HPP
-#define DOGEN_PROBING_TYPES_PROBING_ERROR_FWD_HPP
+#ifndef MASD_DOGEN_PROBING_TYPES_PROBING_ERROR_FWD_HPP
+#define MASD_DOGEN_PROBING_TYPES_PROBING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 class probing_error;
 

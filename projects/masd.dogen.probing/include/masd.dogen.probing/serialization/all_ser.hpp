@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_PROBING_SERIALIZATION_ALL_SER_HPP
+#ifndef MASD_DOGEN_PROBING_SERIALIZATION_ALL_SER_HPP
+#define MASD_DOGEN_PROBING_SERIALIZATION_ALL_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.probing/serialization/metrics_ser.hpp"
+#include "masd.dogen.probing/serialization/metrics_ser.hpp"
 
 #endif

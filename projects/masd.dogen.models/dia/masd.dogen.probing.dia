@@ -97,7 +97,7 @@
             <dia:string>#Houses classes common to all transformations.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.probing
+#DOGEN yarn.model_modules=masd.dogen.probing
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -1613,13 +1613,13 @@
         <dia:point val="48,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,47.95;55.865,51.05"/>
+        <dia:rectangle val="47.95,47.95;56.25,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1759,7 +1759,7 @@
         <dia:point val="50.215,39.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.465,38.65;52.1075,48.7498"/>
+        <dia:rectangle val="49.465,38.65;52.2847,48.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1767,8 +1767,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="50.215,39.4"/>
         <dia:point val="50.215,44"/>
-        <dia:point val="51.9075,44"/>
-        <dia:point val="51.9075,47.9498"/>
+        <dia:point val="52.0457,44"/>
+        <dia:point val="52.0847,47.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

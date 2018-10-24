@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_HASH_METRICS_HASH_HPP
-#define DOGEN_PROBING_HASH_METRICS_HASH_HPP
+#ifndef MASD_DOGEN_PROBING_HASH_METRICS_HASH_HPP
+#define MASD_DOGEN_PROBING_HASH_METRICS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.probing/types/metrics.hpp"
+#include "masd.dogen.probing/types/metrics.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 struct metrics_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::probing::metrics> {
+struct hash<masd::dogen::probing::metrics> {
 public:
-    size_t operator()(const dogen::probing::metrics& v) const {
-        return dogen::probing::metrics_hasher::hash(v);
+    size_t operator()(const masd::dogen::probing::metrics& v) const {
+        return masd::dogen::probing::metrics_hasher::hash(v);
     }
 };
 

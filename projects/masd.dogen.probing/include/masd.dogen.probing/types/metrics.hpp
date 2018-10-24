@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PROBING_TYPES_METRICS_HPP
-#define DOGEN_PROBING_TYPES_METRICS_HPP
+#ifndef MASD_DOGEN_PROBING_TYPES_METRICS_HPP
+#define MASD_DOGEN_PROBING_TYPES_METRICS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.probing/types/metrics_fwd.hpp"
-#include "dogen.probing/serialization/metrics_fwd_ser.hpp"
+#include "masd.dogen.probing/types/metrics_fwd.hpp"
+#include "masd.dogen.probing/serialization/metrics_fwd_ser.hpp"
 
-namespace dogen::probing {
+namespace masd::dogen::probing {
 
 class metrics final {
 public:
@@ -50,14 +50,14 @@ public:
         const std::string& guid,
         const unsigned long start,
         const unsigned long end,
-        const std::list<boost::shared_ptr<dogen::probing::metrics> >& children);
+        const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& children);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::probing::metrics& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::probing::metrics& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::probing::metrics& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::probing::metrics& v, unsigned int version);
 
 public:
     const std::string& transform_id() const;
@@ -81,10 +81,10 @@ public:
     unsigned long end() const;
     void end(const unsigned long v);
 
-    const std::list<boost::shared_ptr<dogen::probing::metrics> >& children() const;
-    std::list<boost::shared_ptr<dogen::probing::metrics> >& children();
-    void children(const std::list<boost::shared_ptr<dogen::probing::metrics> >& v);
-    void children(const std::list<boost::shared_ptr<dogen::probing::metrics> >&& v);
+    const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& children() const;
+    std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& children();
+    void children(const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& v);
+    void children(const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >&& v);
 
 public:
     bool operator==(const metrics& rhs) const;
@@ -102,7 +102,7 @@ private:
     std::string guid_;
     unsigned long start_;
     unsigned long end_;
-    std::list<boost::shared_ptr<dogen::probing::metrics> > children_;
+    std::list<boost::shared_ptr<masd::dogen::probing::metrics> > children_;
 };
 
 }
@@ -111,8 +111,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::probing::metrics& lhs,
-    dogen::probing::metrics& rhs) {
+    masd::dogen::probing::metrics& lhs,
+    masd::dogen::probing::metrics& rhs) {
     lhs.swap(rhs);
 }
 
