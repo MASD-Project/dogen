@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.cpp/io/fabric/visual_studio_project_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/visual_studio_project_io.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const visual_studio_project& v) {
     v.to_stream(s);

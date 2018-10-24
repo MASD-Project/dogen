@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_ARCHETYPE_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class locator_archetype_configuration final {
 public:
@@ -81,8 +81,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::locator_archetype_configuration& lhs,
-    dogen::generation::cpp::formattables::locator_archetype_configuration& rhs) {
+    masd::dogen::generation::cpp::formattables::locator_archetype_configuration& lhs,
+    masd::dogen::generation::cpp::formattables::locator_archetype_configuration& rhs) {
     lhs.swap(rhs);
 }
 

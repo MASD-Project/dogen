@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 artefact_properties::artefact_properties(artefact_properties&& rhs)
     : file_path_(std::move(rhs.file_path_)),

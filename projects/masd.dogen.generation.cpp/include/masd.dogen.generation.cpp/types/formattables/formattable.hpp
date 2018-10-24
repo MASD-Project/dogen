@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FORMATTABLE_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FORMATTABLE_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FORMATTABLE_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FORMATTABLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/element_fwd.hpp"
-#include "dogen.generation.cpp/types/formattables/element_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_fwd.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/element_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class formattable final {
 public:
@@ -42,25 +42,25 @@ public:
 
 public:
     formattable(
-        const boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment,
-        const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& all_segments,
-        const dogen::generation::cpp::formattables::element_properties& element_properties);
+        const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment,
+        const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments,
+        const masd::dogen::generation::cpp::formattables::element_properties& element_properties);
 
 public:
-    const boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment() const;
-    boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment();
-    void master_segment(const boost::shared_ptr<dogen::modeling::meta_model::element>& v);
-    void master_segment(const boost::shared_ptr<dogen::modeling::meta_model::element>&& v);
+    const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment() const;
+    boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment();
+    void master_segment(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v);
+    void master_segment(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>&& v);
 
-    const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& all_segments() const;
-    std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& all_segments();
-    void all_segments(const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& v);
-    void all_segments(const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >&& v);
+    const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments() const;
+    std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments();
+    void all_segments(const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v);
+    void all_segments(const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >&& v);
 
-    const dogen::generation::cpp::formattables::element_properties& element_properties() const;
-    dogen::generation::cpp::formattables::element_properties& element_properties();
-    void element_properties(const dogen::generation::cpp::formattables::element_properties& v);
-    void element_properties(const dogen::generation::cpp::formattables::element_properties&& v);
+    const masd::dogen::generation::cpp::formattables::element_properties& element_properties() const;
+    masd::dogen::generation::cpp::formattables::element_properties& element_properties();
+    void element_properties(const masd::dogen::generation::cpp::formattables::element_properties& v);
+    void element_properties(const masd::dogen::generation::cpp::formattables::element_properties&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -73,9 +73,9 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    boost::shared_ptr<dogen::modeling::meta_model::element> master_segment_;
-    std::list<boost::shared_ptr<dogen::modeling::meta_model::element> > all_segments_;
-    dogen::generation::cpp::formattables::element_properties element_properties_;
+    boost::shared_ptr<masd::dogen::modeling::meta_model::element> master_segment_;
+    std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> > all_segments_;
+    masd::dogen::generation::cpp::formattables::element_properties element_properties_;
 };
 
 }
@@ -84,8 +84,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::formattable& lhs,
-    dogen::generation::cpp::formattables::formattable& rhs) {
+    masd::dogen::generation::cpp::formattables::formattable& lhs,
+    masd::dogen::generation::cpp::formattables::formattable& rhs) {
     lhs.swap(rhs);
 }
 

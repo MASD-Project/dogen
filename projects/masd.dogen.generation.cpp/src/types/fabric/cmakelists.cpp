@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
-#include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
-#include "dogen.generation.cpp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,29 +33,29 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 cmakelists::cmakelists(
-    const dogen::modeling::meta_model::name& name,
+    const masd::dogen::modeling::meta_model::name& name,
     const std::string& documentation,
-    const dogen::annotations::annotation& annotation,
-    const dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+    const masd::dogen::formatting::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
     const std::string& include_directory_path,
     const std::string& source_directory_name,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
-    const dogen::generation::cpp::fabric::odb_targets& odb_targets)
-    : dogen::modeling::meta_model::element(
+    const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets)
+    : masd::dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -76,28 +76,28 @@ cmakelists::cmakelists(
       implementation_file_extension_(implementation_file_extension),
       odb_targets_(odb_targets) { }
 
-void cmakelists::accept(const dogen::modeling::meta_model::element_visitor& v) const {
+void cmakelists::accept(const masd::dogen::modeling::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void cmakelists::accept(dogen::modeling::meta_model::element_visitor& v) const {
+void cmakelists::accept(masd::dogen::modeling::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void cmakelists::accept(const dogen::modeling::meta_model::element_visitor& v) {
+void cmakelists::accept(const masd::dogen::modeling::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void cmakelists::accept(dogen::modeling::meta_model::element_visitor& v) {
+void cmakelists::accept(masd::dogen::modeling::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -106,9 +106,9 @@ void cmakelists::accept(dogen::modeling::meta_model::element_visitor& v) {
 
 void cmakelists::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::fabric::cmakelists\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::fabric::cmakelists\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::modeling::meta_model::element::to_stream(s);
     s << ", "
       << "\"include_directory_path\": " << "\"" << tidy_up_string(include_directory_path_) << "\"" << ", "
       << "\"source_directory_name\": " << "\"" << tidy_up_string(source_directory_name_) << "\"" << ", "
@@ -119,7 +119,7 @@ void cmakelists::to_stream(std::ostream& s) const {
 }
 
 void cmakelists::swap(cmakelists& other) noexcept {
-    dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::modeling::meta_model::element::swap(other);
 
     using std::swap;
     swap(include_directory_path_, other.include_directory_path_);
@@ -129,14 +129,14 @@ void cmakelists::swap(cmakelists& other) noexcept {
     swap(odb_targets_, other.odb_targets_);
 }
 
-bool cmakelists::equals(const dogen::modeling::meta_model::element& other) const {
+bool cmakelists::equals(const masd::dogen::modeling::meta_model::element& other) const {
     const cmakelists* const p(dynamic_cast<const cmakelists* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool cmakelists::operator==(const cmakelists& rhs) const {
-    return dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
         include_directory_path_ == rhs.include_directory_path_ &&
         source_directory_name_ == rhs.source_directory_name_ &&
         header_file_extension_ == rhs.header_file_extension_ &&
@@ -214,19 +214,19 @@ void cmakelists::implementation_file_extension(const std::string&& v) {
     implementation_file_extension_ = std::move(v);
 }
 
-const dogen::generation::cpp::fabric::odb_targets& cmakelists::odb_targets() const {
+const masd::dogen::generation::cpp::fabric::odb_targets& cmakelists::odb_targets() const {
     return odb_targets_;
 }
 
-dogen::generation::cpp::fabric::odb_targets& cmakelists::odb_targets() {
+masd::dogen::generation::cpp::fabric::odb_targets& cmakelists::odb_targets() {
     return odb_targets_;
 }
 
-void cmakelists::odb_targets(const dogen::generation::cpp::fabric::odb_targets& v) {
+void cmakelists::odb_targets(const masd::dogen::generation::cpp::fabric::odb_targets& v) {
     odb_targets_ = v;
 }
 
-void cmakelists::odb_targets(const dogen::generation::cpp::fabric::odb_targets&& v) {
+void cmakelists::odb_targets(const masd::dogen::generation::cpp::fabric::odb_targets&& v) {
     odb_targets_ = std::move(v);
 }
 

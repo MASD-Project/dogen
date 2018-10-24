@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.generation.cpp/io/formattables/helper_descriptor_io.hpp"
-#include "dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/helper_descriptor_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generation::cpp::formattables::helper_descriptor>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::generation::cpp::formattables::helper_descriptor>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -37,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generati
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& s, const helper_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::helper_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::formattables::helper_properties\"" << ", "
       << "\"current\": " << v.current() << ", "
       << "\"direct_descendants\": " << v.direct_descendants() << ", "
       << "\"in_inheritance_relationship\": " << v.in_inheritance_relationship()

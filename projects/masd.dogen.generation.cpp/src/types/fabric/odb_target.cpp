@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/fabric/odb_target.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_target.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 odb_target::odb_target(
     const std::string& name,

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_STREAMING_PROPERTIES_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_STREAMING_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_STREAMING_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_STREAMING_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class streaming_properties final {
 public:
@@ -79,8 +79,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::streaming_properties& lhs,
-    dogen::generation::cpp::formattables::streaming_properties& rhs) {
+    masd::dogen::generation::cpp::formattables::streaming_properties& lhs,
+    masd::dogen::generation::cpp::formattables::streaming_properties& rhs) {
     lhs.swap(rhs);
 }
 

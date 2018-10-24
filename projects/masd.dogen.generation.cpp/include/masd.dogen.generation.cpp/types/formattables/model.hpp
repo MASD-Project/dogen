@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_MODEL_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_MODEL_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_MODEL_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,13 +29,13 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.generation.cpp/types/formattables/formattable.hpp"
-#include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
-#include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/cpp_standards.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/facet_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class model final {
 public:
@@ -48,38 +48,38 @@ public:
 
 public:
     model(
-        const dogen::modeling::meta_model::name& name,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& formattables,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& facet_properties,
-        const dogen::generation::cpp::formattables::cpp_standards cpp_standard,
+        const masd::dogen::modeling::meta_model::name& name,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& formattables,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& facet_properties,
+        const masd::dogen::generation::cpp::formattables::cpp_standards cpp_standard,
         const std::list<std::string>& odb_databases,
         const std::string& odb_sql_name_case,
         const std::list<std::string>& project_items);
 
 public:
-    const dogen::modeling::meta_model::name& name() const;
-    dogen::modeling::meta_model::name& name();
-    void name(const dogen::modeling::meta_model::name& v);
-    void name(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& name() const;
+    masd::dogen::modeling::meta_model::name& name();
+    void name(const masd::dogen::modeling::meta_model::name& v);
+    void name(const masd::dogen::modeling::meta_model::name&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
-    void streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& v);
-    void streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
+    void streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& v);
+    void streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& formattables() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& formattables();
-    void formattables(const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& v);
-    void formattables(const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& formattables() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& formattables();
+    void formattables(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& v);
+    void formattables(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& facet_properties() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& facet_properties();
-    void facet_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& v);
-    void facet_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& facet_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& facet_properties();
+    void facet_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& v);
+    void facet_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>&& v);
 
-    dogen::generation::cpp::formattables::cpp_standards cpp_standard() const;
-    void cpp_standard(const dogen::generation::cpp::formattables::cpp_standards v);
+    masd::dogen::generation::cpp::formattables::cpp_standards cpp_standard() const;
+    void cpp_standard(const masd::dogen::generation::cpp::formattables::cpp_standards v);
 
     const std::list<std::string>& odb_databases() const;
     std::list<std::string>& odb_databases();
@@ -107,11 +107,11 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::modeling::meta_model::name name_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable> formattables_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties> facet_properties_;
-    dogen::generation::cpp::formattables::cpp_standards cpp_standard_;
+    masd::dogen::modeling::meta_model::name name_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable> formattables_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties> facet_properties_;
+    masd::dogen::generation::cpp::formattables::cpp_standards cpp_standard_;
     std::list<std::string> odb_databases_;
     std::string odb_sql_name_case_;
     std::list<std::string> project_items_;
@@ -123,8 +123,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::model& lhs,
-    dogen::generation::cpp::formattables::model& rhs) {
+    masd::dogen::generation::cpp::formattables::model& lhs,
+    masd::dogen::generation::cpp::formattables::model& rhs) {
     lhs.swap(rhs);
 }
 

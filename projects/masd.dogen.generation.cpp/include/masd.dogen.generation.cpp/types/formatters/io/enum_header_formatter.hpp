@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_ENUM_HEADER_FORMATTER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_ENUM_HEADER_FORMATTER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_ENUM_HEADER_FORMATTER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_ENUM_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 class enum_header_formatter final : public artefact_formatter_interface {
 public:

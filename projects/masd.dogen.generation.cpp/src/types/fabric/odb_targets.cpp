@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_targets.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 odb_targets::odb_targets(
     const std::string& main_target_name,
     const std::string& common_odb_options,
-    const std::list<dogen::generation::cpp::fabric::odb_target>& targets)
+    const std::list<masd::dogen::generation::cpp::fabric::odb_target>& targets)
     : main_target_name_(main_target_name),
       common_odb_options_(common_odb_options),
       targets_(targets) { }
@@ -81,19 +81,19 @@ void odb_targets::common_odb_options(const std::string&& v) {
     common_odb_options_ = std::move(v);
 }
 
-const std::list<dogen::generation::cpp::fabric::odb_target>& odb_targets::targets() const {
+const std::list<masd::dogen::generation::cpp::fabric::odb_target>& odb_targets::targets() const {
     return targets_;
 }
 
-std::list<dogen::generation::cpp::fabric::odb_target>& odb_targets::targets() {
+std::list<masd::dogen::generation::cpp::fabric::odb_target>& odb_targets::targets() {
     return targets_;
 }
 
-void odb_targets::targets(const std::list<dogen::generation::cpp::fabric::odb_target>& v) {
+void odb_targets::targets(const std::list<masd::dogen::generation::cpp::fabric::odb_target>& v) {
     targets_ = v;
 }
 
-void odb_targets::targets(const std::list<dogen::generation::cpp::fabric::odb_target>&& v) {
+void odb_targets::targets(const std::list<masd::dogen::generation::cpp::fabric::odb_target>&& v) {
     targets_ = std::move(v);
 }
 

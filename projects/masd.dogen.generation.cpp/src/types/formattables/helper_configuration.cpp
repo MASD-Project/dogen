@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/helper_configuration.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/helper_configuration.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 helper_configuration::helper_configuration(
     const std::unordered_map<std::string, std::string>& helper_families,
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties)
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties)
     : helper_families_(helper_families),
       streaming_properties_(streaming_properties) { }
 
@@ -61,19 +61,19 @@ void helper_configuration::helper_families(const std::unordered_map<std::string,
     helper_families_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& helper_configuration::streaming_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& helper_configuration::streaming_properties() const {
     return streaming_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& helper_configuration::streaming_properties() {
+std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& helper_configuration::streaming_properties() {
     return streaming_properties_;
 }
 
-void helper_configuration::streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& v) {
+void helper_configuration::streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& v) {
     streaming_properties_ = v;
 }
 
-void helper_configuration::streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>&& v) {
+void helper_configuration::streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>&& v) {
     streaming_properties_ = std::move(v);
 }
 

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_IO_FABRIC_FORWARD_DECLARATIONS_IO_HPP
-#define DOGEN_GENERATION_CPP_IO_FABRIC_FORWARD_DECLARATIONS_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_IO_FABRIC_FORWARD_DECLARATIONS_IO_HPP
+#define MASD_DOGEN_GENERATION_CPP_IO_FABRIC_FORWARD_DECLARATIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.cpp/types/fabric/forward_declarations.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/forward_declarations.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::cpp::fabric::forward_declarations& v);
+     const masd::dogen::generation::cpp::fabric::forward_declarations& v);
 
 }
 

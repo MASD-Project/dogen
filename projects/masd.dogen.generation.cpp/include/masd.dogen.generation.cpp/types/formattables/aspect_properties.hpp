@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_PROPERTIES_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class aspect_properties final {
 public:
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::aspect_properties& lhs,
-    dogen::generation::cpp::formattables::aspect_properties& rhs) {
+    masd::dogen::generation::cpp::formattables::aspect_properties& lhs,
+    masd::dogen::generation::cpp::formattables::aspect_properties& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_FORWARD_DECLARATIONS_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_FORWARD_DECLARATIONS_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_FORWARD_DECLARATIONS_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_FORWARD_DECLARATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,12 +27,12 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
-class forward_declarations final : public dogen::modeling::meta_model::element {
+class forward_declarations final : public masd::dogen::modeling::meta_model::element {
 public:
     forward_declarations(const forward_declarations&) = default;
     forward_declarations(forward_declarations&&) = default;
@@ -44,31 +44,31 @@ public:
 
 public:
     forward_declarations(
-        const dogen::modeling::meta_model::name& name,
+        const masd::dogen::modeling::meta_model::name& name,
         const std::string& documentation,
-        const dogen::annotations::annotation& annotation,
-        const dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
         const bool is_enum,
-        const dogen::modeling::meta_model::name& underlying_element,
+        const masd::dogen::modeling::meta_model::name& underlying_element,
         const bool is_exception);
 
 public:
-    using dogen::modeling::meta_model::element::accept;
+    using masd::dogen::modeling::meta_model::element::accept;
 
-    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -86,10 +86,10 @@ public:
      * @brief The underlying type of the enumeration, if we are an enum forward declaration.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& underlying_element() const;
-    dogen::modeling::meta_model::name& underlying_element();
-    void underlying_element(const dogen::modeling::meta_model::name& v);
-    void underlying_element(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& underlying_element() const;
+    masd::dogen::modeling::meta_model::name& underlying_element();
+    void underlying_element(const masd::dogen::modeling::meta_model::name& v);
+    void underlying_element(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     bool is_exception() const;
@@ -102,7 +102,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(forward_declarations& other) noexcept;
@@ -110,7 +110,7 @@ public:
 
 private:
     bool is_enum_;
-    dogen::modeling::meta_model::name underlying_element_;
+    masd::dogen::modeling::meta_model::name underlying_element_;
     bool is_exception_;
 };
 
@@ -120,8 +120,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::fabric::forward_declarations& lhs,
-    dogen::generation::cpp::fabric::forward_declarations& rhs) {
+    masd::dogen::generation::cpp::fabric::forward_declarations& lhs,
+    masd::dogen::generation::cpp::fabric::forward_declarations& rhs) {
     lhs.swap(rhs);
 }
 

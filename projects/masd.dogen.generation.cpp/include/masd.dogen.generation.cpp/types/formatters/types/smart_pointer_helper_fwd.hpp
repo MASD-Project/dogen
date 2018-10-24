@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_FWD_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_FWD_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_SMART_POINTER_HELPER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::cpp::formatters::types {
+namespace masd::dogen::generation::cpp::formatters::types {
 
 class smart_pointer_helper;
 

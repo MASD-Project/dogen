@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_IO_FABRIC_CMAKELISTS_IO_HPP
-#define DOGEN_GENERATION_CPP_IO_FABRIC_CMAKELISTS_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_IO_FABRIC_CMAKELISTS_IO_HPP
+#define MASD_DOGEN_GENERATION_CPP_IO_FABRIC_CMAKELISTS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::cpp::fabric::cmakelists& v);
+     const masd::dogen::generation::cpp::fabric::cmakelists& v);
 
 }
 

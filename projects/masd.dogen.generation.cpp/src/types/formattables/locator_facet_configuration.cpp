@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 locator_facet_configuration::locator_facet_configuration(
     const std::string& directory,

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
-class object_odb_options final : public dogen::modeling::meta_model::element {
+class object_odb_options final : public masd::dogen::modeling::meta_model::element {
 public:
     object_odb_options() = default;
     object_odb_options(const object_odb_options&) = default;
@@ -43,31 +43,31 @@ public:
 
 public:
     object_odb_options(
-        const dogen::modeling::meta_model::name& name,
+        const masd::dogen::modeling::meta_model::name& name,
         const std::string& documentation,
-        const dogen::annotations::annotation& annotation,
-        const dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
         const std::string& epilogue,
         const std::list<std::string>& include_regexes,
         const std::string& header_guard_prefix);
 
 public:
-    using dogen::modeling::meta_model::element::accept;
+    using masd::dogen::modeling::meta_model::element::accept;
 
-    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::modeling::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) const override;
+    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -94,7 +94,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(object_odb_options& other) noexcept;
@@ -112,8 +112,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::fabric::object_odb_options& lhs,
-    dogen::generation::cpp::fabric::object_odb_options& rhs) {
+    masd::dogen::generation::cpp::fabric::object_odb_options& lhs,
+    masd::dogen::generation::cpp::fabric::object_odb_options& rhs) {
     lhs.swap(rhs);
 }
 

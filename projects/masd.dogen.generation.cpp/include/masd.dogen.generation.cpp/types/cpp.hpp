@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_CPP_HPP
-#define DOGEN_GENERATION_CPP_TYPES_CPP_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_CPP_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_CPP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 /**
  * @brief CPP is the C++ backend in the default generation kernel.
  */
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 }
 
 #endif

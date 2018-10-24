@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/odb_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/odb_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 odb_properties::odb_properties()
     : is_value_(static_cast<bool>(0)) { }

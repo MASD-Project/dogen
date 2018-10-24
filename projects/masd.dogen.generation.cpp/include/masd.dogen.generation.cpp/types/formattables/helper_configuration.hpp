@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class helper_configuration final {
 public:
@@ -42,7 +42,7 @@ public:
 public:
     helper_configuration(
         const std::unordered_map<std::string, std::string>& helper_families,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties);
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties);
 
 public:
     const std::unordered_map<std::string, std::string>& helper_families() const;
@@ -50,10 +50,10 @@ public:
     void helper_families(const std::unordered_map<std::string, std::string>& v);
     void helper_families(const std::unordered_map<std::string, std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
-    void streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& v);
-    void streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
+    void streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& v);
+    void streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>&& v);
 
 public:
     bool operator==(const helper_configuration& rhs) const;
@@ -67,7 +67,7 @@ public:
 
 private:
     std::unordered_map<std::string, std::string> helper_families_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
 };
 
 }
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::helper_configuration& lhs,
-    dogen::generation::cpp::formattables::helper_configuration& rhs) {
+    masd::dogen::generation::cpp::formattables::helper_configuration& lhs,
+    masd::dogen::generation::cpp::formattables::helper_configuration& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ELEMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,13 +30,13 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.generation.cpp/types/formattables/odb_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/test_data_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/odb_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/aspect_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/test_data_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 /**
  * @brief All of the properties associated with an element.
@@ -52,43 +52,43 @@ public:
 
 public:
     element_properties(
-        const dogen::generation::cpp::formattables::aspect_properties& aspect_properties,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& artefact_properties,
-        const std::list<dogen::generation::cpp::formattables::helper_properties>& helper_properties,
+        const masd::dogen::generation::cpp::formattables::aspect_properties& aspect_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& artefact_properties,
+        const std::list<masd::dogen::generation::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
-        const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
+        const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& odb_properties,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
 
 public:
-    const dogen::generation::cpp::formattables::aspect_properties& aspect_properties() const;
-    dogen::generation::cpp::formattables::aspect_properties& aspect_properties();
-    void aspect_properties(const dogen::generation::cpp::formattables::aspect_properties& v);
-    void aspect_properties(const dogen::generation::cpp::formattables::aspect_properties&& v);
+    const masd::dogen::generation::cpp::formattables::aspect_properties& aspect_properties() const;
+    masd::dogen::generation::cpp::formattables::aspect_properties& aspect_properties();
+    void aspect_properties(const masd::dogen::generation::cpp::formattables::aspect_properties& v);
+    void aspect_properties(const masd::dogen::generation::cpp::formattables::aspect_properties&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& artefact_properties() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& artefact_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>&& v);
 
-    const std::list<dogen::generation::cpp::formattables::helper_properties>& helper_properties() const;
-    std::list<dogen::generation::cpp::formattables::helper_properties>& helper_properties();
-    void helper_properties(const std::list<dogen::generation::cpp::formattables::helper_properties>& v);
-    void helper_properties(const std::list<dogen::generation::cpp::formattables::helper_properties>&& v);
+    const std::list<masd::dogen::generation::cpp::formattables::helper_properties>& helper_properties() const;
+    std::list<masd::dogen::generation::cpp::formattables::helper_properties>& helper_properties();
+    void helper_properties(const std::list<masd::dogen::generation::cpp::formattables::helper_properties>& v);
+    void helper_properties(const std::list<masd::dogen::generation::cpp::formattables::helper_properties>&& v);
 
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype() const;
     std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype();
     void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>& v);
     void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>&& v);
 
-    const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties() const;
-    boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties();
-    void odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>& v);
-    void odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>&& v);
+    const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& odb_properties() const;
+    boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& odb_properties();
+    void odb_properties(const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& v);
+    void odb_properties(const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties();
-    void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& v);
-    void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties();
+    void attribute_level_test_data_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& v);
+    void attribute_level_test_data_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>&& v);
 
 public:
     bool operator==(const element_properties& rhs) const;
@@ -101,12 +101,12 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    dogen::generation::cpp::formattables::aspect_properties aspect_properties_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties> artefact_properties_;
-    std::list<dogen::generation::cpp::formattables::helper_properties> helper_properties_;
+    masd::dogen::generation::cpp::formattables::aspect_properties aspect_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties> artefact_properties_;
+    std::list<masd::dogen::generation::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
-    boost::optional<dogen::generation::cpp::formattables::odb_properties> odb_properties_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
+    boost::optional<masd::dogen::generation::cpp::formattables::odb_properties> odb_properties_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
 };
 
 }
@@ -115,8 +115,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::element_properties& lhs,
-    dogen::generation::cpp::formattables::element_properties& rhs) {
+    masd::dogen::generation::cpp::formattables::element_properties& lhs,
+    masd::dogen::generation::cpp::formattables::element_properties& rhs) {
     lhs.swap(rhs);
 }
 

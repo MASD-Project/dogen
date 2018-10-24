@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/types/formattables/formattable.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::modeling::meta_model::element>& lhs,
-const boost::shared_ptr<dogen::modeling::meta_model::element>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& lhs,
+const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 formattable::formattable(
-    const boost::shared_ptr<dogen::modeling::meta_model::element>& master_segment,
-    const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& all_segments,
-    const dogen::generation::cpp::formattables::element_properties& element_properties)
+    const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment,
+    const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments,
+    const masd::dogen::generation::cpp::formattables::element_properties& element_properties)
     : master_segment_(master_segment),
       all_segments_(all_segments),
       element_properties_(element_properties) { }
@@ -59,51 +59,51 @@ formattable& formattable::operator=(formattable other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::modeling::meta_model::element>& formattable::master_segment() const {
+const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& formattable::master_segment() const {
     return master_segment_;
 }
 
-boost::shared_ptr<dogen::modeling::meta_model::element>& formattable::master_segment() {
+boost::shared_ptr<masd::dogen::modeling::meta_model::element>& formattable::master_segment() {
     return master_segment_;
 }
 
-void formattable::master_segment(const boost::shared_ptr<dogen::modeling::meta_model::element>& v) {
+void formattable::master_segment(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
     master_segment_ = v;
 }
 
-void formattable::master_segment(const boost::shared_ptr<dogen::modeling::meta_model::element>&& v) {
+void formattable::master_segment(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>&& v) {
     master_segment_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& formattable::all_segments() const {
+const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& formattable::all_segments() const {
     return all_segments_;
 }
 
-std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& formattable::all_segments() {
+std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& formattable::all_segments() {
     return all_segments_;
 }
 
-void formattable::all_segments(const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& v) {
+void formattable::all_segments(const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v) {
     all_segments_ = v;
 }
 
-void formattable::all_segments(const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >&& v) {
+void formattable::all_segments(const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >&& v) {
     all_segments_ = std::move(v);
 }
 
-const dogen::generation::cpp::formattables::element_properties& formattable::element_properties() const {
+const masd::dogen::generation::cpp::formattables::element_properties& formattable::element_properties() const {
     return element_properties_;
 }
 
-dogen::generation::cpp::formattables::element_properties& formattable::element_properties() {
+masd::dogen::generation::cpp::formattables::element_properties& formattable::element_properties() {
     return element_properties_;
 }
 
-void formattable::element_properties(const dogen::generation::cpp::formattables::element_properties& v) {
+void formattable::element_properties(const masd::dogen::generation::cpp::formattables::element_properties& v) {
     element_properties_ = v;
 }
 
-void formattable::element_properties(const dogen::generation::cpp::formattables::element_properties&& v) {
+void formattable::element_properties(const masd::dogen::generation::cpp::formattables::element_properties&& v) {
     element_properties_ = std::move(v);
 }
 

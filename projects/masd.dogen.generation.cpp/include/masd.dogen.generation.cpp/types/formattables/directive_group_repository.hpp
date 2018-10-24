@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.cpp/types/formattables/directive_group.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class directive_group_repository final {
 public:
@@ -40,13 +40,13 @@ public:
     ~directive_group_repository() = default;
 
 public:
-    explicit directive_group_repository(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >& by_id);
+    explicit directive_group_repository(const std::unordered_map<std::string, std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::directive_group> >& by_id);
 
 public:
-    const std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >& by_id() const;
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >& by_id();
-    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >& v);
-    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> >&& v);
+    const std::unordered_map<std::string, std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::directive_group> >& by_id() const;
+    std::unordered_map<std::string, std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::directive_group> >& by_id();
+    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::directive_group> >& v);
+    void by_id(const std::unordered_map<std::string, std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::directive_group> >&& v);
 
 public:
     bool operator==(const directive_group_repository& rhs) const;
@@ -59,7 +59,7 @@ public:
     directive_group_repository& operator=(directive_group_repository other);
 
 private:
-    std::unordered_map<std::string, std::unordered_map<std::string, dogen::generation::cpp::formattables::directive_group> > by_id_;
+    std::unordered_map<std::string, std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::directive_group> > by_id_;
 };
 
 }
@@ -68,8 +68,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::directive_group_repository& lhs,
-    dogen::generation::cpp::formattables::directive_group_repository& rhs) {
+    masd::dogen::generation::cpp::formattables::directive_group_repository& lhs,
+    masd::dogen::generation::cpp::formattables::directive_group_repository& rhs) {
     lhs.swap(rhs);
 }
 

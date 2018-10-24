@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 /**
  * @brief Represents the group of inclusion directives associated with a name and an archetype.
@@ -88,8 +88,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::directive_group& lhs,
-    dogen::generation::cpp::formattables::directive_group& rhs) {
+    masd::dogen::generation::cpp::formattables::directive_group& lhs,
+    masd::dogen::generation::cpp::formattables::directive_group& rhs) {
     lhs.swap(rhs);
 }
 

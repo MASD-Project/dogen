@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_CPP_STANDARDS_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_CPP_STANDARDS_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_CPP_STANDARDS_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_CPP_STANDARDS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 enum class cpp_standards : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

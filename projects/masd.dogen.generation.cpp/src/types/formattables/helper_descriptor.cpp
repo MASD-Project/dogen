@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/helper_descriptor.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/helper_descriptor.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 helper_descriptor::helper_descriptor()
     : is_simple_type_(static_cast<bool>(0)),
@@ -48,7 +48,7 @@ helper_descriptor::helper_descriptor(
     const std::string& name_qualified,
     const std::string& name_tree_qualified,
     const std::string& name_tree_identifiable,
-    const boost::optional<dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
+    const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
     const bool is_simple_type,
     const bool requires_hashing_helper,
     const bool is_circular_dependency,
@@ -196,19 +196,19 @@ void helper_descriptor::name_tree_identifiable(const std::string&& v) {
     name_tree_identifiable_ = std::move(v);
 }
 
-const boost::optional<dogen::generation::cpp::formattables::streaming_properties>& helper_descriptor::streaming_properties() const {
+const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& helper_descriptor::streaming_properties() const {
     return streaming_properties_;
 }
 
-boost::optional<dogen::generation::cpp::formattables::streaming_properties>& helper_descriptor::streaming_properties() {
+boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& helper_descriptor::streaming_properties() {
     return streaming_properties_;
 }
 
-void helper_descriptor::streaming_properties(const boost::optional<dogen::generation::cpp::formattables::streaming_properties>& v) {
+void helper_descriptor::streaming_properties(const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& v) {
     streaming_properties_ = v;
 }
 
-void helper_descriptor::streaming_properties(const boost::optional<dogen::generation::cpp::formattables::streaming_properties>&& v) {
+void helper_descriptor::streaming_properties(const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>&& v) {
     streaming_properties_ = std::move(v);
 }
 

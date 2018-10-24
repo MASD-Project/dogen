@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.generation.cpp/io/formatters/inclusion_support_types_io.hpp"
+#include "masd.dogen.generation.cpp/io/formatters/inclusion_support_types_io.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const inclusion_support_types& v) {
     s << "{ " << "\"__type__\": " << "\"inclusion_support_types\", " << "\"value\": ";

@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const cpp_standards& v) {
     s << "{ " << "\"__type__\": " << "\"cpp_standards\", " << "\"value\": ";

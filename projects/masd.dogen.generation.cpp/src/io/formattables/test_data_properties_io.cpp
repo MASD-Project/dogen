@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.cpp/io/formattables/test_data_properties_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/test_data_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const test_data_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::test_data_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::formattables::test_data_properties\"" << ", "
       << "\"maximum_size\": " << v.maximum_size() << ", "
       << "\"prefix\": " << "\"" << tidy_up_string(v.prefix()) << "\""
       << " }";

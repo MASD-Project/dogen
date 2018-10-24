@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.cpp/io/fabric/cmakelists_io.hpp"
-#include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/cmakelists_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const cmakelists& v) {
     v.to_stream(s);

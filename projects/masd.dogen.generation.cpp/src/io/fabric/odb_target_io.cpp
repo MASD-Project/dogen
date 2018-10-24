@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.cpp/io/fabric/odb_target_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/odb_target_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -57,11 +57,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const odb_target& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::fabric::odb_target\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::fabric::odb_target\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"comment\": " << "\"" << tidy_up_string(v.comment()) << "\"" << ", "
       << "\"output_directory\": " << "\"" << tidy_up_string(v.output_directory()) << "\"" << ", "

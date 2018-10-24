@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.cpp/io/formattables/directive_group_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/directive_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -44,11 +44,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const directive_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::directive_group\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::formattables::directive_group\"" << ", "
       << "\"primary\": " << "\"" << tidy_up_string(v.primary()) << "\"" << ", "
       << "\"secondary\": " << v.secondary()
       << " }";

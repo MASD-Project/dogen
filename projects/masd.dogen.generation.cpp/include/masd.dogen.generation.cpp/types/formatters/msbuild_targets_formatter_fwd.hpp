@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_MSBUILD_TARGETS_FORMATTER_FWD_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_MSBUILD_TARGETS_FORMATTER_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_MSBUILD_TARGETS_FORMATTER_FWD_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_MSBUILD_TARGETS_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 class msbuild_targets_formatter;
 

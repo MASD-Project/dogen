@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_IO_FORMATTABLES_DIRECTIVE_GROUP_IO_HPP
-#define DOGEN_GENERATION_CPP_IO_FORMATTABLES_DIRECTIVE_GROUP_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_IO_FORMATTABLES_DIRECTIVE_GROUP_IO_HPP
+#define MASD_DOGEN_GENERATION_CPP_IO_FORMATTABLES_DIRECTIVE_GROUP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.cpp/types/formattables/directive_group.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::cpp::formattables::directive_group& v);
+     const masd::dogen::generation::cpp::formattables::directive_group& v);
 
 }
 

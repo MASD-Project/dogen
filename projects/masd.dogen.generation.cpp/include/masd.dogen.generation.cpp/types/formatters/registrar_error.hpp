@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_ERROR_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_ERROR_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_ERROR_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 /**
  * @brief There was an error in the registrar.

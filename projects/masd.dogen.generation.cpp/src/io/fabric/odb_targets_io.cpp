@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.cpp/io/fabric/odb_target_io.hpp"
-#include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/odb_target_io.hpp"
+#include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generation::cpp::fabric::odb_target>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::generation::cpp::fabric::odb_target>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -45,11 +45,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::generati
 
 }
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream& operator<<(std::ostream& s, const odb_targets& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::fabric::odb_targets\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::fabric::odb_targets\"" << ", "
       << "\"main_target_name\": " << "\"" << tidy_up_string(v.main_target_name()) << "\"" << ", "
       << "\"common_odb_options\": " << "\"" << tidy_up_string(v.common_odb_options()) << "\"" << ", "
       << "\"targets\": " << v.targets()

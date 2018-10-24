@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_VARIANT_HELPER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_VARIANT_HELPER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_VARIANT_HELPER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_IO_VARIANT_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen::generation::cpp::formatters::io {
+namespace masd::dogen::generation::cpp::formatters::io {
 
 class variant_helper : public helper_formatter_interface {
 public:

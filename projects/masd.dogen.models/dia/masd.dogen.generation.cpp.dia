@@ -106,7 +106,7 @@
         <dia:point val="-48,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,11.95;-25.49,25.75"/>
+        <dia:rectangle val="-48.05,11.95;-25.49,26.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="22.460000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.700000000000001"/>
+        <dia:real val="14.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -135,7 +135,7 @@
             <dia:string>#CPP is the C++ backend in the default generation kernel.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.generation.cpp
+#DOGEN yarn.model_modules=masd.dogen.generation.cpp
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.modeling.dia
 #DOGEN yarn.reference=masd.dogen.formatting.dia
@@ -21486,7 +21486,7 @@ and element.#</dia:string>
         <dia:point val="207.91,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="196.004,40.9993;208.66,53.8"/>
+        <dia:rectangle val="196.039,40.9995;208.66,53.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21494,8 +21494,8 @@ and element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="207.91,53"/>
         <dia:point val="207.91,46"/>
-        <dia:point val="196.054,46"/>
-        <dia:point val="196.089,41.0496"/>
+        <dia:point val="196.089,46"/>
+        <dia:point val="196.097,41.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28090,7 +28090,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="37,57.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.0012,56.85;37.75,68.7508"/>
+        <dia:rectangle val="31.0377,56.85;37.75,68.7508"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28098,8 +28098,8 @@ an "odd" formatter.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="37,57.6"/>
         <dia:point val="37,63.3334"/>
-        <dia:point val="31.0516,63.3334"/>
-        <dia:point val="31.0879,67.9508"/>
+        <dia:point val="31.0878,63.3334"/>
+        <dia:point val="31.0969,67.9508"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30798,7 +30798,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="326.365,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="325.615,64.3996;337.164,74.8"/>
+        <dia:rectangle val="325.615,64.4;337.183,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30806,8 +30806,8 @@ an "odd" formatter.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="326.365,74"/>
         <dia:point val="326.365,68.9167"/>
-        <dia:point val="336.906,68.9167"/>
-        <dia:point val="336.964,64.4502"/>
+        <dia:point val="336.964,68.9167"/>
+        <dia:point val="336.983,64.4502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

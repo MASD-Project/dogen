@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/facet_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 facet_properties::facet_properties()
     : enabled_(static_cast<bool>(0)) { }

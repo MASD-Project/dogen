@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/aspect_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 aspect_properties::aspect_properties()
     : requires_manual_default_constructor_(static_cast<bool>(0)),

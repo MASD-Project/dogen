@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_IO_FORMATTERS_INCLUSION_SUPPORT_TYPES_IO_HPP
-#define DOGEN_GENERATION_CPP_IO_FORMATTERS_INCLUSION_SUPPORT_TYPES_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_IO_FORMATTERS_INCLUSION_SUPPORT_TYPES_IO_HPP
+#define MASD_DOGEN_GENERATION_CPP_IO_FORMATTERS_INCLUSION_SUPPORT_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace masd::dogen::generation::cpp::formatters {
 
 std::ostream& operator<<(std::ostream& s, const inclusion_support_types& v);
 

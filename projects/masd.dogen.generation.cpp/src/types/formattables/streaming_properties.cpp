@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 streaming_properties::streaming_properties()
     : requires_quoting_(static_cast<bool>(0)),

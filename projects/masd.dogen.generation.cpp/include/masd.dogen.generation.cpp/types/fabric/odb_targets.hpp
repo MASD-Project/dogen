@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGETS_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGETS_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGETS_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGETS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.generation.cpp/types/fabric/odb_target.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_target.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class odb_targets final {
 public:
@@ -43,7 +43,7 @@ public:
     odb_targets(
         const std::string& main_target_name,
         const std::string& common_odb_options,
-        const std::list<dogen::generation::cpp::fabric::odb_target>& targets);
+        const std::list<masd::dogen::generation::cpp::fabric::odb_target>& targets);
 
 public:
     const std::string& main_target_name() const;
@@ -56,10 +56,10 @@ public:
     void common_odb_options(const std::string& v);
     void common_odb_options(const std::string&& v);
 
-    const std::list<dogen::generation::cpp::fabric::odb_target>& targets() const;
-    std::list<dogen::generation::cpp::fabric::odb_target>& targets();
-    void targets(const std::list<dogen::generation::cpp::fabric::odb_target>& v);
-    void targets(const std::list<dogen::generation::cpp::fabric::odb_target>&& v);
+    const std::list<masd::dogen::generation::cpp::fabric::odb_target>& targets() const;
+    std::list<masd::dogen::generation::cpp::fabric::odb_target>& targets();
+    void targets(const std::list<masd::dogen::generation::cpp::fabric::odb_target>& v);
+    void targets(const std::list<masd::dogen::generation::cpp::fabric::odb_target>&& v);
 
 public:
     bool operator==(const odb_targets& rhs) const;
@@ -74,7 +74,7 @@ public:
 private:
     std::string main_target_name_;
     std::string common_odb_options_;
-    std::list<dogen::generation::cpp::fabric::odb_target> targets_;
+    std::list<masd::dogen::generation::cpp::fabric::odb_target> targets_;
 };
 
 }
@@ -83,8 +83,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::fabric::odb_targets& lhs,
-    dogen::generation::cpp::fabric::odb_targets& rhs) {
+    masd::dogen::generation::cpp::fabric::odb_targets& lhs,
+    masd::dogen::generation::cpp::fabric::odb_targets& rhs) {
     lhs.swap(rhs);
 }
 

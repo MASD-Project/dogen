@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/model.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 model::model()
-    : cpp_standard_(static_cast<dogen::generation::cpp::formattables::cpp_standards>(0)) { }
+    : cpp_standard_(static_cast<masd::dogen::generation::cpp::formattables::cpp_standards>(0)) { }
 
 model::model(
-    const dogen::modeling::meta_model::name& name,
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& formattables,
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& facet_properties,
-    const dogen::generation::cpp::formattables::cpp_standards cpp_standard,
+    const masd::dogen::modeling::meta_model::name& name,
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& formattables,
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& facet_properties,
+    const masd::dogen::generation::cpp::formattables::cpp_standards cpp_standard,
     const std::list<std::string>& odb_databases,
     const std::string& odb_sql_name_case,
     const std::list<std::string>& project_items)
@@ -72,75 +72,75 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::modeling::meta_model::name& model::name() const {
+const masd::dogen::modeling::meta_model::name& model::name() const {
     return name_;
 }
 
-dogen::modeling::meta_model::name& model::name() {
+masd::dogen::modeling::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::modeling::meta_model::name& v) {
+void model::name(const masd::dogen::modeling::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::modeling::meta_model::name&& v) {
+void model::name(const masd::dogen::modeling::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& model::streaming_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& model::streaming_properties() const {
     return streaming_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& model::streaming_properties() {
+std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& model::streaming_properties() {
     return streaming_properties_;
 }
 
-void model::streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& v) {
+void model::streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& v) {
     streaming_properties_ = v;
 }
 
-void model::streaming_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>&& v) {
+void model::streaming_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>&& v) {
     streaming_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& model::formattables() const {
+const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& model::formattables() const {
     return formattables_;
 }
 
-std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& model::formattables() {
+std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& model::formattables() {
     return formattables_;
 }
 
-void model::formattables(const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& v) {
+void model::formattables(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& v) {
     formattables_ = v;
 }
 
-void model::formattables(const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>&& v) {
+void model::formattables(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>&& v) {
     formattables_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& model::facet_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& model::facet_properties() const {
     return facet_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& model::facet_properties() {
+std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& model::facet_properties() {
     return facet_properties_;
 }
 
-void model::facet_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& v) {
+void model::facet_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& v) {
     facet_properties_ = v;
 }
 
-void model::facet_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>&& v) {
+void model::facet_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>&& v) {
     facet_properties_ = std::move(v);
 }
 
-dogen::generation::cpp::formattables::cpp_standards model::cpp_standard() const {
+masd::dogen::generation::cpp::formattables::cpp_standards model::cpp_standard() const {
     return cpp_standard_;
 }
 
-void model::cpp_standard(const dogen::generation::cpp::formattables::cpp_standards v) {
+void model::cpp_standard(const masd::dogen::generation::cpp::formattables::cpp_standards v) {
     cpp_standard_ = v;
 }
 

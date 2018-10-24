@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/directive_group.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 directive_group::directive_group(
     const std::string& primary,

@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.generation.cpp/io/formattables/formattable_io.hpp"
-#include "dogen.generation.cpp/io/formattables/element_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/formattable_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::modeling::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -41,7 +41,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::modeling::meta_model::element> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,11 +53,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::formattable\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::formattables::formattable\"" << ", "
       << "\"master_segment\": " << v.master_segment() << ", "
       << "\"all_segments\": " << v.all_segments() << ", "
       << "\"element_properties\": " << v.element_properties()

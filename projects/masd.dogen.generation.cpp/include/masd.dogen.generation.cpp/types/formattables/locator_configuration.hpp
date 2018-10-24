@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_CONFIGURATION_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_CONFIGURATION_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
-#include "dogen.generation.cpp/types/formattables/locator_archetype_configuration.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator_facet_configuration.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator_archetype_configuration.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class locator_configuration final {
 public:
@@ -44,8 +44,8 @@ public:
 
 public:
     locator_configuration(
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations,
-        const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_archetype_configuration>& archetype_configurations,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations,
+        const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_archetype_configuration>& archetype_configurations,
         const std::string& include_directory_name,
         const std::string& source_directory_name,
         const bool disable_facet_directories,
@@ -54,15 +54,15 @@ public:
         const std::string& backend_directory_name);
 
 public:
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations();
-    void facet_configurations(const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration>& v);
-    void facet_configurations(const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration>& facet_configurations();
+    void facet_configurations(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration>& v);
+    void facet_configurations(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration>&& v);
 
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_archetype_configuration>& archetype_configurations() const;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_archetype_configuration>& archetype_configurations();
-    void archetype_configurations(const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_archetype_configuration>& v);
-    void archetype_configurations(const std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_archetype_configuration>&& v);
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_archetype_configuration>& archetype_configurations() const;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_archetype_configuration>& archetype_configurations();
+    void archetype_configurations(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_archetype_configuration>& v);
+    void archetype_configurations(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_archetype_configuration>&& v);
 
     const std::string& include_directory_name() const;
     std::string& include_directory_name();
@@ -103,8 +103,8 @@ public:
     locator_configuration& operator=(locator_configuration other);
 
 private:
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_facet_configuration> facet_configurations_;
-    std::unordered_map<std::string, dogen::generation::cpp::formattables::locator_archetype_configuration> archetype_configurations_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_facet_configuration> facet_configurations_;
+    std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::locator_archetype_configuration> archetype_configurations_;
     std::string include_directory_name_;
     std::string source_directory_name_;
     bool disable_facet_directories_;
@@ -119,8 +119,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::locator_configuration& lhs,
-    dogen::generation::cpp::formattables::locator_configuration& rhs) {
+    masd::dogen::generation::cpp::formattables::locator_configuration& lhs,
+    masd::dogen::generation::cpp::formattables::locator_configuration& rhs) {
     lhs.swap(rhs);
 }
 

@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.cpp/io/formattables/helper_configuration_io.hpp"
-#include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/helper_configuration_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -51,7 +51,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,11 +67,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const helper_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::helper_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::formattables::helper_configuration\"" << ", "
       << "\"helper_families\": " << v.helper_families() << ", "
       << "\"streaming_properties\": " << v.streaming_properties()
       << " }";

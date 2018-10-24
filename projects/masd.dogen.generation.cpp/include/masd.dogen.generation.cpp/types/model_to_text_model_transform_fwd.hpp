@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_FWD_HPP
-#define DOGEN_GENERATION_CPP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_FWD_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_FWD_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_MODEL_TO_TEXT_MODEL_TRANSFORM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::generation::cpp {
+namespace masd::dogen::generation::cpp {
 
 class model_to_text_model_transform;
 

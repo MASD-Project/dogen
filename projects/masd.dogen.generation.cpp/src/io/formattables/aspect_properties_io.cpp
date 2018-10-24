@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& s, const aspect_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::aspect_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::generation::cpp::formattables::aspect_properties\"" << ", "
       << "\"requires_manual_default_constructor\": " << v.requires_manual_default_constructor() << ", "
       << "\"requires_manual_move_constructor\": " << v.requires_manual_move_constructor() << ", "
       << "\"requires_stream_manipulators\": " << v.requires_stream_manipulators()

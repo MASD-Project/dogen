@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_HELPER_DESCRIPTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 class helper_descriptor final {
 public:
@@ -52,7 +52,7 @@ public:
         const std::string& name_qualified,
         const std::string& name_tree_qualified,
         const std::string& name_tree_identifiable,
-        const boost::optional<dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
+        const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
         const bool is_simple_type,
         const bool requires_hashing_helper,
         const bool is_circular_dependency,
@@ -89,10 +89,10 @@ public:
     void name_tree_identifiable(const std::string& v);
     void name_tree_identifiable(const std::string&& v);
 
-    const boost::optional<dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
-    boost::optional<dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
-    void streaming_properties(const boost::optional<dogen::generation::cpp::formattables::streaming_properties>& v);
-    void streaming_properties(const boost::optional<dogen::generation::cpp::formattables::streaming_properties>&& v);
+    const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
+    boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
+    void streaming_properties(const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>& v);
+    void streaming_properties(const boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties>&& v);
 
     bool is_simple_type() const;
     void is_simple_type(const bool v);
@@ -123,7 +123,7 @@ private:
     std::string name_qualified_;
     std::string name_tree_qualified_;
     std::string name_tree_identifiable_;
-    boost::optional<dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
+    boost::optional<masd::dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
     bool is_simple_type_;
     bool requires_hashing_helper_;
     bool is_circular_dependency_;
@@ -136,8 +136,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::formattables::helper_descriptor& lhs,
-    dogen::generation::cpp::formattables::helper_descriptor& rhs) {
+    masd::dogen::generation::cpp::formattables::helper_descriptor& lhs,
+    masd::dogen::generation::cpp::formattables::helper_descriptor& rhs) {
     lhs.swap(rhs);
 }
 

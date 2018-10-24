@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGET_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGET_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGET_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_ODB_TARGET_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <utility>
 #include <algorithm>
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class odb_target final {
 public:
@@ -104,8 +104,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::fabric::odb_target& lhs,
-    dogen::generation::cpp::fabric::odb_target& rhs) {
+    masd::dogen::generation::cpp::fabric::odb_target& lhs,
+    masd::dogen::generation::cpp::fabric::odb_target& rhs) {
     lhs.swap(rhs);
 }
 

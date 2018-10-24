@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_IO_FABRIC_VISUAL_STUDIO_CONFIGURATION_IO_HPP
-#define DOGEN_GENERATION_CPP_IO_FABRIC_VISUAL_STUDIO_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_IO_FABRIC_VISUAL_STUDIO_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_GENERATION_CPP_IO_FABRIC_VISUAL_STUDIO_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::cpp::fabric::visual_studio_configuration& v);
+     const masd::dogen::generation::cpp::fabric::visual_studio_configuration& v);
 
 }
 

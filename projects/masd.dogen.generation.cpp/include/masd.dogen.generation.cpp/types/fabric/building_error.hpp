@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_BUILDING_ERROR_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_BUILDING_ERROR_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_BUILDING_ERROR_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class building_error : public virtual std::exception, public virtual boost::exception {
 public:

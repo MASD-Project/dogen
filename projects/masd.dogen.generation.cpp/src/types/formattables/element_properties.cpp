@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/element_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/element_properties.hpp"
 
-namespace dogen::generation::cpp::formattables {
+namespace masd::dogen::generation::cpp::formattables {
 
 element_properties::element_properties(element_properties&& rhs)
     : aspect_properties_(std::move(rhs.aspect_properties_)),
@@ -31,12 +31,12 @@ element_properties::element_properties(element_properties&& rhs)
       attribute_level_test_data_properties_(std::move(rhs.attribute_level_test_data_properties_)) { }
 
 element_properties::element_properties(
-    const dogen::generation::cpp::formattables::aspect_properties& aspect_properties,
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& artefact_properties,
-    const std::list<dogen::generation::cpp::formattables::helper_properties>& helper_properties,
+    const masd::dogen::generation::cpp::formattables::aspect_properties& aspect_properties,
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& artefact_properties,
+    const std::list<masd::dogen::generation::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
-    const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties,
-    const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties)
+    const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& odb_properties,
+    const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties)
     : aspect_properties_(aspect_properties),
       artefact_properties_(artefact_properties),
       helper_properties_(helper_properties),
@@ -69,51 +69,51 @@ element_properties& element_properties::operator=(element_properties other) {
     return *this;
 }
 
-const dogen::generation::cpp::formattables::aspect_properties& element_properties::aspect_properties() const {
+const masd::dogen::generation::cpp::formattables::aspect_properties& element_properties::aspect_properties() const {
     return aspect_properties_;
 }
 
-dogen::generation::cpp::formattables::aspect_properties& element_properties::aspect_properties() {
+masd::dogen::generation::cpp::formattables::aspect_properties& element_properties::aspect_properties() {
     return aspect_properties_;
 }
 
-void element_properties::aspect_properties(const dogen::generation::cpp::formattables::aspect_properties& v) {
+void element_properties::aspect_properties(const masd::dogen::generation::cpp::formattables::aspect_properties& v) {
     aspect_properties_ = v;
 }
 
-void element_properties::aspect_properties(const dogen::generation::cpp::formattables::aspect_properties&& v) {
+void element_properties::aspect_properties(const masd::dogen::generation::cpp::formattables::aspect_properties&& v) {
     aspect_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& element_properties::artefact_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& element_properties::artefact_properties() const {
     return artefact_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& element_properties::artefact_properties() {
+std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& element_properties::artefact_properties() {
     return artefact_properties_;
 }
 
-void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& v) {
+void element_properties::artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>& v) {
     artefact_properties_ = v;
 }
 
-void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>&& v) {
+void element_properties::artefact_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::artefact_properties>&& v) {
     artefact_properties_ = std::move(v);
 }
 
-const std::list<dogen::generation::cpp::formattables::helper_properties>& element_properties::helper_properties() const {
+const std::list<masd::dogen::generation::cpp::formattables::helper_properties>& element_properties::helper_properties() const {
     return helper_properties_;
 }
 
-std::list<dogen::generation::cpp::formattables::helper_properties>& element_properties::helper_properties() {
+std::list<masd::dogen::generation::cpp::formattables::helper_properties>& element_properties::helper_properties() {
     return helper_properties_;
 }
 
-void element_properties::helper_properties(const std::list<dogen::generation::cpp::formattables::helper_properties>& v) {
+void element_properties::helper_properties(const std::list<masd::dogen::generation::cpp::formattables::helper_properties>& v) {
     helper_properties_ = v;
 }
 
-void element_properties::helper_properties(const std::list<dogen::generation::cpp::formattables::helper_properties>&& v) {
+void element_properties::helper_properties(const std::list<masd::dogen::generation::cpp::formattables::helper_properties>&& v) {
     helper_properties_ = std::move(v);
 }
 
@@ -133,35 +133,35 @@ void element_properties::canonical_archetype_to_archetype(const std::unordered_m
     canonical_archetype_to_archetype_ = std::move(v);
 }
 
-const boost::optional<dogen::generation::cpp::formattables::odb_properties>& element_properties::odb_properties() const {
+const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& element_properties::odb_properties() const {
     return odb_properties_;
 }
 
-boost::optional<dogen::generation::cpp::formattables::odb_properties>& element_properties::odb_properties() {
+boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& element_properties::odb_properties() {
     return odb_properties_;
 }
 
-void element_properties::odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>& v) {
+void element_properties::odb_properties(const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>& v) {
     odb_properties_ = v;
 }
 
-void element_properties::odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>&& v) {
+void element_properties::odb_properties(const boost::optional<masd::dogen::generation::cpp::formattables::odb_properties>&& v) {
     odb_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() const {
+const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() const {
     return attribute_level_test_data_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() {
+std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() {
     return attribute_level_test_data_properties_;
 }
 
-void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& v) {
+void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>& v) {
     attribute_level_test_data_properties_ = v;
 }
 
-void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>&& v) {
+void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::test_data_properties>&& v) {
     attribute_level_test_data_properties_ = std::move(v);
 }
 

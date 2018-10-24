@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_IO_FABRIC_ODB_TARGET_IO_HPP
-#define DOGEN_GENERATION_CPP_IO_FABRIC_ODB_TARGET_IO_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_IO_FABRIC_ODB_TARGET_IO_HPP
+#define MASD_DOGEN_GENERATION_CPP_IO_FABRIC_ODB_TARGET_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.generation.cpp/types/fabric/odb_target.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_target.hpp"
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::generation::cpp::fabric::odb_target& v);
+     const masd::dogen::generation::cpp::fabric::odb_target& v);
 
 }
 

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TEST_DATA_SEQUENCE_CONTAINER_HELPER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TEST_DATA_SEQUENCE_CONTAINER_HELPER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TEST_DATA_SEQUENCE_CONTAINER_HELPER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TEST_DATA_SEQUENCE_CONTAINER_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
-namespace dogen::generation::cpp::formatters::test_data {
+namespace masd::dogen::generation::cpp::formatters::test_data {
 
 class sequence_container_helper : public helper_formatter_interface {
 public:

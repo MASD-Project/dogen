@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_VISUAL_STUDIO_CONFIGURATION_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_VISUAL_STUDIO_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_VISUAL_STUDIO_CONFIGURATION_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_VISUAL_STUDIO_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::generation::cpp::fabric {
+namespace masd::dogen::generation::cpp::fabric {
 
 class visual_studio_configuration final {
 public:
@@ -74,8 +74,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::generation::cpp::fabric::visual_studio_configuration& lhs,
-    dogen::generation::cpp::fabric::visual_studio_configuration& rhs) {
+    masd::dogen::generation::cpp::fabric::visual_studio_configuration& lhs,
+    masd::dogen::generation::cpp::fabric::visual_studio_configuration& rhs) {
     lhs.swap(rhs);
 }
 
