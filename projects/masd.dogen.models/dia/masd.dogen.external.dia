@@ -902,7 +902,7 @@
         <dia:point val="-22,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-22.05,-12.05;2.05,3.35"/>
+        <dia:rectangle val="-22.05,-12.05;2.05,4.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -914,7 +914,7 @@
         <dia:real val="24.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="15.300000000000001"/>
+        <dia:real val="16.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -937,7 +937,7 @@ An exogenous model is defined as:
 - a Dogen format designed for interoperability (JSON).
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.external
+#DOGEN yarn.model_modules=masd.dogen.external
 #DOGEN yarn.input_language=cpp
 #DOGEN yarn.reference=masd.dogen.probing.dia
 #DOGEN quilt.cpp.enabled=true

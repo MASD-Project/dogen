@@ -208,6 +208,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.dia/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.external/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.probing/include
 
     ${CMAKE_SOURCE_DIR}/projects/dogen.formatting/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.options/include
@@ -219,7 +220,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.generation.csharp/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.knitter/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.tailor/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.probing/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
     )
 
@@ -231,6 +231,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.probing)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external.json)
@@ -242,5 +243,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation.csharp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.formatting)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.knitter)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tailor)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.probing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
