@@ -1,13 +1,13 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/master_header.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/master_header_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/master_header.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/master_header_formatter.hpp" #>
 <#+
 
 master_header_formatter::master_header_formatter(const std::string& facet_name)

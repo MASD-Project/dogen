@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,12 +30,12 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/types/archetype_locations_group.hpp"
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "dogen.generation.cpp/types/formatters/repository.hpp"
-#include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 
 namespace dogen::generation::cpp::formatters {

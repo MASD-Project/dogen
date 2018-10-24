@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_DECORATION_EXPANDER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_DECORATION_EXPANDER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_DECORATION_EXPANDER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_DECORATION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.formatting/types/decoration_properties.hpp"
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
 
 namespace dogen::generation::cpp::fabric {
 

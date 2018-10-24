@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/test_data_properties_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/test_data_properties_expander.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

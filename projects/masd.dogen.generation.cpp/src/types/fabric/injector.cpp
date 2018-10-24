@@ -20,15 +20,15 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.generation.cpp/types/formatters/workflow.hpp"
-#include "dogen.generation.cpp/types/fabric/registrar_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/build_files_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/master_header_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/forward_declarations_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/injector.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/workflow.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/registrar_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/build_files_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/master_header_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/forward_declarations_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/injector.hpp"
 
 namespace {
 

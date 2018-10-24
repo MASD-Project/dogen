@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
-#include "dogen.generation.cpp/types/formattables/streaming_expander.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/streaming_expander.hpp"
 
 namespace {
 
@@ -41,7 +41,7 @@ std::ostream& operator<<(std::ostream& s,
     const streaming_expander::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::"
+      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
       << "streaming_expander::type_group\"" << ", "
       << "\"requires_quoting\": " << v.requires_quoting << ", "
       << "\"string_conversion_method\": " << v.string_conversion_method << ", "

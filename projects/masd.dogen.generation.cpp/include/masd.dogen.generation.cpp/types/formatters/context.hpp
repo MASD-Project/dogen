@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_CONTEXT_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_CONTEXT_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_CONTEXT_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,10 @@
 #include <algorithm>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "dogen.generation.cpp/types/formattables/model.hpp"
-#include "dogen.generation.cpp/types/formattables/element_properties.hpp"
-#include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/element_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 
 namespace dogen::generation::cpp::formatters {
 

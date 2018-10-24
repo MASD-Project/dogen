@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/fabric/master_header.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/master_header.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.formatting/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 
 namespace dogen::generation::cpp::formatters {

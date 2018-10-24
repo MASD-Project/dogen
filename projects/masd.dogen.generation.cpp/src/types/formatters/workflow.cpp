@@ -20,15 +20,15 @@
  */
 #include <iterator>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.generation.cpp/types/workflow_error.hpp"
-#include "dogen.modeling/io/meta_model/formatting_styles_io.hpp"
-#include "dogen.generation.cpp/io/formattables/artefact_properties_io.hpp"
-#include "dogen.generation.cpp/types/formatters/context.hpp"
-#include "dogen.generation.cpp/types/formatters/wale_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.cpp/types/formatters/workflow.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.generation.cpp/types/workflow_error.hpp"
+#include "masd.dogen.modeling/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/artefact_properties_io.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/context.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/wale_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/workflow.hpp"
 
 namespace {
 

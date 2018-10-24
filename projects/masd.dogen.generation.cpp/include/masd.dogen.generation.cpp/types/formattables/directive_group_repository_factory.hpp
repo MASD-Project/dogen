@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,13 +29,13 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.generation.cpp/types/formattables/model.hpp"
-#include "dogen.generation.cpp/types/formatters/repository.hpp"
-#include "dogen.generation.cpp/types/formattables/locator.hpp"
-#include "dogen.generation.cpp/types/formattables/formattable.hpp"
-#include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

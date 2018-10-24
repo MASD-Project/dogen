@@ -20,14 +20,14 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/io/meta_model/letter_cases_io.hpp"
-#include "dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
-#include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
-#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/adaptation_error.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.cpp/types/formattables/adapter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/io/meta_model/letter_cases_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/adaptation_error.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/adapter.hpp"
 
 namespace {
 

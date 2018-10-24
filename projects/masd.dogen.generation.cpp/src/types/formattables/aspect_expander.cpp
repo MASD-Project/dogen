@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
-#include "dogen.generation.cpp/types/formattables/aspect_expander.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/aspect_expander.hpp"
 
 namespace {
 
@@ -41,7 +41,7 @@ namespace dogen::generation::cpp::formattables {
 std::ostream&
 operator<<(std::ostream& s, const aspect_expander::type_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::"
+      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
       << "aspect_expander::type_group\"" << ", "
       << "\"requires_manual_default_constructor\": "
       << v.requires_manual_default_constructor << ", "

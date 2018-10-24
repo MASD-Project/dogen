@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formattables/expansion_error.hpp"
-#include "dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/expansion_error.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
 
 namespace {
 

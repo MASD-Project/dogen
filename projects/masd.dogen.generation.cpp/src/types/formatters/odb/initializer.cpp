@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/builtin_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/primitive_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/class_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/enum_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/initializer.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/builtin_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/primitive_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/class_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/enum_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/initializer.hpp"
 
 namespace dogen::generation::cpp::formatters::odb {
 

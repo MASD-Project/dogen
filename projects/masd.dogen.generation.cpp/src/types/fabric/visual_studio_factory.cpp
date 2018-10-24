@@ -20,17 +20,17 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/algorithm/string/join.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.modeling/types/meta_model/module.hpp"
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.modeling/types/helpers/name_flattener.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
-#include "dogen.generation.cpp/types/fabric/visual_studio_solution.hpp"
-#include "dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/visual_studio_solution.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
 
 namespace {
 

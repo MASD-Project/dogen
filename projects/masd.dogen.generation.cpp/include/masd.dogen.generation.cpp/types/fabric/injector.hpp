@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_INJECTOR_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_INJECTOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_INJECTOR_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_INJECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
 
 namespace dogen::generation::cpp::fabric {
 

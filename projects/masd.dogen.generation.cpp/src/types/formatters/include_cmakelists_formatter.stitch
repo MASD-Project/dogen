@@ -2,16 +2,16 @@
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
-<#@ stitch.inclusion_dependency="dogen.utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/cmakelists.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/include_cmakelists_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/cmakelists.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/include_cmakelists_formatter.hpp" #>
 <#+
 
 std::string include_cmakelists_formatter::static_id() {

@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/streaming_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/canonical_archetype_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/inclusion_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/aspect_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/helper_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/reducer.hpp"
-#include "dogen.generation.cpp/types/formattables/file_path_and_guard_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/odb_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/facet_directory_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/build_files_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
-#include "dogen.generation.cpp/types/formattables/model_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/streaming_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/canonical_archetype_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/inclusion_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/aspect_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/helper_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/reducer.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/file_path_and_guard_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/odb_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/facet_directory_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/build_files_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/cpp_standard_expander.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

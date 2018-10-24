@@ -21,19 +21,19 @@
 #include <sstream>
 #include <typeindex>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.cpp/types/formattables/expansion_error.hpp"
-#include "dogen.generation.cpp/types/formattables/directive_group.hpp"
-#include "dogen.generation.cpp/io/formattables/directive_group_io.hpp"
-#include "dogen.generation.cpp/types/formattables/directive_group_repository_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/expansion_error.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/directive_group_io.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group_repository_factory.hpp"
 
 namespace {
 
@@ -66,7 +66,7 @@ std::ostream& operator<<(std::ostream& s,
     formattater_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::"
+      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
       << "directive_group_repository_factory::formatters_type_group\""
       << ", "
       << "\"primary_inclusion_directive\": "
@@ -82,7 +82,7 @@ std::ostream& operator<<(std::ostream& s,
     const directive_group_repository_factory::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::"
+      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
       << "directive_group_repository_factory::type_group\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required << ", "
       << "\"formattaters_type_groups\": "

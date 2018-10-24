@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/types/formattables/reducer.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/reducer.hpp"
 
 namespace {
 

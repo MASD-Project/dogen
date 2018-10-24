@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,10 +30,10 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "dogen.generation.cpp/types/formattables/directive_group.hpp"
-#include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

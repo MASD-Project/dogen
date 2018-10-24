@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 

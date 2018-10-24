@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <string>
 #include <unordered_set>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/model.hpp"
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "dogen.generation.cpp/types/formattables/model.hpp"
-#include "dogen.generation.cpp/types/formattables/locator.hpp"
-#include "dogen.generation.cpp/types/formatters/repository.hpp"
-#include "dogen.generation.cpp/types/formattables/formattable.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

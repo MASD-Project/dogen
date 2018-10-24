@@ -20,11 +20,11 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/registrar.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/registrar_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/registrar.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/registrar_factory.hpp"
 
 namespace {
 

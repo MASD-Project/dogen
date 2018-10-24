@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FABRIC_DYNAMIC_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.modeling/types/transforms/context_fwd.hpp"
-#include "dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
+#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
 
 namespace dogen::generation::cpp::fabric {
 

@@ -21,15 +21,15 @@
 #include <boost/make_shared.hpp>
 #include <boost/pointer_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/types/helpers/name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/building_error.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
-#include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
-#include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/building_error.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 
 namespace {
 

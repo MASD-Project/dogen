@@ -1,10 +1,10 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::io #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/variant_helper.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/variant_helper.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
 <#@ stitch.wale.template=cpp_helper_formatter_implementation.wale #>
 <#@ stitch.wale.kvp.helper.family=BoostVariant #>
 <#@ stitch.wale.kvp.class.simple_name=variant_helper #>

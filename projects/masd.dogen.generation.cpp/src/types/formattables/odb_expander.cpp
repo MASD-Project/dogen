@@ -20,23 +20,23 @@
  */
 #include <sstream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.generation.cpp/types/formattables/adapter.hpp"
-#include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
-#include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
-#include "dogen.generation.cpp/types/fabric/element_visitor.hpp"
-#include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen.generation.cpp/io/formattables/odb_properties_io.hpp"
-#include "dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formattables/odb_expander.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/adapter.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/odb_properties_io.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/odb/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/odb_expander.hpp"
 
 namespace {
 
@@ -279,7 +279,7 @@ std::ostream& operator<<(std::ostream& s,
     const odb_expander::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::generation::cpp::formattables::"
+      << "\"__type__\": " << "\"masd.dogen::generation::cpp::formattables::"
       << "odb_expander::type_group\"" << ", "
       << "\"odb_pragma\": " << v.odb_pragma
       << " }";

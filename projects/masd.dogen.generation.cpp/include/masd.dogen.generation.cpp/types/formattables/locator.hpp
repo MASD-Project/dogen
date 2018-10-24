@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_LOCATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,12 +30,12 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.generation.cpp/types/formatters/repository.hpp"
-#include "dogen.generation.cpp/types/formattables/locator_configuration.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator_configuration.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

@@ -1,16 +1,16 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::generation::cpp::formatters #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
-<#@ stitch.inclusion_dependency="dogen.utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/visual_studio_project.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/visual_studio_project_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/visual_studio_project.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/visual_studio_project_formatter.hpp" #>
 <#+
 
 std::string visual_studio_project_formatter::static_id() {

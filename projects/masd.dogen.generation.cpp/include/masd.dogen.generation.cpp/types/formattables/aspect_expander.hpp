@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_EXPANDER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_EXPANDER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_EXPANDER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_ASPECT_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,14 +29,14 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/types/meta_model/attribute.hpp"
-#include "dogen.generation.cpp/types/formattables/formattable.hpp"
-#include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
-#include "dogen.generation.cpp/types/formattables/model.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/aspect_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

@@ -19,17 +19,17 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
-#include "dogen.modeling/types/meta_model/exception.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/types/meta_model/visitor.hpp"
-#include "dogen.modeling/types/meta_model/element_visitor.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/forward_declarations.hpp"
-#include "dogen.generation.cpp/types/fabric/forward_declarations_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/forward_declarations.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/forward_declarations_factory.hpp"
 
 namespace {
 

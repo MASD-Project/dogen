@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/hash/primitive_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/hash/primitive_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/hash/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
 
 namespace dogen::generation::cpp::formatters::hash {
 

@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/types/enum_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/types/enum_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.formatting/types/sequence_formatter.hpp"
-#include "dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "dogen.modeling/types/meta_model/enumeration.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/enum_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/enum_header_formatter.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 

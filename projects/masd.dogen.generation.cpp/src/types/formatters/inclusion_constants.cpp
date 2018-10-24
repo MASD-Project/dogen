@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
 
 namespace dogen::generation::cpp::formatters {
 

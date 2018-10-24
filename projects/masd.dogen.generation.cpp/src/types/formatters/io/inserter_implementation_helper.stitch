@@ -1,7 +1,7 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::io #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
 <#+
 
 void inserter_implementation_helper(

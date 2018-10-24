@@ -19,12 +19,12 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/types/utility_formatter.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
-#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/wale_formatter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/types/utility_formatter.hpp"
+#include "masd.dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/formatting_error.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/wale_formatter.hpp"
 
 namespace {
 

@@ -22,13 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/join.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formattables/location_error.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.cpp/types/formattables/locator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.generation.cpp/types/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/location_error.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 
 namespace {
 

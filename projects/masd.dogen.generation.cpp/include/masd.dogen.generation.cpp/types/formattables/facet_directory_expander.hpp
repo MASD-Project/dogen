@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FACET_DIRECTORY_EXPANDER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FACET_DIRECTORY_EXPANDER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FACET_DIRECTORY_EXPANDER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTABLES_FACET_DIRECTORY_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <unordered_map>
-#include "dogen.generation.cpp/types/formattables/locator.hpp"
-#include "dogen.generation.cpp/types/formattables/model.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

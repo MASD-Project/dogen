@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/odb_file_path_generator.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/odb_file_path_generator.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

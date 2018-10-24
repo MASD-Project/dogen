@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
-#include "dogen.generation.cpp/types/formattables/building_error.hpp"
-#include "dogen.generation.cpp/io/formattables/directive_group_io.hpp"
-#include "dogen.generation.cpp/types/formattables/dependencies_builder.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/building_error.hpp"
+#include "masd.dogen.generation.cpp/io/formattables/directive_group_io.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/dependencies_builder.hpp"
 
 namespace {
 

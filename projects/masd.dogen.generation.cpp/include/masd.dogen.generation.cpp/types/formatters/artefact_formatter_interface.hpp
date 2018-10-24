@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.generation.cpp/types/formattables/locator.hpp"
-#include "dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
-#include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen.generation.cpp/types/formatters/context.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/context.hpp"
 
 namespace dogen::generation::cpp::formatters {
 

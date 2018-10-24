@@ -22,14 +22,14 @@
 #include <iterator>
 #include <algorithm>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/set_io.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/io/formatters/repository_io.hpp"
-#include "dogen.generation.cpp/types/formatters/registrar_error.hpp"
-#include "dogen.generation.cpp/types/formatters/registrar.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/set_io.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/io/formatters/repository_io.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/registrar_error.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/registrar.hpp"
 
 namespace {
 

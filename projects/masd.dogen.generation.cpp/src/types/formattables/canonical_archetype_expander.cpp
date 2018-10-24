@@ -19,12 +19,12 @@
  *
  */
 #include <typeindex>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen.generation.cpp/types/formattables/canonical_archetype_expander.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {
 

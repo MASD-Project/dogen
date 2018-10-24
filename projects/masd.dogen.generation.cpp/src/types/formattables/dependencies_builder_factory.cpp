@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 
 namespace dogen::generation::cpp::formattables {
 

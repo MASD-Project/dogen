@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_STITCH_FORMATTER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_STITCH_FORMATTER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_STITCH_FORMATTER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_STITCH_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.modeling/types/meta_model/element_fwd.hpp"
-#include "dogen.templating/types/stitch/instantiator.hpp"
-#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_fwd.hpp"
+#include "masd.dogen.templating/types/stitch/instantiator.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen::generation::cpp::formatters {
 

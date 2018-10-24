@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/stitch_formatter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/stitch_formatter.hpp"
 
 namespace {
 

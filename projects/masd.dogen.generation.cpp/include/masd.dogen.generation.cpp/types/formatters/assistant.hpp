@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ASSISTANT_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ASSISTANT_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ASSISTANT_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_ASSISTANT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,18 +32,18 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.formatting/types/comment_styles.hpp"
-#include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/element.hpp"
-#include "dogen.modeling/types/meta_model/object.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/types/meta_model/letter_cases.hpp"
-#include "dogen.generation.cpp/types/formatters/context.hpp"
-#include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.formatting/types/comment_styles.hpp"
+#include "masd.dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/context.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
 
 namespace dogen::generation::cpp::formatters {
 

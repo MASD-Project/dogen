@@ -1,9 +1,9 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::generation::cpp::formatters::test_data #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/bool_helper.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>
-<#@ stitch.inclusion_dependency="dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/bool_helper.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formattables/helper_properties.hpp" #>
 <#@ stitch.wale.template=cpp_helper_formatter_implementation_enabled.wale #>
 <#@ stitch.wale.kvp.helper.family=Boolean #>
 <#@ stitch.wale.kvp.class.simple_name=bool_helper #>

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_WALE_FORMATTER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_WALE_FORMATTER_HPP
+#ifndef MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_WALE_FORMATTER_HPP
+#define MASD_DOGEN_GENERATION_CPP_TYPES_FORMATTERS_WALE_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.modeling/types/meta_model/element_fwd.hpp"
-#include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
-#include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_fwd.hpp"
+#include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
+#include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 
 namespace dogen::generation::cpp::formatters {
 
