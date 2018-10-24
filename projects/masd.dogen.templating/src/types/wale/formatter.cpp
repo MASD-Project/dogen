@@ -19,7 +19,7 @@
  *
  */
 #include <boost/algorithm/string/replace.hpp>
-#include "dogen.templating/types/wale/formatter.hpp"
+#include "masd.dogen.templating/types/wale/formatter.hpp"
 
 namespace {
 
@@ -28,7 +28,7 @@ const std::string postfix("}}");
 
 }
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 std::string formatter::wrap_key(const std::string& key) const {
     return prefix + key + postfix;

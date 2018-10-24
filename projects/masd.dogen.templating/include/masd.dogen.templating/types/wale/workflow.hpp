@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_WALE_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.templating/types/wale/properties.hpp"
-#include "dogen.templating/types/wale/text_template.hpp"
+#include "masd.dogen.templating/types/wale/properties.hpp"
+#include "masd.dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 class workflow final {
 private:

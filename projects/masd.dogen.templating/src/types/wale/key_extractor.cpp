@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.templating/types/wale/extraction_error.hpp"
-#include "dogen.templating/types/wale/key_extractor.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.templating/types/wale/extraction_error.hpp"
+#include "masd.dogen.templating/types/wale/key_extractor.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("templating.wale.key_extractor"));
 
 const char dot('.');
@@ -39,7 +39,7 @@ const std::string eol_before_close("Reached EOL before finding close markers");
 
 }
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 enum states {
     waiting_first_open,

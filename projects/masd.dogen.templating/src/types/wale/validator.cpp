@@ -20,21 +20,21 @@
  */
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.templating/types/wale/validation_error.hpp"
-#include "dogen.templating/types/wale/validator.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.templating/types/wale/validation_error.hpp"
+#include "masd.dogen.templating/types/wale/validator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("templating.wale.validator"));
 
 const std::string key_error("Expected key not supplied: ");
 
 }
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 void validator::validate(const text_template& tt) const {
     std::unordered_set<std::string> s;

@@ -19,15 +19,15 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.modeling/io/meta_model/artefact_io.hpp"
-#include "dogen.templating/test/mock_text_template_factory.hpp"
-#include "dogen.templating/io/stitch/text_template_io.hpp"
-#include "dogen.templating/types/stitch/resolution_error.hpp"
-#include "dogen.templating/types/stitch/formatting_error.hpp"
-#include "dogen.templating/types/stitch/formatter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.modeling/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.templating/test/mock_text_template_factory.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_io.hpp"
+#include "masd.dogen.templating/types/stitch/resolution_error.hpp"
+#include "masd.dogen.templating/types/stitch/formatting_error.hpp"
+#include "masd.dogen.templating/types/stitch/formatter.hpp"
 
 namespace {
 
@@ -167,20 +167,20 @@ line 2
 
 const std::string unmapped_variable("Key not found:");
 
-dogen::modeling::meta_model::artefact
-format(const dogen::templating::stitch::text_template& tt) {
-    dogen::templating::stitch::formatter f;
+masd::dogen::modeling::meta_model::artefact
+format(const masd::dogen::templating::stitch::text_template& tt) {
+    masd::dogen::templating::stitch::formatter f;
     return f.format(tt);
 }
 
-using dogen::utility::test::asserter;
+using masd::dogen::utility::test::asserter;
 dogen::templating::test::mock_text_template_factory factory;
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::templating::stitch::formatting_error;
-using dogen::templating::stitch::resolution_error;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::templating::stitch::formatting_error;
+using masd::dogen::templating::stitch::resolution_error;
 
 BOOST_AUTO_TEST_SUITE(stitch_formatter_tests)
 

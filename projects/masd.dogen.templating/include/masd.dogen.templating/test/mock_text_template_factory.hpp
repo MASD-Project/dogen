@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_STITCH_MOCK_TEXT_TEMPLATE_FACTORY_HPP
-#define DOGEN_TEMPLATING_STITCH_MOCK_TEXT_TEMPLATE_FACTORY_HPP
+#ifndef MASD_DOGEN_TEMPLATING_STITCH_MOCK_TEXT_TEMPLATE_FACTORY_HPP
+#define MASD_DOGEN_TEMPLATING_STITCH_MOCK_TEXT_TEMPLATE_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.templating/types/stitch/text_template.hpp"
+#include "masd.dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen::templating::test {
+namespace masd::dogen::templating::test {
 
 /**
  * @brief Generates text templates for testing purposes.

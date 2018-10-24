@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_TRAITS_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_TRAITS_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_TRAITS_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 struct traits {
     /**

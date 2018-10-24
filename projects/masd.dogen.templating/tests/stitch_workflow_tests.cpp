@@ -19,14 +19,14 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/test/asserter.hpp"
-#include "dogen.utility/test_data/seam.hpp"
-#include "dogen.utility/test_data/stitch.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.templating/io/stitch/text_template_io.hpp"
-#include "dogen.templating/types/stitch/instantiation_error.hpp"
-#include "dogen.templating/types/stitch/workflow.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/asserter.hpp"
+#include "masd.dogen.utility/test_data/seam.hpp"
+#include "masd.dogen.utility/test_data/stitch.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_io.hpp"
+#include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
+#include "masd.dogen.templating/types/stitch/workflow.hpp"
 
 namespace {
 
@@ -39,9 +39,9 @@ const bool compatibility_mode(false);
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::utility::test::asserter;
-using dogen::templating::stitch::instantiation_error;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::utility::test::asserter;
+using masd::dogen::templating::stitch::instantiation_error;
 
 BOOST_AUTO_TEST_SUITE(stitch_workflow_tests)
 
@@ -49,8 +49,8 @@ BOOST_AUTO_TEST_SUITE(stitch_workflow_tests)
 BOOST_IGNORE_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("simple_template_results_in_expected_output");
 
-    dogen::templating::stitch::workflow w(compatibility_mode);
-    using namespace dogen::utility::test_data;
+    masd::dogen::templating::stitch::workflow w(compatibility_mode);
+    using namespace masd::dogen::utility::test_data;
     w.execute(stitch::input_simple_template_stitch());
 
     BOOST_CHECK(asserter::assert_file(
@@ -61,8 +61,8 @@ BOOST_IGNORE_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
 BOOST_IGNORE_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("complex_template_results_in_expected_output");
 
-    dogen::templating::stitch::workflow w(compatibility_mode);
-    using namespace dogen::utility::test_data;
+    masd::dogen::templating::stitch::workflow w(compatibility_mode);
+    using namespace masd::dogen::utility::test_data;
     w.execute(stitch::input_complex_template_stitch());
 
     BOOST_CHECK(asserter::assert_file(
@@ -74,9 +74,10 @@ BOOST_IGNORE_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
 BOOST_AUTO_TEST_CASE(empty_template_throws) {
     SETUP_TEST_LOG_SOURCE("empty_template_throws");
 
-    dogen::templating::stitch::workflow w(compatibility_mode);
-    using namespace dogen::utility::test_data;
-    contains_checker<dogen::templating::stitch::instantiation_error> c(empty_template);
+    masd::dogen::templating::stitch::workflow w(compatibility_mode);
+    using namespace masd::dogen::utility::test_data;
+    contains_checker<masd::dogen::templating::stitch::instantiation_error>
+        c(empty_template);
     BOOST_CHECK_EXCEPTION(w.execute(stitch::input_empty_template_stitch());,
         instantiation_error, c);
 }

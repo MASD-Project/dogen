@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.templating/io/wale/properties_io.hpp"
-#include "dogen.templating/types/wale/key_extractor.hpp"
-#include "dogen.templating/types/wale/formatter.hpp"
-#include "dogen.templating/types/wale/validator.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.templating/io/wale/properties_io.hpp"
+#include "masd.dogen.templating/types/wale/key_extractor.hpp"
+#include "masd.dogen.templating/types/wale/formatter.hpp"
+#include "masd.dogen.templating/types/wale/validator.hpp"
+#include "masd.dogen.templating/types/wale/workflow.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("templating.wale.workflow"));
 
 const std::string wale_dir("wale");
 
 }
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 properties workflow::create_properties(
     const boost::filesystem::path& template_path,
@@ -54,7 +54,7 @@ boost::filesystem::path
 workflow::resolve_path(const boost::filesystem::path& p) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving path: " << p;
 
-    using namespace dogen::utility::filesystem;
+    using namespace masd::dogen::utility::filesystem;
     const auto data_dir(dogen::utility::filesystem::data_files_directory());
     const auto dir(data_dir / wale_dir);
     const auto r(dir / p);

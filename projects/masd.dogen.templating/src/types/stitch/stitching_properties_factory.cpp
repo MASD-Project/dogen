@@ -19,17 +19,17 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/string/splitter.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.templating/types/stitch/traits.hpp"
-#include "dogen.templating/types/stitch/building_error.hpp"
-#include "dogen.templating/types/stitch/stitching_properties_factory.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/string/splitter.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.templating/types/stitch/traits.hpp"
+#include "masd.dogen.templating/types/stitch/building_error.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties_factory.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("templating.stitch.stitching_properties_factory"));
 
 const std::string field_definition_not_found(
@@ -37,7 +37,7 @@ const std::string field_definition_not_found(
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 stitching_properties_factory::
 stitching_properties_factory(const annotations::type_repository& arp)

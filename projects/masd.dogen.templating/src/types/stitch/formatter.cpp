@@ -20,17 +20,17 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.formatting/types/utility_formatter.hpp"
-#include "dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
-#include "dogen.templating/io/stitch/block_types_io.hpp"
-#include "dogen.templating/types/stitch/formatting_error.hpp"
-#include "dogen.templating/types/stitch/formatter.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.formatting/types/utility_formatter.hpp"
+#include "masd.dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.templating/io/stitch/block_types_io.hpp"
+#include "masd.dogen.templating/types/stitch/formatting_error.hpp"
+#include "masd.dogen.templating/types/stitch/formatter.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("templating.stitch.formatting"));
 
 const std::string empty_header_guard;
@@ -53,7 +53,7 @@ const std::string unsupported_block_type("Block type is unsupported: ");
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 void formatter::format_text_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
@@ -166,11 +166,11 @@ modeling::meta_model::artefact formatter::format(const text_template& tt) const 
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());
-        dogen::formatting::cpp::scoped_boilerplate_formatter
+        masd::dogen::formatting::cpp::scoped_boilerplate_formatter
             sbf(s, tt.properties().decoration_properties(), id,
                 empty_header_guard);
 
-        dogen::formatting::cpp::scoped_namespace_formatter snf(
+        masd::dogen::formatting::cpp::scoped_namespace_formatter snf(
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
             true/*add_new_line_*/, true/*nested_namespaces*/);
 

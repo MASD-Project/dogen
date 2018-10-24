@@ -19,9 +19,9 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.templating/types/wale/key_extractor.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.templating/types/wale/key_extractor.hpp"
 
 namespace {
 
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_SUITE(wale_key_extractor_tests)
 BOOST_AUTO_TEST_CASE(string_with_no_keys_results_in_no_extracted_keys) {
     SETUP_TEST_LOG_SOURCE("string_with_no_keys_results_in_no_extracted_keys");
 
-    dogen::templating::wale::key_extractor ke;
+    masd::dogen::templating::wale::key_extractor ke;
     BOOST_LOG_SEV(lg, debug) << "input 0: " << no_keys_0;
     const auto a0(ke.extract(no_keys_0));
     BOOST_LOG_SEV(lg, debug) << "result 0: " << a0;
@@ -122,7 +122,7 @@ BOOST_AUTO_TEST_CASE(string_with_no_keys_results_in_no_extracted_keys) {
 BOOST_AUTO_TEST_CASE(string_with_one_key_results_in_one_extracted_key) {
     SETUP_TEST_LOG_SOURCE("string_with_one_key_results_in_one_extracted_key");
 
-    dogen::templating::wale::key_extractor ke;
+    masd::dogen::templating::wale::key_extractor ke;
     BOOST_LOG_SEV(lg, debug) << "input 0: " << one_key_0;
     const auto a0(ke.extract(one_key_0));
     BOOST_LOG_SEV(lg, debug) << "result 0: " << a0;
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(string_with_one_key_results_in_one_extracted_key) {
 BOOST_AUTO_TEST_CASE(string_with_two_keys_results_in_two_extracted_keys) {
     SETUP_TEST_LOG_SOURCE("string_with_two_keys_results_in_two_extracted_keys");
 
-    dogen::templating::wale::key_extractor ke;
+    masd::dogen::templating::wale::key_extractor ke;
     BOOST_LOG_SEV(lg, debug) << "input 0: " << two_keys_0;
     const auto a0(ke.extract(two_keys_0));
     BOOST_LOG_SEV(lg, debug) << "result 0: " << a0;
@@ -178,7 +178,7 @@ BOOST_AUTO_TEST_CASE(string_with_two_keys_results_in_two_extracted_keys) {
 BOOST_AUTO_TEST_CASE(string_with_many_keys_results_in_expected_extracted_keys) {
     SETUP_TEST_LOG_SOURCE("string_with_many_keys_results_in_expected_extracted_keys");
 
-    dogen::templating::wale::key_extractor ke;
+    masd::dogen::templating::wale::key_extractor ke;
     BOOST_LOG_SEV(lg, debug) << "input 0: " << many_keys_0;
     const auto a0(ke.extract(many_keys_0));
     BOOST_LOG_SEV(lg, debug) << "result 0: " << a0;
@@ -223,7 +223,7 @@ BOOST_AUTO_TEST_CASE(string_with_many_keys_results_in_expected_extracted_keys) {
 BOOST_AUTO_TEST_CASE(valid_keys_result_in_expected_extracted_keys) {
     SETUP_TEST_LOG_SOURCE("valid_keys_result_in_expected_extracted_keys");
 
-    dogen::templating::wale::key_extractor ke;
+    masd::dogen::templating::wale::key_extractor ke;
     BOOST_LOG_SEV(lg, debug) << "input 0: " << valid_key_0;
     const auto a0(ke.extract(valid_key_0));
     BOOST_LOG_SEV(lg, debug) << "result 0: " << a0;

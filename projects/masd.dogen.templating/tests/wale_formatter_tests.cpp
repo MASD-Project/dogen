@@ -19,10 +19,10 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.templating/io/wale/text_template_io.hpp"
-#include "dogen.templating/types/wale/formatter.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.templating/io/wale/text_template_io.hpp"
+#include "masd.dogen.templating/types/wale/formatter.hpp"
 
 namespace {
 
@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_SUITE(wale_formatter_tests)
 BOOST_AUTO_TEST_CASE(trivial_template_formats_correctly) {
     SETUP_TEST_LOG_SOURCE("trivial_template_formats_correctly");
 
-    dogen::templating::wale::text_template tt;
+    masd::dogen::templating::wale::text_template tt;
     tt.properties().supplied_kvps(std::unordered_map<std::string, std::string> {
             { "one", "um" },
             { "two", "dois" },
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(trivial_template_formats_correctly) {
     const auto& e(trivial_template_output);
     BOOST_LOG_SEV(lg, debug) << "expected: " << e;
 
-    dogen::templating::wale::formatter f;
+    masd::dogen::templating::wale::formatter f;
     const auto a(f.format(tt));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
 

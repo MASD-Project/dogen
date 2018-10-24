@@ -21,26 +21,26 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/list_io.hpp"
-#include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/types/type_repository_factory.hpp"
-#include "dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "dogen.formatting/types/repository_factory.hpp"
-#include "dogen.modeling/io/meta_model/artefact_io.hpp"
-#include "dogen.modeling/types/helpers/filesystem_writer.hpp"
-#include "dogen.templating/types/stitch/parser.hpp"
-#include "dogen.templating/types/stitch/properties_factory.hpp"
-#include "dogen.templating/types/stitch/instantiator.hpp"
-#include "dogen.templating/types/stitch/formatter.hpp"
-#include "dogen.templating/types/stitch/workflow_error.hpp"
-#include "dogen.templating/types/stitch/workflow.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/list_io.hpp"
+#include "masd.dogen.utility/io/forward_list_io.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.annotations/types/type_repository_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.modeling/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.modeling/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.templating/types/stitch/parser.hpp"
+#include "masd.dogen.templating/types/stitch/properties_factory.hpp"
+#include "masd.dogen.templating/types/stitch/instantiator.hpp"
+#include "masd.dogen.templating/types/stitch/formatter.hpp"
+#include "masd.dogen.templating/types/stitch/workflow_error.hpp"
+#include "masd.dogen.templating/types/stitch/workflow.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("templating.stitch.workflow"));
 
 const std::string annotations_dir("annotations");
@@ -53,7 +53,7 @@ const std::string error_in_file("Failed to parse file: ");
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 workflow::workflow(const bool compatibility_mode)
     : compatibility_mode_(compatibility_mode) {}
@@ -108,7 +108,7 @@ workflow::obtain_archetype_location_repository() const {
 
 dogen::formatting::repository workflow::create_formatting_repository(
     const std::vector<boost::filesystem::path>& data_dirs) const {
-    dogen::formatting::repository_factory f;
+    masd::dogen::formatting::repository_factory f;
     return f.make(data_dirs);
 }
 
@@ -122,7 +122,7 @@ annotations::type_repository workflow::create_annotations_type_repository(
 std::list<modeling::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const dogen::formatting::repository& drp, const std::forward_list<
+    const masd::dogen::formatting::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
     std::list<modeling::meta_model::artefact> r;

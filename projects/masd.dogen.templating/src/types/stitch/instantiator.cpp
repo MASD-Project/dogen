@@ -20,21 +20,21 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
-#include "dogen.templating/types/stitch/instantiation_error.hpp"
-#include "dogen.templating/types/stitch/parser.hpp"
-#include "dogen.templating/types/stitch/properties.hpp"
-#include "dogen.templating/types/stitch/formatter.hpp"
-#include "dogen.templating/types/stitch/instantiator.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.utility/io/unordered_map_io.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.templating/types/stitch/instantiation_error.hpp"
+#include "masd.dogen.templating/types/stitch/parser.hpp"
+#include "masd.dogen.templating/types/stitch/properties.hpp"
+#include "masd.dogen.templating/types/stitch/formatter.hpp"
+#include "masd.dogen.templating/types/stitch/instantiator.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("templating.stitch.instantiator"));
 
 const std::string stitch_postfix(".cpp");
@@ -45,11 +45,11 @@ const std::string duplicate_variable("Attempt to insert duplicate variable: ");
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const dogen::formatting::repository& frp)
+    const masd::dogen::formatting::repository& frp)
     : annotation_factory_(af), properties_factory_(atrp, frp) {}
 
 boost::filesystem::path

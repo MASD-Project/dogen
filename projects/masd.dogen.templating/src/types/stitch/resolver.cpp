@@ -19,20 +19,20 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.templating/types/stitch/resolution_error.hpp"
-#include "dogen.templating/types/stitch/resolver.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.templating/types/stitch/resolution_error.hpp"
+#include "masd.dogen.templating/types/stitch/resolver.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("templating.stitch.resolver"));
 
 const std::string key_not_found("Key not found: ");
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 resolver::resolver(const std::unordered_map<std::string, std::string>& kvps)
     : kvps_(kvps) {}

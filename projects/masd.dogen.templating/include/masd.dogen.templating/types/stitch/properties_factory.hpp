@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_FACTORY_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_FACTORY_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_FACTORY_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.formatting/types/decoration_properties.hpp"
-#include "dogen.templating/types/stitch/stitching_properties.hpp"
-#include "dogen.templating/types/stitch/properties.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
+#include "masd.dogen.templating/types/stitch/properties.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief Creates the settings bundle.
@@ -41,7 +41,7 @@ namespace dogen::templating::stitch {
 class properties_factory {
 public:
     properties_factory(const annotations::type_repository& atrp,
-        const dogen::formatting::repository& frp);
+        const masd::dogen::formatting::repository& frp);
 
 private:
     /**
@@ -64,7 +64,7 @@ public:
 
 private:
     const annotations::type_repository& annotations_repository_;
-    const dogen::formatting::repository& formatting_repository_;
+    const masd::dogen::formatting::repository& formatting_repository_;
 };
 
 }

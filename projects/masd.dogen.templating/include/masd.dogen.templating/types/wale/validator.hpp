@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_VALIDATOR_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_VALIDATOR_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_WALE_VALIDATOR_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_WALE_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.templating/types/wale/text_template.hpp"
+#include "masd.dogen.templating/types/wale/text_template.hpp"
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 class validator final {
 public:

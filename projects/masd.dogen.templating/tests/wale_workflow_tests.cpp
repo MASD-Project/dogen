@@ -19,9 +19,9 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.templating/types/wale/workflow.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/io/unordered_set_io.hpp"
+#include "masd.dogen.templating/types/wale/workflow.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(wale_templates_in_data_produce_expected_instantiation) {
         {"class.simple_name", "some_class"}
     };
 
-    dogen::templating::wale::workflow w;
+    masd::dogen::templating::wale::workflow w;
     w.execute("cpp_artefact_formatter_header.wale", kvps);
     BOOST_TEST_CHECKPOINT("Instantiated template.");
 }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_FACTORY_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_FACTORY_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_FACTORY_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_STITCHING_PROPERTIES_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.templating/types/stitch/stitching_properties.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief Creates the stitching settings.

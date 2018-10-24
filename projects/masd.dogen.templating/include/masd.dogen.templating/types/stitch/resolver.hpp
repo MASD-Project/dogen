@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_RESOLVER_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_RESOLVER_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_RESOLVER_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_RESOLVER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <unordered_map>
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 class resolver final {
 public:

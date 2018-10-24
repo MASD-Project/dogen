@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_FORMATTER_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_FORMATTER_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_FORMATTER_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.templating/types/stitch/line.hpp"
-#include "dogen.templating/types/stitch/text_template.hpp"
-#include "dogen.templating/types/stitch/resolver.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.templating/types/stitch/line.hpp"
+#include "masd.dogen.templating/types/stitch/text_template.hpp"
+#include "masd.dogen.templating/types/stitch/resolver.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief Format a text template into a file.

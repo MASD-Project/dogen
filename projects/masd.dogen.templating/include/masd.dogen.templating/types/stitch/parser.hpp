@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_PARSER_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_PARSER_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_PARSER_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,11 +27,11 @@
 
 #include <string>
 #include <utility>
-#include "dogen.templating/types/stitch/line.hpp"
-#include "dogen.templating/types/stitch/block.hpp"
-#include "dogen.templating/types/stitch/text_template_body.hpp"
+#include "masd.dogen.templating/types/stitch/line.hpp"
+#include "masd.dogen.templating/types/stitch/block.hpp"
+#include "masd.dogen.templating/types/stitch/text_template_body.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief Provides line number information on errors.

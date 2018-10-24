@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.templating/types/stitch/traits.hpp"
+#include "masd.dogen.templating/types/stitch/traits.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 std::string traits::model_name() {
     static std::string r("stitch");

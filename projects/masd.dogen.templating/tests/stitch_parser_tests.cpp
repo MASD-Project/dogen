@@ -20,14 +20,14 @@
  */
 #include <algorithm>
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
-#include "dogen.utility/filesystem/path.hpp"
-#include "dogen.utility/filesystem/file.hpp"
-#include "dogen.utility/test/exception_checkers.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.templating/io/stitch/text_template_body_io.hpp"
-#include "dogen.templating/types/stitch/parsing_error.hpp"
-#include "dogen.templating/types/stitch/parser.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/filesystem/path.hpp"
+#include "masd.dogen.utility/filesystem/file.hpp"
+#include "masd.dogen.utility/test/exception_checkers.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
+#include "masd.dogen.templating/types/stitch/parsing_error.hpp"
+#include "masd.dogen.templating/types/stitch/parser.hpp"
 
 namespace {
 
@@ -143,8 +143,9 @@ const std::string start_and_end("start and end in the same line");
 const std::string middle_of_line("the middle of a line");
 const std::string invalid_characters("Invalid characters used");
 
-dogen::templating::stitch::text_template_body parse(const std::string& s) {
-    dogen::templating::stitch::parser p;
+masd::dogen::templating::stitch::text_template_body
+parse(const std::string& s) {
+    masd::dogen::templating::stitch::parser p;
     return p.parse(s);
 }
 
@@ -158,8 +159,8 @@ bool find_kvp(
 
 }
 
-using dogen::utility::test::contains_checker;
-using dogen::templating::stitch::parsing_error;
+using masd::dogen::utility::test::contains_checker;
+using masd::dogen::templating::stitch::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(stitch_parser_tests)
 
@@ -178,7 +179,7 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_in_single_line_results_in_exp
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
-    BOOST_CHECK(b.type() == dogen::templating::stitch::block_types::text_block);
+    BOOST_CHECK(b.type() == masd::dogen::templating::stitch::block_types::text_block);
     BOOST_CHECK(b.content() == only_text_content_in_single_line);
 }
 
@@ -191,13 +192,13 @@ BOOST_AUTO_TEST_CASE(string_with_only_text_content_multi_line_results_in_expecte
     const auto& l1(body.lines().front());
     BOOST_REQUIRE(l1.blocks().size() == 1);
     const auto& b1(l1.blocks().front());
-    BOOST_CHECK(b1.type() == dogen::templating::stitch::block_types::text_block);
+    BOOST_CHECK(b1.type() == masd::dogen::templating::stitch::block_types::text_block);
     BOOST_CHECK(b1.content() == only_text_content_in_single_line);
 
     const auto& l2(body.lines().back());
     BOOST_REQUIRE(l2.blocks().size() == 1);
     const auto& b2(l2.blocks().front());
-    BOOST_CHECK(b2.type() == dogen::templating::stitch::block_types::text_block);
+    BOOST_CHECK(b2.type() == masd::dogen::templating::stitch::block_types::text_block);
     BOOST_CHECK(b2.content() == only_text_content_second_line);
 }
 
@@ -210,7 +211,7 @@ BOOST_AUTO_TEST_CASE(inline_standard_control_block_results_in_expected_template)
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
-    BOOST_CHECK(b.type() == dogen::templating::stitch::block_types::standard_control_block);
+    BOOST_CHECK(b.type() == masd::dogen::templating::stitch::block_types::standard_control_block);
     BOOST_CHECK(b.content() == single_line_standard_control_block_content);
 }
 
@@ -248,7 +249,7 @@ BOOST_AUTO_TEST_CASE(single_line_standard_control_block_results_in_expected_temp
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
-    BOOST_CHECK(b.type() == dogen::templating::stitch::block_types::standard_control_block);
+    BOOST_CHECK(b.type() == masd::dogen::templating::stitch::block_types::standard_control_block);
     BOOST_CHECK(b.content() == single_line_standard_control_block_content);
 }
 
@@ -261,7 +262,7 @@ BOOST_AUTO_TEST_CASE(text_standard_standard_control_text_single_line_results_in_
     const auto l1(*i);
     BOOST_REQUIRE(l1.blocks().size() == 1);
     const auto& b1(l1.blocks().front());
-    using dogen::templating::stitch::block_types;
+    using masd::dogen::templating::stitch::block_types;
     BOOST_CHECK(b1.type() == block_types::text_block);
     BOOST_CHECK(b1.content() == only_text_content_in_single_line);
 
@@ -289,7 +290,7 @@ BOOST_AUTO_TEST_CASE(standard_control_text_standard_control_single_line_results_
     const auto l1(*i);
     BOOST_REQUIRE(l1.blocks().size() == 1);
     const auto& b1(l1.blocks().front());
-    using dogen::templating::stitch::block_types;
+    using masd::dogen::templating::stitch::block_types;
     BOOST_CHECK(b1.type() == block_types::standard_control_block);
     BOOST_CHECK(b1.content() == single_line_standard_control_block_content);
 
@@ -399,7 +400,7 @@ BOOST_AUTO_TEST_CASE(line_with_stand_alone_expression_block_results_in_expected_
 
     BOOST_REQUIRE(line.blocks().size() == 1);
     const auto& b(line.blocks().front());
-    BOOST_CHECK(b.type() == dogen::templating::stitch::block_types::expression_block);
+    BOOST_CHECK(b.type() == masd::dogen::templating::stitch::block_types::expression_block);
     BOOST_CHECK(b.content() == inline_block);
 }
 
@@ -411,11 +412,11 @@ BOOST_AUTO_TEST_CASE(line_with_text_expression_block_results_in_expected_templat
 
     BOOST_REQUIRE(line.blocks().size() == 2);
     const auto& b1(line.blocks().front());
-    BOOST_CHECK(b1.type() == dogen::templating::stitch::block_types::text_block);
+    BOOST_CHECK(b1.type() == masd::dogen::templating::stitch::block_types::text_block);
     BOOST_CHECK(b1.content() == only_text_content_in_single_line);
 
     const auto& b2(line.blocks().back());
-    BOOST_CHECK(b2.type() == dogen::templating::stitch::block_types::expression_block);
+    BOOST_CHECK(b2.type() == masd::dogen::templating::stitch::block_types::expression_block);
     BOOST_CHECK(b2.content() == inline_block);
 }
 
@@ -428,7 +429,7 @@ BOOST_AUTO_TEST_CASE(line_with_text_expression_block_text_results_in_expected_te
     BOOST_REQUIRE(line.blocks().size() == 3);
     auto i(line.blocks().begin());
     const auto& b1(*i);
-    using dogen::templating::stitch::block_types;
+    using masd::dogen::templating::stitch::block_types;
     BOOST_CHECK(b1.type() == block_types::text_block);
     BOOST_CHECK(b1.content() == only_text_content_in_single_line);
 
@@ -452,7 +453,7 @@ BOOST_AUTO_TEST_CASE(line_with_expression_block_text_expression_block_results_in
     BOOST_REQUIRE(line.blocks().size() == 3);
     auto i(line.blocks().begin());
     const auto& b1(*i);
-    using dogen::templating::stitch::block_types;
+    using masd::dogen::templating::stitch::block_types;
     BOOST_CHECK(b1.type() == block_types::expression_block);
     BOOST_CHECK(b1.content() == inline_block);
 
@@ -476,7 +477,7 @@ BOOST_AUTO_TEST_CASE(line_with_text_expression_block_text_expression_block_text_
     BOOST_REQUIRE(line.blocks().size() == 5);
     auto i(line.blocks().begin());
     const auto& b1(*i);
-    using dogen::templating::stitch::block_types;
+    using masd::dogen::templating::stitch::block_types;
     BOOST_CHECK(b1.type() == block_types::text_block);
     BOOST_CHECK(b1.content() == only_text_content_in_single_line);
 
@@ -550,7 +551,7 @@ BOOST_AUTO_TEST_CASE(line_with_variable_block_results_in_expected_template) {
     BOOST_REQUIRE(line.blocks().size() == 1);
     auto i(line.blocks().begin());
     const auto& b1(*i);
-    using dogen::templating::stitch::block_types;
+    using masd::dogen::templating::stitch::block_types;
     BOOST_CHECK(b1.type() == block_types::variable_block);
     BOOST_CHECK(b1.content() == simple_variable);
 }

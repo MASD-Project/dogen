@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.formatting/types/decoration_properties_factory.hpp"
-#include "dogen.templating/types/stitch/stitching_properties_factory.hpp"
-#include "dogen.templating/types/stitch/properties_factory.hpp"
+#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.templating/types/stitch/stitching_properties_factory.hpp"
+#include "masd.dogen.templating/types/stitch/properties_factory.hpp"
 
 namespace {
 
@@ -28,15 +28,15 @@ const std::string cpp_modeline_name("cpp");
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 properties_factory::properties_factory(const annotations::type_repository& atrp,
-    const dogen::formatting::repository& frp)
+    const masd::dogen::formatting::repository& frp)
     : annotations_repository_(atrp),   formatting_repository_(frp) {}
 
 boost::optional<formatting::decoration_properties> properties_factory::
 make_decoration_properties(const annotations::annotation& a) const {
-    using dogen::formatting::decoration_properties_factory;
+    using masd::dogen::formatting::decoration_properties_factory;
     const auto& drp(annotations_repository_);
     decoration_properties_factory f(drp, formatting_repository_);
     return f.make(cpp_modeline_name, a);

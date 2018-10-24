@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_STITCH_WORKFLOW_HPP
-#define DOGEN_TEMPLATING_TYPES_STITCH_WORKFLOW_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_STITCH_WORKFLOW_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_STITCH_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,16 +30,16 @@
 #include <string>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/annotation_factory.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.modeling/types/meta_model/artefact.hpp"
-#include "dogen.formatting/types/repository.hpp"
-#include "dogen.templating/types/stitch/properties.hpp"
-#include "dogen.templating/types/stitch/text_template.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.templating/types/stitch/properties.hpp"
+#include "masd.dogen.templating/types/stitch/text_template.hpp"
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 /**
  * @brief Performs the stitch workflow.
@@ -84,7 +84,7 @@ private:
     /**
      * @brief Creates the formatting' repository.
      */
-    dogen::formatting::repository create_formatting_repository(
+    masd::dogen::formatting::repository create_formatting_repository(
         const std::vector<boost::filesystem::path>& data_dirs) const;
 
     /**
@@ -101,7 +101,7 @@ private:
     std::list<modeling::meta_model::artefact>
     create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const dogen::formatting::repository& drp,
+        const masd::dogen::formatting::repository& drp,
         const std::forward_list<boost::filesystem::path>&
         text_template_paths) const;
 

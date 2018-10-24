@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEMPLATING_TYPES_WALE_KEY_EXTRACTOR_HPP
-#define DOGEN_TEMPLATING_TYPES_WALE_KEY_EXTRACTOR_HPP
+#ifndef MASD_DOGEN_TEMPLATING_TYPES_WALE_KEY_EXTRACTOR_HPP
+#define MASD_DOGEN_TEMPLATING_TYPES_WALE_KEY_EXTRACTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <locale>
 #include <unordered_set>
 
-namespace dogen::templating::wale {
+namespace masd::dogen::templating::wale {
 
 class key_extractor final {
 public:

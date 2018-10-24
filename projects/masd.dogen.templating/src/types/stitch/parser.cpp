@@ -29,15 +29,15 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.templating/io/stitch/line_io.hpp"
-#include "dogen.templating/types/stitch/parsing_error.hpp"
-#include "dogen.templating/io/stitch/text_template_body_io.hpp"
-#include "dogen.templating/types/stitch/parser.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.templating/io/stitch/line_io.hpp"
+#include "masd.dogen.templating/types/stitch/parsing_error.hpp"
+#include "masd.dogen.templating/io/stitch/text_template_body_io.hpp"
+#include "masd.dogen.templating/types/stitch/parser.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory("templating.stitch.parser"));
 
 const std::string empty;
@@ -74,7 +74,7 @@ const bool do_trim(true);
 
 }
 
-namespace dogen::templating::stitch {
+namespace masd::dogen::templating::stitch {
 
 block parser::create_block(const block_types bt, const std::string& c,
     const bool trim) const {
