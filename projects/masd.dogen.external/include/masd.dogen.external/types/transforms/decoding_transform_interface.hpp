@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_DECODING_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external/types/transforms/context_fwd.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external/types/transforms/context_fwd.hpp"
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 /**
  * @brief Transform that converts exogenous models into our external

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen.external/types/transforms/decoding_transform_interface.hpp"
-#include "dogen.external/types/transforms/encoding_transform_interface.hpp"
+#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.external/types/transforms/encoding_transform_interface.hpp"
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 class registrar final {
 public:

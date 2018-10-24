@@ -19,7 +19,7 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
+#include "masd.dogen.utility/test/logging.hpp"
 
 namespace {
 

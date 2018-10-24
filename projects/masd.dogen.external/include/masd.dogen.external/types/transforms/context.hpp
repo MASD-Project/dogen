@@ -18,27 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen.probing/types/prober.hpp"
+#include "masd.dogen.probing/types/prober.hpp"
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 class context final {
 public:
-    explicit context(const dogen::probing::prober& prober);
+    explicit context(const masd::dogen::probing::prober& prober);
 
 public:
-    const dogen::probing::prober& prober() const;
+    const masd::dogen::probing::prober& prober() const;
 
 private:
-    dogen::probing::prober prober_;
+    masd::dogen::probing::prober prober_;
 };
 
 }

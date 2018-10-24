@@ -20,13 +20,13 @@
  */
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.external/types/transforms/registrar_error.hpp"
-#include "dogen.external/types/transforms/registrar.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.external/types/transforms/registrar_error.hpp"
+#include "masd.dogen.external/types/transforms/registrar.hpp"
 
 namespace {
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger
 lg(logger_factory("external.registrar"));
 
@@ -41,7 +41,7 @@ const std::string null_transform("Transform supplied is null.");
 
 }
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 void registrar::validate() {
     /*

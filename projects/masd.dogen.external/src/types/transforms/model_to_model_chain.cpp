@@ -18,26 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/transformation_error.hpp"
-#include "dogen.external/types/transforms/model_generation_chain.hpp"
-#include "dogen.external/types/transforms/model_to_model_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/transformation_error.hpp"
+#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.external/types/transforms/model_to_model_chain.hpp"
 
 namespace {
 
 const std::string transform_id("external.transforms.model_to_model_chain");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string transform_not_supported("Cannot transform into: ");
 
 }
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 boost::tuple<decoding_transform_interface&, encoding_transform_interface&>
 model_to_model_chain::obtain_transforms(

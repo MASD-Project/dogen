@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.probing/types/scoped_prober.hpp"
-#include "dogen.external/io/meta_model/model_io.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
 
 namespace {
 
 const std::string transform_id("external.transforms.model_generation_chain");
 
-using namespace dogen::utility::log;
+using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 }
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 std::shared_ptr<registrar> model_generation_chain::registrar_;
 

@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
-#define DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.external/types/meta_model/model.hpp"
-#include "dogen.external/types/transforms/registrar.hpp"
-#include "dogen.external/types/transforms/context_fwd.hpp"
+#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.external/types/transforms/registrar.hpp"
+#include "masd.dogen.external/types/transforms/context_fwd.hpp"
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 /**
  * @brief Given the location of a supported exogenous model, it

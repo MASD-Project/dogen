@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.external/types/transforms/encoding_transform_interface.hpp"
+#include "masd.dogen.external/types/transforms/encoding_transform_interface.hpp"
 
-namespace dogen::external::transforms {
+namespace masd::dogen::external::transforms {
 
 encoding_transform_interface::~encoding_transform_interface() noexcept {}
 
