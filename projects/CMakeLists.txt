@@ -207,10 +207,10 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.external/include
 
     ${CMAKE_SOURCE_DIR}/projects/dogen.formatting/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.options/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.external/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.external.json/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.external.dia/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.modeling/include
@@ -230,9 +230,9 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.modeling)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.external.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.options)
