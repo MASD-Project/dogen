@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_IO_META_MODEL_DIRECTORY_STRUCTURE_STYLES_IO_HPP
-#define DOGEN_MODELING_IO_META_MODEL_DIRECTORY_STRUCTURE_STYLES_IO_HPP
+#ifndef MASD_DOGEN_MODELING_IO_META_MODEL_DIRECTORY_STRUCTURE_STYLES_IO_HPP
+#define MASD_DOGEN_MODELING_IO_META_MODEL_DIRECTORY_STRUCTURE_STYLES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/meta_model/directory_structure_styles.hpp"
+#include "masd.dogen.modeling/types/meta_model/directory_structure_styles.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const directory_structure_styles& v);
 

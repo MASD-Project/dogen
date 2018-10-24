@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_POST_PROCESSING_CHAIN_FWD_HPP
-#define DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_POST_PROCESSING_CHAIN_FWD_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_POST_PROCESSING_CHAIN_FWD_HPP
+#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_POST_PROCESSING_CHAIN_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class model_post_processing_chain;
 

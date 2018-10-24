@@ -20,15 +20,15 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.modeling/io/meta_model/attribute_io.hpp"
-#include "dogen.modeling/types/meta_model/primitive.hpp"
-#include "dogen.modeling/types/meta_model/element_visitor.hpp"
-#include "dogen.modeling/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_primitive_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::modeling::meta_model::orm_primitive_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -41,7 +41,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 primitive::primitive()
     : is_nullable_(static_cast<bool>(0)),
@@ -49,8 +49,8 @@ primitive::primitive()
       is_immutable_(static_cast<bool>(0)) { }
 
 primitive::primitive(primitive&& rhs)
-    : dogen::modeling::meta_model::element(
-        std::forward<dogen::modeling::meta_model::element>(rhs)),
+    : masd::dogen::modeling::meta_model::element(
+        std::forward<masd::dogen::modeling::meta_model::element>(rhs)),
       is_nullable_(std::move(rhs.is_nullable_)),
       value_attribute_(std::move(rhs.value_attribute_)),
       use_type_aliasing_(std::move(rhs.use_type_aliasing_)),
@@ -58,26 +58,26 @@ primitive::primitive(primitive&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)) { }
 
 primitive::primitive(
-    const dogen::modeling::meta_model::name& name,
+    const masd::dogen::modeling::meta_model::name& name,
     const std::string& documentation,
-    const dogen::annotations::annotation& annotation,
-    const dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+    const masd::dogen::formatting::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
     const bool is_nullable,
-    const dogen::modeling::meta_model::attribute& value_attribute,
+    const masd::dogen::modeling::meta_model::attribute& value_attribute,
     const bool use_type_aliasing,
     const bool is_immutable,
-    const boost::optional<dogen::modeling::meta_model::orm_primitive_properties>& orm_properties)
-    : dogen::modeling::meta_model::element(
+    const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& orm_properties)
+    : masd::dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -122,9 +122,9 @@ void primitive::to_stream(std::ostream& s) const {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::primitive\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::primitive\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::modeling::meta_model::element::to_stream(s);
     s << ", "
       << "\"is_nullable\": " << is_nullable_ << ", "
       << "\"value_attribute\": " << value_attribute_ << ", "
@@ -135,7 +135,7 @@ void primitive::to_stream(std::ostream& s) const {
 }
 
 void primitive::swap(primitive& other) noexcept {
-    dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::modeling::meta_model::element::swap(other);
 
     using std::swap;
     swap(is_nullable_, other.is_nullable_);
@@ -145,14 +145,14 @@ void primitive::swap(primitive& other) noexcept {
     swap(orm_properties_, other.orm_properties_);
 }
 
-bool primitive::equals(const dogen::modeling::meta_model::element& other) const {
+bool primitive::equals(const masd::dogen::modeling::meta_model::element& other) const {
     const primitive* const p(dynamic_cast<const primitive* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool primitive::operator==(const primitive& rhs) const {
-    return dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
         is_nullable_ == rhs.is_nullable_ &&
         value_attribute_ == rhs.value_attribute_ &&
         use_type_aliasing_ == rhs.use_type_aliasing_ &&
@@ -174,19 +174,19 @@ void primitive::is_nullable(const bool v) {
     is_nullable_ = v;
 }
 
-const dogen::modeling::meta_model::attribute& primitive::value_attribute() const {
+const masd::dogen::modeling::meta_model::attribute& primitive::value_attribute() const {
     return value_attribute_;
 }
 
-dogen::modeling::meta_model::attribute& primitive::value_attribute() {
+masd::dogen::modeling::meta_model::attribute& primitive::value_attribute() {
     return value_attribute_;
 }
 
-void primitive::value_attribute(const dogen::modeling::meta_model::attribute& v) {
+void primitive::value_attribute(const masd::dogen::modeling::meta_model::attribute& v) {
     value_attribute_ = v;
 }
 
-void primitive::value_attribute(const dogen::modeling::meta_model::attribute&& v) {
+void primitive::value_attribute(const masd::dogen::modeling::meta_model::attribute&& v) {
     value_attribute_ = std::move(v);
 }
 
@@ -206,19 +206,19 @@ void primitive::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-const boost::optional<dogen::modeling::meta_model::orm_primitive_properties>& primitive::orm_properties() const {
+const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& primitive::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<dogen::modeling::meta_model::orm_primitive_properties>& primitive::orm_properties() {
+boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& primitive::orm_properties() {
     return orm_properties_;
 }
 
-void primitive::orm_properties(const boost::optional<dogen::modeling::meta_model::orm_primitive_properties>& v) {
+void primitive::orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& v) {
     orm_properties_ = v;
 }
 
-void primitive::orm_properties(const boost::optional<dogen::modeling::meta_model::orm_primitive_properties>&& v) {
+void primitive::orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

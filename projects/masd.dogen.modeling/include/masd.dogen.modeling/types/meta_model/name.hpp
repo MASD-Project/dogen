@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_NAME_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_NAME_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_NAME_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <string>
 #include <algorithm>
 #include <map>
-#include "dogen.modeling/types/meta_model/location.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.modeling/types/meta_model/location.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Name of an element in modeling space.
@@ -60,8 +60,8 @@ public:
     name(
         const std::string& id,
         const std::string& simple,
-        const std::map<dogen::modeling::meta_model::languages, std::string>& qualified,
-        const dogen::modeling::meta_model::location& location,
+        const std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified,
+        const masd::dogen::modeling::meta_model::location& location,
         const std::string& identifiable);
 
 public:
@@ -97,20 +97,20 @@ public:
      * @brief Qualified name in a language specific representation.
      */
     /**@{*/
-    const std::map<dogen::modeling::meta_model::languages, std::string>& qualified() const;
-    std::map<dogen::modeling::meta_model::languages, std::string>& qualified();
-    void qualified(const std::map<dogen::modeling::meta_model::languages, std::string>& v);
-    void qualified(const std::map<dogen::modeling::meta_model::languages, std::string>&& v);
+    const std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified() const;
+    std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified();
+    void qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>& v);
+    void qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>&& v);
     /**@}*/
 
     /**
      * @brief Where the name is located in element space.
      */
     /**@{*/
-    const dogen::modeling::meta_model::location& location() const;
-    dogen::modeling::meta_model::location& location();
-    void location(const dogen::modeling::meta_model::location& v);
-    void location(const dogen::modeling::meta_model::location&& v);
+    const masd::dogen::modeling::meta_model::location& location() const;
+    masd::dogen::modeling::meta_model::location& location();
+    void location(const masd::dogen::modeling::meta_model::location& v);
+    void location(const masd::dogen::modeling::meta_model::location&& v);
     /**@}*/
 
     /**
@@ -137,8 +137,8 @@ public:
 private:
     std::string id_;
     std::string simple_;
-    std::map<dogen::modeling::meta_model::languages, std::string> qualified_;
-    dogen::modeling::meta_model::location location_;
+    std::map<masd::dogen::modeling::meta_model::languages, std::string> qualified_;
+    masd::dogen::modeling::meta_model::location location_;
     std::string identifiable_;
 };
 
@@ -148,8 +148,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::name& lhs,
-    dogen::modeling::meta_model::name& rhs) {
+    masd::dogen::modeling::meta_model::name& lhs,
+    masd::dogen::modeling::meta_model::name& rhs) {
     lhs.swap(rhs);
 }
 

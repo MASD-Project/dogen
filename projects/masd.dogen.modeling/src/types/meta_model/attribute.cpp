@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 attribute::attribute()
     : is_immutable_(static_cast<bool>(0)),
@@ -38,13 +38,13 @@ attribute::attribute(attribute&& rhs)
 
 attribute::attribute(
     const std::string& documentation,
-    const dogen::annotations::annotation& annotation,
-    const dogen::modeling::meta_model::name& name,
+    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::modeling::meta_model::name& name,
     const std::string& unparsed_type,
-    const dogen::modeling::meta_model::name_tree& parsed_type,
+    const masd::dogen::modeling::meta_model::name_tree& parsed_type,
     const bool is_immutable,
     const bool is_fluent,
-    const boost::optional<dogen::modeling::meta_model::orm_attribute_properties>& orm_properties)
+    const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& orm_properties)
     : documentation_(documentation),
       annotation_(annotation),
       name_(name),
@@ -99,35 +99,35 @@ void attribute::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::annotations::annotation& attribute::annotation() const {
+const masd::dogen::annotations::annotation& attribute::annotation() const {
     return annotation_;
 }
 
-dogen::annotations::annotation& attribute::annotation() {
+masd::dogen::annotations::annotation& attribute::annotation() {
     return annotation_;
 }
 
-void attribute::annotation(const dogen::annotations::annotation& v) {
+void attribute::annotation(const masd::dogen::annotations::annotation& v) {
     annotation_ = v;
 }
 
-void attribute::annotation(const dogen::annotations::annotation&& v) {
+void attribute::annotation(const masd::dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
 }
 
-const dogen::modeling::meta_model::name& attribute::name() const {
+const masd::dogen::modeling::meta_model::name& attribute::name() const {
     return name_;
 }
 
-dogen::modeling::meta_model::name& attribute::name() {
+masd::dogen::modeling::meta_model::name& attribute::name() {
     return name_;
 }
 
-void attribute::name(const dogen::modeling::meta_model::name& v) {
+void attribute::name(const masd::dogen::modeling::meta_model::name& v) {
     name_ = v;
 }
 
-void attribute::name(const dogen::modeling::meta_model::name&& v) {
+void attribute::name(const masd::dogen::modeling::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
@@ -147,19 +147,19 @@ void attribute::unparsed_type(const std::string&& v) {
     unparsed_type_ = std::move(v);
 }
 
-const dogen::modeling::meta_model::name_tree& attribute::parsed_type() const {
+const masd::dogen::modeling::meta_model::name_tree& attribute::parsed_type() const {
     return parsed_type_;
 }
 
-dogen::modeling::meta_model::name_tree& attribute::parsed_type() {
+masd::dogen::modeling::meta_model::name_tree& attribute::parsed_type() {
     return parsed_type_;
 }
 
-void attribute::parsed_type(const dogen::modeling::meta_model::name_tree& v) {
+void attribute::parsed_type(const masd::dogen::modeling::meta_model::name_tree& v) {
     parsed_type_ = v;
 }
 
-void attribute::parsed_type(const dogen::modeling::meta_model::name_tree&& v) {
+void attribute::parsed_type(const masd::dogen::modeling::meta_model::name_tree&& v) {
     parsed_type_ = std::move(v);
 }
 
@@ -179,19 +179,19 @@ void attribute::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-const boost::optional<dogen::modeling::meta_model::orm_attribute_properties>& attribute::orm_properties() const {
+const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& attribute::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<dogen::modeling::meta_model::orm_attribute_properties>& attribute::orm_properties() {
+boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& attribute::orm_properties() {
     return orm_properties_;
 }
 
-void attribute::orm_properties(const boost::optional<dogen::modeling::meta_model::orm_attribute_properties>& v) {
+void attribute::orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& v) {
     orm_properties_ = v;
 }
 
-void attribute::orm_properties(const boost::optional<dogen::modeling::meta_model::orm_attribute_properties>&& v) {
+void attribute::orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 

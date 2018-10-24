@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_LETTER_CASES_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_LETTER_CASES_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_LETTER_CASES_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_LETTER_CASES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 enum class letter_cases : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

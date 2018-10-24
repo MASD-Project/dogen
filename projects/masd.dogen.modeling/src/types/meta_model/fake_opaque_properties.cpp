@@ -19,20 +19,20 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.modeling/types/meta_model/fake_opaque_properties.hpp"
+#include "masd.dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/fake_opaque_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 void fake_opaque_properties::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::fake_opaque_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::fake_opaque_properties\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::modeling::meta_model::opaque_properties::to_stream(s);
+    masd::dogen::modeling::meta_model::opaque_properties::to_stream(s);
     s << " }";
 }
 
-bool fake_opaque_properties::equals(const dogen::modeling::meta_model::opaque_properties& other) const {
+bool fake_opaque_properties::equals(const masd::dogen::modeling::meta_model::opaque_properties& other) const {
     const fake_opaque_properties* const p(dynamic_cast<const fake_opaque_properties* const>(&other));
     if (!p) return false;
     return *this == *p;

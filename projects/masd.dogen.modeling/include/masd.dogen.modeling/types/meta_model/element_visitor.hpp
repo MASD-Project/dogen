@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_VISITOR_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_VISITOR_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_VISITOR_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.modeling/types/meta_model/module_fwd.hpp"
-#include "dogen.modeling/types/meta_model/object_fwd.hpp"
-#include "dogen.modeling/types/meta_model/builtin_fwd.hpp"
-#include "dogen.modeling/types/meta_model/visitor_fwd.hpp"
-#include "dogen.modeling/types/meta_model/exception_fwd.hpp"
-#include "dogen.modeling/types/meta_model/primitive_fwd.hpp"
-#include "dogen.modeling/types/meta_model/enumeration_fwd.hpp"
-#include "dogen.modeling/types/meta_model/object_template_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/module_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/builtin_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/visitor_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/primitive_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumeration_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/object_template_fwd.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Visitor for element
@@ -45,83 +45,83 @@ public:
 
 public:
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::builtin
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::builtin
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::builtin&) const { }
-    virtual void visit(const dogen::modeling::meta_model::builtin&) { }
-    virtual void visit(dogen::modeling::meta_model::builtin&) const { }
-    virtual void visit(dogen::modeling::meta_model::builtin&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::builtin&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::builtin&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::builtin&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::builtin&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::enumeration
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::enumeration
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::enumeration&) const { }
-    virtual void visit(const dogen::modeling::meta_model::enumeration&) { }
-    virtual void visit(dogen::modeling::meta_model::enumeration&) const { }
-    virtual void visit(dogen::modeling::meta_model::enumeration&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::enumeration&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::enumeration&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::enumeration&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::enumeration&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::exception
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::exception
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::exception&) const { }
-    virtual void visit(const dogen::modeling::meta_model::exception&) { }
-    virtual void visit(dogen::modeling::meta_model::exception&) const { }
-    virtual void visit(dogen::modeling::meta_model::exception&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::exception&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::exception&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::exception&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::exception&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::module
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::module
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::module&) const { }
-    virtual void visit(const dogen::modeling::meta_model::module&) { }
-    virtual void visit(dogen::modeling::meta_model::module&) const { }
-    virtual void visit(dogen::modeling::meta_model::module&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::module&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::module&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::module&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::module&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::object
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::object
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::object&) const { }
-    virtual void visit(const dogen::modeling::meta_model::object&) { }
-    virtual void visit(dogen::modeling::meta_model::object&) const { }
-    virtual void visit(dogen::modeling::meta_model::object&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::object&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::object&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::object&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::object&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::object_template
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::object_template
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::object_template&) const { }
-    virtual void visit(const dogen::modeling::meta_model::object_template&) { }
-    virtual void visit(dogen::modeling::meta_model::object_template&) const { }
-    virtual void visit(dogen::modeling::meta_model::object_template&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::object_template&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::object_template&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::object_template&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::object_template&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::primitive
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::primitive
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::primitive&) const { }
-    virtual void visit(const dogen::modeling::meta_model::primitive&) { }
-    virtual void visit(dogen::modeling::meta_model::primitive&) const { }
-    virtual void visit(dogen::modeling::meta_model::primitive&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::primitive&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::primitive&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::primitive&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::primitive&) { }
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::modeling::meta_model::visitor
+     * @brief Accept visits for type masd::dogen::modeling::meta_model::visitor
      */
     /**@{*/
-    virtual void visit(const dogen::modeling::meta_model::visitor&) const { }
-    virtual void visit(const dogen::modeling::meta_model::visitor&) { }
-    virtual void visit(dogen::modeling::meta_model::visitor&) const { }
-    virtual void visit(dogen::modeling::meta_model::visitor&) { }
+    virtual void visit(const masd::dogen::modeling::meta_model::visitor&) const { }
+    virtual void visit(const masd::dogen::modeling::meta_model::visitor&) { }
+    virtual void visit(masd::dogen::modeling::meta_model::visitor&) const { }
+    virtual void visit(masd::dogen::modeling::meta_model::visitor&) { }
     /**@}*/
 };
 

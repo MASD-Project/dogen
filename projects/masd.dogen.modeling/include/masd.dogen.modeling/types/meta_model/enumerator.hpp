@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief One of a set of valid values that an enumeration can assume.
@@ -47,8 +47,8 @@ public:
 public:
     enumerator(
         const std::string& documentation,
-        const dogen::modeling::meta_model::name& name,
-        const dogen::annotations::annotation& annotation,
+        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::annotations::annotation& annotation,
         const std::string& value);
 
 public:
@@ -70,20 +70,20 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& name() const;
-    dogen::modeling::meta_model::name& name();
-    void name(const dogen::modeling::meta_model::name& v);
-    void name(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& name() const;
+    masd::dogen::modeling::meta_model::name& name();
+    void name(const masd::dogen::modeling::meta_model::name& v);
+    void name(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     /**
      * @brief Annotation for this element.
      */
     /**@{*/
-    const dogen::annotations::annotation& annotation() const;
-    dogen::annotations::annotation& annotation();
-    void annotation(const dogen::annotations::annotation& v);
-    void annotation(const dogen::annotations::annotation&& v);
+    const masd::dogen::annotations::annotation& annotation() const;
+    masd::dogen::annotations::annotation& annotation();
+    void annotation(const masd::dogen::annotations::annotation& v);
+    void annotation(const masd::dogen::annotations::annotation&& v);
     /**@}*/
 
     /**
@@ -110,8 +110,8 @@ public:
 
 private:
     std::string documentation_;
-    dogen::modeling::meta_model::name name_;
-    dogen::annotations::annotation annotation_;
+    masd::dogen::modeling::meta_model::name name_;
+    masd::dogen::annotations::annotation annotation_;
     std::string value_;
 };
 
@@ -121,8 +121,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::enumerator& lhs,
-    dogen::modeling::meta_model::enumerator& rhs) {
+    masd::dogen::modeling::meta_model::enumerator& lhs,
+    masd::dogen::modeling::meta_model::enumerator& rhs) {
     lhs.swap(rhs);
 }
 

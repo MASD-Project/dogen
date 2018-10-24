@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/element_archetype_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_archetype_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const element_archetype& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::element_archetype\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::element_archetype\"" << ", "
       << "\"element\": " << "\"" << tidy_up_string(v.element()) << "\"" << ", "
       << "\"archetype\": " << "\"" << tidy_up_string(v.archetype()) << "\""
       << " }";

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/formatting_styles_hash.hpp"
-#include "dogen.modeling/hash/transforms/formatting_configuration_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/formatting_styles_hash.hpp"
+#include "masd.dogen.modeling/hash/transforms/formatting_configuration_hash.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::size_t formatting_configuration_hasher::hash(const formatting_configuration& v) {
     std::size_t seed(0);

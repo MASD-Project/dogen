@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "dogen.modeling/hash/meta_model/visitor_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/visitor_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_modeling_meta_model_name(const std::list<dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_name(const std::list<masd::dogen::modeling::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_dogen_modeling_meta_model_name(const std::list<
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_modeling_meta_model_name(const boost::optional<dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_name(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -50,15 +50,15 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_name(const boos
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t visitor_hasher::hash(const visitor& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::modeling::meta_model::element&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::element&>(v));
 
-    combine(seed, hash_std_list_dogen_modeling_meta_model_name(v.visits()));
-    combine(seed, hash_boost_optional_dogen_modeling_meta_model_name(v.parent()));
+    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.visits()));
+    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_name(v.parent()));
 
     return seed;
 }

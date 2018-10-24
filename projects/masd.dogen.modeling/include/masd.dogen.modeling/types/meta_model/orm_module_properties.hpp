@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_ORM_MODULE_PROPERTIES_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_ORM_MODULE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_MODULE_PROPERTIES_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_MODULE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 class orm_module_properties final {
 public:
@@ -71,8 +71,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::orm_module_properties& lhs,
-    dogen::modeling::meta_model::orm_module_properties& rhs) {
+    masd::dogen::modeling::meta_model::orm_module_properties& lhs,
+    masd::dogen::modeling::meta_model::orm_module_properties& rhs) {
     lhs.swap(rhs);
 }
 

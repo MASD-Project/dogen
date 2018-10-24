@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_MODEL_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_MODEL_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_MODEL_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,19 +32,19 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/meta_model/module_fwd.hpp"
-#include "dogen.modeling/types/meta_model/element_fwd.hpp"
-#include "dogen.modeling/types/meta_model/origin_types.hpp"
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "dogen.modeling/types/meta_model/locator_properties.hpp"
-#include "dogen.modeling/types/meta_model/orm_model_properties.hpp"
-#include "dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
-#include "dogen.modeling/types/meta_model/global_archetype_location_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/meta_model/module_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/origin_types.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.modeling/types/meta_model/locator_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.modeling/types/meta_model/global_archetype_location_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Modeling model.
@@ -62,50 +62,50 @@ public:
 
 public:
     model(
-        const dogen::modeling::meta_model::name& name,
-        const dogen::modeling::meta_model::name& meta_name,
-        const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& references,
-        const std::unordered_set<dogen::modeling::meta_model::name>& leaves,
-        const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements,
-        const boost::shared_ptr<dogen::modeling::meta_model::module>& root_module,
+        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::modeling::meta_model::name& meta_name,
+        const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& references,
+        const std::unordered_set<masd::dogen::modeling::meta_model::name>& leaves,
+        const std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& elements,
+        const boost::shared_ptr<masd::dogen::modeling::meta_model::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
-        const dogen::modeling::meta_model::languages input_language,
-        const dogen::modeling::meta_model::languages output_language,
-        const boost::optional<dogen::modeling::meta_model::orm_model_properties>& orm_properties,
-        const std::unordered_set<dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element,
-        const dogen::modeling::meta_model::locator_properties& locator_properties,
-        const dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties);
+        const masd::dogen::modeling::meta_model::languages input_language,
+        const masd::dogen::modeling::meta_model::languages output_language,
+        const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& orm_properties,
+        const std::unordered_set<masd::dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element,
+        const masd::dogen::modeling::meta_model::locator_properties& locator_properties,
+        const masd::dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties);
 
 public:
     /**
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& name() const;
-    dogen::modeling::meta_model::name& name();
-    void name(const dogen::modeling::meta_model::name& v);
-    void name(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& name() const;
+    masd::dogen::modeling::meta_model::name& name();
+    void name(const masd::dogen::modeling::meta_model::name& v);
+    void name(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     /**
      * @brief Name of the element in the meta-model that this instance conforms to.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& meta_name() const;
-    dogen::modeling::meta_model::name& meta_name();
-    void meta_name(const dogen::modeling::meta_model::name& v);
-    void meta_name(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& meta_name() const;
+    masd::dogen::modeling::meta_model::name& meta_name();
+    void meta_name(const masd::dogen::modeling::meta_model::name& v);
+    void meta_name(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     /**
      * @brief All other models that this model depends on, mapped to their origin.
      */
     /**@{*/
-    const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& references() const;
-    std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& references();
-    void references(const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& v);
-    void references(const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>&& v);
+    const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& references() const;
+    std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& references();
+    void references(const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& v);
+    void references(const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>&& v);
     /**@}*/
 
     /**
@@ -114,25 +114,25 @@ public:
      * Leaves are types concrete types which have a parent.
      */
     /**@{*/
-    const std::unordered_set<dogen::modeling::meta_model::name>& leaves() const;
-    std::unordered_set<dogen::modeling::meta_model::name>& leaves();
-    void leaves(const std::unordered_set<dogen::modeling::meta_model::name>& v);
-    void leaves(const std::unordered_set<dogen::modeling::meta_model::name>&& v);
+    const std::unordered_set<masd::dogen::modeling::meta_model::name>& leaves() const;
+    std::unordered_set<masd::dogen::modeling::meta_model::name>& leaves();
+    void leaves(const std::unordered_set<masd::dogen::modeling::meta_model::name>& v);
+    void leaves(const std::unordered_set<masd::dogen::modeling::meta_model::name>&& v);
     /**@}*/
 
-    const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements() const;
-    std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& elements();
-    void elements(const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >& v);
-    void elements(const std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> >&& v);
+    const std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& elements() const;
+    std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& elements();
+    void elements(const std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v);
+    void elements(const std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >&& v);
 
     /**
      * @brief The module that represents the model.
      */
     /**@{*/
-    const boost::shared_ptr<dogen::modeling::meta_model::module>& root_module() const;
-    boost::shared_ptr<dogen::modeling::meta_model::module>& root_module();
-    void root_module(const boost::shared_ptr<dogen::modeling::meta_model::module>& v);
-    void root_module(const boost::shared_ptr<dogen::modeling::meta_model::module>&& v);
+    const boost::shared_ptr<masd::dogen::modeling::meta_model::module>& root_module() const;
+    boost::shared_ptr<masd::dogen::modeling::meta_model::module>& root_module();
+    void root_module(const boost::shared_ptr<masd::dogen::modeling::meta_model::module>& v);
+    void root_module(const boost::shared_ptr<masd::dogen::modeling::meta_model::module>&& v);
     /**@}*/
 
     /**
@@ -157,37 +157,37 @@ public:
      * @brief Language in which this model was written.
      */
     /**@{*/
-    dogen::modeling::meta_model::languages input_language() const;
-    void input_language(const dogen::modeling::meta_model::languages v);
+    masd::dogen::modeling::meta_model::languages input_language() const;
+    void input_language(const masd::dogen::modeling::meta_model::languages v);
     /**@}*/
 
     /**
      * @brief Language in which to output the model.
      */
     /**@{*/
-    dogen::modeling::meta_model::languages output_language() const;
-    void output_language(const dogen::modeling::meta_model::languages v);
+    masd::dogen::modeling::meta_model::languages output_language() const;
+    void output_language(const masd::dogen::modeling::meta_model::languages v);
     /**@}*/
 
-    const boost::optional<dogen::modeling::meta_model::orm_model_properties>& orm_properties() const;
-    boost::optional<dogen::modeling::meta_model::orm_model_properties>& orm_properties();
-    void orm_properties(const boost::optional<dogen::modeling::meta_model::orm_model_properties>& v);
-    void orm_properties(const boost::optional<dogen::modeling::meta_model::orm_model_properties>&& v);
+    const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& orm_properties() const;
+    boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>&& v);
 
-    const std::unordered_set<dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element() const;
-    std::unordered_set<dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element();
-    void enabled_archetype_for_element(const std::unordered_set<dogen::modeling::meta_model::element_archetype>& v);
-    void enabled_archetype_for_element(const std::unordered_set<dogen::modeling::meta_model::element_archetype>&& v);
+    const std::unordered_set<masd::dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element() const;
+    std::unordered_set<masd::dogen::modeling::meta_model::element_archetype>& enabled_archetype_for_element();
+    void enabled_archetype_for_element(const std::unordered_set<masd::dogen::modeling::meta_model::element_archetype>& v);
+    void enabled_archetype_for_element(const std::unordered_set<masd::dogen::modeling::meta_model::element_archetype>&& v);
 
-    const dogen::modeling::meta_model::locator_properties& locator_properties() const;
-    dogen::modeling::meta_model::locator_properties& locator_properties();
-    void locator_properties(const dogen::modeling::meta_model::locator_properties& v);
-    void locator_properties(const dogen::modeling::meta_model::locator_properties&& v);
+    const masd::dogen::modeling::meta_model::locator_properties& locator_properties() const;
+    masd::dogen::modeling::meta_model::locator_properties& locator_properties();
+    void locator_properties(const masd::dogen::modeling::meta_model::locator_properties& v);
+    void locator_properties(const masd::dogen::modeling::meta_model::locator_properties&& v);
 
-    const dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties() const;
-    dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties();
-    void global_archetype_location_properties(const dogen::modeling::meta_model::global_archetype_location_properties& v);
-    void global_archetype_location_properties(const dogen::modeling::meta_model::global_archetype_location_properties&& v);
+    const masd::dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties() const;
+    masd::dogen::modeling::meta_model::global_archetype_location_properties& global_archetype_location_properties();
+    void global_archetype_location_properties(const masd::dogen::modeling::meta_model::global_archetype_location_properties& v);
+    void global_archetype_location_properties(const masd::dogen::modeling::meta_model::global_archetype_location_properties&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -200,20 +200,20 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::modeling::meta_model::name name_;
-    dogen::modeling::meta_model::name meta_name_;
-    std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types> references_;
-    std::unordered_set<dogen::modeling::meta_model::name> leaves_;
-    std::vector<boost::shared_ptr<dogen::modeling::meta_model::element> > elements_;
-    boost::shared_ptr<dogen::modeling::meta_model::module> root_module_;
+    masd::dogen::modeling::meta_model::name name_;
+    masd::dogen::modeling::meta_model::name meta_name_;
+    std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types> references_;
+    std::unordered_set<masd::dogen::modeling::meta_model::name> leaves_;
+    std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> > elements_;
+    boost::shared_ptr<masd::dogen::modeling::meta_model::module> root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
-    dogen::modeling::meta_model::languages input_language_;
-    dogen::modeling::meta_model::languages output_language_;
-    boost::optional<dogen::modeling::meta_model::orm_model_properties> orm_properties_;
-    std::unordered_set<dogen::modeling::meta_model::element_archetype> enabled_archetype_for_element_;
-    dogen::modeling::meta_model::locator_properties locator_properties_;
-    dogen::modeling::meta_model::global_archetype_location_properties global_archetype_location_properties_;
+    masd::dogen::modeling::meta_model::languages input_language_;
+    masd::dogen::modeling::meta_model::languages output_language_;
+    boost::optional<masd::dogen::modeling::meta_model::orm_model_properties> orm_properties_;
+    std::unordered_set<masd::dogen::modeling::meta_model::element_archetype> enabled_archetype_for_element_;
+    masd::dogen::modeling::meta_model::locator_properties locator_properties_;
+    masd::dogen::modeling::meta_model::global_archetype_location_properties global_archetype_location_properties_;
 };
 
 }
@@ -222,8 +222,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::model& lhs,
-    dogen::modeling::meta_model::model& rhs) {
+    masd::dogen::modeling::meta_model::model& lhs,
+    masd::dogen::modeling::meta_model::model& rhs) {
     lhs.swap(rhs);
 }
 

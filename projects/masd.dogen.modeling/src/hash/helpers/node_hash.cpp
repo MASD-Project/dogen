@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/helpers/node_hash.hpp"
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/hash/helpers/node_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
 
 namespace {
 
@@ -29,30 +29,30 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_helpers_node(const boost::shared_ptr<dogen::modeling::helpers::node>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_helpers_node(const boost::shared_ptr<masd::dogen::modeling::helpers::node>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_boost_shared_ptr_dogen_modeling_helpers_node(const std::list<boost::shared_ptr<dogen::modeling::helpers::node> >& v) {
+inline std::size_t hash_std_list_boost_shared_ptr_masd_dogen_modeling_helpers_node(const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_helpers_node(i));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_helpers_node(i));
     }
     return seed;
 }
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::size_t node_hasher::hash(const node& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_boost_shared_ptr_dogen_modeling_helpers_node(v.parent()));
+    combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_helpers_node(v.parent()));
     combine(seed, v.data());
-    combine(seed, hash_std_list_boost_shared_ptr_dogen_modeling_helpers_node(v.children()));
+    combine(seed, hash_std_list_boost_shared_ptr_masd_dogen_modeling_helpers_node(v.children()));
 
     return seed;
 }

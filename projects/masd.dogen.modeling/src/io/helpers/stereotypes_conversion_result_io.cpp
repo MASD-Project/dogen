@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.modeling/io/helpers/stereotypes_conversion_result_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::modeling::meta_model::static_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -59,11 +59,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const stereotypes_conversion_result& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::helpers::stereotypes_conversion_result\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::helpers::stereotypes_conversion_result\"" << ", "
       << "\"static_stereotypes\": " << v.static_stereotypes() << ", "
       << "\"dynamic_stereotypes\": " << v.dynamic_stereotypes()
       << " }";

@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.modeling/io/meta_model/path_contribution_types_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/path_contribution_types_io.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const path_contribution_types& v) {
     s << "{ " << "\"__type__\": " << "\"path_contribution_types\", " << "\"value\": ";

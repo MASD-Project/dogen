@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_IO_TRANSFORMS_OPTIONS_IO_HPP
-#define DOGEN_MODELING_IO_TRANSFORMS_OPTIONS_IO_HPP
+#ifndef MASD_DOGEN_MODELING_IO_TRANSFORMS_OPTIONS_IO_HPP
+#define MASD_DOGEN_MODELING_IO_TRANSFORMS_OPTIONS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::modeling::transforms::options& v);
+     const masd::dogen::modeling::transforms::options& v);
 
 }
 

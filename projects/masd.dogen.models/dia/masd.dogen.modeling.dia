@@ -785,7 +785,7 @@ supported languages.#</dia:string>
         <dia:point val="-278,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-113.05;-248.56,-78.45"/>
+        <dia:rectangle val="-278.05,-113.05;-248.56,-77.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -797,7 +797,7 @@ supported languages.#</dia:string>
         <dia:real val="29.390000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="34.5"/>
+        <dia:real val="35.299999999999997"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -842,7 +842,7 @@ etc.).
 and to build it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.modeling
+#DOGEN yarn.model_modules=masd.dogen.modeling
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.formatting.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
@@ -11696,7 +11696,7 @@ model.#</dia:string>
             <dia:string>#formatting_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dogen::formatting::repository#</dia:string>
+            <dia:string>#formatting::repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

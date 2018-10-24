@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/helpers/mapping_io.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
-#include "dogen.modeling/io/helpers/mapping_value_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_value_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::modeling::meta_model::languages, dogen::modeling::helpers::mapping_value>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -50,11 +50,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::helpers::mapping\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::helpers::mapping\"" << ", "
       << "\"lam_id\": " << "\"" << tidy_up_string(v.lam_id()) << "\"" << ", "
       << "\"by_language\": " << v.by_language()
       << " }";

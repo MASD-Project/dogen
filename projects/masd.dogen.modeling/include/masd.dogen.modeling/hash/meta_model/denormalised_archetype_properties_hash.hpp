@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_HASH_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HASH_HPP
-#define DOGEN_MODELING_HASH_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HASH_HPP
+#ifndef MASD_DOGEN_MODELING_HASH_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HASH_HPP
+#define MASD_DOGEN_MODELING_HASH_META_MODEL_DENORMALISED_ARCHETYPE_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 struct denormalised_archetype_properties_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::modeling::meta_model::denormalised_archetype_properties> {
+struct hash<masd::dogen::modeling::meta_model::denormalised_archetype_properties> {
 public:
-    size_t operator()(const dogen::modeling::meta_model::denormalised_archetype_properties& v) const {
-        return dogen::modeling::meta_model::denormalised_archetype_properties_hasher::hash(v);
+    size_t operator()(const masd::dogen::modeling::meta_model::denormalised_archetype_properties& v) const {
+        return masd::dogen::modeling::meta_model::denormalised_archetype_properties_hasher::hash(v);
     }
 };
 

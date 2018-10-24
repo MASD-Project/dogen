@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     s << "{ " << "\"__type__\": " << "\"static_stereotypes\", " << "\"value\": ";

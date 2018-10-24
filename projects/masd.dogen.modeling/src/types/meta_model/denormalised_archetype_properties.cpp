@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/denormalised_archetype_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 denormalised_archetype_properties::denormalised_archetype_properties()
     : backend_enabled_(static_cast<bool>(0)),

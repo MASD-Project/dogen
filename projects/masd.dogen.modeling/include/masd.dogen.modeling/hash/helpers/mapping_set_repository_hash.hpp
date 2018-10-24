@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_HASH_HELPERS_MAPPING_SET_REPOSITORY_HASH_HPP
-#define DOGEN_MODELING_HASH_HELPERS_MAPPING_SET_REPOSITORY_HASH_HPP
+#ifndef MASD_DOGEN_MODELING_HASH_HELPERS_MAPPING_SET_REPOSITORY_HASH_HPP
+#define MASD_DOGEN_MODELING_HASH_HELPERS_MAPPING_SET_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.modeling/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 struct mapping_set_repository_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::modeling::helpers::mapping_set_repository> {
+struct hash<masd::dogen::modeling::helpers::mapping_set_repository> {
 public:
-    size_t operator()(const dogen::modeling::helpers::mapping_set_repository& v) const {
-        return dogen::modeling::helpers::mapping_set_repository_hasher::hash(v);
+    size_t operator()(const masd::dogen::modeling::helpers::mapping_set_repository& v) const {
+        return masd::dogen::modeling::helpers::mapping_set_repository_hasher::hash(v);
     }
 };
 

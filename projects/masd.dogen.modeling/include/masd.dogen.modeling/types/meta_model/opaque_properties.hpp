@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_OPAQUE_PROPERTIES_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_OPAQUE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_OPAQUE_PROPERTIES_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_OPAQUE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <iosfwd>
 #include <algorithm>
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Base class for any properties that are not known to modeling.

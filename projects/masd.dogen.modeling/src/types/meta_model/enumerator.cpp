@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/enumerator.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumerator.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 enumerator::enumerator(
     const std::string& documentation,
-    const dogen::modeling::meta_model::name& name,
-    const dogen::annotations::annotation& annotation,
+    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::annotations::annotation& annotation,
     const std::string& value)
     : documentation_(documentation),
       name_(name),
@@ -69,35 +69,35 @@ void enumerator::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const dogen::modeling::meta_model::name& enumerator::name() const {
+const masd::dogen::modeling::meta_model::name& enumerator::name() const {
     return name_;
 }
 
-dogen::modeling::meta_model::name& enumerator::name() {
+masd::dogen::modeling::meta_model::name& enumerator::name() {
     return name_;
 }
 
-void enumerator::name(const dogen::modeling::meta_model::name& v) {
+void enumerator::name(const masd::dogen::modeling::meta_model::name& v) {
     name_ = v;
 }
 
-void enumerator::name(const dogen::modeling::meta_model::name&& v) {
+void enumerator::name(const masd::dogen::modeling::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::annotations::annotation& enumerator::annotation() const {
+const masd::dogen::annotations::annotation& enumerator::annotation() const {
     return annotation_;
 }
 
-dogen::annotations::annotation& enumerator::annotation() {
+masd::dogen::annotations::annotation& enumerator::annotation() {
     return annotation_;
 }
 
-void enumerator::annotation(const dogen::annotations::annotation& v) {
+void enumerator::annotation(const masd::dogen::annotations::annotation& v) {
     annotation_ = v;
 }
 
-void enumerator::annotation(const dogen::annotations::annotation&& v) {
+void enumerator::annotation(const masd::dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
 }
 

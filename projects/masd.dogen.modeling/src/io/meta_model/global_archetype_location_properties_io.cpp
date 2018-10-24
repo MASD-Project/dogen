@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/facet_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/backend_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/archetype_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/denormalised_archetype_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/global_archetype_location_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/facet_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/backend_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/archetype_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/denormalised_archetype_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/global_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::modeling::meta_model::backend_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::backend_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -54,7 +54,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::modeling::meta_model::facet_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::facet_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -72,7 +72,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::modeling::meta_model::archetype_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -90,7 +90,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::modeling::meta_model::denormalised_archetype_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::denormalised_archetype_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -106,11 +106,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const global_archetype_location_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::global_archetype_location_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::global_archetype_location_properties\"" << ", "
       << "\"backend_properties\": " << v.backend_properties() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"archetype_properties\": " << v.archetype_properties() << ", "

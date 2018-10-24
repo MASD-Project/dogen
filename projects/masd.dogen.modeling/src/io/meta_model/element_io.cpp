@@ -21,17 +21,17 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.formatting/io/decoration_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/origin_types_io.hpp"
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.modeling/io/meta_model/artefact_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/origin_types_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/artefact_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const element& v) {
     v.to_stream(s);

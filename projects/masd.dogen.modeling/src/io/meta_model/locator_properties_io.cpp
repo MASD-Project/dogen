@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/locator_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/model_segment_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/directory_structure_styles_io.hpp"
-#include "dogen.modeling/io/meta_model/archetype_family_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/locator_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/model_segment_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/directory_structure_styles_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/archetype_family_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/intra_backend_segment_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -37,7 +37,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::modeling::meta_model::intra_backend_segment_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -55,7 +55,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::modeling::meta_model::archetype_family_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -71,7 +71,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const locator_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -81,7 +81,7 @@ std::ostream& operator<<(std::ostream& s, const locator_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::locator_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::locator_properties\"" << ", "
       << "\"directory_structure_style\": " << v.directory_structure_style() << ", "
       << "\"name_separator\": " << "\"" << tidy_up_string(v.name_separator()) << "\"" << ", "
       << "\"model_segment_properties\": " << v.model_segment_properties() << ", "

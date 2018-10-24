@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/helpers/node_io.hpp"
-#include "dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/helpers/node_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::modeling::helpers::node>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::helpers::node>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::modeling::helpers::node> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -52,11 +52,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const node& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::helpers::node\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::helpers::node\"" << ", "
       << "\"parent\": " << v.parent() << ", "
       << "\"data\": " << v.data() << ", "
       << "\"children\": " << v.children()

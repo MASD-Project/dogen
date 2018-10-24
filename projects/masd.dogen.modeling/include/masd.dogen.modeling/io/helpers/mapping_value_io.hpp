@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_IO_HELPERS_MAPPING_VALUE_IO_HPP
-#define DOGEN_MODELING_IO_HELPERS_MAPPING_VALUE_IO_HPP
+#ifndef MASD_DOGEN_MODELING_IO_HELPERS_MAPPING_VALUE_IO_HPP
+#define MASD_DOGEN_MODELING_IO_HELPERS_MAPPING_VALUE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/helpers/mapping_value.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_value.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::modeling::helpers::mapping_value& v);
+     const masd::dogen::modeling::helpers::mapping_value& v);
 
 }
 

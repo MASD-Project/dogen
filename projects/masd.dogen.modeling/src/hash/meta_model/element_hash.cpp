@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/hash/annotation_hash.hpp"
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "dogen.formatting/hash/decoration_properties_hash.hpp"
-#include "dogen.modeling/hash/meta_model/origin_types_hash.hpp"
-#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
-#include "dogen.modeling/hash/meta_model/static_stereotypes_hash.hpp"
-#include "dogen.modeling/hash/meta_model/artefact_properties_hash.hpp"
-#include "dogen.modeling/hash/meta_model/local_archetype_location_properties_hash.hpp"
+#include "masd.dogen.annotations/hash/annotation_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.formatting/hash/decoration_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/origin_types_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/static_stereotypes_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/artefact_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -36,7 +36,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_modeling_meta_model_name(const boost::optional<dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_name(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -46,7 +46,7 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_name(const boos
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_modeling_meta_model_static_stereotypes(const std::list<dogen::modeling::meta_model::static_stereotypes>& v) {
+inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -62,7 +62,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_artefact_properties(const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_artefact_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -71,7 +71,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_a
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_local_archetype_location_properties(const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_local_archetype_location_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -80,24 +80,24 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_l
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(const boost::shared_ptr<dogen::modeling::meta_model::opaque_properties>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_opaque_properties(const boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_opaque_properties(i.second));
     }
     return seed;
 }
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t element_hasher::hash(const element& v) {
     std::size_t seed(0);
@@ -106,16 +106,16 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.documentation());
     combine(seed, v.annotation());
     combine(seed, v.origin_type());
-    combine(seed, hash_boost_optional_dogen_modeling_meta_model_name(v.contained_by()));
+    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_name(v.contained_by()));
     combine(seed, v.in_global_module());
-    combine(seed, hash_std_list_dogen_modeling_meta_model_static_stereotypes(v.static_stereotypes()));
+    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_static_stereotypes(v.static_stereotypes()));
     combine(seed, hash_std_list_std_string(v.dynamic_stereotypes()));
     combine(seed, v.meta_name());
     combine(seed, v.is_element_extension());
     combine(seed, v.decoration_properties());
-    combine(seed, hash_std_unordered_map_std_string_dogen_modeling_meta_model_artefact_properties(v.artefact_properties()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_modeling_meta_model_local_archetype_location_properties(v.archetype_location_properties()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_opaque_properties(v.opaque_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_artefact_properties(v.artefact_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_local_archetype_location_properties(v.archetype_location_properties()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_opaque_properties(v.opaque_properties()));
 
     return seed;
 }

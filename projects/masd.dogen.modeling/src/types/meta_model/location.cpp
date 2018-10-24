@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/location.hpp"
+#include "masd.dogen.modeling/types/meta_model/location.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 location::location(
     const std::list<std::string>& external_modules,

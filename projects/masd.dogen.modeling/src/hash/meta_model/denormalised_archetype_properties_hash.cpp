@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/denormalised_archetype_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/denormalised_archetype_properties_hash.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t denormalised_archetype_properties_hasher::hash(const denormalised_archetype_properties& v) {
     std::size_t seed(0);

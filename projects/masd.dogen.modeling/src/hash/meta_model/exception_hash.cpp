@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "dogen.modeling/hash/meta_model/exception_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/exception_hash.hpp"
 
 namespace {
 
@@ -31,12 +31,12 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t exception_hasher::hash(const exception& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::modeling::meta_model::element&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::element&>(v));
     return seed;
 }
 

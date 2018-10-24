@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/name_io.hpp"
-#include "dogen.modeling/io/meta_model/location_io.hpp"
-#include "dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::map<dogen::modeling::meta_model::languages, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::map<masd::dogen::modeling::meta_model::languages, std::string>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -50,11 +50,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::map<dogen::modeling:
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const name& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::name\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::name\"" << ", "
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
       << "\"qualified\": " << v.qualified() << ", "

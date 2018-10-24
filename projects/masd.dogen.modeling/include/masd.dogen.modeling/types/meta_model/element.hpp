@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,17 +32,17 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.formatting/types/decoration_properties.hpp"
-#include "dogen.modeling/types/meta_model/origin_types.hpp"
-#include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
-#include "dogen.modeling/types/meta_model/artefact_properties.hpp"
-#include "dogen.modeling/types/meta_model/element_visitor_fwd.hpp"
-#include "dogen.modeling/types/meta_model/opaque_properties_fwd.hpp"
-#include "dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/origin_types.hpp"
+#include "masd.dogen.modeling/types/meta_model/static_stereotypes.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_visitor_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/opaque_properties_fwd.hpp"
+#include "masd.dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Represents a generic modeling construct.
@@ -65,20 +65,20 @@ public:
 
 public:
     element(
-        const dogen::modeling::meta_model::name& name,
+        const masd::dogen::modeling::meta_model::name& name,
         const std::string& documentation,
-        const dogen::annotations::annotation& annotation,
-        const dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties);
+        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties);
 
 public:
     virtual void accept(const element_visitor& v) const = 0;
@@ -94,10 +94,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& name() const;
-    dogen::modeling::meta_model::name& name();
-    void name(const dogen::modeling::meta_model::name& v);
-    void name(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& name() const;
+    masd::dogen::modeling::meta_model::name& name();
+    void name(const masd::dogen::modeling::meta_model::name& v);
+    void name(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -118,28 +118,28 @@ public:
      * @brief Annotation for this element.
      */
     /**@{*/
-    const dogen::annotations::annotation& annotation() const;
-    dogen::annotations::annotation& annotation();
-    void annotation(const dogen::annotations::annotation& v);
-    void annotation(const dogen::annotations::annotation&& v);
+    const masd::dogen::annotations::annotation& annotation() const;
+    masd::dogen::annotations::annotation& annotation();
+    void annotation(const masd::dogen::annotations::annotation& v);
+    void annotation(const masd::dogen::annotations::annotation&& v);
     /**@}*/
 
     /**
      * @brief How was this model element originated.
      */
     /**@{*/
-    dogen::modeling::meta_model::origin_types origin_type() const;
-    void origin_type(const dogen::modeling::meta_model::origin_types v);
+    masd::dogen::modeling::meta_model::origin_types origin_type() const;
+    void origin_type(const masd::dogen::modeling::meta_model::origin_types v);
     /**@}*/
 
     /**
      * @brief Name of the module in which we are contained.
      */
     /**@{*/
-    const boost::optional<dogen::modeling::meta_model::name>& contained_by() const;
-    boost::optional<dogen::modeling::meta_model::name>& contained_by();
-    void contained_by(const boost::optional<dogen::modeling::meta_model::name>& v);
-    void contained_by(const boost::optional<dogen::modeling::meta_model::name>&& v);
+    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by() const;
+    boost::optional<masd::dogen::modeling::meta_model::name>& contained_by();
+    void contained_by(const boost::optional<masd::dogen::modeling::meta_model::name>& v);
+    void contained_by(const boost::optional<masd::dogen::modeling::meta_model::name>&& v);
     /**@}*/
 
     /**
@@ -155,10 +155,10 @@ public:
      * model.
      */
     /**@{*/
-    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::modeling::meta_model::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::modeling::meta_model::static_stereotypes>&& v);
+    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes() const;
+    std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes();
+    void static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v);
+    void static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>&& v);
     /**@}*/
 
     /**
@@ -175,10 +175,10 @@ public:
      * @brief Name of the element in the meta-model that this instance conforms to.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& meta_name() const;
-    dogen::modeling::meta_model::name& meta_name();
-    void meta_name(const dogen::modeling::meta_model::name& v);
-    void meta_name(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& meta_name() const;
+    masd::dogen::modeling::meta_model::name& meta_name();
+    void meta_name(const masd::dogen::modeling::meta_model::name& v);
+    void meta_name(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -189,20 +189,20 @@ public:
     void is_element_extension(const bool v);
     /**@}*/
 
-    const dogen::formatting::decoration_properties& decoration_properties() const;
-    dogen::formatting::decoration_properties& decoration_properties();
-    void decoration_properties(const dogen::formatting::decoration_properties& v);
-    void decoration_properties(const dogen::formatting::decoration_properties&& v);
+    const masd::dogen::formatting::decoration_properties& decoration_properties() const;
+    masd::dogen::formatting::decoration_properties& decoration_properties();
+    void decoration_properties(const masd::dogen::formatting::decoration_properties& v);
+    void decoration_properties(const masd::dogen::formatting::decoration_properties&& v);
 
-    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties() const;
-    std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties();
-    void artefact_properties(const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& v);
-    void artefact_properties(const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties() const;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties() const;
-    std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties();
-    void archetype_location_properties(const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& v);
-    void archetype_location_properties(const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties() const;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties();
+    void archetype_location_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& v);
+    void archetype_location_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>&& v);
 
     /**
      * @brief Any opaque properties associated with this element, by key.
@@ -211,10 +211,10 @@ public:
      * clashes.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties();
-    void opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& v);
-    void opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties() const;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties();
+    void opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& v);
+    void opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >&& v);
     /**@}*/
 
 protected:
@@ -226,20 +226,20 @@ protected:
     void swap(element& other) noexcept;
 
 private:
-    dogen::modeling::meta_model::name name_;
+    masd::dogen::modeling::meta_model::name name_;
     std::string documentation_;
-    dogen::annotations::annotation annotation_;
-    dogen::modeling::meta_model::origin_types origin_type_;
-    boost::optional<dogen::modeling::meta_model::name> contained_by_;
+    masd::dogen::annotations::annotation annotation_;
+    masd::dogen::modeling::meta_model::origin_types origin_type_;
+    boost::optional<masd::dogen::modeling::meta_model::name> contained_by_;
     bool in_global_module_;
-    std::list<dogen::modeling::meta_model::static_stereotypes> static_stereotypes_;
+    std::list<masd::dogen::modeling::meta_model::static_stereotypes> static_stereotypes_;
     std::list<std::string> dynamic_stereotypes_;
-    dogen::modeling::meta_model::name meta_name_;
+    masd::dogen::modeling::meta_model::name meta_name_;
     bool is_element_extension_;
-    dogen::formatting::decoration_properties decoration_properties_;
-    std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties> artefact_properties_;
-    std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties> archetype_location_properties_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> > opaque_properties_;
+    masd::dogen::formatting::decoration_properties decoration_properties_;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties> artefact_properties_;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties> archetype_location_properties_;
+    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> > opaque_properties_;
 };
 
 inline element::~element() noexcept { }

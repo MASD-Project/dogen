@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/letter_cases_hash.hpp"
-#include "dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
-#include "dogen.modeling/hash/meta_model/orm_model_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/letter_cases_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/orm_model_properties_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_modeling_meta_model_orm_database_systems(const std::vector<dogen::modeling::meta_model::orm_database_systems>& v) {
+inline std::size_t hash_std_vector_masd_dogen_modeling_meta_model_orm_database_systems(const std::vector<masd::dogen::modeling::meta_model::orm_database_systems>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -38,7 +38,7 @@ inline std::size_t hash_std_vector_dogen_modeling_meta_model_orm_database_system
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_modeling_meta_model_letter_cases(const boost::optional<dogen::modeling::meta_model::letter_cases>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_letter_cases(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -50,14 +50,14 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_letter_cases(co
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t orm_model_properties_hasher::hash(const orm_model_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_vector_dogen_modeling_meta_model_orm_database_systems(v.database_systems()));
+    combine(seed, hash_std_vector_masd_dogen_modeling_meta_model_orm_database_systems(v.database_systems()));
     combine(seed, v.schema_name());
-    combine(seed, hash_boost_optional_dogen_modeling_meta_model_letter_cases(v.letter_case()));
+    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_letter_cases(v.letter_case()));
 
     return seed;
 }

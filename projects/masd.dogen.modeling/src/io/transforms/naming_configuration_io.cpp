@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/transforms/naming_configuration_io.hpp"
+#include "masd.dogen.modeling/io/transforms/naming_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::ostream& operator<<(std::ostream& s, const naming_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::transforms::naming_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::transforms::naming_configuration\"" << ", "
       << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\"" << ", "
       << "\"model_modules\": " << "\"" << tidy_up_string(v.model_modules()) << "\""
       << " }";

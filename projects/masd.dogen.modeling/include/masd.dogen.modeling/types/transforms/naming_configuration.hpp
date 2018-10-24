@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_HPP
-#define DOGEN_MODELING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_HPP
+#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class naming_configuration final {
 public:
@@ -74,8 +74,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::transforms::naming_configuration& lhs,
-    dogen::modeling::transforms::naming_configuration& rhs) {
+    masd::dogen::modeling::transforms::naming_configuration& lhs,
+    masd::dogen::modeling::transforms::naming_configuration& rhs) {
     lhs.swap(rhs);
 }
 

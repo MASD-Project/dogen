@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
-#include "dogen.modeling/hash/meta_model/orm_attribute_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/orm_attribute_properties_hash.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_orm_database_systems_std_string(const std::unordered_map<dogen::modeling::meta_model::orm_database_systems, std::string>& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_orm_database_systems_std_string(const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -50,7 +50,7 @@ inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_orm_database
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t orm_attribute_properties_hasher::hash(const orm_attribute_properties& v) {
     std::size_t seed(0);
@@ -58,7 +58,7 @@ std::size_t orm_attribute_properties_hasher::hash(const orm_attribute_properties
     combine(seed, v.column_name());
     combine(seed, v.is_primary_key());
     combine(seed, hash_boost_optional_bool(v.is_nullable()));
-    combine(seed, hash_std_unordered_map_dogen_modeling_meta_model_orm_database_systems_std_string(v.type_overrides()));
+    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_orm_database_systems_std_string(v.type_overrides()));
     combine(seed, v.is_composite());
 
     return seed;

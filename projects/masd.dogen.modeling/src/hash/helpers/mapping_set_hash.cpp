@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "dogen.modeling/hash/helpers/mapping_set_hash.hpp"
-#include "dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/hash/helpers/mapping_set_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_name(const std::unordered_map<std::string, dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_name(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -39,11 +39,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_meta_model_n
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_languages_std_unordered_map_std_string_dogen_modeling_meta_model_name(const std::unordered_map<dogen::modeling::meta_model::languages, std::unordered_map<std::string, dogen::modeling::meta_model::name> >& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_languages_std_unordered_map_std_string_masd_dogen_modeling_meta_model_name(const std::unordered_map<masd::dogen::modeling::meta_model::languages, std::unordered_map<std::string, masd::dogen::modeling::meta_model::name> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_dogen_modeling_meta_model_name(i.second));
+        combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_name(i.second));
     }
     return seed;
 }
@@ -56,7 +56,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_languages_std_unordered_set_std_string(const std::unordered_map<dogen::modeling::meta_model::languages, std::unordered_set<std::string> >& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_languages_std_unordered_set_std_string(const std::unordered_map<masd::dogen::modeling::meta_model::languages, std::unordered_set<std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -67,14 +67,14 @@ inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_languages_st
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::size_t mapping_set_hasher::hash(const mapping_set& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
-    combine(seed, hash_std_unordered_map_dogen_modeling_meta_model_languages_std_unordered_map_std_string_dogen_modeling_meta_model_name(v.by_language_agnostic_id()));
-    combine(seed, hash_std_unordered_map_dogen_modeling_meta_model_languages_std_unordered_set_std_string(v.erasures_by_language()));
+    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_languages_std_unordered_map_std_string_masd_dogen_modeling_meta_model_name(v.by_language_agnostic_id()));
+    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_languages_std_unordered_set_std_string(v.erasures_by_language()));
 
     return seed;
 }

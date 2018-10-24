@@ -19,28 +19,28 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.modeling/types/meta_model/exception.hpp"
-#include "dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.modeling/types/meta_model/exception.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 exception::exception(
-    const dogen::modeling::meta_model::name& name,
+    const masd::dogen::modeling::meta_model::name& name,
     const std::string& documentation,
-    const dogen::annotations::annotation& annotation,
-    const dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::annotations::annotation& annotation,
+    const masd::dogen::modeling::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::modeling::meta_model::name& meta_name,
     const bool is_element_extension,
-    const dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties)
-    : dogen::modeling::meta_model::element(
+    const masd::dogen::formatting::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties)
+    : masd::dogen::modeling::meta_model::element(
       name,
       documentation,
       annotation,
@@ -74,25 +74,25 @@ void exception::accept(element_visitor& v) {
 
 void exception::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::exception\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::exception\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::modeling::meta_model::element::to_stream(s);
     s << " }";
 }
 
 void exception::swap(exception& other) noexcept {
-    dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::modeling::meta_model::element::swap(other);
 
 }
 
-bool exception::equals(const dogen::modeling::meta_model::element& other) const {
+bool exception::equals(const masd::dogen::modeling::meta_model::element& other) const {
     const exception* const p(dynamic_cast<const exception* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool exception::operator==(const exception& rhs) const {
-    return dogen::modeling::meta_model::element::compare(rhs);
+    return masd::dogen::modeling::meta_model::element::compare(rhs);
 }
 
 exception& exception::operator=(exception other) {

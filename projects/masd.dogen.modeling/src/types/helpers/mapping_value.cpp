@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/helpers/mapping_value.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_value.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 mapping_value::mapping_value()
-    : mapping_action_(static_cast<dogen::modeling::helpers::mapping_actions>(0)) { }
+    : mapping_action_(static_cast<masd::dogen::modeling::helpers::mapping_actions>(0)) { }
 
 mapping_value::mapping_value(mapping_value&& rhs)
     : mapping_action_(std::move(rhs.mapping_action_)),
       default_name_(std::move(rhs.default_name_)) { }
 
 mapping_value::mapping_value(
-    const dogen::modeling::helpers::mapping_actions mapping_action,
-    const boost::optional<dogen::modeling::meta_model::name>& default_name)
+    const masd::dogen::modeling::helpers::mapping_actions mapping_action,
+    const boost::optional<masd::dogen::modeling::meta_model::name>& default_name)
     : mapping_action_(mapping_action),
       default_name_(default_name) { }
 
@@ -52,27 +52,27 @@ mapping_value& mapping_value::operator=(mapping_value other) {
     return *this;
 }
 
-dogen::modeling::helpers::mapping_actions mapping_value::mapping_action() const {
+masd::dogen::modeling::helpers::mapping_actions mapping_value::mapping_action() const {
     return mapping_action_;
 }
 
-void mapping_value::mapping_action(const dogen::modeling::helpers::mapping_actions v) {
+void mapping_value::mapping_action(const masd::dogen::modeling::helpers::mapping_actions v) {
     mapping_action_ = v;
 }
 
-const boost::optional<dogen::modeling::meta_model::name>& mapping_value::default_name() const {
+const boost::optional<masd::dogen::modeling::meta_model::name>& mapping_value::default_name() const {
     return default_name_;
 }
 
-boost::optional<dogen::modeling::meta_model::name>& mapping_value::default_name() {
+boost::optional<masd::dogen::modeling::meta_model::name>& mapping_value::default_name() {
     return default_name_;
 }
 
-void mapping_value::default_name(const boost::optional<dogen::modeling::meta_model::name>& v) {
+void mapping_value::default_name(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
     default_name_ = v;
 }
 
-void mapping_value::default_name(const boost::optional<dogen::modeling::meta_model::name>&& v) {
+void mapping_value::default_name(const boost::optional<masd::dogen::modeling::meta_model::name>&& v) {
     default_name_ = std::move(v);
 }
 

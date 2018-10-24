@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/transforms/configuration_hash.hpp"
+#include "masd.dogen.modeling/hash/transforms/configuration_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
 
 }
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 std::size_t configuration_hasher::hash(const configuration& v) {
     std::size_t seed(0);

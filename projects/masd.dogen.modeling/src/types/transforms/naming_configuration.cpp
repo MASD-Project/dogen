@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/naming_configuration.hpp"
+#include "masd.dogen.modeling/types/transforms/naming_configuration.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 naming_configuration::naming_configuration(
     const std::string& external_modules,

@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "dogen.modeling/hash/meta_model/enumerator_hash.hpp"
-#include "dogen.modeling/hash/meta_model/enumeration_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/enumerator_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/enumeration_hash.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_modeling_meta_model_enumerator(const std::vector<dogen::modeling::meta_model::enumerator>& v) {
+inline std::size_t hash_std_vector_masd_dogen_modeling_meta_model_enumerator(const std::vector<masd::dogen::modeling::meta_model::enumerator>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -41,15 +41,15 @@ inline std::size_t hash_std_vector_dogen_modeling_meta_model_enumerator(const st
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t enumeration_hasher::hash(const enumeration& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::modeling::meta_model::element&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::element&>(v));
 
     combine(seed, v.underlying_element());
-    combine(seed, hash_std_vector_dogen_modeling_meta_model_enumerator(v.enumerators()));
+    combine(seed, hash_std_vector_masd_dogen_modeling_meta_model_enumerator(v.enumerators()));
     combine(seed, v.use_implementation_defined_underlying_element());
     combine(seed, v.use_implementation_defined_enumerator_values());
     combine(seed, v.add_invalid_enumerator());

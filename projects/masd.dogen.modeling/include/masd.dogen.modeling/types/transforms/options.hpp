@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_TRANSFORMS_OPTIONS_HPP
-#define DOGEN_MODELING_TYPES_TRANSFORMS_OPTIONS_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_OPTIONS_HPP
+#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class options final {
 public:
@@ -234,8 +234,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::transforms::options& lhs,
-    dogen::modeling::transforms::options& rhs) {
+    masd::dogen::modeling::transforms::options& lhs,
+    masd::dogen::modeling::transforms::options& rhs) {
     lhs.swap(rhs);
 }
 

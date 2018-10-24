@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_HELPERS_SEPARATORS_HPP
-#define DOGEN_MODELING_TYPES_HELPERS_SEPARATORS_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_SEPARATORS_HPP
+#define MASD_DOGEN_MODELING_TYPES_HELPERS_SEPARATORS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Available separators to be used by the pretty printer.

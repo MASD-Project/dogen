@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/opaque_properties_hash.hpp"
 
 namespace {
 
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t opaque_properties_hasher::hash(const opaque_properties&) {
     std::size_t seed(0);

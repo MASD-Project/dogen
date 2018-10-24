@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/module_hash.hpp"
-#include "dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "dogen.modeling/hash/meta_model/orm_module_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/module_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/orm_module_properties_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_modeling_meta_model_orm_module_properties(const boost::optional<dogen::modeling::meta_model::orm_module_properties>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_module_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_module_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -50,17 +50,17 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_orm_module_prop
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t module_hasher::hash(const module& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const dogen::modeling::meta_model::element&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::element&>(v));
 
     combine(seed, hash_std_list_std_string(v.members()));
     combine(seed, v.is_root());
     combine(seed, v.is_global_module());
-    combine(seed, hash_boost_optional_dogen_modeling_meta_model_orm_module_properties(v.orm_properties()));
+    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_orm_module_properties(v.orm_properties()));
 
     return seed;
 }

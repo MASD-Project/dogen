@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 name_tree::name_tree()
     : are_children_opaque_(static_cast<bool>(0)),
@@ -29,11 +29,11 @@ name_tree::name_tree()
       is_floating_point_(static_cast<bool>(0)) { }
 
 name_tree::name_tree(
-    const dogen::modeling::meta_model::name& current,
-    const std::list<dogen::modeling::meta_model::name_tree>& children,
+    const masd::dogen::modeling::meta_model::name& current,
+    const std::list<masd::dogen::modeling::meta_model::name_tree>& children,
     const bool are_children_opaque,
     const bool is_circular_dependency,
-    const std::map<dogen::modeling::meta_model::languages, std::string>& qualified,
+    const std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified,
     const std::string& identifiable,
     const bool is_current_simple_type,
     const bool is_floating_point)
@@ -75,35 +75,35 @@ name_tree& name_tree::operator=(name_tree other) {
     return *this;
 }
 
-const dogen::modeling::meta_model::name& name_tree::current() const {
+const masd::dogen::modeling::meta_model::name& name_tree::current() const {
     return current_;
 }
 
-dogen::modeling::meta_model::name& name_tree::current() {
+masd::dogen::modeling::meta_model::name& name_tree::current() {
     return current_;
 }
 
-void name_tree::current(const dogen::modeling::meta_model::name& v) {
+void name_tree::current(const masd::dogen::modeling::meta_model::name& v) {
     current_ = v;
 }
 
-void name_tree::current(const dogen::modeling::meta_model::name&& v) {
+void name_tree::current(const masd::dogen::modeling::meta_model::name&& v) {
     current_ = std::move(v);
 }
 
-const std::list<dogen::modeling::meta_model::name_tree>& name_tree::children() const {
+const std::list<masd::dogen::modeling::meta_model::name_tree>& name_tree::children() const {
     return children_;
 }
 
-std::list<dogen::modeling::meta_model::name_tree>& name_tree::children() {
+std::list<masd::dogen::modeling::meta_model::name_tree>& name_tree::children() {
     return children_;
 }
 
-void name_tree::children(const std::list<dogen::modeling::meta_model::name_tree>& v) {
+void name_tree::children(const std::list<masd::dogen::modeling::meta_model::name_tree>& v) {
     children_ = v;
 }
 
-void name_tree::children(const std::list<dogen::modeling::meta_model::name_tree>&& v) {
+void name_tree::children(const std::list<masd::dogen::modeling::meta_model::name_tree>&& v) {
     children_ = std::move(v);
 }
 
@@ -123,19 +123,19 @@ void name_tree::is_circular_dependency(const bool v) {
     is_circular_dependency_ = v;
 }
 
-const std::map<dogen::modeling::meta_model::languages, std::string>& name_tree::qualified() const {
+const std::map<masd::dogen::modeling::meta_model::languages, std::string>& name_tree::qualified() const {
     return qualified_;
 }
 
-std::map<dogen::modeling::meta_model::languages, std::string>& name_tree::qualified() {
+std::map<masd::dogen::modeling::meta_model::languages, std::string>& name_tree::qualified() {
     return qualified_;
 }
 
-void name_tree::qualified(const std::map<dogen::modeling::meta_model::languages, std::string>& v) {
+void name_tree::qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>& v) {
     qualified_ = v;
 }
 
-void name_tree::qualified(const std::map<dogen::modeling::meta_model::languages, std::string>&& v) {
+void name_tree::qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>&& v) {
     qualified_ = std::move(v);
 }
 

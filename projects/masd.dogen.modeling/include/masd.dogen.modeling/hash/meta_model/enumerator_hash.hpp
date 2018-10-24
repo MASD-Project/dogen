@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_HASH_META_MODEL_ENUMERATOR_HASH_HPP
-#define DOGEN_MODELING_HASH_META_MODEL_ENUMERATOR_HASH_HPP
+#ifndef MASD_DOGEN_MODELING_HASH_META_MODEL_ENUMERATOR_HASH_HPP
+#define MASD_DOGEN_MODELING_HASH_META_MODEL_ENUMERATOR_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "dogen.modeling/types/meta_model/enumerator.hpp"
+#include "masd.dogen.modeling/types/meta_model/enumerator.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 struct enumerator_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<dogen::modeling::meta_model::enumerator> {
+struct hash<masd::dogen::modeling::meta_model::enumerator> {
 public:
-    size_t operator()(const dogen::modeling::meta_model::enumerator& v) const {
-        return dogen::modeling::meta_model::enumerator_hasher::hash(v);
+    size_t operator()(const masd::dogen::modeling::meta_model::enumerator& v) const {
+        return masd::dogen::modeling::meta_model::enumerator_hasher::hash(v);
     }
 };
 

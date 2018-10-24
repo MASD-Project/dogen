@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_TRANSFORMS_FORMATTING_CONFIGURATION_HPP
-#define DOGEN_MODELING_TYPES_TRANSFORMS_FORMATTING_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_FORMATTING_CONFIGURATION_HPP
+#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_FORMATTING_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/formatting_styles.hpp"
+#include "masd.dogen.modeling/types/meta_model/formatting_styles.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 class formatting_configuration final {
 public:
@@ -42,12 +42,12 @@ public:
 
 public:
     formatting_configuration(
-        const dogen::modeling::meta_model::formatting_styles style,
+        const masd::dogen::modeling::meta_model::formatting_styles style,
         const std::string& input);
 
 public:
-    dogen::modeling::meta_model::formatting_styles style() const;
-    void style(const dogen::modeling::meta_model::formatting_styles v);
+    masd::dogen::modeling::meta_model::formatting_styles style() const;
+    void style(const masd::dogen::modeling::meta_model::formatting_styles v);
 
     const std::string& input() const;
     std::string& input();
@@ -65,7 +65,7 @@ public:
     formatting_configuration& operator=(formatting_configuration other);
 
 private:
-    dogen::modeling::meta_model::formatting_styles style_;
+    masd::dogen::modeling::meta_model::formatting_styles style_;
     std::string input_;
 };
 
@@ -75,8 +75,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::transforms::formatting_configuration& lhs,
-    dogen::modeling::transforms::formatting_configuration& rhs) {
+    masd::dogen::modeling::transforms::formatting_configuration& lhs,
+    masd::dogen::modeling::transforms::formatting_configuration& rhs) {
     lhs.swap(rhs);
 }
 

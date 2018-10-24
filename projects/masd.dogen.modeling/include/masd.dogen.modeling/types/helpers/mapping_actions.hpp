@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_HELPERS_MAPPING_ACTIONS_HPP
-#define DOGEN_MODELING_TYPES_HELPERS_MAPPING_ACTIONS_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_ACTIONS_HPP
+#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_ACTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 enum class mapping_actions : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

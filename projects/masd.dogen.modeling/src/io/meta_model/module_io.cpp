@@ -21,11 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/module_io.hpp"
-#include "dogen.modeling/io/meta_model/element_io.hpp"
-#include "dogen.modeling/io/meta_model/orm_module_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/module_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_module_properties_io.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const module& v) {
     v.to_stream(s);

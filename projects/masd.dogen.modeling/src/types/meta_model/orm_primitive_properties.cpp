@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 orm_primitive_properties::orm_primitive_properties()
     : generate_mapping_(static_cast<bool>(0)) { }
@@ -33,7 +33,7 @@ orm_primitive_properties::orm_primitive_properties(orm_primitive_properties&& rh
 orm_primitive_properties::orm_primitive_properties(
     const bool generate_mapping,
     const std::string& schema_name,
-    const boost::optional<dogen::modeling::meta_model::letter_cases>& letter_case)
+    const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case)
     : generate_mapping_(generate_mapping),
       schema_name_(schema_name),
       letter_case_(letter_case) { }
@@ -81,19 +81,19 @@ void orm_primitive_properties::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
 }
 
-const boost::optional<dogen::modeling::meta_model::letter_cases>& orm_primitive_properties::letter_case() const {
+const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& orm_primitive_properties::letter_case() const {
     return letter_case_;
 }
 
-boost::optional<dogen::modeling::meta_model::letter_cases>& orm_primitive_properties::letter_case() {
+boost::optional<masd::dogen::modeling::meta_model::letter_cases>& orm_primitive_properties::letter_case() {
     return letter_case_;
 }
 
-void orm_primitive_properties::letter_case(const boost::optional<dogen::modeling::meta_model::letter_cases>& v) {
+void orm_primitive_properties::letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v) {
     letter_case_ = v;
 }
 
-void orm_primitive_properties::letter_case(const boost::optional<dogen::modeling::meta_model::letter_cases>&& v) {
+void orm_primitive_properties::letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>&& v) {
     letter_case_ = std::move(v);
 }
 

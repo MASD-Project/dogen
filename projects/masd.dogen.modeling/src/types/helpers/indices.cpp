@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/helpers/indices.hpp"
+#include "masd.dogen.modeling/types/helpers/indices.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,

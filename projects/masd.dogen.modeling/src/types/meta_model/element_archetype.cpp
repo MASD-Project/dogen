@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 element_archetype::element_archetype(
     const std::string& element,

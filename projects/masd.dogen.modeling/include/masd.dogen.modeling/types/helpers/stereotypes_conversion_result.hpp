@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_HELPERS_STEREOTYPES_CONVERSION_RESULT_HPP
-#define DOGEN_MODELING_TYPES_HELPERS_STEREOTYPES_CONVERSION_RESULT_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_STEREOTYPES_CONVERSION_RESULT_HPP
+#define MASD_DOGEN_MODELING_TYPES_HELPERS_STEREOTYPES_CONVERSION_RESULT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/static_stereotypes.hpp"
+#include "masd.dogen.modeling/types/meta_model/static_stereotypes.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Aggregates the result of parsing a CSV string with well-known stereotypes and user
@@ -45,14 +45,14 @@ public:
 
 public:
     stereotypes_conversion_result(
-        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes);
 
 public:
-    const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::modeling::meta_model::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::modeling::meta_model::static_stereotypes>&& v);
+    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes() const;
+    std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes();
+    void static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v);
+    void static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>&& v);
 
     const std::list<std::string>& dynamic_stereotypes() const;
     std::list<std::string>& dynamic_stereotypes();
@@ -70,7 +70,7 @@ public:
     stereotypes_conversion_result& operator=(stereotypes_conversion_result other);
 
 private:
-    std::list<dogen::modeling::meta_model::static_stereotypes> static_stereotypes_;
+    std::list<masd::dogen::modeling::meta_model::static_stereotypes> static_stereotypes_;
     std::list<std::string> dynamic_stereotypes_;
 };
 
@@ -80,8 +80,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::helpers::stereotypes_conversion_result& lhs,
-    dogen::modeling::helpers::stereotypes_conversion_result& rhs) {
+    masd::dogen::modeling::helpers::stereotypes_conversion_result& lhs,
+    masd::dogen::modeling::helpers::stereotypes_conversion_result& rhs) {
     lhs.swap(rhs);
 }
 

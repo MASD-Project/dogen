@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const orm_database_systems& v) {
     s << "{ " << "\"__type__\": " << "\"orm_database_systems\", " << "\"value\": ";

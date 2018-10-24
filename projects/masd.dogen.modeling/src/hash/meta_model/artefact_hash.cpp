@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/artefact_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/artefact_hash.hpp"
 
 namespace {
 
@@ -44,7 +44,7 @@ inline std::size_t hash_std_vector_boost_filesystem_path(const std::vector<boost
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t artefact_hasher::hash(const artefact& v) {
     std::size_t seed(0);

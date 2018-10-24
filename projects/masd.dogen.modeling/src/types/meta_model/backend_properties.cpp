@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/backend_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/backend_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 backend_properties::backend_properties()
     : enabled_(static_cast<bool>(0)) { }

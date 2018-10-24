@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "dogen.modeling/hash/meta_model/module_hash.hpp"
-#include "dogen.modeling/hash/meta_model/object_hash.hpp"
-#include "dogen.modeling/hash/meta_model/builtin_hash.hpp"
-#include "dogen.modeling/hash/meta_model/visitor_hash.hpp"
-#include "dogen.modeling/hash/meta_model/endomodel_hash.hpp"
-#include "dogen.modeling/hash/meta_model/exception_hash.hpp"
-#include "dogen.modeling/hash/meta_model/languages_hash.hpp"
-#include "dogen.modeling/hash/meta_model/primitive_hash.hpp"
-#include "dogen.modeling/hash/meta_model/enumeration_hash.hpp"
-#include "dogen.modeling/hash/meta_model/origin_types_hash.hpp"
-#include "dogen.modeling/hash/meta_model/object_template_hash.hpp"
-#include "dogen.modeling/hash/meta_model/orm_model_properties_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/module_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/object_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/builtin_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/visitor_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/endomodel_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/exception_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/primitive_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/enumeration_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/origin_types_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/object_template_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/orm_model_properties_hash.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_name_dogen_modeling_meta_model_origin_types(const std::unordered_map<dogen::modeling::meta_model::name, dogen::modeling::meta_model::origin_types>& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_name_masd_dogen_modeling_meta_model_origin_types(const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -49,7 +49,7 @@ inline std::size_t hash_std_unordered_map_dogen_modeling_meta_model_name_dogen_m
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_dogen_modeling_meta_model_name(const std::unordered_set<dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_std_unordered_set_masd_dogen_modeling_meta_model_name(const std::unordered_set<masd::dogen::modeling::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -57,127 +57,127 @@ inline std::size_t hash_std_unordered_set_dogen_modeling_meta_model_name(const s
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_module(const boost::shared_ptr<dogen::modeling::meta_model::module>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_module(const boost::shared_ptr<masd::dogen::modeling::meta_model::module>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_module(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::module> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_module(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::module> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_module(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_module(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_object_template(const boost::shared_ptr<dogen::modeling::meta_model::object_template>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_object_template(const boost::shared_ptr<masd::dogen::modeling::meta_model::object_template>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_object_template(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::object_template> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_object_template(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::object_template> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_object_template(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_object_template(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_builtin(const boost::shared_ptr<dogen::modeling::meta_model::builtin>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_builtin(const boost::shared_ptr<masd::dogen::modeling::meta_model::builtin>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_builtin(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::builtin> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_builtin(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::builtin> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_builtin(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_builtin(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_enumeration(const boost::shared_ptr<dogen::modeling::meta_model::enumeration>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_enumeration(const boost::shared_ptr<masd::dogen::modeling::meta_model::enumeration>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_enumeration(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::enumeration> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_enumeration(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::enumeration> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_enumeration(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_enumeration(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_primitive(const boost::shared_ptr<dogen::modeling::meta_model::primitive>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_primitive(const boost::shared_ptr<masd::dogen::modeling::meta_model::primitive>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_primitive(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::primitive> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_primitive(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::primitive> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_primitive(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_primitive(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_object(const boost::shared_ptr<dogen::modeling::meta_model::object>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_object(const boost::shared_ptr<masd::dogen::modeling::meta_model::object>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_object(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::object> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_object(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::object> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_object(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_object(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_exception(const boost::shared_ptr<dogen::modeling::meta_model::exception>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_exception(const boost::shared_ptr<masd::dogen::modeling::meta_model::exception>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_exception(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::exception> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_exception(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::exception> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_exception(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_exception(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_modeling_meta_model_visitor(const boost::shared_ptr<dogen::modeling::meta_model::visitor>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_visitor(const boost::shared_ptr<masd::dogen::modeling::meta_model::visitor>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_visitor(const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::visitor> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_visitor(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::visitor> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_visitor(i.second));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_visitor(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_modeling_meta_model_languages(const std::list<dogen::modeling::meta_model::languages>& v) {
+inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_languages(const std::list<masd::dogen::modeling::meta_model::languages>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -185,7 +185,7 @@ inline std::size_t hash_std_list_dogen_modeling_meta_model_languages(const std::
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_modeling_meta_model_orm_model_properties(const boost::optional<dogen::modeling::meta_model::orm_model_properties>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_model_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -197,7 +197,7 @@ inline std::size_t hash_boost_optional_dogen_modeling_meta_model_orm_model_prope
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::size_t endomodel_hasher::hash(const endomodel& v) {
     std::size_t seed(0);
@@ -205,20 +205,20 @@ std::size_t endomodel_hasher::hash(const endomodel& v) {
     combine(seed, v.name());
     combine(seed, v.meta_name());
     combine(seed, v.origin_type());
-    combine(seed, hash_std_unordered_map_dogen_modeling_meta_model_name_dogen_modeling_meta_model_origin_types(v.references()));
-    combine(seed, hash_std_unordered_set_dogen_modeling_meta_model_name(v.leaves()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_module(v.modules()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_object_template(v.object_templates()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_builtin(v.builtins()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_enumeration(v.enumerations()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_primitive(v.primitives()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_object(v.objects()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_exception(v.exceptions()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_modeling_meta_model_visitor(v.visitors()));
-    combine(seed, hash_boost_shared_ptr_dogen_modeling_meta_model_module(v.root_module()));
+    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_name_masd_dogen_modeling_meta_model_origin_types(v.references()));
+    combine(seed, hash_std_unordered_set_masd_dogen_modeling_meta_model_name(v.leaves()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_module(v.modules()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_object_template(v.object_templates()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_builtin(v.builtins()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_enumeration(v.enumerations()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_primitive(v.primitives()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_object(v.objects()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_exception(v.exceptions()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_masd_dogen_modeling_meta_model_visitor(v.visitors()));
+    combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_module(v.root_module()));
     combine(seed, v.input_language());
-    combine(seed, hash_std_list_dogen_modeling_meta_model_languages(v.output_languages()));
-    combine(seed, hash_boost_optional_dogen_modeling_meta_model_orm_model_properties(v.orm_properties()));
+    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_languages(v.output_languages()));
+    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_orm_model_properties(v.orm_properties()));
 
     return seed;
 }

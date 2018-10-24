@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/transforms/formatting_configuration.hpp"
+#include "masd.dogen.modeling/types/transforms/formatting_configuration.hpp"
 
-namespace dogen::modeling::transforms {
+namespace masd::dogen::modeling::transforms {
 
 formatting_configuration::formatting_configuration()
-    : style_(static_cast<dogen::modeling::meta_model::formatting_styles>(0)) { }
+    : style_(static_cast<masd::dogen::modeling::meta_model::formatting_styles>(0)) { }
 
 formatting_configuration::formatting_configuration(
-    const dogen::modeling::meta_model::formatting_styles style,
+    const masd::dogen::modeling::meta_model::formatting_styles style,
     const std::string& input)
     : style_(style),
       input_(input) { }
@@ -48,11 +48,11 @@ formatting_configuration& formatting_configuration::operator=(formatting_configu
     return *this;
 }
 
-dogen::modeling::meta_model::formatting_styles formatting_configuration::style() const {
+masd::dogen::modeling::meta_model::formatting_styles formatting_configuration::style() const {
     return style_;
 }
 
-void formatting_configuration::style(const dogen::modeling::meta_model::formatting_styles v) {
+void formatting_configuration::style(const masd::dogen::modeling::meta_model::formatting_styles v) {
     style_ = v;
 }
 

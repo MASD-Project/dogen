@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
-#include "dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "dogen.modeling/io/meta_model/fake_opaque_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/fake_opaque_properties_io.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const fake_opaque_properties& v) {
     v.to_stream(s);

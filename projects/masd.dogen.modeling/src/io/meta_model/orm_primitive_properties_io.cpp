@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/letter_cases_io.hpp"
-#include "dogen.modeling/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/letter_cases_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_primitive_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::modeling::meta_model::letter_cases>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -47,7 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const orm_primitive_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const orm_primitive_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::orm_primitive_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::orm_primitive_properties\"" << ", "
       << "\"generate_mapping\": " << v.generate_mapping() << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"letter_case\": " << v.letter_case()

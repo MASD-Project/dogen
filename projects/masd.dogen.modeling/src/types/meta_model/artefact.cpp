@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 artefact::artefact()
     : overwrite_(static_cast<bool>(0)) { }

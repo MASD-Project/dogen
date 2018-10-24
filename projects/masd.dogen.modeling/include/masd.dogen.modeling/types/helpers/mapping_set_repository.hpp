@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_HELPERS_MAPPING_SET_REPOSITORY_HPP
-#define DOGEN_MODELING_TYPES_HELPERS_MAPPING_SET_REPOSITORY_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_SET_REPOSITORY_HPP
+#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_SET_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.modeling/types/helpers/mapping_set.hpp"
+#include "masd.dogen.modeling/types/helpers/mapping_set.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 /**
  * @brief Stores all available mapping sets.
@@ -44,19 +44,19 @@ public:
 
 public:
     mapping_set_repository(
-        const dogen::modeling::helpers::mapping_set& default_mapping_set,
-        const std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>& by_name);
+        const masd::dogen::modeling::helpers::mapping_set& default_mapping_set,
+        const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& by_name);
 
 public:
-    const dogen::modeling::helpers::mapping_set& default_mapping_set() const;
-    dogen::modeling::helpers::mapping_set& default_mapping_set();
-    void default_mapping_set(const dogen::modeling::helpers::mapping_set& v);
-    void default_mapping_set(const dogen::modeling::helpers::mapping_set&& v);
+    const masd::dogen::modeling::helpers::mapping_set& default_mapping_set() const;
+    masd::dogen::modeling::helpers::mapping_set& default_mapping_set();
+    void default_mapping_set(const masd::dogen::modeling::helpers::mapping_set& v);
+    void default_mapping_set(const masd::dogen::modeling::helpers::mapping_set&& v);
 
-    const std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>& by_name() const;
-    std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>& by_name();
-    void by_name(const std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>& v);
-    void by_name(const std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>&& v);
+    const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& by_name() const;
+    std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& by_name();
+    void by_name(const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& v);
+    void by_name(const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>&& v);
 
 public:
     bool operator==(const mapping_set_repository& rhs) const;
@@ -69,8 +69,8 @@ public:
     mapping_set_repository& operator=(mapping_set_repository other);
 
 private:
-    dogen::modeling::helpers::mapping_set default_mapping_set_;
-    std::unordered_map<std::string, dogen::modeling::helpers::mapping_set> by_name_;
+    masd::dogen::modeling::helpers::mapping_set default_mapping_set_;
+    std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set> by_name_;
 };
 
 }
@@ -79,8 +79,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::helpers::mapping_set_repository& lhs,
-    dogen::modeling::helpers::mapping_set_repository& rhs) {
+    masd::dogen::modeling::helpers::mapping_set_repository& lhs,
+    masd::dogen::modeling::helpers::mapping_set_repository& rhs) {
     lhs.swap(rhs);
 }
 

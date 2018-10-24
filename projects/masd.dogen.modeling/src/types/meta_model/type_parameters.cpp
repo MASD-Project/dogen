@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/type_parameters.hpp"
+#include "masd.dogen.modeling/types/meta_model/type_parameters.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 type_parameters::type_parameters()
     : variable_number_of_parameters_(static_cast<bool>(0)),

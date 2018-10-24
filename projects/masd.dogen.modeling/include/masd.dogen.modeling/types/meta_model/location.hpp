@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Identifies a hierarchy of containment within the modeling space.
@@ -143,8 +143,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::location& lhs,
-    dogen::modeling::meta_model::location& rhs) {
+    masd::dogen::modeling::meta_model::location& lhs,
+    masd::dogen::modeling::meta_model::location& rhs) {
     lhs.swap(rhs);
 }
 

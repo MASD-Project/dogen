@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_IO_META_MODEL_OPAQUE_PROPERTIES_IO_HPP
-#define DOGEN_MODELING_IO_META_MODEL_OPAQUE_PROPERTIES_IO_HPP
+#ifndef MASD_DOGEN_MODELING_IO_META_MODEL_OPAQUE_PROPERTIES_IO_HPP
+#define MASD_DOGEN_MODELING_IO_META_MODEL_OPAQUE_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/meta_model/opaque_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/opaque_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::modeling::meta_model::opaque_properties& v);
+     const masd::dogen::modeling::meta_model::opaque_properties& v);
 
 }
 

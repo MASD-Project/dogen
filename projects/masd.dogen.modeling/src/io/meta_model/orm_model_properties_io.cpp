@@ -20,13 +20,13 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.modeling/io/meta_model/letter_cases_io.hpp"
-#include "dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
-#include "dogen.modeling/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/letter_cases_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
+#include "masd.dogen.modeling/io/meta_model/orm_model_properties_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::modeling::meta_model::orm_database_systems>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<masd::dogen::modeling::meta_model::orm_database_systems>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -48,7 +48,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::modeling::meta_model::letter_cases>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -61,11 +61,11 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::mo
 
 }
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const orm_model_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::modeling::meta_model::orm_model_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::orm_model_properties\"" << ", "
       << "\"database_systems\": " << v.database_systems() << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"letter_case\": " << v.letter_case()

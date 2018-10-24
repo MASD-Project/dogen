@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_NAME_TREE_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_NAME_TREE_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_NAME_TREE_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_NAME_TREE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,12 +29,12 @@
 #include <string>
 #include <algorithm>
 #include <map>
-#include "dogen.modeling/types/meta_model/name.hpp"
-#include "dogen.modeling/types/meta_model/languages.hpp"
-#include "dogen.modeling/types/meta_model/name_tree.hpp"
-#include "dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/languages.hpp"
+#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Adds support for name composition as a tree-like structure.
@@ -55,11 +55,11 @@ public:
 
 public:
     name_tree(
-        const dogen::modeling::meta_model::name& current,
-        const std::list<dogen::modeling::meta_model::name_tree>& children,
+        const masd::dogen::modeling::meta_model::name& current,
+        const std::list<masd::dogen::modeling::meta_model::name_tree>& children,
         const bool are_children_opaque,
         const bool is_circular_dependency,
-        const std::map<dogen::modeling::meta_model::languages, std::string>& qualified,
+        const std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified,
         const std::string& identifiable,
         const bool is_current_simple_type,
         const bool is_floating_point);
@@ -69,20 +69,20 @@ public:
      * @brief Name for the current level of the tree.
      */
     /**@{*/
-    const dogen::modeling::meta_model::name& current() const;
-    dogen::modeling::meta_model::name& current();
-    void current(const dogen::modeling::meta_model::name& v);
-    void current(const dogen::modeling::meta_model::name&& v);
+    const masd::dogen::modeling::meta_model::name& current() const;
+    masd::dogen::modeling::meta_model::name& current();
+    void current(const masd::dogen::modeling::meta_model::name& v);
+    void current(const masd::dogen::modeling::meta_model::name&& v);
     /**@}*/
 
     /**
      * @brief Names of the child elements.
      */
     /**@{*/
-    const std::list<dogen::modeling::meta_model::name_tree>& children() const;
-    std::list<dogen::modeling::meta_model::name_tree>& children();
-    void children(const std::list<dogen::modeling::meta_model::name_tree>& v);
-    void children(const std::list<dogen::modeling::meta_model::name_tree>&& v);
+    const std::list<masd::dogen::modeling::meta_model::name_tree>& children() const;
+    std::list<masd::dogen::modeling::meta_model::name_tree>& children();
+    void children(const std::list<masd::dogen::modeling::meta_model::name_tree>& v);
+    void children(const std::list<masd::dogen::modeling::meta_model::name_tree>&& v);
     /**@}*/
 
     /**
@@ -109,10 +109,10 @@ public:
      * @brief Qualified name in a language specific representation.
      */
     /**@{*/
-    const std::map<dogen::modeling::meta_model::languages, std::string>& qualified() const;
-    std::map<dogen::modeling::meta_model::languages, std::string>& qualified();
-    void qualified(const std::map<dogen::modeling::meta_model::languages, std::string>& v);
-    void qualified(const std::map<dogen::modeling::meta_model::languages, std::string>&& v);
+    const std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified() const;
+    std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified();
+    void qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>& v);
+    void qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>&& v);
     /**@}*/
 
     /**
@@ -153,11 +153,11 @@ public:
     name_tree& operator=(name_tree other);
 
 private:
-    dogen::modeling::meta_model::name current_;
-    std::list<dogen::modeling::meta_model::name_tree> children_;
+    masd::dogen::modeling::meta_model::name current_;
+    std::list<masd::dogen::modeling::meta_model::name_tree> children_;
     bool are_children_opaque_;
     bool is_circular_dependency_;
-    std::map<dogen::modeling::meta_model::languages, std::string> qualified_;
+    std::map<masd::dogen::modeling::meta_model::languages, std::string> qualified_;
     std::string identifiable_;
     bool is_current_simple_type_;
     bool is_floating_point_;
@@ -169,8 +169,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::name_tree& lhs,
-    dogen::modeling::meta_model::name_tree& rhs) {
+    masd::dogen::modeling::meta_model::name_tree& lhs,
+    masd::dogen::modeling::meta_model::name_tree& rhs) {
     lhs.swap(rhs);
 }
 

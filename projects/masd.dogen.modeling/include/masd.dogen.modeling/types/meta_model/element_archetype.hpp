@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_ARCHETYPE_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_ARCHETYPE_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_ARCHETYPE_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ELEMENT_ARCHETYPE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 class element_archetype final {
 public:
@@ -74,8 +74,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::element_archetype& lhs,
-    dogen::modeling::meta_model::element_archetype& rhs) {
+    masd::dogen::modeling::meta_model::element_archetype& lhs,
+    masd::dogen::modeling::meta_model::element_archetype& rhs) {
     lhs.swap(rhs);
 }
 

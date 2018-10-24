@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 intra_backend_segment_properties::intra_backend_segment_properties()
-    : external_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)),
-      model_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)),
-      internal_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)),
-      facet_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)) { }
+    : external_modules_(static_cast<masd::dogen::modeling::meta_model::path_contribution_types>(0)),
+      model_modules_(static_cast<masd::dogen::modeling::meta_model::path_contribution_types>(0)),
+      internal_modules_(static_cast<masd::dogen::modeling::meta_model::path_contribution_types>(0)),
+      facet_(static_cast<masd::dogen::modeling::meta_model::path_contribution_types>(0)) { }
 
 intra_backend_segment_properties::intra_backend_segment_properties(intra_backend_segment_properties&& rhs)
     : override_parent_path_(std::move(rhs.override_parent_path_)),
@@ -39,10 +39,10 @@ intra_backend_segment_properties::intra_backend_segment_properties(intra_backend
 intra_backend_segment_properties::intra_backend_segment_properties(
     const boost::filesystem::path& override_parent_path,
     const boost::filesystem::path& path_segment,
-    const dogen::modeling::meta_model::path_contribution_types external_modules,
-    const dogen::modeling::meta_model::path_contribution_types model_modules,
-    const dogen::modeling::meta_model::path_contribution_types internal_modules,
-    const dogen::modeling::meta_model::path_contribution_types facet)
+    const masd::dogen::modeling::meta_model::path_contribution_types external_modules,
+    const masd::dogen::modeling::meta_model::path_contribution_types model_modules,
+    const masd::dogen::modeling::meta_model::path_contribution_types internal_modules,
+    const masd::dogen::modeling::meta_model::path_contribution_types facet)
     : override_parent_path_(override_parent_path),
       path_segment_(path_segment),
       external_modules_(external_modules),
@@ -107,35 +107,35 @@ void intra_backend_segment_properties::path_segment(const boost::filesystem::pat
     path_segment_ = std::move(v);
 }
 
-dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::external_modules() const {
+masd::dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::external_modules() const {
     return external_modules_;
 }
 
-void intra_backend_segment_properties::external_modules(const dogen::modeling::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::external_modules(const masd::dogen::modeling::meta_model::path_contribution_types v) {
     external_modules_ = v;
 }
 
-dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::model_modules() const {
+masd::dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::model_modules() const {
     return model_modules_;
 }
 
-void intra_backend_segment_properties::model_modules(const dogen::modeling::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::model_modules(const masd::dogen::modeling::meta_model::path_contribution_types v) {
     model_modules_ = v;
 }
 
-dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::internal_modules() const {
+masd::dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::internal_modules() const {
     return internal_modules_;
 }
 
-void intra_backend_segment_properties::internal_modules(const dogen::modeling::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::internal_modules(const masd::dogen::modeling::meta_model::path_contribution_types v) {
     internal_modules_ = v;
 }
 
-dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::facet() const {
+masd::dogen::modeling::meta_model::path_contribution_types intra_backend_segment_properties::facet() const {
     return facet_;
 }
 
-void intra_backend_segment_properties::facet(const dogen::modeling::meta_model::path_contribution_types v) {
+void intra_backend_segment_properties::facet(const masd::dogen::modeling::meta_model::path_contribution_types v) {
     facet_ = v;
 }
 

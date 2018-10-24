@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_ORM_MODEL_PROPERTIES_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_ORM_MODEL_PROPERTIES_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_MODEL_PROPERTIES_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_MODEL_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <vector>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.modeling/types/meta_model/letter_cases.hpp"
-#include "dogen.modeling/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 class orm_model_properties final {
 public:
@@ -45,25 +45,25 @@ public:
 
 public:
     orm_model_properties(
-        const std::vector<dogen::modeling::meta_model::orm_database_systems>& database_systems,
+        const std::vector<masd::dogen::modeling::meta_model::orm_database_systems>& database_systems,
         const std::string& schema_name,
-        const boost::optional<dogen::modeling::meta_model::letter_cases>& letter_case);
+        const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case);
 
 public:
-    const std::vector<dogen::modeling::meta_model::orm_database_systems>& database_systems() const;
-    std::vector<dogen::modeling::meta_model::orm_database_systems>& database_systems();
-    void database_systems(const std::vector<dogen::modeling::meta_model::orm_database_systems>& v);
-    void database_systems(const std::vector<dogen::modeling::meta_model::orm_database_systems>&& v);
+    const std::vector<masd::dogen::modeling::meta_model::orm_database_systems>& database_systems() const;
+    std::vector<masd::dogen::modeling::meta_model::orm_database_systems>& database_systems();
+    void database_systems(const std::vector<masd::dogen::modeling::meta_model::orm_database_systems>& v);
+    void database_systems(const std::vector<masd::dogen::modeling::meta_model::orm_database_systems>&& v);
 
     const std::string& schema_name() const;
     std::string& schema_name();
     void schema_name(const std::string& v);
     void schema_name(const std::string&& v);
 
-    const boost::optional<dogen::modeling::meta_model::letter_cases>& letter_case() const;
-    boost::optional<dogen::modeling::meta_model::letter_cases>& letter_case();
-    void letter_case(const boost::optional<dogen::modeling::meta_model::letter_cases>& v);
-    void letter_case(const boost::optional<dogen::modeling::meta_model::letter_cases>&& v);
+    const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case() const;
+    boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case();
+    void letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v);
+    void letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>&& v);
 
 public:
     bool operator==(const orm_model_properties& rhs) const;
@@ -76,9 +76,9 @@ public:
     orm_model_properties& operator=(orm_model_properties other);
 
 private:
-    std::vector<dogen::modeling::meta_model::orm_database_systems> database_systems_;
+    std::vector<masd::dogen::modeling::meta_model::orm_database_systems> database_systems_;
     std::string schema_name_;
-    boost::optional<dogen::modeling::meta_model::letter_cases> letter_case_;
+    boost::optional<masd::dogen::modeling::meta_model::letter_cases> letter_case_;
 };
 
 }
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::orm_model_properties& lhs,
-    dogen::modeling::meta_model::orm_model_properties& rhs) {
+    masd::dogen::modeling::meta_model::orm_model_properties& lhs,
+    masd::dogen::modeling::meta_model::orm_model_properties& rhs) {
     lhs.swap(rhs);
 }
 

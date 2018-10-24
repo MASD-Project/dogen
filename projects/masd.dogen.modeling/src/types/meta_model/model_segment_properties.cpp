@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/model_segment_properties.hpp"
+#include "masd.dogen.modeling/types/meta_model/model_segment_properties.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 model_segment_properties::model_segment_properties()
-    : external_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)),
-      model_modules_(static_cast<dogen::modeling::meta_model::path_contribution_types>(0)) { }
+    : external_modules_(static_cast<masd::dogen::modeling::meta_model::path_contribution_types>(0)),
+      model_modules_(static_cast<masd::dogen::modeling::meta_model::path_contribution_types>(0)) { }
 
 model_segment_properties::model_segment_properties(
     const std::string& directory,
-    const dogen::modeling::meta_model::path_contribution_types external_modules,
-    const dogen::modeling::meta_model::path_contribution_types model_modules)
+    const masd::dogen::modeling::meta_model::path_contribution_types external_modules,
+    const masd::dogen::modeling::meta_model::path_contribution_types model_modules)
     : directory_(directory),
       external_modules_(external_modules),
       model_modules_(model_modules) { }
@@ -69,19 +69,19 @@ void model_segment_properties::directory(const std::string&& v) {
     directory_ = std::move(v);
 }
 
-dogen::modeling::meta_model::path_contribution_types model_segment_properties::external_modules() const {
+masd::dogen::modeling::meta_model::path_contribution_types model_segment_properties::external_modules() const {
     return external_modules_;
 }
 
-void model_segment_properties::external_modules(const dogen::modeling::meta_model::path_contribution_types v) {
+void model_segment_properties::external_modules(const masd::dogen::modeling::meta_model::path_contribution_types v) {
     external_modules_ = v;
 }
 
-dogen::modeling::meta_model::path_contribution_types model_segment_properties::model_modules() const {
+masd::dogen::modeling::meta_model::path_contribution_types model_segment_properties::model_modules() const {
     return model_modules_;
 }
 
-void model_segment_properties::model_modules(const dogen::modeling::meta_model::path_contribution_types v) {
+void model_segment_properties::model_modules(const masd::dogen::modeling::meta_model::path_contribution_types v) {
     model_modules_ = v;
 }
 

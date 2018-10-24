@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_META_MODEL_BUILTIN_HPP
-#define DOGEN_MODELING_TYPES_META_MODEL_BUILTIN_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_BUILTIN_HPP
+#define MASD_DOGEN_MODELING_TYPES_META_MODEL_BUILTIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.modeling/types/meta_model/element.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 /**
  * @brief Represents a value type that is built-in at the hardware level.
  */
-class builtin final : public dogen::modeling::meta_model::element {
+class builtin final : public masd::dogen::modeling::meta_model::element {
 public:
     builtin(const builtin&) = default;
     builtin(builtin&&) = default;
@@ -46,20 +46,20 @@ public:
 
 public:
     builtin(
-        const dogen::modeling::meta_model::name& name,
+        const masd::dogen::modeling::meta_model::name& name,
         const std::string& documentation,
-        const dogen::annotations::annotation& annotation,
-        const dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::annotations::annotation& annotation,
+        const masd::dogen::modeling::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::modeling::meta_model::name& meta_name,
         const bool is_element_extension,
-        const dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
         const bool is_default_enumeration_type,
         const bool is_floating_point,
         const bool can_be_enumeration_underlier,
@@ -115,7 +115,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
 
 public:
     void swap(builtin& other) noexcept;
@@ -134,8 +134,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::meta_model::builtin& lhs,
-    dogen::modeling::meta_model::builtin& rhs) {
+    masd::dogen::modeling::meta_model::builtin& lhs,
+    masd::dogen::modeling::meta_model::builtin& rhs) {
     lhs.swap(rhs);
 }
 

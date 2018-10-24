@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_IO_HELPERS_NODE_IO_HPP
-#define DOGEN_MODELING_IO_HELPERS_NODE_IO_HPP
+#ifndef MASD_DOGEN_MODELING_IO_HELPERS_NODE_IO_HPP
+#define MASD_DOGEN_MODELING_IO_HELPERS_NODE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.modeling/types/helpers/node.hpp"
+#include "masd.dogen.modeling/types/helpers/node.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::modeling::helpers::node& v);
+     const masd::dogen::modeling::helpers::node& v);
 
 }
 

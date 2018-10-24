@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_MODELING_TYPES_HELPERS_MAPPING_CONTEXT_HPP
-#define DOGEN_MODELING_TYPES_HELPERS_MAPPING_CONTEXT_HPP
+#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_CONTEXT_HPP
+#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 class mapping_context final {
 public:
@@ -42,25 +42,25 @@ public:
 
 public:
     mapping_context(
-        const std::unordered_map<std::string, dogen::modeling::meta_model::name>& translations,
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& translations,
         const std::unordered_set<std::string>& erasures,
-        const std::unordered_map<std::string, dogen::modeling::meta_model::name>& injections);
+        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& injections);
 
 public:
-    const std::unordered_map<std::string, dogen::modeling::meta_model::name>& translations() const;
-    std::unordered_map<std::string, dogen::modeling::meta_model::name>& translations();
-    void translations(const std::unordered_map<std::string, dogen::modeling::meta_model::name>& v);
-    void translations(const std::unordered_map<std::string, dogen::modeling::meta_model::name>&& v);
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& translations() const;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& translations();
+    void translations(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& v);
+    void translations(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>&& v);
 
     const std::unordered_set<std::string>& erasures() const;
     std::unordered_set<std::string>& erasures();
     void erasures(const std::unordered_set<std::string>& v);
     void erasures(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::modeling::meta_model::name>& injections() const;
-    std::unordered_map<std::string, dogen::modeling::meta_model::name>& injections();
-    void injections(const std::unordered_map<std::string, dogen::modeling::meta_model::name>& v);
-    void injections(const std::unordered_map<std::string, dogen::modeling::meta_model::name>&& v);
+    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& injections() const;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& injections();
+    void injections(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& v);
+    void injections(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>&& v);
 
 public:
     bool operator==(const mapping_context& rhs) const;
@@ -73,9 +73,9 @@ public:
     mapping_context& operator=(mapping_context other);
 
 private:
-    std::unordered_map<std::string, dogen::modeling::meta_model::name> translations_;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::name> translations_;
     std::unordered_set<std::string> erasures_;
-    std::unordered_map<std::string, dogen::modeling::meta_model::name> injections_;
+    std::unordered_map<std::string, masd::dogen::modeling::meta_model::name> injections_;
 };
 
 }
@@ -84,8 +84,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::modeling::helpers::mapping_context& lhs,
-    dogen::modeling::helpers::mapping_context& rhs) {
+    masd::dogen::modeling::helpers::mapping_context& lhs,
+    masd::dogen::modeling::helpers::mapping_context& rhs) {
     lhs.swap(rhs);
 }
 

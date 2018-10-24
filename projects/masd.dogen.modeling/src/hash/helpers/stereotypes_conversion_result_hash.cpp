@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/meta_model/static_stereotypes_hash.hpp"
-#include "dogen.modeling/hash/helpers/stereotypes_conversion_result_hash.hpp"
+#include "masd.dogen.modeling/hash/meta_model/static_stereotypes_hash.hpp"
+#include "masd.dogen.modeling/hash/helpers/stereotypes_conversion_result_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_dogen_modeling_meta_model_static_stereotypes(const std::list<dogen::modeling::meta_model::static_stereotypes>& v) {
+inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -47,12 +47,12 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::size_t stereotypes_conversion_result_hasher::hash(const stereotypes_conversion_result& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_dogen_modeling_meta_model_static_stereotypes(v.static_stereotypes()));
+    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_static_stereotypes(v.static_stereotypes()));
     combine(seed, hash_std_list_std_string(v.dynamic_stereotypes()));
 
     return seed;

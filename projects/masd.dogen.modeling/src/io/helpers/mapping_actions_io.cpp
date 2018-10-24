@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen.modeling/io/helpers/mapping_actions_io.hpp"
+#include "masd.dogen.modeling/io/helpers/mapping_actions_io.hpp"
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping_actions& v) {
     s << "{ " << "\"__type__\": " << "\"mapping_actions\", " << "\"value\": ";

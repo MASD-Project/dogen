@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.modeling/types/meta_model/name.hpp"
 
-namespace dogen::modeling::meta_model {
+namespace masd::dogen::modeling::meta_model {
 
 name::name(
     const std::string& id,
     const std::string& simple,
-    const std::map<dogen::modeling::meta_model::languages, std::string>& qualified,
-    const dogen::modeling::meta_model::location& location,
+    const std::map<masd::dogen::modeling::meta_model::languages, std::string>& qualified,
+    const masd::dogen::modeling::meta_model::location& location,
     const std::string& identifiable)
     : id_(id),
       simple_(simple),
@@ -89,35 +89,35 @@ void name::simple(const std::string&& v) {
     simple_ = std::move(v);
 }
 
-const std::map<dogen::modeling::meta_model::languages, std::string>& name::qualified() const {
+const std::map<masd::dogen::modeling::meta_model::languages, std::string>& name::qualified() const {
     return qualified_;
 }
 
-std::map<dogen::modeling::meta_model::languages, std::string>& name::qualified() {
+std::map<masd::dogen::modeling::meta_model::languages, std::string>& name::qualified() {
     return qualified_;
 }
 
-void name::qualified(const std::map<dogen::modeling::meta_model::languages, std::string>& v) {
+void name::qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>& v) {
     qualified_ = v;
 }
 
-void name::qualified(const std::map<dogen::modeling::meta_model::languages, std::string>&& v) {
+void name::qualified(const std::map<masd::dogen::modeling::meta_model::languages, std::string>&& v) {
     qualified_ = std::move(v);
 }
 
-const dogen::modeling::meta_model::location& name::location() const {
+const masd::dogen::modeling::meta_model::location& name::location() const {
     return location_;
 }
 
-dogen::modeling::meta_model::location& name::location() {
+masd::dogen::modeling::meta_model::location& name::location() {
     return location_;
 }
 
-void name::location(const dogen::modeling::meta_model::location& v) {
+void name::location(const masd::dogen::modeling::meta_model::location& v) {
     location_ = v;
 }
 
-void name::location(const dogen::modeling::meta_model::location&& v) {
+void name::location(const masd::dogen::modeling::meta_model::location&& v) {
     location_ = std::move(v);
 }
 

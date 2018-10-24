@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.modeling/hash/helpers/mapping_set_hash.hpp"
-#include "dogen.modeling/hash/helpers/mapping_set_repository_hash.hpp"
+#include "masd.dogen.modeling/hash/helpers/mapping_set_hash.hpp"
+#include "masd.dogen.modeling/hash/helpers/mapping_set_repository_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_helpers_mapping_set(const std::unordered_map<std::string, dogen::modeling::helpers::mapping_set>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_helpers_mapping_set(const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -40,13 +40,13 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_modeling_helpers_mapp
 
 }
 
-namespace dogen::modeling::helpers {
+namespace masd::dogen::modeling::helpers {
 
 std::size_t mapping_set_repository_hasher::hash(const mapping_set_repository& v) {
     std::size_t seed(0);
 
     combine(seed, v.default_mapping_set());
-    combine(seed, hash_std_unordered_map_std_string_dogen_modeling_helpers_mapping_set(v.by_name()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_helpers_mapping_set(v.by_name()));
 
     return seed;
 }
