@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.dia/io/font_io.hpp"
+#include "masd.dogen.dia/io/font_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const font& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia::font\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::dia::font\"" << ", "
       << "\"family\": " << "\"" << tidy_up_string(v.family()) << "\"" << ", "
       << "\"style\": " << "\"" << tidy_up_string(v.style()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\""

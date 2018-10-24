@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/enumeration.hpp"
+#include "masd.dogen.dia/types/enumeration.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 enumeration::enumeration(const std::string& value)
     : value_(value) { }

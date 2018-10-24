@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_PERSISTER_ERROR_HPP
-#define DOGEN_DIA_TYPES_PERSISTER_ERROR_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_PERSISTER_ERROR_HPP
+#define MASD_DOGEN_DIA_TYPES_PERSISTER_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief An error occurred whilst tryng to persist a Dia diagram.

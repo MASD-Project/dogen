@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.dia/io/layer_io.hpp"
-#include "dogen.dia/io/object_io.hpp"
+#include "masd.dogen.dia/io/layer_io.hpp"
+#include "masd.dogen.dia/io/object_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::object>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<masd::dogen::dia::object>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -46,7 +46,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::o
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const layer& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -56,7 +56,7 @@ std::ostream& operator<<(std::ostream& s, const layer& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia::layer\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::dia::layer\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"visible\": " << v.visible() << ", "
       << "\"active\": " << v.active() << ", "

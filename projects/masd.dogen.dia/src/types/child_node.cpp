@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/child_node.hpp"
+#include "masd.dogen.dia/types/child_node.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 child_node::child_node(const std::string& parent)
     : parent_(parent) { }

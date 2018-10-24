@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/diagram.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 diagram::diagram(
-    const dogen::dia::diagram_data& diagram_data,
-    const std::vector<dogen::dia::layer>& layers)
+    const masd::dogen::dia::diagram_data& diagram_data,
+    const std::vector<masd::dogen::dia::layer>& layers)
     : diagram_data_(diagram_data),
       layers_(layers) { }
 
@@ -45,35 +45,35 @@ diagram& diagram::operator=(diagram other) {
     return *this;
 }
 
-const dogen::dia::diagram_data& diagram::diagram_data() const {
+const masd::dogen::dia::diagram_data& diagram::diagram_data() const {
     return diagram_data_;
 }
 
-dogen::dia::diagram_data& diagram::diagram_data() {
+masd::dogen::dia::diagram_data& diagram::diagram_data() {
     return diagram_data_;
 }
 
-void diagram::diagram_data(const dogen::dia::diagram_data& v) {
+void diagram::diagram_data(const masd::dogen::dia::diagram_data& v) {
     diagram_data_ = v;
 }
 
-void diagram::diagram_data(const dogen::dia::diagram_data&& v) {
+void diagram::diagram_data(const masd::dogen::dia::diagram_data&& v) {
     diagram_data_ = std::move(v);
 }
 
-const std::vector<dogen::dia::layer>& diagram::layers() const {
+const std::vector<masd::dogen::dia::layer>& diagram::layers() const {
     return layers_;
 }
 
-std::vector<dogen::dia::layer>& diagram::layers() {
+std::vector<masd::dogen::dia::layer>& diagram::layers() {
     return layers_;
 }
 
-void diagram::layers(const std::vector<dogen::dia::layer>& v) {
+void diagram::layers(const std::vector<masd::dogen::dia::layer>& v) {
     layers_ = v;
 }
 
-void diagram::layers(const std::vector<dogen::dia::layer>&& v) {
+void diagram::layers(const std::vector<masd::dogen::dia::layer>&& v) {
     layers_ = std::move(v);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_COMPOSITE_HPP
-#define DOGEN_DIA_TYPES_COMPOSITE_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_COMPOSITE_HPP
+#define MASD_DOGEN_DIA_TYPES_COMPOSITE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <vector>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.dia/types/attribute_fwd.hpp"
-#include "dogen.dia/types/composite_fwd.hpp"
-#include "dogen.dia/serialization/composite_fwd_ser.hpp"
+#include "masd.dogen.dia/types/attribute_fwd.hpp"
+#include "masd.dogen.dia/types/composite_fwd.hpp"
+#include "masd.dogen.dia/serialization/composite_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Attribute value which is made up of other attributes.
@@ -48,15 +48,15 @@ public:
 public:
     composite(
         const std::string& type,
-        const std::vector<boost::shared_ptr<dogen::dia::attribute> >& value,
-        const boost::shared_ptr<dogen::dia::composite>& inner_composite);
+        const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& value,
+        const boost::shared_ptr<masd::dogen::dia::composite>& inner_composite);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::composite& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::composite& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::composite& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::composite& v, unsigned int version);
 
 public:
     /**
@@ -73,20 +73,20 @@ public:
      * @brief Underlying Dia attributes.
      */
     /**@{*/
-    const std::vector<boost::shared_ptr<dogen::dia::attribute> >& value() const;
-    std::vector<boost::shared_ptr<dogen::dia::attribute> >& value();
-    void value(const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v);
-    void value(const std::vector<boost::shared_ptr<dogen::dia::attribute> >&& v);
+    const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& value() const;
+    std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& value();
+    void value(const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& v);
+    void value(const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >&& v);
     /**@}*/
 
     /**
      * @brief Some composites contain an inner composite field.
      */
     /**@{*/
-    const boost::shared_ptr<dogen::dia::composite>& inner_composite() const;
-    boost::shared_ptr<dogen::dia::composite>& inner_composite();
-    void inner_composite(const boost::shared_ptr<dogen::dia::composite>& v);
-    void inner_composite(const boost::shared_ptr<dogen::dia::composite>&& v);
+    const boost::shared_ptr<masd::dogen::dia::composite>& inner_composite() const;
+    boost::shared_ptr<masd::dogen::dia::composite>& inner_composite();
+    void inner_composite(const boost::shared_ptr<masd::dogen::dia::composite>& v);
+    void inner_composite(const boost::shared_ptr<masd::dogen::dia::composite>&& v);
     /**@}*/
 
 public:
@@ -101,8 +101,8 @@ public:
 
 private:
     std::string type_;
-    std::vector<boost::shared_ptr<dogen::dia::attribute> > value_;
-    boost::shared_ptr<dogen::dia::composite> inner_composite_;
+    std::vector<boost::shared_ptr<masd::dogen::dia::attribute> > value_;
+    boost::shared_ptr<masd::dogen::dia::composite> inner_composite_;
 };
 
 }
@@ -111,8 +111,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::composite& lhs,
-    dogen::dia::composite& rhs) {
+    masd::dogen::dia::composite& lhs,
+    masd::dogen::dia::composite& rhs) {
     lhs.swap(rhs);
 }
 

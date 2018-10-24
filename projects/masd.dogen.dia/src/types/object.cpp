@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/object.hpp"
+#include "masd.dogen.dia/types/object.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 object::object()
     : version_(static_cast<int>(0)) { }
@@ -37,9 +37,9 @@ object::object(
     const std::string& type,
     const int version,
     const std::string& id,
-    const std::vector<dogen::dia::connection>& connections,
-    const boost::optional<dogen::dia::child_node>& child_node,
-    const std::vector<dogen::dia::attribute>& attributes)
+    const std::vector<masd::dogen::dia::connection>& connections,
+    const boost::optional<masd::dogen::dia::child_node>& child_node,
+    const std::vector<masd::dogen::dia::attribute>& attributes)
     : type_(type),
       version_(version),
       id_(id),
@@ -112,51 +112,51 @@ void object::id(const std::string&& v) {
     id_ = std::move(v);
 }
 
-const std::vector<dogen::dia::connection>& object::connections() const {
+const std::vector<masd::dogen::dia::connection>& object::connections() const {
     return connections_;
 }
 
-std::vector<dogen::dia::connection>& object::connections() {
+std::vector<masd::dogen::dia::connection>& object::connections() {
     return connections_;
 }
 
-void object::connections(const std::vector<dogen::dia::connection>& v) {
+void object::connections(const std::vector<masd::dogen::dia::connection>& v) {
     connections_ = v;
 }
 
-void object::connections(const std::vector<dogen::dia::connection>&& v) {
+void object::connections(const std::vector<masd::dogen::dia::connection>&& v) {
     connections_ = std::move(v);
 }
 
-const boost::optional<dogen::dia::child_node>& object::child_node() const {
+const boost::optional<masd::dogen::dia::child_node>& object::child_node() const {
     return child_node_;
 }
 
-boost::optional<dogen::dia::child_node>& object::child_node() {
+boost::optional<masd::dogen::dia::child_node>& object::child_node() {
     return child_node_;
 }
 
-void object::child_node(const boost::optional<dogen::dia::child_node>& v) {
+void object::child_node(const boost::optional<masd::dogen::dia::child_node>& v) {
     child_node_ = v;
 }
 
-void object::child_node(const boost::optional<dogen::dia::child_node>&& v) {
+void object::child_node(const boost::optional<masd::dogen::dia::child_node>&& v) {
     child_node_ = std::move(v);
 }
 
-const std::vector<dogen::dia::attribute>& object::attributes() const {
+const std::vector<masd::dogen::dia::attribute>& object::attributes() const {
     return attributes_;
 }
 
-std::vector<dogen::dia::attribute>& object::attributes() {
+std::vector<masd::dogen::dia::attribute>& object::attributes() {
     return attributes_;
 }
 
-void object::attributes(const std::vector<dogen::dia::attribute>& v) {
+void object::attributes(const std::vector<masd::dogen::dia::attribute>& v) {
     attributes_ = v;
 }
 
-void object::attributes(const std::vector<dogen::dia::attribute>&& v) {
+void object::attributes(const std::vector<masd::dogen::dia::attribute>&& v) {
     attributes_ = std::move(v);
 }
 

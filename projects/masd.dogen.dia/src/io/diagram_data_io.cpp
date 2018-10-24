@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "dogen.dia/io/attribute_io.hpp"
-#include "dogen.dia/io/diagram_data_io.hpp"
+#include "masd.dogen.dia/io/attribute_io.hpp"
+#include "masd.dogen.dia/io/diagram_data_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::attribute>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<masd::dogen::dia::attribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -36,11 +36,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::a
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const diagram_data& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia::diagram_data\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::dia::diagram_data\"" << ", "
       << "\"attributes\": " << v.attributes()
       << " }";
     return(s);

@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/composite.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/types/composite.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::dia::attribute>& lhs,
-const boost::shared_ptr<dogen::dia::attribute>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::dia::attribute>& lhs,
+const boost::shared_ptr<masd::dogen::dia::attribute>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -32,19 +32,19 @@ const boost::shared_ptr<dogen::dia::attribute>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::dia::composite>& lhs,
-const boost::shared_ptr<dogen::dia::composite>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::dia::composite>& lhs,
+const boost::shared_ptr<masd::dogen::dia::composite>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 composite::composite(
     const std::string& type,
-    const std::vector<boost::shared_ptr<dogen::dia::attribute> >& value,
-    const boost::shared_ptr<dogen::dia::composite>& inner_composite)
+    const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& value,
+    const boost::shared_ptr<masd::dogen::dia::composite>& inner_composite)
     : type_(type),
       value_(value),
       inner_composite_(inner_composite) { }
@@ -84,35 +84,35 @@ void composite::type(const std::string&& v) {
     type_ = std::move(v);
 }
 
-const std::vector<boost::shared_ptr<dogen::dia::attribute> >& composite::value() const {
+const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& composite::value() const {
     return value_;
 }
 
-std::vector<boost::shared_ptr<dogen::dia::attribute> >& composite::value() {
+std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& composite::value() {
     return value_;
 }
 
-void composite::value(const std::vector<boost::shared_ptr<dogen::dia::attribute> >& v) {
+void composite::value(const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >& v) {
     value_ = v;
 }
 
-void composite::value(const std::vector<boost::shared_ptr<dogen::dia::attribute> >&& v) {
+void composite::value(const std::vector<boost::shared_ptr<masd::dogen::dia::attribute> >&& v) {
     value_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::dia::composite>& composite::inner_composite() const {
+const boost::shared_ptr<masd::dogen::dia::composite>& composite::inner_composite() const {
     return inner_composite_;
 }
 
-boost::shared_ptr<dogen::dia::composite>& composite::inner_composite() {
+boost::shared_ptr<masd::dogen::dia::composite>& composite::inner_composite() {
     return inner_composite_;
 }
 
-void composite::inner_composite(const boost::shared_ptr<dogen::dia::composite>& v) {
+void composite::inner_composite(const boost::shared_ptr<masd::dogen::dia::composite>& v) {
     inner_composite_ = v;
 }
 
-void composite::inner_composite(const boost::shared_ptr<dogen::dia::composite>&& v) {
+void composite::inner_composite(const boost::shared_ptr<masd::dogen::dia::composite>&& v) {
     inner_composite_ = std::move(v);
 }
 

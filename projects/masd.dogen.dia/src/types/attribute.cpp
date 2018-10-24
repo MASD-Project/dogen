@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 attribute::attribute(
     const std::string& name,
-    const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& values)
+    const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& values)
     : name_(name),
       values_(values) { }
 
@@ -61,19 +61,19 @@ void attribute::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& attribute::values() const {
+const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& attribute::values() const {
     return values_;
 }
 
-std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& attribute::values() {
+std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& attribute::values() {
     return values_;
 }
 
-void attribute::values(const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& v) {
+void attribute::values(const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& v) {
     values_ = v;
 }
 
-void attribute::values(const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >&& v) {
+void attribute::values(const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >&& v) {
     values_ = std::move(v);
 }
 

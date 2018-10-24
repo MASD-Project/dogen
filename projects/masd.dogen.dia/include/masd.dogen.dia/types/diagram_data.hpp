@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_DIAGRAM_DATA_HPP
-#define DOGEN_DIA_TYPES_DIAGRAM_DATA_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_DIAGRAM_DATA_HPP
+#define MASD_DOGEN_DIA_TYPES_DIAGRAM_DATA_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <vector>
 #include <algorithm>
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/serialization/diagram_data_fwd_ser.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/serialization/diagram_data_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a all the data associated with a diagram.
@@ -43,24 +43,24 @@ public:
     ~diagram_data() = default;
 
 public:
-    explicit diagram_data(const std::vector<dogen::dia::attribute>& attributes);
+    explicit diagram_data(const std::vector<masd::dogen::dia::attribute>& attributes);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::diagram_data& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::diagram_data& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::diagram_data& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::diagram_data& v, unsigned int version);
 
 public:
     /**
      * @brief All attributes associated with the diagram data.
      */
     /**@{*/
-    const std::vector<dogen::dia::attribute>& attributes() const;
-    std::vector<dogen::dia::attribute>& attributes();
-    void attributes(const std::vector<dogen::dia::attribute>& v);
-    void attributes(const std::vector<dogen::dia::attribute>&& v);
+    const std::vector<masd::dogen::dia::attribute>& attributes() const;
+    std::vector<masd::dogen::dia::attribute>& attributes();
+    void attributes(const std::vector<masd::dogen::dia::attribute>& v);
+    void attributes(const std::vector<masd::dogen::dia::attribute>&& v);
     /**@}*/
 
 public:
@@ -74,7 +74,7 @@ public:
     diagram_data& operator=(diagram_data other);
 
 private:
-    std::vector<dogen::dia::attribute> attributes_;
+    std::vector<masd::dogen::dia::attribute> attributes_;
 };
 
 }
@@ -83,8 +83,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::diagram_data& lhs,
-    dogen::dia::diagram_data& rhs) {
+    masd::dogen::dia::diagram_data& lhs,
+    masd::dogen::dia::diagram_data& rhs) {
     lhs.swap(rhs);
 }
 

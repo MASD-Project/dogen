@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_IO_ENUMERATION_IO_HPP
-#define DOGEN_DIA_IO_ENUMERATION_IO_HPP
+#ifndef MASD_DOGEN_DIA_IO_ENUMERATION_IO_HPP
+#define MASD_DOGEN_DIA_IO_ENUMERATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.dia/types/enumeration.hpp"
+#include "masd.dogen.dia/types/enumeration.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::dia::enumeration& v);
+     const masd::dogen::dia::enumeration& v);
 
 }
 

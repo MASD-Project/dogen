@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/connection.hpp"
+#include "masd.dogen.dia/types/connection.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 connection::connection(
     const std::string& handle,

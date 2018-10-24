@@ -21,17 +21,17 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include <boost/variant/apply_visitor.hpp>
-#include "dogen.dia/io/font_io.hpp"
-#include "dogen.dia/io/real_io.hpp"
-#include "dogen.dia/io/color_io.hpp"
-#include "dogen.dia/io/point_io.hpp"
-#include "dogen.dia/io/string_io.hpp"
-#include "dogen.dia/io/boolean_io.hpp"
-#include "dogen.dia/io/integer_io.hpp"
-#include "dogen.dia/io/attribute_io.hpp"
-#include "dogen.dia/io/composite_io.hpp"
-#include "dogen.dia/io/rectangle_io.hpp"
-#include "dogen.dia/io/enumeration_io.hpp"
+#include "masd.dogen.dia/io/font_io.hpp"
+#include "masd.dogen.dia/io/real_io.hpp"
+#include "masd.dogen.dia/io/color_io.hpp"
+#include "masd.dogen.dia/io/point_io.hpp"
+#include "masd.dogen.dia/io/string_io.hpp"
+#include "masd.dogen.dia/io/boolean_io.hpp"
+#include "masd.dogen.dia/io/integer_io.hpp"
+#include "masd.dogen.dia/io/attribute_io.hpp"
+#include "masd.dogen.dia/io/composite_io.hpp"
+#include "masd.dogen.dia/io/rectangle_io.hpp"
+#include "masd.dogen.dia/io/enumeration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -43,51 +43,51 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-struct boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor : public boost::static_visitor<> {
-    boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor(std::ostream& s) : stream_(s) {
+struct boost_variant_masd_dogen_dia_color_masd_dogen_dia_real_masd_dogen_dia_integer_masd_dogen_dia_font_masd_dogen_dia_boolean_masd_dogen_dia_point_masd_dogen_dia_string_masd_dogen_dia_enumeration_masd_dogen_dia_rectangle_masd_dogen_dia_composite_visitor : public boost::static_visitor<> {
+    boost_variant_masd_dogen_dia_color_masd_dogen_dia_real_masd_dogen_dia_integer_masd_dogen_dia_font_masd_dogen_dia_boolean_masd_dogen_dia_point_masd_dogen_dia_string_masd_dogen_dia_enumeration_masd_dogen_dia_rectangle_masd_dogen_dia_composite_visitor(std::ostream& s) : stream_(s) {
         s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
         s << "\"data\": ";
     }
 
-    ~boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor() { stream_ << " }"; }
+    ~boost_variant_masd_dogen_dia_color_masd_dogen_dia_real_masd_dogen_dia_integer_masd_dogen_dia_font_masd_dogen_dia_boolean_masd_dogen_dia_point_masd_dogen_dia_string_masd_dogen_dia_enumeration_masd_dogen_dia_rectangle_masd_dogen_dia_composite_visitor() { stream_ << " }"; }
 
-    void operator()(const dogen::dia::color& v) const {
+    void operator()(const masd::dogen::dia::color& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::real& v) const {
+    void operator()(const masd::dogen::dia::real& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::integer& v) const {
+    void operator()(const masd::dogen::dia::integer& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::font& v) const {
+    void operator()(const masd::dogen::dia::font& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::boolean& v) const {
+    void operator()(const masd::dogen::dia::boolean& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::point& v) const {
+    void operator()(const masd::dogen::dia::point& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::string& v) const {
+    void operator()(const masd::dogen::dia::string& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::enumeration& v) const {
+    void operator()(const masd::dogen::dia::enumeration& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::rectangle& v) const {
+    void operator()(const masd::dogen::dia::rectangle& v) const {
         stream_ << v;
     }
 
-    void operator()(const dogen::dia::composite& v) const {
+    void operator()(const masd::dogen::dia::composite& v) const {
         stream_ << v;
     }
 
@@ -95,8 +95,8 @@ private:
     std::ostream& stream_;
 };
 
-inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite>& v) {
-    boost::apply_visitor(boost_variant_dogen_dia_color_dogen_dia_real_dogen_dia_integer_dogen_dia_font_dogen_dia_boolean_dogen_dia_point_dogen_dia_string_dogen_dia_enumeration_dogen_dia_rectangle_dogen_dia_composite_visitor(s), v);
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite>& v) {
+    boost::apply_visitor(boost_variant_masd_dogen_dia_color_masd_dogen_dia_real_masd_dogen_dia_integer_masd_dogen_dia_font_masd_dogen_dia_boolean_masd_dogen_dia_point_masd_dogen_dia_string_masd_dogen_dia_enumeration_masd_dogen_dia_rectangle_masd_dogen_dia_composite_visitor(s), v);
     return s;
 }
 
@@ -104,7 +104,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::dia
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -116,11 +116,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::varian
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia::attribute\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::dia::attribute\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"values\": " << v.values()
       << " }";

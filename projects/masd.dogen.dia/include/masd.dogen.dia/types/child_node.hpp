@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_CHILD_NODE_HPP
-#define DOGEN_DIA_TYPES_CHILD_NODE_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_CHILD_NODE_HPP
+#define MASD_DOGEN_DIA_TYPES_CHILD_NODE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/child_node_fwd_ser.hpp"
+#include "masd.dogen.dia/serialization/child_node_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a child_node in a diagram.
@@ -51,10 +51,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::child_node& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::child_node& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::child_node& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::child_node& v, unsigned int version);
 
 public:
     /**
@@ -87,8 +87,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::child_node& lhs,
-    dogen::dia::child_node& rhs) {
+    masd::dogen::dia::child_node& lhs,
+    masd::dogen::dia::child_node& rhs) {
     lhs.swap(rhs);
 }
 

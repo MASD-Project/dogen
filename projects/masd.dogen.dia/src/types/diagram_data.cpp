@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/diagram_data.hpp"
+#include "masd.dogen.dia/types/diagram_data.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
-diagram_data::diagram_data(const std::vector<dogen::dia::attribute>& attributes)
+diagram_data::diagram_data(const std::vector<masd::dogen::dia::attribute>& attributes)
     : attributes_(attributes) { }
 
 void diagram_data::swap(diagram_data& other) noexcept {
@@ -40,19 +40,19 @@ diagram_data& diagram_data::operator=(diagram_data other) {
     return *this;
 }
 
-const std::vector<dogen::dia::attribute>& diagram_data::attributes() const {
+const std::vector<masd::dogen::dia::attribute>& diagram_data::attributes() const {
     return attributes_;
 }
 
-std::vector<dogen::dia::attribute>& diagram_data::attributes() {
+std::vector<masd::dogen::dia::attribute>& diagram_data::attributes() {
     return attributes_;
 }
 
-void diagram_data::attributes(const std::vector<dogen::dia::attribute>& v) {
+void diagram_data::attributes(const std::vector<masd::dogen::dia::attribute>& v) {
     attributes_ = v;
 }
 
-void diagram_data::attributes(const std::vector<dogen::dia::attribute>&& v) {
+void diagram_data::attributes(const std::vector<masd::dogen::dia::attribute>&& v) {
     attributes_ = std::move(v);
 }
 

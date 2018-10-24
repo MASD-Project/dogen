@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_OBJECT_HPP
-#define DOGEN_DIA_TYPES_OBJECT_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_OBJECT_HPP
+#define MASD_DOGEN_DIA_TYPES_OBJECT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,12 +29,12 @@
 #include <vector>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/child_node.hpp"
-#include "dogen.dia/types/connection.hpp"
-#include "dogen.dia/serialization/object_fwd_ser.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/types/child_node.hpp"
+#include "masd.dogen.dia/types/connection.hpp"
+#include "masd.dogen.dia/serialization/object_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a Dia object.
@@ -55,16 +55,16 @@ public:
         const std::string& type,
         const int version,
         const std::string& id,
-        const std::vector<dogen::dia::connection>& connections,
-        const boost::optional<dogen::dia::child_node>& child_node,
-        const std::vector<dogen::dia::attribute>& attributes);
+        const std::vector<masd::dogen::dia::connection>& connections,
+        const boost::optional<masd::dogen::dia::child_node>& child_node,
+        const std::vector<masd::dogen::dia::attribute>& attributes);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::object& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::object& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::object& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::object& v, unsigned int version);
 
 public:
     /**
@@ -99,30 +99,30 @@ public:
      * @brief Connection details for this object.
      */
     /**@{*/
-    const std::vector<dogen::dia::connection>& connections() const;
-    std::vector<dogen::dia::connection>& connections();
-    void connections(const std::vector<dogen::dia::connection>& v);
-    void connections(const std::vector<dogen::dia::connection>&& v);
+    const std::vector<masd::dogen::dia::connection>& connections() const;
+    std::vector<masd::dogen::dia::connection>& connections();
+    void connections(const std::vector<masd::dogen::dia::connection>& v);
+    void connections(const std::vector<masd::dogen::dia::connection>&& v);
     /**@}*/
 
     /**
      * @brief Parenting information for this object.
      */
     /**@{*/
-    const boost::optional<dogen::dia::child_node>& child_node() const;
-    boost::optional<dogen::dia::child_node>& child_node();
-    void child_node(const boost::optional<dogen::dia::child_node>& v);
-    void child_node(const boost::optional<dogen::dia::child_node>&& v);
+    const boost::optional<masd::dogen::dia::child_node>& child_node() const;
+    boost::optional<masd::dogen::dia::child_node>& child_node();
+    void child_node(const boost::optional<masd::dogen::dia::child_node>& v);
+    void child_node(const boost::optional<masd::dogen::dia::child_node>&& v);
     /**@}*/
 
     /**
      * @brief All attributes associated with the object.
      */
     /**@{*/
-    const std::vector<dogen::dia::attribute>& attributes() const;
-    std::vector<dogen::dia::attribute>& attributes();
-    void attributes(const std::vector<dogen::dia::attribute>& v);
-    void attributes(const std::vector<dogen::dia::attribute>&& v);
+    const std::vector<masd::dogen::dia::attribute>& attributes() const;
+    std::vector<masd::dogen::dia::attribute>& attributes();
+    void attributes(const std::vector<masd::dogen::dia::attribute>& v);
+    void attributes(const std::vector<masd::dogen::dia::attribute>&& v);
     /**@}*/
 
 public:
@@ -139,9 +139,9 @@ private:
     std::string type_;
     int version_;
     std::string id_;
-    std::vector<dogen::dia::connection> connections_;
-    boost::optional<dogen::dia::child_node> child_node_;
-    std::vector<dogen::dia::attribute> attributes_;
+    std::vector<masd::dogen::dia::connection> connections_;
+    boost::optional<masd::dogen::dia::child_node> child_node_;
+    std::vector<masd::dogen::dia::attribute> attributes_;
 };
 
 }
@@ -150,8 +150,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::object& lhs,
-    dogen::dia::object& rhs) {
+    masd::dogen::dia::object& lhs,
+    masd::dogen::dia::object& rhs) {
     lhs.swap(rhs);
 }
 

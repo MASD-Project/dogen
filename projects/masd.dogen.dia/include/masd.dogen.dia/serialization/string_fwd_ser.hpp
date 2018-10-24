@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_STRING_FWD_SER_HPP
-#define DOGEN_DIA_SERIALIZATION_STRING_FWD_SER_HPP
+#ifndef MASD_DOGEN_DIA_SERIALIZATION_STRING_FWD_SER_HPP
+#define MASD_DOGEN_DIA_SERIALIZATION_STRING_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.dia/types/string_fwd.hpp"
+#include "masd.dogen.dia/types/string_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::dia::string& v, unsigned int version);
+void save(Archive& ar, const masd::dogen::dia::string& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::dia::string& v, unsigned int version);
+void load(Archive& ar, masd::dogen::dia::string& v, unsigned int version);
 
 } }
 

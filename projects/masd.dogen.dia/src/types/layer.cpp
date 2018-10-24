@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/layer.hpp"
+#include "masd.dogen.dia/types/layer.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 layer::layer()
     : visible_(static_cast<bool>(0)),
@@ -30,7 +30,7 @@ layer::layer(
     const std::string& name,
     const bool visible,
     const bool active,
-    const std::vector<dogen::dia::object>& objects)
+    const std::vector<masd::dogen::dia::object>& objects)
     : name_(name),
       visible_(visible),
       active_(active),
@@ -89,19 +89,19 @@ void layer::active(const bool v) {
     active_ = v;
 }
 
-const std::vector<dogen::dia::object>& layer::objects() const {
+const std::vector<masd::dogen::dia::object>& layer::objects() const {
     return objects_;
 }
 
-std::vector<dogen::dia::object>& layer::objects() {
+std::vector<masd::dogen::dia::object>& layer::objects() {
     return objects_;
 }
 
-void layer::objects(const std::vector<dogen::dia::object>& v) {
+void layer::objects(const std::vector<masd::dogen::dia::object>& v) {
     objects_ = v;
 }
 
-void layer::objects(const std::vector<dogen::dia::object>&& v) {
+void layer::objects(const std::vector<masd::dogen::dia::object>&& v) {
     objects_ = std::move(v);
 }
 

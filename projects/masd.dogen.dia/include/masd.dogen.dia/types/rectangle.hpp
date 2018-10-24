@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_RECTANGLE_HPP
-#define DOGEN_DIA_TYPES_RECTANGLE_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_RECTANGLE_HPP
+#define MASD_DOGEN_DIA_TYPES_RECTANGLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/rectangle_fwd_ser.hpp"
+#include "masd.dogen.dia/serialization/rectangle_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a rectangle in a diagram.
@@ -46,10 +46,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::rectangle& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::rectangle& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::rectangle& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::rectangle& v, unsigned int version);
 
 public:
     /**
@@ -82,8 +82,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::rectangle& lhs,
-    dogen::dia::rectangle& rhs) {
+    masd::dogen::dia::rectangle& lhs,
+    masd::dogen::dia::rectangle& rhs) {
     lhs.swap(rhs);
 }
 

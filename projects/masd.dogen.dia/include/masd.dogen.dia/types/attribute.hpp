@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_ATTRIBUTE_HPP
-#define DOGEN_DIA_TYPES_ATTRIBUTE_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_ATTRIBUTE_HPP
+#define MASD_DOGEN_DIA_TYPES_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,19 +29,19 @@
 #include <vector>
 #include <algorithm>
 #include <boost/variant.hpp>
-#include "dogen.dia/types/font.hpp"
-#include "dogen.dia/types/real.hpp"
-#include "dogen.dia/types/color.hpp"
-#include "dogen.dia/types/point.hpp"
-#include "dogen.dia/types/string.hpp"
-#include "dogen.dia/types/boolean.hpp"
-#include "dogen.dia/types/integer.hpp"
-#include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/rectangle.hpp"
-#include "dogen.dia/types/enumeration.hpp"
-#include "dogen.dia/serialization/attribute_fwd_ser.hpp"
+#include "masd.dogen.dia/types/font.hpp"
+#include "masd.dogen.dia/types/real.hpp"
+#include "masd.dogen.dia/types/color.hpp"
+#include "masd.dogen.dia/types/point.hpp"
+#include "masd.dogen.dia/types/string.hpp"
+#include "masd.dogen.dia/types/boolean.hpp"
+#include "masd.dogen.dia/types/integer.hpp"
+#include "masd.dogen.dia/types/composite.hpp"
+#include "masd.dogen.dia/types/rectangle.hpp"
+#include "masd.dogen.dia/types/enumeration.hpp"
+#include "masd.dogen.dia/serialization/attribute_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Attribute in a Dia diagram.
@@ -56,14 +56,14 @@ public:
 public:
     attribute(
         const std::string& name,
-        const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& values);
+        const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& values);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::attribute& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::attribute& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::attribute& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::attribute& v, unsigned int version);
 
 public:
     /**
@@ -80,10 +80,10 @@ public:
      * @brief Values for the attribute.
      */
     /**@{*/
-    const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& values() const;
-    std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& values();
-    void values(const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& v);
-    void values(const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >&& v);
+    const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& values() const;
+    std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& values();
+    void values(const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >& v);
+    void values(const std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> >&& v);
     /**@}*/
 
 public:
@@ -98,7 +98,7 @@ public:
 
 private:
     std::string name_;
-    std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> > values_;
+    std::vector<boost::variant<masd::dogen::dia::color, masd::dogen::dia::real, masd::dogen::dia::integer, masd::dogen::dia::font, masd::dogen::dia::boolean, masd::dogen::dia::point, masd::dogen::dia::string, masd::dogen::dia::enumeration, masd::dogen::dia::rectangle, masd::dogen::dia::composite> > values_;
 };
 
 }
@@ -107,8 +107,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::attribute& lhs,
-    dogen::dia::attribute& rhs) {
+    masd::dogen::dia::attribute& lhs,
+    masd::dogen::dia::attribute& rhs) {
     lhs.swap(rhs);
 }
 

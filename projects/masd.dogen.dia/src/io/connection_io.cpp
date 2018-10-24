@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.dia/io/connection_io.hpp"
+#include "masd.dogen.dia/io/connection_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const connection& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia::connection\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::dia::connection\"" << ", "
       << "\"handle\": " << "\"" << tidy_up_string(v.handle()) << "\"" << ", "
       << "\"to\": " << "\"" << tidy_up_string(v.to()) << "\"" << ", "
       << "\"connection_slot\": " << "\"" << tidy_up_string(v.connection_slot()) << "\""

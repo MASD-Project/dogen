@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_POINT_HPP
-#define DOGEN_DIA_TYPES_POINT_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_POINT_HPP
+#define MASD_DOGEN_DIA_TYPES_POINT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/point_fwd_ser.hpp"
+#include "masd.dogen.dia/serialization/point_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a point in a diagram.
@@ -46,10 +46,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::point& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::point& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::point& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::point& v, unsigned int version);
 
 public:
     /**
@@ -82,8 +82,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::point& lhs,
-    dogen::dia::point& rhs) {
+    masd::dogen::dia::point& lhs,
+    masd::dogen::dia::point& rhs) {
     lhs.swap(rhs);
 }
 

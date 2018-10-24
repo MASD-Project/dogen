@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/rectangle.hpp"
+#include "masd.dogen.dia/types/rectangle.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 rectangle::rectangle(const std::string& value)
     : value_(value) { }

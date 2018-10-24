@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_LAYER_HPP
-#define DOGEN_DIA_TYPES_LAYER_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_LAYER_HPP
+#define MASD_DOGEN_DIA_TYPES_LAYER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include "dogen.dia/types/object.hpp"
-#include "dogen.dia/serialization/layer_fwd_ser.hpp"
+#include "masd.dogen.dia/types/object.hpp"
+#include "masd.dogen.dia/serialization/layer_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a layer in a Dia diagram.
@@ -50,14 +50,14 @@ public:
         const std::string& name,
         const bool visible,
         const bool active,
-        const std::vector<dogen::dia::object>& objects);
+        const std::vector<masd::dogen::dia::object>& objects);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::layer& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::layer& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::layer& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::layer& v, unsigned int version);
 
 public:
     /**
@@ -90,10 +90,10 @@ public:
      * @brief Dia objects contained in layer.
      */
     /**@{*/
-    const std::vector<dogen::dia::object>& objects() const;
-    std::vector<dogen::dia::object>& objects();
-    void objects(const std::vector<dogen::dia::object>& v);
-    void objects(const std::vector<dogen::dia::object>&& v);
+    const std::vector<masd::dogen::dia::object>& objects() const;
+    std::vector<masd::dogen::dia::object>& objects();
+    void objects(const std::vector<masd::dogen::dia::object>& v);
+    void objects(const std::vector<masd::dogen::dia::object>&& v);
     /**@}*/
 
 public:
@@ -110,7 +110,7 @@ private:
     std::string name_;
     bool visible_;
     bool active_;
-    std::vector<dogen::dia::object> objects_;
+    std::vector<masd::dogen::dia::object> objects_;
 };
 
 }
@@ -119,8 +119,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::layer& lhs,
-    dogen::dia::layer& rhs) {
+    masd::dogen::dia::layer& lhs,
+    masd::dogen::dia::layer& rhs) {
     lhs.swap(rhs);
 }
 

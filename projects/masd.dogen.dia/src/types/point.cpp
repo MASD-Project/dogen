@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/point.hpp"
+#include "masd.dogen.dia/types/point.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 point::point(const std::string& value)
     : value_(value) { }

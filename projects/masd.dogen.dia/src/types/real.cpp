@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/real.hpp"
+#include "masd.dogen.dia/types/real.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 real::real(const std::string& value)
     : value_(value) { }

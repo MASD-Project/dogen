@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/color.hpp"
+#include "masd.dogen.dia/types/color.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 color::color(const std::string& value)
     : value_(value) { }

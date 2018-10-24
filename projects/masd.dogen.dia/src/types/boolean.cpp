@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/boolean.hpp"
+#include "masd.dogen.dia/types/boolean.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 boolean::boolean(const std::string& value)
     : value_(value) { }

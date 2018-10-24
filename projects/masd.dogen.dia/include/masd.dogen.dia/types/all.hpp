@@ -18,33 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_ALL_HPP
-#define DOGEN_DIA_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_ALL_HPP
+#define MASD_DOGEN_DIA_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.dia/types/font.hpp"
-#include "dogen.dia/types/real.hpp"
-#include "dogen.dia/types/color.hpp"
-#include "dogen.dia/types/layer.hpp"
-#include "dogen.dia/types/point.hpp"
-#include "dogen.dia/types/object.hpp"
-#include "dogen.dia/types/string.hpp"
-#include "dogen.dia/types/boolean.hpp"
-#include "dogen.dia/types/diagram.hpp"
-#include "dogen.dia/types/integer.hpp"
-#include "dogen.dia/types/hydrator.hpp"
-#include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/persister.hpp"
-#include "dogen.dia/types/rectangle.hpp"
-#include "dogen.dia/types/child_node.hpp"
-#include "dogen.dia/types/connection.hpp"
-#include "dogen.dia/types/enumeration.hpp"
-#include "dogen.dia/types/diagram_data.hpp"
-#include "dogen.dia/types/hydration_error.hpp"
-#include "dogen.dia/types/persister_error.hpp"
+#include "masd.dogen.dia/types/font.hpp"
+#include "masd.dogen.dia/types/real.hpp"
+#include "masd.dogen.dia/types/color.hpp"
+#include "masd.dogen.dia/types/layer.hpp"
+#include "masd.dogen.dia/types/point.hpp"
+#include "masd.dogen.dia/types/object.hpp"
+#include "masd.dogen.dia/types/string.hpp"
+#include "masd.dogen.dia/types/boolean.hpp"
+#include "masd.dogen.dia/types/diagram.hpp"
+#include "masd.dogen.dia/types/integer.hpp"
+#include "masd.dogen.dia/types/hydrator.hpp"
+#include "masd.dogen.dia/types/attribute.hpp"
+#include "masd.dogen.dia/types/composite.hpp"
+#include "masd.dogen.dia/types/persister.hpp"
+#include "masd.dogen.dia/types/rectangle.hpp"
+#include "masd.dogen.dia/types/child_node.hpp"
+#include "masd.dogen.dia/types/connection.hpp"
+#include "masd.dogen.dia/types/enumeration.hpp"
+#include "masd.dogen.dia/types/diagram_data.hpp"
+#include "masd.dogen.dia/types/hydration_error.hpp"
+#include "masd.dogen.dia/types/persister_error.hpp"
 
 #endif

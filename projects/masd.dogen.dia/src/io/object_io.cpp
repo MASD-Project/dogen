@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.dia/io/object_io.hpp"
-#include "dogen.dia/io/attribute_io.hpp"
-#include "dogen.dia/io/child_node_io.hpp"
-#include "dogen.dia/io/connection_io.hpp"
+#include "masd.dogen.dia/io/object_io.hpp"
+#include "masd.dogen.dia/io/attribute_io.hpp"
+#include "masd.dogen.dia/io/child_node_io.hpp"
+#include "masd.dogen.dia/io/connection_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::connection>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<masd::dogen::dia::connection>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,7 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::c
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::dia::child_node>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::dia::child_node>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -64,7 +64,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::di
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::attribute>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<masd::dogen::dia::attribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -76,11 +76,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::dia::a
 
 }
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 std::ostream& operator<<(std::ostream& s, const object& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::dia::object\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::dia::object\"" << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
       << "\"version\": " << v.version() << ", "
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "

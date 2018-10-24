@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/integer.hpp"
+#include "masd.dogen.dia/types/integer.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 integer::integer(const std::string& value)
     : value_(value) { }

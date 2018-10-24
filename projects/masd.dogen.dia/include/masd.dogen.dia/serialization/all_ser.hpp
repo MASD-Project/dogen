@@ -18,29 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_SERIALIZATION_ALL_SER_HPP
-#define DOGEN_DIA_SERIALIZATION_ALL_SER_HPP
+#ifndef MASD_DOGEN_DIA_SERIALIZATION_ALL_SER_HPP
+#define MASD_DOGEN_DIA_SERIALIZATION_ALL_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.dia/serialization/font_ser.hpp"
-#include "dogen.dia/serialization/real_ser.hpp"
-#include "dogen.dia/serialization/color_ser.hpp"
-#include "dogen.dia/serialization/layer_ser.hpp"
-#include "dogen.dia/serialization/point_ser.hpp"
-#include "dogen.dia/serialization/object_ser.hpp"
-#include "dogen.dia/serialization/string_ser.hpp"
-#include "dogen.dia/serialization/boolean_ser.hpp"
-#include "dogen.dia/serialization/diagram_ser.hpp"
-#include "dogen.dia/serialization/integer_ser.hpp"
-#include "dogen.dia/serialization/attribute_ser.hpp"
-#include "dogen.dia/serialization/composite_ser.hpp"
-#include "dogen.dia/serialization/rectangle_ser.hpp"
-#include "dogen.dia/serialization/child_node_ser.hpp"
-#include "dogen.dia/serialization/connection_ser.hpp"
-#include "dogen.dia/serialization/enumeration_ser.hpp"
-#include "dogen.dia/serialization/diagram_data_ser.hpp"
+#include "masd.dogen.dia/serialization/font_ser.hpp"
+#include "masd.dogen.dia/serialization/real_ser.hpp"
+#include "masd.dogen.dia/serialization/color_ser.hpp"
+#include "masd.dogen.dia/serialization/layer_ser.hpp"
+#include "masd.dogen.dia/serialization/point_ser.hpp"
+#include "masd.dogen.dia/serialization/object_ser.hpp"
+#include "masd.dogen.dia/serialization/string_ser.hpp"
+#include "masd.dogen.dia/serialization/boolean_ser.hpp"
+#include "masd.dogen.dia/serialization/diagram_ser.hpp"
+#include "masd.dogen.dia/serialization/integer_ser.hpp"
+#include "masd.dogen.dia/serialization/attribute_ser.hpp"
+#include "masd.dogen.dia/serialization/composite_ser.hpp"
+#include "masd.dogen.dia/serialization/rectangle_ser.hpp"
+#include "masd.dogen.dia/serialization/child_node_ser.hpp"
+#include "masd.dogen.dia/serialization/connection_ser.hpp"
+#include "masd.dogen.dia/serialization/enumeration_ser.hpp"
+#include "masd.dogen.dia/serialization/diagram_data_ser.hpp"
 
 #endif

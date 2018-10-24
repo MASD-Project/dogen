@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.dia/types/font.hpp"
+#include "masd.dogen.dia/types/font.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 font::font(
     const std::string& family,

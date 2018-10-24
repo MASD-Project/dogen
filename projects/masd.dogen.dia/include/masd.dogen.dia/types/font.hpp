@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_FONT_HPP
-#define DOGEN_DIA_TYPES_FONT_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_FONT_HPP
+#define MASD_DOGEN_DIA_TYPES_FONT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/font_fwd_ser.hpp"
+#include "masd.dogen.dia/serialization/font_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a font in a diagram.
@@ -49,10 +49,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::font& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::font& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::font& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::font& v, unsigned int version);
 
 public:
     const std::string& family() const;
@@ -92,8 +92,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::font& lhs,
-    dogen::dia::font& rhs) {
+    masd::dogen::dia::font& lhs,
+    masd::dogen::dia::font& rhs) {
     lhs.swap(rhs);
 }
 

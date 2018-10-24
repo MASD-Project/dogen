@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_CONNECTION_HPP
-#define DOGEN_DIA_TYPES_CONNECTION_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_CONNECTION_HPP
+#define MASD_DOGEN_DIA_TYPES_CONNECTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/connection_fwd_ser.hpp"
+#include "masd.dogen.dia/serialization/connection_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Connection between entities in a Dia diagram.
@@ -49,10 +49,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::connection& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::connection& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::connection& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::connection& v, unsigned int version);
 
 public:
     /**
@@ -110,8 +110,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::connection& lhs,
-    dogen::dia::connection& rhs) {
+    masd::dogen::dia::connection& lhs,
+    masd::dogen::dia::connection& rhs) {
     lhs.swap(rhs);
 }
 

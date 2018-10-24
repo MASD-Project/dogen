@@ -28,14 +28,14 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen.dia/serialization/connection_ser.hpp"
+#include "masd.dogen.dia/serialization/connection_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::dia::connection& v,
+    const masd::dogen::dia::connection& v,
     const unsigned int /*version*/) {
     ar << make_nvp("handle", v.handle_);
     ar << make_nvp("to", v.to_);
@@ -44,7 +44,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::dia::connection& v,
+    masd::dogen::dia::connection& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("handle", v.handle_);
     ar >> make_nvp("to", v.to_);
@@ -56,16 +56,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::dia::connection& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::dia::connection& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const masd::dogen::dia::connection& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, masd::dogen::dia::connection& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::dia::connection& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::dia::connection& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const masd::dogen::dia::connection& v, unsigned int version);
+template void load(archive::text_iarchive& ar, masd::dogen::dia::connection& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::dia::connection& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::dia::connection& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const masd::dogen::dia::connection& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, masd::dogen::dia::connection& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::dia::connection& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::dia::connection& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const masd::dogen::dia::connection& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, masd::dogen::dia::connection& v, unsigned int version);
 
 } }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_DIA_TYPES_DIAGRAM_HPP
-#define DOGEN_DIA_TYPES_DIAGRAM_HPP
+#ifndef MASD_DOGEN_DIA_TYPES_DIAGRAM_HPP
+#define MASD_DOGEN_DIA_TYPES_DIAGRAM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,11 +27,11 @@
 
 #include <vector>
 #include <algorithm>
-#include "dogen.dia/types/layer.hpp"
-#include "dogen.dia/types/diagram_data.hpp"
-#include "dogen.dia/serialization/diagram_fwd_ser.hpp"
+#include "masd.dogen.dia/types/layer.hpp"
+#include "masd.dogen.dia/types/diagram_data.hpp"
+#include "masd.dogen.dia/serialization/diagram_fwd_ser.hpp"
 
-namespace dogen::dia {
+namespace masd::dogen::dia {
 
 /**
  * @brief Represents a diagram in Dia.
@@ -45,35 +45,35 @@ public:
 
 public:
     diagram(
-        const dogen::dia::diagram_data& diagram_data,
-        const std::vector<dogen::dia::layer>& layers);
+        const masd::dogen::dia::diagram_data& diagram_data,
+        const std::vector<masd::dogen::dia::layer>& layers);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::diagram& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::dia::diagram& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::diagram& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::dia::diagram& v, unsigned int version);
 
 public:
     /**
      * @brief Basic diagram definitions.
      */
     /**@{*/
-    const dogen::dia::diagram_data& diagram_data() const;
-    dogen::dia::diagram_data& diagram_data();
-    void diagram_data(const dogen::dia::diagram_data& v);
-    void diagram_data(const dogen::dia::diagram_data&& v);
+    const masd::dogen::dia::diagram_data& diagram_data() const;
+    masd::dogen::dia::diagram_data& diagram_data();
+    void diagram_data(const masd::dogen::dia::diagram_data& v);
+    void diagram_data(const masd::dogen::dia::diagram_data&& v);
     /**@}*/
 
     /**
      * @brief Visual layers on the diagram.
      */
     /**@{*/
-    const std::vector<dogen::dia::layer>& layers() const;
-    std::vector<dogen::dia::layer>& layers();
-    void layers(const std::vector<dogen::dia::layer>& v);
-    void layers(const std::vector<dogen::dia::layer>&& v);
+    const std::vector<masd::dogen::dia::layer>& layers() const;
+    std::vector<masd::dogen::dia::layer>& layers();
+    void layers(const std::vector<masd::dogen::dia::layer>& v);
+    void layers(const std::vector<masd::dogen::dia::layer>&& v);
     /**@}*/
 
 public:
@@ -87,8 +87,8 @@ public:
     diagram& operator=(diagram other);
 
 private:
-    dogen::dia::diagram_data diagram_data_;
-    std::vector<dogen::dia::layer> layers_;
+    masd::dogen::dia::diagram_data diagram_data_;
+    std::vector<masd::dogen::dia::layer> layers_;
 };
 
 }
@@ -97,8 +97,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::dia::diagram& lhs,
-    dogen::dia::diagram& rhs) {
+    masd::dogen::dia::diagram& lhs,
+    masd::dogen::dia::diagram& rhs) {
     lhs.swap(rhs);
 }
 
