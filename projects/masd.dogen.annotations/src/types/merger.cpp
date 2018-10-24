@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.annotations/types/merger.hpp"
+#include "masd.dogen.annotations/types/merger.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 annotation merger::merge(const annotation& lhs, const annotation& rhs) const {
     annotation r(lhs);

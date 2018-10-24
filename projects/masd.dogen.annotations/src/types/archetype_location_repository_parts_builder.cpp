@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/building_error.hpp"
-#include "dogen.annotations/types/archetype_location_repository_parts_builder.hpp"
+#include "masd.dogen.annotations/types/building_error.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts_builder.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ const std::string empty_family("Family cannot be empty.");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 void archetype_location_repository_parts_builder::
 validate(const std::string& meta_name, const std::string& family,

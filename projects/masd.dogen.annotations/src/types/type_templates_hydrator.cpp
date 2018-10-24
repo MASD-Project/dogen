@@ -24,11 +24,11 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/io/value_types_io.hpp"
-#include "dogen.annotations/io/template_kinds_io.hpp"
-#include "dogen.annotations/types/value_factory.hpp"
-#include "dogen.annotations/types/hydration_error.hpp"
-#include "dogen.annotations/types/type_templates_hydrator.hpp"
+#include "masd.dogen.annotations/io/value_types_io.hpp"
+#include "masd.dogen.annotations/io/template_kinds_io.hpp"
+#include "masd.dogen.annotations/types/value_factory.hpp"
+#include "masd.dogen.annotations/types/hydration_error.hpp"
+#include "masd.dogen.annotations/types/type_templates_hydrator.hpp"
 
 namespace {
 
@@ -83,7 +83,7 @@ const std::string invalid_template_kind(
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 scope_types type_templates_hydrator::to_scope_type(const std::string& s) const {
     if (s == scope_any)

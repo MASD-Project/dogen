@@ -23,13 +23,13 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/text.hpp"
-#include "dogen.annotations/types/number.hpp"
-#include "dogen.annotations/types/boolean.hpp"
-#include "dogen.annotations/types/key_value_pair.hpp"
-#include "dogen.annotations/types/text_collection.hpp"
-#include "dogen.annotations/types/selection_error.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/text.hpp"
+#include "masd.dogen.annotations/types/number.hpp"
+#include "masd.dogen.annotations/types/boolean.hpp"
+#include "masd.dogen.annotations/types/key_value_pair.hpp"
+#include "masd.dogen.annotations/types/text_collection.hpp"
+#include "masd.dogen.annotations/types/selection_error.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
 
 namespace {
 
@@ -53,7 +53,7 @@ const std::string duplicate_key("Duplicate key in kvp: ");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 entry_selector::entry_selector(const annotation& a) : annotation_(a) { }
 

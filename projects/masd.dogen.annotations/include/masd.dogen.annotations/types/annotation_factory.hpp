@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_FACTORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_FACTORY_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_FACTORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ANNOTATIONS_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,13 +31,13 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/annotation.hpp"
-#include "dogen.annotations/types/scope_types.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/scope_types.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Produces an annotation object from raw data.

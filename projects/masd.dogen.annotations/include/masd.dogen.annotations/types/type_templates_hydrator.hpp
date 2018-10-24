@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATES_HYDRATOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATES_HYDRATOR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATES_HYDRATOR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_TYPE_TEMPLATES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,14 +30,14 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen.annotations/types/name.hpp"
-#include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/types/value_types.hpp"
-#include "dogen.annotations/types/template_kinds.hpp"
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/types/type_template.hpp"
+#include "masd.dogen.annotations/types/name.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/value_types.hpp"
+#include "masd.dogen.annotations/types/template_kinds.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/type_template.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Reads field definitions from a well-defined JSON

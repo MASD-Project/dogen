@@ -24,8 +24,8 @@
 #include <boost/filesystem/fstream.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/hydration_error.hpp"
-#include "dogen.annotations/types/profile_hydrator.hpp"
+#include "masd.dogen.annotations/types/hydration_error.hpp"
+#include "masd.dogen.annotations/types/profile_hydrator.hpp"
 
 namespace {
 
@@ -67,7 +67,7 @@ const std::string template_has_no_untyped_value(
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 template_kinds profile_hydrator::to_template_kind(const std::string& s) const {
     if (s == template_kind_instance)

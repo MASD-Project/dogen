@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/building_error.hpp"
-#include "dogen.annotations/test/mock_type_factory.hpp"
-#include "dogen.annotations/test/mock_type_repository_factory.hpp"
+#include "masd.dogen.annotations/types/building_error.hpp"
+#include "masd.dogen.annotations/test/mock_type_factory.hpp"
+#include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string duplicate_qualified_name(
 
 }
 
-namespace dogen::annotations::test {
+namespace masd::dogen::annotations::test {
 
 void mock_type_repository_factory::add_type(
     const type& t, type_repository& trp) const {

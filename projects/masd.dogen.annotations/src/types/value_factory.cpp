@@ -22,14 +22,14 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/io/value_types_io.hpp"
-#include "dogen.annotations/types/building_error.hpp"
-#include "dogen.annotations/types/text.hpp"
-#include "dogen.annotations/types/text_collection.hpp"
-#include "dogen.annotations/types/boolean.hpp"
-#include "dogen.annotations/types/number.hpp"
-#include "dogen.annotations/types/key_value_pair.hpp"
-#include "dogen.annotations/types/value_factory.hpp"
+#include "masd.dogen.annotations/io/value_types_io.hpp"
+#include "masd.dogen.annotations/types/building_error.hpp"
+#include "masd.dogen.annotations/types/text.hpp"
+#include "masd.dogen.annotations/types/text_collection.hpp"
+#include "masd.dogen.annotations/types/boolean.hpp"
+#include "masd.dogen.annotations/types/number.hpp"
+#include "masd.dogen.annotations/types/key_value_pair.hpp"
+#include "masd.dogen.annotations/types/value_factory.hpp"
 
 namespace {
 
@@ -68,7 +68,7 @@ private:
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 int value_factory::to_int(const std::string& s) const {
     try {

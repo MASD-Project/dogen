@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_TEMPLATE_INSTANTIATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,13 +31,13 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/type_template.hpp"
-#include "dogen.annotations/types/entry_template.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_template.hpp"
+#include "masd.dogen.annotations/types/entry_template.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class template_instantiator {
 public:

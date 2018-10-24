@@ -26,15 +26,15 @@
 #include "dogen.utility/io/vector_io.hpp"
 #include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.utility/filesystem/file.hpp"
-#include "dogen.annotations/io/profiler_configuration_io.hpp"
-#include "dogen.annotations/io/profile_io.hpp"
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.annotations/types/profile_hydrator.hpp"
-#include "dogen.annotations/types/profiling_error.hpp"
-#include "dogen.annotations/types/instantiation_error.hpp"
-#include "dogen.annotations/types/template_instantiator.hpp"
-#include "dogen.annotations/types/merger.hpp"
-#include "dogen.annotations/types/profiler.hpp"
+#include "masd.dogen.annotations/io/profiler_configuration_io.hpp"
+#include "masd.dogen.annotations/io/profile_io.hpp"
+#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.annotations/types/profile_hydrator.hpp"
+#include "masd.dogen.annotations/types/profiling_error.hpp"
+#include "masd.dogen.annotations/types/instantiation_error.hpp"
+#include "masd.dogen.annotations/types/template_instantiator.hpp"
+#include "masd.dogen.annotations/types/merger.hpp"
+#include "masd.dogen.annotations/types/profiler.hpp"
 
 using namespace dogen::utility::log;
 
@@ -57,7 +57,7 @@ const std::string empty_label("Profile has an empty label: ");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::vector<boost::filesystem::path> profiler::to_profile_directories(
     const std::vector<boost::filesystem::path>& data_dirs) const {

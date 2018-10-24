@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/types/archetype_locations_group.hpp"
-#include "dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "dogen.annotations/types/archetype_location_repository.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/archetype_locations_group.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class archetype_location_repository_builder final {
 private:

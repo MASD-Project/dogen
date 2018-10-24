@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/building_error.hpp"
-#include "dogen.annotations/io/archetype_location_repository_io.hpp"
-#include "dogen.annotations/types/archetype_location_repository_builder.hpp"
+#include "masd.dogen.annotations/types/building_error.hpp"
+#include "masd.dogen.annotations/io/archetype_location_repository_io.hpp"
+#include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 void archetype_location_repository_builder::
 validate(const std::list<archetype_location>& als) const {

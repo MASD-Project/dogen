@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/log/logger.hpp"
-#include "dogen.annotations/types/selection_error.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/types/selection_error.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ const std::string no_fields_for_model("Could not find any fields for model: ");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 type_repository_selector::type_repository_selector(const type_repository& rp)
     : repository_(rp) {}

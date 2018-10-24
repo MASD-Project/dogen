@@ -25,15 +25,15 @@
 #include "dogen.utility/io/forward_list_io.hpp"
 #include "dogen.utility/io/unordered_map_io.hpp"
 #include "dogen.utility/io/unordered_set_io.hpp"
-#include "dogen.annotations/io/template_kinds_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/io/type_template_io.hpp"
-#include "dogen.annotations/io/entry_template_io.hpp"
-#include "dogen.annotations/types/template_kinds.hpp"
-#include "dogen.annotations/types/value_factory.hpp"
-#include "dogen.annotations/types/instantiation_error.hpp"
-#include "dogen.annotations/types/template_instantiator.hpp"
+#include "masd.dogen.annotations/io/template_kinds_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/io/type_template_io.hpp"
+#include "masd.dogen.annotations/io/entry_template_io.hpp"
+#include "masd.dogen.annotations/types/template_kinds.hpp"
+#include "masd.dogen.annotations/types/value_factory.hpp"
+#include "masd.dogen.annotations/types/instantiation_error.hpp"
+#include "masd.dogen.annotations/types/template_instantiator.hpp"
 
 namespace {
 
@@ -57,7 +57,7 @@ const std::string missing_kernel("Recursive templates must supply the kernel.");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 template_instantiator::
 template_instantiator(const archetype_location_repository& alrp)

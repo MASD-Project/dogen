@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_FACTORY_HPP
-#define DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_FACTORY_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_FACTORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TEST_MOCK_TYPE_FACTORY_HPP
 
 #include <list>
-#include "dogen.annotations/types/value_types.hpp"
-#include "dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/value_types.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
 
-namespace dogen::annotations::test {
+namespace masd::dogen::annotations::test {
 
 /**
  * @brief Generates field definitions.

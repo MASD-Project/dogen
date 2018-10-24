@@ -26,12 +26,12 @@
 #include "dogen.utility/filesystem/file.hpp"
 #include "dogen.utility/io/vector_io.hpp"
 #include "dogen.utility/io/forward_list_io.hpp"
-#include "dogen.annotations/io/type_repository_io.hpp"
-#include "dogen.annotations/io/archetype_location_io.hpp"
-#include "dogen.annotations/types/template_instantiator.hpp"
-#include "dogen.annotations/types/building_error.hpp"
-#include "dogen.annotations/types/type_templates_hydrator.hpp"
-#include "dogen.annotations/types/type_repository_factory.hpp"
+#include "masd.dogen.annotations/io/type_repository_io.hpp"
+#include "masd.dogen.annotations/io/archetype_location_io.hpp"
+#include "masd.dogen.annotations/types/template_instantiator.hpp"
+#include "masd.dogen.annotations/types/building_error.hpp"
+#include "masd.dogen.annotations/types/type_templates_hydrator.hpp"
+#include "masd.dogen.annotations/types/type_repository_factory.hpp"
 
 namespace {
 
@@ -46,7 +46,7 @@ const std::string duplicate_qualified_name(
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 std::list<type_template> type_repository_factory::hydrate_templates(
     const std::vector<boost::filesystem::path>& data_dirs) const {

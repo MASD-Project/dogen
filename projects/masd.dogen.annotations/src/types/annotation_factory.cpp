@@ -26,16 +26,16 @@
 #include "dogen.utility/log/logger.hpp"
 #include "dogen.utility/io/list_io.hpp"
 #include "dogen.utility/io/unordered_map_io.hpp"
-#include "dogen.annotations/io/type_io.hpp"
-#include "dogen.annotations/io/annotation_io.hpp"
-#include "dogen.annotations/io/scope_types_io.hpp"
-#include "dogen.annotations/types/merger.hpp"
-#include "dogen.annotations/types/profiler.hpp"
-#include "dogen.annotations/types/value_factory.hpp"
-#include "dogen.annotations/types/building_error.hpp"
-#include "dogen.annotations/types/entry_selector.hpp"
-#include "dogen.annotations/types/type_repository_selector.hpp"
-#include "dogen.annotations/types/annotation_factory.hpp"
+#include "masd.dogen.annotations/io/type_io.hpp"
+#include "masd.dogen.annotations/io/annotation_io.hpp"
+#include "masd.dogen.annotations/io/scope_types_io.hpp"
+#include "masd.dogen.annotations/types/merger.hpp"
+#include "masd.dogen.annotations/types/profiler.hpp"
+#include "masd.dogen.annotations/types/value_factory.hpp"
+#include "masd.dogen.annotations/types/building_error.hpp"
+#include "masd.dogen.annotations/types/entry_selector.hpp"
+#include "masd.dogen.annotations/types/type_repository_selector.hpp"
+#include "masd.dogen.annotations/types/annotation_factory.hpp"
 
 namespace {
 
@@ -62,7 +62,7 @@ const std::string default_root("default.root_module");
 
 }
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 annotation_factory::annotation_factory(
     const std::vector<boost::filesystem::path>& data_dirs,

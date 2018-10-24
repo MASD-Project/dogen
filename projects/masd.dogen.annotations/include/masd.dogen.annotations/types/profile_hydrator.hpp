@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_PROFILE_HYDRATOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_PROFILE_HYDRATOR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_HYDRATOR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_PROFILE_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,13 +28,13 @@
 #include <list>
 #include <string>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen.annotations/types/name.hpp"
-#include "dogen.annotations/types/template_kinds.hpp"
-#include "dogen.annotations/types/archetype_location.hpp"
-#include "dogen.annotations/types/entry_template.hpp"
-#include "dogen.annotations/types/profile.hpp"
+#include "masd.dogen.annotations/types/name.hpp"
+#include "masd.dogen.annotations/types/template_kinds.hpp"
+#include "masd.dogen.annotations/types/archetype_location.hpp"
+#include "masd.dogen.annotations/types/entry_template.hpp"
+#include "masd.dogen.annotations/types/profile.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 class profile_hydrator {
 private:

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_ENTRY_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/types/annotation.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/annotation.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Performs a number of simple queries over the annotations

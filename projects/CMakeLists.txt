@@ -204,6 +204,8 @@ include_directories(
     ${stage_inc_dir}/
 
     # real code
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
+
     ${CMAKE_SOURCE_DIR}/projects/dogen.dia/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.formatting/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
@@ -217,7 +219,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.generation.csharp/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.knitter/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.tailor/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.annotations/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.probing/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
     )

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_VALUE_FACTORY_HPP
-#define DOGEN_ANNOTATIONS_TYPES_VALUE_FACTORY_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_VALUE_FACTORY_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_VALUE_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <string>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.annotations/types/value.hpp"
-#include "dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/value.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Builds a value from raw data.

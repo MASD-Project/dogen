@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_SELECTOR_HPP
-#define DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_SELECTOR_HPP
+#ifndef MASD_DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_SELECTOR_HPP
+#define MASD_DOGEN_ANNOTATIONS_TYPES_TYPE_REPOSITORY_SELECTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.annotations/types/type.hpp"
-#include "dogen.annotations/types/type_repository.hpp"
+#include "masd.dogen.annotations/types/type.hpp"
+#include "masd.dogen.annotations/types/type_repository.hpp"
 
-namespace dogen::annotations {
+namespace masd::dogen::annotations {
 
 /**
  * @brief Performs a set of canned queries over a repository.
