@@ -18,21 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen.utility/test/logging.hpp"
+#define BOOST_TEST_MODULE tailor_tests
+#include <boost/test/included/unit_test.hpp>
+#include "masd.dogen.utility/test/fixture.hpp"
 
-namespace {
-
-const std::string empty;
-const std::string test_module("tailor");
-const std::string test_suite("fake_tests");
-
-}
-
-BOOST_AUTO_TEST_SUITE(fake_tests)
-
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
-}
-
-BOOST_AUTO_TEST_SUITE_END()
+using namespace dogen::utility::test;
+BOOST_GLOBAL_FIXTURE(exception_fixture);

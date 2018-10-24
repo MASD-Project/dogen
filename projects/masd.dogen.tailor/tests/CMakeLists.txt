@@ -19,7 +19,7 @@
 #
 set(name "tailor")
 set(tests_name "${name}.tests")
-set(binary_name "dogen.${tests_name}")
+set(binary_name "masd.dogen.${tests_name}")
 set(tests_files "")
 file(GLOB_RECURSE tests_files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"

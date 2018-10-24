@@ -18,9 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.tailor/workflow.hpp"
+#include <boost/test/unit_test.hpp>
+#include "masd.dogen.utility/test/logging.hpp"
 
-int main(const int argc, const char* argv[]) {
-    dogen::tailor::workflow w;
-    return w.execute(argc, argv);
+namespace {
+
+const std::string empty;
+const std::string test_module("tailor");
+const std::string test_suite("fake_tests");
+
 }
+
+BOOST_AUTO_TEST_SUITE(fake_tests)
+
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()

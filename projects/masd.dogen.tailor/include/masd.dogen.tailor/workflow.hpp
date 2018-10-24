@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TAILOR_WORKFLOW_HPP
-#define DOGEN_TAILOR_WORKFLOW_HPP
+#ifndef MASD_DOGEN_TAILOR_WORKFLOW_HPP
+#define MASD_DOGEN_TAILOR_WORKFLOW_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.options/types/tailoring_options.hpp"
+#include "masd.dogen.options/types/tailoring_options.hpp"
 
 namespace dogen::tailor {
 

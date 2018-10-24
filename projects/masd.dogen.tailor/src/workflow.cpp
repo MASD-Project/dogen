@@ -21,29 +21,29 @@
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/version.hpp"
-#include "dogen.utility/log/life_cycle_manager.hpp"
-#include "dogen.utility/log/severity_level.hpp"
-#include "dogen.utility/log/logger.hpp"
-#include "dogen.options/types/tailoring_options.hpp"
-#include "dogen.external/types/transforms/context.hpp"
-#include "dogen.external/types/transforms/model_to_model_chain.hpp"
-#include "dogen.external.json/types/initializer.hpp"
-#include "dogen.external.dia/types/initializer.hpp"
-#include "dogen.modeling/types/transforms/options.hpp"
-#include "dogen.modeling/types/transforms/context_factory.hpp"
-#include "dogen.tailor/program_options_parser.hpp"
-#include "dogen.tailor/parser_validation_error.hpp"
-#include "dogen.tailor/workflow_error.hpp"
-#include "dogen.tailor/workflow.hpp"
+#include "masd.dogen.utility/log/life_cycle_manager.hpp"
+#include "masd.dogen.utility/log/severity_level.hpp"
+#include "masd.dogen.utility/log/logger.hpp"
+#include "masd.dogen.options/types/tailoring_options.hpp"
+#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.external/types/transforms/model_to_model_chain.hpp"
+#include "masd.dogen.external.json/types/initializer.hpp"
+#include "masd.dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
+#include "masd.dogen.tailor/program_options_parser.hpp"
+#include "masd.dogen.tailor/parser_validation_error.hpp"
+#include "masd.dogen.tailor/workflow_error.hpp"
+#include "masd.dogen.tailor/workflow.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("tailor"));
-const std::string log_file_prefix("dogen.tailor.");
+const std::string log_file_prefix("masd.dogen.tailor.");
 const std::string more_information(
     "Try `dogen.tailor --help' for more information.");
-const std::string tailor_product("Dogen Tailor v" DOGEN_VERSION);
+const std::string tailor_product("Dogen Tailor v" MASD_DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
 const std::string log_file_msg("See the log file for details: ");

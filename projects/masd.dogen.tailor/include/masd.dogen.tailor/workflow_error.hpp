@@ -18,9 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_MODULE tailor_tests
-#include <boost/test/included/unit_test.hpp>
-#include "dogen.utility/test/fixture.hpp"
+#ifndef MASD_DOGEN_TAILOR_WORKFLOW_ERROR_HPP
+#define MASD_DOGEN_TAILOR_WORKFLOW_ERROR_HPP
 
-using namespace dogen::utility::test;
-BOOST_GLOBAL_FIXTURE(exception_fixture);
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "masd.dogen.utility/exception/utility_exception.hpp"
+
+namespace dogen::tailor {
+
+/**
+ * @brief A fatal error has occurred during option parsing.
+ */
+class workflow_error : public utility::exception::exception {
+public:
+    workflow_error(std::string message)
+        : utility::exception::exception(message) { }
+    workflow_error() { }
+
+    virtual ~workflow_error() throw() {}
+};
+
+}
+
+#endif

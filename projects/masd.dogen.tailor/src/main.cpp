@@ -18,29 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TAILOR_WORKFLOW_ERROR_HPP
-#define DOGEN_TAILOR_WORKFLOW_ERROR_HPP
+#include "masd.dogen.tailor/workflow.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen.utility/exception/utility_exception.hpp"
-
-namespace dogen::tailor {
-
-/**
- * @brief A fatal error has occurred during option parsing.
- */
-class workflow_error : public utility::exception::exception {
-public:
-    workflow_error(std::string message)
-        : utility::exception::exception(message) { }
-    workflow_error() { }
-
-    virtual ~workflow_error() throw() {}
-};
-
+int main(const int argc, const char* argv[]) {
+    dogen::tailor::workflow w;
+    return w.execute(argc, argv);
 }
-
-#endif
