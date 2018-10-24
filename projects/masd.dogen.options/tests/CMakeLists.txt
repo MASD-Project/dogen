@@ -19,7 +19,7 @@
 #
 set(name "options")
 set(tests_name "${name}.tests")
-set(binary_name "dogen.${tests_name}")
+set(binary_name "masd.dogen.${tests_name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
