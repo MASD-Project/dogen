@@ -31,10 +31,6 @@ parameter to force a class to become a parent.
 
 For now we just hacked it by adding a fake descendant.
 
-*** Default model modules from filename                               :story:
-
-It would be nice to be able to not have to supply model modules when
-its obvious from the filename.
 *** Windows packages have a sanity folder                             :story:
 
 We should remove the ctest file and add the dia and json examples. We
@@ -1512,7 +1508,9 @@ Notes:
      to use external modules as a named configuration (or else its
      recursive, we cannot find a configuration because its missing
      EMs, and its missing EMs because we did not process the named
-     configuration).
+     configuration). In a world where external modules are merged with
+     model modules, this becomes cleaner since the model module must
+     be unique for each model.
   3. collect all elements that need pre-processing and pre-process
      them: mappings, licences, named configurations/profiles. Not
      traits/object templates. All initialised structures are placed in
@@ -3253,6 +3251,14 @@ the fake internal module, either with the current facet or types; this
 is done for all non-proxy names. The "is proxy" property needs to be
 added to names.
 
+In addition, we could define =using= declarations for all dependent
+facets at the top of each file as we know these up front. Thus all
+types are declared on a namespace specific to the facet, but each
+facet includes dependent facets so that the templates themselves are
+not affected (other than the using statement). Actually this will not
+work if there are several referenced models which happen to have types
+with the same name.
+
 Tasks:
 
 - add a meta-data flag to enable/disable this feature.
@@ -4281,31 +4287,6 @@ For variables, the simple way is to have some "special names". For
 example =$(facet_name)= could be made to mean the facet name. With
 just support for this we could probably handle all of the use cases
 except for =postfix=.
-
-*** Nested external model path results in strange references          :story:
-
-Note: we have probably already implemented a solution for this, need
-to check the resolver.
-
-The external model path does not contribute to path resolution in a
-model. Up til now that has actually been a feature; it would have been
-annoying to have to dype =dogen::= on every type for every
-model. Instead, we refer to say =dogen::a::b= as simply =a::b= in all
-models that use =a=. However this masks a deeper problem: this is not
-the desired behaviour at all times. We saw this problem when we
-created multiple models under dynamic: =dynamic::schema= and
-=dynamic::expansion=. In this case, users of these models referred to
-them as =schema= and =expansion= respectively, and this was not
-ideal. In general:
-
-- external module path should contribute to references just like
-  internal module path does - there should be no difference;
-- dogen should be clever enough to determine if two models share a
-  top-level namespace (regardless if it was obtained from the external
-  or internal module path) that there is no need to have an absolute
-  path. So in the case of =dogen=, since every model has =dogen= as
-  their external module path, according to this rule we should not
-  have to type it.
 
 *** Perform lexical casts once only for error reporting               :story:
 
@@ -5955,6 +5936,7 @@ Links:
 - [[https://github.com/swagger-api/swagger-codegen][Swagger codegen]]: tool for code generation of swagger APIs. See also
   [[https://swagger.io/tools/swagger-codegen/][this link]].
 - [[https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v3.0][OpenAPI examples]]: YAML documents with examples.
+- [[https://github.com/matt-42/silicon][silicon]]: yet another C++ HTTP framework.
 
 *** HTTP API support                                                  :story:
 

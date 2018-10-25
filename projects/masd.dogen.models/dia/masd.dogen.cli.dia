@@ -68,7 +68,7 @@
         <dia:point val="30,9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,8.95;51.355,18.75"/>
+        <dia:rectangle val="29.95,8.95;51.355,19.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="21.305000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.7000000000000011"/>
+        <dia:real val="10.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -97,7 +97,7 @@
             <dia:string>#Provides the top-level API for the dogen product.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen.cli
+#DOGEN yarn.model_modules=masd.dogen.cli
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17

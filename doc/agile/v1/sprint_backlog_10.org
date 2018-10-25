@@ -132,6 +132,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 15:15]--[2018-10-25 Thu 15:54] =>  0:39
+    CLOCK: [2018-10-25 Thu 12:50]--[2018-10-25 Thu 13:25] =>  0:35
     CLOCK: [2018-10-25 Thu 11:48]--[2018-10-25 Thu 12:03] =>  0:15
     CLOCK: [2018-10-24 Wed 08:03]--[2018-10-24 Wed 08:24] =>  0:21
     CLOCK: [2018-10-19 Fri 11:46]--[2018-10-19 Fri 11:49] =>  0:03
@@ -935,6 +937,37 @@ the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
 
+*** STARTED Implement the new dogen product API                       :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 13:26]--[2018-10-25 Thu 13:58] =>  0:32
+    :END:
+
+Now we've designed a clean top-level API for the product, we need to
+code-generate it and implement it in terms of the existing code.
+
+*** Add DTL to vcpkg                                                  :story:
+
+DTL seems to be the easiest library to work with in terms of
+generating diffs. However, its not on vcpkg.
+
+Tasks:
+
+- add CMake support to DTL. Not strictly needed but seems like an easy
+  thing to do and will make vcpkg easier. It also means we can build
+  tests and examples to make sure it all works in isolation. Actually
+  this was tried before and not accepted by the maintainer.
+- add DTL port.
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
+- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
+  diffs. Also not on vcpkg.
+- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
+  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
+- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
+- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
+
 *** Add tests for external and model modules                          :story:
 
 At present we do not have tests exercising different combinations of
@@ -1027,11 +1060,55 @@ Notes:
   opposite) and has the properties defined above. Or we could have a
   "location flattener" that performs these actions, but this is less
   clean as we now need a few of these helpers.
+- there are two fundamental concepts: a path (which is what we call a
+  location) and an address (which is what we call an ID). Path implies
+  an hierarchical space, which is what modeling and generation space
+  are. Address is flat and unique. There is a function to go from
+  paths to addresses but not vice-versa. Given two paths we can
+  generate all possible addresses by performing a "climb" in the
+  hierarchical space.
+- we could make addresses URIs, and preserve almost all of the
+  information: =masd://some.model.name/a/b.c=. The problem is we
+  cannot tell the difference between model modules and external
+  modules. However, we could simplify this and say model modules and
+  external modules are all the same thing; users can choose to express
+  external modules as part of the file name or not. (e.g. "express
+  full path" or some such flag). We can also choose to express
+  external modules as directories or as a dotted path. URIs may not be
+  the best of ideas because models exist in contexts (workspaces,
+  servers, users) rather than in one universal space. However, we
+  could use URLs as a way to identify resources once we clear up the
+  REST story.
 
-*** Implement the new dogen product API                               :story:
+*** Default model modules from filename                               :story:
 
-Now we've designed a clean top-level API for the product, we need to
-code-generate it and implement it in terms of the existing code.
+It would be nice to be able to not have to supply model modules when
+its obvious from the filename.
+
+*** Nested external model path results in strange references          :story:
+
+Note: we have probably already implemented a solution for this, need
+to check the resolver.
+
+The external model path does not contribute to path resolution in a
+model. Up til now that has actually been a feature; it would have been
+annoying to have to dype =dogen::= on every type for every
+model. Instead, we refer to say =dogen::a::b= as simply =a::b= in all
+models that use =a=. However this masks a deeper problem: this is not
+the desired behaviour at all times. We saw this problem when we
+created multiple models under dynamic: =dynamic::schema= and
+=dynamic::expansion=. In this case, users of these models referred to
+them as =schema= and =expansion= respectively, and this was not
+ideal. In general:
+
+- external module path should contribute to references just like
+  internal module path does - there should be no difference;
+- dogen should be clever enough to determine if two models share a
+  top-level namespace (regardless if it was obtained from the external
+  or internal module path) that there is no need to have an absolute
+  path. So in the case of =dogen=, since every model has =dogen= as
+  their external module path, according to this rule we should not
+  have to type it.
 
 *** Remove hello world model                                          :story:
 
