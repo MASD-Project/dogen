@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-25 Thu 08:18]
+#+CAPTION: Clock summary at [2018-10-25 Thu 09:26]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *72:47* |       |       |   0.0 |
+| *Total time*                                                                | *73:53* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 72:47   |       |       |   0.0 |
-| Active                                                                      |         | 72:47 |       |   0.0 |
+| Stories                                                                     | 73:53   |       |       |   0.0 |
+| Active                                                                      |         | 73:53 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:23 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -49,8 +49,8 @@
 | Remove facets that are not being used                                       |         |       |  8:31 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 14:46 |   0.0 |
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
+| Update dogen namespaces to match the new specification                      |         |       | 11:03 |   0.0 |
 | Read up on framework and API design                                         |         |       |  4:34 |   0.0 |
-| Update dogen namespaces to match the new specification                      |         |       |  9:57 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -804,6 +804,40 @@ Links:
 - [[https://en.cppreference.com/w/cpp/language/namespace][C++ Namespaces]]
 - [[http://www.nuonsoft.com/blog/2017/08/01/c17-nested-namespaces/][C++17: Nested Namespaces]]
 
+*** COMPLETED Update dogen namespaces to match the new specification  :story:
+    CLOSED: [2018-10-25 Thu 09:26]
+    :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 08:19]--[2018-10-25 Thu 09:25] =>  1:06
+    CLOCK: [2018-10-25 Thu 08:07]--[2018-10-25 Thu 08:18] =>  0:11
+    CLOCK: [2018-10-24 Wed 19:12]--[2018-10-24 Wed 19:41] =>  0:29
+    CLOCK: [2018-10-24 Wed 18:09]--[2018-10-24 Wed 18:58] =>  0:49
+    CLOCK: [2018-10-24 Wed 17:11]--[2018-10-24 Wed 18:08] =>  0:57
+    CLOCK: [2018-10-24 Wed 17:04]--[2018-10-24 Wed 17:10] =>  0:06
+    CLOCK: [2018-10-24 Wed 15:42]--[2018-10-24 Wed 17:03] =>  1:21
+    CLOCK: [2018-10-24 Wed 13:16]--[2018-10-24 Wed 15:41] =>  2:25
+    CLOCK: [2018-10-24 Wed 12:48]--[2018-10-24 Wed 13:15] =>  0:27
+    CLOCK: [2018-10-24 Wed 09:32]--[2018-10-24 Wed 12:02] =>  2:30
+    CLOCK: [2018-10-24 Wed 09:04]--[2018-10-24 Wed 09:31] =>  0:27
+    CLOCK: [2018-10-22 Mon 17:13]--[2018-10-22 Mon 17:28] =>  0:15
+    :END:
+
+Following on [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces][from FDG]], we will from now on name all models:
+
+: ORGANISATION.PRODUCT.COMPONENT
+
+Where ORGANISATION is the top-level umbrella organisation (e.g. MASD),
+PRODUCT is the individual product (e.g. dogen) and the component is
+the library or executable.
+
+There have been many discussions on this topic, and there are many
+pluses and minuses, but one important point is that we need a
+consistent approach, and this is as supported by FDG.
+
+We will update the model modules rather than external modules so that
+the directory names follow the same naming convention.
+
+We need to update one model at a time.
+
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
      CLOCK: [2018-10-24 Wed 08:24]--[2018-10-24 Wed 09:03] =>  0:39
@@ -842,38 +876,6 @@ It seems we have several types of classes:
 
 These should be identifiable at the meta-model level, with appropriate
 names.
-
-*** STARTED Update dogen namespaces to match the new specification    :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-25 Thu 08:07]--[2018-10-25 Thu 08:18] =>  0:11
-    CLOCK: [2018-10-24 Wed 19:12]--[2018-10-24 Wed 19:41] =>  0:29
-    CLOCK: [2018-10-24 Wed 18:09]--[2018-10-24 Wed 18:58] =>  0:49
-    CLOCK: [2018-10-24 Wed 17:11]--[2018-10-24 Wed 18:08] =>  0:57
-    CLOCK: [2018-10-24 Wed 17:04]--[2018-10-24 Wed 17:10] =>  0:06
-    CLOCK: [2018-10-24 Wed 15:42]--[2018-10-24 Wed 17:03] =>  1:21
-    CLOCK: [2018-10-24 Wed 13:16]--[2018-10-24 Wed 15:41] =>  2:25
-    CLOCK: [2018-10-24 Wed 12:48]--[2018-10-24 Wed 13:15] =>  0:27
-    CLOCK: [2018-10-24 Wed 09:32]--[2018-10-24 Wed 12:02] =>  2:30
-    CLOCK: [2018-10-24 Wed 09:04]--[2018-10-24 Wed 09:31] =>  0:27
-    CLOCK: [2018-10-22 Mon 17:13]--[2018-10-22 Mon 17:28] =>  0:15
-    :END:
-
-Following on [[https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces][from FDG]], we will from now on name all models:
-
-: ORGANISATION.PRODUCT.COMPONENT
-
-Where ORGANISATION is the top-level umbrella organisation (e.g. MASD),
-PRODUCT is the individual product (e.g. dogen) and the component is
-the library or executable.
-
-There have been many discussions on this topic, and there are many
-pluses and minuses, but one important point is that we need a
-consistent approach, and this is as supported by FDG.
-
-We will update the model modules rather than external modules so that
-the directory names follow the same naming convention.
-
-We need to update one model at a time.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
@@ -928,6 +930,16 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** Add tests for external and model modules                          :story:
+
+At present we do not have tests exercising different combinations of
+external and model modules.
+
+Tests:
+
+- 0-3 levels of external modules
+- 1-3 levels of model modules
 
 *** Rewrite name resolution in terms of lists                         :story:
 
