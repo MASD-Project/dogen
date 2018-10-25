@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-25 Thu 15:56]
+#+CAPTION: Clock summary at [2018-10-25 Thu 16:50]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *78:15* |       |       |   0.0 |
+| *Total time*                                                                | *79:10* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 78:15   |       |       |   0.0 |
-| Active                                                                      |         | 78:15 |       |   0.0 |
+| Stories                                                                     | 79:10   |       |       |   0.0 |
+| Active                                                                      |         | 79:10 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  2:52 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -50,8 +50,9 @@
 | Design a top-level Dogen API                                                |         |       | 14:46 |   0.0 |
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
 | Update dogen namespaces to match the new specification                      |         |       | 12:28 |   0.0 |
+| Add support for LGTM                                                        |         |       |  0:18 |   0.0 |
 | Read up on framework and API design                                         |         |       |  5:30 |   0.0 |
-| Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
+| Create a single binary for all of dogen                                     |         |       |  2:35 |   0.0 |
 | Implement the new dogen product API                                         |         |       |  0:32 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -846,6 +847,9 @@ We need to update one model at a time.
 
 *** COMPLETED Add support for LGTM                                    :story:
     CLOSED: [2018-10-25 Thu 15:56]
+    :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 15:54]--[2018-10-25 Thu 16:12] =>  0:18
+    :END:
 
 *Rationale*: seems like we had done it already.
 
@@ -899,6 +903,7 @@ names.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 16:13]--[2018-10-25 Thu 16:50] =>  0:37
     CLOCK: [2018-10-19 Fri 14:41]--[2018-10-19 Fri 16:39] =>  1:58
     :END:
 
@@ -958,6 +963,24 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 
 Now we've designed a clean top-level API for the product, we need to
 code-generate it and implement it in terms of the existing code.
+
+*** Great meta-data rename                                            :story:
+
+All of the existing stereotypes and meta-data need to be moved from
+the existing names (e.g. =quilt=, =yarn=, etc) into
+=masd=. Interestingly, we can take this opportunity to make dia
+diagrams a bit more readable. Instead of
+
+: #DOGEN a.b.c=d
+
+we can now just do:
+
+: masd.a.b.c=4
+
+It is very unlikely dia users will need lines starting with =masd.=.
+
+We should probably try to tackle this rename sooner rather than later
+since it badly breaks model-compatibility.
 
 *** Add DTL to vcpkg                                                  :story:
 

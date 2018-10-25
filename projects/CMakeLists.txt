@@ -204,6 +204,7 @@ include_directories(
     ${stage_inc_dir}/
 
     # real code
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.cli/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.dia/include
@@ -226,6 +227,7 @@ include_directories(
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
+# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)

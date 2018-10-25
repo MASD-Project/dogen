@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_ORCHESTRATION_ERROR_FWD_HPP
-#define MASD_DOGEN_CLI_TYPES_ORCHESTRATION_ERROR_FWD_HPP
+#ifndef MASD_DOGEN_CLI_TYPES_ORCHESTRATION_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_CLI_TYPES_ORCHESTRATION_EXCEPTION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace masd::dogen::cli {
 
-class orchestration_error;
+class orchestration_exception;
 
 }
 

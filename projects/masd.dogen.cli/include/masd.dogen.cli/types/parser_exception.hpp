@@ -18,11 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TEST_DATA_ALL_TD_HPP
-#define MASD_DOGEN_CLI_TEST_DATA_ALL_TD_HPP
+#ifndef MASD_DOGEN_CLI_TYPES_PARSER_EXCEPTION_HPP
+#define MASD_DOGEN_CLI_TYPES_PARSER_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace masd::dogen::cli {
+
+/**
+ * @brief A fatal error has occurred during option parsing.
+ */
+class parser_exception : public virtual std::exception, public virtual boost::exception {
+public:
+    parser_exception() = default;
+    ~parser_exception() noexcept = default;
+
+public:
+    explicit parser_exception(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+}
 
 #endif

@@ -28,9 +28,9 @@
 #include "masd.dogen.cli/types/cli.hpp"
 #include "masd.dogen.cli/types/orchestrator.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
+#include "masd.dogen.cli/types/parser_exception.hpp"
 #include "masd.dogen.cli/types/command_line_parser.hpp"
-#include "masd.dogen.cli/types/orchestration_error.hpp"
 #include "masd.dogen.cli/types/program_options_parser.hpp"
-#include "masd.dogen.cli/types/parser_validation_error.hpp"
+#include "masd.dogen.cli/types/orchestration_exception.hpp"
 
 #endif
