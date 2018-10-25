@@ -18,6 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-int main(void) {
-    return 0;
-}
+#define BOOST_TEST_MODULE knitter_tests
+#include <boost/test/included/unit_test.hpp>
+#include "masd.dogen.utility/test/fixture.hpp"
+
+using namespace masd::dogen::utility::test;
+BOOST_GLOBAL_FIXTURE(exception_fixture);

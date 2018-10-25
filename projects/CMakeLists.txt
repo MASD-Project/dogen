@@ -227,7 +227,7 @@ include_directories(
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
-# add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)
