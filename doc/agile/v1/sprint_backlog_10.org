@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-25 Thu 09:26]
+#+CAPTION: Clock summary at [2018-10-25 Thu 11:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *73:53* |       |       |   0.0 |
+| *Total time*                                                                | *76:14* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 73:53   |       |       |   0.0 |
-| Active                                                                      |         | 73:53 |       |   0.0 |
+| Stories                                                                     | 76:14   |       |       |   0.0 |
+| Active                                                                      |         | 76:14 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  1:23 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -49,8 +49,8 @@
 | Remove facets that are not being used                                       |         |       |  8:31 |   0.0 |
 | Design a top-level Dogen API                                                |         |       | 14:46 |   0.0 |
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
-| Update dogen namespaces to match the new specification                      |         |       | 11:03 |   0.0 |
-| Read up on framework and API design                                         |         |       |  4:34 |   0.0 |
+| Update dogen namespaces to match the new specification                      |         |       | 12:28 |   0.0 |
+| Read up on framework and API design                                         |         |       |  5:30 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -132,6 +132,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 11:48]--[2018-10-25 Thu 12:03] =>  0:15
     CLOCK: [2018-10-24 Wed 08:03]--[2018-10-24 Wed 08:24] =>  0:21
     CLOCK: [2018-10-19 Fri 11:46]--[2018-10-19 Fri 11:49] =>  0:03
     CLOCK: [2018-10-18 Thu 20:23]--[2018-10-18 Thu 20:36] =>  0:13
@@ -807,6 +808,8 @@ Links:
 *** COMPLETED Update dogen namespaces to match the new specification  :story:
     CLOSED: [2018-10-25 Thu 09:26]
     :LOGBOOK:
+    CLOCK: [2018-10-25 Thu 11:35]--[2018-10-25 Thu 11:47] =>  0:12
+    CLOCK: [2018-10-25 Thu 10:21]--[2018-10-25 Thu 11:34] =>  1:13
     CLOCK: [2018-10-25 Thu 08:19]--[2018-10-25 Thu 09:25] =>  1:06
     CLOCK: [2018-10-25 Thu 08:07]--[2018-10-25 Thu 08:18] =>  0:11
     CLOCK: [2018-10-24 Wed 19:12]--[2018-10-24 Wed 19:41] =>  0:29
@@ -840,6 +843,7 @@ We need to update one model at a time.
 
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
+     CLOCK: [2018-10-25 Thu 09:25]--[2018-10-25 Thu 10:21] =>  0:56
      CLOCK: [2018-10-24 Wed 08:24]--[2018-10-24 Wed 09:03] =>  0:39
      CLOCK: [2018-10-23 Tue 13:07]--[2018-10-23 Tue 13:23] =>  0:16
      CLOCK: [2018-10-23 Tue 08:48]--[2018-10-23 Tue 09:50] =>  1:02
@@ -1001,6 +1005,28 @@ Tasks:
   somehow. We can copy the =model_name_mode= logic from printer.
 - drop all of the logic in resolver at present and use the list logic
   as per above. Do not check references, etc.
+
+Notes:
+
+- there are a few useful functions here:
+  - subtraction: given a base list, subtract another list. Fro
+    example, given =masd::dogen::annotations::annotation=, subtract
+    =masd::dogen::annotations=. This is useful when determining the
+    right qualification inside a class.
+  - addition: concatenate a list with another.
+  - combination: given a base list, create all possible permutations
+    for a second list. For example: =masd::dogen::annotations= and
+    =some::type=, we want =masd::dogen::annotations::some::type=,
+    =masd::dogen::some::type=, =masd::some::type=, =some::type=. We
+    are iterating upwards the first list.
+  - make id: given a list, generate an ID. This was we don't even need
+    to go though the whole "name building" exercise, we simply go from
+    lists into ID's and check the containers.
+- we probably should introduce a type for this: =flat_location=?
+  something that can be converted from a =location= (but not the
+  opposite) and has the properties defined above. Or we could have a
+  "location flattener" that performs these actions, but this is less
+  clean as we now need a few of these helpers.
 
 *** Implement the new dogen product API                               :story:
 
