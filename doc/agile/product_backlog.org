@@ -6556,16 +6556,6 @@ Links:
 
 - [[https://blog.tartanllama.xyz/spaceship-operator/][Spaceship Operator]]
 
-*** Add support for LGTM                                              :story:
-
-As seen in project Heatherstone.
-
-Links:
-
-- https://github.com/utilForever/Hearthstonepp
-- https://lgtm.com/
-- https://lgtm.com/projects/g/utilForever/Hearthstonepp/alerts/?mode=list
-
 *** Consider adding support for OutOfLine                             :story:
 
 OutOfLine seems like an interesting pattern to improve cache

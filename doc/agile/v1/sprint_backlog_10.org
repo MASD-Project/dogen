@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-25 Thu 11:47]
+#+CAPTION: Clock summary at [2018-10-25 Thu 15:56]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *76:14* |       |       |   0.0 |
+| *Total time*                                                                | *78:15* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 76:14   |       |       |   0.0 |
-| Active                                                                      |         | 76:14 |       |   0.0 |
+| Stories                                                                     | 78:15   |       |       |   0.0 |
+| Active                                                                      |         | 78:15 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  1:23 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  2:52 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
 | Add support for kcov                                                        |         |       |  3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       |  0:09 |   0.0 |
@@ -52,6 +52,7 @@
 | Update dogen namespaces to match the new specification                      |         |       | 12:28 |   0.0 |
 | Read up on framework and API design                                         |         |       |  5:30 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  1:58 |   0.0 |
+| Implement the new dogen product API                                         |         |       |  0:32 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -842,6 +843,19 @@ We will update the model modules rather than external modules so that
 the directory names follow the same naming convention.
 
 We need to update one model at a time.
+
+*** COMPLETED Add support for LGTM                                    :story:
+    CLOSED: [2018-10-25 Thu 15:56]
+
+*Rationale*: seems like we had done it already.
+
+As seen in project Heatherstone.
+
+Links:
+
+- https://github.com/utilForever/Hearthstonepp
+- https://lgtm.com/
+- https://lgtm.com/projects/g/utilForever/Hearthstonepp/alerts/?mode=list
 
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
