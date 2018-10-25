@@ -99,6 +99,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     # main input models
     set(prefix "masd.dogen")
     set(models ${prefix}.annotations)
+    set(models ${models} ${prefix}.cli)
     set(models ${models} ${prefix}.dia)
     set(models ${models} ${prefix}.formatting)
     set(models ${models} ${prefix}.options)
