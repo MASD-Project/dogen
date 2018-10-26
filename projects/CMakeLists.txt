@@ -153,11 +153,12 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
     if(${MSVC_VERSION} GREATER 1399) # 1400+ => VC2005+
         # cannot use incremental rebuild
         string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
-        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
-        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE
+            "${CMAKE_C_FLAGS_RELEASE}")
+        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG
+            "${CMAKE_CXX_FLAGS_DEBUG}")
         string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE
             "${CMAKE_CXX_FLAGS_RELEASE}")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
 
         # workaround for C1128: number of sections exceeded object
         # file format limit.
@@ -174,6 +175,9 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
     endforeach(flag_var)
 
     if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+        # flag not supported by clang-cl
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+
         # For some reason CMake seems to be including the debug
         # version of this library on release builds as well so we
         # need to ignore it. Not adding this to clang-cl as it
