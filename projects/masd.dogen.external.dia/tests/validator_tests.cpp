@@ -32,7 +32,7 @@ using masd::dogen::utility::test::asserter;
 namespace  {
 
 const std::string empty;
-const std::string test_module("external.dia");
+const std::string test_module("masd.external.dia.tests");
 const std::string test_suite("validator_tests");
 
 const std::string no_uml_type("No UML type");

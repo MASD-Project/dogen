@@ -33,7 +33,7 @@
 
 namespace {
 
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("associations_transform_tests");
 const std::string object_not_found("Object not found in");
 

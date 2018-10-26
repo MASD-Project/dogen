@@ -35,23 +35,23 @@ set_target_properties(${tests_target_name}
 
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
-    utility
-    options
-    dia
-    formatting
-    external
-    external.json
-    external.dia
-    modeling
-    generation.cpp
-    generation.csharp
+    masd.dogen.utility.lib
+    masd.dogen.options.lib
+    masd.dogen.dia.lib
+    masd.dogen.formatting.lib
+    masd.dogen.external.lib
+    masd.dogen.external.json.lib
+    masd.dogen.external.dia.lib
+    masd.dogen.modeling.lib
+    masd.dogen.generation.cpp.lib
+    masd.dogen.generation.csharp.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(command $<TARGET_FILE:${tests_target_name}> ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_binary_name}> ${boost_test_parameters})
 
 add_custom_target(run_${tests_target_name}
     COMMENT "Running ${tests_target_name}" VERBATIM
@@ -65,7 +65,7 @@ if(WITH_BENCHMARKS)
     set(benchmark_file
         ${benchmark_directory}/${benchmark_prefix}${tests_target_name}.csv)
     add_custom_target(benchmark_${tests_target_name}
-        COMMENT "Benchmarking testing ${tests_target_name}" VERBATIM
+        COMMENT "Benchmarking testing ${tests_binary_name}" VERBATIM
         COMMAND ${benchmark_command} ${benchmark_repeats} ${benchmark_file}
         ${command}
         WORKING_DIRECTORY ${stage_bin_dir}
@@ -74,6 +74,6 @@ if(WITH_BENCHMARKS)
     add_dependencies(benchmark_all benchmark_${tests_target_name})
 endif()
 
-add_boost_tests(${tests_target_name} ${test_files})
+add_boost_tests(${tests_binary_name} ${test_files})
 
 install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)

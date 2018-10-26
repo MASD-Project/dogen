@@ -17,34 +17,37 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "annotations")
-set(tests_name "${name}.tests")
-set(binary_name "masd.dogen.${tests_name}")
+set(name "masd.dogen.annotations")
+set(lib_target_name ${name}.lib)
+set(tests_binary_name ${name}.tests)
+set(tests_target_name ${name}.tests)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(${tests_name} ${files})
-set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
+set(test_files ${files})
+add_executable(${tests_target_name} ${test_files})
+set_target_properties(${tests_target_name}
+    PROPERTIES OUTPUT_NAME ${tests_binary_name})
 
-target_link_libraries(${tests_name}
-    ${name}
-    utility
+target_link_libraries(${tests_target_name}
+    ${lib_target_name}
+    masd.dogen.utility.lib
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_binary_name}> ${boost_test_parameters})
 
-add_custom_target(run_${tests_name}
-    COMMENT "Running ${tests_name}" VERBATIM
+add_custom_target(run_${tests_target_name}
+    COMMENT "Running ${tests_target_name}" VERBATIM
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${tests_name})
 
-add_dependencies(run_all_tests run_${tests_name})
-add_dependencies(run_windows_green_tests run_${tests_name})
+add_dependencies(run_all_tests run_${tests_target_name})
 
 if(WITH_BENCHMARKS)
     add_custom_target(benchmark_${tests_name}
@@ -56,6 +59,6 @@ if(WITH_BENCHMARKS)
     add_dependencies(benchmark_all benchmark_${tests_name})
 endif()
 
-add_boost_tests(${name} ${files})
+add_boost_tests(${tests_binary_name} ${test_files})
 
-install(TARGETS ${tests_name} RUNTIME DESTINATION bin COMPONENT tests)
+install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)

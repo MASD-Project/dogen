@@ -33,7 +33,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("modeline_group_hydrator_tests");
 
 const std::string duplicate_group("Duplicate modeline group");

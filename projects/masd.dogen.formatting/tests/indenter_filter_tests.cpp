@@ -26,7 +26,7 @@
 
 namespace {
 
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("indent_filter_tests");
 
 const std::string empty;

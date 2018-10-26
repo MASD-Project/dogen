@@ -42,7 +42,7 @@ using mock_factory = masd::dogen::external::dia::test::mock_processed_object_fac
 
 namespace  {
 
-const std::string test_module("external.dia");
+const std::string test_module("masd.external.dia.tests");
 const std::string test_suite("adapter_tests");
 
 const std::string empty;

@@ -33,6 +33,4 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
-install(TARGETS ${lib_target_name}
-    ARCHIVE DESTINATION lib
-    COMPONENT libraries)
+install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)

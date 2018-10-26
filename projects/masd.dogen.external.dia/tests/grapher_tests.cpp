@@ -38,7 +38,7 @@ using factory = masd::dogen::external::dia::test::mock_processed_object_factory;
 
 namespace  {
 
-const std::string test_module("external.dia");
+const std::string test_module("masd.external.dia.tests");
 const std::string test_suite("grapher_tests");
 const std::string graph_generated("Graph has already been generated");
 const std::string graph_not_generated("Graph has not yet been generated");

@@ -37,7 +37,7 @@ template<typename Archive> void register_types(Archive& ar) {
 
 namespace {
 
-const std::string test_module("dia");
+const std::string test_module("masd.dogen.dia.tests");
 const std::string test_suite("hydrator_tests");
 
 

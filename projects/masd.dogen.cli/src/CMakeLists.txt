@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -45,9 +45,7 @@ set(exe_binary_name ${name})
 set(exe_target_name ${name}.exe)
 
 set(exe_files ${files})
-message(STATUS "${exe_files}")
 list(FILTER exe_files INCLUDE REGEX "main.cpp")
-message(STATUS "${exe_files}")
 
 add_executable(${exe_target_name} ${exe_files})
 set_target_properties(${exe_target_name} PROPERTIES
@@ -55,19 +53,18 @@ set_target_properties(${exe_target_name} PROPERTIES
 
 target_link_libraries(${exe_target_name}
     ${lib_target_name}
-    utility
-    options
-    dia
-    formatting
-    external
-    external.json
-    external.dia
-    modeling
-    generation.cpp
-    generation.csharp
+    masd.dogen.utility.lib
+    masd.dogen.options.lib
+    masd.dogen.dia.lib
+    masd.dogen.formatting.lib
+    masd.dogen.external.lib
+    masd.dogen.external.json.lib
+    masd.dogen.external.dia.lib
+    masd.dogen.modeling.lib
+    masd.dogen.generation.cpp.lib
+    masd.dogen.generation.csharp.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
-install(TARGETS ${exe_target_name}
-    RUNTIME DESTINATION bin
+install(TARGETS ${exe_target_name} RUNTIME DESTINATION bin
     COMPONENT applications)

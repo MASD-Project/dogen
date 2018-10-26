@@ -29,7 +29,7 @@
 // namespace {
 
 // const std::string empty;
-// const std::string test_module("yarn");
+// const std::string test_module("masd.dogen.modeling.tests");
 // const std::string test_suite("hashing_tests");
 
 // }

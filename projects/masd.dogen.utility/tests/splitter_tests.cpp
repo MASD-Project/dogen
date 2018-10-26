@@ -27,7 +27,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("utility");
+const std::string test_module("masd.dogen.utility.tests");
 const std::string test_suite("splitter_tests");
 
 const std::string mixed_scopes("String has more than one");

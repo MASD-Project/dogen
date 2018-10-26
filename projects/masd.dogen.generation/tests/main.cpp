@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_MODULE generation_cpp_tests
+#define BOOST_TEST_MODULE masd.dogen.generation.tests
 #include <boost/test/included/unit_test.hpp>
 #include "masd.dogen.utility/test/fixture.hpp"
 

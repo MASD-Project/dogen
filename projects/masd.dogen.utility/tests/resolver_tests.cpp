@@ -32,7 +32,7 @@
 
 namespace {
 
-const std::string test_module("utility");
+const std::string test_module("masd.dogen.utility.tests");
 const std::string test_suite("resolver_tests");
 
 const std::string non_existent_file("non_existent_file.dia");

@@ -32,7 +32,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("templating");
+const std::string test_module("masd.dogen.templating.tests");
 const std::string test_suite("stitch_parser_tests");
 
 const std::string only_text_content_in_single_line("some text content");

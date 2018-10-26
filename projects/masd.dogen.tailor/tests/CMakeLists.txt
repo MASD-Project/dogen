@@ -17,72 +17,60 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "tailor")
-set(tests_name "${name}.tests")
-set(binary_name "masd.dogen.${tests_name}")
-set(tests_files "")
-file(GLOB_RECURSE tests_files RELATIVE
+set(name "masd.dogen.tailor")
+set(lib_target_name ${name}.lib)
+set(tests_binary_name ${name}.tests)
+set(tests_target_name ${name}.tests)
+
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-set(all_files "")
-file(GLOB_RECURSE all_files RELATIVE
-    "${CMAKE_CURRENT_SOURCE_DIR}/../src"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../src/*.cpp")
+set(test_files ${files})
+add_executable(${tests_target_name} ${test_files})
 
-set(executable_files "")
-set(ignore_file false)
-foreach(cpp_file ${all_files})
-    if("${cpp_file}" MATCHES "main.cpp")
-        set(ignore_file true)
-    endif()
+set_target_properties(${tests_target_name}
+    PROPERTIES OUTPUT_NAME ${tests_binary_name})
 
-    if(NOT ignore_file)
-        set(executable_files ${executable_files}
-            "${CMAKE_CURRENT_SOURCE_DIR}/../src/${cpp_file}")
-    endif()
-    set(ignore_file false)
-endforeach()
-
-add_executable(${tests_name} ${tests_files} ${executable_files})
-
-set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
-
-target_link_libraries(${tests_name}
-    utility
-    options
-    external
-    external.json
-    external.dia
-    generation.cpp
-    generation.csharp
+target_link_libraries(${tests_target_name}
+    ${lib_target_name}
+    masd.dogen.utility.lib
+    masd.dogen.options.lib
+    masd.dogen.external.lib
+    masd.dogen.external.json.lib
+    masd.dogen.external.dia.lib
+    masd.dogen.generation.cpp.lib
+    masd.dogen.generation.csharp.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
-set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
+set(command $<TARGET_FILE:${tests_binary_name}> ${boost_test_parameters})
 
-add_custom_target(run_${tests_name}
-    COMMENT "Running ${tests_name}" VERBATIM
+add_custom_target(run_${tests_target_name}
+    COMMENT "Running ${tests_target_name}" VERBATIM
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS ${tests_name})
+    DEPENDS ${tests_target_name})
 
-add_dependencies(run_all_tests run_${tests_name})
+add_dependencies(run_all_tests run_${tests_target_name})
 
 if(WITH_BENCHMARKS)
-    add_custom_target(benchmark_${tests_name}
-        COMMENT "Benchmarking testing ${tests_name}" VERBATIM
-        COMMAND ${benchmark_command} ${benchmark_repeats}
-        ${benchmark_directory}/${benchmark_prefix}${tests_name}.csv ${command}
+    set(benchmark_file
+        ${benchmark_directory}/${benchmark_prefix}${tests_target_name}.csv)
+    add_custom_target(benchmark_${tests_target_name}
+        COMMENT "Benchmarking testing ${tests_binary_name}" VERBATIM
+        COMMAND ${benchmark_command} ${benchmark_repeats} ${benchmark_file}
+        ${command}
         WORKING_DIRECTORY ${stage_bin_dir}
-        DEPENDS ${tests_name})
+        DEPENDS ${tests_target_name})
 
-    add_dependencies(benchmark_all benchmark_${tests_name})
+    add_dependencies(benchmark_all benchmark_${tests_target_name})
 endif()
 
-add_boost_tests(${name} ${tests_files})
+add_boost_tests(${tests_binary_name} ${test_files})
 
-install(TARGETS ${tests_name} RUNTIME DESTINATION bin COMPONENT tests)
+install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)

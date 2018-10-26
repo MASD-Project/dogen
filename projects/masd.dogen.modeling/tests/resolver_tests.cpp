@@ -37,7 +37,7 @@
 
 namespace {
 
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("resolver_tests");
 
 using masd::dogen::modeling::test::mock_endomodel_factory;

@@ -40,7 +40,7 @@ using masd::dogen::modeling::test::mock_endomodel_factory;
 const mock_endomodel_factory::flags flags;
 const mock_endomodel_factory factory(flags);
 
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("stereotypes_transform_tests");
 const std::string version_name("version");
 const std::string missing_identity("Identity must have at least");

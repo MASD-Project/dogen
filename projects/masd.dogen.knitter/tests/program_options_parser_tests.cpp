@@ -32,7 +32,7 @@ using namespace masd::dogen::utility::log;
 namespace {
 
 const std::string empty;
-const std::string test_module("knitter");
+const std::string test_module("masd.dogen.knitter.tests");
 const std::string test_suite("program_options_parser_tests");
 const std::string help_sanity_line("General options");
 const std::string missing_target("Mandatory parameter target is missing");

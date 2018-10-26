@@ -24,7 +24,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("options");
+const std::string test_module("masd.dogen.options.tests");
 const std::string test_suite("fake_tests");
 
 }

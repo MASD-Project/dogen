@@ -17,27 +17,31 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "generation.csharp")
-set(binary_name "masd.dogen.${name}")
+set(name "masd.dogen.generation.csharp")
+set(lib_binary_name ${name})
+set(lib_target_name ${name}.lib)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(${name} STATIC ${files})
-target_link_libraries(${name}
-    annotations
-    formatting
-    modeling
-    ${Boost_LIBRARIES})
-
-set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
-set_target_properties(${name}
+set(lib_files ${files})
+add_library(${lib_target_name} STATIC ${lib_files})
+set_target_properties(${lib_target_name} PROPERTIES
+    OUTPUT_NAME ${lib_binary_name})
+set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+target_link_libraries(${lib_target_name}
+    masd.dogen.annotations.lib
+    masd.dogen.formatting.lib
+    masd.dogen.modeling.lib
+    ${Boost_LIBRARIES})
+
 if (DOGEN_STITCHER_EXECUTABLE)
-    add_custom_target(stitch_${name}
-        COMMENT "Stitching ${name} model" VERBATIM
+    add_custom_target(stitch_${lib_binary_name}
+        COMMENT "Stitching ${lib_binary_name} model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_STITCHER_EXECUTABLE}
         --target ${CMAKE_CURRENT_SOURCE_DIR}/
@@ -45,4 +49,4 @@ if (DOGEN_STITCHER_EXECUTABLE)
     add_dependencies(stitch_all stitch_${name})
 endif()
 
-install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)

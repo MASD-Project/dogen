@@ -31,7 +31,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("templating");
+const std::string test_module("masd.dogen.templating.tests");
 const std::string test_suite("stitch_workflow_tests");
 
 const std::string empty_template("Template has no content");

@@ -35,7 +35,7 @@ set_target_properties(${tests_target_name}
 
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
-    utility
+    masd.dogen.utility.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
@@ -64,6 +64,6 @@ if(WITH_BENCHMARKS)
     add_dependencies(benchmark_all benchmark_${tests_target_name})
 endif()
 
-add_boost_tests(${tests_target_name} ${test_files})
+add_boost_tests(${tests_binary_name} ${test_files})
 
 install(TARGETS ${tests_target_name} RUNTIME DESTINATION bin COMPONENT tests)

@@ -30,7 +30,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("include_formatter_tests");
 const auto empty_includes(std::list<std::string>{});
 

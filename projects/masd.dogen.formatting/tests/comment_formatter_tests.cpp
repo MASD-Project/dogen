@@ -29,7 +29,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("comment_formatter_tests");
 
 const std::string c_style_empty(R"(/*

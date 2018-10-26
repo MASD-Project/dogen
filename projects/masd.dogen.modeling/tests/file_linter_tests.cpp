@@ -29,7 +29,7 @@
 namespace  {
 
 const std::string test_suite("file_linter_tests");
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string fl_tds_expected("file_linter/expected");
 const std::string fl_tds_actual_f1("file_linter/actual/file_1.txt");
 const std::string fl_tds_actual_f2("file_linter/actual/file_2.txt");

@@ -33,7 +33,7 @@
 
 namespace {
 
-const std::string test_module("utility");
+const std::string test_module("masd.dogen.utility.tests");
 const std::string test_suite("file_tests");
 
 const std::string expected_content(

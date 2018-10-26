@@ -43,7 +43,7 @@ using masd::dogen::utility::test::asserter;
 namespace  {
 
 const std::string empty;
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("name_tree_parser_tests");
 
 const auto cpp(masd::dogen::modeling::meta_model::languages::cpp);

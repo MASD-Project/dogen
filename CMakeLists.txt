@@ -364,7 +364,6 @@ find_package(Dogen REQUIRED)
 add_custom_target(run_all_tests)
 add_custom_target(rat)
 add_dependencies(rat run_all_tests)
-add_custom_target(run_windows_green_tests)
 
 add_custom_target(rebase)
 add_custom_target(diff)

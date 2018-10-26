@@ -30,7 +30,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("annotations");
+const std::string test_module("masd.dogen.annotations.tests");
 const std::string test_suite("type_templates_hydrator_tests");
 
 const std::string simple_name("a simple name");

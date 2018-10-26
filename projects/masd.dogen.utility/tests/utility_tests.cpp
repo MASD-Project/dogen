@@ -86,7 +86,7 @@ public:
         exception::exception(message) { }
 };
 
-const std::string test_suite("utility_tests");
+const std::string test_suite("masd.dogen.utility.tests");
 const std::string test_module("utility");
 const std::string prefix("log/utility/utility_tests/");
 

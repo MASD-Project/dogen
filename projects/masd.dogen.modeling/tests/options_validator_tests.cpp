@@ -32,7 +32,7 @@ namespace {
 
 const std::string empty;
 const boost::filesystem::path empty_dir;
-const std::string test_module("options");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("options_validator_tests");
 
 using namespace boost::filesystem;

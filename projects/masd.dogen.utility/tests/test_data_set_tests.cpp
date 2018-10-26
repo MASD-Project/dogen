@@ -29,7 +29,7 @@
 
 namespace {
 
-const std::string test_module("utility");
+const std::string test_module("masd.dogen.utility.tests");
 const std::string test_suite("test_data_set_tests");
 
 const std::string dia_extension(".dia");

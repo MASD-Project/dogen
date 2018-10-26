@@ -34,10 +34,8 @@ macro(add_boost_tests test_module)
             string(REPLACE ")" "" test_name ${test_name})
 
             string(REPLACE "_tests.cpp" "_tests" test_suite ${cpp_file})
-            # string(REPLACE "tests/" "" test_suite ${test_suite})
 
-            set(tests_cmd
-                ${stage_bin_dir}/masd.dogen.${test_module}.tests)
+            set(tests_cmd ${stage_bin_dir}/${test_module})
             add_test(${test_module}/${test_suite}/${test_name}
                 ${CMAKE_COMMAND} -E chdir ${stage_bin_dir}
                 ${tests_cmd} --run_test=${test_suite}/${test_name})

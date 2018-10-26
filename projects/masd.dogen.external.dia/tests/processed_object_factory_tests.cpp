@@ -35,7 +35,7 @@ using masd::dogen::utility::test::asserter;
 
 namespace  {
 
-const std::string test_module("external.dia");
+const std::string test_module("masd.external.dia.tests");
 const std::string test_suite("processed_object_factory_tests");
 const std::string model_name("test");
 const std::string missing_name("Could not find name");

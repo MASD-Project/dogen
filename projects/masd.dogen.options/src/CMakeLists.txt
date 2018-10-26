@@ -17,16 +17,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "options")
-set(binary_name "dogen.${name}")
+set(name "masd.dogen.options")
+set(lib_binary_name ${name})
+set(lib_target_name ${name}.lib)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(${name} STATIC ${files})
-set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
-set_target_properties(${name}
+set(lib_files ${files})
+add_library(${lib_target_name} STATIC ${lib_files})
+set_target_properties(${lib_target_name} PROPERTIES
+    OUTPUT_NAME ${lib_binary_name})
+set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
-install(TARGETS ${name} ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)

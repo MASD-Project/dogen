@@ -24,7 +24,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("generation.cpp");
+const std::string test_module("masd.dogen.generation.tests");
 const std::string test_suite("fake_tests");
 
 }

@@ -36,7 +36,7 @@
 
 namespace {
 
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("attributes_transform_tests");
 
 const std::string object_template_not_found("Object template not found");

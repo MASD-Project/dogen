@@ -66,7 +66,7 @@
 
 // const std::string empty;
 // const std::string empty_module_path;
-// const std::string test_module("yarn");
+// const std::string test_module("masd.dogen.modeling.tests");
 // const std::string test_suite("code_generation_tests");
 
 // const std::string expected("/expected");

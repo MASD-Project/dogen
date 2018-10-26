@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("csharp_boilerplate_formatter_tests");
 const std::string empty;
 

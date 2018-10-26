@@ -38,7 +38,7 @@ using masd::dogen::modeling::helpers::name_factory;
 namespace  {
 
 const std::string empty;
-const std::string test_module("yarn");
+const std::string test_module("masd.dogen.modeling.tests");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
 const auto cpp(masd::dogen::modeling::meta_model::languages::cpp);

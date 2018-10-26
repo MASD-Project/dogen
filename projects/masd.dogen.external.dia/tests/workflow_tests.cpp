@@ -48,7 +48,7 @@ using masd::dogen::modeling::test::mock_context_factory;
 
 namespace  {
 
-const std::string test_module("external.dia");
+const std::string test_module("masd.external.dia.tests");
 const std::string test_suite("workflow_tests");
 
 bool test_workflow(

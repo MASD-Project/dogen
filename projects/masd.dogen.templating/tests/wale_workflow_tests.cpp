@@ -25,7 +25,7 @@
 
 namespace {
 
-const std::string test_module("templating");
+const std::string test_module("masd.dogen.templating.tests");
 const std::string test_suite("wale_workflow_tests");
 
 }

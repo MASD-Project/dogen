@@ -28,7 +28,7 @@
 
 namespace {
 
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("header_guard_formatter_tests");
 const std::string empty;
 const std::string empty_guard;

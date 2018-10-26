@@ -24,7 +24,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("quilt.csharp");
+const std::string test_module("masd.dogen.quilt.csharp.tests");
 const std::string test_suite("fake_tests");
 
 }

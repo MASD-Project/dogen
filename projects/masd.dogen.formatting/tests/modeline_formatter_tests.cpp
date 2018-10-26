@@ -36,7 +36,7 @@ using masd::dogen::formatting::modeline_locations;
 namespace {
 
 const std::string empty;
-const std::string test_module("formatting");
+const std::string test_module("masd.dogen.formatting.tests");
 const std::string test_suite("modeline_formatter_tests");
 
 const std::string unsupported_editor_message("Modeline is not supported");

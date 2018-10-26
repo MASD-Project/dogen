@@ -43,7 +43,7 @@ using masd::dogen::utility::test_data::xml_reader;
 
 namespace {
 
-const std::string test_module("utility");
+const std::string test_module("masd.dogen.utility.tests");
 const std::string test_suite("xml_tests");
 
 /*

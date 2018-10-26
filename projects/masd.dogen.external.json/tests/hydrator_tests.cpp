@@ -36,7 +36,7 @@
 
 namespace {
 
-const std::string test_module("external.json");
+const std::string test_module("masd.dogen.external.json.tests");
 const std::string test_suite("hydrator_tests");
 
 const std::string documentation("a_doc");
