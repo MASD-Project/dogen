@@ -18,10 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.cli/types/command_line_parser.hpp"
+#ifndef MASD_DOGEN_CLI_TYPES_COMMAND_HPP
+#define MASD_DOGEN_CLI_TYPES_COMMAND_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::cli {
 
-command_line_parser::~command_line_parser() noexcept { }
+/**
+ * @brief Available commands in the command line application.
+ */
+enum class command : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    generate = 1,
+    convert = 2,
+    weave = 3
+};
 
 }
+
+#endif

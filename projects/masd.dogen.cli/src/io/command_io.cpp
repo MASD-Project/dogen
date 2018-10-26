@@ -18,10 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.cli/types/command_line_parser.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "masd.dogen.cli/io/command_io.hpp"
 
 namespace masd::dogen::cli {
 
-command_line_parser::~command_line_parser() noexcept { }
+std::ostream& operator<<(std::ostream& s, const command& v) {
+    s << "{ " << "\"__type__\": " << "\"command\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case command::invalid:
+        attr = "\"invalid\"";
+        break;
+    case command::generate:
+        attr = "\"generate\"";
+        break;
+    case command::convert:
+        attr = "\"convert\"";
+        break;
+    case command::weave:
+        attr = "\"weave\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for command");
+    }
+    s << attr << " }";
+    return s;
+}
 
 }

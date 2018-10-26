@@ -25,4 +25,6 @@
 #pragma once
 #endif
 
+#include "masd.dogen.cli/io/command_io.hpp"
+
 #endif

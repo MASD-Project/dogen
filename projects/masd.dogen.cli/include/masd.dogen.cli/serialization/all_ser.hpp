@@ -25,4 +25,6 @@
 #pragma once
 #endif
 
+#include "masd.dogen.cli/serialization/command_ser.hpp"
+
 #endif

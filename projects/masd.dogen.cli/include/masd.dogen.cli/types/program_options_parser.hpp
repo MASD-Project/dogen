@@ -25,29 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/program_options.hpp>
 #include "masd.dogen.cli/types/command_line_parser.hpp"
 
 namespace masd::dogen::cli {
 
-class program_options_parser final : public masd::dogen::cli::command_line_parser {
+class program_options_parser final : public command_line_parser {
 public:
-    program_options_parser() = default;
-    program_options_parser(const program_options_parser&) = default;
-    program_options_parser(program_options_parser&&) = default;
-    program_options_parser& operator=(const program_options_parser&) = default;
-
-    virtual ~program_options_parser() noexcept { }
-
-public:
-    bool operator==(const program_options_parser& rhs) const;
-    bool operator!=(const program_options_parser& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    bool equals(const masd::dogen::cli::command_line_parser& other) const override;
-
+    boost::optional<modeling::transforms::options>
+    parse(std::vector<std::string> arguments, std::ostream& out,
+        std::ostream& err) const override;
 };
 
 }

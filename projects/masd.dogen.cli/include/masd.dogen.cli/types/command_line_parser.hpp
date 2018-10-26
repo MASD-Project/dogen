@@ -25,34 +25,34 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <vector>
+#include <string>
+#include <boost/optional.hpp>
+#include "masd.dogen.modeling/types/transforms/options.hpp"
 
 namespace masd::dogen::cli {
 
+/**
+ * Interface for the parsing of command line arguments.
+ */
 class command_line_parser {
 public:
-    command_line_parser() = default;
-    command_line_parser(const command_line_parser&) = default;
-    command_line_parser(command_line_parser&&) = default;
-    command_line_parser& operator=(const command_line_parser&) = default;
-
+    command_line_parser() = delete;
+    command_line_parser(const command_line_parser&) = delete;
+    command_line_parser(command_line_parser&&) = delete;
+    command_line_parser& operator=(const command_line_parser&) = delete;
     virtual ~command_line_parser() noexcept = 0;
 
-protected:
-    bool compare(const command_line_parser& rhs) const;
 public:
-    virtual bool equals(const command_line_parser& other) const = 0;
-
-protected:
-    void swap(command_line_parser& other) noexcept;
-
+    /**
+     * Transforms the supplied command line arguments into the
+     * modeling options.
+     */
+    virtual boost::optional<modeling::transforms::options>
+    parse(std::vector<std::string> arguments, std::ostream& out,
+        std::ostream& err) const = 0;
 };
-
-inline command_line_parser::~command_line_parser() noexcept { }
-
-inline bool operator==(const command_line_parser& lhs, const command_line_parser& rhs) {
-    return lhs.equals(rhs);
-}
 
 }
 

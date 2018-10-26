@@ -26,6 +26,7 @@
 #endif
 
 #include "masd.dogen.cli/types/cli.hpp"
+#include "masd.dogen.cli/types/command.hpp"
 #include "masd.dogen.cli/types/orchestrator.hpp"
 #include "masd.dogen.cli/types/injector_factory.hpp"
 #include "masd.dogen.cli/types/parser_exception.hpp"

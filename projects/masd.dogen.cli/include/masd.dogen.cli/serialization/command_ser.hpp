@@ -18,10 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.cli/types/command_line_parser.hpp"
+#ifndef MASD_DOGEN_CLI_SERIALIZATION_COMMAND_SER_HPP
+#define MASD_DOGEN_CLI_SERIALIZATION_COMMAND_SER_HPP
 
-namespace masd::dogen::cli {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-command_line_parser::~command_line_parser() noexcept { }
+#include <boost/serialization/nvp.hpp>
+#include "masd.dogen.cli/types/command.hpp"
 
+template<class Archive>
+void serialize(Archive& ar, masd::dogen::cli::command& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("command", v);
 }
+
+#endif

@@ -18,10 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.cli/types/command_line_parser.hpp"
+#ifndef MASD_DOGEN_CLI_TYPES_COMMAND_FWD_HPP
+#define MASD_DOGEN_CLI_TYPES_COMMAND_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::cli {
 
-command_line_parser::~command_line_parser() noexcept { }
+enum class command : unsigned int;
 
 }
+
+#endif
