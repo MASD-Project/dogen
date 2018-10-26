@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-25 Thu 17:18]
+#+CAPTION: Clock summary at [2018-10-26 Fri 11:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *79:37* |       |       |   0.0 |
+| *Total time*                                                                | *84:43* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 79:37   |       |       |   0.0 |
-| Active                                                                      |         | 79:37 |       |   0.0 |
+| Stories                                                                     | 84:43   |       |       |   0.0 |
+| Active                                                                      |         | 84:43 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  2:52 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  4:21 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
 | Add support for kcov                                                        |         |       |  3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       |  0:09 |   0.0 |
@@ -51,8 +51,8 @@
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
 | Update dogen namespaces to match the new specification                      |         |       | 12:28 |   0.0 |
 | Add support for LGTM                                                        |         |       |  0:18 |   0.0 |
-| Read up on framework and API design                                         |         |       |  5:30 |   0.0 |
-| Create a single binary for all of dogen                                     |         |       |  3:02 |   0.0 |
+| Read up on framework and API design                                         |         |       |  6:10 |   0.0 |
+| Create a single binary for all of dogen                                     |         |       |  5:59 |   0.0 |
 | Implement the new dogen product API                                         |         |       |  0:32 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -134,6 +134,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-26 Fri 10:17]--[2018-10-26 Fri 11:46] =>  1:29
     CLOCK: [2018-10-25 Thu 15:15]--[2018-10-25 Thu 15:54] =>  0:39
     CLOCK: [2018-10-25 Thu 12:50]--[2018-10-25 Thu 13:25] =>  0:35
     CLOCK: [2018-10-25 Thu 11:48]--[2018-10-25 Thu 12:03] =>  0:15
@@ -863,6 +864,7 @@ Links:
 
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
+     CLOCK: [2018-10-26 Fri 08:09]--[2018-10-26 Fri 08:49] =>  0:40
      CLOCK: [2018-10-25 Thu 09:25]--[2018-10-25 Thu 10:21] =>  0:56
      CLOCK: [2018-10-24 Wed 08:24]--[2018-10-24 Wed 09:03] =>  0:39
      CLOCK: [2018-10-23 Tue 13:07]--[2018-10-23 Tue 13:23] =>  0:16
@@ -903,6 +905,9 @@ names.
 
 *** STARTED Create a single binary for all of dogen                   :story:
     :LOGBOOK:
+    CLOCK: [2018-10-26 Fri 08:50]--[2018-10-26 Fri 10:15] =>  1:25
+    CLOCK: [2018-10-25 Thu 20:10]--[2018-10-25 Thu 21:08] =>  0:58
+    CLOCK: [2018-10-25 Thu 17:19]--[2018-10-25 Thu 17:53] =>  0:34
     CLOCK: [2018-10-25 Thu 16:51]--[2018-10-25 Thu 17:18] =>  0:27
     CLOCK: [2018-10-25 Thu 16:13]--[2018-10-25 Thu 16:50] =>  0:37
     CLOCK: [2018-10-19 Fri 14:41]--[2018-10-19 Fri 16:39] =>  1:58
