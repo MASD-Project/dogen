@@ -5851,6 +5851,25 @@ become very readable.
 
 ** Features that would be really nice to have one day
 
+*** Consider adding c++ attributes                                    :story:
+
+It may be a good idea to have attributes for generated and hand
+crafted code, e.g.:
+
+: [[masd::generated]]
+: [[masd::handcrafted]]
+
+This would allow us to build some clang tool that determines if all
+generated code is used from handcrafted code or not. Presumably
+something similar can be done for C# and Java.
+
+We need to compile with some kind of ignore flag (=-Wattributes=).
+
+Links:
+
+- [[https://en.cppreference.com/w/cpp/language/attributes][Attribute specifier sequence]]
+- [[https://www.bfilipek.com/2017/07/cpp17-in-details-attributes.html][C++17 in details: Attributes]]
+
 *** Consider adding a swagger frontend                                :story:
 
 Once we have HTTP API support, we can consider having a frontend for
@@ -6669,12 +6688,15 @@ styles. This is c++ specific
   =std::function=. Something like a "dispatchable" class. Users can
   set functions and then call =dispatch(x)= which will execute the
   method at =to_index(x)=. No use case for it yet though.
+- stroustrup proposes using operators with enums. However, its not
+  clear there are good operators for all of the use cases above.
 
 Links:
 
 - [[https://www.ibm.com/developerworks/rational/library/scoped-enums/index.html][C++0x, scoped enums]]
 - [[https://stackoverflow.com/questions/36937912/specializing-boostlexical-cast-for-enums-in-boostproperty-maps][specializing boost::lexical_cast for enums in boost::property_maps]]
 - [[https://stackoverflow.com/questions/28828957/enum-to-string-in-modern-c11-c14-c17-and-future-c20][enum to string in modern C++11 / C++14 / C++17 and future C++20]]
+- [[https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods][Can a C++ enum class have methods?]]
 
 *** Consider adding support for bitsery serialisation                 :story:
 
