@@ -10507,11 +10507,12 @@ Patches:
 :        return;
 :      }
 
-*** Add support for Address Sanitizer (ASan)                          :story:
+*** Add support for Thread and Address Sanitizer (asan, tsan)         :story:
 
 This seems like another interest dynamic analysis tool:
 
-[[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
+- [[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
+- [[https://clang.llvm.org/docs/ThreadSanitizer.html][Thread Sanitizer]]
 
 *** Add support for CPPCheck                                         :story:
 
