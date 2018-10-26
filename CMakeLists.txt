@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
 # Log CMake version. Useful for debugging CMake problems.
 message(STATUS "CMake Version: ${CMAKE_VERSION}")
@@ -40,7 +40,7 @@ else()
     message(STATUS "CCache NOT found.")
 endif()
 
-project(dogen)
+project(DOGEN LANGUAGES CXX VERSION 1.0.10)
 
 #
 # add our own modules
@@ -251,14 +251,6 @@ if(MSVC)
     endforeach()
 endif()
 
-# version info
-set(DOGEN_MAJOR_VERSION 1)
-set(DOGEN_MINOR_VERSION 0)
-set(DOGEN_PATCH_VERSION 10)
-set(DOGEN_VERSION "${DOGEN_MAJOR_VERSION}")
-set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_MINOR_VERSION}")
-set(DOGEN_VERSION "${DOGEN_VERSION}.${DOGEN_PATCH_VERSION}")
-
 set(WITH_BUILD_INFO ON)
 set(DOGEN_BUILD_INFO "")
 
@@ -292,7 +284,6 @@ endif()
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Building WITH DEBUG symbols...")
-    set(DOGEN_VERSION "${DOGEN_VERSION}d")
 else()
     message(STATUS "Building WITHOUT DEBUG symbols...")
 endif()
@@ -324,7 +315,7 @@ if (WITH_DOXYGEN)
 
         install(
             DIRECTORY ${stage_doxygen_dir}/html/
-            DESTINATION share/doc/${DOGEN_VERSION}/
+            DESTINATION share/doc/
             COMPONENT documentation
             )
     else()

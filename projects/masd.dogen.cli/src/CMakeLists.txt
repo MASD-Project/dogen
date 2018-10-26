@@ -32,6 +32,8 @@ list(FILTER lib_files EXCLUDE REGEX "main.cpp")
 add_library(${lib_target_name} STATIC ${lib_files})
 set_target_properties(${lib_target_name} PROPERTIES
     OUTPUT_NAME ${lib_binary_name})
+set_target_properties(${lib_target_name}
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 target_link_libraries(${lib_target_name}
     masd.dogen.lib

@@ -21,7 +21,7 @@
 #include <iostream>
 #include <boost/throw_exception.hpp>
 #include <boost/exception/diagnostic_information.hpp>
-#include "dogen/version.hpp"
+#include "masd.dogen/version.hpp"
 #include "masd.dogen.utility/log/life_cycle_manager.hpp"
 #include "masd.dogen.utility/log/severity_level.hpp"
 #include "masd.dogen.utility/log/logger.hpp"

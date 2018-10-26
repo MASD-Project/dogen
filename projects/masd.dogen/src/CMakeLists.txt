@@ -30,6 +30,8 @@ set(lib_files ${files})
 add_library(${lib_target_name} STATIC ${lib_files})
 set_target_properties(${lib_target_name} PROPERTIES
     OUTPUT_NAME ${lib_binary_name})
+set_target_properties(${lib_target_name}
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib

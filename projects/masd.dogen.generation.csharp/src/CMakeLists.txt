@@ -33,7 +33,7 @@ target_link_libraries(${name}
 
 set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(${name}
-    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
+    PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 if (DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(stitch_${name}

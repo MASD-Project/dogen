@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-26 Fri 16:19]
+#+CAPTION: Clock summary at [2018-10-26 Fri 17:22]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *87:40* |       |       |   0.0 |
+| *Total time*                                                                | *88:41* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 87:40   |       |       |   0.0 |
-| Active                                                                      |         | 87:40 |       |   0.0 |
+| Stories                                                                     | 88:41   |       |       |   0.0 |
+| Active                                                                      |         | 88:41 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  4:45 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -51,6 +51,7 @@
 | Add support for nested namespaces                                           |         |       |  6:24 |   0.0 |
 | Update dogen namespaces to match the new specification                      |         |       | 12:28 |   0.0 |
 | Add support for LGTM                                                        |         |       |  0:18 |   0.0 |
+| Use cmake version properly                                                  |         |       |  1:01 |   0.0 |
 | Read up on framework and API design                                         |         |       |  6:10 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  5:59 |   0.0 |
 | Implement the new dogen product API                                         |         |       |  3:05 |   0.0 |
@@ -862,6 +863,15 @@ Links:
 - https://github.com/utilForever/Hearthstonepp
 - https://lgtm.com/
 - https://lgtm.com/projects/g/utilForever/Hearthstonepp/alerts/?mode=list
+
+*** COMPLETED Use cmake version properly                              :story:
+    CLOSED: [2018-10-26 Fri 17:21]
+    :LOGBOOK:
+    CLOCK: [2018-10-26 Fri 16:20]--[2018-10-26 Fri 17:21] =>  1:01
+    :END:
+
+We seemed to have hacked the versioning system in CMake. Implement it
+according to best practices.
 
 *** STARTED Read up on framework and API design                       :story:
      :LOGBOOK:
