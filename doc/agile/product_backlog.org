@@ -228,22 +228,12 @@ We seem to have a traffic light diff on =registrar_ser.cpp=:
 
 This is probably a lack of a stable sort in model dependencies.
 
-*** Fix cmake emacs variable for tab width                            :story:
-
-We need to replace uses of =tab-width= in cmake files with
-=cmake-tab-width=, as explained here:
-
-[[http://stackoverflow.com/questions/25751408/controlling-the-indent-offset-for-cmake-in-emacs][Controlling the indent/offset for CMake in emacs]]
-
-We need to do this for both code generated and manually generated
-files.
-
 *** Using =std::set<std::string>= causes compilation errors           :story:
 
-In theory sets of strings (and any other type that has =operator<=
-should work out of the box, even though we do not support sets of
-dogen types. However, when we tried to use a set of strings we got a
-whole load of compilation errors in serialisation, etc.
+ In theory sets of strings (and any other type that has =operator<=
+ should work out of the box, even though we do not support sets of
+ dogen types. However, when we tried to use a set of strings we got a
+ whole load of compilation errors in serialisation, etc.
 
 *** Using =std::unordered_map<my_enum, ...>= fails equality           :story:
 
@@ -9628,12 +9618,6 @@ symmetric for both use cases.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
-*** Fix =cp= error on cmake with local third-party packages           :story:
-
-We are getting strange errors in cmake:
-
-: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
-
 *** Fix issues with bintray windows uploads                           :story:
 
 At present we are doing a lot of hacks for windows:
@@ -9992,64 +9976,6 @@ Or is the best practice that the user should choose how to link
 against boost in the same way it chooses to generate static or dynamic
 libraries internally for Dogen?
 
-*** Assorted improvements to CMake files                               :epic:
-
-It seems we are not using proper CMake idioms to pick up compiler
-features, as explained here:
-
-- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
-- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
-- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
-- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
-- [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
-- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
-  platform C++ CMake project using modern CMake syntax and transitive
-  dependencies.
-
-We need to implement this using proper CMake idioms.
-
-Notes:
-
-- Add version and language to project.
-- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to
-  repeat the same flags; this could be avoided by passing in a
-  variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is the modern method for setting general
-  compile flags in CMake?]]
-- define qualified aliases for all libraries, including nested
-  aliasing for =dogen::test_models=. Ensure all linking is done
-  against qualified names.
-- use target include directories for each target and only add the
-  required include directories to each target. Mark them with the
-  appropriate visibility, including using =interface=. We should then
-  remove all duplication of libraries in the specs.
-- try replacing calls to =-std=c++-14= with compiler feature
-  detection. We need to create a list of all C++-14 features we're
-  using.
-- remove all of the debug/release compilation options and start using
-  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type
-  support to our builds, but as a result, the binaries moved from
-  =stage/bin= to =bin=. There is no obvious explanation for this.
-- remove =STATIC= on all libraries and let users specify which linkage
-  to use. We already have a story to capture this work.
-- remove the stage folder and use the traditional CMake
-  directories. This will also fix the problems we have with
-  BUILD_TYPE.
-- consider buying the CMake book: https://crascit.com/professional-cmake/.
-
-Merged stories:
-
-*Usage of external module path in cmakelists*                       :story:
-
-It seems like we are not populating the target names
-properly. Originally the target name for test model all built-ins was:
-
-: dogen_all_builtins
-
-When we moved the test models into =test_models= the target name did
-not change. It should have changed to:
-
-: dogen_test_models_all_builtins
-
 *** Check that custom targets in CMake have correct dependencies      :story:
 
 At present we have a number of custom targets, which create a new Make
@@ -10073,29 +9999,6 @@ function already has documented parameters. We should consider
 enabling warnings for all undocumented code. We also need to figure
 out how to mark code as ignored (for example serialisation helpers,
 etc won't require documentation).
-
-*** Support for cmake components and groups                           :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need to integrate the generated models
-with my existing packaging code.
-#+end_quote
-
-We recently added support for creating multiple packages from a single
-source tree. We need generated models to have a new top-level cmake file:
-
-: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
-: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
-:
-: install(
-:     DIRECTORY include/
-:     DESTINATION include
-:     COMPONENT headers
-:     FILES_MATCHING PATTERN "*.hpp")
-
-And the =src= cmake file:
-
-: install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
 
 *** Self-contained build files                                        :story:
 
@@ -10431,13 +10334,6 @@ script for the first video of the series is as follows:
 - generate the hello world model.
 - create a hello world main with make files and compile it.
 - give a quick overview of the available facilities.
-
-*** Add a CMake module for git                                        :story:
-
-We are finding git manually at the moment, which means we are probably
-not doing it right. It appears there is a CMake script for it:
-
-- [[%20http://gnuradio.org/redmine/projects/gnuradio/repository/revisions/accb9f2fe8fd8f6a1e114adac5b15304b0e0012d/entry/cmake/Modules/FindGit.cmake][FindGIT.cmake]]
 
 *** Consider adding support for clang-tidy                            :story:
 
@@ -13190,6 +13086,12 @@ They seem to have added support for conan, appveyor, etc in an
 extensible way. We need to figure out if anything can be nicked for
 our infrastructure. This is also a useful template for when we
 code-generate products.
+
+Notes:
+
+- nice idea to create text files with all of the dependencies for the
+  different OSs (packages and repositories).
+
 
 *** Read A Concept Design for the STL                                 :story:
 
