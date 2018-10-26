@@ -149,13 +149,14 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         CMAKE_CXX_SIMULATE_ID MATCHES "MSVC")
+
     if(${MSVC_VERSION} GREATER 1399) # 1400+ => VC2005+
         # cannot use incremental rebuild
-        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG ${CMAKE_C_FLAGS_DEBUG})
-        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE ${CMAKE_C_FLAGS_RELEASE})
-        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
+        string(REPLACE "/Gm" "" CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
+        string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
         string(REPLACE "/Gm" "" CMAKE_CXX_FLAGS_RELEASE
-            ${CMAKE_CXX_FLAGS_RELEASE})
+            "${CMAKE_CXX_FLAGS_RELEASE}")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
 
         # workaround for C1128: number of sections exceeded object
