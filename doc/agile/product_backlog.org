@@ -7381,6 +7381,11 @@ We should probably also add GCC support.
 
 - [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
 
+Links:
+
+- [[https://stackoverflow.com/questions/16982144/cmake-and-generateexportheader][cmake and GenerateExportHeader]]: maybe we should just use the CMake
+  support.
+
 *** Add export macros support for Linux                               :story:
 
 #+begin_quote

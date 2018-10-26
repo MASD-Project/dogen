@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-26 Fri 21:36]
+#+CAPTION: Clock summary at [2018-10-26 Fri 22:20]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *91:04* |       |       |   0.0 |
+| *Total time*                                                                | *91:38* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 91:04   |       |       |   0.0 |
-| Active                                                                      |         | 91:04 |       |   0.0 |
+| Stories                                                                     | 91:38   |       |       |   0.0 |
+| Active                                                                      |         | 91:38 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  4:45 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -55,7 +55,7 @@
 | Read up on framework and API design                                         |         |       |  6:10 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  5:59 |   0.0 |
 | Implement the new dogen product API                                         |         |       |  3:05 |   0.0 |
-| Update cmake files to reflect product/project naming                        |         |       |  2:23 |   0.0 |
+| Update cmake files to reflect product/project naming                        |         |       |  2:57 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1024,6 +1024,8 @@ Notes:
 
 *** STARTED Update cmake files to reflect product/project naming      :story:
     :LOGBOOK:
+    CLOCK: [2018-10-26 Fri 22:11]--[2018-10-26 Fri 22:20] =>  0:09
+    CLOCK: [2018-10-26 Fri 21:45]--[2018-10-26 Fri 22:10] =>  0:25
     CLOCK: [2018-10-26 Fri 19:21]--[2018-10-26 Fri 20:26] =>  1:05
     CLOCK: [2018-10-26 Fri 17:22]--[2018-10-26 Fri 18:40] =>  1:18
     :END:
