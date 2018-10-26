@@ -964,6 +964,7 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 
 *** STARTED Implement the new dogen product API                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-26 Fri 14:09]
     CLOCK: [2018-10-26 Fri 12:35]--[2018-10-26 Fri 13:25] =>  0:50
     CLOCK: [2018-10-25 Thu 13:26]--[2018-10-25 Thu 13:58] =>  0:32
     :END:

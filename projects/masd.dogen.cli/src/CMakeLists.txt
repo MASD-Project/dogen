@@ -1,4 +1,4 @@
-# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -17,28 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "cli")
-set(binary_name "masd.dogen.${name}")
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(${name} ${files})
-set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
+add_library(masd_dogen_cli STATIC ${files})
+set_target_properties(masd_dogen_cli PROPERTIES
+    OUTPUT_NAME masd_dogen_cli)
 
-target_link_libraries(${name}
-    utility
-    options
-    dia
-    formatting
-    external
-    external.json
-    external.dia
-    modeling
-    generation.cpp
-    generation.csharp
-    ${LIBXML2_LIBRARIES}
-    ${Boost_LIBRARIES})
-
-install(TARGETS ${name} RUNTIME DESTINATION bin COMPONENT applications)
+install(TARGETS masd_dogen_cli ARCHIVE DESTINATION lib COMPONENT libraries)
