@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -17,13 +17,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+set(name "masd.dogen")
+set(lib_binary_name ${name})
+set(lib_target_name ${name}.lib)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_library(masd_dogen STATIC ${files})
-set_target_properties(masd_dogen PROPERTIES
-    OUTPUT_NAME masd_dogen)
+set(lib_files ${files})
+add_library(${lib_target_name} STATIC ${lib_files})
+set_target_properties(${lib_target_name} PROPERTIES
+    OUTPUT_NAME ${lib_binary_name})
 
-install(TARGETS masd_dogen ARCHIVE DESTINATION lib COMPONENT libraries)
+install(TARGETS ${lib_target_name}
+    ARCHIVE DESTINATION lib
+    COMPONENT libraries)

@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-26 Fri 14:07]
+#+CAPTION: Clock summary at [2018-10-26 Fri 15:45]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *85:33* |       |       |   0.0 |
+| *Total time*                                                                | *87:08* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 85:33   |       |       |   0.0 |
-| Active                                                                      |         | 85:33 |       |   0.0 |
+| Stories                                                                     | 87:08   |       |       |   0.0 |
+| Active                                                                      |         | 87:08 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  4:21 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -53,7 +53,7 @@
 | Add support for LGTM                                                        |         |       |  0:18 |   0.0 |
 | Read up on framework and API design                                         |         |       |  6:10 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  5:59 |   0.0 |
-| Implement the new dogen product API                                         |         |       |  1:22 |   0.0 |
+| Implement the new dogen product API                                         |         |       |  2:57 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -964,13 +964,51 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 
 *** STARTED Implement the new dogen product API                       :story:
     :LOGBOOK:
-    CLOCK: [2018-10-26 Fri 14:09]
+    CLOCK: [2018-10-26 Fri 14:21]--[2018-10-26 Fri 15:45] =>  1:24
+    CLOCK: [2018-10-26 Fri 14:09]--[2018-10-26 Fri 14:20] =>  0:11
     CLOCK: [2018-10-26 Fri 12:35]--[2018-10-26 Fri 13:25] =>  0:50
     CLOCK: [2018-10-25 Thu 13:26]--[2018-10-25 Thu 13:58] =>  0:32
     :END:
 
 Now we've designed a clean top-level API for the product, we need to
 code-generate it and implement it in terms of the existing code.
+
+Notes:
+
+- given the new ideas around creating a lib for all binaries - so we do
+  not have to have huge amounts of hackery when testing some aspects
+  of an executable - we require a new convention for naming the cmake
+  targets. There are some constraints:
+  - we cannot have dots in the target name because some build systems
+    do not support them (=make=, it seems). Strangely enough we do
+    seem to have targets with dots at present:
+
+: set(name "annotations")
+: set(tests_name "${name}.tests")
+: add_executable(${tests_name} ${files})
+
+    Maybe this works because we do not reference this target? OK this
+    was tested and no problems were spotted. We need to send this
+    change to the build farm and see if anything breaks across the
+    platforms.
+
+  - we need to distinguish between the library and the executable for
+    executables. For example, we have =masd.dogen.cli=; whilst cmake
+    correctly names the binaries =libmasd.dogen.cli= and
+    =masd.dogen.cli=, the targets themselves have the same name
+    (=masd.dogen.cli=).
+  - at present we are using the simple name for a model as the cmake
+    target name; this means that we cannot have two models with the
+    same simple name but different external/model modules. To be fair,
+    this seems like a really unlikely scenario. By sheer luck , we do
+    not have any problems for the product API model because the
+    product name is the model name (e.g. =masd.dogen= becomes
+    =dogen=).
+- one possible solution is to say that on the exceptional case of
+  binaries, we need to use the postfix =_lib= and =_exe= for the
+  targets, e.g. =cli_lib= and =cli_exe=. For all other cases we can
+  maintain the existing rule.
+
 
 *** Great meta-data rename                                            :story:
 

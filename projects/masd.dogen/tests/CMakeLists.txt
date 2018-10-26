@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "masd.dogen.cli")
+set(name "masd.dogen")
 set(lib_target_name ${name}.lib)
 set(tests_binary_name ${name}.tests)
 set(tests_target_name ${name}.tests)
@@ -36,18 +36,8 @@ set_target_properties(${tests_target_name}
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
     utility
-    options
-    dia
-    formatting
-    external
-    external.json
-    external.dia
-    modeling
-    generation.cpp
-    generation.csharp
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${PQXX_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT})
 
