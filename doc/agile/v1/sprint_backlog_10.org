@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-26 Fri 11:46]
+#+CAPTION: Clock summary at [2018-10-26 Fri 14:07]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *84:43* |       |       |   0.0 |
+| *Total time*                                                                | *85:33* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 84:43   |       |       |   0.0 |
-| Active                                                                      |         | 84:43 |       |   0.0 |
+| Stories                                                                     | 85:33   |       |       |   0.0 |
+| Active                                                                      |         | 85:33 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  4:21 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -53,7 +53,7 @@
 | Add support for LGTM                                                        |         |       |  0:18 |   0.0 |
 | Read up on framework and API design                                         |         |       |  6:10 |   0.0 |
 | Create a single binary for all of dogen                                     |         |       |  5:59 |   0.0 |
-| Implement the new dogen product API                                         |         |       |  0:32 |   0.0 |
+| Implement the new dogen product API                                         |         |       |  1:22 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -964,6 +964,7 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 
 *** STARTED Implement the new dogen product API                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-26 Fri 12:35]--[2018-10-26 Fri 13:25] =>  0:50
     CLOCK: [2018-10-25 Thu 13:26]--[2018-10-25 Thu 13:58] =>  0:32
     :END:
 

@@ -204,6 +204,7 @@ include_directories(
     ${stage_inc_dir}/
 
     # real code
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.cli/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
@@ -226,7 +227,7 @@ include_directories(
 #
 # add all other projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
@@ -238,6 +239,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.options)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.modeling)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.templating)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.generation)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.knitter)
