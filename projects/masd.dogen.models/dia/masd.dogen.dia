@@ -271,7 +271,7 @@
         <dia:point val="4,-10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,-10.05;16.485,-5.55"/>
+        <dia:rectangle val="3.95,-10.05;16.485,-4.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="4,-10"/>
@@ -280,7 +280,7 @@
         <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#artefact_container#</dia:string>
@@ -428,6 +428,29 @@
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#has_diffs#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, one or more artefacts are different.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -632,7 +655,7 @@
         <dia:point val="-1,-37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,-37.05;20.34,-29.35"/>
+        <dia:rectangle val="-1.05,-37.05;20.34,-28.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-1,-37"/>
@@ -641,7 +664,7 @@
         <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#configuration#</dia:string>
@@ -731,6 +754,29 @@
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#activity#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#activity#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#generation#</dia:string>
@@ -1555,7 +1601,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="-20.7775,-24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.5275,-29.45;-0.8,-23.2"/>
+        <dia:rectangle val="-21.5275,-28.65;-0.8,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1564,7 +1610,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="-20.7775,-24"/>
         <dia:point val="-20.7775,-27"/>
         <dia:point val="-1,-27"/>
-        <dia:point val="-1,-29.4"/>
+        <dia:point val="-1,-28.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1683,7 +1729,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="-85,-64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-85.05,-64.05;-63.645,-53.45"/>
+        <dia:rectangle val="-85.05,-64.05;-60.95,-53.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1692,7 +1738,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:point val="-85,-64"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.305000000000003"/>
+        <dia:real val="24.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.500000000000002"/>
@@ -1712,7 +1758,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
             <dia:string>#Provides the top-level API for the dogen product.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=dogen
+#DOGEN yarn.model_modules=masd.dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -1720,7 +1766,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets_temp2#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -3435,16 +3481,16 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="4,-5.6"/>
+        <dia:point val="4,-4.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.7575,-6.35;4.75,1.8"/>
+        <dia:rectangle val="-1.7575,-5.55;4.75,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="4,-5.6"/>
+        <dia:point val="4,-4.8"/>
         <dia:point val="4,-2"/>
         <dia:point val="-1.7075,-2"/>
         <dia:point val="-1.7075,1"/>
@@ -3506,16 +3552,16 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="9.645,-29.3613"/>
+        <dia:point val="9.645,-28.5505"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.895,-30.1113;11.39,-23.2"/>
+        <dia:rectangle val="8.895,-29.3005;11.39,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="9.645,-29.3613"/>
+        <dia:point val="9.645,-28.5505"/>
         <dia:point val="9.645,-27"/>
         <dia:point val="11.19,-27"/>
         <dia:point val="11.19,-24"/>
@@ -3535,7 +3581,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="20"/>
+        <dia:connection handle="0" to="O4" connection="22"/>
         <dia:connection handle="1" to="O21" connection="1"/>
       </dia:connections>
     </dia:object>
@@ -3928,17 +3974,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,-34.3"/>
+        <dia:point val="-1,-33.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-45.1,-46.05;-0.25,-33.5"/>
+        <dia:rectangle val="-45.1,-46.05;-0.25,-32.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-1,-34.3"/>
-        <dia:point val="-45.05,-34.3"/>
+        <dia:point val="-1,-33.5"/>
+        <dia:point val="-45.05,-33.5"/>
         <dia:point val="-45.05,-46"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -3955,7 +4001,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="8"/>
+        <dia:connection handle="0" to="O4" connection="10"/>
         <dia:connection handle="1" to="O27" connection="6"/>
       </dia:connections>
     </dia:object>
@@ -4154,16 +4200,16 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="16.435,-5.6"/>
+        <dia:point val="16.435,-4.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.7425,-6.35;17.185,1.8"/>
+        <dia:rectangle val="10.7425,-5.55;17.185,1.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="16.435,-5.6"/>
+        <dia:point val="16.435,-4.8"/>
         <dia:point val="16.435,-2"/>
         <dia:point val="10.7925,-2"/>
         <dia:point val="10.7925,1"/>
@@ -4548,17 +4594,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="20.29,-34.3"/>
+        <dia:point val="20.29,-33.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.54,-45.45;71.8825,-33.5"/>
+        <dia:rectangle val="19.54,-45.45;71.8825,-32.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.29,-34.3"/>
-        <dia:point val="71.6825,-34.3"/>
+        <dia:point val="20.29,-33.5"/>
+        <dia:point val="71.6825,-33.5"/>
         <dia:point val="71.6825,-45.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -4575,7 +4621,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="9"/>
+        <dia:connection handle="0" to="O4" connection="11"/>
         <dia:connection handle="1" to="O17" connection="6"/>
       </dia:connections>
     </dia:object>
@@ -4617,16 +4663,16 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="20.29,-29.4"/>
+        <dia:point val="20.29,-28.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.54,-30.15;57.1925,-23.2"/>
+        <dia:rectangle val="19.54,-29.35;57.1925,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.29,-29.4"/>
+        <dia:point val="20.29,-28.6"/>
         <dia:point val="20.29,-27"/>
         <dia:point val="56.9925,-27"/>
         <dia:point val="56.9925,-24"/>
@@ -4688,17 +4734,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="20.29,-31.1"/>
+        <dia:point val="20.29,-30.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.54,-31.9;90.6575,-23.2"/>
+        <dia:rectangle val="19.54,-31.1;90.6575,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.29,-31.1"/>
-        <dia:point val="90.4575,-31.1"/>
+        <dia:point val="20.29,-30.3"/>
+        <dia:point val="90.4575,-30.3"/>
         <dia:point val="90.4575,-24"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -4715,7 +4761,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="17"/>
+        <dia:connection handle="0" to="O4" connection="19"/>
         <dia:connection handle="1" to="O31" connection="1"/>
       </dia:connections>
     </dia:object>
@@ -6689,17 +6735,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,-31.1"/>
+        <dia:point val="-1,-30.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-47.4425,-31.9;-0.25,-23.2"/>
+        <dia:rectangle val="-47.4425,-31.1;-0.25,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-1,-31.1"/>
-        <dia:point val="-47.3925,-31.1"/>
+        <dia:point val="-1,-30.3"/>
+        <dia:point val="-47.3925,-30.3"/>
         <dia:point val="-47.3925,-24"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -6716,7 +6762,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="16"/>
+        <dia:connection handle="0" to="O4" connection="18"/>
         <dia:connection handle="1" to="O46" connection="1"/>
       </dia:connections>
     </dia:object>
@@ -6758,17 +6804,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,-32.7"/>
+        <dia:point val="-1,-31.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-73.8275,-33.5;-0.25,-23.2"/>
+        <dia:rectangle val="-73.8275,-32.7;-0.25,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-1,-32.7"/>
-        <dia:point val="-73.7775,-32.7"/>
+        <dia:point val="-1,-31.9"/>
+        <dia:point val="-73.7775,-31.9"/>
         <dia:point val="-73.7775,-24"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -6785,7 +6831,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="12"/>
+        <dia:connection handle="0" to="O4" connection="14"/>
         <dia:connection handle="1" to="O47" connection="1"/>
       </dia:connections>
     </dia:object>
@@ -8280,17 +8326,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="20.29,-32.7"/>
+        <dia:point val="20.29,-31.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.54,-45.45;93.1125,-31.9"/>
+        <dia:rectangle val="19.54,-45.45;93.1125,-31.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.29,-32.7"/>
-        <dia:point val="92.9125,-32.7"/>
+        <dia:point val="20.29,-31.9"/>
+        <dia:point val="92.9125,-31.9"/>
         <dia:point val="92.9125,-45.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -8307,7 +8353,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O4" connection="13"/>
+        <dia:connection handle="0" to="O4" connection="15"/>
         <dia:connection handle="1" to="O64" connection="6"/>
       </dia:connections>
     </dia:object>
