@@ -10484,7 +10484,24 @@ possibly eliminate the use of lists and strings and instead use
   boilerplate to read and write to the array. The user has to supply
   the size of the array (we should offer a sensible default). We need
   to look for the correct exception to throw if the string is not big
-  enough.
+  enough. This approach seems to be useful enough that we should have
+  some kind of stereotype for it like "stack string" or some such.
+- the other interesting thing is that we probably have a very limited
+  number of locations in a model: these will all manifest themselves
+  as modules. If we somehow could have a handle to the module we
+  wouldn't have to carry the location with every name.
+- similarly with name trees, we don't really need to carry all the
+  name information - really a name tree is more of a tree of
+  handles. If these handles were indices into an array then we'd have
+  a very efficient way to perform lookups.
+
+In general, it seems the biggest problem we have is we started of with
+an OOP model of the world which is very far from how the data is
+actually used. Once we have finished with the current clean-ups we
+need to do some analysis on how the data is being used and try to work
+out data structures that are more suitable for this. We should also
+measure the cache hits / misses before and after the changes, as well
+as the memory sizes.
 
 *** Add support for MetaStuff                                         :story:
 
@@ -12317,6 +12334,12 @@ be done after we finished all of the current refactorings - we must
 make sure the code does all that it is intended to do first and then
 tackle the Acton's suggestions. This is to ensure that we have
 captured all the main use cases. Data analysis can be done after this.
+
+Links:
+
+- [[https://www.youtube.com/watch?v=yy8jQgmhbAU][CppCon 2018: Stoyan Nikolov “OOP Is Dead, Long Live Data-oriented
+  Design”]]
+- [[https://en.wikipedia.org/wiki/Data-oriented_design][Data-oriented design]]
 
 *** Consider generating dependency injection code                      :epic:
 

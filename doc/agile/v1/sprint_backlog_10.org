@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-26 Fri 22:20]
+#+CAPTION: Clock summary at [2018-10-27 Sat 11:22]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *91:38* |       |       |   0.0 |
+| *Total time*                                                                | *92:30* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 91:38   |       |       |   0.0 |
-| Active                                                                      |         | 91:38 |       |   0.0 |
+| Stories                                                                     | 92:30   |       |       |   0.0 |
+| Active                                                                      |         | 92:30 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
-| Sprint and product backlog grooming                                         |         |       |  4:45 |   0.0 |
+| Sprint and product backlog grooming                                         |         |       |  5:37 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
 | Add support for kcov                                                        |         |       |  3:09 |   0.0 |
 | Build on tags for Windows                                                   |         |       |  0:09 |   0.0 |
@@ -136,6 +136,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-10-27 Sat 10:30]--[2018-10-27 Sat 11:22] =>  0:52
     CLOCK: [2018-10-26 Fri 15:55]--[2018-10-26 Fri 16:19] =>  0:24
     CLOCK: [2018-10-26 Fri 10:17]--[2018-10-26 Fri 11:46] =>  1:29
     CLOCK: [2018-10-25 Thu 15:15]--[2018-10-25 Thu 15:54] =>  0:39
