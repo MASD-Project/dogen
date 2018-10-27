@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-27 Sat 11:22]
+#+CAPTION: Clock summary at [2018-10-27 Sat 19:48]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *92:30* |       |       |   0.0 |
+| *Total time*                                                                | *98:22* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 92:30   |       |       |   0.0 |
-| Active                                                                      |         | 92:30 |       |   0.0 |
+| Stories                                                                     | 98:22   |       |       |   0.0 |
+| Active                                                                      |         | 98:22 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  1:10 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  5:37 |   0.0 |
 | Create a document with release steps                                        |         |       |  0:11 |   0.0 |
@@ -56,6 +56,7 @@
 | Create a single binary for all of dogen                                     |         |       |  5:59 |   0.0 |
 | Implement the new dogen product API                                         |         |       |  3:05 |   0.0 |
 | Update cmake files to reflect product/project naming                        |         |       |  2:57 |   0.0 |
+| Clean up the mess of refactors in dogen core                                |         |       |  5:52 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1034,6 +1035,49 @@ Notes:
 We need to move all cmake files to the new world where the target
 names follow the product/project name convention, and address the
 hacks around tests.
+
+*** STARTED Clean up the mess of refactors in dogen core              :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-27 Sat 15:02]--[2018-10-27 Sat 19:48] =>  4:46
+    CLOCK: [2018-10-27 Sat 11:23]--[2018-10-27 Sat 12:29] =>  1:06
+    :END:
+
+We finally found a good model for the data in dogen, and its based on
+data driven design. Basically, we need to let go of OOP constructs
+that aggregate data that is logically related from a human perspective
+and start to think of data usage patterns. From this perspective,
+there is no such thing as a modeling element - just a scattering of
+properties that are used by different transforms all the way into text
+transformation. Even text transforms don't really operate on
+elements - they operate on specific element properties. If we segment
+the text transforms this way, we end up with a large number of small
+text transforms, each with very specific tasks, generating chunks of a
+file. Finally, at the end, we need to concatenate these chunks to form
+the end product. With this approach we solve the impedance mismatch
+between the modeling model and the generational model - all we now
+have are additional containers with properties. This also means that
+its much easier to have different models further down the pipeline
+because they are just adding more properties. We can even use
+inheritance for this, e.g. generational model inherits from modeling
+model and adds properties x, y, z; generational cpp model inherits
+from generational model and so forth. As an example, instead of
+generating the decoration properties for every artefact, we now split
+all elements into two groups: those that have "standard" decoration
+properties and those that have overriden decoration properties. We
+then generate these two groups. For those sharing the common
+decoration properties, we insert those in their vector X times. This
+is still not the most efficient (we really only need one copy) but its
+orders of magnitude (at least one) faster than the current
+approach. Similarly with namespaces: we only need to do the namespaces
+once for all types in a facet.
+
+However, we are very far from this at present. The first task is to
+try to abort the OOP refactors that we made in the past. We need to
+get back to:
+
+
+
+
 
 *** Fix cmake emacs variable for tab width                            :story:
 
