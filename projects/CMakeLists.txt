@@ -165,7 +165,9 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /bigobj")
     endif()
 
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+    # It seems Wall and /W4 are not practical for now as it includes
+    # all of the third party headers.
+    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
     set(CMAKE_CXX_FLAGS
         "${CMAKE_CXX_FLAGS} /D _SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING")
 
