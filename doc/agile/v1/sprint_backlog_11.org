@@ -11,90 +11,116 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-10-29 Mon 09:28]
+#+CAPTION: Clock summary at [2018-10-29 Mon 10:46]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:55* |      |      |   0.0 |
+| *Total time*                                                                | *2:13* |      |      |   0.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:55   |      |      |   0.0 |
-| Active                                                                      |        | 0:55 |      |   0.0 |
-| Edit release notes for previous sprint                                      |        |      | 0:40 |   0.0 |
+| Stories                                                                     | 2:13   |      |      |   0.0 |
+| Active                                                                      |        | 2:13 |      |   0.0 |
+| Edit release notes for previous sprint                                      |        |      | 1:58 |   0.0 |
 | Sprint and product backlog grooming                                         |        |      | 0:15 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
-    :LOGBOOK:
-    CLOCK: [2018-10-29 Mon 08:46]--[2018-10-29 Mon 09:26] =>  0:40
-    :END:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2018-10-29 Mon 10:46]
+     :LOGBOOK:
+     CLOCK: [2018-10-29 Mon 10:24]--[2018-10-29 Mon 10:46] =>  0:22
+     CLOCK: [2018-10-29 Mon 09:27]--[2018-10-29 Mon 10:23] =>  0:56
+     CLOCK: [2018-10-29 Mon 08:46]--[2018-10-29 Mon 09:26] =>  0:40
+     :END:
 
-Add github release notes for previous sprint.
+ Add github release notes for previous sprint.
 
-Title: Dogen v1.0.10, "Lucira"
+ Title: Dogen v1.0.10, "Lucira"
 
 #+begin_src markdown
 ![Lucira](http://www.redeangola.info/wp-content/uploads/2016/06/roteiro_lucira_pedro-carreno_5-580x361.jpg)
-_Lucira Village, Namibe province, Angola. [(C) 2016 Rede Angola](http://www.redeangola.info/roteiros/lucira/)_.
+_Lucira fishing village, Namibe province, Angola. [(C) 2016 Rede Angola](http://www.redeangola.info/roteiros/lucira/)_.
 
 # Overview
 
-As described on [the previous sprint](https://github.com/MASD-Project/dogen/releases/tag/v1.0.08), the key objective at present is to get all the infrastructure up-to-date after a hiatus of a year or so of development. This is a requirement so that we can move to C++ 17 and start to make use of all the nice new libraries available. As such, this sprint was entirely taken with infrastructure clean up. Whilst these changes are not user visible, they still provide important benefits to project development so we'll briefly summarise them here.
+This sprint brought the infrastructural work to a close. Much was achieved, though mainly relevant to the development process. As always, you can get the gory details in [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_10.org), but the below has the highlights.
 
-## MASD Project Transition
+## Complete the vcpkg transition
 
-We have started to sync up the work on the PhD with the work on Dogen. This sprint, the main focus was on creating an organisation solely for _Model Assisted Software Development_ (more details on that in the future), and moving all of the infrastructure to match - [Bintray](https://bintray.com/masd-project/main/dogen), [Travis](https://travis-ci.org/MASD-Project/dogen/builds), [Gitter](https://gitter.im/MASD-Project/Lobby) and the like.
+There were still a number of issues to mop-up including proper OSX build support, removing all references to conan (the previous packaging system) and fixing a number of warnings that resulted from the build settings on vcpkg. We have now fully transitioned to vcpkg and we're already experiencing the benefits of the new package management system: adding new packages across all operative systems now takes a couple of hours (the time it takes to rebuild the vcpkg export in three VMs). However, not all packages are available in vcpkg and not all packages that are available build cleanly on all our supported platforms, so we haven't reached nirvana just yet.
 
-## Move to vcpkg
+## Other build improvements
 
-Historically, we've always had a problem in keeping dogen's dependencies up-to-date across the three supported platforms. The problem stems from a lack of a cross-platform package manager in C++. Whilst we tried [Conan](https://conan.io/) in the past, we never managed to get it working properly for our setup. With this sprint we started the move towards using [vcpkg](https://vcpkg.readthedocs.io/en/latest/).
+In parallel to the vcpkg transition we also cleaned up most warnings, resulting in very clean builds on [CDash](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen). The only warnings we see are real warnings that need to be addressed. We have tried moving to ```/W4``` and even ```Wall``` on MSVC but quickly discovered that [it isn't feasible at present](https://github.com/Microsoft/vcpkg/issues/4577), so we are using the compiler default settings until the issues we raised are addressed.
 
-Whilst it still has some deficiencies, it addresses our use case particularly well and will allow us to pick up new dependencies fairly easily going forward. This is crucial as we expand the number of facets available, which hopefully will happen over the next couple of months. In this sprint we have completed the transition to vcpkg for Linux and Windows; the next sprint will be OSX's turn. With the introduction of vcpkg we took the opportunity to upgrade to [boost 1.68](https://www.boost.org/users/history/version_1_68_0.html) on Linux and Windows.
+Sadly, we've had to ignore all failing tests across all platforms for now (thus taking a further hit on code coverage). This had to be done because at present the tests do not provide enough information for us to understand why they are failing when looking at the Travis/AppVeyor logs. Since reproducing things locally is just too expensive, we need to rewrite these tests to make them easy to troubleshoot from CI logs. This will be done as part of the code generation of model tests.
 
-## Add CDash support
+A final build "improvement" was the removal of facets that were used only to test the code generator, such as hashing, serialisation etc. This has helped immensely in terms of the build time outs but the major downside is we've lost yet another significant source of testing. It seems the only way forward is to create a nightly build that exercises all features of the code generator and runs on our machines - we just do not have enough time on Travis / AppVeyor to compile non-essential code. We still appear to hit occasional timeouts, but these are much less frequent.
 
-Since we moved away from our own infrastructure we lost the ability to know which tests are passing and how long test execution is taking. With this sprint we resurrected CDash/CTest support, with a new dashboard, available [here](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen). There are still a few tweaks required - a lot of tests are still failing due to setup issues - but its clearly a win as we can now see a clearer picture across the testing landscape.
+## Code coverage
 
-## Move reference models out of Dogen's repository
+We've lacked code coverage for a very long time, and this has been a pressing need because we need to know which parts of the generated code are not being exercised. We finally managed to get it working thanks to the amazing [kcov](https://github.com/SimonKagstrom/kcov). It is far superior to gcov and previous alternative approaches, requiring very little work to set up. Unfortunately how coverage numbers are very low now due to the commenting out of many unit tests to resolve the build times issues. However, the great news is we can now monitor the coverage as we re-introduce the tests. Sadly, the code coverage story on C# is still weak as we do not seem to be able to generate any information at present (likely due to NUnit shadowing). This will have to be looked at in the future.
 
-For a long time we've been struggling to build Dogen within the hour given to us by Travis. An easy win was to move the reference models ([C++](https://github.com/MASD-Project/cpp_ref_impl) and [C#](https://github.com/MASD-Project/csharp_ref_impl)) away from the main repository. This is also a very logical thing to do as we want these to be examples of stand-alone Dogen products, so that we can point them out to users as an example of how to use the product. Work still remains to be done on the reference implementations (CTest/CDash integration, clean up tests) but the bulk has been done this sprint.
+We now have support for both [Codecov](https://codecov.io/gh/MASD-Project/dogen) and [Coveralls](https://coveralls.io/github/MASD-Project/dogen?branch=master), which appear to give us different results.
 
-For more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_09.org).
+##  C++ 17 support
+
+One of the long time desires has been to migrate from C++ 14 to C++ 17 so that we can use the new features. However, this migration was blocked due to the difficulties of upgrading packages across all platforms. With the completion of the vcpkg story, we finally had all the building blocks in place to move to C++ 17, which was achieved successfully this sprint. This now means we can start to make use of ```ranges```, ```string_view``` and all the latest developments. The very first feature we've introduced is nested namespaces, described below.
+
+## Project naming clean-up
+
+Now we've settled on the new standard namespaces structure, as defined by the [Framework Design Guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces), we had to update all projects to match. We've also made the build targets match this structure, as well as the folders in the file system, making them all consistent. Since we had to update the CMake files, we started to make them a bit more modern - but we only scratched the surface.
+
+## Defining a Dogen API
+
+As part of the work with Framework Design Guidelines, we've created a model to define the product level API and tested it via scenarios. The API is much cleaner and suitable for interoperability (e.g. SWIG) as well as for the code generation of the remotable interfaces.
 
 # User visible changes
 
-Two tiny featurelets were added this sprint:
-
-- **Development Binaries**: We now generate binaries for development releases. These are overwritten with every commit on BinTray.
-- **Improvements on ```--version```**: The command now outputs build information to link it back to the build agent and build number. Note that these details are used only for information purposes. We will add GPG signatures in the future to validate the binaries.
+The main feature added this sprint was the initial support for C++ 17. You can now set your standard to this version:
 
 ```
-$ dogen.knitter  --version
-Dogen Knitter v1.0.09
-Copyright (C) 2015-2017 Domain Driven Consulting Plc.
-Copyright (C) 2012-2015 Marco Craveiro.
-License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
-Build: Provider = 'travis' Number = '2082' Commit = '53a1a169bd6f15c4388add9da933be2a353c4cbf' Timestamp = '2018/10/14 21:54:46'
-IMPORTANT: build details are NOT for security purposes.
+#DOGEN quilt.cpp.standard=c++-17
+```
+
+At present the only difference is how nested namespaces are handled. Using our annotations class as an example, prior to enabling C++ 17 we had:
+
+```
+namespace masd
+namespace dogen
+namespace annotations {
+<snip>
+} } }
+```
+
+Now we generate the following code:
+
+```
+namespace masd::dogen::annotations {
+<snip>
+}
 ```
 
 # Next Sprint
 
-Infrastructural work will hopefully conclude on the next sprint, but the next big task is getting all the tests to run and pass.
+We have reached a bit of a fork in Dogen's development: we have got some good ideas on how to address the fundamental architectural problems, but these require very significant surgery into the core of Dogen and its not yet clear if this can be achieved in an incremental manner. On the other hand, there are a number of important stories that need to be implemented in order to get us in a good shape (such as sorting out the testing story). Hard decisions will have to be made in the next sprint.
 
 # Binaries
 
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.10_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.10/:dogen_1.0.10_amd64-applications.deb)
-- [dogen-1.0.10-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.10/:dogen-1.0.10-Darwin-x86_64.dmg)
-- [dogen-1.0.10-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/:dogen-1.0.10-Windows-AMD64.msi)
+- [dogen_1.0.10_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.10/dogen_1.0.10_amd64-applications.deb)
+- [dogen-1.0.10-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.10/dogen-1.0.10-Darwin-x86_64.dmg)
+- [dogen-1.0.10-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.10-Windows-AMD64.msi)
 
-For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.#+end_src
+
+ - [[https://twitter.com/MarcoCraveiro/status/1051785972206247936][Tweet]]
+ - [[https://www.linkedin.com/feed/update/urn:li:activity:6457553749215899648/][LinkedIn]]
+ - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/1051785972206247936][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6457553749215899648/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/1056856688983187456][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6462624611979841536][LinkedIn]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:

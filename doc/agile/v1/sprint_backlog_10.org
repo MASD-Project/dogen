@@ -124,9 +124,9 @@ Infrastructural work will hopefully conclude on the next sprint, but the next bi
 
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.09_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.09/:dogen_1.0.09_amd64-applications.deb)
-- [dogen-1.0.09-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.09/:dogen-1.0.09-Darwin-x86_64.dmg)
-- [dogen-1.0.09-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/:dogen-1.0.09-Windows-AMD64.msi)
+- [dogen_1.0.09_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.09/dogen_1.0.09_amd64-applications.deb)
+- [dogen-1.0.09-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.09/dogen-1.0.09-Darwin-x86_64.dmg)
+- [dogen-1.0.09-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/dogen-1.0.09-Windows-AMD64.msi)
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
