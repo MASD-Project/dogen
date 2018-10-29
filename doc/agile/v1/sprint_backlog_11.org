@@ -1,0 +1,932 @@
+#+title: Sprint Backlog 11
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2018-10-29 Mon 09:28]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:55* |      |      |   0.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:55   |      |      |   0.0 |
+| Active                                                                      |        | 0:55 |      |   0.0 |
+| Edit release notes for previous sprint                                      |        |      | 0:40 |   0.0 |
+| Sprint and product backlog grooming                                         |        |      | 0:15 |   0.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-29 Mon 08:46]--[2018-10-29 Mon 09:26] =>  0:40
+    :END:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.10, "Lucira"
+
+#+begin_src markdown
+![Lucira](http://www.redeangola.info/wp-content/uploads/2016/06/roteiro_lucira_pedro-carreno_5-580x361.jpg)
+_Lucira Village, Namibe province, Angola. [(C) 2016 Rede Angola](http://www.redeangola.info/roteiros/lucira/)_.
+
+# Overview
+
+As described on [the previous sprint](https://github.com/MASD-Project/dogen/releases/tag/v1.0.08), the key objective at present is to get all the infrastructure up-to-date after a hiatus of a year or so of development. This is a requirement so that we can move to C++ 17 and start to make use of all the nice new libraries available. As such, this sprint was entirely taken with infrastructure clean up. Whilst these changes are not user visible, they still provide important benefits to project development so we'll briefly summarise them here.
+
+## MASD Project Transition
+
+We have started to sync up the work on the PhD with the work on Dogen. This sprint, the main focus was on creating an organisation solely for _Model Assisted Software Development_ (more details on that in the future), and moving all of the infrastructure to match - [Bintray](https://bintray.com/masd-project/main/dogen), [Travis](https://travis-ci.org/MASD-Project/dogen/builds), [Gitter](https://gitter.im/MASD-Project/Lobby) and the like.
+
+## Move to vcpkg
+
+Historically, we've always had a problem in keeping dogen's dependencies up-to-date across the three supported platforms. The problem stems from a lack of a cross-platform package manager in C++. Whilst we tried [Conan](https://conan.io/) in the past, we never managed to get it working properly for our setup. With this sprint we started the move towards using [vcpkg](https://vcpkg.readthedocs.io/en/latest/).
+
+Whilst it still has some deficiencies, it addresses our use case particularly well and will allow us to pick up new dependencies fairly easily going forward. This is crucial as we expand the number of facets available, which hopefully will happen over the next couple of months. In this sprint we have completed the transition to vcpkg for Linux and Windows; the next sprint will be OSX's turn. With the introduction of vcpkg we took the opportunity to upgrade to [boost 1.68](https://www.boost.org/users/history/version_1_68_0.html) on Linux and Windows.
+
+## Add CDash support
+
+Since we moved away from our own infrastructure we lost the ability to know which tests are passing and how long test execution is taking. With this sprint we resurrected CDash/CTest support, with a new dashboard, available [here](https://my.cdash.org/index.php?project=MASD+Project+-+Dogen). There are still a few tweaks required - a lot of tests are still failing due to setup issues - but its clearly a win as we can now see a clearer picture across the testing landscape.
+
+## Move reference models out of Dogen's repository
+
+For a long time we've been struggling to build Dogen within the hour given to us by Travis. An easy win was to move the reference models ([C++](https://github.com/MASD-Project/cpp_ref_impl) and [C#](https://github.com/MASD-Project/csharp_ref_impl)) away from the main repository. This is also a very logical thing to do as we want these to be examples of stand-alone Dogen products, so that we can point them out to users as an example of how to use the product. Work still remains to be done on the reference implementations (CTest/CDash integration, clean up tests) but the bulk has been done this sprint.
+
+For more details of the work carried out this sprint, see [the sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_09.org).
+
+# User visible changes
+
+Two tiny featurelets were added this sprint:
+
+- **Development Binaries**: We now generate binaries for development releases. These are overwritten with every commit on BinTray.
+- **Improvements on ```--version```**: The command now outputs build information to link it back to the build agent and build number. Note that these details are used only for information purposes. We will add GPG signatures in the future to validate the binaries.
+
+```
+$ dogen.knitter  --version
+Dogen Knitter v1.0.09
+Copyright (C) 2015-2017 Domain Driven Consulting Plc.
+Copyright (C) 2012-2015 Marco Craveiro.
+License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+Build: Provider = 'travis' Number = '2082' Commit = '53a1a169bd6f15c4388add9da933be2a353c4cbf' Timestamp = '2018/10/14 21:54:46'
+IMPORTANT: build details are NOT for security purposes.
+```
+
+# Next Sprint
+
+Infrastructural work will hopefully conclude on the next sprint, but the next big task is getting all the tests to run and pass.
+
+# Binaries
+
+You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.10_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.10/:dogen_1.0.10_amd64-applications.deb)
+- [dogen-1.0.10-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.10/:dogen-1.0.10-Darwin-x86_64.dmg)
+- [dogen-1.0.10-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/:dogen-1.0.10-Windows-AMD64.msi)
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/1051785972206247936][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6457553749215899648/][LinkedIn]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2018-10-29 Mon 08:30]--[2018-10-29 Mon 08:45] =>  0:15
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Read up on framework and API design                               :story:
+
+Now that we are creating a top-level API for Dogen we should really
+read up on books about good API design.
+
+Namespacing guideline:
+
+- company | project
+- product | technology
+- feature
+- subnamespace
+
+So in our case, =masd::dogen= and =masd::cpp_ref_impl=. We are
+violating the guideline on no abbreviations with ref_impl but
+=cpp_reference_implementation= seems a tad long.
+
+It seems we have several types of classes:
+
+- interfaces
+- abstract base classes
+- values
+- objects where data dominates and behaviours are small or trivial
+- objects where behaviour dominates and data is small or trivial
+- static classes
+
+These should be identifiable at the meta-model level, with appropriate
+names.
+
+*** Create a single binary for all of dogen                           :story:
+
+As per analysis, we need to create a single dogen binary, like so:
+
+: dogen.cli COMMAND COMMAND_SPECIFIC_OPTIONS
+
+Where =COMMAND= is:
+
+- =transform=: functionality that is currently in tailor.
+- =generate=: functionality that is currently in knitter.
+- =expand=: functionality that is currently in stitcher plus expansion
+  of wale templates.
+- =make=: functionality in darter: create project, structure etc.
+
+In order to support sub-commands we need to do a lot of hackery with
+program options:
+
+- [[https://gist.github.com/randomphrase/10801888][cmdoptions.cpp]]: Demonstration of how to do subcommand option
+  processing with boost program_options
+- [[https://stackoverflow.com/questions/15541498/how-to-implement-subcommands-using-boost-program-options][How to implement subcommands using Boost.Program_options?]]
+
+*Merged Stories*
+
+We started off by creating lots of little executables: knitter,
+darter, tailor, stitcher. Each of these has its own project,
+command-line options etc. However, now that we are concentrating all
+of the domain knowledge in yarn, it seems less useful to have so many
+executables that are simply calling yarn transforms. Instead, it may
+make more sense to use an approach similar to git and have a
+"sub-command":
+
+: dogen knit
+: dogen tailor
+
+And so forth. Of course, we could also take this opportunity and clean
+up these names to making them more meaningful to end users. Perhaps:
+
+: dogen codegen
+: dogen transform
+
+Each of these sub-commands or modes would have their own set of
+associated options. We need to figure out how this is done using boost
+program options. We also need to spend a bit of time working out the
+sub-commands to make sure they make sense across the board.
+
+In terms of names, we can't really call the project "dogen". We should
+call it something allusive to the command line, such as cli. However,
+the final binary should be called dogen or perhaps, =dogen.cli=. This
+fits in with other binaries such as =dogen.web=, =dogen.http=,
+=dogen.gui= etc.
+
+*** Implement the new dogen product API                               :story:
+
+Now the API has been designed and generated, we need to implement it.
+
+*** Clean up the mess of refactors in dogen core                      :story:
+
+We finally found a good model for the data in dogen, and its based on
+data driven design. Basically, we need to let go of OOP constructs
+that aggregate data that is logically related from a human perspective
+and start to think of data usage patterns. From this perspective,
+there is no such thing as a modeling element - just a scattering of
+properties that are used by different transforms all the way into text
+transformation. Even text transforms don't really operate on
+elements - they operate on specific element properties. If we segment
+the text transforms this way, we end up with a large number of small
+text transforms, each with very specific tasks, generating chunks of a
+file. Finally, at the end, we need to concatenate these chunks to form
+the end product. With this approach we solve the impedance mismatch
+between the modeling model and the generational model - all we now
+have are additional containers with properties. This also means that
+its much easier to have different models further down the pipeline
+because they are just adding more properties. We can even use
+inheritance for this, e.g. generational model inherits from modeling
+model and adds properties x, y, z; generational cpp model inherits
+from generational model and so forth. As an example, instead of
+generating the decoration properties for every artefact, we now split
+all elements into two groups: those that have "standard" decoration
+properties and those that have overriden decoration properties. We
+then generate these two groups. For those sharing the common
+decoration properties, we insert those in their vector X times. This
+is still not the most efficient (we really only need one copy) but its
+orders of magnitude (at least one) faster than the current
+approach. Similarly with namespaces: we only need to do the namespaces
+once for all types in a facet.
+
+However, we are very far from this at present. The first task is to
+try to abort the OOP refactors that we made in the past.
+
+*** Fix cmake emacs variable for tab width                            :story:
+
+We need to replace uses of =tab-width= in cmake files with
+=cmake-tab-width=, as explained here:
+
+[[http://stackoverflow.com/questions/25751408/controlling-the-indent-offset-for-cmake-in-emacs][Controlling the indent/offset for CMake in emacs]]
+
+We need to do this for both code generated and manually generated
+files.
+
+*** Fix =cp= error on cmake with local third-party packages           :story:
+
+We are getting strange errors in cmake:
+
+: cp: cannot stat ‘/usr/lib/i386-linux-gnu/libpthread.so.1.54.0’: No such file or directory
+
+*** Assorted improvements to CMake files                               :epic:
+
+It seems we are not using proper CMake idioms to pick up compiler
+features, as explained here:
+
+- [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
+- [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
+- [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
+- [[https://rix0r.nl/blog/2015/08/13/cmake-guide/][The Ultimate Guide to Modern CMake]]
+- [[https://github.com/crezefire/cxp][CXP: C++ Cross Platform]]: A template project for creating a cross
+  platform C++ CMake project using modern CMake syntax and transitive
+  dependencies.
+
+We need to implement this using proper CMake idioms.
+
+Notes:
+
+- Add version and language to project.
+- start using [[https://cmake.org/cmake/help/v3.3/command/target_compile_options.html][target compile options]] for each target. We will have to
+  repeat the same flags; this could be avoided by passing in a
+  variable. See also [[http://stackoverflow.com/questions/23995019/what-is-the-modern-method-for-setting-general-compile-flags-in-cmake][What is the modern method for setting general
+  compile flags in CMake?]]
+- define qualified aliases for all libraries, including nested
+  aliasing for =dogen::test_models=. Ensure all linking is done
+  against qualified names.
+- use target include directories for each target and only add the
+  required include directories to each target. Mark them with the
+  appropriate visibility, including using =interface=. We should then
+  remove all duplication of libraries in the specs.
+- try replacing calls to =-std=c++-14= with compiler feature
+  detection. We need to create a list of all C++-14 features we're
+  using.
+- remove all of the debug/release compilation options and start using
+  =CMAKE_BUILD_TYPE= instead. See [[http://pastebin.com/jCDW5Aa9][this]] example. We added build type
+  support to our builds, but as a result, the binaries moved from
+  =stage/bin= to =bin=. There is no obvious explanation for this.
+- remove =STATIC= on all libraries and let users specify which linkage
+  to use. We already have a story to capture this work.
+- remove the stage folder and use the traditional CMake
+  directories. This will also fix the problems we have with
+  BUILD_TYPE.
+- consider buying the CMake book: https://crascit.com/professional-cmake/.
+
+Merged stories:
+
+*Usage of external module path in cmakelists*                       :story:
+
+It seems like we are not populating the target names
+properly. Originally the target name for test model all built-ins was:
+
+: dogen_all_builtins
+
+When we moved the test models into =test_models= the target name did
+not change. It should have changed to:
+
+: dogen_test_models_all_builtins
+
+*** Support for cmake components and groups                           :story:
+
+#+begin_quote
+*Story*: As a dogen user, I need to integrate the generated models
+with my existing packaging code.
+#+end_quote
+
+We recently added support for creating multiple packages from a single
+source tree. We need generated models to have a new top-level cmake file:
+
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+: add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+:
+: install(
+:     DIRECTORY include/
+:     DESTINATION include
+:     COMPONENT headers
+:     FILES_MATCHING PATTERN "*.hpp")
+
+And the =src= cmake file:
+
+: install(TARGETS dia ARCHIVE DESTINATION lib COMPONENT libraries)
+
+*** Mop-up nested namespaces using legacy syntax                      :story:
+
+It seems we still have a number of places in the templates where we
+are using the legacy nested namespaces. Its probably only in
+serialisation, given that's the only place where we've hard-coded the
+namespaces and they are more than one level deep (we have a lot of
+=std= but that's not affected):
+
+: namespace boost {
+: namespace serialization {
+
+We need to wrap these in if's for C++ 17 and add nested namespaces.
+
+*** Great meta-data rename                                            :story:
+
+All of the existing stereotypes and meta-data need to be moved from
+the existing names (e.g. =quilt=, =yarn=, etc) into
+=masd=. Interestingly, we can take this opportunity to make dia
+diagrams a bit more readable. Instead of
+
+: #DOGEN a.b.c=d
+
+we can now just do:
+
+: masd.a.b.c=4
+
+It is very unlikely dia users will need lines starting with =masd.=.
+
+We should probably try to tackle this rename sooner rather than later
+since it badly breaks model-compatibility.
+
+*** Add DTL to vcpkg                                                  :story:
+
+DTL seems to be the easiest library to work with in terms of
+generating diffs. However, its not on vcpkg.
+
+Tasks:
+
+- add CMake support to DTL. Not strictly needed but seems like an easy
+  thing to do and will make vcpkg easier. It also means we can build
+  tests and examples to make sure it all works in isolation. Actually
+  this was tried before and not accepted by the maintainer.
+- add DTL port.
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][diff-match-patch]]: interesting diff library but requires QT.
+- [[https://github.com/Martinsos/edlib#usage-and-examples][edlib]]: interesting library but seems to be more for Levehnstein
+  diffs. Also not on vcpkg.
+- [[https://github.com/cubicdaiya/dtl/pull/2][Add cmake support]]: PR to add CMake support to DTL, not accepted by
+  the maintainer. See also [[https://github.com/chino540off/dtl][the repo]].
+- [[https://github.com/Microsoft/vcpkg/tree/master/ports/libodb][libodb]]: example of a project with a vcpkg specific CMake support.
+- [[https://stackoverflow.com/questions/13438547/linux-c-or-c-library-to-diff-and-patch-strings][Linux C or C++ library to diff and patch strings?]]
+
+*** Add tests for external and model modules                          :story:
+
+At present we do not have tests exercising different combinations of
+external and model modules.
+
+Tests:
+
+- 0-3 levels of external modules
+- 1-3 levels of model modules
+
+*** Rewrite name resolution in terms of lists                         :story:
+
+Even since we did the external modules / model modules change we broke
+code generation; this is because we do not go up the model modules
+during name resolution. We did a quick hack to fix this but it needs
+to be done properly.
+
+Let's walk through a simple example:. Name cames in as:
+
+- model module: =probing=
+- simple: =prober=
+
+We are in model:
+
+- model module: =dogen.external=
+
+Expected behaviour is to try all combinations of model modules:
+
+- =dogen.external.probing=
+- =dogen.probing
+- =probing=
+
+This highlights a fundamental problem with resolution: we view the
+{external, model, internal} modules as if they are separate entities
+but in reality, for the purposes of resolution, there is only one
+thing that is relevant: the module path. If it matches because of
+{external, model, internal} modules, well that is not relevant to
+resolution. Other users of =name= do need to know this information
+(for example to generate directories or file names) but not the
+resolver.
+
+Interestingly, because we are only looking for an id, it doesn't
+really matter how we get to it (in terms of the internal composition
+of the name), as long as it matches bitwise. This means we can look at
+the process slightly differently:
+
+- start off with the name as the user provided it. Extract all strings
+  from it to create a list, in order: external, model, internal,
+  simple. Try to resolve that. Call it user list.
+- then create a second list from model / context: external, model,
+  internal. Call it model list.
+- try concantenating model list and user list, pretty printing and
+  resolving it. If it fails, pop model list and concatenate again. Try
+  until model list is empty.
+
+Tasks:
+
+- first add a quick hack just to get the code generator working
+  again. For example, take the first model module of the model and try
+  resolving with that. Then worry about fixing this properly.
+- split the conversion of name into list from pretty printer. Printer
+  should merely take a string or list of strings and do its thing. We
+  need to find a good location for this method, since (for now) we
+  cannot place it in the right location which is the name class
+  itself.
+- change resolver to obtain the lists as per above. The to list
+  machinery can be used for this, though we need to handle model names
+  somehow. We can copy the =model_name_mode= logic from printer.
+- drop all of the logic in resolver at present and use the list logic
+  as per above. Do not check references, etc.
+
+Notes:
+
+- there are a few useful functions here:
+  - subtraction: given a base list, subtract another list. Fro
+    example, given =masd::dogen::annotations::annotation=, subtract
+    =masd::dogen::annotations=. This is useful when determining the
+    right qualification inside a class.
+  - addition: concatenate a list with another.
+  - combination: given a base list, create all possible permutations
+    for a second list. For example: =masd::dogen::annotations= and
+    =some::type=, we want =masd::dogen::annotations::some::type=,
+    =masd::dogen::some::type=, =masd::some::type=, =some::type=. We
+    are iterating upwards the first list.
+  - make id: given a list, generate an ID. This was we don't even need
+    to go though the whole "name building" exercise, we simply go from
+    lists into ID's and check the containers.
+- we probably should introduce a type for this: =flat_location=?
+  something that can be converted from a =location= (but not the
+  opposite) and has the properties defined above. Or we could have a
+  "location flattener" that performs these actions, but this is less
+  clean as we now need a few of these helpers.
+- there are two fundamental concepts: a path (which is what we call a
+  location) and an address (which is what we call an ID). Path implies
+  an hierarchical space, which is what modeling and generation space
+  are. Address is flat and unique. There is a function to go from
+  paths to addresses but not vice-versa. Given two paths we can
+  generate all possible addresses by performing a "climb" in the
+  hierarchical space.
+- we could make addresses URIs, and preserve almost all of the
+  information: =masd://some.model.name/a/b.c=. The problem is we
+  cannot tell the difference between model modules and external
+  modules. However, we could simplify this and say model modules and
+  external modules are all the same thing; users can choose to express
+  external modules as part of the file name or not. (e.g. "express
+  full path" or some such flag). We can also choose to express
+  external modules as directories or as a dotted path. URIs may not be
+  the best of ideas because models exist in contexts (workspaces,
+  servers, users) rather than in one universal space. However, we
+  could use URLs as a way to identify resources once we clear up the
+  REST story.
+
+*** Default model modules from filename                               :story:
+
+It would be nice to be able to not have to supply model modules when
+its obvious from the filename.
+
+*** Nested external model path results in strange references          :story:
+
+Note: we have probably already implemented a solution for this, need
+to check the resolver.
+
+The external model path does not contribute to path resolution in a
+model. Up til now that has actually been a feature; it would have been
+annoying to have to dype =dogen::= on every type for every
+model. Instead, we refer to say =dogen::a::b= as simply =a::b= in all
+models that use =a=. However this masks a deeper problem: this is not
+the desired behaviour at all times. We saw this problem when we
+created multiple models under dynamic: =dynamic::schema= and
+=dynamic::expansion=. In this case, users of these models referred to
+them as =schema= and =expansion= respectively, and this was not
+ideal. In general:
+
+- external module path should contribute to references just like
+  internal module path does - there should be no difference;
+- dogen should be clever enough to determine if two models share a
+  top-level namespace (regardless if it was obtained from the external
+  or internal module path) that there is no need to have an absolute
+  path. So in the case of =dogen=, since every model has =dogen= as
+  their external module path, according to this rule we should not
+  have to type it.
+
+*** Remove hello world model                                          :story:
+
+ It is confusing to have it mixed up with product models. Use a regular
+ dogen model to test the package. We could have it on the reference
+ model as a stand alone example, or we could create a "hello dogen"
+ product for a trivial example of dogen usage.
+
+*** Move from doxygen to standardese                                  :story:
+
+We should try to use standardese to generate the documentation for
+dogen. Seems easier to use and CMake friendly. Also, it seems more c++
+compliant because it uses libclang.
+
+Once the move is done, we should update dogen to generate comments in
+either markup via a meta-data parameter (documentation markup?).
+
+Links:
+
+- https://github.com/foonathan/standardese
+
+*** Update ref impl namespaces to match the new specification         :story:
+
+Perform the namespace update to the reference implementation.
+
+*** New approach to model testsing                                    :story:
+
+In the beginning we generated all models with all facets, even the
+dogen core models. The idea was to test the generator even though
+these facets were not useful for the product. This was really useful
+because the dogen models are much more realistic than the test models
+and due to this we picked up a number of bugs. However, we have now
+hit the maximum build times on travis and we need to start removing
+all ballast. This will mean we lose these valuable tests. The
+alternative is to create these tests on the fly:
+
+- create a new override flag that forces all facets to be emitted.
+- create a new test facet with templates that are dependent on the
+  enabled facets; each test tests the dependent facet.
+- create a ctest nightly build that generates code using these new
+  facets, compiles it and runs all tests.
+- we need some meta-data to "ignore" some modeling elements for
+  certain facets such as composition which are known to be broken. Or
+  maybe we should just leave the tests as red so we know.
+- the tests should be designed not to use templates etc to make the
+  debug dumps really obvious (unlike the existing tests). It may even
+  make more sense to test each type individually so that when the test
+  fails its really obvious:
+
+: MY_TYPE_serialisation_roundtrips_correctly
+
+  this way when we look at CDash we know exactly which types failed to
+  serialise.
+
+During the transition phase, we will remove all of the existing tests.
+
+*** Add support for multiple profile binds per modeling element       :story:
+
+At present we can only bind an element to one profile. The reason why
+is because we've already expanded the profile graphs into a flat
+annotation and if we were to apply two of these expanded annotations
+with common parents, the second application would overwrite the
+first. Of course, we bumped into the exact same problem when doing
+profile inheritance; there it was solved by ensuring each parent
+profile is applied only once for each graph.
+
+One possible solution for this problem is to consider each model
+element as a "dynamic profile" (for want of a better name; on the fly
+profile?). We would create a profile which is named after each of the
+profiles it includes, e.g. say we include =dogen::hashable= and
+=dogen::pretty_printable= for model element e0. Then the "on the fly
+profile" would be:
+
+: dogen::hashable_dogen::pretty_printable
+
+It would be generated by the profiler, with parents =dogen::hashable=
+and =dogen::pretty_printable=, and cached so that if anyone shows up
+with that same profile we can reuse it. Because of the additive nature
+of profile graphs this would have the desired result. Actually we
+could probably have a two pass-process; first identify all of the
+required dynamic profiles and generate them; then process them. This
+way we can rely on a const data structure.
+
+This will all be made easier when we have a two-pass pipeline because
+we can do the profile processing on the first pass, and we can even
+generate the "dynamic profiles" as real meta-model elements, created
+on the fly.
+
+*** Facet enablement and model references is buggy                    :story:
+
+At present we are processing enablement as part of the
+post-processing. This means that we are using the target model's
+annotation profile in order to determine the facet enablement. This
+can cause problems as follows: say we enable hashing on a model via
+the model profile of M0. We then consume that model as a reference and
+disable hashing on M1. When processing types from M0 for M1 we will
+disable hashing for them as well. Thus, no includes for hashing will
+be generated even if a hash map is used.
+
+Actually this is not quite right. We are expanding annotations at the
+external model transform level; this means the enablement on the
+reference must be correct. However, somehow we seem to be looking at
+the element on the target model when deciding to include the hash
+file from reference model.
+
+*** Consider creating a test build for all facets                     :story:
+
+In the past we had enabled a lot of facets on the dogen models to
+serve as part of the testing infrastructure. However, its no longer
+feasible to do this because the build is taking too long. However, the
+reference models just can't capture all of the complexity of a
+codebase like dogen's so we lost some testability with this move. What
+would be really nice is if we could create "test builds":
+
+- given a set of test models, copy them somewhere, generate a product
+  configuration with some kind of override that enables all facets
+  everywhere. some will just not come through like ORM.
+- build the product. all handcrafted code is now blank but all facets
+  are coming though.
+- this could be part of the ctest script, as a "mode" - product
+  generation test. Every time there is a commit to a product the build
+  kicks in.
+
+Notes:
+
+- one way to achieve this would be to force the profile of the
+  model. However, we are moving away from profiles, and in the future
+  there will be a list of stereotypes associated with the model. Then
+  it will be much harder to figure out what stereotypes do what and to
+  overwrite them.
+- an alternative would be to have some kind of "test mode"; when
+  handling enablement, we'd check the "mode". If we're in test mode,
+  we simply enable all and ignore any other settings. We could have a
+  "force enable" flag or some such like we do for
+  overwriting. However, we may then hit another problem: enabling all
+  facets may result in non-buildable models:
+  - facets may be incompatible. This is not a problem at present.
+  - handcrafted classes may result in code that does not
+    compile. Shouldn't though because we are still checking the status
+    of the attributes.
+- the key thing though is the overall build time must be below the
+  threshold. Maybe we can have this on a nightly, running on our own
+  hardware.
+
+Conclusions:
+
+- create a new flag: =force-enablement=. When set to true, we ignore
+  all enablement settings and generate all facets. We do not generate
+  all kernels though (e.g. the kernel must be on in the model).
+- create a script that copies the models to a new product and
+  generates them with fore-enablement. This will only work when we can
+  generate products.
+- as facets are enabled, tests are automatically generated for them.
+- build the result and run all tests.
+
+*** Create some basic naming guidelines                               :story:
+
+As per Framework Design Guidelines, we need some basic guidelines for
+naming in Dogen. We don't need to go overboard, we just need something
+to get us started and evolve it as we go along.
+
+Links:
+
+- [[https://isocpp.org/wiki/faq/coding-standards][C++ Coding Standards]]
+- [[http://wiki.c2.com/?CapitalizationRules][Capitalization Rules]]
+- [[https://en.wikipedia.org/wiki/Snake_case][Snake Case]]
+- [[http://cs.smu.ca/~porter/csc/ref/stl/naming_conventions.html][Naming Conventions for these STL Reference Pages]]
+- [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
+- [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
+- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
+
+*** Consider generating program options code                          :story:
+
+If there was a syntax to describe boost program options, we should be
+able to generate most of the code for it:
+
+- the code that initialises the options;
+- the domain objects that will store the options;
+- the copying of values from program options objects into domain
+  objects.
+
+This would mean that creating a command line tool would be a matter of
+just supplying an options file. We could then have a stereotype for
+this (name to be yet identified). Marking a type with this stereotype
+and supplying the appropriate meta-data so one could locate the
+options file would cause dogen to emit the program options binding
+code.
+
+A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
+the same syntax. We just need to have a well defined domain object for
+these. The aim would be to replace config.
+
+For models such as these, the dia representation is just overhead. It
+would be great if we could do it using just JSON.
+
+Actually even better would be if we could have a text file in docopt
+format and parse it and then use it to generate the code described
+above.
+
+Actually maybe we are just making this too complicated. We probably
+just need some very trivial meta-data extensions that express the
+required concept:
+
+- create a yarn element to model this new meta-class. We basically
+  need to model the structure of program options with option groups
+  and options.
+- define a stereotype for the new yarn elements, say
+  =CommandLineOptionGroup=.
+- for types facet we simply generate the regular c++ code. But in
+  addition, we also generate a new facet that: a) injects the
+  propertties into boost program options b) instantiates the c++
+  objects from boost program options.
+- this means that instead of creating a new meta-type, we need to
+  augment =yarn::object= with command line options stuff.
+
+Notes:
+
+- create stereotypes for options group, options; allow users to define
+  members of type options in options group. Or should the options just
+  be member variables? In which case we could have
+  =command_line::options= as the stereotype.
+- generate the options classes.
+- inject a hand-crafted validator or consider generating the validator
+  given the meta-data supplied by the user (mandatory, at most X
+  times, etc).
+- generate an options builder that takes on the building
+  responsibilities from the parser.
+- generate a parser that hooks the builder and copies data from the
+  options map into the options.
+- allow users to supply the help text and the version text as
+  parameters; these should probably be done in a similar way to what
+  we do with the modeline etc.
+- allow users to set default values in the options attributes and set
+  them in generated code. This is probably just adding default value
+  support to dogen, for which we have a separate story.
+- one very useful way in which to use program options is via
+  projections. That is a given model M0 defines the configuration and
+  a second model M1 defines the options parsing. In this case the
+  options defined in M0 already has the required shape:
+  - there is a top-level class housing all options, traditionally
+    called "configuration";
+  - the top-level class contains meta-data with the product blurb;
+  - attributes of that class can be annotated as "modes", "groups" or
+    nothing. A mode will result in a modal CLI interface. Groups
+    result in top-level groupings of options. Nothing means the
+    attribute must be of a simple type and will be a global option
+    (e.g. =help=, =version=, etc).
+  - attributes have a description, etc associated as meta-data. They
+    also have other useful annotations such as optional, mandatory
+    etc. These are used in validation. Interestingly this may mean we
+    can also automatically generate a validator.
+  - dogen generates in M1 a set of chained program option parsers
+    (assuming a modal interface; otherwise just one) which generate
+    the M0 options.
+  - in M1, users define a class with attribute
+    =masd::command_line_options=, associated with an options class.
+  - users can choose the "backend": boost program options, etc. Each
+    is implemented as a separate template.
+  - dogen generates a parser with an associated exception
+    (parser_validation_error). The exception is simply injected as a
+    type.
+
+Links:
+
+- [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
+
+*** Exclude profiles from stereotypes processing                      :story:
+
+At present we are manually excluding profiles from the stereotypes
+transform. This was just a quick hack to get us going. We need to
+replace this with a call to annotations to get a list of profile names
+and exclude those.
+
+We should also rename =is_stereotype_handled_externally= to something
+more like "is profile" or "matches profile name".
+
+Actually the right thing may even be to just remove all of the profile
+stereotypes during annotations processing. However, we should wait
+until we complete the exomodel work since that will remove scribble
+groups, etc. Its all in the annotations transform.
+
+*** Problems in tailor generation of dogen models                     :story:
+
+Regenerated all models, got the following errors:
+
+- we are adding the extension to the dia filename because of how CMake
+  works. We should probably remove the output parameter or at least
+  allow defaulting it to a replacement of the extension.
+- we are removing the dependencies due to duplicates in JSON keys.
+- we are looking for .dia diagrams instead of .json for references.
+
+*Previous Understanding*
+
+We converted all of dogen's models from dia into JSON using tailor and
+code-generated them to see if there were any differences.
+
+Issues to address:
+
+- problems with =quilt.cpp= and =yarn.dia= / =yarn.json=: the
+  conversion of the model path did not work as expected - we do not
+  know of the "."  separator. Fixed it manually and then it all worked
+  (minus CMakeLists, see below). We could possibly fix the builder to
+  automatically use the "." to separate model paths. Actually with the
+  latest changes we now seem to only be looking at the first model
+  module, so for =yarn.dia= we only have =yarn=.
+- CMakeLists were deleted on all models for some reason, even though
+  the annotations profile look correct.
+- in quilt we correctly generated the forward declarations for
+  registrar error and workflow error without including boost
+  exception. Not sure why that is, nor why it is that we are including
+  them for forward declarations.
+- Missing include of registrar serialisation in
+  =all_ser.hpp=. Instability in =registrar_ser.cpp=, but content is
+  correct otherwise.
+- =database.json= generated invalid JSON.
+- references in dia diagrams have the dia extension. This means that
+  they do not resolve when converted to JSON.
+
+"Script":
+
+#+begin_src
+rm *.json
+A="dia knit quilt.cpp wale yarn.json annotations formatters quilt yarn database options stitch yarn.dia"
+for a in $A; do /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/dogen.tailor -t $a.dia -o $a.json; done
+for a in $A; do /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/dogen.knitter -t ${a}.json --cpp-project-dir /home/marco/Development/DomainDrivenConsulting/dogen/projects --ignore-files-matching-regex .*/CMakeLists.txt --ignore-files-matching-regex .*/test/.* --ignore-files-matching-regex .*/tests/.* --verbose --delete-extra-files; done
+#+end_src
+
+In an ideal world, we should probably have a script that we run as
+part of =knit_and_stitch= that converts to tailor and then runs
+knitter on the models, so that we keep track of tailor breaks outside
+of JSON test models.
+
+*** Log file names do not have frontend                               :story:
+
+Add extension to log file name so that we can see both Dia and JSON
+logs at the same time. At present, one overwrites the other because we
+do not have the frontend (e.g. the extension) on the log file name.
+
+*** Update static strings to string views                             :story:
+
+Now we're on C++17 we can start making use of its new features. One
+low hanging fruit is string view. We use static strings quite a lot
+for logging etc. We can just replace these with string views.
+
+Links:
+
+- [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
+
+*** Add basic "diff mode"                                             :story:
+
+We need a very simple way of checking all generated files in memory
+against what's in the file system and returning a flag if they are
+different. We can then use these flags to determine if tests pass. In
+the future we can extend this approach to include a proper diff of the
+files, but for now we just need a reliable way to run system tests
+again.
+
+Actually the right solution for this is to see the processing as part
+of a chain:
+
+- out of the generator come a set of artefacts with operations (write,
+  merge, ignore)
+- these get joined with a transform that reads the state of the file
+  system. It then adds more operations: delete, etc. If there are no
+  diffs, it marks those files as skip.
+- the final step is a processor which gets that model and executes the
+  operations. This can then be replaced by a "reporter" that simply
+  states what the operations would be.
+
+Diff mode is using the report to see if there are any diffs.
+
+Merged Stories:
+
+*Validation-only or dry-run mode*
+
+Both stitcher and knitter could do with a "dry-run" mode in which we'd
+do everything except for actually outputting.
+
+*For Knitter*
+
+It would be nice if one could just check if a dia diagram is valid for
+code generation, e.g. =--validate= or something along those lines.
+
+*For Stitch*
+
+We are interested in performing the parsing. This would be useful for
+example for a flymake mode in emacs.
+
+An additional feature of dry-run would be to run, generate the model
+and then produce a unified diff, e.g. tell me what you'd change. For
+this we'd have to link against a diff library. We need to
+automatically exclude non-overwrite files (or have an option to
+exclude/include them).
+
+Links:
+
+- [[https://github.com/google/diff-match-patch/tree/master/cpp][google Diff Match Patch library]]
+- [[https://github.com/cubicdaiya/dtl][DTL: Diff Template Library]]
+- [[https://stackoverflow.com/questions/1451694/is-there-a-way-to-diff-files-from-c][SO: Is there a way to diff files from C++?]]
+
+*Dry-run option to just diff with existing generated code*
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what has changed with the
+next code generation so that I can evaluate if the changes are as
+expected or not.
+#+end_quote
+
+It would be useful to have an option that would do everything except
+writing the files to disk; instead, it would diff them with the
+existing files and report if there are any differences. This would be
+useful to make sure the source code matches the latest version of the
+diagram.
+
+We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
+
+** Deprecated

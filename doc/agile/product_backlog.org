@@ -416,6 +416,363 @@ to make the user's life easier.
 
 Stories that need to be implemented in order to complete the V2 vision.
 
+*** Rename debian package                                             :story:
+
+At present our package is called =dogen-applcations=. Since there will
+only be one dogen application/package, this is a confusion name. We
+should rename it. Names:
+
+- masd-dogen
+
+*** Finish adding support for clang-cl builds                         :story:
+
+We have added preliminary support for building with clang-cl on
+windows, but the build is not green. Most of the errors seem to be on
+boost.
+
+Links:
+
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
+- [[https://github.com/Kitware/CDash/issues/733][CDash reporting problems]]
+
+*** Tidy-up dogen windows package                                     :story:
+
+There are a few inconsistencies with the package:
+
+- dogen components have a strange structure:
+  "Dogen/runtime/dogen".
+- we should probably have a top-level umbrella for MASD, under which
+  dogen installs.
+- package name is windows amd64. We should use the vcpkg triplets for
+  simplicity (e.g. x64-windows).
+
+*** Mapping of third-party dependencies                               :story:
+
+System models should follow the physical structure of
+dependencies. That is, we should not have a "boost" system model, but
+instead a boost-test etc. Each of these can then have mappings
+(e.g. vcpkg name, build2 name, etc). Users must declare these
+references just like they do with user models. Dogen can then create
+code for:
+
+- cmake targets, properly linking against libraries;
+- vcpkg install, at product level, by de-duplicating component
+  dependencies;
+- possibly distro dependencies.
+
+We should only have a mandatory dependency, which is the STL. In
+addition, we need different models for each version (e.g. c++ 03,
+etc). This makes it easier to include the right types.
+
+Note that each model must have an associated version. The version
+should be part of the file name. However, maybe we need to distinguish
+between TS version (11, 17, etc) from library version.
+
+*** Rename input models directory to models                           :story:
+
+We need to move the dogen project to the new directory layout whereby
+all models are kept in the =models= directory.
+
+*** dogen as a github integration                                     :story:
+
+Perhaps there are some useful services dogen could provide to users in
+terms of dogen integration. If, with every commit, we could regenerate
+the model and read the current state in github, we could then provide
+a status report:
+
+- the model does not build; red emblem. Some changes were made to the
+  model (or to dogen) that make the model invalid. User should take
+  action.
+- the model builds but generates files that are different from what's
+  checked in on github. yellow emblem. Provide a report with the
+  diffs. This can either be because the code generator has changed or
+  the user changed the model.
+- the model builds and generates exactly the same code; green emblem.
+
+With this approach we have two advantages:
+
+- we do not need to add projects as part of the dogen tests; the
+  service takes its place. We can still add a few as the core tests,
+  but we don't need to expand it much beyond reference implementation
+  and dogen itself.
+- we exercise dogen itself as well as the rest endpoint generation
+  code in a way that is actually useful to end users; it would be nice
+  to know immediately when something breaks.
+
+Notes:
+
+- we'll need some kind of way of dealing with tokens and secrets in
+  order to support private GH projects.
+
+*** Add reporting support to dogen model testing                      :story:
+
+Dogen should have a mode which generates a report for a run rather
+than code generate. The report could look like so:
+
+:              /project_a
+:                  /summary for this commit
+:                  /diffs
+:                  /errors
+:                  /benchmark data
+:                  /probing data
+:                  /log
+
+If the report was largely in HTML we could link it to the dogen docs
+and save it into git. This would make troubleshooting much easier. If
+the report contains the probing data it would be easier to figure out
+what went wrong. We should also keep track of the model that was
+generated (e.g. its location and git commit) so we can download it and
+reproduce it locally.
+
+*** Rework the tests using diff mode                                  :story:
+
+Once we have diff mode, we need to find some kind of workflow for
+tests:
+
+- each product is composed of a git URL and a list of models.
+- we git clone all repos as part of the build process.
+- directories and model locations are hard-coded in each test.
+- test runs against the model and hard-coded location, produces the
+  diff. Test asserts of the diff being non-zero.
+
+*** Fix the northwind model                                           :story:
+
+There are numerous problems with this model:
+
+- at present we have oracle support on ODB. Oracle libs are not
+  distributed with debian. If we do not find oracle we do not compile
+  northwind. This is not ideal. We should remove oracle support from
+  northwind, and install odb support in the build machine (hopefully
+  available as debs).
+- the tests are commented out and require a clean up.
+- the tests require a database to be up.
+
+Notes:
+
+- it is possible to setup [[https://docs.travis-ci.com/user/database-setup/#postgresql][postgres on travis]]
+
+*** Simplify split configuration configuration                        :story:
+
+At present we have two separate command line parameters to configure
+the main output directory and the directory for header files. The
+second parameter is used for split configurations. The problem is that
+we now need to treat split configuration projects specially because of
+this. It makes more sense to force the header directory to be relative
+to the output path and make it a meta-data parameter.
+
+*** Make "ignore regexes" a model property                            :story:
+
+At present we have a command line option:
+=--ignore-files-matching-regex=. It is used to ignore files in a
+project. However, the problem is, because it is a command line option,
+it must be supplied with each invocation of Dogen. This means that if
+we want to run dogen from outside the build system, we need to know
+what options were set in the build scripts or else we will have
+different results. This is a problem for testing. We should make it a
+meta-data option, which is supplied with each model and even more
+interesting, can be used with profiling. This means we can create
+profiles for specific purposes (ODB, lisp, etc) and then reuse them in
+different projects.
+
+We should do the same thing for =--delete-extra-files=.
+
+*** Update all stereotypes to masd                                    :story:
+
+We need to start distinguishing MASD from dogen. The profile for UML
+is part of MASD rather than dogen, so we should update all stereotypes
+to match. We need to make a decision regarding the "dia extensions" -
+its not clear if its MASD or dogen.
+
+*** Incorrect generation when changing external modules               :story:
+
+When fixing the C# projects, we updated the external modules, from
+=dogen::test_models= to =CSharpRefImpl=. Regenerating the model
+resulted in updated project files but the rest of the code did not
+change. It worked by using =-f=. It should have worked without forcing
+the write.
+
+*** Code coverage does not work for C#                                :story:
+
+It seems that using NUnit and OpenCov does not work. The main reason
+appears to be the use of shadow copying, which is no longer optional
+on NUnit 3.
+
+Links:
+
+- https://github.com/Ullink/gradle-opencover-plugin/issues/1
+- https://github.com/codecov/example-csharp/blob/master/appveyor.yml
+- https://www.appveyor.com/blog/2017/03/17/codecov/
+
+*** Improve comments on reference implementation                      :story:
+
+At present it is very difficult to understand what each model and/or
+each type does in the reference implementations. We need to add some
+comments to make it more obvious.
+
+*** Code generate C# models using msbuild                             :story:
+
+At present we did a quick hack to code generate in C#: a simple bash
+script that runs dogen. However, this is not how we expect the end
+user to consume it; there should be a msbuild target that:
+
+- detects the code generator;
+- contains the configuration (e.g. options, location of models);'
+- runs the code generator - possibly every time models change;
+- has a tailor target to generate JSON.
+
+*** Add project documentation                                         :story:
+
+We should be able to create a simple set of docs following on from the
+[[https://ned14.github.io/outcome/][outcome project]]. They seem to be using Hugo.
+
+Links:
+
+- https://github.com/foonathan/standardese
+- https://github.com/ned14/outcome/tree/develop/doc/src
+
+*** Create the =generation= model                                     :story:
+
+Create a new model called =generation= and move all code-generation
+related class to it.
+
+We need to create classes for element properties and make model have a
+collection that is a pair of element and element properties. We need a
+good name for this pair:
+
+- extended element
+- augmented element
+- decorated element: though not using the decorator pattern; also, we
+  already have decoration properties so this is confusing.
+
+Alternatively we could just call it =element= and make it contain a
+modeling element.
+
+Approach:
+
+- create a new generation model, copying across all of the meta-model
+  and transform classes from yarn. Get the model to transform from
+  endomodel to generation model.
+- augment formattables with the new element properties. Supply this
+  data via the context or assistant.
+
+Problems:
+
+- all of the transforms assume access to the modeling element means
+  access to the generation properties. However, with the introduction
+  of the generation element we now have a disconnect. For example, we
+  sometimes sort and bucket the elements, and then modify them; this
+  no longer works with generation elements because these are not
+  pointers. It would be easier to make the generation properties a
+  part of the element. This is an ongoing discussion we've had since
+  the days of formattables. However, in formattables we did write all
+  of the transforms to take into account the formattable contained
+  both the element and the formattable properties, whereas now we need
+  to update all transforms to fit this approach. This is a lot more
+  work. The quick hack is to slot in the properties directly into the
+  element as some kind of "opaque properties". We could create a base
+  class =opaque_properties= and then have a container of these in
+  element. However, to make it properly extensible, the only way is to
+  make it a unordered set of pointers.
+- actually the right solution for this is to use multiple
+  inheritance. For each modeling element we need to create a
+  corresponding generation version of it, which is the combination of
+  the modeling element and a generation element base class. Them the
+  generation model is made up of pointers to generation elements and
+  it dispatches into generation elements descendants in the
+  formatter. The key point is to preserve the distinction between
+  modeling (single element) vs generation (projection across facet
+  space).
+
+*** Create a =ci= folder in build                                     :story:
+
+We should use the same approach as nupic for organising the scripts: a
+top-level =ci= folder with folders per CI system. We should also
+follow their naming convention for the build scripts which seem to
+follow the CI events.
+
+Links:
+
+- https://github.com/numenta/nupic.core/tree/master/ci
+
+*** Adding reference to itself results in resolution errors           :story:
+
+Whilst trying to fix the JSON models we inadvertently added a
+self-reference in =dogen.generation.json=:
+
+:    "yarn.reference": "dogen.generation.json",
+
+This resulted in some puzzling errors:
+
+: 2018-10-18 19:15:00.861210 [ERROR] [yarn.transforms.enablement_transform] Duplicate element archetype: quilt.cpp.serialization.registrar_implementation <dogen><generation><registrar>
+
+Ideally we should either warn and ignore or fail to process models
+with self-references.
+
+*** Handcrafted stereotype would not work on C# models                :story:
+
+At present we do not have any tests for C# models with handcrafted. If
+we did it would not work because the annotations only set the C++
+facets. Add a test for this and fix the annotation profile. The same
+problem will apply to all new profiles:
+
+- pretty printable
+- serialisable
+- hashable
+
+*** Rename facets                                                     :story:
+
+We originally called our support for =std::hash= just =hash= and our
+support for =boost::serialization= just =serialization=. The problem
+is:
+
+- we may want to also support =boost::hash=.
+- we may want to support other serialisation types.
+
+We should rename these. Perhaps:
+
+- =std_hash=
+- =boost_serialization=: a tad verbose, but quite explicit.
+
+In addition, =io= is very misleading as the facet is not supposed to
+do I/O proper (e.g. serialisation) but more pretty-printing or debug
+dumping. So perhaps =pretty_print=.
+
+*** Update annotation profiles and stereotypes to masd namespace      :story:
+
+We should rename all annotation profiles and all stereotypes into the
+MASD namespace.
+
+We should also rename the artefact formatters to a compliant names,
+e.g. instead of =C# Artefact Formatter= maybe
+=dogen::csharp_artefact_formatter=. Note its dogen not MASD because
+these are dogen specific profiles. We need to create a model for
+dogen, separate from the MASD standard profile.
+
+*** Consider adding collections at the meta-model level               :story:
+
+A very common pattern we've observed is the creation of "container"
+classes that have a member which is a container (say
+=std::list<some_type>=) and a set of properties associated with that
+container (name, description, etc). We then expose the underlying type
+to users directly. However, perhaps it would make more sense to create
+a new meta-type (collection? container?) with associated meta-data; in
+C++, it would translate to the creation of a class obeying C++
+collection concepts such as iterators etc.
+
+Once this is in place we get code that expresses the high-level domain
+concepts but its still pluggable into the STL machinery such as
+algorithms, ranges, etc.
+
+This also addresses somewhat the annoying issue with pretty printing
+of STL containers because most of the time we would have a domain type
+for the STL collection. The approach is akin to C#'s idea of
+inheriting from collections, except here we use composition.
+
+This also means we can transparently change the underlying collection;
+though it would force a recompile, no code should break (e.g. from
+list to vector or array).
+
 *** Rename core models                                                :story:
 
 The more we catch up with the literature, the more the current model
