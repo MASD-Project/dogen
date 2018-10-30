@@ -6515,6 +6515,8 @@ Links:
   this. See also [[https://medium.freecodecamp.org/how-our-test-data-generator-makes-fake-data-look-real-ace01c5bde4a][this post]].
 - [[https://ieeexplore.ieee.org/abstract/document/8004406/][Automated Generator for Complex and Realistic Test Data]]: paper on
   the subject. Tool they created: [[https://github.com/mrfranta/jop-discontinued][jop]]
+- [[https://gitlab.com/daamien/postgresql_anonymizer][Postgresql Anonymizer]]: similar idea but at the database level. We
+  need to mine their approach for ideas.
 
 **** Example Types
 
