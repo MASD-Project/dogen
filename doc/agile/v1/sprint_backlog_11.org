@@ -11,17 +11,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-01 Thu 18:16]
+#+CAPTION: Clock summary at [2018-11-02 Fri 12:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *25:16* |       |       |   0.0 |
+| *Total time*                                                                | *27:34* |       |       |   0.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 25:16   |       |       |   0.0 |
-| Active                                                                      |         | 25:16 |       |   0.0 |
+| Stories                                                                     | 27:34   |       |       |   0.0 |
+| Active                                                                      |         | 27:34 |       |   0.0 |
 | Edit release notes for previous sprint                                      |         |       |  2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |         |       |  0:15 |   0.0 |
-| Work on MASD theory                                                         |         |       | 22:58 |   0.0 |
+| Work on MASD theory                                                         |         |       | 25:16 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -134,6 +134,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Work on MASD theory                                       :story:
     :LOGBOOK:
+    CLOCK: [2018-11-02 Fri 10:01]--[2018-11-02 Fri 12:19] =>  2:18
     CLOCK: [2018-11-01 Thu 15:45]--[2018-11-01 Thu 18:16] =>  2:27
     CLOCK: [2018-11-01 Thu 10:10]--[2018-11-01 Thu 12:43] =>  2:33
     CLOCK: [2018-10-31 Wed 16:27]--[2018-10-31 Wed 17:45] =>  1:18
