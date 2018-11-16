@@ -1084,6 +1084,61 @@ Type templates are in effect features from a feature model. We need to
 add UML support for features (e.g. add meta-model elements for them),
 with code generation, and link them back to annotations.
 
+In fact, we made a mistake by binding annotations so closely to
+dogen. There are two distinct concerns here:
+
+- the annotations library. This provides "typed support" on top of KVP
+  infrastructure. The idea here is that users can define "fields" with
+  "types" and retrieve information from those KVPs in a structured
+  way. Instead of having to create their own validation
+  infrastructure, they can rely on annotations to do all the hard work
+  for them. As part of the field creation, ideas such as "scopes" and
+  "archetype locations" emerge. However, these do not really belong to
+  the domain of annotations; these are concepts that end users create
+  and give them semantics. What annotations needs to be able to do is
+  to allow the creation of arbitrary notions of "scopes" and
+  "hierarchy". Basically, annotations could be a completely
+  self-contained project with no dependencies and usable outside of
+  dogen.
+- the linkage between the annotations library and dogen. Here we can
+  create metamodel elements to convey the input parameters needed to
+  code generate the elements for the annotations library. In this
+  sense, annotations is nothing more than a platform that the
+  transforms leverage; it has nothing particularly special to do with
+  dogen. It just so happens that dogen itself then makes use of
+  annotations to supply metadata internally, but this is a mere
+  coincidence.
+- the linkage between stitch and annotations. In this view, stitch is
+  yet another client of annotations, via dogen. Again, there is no
+  reason why stitch needs to have any dependency on dogen, other than
+  annotations. In this sense, features such as licences and other
+  boilerplate must be supplied as KVP parameters into stitch, without
+  it directly depending in formattables. In addition, the fact that
+  stitch generates c++ is also a coincidence. We could have a
+  parameter that configures stitch and generate say C#.
+
+Interestingly, in this sense we could then say that both stitch and
+annotations are stand alone libraries generated using dogen, and then
+in turn consumed by dogen. This could be done as packages by means of
+vcpkg. And of course, stitch could then use a proper templating engine
+instead of wale (another vcpkg dependency).
+
+Finally, the logical conclusion is that dogen can use *any* of a
+number of templating engines. The parameters to the engine are
+supplied using KVPs (by means of annotation). There is a generic
+metamodel element representing the binding to templating, and one of
+its parameters is the templating engine. These are bound to the dogen
+binary at compile time. End users can also make use of this mechanism,
+for any of the available facets. This means that where we supply
+=formatting_style=, we should really reflect the templating
+engine. And then, all parameters with a known prefix, say:
+
+: masd.templating.ENGINE.X=Y
+
+Are supplied as parameters to the engine. These may need to take into
+account facets as well, so that we can bind each facet to a different
+template and supply different parameters.
+
 *Previous Understanding*
 
 Tasks:
@@ -1122,7 +1177,6 @@ it would make more sense to treat them as a initialisation step. This
 will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
-
 
 *** Add support for object templates that work cross-model            :story:
 
@@ -2416,7 +2470,7 @@ make things slightly more efficient:
   again. Actually we may even be able to go up the endomodel chain all
   the way up to merging.
 
-*** Check for incompatibility between input language and enabled kernels :story:
+*** Check for incompatibility between input language and kernels      :story:
 
 At present it is possible to have a model with input language of say
 C++ but with the C# kernel enabled. We should throw if the input
@@ -6196,7 +6250,31 @@ sufficient.
 This may not be required once we move over to Catch since the specs
 become very readable.
 
-** Features that would be really nice to have one day
+** Features that would be nice to have one day
+
+*** Consider adding support for iguana                                :story:
+
+Iguana is yet another serialisation framework.
+
+Links:
+
+- https://github.com/qicosmos/iguana
+
+*** Consider adding support for ormpp                                 :story:
+
+Yet another ORM framework. It would be nice to target ODB and ormpp
+using exactly the same metamodel constructs.
+
+Links:
+
+- https://github.com/qicosmos/ormpp
+
+*** Consider adding support for Apache Arrow IPC                      :story:
+
+Yet another serialisation format.
+
+Links:
+- https://github.com/apache/arrow/tree/master/cpp/src/arrow/ipc
 
 *** Consider adding c++ attributes                                    :story:
 
@@ -6303,6 +6381,7 @@ Links:
   [[https://swagger.io/tools/swagger-codegen/][this link]].
 - [[https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v3.0][OpenAPI examples]]: YAML documents with examples.
 - [[https://github.com/matt-42/silicon][silicon]]: yet another C++ HTTP framework.
+- [[https://github.com/qicosmos/cinatra][cinatra]]: another HTTP framework. Example site: http://purecpp.org/
 
 *** HTTP API support                                                  :story:
 
@@ -6517,6 +6596,12 @@ Links:
   the subject. Tool they created: [[https://github.com/mrfranta/jop-discontinued][jop]]
 - [[https://gitlab.com/daamien/postgresql_anonymizer][Postgresql Anonymizer]]: similar idea but at the database level. We
   need to mine their approach for ideas.
+- [[https://github.com/minimaxir/big-list-of-naughty-strings][Big List of Naughty Strings]]: The Big List of Naughty Strings is an
+  evolving list of strings which have a high probability of causing
+  issues when used as user-input data.
+- [[https://github.com/dariusk/corpora][corpora]]: A collection of small corpuses of interesting data for the
+  creation of bots and similar stuff.
+- [[https://github.com/joke2k/faker][faker]]: Faker is a Python package that generates fake data for you.
 
 **** Example Types
 
@@ -8462,7 +8547,6 @@ Interesting serialisation format.
 Links:
 
 - https://github.com/google/libnop
-
 
 ** In next major release
 
@@ -11234,7 +11318,7 @@ Links:
 
 - [[http://www.learncpp.com/cpp-tutorial/125-the-virtual-table/][12.5 — The virtual table]]
 
-*** Implement wale in terms of mustache templates                     :story:
+*** Implement wale in terms of existing template libraries            :story:
 
 Originally we implemented wale as a quick hack, but we stated:
 
@@ -11260,6 +11344,9 @@ Links:
 - [[https://github.com/cierelabs/boostache/tree/develop][boostache]]
 - [[https://github.com/no1msd/mstch][mstch]]
 - [[https://github.com/mrtazz/plustache][plustache]]
+- [[https://github.com/melpon/ginger][ginger]]
+- [[https://github.com/qicosmos/render][render]]
+- [[https://github.com/pantor/inja][inja]]
 
 *** Add support for XText                                             :story:
 
