@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_TYPES_ALL_HPP
-#define MASD_DOGEN_EXTERNAL_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_ALL_HPP
+#define MASD_DOGEN_INJECTION_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.external/types/external.hpp"
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external/types/meta_model/element.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external/types/meta_model/attribute.hpp"
-#include "masd.dogen.external/types/transforms/registrar.hpp"
-#include "masd.dogen.external/types/transforms/registrar_error.hpp"
-#include "masd.dogen.external/types/transforms/model_to_model_chain.hpp"
-#include "masd.dogen.external/types/transforms/transformation_error.hpp"
-#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
-#include "masd.dogen.external/types/transforms/encoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/injection.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/meta_model/attribute.hpp"
+#include "masd.dogen.injection/types/transforms/registrar.hpp"
+#include "masd.dogen.injection/types/transforms/registrar_error.hpp"
+#include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
+#include "masd.dogen.injection/types/transforms/transformation_error.hpp"
+#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"
 
 #endif

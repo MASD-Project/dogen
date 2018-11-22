@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external/types/meta_model/attribute.hpp"
+#include "masd.dogen.injection/types/meta_model/attribute.hpp"
 
-namespace masd::dogen::external::meta_model {
+namespace masd::dogen::injection::meta_model {
 
 attribute::attribute(
     const std::string& name,

@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.external/io/meta_model/model_io.hpp"
-#include "masd.dogen.external/io/meta_model/element_io.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/io/meta_model/element_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -74,7 +74,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::external::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::injection::meta_model::element>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -86,11 +86,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::ex
 
 }
 
-namespace masd::dogen::external::meta_model {
+namespace masd::dogen::injection::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::external::meta_model::model\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::injection::meta_model::model\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "

@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.external/io/meta_model/element_io.hpp"
-#include "masd.dogen.external/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.injection/io/meta_model/element_io.hpp"
+#include "masd.dogen.injection/io/meta_model/attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -75,7 +75,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::external::meta_model::attribute>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::injection::meta_model::attribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -87,7 +87,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::ex
 
 }
 
-namespace masd::dogen::external::meta_model {
+namespace masd::dogen::injection::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const element& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -97,7 +97,7 @@ std::ostream& operator<<(std::ostream& s, const element& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::external::meta_model::element\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::injection::meta_model::element\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "

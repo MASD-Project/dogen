@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_IO_META_MODEL_ELEMENT_IO_HPP
-#define MASD_DOGEN_EXTERNAL_IO_META_MODEL_ELEMENT_IO_HPP
+#ifndef MASD_DOGEN_INJECTION_IO_META_MODEL_ELEMENT_IO_HPP
+#define MASD_DOGEN_INJECTION_IO_META_MODEL_ELEMENT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
 
-namespace masd::dogen::external::meta_model {
+namespace masd::dogen::injection::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::external::meta_model::element& v);
+     const masd::dogen::injection::meta_model::element& v);
 
 }
 

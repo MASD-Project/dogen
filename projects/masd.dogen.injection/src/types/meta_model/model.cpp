@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
 
-namespace masd::dogen::external::meta_model {
+namespace masd::dogen::injection::meta_model {
 
 model::model(
     const std::string& name,
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const std::list<std::string>& stereotypes,
-    const std::list<masd::dogen::external::meta_model::element>& elements)
+    const std::list<masd::dogen::injection::meta_model::element>& elements)
     : name_(name),
       documentation_(documentation),
       tagged_values_(tagged_values),
@@ -121,19 +121,19 @@ void model::stereotypes(const std::list<std::string>&& v) {
     stereotypes_ = std::move(v);
 }
 
-const std::list<masd::dogen::external::meta_model::element>& model::elements() const {
+const std::list<masd::dogen::injection::meta_model::element>& model::elements() const {
     return elements_;
 }
 
-std::list<masd::dogen::external::meta_model::element>& model::elements() {
+std::list<masd::dogen::injection::meta_model::element>& model::elements() {
     return elements_;
 }
 
-void model::elements(const std::list<masd::dogen::external::meta_model::element>& v) {
+void model::elements(const std::list<masd::dogen::injection::meta_model::element>& v) {
     elements_ = v;
 }
 
-void model::elements(const std::list<masd::dogen::external::meta_model::element>&& v) {
+void model::elements(const std::list<masd::dogen::injection::meta_model::element>&& v) {
     elements_ = std::move(v);
 }
 

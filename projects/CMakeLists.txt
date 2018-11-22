@@ -215,12 +215,12 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.annotations/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.external/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.dia/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.json/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.probing/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.formatting/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.options/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.external.dia/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.external.json/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.modeling/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.templating/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.generation/include
@@ -238,12 +238,12 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.annotations)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.dia)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.probing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.formatting)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.options)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external.dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.external.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.modeling)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.templating)

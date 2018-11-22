@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_TYPES_EXTERNAL_HPP
-#define MASD_DOGEN_EXTERNAL_TYPES_EXTERNAL_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_INJECTION_HPP
+#define MASD_DOGEN_INJECTION_TYPES_INJECTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
  *   Dogen, such as Dia
  * - a Dogen format designed for interoperability (JSON).
  */
-namespace masd::dogen::external {
+namespace masd::dogen::injection {
 }
 
 #endif
