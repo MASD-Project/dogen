@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string/join.hpp>
-#include "masd.dogen.formatting/types/cpp/namespace_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/namespace_formatter.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ const std::string separator("::");
 
 }
 
-namespace masd::dogen::formatting::cpp {
+namespace masd::dogen::extraction::cpp {
 
 namespace_formatter::namespace_formatter(
     const bool create_anonymous_namespace, const bool add_new_line,

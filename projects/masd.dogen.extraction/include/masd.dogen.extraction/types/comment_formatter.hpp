@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTNG_TYPES_COMMENT_FORMATTER_HPP
-#define MASD_DOGEN_FORMATTNG_TYPES_COMMENT_FORMATTER_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_COMMENT_FORMATTER_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_COMMENT_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <iosfwd>
-#include "masd.dogen.formatting/types/comment_styles.hpp"
+#include "masd.dogen.extraction/types/comment_styles.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Formats input according to commenting options.

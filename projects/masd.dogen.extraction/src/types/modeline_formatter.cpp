@@ -21,15 +21,15 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.formatting/io/modeline_io.hpp"
-#include "masd.dogen.formatting/types/formatting_error.hpp"
-#include "masd.dogen.formatting/types/modeline_formatter.hpp"
+#include "masd.dogen.extraction/io/modeline_io.hpp"
+#include "masd.dogen.extraction/types/formatting_error.hpp"
+#include "masd.dogen.extraction/types/modeline_formatter.hpp"
 
 using namespace masd::dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatting.modeline_formatter"));
+auto lg(logger_factory("extraction.modeline_formatter"));
 
 const std::string vim_marker("vim: set");
 const std::string vim_field_separator("=");
@@ -45,7 +45,7 @@ const std::string unsupported_modeline("Modeline is not supported.");
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 bool modeline_formatter::is_vim(const modeline& m) const {
     return m.editor() == editors::vim;

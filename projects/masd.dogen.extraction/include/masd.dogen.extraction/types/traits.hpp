@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 struct traits {
     struct decoration {

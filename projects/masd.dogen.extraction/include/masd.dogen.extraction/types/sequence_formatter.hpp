@@ -26,9 +26,9 @@
 #endif
 
 #include <string>
-#include "masd.dogen.formatting/types/infix_configuration.hpp"
+#include "masd.dogen.extraction/types/infix_configuration.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Helper to format sequences.

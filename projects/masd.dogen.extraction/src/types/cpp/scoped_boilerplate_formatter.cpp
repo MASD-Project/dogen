@@ -19,9 +19,9 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
 
-namespace masd::dogen::formatting::cpp {
+namespace masd::dogen::extraction::cpp {
 
 scoped_boilerplate_formatter::scoped_boilerplate_formatter(std::ostream& s,
     const boost::optional<decoration_properties>& odp,

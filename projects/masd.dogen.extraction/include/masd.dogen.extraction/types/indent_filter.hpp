@@ -40,7 +40,7 @@
 #include <boost/iostreams/concepts.hpp>
 #include <boost/iostreams/operations.hpp>
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Store a pointer to the indenter filter.
@@ -305,14 +305,14 @@ typedef basic_negative_indenter_scope<char> negative_indenter_scope;
 template<class char_type, class traits_type>
 inline std::basic_ostream<char_type, traits_type>&
 operator++(std::basic_ostream<char_type, traits_type>& s) {
-    s << masd::dogen::formatting::indent_in;
+    s << masd::dogen::extraction::indent_in;
     return s;
 }
 
 template<class char_type, class traits_type>
 inline std::basic_ostream<char_type, traits_type>&
 operator--(std::basic_ostream<char_type, traits_type>& s) {
-    s << masd::dogen::formatting::indent_out;
+    s << masd::dogen::extraction::indent_out;
     return s;
 }
 /**@}*/

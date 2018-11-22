@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 
-namespace masd::dogen::formatting::csharp {
+namespace masd::dogen::extraction::csharp {
 
 /**
  * @brief Generates using statements.

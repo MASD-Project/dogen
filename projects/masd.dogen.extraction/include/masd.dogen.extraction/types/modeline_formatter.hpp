@@ -27,9 +27,9 @@
 
 #include <iosfwd>
 #include <string>
-#include "masd.dogen.formatting/types/modeline.hpp"
+#include "masd.dogen.extraction/types/modeline.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Creates a modeline, ready to be wrapped in comments.

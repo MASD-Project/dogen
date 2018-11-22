@@ -28,9 +28,9 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 
-namespace masd::dogen::formatting::cpp {
+namespace masd::dogen::extraction::cpp {
 
 /**
  * @brief Formats all of the boilerplate content in a C++ file such as

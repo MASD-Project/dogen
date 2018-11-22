@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.formatting/types/decoration_formatter.hpp"
-#include "masd.dogen.formatting/types/cpp/include_formatter.hpp"
-#include "masd.dogen.formatting/types/cpp/header_guard_formatter.hpp"
-#include "masd.dogen.formatting/types/cpp/boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/decoration_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/include_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/header_guard_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/boilerplate_formatter.hpp"
 
-namespace masd::dogen::formatting::cpp {
+namespace masd::dogen::extraction::cpp {
 
 boilerplate_formatter::boilerplate_formatter(
     const bool generate_preamble, const bool generate_header_guards)

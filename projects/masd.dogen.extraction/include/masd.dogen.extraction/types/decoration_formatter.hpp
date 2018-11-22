@@ -26,10 +26,10 @@
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.formatting/types/comment_styles.hpp"
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/comment_styles.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 class decoration_formatter {
 private:

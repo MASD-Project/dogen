@@ -25,15 +25,15 @@
 #include "masd.dogen.utility/filesystem/path.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
-#include "masd.dogen.formatting/types/modeline_group_hydrator.hpp"
-#include "masd.dogen.formatting/io/modeline_group_io.hpp"
-#include "masd.dogen.formatting/types/hydration_error.hpp"
+#include "masd.dogen.extraction/types/modeline_group_hydrator.hpp"
+#include "masd.dogen.extraction/io/modeline_group_io.hpp"
+#include "masd.dogen.extraction/types/hydration_error.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 
 const std::string empty;
-const std::string test_module("masd.dogen.formatting.tests");
+const std::string test_module("masd.dogen.extraction.tests");
 const std::string test_suite("modeline_group_hydrator_tests");
 
 const std::string duplicate_group("Duplicate modeline group");
@@ -132,11 +132,11 @@ const std::string no_fields_message("Modeline must have at least");
 
 }
 
-using masd::dogen::formatting::hydration_error;
-using masd::dogen::formatting::modeline_group_hydrator;
-using masd::dogen::formatting::editors;
-using masd::dogen::formatting::modeline_locations;
-using namespace masd::dogen::formatting;
+using masd::dogen::extraction::hydration_error;
+using masd::dogen::extraction::modeline_group_hydrator;
+using masd::dogen::extraction::editors;
+using masd::dogen::extraction::modeline_locations;
+using namespace masd::dogen::extraction;
 using namespace masd::dogen::utility::test;
 using namespace masd::dogen::utility::filesystem;
 using masd::dogen::utility::test::contains_checker;

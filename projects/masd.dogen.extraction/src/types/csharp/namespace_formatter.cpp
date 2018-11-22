@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string/join.hpp>
-#include "masd.dogen.formatting/types/csharp/namespace_formatter.hpp"
+#include "masd.dogen.extraction/types/csharp/namespace_formatter.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ const std::string dot(".");
 
 }
 
-namespace masd::dogen::formatting::csharp {
+namespace masd::dogen::extraction::csharp {
 
 namespace_formatter::namespace_formatter(const bool add_new_line)
     : add_new_line_(add_new_line) {}

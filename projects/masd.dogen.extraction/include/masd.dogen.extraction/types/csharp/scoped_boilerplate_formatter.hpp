@@ -29,10 +29,10 @@
 #include <iosfwd>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
-#include "masd.dogen.formatting/types/csharp/boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/csharp/boilerplate_formatter.hpp"
 
-namespace masd::dogen::formatting::csharp {
+namespace masd::dogen::extraction::csharp {
 
 /**
  * @brief RAII wrapper around the boilerplate formatter.

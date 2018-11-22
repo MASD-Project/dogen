@@ -20,20 +20,20 @@
  */
 #include <sstream>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.formatting/io/infix_configuration_io.hpp"
-#include "masd.dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.extraction/io/infix_configuration_io.hpp"
+#include "masd.dogen.extraction/types/sequence_formatter.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("formatting.sequence_formatter"));
+static logger lg(logger_factory("extraction.sequence_formatter"));
 
 const std::string empty;
 const std::string comma(",");
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 bool sequence_formatter::is_first() const {
     return position_ == 0;

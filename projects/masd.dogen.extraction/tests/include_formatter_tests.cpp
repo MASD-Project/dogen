@@ -19,18 +19,18 @@
  *
  */
 #include <boost/test/unit_test.hpp>
-#include "masd.dogen.formatting/types/indent_filter.hpp"
+#include "masd.dogen.extraction/types/indent_filter.hpp"
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/filesystem/path.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
 #include "masd.dogen.utility/test/asserter.hpp"
-#include "masd.dogen.formatting/types/cpp/include_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/include_formatter.hpp"
 
 namespace {
 
 const std::string empty;
-const std::string test_module("masd.dogen.formatting.tests");
+const std::string test_module("masd.dogen.extraction.tests");
 const std::string test_suite("include_formatter_tests");
 const auto empty_includes(std::list<std::string>{});
 
@@ -62,10 +62,10 @@ BOOST_AUTO_TEST_CASE(non_empty_includes_produces_expected_preprocessor_includes)
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::extraction::indent_filter::push(fo, 4);
     fo.push(s);
 
-    masd::dogen::formatting::cpp::include_formatter f;
+    masd::dogen::extraction::cpp::include_formatter f;
     f.format(fo, includes);
     BOOST_CHECK(asserter::assert_equals_marker(with_includes, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";
@@ -77,10 +77,10 @@ BOOST_AUTO_TEST_CASE(empty_includes_produces_no_preprocessor_includes) {
 
     std::ostringstream s;
     boost::iostreams::filtering_ostream fo;
-    masd::dogen::formatting::indent_filter::push(fo, 4);
+    masd::dogen::extraction::indent_filter::push(fo, 4);
     fo.push(s);
 
-    masd::dogen::formatting::cpp::include_formatter f;
+    masd::dogen::extraction::cpp::include_formatter f;
     f.format(fo, empty_includes);
     BOOST_CHECK(asserter::assert_equals_marker(empty, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Disable modeline bottom";

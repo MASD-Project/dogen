@@ -22,16 +22,16 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.formatting/types/traits.hpp"
-#include "masd.dogen.formatting/types/repository_factory.hpp"
-#include "masd.dogen.formatting/types/code_generation_marker_factory.hpp"
-#include "masd.dogen.formatting/types/building_error.hpp"
-#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/types/traits.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
+#include "masd.dogen.extraction/types/code_generation_marker_factory.hpp"
+#include "masd.dogen.extraction/types/building_error.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("formatting.decoration_properties_factory"));
+auto lg(logger_factory("extraction.decoration_properties_factory"));
 
 const std::string missing_context_ptr("Context pointer is null");
 const std::string licence_not_found("Licence not found: ");
@@ -40,7 +40,7 @@ const std::string modeline_not_found("Modeline not found: ");
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 decoration_properties_factory::
 decoration_properties_factory(const annotations::type_repository& drp,

@@ -23,13 +23,13 @@
 #include "masd.dogen.utility/test/asserter.hpp"
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/test/canned_tests.hpp"
-#include "masd.dogen.formatting/types/comment_formatter.hpp"
+#include "masd.dogen.extraction/types/comment_formatter.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 
 const std::string empty;
-const std::string test_module("masd.dogen.formatting.tests");
+const std::string test_module("masd.dogen.extraction.tests");
 const std::string test_suite("comment_formatter_tests");
 
 const std::string c_style_empty(R"(/*
@@ -158,7 +158,7 @@ const bool line_between_blocks(true);
 const bool documenting_previous_identifier(true);
 
 template<typename Content>
-std::string format(const masd::dogen::formatting::comment_formatter& f,
+std::string format(const masd::dogen::extraction::comment_formatter& f,
     const Content& c, const bool line_between) {
     std::ostringstream s;
     f.format(s, c, line_between);
@@ -166,7 +166,7 @@ std::string format(const masd::dogen::formatting::comment_formatter& f,
 }
 
 template<typename Content>
-std::string format(const masd::dogen::formatting::comment_formatter& f,
+std::string format(const masd::dogen::extraction::comment_formatter& f,
     const Content& c) {
     std::ostringstream s;
     f.format(s, c);
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_SUITE(comment_formatter_tests)
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_empty_string_as_c_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f;
+    masd::dogen::extraction::comment_formatter f;
     const auto r(format(f, empty));
     BOOST_CHECK(asserter::assert_equals_marker(c_style_empty, r));
 }
@@ -191,11 +191,11 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_c_style_comment_produces_expecte
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_empty_string_as_doxygen_c_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         !start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::c_style,
+        masd::dogen::extraction::comment_styles::c_style,
         !last_line_is_blank);
 
     const auto r(format(f, empty));
@@ -205,11 +205,11 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_doxygen_c_style_comment_produces
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_csharp_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_empty_string_as_csharp_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::csharp_style,
+        masd::dogen::extraction::comment_styles::csharp_style,
         last_line_is_blank);
 
     const auto r(format(f, empty));
@@ -219,11 +219,11 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_csharp_style_comment_produces_ex
 BOOST_AUTO_TEST_CASE(formatting_empty_string_as_sandcastle_csharp_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_empty_string_as_sandcastle_csharp_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::csharp_style,
+        masd::dogen::extraction::comment_styles::csharp_style,
         last_line_is_blank);
 
     const auto r(format(f, empty));
@@ -234,11 +234,11 @@ BOOST_AUTO_TEST_CASE(formatting_empty_string_as_sandcastle_csharp_style_comment_
 BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_licence_as_c_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::c_style,
+        masd::dogen::extraction::comment_styles::c_style,
         last_line_is_blank);
 
     std::list<std::string> content { modeline, licence };
@@ -249,11 +249,11 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_c_style_comment_produces_expected_out
 BOOST_AUTO_TEST_CASE(formatting_licence_as_csharp_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_licence_as_csharp_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::csharp_style,
+        masd::dogen::extraction::comment_styles::csharp_style,
         last_line_is_blank);
 
     std::list<std::string> content { modeline, licence };
@@ -264,11 +264,11 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_csharp_style_comment_produces_expecte
 BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_licence_as_shell_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::shell_style,
+        masd::dogen::extraction::comment_styles::shell_style,
         last_line_is_blank);
 
     std::list<std::string> content { modeline, licence };
@@ -279,11 +279,11 @@ BOOST_AUTO_TEST_CASE(formatting_licence_as_shell_style_comment_produces_expected
 BOOST_AUTO_TEST_CASE(formatting_modeline_as_shell_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_modeline_as_shell_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::shell_style,
+        masd::dogen::extraction::comment_styles::shell_style,
         !last_line_is_blank);
 
     const auto r(format(f, modeline));
@@ -293,11 +293,11 @@ BOOST_AUTO_TEST_CASE(formatting_modeline_as_shell_style_comment_produces_expecte
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_one_line_as_doxygen_c_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         !start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::c_style,
+        masd::dogen::extraction::comment_styles::c_style,
         !last_line_is_blank);
 
     const auto r(format(f, doxygen_brief));
@@ -307,11 +307,11 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_c_style_comment_produces_exp
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_sandcastle_csharp_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_one_line_as_sandcastle_csharp_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::csharp_style,
+        masd::dogen::extraction::comment_styles::csharp_style,
         !last_line_is_blank);
 
     const auto r(format(f, doxygen_brief));
@@ -321,11 +321,11 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_sandcastle_csharp_style_comment_prod
 BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_multi_line_as_doxygen_c_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         !start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::c_style,
+        masd::dogen::extraction::comment_styles::c_style,
         last_line_is_blank);
 
     const auto r(format(f, doxgen_multi_line));
@@ -335,11 +335,11 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_as_doxygen_c_style_comment_produces_e
 BOOST_AUTO_TEST_CASE(formatting_multi_line_as_sandcastle_csharp_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_multi_line_as_sandcastle_csharp_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::csharp_style,
+        masd::dogen::extraction::comment_styles::csharp_style,
         last_line_is_blank);
 
     const auto r(format(f, doxgen_multi_line));
@@ -350,11 +350,11 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_as_sandcastle_csharp_style_comment_pr
 BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_one_line_as_doxygen_cpp_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::cpp_style,
+        masd::dogen::extraction::comment_styles::cpp_style,
         !last_line_is_blank);
 
     const auto r(format(f, enumeration));
@@ -364,11 +364,11 @@ BOOST_AUTO_TEST_CASE(formatting_one_line_as_doxygen_cpp_style_comment_produces_e
 BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_multi_line_text_as_shell_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::shell_style,
+        masd::dogen::extraction::comment_styles::shell_style,
         !last_line_is_blank);
 
     const auto r(format(f, multi_line_text));
@@ -378,11 +378,11 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_
 BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_xml_style_comment_produces_expected_output) {
     SETUP_TEST_LOG_SOURCE("formatting_multi_line_text_as_xml_style_comment_produces_expected_output");
 
-    masd::dogen::formatting::comment_formatter f(
+    masd::dogen::extraction::comment_formatter f(
         start_on_first_line,
         !use_documentation_tool_markup,
         !documenting_previous_identifier,
-        masd::dogen::formatting::comment_styles::xml_style,
+        masd::dogen::extraction::comment_styles::xml_style,
         !last_line_is_blank);
 
     const auto r(format(f, multi_line_text));

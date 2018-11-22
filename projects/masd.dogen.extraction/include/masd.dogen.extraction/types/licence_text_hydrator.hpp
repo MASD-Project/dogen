@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Hydrates the licence text from a stream or file.

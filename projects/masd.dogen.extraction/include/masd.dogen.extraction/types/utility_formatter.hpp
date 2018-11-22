@@ -27,10 +27,10 @@
 
 #include <string>
 #include <ostream>
-#include "masd.dogen.formatting/types/quote_types.hpp"
-#include "masd.dogen.formatting/types/spacing_types.hpp"
+#include "masd.dogen.extraction/types/quote_types.hpp"
+#include "masd.dogen.extraction/types/spacing_types.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Mixed grab-bag of formatting utilities.

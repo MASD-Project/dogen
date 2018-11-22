@@ -27,12 +27,12 @@
 
 #include <list>
 #include <string>
-#include "masd.dogen.formatting/types/licence.hpp"
-#include "masd.dogen.formatting/types/modeline.hpp"
-#include "masd.dogen.formatting/types/modeline_locations.hpp"
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/licence.hpp"
+#include "masd.dogen.extraction/types/modeline.hpp"
+#include "masd.dogen.extraction/types/modeline_locations.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 
-namespace masd::dogen::formatting::test {
+namespace masd::dogen::extraction::test {
 
 class mock_decoration_properties_factory {
 public:

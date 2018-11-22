@@ -28,9 +28,9 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "masd.dogen.formatting/types/csharp/namespace_formatter.hpp"
+#include "masd.dogen.extraction/types/csharp/namespace_formatter.hpp"
 
-namespace masd::dogen::formatting::csharp {
+namespace masd::dogen::extraction::csharp {
 
 /**
  * @brief RAII wrapper around the namespaces formatter.

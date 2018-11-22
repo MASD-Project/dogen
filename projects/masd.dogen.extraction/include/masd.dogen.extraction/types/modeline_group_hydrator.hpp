@@ -30,10 +30,10 @@
 #include <istream>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "masd.dogen.formatting/types/modeline_field.hpp"
-#include "masd.dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.extraction/types/modeline_field.hpp"
+#include "masd.dogen.extraction/types/modeline_group.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Hydrates a modeline group in a stream.

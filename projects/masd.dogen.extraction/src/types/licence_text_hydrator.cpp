@@ -22,19 +22,19 @@
 #include <boost/filesystem/fstream.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/filesystem/file.hpp"
-#include "masd.dogen.formatting/types/hydration_error.hpp"
-#include "masd.dogen.formatting/types/licence_text_hydrator.hpp"
+#include "masd.dogen.extraction/types/hydration_error.hpp"
+#include "masd.dogen.extraction/types/licence_text_hydrator.hpp"
 
 using namespace masd::dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("formatting.licence_text_hydrator"));
+auto lg(logger_factory("extraction.licence_text_hydrator"));
 const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::string licence_text_hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Reading stream.";

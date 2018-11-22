@@ -29,13 +29,13 @@
 #include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.formatting/types/licence.hpp"
-#include "masd.dogen.formatting/types/repository.hpp"
-#include "masd.dogen.formatting/types/modeline_group.hpp"
-#include "masd.dogen.formatting/types/decoration_configuration.hpp"
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/licence.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
+#include "masd.dogen.extraction/types/modeline_group.hpp"
+#include "masd.dogen.extraction/types/decoration_configuration.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Creates the decoration configuration.

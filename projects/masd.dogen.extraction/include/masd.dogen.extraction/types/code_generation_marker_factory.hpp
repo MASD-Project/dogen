@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 class code_generation_marker_factory {
 public:

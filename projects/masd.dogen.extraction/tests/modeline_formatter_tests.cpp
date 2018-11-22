@@ -22,21 +22,21 @@
 #include "masd.dogen.utility/test/asserter.hpp"
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/test/canned_tests.hpp"
-#include "masd.dogen.formatting/types/modeline.hpp"
-#include "masd.dogen.formatting/types/modeline_formatter.hpp"
-#include "masd.dogen.formatting/types/formatting_error.hpp"
+#include "masd.dogen.extraction/types/modeline.hpp"
+#include "masd.dogen.extraction/types/modeline_formatter.hpp"
+#include "masd.dogen.extraction/types/formatting_error.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
 
-using masd::dogen::formatting::editors;
-using masd::dogen::formatting::modeline;
-using masd::dogen::formatting::modeline_field;
-using masd::dogen::formatting::modeline_formatter;
-using masd::dogen::formatting::modeline_locations;
+using masd::dogen::extraction::editors;
+using masd::dogen::extraction::modeline;
+using masd::dogen::extraction::modeline_field;
+using masd::dogen::extraction::modeline_formatter;
+using masd::dogen::extraction::modeline_locations;
 
 namespace {
 
 const std::string empty;
-const std::string test_module("masd.dogen.formatting.tests");
+const std::string test_module("masd.dogen.extraction.tests");
 const std::string test_suite("modeline_formatter_tests");
 
 const std::string unsupported_editor_message("Modeline is not supported");
@@ -111,7 +111,7 @@ format(const modeline_formatter& f, const modeline& m) {
 
 using namespace masd::dogen::utility::test;
 using masd::dogen::utility::test::asserter;
-using masd::dogen::formatting::formatting_error;
+using masd::dogen::extraction::formatting_error;
 
 BOOST_AUTO_TEST_SUITE(modeline_formatter_tests)
 

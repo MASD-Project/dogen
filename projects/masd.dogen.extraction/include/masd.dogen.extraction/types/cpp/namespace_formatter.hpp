@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <string>
 
-namespace masd::dogen::formatting::cpp {
+namespace masd::dogen::extraction::cpp {
 
 /**
  * @brief Formats C++ namespaces.

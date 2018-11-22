@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 
-namespace masd::dogen::formatting::cpp {
+namespace masd::dogen::extraction::cpp {
 
 /**
  * @brief Generates preprocessor include statements.

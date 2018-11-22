@@ -30,10 +30,10 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.formatting/types/modeline_group.hpp"
-#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.extraction/types/modeline_group.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Generates the formatter's repositotry by hydrating all

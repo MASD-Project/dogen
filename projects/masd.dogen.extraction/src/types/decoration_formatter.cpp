@@ -20,9 +20,9 @@
  */
 #include <sstream>
 #include <ostream>
-#include "masd.dogen.formatting/types/comment_formatter.hpp"
-#include "masd.dogen.formatting/types/modeline_formatter.hpp"
-#include "masd.dogen.formatting/types/decoration_formatter.hpp"
+#include "masd.dogen.extraction/types/comment_formatter.hpp"
+#include "masd.dogen.extraction/types/modeline_formatter.hpp"
+#include "masd.dogen.extraction/types/decoration_formatter.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const bool documenting_previous_identifier(true);
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 void decoration_formatter::
 add_modeline(std::list<std::string>& content, const modeline& m) const {
