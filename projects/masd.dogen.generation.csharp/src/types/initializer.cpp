@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.coding/types/transforms/model_to_text_model_chain.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/workflow.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/initializer.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/initializer.hpp"
@@ -30,7 +30,7 @@ namespace masd::dogen::generation::csharp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize();
-    modeling::transforms::register_transform<model_to_text_model_transform>();
+    coding::transforms::register_transform<model_to_text_model_transform>();
 }
 
 }

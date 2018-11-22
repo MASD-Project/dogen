@@ -26,9 +26,9 @@
 #include "masd.dogen.utility/log/severity_level.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.formatting/types/formatting_error.hpp"
-#include "masd.dogen.modeling/types/transforms/options.hpp"
-#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
-#include "masd.dogen.modeling/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context_factory.hpp"
+#include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
 #include "masd.dogen.knitter/initializer.hpp"
 #include "masd.dogen.knitter/workflow_error.hpp"
 #include "masd.dogen.knitter/program_options_parser.hpp"
@@ -87,12 +87,12 @@ namespace masd::dogen::knitter {
 workflow::workflow() : can_log_(false) { }
 
 void workflow::
-initialise_model_name(const modeling::transforms::options& o) {
+initialise_model_name(const coding::transforms::options& o) {
     const boost::filesystem::path p(o.target());
     model_name_ = p.stem().filename().string();
 }
 
-boost::optional<modeling::transforms::options>
+boost::optional<coding::transforms::options>
 workflow::generate_options(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
@@ -105,7 +105,7 @@ workflow::generate_options(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::initialise_logging(const modeling::transforms::options& o) {
+void workflow::initialise_logging(const coding::transforms::options& o) {
     log_path_ = o.log_file();
 
     life_cycle_manager lcm;
@@ -114,13 +114,13 @@ void workflow::initialise_logging(const modeling::transforms::options& o) {
     can_log_ = true;
 }
 
-void workflow::knit(const modeling::transforms::options& o) const {
+void workflow::knit(const coding::transforms::options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
 
     initializer::initialize();
 
     try {
-        using namespace modeling::transforms;
+        using namespace coding::transforms;
         const auto ctx(context_factory::make(o));
         code_generation_chain::transform(ctx);
     } catch(const masd::dogen::formatting::formatting_error& e) {

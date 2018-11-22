@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assistant_fwd.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assembly_info_fwd.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/visual_studio_project_fwd.hpp"
@@ -36,12 +36,12 @@ namespace masd::dogen::generation::csharp::fabric {
 /**
  * @brief Visitor for element
  */
-class element_visitor : public masd::dogen::modeling::meta_model::element_visitor {
+class element_visitor : public masd::dogen::coding::meta_model::element_visitor {
 public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
-    using masd::dogen::modeling::meta_model::element_visitor::visit;
+    using masd::dogen::coding::meta_model::element_visitor::visit;
 
     /**
      * @brief Accept visits for type masd::dogen::generation::csharp::fabric::assembly_info

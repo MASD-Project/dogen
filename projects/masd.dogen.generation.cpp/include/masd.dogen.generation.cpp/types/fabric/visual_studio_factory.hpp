@@ -30,8 +30,8 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
@@ -54,23 +54,23 @@ private:
 
 private:
     std::string obtain_project_name(
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 
 private:
-    boost::shared_ptr<modeling::meta_model::element>
+    boost::shared_ptr<coding::meta_model::element>
     make_solution(const visual_studio_configuration cfg,
         const std::string& project_name,
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 
-    boost::shared_ptr<modeling::meta_model::element>
+    boost::shared_ptr<coding::meta_model::element>
     make_project(const visual_studio_configuration cfg,
         const std::string& project_name,
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 
 public:
-    std::list<boost::shared_ptr<modeling::meta_model::element>>
+    std::list<boost::shared_ptr<coding::meta_model::element>>
     make(const annotations::type_repository& atrp,
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 };
 
 }

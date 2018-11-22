@@ -28,8 +28,8 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
@@ -38,26 +38,26 @@ public:
     virtual ~injector() noexcept;
 
 private:
-    void add_element(const boost::shared_ptr<modeling::meta_model::element>& e,
-        modeling::meta_model::model& m) const;
+    void add_element(const boost::shared_ptr<coding::meta_model::element>& e,
+        coding::meta_model::model& m) const;
 
     void add_elements(
-        const std::list<boost::shared_ptr<modeling::meta_model::element>>& elements,
-        modeling::meta_model::model& m) const;
+        const std::list<boost::shared_ptr<coding::meta_model::element>>& elements,
+        coding::meta_model::model& m) const;
 
 private:
-    void inject_registrar(modeling::meta_model::model& m) const;
-    void inject_build_files(modeling::meta_model::model& m) const;
-    void inject_odb_options(modeling::meta_model::model& m) const;
-    void inject_master_headers(modeling::meta_model::model& m) const;
+    void inject_registrar(coding::meta_model::model& m) const;
+    void inject_build_files(coding::meta_model::model& m) const;
+    void inject_odb_options(coding::meta_model::model& m) const;
+    void inject_master_headers(coding::meta_model::model& m) const;
     void inject_visual_studio(const annotations::type_repository& atrp,
-        modeling::meta_model::model& m) const;
+        coding::meta_model::model& m) const;
     void inject_forward_declarations(
-        modeling::meta_model::model& m) const;
+        coding::meta_model::model& m) const;
 
 public:
     void inject(const annotations::type_repository& atrp,
-        modeling::meta_model::model& m) const;
+        coding::meta_model::model& m) const;
 };
 
 }

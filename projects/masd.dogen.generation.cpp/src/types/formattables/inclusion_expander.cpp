@@ -108,7 +108,7 @@ inclusion_expander::element_inclusion_dependencies_type
 inclusion_expander::compute_inclusion_dependencies(
     const formatters::repository& frp,
     const dependencies_builder_factory& df,
-    const modeling::meta_model::element& e) const {
+    const coding::meta_model::element& e) const {
 
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
@@ -200,7 +200,7 @@ void inclusion_expander::populate_inclusion_dependencies(
              * model. However, we do need them around for inclusion
              * directives, so we can't rely on reduction.
              */
-            if (e.origin_type() != modeling::meta_model::origin_types::target)
+            if (e.origin_type() != coding::meta_model::origin_types::target)
                 continue;
 
             /*
@@ -239,7 +239,7 @@ void inclusion_expander::populate_inclusion_dependencies(
 }
 
 void inclusion_expander::expand(const annotations::type_repository& atrp,
-    const std::unordered_set<modeling::meta_model::element_archetype>&
+    const std::unordered_set<coding::meta_model::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
 

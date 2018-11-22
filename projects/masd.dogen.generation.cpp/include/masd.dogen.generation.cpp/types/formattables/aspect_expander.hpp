@@ -32,8 +32,8 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/aspect_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -64,13 +64,13 @@ private:
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
-    void walk_name_tree(const modeling::meta_model::name_tree& nt,
+    void walk_name_tree(const coding::meta_model::name_tree& nt,
         const bool is_top_level, const aspect_properties_type& element_aps,
         aspect_properties& ap) const;
 
     aspect_properties compute_aspect_properties(
         const aspect_properties_type& element_aps,
-        const std::list<modeling::meta_model::attribute>& attrs) const;
+        const std::list<coding::meta_model::attribute>& attrs) const;
 
     void populate_aspect_properties(const std::string& element_id,
         const aspect_properties_type& element_aps,

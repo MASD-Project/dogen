@@ -23,7 +23,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/io/vector_io.hpp"
-#include "masd.dogen.modeling/io/transforms/options_io.hpp"
+#include "masd.dogen.coding/io/transforms/options_io.hpp"
 #include "masd.dogen.knitter/program_options_parser.hpp"
 #include "masd.dogen.knitter/parser_validation_error.hpp"
 
@@ -126,7 +126,7 @@ void check_exception(std::vector<std::string> options, std::string expected) {
     BOOST_CHECK(!version);
 }
 
-masd::dogen::modeling::transforms::options
+masd::dogen::coding::transforms::options
 check_valid_arguments(std::vector<std::string> options) {
     bool help(false);
     bool version(false);
@@ -211,8 +211,8 @@ BOOST_AUTO_TEST_CASE(supplying_no_arguments_throws) {
     check_exception(std::vector<std::string> {}, missing_target);
 }
 
-BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
-    SETUP_TEST_LOG_SOURCE("supplying_modeling_options_results_in_expected_options");
+BOOST_AUTO_TEST_CASE(supplying_coding_options_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_coding_options_results_in_expected_options");
 
     const std::vector<std::string> o = {
         target_arg, target_value_arg
@@ -226,8 +226,8 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
     BOOST_CHECK(ends_with(gs, target_value_arg));
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_options) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_modeling_options_other_than_target_results_in_expected_options");
+BOOST_AUTO_TEST_CASE(not_supplying_coding_options_other_than_target_results_in_expected_options) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_coding_options_other_than_target_results_in_expected_options");
 
     const std::vector<std::string> o = {
         target_arg, target_value_arg,

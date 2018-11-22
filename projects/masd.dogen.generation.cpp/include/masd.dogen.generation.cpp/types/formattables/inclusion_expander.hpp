@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_set>
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
@@ -78,7 +78,7 @@ public:
     element_inclusion_dependencies_type compute_inclusion_dependencies(
         const formatters::repository& frp,
         const dependencies_builder_factory& f,
-        const modeling::meta_model::element& e) const;
+        const coding::meta_model::element& e) const;
 
     void populate_inclusion_dependencies(const formatters::repository& frp,
         const dependencies_builder_factory& df,
@@ -86,7 +86,7 @@ public:
 
 public:
     void expand(const annotations::type_repository& atrp,
-        const std::unordered_set<modeling::meta_model::element_archetype>&
+        const std::unordered_set<coding::meta_model::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };

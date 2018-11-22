@@ -34,8 +34,8 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
-#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_interface.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -46,7 +46,7 @@ namespace masd::dogen::generation::cpp {
  * @brief Implements a C++ model to text transform.
  */
 class model_to_text_model_transform final :
-        public modeling::transforms::model_to_text_model_transform_interface {
+        public coding::transforms::model_to_text_model_transform_interface {
 public:
     model_to_text_model_transform() = default;
     model_to_text_model_transform(
@@ -70,22 +70,22 @@ private:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const formatters::repository& frp, const formattables::locator& l,
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 
     /**
      * @brief Creates a file locator.
      */
-    formattables::locator make_locator(const modeling::transforms::options& o,
+    formattables::locator make_locator(const coding::transforms::options& o,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra, const formatters::repository& frp,
         const bool enable_backend_directories,
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<modeling::meta_model::artefact>
-    format(const std::unordered_set<modeling::meta_model::element_archetype>&
+    std::list<coding::meta_model::artefact>
+    format(const std::unordered_set<coding::meta_model::element_archetype>&
         enabled_archetype_for_element, const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
         const dogen::formatting::repository& drp,
@@ -114,17 +114,17 @@ public:
     const annotations::archetype_location_repository_parts&
     archetype_location_repository_parts() const override;
 
-    modeling::meta_model::languages language() const override;
+    coding::meta_model::languages language() const override;
 
     std::unordered_map<std::string,
-                       modeling::meta_model::intra_backend_segment_properties>
+                       coding::meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties(
-        const modeling::transforms::options& o) const override;
+        const coding::transforms::options& o) const override;
 
-    modeling::meta_model::text_model
-    transform(const modeling::transforms::context& ctx,
+    coding::meta_model::text_model
+    transform(const coding::transforms::context& ctx,
         const bool enable_backend_directories,
-        const modeling::meta_model::model& m) const override;
+        const coding::meta_model::model& m) const override;
 };
 
 }

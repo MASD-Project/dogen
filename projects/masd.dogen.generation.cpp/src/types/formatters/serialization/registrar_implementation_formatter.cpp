@@ -51,7 +51,7 @@ registrar_implementation_formatter::archetype_location() const {
     return r;
 }
 
-const modeling::meta_model::name& registrar_implementation_formatter::meta_name() const {
+const coding::meta_model::name& registrar_implementation_formatter::meta_name() const {
     using fabric::meta_name_factory;
     static auto r(meta_name_factory::make_registrar_name());
     return r;
@@ -66,7 +66,7 @@ inclusion_support_types registrar_implementation_formatter::inclusion_support_ty
 }
 
 boost::filesystem::path registrar_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -78,14 +78,14 @@ boost::filesystem::path registrar_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path registrar_implementation_formatter::full_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> registrar_implementation_formatter::
 inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const modeling::meta_model::element& e) const {
+    const coding::meta_model::element& e) const {
     const auto& rg(assistant::as<fabric::registrar>(e));
     auto builder(f.make());
 
@@ -112,8 +112,8 @@ inclusion_dependencies(
     return builder.build();
 }
 
-modeling::meta_model::artefact registrar_implementation_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact registrar_implementation_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<fabric::registrar>(e));
 

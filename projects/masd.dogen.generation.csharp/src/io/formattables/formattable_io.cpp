@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::element>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 

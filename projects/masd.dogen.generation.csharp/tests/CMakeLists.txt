@@ -38,7 +38,7 @@ target_link_libraries(${tests_target_name}
     masd.dogen.utility.lib
     masd.dogen.options.lib
     masd.dogen.dia.lib
-    masd.dogen.modeling.lib
+    masd.dogen.coding.lib
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}

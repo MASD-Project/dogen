@@ -25,8 +25,8 @@
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::io {
@@ -48,8 +48,8 @@ class_header_formatter::archetype_location() const {
     return r;
 }
 
-const modeling::meta_model::name& class_header_formatter::meta_name() const {
-    using modeling::helpers::meta_name_factory;
+const coding::meta_model::name& class_header_formatter::meta_name() const {
+    using coding::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
 }
@@ -63,18 +63,18 @@ inclusion_support_types class_header_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path class_header_formatter::inclusion_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path class_header_formatter::full_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> class_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const modeling::meta_model::element& e) const {
+    const coding::meta_model::element& e) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::iosfwd());
 
@@ -84,10 +84,10 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-modeling::meta_model::artefact class_header_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact class_header_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<modeling::meta_model::object>(e));
+    const auto& o(a.as<coding::meta_model::object>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

@@ -29,9 +29,9 @@
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
-#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/locator.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/context.hpp"
 
@@ -59,7 +59,7 @@ public:
      * @brief Returns name of the meta-model element that this
      * formatter supports.
      */
-    virtual const modeling::meta_model::name& meta_name() const = 0;
+    virtual const coding::meta_model::name& meta_name() const = 0;
 
     /**
      * @brief Family to which this formatter belongs.
@@ -71,21 +71,21 @@ public:
      * @brief Provides the full path.
      */
     virtual boost::filesystem::path full_path(const formattables::locator& l,
-        const modeling::meta_model::name& n) const = 0;
+        const coding::meta_model::name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter
      * against the supplied element.
      */
     virtual std::list<std::string>
-    inclusion_dependencies(const modeling::meta_model::element& e) const = 0;
+    inclusion_dependencies(const coding::meta_model::element& e) const = 0;
 
 public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual modeling::meta_model::artefact
-    format(const context& ctx, const modeling::meta_model::element& e) const = 0;
+    virtual coding::meta_model::artefact
+    format(const context& ctx, const coding::meta_model::element& e) const = 0;
 };
 
 }

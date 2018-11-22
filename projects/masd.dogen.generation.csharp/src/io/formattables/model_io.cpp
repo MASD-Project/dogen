@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/model_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"

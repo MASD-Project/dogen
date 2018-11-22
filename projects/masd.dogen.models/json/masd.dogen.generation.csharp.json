@@ -5,7 +5,7 @@
     "yarn.model_modules": "masd.dogen.generation.csharp",
     "yarn.reference": "masd.dogen.generation.json",
     "yarn.reference": "masd.dogen.options.json",
-    "yarn.reference": "masd.dogen.modeling.json",
+    "yarn.reference": "masd.dogen.coding.json",
     "yarn.reference": "masd.dogen.formatting.json",
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.probing.json",
@@ -265,7 +265,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "modeling::meta_model::name"
+          "type": "coding::meta_model::name"
         },
         {
           "name": "formattables",
@@ -295,7 +295,7 @@
         },
         {
           "name": "element",
-          "type": "boost::shared_ptr<modeling::meta_model::element>"
+          "type": "boost::shared_ptr<coding::meta_model::element>"
         }
       ]
     },
@@ -444,7 +444,7 @@
     {
       "name": "fabric::visual_studio_project",
       "tagged_values": {
-        "yarn.generalization.parent": "modeling::meta_model::element"
+        "yarn.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -501,7 +501,7 @@
     {
       "name": "fabric::visual_studio_solution",
       "tagged_values": {
-        "yarn.generalization.parent": "modeling::meta_model::element"
+        "yarn.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -540,7 +540,7 @@
     {
       "name": "fabric::assembly_info",
       "tagged_values": {
-        "yarn.generalization.parent": "modeling::meta_model::element"
+        "yarn.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -765,7 +765,7 @@
     {
       "name": "fabric::assistant",
       "tagged_values": {
-        "yarn.generalization.parent": "modeling::meta_model::element"
+        "yarn.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "dogen::object"
     },

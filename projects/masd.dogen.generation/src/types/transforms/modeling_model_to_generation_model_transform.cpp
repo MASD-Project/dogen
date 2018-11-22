@@ -24,19 +24,19 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/elements_traversal.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
 #include "masd.dogen.generation/types/transforms/modeling_model_to_generation_model_transform.hpp"
@@ -73,7 +73,7 @@ private:
         }
     }
 
-    void add(boost::shared_ptr<modeling::meta_model::element> e) {
+    void add(boost::shared_ptr<coding::meta_model::element> e) {
         /*
          * We need to ensure that there aren't any duplicate element
          * id's across all of the different containers. However, there
@@ -89,42 +89,42 @@ private:
         }
 
         /*meta_model::generatable_element ge;
-        ge.modeling_element(e);
+        ge.coding_element(e);
         result_.elements().push_back(ge);*/
     }
 
 public:
-    void operator()(boost::shared_ptr<modeling::meta_model::element>) { }
-    void operator()(boost::shared_ptr<modeling::meta_model::module> m) {
+    void operator()(boost::shared_ptr<coding::meta_model::element>) { }
+    void operator()(boost::shared_ptr<coding::meta_model::module> m) {
         result_.module_ids().insert(m->name().id());
         add(m);
     }
     void operator()
-    (boost::shared_ptr<modeling::meta_model::object_template> ot) {
+    (boost::shared_ptr<coding::meta_model::object_template> ot) {
         add(ot);
     }
-    void operator()(boost::shared_ptr<modeling::meta_model::builtin> b) {
+    void operator()(boost::shared_ptr<coding::meta_model::builtin> b) {
         add(b);
     }
-    void operator()(boost::shared_ptr<modeling::meta_model::enumeration> e) {
+    void operator()(boost::shared_ptr<coding::meta_model::enumeration> e) {
         add(e);
     }
-    void operator()(boost::shared_ptr<modeling::meta_model::primitive> p) {
+    void operator()(boost::shared_ptr<coding::meta_model::primitive> p) {
         add(p);
     }
-    void operator()(boost::shared_ptr<modeling::meta_model::object> o) {
+    void operator()(boost::shared_ptr<coding::meta_model::object> o) {
         add(o);
     }
-    void operator()(boost::shared_ptr<modeling::meta_model::exception> e) {
+    void operator()(boost::shared_ptr<coding::meta_model::exception> e) {
         add(e);
     }
-    void operator()(boost::shared_ptr<modeling::meta_model::visitor> v) {
+    void operator()(boost::shared_ptr<coding::meta_model::visitor> v) {
         add(v);
     }
 
 public:
     void add(
-        const std::list<boost::shared_ptr<modeling::meta_model::element>>& ie) {
+        const std::list<boost::shared_ptr<coding::meta_model::element>>& ie) {
         for (const auto& e : ie)
             add(e);
     }
@@ -139,8 +139,8 @@ private:
 
 }
 
-std::size_t modeling_model_to_generation_model_transform::
-compute_total_size(const modeling::meta_model::endomodel& em) {
+std::size_t coding_model_to_generation_model_transform::
+compute_total_size(const coding::meta_model::endomodel& em) {
     std::size_t r;
     r = em.modules().size();
     r += em.object_templates().size();
@@ -153,11 +153,11 @@ compute_total_size(const modeling::meta_model::endomodel& em) {
     return r;
 }
 
-meta_model::model modeling_model_to_generation_model_transform::
-transform(const modeling::meta_model::endomodel& m) {
+meta_model::model coding_model_to_generation_model_transform::
+transform(const coding::meta_model::endomodel& m) {
     meta_model::model r;
     r.name(m.name());
-    r.meta_name(modeling::helpers::meta_name_factory::make_model_name());
+    r.meta_name(coding::helpers::meta_name_factory::make_model_name());
 
     r.input_language(m.input_language());
     if (m.output_languages().size() != 1) {
@@ -179,14 +179,14 @@ transform(const modeling::meta_model::endomodel& m) {
     r.elements().reserve(size);
 
     model_populator mp(r);
-    modeling::meta_model::shared_elements_traversal(m, mp);
+    coding::meta_model::shared_elements_traversal(m, mp);
 
     return r;
 }
 
-std::list<meta_model::model> modeling_model_to_generation_model_transform::
+std::list<meta_model::model> coding_model_to_generation_model_transform::
 transform(const context& ctx, const
-    std::list<modeling::meta_model::endomodel>& ms) {
+    std::list<coding::meta_model::endomodel>& ms) {
     probing::scoped_transform_prober stp(lg, "endomodel to model transform",
         transform_id, ctx.prober(), ms);
 

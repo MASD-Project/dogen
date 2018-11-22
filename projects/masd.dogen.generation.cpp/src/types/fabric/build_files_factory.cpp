@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -42,41 +42,41 @@ const std::string msbuild_targets_name("msbuild_targets");
 
 namespace masd::dogen::generation::cpp::fabric {
 
-boost::shared_ptr<modeling::meta_model::element> build_files_factory::
-make_cmakelists(const modeling::meta_model::model& m) const {
+boost::shared_ptr<coding::meta_model::element> build_files_factory::
+make_cmakelists(const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
-    modeling::helpers::name_factory nf;
+    coding::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), cmakelists_name));
     auto r(boost::make_shared<cmakelists>());
     r->name(n);
     r->meta_name(meta_name_factory::make_cmakelists_name());
-    r->origin_type(modeling::meta_model::origin_types::target);
+    r->origin_type(coding::meta_model::origin_types::target);
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
     return r;
 }
 
-boost::shared_ptr<modeling::meta_model::element> build_files_factory::
-make_msbuild_targets(const modeling::meta_model::model& m) const {
+boost::shared_ptr<coding::meta_model::element> build_files_factory::
+make_msbuild_targets(const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
 
-    modeling::helpers::name_factory nf;
+    coding::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), msbuild_targets_name));
     auto r(boost::make_shared<msbuild_targets>());
     r->name(n);
     r->meta_name(meta_name_factory::make_msbuild_targets_name());
-    r->origin_type(modeling::meta_model::origin_types::target);
+    r->origin_type(coding::meta_model::origin_types::target);
 
     BOOST_LOG_SEV(lg, debug) << "Generated MSBuild Targets.";
     return r;
 }
 
-std::list<boost::shared_ptr<modeling::meta_model::element>> build_files_factory::
-make(const modeling::meta_model::model& m) const {
+std::list<boost::shared_ptr<coding::meta_model::element>> build_files_factory::
+make(const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Build Files.";
 
-    std::list<boost::shared_ptr<modeling::meta_model::element>> r;
+    std::list<boost::shared_ptr<coding::meta_model::element>> r;
     r.push_back(make_cmakelists(m));
     r.push_back(make_msbuild_targets(m));
 

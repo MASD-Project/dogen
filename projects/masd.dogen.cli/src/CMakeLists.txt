@@ -60,7 +60,7 @@ target_link_libraries(${exe_target_name}
     masd.dogen.injection.lib
     masd.dogen.injection.json.lib
     masd.dogen.injection.dia.lib
-    masd.dogen.modeling.lib
+    masd.dogen.coding.lib
     masd.dogen.generation.cpp.lib
     masd.dogen.generation.csharp.lib
     ${LIBXML2_LIBRARIES}

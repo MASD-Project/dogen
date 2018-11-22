@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/module_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/module_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/model_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/origin_types_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/origin_types_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/locator_properties_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/orm_model_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/orm_model_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
@@ -37,7 +37,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_name_masd_dogen_modeling_meta_model_origin_types(const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_coding_meta_model_name_masd_dogen_coding_meta_model_origin_types(const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -46,7 +46,7 @@ inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_name_ma
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_masd_dogen_modeling_meta_model_name(const std::unordered_set<masd::dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_std_unordered_set_masd_dogen_coding_meta_model_name(const std::unordered_set<masd::dogen::coding::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -54,21 +54,21 @@ inline std::size_t hash_std_unordered_set_masd_dogen_modeling_meta_model_name(co
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_element(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_coding_meta_model_element(const boost::shared_ptr<masd::dogen::coding::meta_model::element>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_vector_boost_shared_ptr_masd_dogen_modeling_meta_model_element(const std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v) {
+inline std::size_t hash_std_vector_boost_shared_ptr_masd_dogen_coding_meta_model_element(const std::vector<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_element(i));
+        combine(seed, hash_boost_shared_ptr_masd_dogen_coding_meta_model_element(i));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_masd_dogen_modeling_meta_model_module(const boost::shared_ptr<masd::dogen::modeling::meta_model::module>& v) {
+inline std::size_t hash_boost_shared_ptr_masd_dogen_coding_meta_model_module(const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
@@ -82,7 +82,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_model_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -109,15 +109,15 @@ std::size_t model_hasher::hash(const model& v) {
 
     combine(seed, v.name());
     combine(seed, v.meta_name());
-    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_name_masd_dogen_modeling_meta_model_origin_types(v.references()));
-    combine(seed, hash_std_unordered_set_masd_dogen_modeling_meta_model_name(v.leaves()));
-    combine(seed, hash_std_vector_boost_shared_ptr_masd_dogen_modeling_meta_model_element(v.elements()));
-    combine(seed, hash_boost_shared_ptr_masd_dogen_modeling_meta_model_module(v.root_module()));
+    combine(seed, hash_std_unordered_map_masd_dogen_coding_meta_model_name_masd_dogen_coding_meta_model_origin_types(v.references()));
+    combine(seed, hash_std_unordered_set_masd_dogen_coding_meta_model_name(v.leaves()));
+    combine(seed, hash_std_vector_boost_shared_ptr_masd_dogen_coding_meta_model_element(v.elements()));
+    combine(seed, hash_boost_shared_ptr_masd_dogen_coding_meta_model_module(v.root_module()));
     combine(seed, hash_std_unordered_set_std_string(v.module_ids()));
     combine(seed, v.has_generatable_types());
     combine(seed, v.input_language());
     combine(seed, v.output_language());
-    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_orm_model_properties(v.orm_properties()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_orm_model_properties(v.orm_properties()));
     combine(seed, hash_std_unordered_set_masd_dogen_generation_meta_model_element_archetype(v.enabled_archetype_for_element()));
     combine(seed, v.locator_properties());
     combine(seed, v.global_archetype_location_properties());

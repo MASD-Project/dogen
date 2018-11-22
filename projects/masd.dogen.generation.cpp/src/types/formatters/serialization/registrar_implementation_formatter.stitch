@@ -25,7 +25,7 @@
 std::list<std::string> registrar_implementation_formatter::
 inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const modeling::meta_model::element& e) const {
+    const coding::meta_model::element& e) const {
     const auto& rg(assistant::as<fabric::registrar>(e));
     auto builder(f.make());
 
@@ -52,8 +52,8 @@ inclusion_dependencies(
     return builder.build();
 }
 
-modeling::meta_model::artefact registrar_implementation_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact registrar_implementation_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<fabric::registrar>(e));
 

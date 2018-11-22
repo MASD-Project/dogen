@@ -146,7 +146,7 @@ bool is_command_valid(const std::string& command) {
 
 namespace masd::dogen::cli {
 
-boost::optional<modeling::transforms::options>
+boost::optional<coding::transforms::options>
 program_options_parser::parse(std::vector<std::string> arguments,
     std::ostream& /*out*/, std::ostream& /*err*/) const {
 
@@ -163,7 +163,7 @@ program_options_parser::parse(std::vector<std::string> arguments,
     if (!is_command_valid(cmd)) {
     }
 
-    modeling::transforms::options r;
+    coding::transforms::options r;
     return r;
 }
 

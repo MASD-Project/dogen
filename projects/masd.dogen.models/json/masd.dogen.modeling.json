@@ -1,8 +1,8 @@
 {
-  "documentation": "Yarn is the Dogen meta-model.\n\n@section modeling_0 Overview\n\nModeling is a meta-model that provides a programming-language-neutral type\nrepresentation, designed for code generation. There are two core types\nin modeling: @e endomodel and @e model. Intermediate models are\nobtained via @frontends and post-processed until they form a cohesive\nwhole. They are then transformed into a final model representation, at\nwhich point they are suitable for code generation.\n\n@section modeling_0 Mission\n\nModeling's objectives are:\n\n@li to provide a set of constructs that the frontends can map to\neasily, as well as the machinery for frontend management\n(registration, etc.).\n\n@li to provide the tooling required to combine multiple intermediate\nmodeling models together into a bigger model - called the intermediate @e\nmerged model.\n\n@li to ensure the consistency of the intermediate merged model via\nvalidation rules (such as verifying that all types have a definitions,\netc.).\n\n@li to provide all the information required to build the final model\nand to build it.\n",
+  "documentation": "Yarn is the Dogen meta-model.\n\n@section coding_0 Overview\n\nCoding is a meta-model that provides a programming-language-neutral type\nrepresentation, designed for code generation. There are two core types\nin coding: @e endomodel and @e model. Intermediate models are\nobtained via @frontends and post-processed until they form a cohesive\nwhole. They are then transformed into a final model representation, at\nwhich point they are suitable for code generation.\n\n@section coding_0 Mission\n\nCoding's objectives are:\n\n@li to provide a set of constructs that the frontends can map to\neasily, as well as the machinery for frontend management\n(registration, etc.).\n\n@li to provide the tooling required to combine multiple intermediate\ncoding models together into a bigger model - called the intermediate @e\nmerged model.\n\n@li to ensure the consistency of the intermediate merged model via\nvalidation rules (such as verifying that all types have a definitions,\netc.).\n\n@li to provide all the information required to build the final model\nand to build it.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "masd.dogen.modeling",
+    "yarn.model_modules": "masd.dogen.coding",
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.formatting.json",
     "yarn.reference": "masd.dogen.probing.json",
@@ -105,7 +105,7 @@
     },
     {
       "name": "meta_model::element",
-      "documentation": "Represents a generic modeling construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
+      "documentation": "Represents a generic coding construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
       "stereotypes": [
         "dogen::visitable",
         "Element"
@@ -141,7 +141,7 @@
       "parents": [
         "meta_model::element"
       ],
-      "documentation": "Container for other modeling elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "documentation": "Container for other coding elements.\n\nAggregates a group of logically related elements into a unit.\n",
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
@@ -235,7 +235,7 @@
     },
     {
       "name": "meta_model::DeterminableOrigin",
-      "documentation": "A unit of modeling that can be code generated.\n",
+      "documentation": "A unit of coding that can be code generated.\n",
       "stereotypes": [
         "dogen::object_template"
       ],
@@ -312,7 +312,7 @@
         "meta_model::Stereotypable",
         "meta_model::MetaNameable"
       ],
-      "documentation": "A unit of modeling that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
+      "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "stereotypes": [
         "dogen::object_template"
       ],
@@ -446,7 +446,7 @@
     },
     {
       "name": "meta_model::name",
-      "documentation": "Name of an element in modeling space.\n\nA name represents a point in modeling space, and this point can only be\nused by one modeling element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
+      "documentation": "Name of an element in coding space.\n\nA name represents a point in coding space, and this point can only be\nused by one coding element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
@@ -457,7 +457,7 @@
         {
           "name": "simple",
           "type": "std::string",
-          "documentation": "Simple (non-qualified) name of the modeling element at this address.\n\nThe simple name must be unique for a given location.\n"
+          "documentation": "Simple (non-qualified) name of the coding element at this address.\n\nThe simple name must be unique for a given location.\n"
         },
         {
           "name": "qualified",
@@ -543,13 +543,13 @@
     },
     {
       "name": "meta_model::location",
-      "documentation": "Identifies a hierarchy of containment within the modeling space.\n\nElements exist at unique points within the modeling space called @e addresses.\nHowever, certain elements have the ability to contain other elements, creating\nin effect new dimensions in modeling space. The location class keeps track\nof these dimensions. Note that the attributes of this class are hierarchical, i.e.\nexternal modules contain model modules and so forth. These attributes are best\nthought of as a single linked list, where segments of that linked list have different\nmeaning. However, because we care about these meanings, we implemented the\ntype with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are the main\nmodel elements that provide containment. For example, inner classes are\ncontained within classes; in modeling terms it means a location should also have an\n\"object\" attribute to represent this relationship.\n\nAlso, note that the location class itself encodes the address of the element that\nowns that location; returning to the linked list idea, the tail of the linked list is\nthe name of the element, and the remaining linked list provides the location of\nthe element.\n",
+      "documentation": "Identifies a hierarchy of containment within the coding space.\n\nElements exist at unique points within the coding space called @e addresses.\nHowever, certain elements have the ability to contain other elements, creating\nin effect new dimensions in coding space. The location class keeps track\nof these dimensions. Note that the attributes of this class are hierarchical, i.e.\nexternal modules contain model modules and so forth. These attributes are best\nthought of as a single linked list, where segments of that linked list have different\nmeaning. However, because we care about these meanings, we implemented the\ntype with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are the main\nmodel elements that provide containment. For example, inner classes are\ncontained within classes; in coding terms it means a location should also have an\n\"object\" attribute to represent this relationship.\n\nAlso, note that the location class itself encodes the address of the element that\nowns that location; returning to the linked list idea, the tail of the linked list is\nthe name of the element, and the remaining linked list provides the location of\nthe element.\n",
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
           "name": "external_modules",
           "type": "std::list<std::string>",
-          "documentation": "All modules external to the model itself.\n\nIt is sometimes useful to create a model within a set of existing modules. In this\ncase, the model does not own the existing modules and they are considered\n\"external\" to the model. This is useful, for example, when declaring a model\nwithin a larger project such as @e masd::dogen::modeling. In this case, @e dogen is the\nexternal module.\n"
+          "documentation": "All modules external to the model itself.\n\nIt is sometimes useful to create a model within a set of existing modules. In this\ncase, the model does not own the existing modules and they are considered\n\"external\" to the model. This is useful, for example, when declaring a model\nwithin a larger project such as @e masd::dogen::coding. In this case, @e dogen is the\nexternal module.\n"
         },
         {
           "name": "model_modules",
@@ -564,13 +564,13 @@
         {
           "name": "element",
           "type": "std::string",
-          "documentation": "Name of the owning element, if any.\n\nFor modeling elements which are located within other modeling elements that\nare not modules, such as attributes, inner classes, etc.\n"
+          "documentation": "Name of the owning element, if any.\n\nFor coding elements which are located within other coding elements that\nare not modules, such as attributes, inner classes, etc.\n"
         }
       ]
     },
     {
       "name": "meta_model::model",
-      "documentation": "Modeling model.\n",
+      "documentation": "Coding model.\n",
       "stereotypes": [
         "Nameable",
         "MetaNameable"
@@ -2665,7 +2665,7 @@
     },
     {
       "name": "meta_model::opaque_properties",
-      "documentation": "Base class for any properties that are not known to modeling.\n",
+      "documentation": "Base class for any properties that are not known to coding.\n",
       "tagged_values": {
         "yarn.generalization.is_final": "false"
       },

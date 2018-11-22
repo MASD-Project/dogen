@@ -23,9 +23,9 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
@@ -88,8 +88,8 @@ make_configuration(const annotations::type_repository& atrp,
 }
 
 std::string visual_studio_factory::
-obtain_project_name(const modeling::meta_model::model& m) const {
-    modeling::helpers::name_flattener nfl(false/*detect_model_name*/);
+obtain_project_name(const coding::meta_model::model& m) const {
+    coding::helpers::name_flattener nfl(false/*detect_model_name*/);
     const auto ns(nfl.flatten(m.name()));
 
     using boost::algorithm::join;
@@ -97,20 +97,20 @@ obtain_project_name(const modeling::meta_model::model& m) const {
     return r;
 }
 
-boost::shared_ptr<modeling::meta_model::element>
+boost::shared_ptr<coding::meta_model::element>
 visual_studio_factory::make_solution(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
-    modeling::helpers::name_factory nf;
+    coding::helpers::name_factory nf;
     const auto sn(project_name + "-vc" + sln_extension);
     const auto n(nf.build_element_in_model(m.name(), sn));
 
     auto r(boost::make_shared<visual_studio_solution>());
     r->name(n);
     r->meta_name(meta_name_factory::make_visual_studio_solution_name());
-    r->origin_type(modeling::meta_model::origin_types::target);
+    r->origin_type(coding::meta_model::origin_types::target);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
     r->project_solution_guid(cfg.project_solution_guid());
@@ -120,20 +120,20 @@ visual_studio_factory::make_solution(const visual_studio_configuration cfg,
     return r;
 }
 
-boost::shared_ptr<modeling::meta_model::element>
+boost::shared_ptr<coding::meta_model::element>
 visual_studio_factory::make_project(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
-    modeling::helpers::name_factory nf;
+    coding::helpers::name_factory nf;
     const auto sn(project_name + proj_extension);
     const auto n(nf.build_element_in_model(m.name(), sn));
 
     auto r(boost::make_shared<visual_studio_project>());
     r->name(n);
     r->meta_name(meta_name_factory::make_visual_studio_project_name());
-    r->origin_type(modeling::meta_model::origin_types::target);
+    r->origin_type(coding::meta_model::origin_types::target);
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
 
@@ -142,15 +142,15 @@ visual_studio_factory::make_project(const visual_studio_configuration cfg,
     return r;
 }
 
-std::list<boost::shared_ptr<modeling::meta_model::element>> visual_studio_factory::
+std::list<boost::shared_ptr<coding::meta_model::element>> visual_studio_factory::
 make(const annotations::type_repository& atrp,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
 
     const auto pn(obtain_project_name(m));
     const auto ra(m.root_module()->annotation());
     const auto cfg(make_configuration(atrp, ra));
 
-    std::list<boost::shared_ptr<modeling::meta_model::element>> r;
+    std::list<boost::shared_ptr<coding::meta_model::element>> r;
     r.push_back(make_solution(cfg, pn, m));
     r.push_back(make_project(cfg, pn, m));
 

@@ -1,6 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::serialization #>
-<#@ stitch.inclusion_dependency="masd.dogen.modeling/types/meta_model/object.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/forward_declarations.hpp" #>
@@ -23,7 +23,7 @@
 
 std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const modeling::meta_model::element& e) const {
+    const coding::meta_model::element& e) const {
     auto builder(f.make());
 
     using tp = formatters::types::traits;
@@ -33,8 +33,8 @@ std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-modeling::meta_model::artefact forward_declarations_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact forward_declarations_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
 
     const auto& fd(a.as<fabric::forward_declarations>(e));
@@ -42,7 +42,7 @@ format(const context& ctx, const modeling::meta_model::element& e) const {
     // FIXME: hack: legacy formatters do not support serialisation
     // forward declarations for some types.
     if (fd.is_enum() || fd.is_exception())
-        return modeling::meta_model::artefact();
+        return coding::meta_model::artefact();
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

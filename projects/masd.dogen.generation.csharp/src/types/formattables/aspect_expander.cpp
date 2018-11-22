@@ -23,12 +23,12 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -44,7 +44,7 @@ static logger lg(logger_factory("generation.csharp.formattables.aspect_expander"
 
 namespace masd::dogen::generation::csharp::formattables {
 
-class aspect_properties_generator : public modeling::meta_model::element_visitor {
+class aspect_properties_generator : public coding::meta_model::element_visitor {
 private:
     struct type_group {
         annotations::type requires_static_reference_equals;
@@ -61,11 +61,11 @@ private:
         const std::string& id, const bool is_floating_point = false);
 
 public:
-    using modeling::meta_model::element_visitor::visit;
-    void visit(const modeling::meta_model::enumeration& e);
-    void visit(const modeling::meta_model::exception& e);
-    void visit(const modeling::meta_model::object& o);
-    void visit(const modeling::meta_model::builtin& p);
+    using coding::meta_model::element_visitor::visit;
+    void visit(const coding::meta_model::enumeration& e);
+    void visit(const coding::meta_model::exception& e);
+    void visit(const coding::meta_model::object& o);
+    void visit(const coding::meta_model::builtin& p);
 
 public:
     const std::unordered_map<std::string, formattables::aspect_properties>&
@@ -112,19 +112,19 @@ void aspect_properties_generator::handle_aspect_properties(
     result_[id] = ap;
 }
 
-void aspect_properties_generator::visit(const modeling::meta_model::enumeration& e) {
+void aspect_properties_generator::visit(const coding::meta_model::enumeration& e) {
     handle_aspect_properties(e.annotation(), e.name().id());
 }
 
-void aspect_properties_generator::visit(const modeling::meta_model::exception& e) {
+void aspect_properties_generator::visit(const coding::meta_model::exception& e) {
     handle_aspect_properties(e.annotation(), e.name().id());
 }
 
-void aspect_properties_generator::visit(const modeling::meta_model::object& o) {
+void aspect_properties_generator::visit(const coding::meta_model::object& o) {
     handle_aspect_properties(o.annotation(), o.name().id());
 }
 
-void aspect_properties_generator::visit(const modeling::meta_model::builtin& p) {
+void aspect_properties_generator::visit(const coding::meta_model::builtin& p) {
     handle_aspect_properties(p.annotation(), p.name().id());
 }
 

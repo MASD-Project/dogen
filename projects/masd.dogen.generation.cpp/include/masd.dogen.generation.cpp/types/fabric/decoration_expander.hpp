@@ -27,14 +27,14 @@
 
 #include "masd.dogen.formatting/types/decoration_properties.hpp"
 #include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 class decoration_expander final {
 public:
     void expand(const dogen::formatting::decoration_properties_factory& dpf,
-        modeling::meta_model::model& m) const;
+        coding::meta_model::model& m) const;
 };
 
 }

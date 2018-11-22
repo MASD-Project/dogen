@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
 
 namespace masd::dogen::knitter {
 
@@ -42,25 +42,25 @@ private:
     /**
      * @brief Sets up the model name from the options.
      */
-    void initialise_model_name(const modeling::transforms::options& o);
+    void initialise_model_name(const coding::transforms::options& o);
 
 private:
     /**
      * @brief Given the main arguments, generates the transform options.
      */
-    boost::optional<modeling::transforms::options>
+    boost::optional<coding::transforms::options>
     generate_options(const int argc, const char* argv[]) const;
 
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging(const modeling::transforms::options& o);
+    void initialise_logging(const coding::transforms::options& o);
 
     /**
      * @brief Executes the code generation workflow for the given the
      * application options.
      */
-    void knit(const modeling::transforms::options& o) const;
+    void knit(const coding::transforms::options& o) const;
 
 private:
      /**

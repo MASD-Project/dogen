@@ -29,8 +29,8 @@
 #include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
 #include "masd.dogen.injection.json/types/initializer.hpp"
 #include "masd.dogen.injection.dia/types/initializer.hpp"
-#include "masd.dogen.modeling/types/transforms/options.hpp"
-#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context_factory.hpp"
 #include "masd.dogen.tailor/program_options_parser.hpp"
 #include "masd.dogen.tailor/parser_validation_error.hpp"
 #include "masd.dogen.tailor/workflow_error.hpp"
@@ -115,10 +115,10 @@ void workflow::tailor(const masd::dogen::options::tailoring_options& to) const {
     masd::dogen::injection::json::initializer::initialize();
     masd::dogen::injection::dia::initializer::initialize();
 
-    masd::dogen::modeling::transforms::options o;
+    masd::dogen::coding::transforms::options o;
     o.target(to.target());
 
-    using namespace masd::dogen::modeling::transforms;
+    using namespace masd::dogen::coding::transforms;
     const auto ctx(context_factory::make(o, false/*enable_validation*/));
     const masd::dogen::injection::transforms::context ext_ctx(ctx.prober());
 

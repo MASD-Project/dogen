@@ -26,7 +26,7 @@
 #endif
 
 #include "masd.dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/master_header_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets_fwd.hpp"
@@ -41,12 +41,12 @@ namespace masd::dogen::generation::cpp::fabric {
 /**
  * @brief Visitor for element
  */
-class element_visitor : public masd::dogen::modeling::meta_model::element_visitor {
+class element_visitor : public masd::dogen::coding::meta_model::element_visitor {
 public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
-    using masd::dogen::modeling::meta_model::element_visitor::visit;
+    using masd::dogen::coding::meta_model::element_visitor::visit;
 
     /**
      * @brief Accept visits for type masd::dogen::generation::cpp::fabric::cmakelists

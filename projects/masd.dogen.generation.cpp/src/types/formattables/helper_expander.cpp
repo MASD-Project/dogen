@@ -23,14 +23,14 @@
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/helper_properties.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/helper_configuration_io.hpp"
@@ -58,7 +58,7 @@ const std::string empty_identifiable(
 
 namespace masd::dogen::generation::cpp::formattables {
 
-class helper_properties_generator : public modeling::meta_model::element_visitor {
+class helper_properties_generator : public coding::meta_model::element_visitor {
 public:
     helper_properties_generator(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff);
@@ -66,7 +66,7 @@ public:
 private:
     template<typename Qualified>
     std::string get_qualified(const Qualified& iaq) const {
-        using modeling::meta_model::languages;
+        using coding::meta_model::languages;
         const auto i(iaq.qualified().find(languages::cpp));
         if (i == iaq.qualified().end()) {
             BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
@@ -92,7 +92,7 @@ private:
         const helper_expander::facets_for_family_type& fff,
         const bool in_inheritance_relationship,
         const bool inherit_opaqueness_from_parent,
-        const modeling::meta_model::name_tree& nt,
+        const coding::meta_model::name_tree& nt,
         std::unordered_set<std::string>& done,
         std::list<helper_properties>& hps) const;
 
@@ -100,16 +100,16 @@ private:
     compute_helper_properties(const helper_configuration& cfg,
         const helper_expander::facets_for_family_type& fff,
         const bool in_inheritance_relationship,
-        const std::list<modeling::meta_model::attribute>& attrs) const;
+        const std::list<coding::meta_model::attribute>& attrs) const;
 
 public:
     /*
      * We are only interested in yarn objects and primitives; all
      * other element types do not need helpers.
      */
-    using modeling::meta_model::element_visitor::visit;
-    void visit(const modeling::meta_model::object& o);
-    void visit(const modeling::meta_model::primitive& p);
+    using coding::meta_model::element_visitor::visit;
+    void visit(const coding::meta_model::object& o);
+    void visit(const coding::meta_model::primitive& p);
 
 public:
     const std::list<formattables::helper_properties>& result() const;
@@ -177,7 +177,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
     const bool inherit_opaqueness_from_parent,
-    const modeling::meta_model::name_tree& nt,
+    const coding::meta_model::name_tree& nt,
     std::unordered_set<std::string>& done,
     std::list<helper_properties>& hps) const {
 
@@ -185,7 +185,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
     helper_descriptor r;
-    modeling::helpers::name_flattener nf;
+    coding::helpers::name_flattener nf;
     r.namespaces(nf.flatten(nt.current()));
     r.is_simple_type(nt.is_current_simple_type());
 
@@ -280,7 +280,7 @@ helper_properties_generator::
 compute_helper_properties(const helper_configuration& cfg,
     const helper_expander::facets_for_family_type& fff,
     const bool in_inheritance_relationship,
-    const std::list<modeling::meta_model::attribute>& attrs) const {
+    const std::list<coding::meta_model::attribute>& attrs) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started making helper properties.";
 
@@ -307,7 +307,7 @@ compute_helper_properties(const helper_configuration& cfg,
     return r;
 }
 
-void helper_properties_generator::visit(const modeling::meta_model::object& o) {
+void helper_properties_generator::visit(const coding::meta_model::object& o) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
     const auto& attrs(o.local_attributes());
@@ -315,10 +315,10 @@ void helper_properties_generator::visit(const modeling::meta_model::object& o) {
     result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
 
-void helper_properties_generator::visit(const modeling::meta_model::primitive& p) {
+void helper_properties_generator::visit(const coding::meta_model::primitive& p) {
     const auto& fff(facets_for_family_);
     const auto& cfg(helper_configuration_);
-    const std::list<modeling::meta_model::attribute> attrs({ p.value_attribute() });
+    const std::list<coding::meta_model::attribute> attrs({ p.value_attribute() });
     const auto iir(false/*in_inheritance_relationship*/);
     result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
@@ -407,7 +407,7 @@ void helper_expander::populate_helper_properties(
          * reduction or else we will not get helpers for referenced
          * models.
          */
-        if (segment->origin_type() != modeling::meta_model::origin_types::target) {
+        if (segment->origin_type() != coding::meta_model::origin_types::target) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }

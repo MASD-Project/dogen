@@ -28,22 +28,22 @@
 #include <list>
 #include <string>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 class odb_options_factory final {
 private:
-    boost::shared_ptr<modeling::meta_model::element>
-    make(const modeling::meta_model::name& n,
-        const modeling::meta_model::origin_types& ot,
+    boost::shared_ptr<coding::meta_model::element>
+    make(const coding::meta_model::name& n,
+        const coding::meta_model::origin_types& ot,
         const annotations::annotation& a) const;
 
 public:
-    std::list<boost::shared_ptr<modeling::meta_model::element>>
-    make(const modeling::meta_model::model& m) const;
+    std::list<boost::shared_ptr<coding::meta_model::element>>
+    make(const coding::meta_model::model& m) const;
 };
 
 }

@@ -246,7 +246,7 @@ insert_inclusion_directive(const std::string& id, const std::string& archetype,
 }
 
 void directive_group_repository_factory::
-compute_directives(const type_group& tg, const modeling::meta_model::element& e,
+compute_directives(const type_group& tg, const coding::meta_model::element& e,
     const artefact_formatters_type& formatters, const locator& l,
     directive_group_repository& dgrp) const {
 

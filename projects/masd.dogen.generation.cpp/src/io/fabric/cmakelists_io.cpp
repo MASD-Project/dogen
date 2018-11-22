@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/cmakelists_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 

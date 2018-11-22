@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assembly_info.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.csharp/types/fabric/assembly_info_factory.hpp"
@@ -37,18 +37,18 @@ const std::string module_name("Properties");
 
 namespace masd::dogen::generation::csharp::fabric {
 
-boost::shared_ptr<modeling::meta_model::element> assembly_info_factory::
-make(const modeling::meta_model::model& m) const {
+boost::shared_ptr<coding::meta_model::element> assembly_info_factory::
+make(const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
 
-    modeling::helpers::name_factory nf;
+    coding::helpers::name_factory nf;
     auto n(nf.build_element_in_model(m.name(), simple_name));
     n.location().internal_modules().push_back(module_name);
 
     auto r(boost::make_shared<assembly_info>());
     r->name(n);
     r->meta_name(meta_name_factory::make_assembly_info_name());
-    r->origin_type(modeling::meta_model::origin_types::target);
+    r->origin_type(coding::meta_model::origin_types::target);
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";
     return r;

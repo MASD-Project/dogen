@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.modeling/types/meta_model/element_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/element_properties.hpp"
 
 namespace masd::dogen::generation::cpp::formattables {
@@ -42,20 +42,20 @@ public:
 
 public:
     formattable(
-        const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment,
-        const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments,
+        const boost::shared_ptr<masd::dogen::coding::meta_model::element>& master_segment,
+        const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& all_segments,
         const masd::dogen::generation::cpp::formattables::element_properties& element_properties);
 
 public:
-    const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment() const;
-    boost::shared_ptr<masd::dogen::modeling::meta_model::element>& master_segment();
-    void master_segment(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v);
-    void master_segment(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>&& v);
+    const boost::shared_ptr<masd::dogen::coding::meta_model::element>& master_segment() const;
+    boost::shared_ptr<masd::dogen::coding::meta_model::element>& master_segment();
+    void master_segment(const boost::shared_ptr<masd::dogen::coding::meta_model::element>& v);
+    void master_segment(const boost::shared_ptr<masd::dogen::coding::meta_model::element>&& v);
 
-    const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments() const;
-    std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& all_segments();
-    void all_segments(const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v);
-    void all_segments(const std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >&& v);
+    const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& all_segments() const;
+    std::list<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& all_segments();
+    void all_segments(const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& v);
+    void all_segments(const std::list<boost::shared_ptr<masd::dogen::coding::meta_model::element> >&& v);
 
     const masd::dogen::generation::cpp::formattables::element_properties& element_properties() const;
     masd::dogen::generation::cpp::formattables::element_properties& element_properties();
@@ -73,8 +73,8 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    boost::shared_ptr<masd::dogen::modeling::meta_model::element> master_segment_;
-    std::list<boost::shared_ptr<masd::dogen::modeling::meta_model::element> > all_segments_;
+    boost::shared_ptr<masd::dogen::coding::meta_model::element> master_segment_;
+    std::list<boost::shared_ptr<masd::dogen::coding::meta_model::element> > all_segments_;
     masd::dogen::generation::cpp::formattables::element_properties element_properties_;
 };
 

@@ -30,7 +30,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/program_options.hpp>
-#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
 
 namespace masd::dogen::knitter {
 
@@ -68,7 +68,7 @@ private:
     make_variables_map(const options_description& od) const;
 
 private:
-    modeling::transforms::options
+    coding::transforms::options
     make_knitting_options(const variables_map& vm) const;
 
 public:
@@ -76,7 +76,7 @@ public:
     void version_function(std::function<void()> value);
 
 public:
-    boost::optional<modeling::transforms::options> parse();
+    boost::optional<coding::transforms::options> parse();
 
 private:
     const std::vector<std::string> arguments_;

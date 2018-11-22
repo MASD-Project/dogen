@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/element_visitor.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -27,22 +27,22 @@
 namespace masd::dogen::generation::cpp::fabric {
 
 msbuild_targets::msbuild_targets(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
-    const masd::dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::coding::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const masd::dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::coding::meta_model::name& meta_name,
     const bool is_element_extension,
     const masd::dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
     const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets)
-    : masd::dogen::modeling::meta_model::element(
+    : masd::dogen::coding::meta_model::element(
       name,
       documentation,
       annotation,
@@ -59,28 +59,28 @@ msbuild_targets::msbuild_targets(
       opaque_properties),
       odb_targets_(odb_targets) { }
 
-void msbuild_targets::accept(const masd::dogen::modeling::meta_model::element_visitor& v) const {
+void msbuild_targets::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void msbuild_targets::accept(masd::dogen::modeling::meta_model::element_visitor& v) const {
+void msbuild_targets::accept(masd::dogen::coding::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void msbuild_targets::accept(const masd::dogen::modeling::meta_model::element_visitor& v) {
+void msbuild_targets::accept(const masd::dogen::coding::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void msbuild_targets::accept(masd::dogen::modeling::meta_model::element_visitor& v) {
+void msbuild_targets::accept(masd::dogen::coding::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -91,27 +91,27 @@ void msbuild_targets::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::generation::cpp::fabric::msbuild_targets\"" << ", "
       << "\"__parent_0__\": ";
-    masd::dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
       << "\"odb_targets\": " << odb_targets_
       << " }";
 }
 
 void msbuild_targets::swap(msbuild_targets& other) noexcept {
-    masd::dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
     swap(odb_targets_, other.odb_targets_);
 }
 
-bool msbuild_targets::equals(const masd::dogen::modeling::meta_model::element& other) const {
+bool msbuild_targets::equals(const masd::dogen::coding::meta_model::element& other) const {
     const msbuild_targets* const p(dynamic_cast<const msbuild_targets* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool msbuild_targets::operator==(const msbuild_targets& rhs) const {
-    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::coding::meta_model::element::compare(rhs) &&
         odb_targets_ == rhs.odb_targets_;
 }
 

@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/assistant_properties.hpp"
@@ -45,17 +45,17 @@ public:
 
 public:
     model(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables,
         const std::list<std::string>& project_items,
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
         const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::assistant_properties>& assistant_properties);
 
 public:
-    const masd::dogen::modeling::meta_model::name& name() const;
-    masd::dogen::modeling::meta_model::name& name();
-    void name(const masd::dogen::modeling::meta_model::name& v);
-    void name(const masd::dogen::modeling::meta_model::name&& v);
+    const masd::dogen::coding::meta_model::name& name() const;
+    masd::dogen::coding::meta_model::name& name();
+    void name(const masd::dogen::coding::meta_model::name& v);
+    void name(const masd::dogen::coding::meta_model::name&& v);
 
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables() const;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables();
@@ -88,7 +88,7 @@ public:
     model& operator=(model other);
 
 private:
-    masd::dogen::modeling::meta_model::name name_;
+    masd::dogen::coding::meta_model::name name_;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable> formattables_;
     std::list<std::string> project_items_;
     std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties> aspect_properties_;

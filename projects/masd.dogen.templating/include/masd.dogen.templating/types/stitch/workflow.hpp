@@ -34,7 +34,7 @@
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact.hpp"
 #include "masd.dogen.formatting/types/repository.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 #include "masd.dogen.templating/types/stitch/text_template.hpp"
@@ -98,7 +98,7 @@ private:
     /**
      * @brief Creates the artefacts
      */
-    std::list<modeling::meta_model::artefact>
+    std::list<coding::meta_model::artefact>
     create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
         const masd::dogen::formatting::repository& drp,
@@ -109,7 +109,7 @@ private:
      * @brief Writes all of the artefacts to the filesystem.
      */
     void write_artefacts(
-        const std::list<modeling::meta_model::artefact>& artefacts) const;
+        const std::list<coding::meta_model::artefact>& artefacts) const;
 
 public:
     /**

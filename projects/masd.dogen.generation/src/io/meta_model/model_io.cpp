@@ -21,20 +21,20 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/module_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/module_io.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/origin_types_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "masd.dogen.generation/io/meta_model/locator_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::modeling::meta_model::name, masd::dogen::modeling::meta_model::origin_types>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::coding::meta_model::name, masd::dogen::coding::meta_model::origin_types>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -52,7 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<masd::dogen::modeling::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<masd::dogen::coding::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -66,7 +66,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<masd::
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::element>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -82,7 +82,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<masd::dogen::modeling::meta_model::element> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<masd::dogen::coding::meta_model::element> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -96,7 +96,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::meta_model::module>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::module>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -134,7 +134,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::orm_model_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_model_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

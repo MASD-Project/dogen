@@ -26,7 +26,7 @@ model::model()
     : cpp_standard_(static_cast<masd::dogen::generation::cpp::formattables::cpp_standards>(0)) { }
 
 model::model(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::formattable>& formattables,
     const std::unordered_map<std::string, masd::dogen::generation::cpp::formattables::facet_properties>& facet_properties,
@@ -72,19 +72,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const masd::dogen::modeling::meta_model::name& model::name() const {
+const masd::dogen::coding::meta_model::name& model::name() const {
     return name_;
 }
 
-masd::dogen::modeling::meta_model::name& model::name() {
+masd::dogen::coding::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const masd::dogen::modeling::meta_model::name& v) {
+void model::name(const masd::dogen::coding::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const masd::dogen::modeling::meta_model::name&& v) {
+void model::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
 }
 

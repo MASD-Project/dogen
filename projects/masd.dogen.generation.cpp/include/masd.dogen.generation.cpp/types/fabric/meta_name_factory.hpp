@@ -26,27 +26,27 @@
 #endif
 
 #include <string>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 class meta_name_factory final {
 private:
-    static modeling::meta_model::location make_location();
+    static coding::meta_model::location make_location();
 
 private:
-    static modeling::meta_model::name make_name(const std::string& sn);
+    static coding::meta_model::name make_name(const std::string& sn);
 
 public:
-    static modeling::meta_model::name make_cmakelists_name();
-    static modeling::meta_model::name make_master_header_name();
-    static modeling::meta_model::name make_msbuild_targets_name();
-    static modeling::meta_model::name make_visual_studio_project_name();
-    static modeling::meta_model::name make_visual_studio_solution_name();
-    static modeling::meta_model::name make_common_odb_options_name();
-    static modeling::meta_model::name make_object_odb_options_name();
-    static modeling::meta_model::name make_registrar_name();
-    static modeling::meta_model::name make_forward_declarations_name();
+    static coding::meta_model::name make_cmakelists_name();
+    static coding::meta_model::name make_master_header_name();
+    static coding::meta_model::name make_msbuild_targets_name();
+    static coding::meta_model::name make_visual_studio_project_name();
+    static coding::meta_model::name make_visual_studio_solution_name();
+    static coding::meta_model::name make_common_odb_options_name();
+    static coding::meta_model::name make_object_odb_options_name();
+    static coding::meta_model::name make_registrar_name();
+    static coding::meta_model::name make_forward_declarations_name();
 };
 
 }

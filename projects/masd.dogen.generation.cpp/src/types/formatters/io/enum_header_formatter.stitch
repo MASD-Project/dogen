@@ -1,8 +1,8 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::io #>
 <#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.modeling/types/meta_model/enumeration.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.modeling/types/helpers/meta_name_factory.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/enumeration.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.coding/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/types/traits.hpp" #>
@@ -14,15 +14,15 @@
 <#@ stitch.wale.kvp.class.simple_name=enum_header_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=enum_header #>
 <#@ stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ stitch.wale.kvp.yarn_element=modeling::meta_model::enumeration #>
+<#@ stitch.wale.kvp.yarn_element=coding::meta_model::enumeration #>
 <#@ stitch.wale.kvp.meta_element=enumeration #>
-<#@ stitch.wale.kvp.meta_name_factory=modeling::helpers::meta_name_factory #>
+<#@ stitch.wale.kvp.meta_name_factory=coding::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const modeling::meta_model::element& e) const {
+    const coding::meta_model::element& e) const {
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::iosfwd());
@@ -32,10 +32,10 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-modeling::meta_model::artefact enum_header_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact enum_header_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ye(a.as<modeling::meta_model::enumeration>(e));
+    const auto& ye(a.as<coding::meta_model::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

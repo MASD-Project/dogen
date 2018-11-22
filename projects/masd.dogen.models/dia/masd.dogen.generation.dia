@@ -210,7 +210,7 @@
             <dia:string>#references#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;modeling::meta_model::name, modeling::meta_model::origin_types&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;coding::meta_model::name, coding::meta_model::origin_types&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -233,7 +233,7 @@
             <dia:string>#leaves#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;modeling::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;coding::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -258,7 +258,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#elements#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;boost::shared_ptr&lt;modeling::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::vector&lt;boost::shared_ptr&lt;coding::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -281,7 +281,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#root_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;modeling::meta_model::module&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;coding::meta_model::module&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -350,7 +350,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#input_language#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#modeling::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::languages#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -373,7 +373,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#output_language#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#modeling::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::languages#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -396,7 +396,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#orm_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;modeling::meta_model::orm_model_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;coding::meta_model::orm_model_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4893,7 +4893,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.generation
 #DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.modeling.dia
+#DOGEN yarn.reference=masd.dogen.coding.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
 #DOGEN yarn.reference=masd.dogen.formatting.dia
 #DOGEN yarn.input_language=cpp
@@ -5032,7 +5032,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#modeling::meta_model::name#</dia:string>
+            <dia:string>#coding::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5167,7 +5167,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#modeling::meta_model::name#</dia:string>
+            <dia:string>#coding::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5290,7 +5290,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Element properties related to code generation.
 
-#DOGEN yarn.generalization.parent=modeling::meta_model::opaque_properties#</dia:string>
+#DOGEN yarn.generalization.parent=coding::meta_model::opaque_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7284,7 +7284,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#modeling::meta_model::languages#</dia:string>
+            <dia:string>#coding::meta_model::languages#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7504,7 +7504,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#transforms_by_language_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;modeling::meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;coding::meta_model::languages, std::shared_ptr&lt;model_to_text_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9122,7 +9122,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const modeling::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const coding::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10334,7 +10334,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const modeling::meta_model::endomodel&amp;#</dia:string>
+                <dia:string>#const coding::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10556,7 +10556,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#intra_backend_segment_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, modeling::meta_model::intra_backend_segment_properties&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, coding::meta_model::intra_backend_segment_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10671,7 +10671,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#modeling_model_to_generation_model_transform#</dia:string>
+        <dia:string>#coding_model_to_generation_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -10810,7 +10810,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const modeling::meta_model::model&amp;#</dia:string>
+                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

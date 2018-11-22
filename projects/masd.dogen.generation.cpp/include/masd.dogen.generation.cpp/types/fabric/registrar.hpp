@@ -28,12 +28,12 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
-class registrar final : public masd::dogen::modeling::meta_model::element {
+class registrar final : public masd::dogen::coding::meta_model::element {
 public:
     registrar() = default;
     registrar(const registrar&) = default;
@@ -43,31 +43,31 @@ public:
 
 public:
     registrar(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
-        const std::list<masd::dogen::modeling::meta_model::name>& leaves,
-        const std::list<masd::dogen::modeling::meta_model::name>& model_dependencies,
-        const std::list<masd::dogen::modeling::meta_model::name>& registrar_dependencies);
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
+        const std::list<masd::dogen::coding::meta_model::name>& leaves,
+        const std::list<masd::dogen::coding::meta_model::name>& model_dependencies,
+        const std::list<masd::dogen::coding::meta_model::name>& registrar_dependencies);
 
 public:
-    using masd::dogen::modeling::meta_model::element::accept;
+    using masd::dogen::coding::meta_model::element::accept;
 
-    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) override;
-    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(const masd::dogen::coding::meta_model::element_visitor& v) const override;
+    virtual void accept(masd::dogen::coding::meta_model::element_visitor& v) const override;
+    virtual void accept(const masd::dogen::coding::meta_model::element_visitor& v) override;
+    virtual void accept(masd::dogen::coding::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -76,30 +76,30 @@ public:
      * @brief List of all concrete classes which are part of an inheritance tree.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& leaves() const;
-    std::list<masd::dogen::modeling::meta_model::name>& leaves();
-    void leaves(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void leaves(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& leaves() const;
+    std::list<masd::dogen::coding::meta_model::name>& leaves();
+    void leaves(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void leaves(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief List of all models which the model depends on.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& model_dependencies() const;
-    std::list<masd::dogen::modeling::meta_model::name>& model_dependencies();
-    void model_dependencies(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void model_dependencies(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& model_dependencies() const;
+    std::list<masd::dogen::coding::meta_model::name>& model_dependencies();
+    void model_dependencies(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void model_dependencies(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief Registrars on other models this registrar depends on.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& registrar_dependencies() const;
-    std::list<masd::dogen::modeling::meta_model::name>& registrar_dependencies();
-    void registrar_dependencies(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void registrar_dependencies(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& registrar_dependencies() const;
+    std::list<masd::dogen::coding::meta_model::name>& registrar_dependencies();
+    void registrar_dependencies(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void registrar_dependencies(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
 public:
@@ -109,16 +109,16 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(registrar& other) noexcept;
     registrar& operator=(registrar other);
 
 private:
-    std::list<masd::dogen::modeling::meta_model::name> leaves_;
-    std::list<masd::dogen::modeling::meta_model::name> model_dependencies_;
-    std::list<masd::dogen::modeling::meta_model::name> registrar_dependencies_;
+    std::list<masd::dogen::coding::meta_model::name> leaves_;
+    std::list<masd::dogen::coding::meta_model::name> model_dependencies_;
+    std::list<masd::dogen::coding::meta_model::name> registrar_dependencies_;
 };
 
 }

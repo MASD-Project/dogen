@@ -22,8 +22,8 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.formatting/types/indent_filter.hpp"
 #include "masd.dogen.formatting/types/comment_formatter.hpp"
-#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/types/helpers/name_flattener.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/formatting_error.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/assistant.hpp"
@@ -58,7 +58,7 @@ namespace masd::dogen::generation::csharp::formatters {
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>
 get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    const auto l(modeling::meta_model::languages::csharp);
+    const auto l(coding::meta_model::languages::csharp);
     const auto i(iaq.qualified().find(l));
     if (i == iaq.qualified().end()) {
         BOOST_LOG_SEV(lg, error) << qn_missing << l;
@@ -69,13 +69,13 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 std::string
-assistant::get_qualified_name(const modeling::meta_model::name& n) const {
+assistant::get_qualified_name(const coding::meta_model::name& n) const {
     const auto pair(get_identifiable_and_qualified(n));
     return pair.second;
 }
 
 std::string
-assistant::get_qualified_name(const modeling::meta_model::name_tree& nt) const {
+assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
     const auto pair(get_identifiable_and_qualified(nt));
     return pair.second;
 }
@@ -95,7 +95,7 @@ assistant(const context& ctx, const annotations::archetype_location& al,
 }
 
 std::string
-assistant::make_inheritance_keyword_text(const modeling::meta_model::object& o) {
+assistant::make_inheritance_keyword_text(const coding::meta_model::object& o) {
     if (o.is_parent())
         return abstract_keyword_text;
 
@@ -116,12 +116,12 @@ obtain_artefact_properties(const std::string& archetype) const {
 }
 
 const dogen::formatting::decoration_properties& assistant::
-get_decoration_properties(const modeling::meta_model::element& e) const {
+get_decoration_properties(const coding::meta_model::element& e) const {
     return e.decoration_properties();
 }
 
 dogen::formatting::csharp::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const modeling::meta_model::element& e) {
+make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
     const auto& dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.using_dependencies());
@@ -137,13 +137,13 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 }
 
 std::list<std::string>
-assistant::make_namespaces(const modeling::meta_model::name& n) const {
-    modeling::helpers::name_flattener nf;
+assistant::make_namespaces(const coding::meta_model::name& n) const {
+    coding::helpers::name_flattener nf;
     return nf.flatten(n);
 }
 
 std::string
-assistant::reference_equals(const modeling::meta_model::attribute& attr) const {
+assistant::reference_equals(const coding::meta_model::attribute& attr) const {
     const auto& c(context_.model().aspect_properties());
     const auto n(attr.parsed_type().current());
     const auto i(c.find(n.id()));
@@ -195,7 +195,7 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::string assistant::
-make_argument_name(const modeling::meta_model::attribute& attr) const {
+make_argument_name(const coding::meta_model::attribute& attr) const {
     auto r(attr.name().simple());
     if (r.empty()) {
         BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
@@ -246,7 +246,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 }
 
 boost::optional<formattables::assistant_properties> assistant::
-get_assistant_properties(const modeling::meta_model::attribute& attr) const {
+get_assistant_properties(const coding::meta_model::attribute& attr) const {
 
     const auto& ap(context_.model().assistant_properties());
     const auto i(ap.find(attr.parsed_type().current().id()));
@@ -292,8 +292,8 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-modeling::meta_model::artefact assistant::make_artefact() const {
-    modeling::meta_model::artefact r;
+coding::meta_model::artefact assistant::make_artefact() const {
+    coding::meta_model::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
     r.overwrite(artefact_properties_.overwrite());

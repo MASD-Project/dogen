@@ -28,8 +28,8 @@
 #include <memory>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface_fwd.hpp"
 
 namespace masd::dogen::generation::transforms {
@@ -42,13 +42,13 @@ public:
     ~model_to_text_model_transform_registrar() = default;
 
 public:
-    explicit model_to_text_model_transform_registrar(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_);
+    explicit model_to_text_model_transform_registrar(const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_);
 
 public:
-    const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_() const;
-    std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_();
-    void transforms_by_language_(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& v);
-    void transforms_by_language_(const std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >&& v);
+    const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_() const;
+    std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& transforms_by_language_();
+    void transforms_by_language_(const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >& v);
+    void transforms_by_language_(const std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> >&& v);
 
 public:
     bool operator==(const model_to_text_model_transform_registrar& rhs) const;
@@ -61,7 +61,7 @@ public:
     model_to_text_model_transform_registrar& operator=(model_to_text_model_transform_registrar other);
 
 private:
-    std::unordered_map<dogen::modeling::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> > transforms_by_language__;
+    std::unordered_map<dogen::coding::meta_model::languages, std::shared_ptr<dogen::generation::transforms::model_to_text_model_transform_interface> > transforms_by_language__;
 };
 
 }

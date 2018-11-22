@@ -25,29 +25,29 @@
 #pragma once
 #endif
 
-#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
-#include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.coding/types/transforms/dynamic_transform_interface.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 class dynamic_transform final :
-        public modeling::transforms::dynamic_transform_interface {
+        public coding::transforms::dynamic_transform_interface {
 private:
     bool requires_expansion(
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 
     void expand_injection(const annotations::type_repository& atrp,
-        modeling::meta_model::model& m) const;
+        coding::meta_model::model& m) const;
 
     void expand_decoration(
         const dogen::formatting::decoration_properties_factory& dpf,
-        modeling::meta_model::model& m) const;
+        coding::meta_model::model& m) const;
 
 public:
     std::string id() const override;
-    void transform(const modeling::transforms::context& ctx,
+    void transform(const coding::transforms::context& ctx,
         const dogen::formatting::decoration_properties_factory& dpf,
-        modeling::meta_model::model& m) const override;
+        coding::meta_model::model& m) const override;
 };
 
 }

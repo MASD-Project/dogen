@@ -45,7 +45,7 @@ registrar_header_formatter::archetype_location() const {
     return r;
 }
 
-const modeling::meta_model::name& registrar_header_formatter::meta_name() const {
+const coding::meta_model::name& registrar_header_formatter::meta_name() const {
     using fabric::meta_name_factory;
     static auto r(meta_name_factory::make_registrar_name());
     return r;
@@ -60,24 +60,24 @@ inclusion_support_types registrar_header_formatter::inclusion_support_type() con
 }
 
 boost::filesystem::path registrar_header_formatter::inclusion_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path registrar_header_formatter::full_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> registrar_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const modeling::meta_model::element& /*e*/) const {
+    const coding::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-modeling::meta_model::artefact registrar_header_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact registrar_header_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<fabric::registrar>(e));
 

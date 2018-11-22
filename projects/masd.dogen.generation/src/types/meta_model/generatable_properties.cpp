@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.formatting/io/decoration_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/opaque_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.generation/types/meta_model/generatable_properties.hpp"
 #include "masd.dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
@@ -76,7 +76,7 @@ generatable_properties::generatable_properties(
     const masd::dogen::formatting::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties)
-    : masd::dogen::modeling::meta_model::opaque_properties(),
+    : masd::dogen::coding::meta_model::opaque_properties(),
       decoration_properties_(decoration_properties),
       artefact_properties_(artefact_properties),
       archetype_location_properties_(archetype_location_properties) { }
@@ -85,7 +85,7 @@ void generatable_properties::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"masd::dogen::generation::meta_model::generatable_properties\"" << ", "
       << "\"__parent_0__\": ";
-    masd::dogen::modeling::meta_model::opaque_properties::to_stream(s);
+    masd::dogen::coding::meta_model::opaque_properties::to_stream(s);
     s << ", "
       << "\"decoration_properties\": " << decoration_properties_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
@@ -94,7 +94,7 @@ void generatable_properties::to_stream(std::ostream& s) const {
 }
 
 void generatable_properties::swap(generatable_properties& other) noexcept {
-    masd::dogen::modeling::meta_model::opaque_properties::swap(other);
+    masd::dogen::coding::meta_model::opaque_properties::swap(other);
 
     using std::swap;
     swap(decoration_properties_, other.decoration_properties_);
@@ -102,14 +102,14 @@ void generatable_properties::swap(generatable_properties& other) noexcept {
     swap(archetype_location_properties_, other.archetype_location_properties_);
 }
 
-bool generatable_properties::equals(const masd::dogen::modeling::meta_model::opaque_properties& other) const {
+bool generatable_properties::equals(const masd::dogen::coding::meta_model::opaque_properties& other) const {
     const generatable_properties* const p(dynamic_cast<const generatable_properties* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool generatable_properties::operator==(const generatable_properties& rhs) const {
-    return masd::dogen::modeling::meta_model::opaque_properties::compare(rhs) &&
+    return masd::dogen::coding::meta_model::opaque_properties::compare(rhs) &&
         decoration_properties_ == rhs.decoration_properties_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
         archetype_location_properties_ == rhs.archetype_location_properties_;

@@ -37,7 +37,7 @@ target_link_libraries(${lib_target_name}
     masd.dogen.utility.lib
     masd.dogen.annotations.lib
     masd.dogen.formatting.lib
-    masd.dogen.modeling.lib
+    masd.dogen.coding.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name} ARCHIVE DESTINATION lib COMPONENT libraries)

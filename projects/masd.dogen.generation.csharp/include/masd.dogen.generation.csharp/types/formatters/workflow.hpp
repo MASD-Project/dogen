@@ -27,7 +27,7 @@
 
 #include <list>
 #include <memory>
-#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/model.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/registrar.hpp"
 
@@ -45,7 +45,7 @@ public:
     static csharp::formatters::registrar& registrar();
 
 public:
-    std::list<modeling::meta_model::artefact>
+    std::list<coding::meta_model::artefact>
     execute(const formattables::model& fm) const;
 
 private:

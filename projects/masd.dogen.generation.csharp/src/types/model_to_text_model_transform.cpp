@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/workflow.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/workflow.hpp"
@@ -49,7 +49,7 @@ formattables::model model_to_text_model_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, frp, l, m);
 }
@@ -58,7 +58,7 @@ std::string model_to_text_model_transform::id() const {
     return traits::backend();
 }
 
-std::list<modeling::meta_model::artefact> model_to_text_model_transform::
+std::list<coding::meta_model::artefact> model_to_text_model_transform::
 format(const annotations::type_repository& /*atrp*/,
     const annotations::annotation_factory& /*af*/,
     const dogen::formatting::repository& /*drp*/,
@@ -93,29 +93,29 @@ model_to_text_model_transform::archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-modeling::meta_model::languages model_to_text_model_transform::language() const {
-    return modeling::meta_model::languages::csharp;
+coding::meta_model::languages model_to_text_model_transform::language() const {
+    return coding::meta_model::languages::csharp;
 }
 
 std::unordered_map<std::string,
-                   modeling::meta_model::intra_backend_segment_properties>
+                   coding::meta_model::intra_backend_segment_properties>
 model_to_text_model_transform::
-intra_backend_segment_properties(const modeling::transforms::options& /*o*/) const {
-    using namespace modeling::meta_model;
+intra_backend_segment_properties(const coding::transforms::options& /*o*/) const {
+    using namespace coding::meta_model;
     class intra_backend_segment_properties project;
     project.internal_modules(path_contribution_types::as_folders);
     project.facet(path_contribution_types::as_folders);
 
     std::unordered_map<std::string,
-                       modeling::meta_model::intra_backend_segment_properties> r;
+                       coding::meta_model::intra_backend_segment_properties> r;
     r["project"] = project;
     return r;
 }
 
-modeling::meta_model::text_model
-model_to_text_model_transform::transform(const modeling::transforms::context& ctx,
+coding::meta_model::text_model
+model_to_text_model_transform::transform(const coding::transforms::context& ctx,
     const bool enable_backend_directories,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     probing::scoped_transform_prober stp(lg,
         "C# model to text transform", transform_id, m.name().id(),
         ctx.prober());
@@ -141,7 +141,7 @@ model_to_text_model_transform::transform(const modeling::transforms::context& ct
     /*
      * Code-generate all artefacts.
      */
-    modeling::meta_model::text_model r;
+    coding::meta_model::text_model r;
     const auto& drp(ctx.formatting_repository());
     const auto& af(ctx.annotation_factory());
     r.artefacts(format(atrp, af, drp, fm));

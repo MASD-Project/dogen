@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
-modeling::meta_model::location meta_name_factory::make_location() {
-    modeling::meta_model::location r;
+coding::meta_model::location meta_name_factory::make_location() {
+    coding::meta_model::location r;
     r.external_modules().push_back("dogen");
     r.model_modules().push_back("generation");
     r.model_modules().push_back("cpp");
@@ -32,55 +32,55 @@ modeling::meta_model::location meta_name_factory::make_location() {
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_name(const std::string& sn) {
+coding::meta_model::name meta_name_factory::make_name(const std::string& sn) {
     static const auto l(make_location());
-    modeling::helpers::name_builder b;
+    coding::helpers::name_builder b;
     b.location(l);
     b.simple_name(sn);
     return b.build();
 }
 
-modeling::meta_model::name meta_name_factory::make_cmakelists_name() {
+coding::meta_model::name meta_name_factory::make_cmakelists_name() {
     static const auto r(make_name("cmakelists"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_master_header_name() {
+coding::meta_model::name meta_name_factory::make_master_header_name() {
     static const auto r(make_name("maste_header"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_msbuild_targets_name() {
+coding::meta_model::name meta_name_factory::make_msbuild_targets_name() {
     static const auto r(make_name("msbuild_targets"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_visual_studio_project_name() {
+coding::meta_model::name meta_name_factory::make_visual_studio_project_name() {
     static const auto r(make_name("visual_studio_project"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
+coding::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
     static const auto r(make_name("visual_studio_solution"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_common_odb_options_name() {
+coding::meta_model::name meta_name_factory::make_common_odb_options_name() {
     static const auto r(make_name("common_odb_options"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_object_odb_options_name() {
+coding::meta_model::name meta_name_factory::make_object_odb_options_name() {
     static const auto r(make_name("object_odb_options"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_registrar_name() {
+coding::meta_model::name meta_name_factory::make_registrar_name() {
     static const auto r(make_name("registrar"));
     return r;
 }
 
-modeling::meta_model::name meta_name_factory::make_forward_declarations_name() {
+coding::meta_model::name meta_name_factory::make_forward_declarations_name() {
     static const auto r(make_name("forward_declarations"));
     return r;
 }

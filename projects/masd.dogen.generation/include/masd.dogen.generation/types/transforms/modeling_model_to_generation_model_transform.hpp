@@ -18,30 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
-#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_MODELING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#ifndef MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CODING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#define MASD_DOGEN_GENERATION_TYPES_TRANSFORMS_CODING_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
 #include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.generation/types/transforms/context.hpp"
 
 namespace masd::dogen::generation::transforms {
 
-class modeling_model_to_generation_model_transform final {
+class coding_model_to_generation_model_transform final {
 private:
     static std::size_t
-    compute_total_size(const modeling::meta_model::endomodel& em);
+    compute_total_size(const coding::meta_model::endomodel& em);
     static meta_model::model
-    transform(const modeling::meta_model::endomodel& em);
+    transform(const coding::meta_model::endomodel& em);
 
 public:
     static std::list<meta_model::model> transform(const context& ctx,
-        const std::list<modeling::meta_model::endomodel>& ems);
+        const std::list<coding::meta_model::endomodel>& ems);
 };
 
 }

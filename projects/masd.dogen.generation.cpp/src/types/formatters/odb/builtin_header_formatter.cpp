@@ -24,8 +24,8 @@
 #include "masd.dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
 
 namespace masd::dogen::generation::cpp::formatters::odb {
 
@@ -46,8 +46,8 @@ builtin_header_formatter::archetype_location() const {
     return r;
 }
 
-const modeling::meta_model::name& builtin_header_formatter::meta_name() const {
-    using modeling::helpers::meta_name_factory;
+const coding::meta_model::name& builtin_header_formatter::meta_name() const {
+    using coding::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_builtin_name());
     return r;
 }
@@ -61,25 +61,25 @@ inclusion_support_types builtin_header_formatter::inclusion_support_type() const
 }
 
 boost::filesystem::path builtin_header_formatter::inclusion_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path builtin_header_formatter::full_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> builtin_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const modeling::meta_model::element& /*e*/) const {
+    const coding::meta_model::element& /*e*/) const {
     static const std::list<std::string> r;
     return r;
 }
 
-modeling::meta_model::artefact builtin_header_formatter::
-format(const context& /*ctx*/, const modeling::meta_model::element& /*e*/) const {
-    modeling::meta_model::artefact r;
+coding::meta_model::artefact builtin_header_formatter::
+format(const context& /*ctx*/, const coding::meta_model::element& /*e*/) const {
+    coding::meta_model::artefact r;
     return r;
 }
 

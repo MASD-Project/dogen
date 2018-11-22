@@ -50,7 +50,7 @@ msbuild_targets_formatter::archetype_location() const {
     return r;
 }
 
-const modeling::meta_model::name& msbuild_targets_formatter::meta_name() const {
+const coding::meta_model::name& msbuild_targets_formatter::meta_name() const {
     static auto r(fabric::meta_name_factory::make_msbuild_targets_name());
     return r;
 }
@@ -65,7 +65,7 @@ msbuild_targets_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path msbuild_targets_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const modeling::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
 
     using namespace masd::dogen::utility::log;
     using namespace masd::dogen::generation::cpp::formatters;
@@ -78,19 +78,19 @@ boost::filesystem::path msbuild_targets_formatter::inclusion_path(
 }
 
 boost::filesystem::path msbuild_targets_formatter::full_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path_for_msbuild_targets(n, static_id());
 }
 
 std::list<std::string> msbuild_targets_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const modeling::meta_model::element& /*e*/) const {
+    const coding::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-modeling::meta_model::artefact msbuild_targets_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact msbuild_targets_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& c(a.as<fabric::msbuild_targets>(e));
 

@@ -68,6 +68,6 @@
 #include "masd.dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_text_model_transform_interface.hpp"
 #include "masd.dogen.generation/types/transforms/model_to_text_model_transform_registrar.hpp"
-#include "masd.dogen.generation/types/transforms/modeling_model_to_generation_model_transform.hpp"
+#include "masd.dogen.generation/types/transforms/coding_model_to_generation_model_transform.hpp"
 
 #endif

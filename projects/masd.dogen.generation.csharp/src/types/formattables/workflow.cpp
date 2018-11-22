@@ -34,7 +34,7 @@ static logger lg(logger_factory("generation.csharp.formattables.workflow"));
 namespace masd::dogen::generation::csharp::formattables {
 
 model workflow:: make_model(const formatters::repository& frp,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     model r;
     r.name(m.name());
 
@@ -56,7 +56,7 @@ model workflow::execute(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const locator& l,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
 
     auto r(make_model(frp, m));
     expand_model(atrp, ra, frp, l, r);

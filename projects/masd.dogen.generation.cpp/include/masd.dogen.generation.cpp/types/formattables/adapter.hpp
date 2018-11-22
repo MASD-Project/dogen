@@ -27,10 +27,10 @@
 
 #include <string>
 #include <unordered_map>
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
-#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/repository.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/model.hpp"
@@ -44,21 +44,21 @@ namespace masd::dogen::generation::cpp::formattables {
 class adapter {
 public:
     static std::string
-    to_odb_database(const modeling::meta_model::orm_database_systems ds);
+    to_odb_database(const coding::meta_model::orm_database_systems ds);
 
 private:
     std::string
-    to_odb_sql_name_case(const modeling::meta_model::letter_cases lc) const;
+    to_odb_sql_name_case(const coding::meta_model::letter_cases lc) const;
 
     std::list<std::string>
-    make_databases(const modeling::meta_model::orm_model_properties& omp) const;
+    make_databases(const coding::meta_model::orm_model_properties& omp) const;
 
 public:
     /**
      * @brief Given a yarn model, produces the corresponding formattables.
      */
     model adapt(const formatters::repository& frp,
-        const modeling::meta_model::model& m) const;
+        const coding::meta_model::model& m) const;
 };
 
 }

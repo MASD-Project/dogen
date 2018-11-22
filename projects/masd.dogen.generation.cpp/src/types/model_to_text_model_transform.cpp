@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/filesystem/path.hpp"
 #include "masd.dogen.formatting/types/repository_factory.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/workflow.hpp"
@@ -56,16 +56,16 @@ formattables::model model_to_text_model_transform::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, l, frp, m);
 }
 
 formattables::locator model_to_text_model_transform::make_locator(
-    const modeling::transforms::options& o,
+    const coding::transforms::options& o,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const formatters::repository& frp, const bool enable_backend_directories,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
 
     const auto& mn(m.name());
     const auto odp(o.output_directory_path());
@@ -80,8 +80,8 @@ std::string model_to_text_model_transform::id() const {
     return traits::backend();
 }
 
-std::list<modeling::meta_model::artefact> model_to_text_model_transform::
-format(const std::unordered_set<modeling::meta_model::element_archetype>&
+std::list<coding::meta_model::artefact> model_to_text_model_transform::
+format(const std::unordered_set<coding::meta_model::element_archetype>&
     enabled_archetype_for_element, const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
     const dogen::formatting::repository& drp,
@@ -126,25 +126,25 @@ model_to_text_model_transform::archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-modeling::meta_model::languages model_to_text_model_transform::language() const {
-    return modeling::meta_model::languages::cpp;
+coding::meta_model::languages model_to_text_model_transform::language() const {
+    return coding::meta_model::languages::cpp;
 }
 
 std::unordered_map<std::string,
-                   modeling::meta_model::intra_backend_segment_properties>
+                   coding::meta_model::intra_backend_segment_properties>
 model_to_text_model_transform::
-intra_backend_segment_properties(const modeling::transforms::options& /*o*/) const {
-    // modeling::meta_model::intra_backend_segment_properties include;
-    // modeling::meta_model::intra_backend_segment_properties implementation;
+intra_backend_segment_properties(const coding::transforms::options& /*o*/) const {
+    // coding::meta_model::intra_backend_segment_properties include;
+    // coding::meta_model::intra_backend_segment_properties implementation;
     std::unordered_map<std::string,
-                       modeling::meta_model::intra_backend_segment_properties> r;
+                       coding::meta_model::intra_backend_segment_properties> r;
     return r;
 }
 
-modeling::meta_model::text_model
-model_to_text_model_transform::transform(const modeling::transforms::context& ctx,
+coding::meta_model::text_model
+model_to_text_model_transform::transform(const coding::transforms::context& ctx,
     const bool enable_backend_directories,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     probing::scoped_transform_prober stp(lg,
         "C++ model to text transform", transform_id, m.name().id(),
         ctx.prober());
@@ -168,7 +168,7 @@ model_to_text_model_transform::transform(const modeling::transforms::context& ct
     /*
      * Code-generate all artefacts.
      */
-    modeling::meta_model::text_model r;
+    coding::meta_model::text_model r;
     const auto& drp(ctx.formatting_repository());
     const auto& af(ctx.annotation_factory());
     const auto& eafe(m.enabled_archetype_for_element());

@@ -23,8 +23,8 @@
 #include "masd.dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.formatting/types/sequence_formatter.hpp"
-#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
 
 namespace masd::dogen::generation::csharp::formatters::types {
 
@@ -44,8 +44,8 @@ annotations::archetype_location class_formatter::archetype_location() const {
     return r;
 }
 
-const modeling::meta_model::name& class_formatter::meta_name() const {
-    using modeling::helpers::meta_name_factory;
+const coding::meta_model::name& class_formatter::meta_name() const {
+    using coding::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
 }
@@ -55,21 +55,21 @@ std::string class_formatter::family() const {
 }
 
 boost::filesystem::path class_formatter::full_path(
-    const formattables::locator& l, const modeling::meta_model::name& n) const {
+    const formattables::locator& l, const coding::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> class_formatter::
-inclusion_dependencies(const modeling::meta_model::element& /*e*/) const {
+inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-modeling::meta_model::artefact class_formatter::
-format(const context& ctx, const modeling::meta_model::element& e) const {
+coding::meta_model::artefact class_formatter::
+format(const context& ctx, const coding::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& o(a.as<modeling::meta_model::object>(static_id(), e));
+    const auto& o(a.as<coding::meta_model::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

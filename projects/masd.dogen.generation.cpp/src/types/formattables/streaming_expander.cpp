@@ -24,7 +24,7 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/streaming_expander.hpp"
 

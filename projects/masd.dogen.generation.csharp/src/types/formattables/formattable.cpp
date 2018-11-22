@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/formattable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& lhs,
-const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::element>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::element>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -34,7 +34,7 @@ namespace masd::dogen::generation::csharp::formattables {
 
 formattable::formattable(
     const masd::dogen::generation::csharp::formattables::element_properties& element_properties,
-    const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& element)
+    const boost::shared_ptr<masd::dogen::coding::meta_model::element>& element)
     : element_properties_(element_properties),
       element_(element) { }
 
@@ -71,19 +71,19 @@ void formattable::element_properties(const masd::dogen::generation::csharp::form
     element_properties_ = std::move(v);
 }
 
-const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& formattable::element() const {
+const boost::shared_ptr<masd::dogen::coding::meta_model::element>& formattable::element() const {
     return element_;
 }
 
-boost::shared_ptr<masd::dogen::modeling::meta_model::element>& formattable::element() {
+boost::shared_ptr<masd::dogen::coding::meta_model::element>& formattable::element() {
     return element_;
 }
 
-void formattable::element(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>& v) {
+void formattable::element(const boost::shared_ptr<masd::dogen::coding::meta_model::element>& v) {
     element_ = v;
 }
 
-void formattable::element(const boost::shared_ptr<masd::dogen::modeling::meta_model::element>&& v) {
+void formattable::element(const boost::shared_ptr<masd::dogen::coding::meta_model::element>&& v) {
     element_ = std::move(v);
 }
 

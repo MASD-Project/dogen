@@ -29,7 +29,7 @@
 #include <vector>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
 
 namespace masd::dogen::cli {
 
@@ -47,9 +47,9 @@ public:
 public:
     /**
      * Transforms the supplied command line arguments into the
-     * modeling options.
+     * coding options.
      */
-    virtual boost::optional<modeling::transforms::options>
+    virtual boost::optional<coding::transforms::options>
     parse(std::vector<std::string> arguments, std::ostream& out,
         std::ostream& err) const = 0;
 };

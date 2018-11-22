@@ -28,10 +28,10 @@
 #include "masd.dogen.formatting/types/comment_formatter.hpp"
 #include "masd.dogen.formatting/types/decoration_formatter.hpp"
 #include "masd.dogen.formatting/types/utility_formatter.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/letter_cases_io.hpp"
-#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
-#include "masd.dogen.modeling/hash/meta_model/element_archetype_hash.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
+#include "masd.dogen.coding/types/helpers/name_flattener.hpp"
+#include "masd.dogen.coding/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "masd.dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/io/traits.hpp"
@@ -88,7 +88,7 @@ namespace masd::dogen::generation::cpp::formatters {
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>
 get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    using modeling::meta_model::languages;
+    using coding::meta_model::languages;
     const auto i(iaq.qualified().find(languages::cpp));
     if (i == iaq.qualified().end()) {
         BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
@@ -99,7 +99,7 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
 }
 
 assistant::
-assistant(const context& ctx, const modeling::meta_model::element& e,
+assistant(const context& ctx, const coding::meta_model::element& e,
     const annotations::archetype_location& al, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
@@ -135,7 +135,7 @@ void assistant::validate() const {
 }
 
 std::string
-assistant::make_final_keyword_text(const modeling::meta_model::object& o) const {
+assistant::make_final_keyword_text(const coding::meta_model::object& o) const {
     if (is_cpp_standard_98())
         return empty;
 
@@ -157,13 +157,13 @@ std::string assistant::make_noexcept_keyword_text() const {
 }
 
 std::string
-assistant::make_by_ref_text(const modeling::meta_model::attribute& attr) {
+assistant::make_by_ref_text(const coding::meta_model::attribute& attr) {
     return attr.parsed_type().is_current_simple_type() ? empty : by_ref_text;
 }
 
 std::string assistant::
 make_setter_return_type(const std::string& containing_type_name,
-    const modeling::meta_model::attribute& attr) {
+    const coding::meta_model::attribute& attr) {
 
     std::ostringstream s;
     if (attr.is_fluent())
@@ -175,24 +175,24 @@ make_setter_return_type(const std::string& containing_type_name,
 }
 
 std::string
-assistant::get_qualified_name(const modeling::meta_model::name& n) const {
+assistant::get_qualified_name(const coding::meta_model::name& n) const {
     const auto pair(get_identifiable_and_qualified(n));
     return pair.second;
 }
 
 std::string
-assistant::get_qualified_name(const modeling::meta_model::name_tree& nt) const {
+assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
     const auto pair(get_identifiable_and_qualified(nt));
     return pair.second;
 }
 
 std::string
-assistant::get_identifiable_model_name(const modeling::meta_model::name& n) const {
+assistant::get_identifiable_model_name(const coding::meta_model::name& n) const {
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
 }
 
-std::string assistant::get_product_name(const modeling::meta_model::name& n) const {
+std::string assistant::get_product_name(const coding::meta_model::name& n) const {
     if (n.location().external_modules().empty())
         return empty;
 
@@ -228,9 +228,9 @@ const formattables::artefact_properties& assistant::obtain_artefact_properties(
     return i->second;
 }
 
-const modeling::meta_model::artefact_properties&
+const coding::meta_model::artefact_properties&
 assistant::obtain_new_artefact_properties(
-    const modeling::meta_model::element& e, const std::string& archetype) const {
+    const coding::meta_model::element& e, const std::string& archetype) const {
     const auto& ap(e.artefact_properties());
     const auto i(ap.find(archetype));
     if (i == ap.end()) {
@@ -255,24 +255,24 @@ obtain_facet_properties(const std::string& facet_name) const {
 }
 
 std::string assistant::
-make_member_variable_name(const modeling::meta_model::attribute& attr) const {
+make_member_variable_name(const coding::meta_model::attribute& attr) const {
     return attr.name().simple() + member_variable_postfix;
 }
 
 std::string assistant::
-make_getter_setter_name(const modeling::meta_model::attribute& attr) const {
+make_getter_setter_name(const coding::meta_model::attribute& attr) const {
     return attr.name().simple();
 }
 
 std::list<std::string>
-assistant::make_namespaces(const modeling::meta_model::name& n,
+assistant::make_namespaces(const coding::meta_model::name& n,
     const bool detect_model_name) const {
-    modeling::helpers::name_flattener nf(detect_model_name);
+    coding::helpers::name_flattener nf(detect_model_name);
     return nf.flatten(n);
 }
 
 bool assistant::is_archetype_enabled(const std::string& archetype) const {
-    modeling::meta_model::element_archetype ea(element_.name().id(), archetype);
+    coding::meta_model::element_archetype ea(element_.name().id(), archetype);
     const auto& eafe(context_.enabled_archetype_for_element());
     const auto i(eafe.find(ea));
     const bool is_disabled(i == eafe.end());
@@ -362,12 +362,12 @@ bool assistant::is_odb_facet_enabled() const {
 }
 
 const dogen::formatting::decoration_properties& assistant::
-get_decoration_properties(const modeling::meta_model::element& e) const {
+get_decoration_properties(const coding::meta_model::element& e) const {
     return e.decoration_properties();
 }
 
 dogen::formatting::cpp::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const modeling::meta_model::element& e) {
+make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.inclusion_dependencies());
@@ -386,7 +386,7 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
 
 void assistant::
 make_decoration_preamble(const dogen::formatting::comment_styles cs,
-    const modeling::meta_model::element& e) {
+    const coding::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     make_decoration_preamble(cs, dp);
 }
@@ -590,7 +590,7 @@ streaming_for_type(const formattables::streaming_properties& sp,
     return stream.str();
 }
 
-std::string assistant::streaming_for_type(const modeling::meta_model::name& n,
+std::string assistant::streaming_for_type(const coding::meta_model::name& n,
     const std::string& s) const {
 
     const auto str_propss(context_.model().streaming_properties());
@@ -613,7 +613,7 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 }
 
 bool assistant::
-requires_hashing_helper_method(const modeling::meta_model::attribute& attr) const {
+requires_hashing_helper_method(const coding::meta_model::attribute& attr) const {
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
         const auto ident(attr.parsed_type().identifiable());
@@ -662,15 +662,15 @@ std::string assistant::get_odb_type() const {
     return odb_object_type;
 }
 
-std::list<modeling::meta_model::name> assistant::
+std::list<coding::meta_model::name> assistant::
 names_with_enabled_archetype(const std::string& archetype,
-    const std::list<modeling::meta_model::name> names) const {
-    std::list<modeling::meta_model::name> r;
+    const std::list<coding::meta_model::name> names) const {
+    std::list<coding::meta_model::name> r;
     for (const auto& n : names) {
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
 
-        modeling::meta_model::element_archetype ea(id, archetype);
+        coding::meta_model::element_archetype ea(id, archetype);
         const auto& eafe(context_.enabled_archetype_for_element());
         const auto i(eafe.find(ea));
         const bool is_disabled(i == eafe.end());
@@ -687,7 +687,7 @@ assistant::artefact_properties() const {
     return artefact_properties_;
 }
 
-const modeling::meta_model::artefact_properties&
+const coding::meta_model::artefact_properties&
 assistant::new_artefact_properties() const {
     return new_artefact_properties_;
 }
@@ -696,8 +696,8 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-modeling::meta_model::artefact assistant::make_artefact() const {
-    modeling::meta_model::artefact r;
+coding::meta_model::artefact assistant::make_artefact() const {
+    coding::meta_model::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
 

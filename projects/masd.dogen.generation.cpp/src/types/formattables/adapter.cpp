@@ -21,9 +21,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/io/meta_model/letter_cases_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/orm_database_systems_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_database_systems_io.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/adaptation_error.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -55,8 +55,8 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 namespace masd::dogen::generation::cpp::formattables {
 
 std::string
-adapter::to_odb_database(const modeling::meta_model::orm_database_systems ds) {
-    using modeling::meta_model::orm_database_systems;
+adapter::to_odb_database(const coding::meta_model::orm_database_systems ds) {
+    using coding::meta_model::orm_database_systems;
 
     switch (ds) {
     case orm_database_systems::mysql: return mysql;
@@ -72,8 +72,8 @@ adapter::to_odb_database(const modeling::meta_model::orm_database_systems ds) {
 }
 
 std::string adapter::
-to_odb_sql_name_case(const modeling::meta_model::letter_cases lc) const {
-    using modeling::meta_model::letter_cases;
+to_odb_sql_name_case(const coding::meta_model::letter_cases lc) const {
+    using coding::meta_model::letter_cases;
 
     switch (lc) {
     case letter_cases::upper_case: return upper_case;
@@ -86,7 +86,7 @@ to_odb_sql_name_case(const modeling::meta_model::letter_cases lc) const {
 }
 
 std::list<std::string> adapter::
-make_databases(const modeling::meta_model::orm_model_properties& omp) const {
+make_databases(const coding::meta_model::orm_model_properties& omp) const {
     std::list<std::string> r;
 
     if (omp.database_systems().size() > 1)
@@ -99,7 +99,7 @@ make_databases(const modeling::meta_model::orm_model_properties& omp) const {
 }
 
 model adapter::adapt(const formatters::repository& frp,
-    const modeling::meta_model::model& m) const {
+    const coding::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Adapting yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 

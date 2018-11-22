@@ -25,8 +25,8 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.annotations/io/type_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp"
@@ -67,8 +67,8 @@ public:
     using fabric::element_visitor::visit;
     void visit(fabric::common_odb_options& coo);
     void visit(fabric::object_odb_options& ooo);
-    void visit(modeling::meta_model::object& o);
-    void visit(modeling::meta_model::primitive& p);
+    void visit(coding::meta_model::object& o);
+    void visit(coding::meta_model::primitive& p);
 
 public:
     const boost::optional<odb_properties>& result() const;
@@ -129,7 +129,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
     ooo.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
 }
 
-void updator::visit(modeling::meta_model::object& o) {
+void updator::visit(coding::meta_model::object& o) {
     odb_properties op;
 
     const annotations::entry_selector s(o.annotation());
@@ -146,7 +146,7 @@ void updator::visit(modeling::meta_model::object& o) {
         if (cfg.generate_mapping() && !op.is_value() && !cfg.has_primary_key())
             top_level_pragmas.push_back(no_id_pragma);
 
-        using modeling::meta_model::letter_cases;
+        using coding::meta_model::letter_cases;
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && (op.is_value() || cfg.generate_mapping())) {
             std::ostringstream s;
@@ -221,7 +221,7 @@ void updator::visit(modeling::meta_model::object& o) {
         result_ = op;
 }
 
-void updator::visit(modeling::meta_model::primitive& p) {
+void updator::visit(coding::meta_model::primitive& p) {
     odb_properties op;
     op.is_value(true);
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, p.annotation()));
@@ -234,7 +234,7 @@ void updator::visit(modeling::meta_model::primitive& p) {
             std::ostringstream s;
             s << "schema(\"";
 
-            using modeling::meta_model::letter_cases;
+            using coding::meta_model::letter_cases;
             if (!cfg.letter_case())
                 s << cfg.schema_name();
             else if (*cfg.letter_case() == letter_cases::upper_case)
@@ -318,7 +318,7 @@ void odb_expander::expand(const annotations::type_repository& atrp,
          * for referenced models.
          */
         auto segment(formattable.master_segment());
-        if (segment->origin_type() != modeling::meta_model::origin_types::target)
+        if (segment->origin_type() != coding::meta_model::origin_types::target)
             continue;
 
         for (const auto& ptr : formattable.all_segments()) {

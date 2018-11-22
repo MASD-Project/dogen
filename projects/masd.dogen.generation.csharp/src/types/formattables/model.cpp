@@ -23,7 +23,7 @@
 namespace masd::dogen::generation::csharp::formattables {
 
 model::model(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
     const std::unordered_map<std::string, masd::dogen::generation::csharp::formattables::aspect_properties>& aspect_properties,
@@ -57,19 +57,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const masd::dogen::modeling::meta_model::name& model::name() const {
+const masd::dogen::coding::meta_model::name& model::name() const {
     return name_;
 }
 
-masd::dogen::modeling::meta_model::name& model::name() {
+masd::dogen::coding::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const masd::dogen::modeling::meta_model::name& v) {
+void model::name(const masd::dogen::coding::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const masd::dogen::modeling::meta_model::name&& v) {
+void model::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
 }
 

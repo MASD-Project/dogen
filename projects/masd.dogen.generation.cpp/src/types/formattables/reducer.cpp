@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.generation.cpp/types/formattables/reducer.hpp"
 
 namespace {
@@ -39,7 +39,7 @@ void reducer::reduce(model& fm) const {
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.master_segment());
-        if (e.origin_type() != modeling::meta_model::origin_types::target)
+        if (e.origin_type() != coding::meta_model::origin_types::target)
             continue;
 
         reduced.insert(pair);

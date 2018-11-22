@@ -28,11 +28,11 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
-class visual_studio_project final : public masd::dogen::modeling::meta_model::element {
+class visual_studio_project final : public masd::dogen::coding::meta_model::element {
 public:
     visual_studio_project() = default;
     visual_studio_project(const visual_studio_project&) = default;
@@ -42,31 +42,31 @@ public:
 
 public:
     visual_studio_project(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
         const std::string& project_guid,
         const std::string& project_name,
         const std::string& tools_version);
 
 public:
-    using masd::dogen::modeling::meta_model::element::accept;
+    using masd::dogen::coding::meta_model::element::accept;
 
-    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) const override;
-    virtual void accept(const masd::dogen::modeling::meta_model::element_visitor& v) override;
-    virtual void accept(masd::dogen::modeling::meta_model::element_visitor& v) override;
+    virtual void accept(const masd::dogen::coding::meta_model::element_visitor& v) const override;
+    virtual void accept(masd::dogen::coding::meta_model::element_visitor& v) const override;
+    virtual void accept(const masd::dogen::coding::meta_model::element_visitor& v) override;
+    virtual void accept(masd::dogen::coding::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -93,7 +93,7 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(visual_studio_project& other) noexcept;
