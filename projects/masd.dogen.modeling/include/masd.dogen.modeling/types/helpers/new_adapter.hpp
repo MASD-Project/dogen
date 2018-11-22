@@ -31,8 +31,8 @@
 #include <boost/shared_ptr.hpp>
 #include "masd.dogen.annotations/types/scope_types.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.external/types/meta_model/attribute.hpp"
-#include "masd.dogen.external/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/meta_model/attribute.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
 #include "masd.dogen.modeling/types/meta_model/location.hpp"
 #include "masd.dogen.modeling/types/meta_model/element.hpp"
 #include "masd.dogen.modeling/types/meta_model/enumerator.hpp"
@@ -72,29 +72,29 @@ private:
         const std::string& n) const;
 
     /**
-     * @brief Converts an external attribute to an yarn attribute.
+     * @brief Converts an injection attribute to an yarn attribute.
      *
-     * @pre name and type of the external attribute must not be empty.
+     * @pre name and type of the injector attribute must not be empty.
      */
     meta_model::attribute to_attribute(const meta_model::location& l,
-        const external::meta_model::attribute& a) const;
+        const injection::meta_model::attribute& a) const;
 
     /**
-     * @brief Converts an external attribute to an yarn enumerator.
+     * @brief Converts an injector attribute to an yarn enumerator.
      *
-     * @pre name and type of the external attribute must not be empty.
+     * @pre name and type of the injector attribute must not be empty.
      */
     meta_model::enumerator to_enumerator(const meta_model::location& l,
-        const external::meta_model::attribute& a) const;
+        const injection::meta_model::attribute& a) const;
 
 private:
     /**
      * @brief Populates the meta-model element attributes using the
-     * external element.
+     * injection element.
      */
     void populate_element(const annotations::scope_types scope,
         const meta_model::location& l, const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee, meta_model::element& e) const;
+        const injection::meta_model::element& ee, meta_model::element& e) const;
 
 public:
     /**
@@ -104,7 +104,7 @@ public:
     boost::shared_ptr<meta_model::object>
     to_object(const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
@@ -113,7 +113,7 @@ public:
     boost::shared_ptr<meta_model::object_template>
     to_object_template(const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
@@ -122,7 +122,7 @@ public:
     boost::shared_ptr<meta_model::exception>
     to_exception(const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
@@ -131,7 +131,7 @@ public:
     boost::shared_ptr<meta_model::primitive>
     to_primitive(const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
@@ -140,7 +140,7 @@ public:
     boost::shared_ptr<meta_model::enumeration>
     to_enumeration(const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
@@ -149,7 +149,7 @@ public:
     boost::shared_ptr<meta_model::module>
     to_module(const bool is_root_module, const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
     /**
      * @brief Converts an exoelement with a stereotype of
@@ -158,7 +158,7 @@ public:
     boost::shared_ptr<meta_model::builtin>
     to_builtin(const meta_model::location& l,
         const stereotypes_conversion_result& scr,
-        const external::meta_model::element& ee) const;
+        const injection::meta_model::element& ee) const;
 
 private:
     const annotations::annotation_factory& annotation_factory_;

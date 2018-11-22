@@ -32,7 +32,7 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.modeling/types/helpers/new_adapter.hpp"
 #include "masd.dogen.modeling/types/meta_model/element.hpp"
 #include "masd.dogen.modeling/types/meta_model/location.hpp"
@@ -67,11 +67,11 @@ private:
 
     static void process_element(const helpers::new_adapter& ad,
         const meta_model::location& l,
-        const external::meta_model::element& e, meta_model::endomodel& em);
+        const injection::meta_model::element& e, meta_model::endomodel& em);
 
 public:
     static meta_model::endomodel
-    transform(const context& ctx, const external::meta_model::model& m);
+    transform(const context& ctx, const injection::meta_model::model& m);
 };
 
 }

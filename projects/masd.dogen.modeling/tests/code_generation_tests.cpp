@@ -28,8 +28,8 @@
 // #include "masd.dogen.utility/filesystem/file.hpp"
 // #include "masd.dogen.utility/test/macros.hpp"
 // #include "masd.dogen.utility/test/asserter.hpp"
-// #include "masd.dogen.utility/test_data/external_dia.hpp"
-// #include "masd.dogen.utility/test_data/external_json.hpp"
+// #include "masd.dogen.utility/test_data/injection_dia.hpp"
+// #include "masd.dogen.utility/test_data/injection_json.hpp"
 // #include "masd.dogen.utility/test/logging.hpp"
 // #include "masd.dogen.dia/io/diagram_io.hpp"
 // #include "masd.dogen.modeling/test/mock_options_factory.hpp"
@@ -52,8 +52,8 @@
 // #define ENABLE_JSON_TESTS
 // #define ENABLE_CSHARP_TESTS
 
-// using masd::dogen::utility::test_data::external_dia;
-// using masd::dogen::utility::test_data::external_json;
+// using masd::dogen::utility::test_data::injection_dia;
+// using masd::dogen::utility::test_data::injection_json;
 
 // namespace  {
 
@@ -107,8 +107,8 @@
 //     const boost::filesystem::path& probing_directory_path,
 //     const bool json = false) {
 //     const auto target(json ?
-//         external_json::input_split_project_json() :
-//         external_dia::input_split_project_dia());
+//         injection_json::input_split_project_json() :
+//         injection_dia::input_split_project_dia());
 //     const auto model_name(target.stem().string());
 //     const auto actual_dir(json ? actual_json_dir : actual_dia_dir);
 //     auto r(make_test_configuration(model_name, target, actual_dir,
@@ -178,56 +178,56 @@ BOOST_AUTO_TEST_SUITE(code_generator_tests)
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("cpp_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_cpp_model_dia());
+    const auto dia(injection_dia::input_cpp_model_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code_dia) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_disable_facet_folders_dia());
+    const auto dia(injection_dia::input_disable_facet_folders_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code_dia) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_disable_cmakelists_dia());
+    const auto dia(injection_dia::input_disable_cmakelists_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_types_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_types_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_enable_facet_types_dia());
+    const auto dia(injection_dia::input_enable_facet_types_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_cod_diae");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_enable_facet_hash_dia());
+    const auto dia(injection_dia::input_enable_facet_hash_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_enable_facet_serialization_dia());
+    const auto dia(injection_dia::input_enable_facet_serialization_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_dia) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_enable_facet_io_dia());
+    const auto dia(injection_dia::input_enable_facet_io_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(class_without_name_model_throws) {
     SETUP_TEST_LOG("class_without_name_model_throws");
     const bool ep(false/*enable probing locally*/);
-    const auto target(external_dia::input_class_without_name_dia());
+    const auto target(injection_dia::input_class_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(test_code_generation(target, actual_dia_dir, ep, pd),
         std::exception, c);
@@ -236,35 +236,35 @@ BOOST_IGNORE_AUTO_TEST_CASE(class_without_name_model_throws) {
 BOOST_IGNORE_AUTO_TEST_CASE(compressed_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_compressed_dia());
+    const auto dia(injection_dia::input_compressed_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_two_layers_with_objects_dia());
+    const auto dia(injection_dia::input_two_layers_with_objects_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(std_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("std_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_std_model_dia());
+    const auto dia(injection_dia::input_std_model_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(boost_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("boost_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_boost_model_dia());
+    const auto dia(injection_dia::input_boost_model_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_package_without_name_dia());
+    const auto dia(injection_dia::input_package_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(test_code_generation(dia, actual_dia_dir, ep, pd),
         std::exception, c);
@@ -273,7 +273,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(package_without_name_model_throws) {
 BOOST_IGNORE_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_dia) {
     SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_all_path_and_directory_settings_dia());
+    const auto dia(injection_dia::input_all_path_and_directory_settings_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
@@ -287,14 +287,14 @@ BOOST_IGNORE_AUTO_TEST_CASE(split_project_model_generates_expected_code_dia) {
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("cpp_98_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_cpp_98_dia());
+    const auto dia(injection_dia::input_cpp_98_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(lam_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("lam_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_lam_model_dia());
+    const auto dia(injection_dia::input_lam_model_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
@@ -303,7 +303,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(lam_model_generates_expected_code_dia) {
 BOOST_IGNORE_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_dia");
     const bool ep(false/*enable probing locally*/);
-    const auto dia(external_dia::input_csharp_model_dia());
+    const auto dia(injection_dia::input_csharp_model_dia());
     BOOST_CHECK(test_code_generation(dia, actual_dia_dir, ep, pd));
 }
 
@@ -316,77 +316,77 @@ BOOST_IGNORE_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_model_generates_expected_code_json) {
     SETUP_TEST_LOG("cpp_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_cpp_model_json());
+    const auto json(injection_json::input_cpp_model_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code_json) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_disable_facet_folders_json());
+    const auto json(injection_json::input_disable_facet_folders_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(disable_cmakelists_generates_expected_code_json) {
     SETUP_TEST_LOG("disable_cmakelists_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_disable_cmakelists_json());
+    const auto json(injection_json::input_disable_cmakelists_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_types_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_types_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_enable_facet_types_json());
+    const auto json(injection_json::input_enable_facet_types_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_hash_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_hash_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_enable_facet_hash_json());
+    const auto json(injection_json::input_enable_facet_hash_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_serialization_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_serialization_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_enable_facet_serialization_json());
+    const auto json(injection_json::input_enable_facet_serialization_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_json) {
     SETUP_TEST_LOG("enable_facet_io_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_enable_facet_io_json());
+    const auto json(injection_json::input_enable_facet_io_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(compressed_model_generates_expected_code_json) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_compressed_json());
+    const auto json(injection_json::input_compressed_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(std_model_generates_expected_code_json) {
     SETUP_TEST_LOG("std_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_std_model_json());
+    const auto json(injection_json::input_std_model_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(boost_model_generates_expected_code_json) {
     SETUP_TEST_LOG("boost_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_boost_model_json());
+    const auto json(injection_json::input_boost_model_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_json) {
     SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_all_path_and_directory_settings_json());
+    const auto json(injection_json::input_all_path_and_directory_settings_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
@@ -400,14 +400,14 @@ BOOST_IGNORE_AUTO_TEST_CASE(split_project_model_generates_expected_code_json) {
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_json) {
     SETUP_TEST_LOG("cpp_98_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_cpp_98_json());
+    const auto json(injection_json::input_cpp_98_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(lam_model_generates_expected_code_json) {
     SETUP_TEST_LOG("lam_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_lam_model_json());
+    const auto json(injection_json::input_lam_model_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 
@@ -416,7 +416,7 @@ BOOST_IGNORE_AUTO_TEST_CASE(lam_model_generates_expected_code_json) {
 BOOST_IGNORE_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_json");
     const bool ep(false/*enable probing locally*/);
-    const auto json(external_json::input_csharp_model_json());
+    const auto json(injection_json::input_csharp_model_json());
     BOOST_CHECK(test_code_generation(json, actual_json_dir, ep, pd));
 }
 

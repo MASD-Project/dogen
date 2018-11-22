@@ -38,7 +38,7 @@
 #include "masd.dogen.modeling/types/meta_model/object_template.hpp"
 #include "masd.dogen.modeling/io/meta_model/name_io.hpp"
 #include "masd.dogen.modeling/io/meta_model/location_io.hpp"
-#include "masd.dogen.external/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.modeling/io/helpers/stereotypes_conversion_result_io.hpp"
@@ -179,7 +179,7 @@ compute_element_type(const std::list<meta_model::static_stereotypes>& st,
 
 void external_model_to_endomodel_transform::
 process_element(const helpers::new_adapter& ad, const meta_model::location& l,
-    const external::meta_model::element& e, meta_model::endomodel& em) {
+    const injection::meta_model::element& e, meta_model::endomodel& em) {
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(e.stereotypes()));
@@ -217,7 +217,7 @@ process_element(const helpers::new_adapter& ad, const meta_model::location& l,
 }
 
 meta_model::endomodel external_model_to_endomodel_transform::
-transform(const context& ctx, const external::meta_model::model& m) {
+transform(const context& ctx, const injection::meta_model::model& m) {
     probing::scoped_transform_prober stp(lg,
         "external model to endomodel transform", transform_id, m.name(),
         ctx.prober(), m);

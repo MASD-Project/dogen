@@ -24,8 +24,8 @@
 #include "masd.dogen.utility/test/fixture.hpp"
 #include "masd.dogen.generation.csharp/types/initializer.hpp"
 #include "masd.dogen.generation.cpp/types/initializer.hpp"
-#include "masd.dogen.external.json/types/initializer.hpp"
-#include "masd.dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.injection.json/types/initializer.hpp"
+#include "masd.dogen.injection.dia/types/initializer.hpp"
 
 namespace  {
 
@@ -35,8 +35,8 @@ const std::string test_module("modeling");
 struct initializer {
     initializer() {
         SETUP_TEST_LOG("initializer");
-        masd::dogen::external::json::initializer::initialize();
-        masd::dogen::external::dia::initializer::initialize();
+        masd::dogen::injection::json::initializer::initialize();
+        masd::dogen::injection::dia::initializer::initialize();
         masd::dogen::generation::csharp::initializer::initialize();
         masd::dogen::generation::cpp::initializer::initialize();
     }

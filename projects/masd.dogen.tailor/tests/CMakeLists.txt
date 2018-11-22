@@ -37,9 +37,9 @@ target_link_libraries(${tests_target_name}
     ${lib_target_name}
     masd.dogen.utility.lib
     masd.dogen.options.lib
-    masd.dogen.external.lib
-    masd.dogen.external.json.lib
-    masd.dogen.external.dia.lib
+    masd.dogen.injection.lib
+    masd.dogen.injection.json.lib
+    masd.dogen.injection.dia.lib
     masd.dogen.generation.cpp.lib
     masd.dogen.generation.csharp.lib
     ${LIBXML2_LIBRARIES}

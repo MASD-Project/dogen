@@ -78,7 +78,7 @@ meta_model::name new_adapter::to_name(const meta_model::location& l,
 
 meta_model::attribute
 new_adapter::to_attribute(const meta_model::location& /*l*/,
-    const external::meta_model::attribute& ea) const {
+    const injection::meta_model::attribute& ea) const {
     ensure_not_empty(ea.name());
 
     meta_model::attribute r;
@@ -92,7 +92,7 @@ new_adapter::to_attribute(const meta_model::location& /*l*/,
 
 meta_model::enumerator
 new_adapter::to_enumerator(const meta_model::location& /*l*/,
-    const external::meta_model::attribute& ea) const {
+    const injection::meta_model::attribute& ea) const {
     ensure_not_empty(ea.name());
 
     if (!ea.type().empty()) {
@@ -112,7 +112,7 @@ new_adapter::to_enumerator(const meta_model::location& /*l*/,
 void new_adapter::populate_element(const annotations::scope_types scope,
     const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee, meta_model::element& e) const {
+    const injection::meta_model::element& ee, meta_model::element& e) const {
     e.name(to_name(l, ee.name()));
     e.origin_type(meta_model::origin_types::not_yet_determined);
     e.documentation(ee.documentation());
@@ -130,7 +130,7 @@ void new_adapter::populate_element(const annotations::scope_types scope,
 boost::shared_ptr<meta_model::object>
 new_adapter::to_object(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to object: "
                              << ee.name();
 
@@ -151,7 +151,7 @@ new_adapter::to_object(const meta_model::location& l,
 boost::shared_ptr<meta_model::object_template>
 new_adapter::to_object_template(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element "
                              << "to object template: " << ee.name();
 
@@ -170,7 +170,7 @@ new_adapter::to_object_template(const meta_model::location& l,
 boost::shared_ptr<meta_model::exception>
 new_adapter::to_exception(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to exception: "
                              << ee.name();
 
@@ -182,7 +182,7 @@ new_adapter::to_exception(const meta_model::location& l,
 boost::shared_ptr<meta_model::primitive>
 new_adapter::to_primitive(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to primitive: "
                              << ee.name();
 
@@ -194,7 +194,7 @@ new_adapter::to_primitive(const meta_model::location& l,
 boost::shared_ptr<meta_model::enumeration>
 new_adapter::to_enumeration(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to enumeration: "
                              << ee.name();
 
@@ -210,7 +210,7 @@ new_adapter::to_enumeration(const meta_model::location& l,
 boost::shared_ptr<meta_model::module> new_adapter::
 to_module(const bool is_root_module, const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to module: "
                              << ee.name();
 
@@ -223,7 +223,7 @@ to_module(const bool is_root_module, const meta_model::location& l,
 boost::shared_ptr<meta_model::builtin>
 new_adapter::to_builtin(const meta_model::location& l,
     const stereotypes_conversion_result& scr,
-    const external::meta_model::element& ee) const {
+    const injection::meta_model::element& ee) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming external element to builtin: "
                              << ee.name();
 

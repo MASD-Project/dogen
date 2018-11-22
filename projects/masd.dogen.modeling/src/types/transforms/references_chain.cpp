@@ -24,8 +24,8 @@
 #include "masd.dogen.modeling/types/helpers/reference_paths_extractor.hpp"
 #include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
 #include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
 // #include "masd.dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
 // #include "masd.dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
@@ -86,8 +86,8 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * of the exogenous model.
          */
         // const auto em(exomodel_generation_chain::transform(ctx, rp));
-        const external::transforms::context ext_ctx(ctx.prober());
-        const auto em(external::transforms::model_generation_chain::transform(ext_ctx, rp));
+        const injection::transforms::context ext_ctx(ctx.prober());
+        const auto em(injection::transforms::model_generation_chain::transform(ext_ctx, rp));
 
         /*
          * Convert the internal representation of the exogenous model into

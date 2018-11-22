@@ -25,10 +25,10 @@
 #include "masd.dogen.utility/log/severity_level.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.options/types/tailoring_options.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external/types/transforms/model_to_model_chain.hpp"
-#include "masd.dogen.external.json/types/initializer.hpp"
-#include "masd.dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/model_to_model_chain.hpp"
+#include "masd.dogen.injection.json/types/initializer.hpp"
+#include "masd.dogen.injection.dia/types/initializer.hpp"
 #include "masd.dogen.modeling/types/transforms/options.hpp"
 #include "masd.dogen.modeling/types/transforms/context_factory.hpp"
 #include "masd.dogen.tailor/program_options_parser.hpp"
@@ -112,17 +112,17 @@ initialise_logging(const masd::dogen::options::tailoring_options& to) {
 void workflow::tailor(const masd::dogen::options::tailoring_options& to) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
-    masd::dogen::external::json::initializer::initialize();
-    masd::dogen::external::dia::initializer::initialize();
+    masd::dogen::injection::json::initializer::initialize();
+    masd::dogen::injection::dia::initializer::initialize();
 
     masd::dogen::modeling::transforms::options o;
     o.target(to.target());
 
     using namespace masd::dogen::modeling::transforms;
     const auto ctx(context_factory::make(o, false/*enable_validation*/));
-    const masd::dogen::external::transforms::context ext_ctx(ctx.prober());
+    const masd::dogen::injection::transforms::context ext_ctx(ctx.prober());
 
-    using namespace masd::dogen::external::transforms;
+    using namespace masd::dogen::injection::transforms;
     model_to_model_chain::transform(ext_ctx, o.target(), to.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
