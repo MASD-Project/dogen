@@ -67,12 +67,12 @@ endforeach()
 if (WITH_JSON_VALIDATION)
     set(files "")
 
-    set(folder "external.json/input")
+    set(folder "injection.json/input")
     file(GLOB_RECURSE files RELATIVE
         "${CMAKE_CURRENT_SOURCE_DIR}/${folder}"
         "${CMAKE_CURRENT_SOURCE_DIR}/${folder}/*.json")
 
-    set(target "external.json")
+    set(target "injection.json")
     add_custom_target(validate_json_${target})
     add_dependencies(validate_all_json validate_json_${target})
 
@@ -101,8 +101,8 @@ endif()
 #
 # sample files for installation
 #
-set(input_dir "${CMAKE_CURRENT_SOURCE_DIR}/external.dia/input")
-set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/external.json/input")
+set(input_dir "${CMAKE_CURRENT_SOURCE_DIR}/injection.dia/input")
+set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/injection.json/input")
 file(GLOB samples "${input_dir}/*.dia")
 install(FILES ${samples} DESTINATION share/samples/dia)
 

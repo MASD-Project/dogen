@@ -25,7 +25,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/test_data/xml_reader.hpp"
-#include "masd.dogen.utility/test_data/external_dia.hpp"
+#include "masd.dogen.utility/test_data/injection_dia.hpp"
 
 namespace {
 
@@ -40,16 +40,16 @@ const std::string xml_reader_input_dir("xml_reader/input");
 const std::string xml_reader_expected_dir("xml_reader/expected");
 const std::string xml_reader_actual_dir("xml_reader/actual");
 
-const std::string external_dia_dir("external.dia");
-const std::string external_dia_input_dir("external.dia/input");
-const std::string external_dia_expected_dir("external.dia/expected");
-const std::string external_dia_actual_dir("external.dia/actual");
+const std::string injection_dia_dir("injection.dia");
+const std::string injection_dia_input_dir("injection.dia/input");
+const std::string injection_dia_expected_dir("injection.dia/expected");
+const std::string injection_dia_actual_dir("injection.dia/actual");
 
 const std::string boolean_values_file("xml_reader/input/boolean_values.xml");
 const std::string class_namespace_file_dia(
-    "external.dia/input/boost_model.dia");
+    "injection.dia/input/boost_model.dia");
 const std::string class_namespace_file_diaxml(
-    "external.dia/expected/boost_model.diaxml");
+    "injection.dia/expected/boost_model.diaxml");
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {
@@ -99,18 +99,18 @@ BOOST_AUTO_TEST_CASE(xml_reader_passes_sanity_checks) {
     test_valid_file(xml_reader::input_boolean_values(), boolean_values_file);
 }
 
-BOOST_AUTO_TEST_CASE(external_dia_passes_sanity_checks) {
-    SETUP_TEST_LOG("external_dia_passes_sanity_checks");
-    using masd::dogen::utility::test_data::external_dia;
-    test_main_directory(external_dia::data_set(), external_dia_dir);
-    test_main_directory(external_dia::input(), external_dia_input_dir);
-    test_main_directory(external_dia::expected(), external_dia_expected_dir);
-    test_main_directory(external_dia::actual(), external_dia_actual_dir);
-    test_non_existent_file(external_dia::non_existent_file(), dia_extension);
+BOOST_AUTO_TEST_CASE(injection_dia_passes_sanity_checks) {
+    SETUP_TEST_LOG("injection_dia_passes_sanity_checks");
+    using masd::dogen::utility::test_data::injection_dia;
+    test_main_directory(injection_dia::data_set(), injection_dia_dir);
+    test_main_directory(injection_dia::input(), injection_dia_input_dir);
+    test_main_directory(injection_dia::expected(), injection_dia_expected_dir);
+    test_main_directory(injection_dia::actual(), injection_dia_actual_dir);
+    test_non_existent_file(injection_dia::non_existent_file(), dia_extension);
 
-    test_valid_file(external_dia::input_boost_model_dia(),
+    test_valid_file(injection_dia::input_boost_model_dia(),
         class_namespace_file_dia);
-    test_valid_file(external_dia::expected_boost_model_dia_xml(),
+    test_valid_file(injection_dia::expected_boost_model_dia_xml(),
         class_namespace_file_diaxml);
 }
 

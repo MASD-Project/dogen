@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_TEST_DATA_EXTERNAL_JSON_HPP
-#define MASD_DOGEN_UTILITY_TEST_DATA_EXTERNAL_JSON_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_DATA_INJECTION_JSON_HPP
+#define MASD_DOGEN_UTILITY_TEST_DATA_INJECTION_JSON_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,13 +29,13 @@
 
 namespace masd::dogen::utility::test_data {
 
-class external_json {
+class injection_json {
 public:
-    external_json() = delete;
-    external_json(const external_json&) = delete;
-    ~external_json() = delete;
-    external_json(external_json&&) = delete;
-    external_json& operator=(const external_json&) = delete;
+    injection_json() = delete;
+    injection_json(const injection_json&) = delete;
+    ~injection_json() = delete;
+    injection_json(injection_json&&) = delete;
+    injection_json& operator=(const injection_json&) = delete;
 
 public:
     static boost::filesystem::path data_set();

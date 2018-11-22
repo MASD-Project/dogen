@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_UTILITY_TEST_DATA_EXTERNAL_DIA_HPP
-#define MASD_DOGEN_UTILITY_TEST_DATA_EXTERNAL_DIA_HPP
+#ifndef MASD_DOGEN_UTILITY_TEST_DATA_INJECTION_DIA_HPP
+#define MASD_DOGEN_UTILITY_TEST_DATA_INJECTION_DIA_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,13 +29,13 @@
 
 namespace masd::dogen::utility::test_data {
 
-class external_dia {
+class injection_dia {
 public:
-    external_dia() = delete;
-    external_dia(const external_dia&) = delete;
-    ~external_dia() = delete;
-    external_dia(external_dia&&) = delete;
-    external_dia& operator=(const external_dia&) = delete;
+    injection_dia() = delete;
+    injection_dia(const injection_dia&) = delete;
+    ~injection_dia() = delete;
+    injection_dia(injection_dia&&) = delete;
+    injection_dia& operator=(const injection_dia&) = delete;
 
 public:
     static boost::filesystem::path data_set();
