@@ -15880,13 +15880,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O124">
       <dia:attribute name="obj_pos">
-        <dia:point val="26.1187,256.146"/>
+        <dia:point val="26.9044,256.289"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.0687,256.096;37.9187,259.196"/>
+        <dia:rectangle val="26.8544,256.239;38.7044,259.339"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26.1187,256.146"/>
+        <dia:point val="26.9044,256.289"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.75"/>
@@ -21486,7 +21486,7 @@ and element.#</dia:string>
         <dia:point val="207.91,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="196.047,40.9996;208.66,53.8"/>
+        <dia:rectangle val="196.049,40.9996;208.66,53.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -21494,8 +21494,8 @@ and element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="207.91,53"/>
         <dia:point val="207.91,46"/>
-        <dia:point val="196.097,46"/>
-        <dia:point val="196.099,41.0496"/>
+        <dia:point val="196.099,46"/>
+        <dia:point val="196.1,41.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28090,7 +28090,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="37,57.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.0469,56.85;37.75,68.7508"/>
+        <dia:rectangle val="31.0492,56.85;37.75,68.7508"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28098,8 +28098,8 @@ an "odd" formatter.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="37,57.6"/>
         <dia:point val="37,63.3334"/>
-        <dia:point val="31.0969,63.3334"/>
-        <dia:point val="31.0992,67.9508"/>
+        <dia:point val="31.0992,63.3334"/>
+        <dia:point val="31.0998,67.9508"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30798,7 +30798,7 @@ an "odd" formatter.#</dia:string>
         <dia:point val="326.365,74"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="325.615,64.4002;337.192,74.8"/>
+        <dia:rectangle val="325.615,64.4002;337.193,74.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

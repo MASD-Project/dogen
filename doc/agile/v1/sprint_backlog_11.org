@@ -4,22 +4,27 @@
 #+tags: { story(s) epic(e) }
 
 * Mission Statement
+
+- resolve the refactoring problem with lots of duplicated types;
+- work on the masd profile.
+
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-16 Fri 20:55]
+#+CAPTION: Clock summary at [2018-11-22 Thu 11:25]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *115:56* |        |        |   0.0 |
+| *Total time*                                                                | *119:48* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 115:56   |        |        |   0.0 |
-| Active                                                                      |          | 115:56 |        |   0.0 |
+| Stories                                                                     | 119:48   |        |        |   0.0 |
+| Active                                                                      |          | 119:48 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
-| Sprint and product backlog grooming                                         |          |        |   0:15 |   0.0 |
+| Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
+| Read up on framework and API design                                         |          |        |   0:57 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -125,12 +130,15 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2018-11-22 Thu 10:21]--[2018-11-22 Thu 11:25] =>  1:01
+    CLOCK: [2018-11-19 Mon 09:10]--[2018-11-19 Mon 11:01] =>  1:51
     CLOCK: [2018-10-29 Mon 08:30]--[2018-10-29 Mon 08:45] =>  0:15
     :END:
 
 Updates to sprint and product backlog.
 
-*** STARTED Work on MASD theory                                       :story:
+*** COMPLETED Work on MASD theory                                     :story:
+    CLOSED: [2018-11-19 Mon 11:35]
     :LOGBOOK:
     CLOCK: [2018-11-16 Fri 16:07]--[2018-11-16 Fri 17:07] =>  1:00
     CLOCK: [2018-11-16 Fri 13:28]--[2018-11-16 Fri 15:00] =>  1:32
@@ -179,12 +187,19 @@ Work on defining the theory for MASD:
 - update API scenarios.
 - finish foundations chapter.
 
+*** COMPLETED Rename input models directory to models                 :story:
+    CLOSED: [2018-11-22 Thu 10:30]
+
+*Rationale*: Already done.
+
+We need to move the dogen project to the new directory layout whereby
+all models are kept in the =models= directory.
+
 *** STARTED Read up on framework and API design                       :story:
-
-Now that we are creating a top-level API for Dogen we should really
-read up on books about good API design.
-
-*** Read up on framework and API design                               :story:
+    :LOGBOOK:
+    CLOCK: [2018-11-22 Thu 09:55]--[2018-11-22 Thu 10:20] =>  0:25
+    CLOCK: [2018-11-19 Mon 11:02]--[2018-11-19 Mon 11:34] =>  0:32
+    :END:
 
 Now that we are creating a top-level API for Dogen we should really
 read up on books about good API design.
@@ -211,6 +226,39 @@ It seems we have several types of classes:
 
 These should be identifiable at the meta-model level, with appropriate
 names.
+
+*** Rename models to fit MASD architecture                            :story:
+
+We now have the following top-level models:
+
+- injection
+- coding
+- generation
+- extraction
+
+We need to update the models to match this.
+
+*** Great meta-data rename                                            :story:
+
+All of the existing stereotypes and meta-data need to be moved from
+the existing names (e.g. =quilt=, =yarn=, etc) into
+=masd=. Interestingly, we can take this opportunity to make dia
+diagrams a bit more readable. Instead of
+
+: #DOGEN a.b.c=d
+
+we can now just do:
+
+: masd.a.b.c=4
+
+It is very unlikely dia users will need lines starting with =masd.=.
+
+We should probably try to tackle this rename sooner rather than later
+since it badly breaks model-compatibility.
+
+*** Create the =orchestration= model                                  :story:
+
+Create a model with the top-level transforms.
 
 *** Create a single binary for all of dogen                           :story:
 
@@ -269,37 +317,8 @@ Now the API has been designed and generated, we need to implement it.
 
 *** Clean up the mess of refactors in dogen core                      :story:
 
-We finally found a good model for the data in dogen, and its based on
-data driven design. Basically, we need to let go of OOP constructs
-that aggregate data that is logically related from a human perspective
-and start to think of data usage patterns. From this perspective,
-there is no such thing as a modeling element - just a scattering of
-properties that are used by different transforms all the way into text
-transformation. Even text transforms don't really operate on
-elements - they operate on specific element properties. If we segment
-the text transforms this way, we end up with a large number of small
-text transforms, each with very specific tasks, generating chunks of a
-file. Finally, at the end, we need to concatenate these chunks to form
-the end product. With this approach we solve the impedance mismatch
-between the modeling model and the generational model - all we now
-have are additional containers with properties. This also means that
-its much easier to have different models further down the pipeline
-because they are just adding more properties. We can even use
-inheritance for this, e.g. generational model inherits from modeling
-model and adds properties x, y, z; generational cpp model inherits
-from generational model and so forth. As an example, instead of
-generating the decoration properties for every artefact, we now split
-all elements into two groups: those that have "standard" decoration
-properties and those that have overriden decoration properties. We
-then generate these two groups. For those sharing the common
-decoration properties, we insert those in their vector X times. This
-is still not the most efficient (we really only need one copy) but its
-orders of magnitude (at least one) faster than the current
-approach. Similarly with namespaces: we only need to do the namespaces
-once for all types in a facet.
-
-However, we are very far from this at present. The first task is to
-try to abort the OOP refactors that we made in the past.
+The first task is to try to abort the OOP refactors that we made in
+the past.
 
 *** Fix cmake emacs variable for tab width                            :story:
 
@@ -410,24 +429,6 @@ namespaces and they are more than one level deep (we have a lot of
 : namespace serialization {
 
 We need to wrap these in if's for C++ 17 and add nested namespaces.
-
-*** Great meta-data rename                                            :story:
-
-All of the existing stereotypes and meta-data need to be moved from
-the existing names (e.g. =quilt=, =yarn=, etc) into
-=masd=. Interestingly, we can take this opportunity to make dia
-diagrams a bit more readable. Instead of
-
-: #DOGEN a.b.c=d
-
-we can now just do:
-
-: masd.a.b.c=4
-
-It is very unlikely dia users will need lines starting with =masd.=.
-
-We should probably try to tackle this rename sooner rather than later
-since it badly breaks model-compatibility.
 
 *** Add DTL to vcpkg                                                  :story:
 
@@ -1010,3 +1011,9 @@ diagram.
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
 
 ** Deprecated
+*** CANCELLED Update =yarn.dia= traits to external                    :story:
+    CLOSED: [2018-11-22 Thu 10:38]
+
+*Rationale*: superseded by the MASD rename.
+
+We renamed the model but did not update the traits.

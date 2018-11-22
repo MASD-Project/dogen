@@ -9,10 +9,12 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 ** Bugs and Limitations
 
+Things we should address as soon as possible because they impact dogen
+usage.
+
 *** Do not output JSON markers for primitives                         :story:
 
 We should just output the underlying primitive.
-
 
 *** Fix typo in ODB error message                                     :story:
 
@@ -35,7 +37,6 @@ For now we just hacked it by adding a fake descendant.
 
 We should remove the ctest file and add the dia and json examples. We
 should also have pdf/html docs.
-
 
 *** Drop the original extension in tailor                             :story:
 
@@ -412,40 +413,32 @@ The log file is a bit more verbose but still not particularly helpful:
 We should try to at least name the object that has the one connection
 to make the user's life easier.
 
-** Required for V2
+*** Incorrect generation when changing external modules               :story:
 
-Stories that need to be implemented in order to complete the V2 vision.
+When fixing the C# projects, we updated the external modules, from
+=dogen::test_models= to =CSharpRefImpl=. Regenerating the model
+resulted in updated project files but the rest of the code did not
+change. It worked by using =-f=. It should have worked without forcing
+the write.
 
-*** Rename debian package                                             :story:
+*** Code coverage does not work for C#                                :story:
 
-At present our package is called =dogen-applcations=. Since there will
-only be one dogen application/package, this is a confusion name. We
-should rename it. Names:
-
-- masd-dogen
-
-*** Finish adding support for clang-cl builds                         :story:
-
-We have added preliminary support for building with clang-cl on
-windows, but the build is not green. Most of the errors seem to be on
-boost.
+It seems that using NUnit and OpenCov does not work. The main reason
+appears to be the use of shadow copying, which is no longer optional
+on NUnit 3.
 
 Links:
 
-- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
-- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
-- [[https://github.com/Kitware/CDash/issues/733][CDash reporting problems]]
+- https://github.com/Ullink/gradle-opencover-plugin/issues/1
+- https://github.com/codecov/example-csharp/blob/master/appveyor.yml
+- https://www.appveyor.com/blog/2017/03/17/codecov/
 
-*** Tidy-up dogen windows package                                     :story:
+** Required for V2
 
-There are a few inconsistencies with the package:
-
-- dogen components have a strange structure:
-  "Dogen/runtime/dogen".
-- we should probably have a top-level umbrella for MASD, under which
-  dogen installs.
-- package name is windows amd64. We should use the vcpkg triplets for
-  simplicity (e.g. x64-windows).
+Stories that need to be implemented in order to complete the V2
+vision. The V2 vision is to finish the dogen API and implement all
+functionality in terms of metamodel elements - e.g. no special cases
+such as profiles, licences etc.
 
 *** Mapping of third-party dependencies                               :story:
 
@@ -468,42 +461,6 @@ etc). This makes it easier to include the right types.
 Note that each model must have an associated version. The version
 should be part of the file name. However, maybe we need to distinguish
 between TS version (11, 17, etc) from library version.
-
-*** Rename input models directory to models                           :story:
-
-We need to move the dogen project to the new directory layout whereby
-all models are kept in the =models= directory.
-
-*** dogen as a github integration                                     :story:
-
-Perhaps there are some useful services dogen could provide to users in
-terms of dogen integration. If, with every commit, we could regenerate
-the model and read the current state in github, we could then provide
-a status report:
-
-- the model does not build; red emblem. Some changes were made to the
-  model (or to dogen) that make the model invalid. User should take
-  action.
-- the model builds but generates files that are different from what's
-  checked in on github. yellow emblem. Provide a report with the
-  diffs. This can either be because the code generator has changed or
-  the user changed the model.
-- the model builds and generates exactly the same code; green emblem.
-
-With this approach we have two advantages:
-
-- we do not need to add projects as part of the dogen tests; the
-  service takes its place. We can still add a few as the core tests,
-  but we don't need to expand it much beyond reference implementation
-  and dogen itself.
-- we exercise dogen itself as well as the rest endpoint generation
-  code in a way that is actually useful to end users; it would be nice
-  to know immediately when something breaks.
-
-Notes:
-
-- we'll need some kind of way of dealing with tokens and secrets in
-  order to support private GH projects.
 
 *** Add reporting support to dogen model testing                      :story:
 
@@ -584,52 +541,11 @@ is part of MASD rather than dogen, so we should update all stereotypes
 to match. We need to make a decision regarding the "dia extensions" -
 its not clear if its MASD or dogen.
 
-*** Incorrect generation when changing external modules               :story:
-
-When fixing the C# projects, we updated the external modules, from
-=dogen::test_models= to =CSharpRefImpl=. Regenerating the model
-resulted in updated project files but the rest of the code did not
-change. It worked by using =-f=. It should have worked without forcing
-the write.
-
-*** Code coverage does not work for C#                                :story:
-
-It seems that using NUnit and OpenCov does not work. The main reason
-appears to be the use of shadow copying, which is no longer optional
-on NUnit 3.
-
-Links:
-
-- https://github.com/Ullink/gradle-opencover-plugin/issues/1
-- https://github.com/codecov/example-csharp/blob/master/appveyor.yml
-- https://www.appveyor.com/blog/2017/03/17/codecov/
-
 *** Improve comments on reference implementation                      :story:
 
 At present it is very difficult to understand what each model and/or
 each type does in the reference implementations. We need to add some
 comments to make it more obvious.
-
-*** Code generate C# models using msbuild                             :story:
-
-At present we did a quick hack to code generate in C#: a simple bash
-script that runs dogen. However, this is not how we expect the end
-user to consume it; there should be a msbuild target that:
-
-- detects the code generator;
-- contains the configuration (e.g. options, location of models);'
-- runs the code generator - possibly every time models change;
-- has a tailor target to generate JSON.
-
-*** Add project documentation                                         :story:
-
-We should be able to create a simple set of docs following on from the
-[[https://ned14.github.io/outcome/][outcome project]]. They seem to be using Hugo.
-
-Links:
-
-- https://github.com/foonathan/standardese
-- https://github.com/ned14/outcome/tree/develop/doc/src
 
 *** Create the =generation= model                                     :story:
 
@@ -683,17 +599,6 @@ Problems:
   formatter. The key point is to preserve the distinction between
   modeling (single element) vs generation (projection across facet
   space).
-
-*** Create a =ci= folder in build                                     :story:
-
-We should use the same approach as nupic for organising the scripts: a
-top-level =ci= folder with folders per CI system. We should also
-follow their naming convention for the build scripts which seem to
-follow the CI events.
-
-Links:
-
-- https://github.com/numenta/nupic.core/tree/master/ci
 
 *** Adding reference to itself results in resolution errors           :story:
 
@@ -788,10 +693,6 @@ that is then enriched for generation. This means we could have:
 - middleend/modeling
 - backend/generation
 
-*** Create the =orchestration= model                                  :story:
-
-Create a model with the top-level transforms.
-
 *** Clean up UML profiles and meta-data                               :story:
 
 - we should wait until we rename =quilt= too so we can clean up the
@@ -813,10 +714,6 @@ Create a model with the top-level transforms.
 : #DOGEN external.dia.comment=true
 
   in fact, should we mention "tagged values" instead of "comment"?
-*** Update =yarn.dia= traits to external                              :story:
-
-We renamed the model but did not update the traits.
-
 *** Clean up external element                                         :story:
 
 Need to add: can_be_primitive_underlier, in_global_module,
@@ -1443,7 +1340,7 @@ Random notes:
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
 
-*** Move helpers into yarn                                            :story:
+*** Move helpers into generation                                      :story:
 
 Looking at helpers, it is clear that they are common to all
 languages. We just need to rename the terminology slightly -
@@ -1531,7 +1428,7 @@ of two approaches:
 - stubs only, were we generate the original content but then users
   subsequently manage the files.
 
-*** Remove implicit modeling elements                                 :story:
+*** Make explicit all implicit modeling elements                      :story:
 
 At present we have a number of modeling elements that can be
 configured (enabled/disabled) but do not have a representation within
@@ -1585,6 +1482,12 @@ current script). If we make the colours standard RGB, they can also be
 used in other frontends. We must also include entries for metamodel
 elements such as =dogen::enumeration=.
 
+We should have a metamodel element for this. The keys could be simply:
+
+: masd.METAMODEL_ELEMENT.colour=RGB
+
+Then, we could expose the metamodel element from SWIG into python.
+
 *** Propagate =fluent= stereotype                                     :story:
 
 It would be nice to be able to mark an object template called say
@@ -1593,6 +1496,9 @@ instantiate that template set to fluent.
 
 This is a variation on the general problem of feature propagation
 (e.g. hashing, etc).
+
+It would also be nice to have a meta-data parameter to determine if
+the "auto-propagation" is on or off.
 
 *** Mappings as meta-model elements                                   :story:
 
@@ -1613,6 +1519,24 @@ mappings. A few things are needed:
   demand if, after mapping, we find types being referenced (e.g. get a
   list of all referenced models after mapping, check for their
   presence in references list and load them).
+
+Merged Stories:
+
+*Allow users to choose mapping sets*
+
+At present we load the "default" mappings, which are also the only
+mappings available. It is entirely possible that users will not agree
+with those mappings. If we add a name to the mappings, and provide a
+meta-data tag to choose mappings we can then allow users to provide
+their own and set the meta-data accordingly. Mapper then reads the
+meta-data in the model and uses the requested element map. For this we
+need to name the element maps and we also need to create a "mapping
+set". These can be indexed by name in the mapping repository. Mapper
+chooses the mapping set to use.
+
+In keeping with the idea that profiles are model-level concepts,
+mappings should be too. We should be able to import mappings in a UML
+diagram and override them or define new ones too.
 
 *** Modeline groups as meta-model elements                            :story:
 
@@ -2470,6 +2394,9 @@ make things slightly more efficient:
   again. Actually we may even be able to go up the endomodel chain all
   the way up to merging.
 
+These should be called "product models" rather than projects. We
+should also consider how "product families" fit in this architecture.
+
 *** Check for incompatibility between input language and kernels      :story:
 
 At present it is possible to have a model with input language of say
@@ -2515,22 +2442,6 @@ One slight snag: the value could be of any type:
 
 We can start by just supporting strings, but probably worthwhile
 having a think on how to specify the type.
-
-*** Allow users to choose mapping sets                                :story:
-
-At present we load the "default" mappings, which are also the only
-mappings available. It is entirely possible that users will not agree
-with those mappings. If we add a name to the mappings, and provide a
-meta-data tag to choose mappings we can then allow users to provide
-their own and set the meta-data accordingly. Mapper then reads the
-meta-data in the model and uses the requested element map. For this we
-need to name the element maps and we also need to create a "mapping
-set". These can be indexed by name in the mapping repository. Mapper
-chooses the mapping set to use.
-
-In keeping with the idea that profiles are model-level concepts,
-mappings should be too. We should be able to import mappings in a UML
-diagram and override them or define new ones too.
 
 *** Allow users to override mapping sets at the element level         :story:
 
@@ -2699,9 +2610,61 @@ Actually, we did find [[https://github.com/DomainDrivenConsulting/dogen/blob/mas
 In general, this is a variation of the problem of the graph of
 dependencies between facets at the element level.
 
-** In next few sprints
 
- Stories that we intend to look at in the very near future.
+** Required for V3
+
+Stories that need to be implemented in order to complete the V3
+vision. The V3 vision is to update dogen's metamodel to a data-driven
+implementation.
+
+*** Create a new data-driven architecture for dogen                    :epic:
+
+We finally found a good model for the data in dogen, and its based on
+data driven design. Basically, we need to let go of OOP constructs
+that aggregate data that is logically related from a human perspective
+and start to think of data usage patterns. From this perspective,
+there is no such thing as a modeling element - just a scattering of
+properties that are used by different transforms all the way into text
+transformation. Even text transforms don't really operate on
+elements - they operate on specific element properties. If we segment
+the text transforms this way, we end up with a large number of small
+text transforms, each with very specific tasks, generating chunks of a
+file. Finally, at the end, we need to concatenate these chunks to form
+the end product. With this approach we solve the impedance mismatch
+between the modeling model and the generational model - all we now
+have are additional containers with properties. This also means that
+its much easier to have different models further down the pipeline
+because they are just adding more properties. We can even use
+inheritance for this, e.g. generational model inherits from modeling
+model and adds properties x, y, z; generational cpp model inherits
+from generational model and so forth. As an example, instead of
+generating the decoration properties for every artefact, we now split
+all elements into two groups: those that have "standard" decoration
+properties and those that have overriden decoration properties. We
+then generate these two groups. For those sharing the common
+decoration properties, we insert those in their vector X times. This
+is still not the most efficient (we really only need one copy) but its
+orders of magnitude (at least one) faster than the current
+approach. Similarly with namespaces: we only need to do the namespaces
+once for all types in a facet.
+
+However, we are very far from this at present.
+
+** Can go in any sprint or release
+
+Stories that are not part of the vision of a release, and so can be
+picked up whenever we fancy.
+
+*** Create a =ci= folder in build                                     :story:
+
+We should use the same approach as nupic for organising the scripts: a
+top-level =ci= folder with folders per CI system. We should also
+follow their naming convention for the build scripts which seem to
+follow the CI events.
+
+Links:
+
+- https://github.com/numenta/nupic.core/tree/master/ci
 
 *** Consider making fully generated files read-only                   :story:
 
@@ -3308,6 +3271,16 @@ present that try to figure out the meta-model element because they are
 related to resolution. But for any other cases it may result in
 slightly more performant code. We need to look at all the use cases.
 
+*** Report validation errors like compilers do                        :story:
+
+It would be very useful to output validation errors like a compiler,
+referencing the original file from where the meta-element was defined
+and any other additional information the user may find useful. We
+could also have "reporting themes" such as visual studio or
+GCC. Finally, we should support validation warnings, using the same
+conventions as compilers (-Wall, etc). Though perhaps these are better
+defined as part of the metamodel rather than command-line arguments.
+
 *** Additional validation rules for yarn                               :epic:
 
 Now that we have introduced the basic validation infrastructure
@@ -3368,6 +3341,9 @@ ideas into stories and add them as we go along.
   using derived visitable in C++ model.
 - there must be at least one element for a given id with
   =is_element_extension= set to false.
+- for interfaces, etc: if a user overloads a method, check to see if
+  arguments to the method with the same name are in the same order for
+  all overloads (framework design guidelines p. 124).
 
 Existing validation code:
 
@@ -3404,6 +3380,18 @@ Existing validation code:
 :     const auto op2(mock_profile(po2));
 :     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
 : }
+
+*** Add support for "naming rules"                                    :story:
+
+The framework design guidelines has a number of suggestions for how
+naming should be done for different meta-types such as enums, etc. We
+could have "naming profiles" that validate that the user is following
+those guidelines. We could also have a "dictionary" that checks the
+spelling, looking for things such as log_in vs login etc.
+
+We should have numbers (or names) for each of these warnings and add a
+convention such as =-W= and =-Wno= so that users can enable and
+disable warnings. These can be placed globally or locally on elements.
 
 *** Add test for parent with no derived classes on the same model     :story:
 
@@ -6252,6 +6240,103 @@ become very readable.
 
 ** Features that would be nice to have one day
 
+*** Add project documentation                                         :story:
+
+We should be able to create a simple set of docs following on from the
+[[https://ned14.github.io/outcome/][outcome project]]. They seem to be using Hugo.
+
+Links:
+
+- https://github.com/foonathan/standardese
+- https://github.com/ned14/outcome/tree/develop/doc/src
+
+*** Code generate C# models using msbuild                             :story:
+
+At present we did a quick hack to code generate in C#: a simple bash
+script that runs dogen. However, this is not how we expect the end
+user to consume it; there should be a msbuild target that:
+
+- detects the code generator;
+- contains the configuration (e.g. options, location of models);'
+- runs the code generator - possibly every time models change;
+- has a tailor target to generate JSON.
+
+*** dogen as a github integration                                     :story:
+
+Perhaps there are some useful services dogen could provide to users in
+terms of dogen integration. If, with every commit, we could regenerate
+the model and read the current state in github, we could then provide
+a status report:
+
+- the model does not build; red emblem. Some changes were made to the
+  model (or to dogen) that make the model invalid. User should take
+  action.
+- the model builds but generates files that are different from what's
+  checked in on github. yellow emblem. Provide a report with the
+  diffs. This can either be because the code generator has changed or
+  the user changed the model.
+- the model builds and generates exactly the same code; green emblem.
+
+With this approach we have two advantages:
+
+- we do not need to add projects as part of the dogen tests; the
+  service takes its place. We can still add a few as the core tests,
+  but we don't need to expand it much beyond reference implementation
+  and dogen itself.
+- we exercise dogen itself as well as the rest endpoint generation
+  code in a way that is actually useful to end users; it would be nice
+  to know immediately when something breaks.
+
+Notes:
+
+- we'll need some kind of way of dealing with tokens and secrets in
+  order to support private GH projects.
+
+*** Rename debian package                                             :story:
+
+At present our package is called =dogen-applcations=. Since there will
+only be one dogen application/package, this is a confusion name. We
+should rename it. Names:
+
+- masd-dogen
+
+*** Finish adding support for clang-cl builds                         :story:
+
+We have added preliminary support for building with clang-cl on
+windows, but the build is not green. Most of the errors seem to be on
+boost.
+
+Links:
+
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/6bnv6ppljlklu2ag][Release build]]
+- [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/19463961/job/45yhn8sdhexvsdmi][Debug build]]
+- [[https://github.com/Kitware/CDash/issues/733][CDash reporting problems]]
+
+*** Tidy-up dogen windows package                                     :story:
+
+There are a few inconsistencies with the package:
+
+- dogen components have a strange structure:
+  "Dogen/runtime/dogen".
+- we should probably have a top-level umbrella for MASD, under which
+  dogen installs.
+- package name is windows amd64. We should use the vcpkg triplets for
+  simplicity (e.g. x64-windows).
+
+*** Add support for package installation scripts                      :story:
+
+Once it is possible to declare dependencies and map them to different
+packaging systems such as vcpkg, the next logical step is to generate
+batch files for each platform to build the product dependencies. These
+should be standardised.
+
+Notes:
+
+- generate the script with a well defined name.
+- create the entire vcpkg workflow (download, build, export, upload to
+  dropbox).
+- create cmakefile / script to download export from dropbox.
+
 *** Consider adding support for iguana                                :story:
 
 Iguana is yet another serialisation framework.
@@ -7036,6 +7121,19 @@ styles. This is c++ specific
     "masd" provider/style. With conversion methods.
 - external library: [[https://github.com/therocode/meta_enum][meta-enum]], [[https://github.com/aantron/better-enums][better-enums]], [[https://github.com/nadult/fwk_enum][fwk_enum]], etc. The style
   is the name of the library.
+
+We should also take into consideration the "boolean enum" scenario,
+whereby we want a wrapper around a boolean. See [[https://codereview.stackexchange.com/questions/11300/boolean-enums-improved-clarity-or-just-overkill][Boolean enums:
+improved clarity or just overkill?]] Ideally the metamodel should make
+this clear rather than having to set meta-data type to bool and then
+making sure there are only two values. In effect, we have three
+different types of enumerations:
+
+- regular enumerations;
+- boolean enumerations;
+- flags.
+
+The metamodel must reflect this.
 
 **** Scenarios:
 
@@ -8548,11 +8646,6 @@ Links:
 
 - https://github.com/google/libnop
 
-** In next major release
-
-These stories are good candidates for the subsequent release. This
-release will be all about adding new features.
-
 *** Add boost variant visitors                                        :story:
 
 It would be nice if we could automatically generate boost variant
@@ -9110,6 +9203,13 @@ Value zero should always be assigned to the most used enumeration
 value because it is very efficient to compare against zero. We should
 use a different value for invalid such as =0xFF...= etc.
 
+*** Allow renaming =invalid= enumerator                               :story:
+
+At present we issue the =invalid= enumerator to signal no
+choice. However, in certain cases there are domain specific options
+that are better suited (such as =none=, etc). Users should be able to
+change the name of the enumerator.
+
 *** Bitmask enumeration                                               :story:
 
 #+begin_quote
@@ -9121,6 +9221,38 @@ We should have a dynamic extension flag that generates enumerators
 with values that are powers of two. These can then be used for flags,
 as per the [[*Add%20support%20for%20bitsets][bitset story]].
 
+The metamodel element should reflect the enumeration type (flag or
+not). The computation of the flags should take place as part of the
+metamodel tranforms. If the user supplies values, validation must
+ensure they are valid as flags (powers of 2). Values should be written
+as hex values (unless users specify decimal). Actually we should
+create a separate metamodel element for flags called =flags= or
+=bitmasks= so that it is obvious at the metamodel element level that
+these are distinct concepts.
+
+Framework guidelines state that enumerators for flags should use
+plural nouns or noun phrases and simple enums should use singular
+nouns or noun phrases.
+
+Notes:
+
+- interesting methods for flags: is exactly one bit set, count on
+  bits, are all bits on, are any bits on, turn all bits on/off. A flag
+  builder would be nice as well: turn_on / turn_off(flag) which
+  returns the updated flag:
+
+: my_flags_builder b;
+: const auto f(b.turn_on(my_flags::flag_a).
+:   turn_on(my_flags::flag_b));
+
+- it should be possible to have flags which represent commonly used
+  flags, for example: read, write, read_write. In this case, the value
+  of the flag must be a set of existing flags on the enumeration.
+- validation should not allow setting flags value to zero. Issue a
+  warning violating the framework design guidelines. However, there
+  should be a flag to force this if users really need it.
+- for flags, 0 must always mean "none", as in "all flags are
+  cleared".
 *** Support for file level comments via dynamic extensions            :story:
 
 #+begin_quote
@@ -9664,7 +9796,6 @@ all code that makes use of these typedefs when when its trivial code.
   is just a simple mapping of a type to a type definition. This makes
   using types such as =dec:decimal<8>= etc possible without changing
   the parsing code.
-
 
 *** Automatic typedef generation                                      :story:
 
