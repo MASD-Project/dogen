@@ -20,16 +20,16 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/types/transforms/generability_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/types/transforms/generability_transform.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 bool generability_transform::is_generatable(const meta_model::element& e) {
     const auto ot(e.origin_type());

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
-#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class dynamic_transform_interface {
 public:

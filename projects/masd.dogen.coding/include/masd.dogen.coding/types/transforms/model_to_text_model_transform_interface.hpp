@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_INTERFACE_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_INTERFACE_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,15 +32,15 @@
 #include <boost/filesystem/path.hpp>
 #include "masd.dogen.annotations/types/archetype_locations_group.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_parts.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
-#include "masd.dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
-#include "masd.dogen.modeling/types/transforms/options.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/text_model.hpp"
+#include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 /**
  * @brief Performs a model to text transformation of a meta-model,
@@ -94,7 +94,7 @@ public:
     /**
      * @brief Language supported by this transform.
      */
-    virtual modeling::meta_model::languages language() const = 0;
+    virtual coding::meta_model::languages language() const = 0;
 
     /**
      * @brief Returns all intra-backend segment properties.

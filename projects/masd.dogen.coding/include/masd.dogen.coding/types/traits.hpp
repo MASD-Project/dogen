@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRAITS_FWD_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRAITS_FWD_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRAITS_FWD_HPP
+#define MASD_DOGEN_CODING_TYPES_TRAITS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace masd::dogen::modeling {
+namespace masd::dogen::coding {
 
 struct traits {
     static std::string enabled();

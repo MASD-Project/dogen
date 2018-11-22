@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_ORM_TRANSFORM_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_ORM_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ORM_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ORM_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,17 +32,17 @@
 #include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_model_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_object_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_module_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
-#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
-#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class orm_transform final {
 private:

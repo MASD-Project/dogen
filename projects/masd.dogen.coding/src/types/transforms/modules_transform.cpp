@@ -23,15 +23,15 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/elements_traversal.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/modules_transform.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/modules_transform.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ const std::string missing_module("Could not find module: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 namespace {
 

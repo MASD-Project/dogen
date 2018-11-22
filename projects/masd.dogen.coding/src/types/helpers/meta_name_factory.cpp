@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 meta_model::location meta_name_factory::make_location() {
     meta_model::location r;

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_FILESYSTEM_WRITER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_FILESYSTEM_WRITER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_FILESYSTEM_WRITER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_FILESYSTEM_WRITER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Writes artefacts as files into the filesystem.

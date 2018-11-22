@@ -21,15 +21,15 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
-// #include "masd.dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
-// #include "masd.dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
-#include "masd.dogen.modeling/types/transforms/initial_target_chain.hpp"
+#include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "masd.dogen.coding/types/transforms/exomodel_generation_chain.hpp"
+// #include "masd.dogen.coding/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/initial_target_chain.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {

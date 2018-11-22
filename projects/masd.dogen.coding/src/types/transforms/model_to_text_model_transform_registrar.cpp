@@ -21,9 +21,9 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/transforms/registrar_error.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.coding/types/transforms/registrar_error.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_registrar.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ const std::string language_taken("Transform already registered for language: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void model_to_text_model_transform_registrar::
 register_transform(std::shared_ptr<model_to_text_model_transform_interface> t) {
@@ -70,7 +70,7 @@ void model_to_text_model_transform_registrar::validate() const {
 
 std::shared_ptr<model_to_text_model_transform_interface>
 model_to_text_model_transform_registrar::
-transform_for_language(const modeling::meta_model::languages l) const {
+transform_for_language(const coding::meta_model::languages l) const {
     const auto i(transforms_by_language_.find(l));
     if (i == transforms_by_language_.end())
         return std::shared_ptr<model_to_text_model_transform_interface>();
@@ -78,7 +78,7 @@ transform_for_language(const modeling::meta_model::languages l) const {
     return i->second;
 }
 
-const std::unordered_map<modeling::meta_model::languages, std::
+const std::unordered_map<coding::meta_model::languages, std::
                          shared_ptr<model_to_text_model_transform_interface>>&
 model_to_text_model_transform_registrar::transforms_by_language() const {
     return transforms_by_language_;

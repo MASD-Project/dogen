@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/printing_error.hpp"
-#include "masd.dogen.modeling/types/helpers/pretty_printer.hpp"
+#include "masd.dogen.coding/types/helpers/printing_error.hpp"
+#include "masd.dogen.coding/types/helpers/pretty_printer.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ const std::string empty_child("Attempt to add an empty child.");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 pretty_printer::pretty_printer()
     : has_children_(false), last_child_had_children_(false),

@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TEST_YARN_MOCK_CONTEXT_FACTORY_HPP
-#define MASD_DOGEN_MODELING_TEST_YARN_MOCK_CONTEXT_FACTORY_HPP
+#ifndef MASD_DOGEN_CODING_TEST_YARN_MOCK_CONTEXT_FACTORY_HPP
+#define MASD_DOGEN_CODING_TEST_YARN_MOCK_CONTEXT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
-namespace masd::dogen::modeling::test {
+namespace masd::dogen::coding::test {
 
 class mock_context_factory {
 public:

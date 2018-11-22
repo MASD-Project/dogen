@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_ARTEFACT_WRITER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Class with the ability to write artefacts into some storage

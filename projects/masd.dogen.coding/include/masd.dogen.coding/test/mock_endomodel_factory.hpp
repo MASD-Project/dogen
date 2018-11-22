@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TEST_MOCK_ENDOMODEL_FACTORY_HPP
-#define MASD_DOGEN_MODELING_TEST_MOCK_ENDOMODEL_FACTORY_HPP
+#ifndef MASD_DOGEN_CODING_TEST_MOCK_ENDOMODEL_FACTORY_HPP
+#define MASD_DOGEN_CODING_TEST_MOCK_ENDOMODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 
-namespace masd::dogen::modeling::test {
+namespace masd::dogen::coding::test {
 
 /**
  * @brief Generates mock intermediate models.

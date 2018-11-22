@@ -20,9 +20,9 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/io/transforms/options_io.hpp"
-#include "masd.dogen.modeling/types/transforms/validation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/options_validator.hpp"
+#include "masd.dogen.coding/io/transforms/options_io.hpp"
+#include "masd.dogen.coding/types/transforms/validation_error.hpp"
+#include "masd.dogen.coding/types/transforms/options_validator.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ const std::string non_absolute_output(
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void options_validator::validate(const options& o) {
     BOOST_LOG_SEV(lg, info) << "Validating options: " << o;

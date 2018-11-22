@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONTEXT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.modeling/types/transforms/options.hpp"
-#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_registrar.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_registrar.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 /**
  * @brief Factory that creates transformation contexts.

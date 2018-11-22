@@ -28,13 +28,13 @@
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.formatting/types/repository_factory.hpp"
 #include "masd.dogen.probing/types/prober.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
-#include "masd.dogen.modeling/types/helpers/filesystem_writer.hpp"
-#include "masd.dogen.modeling/types/transforms/building_error.hpp"
-#include "masd.dogen.modeling/types/transforms/options_validator.hpp"
-#include "masd.dogen.modeling/types/transforms/model_to_text_model_chain.hpp"
-#include "masd.dogen.modeling/types/transforms/context_factory.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.coding/types/transforms/building_error.hpp"
+#include "masd.dogen.coding/types/transforms/options_validator.hpp"
+#include "masd.dogen.coding/types/transforms/model_to_text_model_chain.hpp"
+#include "masd.dogen.coding/types/transforms/context_factory.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ const std::string duplicate_segment("Duplicat segment: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::unordered_map<std::string,
                    meta_model::intra_backend_segment_properties>

@@ -20,13 +20,13 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/elements_traversal.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/helpers/meta_name_factory.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/meta_naming_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 using helpers::meta_name_factory;
 

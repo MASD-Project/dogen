@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/transforms/merge_transform.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/transforms/merge_transform.hpp"
 
 namespace {
 
@@ -44,7 +44,7 @@ void copy(const ElementAssociativeContainer& src,
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void merge_transform::merge(const meta_model::endomodel& src,
     meta_model::endomodel& dst) {

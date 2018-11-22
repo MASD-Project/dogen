@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/new_name_tree_parser.hpp"
+#include "masd.dogen.coding/types/helpers/new_name_tree_parser.hpp"
 
 namespace {
 

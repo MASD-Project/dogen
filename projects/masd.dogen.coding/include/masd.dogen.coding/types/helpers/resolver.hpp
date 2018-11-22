@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_RESOLVER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_RESOLVER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_RESOLVER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_RESOLVER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,12 +27,12 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/helpers/indices.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/helpers/indices.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Resolves type references within a model.

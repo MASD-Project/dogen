@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_MODEL_TO_TEXT_MODEL_TRANSFORM_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,10 +31,10 @@
 #include <memory>
 #include <unordered_map>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/transforms/model_to_text_model_transform_interface.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/transforms/model_to_text_model_transform_interface.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 /**
  * @brief Keeps track of all the available model to text model
@@ -60,18 +60,18 @@ public:
      * exists. Otherwise returns a null shared pointer.
      */
     std::shared_ptr<model_to_text_model_transform_interface>
-    transform_for_language(const modeling::meta_model::languages l) const;
+    transform_for_language(const coding::meta_model::languages l) const;
 
     /**
      * @brief Returns all available transforms, by language.
      */
     const std::unordered_map<
-        modeling::meta_model::languages,
+        coding::meta_model::languages,
         std::shared_ptr<model_to_text_model_transform_interface>>&
     transforms_by_language() const;
 
 private:
-    std::unordered_map<modeling::meta_model::languages,
+    std::unordered_map<coding::meta_model::languages,
     std::shared_ptr<model_to_text_model_transform_interface>>
     transforms_by_language_;
 };

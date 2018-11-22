@@ -27,16 +27,16 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/exception/utility_exception.hpp"
 #include "masd.dogen.annotations/types/value_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
 
 namespace {
 
@@ -114,7 +114,7 @@ std::string module_name(const unsigned int i) {
 
 }
 
-namespace masd::dogen::modeling::test {
+namespace masd::dogen::coding::test {
 
 namespace {
 
@@ -203,7 +203,7 @@ mock_name_tree(mock_endomodel_factory::attribute_types pt) {
 
 std::string
 mock_unparsed_type(mock_endomodel_factory::attribute_types pt) {
-    using namespace modeling;
+    using namespace coding;
     using test::mock_endomodel_factory;
     using attribute_types = mock_endomodel_factory::attribute_types;
 
@@ -1561,7 +1561,7 @@ object_with_group_of_attributes_of_different_types(
     lambda(p2);
 
     auto o2(boost::make_shared<meta_model::object>());
-    modeling::helpers::name_factory nf;
+    coding::helpers::name_factory nf;
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);
 

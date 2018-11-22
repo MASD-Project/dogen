@@ -21,21 +21,21 @@
 // #include <boost/test/unit_test.hpp>
 // #include "masd.dogen.utility/test/logging.hpp"
 // #include "masd.dogen.utility/test/canned_tests.hpp"
-// #include "masd.dogen.modeling/types/all.hpp"
-// #include "masd.dogen.modeling/hash/all_hash.hpp"
-// #include "masd.dogen.modeling/io/all_io.hpp"
-// #include "masd.dogen.modeling/test_data/all_td.hpp"
+// #include "masd.dogen.coding/types/all.hpp"
+// #include "masd.dogen.coding/hash/all_hash.hpp"
+// #include "masd.dogen.coding/io/all_io.hpp"
+// #include "masd.dogen.coding/test_data/all_td.hpp"
 
 // namespace {
 
 // const std::string empty;
-// const std::string test_module("masd.dogen.modeling.tests");
+// const std::string test_module("masd.dogen.coding.tests");
 // const std::string test_suite("move_copy_assignment_tests");
 
 // }
 
-// using namespace masd::dogen::modeling::helpers;
-// using namespace masd::dogen::modeling::meta_model;
+// using namespace masd::dogen::coding::helpers;
+// using namespace masd::dogen::coding::meta_model;
 // using namespace masd::dogen::utility::test;
 
 // BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)

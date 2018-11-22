@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_EXTERNAL_MODEL_TO_ENDOMODEL_TRANSFORM_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_EXTERNAL_MODEL_TO_ENDOMODEL_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_EXTERNAL_MODEL_TO_ENDOMODEL_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_EXTERNAL_MODEL_TO_ENDOMODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,15 +33,15 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
-#include "masd.dogen.modeling/types/helpers/new_adapter.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/location.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
-#include "masd.dogen.modeling/types/transforms/naming_configuration.hpp"
+#include "masd.dogen.coding/types/helpers/new_adapter.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/location.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
+#include "masd.dogen.coding/types/transforms/naming_configuration.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class external_model_to_endomodel_transform final {
 private:

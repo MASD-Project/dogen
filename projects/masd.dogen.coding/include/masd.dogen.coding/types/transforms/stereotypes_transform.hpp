@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_STEREOTYPES_TRANSFORM_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_STEREOTYPES_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_STEREOTYPES_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_STEREOTYPES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,14 +28,14 @@
 #include <list>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/hash/meta_model/location_hash.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/hash/meta_model/location_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 /**
  * @brief Locates objects with stereotypes and performs the required

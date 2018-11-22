@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/transforms/registrar_error.hpp"
-#include "masd.dogen.modeling/types/transforms/dynamic_transform_registrar.hpp"
+#include "masd.dogen.coding/types/transforms/registrar_error.hpp"
+#include "masd.dogen.coding/types/transforms/dynamic_transform_registrar.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string null_frontend("Frontend supplied is null.");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void dynamic_transform_registrar::register_dynamic_transform(
     std::shared_ptr<const dynamic_transform_interface> dt) {

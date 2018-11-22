@@ -23,27 +23,27 @@
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/test/asserter.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/parsing_error.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_tree_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/types/helpers/legacy_name_tree_parser.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/parsing_error.hpp"
+#include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/types/helpers/legacy_name_tree_parser.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
 
 using masd::dogen::utility::test::asserter;
-using masd::dogen::modeling::meta_model::name_tree;
-using masd::dogen::modeling::helpers::legacy_name_tree_parser;
-using masd::dogen::modeling::helpers::name_factory;
+using masd::dogen::coding::meta_model::name_tree;
+using masd::dogen::coding::helpers::legacy_name_tree_parser;
+using masd::dogen::coding::helpers::name_factory;
 
 namespace  {
 
 const std::string empty;
-const std::string test_module("masd.dogen.modeling.tests");
+const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
-const auto cpp(masd::dogen::modeling::meta_model::languages::cpp);
+const auto cpp(masd::dogen::coding::meta_model::languages::cpp);
 
-name_tree make(const masd::dogen::modeling::meta_model::name& n) {
+name_tree make(const masd::dogen::coding::meta_model::name& n) {
     name_tree r;
     r.current(n);
     return r;
@@ -60,7 +60,7 @@ bool test_builtin(const std::string& s) {
 
 }
 
-using masd::dogen::modeling::helpers::parsing_error;
+using masd::dogen::coding::helpers::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(legacy_name_tree_parser_tests)
 

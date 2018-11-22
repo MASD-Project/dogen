@@ -21,9 +21,9 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string empty_internal_modules("Internal modules cannot be empty.");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 meta_model::name name_factory::build_model_name(const std::string& model_name,
     const std::string& external_modules) const {

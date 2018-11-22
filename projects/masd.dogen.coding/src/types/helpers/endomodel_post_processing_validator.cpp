@@ -25,10 +25,10 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/types/helpers/decomposer.hpp"
-#include "masd.dogen.modeling/types/helpers/validation_error.hpp"
-#include "masd.dogen.modeling/types/helpers/endomodel_post_processing_validator.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/types/helpers/decomposer.hpp"
+#include "masd.dogen.coding/types/helpers/validation_error.hpp"
+#include "masd.dogen.coding/types/helpers/endomodel_post_processing_validator.hpp"
 
 typedef boost::error_info<struct owner, std::string>
 errmsg_validation_owner;
@@ -117,7 +117,7 @@ const std::string invalid_empty_id("Name must have a non-empty id.");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 template<typename Container>
 inline void check_not_in_container(const Container& c, const std::string& str,

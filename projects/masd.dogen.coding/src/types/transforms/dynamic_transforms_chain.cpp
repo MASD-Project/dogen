@@ -23,10 +23,10 @@
 #include "masd.dogen.formatting/types/repository_factory.hpp"
 #include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/dynamic_transforms_chain.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/dynamic_transforms_chain.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::shared_ptr<dynamic_transform_registrar>
 dynamic_transforms_chain::registrar_;

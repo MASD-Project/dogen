@@ -20,15 +20,15 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/types/helpers/validation_error.hpp"
-#include "masd.dogen.modeling/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/helpers/validation_error.hpp"
+#include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
 
 namespace {
 
@@ -47,7 +47,7 @@ const std::string nullable_primary_key(
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class validator {
 public:

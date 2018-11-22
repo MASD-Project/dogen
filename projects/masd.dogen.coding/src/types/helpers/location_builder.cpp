@@ -23,9 +23,9 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/types/helpers/location_builder.hpp"
+#include "masd.dogen.coding/io/meta_model/location_io.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/types/helpers/location_builder.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ const std::string empty_internal_modules("Internal modules are empty.");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 void location_builder::external_modules(const std::string& em) {
     if (em.empty())

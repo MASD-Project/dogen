@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_BUILDING_ERROR_HPP
-#define MASD_DOGEN_MODELING_TYPES_BUILDING_ERROR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_BUILDING_ERROR_HPP
+#define MASD_DOGEN_CODING_TYPES_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <boost/exception/info.hpp>
 #include <string>
 
-namespace masd::dogen::modeling::test {
+namespace masd::dogen::coding::test {
 
 /**
  * @brief An error has occurred while injecting types.

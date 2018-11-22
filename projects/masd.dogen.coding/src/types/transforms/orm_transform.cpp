@@ -26,23 +26,23 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/traits.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/io/meta_model/orm_model_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/orm_object_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/orm_primitive_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/orm_transform.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_model_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_object_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_primitive_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/orm_transform.hpp"
 
 namespace {
 
@@ -70,7 +70,7 @@ const std::string duplicate_database_system(
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 meta_model::orm_database_systems orm_transform::
 to_orm_database_system(const std::string& s) {
@@ -148,7 +148,7 @@ make_type_overrides(const std::list<std::string> ls) {
 std::ostream&
 operator<<(std::ostream& s, const orm_transform::type_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"modeling::orm_transform::"
+      << "\"__type__\": " << "\"coding::orm_transform::"
       << "type_group\"" << ", "
       << "\"database_system\": " << v.database_system << ", "
       << "\"table_name\": " << v.table_name << ", "

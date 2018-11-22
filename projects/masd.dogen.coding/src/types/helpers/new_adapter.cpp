@@ -22,11 +22,11 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/adaptation_error.hpp"
-#include "masd.dogen.modeling/types/helpers/new_adapter.hpp"
+#include "masd.dogen.coding/io/meta_model/location_io.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/adaptation_error.hpp"
+#include "masd.dogen.coding/types/helpers/new_adapter.hpp"
 
 namespace {
 
@@ -43,7 +43,7 @@ const scope_types property_scope(scope_types::property);
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 new_adapter::new_adapter(const annotations::annotation_factory& f)
     : annotation_factory_(f) {}

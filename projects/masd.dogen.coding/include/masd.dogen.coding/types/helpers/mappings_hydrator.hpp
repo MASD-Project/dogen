@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPINGS_HYDRATOR_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPINGS_HYDRATOR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_MAPPINGS_HYDRATOR_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_MAPPINGS_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,12 +30,12 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_actions.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_actions.hpp"
+#include "masd.dogen.coding/types/helpers/mapping.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class mappings_hydrator final {
 private:

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_REGISTRAR_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_REGISTRAR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_REGISTRAR_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_REGISTRAR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <list>
 #include <memory>
-#include "masd.dogen.modeling/types/transforms/dynamic_transform_interface.hpp"
+#include "masd.dogen.coding/types/transforms/dynamic_transform_interface.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class dynamic_transform_registrar final {
 public:

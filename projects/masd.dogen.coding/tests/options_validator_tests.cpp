@@ -23,16 +23,16 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
-#include "masd.dogen.modeling/types/transforms/validation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/options.hpp"
-#include "masd.dogen.modeling/test/mock_options_factory.hpp"
-#include "masd.dogen.modeling/types/transforms/options_validator.hpp"
+#include "masd.dogen.coding/types/transforms/validation_error.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/test/mock_options_factory.hpp"
+#include "masd.dogen.coding/types/transforms/options_validator.hpp"
 
 namespace {
 
 const std::string empty;
 const boost::filesystem::path empty_dir;
-const std::string test_module("masd.dogen.modeling.tests");
+const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("options_validator_tests");
 
 using namespace boost::filesystem;
@@ -48,33 +48,33 @@ const std::string missing_output_dir("You must supply the output directory");
 const std::string target_is_relative("Target path is not absolute");
 const std::string output_dir_is_relative("The output directory path is not");
 
-masd::dogen::modeling::transforms::options target_only() {
-    using masd::dogen::modeling::test::mock_options_factory;
+masd::dogen::coding::transforms::options target_only() {
+    using masd::dogen::coding::test::mock_options_factory;
     return mock_options_factory::make_knitting_options(absolute_target);
 }
 
-masd::dogen::modeling::transforms::options target_and_project_dir(
+masd::dogen::coding::transforms::options target_and_project_dir(
     const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir) {
-    using masd::dogen::modeling::test::mock_options_factory;
+    using masd::dogen::coding::test::mock_options_factory;
     return mock_options_factory::make_knitting_options(target, output_dir);
 }
 
 }
 
 using masd::dogen::utility::test::contains_checker;
-using masd::dogen::modeling::transforms::validation_error;
+using masd::dogen::coding::transforms::validation_error;
 
 BOOST_AUTO_TEST_SUITE(options_validator_tests)
 
 BOOST_AUTO_TEST_CASE(options_without_a_target_are_invalid) {
     SETUP_TEST_LOG_SOURCE("options_without_a_target_are_invalid");
 
-    masd::dogen::modeling::transforms::options o;
+    masd::dogen::coding::transforms::options o;
     BOOST_CHECK(o.target().empty());
     contains_checker<validation_error> c(missing_target);
 
-    masd::dogen::modeling::transforms::options_validator v;
+    masd::dogen::coding::transforms::options_validator v;
     BOOST_CHECK_EXCEPTION(v.validate(o), validation_error, c);
 }
 
@@ -82,14 +82,14 @@ BOOST_AUTO_TEST_CASE(options_with_a_relative_target_are_invalid) {
     SETUP_TEST_LOG_SOURCE("options_with_a_relative_target_are_invalid");
 
     const auto o(target_and_project_dir(relative_target, absolute_output_dir));
-    masd::dogen::modeling::transforms::options_validator v;
+    masd::dogen::coding::transforms::options_validator v;
     contains_checker<validation_error> c(target_is_relative);
     BOOST_CHECK_EXCEPTION(v.validate(o), validation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(options_with_a_target_are_valid) {
     SETUP_TEST_LOG_SOURCE("options_with_a_target_are_valid");
-    masd::dogen::modeling::transforms::options_validator v;
+    masd::dogen::coding::transforms::options_validator v;
     v.validate(target_and_project_dir(absolute_target, absolute_output_dir));
 }
 
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(options_without_a_output_directory_are_invalid) {
     SETUP_TEST_LOG_SOURCE("options_without_a_output_directory_are_invalid");
 
     contains_checker<validation_error> c(missing_output_dir);
-    masd::dogen::modeling::transforms::options_validator v;
+    masd::dogen::coding::transforms::options_validator v;
     BOOST_CHECK_EXCEPTION(v.validate(target_only()), validation_error, c);
 }
 
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE(options_with_a_relative_output_directory_are_invalid) {
     SETUP_TEST_LOG_SOURCE("options_with_a_relative_output_directory_are_invalid");
 
     const auto o(target_and_project_dir(absolute_target, relative_output_dir));
-    masd::dogen::modeling::transforms::options_validator v;
+    masd::dogen::coding::transforms::options_validator v;
     contains_checker<validation_error> c(output_dir_is_relative);
     BOOST_CHECK_EXCEPTION(v.validate(o), validation_error, c);
 }

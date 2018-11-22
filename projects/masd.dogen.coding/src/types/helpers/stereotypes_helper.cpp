@@ -25,8 +25,8 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
 #include "masd.dogen.utility/exception/invalid_enum_value.hpp"
-#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.coding/types/helpers/stereotypes_helper.hpp"
 
 namespace {
 
@@ -52,7 +52,7 @@ const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 using meta_model::static_stereotypes;
 

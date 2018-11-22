@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 context::context(
         const std::vector<boost::filesystem::path>& data_directories,

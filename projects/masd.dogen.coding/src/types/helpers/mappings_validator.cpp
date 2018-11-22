@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/validation_error.hpp"
-#include "masd.dogen.modeling/types/helpers/mappings_validator.hpp"
+#include "masd.dogen.coding/types/helpers/validation_error.hpp"
+#include "masd.dogen.coding/types/helpers/mappings_validator.hpp"
 
 namespace {
 
@@ -44,7 +44,7 @@ const std::string unexpected_default_value(
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 void mappings_validator::
 validate(const meta_model::languages l, const mapping_value& mv) const {

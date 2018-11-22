@@ -20,19 +20,19 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/types/meta_model/artefact_properties.hpp"
-#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/artefact_properties_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/artefact_properties_transform.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ const std::string duplicate_archetype("Duplicate archetype: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void artefact_properties_transform::
 update_element(const context& ctx, meta_model::element& e) {

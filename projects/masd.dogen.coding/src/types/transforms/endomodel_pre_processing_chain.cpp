@@ -20,17 +20,17 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/helpers/endomodel_pre_processing_validator.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/modules_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/origin_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/language_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/type_params_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/parsing_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/primitives_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/modules_transform.hpp"
+#include "masd.dogen.coding/types/transforms/origin_transform.hpp"
+#include "masd.dogen.coding/types/transforms/language_transform.hpp"
+#include "masd.dogen.coding/types/transforms/type_params_transform.hpp"
+#include "masd.dogen.coding/types/transforms/parsing_transform.hpp"
+#include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
+#include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 bool endomodel_pre_processing_chain::is_language_relevant(
     const std::unordered_set<meta_model::languages>& relevant_languages,

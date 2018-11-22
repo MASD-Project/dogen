@@ -20,10 +20,10 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/unordered_set_io.hpp"
-#include "masd.dogen.modeling/io/helpers/indices_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/helpers/indexer.hpp"
+#include "masd.dogen.coding/io/helpers/indices_io.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/helpers/indexer.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ auto lg(logger_factory("yarn.helpers.indexer"));
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 indices indexer::index(meta_model::endomodel& m) {
     indices r;

@@ -20,10 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/types/helpers/string_processor.hpp"
-#include "masd.dogen.modeling/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/types/helpers/string_processor.hpp"
+#include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
 
 namespace {
 
@@ -34,7 +34,7 @@ const std::string qn_missing("Could not find qualified name for language: ");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 identifiable_and_qualified_builder::
 identifiable_and_qualified_builder() : csharp_pp_(separators::dots),

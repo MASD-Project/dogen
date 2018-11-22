@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_FILE_LINTER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_FILE_LINTER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_FILE_LINTER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_FILE_LINTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <list>
 #include <vector>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
+#include "masd.dogen.coding/types/meta_model/text_model.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class file_linter final {
 private:

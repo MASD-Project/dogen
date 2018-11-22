@@ -25,11 +25,11 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/formatting_styles_io.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/formatting_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/formatting_transform.hpp"
 
 namespace {
 
@@ -48,7 +48,7 @@ const std::string invalid_style("Formatting style is not valid:");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::ostream&
 operator<<(std::ostream& s, const formatting_transform::type_group& v) {

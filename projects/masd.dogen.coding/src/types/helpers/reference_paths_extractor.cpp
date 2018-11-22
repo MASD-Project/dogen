@@ -25,11 +25,11 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.modeling/types/traits.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/helpers/reference_paths_extractor.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/helpers/reference_paths_extractor.hpp"
 
 namespace {
 
@@ -40,13 +40,13 @@ const std::string library_dir("library");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::ostream&
 operator<<(std::ostream& s, const reference_paths_extractor::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::"
+      << "\"__type__\": " << "\"masd::dogen::coding::"
       << "descriptor_factory::type_group\"" << ", "
       << "\"references\": " << v.reference
       << " }";

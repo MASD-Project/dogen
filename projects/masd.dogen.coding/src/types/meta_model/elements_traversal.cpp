@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/elements_traversal.hpp"
+#include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 // dummy function to suppress ranlib warnings
 void elements_traversal() { }

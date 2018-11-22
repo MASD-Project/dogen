@@ -27,12 +27,12 @@
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/attributes_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
 
 namespace {
 
@@ -49,7 +49,7 @@ const std::string object_template_not_found(
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 meta_model::object& attributes_transform::
 find_object(const meta_model::name& n, meta_model::endomodel& em) {
@@ -111,7 +111,7 @@ void attributes_transform::expand_object(meta_model::object& o,
     /*
      * If we are a fluent or an immutable object, we need to mark all
      * properties we've inherited via object templates - these have
-     * values that are specific to the object modeling the object
+     * values that are specific to the object coding the object
      * template. This is actually a bit of a problem because this
      * means we are instantiating different object templates.
      */

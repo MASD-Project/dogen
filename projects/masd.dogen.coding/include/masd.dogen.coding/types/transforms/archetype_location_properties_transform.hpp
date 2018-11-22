@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_ARCHETYPE_LOCATION_PROPERTIES_TRANSFORM_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_ARCHETYPE_LOCATION_PROPERTIES_TRANSFORM_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_ARCHETYPE_LOCATION_PROPERTIES_TRANSFORM_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_ARCHETYPE_LOCATION_PROPERTIES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,15 +28,15 @@
 #include <string>
 #include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.modeling/types/meta_model/model.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_archetype.hpp"
-#include "masd.dogen.modeling/types/meta_model/backend_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/facet_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/archetype_properties.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/meta_model/model.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/element_archetype.hpp"
+#include "masd.dogen.coding/types/meta_model/backend_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/facet_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/archetype_properties.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class archetype_location_properties_transform final {
 private:

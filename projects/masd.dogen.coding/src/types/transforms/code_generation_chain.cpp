@@ -22,20 +22,20 @@
 #include "masd.dogen.utility/filesystem/path.hpp"
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/transforms/text_model_generation_chain.hpp"
-#include "masd.dogen.modeling/types/helpers/file_linter.hpp"
-#include "masd.dogen.modeling/types/transforms/code_generation_chain.hpp"
+#include "masd.dogen.coding/types/transforms/text_model_generation_chain.hpp"
+#include "masd.dogen.coding/types/helpers/file_linter.hpp"
+#include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
 
 namespace {
 
-const std::string transform_id("masd.dogen.modeling.code_generation_chain");
+const std::string transform_id("masd.dogen.coding.code_generation_chain");
 
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void code_generation_chain::
 write(const context& ctx, const meta_model::text_model& tm) {

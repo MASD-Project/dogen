@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_INDEXER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_INDEXER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_INDEXER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_INDEXER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <unordered_set>
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/helpers/indices.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/helpers/indices.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class indexer final {
 public:

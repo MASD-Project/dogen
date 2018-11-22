@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_MAPPER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_MAPPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,15 +29,15 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_context.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_context.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class mapper final {
 public:

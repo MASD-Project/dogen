@@ -31,7 +31,7 @@
 #include "masd.dogen.utility/io/forward_list_io.hpp"
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.utility/io/forward_list_io.hpp"
-#include "masd.dogen.modeling/types/helpers/file_linter.hpp"
+#include "masd.dogen.coding/types/helpers/file_linter.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ auto lg(logger_factory("yarn.helpers.file_linter"));
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::set<boost::filesystem::path> file_linter::
 obtain_expected_files(const meta_model::text_model& tm) {

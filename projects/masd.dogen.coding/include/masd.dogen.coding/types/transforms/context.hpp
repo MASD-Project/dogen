@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_CONTEXT_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_CONTEXT_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONTEXT_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,12 +34,12 @@
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.formatting/types/repository.hpp"
 #include "masd.dogen.probing/types/prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
-#include "masd.dogen.modeling/types/transforms/options.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
-#include "masd.dogen.modeling/types/helpers/artefact_writer_interface.hpp"
+#include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 /**
  * @brief Context for all transformations.

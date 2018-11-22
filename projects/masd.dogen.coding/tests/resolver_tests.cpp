@@ -22,25 +22,25 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/helpers/resolution_error.hpp"
-#include "masd.dogen.modeling/types/transforms/merge_transform.hpp"
-#include "masd.dogen.modeling/types/helpers/indexer.hpp"
-#include "masd.dogen.modeling/types/helpers/indices.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/helpers/resolution_error.hpp"
+#include "masd.dogen.coding/types/transforms/merge_transform.hpp"
+#include "masd.dogen.coding/types/helpers/indexer.hpp"
+#include "masd.dogen.coding/types/helpers/indices.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
-#include "masd.dogen.modeling/test/mock_context_factory.hpp"
-#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/resolver.hpp"
+#include "masd.dogen.coding/test/mock_context_factory.hpp"
+#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/types/helpers/resolver.hpp"
 
 namespace {
 
-const std::string test_module("masd.dogen.modeling.tests");
+const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("resolver_tests");
 
-using masd::dogen::modeling::test::mock_endomodel_factory;
+using masd::dogen::coding::test::mock_endomodel_factory;
 
 /*
  * FIXME: we need to update the mock factory to generate merged
@@ -61,7 +61,7 @@ const mock_endomodel_factory::flags flags(false/*tagged*/,
 
 const mock_endomodel_factory factory(flags);
 
-const auto idx = masd::dogen::modeling::helpers::indices();
+const auto idx = masd::dogen::coding::helpers::indices();
 
 const std::string inconsistent_kvp("Inconsistency between key and value");
 const std::string missing_target("No target model found");
@@ -72,12 +72,12 @@ const std::string missing_parent("Object's parent could not be located");
 }
 
 using masd::dogen::utility::test::contains_checker;
-using masd::dogen::modeling::helpers::resolution_error;
-using masd::dogen::modeling::helpers::indexer;
-using masd::dogen::modeling::helpers::resolver;
-using masd::dogen::modeling::transforms::merge_transform;
-using masd::dogen::modeling::meta_model::endomodel;
-using masd::dogen::modeling::test::mock_context_factory;
+using masd::dogen::coding::helpers::resolution_error;
+using masd::dogen::coding::helpers::indexer;
+using masd::dogen::coding::helpers::resolver;
+using masd::dogen::coding::transforms::merge_transform;
+using masd::dogen::coding::meta_model::endomodel;
+using masd::dogen::coding::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(resolver_tests)
 
@@ -98,7 +98,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
         }
     }
     const auto idx(indexer::index(m));
-    using namespace masd::dogen::modeling::meta_model;
+    using namespace masd::dogen::coding::meta_model;
     const auto original([](const endomodel& im) {
             auto r(im);
             r.objects().clear();
@@ -281,7 +281,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
     SETUP_TEST_LOG("object_with_third_degree_parent_missing_within_single_model_throws");
     auto m(factory.object_with_third_degree_parent_missing());
     contains_checker<resolution_error> c(missing_parent);
-    using masd::dogen::modeling::helpers::resolver;
+    using masd::dogen::coding::helpers::resolver;
     BOOST_CHECK_EXCEPTION(resolver::resolve(idx, m), resolution_error, c);
 }
 

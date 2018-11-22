@@ -23,16 +23,16 @@
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/helpers/mapping_io.hpp"
-#include "masd.dogen.modeling/io/helpers/mapping_set_io.hpp"
-#include "masd.dogen.modeling/io/helpers/mapping_set_repository_io.hpp"
-#include "masd.dogen.modeling/io/helpers/mapping_actions_io.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/types/helpers/mappings_hydrator.hpp"
-#include "masd.dogen.modeling/types/helpers/mappings_validator.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_set_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_set_repository_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_actions_io.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/types/helpers/mappings_hydrator.hpp"
+#include "masd.dogen.coding/types/helpers/mappings_validator.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 
 namespace {
 
@@ -48,7 +48,7 @@ const std::string mappings_dir("mappings");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::unordered_map<std::string, std::list<mapping>>
 mapping_set_repository_factory::

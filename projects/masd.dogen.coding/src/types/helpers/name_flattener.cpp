@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/name_flattener.hpp"
+#include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 name_flattener::name_flattener(const bool detect_model_name)
     : detect_model_name_(detect_model_name) {}

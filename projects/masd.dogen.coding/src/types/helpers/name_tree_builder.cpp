@@ -27,13 +27,13 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_tree_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/types/helpers/name_tree_builder.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/location_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/types/helpers/name_tree_builder.hpp"
 
 namespace {
 
@@ -42,7 +42,7 @@ auto lg(logger_factory("yarn.helpers.name_tree_builder"));
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 name_tree_builder::name_tree_builder()
     : root_(new node), current_(root_) {}

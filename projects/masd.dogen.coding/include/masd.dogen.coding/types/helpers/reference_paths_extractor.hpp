@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_REFERENCE_PATHS_EXTRACTOR_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_REFERENCE_PATHS_EXTRACTOR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_REFERENCE_PATHS_EXTRACTOR_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_REFERENCE_PATHS_EXTRACTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,10 +31,10 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/types/transforms/context_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class reference_paths_extractor final {
 private:

@@ -24,25 +24,25 @@
 #include "masd.dogen.utility/test/asserter.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/object_io.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/test/mock_context_factory.hpp"
-#include "masd.dogen.modeling/test/mock_endomodel_factory.hpp"
-#include "masd.dogen.modeling/types/transforms/attributes_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/object_io.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/test/mock_context_factory.hpp"
+#include "masd.dogen.coding/test/mock_endomodel_factory.hpp"
+#include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
 
 namespace {
 
-const std::string test_module("masd.dogen.modeling.tests");
+const std::string test_module("masd.dogen.coding.tests");
 const std::string test_suite("attributes_transform_tests");
 
 const std::string object_template_not_found("Object template not found");
 const std::string object_not_found("Object not found in model");
 
-using masd::dogen::modeling::test::mock_endomodel_factory;
+using masd::dogen::coding::test::mock_endomodel_factory;
 
 /**
  * @brief We require the object templates to have been indexed or else
@@ -91,15 +91,15 @@ bool has_duplicate_attribute_names(const Stateful& s,
 }
 
 using masd::dogen::utility::test::contains_checker;
-using masd::dogen::modeling::transforms::transformation_error;
+using masd::dogen::coding::transforms::transformation_error;
 using masd::dogen::utility::test::asserter;
-using masd::dogen::modeling::transforms::attributes_transform;
-using masd::dogen::modeling::meta_model::origin_types;
-using object_types = masd::dogen::modeling::test::mock_endomodel_factory::
+using masd::dogen::coding::transforms::attributes_transform;
+using masd::dogen::coding::meta_model::origin_types;
+using object_types = masd::dogen::coding::test::mock_endomodel_factory::
 object_types;
-using attribute_types = masd::dogen::modeling::test::mock_endomodel_factory::
+using attribute_types = masd::dogen::coding::test::mock_endomodel_factory::
 attribute_types;
-using masd::dogen::modeling::test::mock_context_factory;
+using masd::dogen::coding::test::mock_context_factory;
 
 BOOST_AUTO_TEST_SUITE(attributes_transform_tests)
 

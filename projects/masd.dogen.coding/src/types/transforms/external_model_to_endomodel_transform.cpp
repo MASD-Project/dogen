@@ -26,29 +26,29 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/traits.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/location_io.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "masd.dogen.modeling/io/helpers/stereotypes_conversion_result_io.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/location_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
-#include "masd.dogen.modeling/types/helpers/stereotypes_helper.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.coding/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/location_builder.hpp"
+#include "masd.dogen.coding/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.coding/types/helpers/stereotypes_helper.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
 
 namespace {
 
@@ -66,12 +66,12 @@ const std::string invalid_element_type(
 const std::string too_many_yarn_types(
     "Attempting to set the yarn type more than once.");
 
-using masd::dogen::modeling::meta_model::location;
+using masd::dogen::coding::meta_model::location;
 const location empty_location = location();
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 template<typename Element>
 inline void
@@ -88,7 +88,7 @@ insert(const boost::shared_ptr<Element>& e,
 std::ostream& operator<<(std::ostream& s,
     const external_model_to_endomodel_transform::type_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"modeling::external_model_to_endomodel_transform::"
+      << "\"__type__\": " << "\"coding::external_model_to_endomodel_transform::"
       << "type_group\"" << ", "
       << "\"external_modules\": " << v.external_modules << ", "
       << "\"model_modules\": " << v.model_modules
@@ -150,7 +150,7 @@ compute_element_type(const std::list<meta_model::static_stereotypes>& st,
      * Extract the element type information from the supplied static
      * stereotypes. If we have exactly one, we're go to go.
      */
-    modeling::helpers::stereotypes_helper h;
+    coding::helpers::stereotypes_helper h;
     const auto et(h.extract_element_types(st));
     if (et.size() == 1)
         return et.front();

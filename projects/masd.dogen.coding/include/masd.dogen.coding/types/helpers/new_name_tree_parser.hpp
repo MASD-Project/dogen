@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_NEW_NAME_TREE_PARSER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_NEW_NAME_TREE_PARSER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_NEW_NAME_TREE_PARSER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_NEW_NAME_TREE_PARSER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,10 +41,10 @@
 #include <boost/phoenix/bind/bind_function.hpp>
 
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_tree_io.hpp"
-#include "masd.dogen.modeling/types/helpers/parsing_error.hpp"
-#include "masd.dogen.modeling/types/helpers/name_tree_builder.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.coding/types/helpers/parsing_error.hpp"
+#include "masd.dogen.coding/types/helpers/name_tree_builder.hpp"
 
 namespace {
 
@@ -55,7 +55,7 @@ const std::string unsupported_language = "Invalid or unsupported language: ";
 const std::string error_msg = "Failed to parse string: ";
 using namespace boost::spirit;
 
-using masd::dogen::modeling::helpers::name_tree_builder;
+using masd::dogen::coding::helpers::name_tree_builder;
 
 namespace distinct {
 
@@ -246,7 +246,7 @@ struct name_tree_listener
 
     name_tree_listener() {}
     name_tree_listener(const std::unordered_set<std::string>& top_level_modules,
-        const masd::dogen::modeling::meta_model::location& model_location)
+        const masd::dogen::coding::meta_model::location& model_location)
         : ntb(top_level_modules, model_location) {}
 
     void apply()
@@ -282,15 +282,15 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
 
-    std::string scope_operator_for_language(const masd::dogen::modeling::meta_model::languages l) {
+    std::string scope_operator_for_language(const masd::dogen::coding::meta_model::languages l) {
         switch (l) {
-        case masd::dogen::modeling::meta_model::languages::csharp:  return ".";
-        case masd::dogen::modeling::meta_model::languages::cpp:     return "::";
+        case masd::dogen::coding::meta_model::languages::csharp:  return ".";
+        case masd::dogen::coding::meta_model::languages::cpp:     return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(l));
             BOOST_LOG_SEV(lg, error) << unsupported_language << s;
             BOOST_THROW_EXCEPTION(
-                masd::dogen::modeling::helpers::parsing_error(unsupported_language + s));
+                masd::dogen::coding::helpers::parsing_error(unsupported_language + s));
             return "";
         } }
     }
@@ -313,7 +313,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
     std::string scope_str;
-    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const masd::dogen::modeling::meta_model::languages l)
+    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const masd::dogen::coding::meta_model::languages l)
           : custom_type_grammar::base_type(custom_type), listener(listener), scope_str(scope_operator_for_language(l))
     {
         namespace phoenix = boost::phoenix;
@@ -399,7 +399,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
     }
 
     grammar(listener_t &l,
-        const masd::dogen::modeling::meta_model::languages language)
+        const masd::dogen::coding::meta_model::languages language)
                 : grammar::base_type(type_name), listener(&l), custom_type{ &l , language } {
         setup_functors();
         using qi::on_error;

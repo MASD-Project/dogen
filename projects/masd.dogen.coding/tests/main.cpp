@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_MODULE masd.dogen.modeling.tests
+#define BOOST_TEST_MODULE masd.dogen.coding.tests
 #include <boost/test/included/unit_test.hpp>
 #include "masd.dogen.utility/test/logging.hpp"
 #include "masd.dogen.utility/test/fixture.hpp"
@@ -30,7 +30,7 @@
 namespace  {
 
 const std::string test_suite("initializer");
-const std::string test_module("modeling");
+const std::string test_module("coding");
 
 struct initializer {
     initializer() {

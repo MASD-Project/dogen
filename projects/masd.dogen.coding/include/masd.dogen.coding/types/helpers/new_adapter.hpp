@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_NEW_ADAPTER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_NEW_ADAPTER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_NEW_ADAPTER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_NEW_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,21 +33,21 @@
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.injection/types/meta_model/attribute.hpp"
 #include "masd.dogen.injection/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/location.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumerator.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/primitive.hpp"
-#include "masd.dogen.modeling/types/meta_model/exception.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/object.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
-#include "masd.dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
+#include "masd.dogen.coding/types/meta_model/location.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/enumerator.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/primitive.hpp"
+#include "masd.dogen.coding/types/meta_model/exception.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/object.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class new_adapter final {
 public:
@@ -98,7 +98,7 @@ private:
 
 public:
     /**
-     * @brief Converts an exoelement with a stereotype of modeling::object
+     * @brief Converts an exoelement with a stereotype of coding::object
      * to a yarn object.
      */
     boost::shared_ptr<meta_model::object>
@@ -108,7 +108,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * modeling::object_template to a yarn object template.
+     * coding::object_template to a yarn object template.
      */
     boost::shared_ptr<meta_model::object_template>
     to_object_template(const meta_model::location& l,
@@ -117,7 +117,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * modeling::exception to a yarn exception.
+     * coding::exception to a yarn exception.
      */
     boost::shared_ptr<meta_model::exception>
     to_exception(const meta_model::location& l,
@@ -126,7 +126,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * modeling::primitive to a yarn primitive.
+     * coding::primitive to a yarn primitive.
      */
     boost::shared_ptr<meta_model::primitive>
     to_primitive(const meta_model::location& l,
@@ -135,7 +135,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * modeling::enumeration to a yarn enumeration.
+     * coding::enumeration to a yarn enumeration.
      */
     boost::shared_ptr<meta_model::enumeration>
     to_enumeration(const meta_model::location& l,
@@ -144,7 +144,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * modeling::module to a yarn module.
+     * coding::module to a yarn module.
      */
     boost::shared_ptr<meta_model::module>
     to_module(const bool is_root_module, const meta_model::location& l,
@@ -153,7 +153,7 @@ public:
 
     /**
      * @brief Converts an exoelement with a stereotype of
-     * modeling::module to a yarn module.
+     * coding::module to a yarn module.
      */
     boost::shared_ptr<meta_model::builtin>
     to_builtin(const meta_model::location& l,

@@ -20,21 +20,21 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/helpers/indexer.hpp"
-#include "masd.dogen.modeling/types/helpers/endomodel_post_processing_validator.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/enumerations_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/generalization_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/stereotypes_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/object_templates_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/containment_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/orm_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/resolver_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/attributes_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/associations_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/meta_naming_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/endomodel_post_processing_chain.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/helpers/indexer.hpp"
+#include "masd.dogen.coding/types/helpers/endomodel_post_processing_validator.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
+#include "masd.dogen.coding/types/transforms/generalization_transform.hpp"
+#include "masd.dogen.coding/types/transforms/stereotypes_transform.hpp"
+#include "masd.dogen.coding/types/transforms/object_templates_transform.hpp"
+#include "masd.dogen.coding/types/transforms/containment_transform.hpp"
+#include "masd.dogen.coding/types/transforms/orm_transform.hpp"
+#include "masd.dogen.coding/types/transforms/resolver_transform.hpp"
+#include "masd.dogen.coding/types/transforms/attributes_transform.hpp"
+#include "masd.dogen.coding/types/transforms/associations_transform.hpp"
+#include "masd.dogen.coding/types/transforms/meta_naming_transform.hpp"
+#include "masd.dogen.coding/types/transforms/endomodel_post_processing_chain.hpp"
 
 namespace {
 
@@ -46,7 +46,7 @@ auto lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 void endomodel_post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {

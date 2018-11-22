@@ -23,15 +23,15 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/location_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/helpers/separators.hpp"
-#include "masd.dogen.modeling/types/helpers/building_error.hpp"
-#include "masd.dogen.modeling/types/helpers/string_processor.hpp"
-#include "masd.dogen.modeling/types/helpers/pretty_printer.hpp"
-#include "masd.dogen.modeling/types/helpers/identifiable_and_qualified_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/location_io.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/helpers/separators.hpp"
+#include "masd.dogen.coding/types/helpers/building_error.hpp"
+#include "masd.dogen.coding/types/helpers/string_processor.hpp"
+#include "masd.dogen.coding/types/helpers/pretty_printer.hpp"
+#include "masd.dogen.coding/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
 
 namespace {
 
@@ -43,7 +43,7 @@ const std::string unexpected_simple_name("Simple name is not expected.");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 name_builder::name_builder(const bool model_name_mode)
     : model_name_mode_(model_name_mode) { }

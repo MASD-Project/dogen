@@ -25,8 +25,8 @@
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/filesystem/file.hpp"
-#include "masd.dogen.modeling/io/meta_model/artefact_io.hpp"
-#include "masd.dogen.modeling/types/helpers/filesystem_writer.hpp"
+#include "masd.dogen.coding/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
 
 namespace {
 
@@ -49,7 +49,7 @@ std::string create_hacked_contents(const std::string file_name) {
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 filesystem_writer::filesystem_writer(const bool force_write)
     : force_write_(force_write) {}

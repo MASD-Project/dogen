@@ -32,15 +32,15 @@
 // #include "masd.dogen.utility/test_data/injection_json.hpp"
 // #include "masd.dogen.utility/test/logging.hpp"
 // #include "masd.dogen.dia/io/diagram_io.hpp"
-// #include "masd.dogen.modeling/test/mock_options_factory.hpp"
-// #include "masd.dogen.modeling/types/transforms/options.hpp"
-// #include "masd.dogen.modeling/types/transforms/context_factory.hpp"
-// #include "masd.dogen.modeling/types/transforms/code_generation_chain.hpp"
-// #include "masd.dogen.modeling/io/meta_model/model_io.hpp"
+// #include "masd.dogen.coding/test/mock_options_factory.hpp"
+// #include "masd.dogen.coding/types/transforms/options.hpp"
+// #include "masd.dogen.coding/types/transforms/context_factory.hpp"
+// #include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
+// #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 // #include "masd.dogen.dia/serialization/diagram_ser.hpp"
-// #include "masd.dogen.modeling/serialization/meta_model/model_ser.hpp"
+// #include "masd.dogen.coding/serialization/meta_model/model_ser.hpp"
 // #include "masd.dogen.dia/test/dia_file_asserter.hpp"
-// #include "masd.dogen.modeling/test/yarn_file_asserter.hpp"
+// #include "masd.dogen.coding/test/yarn_file_asserter.hpp"
 // #include "masd.dogen.utility/test/exception_checkers.hpp"
 
 /*
@@ -66,7 +66,7 @@
 
 // const std::string empty;
 // const std::string empty_module_path;
-// const std::string test_module("masd.dogen.modeling.tests");
+// const std::string test_module("masd.dogen.coding.tests");
 // const std::string test_suite("code_generation_tests");
 
 // const std::string expected("/expected");
@@ -79,7 +79,7 @@
 // struct test_configuration {
 //     boost::filesystem::path expected;
 //     boost::filesystem::path actual;
-//     masd::dogen::modeling::transforms::options options;
+//     masd::dogen::coding::transforms::options options;
 // };
 
 // test_configuration make_test_configuration(const std::string& model_name,
@@ -92,7 +92,7 @@
 //     r.expected = validating_resolver::resolve(model_name + ::expected);
 //     r.actual = validating_resolver::resolve(model_name + actual_dir);
 
-//     using masd::dogen::modeling::test::mock_options_factory;
+//     using masd::dogen::coding::test::mock_options_factory;
 //     r.options = mock_options_factory::make_knitting_options(target, r.actual);
 
 //     if (enable_probing_globally || enable_probing) {
@@ -143,8 +143,8 @@
 //      */
 //     // boost::filesystem::remove_all(tc.actual);
 //     // boost::filesystem::create_directory(tc.actual);
-//     const auto ctx(dogen::modeling::transforms::context_factory::make(tc.options));
-//     masd::dogen::modeling::transforms::code_generation_chain::transform(ctx);
+//     const auto ctx(dogen::coding::transforms::context_factory::make(tc.options));
+//     masd::dogen::coding::transforms::code_generation_chain::transform(ctx);
 
 //     using masd::dogen::utility::test::asserter;
 //     return asserter::assert_directory(tc.expected, tc.actual);

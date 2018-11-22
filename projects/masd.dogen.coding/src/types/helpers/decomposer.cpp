@@ -19,9 +19,9 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/meta_model/elements_traversal.hpp"
-#include "masd.dogen.modeling/io/helpers/decomposition_result_io.hpp"
-#include "masd.dogen.modeling/types/helpers/decomposer.hpp"
+#include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
+#include "masd.dogen.coding/io/helpers/decomposition_result_io.hpp"
+#include "masd.dogen.coding/types/helpers/decomposer.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ auto lg(logger_factory("yarn.helpers.decomposer"));
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 void decomposer::add_name(const std::string& owner, const meta_model::name& n) {
     result_.names().push_back(std::make_pair(owner, n));

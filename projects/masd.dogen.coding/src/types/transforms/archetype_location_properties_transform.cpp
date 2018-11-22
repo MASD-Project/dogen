@@ -28,17 +28,17 @@
 #include "masd.dogen.utility/io/optional_io.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/traits.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/element_archetype_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/backend_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/facet_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/archetype_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_archetype_io.hpp"
+#include "masd.dogen.coding/io/meta_model/backend_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/facet_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/archetype_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/archetype_location_properties_transform.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/archetype_location_properties_transform.hpp"
 
 namespace {
 
@@ -56,13 +56,13 @@ const std::string archetype_not_found("Could not find archetype: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 inline std::ostream& operator<<(std::ostream& s,
     const archetype_location_properties_transform::backend_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"modeling::transform::"
+      << "\"__type__\": " << "\"coding::transform::"
       << "archetype_location_properties_transform::backend_type_group\"" << ", "
       << "\"enabled\": " << v.enabled << ", "
       << "\"directory\": " << v.directory
@@ -75,7 +75,7 @@ inline std::ostream& operator<<(std::ostream& s,
     const archetype_location_properties_transform::facet_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"modeling::transform::"
+      << "\"__type__\": " << "\"coding::transform::"
       << "archetype_location_properties_transform::facet_type_group\"" << ", "
       << "\"enabled\": " << v.enabled << ", "
       << "\"overwrite\": " << v.overwrite << ", "
@@ -90,7 +90,7 @@ inline std::ostream& operator<<(std::ostream& s, const
     archetype_location_properties_transform::global_archetype_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"modeling::transform::"
+      << "\"__type__\": " << "\"coding::transform::"
       << "archetype_location_properties_transform::global_archetype_type_group\""
       << ", "
       << "\"enabled\": " << v.enabled << ", "
@@ -105,7 +105,7 @@ inline std::ostream& operator<<(std::ostream& s, const
     archetype_location_properties_transform::local_archetype_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"modeling::transform::"
+      << "\"__type__\": " << "\"coding::transform::"
       << "archetype_location_properties_transform::local_archetype_type_group\""
       << ", "
       << "\"facet_enabled\": " << v.facet_enabled << ", "

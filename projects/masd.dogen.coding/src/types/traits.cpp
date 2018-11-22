@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/traits.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
 
-namespace masd::dogen::modeling {
+namespace masd::dogen::coding {
 
 std::string traits::enabled() {
     static std::string r("enabled");

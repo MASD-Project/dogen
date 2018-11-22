@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_STEREOTYPES_HELPER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_STEREOTYPES_HELPER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_STEREOTYPES_HELPER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_STEREOTYPES_HELPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "masd.dogen.modeling/types/meta_model/static_stereotypes.hpp"
-#include "masd.dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
+#include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
+#include "masd.dogen.coding/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Converts well-known stereotypes from and to strings.
@@ -44,7 +44,7 @@ public:
      *
      * @note The string must not have any leading or trailing spaces
      * or other artefacts and must match exactly the definition of a
-     * well-known yarn stereotype, e.g. 'modeling::object', etc.
+     * well-known yarn stereotype, e.g. 'coding::object', etc.
      */
     meta_model::static_stereotypes from_string(const std::string& s) const;
 

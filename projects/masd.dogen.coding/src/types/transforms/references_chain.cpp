@@ -21,16 +21,16 @@
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/helpers/reference_paths_extractor.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/helpers/reference_paths_extractor.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.modeling/types/transforms/external_model_to_endomodel_transform.hpp"
-// #include "masd.dogen.modeling/types/transforms/exomodel_generation_chain.hpp"
-// #include "masd.dogen.modeling/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "masd.dogen.modeling/types/transforms/endomodel_pre_processing_chain.hpp"
-#include "masd.dogen.modeling/types/transforms/references_chain.hpp"
+#include "masd.dogen.coding/types/transforms/external_model_to_endomodel_transform.hpp"
+// #include "masd.dogen.coding/types/transforms/exomodel_generation_chain.hpp"
+// #include "masd.dogen.coding/types/transforms/exomodel_to_endomodel_transform.hpp"
+#include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
+#include "masd.dogen.coding/types/transforms/references_chain.hpp"
 
 namespace {
 
@@ -43,7 +43,7 @@ const std::string non_absolute_target("Target path is not absolute: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::unordered_set<meta_model::languages> references_chain::
 obtain_relevant_languages(const meta_model::endomodel& target) {

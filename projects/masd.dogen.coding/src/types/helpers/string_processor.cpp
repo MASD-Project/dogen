@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/string_processor.hpp"
+#include "masd.dogen.coding/types/helpers/string_processor.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ const std::string scope_operator("::");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::string string_processor::to_identifiable(const std::string& s) {
     std::string r(s);

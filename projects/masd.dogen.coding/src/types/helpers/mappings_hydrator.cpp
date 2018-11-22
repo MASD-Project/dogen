@@ -26,9 +26,9 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.modeling/types/helpers/name_builder.hpp"
-#include "masd.dogen.modeling/types/helpers/hydration_error.hpp"
-#include "masd.dogen.modeling/types/helpers/mappings_hydrator.hpp"
+#include "masd.dogen.coding/types/helpers/name_builder.hpp"
+#include "masd.dogen.coding/types/helpers/hydration_error.hpp"
+#include "masd.dogen.coding/types/helpers/mappings_hydrator.hpp"
 
 namespace {
 
@@ -66,7 +66,7 @@ const std::string duplicate_language("Language mapped more than once: ");
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 mapping_actions
 mappings_hydrator::to_mapping_action(const std::string& s) const {

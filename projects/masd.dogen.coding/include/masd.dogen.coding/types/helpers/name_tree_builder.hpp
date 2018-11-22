@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_NAME_TREE_BUILDER_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_NAME_TREE_BUILDER_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_NAME_TREE_BUILDER_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_NAME_TREE_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,12 +29,12 @@
 #include <string>
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/location.hpp"
-#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
-#include "masd.dogen.modeling/types/helpers/node.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/location.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/helpers/node.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Creates a name tree as directed by the external caller.

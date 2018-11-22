@@ -27,16 +27,16 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/io/meta_model/languages_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/traits.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumeration.hpp"
-#include "masd.dogen.modeling/types/helpers/name_factory.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/enumerations_transform.hpp"
+#include "masd.dogen.coding/io/meta_model/languages_io.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/meta_model/enumeration.hpp"
+#include "masd.dogen.coding/types/helpers/name_factory.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/enumerations_transform.hpp"
 
 namespace {
 
@@ -57,14 +57,14 @@ const std::string missing_default(
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
     const enumerations_transform::enumeration_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::"
+      << "\"__type__\": " << "\"masd::dogen::coding::"
       << "enumerations_transform::enumeration_type_group\"" << ", "
       << "\"use_implementation_defined_underlying_element\": "
       << v.use_implementation_defined_underlying_element << ", "
@@ -81,7 +81,7 @@ operator<<(std::ostream& s,
     const enumerations_transform::enumerator_type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::"
+      << "\"__type__\": " << "\"masd::dogen::coding::"
       << "enumerations_transform::enumerator_type_group\"" << ", "
       << "\"value\": " << v.value
       << " }";
@@ -93,7 +93,7 @@ std::ostream&
 operator<<(std::ostream& s, const enumerations_transform::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::enumerations_transform::"
+      << "\"__type__\": " << "\"masd::dogen::coding::enumerations_transform::"
       << "type_group\"" << ", "
       << "\"enumeration\": " << v.enumeration << ", "
       << "\"enumerator\": " << v.enumerator

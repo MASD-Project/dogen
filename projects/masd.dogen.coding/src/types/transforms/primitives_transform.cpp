@@ -24,11 +24,11 @@
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/traits.hpp"
-#include "masd.dogen.modeling/io/meta_model/endomodel_io.hpp"
-#include "masd.dogen.modeling/types/transforms/context.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/primitives_transform.hpp"
+#include "masd.dogen.coding/types/traits.hpp"
+#include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
+#include "masd.dogen.coding/types/transforms/context.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/primitives_transform.hpp"
 
 namespace {
 
@@ -39,13 +39,13 @@ static logger lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::ostream&
 operator<<(std::ostream& s, const primitives_transform::type_group& v) {
     s << " { "
       << "\"__type__\": "
-      << "\"masd::dogen::modeling::primitives_transform::type_group\""
+      << "\"masd::dogen::coding::primitives_transform::type_group\""
       << ", " << "\"is_nullable\": " << v.is_nullable << ", "
       << "\"use_type_aliasing\": " << v.use_type_aliasing
       << " }";

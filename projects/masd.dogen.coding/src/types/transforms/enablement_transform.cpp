@@ -23,11 +23,11 @@
 #include "masd.dogen.utility/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.modeling/types/meta_model/module.hpp"
-#include "masd.dogen.modeling/io/meta_model/model_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/facet_properties_io.hpp"
-#include "masd.dogen.modeling/types/transforms/transformation_error.hpp"
-#include "masd.dogen.modeling/types/transforms/enablement_transform.hpp"
+#include "masd.dogen.coding/types/meta_model/module.hpp"
+#include "masd.dogen.coding/io/meta_model/model_io.hpp"
+#include "masd.dogen.coding/io/meta_model/facet_properties_io.hpp"
+#include "masd.dogen.coding/types/transforms/transformation_error.hpp"
+#include "masd.dogen.coding/types/transforms/enablement_transform.hpp"
 
 namespace {
 
@@ -44,15 +44,15 @@ const std::string meta_name_not_found("Meta-name not found: ");
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 bool enablement_transform::
-is_element_disabled(const modeling::meta_model::element& e) {
+is_element_disabled(const coding::meta_model::element& e) {
     /*
      * We're only interested in modules as these are the only elements
      * that can be enabled/disabled based on their state.
      */
-    const auto ptr(dynamic_cast<const modeling::meta_model::module*>(&e));
+    const auto ptr(dynamic_cast<const coding::meta_model::module*>(&e));
     if (!ptr)
         return false;
 
