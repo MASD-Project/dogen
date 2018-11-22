@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/location_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/location_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t location_hasher::hash(const location& v) {
     std::size_t seed(0);

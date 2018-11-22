@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_ATTRIBUTE_PROPERTIES_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_ATTRIBUTE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ORM_ATTRIBUTE_PROPERTIES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_ORM_ATTRIBUTE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/orm_database_systems.hpp"
-#include "masd.dogen.modeling/hash/meta_model/orm_database_systems_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_database_systems.hpp"
+#include "masd.dogen.coding/hash/meta_model/orm_database_systems_hash.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 class orm_attribute_properties final {
 public:
@@ -50,7 +50,7 @@ public:
         const std::string& column_name,
         const bool is_primary_key,
         const boost::optional<bool>& is_nullable,
-        const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& type_overrides,
+        const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& type_overrides,
         const bool is_composite);
 
 public:
@@ -86,10 +86,10 @@ public:
      * @brief Override the default type for this attribute for a given database system.
      */
     /**@{*/
-    const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& type_overrides() const;
-    std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& type_overrides();
-    void type_overrides(const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& v);
-    void type_overrides(const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& type_overrides() const;
+    std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& type_overrides();
+    void type_overrides(const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& v);
+    void type_overrides(const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>&& v);
     /**@}*/
 
     /**
@@ -114,7 +114,7 @@ private:
     std::string column_name_;
     bool is_primary_key_;
     boost::optional<bool> is_nullable_;
-    std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string> type_overrides_;
+    std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string> type_overrides_;
     bool is_composite_;
 };
 
@@ -124,8 +124,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::orm_attribute_properties& lhs,
-    masd::dogen::modeling::meta_model::orm_attribute_properties& rhs) {
+    masd::dogen::coding::meta_model::orm_attribute_properties& lhs,
+    masd::dogen::coding::meta_model::orm_attribute_properties& rhs) {
     lhs.swap(rhs);
 }
 

@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::modeling::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::mo
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -53,32 +53,32 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 visitor::visitor(visitor&& rhs)
-    : masd::dogen::modeling::meta_model::element(
-        std::forward<masd::dogen::modeling::meta_model::element>(rhs)),
+    : masd::dogen::coding::meta_model::element(
+        std::forward<masd::dogen::coding::meta_model::element>(rhs)),
       visits_(std::move(rhs.visits_)),
       parent_(std::move(rhs.parent_)) { }
 
 visitor::visitor(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
-    const masd::dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::coding::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const masd::dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::coding::meta_model::name& meta_name,
     const bool is_element_extension,
     const masd::dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
-    const std::list<masd::dogen::modeling::meta_model::name>& visits,
-    const boost::optional<masd::dogen::modeling::meta_model::name>& parent)
-    : masd::dogen::modeling::meta_model::element(
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
+    const std::list<masd::dogen::coding::meta_model::name>& visits,
+    const boost::optional<masd::dogen::coding::meta_model::name>& parent)
+    : masd::dogen::coding::meta_model::element(
       name,
       documentation,
       annotation,
@@ -114,9 +114,9 @@ void visitor::accept(element_visitor& v) {
 
 void visitor::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::visitor\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::visitor\"" << ", "
       << "\"__parent_0__\": ";
-    masd::dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
       << "\"visits\": " << visits_ << ", "
       << "\"parent\": " << parent_
@@ -124,21 +124,21 @@ void visitor::to_stream(std::ostream& s) const {
 }
 
 void visitor::swap(visitor& other) noexcept {
-    masd::dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
     swap(visits_, other.visits_);
     swap(parent_, other.parent_);
 }
 
-bool visitor::equals(const masd::dogen::modeling::meta_model::element& other) const {
+bool visitor::equals(const masd::dogen::coding::meta_model::element& other) const {
     const visitor* const p(dynamic_cast<const visitor* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool visitor::operator==(const visitor& rhs) const {
-    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::coding::meta_model::element::compare(rhs) &&
         visits_ == rhs.visits_ &&
         parent_ == rhs.parent_;
 }
@@ -149,35 +149,35 @@ visitor& visitor::operator=(visitor other) {
     return *this;
 }
 
-const std::list<masd::dogen::modeling::meta_model::name>& visitor::visits() const {
+const std::list<masd::dogen::coding::meta_model::name>& visitor::visits() const {
     return visits_;
 }
 
-std::list<masd::dogen::modeling::meta_model::name>& visitor::visits() {
+std::list<masd::dogen::coding::meta_model::name>& visitor::visits() {
     return visits_;
 }
 
-void visitor::visits(const std::list<masd::dogen::modeling::meta_model::name>& v) {
+void visitor::visits(const std::list<masd::dogen::coding::meta_model::name>& v) {
     visits_ = v;
 }
 
-void visitor::visits(const std::list<masd::dogen::modeling::meta_model::name>&& v) {
+void visitor::visits(const std::list<masd::dogen::coding::meta_model::name>&& v) {
     visits_ = std::move(v);
 }
 
-const boost::optional<masd::dogen::modeling::meta_model::name>& visitor::parent() const {
+const boost::optional<masd::dogen::coding::meta_model::name>& visitor::parent() const {
     return parent_;
 }
 
-boost::optional<masd::dogen::modeling::meta_model::name>& visitor::parent() {
+boost::optional<masd::dogen::coding::meta_model::name>& visitor::parent() {
     return parent_;
 }
 
-void visitor::parent(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
+void visitor::parent(const boost::optional<masd::dogen::coding::meta_model::name>& v) {
     parent_ = v;
 }
 
-void visitor::parent(const boost::optional<masd::dogen::modeling::meta_model::name>&& v) {
+void visitor::parent(const boost::optional<masd::dogen::coding::meta_model::name>&& v) {
     parent_ = std::move(v);
 }
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/name_tree_hash.hpp"
-#include "masd.dogen.modeling/hash/helpers/decomposition_result_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_tree_hash.hpp"
+#include "masd.dogen.coding/hash/helpers/decomposition_result_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_masd_dogen_modeling_meta_model_name(const std::pair<std::string, masd::dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_std_pair_std_string_masd_dogen_coding_meta_model_name(const std::pair<std::string, masd::dogen::coding::meta_model::name>& v) {
     std::size_t seed(0);
 
     combine(seed, v.first);
@@ -38,15 +38,15 @@ inline std::size_t hash_std_pair_std_string_masd_dogen_modeling_meta_model_name(
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_masd_dogen_modeling_meta_model_name(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v) {
+inline std::size_t hash_std_list_std_pair_std_string_masd_dogen_coding_meta_model_name(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_masd_dogen_modeling_meta_model_name(i));
+        combine(seed, hash_std_pair_std_string_masd_dogen_coding_meta_model_name(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_std_string_masd_dogen_modeling_meta_model_name_tree(const std::pair<std::string, masd::dogen::modeling::meta_model::name_tree>& v) {
+inline std::size_t hash_std_pair_std_string_masd_dogen_coding_meta_model_name_tree(const std::pair<std::string, masd::dogen::coding::meta_model::name_tree>& v) {
     std::size_t seed(0);
 
     combine(seed, v.first);
@@ -54,25 +54,25 @@ inline std::size_t hash_std_pair_std_string_masd_dogen_modeling_meta_model_name_
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_masd_dogen_modeling_meta_model_name_tree(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& v) {
+inline std::size_t hash_std_list_std_pair_std_string_masd_dogen_coding_meta_model_name_tree(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_masd_dogen_modeling_meta_model_name_tree(i));
+        combine(seed, hash_std_pair_std_string_masd_dogen_coding_meta_model_name_tree(i));
     }
     return seed;
 }
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_modeling_meta_model_name(v.names()));
-    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_modeling_meta_model_name(v.meta_names()));
-    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_modeling_meta_model_name_tree(v.name_trees()));
-    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_modeling_meta_model_name(v.injected_names()));
+    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_coding_meta_model_name(v.names()));
+    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_coding_meta_model_name(v.meta_names()));
+    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_coding_meta_model_name_tree(v.name_trees()));
+    combine(seed, hash_std_list_std_pair_std_string_masd_dogen_coding_meta_model_name(v.injected_names()));
 
     return seed;
 }

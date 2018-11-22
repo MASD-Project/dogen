@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/transforms/configuration_io.hpp"
+#include "masd.dogen.coding/io/transforms/configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::ostream& operator<<(std::ostream& s, const configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::transforms::configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::transforms::configuration\"" << ", "
       << "\"enabled_backends\": " << v.enabled_backends() << ", "
       << "\"enable_backend_directories\": " << v.enable_backend_directories()
       << " }";

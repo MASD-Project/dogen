@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/transforms/options_io.hpp"
+#include "masd.dogen.coding/io/transforms/options_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>&
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::ostream& operator<<(std::ostream& s, const options& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const options& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::transforms::options\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::transforms::options\"" << ", "
       << "\"log_file\": " << "\"" << v.log_file().generic_string() << "\"" << ", "
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "

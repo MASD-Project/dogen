@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_IO_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_IO_HPP
-#define MASD_DOGEN_MODELING_IO_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_IO_HPP
+#ifndef MASD_DOGEN_CODING_IO_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_IO_HPP
+#define MASD_DOGEN_CODING_IO_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.modeling/types/meta_model/local_archetype_location_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::modeling::meta_model::local_archetype_location_properties& v);
+     const masd::dogen::coding::meta_model::local_archetype_location_properties& v);
 
 }
 

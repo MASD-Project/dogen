@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_PRIMITIVE_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_PRIMITIVE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_PRIMITIVE_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_PRIMITIVE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,16 +28,16 @@
 #include <iosfwd>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_primitive_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_primitive_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief Defines an element created by the user to wrap another element, most likely a built-in.
  */
-class primitive final : public masd::dogen::modeling::meta_model::element {
+class primitive final : public masd::dogen::coding::meta_model::element {
 public:
     primitive(const primitive&) = default;
 
@@ -51,25 +51,25 @@ public:
 
 public:
     primitive(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
         const bool is_nullable,
-        const masd::dogen::modeling::meta_model::attribute& value_attribute,
+        const masd::dogen::coding::meta_model::attribute& value_attribute,
         const bool use_type_aliasing,
         const bool is_immutable,
-        const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& orm_properties);
 
 public:
     using element::accept;
@@ -94,10 +94,10 @@ public:
      * @brief Attribute that represents the value of the primitive.
      */
     /**@{*/
-    const masd::dogen::modeling::meta_model::attribute& value_attribute() const;
-    masd::dogen::modeling::meta_model::attribute& value_attribute();
-    void value_attribute(const masd::dogen::modeling::meta_model::attribute& v);
-    void value_attribute(const masd::dogen::modeling::meta_model::attribute&& v);
+    const masd::dogen::coding::meta_model::attribute& value_attribute() const;
+    masd::dogen::coding::meta_model::attribute& value_attribute();
+    void value_attribute(const masd::dogen::coding::meta_model::attribute& v);
+    void value_attribute(const masd::dogen::coding::meta_model::attribute&& v);
     /**@}*/
 
     /**
@@ -116,10 +116,10 @@ public:
     void is_immutable(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& orm_properties() const;
-    boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>&& v);
 
 public:
     bool operator==(const primitive& rhs) const;
@@ -128,7 +128,7 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(primitive& other) noexcept;
@@ -136,10 +136,10 @@ public:
 
 private:
     bool is_nullable_;
-    masd::dogen::modeling::meta_model::attribute value_attribute_;
+    masd::dogen::coding::meta_model::attribute value_attribute_;
     bool use_type_aliasing_;
     bool is_immutable_;
-    boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties> orm_properties_;
 };
 
 }
@@ -148,8 +148,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::primitive& lhs,
-    masd::dogen::modeling::meta_model::primitive& rhs) {
+    masd::dogen::coding::meta_model::primitive& lhs,
+    masd::dogen::coding::meta_model::primitive& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_HASH_META_MODEL_FACET_PROPERTIES_HASH_HPP
-#define MASD_DOGEN_MODELING_HASH_META_MODEL_FACET_PROPERTIES_HASH_HPP
+#ifndef MASD_DOGEN_CODING_HASH_META_MODEL_FACET_PROPERTIES_HASH_HPP
+#define MASD_DOGEN_CODING_HASH_META_MODEL_FACET_PROPERTIES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.modeling/types/meta_model/facet_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/facet_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 struct facet_properties_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<masd::dogen::modeling::meta_model::facet_properties> {
+struct hash<masd::dogen::coding::meta_model::facet_properties> {
 public:
-    size_t operator()(const masd::dogen::modeling::meta_model::facet_properties& v) const {
-        return masd::dogen::modeling::meta_model::facet_properties_hasher::hash(v);
+    size_t operator()(const masd::dogen::coding::meta_model::facet_properties& v) const {
+        return masd::dogen::coding::meta_model::facet_properties_hasher::hash(v);
     }
 };
 

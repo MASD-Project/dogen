@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen.modeling/io/helpers/separators_io.hpp"
+#include "masd.dogen.coding/io/helpers/separators_io.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::ostream& operator<<(std::ostream& s, const separators& v) {
     s << "{ " << "\"__type__\": " << "\"separators\", " << "\"value\": ";

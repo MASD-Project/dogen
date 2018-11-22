@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "masd.dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
 namespace boost {
 
@@ -37,7 +37,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const local_archetype_location_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& s, const local_archetype_location_propert
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::local_archetype_location_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::local_archetype_location_properties\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "

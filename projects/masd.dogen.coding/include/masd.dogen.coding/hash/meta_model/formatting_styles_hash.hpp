@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_HASH_META_MODEL_FORMATTING_STYLES_HASH_HPP
-#define MASD_DOGEN_MODELING_HASH_META_MODEL_FORMATTING_STYLES_HASH_HPP
+#ifndef MASD_DOGEN_CODING_HASH_META_MODEL_FORMATTING_STYLES_HASH_HPP
+#define MASD_DOGEN_CODING_HASH_META_MODEL_FORMATTING_STYLES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.modeling/types/meta_model/formatting_styles.hpp"
+#include "masd.dogen.coding/types/meta_model/formatting_styles.hpp"
 
 namespace std {
 
 template<>
-struct hash<masd::dogen::modeling::meta_model::formatting_styles> {
+struct hash<masd::dogen::coding::meta_model::formatting_styles> {
 public:
-    size_t operator()(const masd::dogen::modeling::meta_model::formatting_styles& v) const {
+    size_t operator()(const masd::dogen::coding::meta_model::formatting_styles& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

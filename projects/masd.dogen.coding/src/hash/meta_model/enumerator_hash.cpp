@@ -19,8 +19,8 @@
  *
  */
 #include "masd.dogen.annotations/hash/annotation_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/enumerator_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/enumerator_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t enumerator_hasher::hash(const enumerator& v) {
     std::size_t seed(0);

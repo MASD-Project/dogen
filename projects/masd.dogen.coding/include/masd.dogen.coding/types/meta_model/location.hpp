@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCATION_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_LOCATION_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,29 +29,31 @@
 #include <string>
 #include <algorithm>
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Identifies a hierarchy of containment within the modeling space.
+ * @brief Identifies a hierarchy of containment within the coding space.
  *
- * Elements exist at unique points within the modeling space called @e addresses.
- * However, certain elements have the ability to contain other elements, creating
- * in effect new dimensions in modeling space. The location class keeps track
- * of these dimensions. Note that the attributes of this class are hierarchical, i.e.
- * external modules contain model modules and so forth. These attributes are best
- * thought of as a single linked list, where segments of that linked list have different
- * meaning. However, because we care about these meanings, we implemented the
- * type with a number of linked lists, one per meaning.
+ * Elements exist at unique points within the coding space called @e
+ * addresses.  However, certain elements have the ability to contain
+ * other elements, creating in effect new dimensions in coding space. The
+ * location class keeps track of these dimensions. Note that the
+ * attributes of this class are hierarchical, i.e.  external modules
+ * contain model modules and so forth. These attributes are best thought
+ * of as a single linked list, where segments of that linked list have
+ * different meaning. However, because we care about these meanings, we
+ * implemented the type with a number of linked lists, one per meaning.
  *
- * A location is not necessarily connected to modules, although these are the main
- * model elements that provide containment. For example, inner classes are
- * contained within classes; in modeling terms it means a location should also have an
- * "object" attribute to represent this relationship.
+ * A location is not necessarily connected to modules, although these are
+ * the main model elements that provide containment. For example, inner
+ * classes are contained within classes; in coding terms it means a
+ * location should also have an "object" attribute to represent this
+ * relationship.
  *
- * Also, note that the location class itself encodes the address of the element that
- * owns that location; returning to the linked list idea, the tail of the linked list is
- * the name of the element, and the remaining linked list provides the location of
- * the element.
+ * Also, note that the location class itself encodes the address of the
+ * element that owns that location; returning to the linked list idea,
+ * the tail of the linked list is the name of the element, and the
+ * remaining linked list provides the location of the element.
  */
 class location final {
 public:
@@ -71,11 +73,11 @@ public:
     /**
      * @brief All modules external to the model itself.
      *
-     * It is sometimes useful to create a model within a set of existing modules. In this
-     * case, the model does not own the existing modules and they are considered
-     * "external" to the model. This is useful, for example, when declaring a model
-     * within a larger project such as @e masd::dogen::modeling. In this case, @e dogen is the
-     * external module.
+     * It is sometimes useful to create a model within a set of existing
+     * modules. In this case, the model does not own the existing modules and
+     * they are considered "external" to the model. This is useful, for
+     * example, when declaring a model within a larger project such as @e
+     * masd::dogen::coding. In this case, @e dogen is the external module.
      */
     /**@{*/
     const std::list<std::string>& external_modules() const;
@@ -110,8 +112,8 @@ public:
     /**
      * @brief Name of the owning element, if any.
      *
-     * For modeling elements which are located within other modeling elements that
-     * are not modules, such as attributes, inner classes, etc.
+     * For coding elements which are located within other coding elements
+     * that are not modules, such as attributes, inner classes, etc.
      */
     /**@{*/
     const std::string& element() const;
@@ -143,8 +145,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::location& lhs,
-    masd::dogen::modeling::meta_model::location& rhs) {
+    masd::dogen::coding::meta_model::location& lhs,
+    masd::dogen::coding::meta_model::location& rhs) {
     lhs.swap(rhs);
 }
 

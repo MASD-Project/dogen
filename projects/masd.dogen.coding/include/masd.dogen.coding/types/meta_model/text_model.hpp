@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_TEXT_MODEL_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_TEXT_MODEL_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_TEXT_MODEL_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_TEXT_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.modeling/types/meta_model/artefact.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 class text_model final {
 public:
@@ -41,14 +41,14 @@ public:
 
 public:
     text_model(
-        const std::list<masd::dogen::modeling::meta_model::artefact>& artefacts,
+        const std::list<masd::dogen::coding::meta_model::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories);
 
 public:
-    const std::list<masd::dogen::modeling::meta_model::artefact>& artefacts() const;
-    std::list<masd::dogen::modeling::meta_model::artefact>& artefacts();
-    void artefacts(const std::list<masd::dogen::modeling::meta_model::artefact>& v);
-    void artefacts(const std::list<masd::dogen::modeling::meta_model::artefact>&& v);
+    const std::list<masd::dogen::coding::meta_model::artefact>& artefacts() const;
+    std::list<masd::dogen::coding::meta_model::artefact>& artefacts();
+    void artefacts(const std::list<masd::dogen::coding::meta_model::artefact>& v);
+    void artefacts(const std::list<masd::dogen::coding::meta_model::artefact>&& v);
 
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
@@ -66,7 +66,7 @@ public:
     text_model& operator=(text_model other);
 
 private:
-    std::list<masd::dogen::modeling::meta_model::artefact> artefacts_;
+    std::list<masd::dogen::coding::meta_model::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
 };
 
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::text_model& lhs,
-    masd::dogen::modeling::meta_model::text_model& rhs) {
+    masd::dogen::coding::meta_model::text_model& lhs,
+    masd::dogen::coding::meta_model::text_model& rhs) {
     lhs.swap(rhs);
 }
 

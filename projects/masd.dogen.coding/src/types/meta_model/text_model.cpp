@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/text_model.hpp"
+#include "masd.dogen.coding/types/meta_model/text_model.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 text_model::text_model(
-    const std::list<masd::dogen::modeling::meta_model::artefact>& artefacts,
+    const std::list<masd::dogen::coding::meta_model::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories)
     : artefacts_(artefacts),
       managed_directories_(managed_directories) { }
@@ -45,19 +45,19 @@ text_model& text_model::operator=(text_model other) {
     return *this;
 }
 
-const std::list<masd::dogen::modeling::meta_model::artefact>& text_model::artefacts() const {
+const std::list<masd::dogen::coding::meta_model::artefact>& text_model::artefacts() const {
     return artefacts_;
 }
 
-std::list<masd::dogen::modeling::meta_model::artefact>& text_model::artefacts() {
+std::list<masd::dogen::coding::meta_model::artefact>& text_model::artefacts() {
     return artefacts_;
 }
 
-void text_model::artefacts(const std::list<masd::dogen::modeling::meta_model::artefact>& v) {
+void text_model::artefacts(const std::list<masd::dogen::coding::meta_model::artefact>& v) {
     artefacts_ = v;
 }
 
-void text_model::artefacts(const std::list<masd::dogen::modeling::meta_model::artefact>&& v) {
+void text_model::artefacts(const std::list<masd::dogen::coding::meta_model::artefact>&& v) {
     artefacts_ = std::move(v);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_OBJECT_PROPERTIES_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ORM_OBJECT_PROPERTIES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ORM_OBJECT_PROPERTIES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_ORM_OBJECT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 class orm_object_properties final {
 public:
@@ -50,7 +50,7 @@ public:
         const std::string& table_name,
         const bool is_value,
         const bool has_primary_key,
-        const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case);
+        const boost::optional<masd::dogen::coding::meta_model::letter_cases>& letter_case);
 
 public:
     /**
@@ -101,10 +101,10 @@ public:
      * @brief What case to use for the database identifiers.
      */
     /**@{*/
-    const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case() const;
-    boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case();
-    void letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v);
-    void letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::letter_cases>& letter_case() const;
+    boost::optional<masd::dogen::coding::meta_model::letter_cases>& letter_case();
+    void letter_case(const boost::optional<masd::dogen::coding::meta_model::letter_cases>& v);
+    void letter_case(const boost::optional<masd::dogen::coding::meta_model::letter_cases>&& v);
     /**@}*/
 
 public:
@@ -123,7 +123,7 @@ private:
     std::string table_name_;
     bool is_value_;
     bool has_primary_key_;
-    boost::optional<masd::dogen::modeling::meta_model::letter_cases> letter_case_;
+    boost::optional<masd::dogen::coding::meta_model::letter_cases> letter_case_;
 };
 
 }
@@ -132,8 +132,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::orm_object_properties& lhs,
-    masd::dogen::modeling::meta_model::orm_object_properties& rhs) {
+    masd::dogen::coding::meta_model::orm_object_properties& lhs,
+    masd::dogen::coding::meta_model::orm_object_properties& rhs) {
     lhs.swap(rhs);
 }
 

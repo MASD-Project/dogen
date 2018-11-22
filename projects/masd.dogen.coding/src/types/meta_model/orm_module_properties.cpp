@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/orm_module_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 orm_module_properties::orm_module_properties(const std::string& schema_name)
     : schema_name_(schema_name) { }

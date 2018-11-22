@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/meta_model/orm_module_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_module_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const orm_module_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::orm_module_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::orm_module_properties\"" << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\""
       << " }";
     return(s);

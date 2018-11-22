@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/builtin.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/types/meta_model/builtin.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 builtin::builtin()
     : is_default_enumeration_type_(static_cast<bool>(0)),
@@ -33,25 +33,25 @@ builtin::builtin()
       can_be_primitive_underlier_(static_cast<bool>(0)) { }
 
 builtin::builtin(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
-    const masd::dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::coding::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const masd::dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::coding::meta_model::name& meta_name,
     const bool is_element_extension,
     const masd::dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
     const bool is_default_enumeration_type,
     const bool is_floating_point,
     const bool can_be_enumeration_underlier,
     const bool can_be_primitive_underlier)
-    : masd::dogen::modeling::meta_model::element(
+    : masd::dogen::coding::meta_model::element(
       name,
       documentation,
       annotation,
@@ -95,9 +95,9 @@ void builtin::to_stream(std::ostream& s) const {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::builtin\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::builtin\"" << ", "
       << "\"__parent_0__\": ";
-    masd::dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
       << "\"is_default_enumeration_type\": " << is_default_enumeration_type_ << ", "
       << "\"is_floating_point\": " << is_floating_point_ << ", "
@@ -107,7 +107,7 @@ void builtin::to_stream(std::ostream& s) const {
 }
 
 void builtin::swap(builtin& other) noexcept {
-    masd::dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
     swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
@@ -116,14 +116,14 @@ void builtin::swap(builtin& other) noexcept {
     swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
 }
 
-bool builtin::equals(const masd::dogen::modeling::meta_model::element& other) const {
+bool builtin::equals(const masd::dogen::coding::meta_model::element& other) const {
     const builtin* const p(dynamic_cast<const builtin* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool builtin::operator==(const builtin& rhs) const {
-    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::coding::meta_model::element::compare(rhs) &&
         is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
         is_floating_point_ == rhs.is_floating_point_ &&
         can_be_enumeration_underlier_ == rhs.can_be_enumeration_underlier_ &&

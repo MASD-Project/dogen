@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_NODE_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_NODE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_NODE_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_NODE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/helpers/node_fwd.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/helpers/node_fwd.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Node in a tree of names.
@@ -47,39 +47,39 @@ public:
 
 public:
     node(
-        const boost::shared_ptr<masd::dogen::modeling::helpers::node>& parent,
-        const masd::dogen::modeling::meta_model::name& data,
-        const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& children);
+        const boost::shared_ptr<masd::dogen::coding::helpers::node>& parent,
+        const masd::dogen::coding::meta_model::name& data,
+        const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& children);
 
 public:
     /**
      * @brief Parent in a tree.
      */
     /**@{*/
-    const boost::shared_ptr<masd::dogen::modeling::helpers::node>& parent() const;
-    boost::shared_ptr<masd::dogen::modeling::helpers::node>& parent();
-    void parent(const boost::shared_ptr<masd::dogen::modeling::helpers::node>& v);
-    void parent(const boost::shared_ptr<masd::dogen::modeling::helpers::node>&& v);
+    const boost::shared_ptr<masd::dogen::coding::helpers::node>& parent() const;
+    boost::shared_ptr<masd::dogen::coding::helpers::node>& parent();
+    void parent(const boost::shared_ptr<masd::dogen::coding::helpers::node>& v);
+    void parent(const boost::shared_ptr<masd::dogen::coding::helpers::node>&& v);
     /**@}*/
 
     /**
      * @brief Current node.
      */
     /**@{*/
-    const masd::dogen::modeling::meta_model::name& data() const;
-    masd::dogen::modeling::meta_model::name& data();
-    void data(const masd::dogen::modeling::meta_model::name& v);
-    void data(const masd::dogen::modeling::meta_model::name&& v);
+    const masd::dogen::coding::meta_model::name& data() const;
+    masd::dogen::coding::meta_model::name& data();
+    void data(const masd::dogen::coding::meta_model::name& v);
+    void data(const masd::dogen::coding::meta_model::name&& v);
     /**@}*/
 
     /**
      * @brief Child nodes in a tree.
      */
     /**@{*/
-    const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& children() const;
-    std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& children();
-    void children(const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& v);
-    void children(const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >&& v);
+    const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& children() const;
+    std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& children();
+    void children(const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& v);
+    void children(const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >&& v);
     /**@}*/
 
 public:
@@ -93,9 +93,9 @@ public:
     node& operator=(node other);
 
 private:
-    boost::shared_ptr<masd::dogen::modeling::helpers::node> parent_;
-    masd::dogen::modeling::meta_model::name data_;
-    std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> > children_;
+    boost::shared_ptr<masd::dogen::coding::helpers::node> parent_;
+    masd::dogen::coding::meta_model::name data_;
+    std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> > children_;
 };
 
 }
@@ -104,8 +104,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::helpers::node& lhs,
-    masd::dogen::modeling::helpers::node& rhs) {
+    masd::dogen::coding::helpers::node& lhs,
+    masd::dogen::coding::helpers::node& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/mapping_set_repository.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_set_repository.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 mapping_set_repository::mapping_set_repository(
-    const masd::dogen::modeling::helpers::mapping_set& default_mapping_set,
-    const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& by_name)
+    const masd::dogen::coding::helpers::mapping_set& default_mapping_set,
+    const std::unordered_map<std::string, masd::dogen::coding::helpers::mapping_set>& by_name)
     : default_mapping_set_(default_mapping_set),
       by_name_(by_name) { }
 
@@ -45,35 +45,35 @@ mapping_set_repository& mapping_set_repository::operator=(mapping_set_repository
     return *this;
 }
 
-const masd::dogen::modeling::helpers::mapping_set& mapping_set_repository::default_mapping_set() const {
+const masd::dogen::coding::helpers::mapping_set& mapping_set_repository::default_mapping_set() const {
     return default_mapping_set_;
 }
 
-masd::dogen::modeling::helpers::mapping_set& mapping_set_repository::default_mapping_set() {
+masd::dogen::coding::helpers::mapping_set& mapping_set_repository::default_mapping_set() {
     return default_mapping_set_;
 }
 
-void mapping_set_repository::default_mapping_set(const masd::dogen::modeling::helpers::mapping_set& v) {
+void mapping_set_repository::default_mapping_set(const masd::dogen::coding::helpers::mapping_set& v) {
     default_mapping_set_ = v;
 }
 
-void mapping_set_repository::default_mapping_set(const masd::dogen::modeling::helpers::mapping_set&& v) {
+void mapping_set_repository::default_mapping_set(const masd::dogen::coding::helpers::mapping_set&& v) {
     default_mapping_set_ = std::move(v);
 }
 
-const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& mapping_set_repository::by_name() const {
+const std::unordered_map<std::string, masd::dogen::coding::helpers::mapping_set>& mapping_set_repository::by_name() const {
     return by_name_;
 }
 
-std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& mapping_set_repository::by_name() {
+std::unordered_map<std::string, masd::dogen::coding::helpers::mapping_set>& mapping_set_repository::by_name() {
     return by_name_;
 }
 
-void mapping_set_repository::by_name(const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& v) {
+void mapping_set_repository::by_name(const std::unordered_map<std::string, masd::dogen::coding::helpers::mapping_set>& v) {
     by_name_ = v;
 }
 
-void mapping_set_repository::by_name(const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>&& v) {
+void mapping_set_repository::by_name(const std::unordered_map<std::string, masd::dogen::coding::helpers::mapping_set>&& v) {
     by_name_ = std::move(v);
 }
 

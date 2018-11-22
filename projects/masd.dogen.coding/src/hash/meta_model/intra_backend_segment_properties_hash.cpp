@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/path_contribution_types_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/intra_backend_segment_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/path_contribution_types_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/intra_backend_segment_properties_hash.hpp"
 
 namespace {
 
@@ -37,7 +37,7 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t intra_backend_segment_properties_hasher::hash(const intra_backend_segment_properties& v) {
     std::size_t seed(0);

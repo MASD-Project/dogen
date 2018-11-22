@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/helpers/mapping_set_io.hpp"
-#include "masd.dogen.modeling/io/helpers/mapping_set_repository_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_set_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_set_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::helpers::mapping_set>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::helpers::mapping_set>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,11 +49,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping_set_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::helpers::mapping_set_repository\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::helpers::mapping_set_repository\"" << ", "
       << "\"default_mapping_set\": " << v.default_mapping_set() << ", "
       << "\"by_name\": " << v.by_name()
       << " }";

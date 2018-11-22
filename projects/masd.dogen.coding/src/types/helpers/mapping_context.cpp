@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/mapping_context.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_context.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 mapping_context::mapping_context(
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& translations,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& translations,
     const std::unordered_set<std::string>& erasures,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& injections)
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& injections)
     : translations_(translations),
       erasures_(erasures),
       injections_(injections) { }
@@ -49,19 +49,19 @@ mapping_context& mapping_context::operator=(mapping_context other) {
     return *this;
 }
 
-const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& mapping_context::translations() const {
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& mapping_context::translations() const {
     return translations_;
 }
 
-std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& mapping_context::translations() {
+std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& mapping_context::translations() {
     return translations_;
 }
 
-void mapping_context::translations(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& v) {
+void mapping_context::translations(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
     translations_ = v;
 }
 
-void mapping_context::translations(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>&& v) {
+void mapping_context::translations(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>&& v) {
     translations_ = std::move(v);
 }
 
@@ -81,19 +81,19 @@ void mapping_context::erasures(const std::unordered_set<std::string>&& v) {
     erasures_ = std::move(v);
 }
 
-const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& mapping_context::injections() const {
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& mapping_context::injections() const {
     return injections_;
 }
 
-std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& mapping_context::injections() {
+std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& mapping_context::injections() {
     return injections_;
 }
 
-void mapping_context::injections(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& v) {
+void mapping_context::injections(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
     injections_ = v;
 }
 
-void mapping_context::injections(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>&& v) {
+void mapping_context::injections(const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>&& v) {
     injections_ = std::move(v);
 }
 

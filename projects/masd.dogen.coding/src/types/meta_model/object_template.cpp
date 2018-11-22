@@ -20,15 +20,15 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/attribute_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/element_visitor.hpp"
-#include "masd.dogen.modeling/types/meta_model/object_template.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.coding/types/meta_model/object_template.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::modeling::meta_model::attribute>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::attribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -42,7 +42,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::mo
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -60,7 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<masd::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::modeling::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -72,7 +72,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::mo
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 object_template::object_template()
     : is_immutable_(static_cast<bool>(0)),
@@ -80,28 +80,28 @@ object_template::object_template()
       is_child_(static_cast<bool>(0)) { }
 
 object_template::object_template(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
-    const masd::dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::coding::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const masd::dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::coding::meta_model::name& meta_name,
     const bool is_element_extension,
     const masd::dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
-    const std::list<masd::dogen::modeling::meta_model::attribute>& all_attributes,
-    const std::list<masd::dogen::modeling::meta_model::attribute>& local_attributes,
-    const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& inherited_attributes,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
+    const std::list<masd::dogen::coding::meta_model::attribute>& all_attributes,
+    const std::list<masd::dogen::coding::meta_model::attribute>& local_attributes,
+    const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& inherited_attributes,
     const bool is_immutable,
     const bool is_fluent,
-    const std::list<masd::dogen::modeling::meta_model::name>& parents,
+    const std::list<masd::dogen::coding::meta_model::name>& parents,
     const bool is_child)
-    : masd::dogen::modeling::meta_model::element(
+    : masd::dogen::coding::meta_model::element(
       name,
       documentation,
       annotation,
@@ -148,9 +148,9 @@ void object_template::to_stream(std::ostream& s) const {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::object_template\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::object_template\"" << ", "
       << "\"__parent_0__\": ";
-    masd::dogen::modeling::meta_model::element::to_stream(s);
+    masd::dogen::coding::meta_model::element::to_stream(s);
     s << ", "
       << "\"all_attributes\": " << all_attributes_ << ", "
       << "\"local_attributes\": " << local_attributes_ << ", "
@@ -163,7 +163,7 @@ void object_template::to_stream(std::ostream& s) const {
 }
 
 void object_template::swap(object_template& other) noexcept {
-    masd::dogen::modeling::meta_model::element::swap(other);
+    masd::dogen::coding::meta_model::element::swap(other);
 
     using std::swap;
     swap(all_attributes_, other.all_attributes_);
@@ -175,14 +175,14 @@ void object_template::swap(object_template& other) noexcept {
     swap(is_child_, other.is_child_);
 }
 
-bool object_template::equals(const masd::dogen::modeling::meta_model::element& other) const {
+bool object_template::equals(const masd::dogen::coding::meta_model::element& other) const {
     const object_template* const p(dynamic_cast<const object_template* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool object_template::operator==(const object_template& rhs) const {
-    return masd::dogen::modeling::meta_model::element::compare(rhs) &&
+    return masd::dogen::coding::meta_model::element::compare(rhs) &&
         all_attributes_ == rhs.all_attributes_ &&
         local_attributes_ == rhs.local_attributes_ &&
         inherited_attributes_ == rhs.inherited_attributes_ &&
@@ -198,51 +198,51 @@ object_template& object_template::operator=(object_template other) {
     return *this;
 }
 
-const std::list<masd::dogen::modeling::meta_model::attribute>& object_template::all_attributes() const {
+const std::list<masd::dogen::coding::meta_model::attribute>& object_template::all_attributes() const {
     return all_attributes_;
 }
 
-std::list<masd::dogen::modeling::meta_model::attribute>& object_template::all_attributes() {
+std::list<masd::dogen::coding::meta_model::attribute>& object_template::all_attributes() {
     return all_attributes_;
 }
 
-void object_template::all_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>& v) {
+void object_template::all_attributes(const std::list<masd::dogen::coding::meta_model::attribute>& v) {
     all_attributes_ = v;
 }
 
-void object_template::all_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>&& v) {
+void object_template::all_attributes(const std::list<masd::dogen::coding::meta_model::attribute>&& v) {
     all_attributes_ = std::move(v);
 }
 
-const std::list<masd::dogen::modeling::meta_model::attribute>& object_template::local_attributes() const {
+const std::list<masd::dogen::coding::meta_model::attribute>& object_template::local_attributes() const {
     return local_attributes_;
 }
 
-std::list<masd::dogen::modeling::meta_model::attribute>& object_template::local_attributes() {
+std::list<masd::dogen::coding::meta_model::attribute>& object_template::local_attributes() {
     return local_attributes_;
 }
 
-void object_template::local_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>& v) {
+void object_template::local_attributes(const std::list<masd::dogen::coding::meta_model::attribute>& v) {
     local_attributes_ = v;
 }
 
-void object_template::local_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>&& v) {
+void object_template::local_attributes(const std::list<masd::dogen::coding::meta_model::attribute>&& v) {
     local_attributes_ = std::move(v);
 }
 
-const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& object_template::inherited_attributes() const {
+const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& object_template::inherited_attributes() const {
     return inherited_attributes_;
 }
 
-std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& object_template::inherited_attributes() {
+std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& object_template::inherited_attributes() {
     return inherited_attributes_;
 }
 
-void object_template::inherited_attributes(const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& v) {
+void object_template::inherited_attributes(const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& v) {
     inherited_attributes_ = v;
 }
 
-void object_template::inherited_attributes(const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >&& v) {
+void object_template::inherited_attributes(const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >&& v) {
     inherited_attributes_ = std::move(v);
 }
 
@@ -262,19 +262,19 @@ void object_template::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-const std::list<masd::dogen::modeling::meta_model::name>& object_template::parents() const {
+const std::list<masd::dogen::coding::meta_model::name>& object_template::parents() const {
     return parents_;
 }
 
-std::list<masd::dogen::modeling::meta_model::name>& object_template::parents() {
+std::list<masd::dogen::coding::meta_model::name>& object_template::parents() {
     return parents_;
 }
 
-void object_template::parents(const std::list<masd::dogen::modeling::meta_model::name>& v) {
+void object_template::parents(const std::list<masd::dogen::coding::meta_model::name>& v) {
     parents_ = v;
 }
 
-void object_template::parents(const std::list<masd::dogen::modeling::meta_model::name>&& v) {
+void object_template::parents(const std::list<masd::dogen::coding::meta_model::name>&& v) {
     parents_ = std::move(v);
 }
 

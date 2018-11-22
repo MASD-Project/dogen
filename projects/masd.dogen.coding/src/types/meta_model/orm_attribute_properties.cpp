@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 orm_attribute_properties::orm_attribute_properties()
     : is_primary_key_(static_cast<bool>(0)),
@@ -37,7 +37,7 @@ orm_attribute_properties::orm_attribute_properties(
     const std::string& column_name,
     const bool is_primary_key,
     const boost::optional<bool>& is_nullable,
-    const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& type_overrides,
+    const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& type_overrides,
     const bool is_composite)
     : column_name_(column_name),
       is_primary_key_(is_primary_key),
@@ -108,19 +108,19 @@ void orm_attribute_properties::is_nullable(const boost::optional<bool>&& v) {
     is_nullable_ = std::move(v);
 }
 
-const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& orm_attribute_properties::type_overrides() const {
+const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& orm_attribute_properties::type_overrides() const {
     return type_overrides_;
 }
 
-std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& orm_attribute_properties::type_overrides() {
+std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& orm_attribute_properties::type_overrides() {
     return type_overrides_;
 }
 
-void orm_attribute_properties::type_overrides(const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>& v) {
+void orm_attribute_properties::type_overrides(const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>& v) {
     type_overrides_ = v;
 }
 
-void orm_attribute_properties::type_overrides(const std::unordered_map<masd::dogen::modeling::meta_model::orm_database_systems, std::string>&& v) {
+void orm_attribute_properties::type_overrides(const std::unordered_map<masd::dogen::coding::meta_model::orm_database_systems, std::string>&& v) {
     type_overrides_ = std::move(v);
 }
 

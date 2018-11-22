@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/stereotypes_conversion_result.hpp"
+#include "masd.dogen.coding/types/helpers/stereotypes_conversion_result.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 stereotypes_conversion_result::stereotypes_conversion_result(
-    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes)
     : static_stereotypes_(static_stereotypes),
       dynamic_stereotypes_(dynamic_stereotypes) { }
@@ -45,19 +45,19 @@ stereotypes_conversion_result& stereotypes_conversion_result::operator=(stereoty
     return *this;
 }
 
-const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& stereotypes_conversion_result::static_stereotypes() const {
+const std::list<masd::dogen::coding::meta_model::static_stereotypes>& stereotypes_conversion_result::static_stereotypes() const {
     return static_stereotypes_;
 }
 
-std::list<masd::dogen::modeling::meta_model::static_stereotypes>& stereotypes_conversion_result::static_stereotypes() {
+std::list<masd::dogen::coding::meta_model::static_stereotypes>& stereotypes_conversion_result::static_stereotypes() {
     return static_stereotypes_;
 }
 
-void stereotypes_conversion_result::static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v) {
+void stereotypes_conversion_result::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
     static_stereotypes_ = v;
 }
 
-void stereotypes_conversion_result::static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>&& v) {
+void stereotypes_conversion_result::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>&& v) {
     static_stereotypes_ = std::move(v);
 }
 

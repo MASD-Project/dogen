@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 class local_archetype_location_properties final {
 public:
@@ -90,8 +90,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::local_archetype_location_properties& lhs,
-    masd::dogen::modeling::meta_model::local_archetype_location_properties& rhs) {
+    masd::dogen::coding::meta_model::local_archetype_location_properties& lhs,
+    masd::dogen::coding::meta_model::local_archetype_location_properties& rhs) {
     lhs.swap(rhs);
 }
 

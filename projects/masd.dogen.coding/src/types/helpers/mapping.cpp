@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/mapping.hpp"
+#include "masd.dogen.coding/types/helpers/mapping.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 mapping::mapping(
     const std::string& lam_id,
-    const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& by_language)
+    const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language)
     : lam_id_(lam_id),
       by_language_(by_language) { }
 
@@ -61,19 +61,19 @@ void mapping::lam_id(const std::string&& v) {
     lam_id_ = std::move(v);
 }
 
-const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& mapping::by_language() const {
+const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& mapping::by_language() const {
     return by_language_;
 }
 
-std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& mapping::by_language() {
+std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& mapping::by_language() {
     return by_language_;
 }
 
-void mapping::by_language(const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& v) {
+void mapping::by_language(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& v) {
     by_language_ = v;
 }
 
-void mapping::by_language(const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>&& v) {
+void mapping::by_language(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>&& v) {
     by_language_ = std::move(v);
 }
 

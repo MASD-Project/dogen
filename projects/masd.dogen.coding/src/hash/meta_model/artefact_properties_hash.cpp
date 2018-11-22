@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/formatting_styles_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/artefact_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/formatting_styles_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/artefact_properties_hash.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     std::size_t seed(0);

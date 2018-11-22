@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.modeling/hash/helpers/mapping_value_hash.hpp"
-#include "masd.dogen.modeling/hash/helpers/mapping_actions_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/hash/helpers/mapping_value_hash.hpp"
+#include "masd.dogen.coding/hash/helpers/mapping_actions_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_name(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_name(const boost::optional<masd::dogen::coding::meta_model::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -42,13 +42,13 @@ inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_name(const
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::size_t mapping_value_hasher::hash(const mapping_value& v) {
     std::size_t seed(0);
 
     combine(seed, v.mapping_action());
-    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_name(v.default_name()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_name(v.default_name()));
 
     return seed;
 }

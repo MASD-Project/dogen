@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/helpers/mapping_context_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/helpers/mapping_context_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,7 +33,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::name>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,11 +63,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::ostream& operator<<(std::ostream& s, const mapping_context& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::helpers::mapping_context\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::helpers::mapping_context\"" << ", "
       << "\"translations\": " << v.translations() << ", "
       << "\"erasures\": " << v.erasures() << ", "
       << "\"injections\": " << v.injections()

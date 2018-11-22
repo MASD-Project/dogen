@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_HASH_META_MODEL_LETTER_CASES_HASH_HPP
-#define MASD_DOGEN_MODELING_HASH_META_MODEL_LETTER_CASES_HASH_HPP
+#ifndef MASD_DOGEN_CODING_HASH_META_MODEL_LETTER_CASES_HASH_HPP
+#define MASD_DOGEN_CODING_HASH_META_MODEL_LETTER_CASES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.modeling/types/meta_model/letter_cases.hpp"
+#include "masd.dogen.coding/types/meta_model/letter_cases.hpp"
 
 namespace std {
 
 template<>
-struct hash<masd::dogen::modeling::meta_model::letter_cases> {
+struct hash<masd::dogen::coding::meta_model::letter_cases> {
 public:
-    size_t operator()(const masd::dogen::modeling::meta_model::letter_cases& v) const {
+    size_t operator()(const masd::dogen::coding::meta_model::letter_cases& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

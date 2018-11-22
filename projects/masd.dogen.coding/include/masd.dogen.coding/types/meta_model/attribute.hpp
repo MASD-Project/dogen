@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ATTRIBUTE_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ATTRIBUTE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ATTRIBUTE_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_ATTRIBUTE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_attribute_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_attribute_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief Represents an attribute in an object.
@@ -53,12 +53,12 @@ public:
     attribute(
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& unparsed_type,
-        const masd::dogen::modeling::meta_model::name_tree& parsed_type,
+        const masd::dogen::coding::meta_model::name_tree& parsed_type,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties);
 
 public:
     /**
@@ -89,10 +89,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const masd::dogen::modeling::meta_model::name& name() const;
-    masd::dogen::modeling::meta_model::name& name();
-    void name(const masd::dogen::modeling::meta_model::name& v);
-    void name(const masd::dogen::modeling::meta_model::name&& v);
+    const masd::dogen::coding::meta_model::name& name() const;
+    masd::dogen::coding::meta_model::name& name();
+    void name(const masd::dogen::coding::meta_model::name& v);
+    void name(const masd::dogen::coding::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -111,10 +111,10 @@ public:
      * @brief Tree of names that represent the type of the attribute, after suitable parsing.
      */
     /**@{*/
-    const masd::dogen::modeling::meta_model::name_tree& parsed_type() const;
-    masd::dogen::modeling::meta_model::name_tree& parsed_type();
-    void parsed_type(const masd::dogen::modeling::meta_model::name_tree& v);
-    void parsed_type(const masd::dogen::modeling::meta_model::name_tree&& v);
+    const masd::dogen::coding::meta_model::name_tree& parsed_type() const;
+    masd::dogen::coding::meta_model::name_tree& parsed_type();
+    void parsed_type(const masd::dogen::coding::meta_model::name_tree& v);
+    void parsed_type(const masd::dogen::coding::meta_model::name_tree&& v);
     /**@}*/
 
     /**
@@ -133,10 +133,10 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& orm_properties() const;
-    boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>&& v);
 
 public:
     bool operator==(const attribute& rhs) const;
@@ -151,12 +151,12 @@ public:
 private:
     std::string documentation_;
     masd::dogen::annotations::annotation annotation_;
-    masd::dogen::modeling::meta_model::name name_;
+    masd::dogen::coding::meta_model::name name_;
     std::string unparsed_type_;
-    masd::dogen::modeling::meta_model::name_tree parsed_type_;
+    masd::dogen::coding::meta_model::name_tree parsed_type_;
     bool is_immutable_;
     bool is_fluent_;
-    boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties> orm_properties_;
 };
 
 }
@@ -165,8 +165,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::attribute& lhs,
-    masd::dogen::modeling::meta_model::attribute& rhs) {
+    masd::dogen::coding::meta_model::attribute& lhs,
+    masd::dogen::coding::meta_model::attribute& rhs) {
     lhs.swap(rhs);
 }
 

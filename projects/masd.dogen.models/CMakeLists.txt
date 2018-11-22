@@ -111,7 +111,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} ${prefix}.generation)
     set(models ${models} ${prefix}.generation.cpp)
     set(models ${models} ${prefix}.generation.csharp)
-    set(models ${models} ${prefix}.modeling)
+    set(models ${models} ${prefix}.coding)
     set(models ${models} ${prefix}.templating)
 endif()
 

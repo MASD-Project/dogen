@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/object_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/attribute_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/type_parameters_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/orm_object_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/object_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/attribute_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/type_parameters_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/orm_object_properties_hash.hpp"
 
 namespace {
 
@@ -33,7 +33,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_attribute(const std::list<masd::dogen::modeling::meta_model::attribute>& v) {
+inline std::size_t hash_std_list_masd_dogen_coding_meta_model_attribute(const std::list<masd::dogen::coding::meta_model::attribute>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -41,16 +41,16 @@ inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_attribute(const 
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_name_std_list_masd_dogen_modeling_meta_model_attribute(const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_coding_meta_model_name_std_list_masd_dogen_coding_meta_model_attribute(const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_list_masd_dogen_modeling_meta_model_attribute(i.second));
+        combine(seed, hash_std_list_masd_dogen_coding_meta_model_attribute(i.second));
     }
     return seed;
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_name(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_name(const boost::optional<masd::dogen::coding::meta_model::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -60,7 +60,7 @@ inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_name(const
     return seed;
 }
 
-inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_name(const std::list<masd::dogen::modeling::meta_model::name>& v) {
+inline std::size_t hash_std_list_masd_dogen_coding_meta_model_name(const std::list<masd::dogen::coding::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -68,7 +68,7 @@ inline std::size_t hash_std_list_masd_dogen_modeling_meta_model_name(const std::
     return seed;
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_object_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_object_properties>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_orm_object_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -80,40 +80,40 @@ inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_object
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t object_hasher::hash(const object& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::element&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::coding::meta_model::element&>(v));
 
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_attribute(v.all_attributes()));
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_attribute(v.local_attributes()));
-    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_name_std_list_masd_dogen_modeling_meta_model_attribute(v.inherited_attributes()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_attribute(v.all_attributes()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_attribute(v.local_attributes()));
+    combine(seed, hash_std_unordered_map_masd_dogen_coding_meta_model_name_std_list_masd_dogen_coding_meta_model_attribute(v.inherited_attributes()));
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
-    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_name(v.base_visitor()));
-    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_name(v.derived_visitor()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_name(v.base_visitor()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_name(v.derived_visitor()));
     combine(seed, v.is_visitation_root());
     combine(seed, v.is_visitation_leaf());
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.transparent_associations()));
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.opaque_associations()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.transparent_associations()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.opaque_associations()));
     combine(seed, v.is_parent());
     combine(seed, v.is_child());
     combine(seed, v.is_leaf());
     combine(seed, v.is_final());
     combine(seed, v.is_abstract());
     combine(seed, v.in_inheritance_relationship());
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.root_parents()));
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.parents()));
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.leaves()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.root_parents()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.parents()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.leaves()));
     combine(seed, v.type_parameters());
     combine(seed, v.is_associative_container());
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.object_templates()));
-    combine(seed, hash_std_list_masd_dogen_modeling_meta_model_name(v.associative_container_keys()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.object_templates()));
+    combine(seed, hash_std_list_masd_dogen_coding_meta_model_name(v.associative_container_keys()));
     combine(seed, v.provides_opaqueness());
     combine(seed, v.can_be_primitive_underlier());
-    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_orm_object_properties(v.orm_properties()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_orm_object_properties(v.orm_properties()));
 
     return seed;
 }

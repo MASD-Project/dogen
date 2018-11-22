@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_FWD_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_FWD_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_FWD_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_NAMING_CONFIGURATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class naming_configuration;
 

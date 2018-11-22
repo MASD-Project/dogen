@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "masd.dogen.modeling/io/meta_model/type_parameters_io.hpp"
+#include "masd.dogen.coding/io/meta_model/type_parameters_io.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const type_parameters& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -32,7 +32,7 @@ std::ostream& operator<<(std::ostream& s, const type_parameters& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::type_parameters\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::type_parameters\"" << ", "
       << "\"variable_number_of_parameters\": " << v.variable_number_of_parameters() << ", "
       << "\"count\": " << v.count() << ", "
       << "\"always_in_heap\": " << v.always_in_heap()

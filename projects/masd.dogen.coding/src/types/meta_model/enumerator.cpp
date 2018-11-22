@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/enumerator.hpp"
+#include "masd.dogen.coding/types/meta_model/enumerator.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 enumerator::enumerator(
     const std::string& documentation,
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const masd::dogen::annotations::annotation& annotation,
     const std::string& value)
     : documentation_(documentation),
@@ -69,19 +69,19 @@ void enumerator::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const masd::dogen::modeling::meta_model::name& enumerator::name() const {
+const masd::dogen::coding::meta_model::name& enumerator::name() const {
     return name_;
 }
 
-masd::dogen::modeling::meta_model::name& enumerator::name() {
+masd::dogen::coding::meta_model::name& enumerator::name() {
     return name_;
 }
 
-void enumerator::name(const masd::dogen::modeling::meta_model::name& v) {
+void enumerator::name(const masd::dogen::coding::meta_model::name& v) {
     name_ = v;
 }
 
-void enumerator::name(const masd::dogen::modeling::meta_model::name&& v) {
+void enumerator::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
 }
 

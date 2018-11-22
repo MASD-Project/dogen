@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_MAPPING_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_MAPPING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.modeling/types/meta_model/languages.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_value.hpp"
-#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/languages.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_value.hpp"
+#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Stores the mapping of a key (the element id) to its values, organised by language.
@@ -47,7 +47,7 @@ public:
 public:
     mapping(
         const std::string& lam_id,
-        const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& by_language);
+        const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language);
 
 public:
     /**
@@ -64,10 +64,10 @@ public:
      * @brief Values of the mapping, by language.
      */
     /**@{*/
-    const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& by_language() const;
-    std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& by_language();
-    void by_language(const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& v);
-    void by_language(const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language() const;
+    std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& by_language();
+    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& v);
+    void by_language(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>&& v);
     /**@}*/
 
 public:
@@ -82,7 +82,7 @@ public:
 
 private:
     std::string lam_id_;
-    std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value> by_language_;
+    std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value> by_language_;
 };
 
 }
@@ -91,8 +91,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::helpers::mapping& lhs,
-    masd::dogen::modeling::helpers::mapping& rhs) {
+    masd::dogen::coding::helpers::mapping& lhs,
+    masd::dogen::coding::helpers::mapping& rhs) {
     lhs.swap(rhs);
 }
 

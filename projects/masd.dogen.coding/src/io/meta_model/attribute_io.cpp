@@ -22,10 +22,10 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.annotations/io/annotation_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/attribute_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_tree_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/orm_attribute_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_tree_io.hpp"
+#include "masd.dogen.coding/io/meta_model/orm_attribute_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -37,7 +37,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::orm_attribute_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::orm_attribute_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const attribute& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -60,7 +60,7 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::attribute\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::attribute\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"annotation\": " << v.annotation() << ", "
       << "\"name\": " << v.name() << ", "

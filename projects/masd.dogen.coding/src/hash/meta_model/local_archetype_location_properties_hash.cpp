@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/local_archetype_location_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/local_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -40,7 +40,7 @@ inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t local_archetype_location_properties_hasher::hash(const local_archetype_location_properties& v) {
     std::size_t seed(0);

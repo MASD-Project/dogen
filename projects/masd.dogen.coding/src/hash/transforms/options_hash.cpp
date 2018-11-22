@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/transforms/options_hash.hpp"
+#include "masd.dogen.coding/hash/transforms/options_hash.hpp"
 
 namespace {
 
@@ -44,7 +44,7 @@ inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v)
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::size_t options_hasher::hash(const options& v) {
     std::size_t seed(0);

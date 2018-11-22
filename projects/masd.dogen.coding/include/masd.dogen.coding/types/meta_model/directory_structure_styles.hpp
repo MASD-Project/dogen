@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_DIRECTORY_STRUCTURE_STYLES_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_DIRECTORY_STRUCTURE_STYLES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_DIRECTORY_STRUCTURE_STYLES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_DIRECTORY_STRUCTURE_STYLES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 enum class directory_structure_styles : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum

@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen.modeling/io/meta_model/formatting_styles_io.hpp"
+#include "masd.dogen.coding/io/meta_model/formatting_styles_io.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const formatting_styles& v) {
     s << "{ " << "\"__type__\": " << "\"formatting_styles\", " << "\"value\": ";

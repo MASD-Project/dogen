@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCATOR_PROPERTIES_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_LOCATOR_PROPERTIES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_LOCATOR_PROPERTIES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_LOCATOR_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,12 +28,12 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.modeling/types/meta_model/model_segment_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/directory_structure_styles.hpp"
-#include "masd.dogen.modeling/types/meta_model/archetype_family_properties.hpp"
-#include "masd.dogen.modeling/types/meta_model/intra_backend_segment_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/model_segment_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/directory_structure_styles.hpp"
+#include "masd.dogen.coding/types/meta_model/archetype_family_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/intra_backend_segment_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 class locator_properties final {
 public:
@@ -46,17 +46,17 @@ public:
 
 public:
     locator_properties(
-        const masd::dogen::modeling::meta_model::directory_structure_styles directory_structure_style,
+        const masd::dogen::coding::meta_model::directory_structure_styles directory_structure_style,
         const std::string& name_separator,
-        const masd::dogen::modeling::meta_model::model_segment_properties& model_segment_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties>& archetype_family_properties,
+        const masd::dogen::coding::meta_model::model_segment_properties& model_segment_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_family_properties>& archetype_family_properties,
         const bool force_backend_directory,
         const bool disable_facet_directories);
 
 public:
-    masd::dogen::modeling::meta_model::directory_structure_styles directory_structure_style() const;
-    void directory_structure_style(const masd::dogen::modeling::meta_model::directory_structure_styles v);
+    masd::dogen::coding::meta_model::directory_structure_styles directory_structure_style() const;
+    void directory_structure_style(const masd::dogen::coding::meta_model::directory_structure_styles v);
 
     /**
      * @brief Separator to use when concatenating sub-components of a path component.
@@ -68,20 +68,20 @@ public:
     void name_separator(const std::string&& v);
     /**@}*/
 
-    const masd::dogen::modeling::meta_model::model_segment_properties& model_segment_properties() const;
-    masd::dogen::modeling::meta_model::model_segment_properties& model_segment_properties();
-    void model_segment_properties(const masd::dogen::modeling::meta_model::model_segment_properties& v);
-    void model_segment_properties(const masd::dogen::modeling::meta_model::model_segment_properties&& v);
+    const masd::dogen::coding::meta_model::model_segment_properties& model_segment_properties() const;
+    masd::dogen::coding::meta_model::model_segment_properties& model_segment_properties();
+    void model_segment_properties(const masd::dogen::coding::meta_model::model_segment_properties& v);
+    void model_segment_properties(const masd::dogen::coding::meta_model::model_segment_properties&& v);
 
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties() const;
-    std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties();
-    void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties>& v);
-    void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties() const;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties();
+    void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::intra_backend_segment_properties>& v);
+    void intra_backend_segment_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::intra_backend_segment_properties>&& v);
 
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties>& archetype_family_properties() const;
-    std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties>& archetype_family_properties();
-    void archetype_family_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties>& v);
-    void archetype_family_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties>&& v);
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_family_properties>& archetype_family_properties() const;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_family_properties>& archetype_family_properties();
+    void archetype_family_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_family_properties>& v);
+    void archetype_family_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_family_properties>&& v);
 
     /**
      * @brief If true, the backend directory will be expressed, even when there is only one
@@ -111,11 +111,11 @@ public:
     locator_properties& operator=(locator_properties other);
 
 private:
-    masd::dogen::modeling::meta_model::directory_structure_styles directory_structure_style_;
+    masd::dogen::coding::meta_model::directory_structure_styles directory_structure_style_;
     std::string name_separator_;
-    masd::dogen::modeling::meta_model::model_segment_properties model_segment_properties_;
-    std::unordered_map<std::string, masd::dogen::modeling::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
-    std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_family_properties> archetype_family_properties_;
+    masd::dogen::coding::meta_model::model_segment_properties model_segment_properties_;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::intra_backend_segment_properties> intra_backend_segment_properties_;
+    std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_family_properties> archetype_family_properties_;
     bool force_backend_directory_;
     bool disable_facet_directories_;
 };
@@ -126,8 +126,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::locator_properties& lhs,
-    masd::dogen::modeling::meta_model::locator_properties& rhs) {
+    masd::dogen::coding::meta_model::locator_properties& lhs,
+    masd::dogen::coding::meta_model::locator_properties& rhs) {
     lhs.swap(rhs);
 }
 

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 orm_object_properties::orm_object_properties()
     : generate_mapping_(static_cast<bool>(0)),
@@ -41,7 +41,7 @@ orm_object_properties::orm_object_properties(
     const std::string& table_name,
     const bool is_value,
     const bool has_primary_key,
-    const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& letter_case)
+    const boost::optional<masd::dogen::coding::meta_model::letter_cases>& letter_case)
     : generate_mapping_(generate_mapping),
       schema_name_(schema_name),
       table_name_(table_name),
@@ -130,19 +130,19 @@ void orm_object_properties::has_primary_key(const bool v) {
     has_primary_key_ = v;
 }
 
-const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& orm_object_properties::letter_case() const {
+const boost::optional<masd::dogen::coding::meta_model::letter_cases>& orm_object_properties::letter_case() const {
     return letter_case_;
 }
 
-boost::optional<masd::dogen::modeling::meta_model::letter_cases>& orm_object_properties::letter_case() {
+boost::optional<masd::dogen::coding::meta_model::letter_cases>& orm_object_properties::letter_case() {
     return letter_case_;
 }
 
-void orm_object_properties::letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>& v) {
+void orm_object_properties::letter_case(const boost::optional<masd::dogen::coding::meta_model::letter_cases>& v) {
     letter_case_ = v;
 }
 
-void orm_object_properties::letter_case(const boost::optional<masd::dogen::modeling::meta_model::letter_cases>&& v) {
+void orm_object_properties::letter_case(const boost::optional<masd::dogen::coding::meta_model::letter_cases>&& v) {
     letter_case_ = std::move(v);
 }
 

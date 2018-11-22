@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/decomposition_result.hpp"
+#include "masd.dogen.coding/types/helpers/decomposition_result.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 decomposition_result::decomposition_result(
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& names,
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& meta_names,
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& name_trees,
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& injected_names)
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& names,
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& meta_names,
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& name_trees,
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& injected_names)
     : names_(names),
       meta_names_(meta_names),
       name_trees_(name_trees),
@@ -53,67 +53,67 @@ decomposition_result& decomposition_result::operator=(decomposition_result other
     return *this;
 }
 
-const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& decomposition_result::names() const {
+const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& decomposition_result::names() const {
     return names_;
 }
 
-std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& decomposition_result::names() {
+std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& decomposition_result::names() {
     return names_;
 }
 
-void decomposition_result::names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v) {
+void decomposition_result::names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v) {
     names_ = v;
 }
 
-void decomposition_result::names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >&& v) {
+void decomposition_result::names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >&& v) {
     names_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& decomposition_result::meta_names() const {
+const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& decomposition_result::meta_names() const {
     return meta_names_;
 }
 
-std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& decomposition_result::meta_names() {
+std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& decomposition_result::meta_names() {
     return meta_names_;
 }
 
-void decomposition_result::meta_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v) {
+void decomposition_result::meta_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v) {
     meta_names_ = v;
 }
 
-void decomposition_result::meta_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >&& v) {
+void decomposition_result::meta_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >&& v) {
     meta_names_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& decomposition_result::name_trees() const {
+const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& decomposition_result::name_trees() const {
     return name_trees_;
 }
 
-std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& decomposition_result::name_trees() {
+std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& decomposition_result::name_trees() {
     return name_trees_;
 }
 
-void decomposition_result::name_trees(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& v) {
+void decomposition_result::name_trees(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& v) {
     name_trees_ = v;
 }
 
-void decomposition_result::name_trees(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >&& v) {
+void decomposition_result::name_trees(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >&& v) {
     name_trees_ = std::move(v);
 }
 
-const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& decomposition_result::injected_names() const {
+const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& decomposition_result::injected_names() const {
     return injected_names_;
 }
 
-std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& decomposition_result::injected_names() {
+std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& decomposition_result::injected_names() {
     return injected_names_;
 }
 
-void decomposition_result::injected_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v) {
+void decomposition_result::injected_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v) {
     injected_names_ = v;
 }
 
-void decomposition_result::injected_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >&& v) {
+void decomposition_result::injected_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >&& v) {
     injected_names_ = std::move(v);
 }
 

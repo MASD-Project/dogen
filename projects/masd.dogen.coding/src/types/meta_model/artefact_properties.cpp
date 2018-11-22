@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/artefact_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 artefact_properties::artefact_properties()
     : enabled_(static_cast<bool>(0)),
       overwrite_(static_cast<bool>(0)),
-      formatting_style_(static_cast<masd::dogen::modeling::meta_model::formatting_styles>(0)) { }
+      formatting_style_(static_cast<masd::dogen::coding::meta_model::formatting_styles>(0)) { }
 
 artefact_properties::artefact_properties(artefact_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
@@ -40,7 +40,7 @@ artefact_properties::artefact_properties(
     const bool overwrite,
     const boost::filesystem::path& file_path,
     const std::list<std::string>& dependencies,
-    const masd::dogen::modeling::meta_model::formatting_styles formatting_style,
+    const masd::dogen::coding::meta_model::formatting_styles formatting_style,
     const std::string& formatting_input)
     : enabled_(enabled),
       overwrite_(overwrite),
@@ -122,11 +122,11 @@ void artefact_properties::dependencies(const std::list<std::string>&& v) {
     dependencies_ = std::move(v);
 }
 
-masd::dogen::modeling::meta_model::formatting_styles artefact_properties::formatting_style() const {
+masd::dogen::coding::meta_model::formatting_styles artefact_properties::formatting_style() const {
     return formatting_style_;
 }
 
-void artefact_properties::formatting_style(const masd::dogen::modeling::meta_model::formatting_styles v) {
+void artefact_properties::formatting_style(const masd::dogen::coding::meta_model::formatting_styles v) {
     formatting_style_ = v;
 }
 

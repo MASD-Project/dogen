@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_OBJECT_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_OBJECT_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_OBJECT_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_OBJECT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,14 +30,14 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/hash/meta_model/name_hash.hpp"
-#include "masd.dogen.modeling/types/meta_model/attribute.hpp"
-#include "masd.dogen.modeling/types/meta_model/type_parameters.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_object_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
+#include "masd.dogen.coding/types/meta_model/attribute.hpp"
+#include "masd.dogen.coding/types/meta_model/type_parameters.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_object_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief Representation of the class notion in the OOP paradigm.
@@ -47,7 +47,7 @@ namespace masd::dogen::modeling::meta_model {
  * meta-model. Since the word class cannot be used in c++ to name types, we
  * decided instead to use the word object.
  */
-class object final : public masd::dogen::modeling::meta_model::element {
+class object final : public masd::dogen::coding::meta_model::element {
 public:
     object(const object&) = default;
 
@@ -61,47 +61,47 @@ public:
 
 public:
     object(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
-        const std::list<masd::dogen::modeling::meta_model::attribute>& all_attributes,
-        const std::list<masd::dogen::modeling::meta_model::attribute>& local_attributes,
-        const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& inherited_attributes,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
+        const std::list<masd::dogen::coding::meta_model::attribute>& all_attributes,
+        const std::list<masd::dogen::coding::meta_model::attribute>& local_attributes,
+        const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& inherited_attributes,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& base_visitor,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& derived_visitor,
+        const boost::optional<masd::dogen::coding::meta_model::name>& base_visitor,
+        const boost::optional<masd::dogen::coding::meta_model::name>& derived_visitor,
         const bool is_visitation_root,
         const bool is_visitation_leaf,
-        const std::list<masd::dogen::modeling::meta_model::name>& transparent_associations,
-        const std::list<masd::dogen::modeling::meta_model::name>& opaque_associations,
+        const std::list<masd::dogen::coding::meta_model::name>& transparent_associations,
+        const std::list<masd::dogen::coding::meta_model::name>& opaque_associations,
         const bool is_parent,
         const bool is_child,
         const bool is_leaf,
         const bool is_final,
         const bool is_abstract,
         const bool in_inheritance_relationship,
-        const std::list<masd::dogen::modeling::meta_model::name>& root_parents,
-        const std::list<masd::dogen::modeling::meta_model::name>& parents,
-        const std::list<masd::dogen::modeling::meta_model::name>& leaves,
-        const masd::dogen::modeling::meta_model::type_parameters& type_parameters,
+        const std::list<masd::dogen::coding::meta_model::name>& root_parents,
+        const std::list<masd::dogen::coding::meta_model::name>& parents,
+        const std::list<masd::dogen::coding::meta_model::name>& leaves,
+        const masd::dogen::coding::meta_model::type_parameters& type_parameters,
         const bool is_associative_container,
-        const std::list<masd::dogen::modeling::meta_model::name>& object_templates,
-        const std::list<masd::dogen::modeling::meta_model::name>& associative_container_keys,
+        const std::list<masd::dogen::coding::meta_model::name>& object_templates,
+        const std::list<masd::dogen::coding::meta_model::name>& associative_container_keys,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
-        const boost::optional<masd::dogen::modeling::meta_model::orm_object_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties);
 
 public:
     using element::accept;
@@ -128,20 +128,20 @@ public:
      * not have a need for it.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::attribute>& all_attributes() const;
-    std::list<masd::dogen::modeling::meta_model::attribute>& all_attributes();
-    void all_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>& v);
-    void all_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>&& v);
+    const std::list<masd::dogen::coding::meta_model::attribute>& all_attributes() const;
+    std::list<masd::dogen::coding::meta_model::attribute>& all_attributes();
+    void all_attributes(const std::list<masd::dogen::coding::meta_model::attribute>& v);
+    void all_attributes(const std::list<masd::dogen::coding::meta_model::attribute>&& v);
     /**@}*/
 
     /**
      * @brief The set of all attributes directly associated with the type.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::attribute>& local_attributes() const;
-    std::list<masd::dogen::modeling::meta_model::attribute>& local_attributes();
-    void local_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>& v);
-    void local_attributes(const std::list<masd::dogen::modeling::meta_model::attribute>&& v);
+    const std::list<masd::dogen::coding::meta_model::attribute>& local_attributes() const;
+    std::list<masd::dogen::coding::meta_model::attribute>& local_attributes();
+    void local_attributes(const std::list<masd::dogen::coding::meta_model::attribute>& v);
+    void local_attributes(const std::list<masd::dogen::coding::meta_model::attribute>&& v);
     /**@}*/
 
     /**
@@ -151,10 +151,10 @@ public:
      * formatting.
      */
     /**@{*/
-    const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& inherited_attributes() const;
-    std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& inherited_attributes();
-    void inherited_attributes(const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >& v);
-    void inherited_attributes(const std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> >&& v);
+    const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& inherited_attributes() const;
+    std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& inherited_attributes();
+    void inherited_attributes(const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >& v);
+    void inherited_attributes(const std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> >&& v);
     /**@}*/
 
     /**
@@ -177,20 +177,20 @@ public:
      * @brief Base class of the visitor that visits the current element, if any.
      */
     /**@{*/
-    const boost::optional<masd::dogen::modeling::meta_model::name>& base_visitor() const;
-    boost::optional<masd::dogen::modeling::meta_model::name>& base_visitor();
-    void base_visitor(const boost::optional<masd::dogen::modeling::meta_model::name>& v);
-    void base_visitor(const boost::optional<masd::dogen::modeling::meta_model::name>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::name>& base_visitor() const;
+    boost::optional<masd::dogen::coding::meta_model::name>& base_visitor();
+    void base_visitor(const boost::optional<masd::dogen::coding::meta_model::name>& v);
+    void base_visitor(const boost::optional<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief Derived class of the visitor that visits the current element, if any.
      */
     /**@{*/
-    const boost::optional<masd::dogen::modeling::meta_model::name>& derived_visitor() const;
-    boost::optional<masd::dogen::modeling::meta_model::name>& derived_visitor();
-    void derived_visitor(const boost::optional<masd::dogen::modeling::meta_model::name>& v);
-    void derived_visitor(const boost::optional<masd::dogen::modeling::meta_model::name>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::name>& derived_visitor() const;
+    boost::optional<masd::dogen::coding::meta_model::name>& derived_visitor();
+    void derived_visitor(const boost::optional<masd::dogen::coding::meta_model::name>& v);
+    void derived_visitor(const boost::optional<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     bool is_visitation_root() const;
@@ -203,10 +203,10 @@ public:
      * @brief Elements that are involved in aggregation or composition relationships.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& transparent_associations() const;
-    std::list<masd::dogen::modeling::meta_model::name>& transparent_associations();
-    void transparent_associations(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void transparent_associations(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& transparent_associations() const;
+    std::list<masd::dogen::coding::meta_model::name>& transparent_associations();
+    void transparent_associations(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void transparent_associations(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
@@ -216,10 +216,10 @@ public:
      * This is used to break cycles where required.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& opaque_associations() const;
-    std::list<masd::dogen::modeling::meta_model::name>& opaque_associations();
-    void opaque_associations(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void opaque_associations(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& opaque_associations() const;
+    std::list<masd::dogen::coding::meta_model::name>& opaque_associations();
+    void opaque_associations(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void opaque_associations(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
@@ -274,36 +274,36 @@ public:
      * @brief Top-most parents at the root of the inheritance hierarchy, if any.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& root_parents() const;
-    std::list<masd::dogen::modeling::meta_model::name>& root_parents();
-    void root_parents(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void root_parents(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& root_parents() const;
+    std::list<masd::dogen::coding::meta_model::name>& root_parents();
+    void root_parents(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void root_parents(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief Direct parent of this element, if any.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& parents() const;
-    std::list<masd::dogen::modeling::meta_model::name>& parents();
-    void parents(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void parents(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& parents() const;
+    std::list<masd::dogen::coding::meta_model::name>& parents();
+    void parents(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void parents(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief Elements that are at the bottom of the inheritance tree.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& leaves() const;
-    std::list<masd::dogen::modeling::meta_model::name>& leaves();
-    void leaves(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void leaves(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& leaves() const;
+    std::list<masd::dogen::coding::meta_model::name>& leaves();
+    void leaves(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void leaves(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
-    const masd::dogen::modeling::meta_model::type_parameters& type_parameters() const;
-    masd::dogen::modeling::meta_model::type_parameters& type_parameters();
-    void type_parameters(const masd::dogen::modeling::meta_model::type_parameters& v);
-    void type_parameters(const masd::dogen::modeling::meta_model::type_parameters&& v);
+    const masd::dogen::coding::meta_model::type_parameters& type_parameters() const;
+    masd::dogen::coding::meta_model::type_parameters& type_parameters();
+    void type_parameters(const masd::dogen::coding::meta_model::type_parameters& v);
+    void type_parameters(const masd::dogen::coding::meta_model::type_parameters&& v);
 
     /**
      * @brief Object is an associative container.
@@ -317,20 +317,20 @@ public:
      * @brief All object templates associated with this object.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& object_templates() const;
-    std::list<masd::dogen::modeling::meta_model::name>& object_templates();
-    void object_templates(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void object_templates(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& object_templates() const;
+    std::list<masd::dogen::coding::meta_model::name>& object_templates();
+    void object_templates(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void object_templates(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief Elements that are keys in an associative container.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& associative_container_keys() const;
-    std::list<masd::dogen::modeling::meta_model::name>& associative_container_keys();
-    void associative_container_keys(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void associative_container_keys(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& associative_container_keys() const;
+    std::list<masd::dogen::coding::meta_model::name>& associative_container_keys();
+    void associative_container_keys(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void associative_container_keys(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
     /**
@@ -349,10 +349,10 @@ public:
     void can_be_primitive_underlier(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::modeling::meta_model::orm_object_properties>& orm_properties() const;
-    boost::optional<masd::dogen::modeling::meta_model::orm_object_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_object_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_object_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_object_properties>&& v);
 
 public:
     bool operator==(const object& rhs) const;
@@ -361,40 +361,40 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(object& other) noexcept;
     object& operator=(object other);
 
 private:
-    std::list<masd::dogen::modeling::meta_model::attribute> all_attributes_;
-    std::list<masd::dogen::modeling::meta_model::attribute> local_attributes_;
-    std::unordered_map<masd::dogen::modeling::meta_model::name, std::list<masd::dogen::modeling::meta_model::attribute> > inherited_attributes_;
+    std::list<masd::dogen::coding::meta_model::attribute> all_attributes_;
+    std::list<masd::dogen::coding::meta_model::attribute> local_attributes_;
+    std::unordered_map<masd::dogen::coding::meta_model::name, std::list<masd::dogen::coding::meta_model::attribute> > inherited_attributes_;
     bool is_immutable_;
     bool is_fluent_;
-    boost::optional<masd::dogen::modeling::meta_model::name> base_visitor_;
-    boost::optional<masd::dogen::modeling::meta_model::name> derived_visitor_;
+    boost::optional<masd::dogen::coding::meta_model::name> base_visitor_;
+    boost::optional<masd::dogen::coding::meta_model::name> derived_visitor_;
     bool is_visitation_root_;
     bool is_visitation_leaf_;
-    std::list<masd::dogen::modeling::meta_model::name> transparent_associations_;
-    std::list<masd::dogen::modeling::meta_model::name> opaque_associations_;
+    std::list<masd::dogen::coding::meta_model::name> transparent_associations_;
+    std::list<masd::dogen::coding::meta_model::name> opaque_associations_;
     bool is_parent_;
     bool is_child_;
     bool is_leaf_;
     bool is_final_;
     bool is_abstract_;
     bool in_inheritance_relationship_;
-    std::list<masd::dogen::modeling::meta_model::name> root_parents_;
-    std::list<masd::dogen::modeling::meta_model::name> parents_;
-    std::list<masd::dogen::modeling::meta_model::name> leaves_;
-    masd::dogen::modeling::meta_model::type_parameters type_parameters_;
+    std::list<masd::dogen::coding::meta_model::name> root_parents_;
+    std::list<masd::dogen::coding::meta_model::name> parents_;
+    std::list<masd::dogen::coding::meta_model::name> leaves_;
+    masd::dogen::coding::meta_model::type_parameters type_parameters_;
     bool is_associative_container_;
-    std::list<masd::dogen::modeling::meta_model::name> object_templates_;
-    std::list<masd::dogen::modeling::meta_model::name> associative_container_keys_;
+    std::list<masd::dogen::coding::meta_model::name> object_templates_;
+    std::list<masd::dogen::coding::meta_model::name> associative_container_keys_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
-    boost::optional<masd::dogen::modeling::meta_model::orm_object_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm_object_properties> orm_properties_;
 };
 
 }
@@ -403,8 +403,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::object& lhs,
-    masd::dogen::modeling::meta_model::object& rhs) {
+    masd::dogen::coding::meta_model::object& lhs,
+    masd::dogen::coding::meta_model::object& rhs) {
     lhs.swap(rhs);
 }
 

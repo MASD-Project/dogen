@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_VALUE_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_MAPPING_VALUE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_MAPPING_VALUE_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_MAPPING_VALUE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,10 +27,10 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/helpers/mapping_actions.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/helpers/mapping_actions.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 /**
  * @brief Value of a mapping.
@@ -48,17 +48,17 @@ public:
 
 public:
     mapping_value(
-        const masd::dogen::modeling::helpers::mapping_actions mapping_action,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& default_name);
+        const masd::dogen::coding::helpers::mapping_actions mapping_action,
+        const boost::optional<masd::dogen::coding::meta_model::name>& default_name);
 
 public:
-    masd::dogen::modeling::helpers::mapping_actions mapping_action() const;
-    void mapping_action(const masd::dogen::modeling::helpers::mapping_actions v);
+    masd::dogen::coding::helpers::mapping_actions mapping_action() const;
+    void mapping_action(const masd::dogen::coding::helpers::mapping_actions v);
 
-    const boost::optional<masd::dogen::modeling::meta_model::name>& default_name() const;
-    boost::optional<masd::dogen::modeling::meta_model::name>& default_name();
-    void default_name(const boost::optional<masd::dogen::modeling::meta_model::name>& v);
-    void default_name(const boost::optional<masd::dogen::modeling::meta_model::name>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::name>& default_name() const;
+    boost::optional<masd::dogen::coding::meta_model::name>& default_name();
+    void default_name(const boost::optional<masd::dogen::coding::meta_model::name>& v);
+    void default_name(const boost::optional<masd::dogen::coding::meta_model::name>&& v);
 
 public:
     bool operator==(const mapping_value& rhs) const;
@@ -71,8 +71,8 @@ public:
     mapping_value& operator=(mapping_value other);
 
 private:
-    masd::dogen::modeling::helpers::mapping_actions mapping_action_;
-    boost::optional<masd::dogen::modeling::meta_model::name> default_name_;
+    masd::dogen::coding::helpers::mapping_actions mapping_action_;
+    boost::optional<masd::dogen::coding::meta_model::name> default_name_;
 };
 
 }
@@ -81,8 +81,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::helpers::mapping_value& lhs,
-    masd::dogen::modeling::helpers::mapping_value& rhs) {
+    masd::dogen::coding::helpers::mapping_value& lhs,
+    masd::dogen::coding::helpers::mapping_value& rhs) {
     lhs.swap(rhs);
 }
 

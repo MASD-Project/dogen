@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_TRANSFORMS_CONFIGURATION_HPP
-#define MASD_DOGEN_MODELING_TYPES_TRANSFORMS_CONFIGURATION_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONFIGURATION_HPP
+#define MASD_DOGEN_CODING_TYPES_TRANSFORMS_CONFIGURATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_set>
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 class configuration final {
 public:
@@ -75,8 +75,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::transforms::configuration& lhs,
-    masd::dogen::modeling::transforms::configuration& rhs) {
+    masd::dogen::coding::transforms::configuration& lhs,
+    masd::dogen::coding::transforms::configuration& rhs) {
     lhs.swap(rhs);
 }
 

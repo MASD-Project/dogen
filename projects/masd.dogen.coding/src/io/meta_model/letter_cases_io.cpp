@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen.modeling/io/meta_model/letter_cases_io.hpp"
+#include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const letter_cases& v) {
     s << "{ " << "\"__type__\": " << "\"letter_cases\", " << "\"value\": ";

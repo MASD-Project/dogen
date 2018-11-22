@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/helpers/indices_hash.hpp"
+#include "masd.dogen.coding/hash/helpers/indices_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::size_t indices_hasher::hash(const indices& v) {
     std::size_t seed(0);

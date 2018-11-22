@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/helpers/mapping_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/languages_hash.hpp"
-#include "masd.dogen.modeling/hash/helpers/mapping_value_hash.hpp"
+#include "masd.dogen.coding/hash/helpers/mapping_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.coding/hash/helpers/mapping_value_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_languages_masd_dogen_modeling_helpers_mapping_value(const std::unordered_map<masd::dogen::modeling::meta_model::languages, masd::dogen::modeling::helpers::mapping_value>& v) {
+inline std::size_t hash_std_unordered_map_masd_dogen_coding_meta_model_languages_masd_dogen_coding_helpers_mapping_value(const std::unordered_map<masd::dogen::coding::meta_model::languages, masd::dogen::coding::helpers::mapping_value>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -41,13 +41,13 @@ inline std::size_t hash_std_unordered_map_masd_dogen_modeling_meta_model_languag
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::size_t mapping_hasher::hash(const mapping& v) {
     std::size_t seed(0);
 
     combine(seed, v.lam_id());
-    combine(seed, hash_std_unordered_map_masd_dogen_modeling_meta_model_languages_masd_dogen_modeling_helpers_mapping_value(v.by_language()));
+    combine(seed, hash_std_unordered_map_masd_dogen_coding_meta_model_languages_masd_dogen_coding_helpers_mapping_value(v.by_language()));
 
     return seed;
 }

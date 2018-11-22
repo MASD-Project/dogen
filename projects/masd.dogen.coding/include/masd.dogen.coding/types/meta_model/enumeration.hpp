@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ENUMERATION_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ENUMERATION_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ENUMERATION_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_ENUMERATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,17 +28,17 @@
 #include <iosfwd>
 #include <vector>
 #include <algorithm>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/enumerator.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/enumerator.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief Defines a bounded set of logically related values for a built-in type
  * or a string.
  */
-class enumeration final : public masd::dogen::modeling::meta_model::element {
+class enumeration final : public masd::dogen::coding::meta_model::element {
 public:
     enumeration(const enumeration&) = default;
     enumeration(enumeration&&) = default;
@@ -50,22 +50,22 @@ public:
 
 public:
     enumeration(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
-        const masd::dogen::modeling::meta_model::name& underlying_element,
-        const std::vector<masd::dogen::modeling::meta_model::enumerator>& enumerators,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
+        const masd::dogen::coding::meta_model::name& underlying_element,
+        const std::vector<masd::dogen::coding::meta_model::enumerator>& enumerators,
         const bool use_implementation_defined_underlying_element,
         const bool use_implementation_defined_enumerator_values,
         const bool add_invalid_enumerator);
@@ -85,20 +85,20 @@ public:
      * @brief Underlying element of each instance of the enumeration.
      */
     /**@{*/
-    const masd::dogen::modeling::meta_model::name& underlying_element() const;
-    masd::dogen::modeling::meta_model::name& underlying_element();
-    void underlying_element(const masd::dogen::modeling::meta_model::name& v);
-    void underlying_element(const masd::dogen::modeling::meta_model::name&& v);
+    const masd::dogen::coding::meta_model::name& underlying_element() const;
+    masd::dogen::coding::meta_model::name& underlying_element();
+    void underlying_element(const masd::dogen::coding::meta_model::name& v);
+    void underlying_element(const masd::dogen::coding::meta_model::name&& v);
     /**@}*/
 
     /**
      * @brief Enumerators for this enumeration.
      */
     /**@{*/
-    const std::vector<masd::dogen::modeling::meta_model::enumerator>& enumerators() const;
-    std::vector<masd::dogen::modeling::meta_model::enumerator>& enumerators();
-    void enumerators(const std::vector<masd::dogen::modeling::meta_model::enumerator>& v);
-    void enumerators(const std::vector<masd::dogen::modeling::meta_model::enumerator>&& v);
+    const std::vector<masd::dogen::coding::meta_model::enumerator>& enumerators() const;
+    std::vector<masd::dogen::coding::meta_model::enumerator>& enumerators();
+    void enumerators(const std::vector<masd::dogen::coding::meta_model::enumerator>& v);
+    void enumerators(const std::vector<masd::dogen::coding::meta_model::enumerator>&& v);
     /**@}*/
 
     /**
@@ -132,15 +132,15 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(enumeration& other) noexcept;
     enumeration& operator=(enumeration other);
 
 private:
-    masd::dogen::modeling::meta_model::name underlying_element_;
-    std::vector<masd::dogen::modeling::meta_model::enumerator> enumerators_;
+    masd::dogen::coding::meta_model::name underlying_element_;
+    std::vector<masd::dogen::coding::meta_model::enumerator> enumerators_;
     bool use_implementation_defined_underlying_element_;
     bool use_implementation_defined_enumerator_values_;
     bool add_invalid_enumerator_;
@@ -152,8 +152,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::enumeration& lhs,
-    masd::dogen::modeling::meta_model::enumeration& rhs) {
+    masd::dogen::coding::meta_model::enumeration& lhs,
+    masd::dogen::coding::meta_model::enumeration& rhs) {
     lhs.swap(rhs);
 }
 

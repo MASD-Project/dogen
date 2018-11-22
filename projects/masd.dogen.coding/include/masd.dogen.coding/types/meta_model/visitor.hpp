@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_VISITOR_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_VISITOR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_VISITOR_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_VISITOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,15 +29,15 @@
 #include <iosfwd>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief Represents a visitor in the GOF visitor design pattern.
  */
-class visitor final : public masd::dogen::modeling::meta_model::element {
+class visitor final : public masd::dogen::coding::meta_model::element {
 public:
     visitor() = default;
     visitor(const visitor&) = default;
@@ -49,22 +49,22 @@ public:
 
 public:
     visitor(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
-        const std::list<masd::dogen::modeling::meta_model::name>& visits,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& parent);
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
+        const std::list<masd::dogen::coding::meta_model::name>& visits,
+        const boost::optional<masd::dogen::coding::meta_model::name>& parent);
 
 public:
     using element::accept;
@@ -81,16 +81,16 @@ public:
      * @brief Elements that are visitable by the visitor.
      */
     /**@{*/
-    const std::list<masd::dogen::modeling::meta_model::name>& visits() const;
-    std::list<masd::dogen::modeling::meta_model::name>& visits();
-    void visits(const std::list<masd::dogen::modeling::meta_model::name>& v);
-    void visits(const std::list<masd::dogen::modeling::meta_model::name>&& v);
+    const std::list<masd::dogen::coding::meta_model::name>& visits() const;
+    std::list<masd::dogen::coding::meta_model::name>& visits();
+    void visits(const std::list<masd::dogen::coding::meta_model::name>& v);
+    void visits(const std::list<masd::dogen::coding::meta_model::name>&& v);
     /**@}*/
 
-    const boost::optional<masd::dogen::modeling::meta_model::name>& parent() const;
-    boost::optional<masd::dogen::modeling::meta_model::name>& parent();
-    void parent(const boost::optional<masd::dogen::modeling::meta_model::name>& v);
-    void parent(const boost::optional<masd::dogen::modeling::meta_model::name>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::name>& parent() const;
+    boost::optional<masd::dogen::coding::meta_model::name>& parent();
+    void parent(const boost::optional<masd::dogen::coding::meta_model::name>& v);
+    void parent(const boost::optional<masd::dogen::coding::meta_model::name>&& v);
 
 public:
     bool operator==(const visitor& rhs) const;
@@ -99,15 +99,15 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(visitor& other) noexcept;
     visitor& operator=(visitor other);
 
 private:
-    std::list<masd::dogen::modeling::meta_model::name> visits_;
-    boost::optional<masd::dogen::modeling::meta_model::name> parent_;
+    std::list<masd::dogen::coding::meta_model::name> visits_;
+    boost::optional<masd::dogen::coding::meta_model::name> parent_;
 };
 
 }
@@ -116,8 +116,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::visitor& lhs,
-    masd::dogen::modeling::meta_model::visitor& rhs) {
+    masd::dogen::coding::meta_model::visitor& lhs,
+    masd::dogen::coding::meta_model::visitor& rhs) {
     lhs.swap(rhs);
 }
 

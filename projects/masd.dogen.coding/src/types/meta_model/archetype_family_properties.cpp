@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/meta_model/archetype_family_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/archetype_family_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 archetype_family_properties::archetype_family_properties(const std::string& extension)
     : extension_(extension) { }

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/meta_model/archetype_family_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/archetype_family_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const archetype_family_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::archetype_family_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::archetype_family_properties\"" << ", "
       << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\""
       << " }";
     return(s);

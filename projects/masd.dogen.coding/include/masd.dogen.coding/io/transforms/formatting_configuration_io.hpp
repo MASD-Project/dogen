@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_IO_TRANSFORMS_FORMATTING_CONFIGURATION_IO_HPP
-#define MASD_DOGEN_MODELING_IO_TRANSFORMS_FORMATTING_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_CODING_IO_TRANSFORMS_FORMATTING_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_CODING_IO_TRANSFORMS_FORMATTING_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.modeling/types/transforms/formatting_configuration.hpp"
+#include "masd.dogen.coding/types/transforms/formatting_configuration.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::modeling::transforms::formatting_configuration& v);
+     const masd::dogen::coding::transforms::formatting_configuration& v);
 
 }
 

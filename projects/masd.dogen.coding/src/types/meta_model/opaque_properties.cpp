@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.modeling/types/meta_model/opaque_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 void opaque_properties::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::opaque_properties\"" << " }";
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::opaque_properties\"" << " }";
 }
 
 void opaque_properties::swap(opaque_properties&) noexcept {

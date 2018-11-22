@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_HASH_TRANSFORMS_OPTIONS_HASH_HPP
-#define MASD_DOGEN_MODELING_HASH_TRANSFORMS_OPTIONS_HASH_HPP
+#ifndef MASD_DOGEN_CODING_HASH_TRANSFORMS_OPTIONS_HASH_HPP
+#define MASD_DOGEN_CODING_HASH_TRANSFORMS_OPTIONS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 struct options_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<masd::dogen::modeling::transforms::options> {
+struct hash<masd::dogen::coding::transforms::options> {
 public:
-    size_t operator()(const masd::dogen::modeling::transforms::options& v) const {
-        return masd::dogen::modeling::transforms::options_hasher::hash(v);
+    size_t operator()(const masd::dogen::coding::transforms::options& v) const {
+        return masd::dogen::coding::transforms::options_hasher::hash(v);
     }
 };
 

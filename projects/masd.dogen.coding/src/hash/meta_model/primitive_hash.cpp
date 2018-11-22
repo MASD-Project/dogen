@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/element_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/attribute_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/primitive_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/orm_primitive_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/element_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/attribute_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/primitive_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/orm_primitive_properties_hash.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_primitive_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_primitive_properties>& v) {
+inline std::size_t hash_boost_optional_masd_dogen_coding_meta_model_orm_primitive_properties(const boost::optional<masd::dogen::coding::meta_model::orm_primitive_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -43,18 +43,18 @@ inline std::size_t hash_boost_optional_masd_dogen_modeling_meta_model_orm_primit
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t primitive_hasher::hash(const primitive& v) {
     std::size_t seed(0);
 
-    combine(seed, dynamic_cast<const masd::dogen::modeling::meta_model::element&>(v));
+    combine(seed, dynamic_cast<const masd::dogen::coding::meta_model::element&>(v));
 
     combine(seed, v.is_nullable());
     combine(seed, v.value_attribute());
     combine(seed, v.use_type_aliasing());
     combine(seed, v.is_immutable());
-    combine(seed, hash_boost_optional_masd_dogen_modeling_meta_model_orm_primitive_properties(v.orm_properties()));
+    combine(seed, hash_boost_optional_masd_dogen_coding_meta_model_orm_primitive_properties(v.orm_properties()));
 
     return seed;
 }

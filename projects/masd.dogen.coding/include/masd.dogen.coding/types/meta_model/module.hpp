@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_MODULE_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_MODULE_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_MODULE_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_MODULE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,17 +30,17 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
-#include "masd.dogen.modeling/types/meta_model/orm_module_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_module_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
- * @brief Container for other modeling elements.
+ * @brief Container for other coding elements.
  *
  * Aggregates a group of logically related elements into a unit.
  */
-class module final : public masd::dogen::modeling::meta_model::element {
+class module final : public masd::dogen::coding::meta_model::element {
 public:
     module(const module&) = default;
 
@@ -54,24 +54,24 @@ public:
 
 public:
     module(
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const std::string& documentation,
         const masd::dogen::annotations::annotation& annotation,
-        const masd::dogen::modeling::meta_model::origin_types origin_type,
-        const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+        const masd::dogen::coding::meta_model::origin_types origin_type,
+        const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
         const bool in_global_module,
-        const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const masd::dogen::modeling::meta_model::name& meta_name,
+        const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
         const masd::dogen::formatting::decoration_properties& decoration_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
         const std::list<std::string>& members,
         const bool is_root,
         const bool is_global_module,
-        const boost::optional<masd::dogen::modeling::meta_model::orm_module_properties>& orm_properties);
+        const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties);
 
 public:
     using element::accept;
@@ -110,10 +110,10 @@ public:
     void is_global_module(const bool v);
     /**@}*/
 
-    const boost::optional<masd::dogen::modeling::meta_model::orm_module_properties>& orm_properties() const;
-    boost::optional<masd::dogen::modeling::meta_model::orm_module_properties>& orm_properties();
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_module_properties>& v);
-    void orm_properties(const boost::optional<masd::dogen::modeling::meta_model::orm_module_properties>&& v);
+    const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties() const;
+    boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& orm_properties();
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>& v);
+    void orm_properties(const boost::optional<masd::dogen::coding::meta_model::orm_module_properties>&& v);
 
 public:
     bool operator==(const module& rhs) const;
@@ -122,7 +122,7 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::element& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::element& other) const override;
 
 public:
     void swap(module& other) noexcept;
@@ -132,7 +132,7 @@ private:
     std::list<std::string> members_;
     bool is_root_;
     bool is_global_module_;
-    boost::optional<masd::dogen::modeling::meta_model::orm_module_properties> orm_properties_;
+    boost::optional<masd::dogen::coding::meta_model::orm_module_properties> orm_properties_;
 };
 
 }
@@ -141,8 +141,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::module& lhs,
-    masd::dogen::modeling::meta_model::module& rhs) {
+    masd::dogen::coding::meta_model::module& lhs,
+    masd::dogen::coding::meta_model::module& rhs) {
     lhs.swap(rhs);
 }
 

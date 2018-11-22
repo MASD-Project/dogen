@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.modeling/io/helpers/indices_io.hpp"
+#include "masd.dogen.coding/io/helpers/indices_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -44,11 +44,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 std::ostream& operator<<(std::ostream& s, const indices& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::helpers::indices\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::helpers::indices\"" << ", "
       << "\"objects_always_in_heap\": " << v.objects_always_in_heap() << ", "
       << "\"elements_referable_by_attributes\": " << v.elements_referable_by_attributes() << ", "
       << "\"primitive_underliers\": " << v.primitive_underliers() << ", "

@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/element_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/attribute_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/object_template_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/element_io.hpp"
+#include "masd.dogen.coding/io/meta_model/attribute_io.hpp"
+#include "masd.dogen.coding/io/meta_model/object_template_io.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const object_template& v) {
     v.to_stream(s);

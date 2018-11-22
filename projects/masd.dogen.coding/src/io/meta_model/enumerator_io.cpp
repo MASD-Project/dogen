@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.annotations/io/annotation_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/enumerator_io.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/io/meta_model/enumerator_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,11 +32,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const enumerator& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::enumerator\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::enumerator\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"annotation\": " << v.annotation() << ", "

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/transforms/options.hpp"
+#include "masd.dogen.coding/types/transforms/options.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 options::options()
     : delete_extra_files_(static_cast<bool>(0)),

@@ -22,15 +22,15 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.annotations/io/annotation_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/name_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/element.hpp"
+#include "masd.dogen.coding/io/meta_model/name_io.hpp"
+#include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.formatting/io/decoration_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/origin_types_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/opaque_properties_io.hpp"
-#include "masd.dogen.modeling/types/meta_model/opaque_properties.hpp"
-#include "masd.dogen.modeling/io/meta_model/static_stereotypes_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/artefact_properties_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
+#include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
+#include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
+#include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
+#include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -42,7 +42,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::coding::meta_model::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -57,7 +57,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -85,7 +85,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -103,7 +103,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -121,8 +121,8 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties>& lhs,
-const boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties>& lhs,
+const boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -130,7 +130,7 @@ const boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties>& r
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -146,7 +146,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -162,10 +162,10 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 element::element()
-    : origin_type_(static_cast<masd::dogen::modeling::meta_model::origin_types>(0)),
+    : origin_type_(static_cast<masd::dogen::coding::meta_model::origin_types>(0)),
       in_global_module_(static_cast<bool>(0)),
       is_element_extension_(static_cast<bool>(0)) { }
 
@@ -186,20 +186,20 @@ element::element(element&& rhs)
       opaque_properties_(std::move(rhs.opaque_properties_)) { }
 
 element::element(
-    const masd::dogen::modeling::meta_model::name& name,
+    const masd::dogen::coding::meta_model::name& name,
     const std::string& documentation,
     const masd::dogen::annotations::annotation& annotation,
-    const masd::dogen::modeling::meta_model::origin_types origin_type,
-    const boost::optional<masd::dogen::modeling::meta_model::name>& contained_by,
+    const masd::dogen::coding::meta_model::origin_types origin_type,
+    const boost::optional<masd::dogen::coding::meta_model::name>& contained_by,
     const bool in_global_module,
-    const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<masd::dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const masd::dogen::modeling::meta_model::name& meta_name,
+    const masd::dogen::coding::meta_model::name& meta_name,
     const bool is_element_extension,
     const masd::dogen::formatting::decoration_properties& decoration_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& opaque_properties)
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties)
     : name_(name),
       documentation_(documentation),
       annotation_(annotation),
@@ -223,7 +223,7 @@ void element::to_stream(std::ostream& s) const {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::element\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::element\"" << ", "
       << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"annotation\": " << annotation_ << ", "
@@ -276,19 +276,19 @@ bool element::compare(const element& rhs) const {
         opaque_properties_ == rhs.opaque_properties_;
 }
 
-const masd::dogen::modeling::meta_model::name& element::name() const {
+const masd::dogen::coding::meta_model::name& element::name() const {
     return name_;
 }
 
-masd::dogen::modeling::meta_model::name& element::name() {
+masd::dogen::coding::meta_model::name& element::name() {
     return name_;
 }
 
-void element::name(const masd::dogen::modeling::meta_model::name& v) {
+void element::name(const masd::dogen::coding::meta_model::name& v) {
     name_ = v;
 }
 
-void element::name(const masd::dogen::modeling::meta_model::name&& v) {
+void element::name(const masd::dogen::coding::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
@@ -324,27 +324,27 @@ void element::annotation(const masd::dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
 }
 
-masd::dogen::modeling::meta_model::origin_types element::origin_type() const {
+masd::dogen::coding::meta_model::origin_types element::origin_type() const {
     return origin_type_;
 }
 
-void element::origin_type(const masd::dogen::modeling::meta_model::origin_types v) {
+void element::origin_type(const masd::dogen::coding::meta_model::origin_types v) {
     origin_type_ = v;
 }
 
-const boost::optional<masd::dogen::modeling::meta_model::name>& element::contained_by() const {
+const boost::optional<masd::dogen::coding::meta_model::name>& element::contained_by() const {
     return contained_by_;
 }
 
-boost::optional<masd::dogen::modeling::meta_model::name>& element::contained_by() {
+boost::optional<masd::dogen::coding::meta_model::name>& element::contained_by() {
     return contained_by_;
 }
 
-void element::contained_by(const boost::optional<masd::dogen::modeling::meta_model::name>& v) {
+void element::contained_by(const boost::optional<masd::dogen::coding::meta_model::name>& v) {
     contained_by_ = v;
 }
 
-void element::contained_by(const boost::optional<masd::dogen::modeling::meta_model::name>&& v) {
+void element::contained_by(const boost::optional<masd::dogen::coding::meta_model::name>&& v) {
     contained_by_ = std::move(v);
 }
 
@@ -356,19 +356,19 @@ void element::in_global_module(const bool v) {
     in_global_module_ = v;
 }
 
-const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& element::static_stereotypes() const {
+const std::list<masd::dogen::coding::meta_model::static_stereotypes>& element::static_stereotypes() const {
     return static_stereotypes_;
 }
 
-std::list<masd::dogen::modeling::meta_model::static_stereotypes>& element::static_stereotypes() {
+std::list<masd::dogen::coding::meta_model::static_stereotypes>& element::static_stereotypes() {
     return static_stereotypes_;
 }
 
-void element::static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>& v) {
+void element::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>& v) {
     static_stereotypes_ = v;
 }
 
-void element::static_stereotypes(const std::list<masd::dogen::modeling::meta_model::static_stereotypes>&& v) {
+void element::static_stereotypes(const std::list<masd::dogen::coding::meta_model::static_stereotypes>&& v) {
     static_stereotypes_ = std::move(v);
 }
 
@@ -388,19 +388,19 @@ void element::dynamic_stereotypes(const std::list<std::string>&& v) {
     dynamic_stereotypes_ = std::move(v);
 }
 
-const masd::dogen::modeling::meta_model::name& element::meta_name() const {
+const masd::dogen::coding::meta_model::name& element::meta_name() const {
     return meta_name_;
 }
 
-masd::dogen::modeling::meta_model::name& element::meta_name() {
+masd::dogen::coding::meta_model::name& element::meta_name() {
     return meta_name_;
 }
 
-void element::meta_name(const masd::dogen::modeling::meta_model::name& v) {
+void element::meta_name(const masd::dogen::coding::meta_model::name& v) {
     meta_name_ = v;
 }
 
-void element::meta_name(const masd::dogen::modeling::meta_model::name&& v) {
+void element::meta_name(const masd::dogen::coding::meta_model::name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -428,51 +428,51 @@ void element::decoration_properties(const masd::dogen::formatting::decoration_pr
     decoration_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& element::artefact_properties() const {
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& element::artefact_properties() const {
     return artefact_properties_;
 }
 
-std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& element::artefact_properties() {
+std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& element::artefact_properties() {
     return artefact_properties_;
 }
 
-void element::artefact_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>& v) {
+void element::artefact_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& v) {
     artefact_properties_ = v;
 }
 
-void element::artefact_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::artefact_properties>&& v) {
+void element::artefact_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>&& v) {
     artefact_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& element::archetype_location_properties() const {
+const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& element::archetype_location_properties() const {
     return archetype_location_properties_;
 }
 
-std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& element::archetype_location_properties() {
+std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& element::archetype_location_properties() {
     return archetype_location_properties_;
 }
 
-void element::archetype_location_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>& v) {
+void element::archetype_location_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& v) {
     archetype_location_properties_ = v;
 }
 
-void element::archetype_location_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::local_archetype_location_properties>&& v) {
+void element::archetype_location_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>&& v) {
     archetype_location_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& element::opaque_properties() const {
+const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& element::opaque_properties() const {
     return opaque_properties_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& element::opaque_properties() {
+std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& element::opaque_properties() {
     return opaque_properties_;
 }
 
-void element::opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >& v) {
+void element::opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& v) {
     opaque_properties_ = v;
 }
 
-void element::opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::modeling::meta_model::opaque_properties> >&& v) {
+void element::opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >&& v) {
     opaque_properties_ = std::move(v);
 }
 

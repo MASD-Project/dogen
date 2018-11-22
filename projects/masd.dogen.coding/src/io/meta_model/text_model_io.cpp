@@ -19,12 +19,12 @@
  *
  */
 #include <ostream>
-#include "masd.dogen.modeling/io/meta_model/artefact_io.hpp"
-#include "masd.dogen.modeling/io/meta_model/text_model_io.hpp"
+#include "masd.dogen.coding/io/meta_model/artefact_io.hpp"
+#include "masd.dogen.coding/io/meta_model/text_model_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::modeling::meta_model::artefact>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::coding::meta_model::artefact>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -50,11 +50,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const text_model& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::modeling::meta_model::text_model\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::coding::meta_model::text_model\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "
       << "\"managed_directories\": " << v.managed_directories()
       << " }";

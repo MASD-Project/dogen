@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/facet_properties_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/backend_properties_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/archetype_properties_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/denormalised_archetype_properties_hash.hpp"
-#include "masd.dogen.modeling/hash/meta_model/global_archetype_location_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/facet_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/backend_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/archetype_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/denormalised_archetype_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_backend_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::backend_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_backend_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::backend_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -41,7 +41,7 @@ inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_mo
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_facet_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::facet_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_facet_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::facet_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -50,7 +50,7 @@ inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_mo
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_archetype_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::archetype_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_archetype_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::archetype_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -59,7 +59,7 @@ inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_mo
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_denormalised_archetype_properties(const std::unordered_map<std::string, masd::dogen::modeling::meta_model::denormalised_archetype_properties>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_denormalised_archetype_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::denormalised_archetype_properties>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -70,15 +70,15 @@ inline std::size_t hash_std_unordered_map_std_string_masd_dogen_modeling_meta_mo
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t global_archetype_location_properties_hasher::hash(const global_archetype_location_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_backend_properties(v.backend_properties()));
-    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_facet_properties(v.facet_properties()));
-    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_archetype_properties(v.archetype_properties()));
-    combine(seed, hash_std_unordered_map_std_string_masd_dogen_modeling_meta_model_denormalised_archetype_properties(v.denormalised_archetype_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_backend_properties(v.backend_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_facet_properties(v.facet_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_archetype_properties(v.archetype_properties()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_coding_meta_model_denormalised_archetype_properties(v.denormalised_archetype_properties()));
 
     return seed;
 }

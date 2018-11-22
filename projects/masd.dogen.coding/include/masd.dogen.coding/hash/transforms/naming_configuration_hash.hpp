@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_HASH_TRANSFORMS_NAMING_CONFIGURATION_HASH_HPP
-#define MASD_DOGEN_MODELING_HASH_TRANSFORMS_NAMING_CONFIGURATION_HASH_HPP
+#ifndef MASD_DOGEN_CODING_HASH_TRANSFORMS_NAMING_CONFIGURATION_HASH_HPP
+#define MASD_DOGEN_CODING_HASH_TRANSFORMS_NAMING_CONFIGURATION_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.modeling/types/transforms/naming_configuration.hpp"
+#include "masd.dogen.coding/types/transforms/naming_configuration.hpp"
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 struct naming_configuration_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<masd::dogen::modeling::transforms::naming_configuration> {
+struct hash<masd::dogen::coding::transforms::naming_configuration> {
 public:
-    size_t operator()(const masd::dogen::modeling::transforms::naming_configuration& v) const {
-        return masd::dogen::modeling::transforms::naming_configuration_hasher::hash(v);
+    size_t operator()(const masd::dogen::coding::transforms::naming_configuration& v) const {
+        return masd::dogen::coding::transforms::naming_configuration_hasher::hash(v);
     }
 };
 

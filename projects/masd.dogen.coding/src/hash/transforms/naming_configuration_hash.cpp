@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/transforms/naming_configuration_hash.hpp"
+#include "masd.dogen.coding/hash/transforms/naming_configuration_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace masd::dogen::modeling::transforms {
+namespace masd::dogen::coding::transforms {
 
 std::size_t naming_configuration_hasher::hash(const naming_configuration& v) {
     std::size_t seed(0);

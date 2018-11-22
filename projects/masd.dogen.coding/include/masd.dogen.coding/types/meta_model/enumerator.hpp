@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_ENUMERATOR_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_ENUMERATOR_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_ENUMERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include "masd.dogen.annotations/types/annotation.hpp"
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief One of a set of valid values that an enumeration can assume.
@@ -47,7 +47,7 @@ public:
 public:
     enumerator(
         const std::string& documentation,
-        const masd::dogen::modeling::meta_model::name& name,
+        const masd::dogen::coding::meta_model::name& name,
         const masd::dogen::annotations::annotation& annotation,
         const std::string& value);
 
@@ -70,10 +70,10 @@ public:
      * @brief Fully qualified name.
      */
     /**@{*/
-    const masd::dogen::modeling::meta_model::name& name() const;
-    masd::dogen::modeling::meta_model::name& name();
-    void name(const masd::dogen::modeling::meta_model::name& v);
-    void name(const masd::dogen::modeling::meta_model::name&& v);
+    const masd::dogen::coding::meta_model::name& name() const;
+    masd::dogen::coding::meta_model::name& name();
+    void name(const masd::dogen::coding::meta_model::name& v);
+    void name(const masd::dogen::coding::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -110,7 +110,7 @@ public:
 
 private:
     std::string documentation_;
-    masd::dogen::modeling::meta_model::name name_;
+    masd::dogen::coding::meta_model::name name_;
     masd::dogen::annotations::annotation annotation_;
     std::string value_;
 };
@@ -121,8 +121,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::enumerator& lhs,
-    masd::dogen::modeling::meta_model::enumerator& rhs) {
+    masd::dogen::coding::meta_model::enumerator& lhs,
+    masd::dogen::coding::meta_model::enumerator& rhs) {
     lhs.swap(rhs);
 }
 

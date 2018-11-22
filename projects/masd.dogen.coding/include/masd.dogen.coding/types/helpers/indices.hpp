@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_INDICES_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_INDICES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_INDICES_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_INDICES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_set>
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class indices final {
 public:
@@ -96,8 +96,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::helpers::indices& lhs,
-    masd::dogen::modeling::helpers::indices& rhs) {
+    masd::dogen::coding::helpers::indices& lhs,
+    masd::dogen::coding::helpers::indices& rhs) {
     lhs.swap(rhs);
 }
 

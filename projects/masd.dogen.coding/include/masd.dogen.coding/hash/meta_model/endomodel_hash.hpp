@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_HASH_META_MODEL_ENDOMODEL_HASH_HPP
-#define MASD_DOGEN_MODELING_HASH_META_MODEL_ENDOMODEL_HASH_HPP
+#ifndef MASD_DOGEN_CODING_HASH_META_MODEL_ENDOMODEL_HASH_HPP
+#define MASD_DOGEN_CODING_HASH_META_MODEL_ENDOMODEL_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.modeling/types/meta_model/endomodel.hpp"
+#include "masd.dogen.coding/types/meta_model/endomodel.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 struct endomodel_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<masd::dogen::modeling::meta_model::endomodel> {
+struct hash<masd::dogen::coding::meta_model::endomodel> {
 public:
-    size_t operator()(const masd::dogen::modeling::meta_model::endomodel& v) const {
-        return masd::dogen::modeling::meta_model::endomodel_hasher::hash(v);
+    size_t operator()(const masd::dogen::coding::meta_model::endomodel& v) const {
+        return masd::dogen::coding::meta_model::endomodel_hasher::hash(v);
     }
 };
 

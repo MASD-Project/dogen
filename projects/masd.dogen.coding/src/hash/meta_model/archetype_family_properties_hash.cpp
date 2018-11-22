@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/hash/meta_model/archetype_family_properties_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/archetype_family_properties_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 std::size_t archetype_family_properties_hasher::hash(const archetype_family_properties& v) {
     std::size_t seed(0);

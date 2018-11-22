@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_TYPE_PARAMETERS_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_TYPE_PARAMETERS_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_TYPE_PARAMETERS_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_TYPE_PARAMETERS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <algorithm>
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 class type_parameters final {
 public:
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::meta_model::type_parameters& lhs,
-    masd::dogen::modeling::meta_model::type_parameters& rhs) {
+    masd::dogen::coding::meta_model::type_parameters& lhs,
+    masd::dogen::coding::meta_model::type_parameters& rhs) {
     lhs.swap(rhs);
 }
 

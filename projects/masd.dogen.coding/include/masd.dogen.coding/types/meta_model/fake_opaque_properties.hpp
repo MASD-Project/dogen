@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_META_MODEL_FAKE_OPAQUE_PROPERTIES_HPP
-#define MASD_DOGEN_MODELING_TYPES_META_MODEL_FAKE_OPAQUE_PROPERTIES_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_META_MODEL_FAKE_OPAQUE_PROPERTIES_HPP
+#define MASD_DOGEN_CODING_TYPES_META_MODEL_FAKE_OPAQUE_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,14 +27,14 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "masd.dogen.modeling/types/meta_model/opaque_properties.hpp"
+#include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
 
-namespace masd::dogen::modeling::meta_model {
+namespace masd::dogen::coding::meta_model {
 
 /**
  * @brief Temporary class used only to trigger inheritance generation.
  */
-class fake_opaque_properties final : public masd::dogen::modeling::meta_model::opaque_properties {
+class fake_opaque_properties final : public masd::dogen::coding::meta_model::opaque_properties {
 public:
     fake_opaque_properties() = default;
     fake_opaque_properties(const fake_opaque_properties&) = default;
@@ -53,7 +53,7 @@ public:
     }
 
 public:
-    bool equals(const masd::dogen::modeling::meta_model::opaque_properties& other) const override;
+    bool equals(const masd::dogen::coding::meta_model::opaque_properties& other) const override;
 
 };
 

@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.modeling/types/helpers/node.hpp"
+#include "masd.dogen.coding/types/helpers/node.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<masd::dogen::modeling::helpers::node>& lhs,
-const boost::shared_ptr<masd::dogen::modeling::helpers::node>& rhs) {
+inline bool operator==(const boost::shared_ptr<masd::dogen::coding::helpers::node>& lhs,
+const boost::shared_ptr<masd::dogen::coding::helpers::node>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
 }
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 node::node(
-    const boost::shared_ptr<masd::dogen::modeling::helpers::node>& parent,
-    const masd::dogen::modeling::meta_model::name& data,
-    const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& children)
+    const boost::shared_ptr<masd::dogen::coding::helpers::node>& parent,
+    const masd::dogen::coding::meta_model::name& data,
+    const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& children)
     : parent_(parent),
       data_(data),
       children_(children) { }
@@ -58,51 +58,51 @@ node& node::operator=(node other) {
     return *this;
 }
 
-const boost::shared_ptr<masd::dogen::modeling::helpers::node>& node::parent() const {
+const boost::shared_ptr<masd::dogen::coding::helpers::node>& node::parent() const {
     return parent_;
 }
 
-boost::shared_ptr<masd::dogen::modeling::helpers::node>& node::parent() {
+boost::shared_ptr<masd::dogen::coding::helpers::node>& node::parent() {
     return parent_;
 }
 
-void node::parent(const boost::shared_ptr<masd::dogen::modeling::helpers::node>& v) {
+void node::parent(const boost::shared_ptr<masd::dogen::coding::helpers::node>& v) {
     parent_ = v;
 }
 
-void node::parent(const boost::shared_ptr<masd::dogen::modeling::helpers::node>&& v) {
+void node::parent(const boost::shared_ptr<masd::dogen::coding::helpers::node>&& v) {
     parent_ = std::move(v);
 }
 
-const masd::dogen::modeling::meta_model::name& node::data() const {
+const masd::dogen::coding::meta_model::name& node::data() const {
     return data_;
 }
 
-masd::dogen::modeling::meta_model::name& node::data() {
+masd::dogen::coding::meta_model::name& node::data() {
     return data_;
 }
 
-void node::data(const masd::dogen::modeling::meta_model::name& v) {
+void node::data(const masd::dogen::coding::meta_model::name& v) {
     data_ = v;
 }
 
-void node::data(const masd::dogen::modeling::meta_model::name&& v) {
+void node::data(const masd::dogen::coding::meta_model::name&& v) {
     data_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& node::children() const {
+const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& node::children() const {
     return children_;
 }
 
-std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& node::children() {
+std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& node::children() {
     return children_;
 }
 
-void node::children(const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >& v) {
+void node::children(const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >& v) {
     children_ = v;
 }
 
-void node::children(const std::list<boost::shared_ptr<masd::dogen::modeling::helpers::node> >&& v) {
+void node::children(const std::list<boost::shared_ptr<masd::dogen::coding::helpers::node> >&& v) {
     children_ = std::move(v);
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_MODELING_TYPES_HELPERS_DECOMPOSITION_RESULT_HPP
-#define MASD_DOGEN_MODELING_TYPES_HELPERS_DECOMPOSITION_RESULT_HPP
+#ifndef MASD_DOGEN_CODING_TYPES_HELPERS_DECOMPOSITION_RESULT_HPP
+#define MASD_DOGEN_CODING_TYPES_HELPERS_DECOMPOSITION_RESULT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,10 +29,10 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "masd.dogen.modeling/types/meta_model/name.hpp"
-#include "masd.dogen.modeling/types/meta_model/name_tree.hpp"
+#include "masd.dogen.coding/types/meta_model/name.hpp"
+#include "masd.dogen.coding/types/meta_model/name_tree.hpp"
 
-namespace masd::dogen::modeling::helpers {
+namespace masd::dogen::coding::helpers {
 
 class decomposition_result final {
 public:
@@ -43,31 +43,31 @@ public:
 
 public:
     decomposition_result(
-        const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& names,
-        const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& meta_names,
-        const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& name_trees,
-        const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& injected_names);
+        const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& names,
+        const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& meta_names,
+        const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& name_trees,
+        const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& injected_names);
 
 public:
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& names() const;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& names();
-    void names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v);
-    void names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >&& v);
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& names() const;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& names();
+    void names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v);
+    void names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >&& v);
 
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& meta_names() const;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& meta_names();
-    void meta_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v);
-    void meta_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >&& v);
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& meta_names() const;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& meta_names();
+    void meta_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v);
+    void meta_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >&& v);
 
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& name_trees() const;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& name_trees();
-    void name_trees(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >& v);
-    void name_trees(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> >&& v);
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& name_trees() const;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& name_trees();
+    void name_trees(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >& v);
+    void name_trees(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> >&& v);
 
-    const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& injected_names() const;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& injected_names();
-    void injected_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >& v);
-    void injected_names(const std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> >&& v);
+    const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& injected_names() const;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& injected_names();
+    void injected_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >& v);
+    void injected_names(const std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> >&& v);
 
 public:
     bool operator==(const decomposition_result& rhs) const;
@@ -80,10 +80,10 @@ public:
     decomposition_result& operator=(decomposition_result other);
 
 private:
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> > names_;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> > meta_names_;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name_tree> > name_trees_;
-    std::list<std::pair<std::string, masd::dogen::modeling::meta_model::name> > injected_names_;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> > names_;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> > meta_names_;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name_tree> > name_trees_;
+    std::list<std::pair<std::string, masd::dogen::coding::meta_model::name> > injected_names_;
 };
 
 }
@@ -92,8 +92,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::modeling::helpers::decomposition_result& lhs,
-    masd::dogen::modeling::helpers::decomposition_result& rhs) {
+    masd::dogen::coding::helpers::decomposition_result& lhs,
+    masd::dogen::coding::helpers::decomposition_result& rhs) {
     lhs.swap(rhs);
 }
 
