@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TO_MODEL_CHAIN_HPP
-#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_TO_MODEL_CHAIN_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_TO_MODEL_CHAIN_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_TO_MODEL_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <utility>
 #include <boost/tuple/tuple.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.external/types/transforms/context_fwd.hpp"
-#include "masd.dogen.external/types/transforms/encoding_transform_interface.hpp"
-#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
+#include "masd.dogen.injection/types/transforms/encoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 class model_to_model_chain final {
 public:

@@ -21,14 +21,14 @@
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.external/types/transforms/registrar_error.hpp"
-#include "masd.dogen.external/types/transforms/registrar.hpp"
+#include "masd.dogen.injection/types/transforms/registrar_error.hpp"
+#include "masd.dogen.injection/types/transforms/registrar.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
 static logger
-lg(logger_factory("external.registrar"));
+lg(logger_factory("injection.registrar"));
 
 const std::string empty_extension("Extension cannot be empty.");
 const std::string no_encoding_transforms("No encoding transforms provided.");
@@ -41,7 +41,7 @@ const std::string null_transform("Transform supplied is null.");
 
 }
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 void registrar::validate() {
     /*

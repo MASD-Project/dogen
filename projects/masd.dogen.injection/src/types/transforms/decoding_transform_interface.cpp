@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 decoding_transform_interface::~decoding_transform_interface() noexcept {}
 

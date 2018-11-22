@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_HPP
-#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_CONTEXT_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_CONTEXT_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_CONTEXT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <algorithm>
 #include "masd.dogen.probing/types/prober.hpp"
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 class context final {
 public:

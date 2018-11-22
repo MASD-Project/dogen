@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
-#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external/types/transforms/registrar.hpp"
-#include "masd.dogen.external/types/transforms/context_fwd.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/transforms/registrar.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 /**
  * @brief Given the location of a supported exogenous model, it
- * obtains it and transforms it into an external model.
+ * obtains it and transforms it into an injection model.
  */
 class model_generation_chain final {
 private:

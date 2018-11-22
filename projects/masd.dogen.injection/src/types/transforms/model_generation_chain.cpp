@@ -20,20 +20,20 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.external/io/meta_model/model_io.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
 
 namespace {
 
-const std::string transform_id("external.transforms.model_generation_chain");
+const std::string transform_id("injection.transforms.model_generation_chain");
 
 using namespace masd::dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 }
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 std::shared_ptr<registrar> model_generation_chain::registrar_;
 
@@ -57,7 +57,7 @@ transforms::registrar& model_generation_chain::registrar() {
 meta_model::model model_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().generic_string());
-    probing::scoped_chain_prober stp(lg, "external model generation chain",
+    probing::scoped_chain_prober stp(lg, "injection model generation chain",
         transform_id, model_name, ctx.prober());
 
     /*

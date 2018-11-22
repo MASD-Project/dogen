@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external/types/transforms/context.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 context::context(const masd::dogen::probing::prober& prober)
     : prober_(prober) { }

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
-#define MASD_DOGEN_EXTERNAL_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
+#ifndef MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
+#define MASD_DOGEN_INJECTION_TYPES_TRANSFORMS_ENCODING_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,13 +27,13 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external/types/transforms/context_fwd.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/transforms/context_fwd.hpp"
 
-namespace masd::dogen::external::transforms {
+namespace masd::dogen::injection::transforms {
 
 /**
- * @brief Transform that converts models in our external model
+ * @brief Transform that converts models in our injection model
  * representation to an exogenous format.
  */
 class encoding_transform_interface {
