@@ -20,21 +20,21 @@
  */
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external.json/types/dehydrator.hpp"
-#include "masd.dogen.external.json/types/encoding_transform.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection.json/types/dehydrator.hpp"
+#include "masd.dogen.injection.json/types/encoding_transform.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-const std::string transform_id("external.json.encoding_transform");
+const std::string transform_id("injection.json.encoding_transform");
 auto lg(logger_factory(transform_id));
 
 const std::string extension(".json");
 
 }
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 encoding_transform::~encoding_transform() noexcept {}
 

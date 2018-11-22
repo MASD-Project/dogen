@@ -28,15 +28,15 @@
 #include "masd.dogen.annotations/test/mock_type_factory.hpp"
 #include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/type.hpp"
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external/io/meta_model/model_io.hpp"
-#include "masd.dogen.external.json/types/hydration_error.hpp"
-#include "masd.dogen.external.json/types/hydrator.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection.json/types/hydration_error.hpp"
+#include "masd.dogen.injection.json/types/hydrator.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
 
 namespace {
 
-const std::string test_module("masd.dogen.external.json.tests");
+const std::string test_module("masd.dogen.injection.json.tests");
 const std::string test_suite("hydrator_tests");
 
 const std::string documentation("a_doc");
@@ -114,12 +114,12 @@ const std::string empty_elements_model(R"({
 }
 )");
 
-masd::dogen::external::meta_model::model hydrate(std::istream& s) {
-    masd::dogen::external::json::hydrator h;
+masd::dogen::injection::meta_model::model hydrate(std::istream& s) {
+    masd::dogen::injection::json::hydrator h;
     return h.hydrate(s);
 }
 
-masd::dogen::external::meta_model::model
+masd::dogen::injection::meta_model::model
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);
@@ -128,7 +128,7 @@ hydrate(const std::string& content) {
 }
 
 using masd::dogen::utility::test::contains_checker;
-using masd::dogen::external::json::hydration_error;
+using masd::dogen::injection::json::hydration_error;
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 

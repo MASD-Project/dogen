@@ -21,23 +21,23 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external/io/meta_model/model_io.hpp"
-#include "masd.dogen.external/types/transforms/transformation_error.hpp"
-#include "masd.dogen.external.json/types/hydrator.hpp"
-#include "masd.dogen.external.json/types/decoding_transform.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/transforms/transformation_error.hpp"
+#include "masd.dogen.injection.json/types/hydrator.hpp"
+#include "masd.dogen.injection.json/types/decoding_transform.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-const std::string transform_id("external.json.decoding_transform");
+const std::string transform_id("injection.json.decoding_transform");
 auto lg(logger_factory(transform_id));
 
 const std::string extension(".json");
 
 }
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 decoding_transform::~decoding_transform() noexcept {}
 

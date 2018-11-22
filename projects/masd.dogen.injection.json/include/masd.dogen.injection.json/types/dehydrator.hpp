@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_DEHYDRATOR_HPP
-#define MASD_DOGEN_EXTERNAL_JSON_TYPES_DEHYDRATOR_HPP
+#ifndef MASD_DOGEN_INJECTION_JSON_TYPES_DEHYDRATOR_HPP
+#define MASD_DOGEN_INJECTION_JSON_TYPES_DEHYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,11 +31,11 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "masd.dogen.external/types/meta_model/element.hpp"
-#include "masd.dogen.external/types/meta_model/attribute.hpp"
-#include "masd.dogen.external/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/meta_model/attribute.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 class dehydrator final {
 private:
@@ -50,13 +50,13 @@ private:
     static void insert_parents(std::ostream& s,
         const std::list<std::string>& parents);
     static void insert_attribute(std::ostream& s,
-        const external::meta_model::attribute& a);
+        const injection::meta_model::attribute& a);
     static void insert_element(std::ostream& s,
-        const external::meta_model::element& e);
+        const injection::meta_model::element& e);
 
 public:
-    static std::string dehydrate(const external::meta_model::model& m);
-    static void dehydrate(const external::meta_model::model& m,
+    static std::string dehydrate(const injection::meta_model::model& m);
+    static void dehydrate(const injection::meta_model::model& m,
         const boost::filesystem::path& p);
 };
 

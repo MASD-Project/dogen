@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_HYDRATOR_HPP
-#define MASD_DOGEN_EXTERNAL_JSON_TYPES_HYDRATOR_HPP
+#ifndef MASD_DOGEN_INJECTION_JSON_TYPES_HYDRATOR_HPP
+#define MASD_DOGEN_INJECTION_JSON_TYPES_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,11 +29,11 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external/types/meta_model/element.hpp"
-#include "masd.dogen.external/types/meta_model/attribute.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/meta_model/attribute.hpp"
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 class hydrator final {
 private:
@@ -70,32 +70,32 @@ private:
     /**
      * @brief Reads the attributes, if any.
      */
-    external::meta_model::attribute
+    injection::meta_model::attribute
     read_attribute(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads an element according to its meta-type by
      * dispatching to the correct read functions.
      */
-    external::meta_model::element
+    injection::meta_model::element
     read_element(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    external::meta_model::model read_stream(std::istream& s) const;
+    injection::meta_model::model read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the model from the JSON stream.
      */
-    external::meta_model::model hydrate(std::istream& s) const;
+    injection::meta_model::model hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the model
      * from the JSON stream.
      */
-    external::meta_model::model hydrate(const boost::filesystem::path& p) const;
+    injection::meta_model::model hydrate(const boost::filesystem::path& p) const;
 };
 
 }

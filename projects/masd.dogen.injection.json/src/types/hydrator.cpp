@@ -25,13 +25,13 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.external.json/types/hydration_error.hpp"
-#include "masd.dogen.external.json/types/hydrator.hpp"
+#include "masd.dogen.injection.json/types/hydration_error.hpp"
+#include "masd.dogen.injection.json/types/hydrator.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("external.json.hydrator"));
+auto lg(logger_factory("injection.json.hydrator"));
 
 const std::string empty;
 const std::string object_element_type("dogen::object");
@@ -62,7 +62,7 @@ const std::string failed_to_open_file("Failed to open file: ");
 
 }
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 std::string
 hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
@@ -116,9 +116,9 @@ hydrator::read_parents(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-external::meta_model::attribute hydrator::
+injection::meta_model::attribute hydrator::
 read_attribute(const boost::property_tree::ptree& pt) const {
-    external::meta_model::attribute r;
+    injection::meta_model::attribute r;
     r.name(pt.get<std::string>(name_key));
     r.type(pt.get<std::string>(type_key));
     r.documentation(read_documentation(pt));
@@ -128,9 +128,9 @@ read_attribute(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-external::meta_model::element hydrator::
+injection::meta_model::element hydrator::
 read_element(const boost::property_tree::ptree& pt) const {
-    external::meta_model::element r;
+    injection::meta_model::element r;
     r.name(pt.get<std::string>(name_key));
     r.documentation(read_documentation(pt));
     r.parents(read_parents(pt));
@@ -162,12 +162,12 @@ read_element(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-external::meta_model::model
+injection::meta_model::model
 hydrator::read_stream(std::istream& s) const {
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
-    external::meta_model::model r;
+    injection::meta_model::model r;
     r.documentation(read_documentation(pt));
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));
@@ -186,7 +186,7 @@ hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-external::meta_model::model hydrator::hydrate(std::istream& s) const {
+injection::meta_model::model hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -206,7 +206,7 @@ external::meta_model::model hydrator::hydrate(std::istream& s) const {
     }
 }
 
-external::meta_model::model
+injection::meta_model::model
 hydrator::hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;

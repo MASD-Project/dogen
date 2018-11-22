@@ -22,12 +22,12 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.formatting/types/utility_formatter.hpp"
-#include "masd.dogen.external.json/types/dehydrator.hpp"
+#include "masd.dogen.injection.json/types/dehydrator.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("external.json.dehydrator"));
+static logger lg(logger_factory("injection.json.dehydrator"));
 
 const std::string scope("::");
 const std::string comma_space(", ");
@@ -35,7 +35,7 @@ const std::string invalid_enumerator("invalid");
 
 }
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 std::string dehydrator::tidy_up_string(std::string s) {
     boost::replace_all(s, "\r", "\\r");
@@ -106,7 +106,7 @@ void dehydrator::insert_parents(std::ostream& s,
 }
 
 void dehydrator::insert_attribute(std::ostream& s,
-    const external::meta_model::attribute& a) {
+    const injection::meta_model::attribute& a) {
 
     s << "{ ";
 
@@ -138,7 +138,7 @@ void dehydrator::insert_attribute(std::ostream& s,
 }
 
 void dehydrator::insert_element(std::ostream& s,
-    const external::meta_model::element& e) {
+    const injection::meta_model::element& e) {
 
     s << "{ ";
 
@@ -191,7 +191,7 @@ void dehydrator::insert_element(std::ostream& s,
     s << " }";
 }
 
-std::string dehydrator::dehydrate(const external::meta_model::model& m) {
+std::string dehydrator::dehydrate(const injection::meta_model::model& m) {
     std::ostringstream s;
 
     s << "{ ";
@@ -231,7 +231,7 @@ std::string dehydrator::dehydrate(const external::meta_model::model& m) {
     return s.str();
 }
 
-void dehydrator::dehydrate(const external::meta_model::model& m,
+void dehydrator::dehydrate(const injection::meta_model::model& m,
     const boost::filesystem::path& p) {
     const auto s(dehydrate(m));
     utility::filesystem::write_file_content(p, s);
