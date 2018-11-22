@@ -4390,14 +4390,14 @@ code: indentation and dividers.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Provides the basic formatting primitives.
+            <dia:string>#Provides the basic extraction primitives.
 
-This model is the repository of all formatting related code
-which is not language specific. Language-specific models can
-then make use of it.
+This model is the repository of all extraction related code which is
+not language specific. Language-specific models can then make use of
+it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.formatting
+#DOGEN yarn.model_modules=masd.dogen.extraction
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
