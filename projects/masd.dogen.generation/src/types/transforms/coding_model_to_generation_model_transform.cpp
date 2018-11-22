@@ -39,7 +39,7 @@
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.generation/io/meta_model/model_io.hpp"
 #include "masd.dogen.generation/types/transforms/transformation_error.hpp"
-#include "masd.dogen.generation/types/transforms/modeling_model_to_generation_model_transform.hpp"
+#include "masd.dogen.generation/types/transforms/coding_model_to_generation_model_transform.hpp"
 
 namespace {
 
