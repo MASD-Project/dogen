@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.external.dia/io/processed_comment_io.hpp"
-#include "masd.dogen.external.dia/io/processed_attribute_io.hpp"
+#include "masd.dogen.injection.dia/io/processed_comment_io.hpp"
+#include "masd.dogen.injection.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,11 +31,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::ostream& operator<<(std::ostream& s, const processed_attribute& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::external::dia::processed_attribute\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::injection::dia::processed_attribute\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
       << "\"comment\": " << v.comment()

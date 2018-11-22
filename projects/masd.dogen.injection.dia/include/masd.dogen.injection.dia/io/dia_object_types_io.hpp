@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_IO_DIA_OBJECT_TYPES_IO_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_IO_DIA_OBJECT_TYPES_IO_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_IO_DIA_OBJECT_TYPES_IO_HPP
+#define MASD_DOGEN_INJECTION_DIA_IO_DIA_OBJECT_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.external.dia/types/dia_object_types.hpp"
+#include "masd.dogen.injection.dia/types/dia_object_types.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::ostream& operator<<(std::ostream& s, const dia_object_types& v);
 

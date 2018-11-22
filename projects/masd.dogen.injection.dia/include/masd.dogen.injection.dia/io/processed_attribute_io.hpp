@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_IO_PROCESSED_ATTRIBUTE_IO_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_IO_PROCESSED_ATTRIBUTE_IO_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_IO_PROCESSED_ATTRIBUTE_IO_HPP
+#define MASD_DOGEN_INJECTION_DIA_IO_PROCESSED_ATTRIBUTE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.external.dia/types/processed_attribute.hpp"
+#include "masd.dogen.injection.dia/types/processed_attribute.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::external::dia::processed_attribute& v);
+     const masd::dogen::injection::dia::processed_attribute& v);
 
 }
 

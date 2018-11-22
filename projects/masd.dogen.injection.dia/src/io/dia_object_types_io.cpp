@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen.external.dia/io/dia_object_types_io.hpp"
+#include "masd.dogen.injection.dia/io/dia_object_types_io.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::ostream& operator<<(std::ostream& s, const dia_object_types& v) {
     s << "{ " << "\"__type__\": " << "\"dia_object_types\", " << "\"value\": ";

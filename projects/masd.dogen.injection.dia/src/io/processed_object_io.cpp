@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.external.dia/io/dia_object_types_io.hpp"
-#include "masd.dogen.external.dia/io/processed_object_io.hpp"
-#include "masd.dogen.external.dia/io/processed_comment_io.hpp"
-#include "masd.dogen.external.dia/io/processed_attribute_io.hpp"
+#include "masd.dogen.injection.dia/io/dia_object_types_io.hpp"
+#include "masd.dogen.injection.dia/io/processed_object_io.hpp"
+#include "masd.dogen.injection.dia/io/processed_comment_io.hpp"
+#include "masd.dogen.injection.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -63,7 +63,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<std::pair
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::external::dia::processed_attribute>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::injection::dia::processed_attribute>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -75,11 +75,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::ex
 
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::ostream& operator<<(std::ostream& s, const processed_object& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::external::dia::processed_object\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::injection::dia::processed_object\"" << ", "
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"dia_object_type\": " << v.dia_object_type() << ", "

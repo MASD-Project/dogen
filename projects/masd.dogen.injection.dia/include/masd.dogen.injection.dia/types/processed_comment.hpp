@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_COMMENT_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_COMMENT_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_COMMENT_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_COMMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 #include <utility>
 #include <algorithm>
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 /**
  * @brief Contains the same content as the original dia comment, but split by type of data.
@@ -125,8 +125,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::external::dia::processed_comment& lhs,
-    masd::dogen::external::dia::processed_comment& rhs) {
+    masd::dogen::injection::dia::processed_comment& lhs,
+    masd::dogen::injection::dia::processed_comment& rhs) {
     lhs.swap(rhs);
 }
 

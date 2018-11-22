@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_OBJECT_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_OBJECT_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_OBJECT_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_OBJECT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,11 +30,11 @@
 #include <utility>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.external.dia/types/dia_object_types.hpp"
-#include "masd.dogen.external.dia/types/processed_comment.hpp"
-#include "masd.dogen.external.dia/types/processed_attribute.hpp"
+#include "masd.dogen.injection.dia/types/dia_object_types.hpp"
+#include "masd.dogen.injection.dia/types/processed_comment.hpp"
+#include "masd.dogen.injection.dia/types/processed_attribute.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 /**
  * @brief Representation of a dia object after first stage processing.
@@ -54,12 +54,12 @@ public:
     processed_object(
         const std::string& id,
         const std::string& name,
-        const masd::dogen::external::dia::dia_object_types dia_object_type,
+        const masd::dogen::injection::dia::dia_object_types dia_object_type,
         const std::string& stereotypes,
-        const masd::dogen::external::dia::processed_comment& comment,
+        const masd::dogen::injection::dia::processed_comment& comment,
         const std::string& child_node_id,
         const boost::optional<std::pair<std::string, std::string> >& connection,
-        const std::list<masd::dogen::external::dia::processed_attribute>& attributes);
+        const std::list<masd::dogen::injection::dia::processed_attribute>& attributes);
 
 public:
     /**
@@ -86,8 +86,8 @@ public:
      * @brief Type of the dia object.
      */
     /**@{*/
-    masd::dogen::external::dia::dia_object_types dia_object_type() const;
-    void dia_object_type(const masd::dogen::external::dia::dia_object_types v);
+    masd::dogen::injection::dia::dia_object_types dia_object_type() const;
+    void dia_object_type(const masd::dogen::injection::dia::dia_object_types v);
     /**@}*/
 
     const std::string& stereotypes() const;
@@ -101,10 +101,10 @@ public:
      * On the case of a UML note, represents the text of the note.
      */
     /**@{*/
-    const masd::dogen::external::dia::processed_comment& comment() const;
-    masd::dogen::external::dia::processed_comment& comment();
-    void comment(const masd::dogen::external::dia::processed_comment& v);
-    void comment(const masd::dogen::external::dia::processed_comment&& v);
+    const masd::dogen::injection::dia::processed_comment& comment() const;
+    masd::dogen::injection::dia::processed_comment& comment();
+    void comment(const masd::dogen::injection::dia::processed_comment& v);
+    void comment(const masd::dogen::injection::dia::processed_comment&& v);
     /**@}*/
 
     /**
@@ -131,10 +131,10 @@ public:
      * @brief All attributes associated with dia object.
      */
     /**@{*/
-    const std::list<masd::dogen::external::dia::processed_attribute>& attributes() const;
-    std::list<masd::dogen::external::dia::processed_attribute>& attributes();
-    void attributes(const std::list<masd::dogen::external::dia::processed_attribute>& v);
-    void attributes(const std::list<masd::dogen::external::dia::processed_attribute>&& v);
+    const std::list<masd::dogen::injection::dia::processed_attribute>& attributes() const;
+    std::list<masd::dogen::injection::dia::processed_attribute>& attributes();
+    void attributes(const std::list<masd::dogen::injection::dia::processed_attribute>& v);
+    void attributes(const std::list<masd::dogen::injection::dia::processed_attribute>&& v);
     /**@}*/
 
 public:
@@ -150,12 +150,12 @@ public:
 private:
     std::string id_;
     std::string name_;
-    masd::dogen::external::dia::dia_object_types dia_object_type_;
+    masd::dogen::injection::dia::dia_object_types dia_object_type_;
     std::string stereotypes_;
-    masd::dogen::external::dia::processed_comment comment_;
+    masd::dogen::injection::dia::processed_comment comment_;
     std::string child_node_id_;
     boost::optional<std::pair<std::string, std::string> > connection_;
-    std::list<masd::dogen::external::dia::processed_attribute> attributes_;
+    std::list<masd::dogen::injection::dia::processed_attribute> attributes_;
 };
 
 }
@@ -164,8 +164,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::external::dia::processed_object& lhs,
-    masd::dogen::external::dia::processed_object& rhs) {
+    masd::dogen::injection::dia::processed_object& lhs,
+    masd::dogen::injection::dia::processed_object& rhs) {
     lhs.swap(rhs);
 }
 
