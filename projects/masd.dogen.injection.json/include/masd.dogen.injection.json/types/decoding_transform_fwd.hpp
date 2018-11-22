@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_FWD_HPP
-#define MASD_DOGEN_EXTERNAL_JSON_TYPES_DECODING_TRANSFORM_FWD_HPP
+#ifndef MASD_DOGEN_INJECTION_JSON_TYPES_DECODING_TRANSFORM_FWD_HPP
+#define MASD_DOGEN_INJECTION_JSON_TYPES_DECODING_TRANSFORM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::external::json {
+namespace masd::dogen::injection::json {
 
 class decoding_transform;
 
