@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "masd.dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor.hpp"
+#include "masd.dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/cmakelists_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/master_header_fwd.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/msbuild_targets_fwd.hpp"
