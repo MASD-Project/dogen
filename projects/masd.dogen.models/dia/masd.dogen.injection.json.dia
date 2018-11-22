@@ -97,12 +97,12 @@
             <dia:string>#Provides file importing support for JSON.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.external.json
+#DOGEN yarn.model_modules=masd.dogen.injection.json
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.formatting.dia
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
-#DOGEN yarn.reference=masd.dogen.external.dia
+#DOGEN yarn.reference=masd.dogen.injection.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17

@@ -227,7 +227,10 @@ It seems we have several types of classes:
 These should be identifiable at the meta-model level, with appropriate
 names.
 
-*** Rename models to fit MASD architecture                            :story:
+*** STARTED Rename models to fit MASD architecture                    :story:
+    :LOGBOOK:
+    CLOCK: [2018-11-22 Thu 13:14]
+    :END:
 
 We now have the following top-level models:
 

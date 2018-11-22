@@ -937,7 +937,7 @@ An exogenous model is defined as:
 - a Dogen format designed for interoperability (JSON).
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.external
+#DOGEN yarn.model_modules=masd.dogen.injectors
 #DOGEN yarn.input_language=cpp
 #DOGEN yarn.reference=masd.dogen.probing.dia
 #DOGEN quilt.cpp.enabled=true

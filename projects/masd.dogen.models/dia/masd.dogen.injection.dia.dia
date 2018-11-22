@@ -2501,13 +2501,13 @@ the root of an inheritance tree.
 @li @b immutable: only getters will be generated for each property.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.external.dia
+#DOGEN yarn.model_modules=masd.dogen.injection.dia
 #DOGEN yarn.reference=masd.dogen.dia.dia
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.formatting.dia
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
-#DOGEN yarn.reference=masd.dogen.external.dia
+#DOGEN yarn.reference=masd.dogen.injection.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -3469,7 +3469,7 @@ manageable format.#</dia:string>
         <dia:point val="0.745,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.005,29.2;8.28471,34.8"/>
+        <dia:rectangle val="-0.005,29.2;8.29569,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3477,8 +3477,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="0.745,34"/>
         <dia:point val="0.745,30"/>
-        <dia:point val="8.04574,30"/>
-        <dia:point val="8.08471,33.9498"/>
+        <dia:point val="8.08471,30"/>
+        <dia:point val="8.09569,33.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
