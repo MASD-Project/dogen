@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_LICENCE_FWD_SER_HPP
-#define MASD_DOGEN_FORMATTING_SERIALIZATION_LICENCE_FWD_SER_HPP
+#ifndef MASD_DOGEN_EXTRACTION_SERIALIZATION_LICENCE_FWD_SER_HPP
+#define MASD_DOGEN_EXTRACTION_SERIALIZATION_LICENCE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/types/licence_fwd.hpp"
+#include "masd.dogen.extraction/types/licence_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const masd::dogen::formatting::licence& v, unsigned int version);
+void save(Archive& ar, const masd::dogen::extraction::licence& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, masd::dogen::formatting::licence& v, unsigned int version);
+void load(Archive& ar, masd::dogen::extraction::licence& v, unsigned int version);
 
 } }
 

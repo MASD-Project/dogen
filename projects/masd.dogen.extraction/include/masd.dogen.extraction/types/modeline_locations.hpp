@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TYPES_MODELINE_LOCATIONS_HPP
-#define MASD_DOGEN_FORMATTING_TYPES_MODELINE_LOCATIONS_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_MODELINE_LOCATIONS_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_MODELINE_LOCATIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Location in the file to place the modeline.

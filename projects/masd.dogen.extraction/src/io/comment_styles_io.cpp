@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen.formatting/io/comment_styles_io.hpp"
+#include "masd.dogen.extraction/io/comment_styles_io.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
     s << "{ " << "\"__type__\": " << "\"comment_styles\", " << "\"value\": ";

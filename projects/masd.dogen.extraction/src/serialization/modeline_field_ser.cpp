@@ -28,14 +28,14 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "masd.dogen.formatting/serialization/modeline_field_ser.hpp"
+#include "masd.dogen.extraction/serialization/modeline_field_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const masd::dogen::formatting::modeline_field& v,
+    const masd::dogen::extraction::modeline_field& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
     ar << make_nvp("value", v.value_);
@@ -43,7 +43,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    masd::dogen::formatting::modeline_field& v,
+    masd::dogen::extraction::modeline_field& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("value", v.value_);
@@ -54,16 +54,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const masd::dogen::formatting::modeline_field& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, masd::dogen::formatting::modeline_field& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const masd::dogen::extraction::modeline_field& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, masd::dogen::extraction::modeline_field& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const masd::dogen::formatting::modeline_field& v, unsigned int version);
-template void load(archive::text_iarchive& ar, masd::dogen::formatting::modeline_field& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const masd::dogen::extraction::modeline_field& v, unsigned int version);
+template void load(archive::text_iarchive& ar, masd::dogen::extraction::modeline_field& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const masd::dogen::formatting::modeline_field& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, masd::dogen::formatting::modeline_field& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const masd::dogen::extraction::modeline_field& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, masd::dogen::extraction::modeline_field& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const masd::dogen::formatting::modeline_field& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, masd::dogen::formatting::modeline_field& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const masd::dogen::extraction::modeline_field& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, masd::dogen::extraction::modeline_field& v, unsigned int version);
 
 } }

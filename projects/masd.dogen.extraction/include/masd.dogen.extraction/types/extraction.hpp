@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TYPES_FORMATTING_HPP
-#define MASD_DOGEN_FORMATTING_TYPES_FORMATTING_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_EXTRACTION_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_EXTRACTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 /**
- * @brief Provides the basic formatting primitives.
+ * @brief Provides the basic extraction primitives.
  *
- * This model is the repository of all formatting related code
- * which is not language specific. Language-specific models can
- * then make use of it.
+ * This model is the repository of all extraction related code which is
+ * not language specific. Language-specific models can then make use of
+ * it.
  */
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 }
 
 #endif

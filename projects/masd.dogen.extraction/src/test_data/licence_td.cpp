@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.formatting/test_data/licence_td.hpp"
+#include "masd.dogen.extraction/test_data/licence_td.hpp"
 
 namespace {
 
@@ -39,7 +39,7 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 licence_generator::licence_generator() : position_(0) { }
 

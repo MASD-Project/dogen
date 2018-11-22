@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_REGISTRAR_SER_HPP
-#define MASD_DOGEN_FORMATTING_SERIALIZATION_REGISTRAR_SER_HPP
+#ifndef MASD_DOGEN_EXTRACTION_SERIALIZATION_REGISTRAR_SER_HPP
+#define MASD_DOGEN_EXTRACTION_SERIALIZATION_REGISTRAR_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 template<typename Archive>
 void register_types(Archive& ar);

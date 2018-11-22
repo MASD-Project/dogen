@@ -29,16 +29,16 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "masd.dogen.formatting/serialization/licence_ser.hpp"
-#include "masd.dogen.formatting/serialization/modeline_ser.hpp"
-#include "masd.dogen.formatting/serialization/decoration_properties_ser.hpp"
+#include "masd.dogen.extraction/serialization/licence_ser.hpp"
+#include "masd.dogen.extraction/serialization/modeline_ser.hpp"
+#include "masd.dogen.extraction/serialization/decoration_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const masd::dogen::formatting::decoration_properties& v,
+    const masd::dogen::extraction::decoration_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("generate_decoration", v.generate_decoration_);
     ar << make_nvp("modeline", v.modeline_);
@@ -48,7 +48,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    masd::dogen::formatting::decoration_properties& v,
+    masd::dogen::extraction::decoration_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("generate_decoration", v.generate_decoration_);
     ar >> make_nvp("modeline", v.modeline_);
@@ -61,16 +61,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const masd::dogen::formatting::decoration_properties& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, masd::dogen::formatting::decoration_properties& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const masd::dogen::extraction::decoration_properties& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const masd::dogen::formatting::decoration_properties& v, unsigned int version);
-template void load(archive::text_iarchive& ar, masd::dogen::formatting::decoration_properties& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const masd::dogen::extraction::decoration_properties& v, unsigned int version);
+template void load(archive::text_iarchive& ar, masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const masd::dogen::formatting::decoration_properties& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, masd::dogen::formatting::decoration_properties& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const masd::dogen::extraction::decoration_properties& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const masd::dogen::formatting::decoration_properties& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, masd::dogen::formatting::decoration_properties& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const masd::dogen::extraction::decoration_properties& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
 } }

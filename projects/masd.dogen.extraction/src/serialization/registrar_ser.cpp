@@ -26,9 +26,9 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "masd.dogen.formatting/serialization/registrar_ser.hpp"
+#include "masd.dogen.extraction/serialization/registrar_ser.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 template<typename Archive>
 void register_types(Archive&) {

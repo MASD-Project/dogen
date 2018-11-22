@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TEST_DATA_COMMENT_STYLES_TD_HPP
-#define MASD_DOGEN_FORMATTING_TEST_DATA_COMMENT_STYLES_TD_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TEST_DATA_COMMENT_STYLES_TD_HPP
+#define MASD_DOGEN_EXTRACTION_TEST_DATA_COMMENT_STYLES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/types/comment_styles.hpp"
+#include "masd.dogen.extraction/types/comment_styles.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 class comment_styles_generator {
 public:
     comment_styles_generator();
 
 public:
-    typedef masd::dogen::formatting::comment_styles result_type;
+    typedef masd::dogen::extraction::comment_styles result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

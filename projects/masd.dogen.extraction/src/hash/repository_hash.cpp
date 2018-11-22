@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/hash/repository_hash.hpp"
-#include "masd.dogen.formatting/hash/modeline_group_hash.hpp"
+#include "masd.dogen.extraction/hash/repository_hash.hpp"
+#include "masd.dogen.extraction/hash/modeline_group_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_masd_dogen_formatting_modeline_group(const std::unordered_map<std::string, masd::dogen::formatting::modeline_group>& v) {
+inline std::size_t hash_std_unordered_map_std_string_masd_dogen_extraction_modeline_group(const std::unordered_map<std::string, masd::dogen::extraction::modeline_group>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -49,12 +49,12 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::size_t repository_hasher::hash(const repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_masd_dogen_formatting_modeline_group(v.modeline_groups()));
+    combine(seed, hash_std_unordered_map_std_string_masd_dogen_extraction_modeline_group(v.modeline_groups()));
     combine(seed, hash_std_unordered_map_std_string_std_string(v.licence_texts()));
 
     return seed;

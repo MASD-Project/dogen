@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.formatting/io/licence_io.hpp"
+#include "masd.dogen.extraction/io/licence_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -44,11 +44,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const licence& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::formatting::licence\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::extraction::licence\"" << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"text\": " << "\"" << tidy_up_string(v.text()) << "\""
       << " }";

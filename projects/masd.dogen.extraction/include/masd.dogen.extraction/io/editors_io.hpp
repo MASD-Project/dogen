@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_IO_EDITORS_IO_HPP
-#define MASD_DOGEN_FORMATTING_IO_EDITORS_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_IO_EDITORS_IO_HPP
+#define MASD_DOGEN_EXTRACTION_IO_EDITORS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.formatting/types/editors.hpp"
+#include "masd.dogen.extraction/types/editors.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const editors& v);
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TYPES_DECORATION_PROPERTIES_HPP
-#define MASD_DOGEN_FORMATTING_TYPES_DECORATION_PROPERTIES_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_DECORATION_PROPERTIES_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_DECORATION_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.formatting/types/licence.hpp"
-#include "masd.dogen.formatting/types/modeline.hpp"
-#include "masd.dogen.formatting/serialization/decoration_properties_fwd_ser.hpp"
+#include "masd.dogen.extraction/types/licence.hpp"
+#include "masd.dogen.extraction/types/modeline.hpp"
+#include "masd.dogen.extraction/serialization/decoration_properties_fwd_ser.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Configuration pertaining to file decoration.
@@ -51,16 +51,16 @@ public:
 public:
     decoration_properties(
         const bool generate_decoration,
-        const boost::optional<masd::dogen::formatting::modeline>& modeline,
-        const boost::optional<masd::dogen::formatting::licence>& licence,
+        const boost::optional<masd::dogen::extraction::modeline>& modeline,
+        const boost::optional<masd::dogen::extraction::licence>& licence,
         const std::string& code_generation_marker);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::decoration_properties& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::decoration_properties& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::decoration_properties& v, unsigned int version);
 
 public:
     /**
@@ -75,20 +75,20 @@ public:
      * @brief Modeline to use in this file, if any.
      */
     /**@{*/
-    const boost::optional<masd::dogen::formatting::modeline>& modeline() const;
-    boost::optional<masd::dogen::formatting::modeline>& modeline();
-    void modeline(const boost::optional<masd::dogen::formatting::modeline>& v);
-    void modeline(const boost::optional<masd::dogen::formatting::modeline>&& v);
+    const boost::optional<masd::dogen::extraction::modeline>& modeline() const;
+    boost::optional<masd::dogen::extraction::modeline>& modeline();
+    void modeline(const boost::optional<masd::dogen::extraction::modeline>& v);
+    void modeline(const boost::optional<masd::dogen::extraction::modeline>&& v);
     /**@}*/
 
     /**
      * @brief Licence to use in this file, if any.
      */
     /**@{*/
-    const boost::optional<masd::dogen::formatting::licence>& licence() const;
-    boost::optional<masd::dogen::formatting::licence>& licence();
-    void licence(const boost::optional<masd::dogen::formatting::licence>& v);
-    void licence(const boost::optional<masd::dogen::formatting::licence>&& v);
+    const boost::optional<masd::dogen::extraction::licence>& licence() const;
+    boost::optional<masd::dogen::extraction::licence>& licence();
+    void licence(const boost::optional<masd::dogen::extraction::licence>& v);
+    void licence(const boost::optional<masd::dogen::extraction::licence>&& v);
     /**@}*/
 
     /**
@@ -113,8 +113,8 @@ public:
 
 private:
     bool generate_decoration_;
-    boost::optional<masd::dogen::formatting::modeline> modeline_;
-    boost::optional<masd::dogen::formatting::licence> licence_;
+    boost::optional<masd::dogen::extraction::modeline> modeline_;
+    boost::optional<masd::dogen::extraction::licence> licence_;
     std::string code_generation_marker_;
 };
 
@@ -124,8 +124,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::formatting::decoration_properties& lhs,
-    masd::dogen::formatting::decoration_properties& rhs) {
+    masd::dogen::extraction::decoration_properties& lhs,
+    masd::dogen::extraction::decoration_properties& rhs) {
     lhs.swap(rhs);
 }
 

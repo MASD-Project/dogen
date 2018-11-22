@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TYPES_SPACING_TYPES_FWD_HPP
-#define MASD_DOGEN_FORMATTING_TYPES_SPACING_TYPES_FWD_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_SPACING_TYPES_FWD_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_SPACING_TYPES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 enum class spacing_types : unsigned int;
 

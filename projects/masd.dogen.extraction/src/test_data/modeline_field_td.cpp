@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.formatting/test_data/modeline_field_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_field_td.hpp"
 
 namespace {
 
@@ -31,7 +31,7 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 modeline_field_generator::modeline_field_generator() : position_(0) { }
 

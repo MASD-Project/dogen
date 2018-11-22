@@ -219,7 +219,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.dia/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.injection.json/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.probing/include
-    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.formatting/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.extraction/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.options/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.coding/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.templating/include
@@ -242,7 +242,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.injection.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.probing)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.formatting)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.extraction)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.options)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.coding)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)

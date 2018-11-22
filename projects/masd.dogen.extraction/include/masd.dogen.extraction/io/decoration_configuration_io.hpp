@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_IO_DECORATION_CONFIGURATION_IO_HPP
-#define MASD_DOGEN_FORMATTING_IO_DECORATION_CONFIGURATION_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_IO_DECORATION_CONFIGURATION_IO_HPP
+#define MASD_DOGEN_EXTRACTION_IO_DECORATION_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.formatting/types/decoration_configuration.hpp"
+#include "masd.dogen.extraction/types/decoration_configuration.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::formatting::decoration_configuration& v);
+     const masd::dogen::extraction::decoration_configuration& v);
 
 }
 

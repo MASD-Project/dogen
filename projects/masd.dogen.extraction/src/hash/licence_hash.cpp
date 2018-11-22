@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/hash/licence_hash.hpp"
+#include "masd.dogen.extraction/hash/licence_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::size_t licence_hasher::hash(const licence& v) {
     std::size_t seed(0);

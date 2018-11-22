@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_IO_SPACING_TYPES_IO_HPP
-#define MASD_DOGEN_FORMATTING_IO_SPACING_TYPES_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_IO_SPACING_TYPES_IO_HPP
+#define MASD_DOGEN_EXTRACTION_IO_SPACING_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.formatting/types/spacing_types.hpp"
+#include "masd.dogen.extraction/types/spacing_types.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const spacing_types& v);
 

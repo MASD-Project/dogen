@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.formatting/test_data/modeline_td.hpp"
-#include "masd.dogen.formatting/test_data/modeline_group_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_group_td.hpp"
 
 namespace {
 
@@ -30,29 +30,29 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-masd::dogen::formatting::modeline
-create_masd_dogen_formatting_modeline(const unsigned int position) {
-    return masd::dogen::formatting::modeline_generator::create(position);
+masd::dogen::extraction::modeline
+create_masd_dogen_extraction_modeline(const unsigned int position) {
+    return masd::dogen::extraction::modeline_generator::create(position);
 }
 
-std::unordered_map<std::string, masd::dogen::formatting::modeline> create_std_unordered_map_std_string_masd_dogen_formatting_modeline(unsigned int position) {
-    std::unordered_map<std::string, masd::dogen::formatting::modeline> r;
+std::unordered_map<std::string, masd::dogen::extraction::modeline> create_std_unordered_map_std_string_masd_dogen_extraction_modeline(unsigned int position) {
+    std::unordered_map<std::string, masd::dogen::extraction::modeline> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_formatting_modeline(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_masd_dogen_extraction_modeline(position + i)));
     }
     return r;
 }
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 modeline_group_generator::modeline_group_generator() : position_(0) { }
 
 void modeline_group_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.modelines(create_std_unordered_map_std_string_masd_dogen_formatting_modeline(position + 1));
+    v.modelines(create_std_unordered_map_std_string_masd_dogen_extraction_modeline(position + 1));
 }
 
 modeline_group_generator::result_type

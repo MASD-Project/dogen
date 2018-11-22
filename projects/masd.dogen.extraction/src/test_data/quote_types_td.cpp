@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/test_data/quote_types_td.hpp"
+#include "masd.dogen.extraction/test_data/quote_types_td.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 quote_types_generator::quote_types_generator() : position_(0) { }
 void quote_types_generator::

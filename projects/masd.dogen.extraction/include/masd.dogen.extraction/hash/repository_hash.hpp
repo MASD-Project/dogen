@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_HASH_REPOSITORY_HASH_HPP
-#define MASD_DOGEN_FORMATTING_HASH_REPOSITORY_HASH_HPP
+#ifndef MASD_DOGEN_EXTRACTION_HASH_REPOSITORY_HASH_HPP
+#define MASD_DOGEN_EXTRACTION_HASH_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 struct repository_hasher {
 public:
@@ -40,10 +40,10 @@ public:
 namespace std {
 
 template<>
-struct hash<masd::dogen::formatting::repository> {
+struct hash<masd::dogen::extraction::repository> {
 public:
-    size_t operator()(const masd::dogen::formatting::repository& v) const {
-        return masd::dogen::formatting::repository_hasher::hash(v);
+    size_t operator()(const masd::dogen::extraction::repository& v) const {
+        return masd::dogen::extraction::repository_hasher::hash(v);
     }
 };
 

@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_IO_MODELINE_FIELD_IO_HPP
-#define MASD_DOGEN_FORMATTING_IO_MODELINE_FIELD_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_IO_MODELINE_FIELD_IO_HPP
+#define MASD_DOGEN_EXTRACTION_IO_MODELINE_FIELD_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.formatting/types/modeline_field.hpp"
+#include "masd.dogen.extraction/types/modeline_field.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::formatting::modeline_field& v);
+     const masd::dogen::extraction::modeline_field& v);
 
 }
 

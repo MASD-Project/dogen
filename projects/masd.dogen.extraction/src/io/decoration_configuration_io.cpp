@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.formatting/io/decoration_configuration_io.hpp"
+#include "masd.dogen.extraction/io/decoration_configuration_io.hpp"
 
 namespace boost {
 
@@ -60,7 +60,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -70,7 +70,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_configuration& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::formatting::decoration_configuration\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::extraction::decoration_configuration\"" << ", "
       << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"copyright_notices\": " << v.copyright_notices() << ", "
       << "\"licence_name\": " << "\"" << tidy_up_string(v.licence_name()) << "\"" << ", "

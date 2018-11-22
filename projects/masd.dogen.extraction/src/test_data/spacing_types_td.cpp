@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/test_data/spacing_types_td.hpp"
+#include "masd.dogen.extraction/test_data/spacing_types_td.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 spacing_types_generator::spacing_types_generator() : position_(0) { }
 void spacing_types_generator::

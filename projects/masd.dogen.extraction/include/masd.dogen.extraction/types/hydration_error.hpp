@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TYPES_HYDRATION_ERROR_HPP
-#define MASD_DOGEN_FORMATTING_TYPES_HYDRATION_ERROR_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_HYDRATION_ERROR_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_HYDRATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 class hydration_error : public virtual std::exception, public virtual boost::exception {
 public:

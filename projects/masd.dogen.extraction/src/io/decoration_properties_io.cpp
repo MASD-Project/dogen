@@ -21,13 +21,13 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.formatting/io/licence_io.hpp"
-#include "masd.dogen.formatting/io/modeline_io.hpp"
-#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.extraction/io/licence_io.hpp"
+#include "masd.dogen.extraction/io/modeline_io.hpp"
+#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::formatting::modeline>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::extraction::modeline>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -42,7 +42,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dog
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::formatting::licence>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::extraction::licence>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -63,7 +63,7 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
     boost::io::ios_flags_saver ifs(s);
@@ -73,7 +73,7 @@ std::ostream& operator<<(std::ostream& s, const decoration_properties& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::formatting::decoration_properties\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::extraction::decoration_properties\"" << ", "
       << "\"generate_decoration\": " << v.generate_decoration() << ", "
       << "\"modeline\": " << v.modeline() << ", "
       << "\"licence\": " << v.licence() << ", "

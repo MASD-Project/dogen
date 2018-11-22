@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/types/modeline_group.hpp"
+#include "masd.dogen.extraction/types/modeline_group.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 modeline_group::modeline_group(
     const std::string& name,
-    const std::unordered_map<std::string, masd::dogen::formatting::modeline>& modelines)
+    const std::unordered_map<std::string, masd::dogen::extraction::modeline>& modelines)
     : name_(name),
       modelines_(modelines) { }
 
@@ -61,19 +61,19 @@ void modeline_group::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, masd::dogen::formatting::modeline>& modeline_group::modelines() const {
+const std::unordered_map<std::string, masd::dogen::extraction::modeline>& modeline_group::modelines() const {
     return modelines_;
 }
 
-std::unordered_map<std::string, masd::dogen::formatting::modeline>& modeline_group::modelines() {
+std::unordered_map<std::string, masd::dogen::extraction::modeline>& modeline_group::modelines() {
     return modelines_;
 }
 
-void modeline_group::modelines(const std::unordered_map<std::string, masd::dogen::formatting::modeline>& v) {
+void modeline_group::modelines(const std::unordered_map<std::string, masd::dogen::extraction::modeline>& v) {
     modelines_ = v;
 }
 
-void modeline_group::modelines(const std::unordered_map<std::string, masd::dogen::formatting::modeline>&& v) {
+void modeline_group::modelines(const std::unordered_map<std::string, masd::dogen::extraction::modeline>&& v) {
     modelines_ = std::move(v);
 }
 

@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_HASH_ALL_HASH_HPP
-#define MASD_DOGEN_FORMATTING_HASH_ALL_HASH_HPP
+#ifndef MASD_DOGEN_EXTRACTION_HASH_ALL_HASH_HPP
+#define MASD_DOGEN_EXTRACTION_HASH_ALL_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/hash/editors_hash.hpp"
-#include "masd.dogen.formatting/hash/licence_hash.hpp"
-#include "masd.dogen.formatting/hash/modeline_hash.hpp"
-#include "masd.dogen.formatting/hash/repository_hash.hpp"
-#include "masd.dogen.formatting/hash/quote_types_hash.hpp"
-#include "masd.dogen.formatting/hash/spacing_types_hash.hpp"
-#include "masd.dogen.formatting/hash/comment_styles_hash.hpp"
-#include "masd.dogen.formatting/hash/modeline_field_hash.hpp"
-#include "masd.dogen.formatting/hash/modeline_group_hash.hpp"
-#include "masd.dogen.formatting/hash/modeline_locations_hash.hpp"
-#include "masd.dogen.formatting/hash/infix_configuration_hash.hpp"
-#include "masd.dogen.formatting/hash/decoration_properties_hash.hpp"
-#include "masd.dogen.formatting/hash/decoration_configuration_hash.hpp"
+#include "masd.dogen.extraction/hash/editors_hash.hpp"
+#include "masd.dogen.extraction/hash/licence_hash.hpp"
+#include "masd.dogen.extraction/hash/modeline_hash.hpp"
+#include "masd.dogen.extraction/hash/repository_hash.hpp"
+#include "masd.dogen.extraction/hash/quote_types_hash.hpp"
+#include "masd.dogen.extraction/hash/spacing_types_hash.hpp"
+#include "masd.dogen.extraction/hash/comment_styles_hash.hpp"
+#include "masd.dogen.extraction/hash/modeline_field_hash.hpp"
+#include "masd.dogen.extraction/hash/modeline_group_hash.hpp"
+#include "masd.dogen.extraction/hash/modeline_locations_hash.hpp"
+#include "masd.dogen.extraction/hash/infix_configuration_hash.hpp"
+#include "masd.dogen.extraction/hash/decoration_properties_hash.hpp"
+#include "masd.dogen.extraction/hash/decoration_configuration_hash.hpp"
 
 #endif

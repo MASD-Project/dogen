@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/hash/modeline_field_hash.hpp"
+#include "masd.dogen.extraction/hash/modeline_field_hash.hpp"
 
 namespace {
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::size_t modeline_field_hasher::hash(const modeline_field& v) {
     std::size_t seed(0);

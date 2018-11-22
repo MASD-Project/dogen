@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TYPES_MODELINE_FIELD_HPP
-#define MASD_DOGEN_FORMATTING_TYPES_MODELINE_FIELD_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TYPES_MODELINE_FIELD_HPP
+#define MASD_DOGEN_EXTRACTION_TYPES_MODELINE_FIELD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include <algorithm>
-#include "masd.dogen.formatting/serialization/modeline_field_fwd_ser.hpp"
+#include "masd.dogen.extraction/serialization/modeline_field_fwd_ser.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 /**
  * @brief Entry in a modeline.
@@ -48,10 +48,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const masd::dogen::formatting::modeline_field& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const masd::dogen::extraction::modeline_field& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, masd::dogen::formatting::modeline_field& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, masd::dogen::extraction::modeline_field& v, unsigned int version);
 
 public:
     /**
@@ -95,8 +95,8 @@ namespace std {
 
 template<>
 inline void swap(
-    masd::dogen::formatting::modeline_field& lhs,
-    masd::dogen::formatting::modeline_field& rhs) {
+    masd::dogen::extraction::modeline_field& lhs,
+    masd::dogen::extraction::modeline_field& rhs) {
     lhs.swap(rhs);
 }
 

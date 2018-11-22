@@ -20,10 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.formatting/io/editors_io.hpp"
-#include "masd.dogen.formatting/io/modeline_io.hpp"
-#include "masd.dogen.formatting/io/modeline_field_io.hpp"
-#include "masd.dogen.formatting/io/modeline_locations_io.hpp"
+#include "masd.dogen.extraction/io/editors_io.hpp"
+#include "masd.dogen.extraction/io/modeline_io.hpp"
+#include "masd.dogen.extraction/io/modeline_field_io.hpp"
+#include "masd.dogen.extraction/io/modeline_locations_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::formatting::modeline_field>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::extraction::modeline_field>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -47,11 +47,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::fo
 
 }
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const modeline& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::formatting::modeline\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::extraction::modeline\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"editor\": " << v.editor() << ", "
       << "\"location\": " << v.location() << ", "

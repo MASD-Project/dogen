@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_HASH_SPACING_TYPES_HASH_HPP
-#define MASD_DOGEN_FORMATTING_HASH_SPACING_TYPES_HASH_HPP
+#ifndef MASD_DOGEN_EXTRACTION_HASH_SPACING_TYPES_HASH_HPP
+#define MASD_DOGEN_EXTRACTION_HASH_SPACING_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <functional>
-#include "masd.dogen.formatting/types/spacing_types.hpp"
+#include "masd.dogen.extraction/types/spacing_types.hpp"
 
 namespace std {
 
 template<>
-struct hash<masd::dogen::formatting::spacing_types> {
+struct hash<masd::dogen::extraction::spacing_types> {
 public:
-    size_t operator()(const masd::dogen::formatting::spacing_types& v) const {
+    size_t operator()(const masd::dogen::extraction::spacing_types& v) const {
         return std::hash<unsigned int>()(static_cast<unsigned int>(v));
     }
 };

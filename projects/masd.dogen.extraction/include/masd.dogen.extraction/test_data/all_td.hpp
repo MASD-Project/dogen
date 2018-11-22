@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TEST_DATA_ALL_TD_HPP
-#define MASD_DOGEN_FORMATTING_TEST_DATA_ALL_TD_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TEST_DATA_ALL_TD_HPP
+#define MASD_DOGEN_EXTRACTION_TEST_DATA_ALL_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/test_data/editors_td.hpp"
-#include "masd.dogen.formatting/test_data/licence_td.hpp"
-#include "masd.dogen.formatting/test_data/modeline_td.hpp"
-#include "masd.dogen.formatting/test_data/repository_td.hpp"
-#include "masd.dogen.formatting/test_data/quote_types_td.hpp"
-#include "masd.dogen.formatting/test_data/spacing_types_td.hpp"
-#include "masd.dogen.formatting/test_data/comment_styles_td.hpp"
-#include "masd.dogen.formatting/test_data/modeline_field_td.hpp"
-#include "masd.dogen.formatting/test_data/modeline_group_td.hpp"
-#include "masd.dogen.formatting/test_data/modeline_locations_td.hpp"
-#include "masd.dogen.formatting/test_data/infix_configuration_td.hpp"
-#include "masd.dogen.formatting/test_data/decoration_properties_td.hpp"
-#include "masd.dogen.formatting/test_data/decoration_configuration_td.hpp"
+#include "masd.dogen.extraction/test_data/editors_td.hpp"
+#include "masd.dogen.extraction/test_data/licence_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_td.hpp"
+#include "masd.dogen.extraction/test_data/repository_td.hpp"
+#include "masd.dogen.extraction/test_data/quote_types_td.hpp"
+#include "masd.dogen.extraction/test_data/spacing_types_td.hpp"
+#include "masd.dogen.extraction/test_data/comment_styles_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_field_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_group_td.hpp"
+#include "masd.dogen.extraction/test_data/modeline_locations_td.hpp"
+#include "masd.dogen.extraction/test_data/infix_configuration_td.hpp"
+#include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
+#include "masd.dogen.extraction/test_data/decoration_configuration_td.hpp"
 
 #endif

@@ -21,9 +21,9 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "masd.dogen.formatting/io/modeline_locations_io.hpp"
+#include "masd.dogen.extraction/io/modeline_locations_io.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream& operator<<(std::ostream& s, const modeline_locations& v) {
     s << "{ " << "\"__type__\": " << "\"modeline_locations\", " << "\"value\": ";

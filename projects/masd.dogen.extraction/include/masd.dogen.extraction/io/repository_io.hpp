@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_IO_REPOSITORY_IO_HPP
-#define MASD_DOGEN_FORMATTING_IO_REPOSITORY_IO_HPP
+#ifndef MASD_DOGEN_EXTRACTION_IO_REPOSITORY_IO_HPP
+#define MASD_DOGEN_EXTRACTION_IO_REPOSITORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const masd::dogen::formatting::repository& v);
+     const masd::dogen::extraction::repository& v);
 
 }
 

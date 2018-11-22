@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TEST_DATA_DECORATION_PROPERTIES_TD_HPP
-#define MASD_DOGEN_FORMATTING_TEST_DATA_DECORATION_PROPERTIES_TD_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TEST_DATA_DECORATION_PROPERTIES_TD_HPP
+#define MASD_DOGEN_EXTRACTION_TEST_DATA_DECORATION_PROPERTIES_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 class decoration_properties_generator {
 public:
     decoration_properties_generator();
 
 public:
-    typedef masd::dogen::formatting::decoration_properties result_type;
+    typedef masd::dogen::extraction::decoration_properties result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/types/licence.hpp"
+#include "masd.dogen.extraction/types/licence.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 licence::licence(
     const std::list<std::string>& copyright_notices,

@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_TEST_DATA_LICENCE_TD_HPP
-#define MASD_DOGEN_FORMATTING_TEST_DATA_LICENCE_TD_HPP
+#ifndef MASD_DOGEN_EXTRACTION_TEST_DATA_LICENCE_TD_HPP
+#define MASD_DOGEN_EXTRACTION_TEST_DATA_LICENCE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/types/licence.hpp"
+#include "masd.dogen.extraction/types/licence.hpp"
 
-namespace masd::dogen::formatting {
+namespace masd::dogen::extraction {
 
 class licence_generator {
 public:
     licence_generator();
 
 public:
-    typedef masd::dogen::formatting::licence result_type;
+    typedef masd::dogen::extraction::licence result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_FORMATTING_SERIALIZATION_QUOTE_TYPES_SER_HPP
-#define MASD_DOGEN_FORMATTING_SERIALIZATION_QUOTE_TYPES_SER_HPP
+#ifndef MASD_DOGEN_EXTRACTION_SERIALIZATION_QUOTE_TYPES_SER_HPP
+#define MASD_DOGEN_EXTRACTION_SERIALIZATION_QUOTE_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/nvp.hpp>
-#include "masd.dogen.formatting/types/quote_types.hpp"
+#include "masd.dogen.extraction/types/quote_types.hpp"
 
 template<class Archive>
-void serialize(Archive& ar, masd::dogen::formatting::quote_types& v, unsigned int /*version*/){
+void serialize(Archive& ar, masd::dogen::extraction::quote_types& v, unsigned int /*version*/){
     using boost::serialization::make_nvp;
     ar & make_nvp("quote_types", v);
 }
