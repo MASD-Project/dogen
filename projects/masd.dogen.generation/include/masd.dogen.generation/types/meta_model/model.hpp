@@ -38,9 +38,9 @@
 #include "masd.dogen.coding/types/meta_model/module_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/element_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
+#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/element_archetype.hpp"
 #include "masd.dogen.generation/types/meta_model/locator_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/orm_model_properties.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation/types/meta_model/global_archetype_location_properties.hpp"
 

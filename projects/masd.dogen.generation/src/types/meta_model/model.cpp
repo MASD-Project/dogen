@@ -19,8 +19,8 @@
  *
  */
 #include "masd.dogen.coding/types/meta_model/module.hpp"
-#include "masd.dogen.generation/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
+#include "masd.dogen.generation/types/meta_model/model.hpp"
 
 namespace boost {
 

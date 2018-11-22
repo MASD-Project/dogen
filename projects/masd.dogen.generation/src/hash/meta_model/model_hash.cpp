@@ -20,13 +20,13 @@
  */
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/module_hash.hpp"
-#include "masd.dogen.generation/hash/meta_model/model_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/element_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/languages_hash.hpp"
+#include "masd.dogen.generation/hash/meta_model/model_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/origin_types_hash.hpp"
+#include "masd.dogen.coding/hash/meta_model/orm_model_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/locator_properties_hash.hpp"
-#include "masd.dogen.coding/hash/meta_model/orm_model_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/global_archetype_location_properties_hash.hpp"
 
 namespace {
