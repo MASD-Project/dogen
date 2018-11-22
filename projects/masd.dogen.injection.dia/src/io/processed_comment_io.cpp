@@ -73,7 +73,7 @@ std::ostream& operator<<(std::ostream& s, const processed_comment& v) {
       << "\"tagged_values\": " << v.tagged_values() << ", "
       << "\"applicable_to_parent_object\": " << v.applicable_to_parent_object() << ", "
       << "\"original_content\": " << "\"" << tidy_up_string(v.original_content()) << "\"" << ", "
-      << "\"external_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\""
+      << "\"injection_modules\": " << "\"" << tidy_up_string(v.external_modules()) << "\""
       << " }";
     return(s);
 }

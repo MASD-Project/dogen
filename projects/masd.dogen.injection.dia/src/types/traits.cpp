@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external.dia/types/traits.hpp"
+#include "masd.dogen.injection.dia/types/traits.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::string traits::comment() {
     static std::string r("yarn.dia.comment");
@@ -28,7 +28,7 @@ std::string traits::comment() {
 }
 
 std::string traits::external_modules() {
-    static std::string r("yarn.dia.external_modules");
+    static std::string r("yarn.dia.injection_modules");
     return r;
 }
 

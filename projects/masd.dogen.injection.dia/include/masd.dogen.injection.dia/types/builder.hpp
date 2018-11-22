@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_BUILDER_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_BUILDER_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "masd.dogen.external/types/meta_model/element.hpp"
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external.dia/types/processed_object.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection.dia/types/processed_object.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 /**
  * @brief Builds a external model from dia processed objects.
@@ -48,7 +48,7 @@ private:
      */
     struct uml_large_package_properties {
         std::string name;
-        std::list<external::meta_model::element>::iterator element;
+        std::list<injection::meta_model::element>::iterator element;
     };
 
 public:
@@ -97,7 +97,7 @@ public:
     /**
      * @brief Generates the external model.
      */
-    external::meta_model::model build();
+    injection::meta_model::model build();
 
 private:
     const std::unordered_map<std::string, std::list<std::string>>&
@@ -106,7 +106,7 @@ private:
     id_to_uml_large_package_properties_;
     std::unordered_map<std::string, std::list<std::string>>
     child_id_to_parent_names_;
-    external::meta_model::model model_;
+    injection::meta_model::model model_;
 };
 
 }

@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external.dia/types/visitor.hpp"
+#include "masd.dogen.injection.dia/types/visitor.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 visitor::visitor(builder& builder) : builder_(builder) {}
 

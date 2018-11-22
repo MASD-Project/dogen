@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.external/types/transforms/model_generation_chain.hpp"
-#include "masd.dogen.external.dia/types/decoding_transform.hpp"
-#include "masd.dogen.external.dia/types/initializer.hpp"
+#include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
+#include "masd.dogen.injection.dia/types/decoding_transform.hpp"
+#include "masd.dogen.injection.dia/types/initializer.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 void initializer::initialize() {
-    external::transforms::register_decoding_transform<decoding_transform>();
+    injection::transforms::register_decoding_transform<decoding_transform>();
 }
 
 }

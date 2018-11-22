@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "masd.dogen.external.dia")
+set(name "masd.dogen.injection.dia")
 set(lib_binary_name ${name})
 set(lib_target_name ${name}.lib)
 
@@ -35,8 +35,7 @@ set_target_properties(${lib_target_name}
 
 target_link_libraries(${lib_target_name}
     masd.dogen.utility.lib
-    masd.dogen.annotations.lib
-    masd.dogen.external.lib
+    masd.dogen.injection.lib
     masd.dogen.dia.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})

@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_ADAPTER_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_ADAPTER_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include "masd.dogen.external/types/meta_model/element.hpp"
-#include "masd.dogen.external/types/meta_model/attribute.hpp"
-#include "masd.dogen.external.dia/types/processed_object.hpp"
-#include "masd.dogen.external.dia/types/processed_attribute.hpp"
+#include "masd.dogen.injection/types/meta_model/element.hpp"
+#include "masd.dogen.injection/types/meta_model/attribute.hpp"
+#include "masd.dogen.injection.dia/types/processed_object.hpp"
+#include "masd.dogen.injection.dia/types/processed_attribute.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 /**
- * @brief Transforms Dia objects into their external counterpart.
+ * @brief Transforms Dia objects into their injection counterpart.
  */
 class adapter final {
 private:
@@ -54,19 +54,19 @@ private:
      * @brief Processes the stereotypes field.
      */
     static void process_stereotypes(const processed_object& po,
-        external::meta_model::element& e);
+        injection::meta_model::element& e);
 
 private:
     /**
-     * @brief Adapts a processed attribute into a external exoattribute.
+     * @brief Adapts a processed attribute into a injection exoattribute.
      */
-    static external::meta_model::attribute adapt(const processed_attribute& a);
+    static injection::meta_model::attribute adapt(const processed_attribute& a);
 
 public:
     /**
-     * @brief Adapts a processed object into a external exoelement.
+     * @brief Adapts a processed object into a injection exoelement.
      */
-    static external::meta_model::element
+    static injection::meta_model::element
     adapt(const processed_object& po, const std::string& contained_by,
         const std::list<std::string>& parents);
 };

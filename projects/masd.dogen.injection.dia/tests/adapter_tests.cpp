@@ -29,20 +29,20 @@
 #include "masd.dogen.modeling/io/meta_model/enumeration_io.hpp"
 #include "masd.dogen.modeling/io/meta_model/module_io.hpp"
 #include "masd.dogen.modeling/io/meta_model/exception_io.hpp"
-#include "masd.dogen.external.dia/types/adapter.hpp"
-#include "masd.dogen.external.dia/types/adaptation_error.hpp"
-#include "masd.dogen.external.dia/io/context_io.hpp"
-#include "masd.dogen.external.dia/types/processed_object.hpp"
-#include "masd.dogen.external.dia/test/mock_processed_object_factory.hpp"
+#include "masd.dogen.injection.dia/types/adapter.hpp"
+#include "masd.dogen.injection.dia/types/adaptation_error.hpp"
+#include "masd.dogen.injection.dia/io/context_io.hpp"
+#include "masd.dogen.injection.dia/types/processed_object.hpp"
+#include "masd.dogen.injection.dia/test/mock_processed_object_factory.hpp"
 #include "masd.dogen.utility/test/exception_checkers.hpp"
 
-using namespace masd::dogen::external::dia;
+using namespace masd::dogen::injection::dia;
 using masd::dogen::utility::test::asserter;
-using mock_factory = masd::dogen::external::dia::test::mock_processed_object_factory;
+using mock_factory = masd::dogen::injection::dia::test::mock_processed_object_factory;
 
 namespace  {
 
-const std::string test_module("masd.external.dia.tests");
+const std::string test_module("masd.injection.dia.tests");
 const std::string test_suite("adapter_tests");
 
 const std::string empty;
@@ -63,12 +63,12 @@ const std::string repository_stereotype("repository");
 
 const std::string immutable_stereotype("immutable");
 
-dogen::external::dia::context empty_context;
-dogen::annotations::scribble_group empty_scribble_group;
+masd::dogen::injection::dia::context empty_context;
+masd::dogen::annotations::scribble_group empty_scribble_group;
 
 }
 
-using masd::dogen::external::dia::adaptation_error;
+using masd::dogen::injection::dia::adaptation_error;
 using masd::dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(adapter_tests)

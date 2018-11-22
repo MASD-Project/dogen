@@ -22,13 +22,13 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/string/splitter.hpp"
-#include "masd.dogen.external.dia/types/adaptation_error.hpp"
-#include "masd.dogen.external.dia/types/adapter.hpp"
+#include "masd.dogen.injection.dia/types/adaptation_error.hpp"
+#include "masd.dogen.injection.dia/types/adapter.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("external.dia.adapter"));
+static logger lg(logger_factory("injection.dia.adapter"));
 
 const std::string name_delimiter("::");
 const std::string object_element("dogen::object");
@@ -38,7 +38,7 @@ const std::string empty_dia_name("Dia name is empty.");
 
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 void adapter::validate_dia_name(const std::string& n) {
     if (n.empty()) {
@@ -56,11 +56,11 @@ std::string adapter::qualified_name(const std::string& contained_by,
     return contained_by + name_delimiter + simple_name;
 }
 
-external::meta_model::attribute
+injection::meta_model::attribute
 adapter::adapt(const processed_attribute& a) {
     validate_dia_name(a.name());
 
-    external::meta_model::attribute r;
+    injection::meta_model::attribute r;
     r.name(a.name());
     r.type(a.type());
     r.documentation(a.comment().documentation());
@@ -69,7 +69,7 @@ adapter::adapt(const processed_attribute& a) {
 }
 
 void adapter::process_stereotypes(const processed_object& po,
-    external::meta_model::element& e) {
+    injection::meta_model::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
                              << po.stereotypes() << "'";
 
@@ -92,12 +92,12 @@ void adapter::process_stereotypes(const processed_object& po,
     BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << st;
 }
 
-external::meta_model::element adapter::
+injection::meta_model::element adapter::
 adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
     validate_dia_name(po.name());
 
-    external::meta_model::element r;
+    injection::meta_model::element r;
     r.name(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());

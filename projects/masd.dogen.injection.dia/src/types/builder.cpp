@@ -22,14 +22,14 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/io/pair_io.hpp"
-#include "masd.dogen.external.dia/types/building_error.hpp"
-#include "masd.dogen.external.dia/types/adapter.hpp"
-#include "masd.dogen.external.dia/types/builder.hpp"
+#include "masd.dogen.injection.dia/types/building_error.hpp"
+#include "masd.dogen.injection.dia/types/adapter.hpp"
+#include "masd.dogen.injection.dia/types/builder.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("external.dia.builder"));
+static logger lg(logger_factory("injection.dia.builder"));
 
 const std::string empty_contained_by;
 const std::list<std::string> empty_parents;
@@ -38,7 +38,7 @@ const std::string package_not_mapped("Dia package ID is not mapped: ");
 
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 builder::builder(const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids) : parent_id_to_child_ids_(parent_id_to_child_ids) {}
@@ -208,7 +208,7 @@ void builder::add(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing: " << po.name();
 }
 
-external::meta_model::model builder::build() {
+injection::meta_model::model builder::build() {
     return model_;
 }
 

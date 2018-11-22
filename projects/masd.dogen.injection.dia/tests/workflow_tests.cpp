@@ -26,7 +26,7 @@
 #include "masd.dogen.utility/test/xml_serialization_helper.hpp"
 #include "masd.dogen.utility/test/asserter.hpp"
 #include "masd.dogen.utility/test/logging.hpp"
-#include "masd.dogen.utility/test_data/external_dia.hpp"
+#include "masd.dogen.utility/test_data/injection_dia.hpp"
 #include "masd.dogen.dia/io/diagram_io.hpp"
 #include "masd.dogen.modeling/types/meta_model/exomodel.hpp"
 #include "masd.dogen.modeling/io/meta_model/exomodel_io.hpp"
@@ -36,19 +36,19 @@
 #include "masd.dogen.dia/test/diagram_serialization_helper.hpp"
 #include "masd.dogen.modeling/serialization/registrar_ser.hpp"
 #include "masd.dogen.annotations/test/mock_type_repository_factory.hpp"
-#include "masd.dogen.external.dia/types/workflow.hpp"
+#include "masd.dogen.injection.dia/types/workflow.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
     masd::dogen::modeling::register_types<Archive>(ar);
 }
 
-using namespace masd::dogen::external::dia;
+using namespace masd::dogen::injection::dia;
 using masd::dogen::utility::test::asserter;
 using masd::dogen::modeling::test::mock_context_factory;
 
 namespace  {
 
-const std::string test_module("masd.external.dia.tests");
+const std::string test_module("masd.injection.dia.tests");
 const std::string test_suite("workflow_tests");
 
 bool test_workflow(
@@ -76,49 +76,49 @@ bool test_workflow(
 
 }
 
-using masd::dogen::utility::test_data::external_dia;
+using masd::dogen::utility::test_data::injection_dia;
 using masd::dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
 BOOST_IGNORE_AUTO_TEST_CASE(empty_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("empty_dia_transforms_into_expected_model");
-    const auto i(external_dia::expected_empty_dia_xml());
-    const auto e(external_dia::expected_empty_external_xml());
-    const auto a(external_dia::actual_empty_external_xml());
+    const auto i(injection_dia::expected_empty_dia_xml());
+    const auto e(injection_dia::expected_empty_injection_xml());
+    const auto a(injection_dia::actual_empty_injection_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_model");
-    const auto i(external_dia::expected_two_layers_with_objects_dia_xml());
-    const auto e(external_dia::expected_two_layers_with_objects_external_xml());
-    const auto a(external_dia::actual_two_layers_with_objects_external_xml());
+    const auto i(injection_dia::expected_two_layers_with_objects_dia_xml());
+    const auto e(injection_dia::expected_two_layers_with_objects_injection_xml());
+    const auto a(injection_dia::actual_two_layers_with_objects_injection_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("cpp_model_dia_transforms_into_expected_model");
-    const auto i(external_dia::expected_cpp_model_dia_xml());
-    const auto e(external_dia::expected_cpp_model_external_xml());
-    const auto a(external_dia::actual_cpp_model_external_xml());
+    const auto i(injection_dia::expected_cpp_model_dia_xml());
+    const auto e(injection_dia::expected_cpp_model_injection_xml());
+    const auto a(injection_dia::actual_cpp_model_injection_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
 
 BOOST_IGNORE_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("std_model_dia_transforms_into_expected_model");
-    const auto i(external_dia::expected_std_model_dia_xml());
-    const auto e(external_dia::expected_std_model_external_xml());
-    const auto a(external_dia::actual_std_model_external_xml());
+    const auto i(injection_dia::expected_std_model_dia_xml());
+    const auto e(injection_dia::expected_std_model_injection_xml());
+    const auto a(injection_dia::actual_std_model_injection_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
 BOOST_IGNORE_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_model) {
     SETUP_TEST_LOG("boost_model_dia_transforms_into_expected_model");
-    const auto i(external_dia::expected_boost_model_dia_xml());
-    const auto e(external_dia::expected_boost_model_external_xml());
-    const auto a(external_dia::actual_boost_model_external_xml());
+    const auto i(injection_dia::expected_boost_model_dia_xml());
+    const auto e(injection_dia::expected_boost_model_injection_xml());
+    const auto a(injection_dia::actual_boost_model_injection_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 

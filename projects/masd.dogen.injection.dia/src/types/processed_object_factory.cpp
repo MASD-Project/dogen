@@ -31,17 +31,17 @@
 #include "masd.dogen.dia/types/attribute.hpp"
 #include "masd.dogen.dia/types/composite.hpp"
 #include "masd.dogen.dia/types/diagram.hpp"
-#include "masd.dogen.external.dia/io/dia_object_types_io.hpp"
-#include "masd.dogen.external.dia/io/processed_object_io.hpp"
-#include "masd.dogen.external.dia/types/building_error.hpp"
-#include "masd.dogen.external.dia/types/processed_object.hpp"
-#include "masd.dogen.external.dia/types/processed_comment_factory.hpp"
-#include "masd.dogen.external.dia/types/processed_object_factory.hpp"
+#include "masd.dogen.injection.dia/io/dia_object_types_io.hpp"
+#include "masd.dogen.injection.dia/io/processed_object_io.hpp"
+#include "masd.dogen.injection.dia/types/building_error.hpp"
+#include "masd.dogen.injection.dia/types/processed_object.hpp"
+#include "masd.dogen.injection.dia/types/processed_comment_factory.hpp"
+#include "masd.dogen.injection.dia/types/processed_object_factory.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("external.dia.processed_object_factory"));
+static logger lg(logger_factory("injection.dia.processed_object_factory"));
 
 const std::string dia_string("string");
 const std::string dia_name("name");
@@ -92,7 +92,7 @@ get_attribute_value(const Variant& v, const std::string& desc) {
     } catch (const boost::bad_get&) {
         BOOST_LOG_SEV(lg, error) << unexpected_attribute_value_type << desc;
 
-        using masd::dogen::external::dia::building_error;
+        using masd::dogen::injection::dia::building_error;
         BOOST_THROW_EXCEPTION(
             building_error(unexpected_attribute_value_type + desc));
     }
@@ -113,7 +113,7 @@ boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
 
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 std::string processed_object_factory::
 parse_string_attribute(const masd::dogen::dia::attribute& a) {

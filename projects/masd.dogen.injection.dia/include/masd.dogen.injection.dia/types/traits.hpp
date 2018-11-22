@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_TRAITS_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_TRAITS_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_TRAITS_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_TRAITS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 #include <string>
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 struct traits {
     /**

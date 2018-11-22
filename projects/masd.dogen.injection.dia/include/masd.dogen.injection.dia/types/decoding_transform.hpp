@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_DECODING_TRANSFORM_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_DECODING_TRANSFORM_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_DECODING_TRANSFORM_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_DECODING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,16 +28,16 @@
 #include <list>
 #include <string>
 #include "masd.dogen.dia/types/diagram_fwd.hpp"
-#include "masd.dogen.external/types/meta_model/model.hpp"
-#include "masd.dogen.external.dia/types/grapher.hpp"
-#include "masd.dogen.external.dia/types/validator.hpp"
-#include "masd.dogen.external.dia/types/processed_object.hpp"
-#include "masd.dogen.external/types/transforms/decoding_transform_interface.hpp"
+#include "masd.dogen.injection/types/meta_model/model.hpp"
+#include "masd.dogen.injection.dia/types/grapher.hpp"
+#include "masd.dogen.injection.dia/types/validator.hpp"
+#include "masd.dogen.injection.dia/types/processed_object.hpp"
+#include "masd.dogen.injection/types/transforms/decoding_transform_interface.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 class decoding_transform final
-    : public external::transforms::decoding_transform_interface {
+    : public injection::transforms::decoding_transform_interface {
 public:
     decoding_transform() = default;
     decoding_transform(const decoding_transform&) = delete;
@@ -53,7 +53,7 @@ private:
 
     /**
      * @brief Transforms the entire graph of processed objects into an
-     * external model.
+     * injection model.
      */
     meta_model::model obtain_model(const std::string& name,
         const std::list<processed_object>& pos) const;

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_COMMENT_FACTORY_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_COMMENT_FACTORY_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_COMMENT_FACTORY_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_COMMENT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "masd.dogen.external.dia/types/processed_comment.hpp"
+#include "masd.dogen.injection.dia/types/processed_comment.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 /**
  * @brief Processes comments in dia diagrams.

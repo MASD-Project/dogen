@@ -29,20 +29,20 @@
 #include "masd.dogen.dia/io/diagram_io.hpp"
 #include "masd.dogen.dia/types/diagram.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.external/types/transforms/context.hpp"
-#include "masd.dogen.external/io/meta_model/model_io.hpp"
-#include "masd.dogen.external/types/transforms/transformation_error.hpp"
-#include "masd.dogen.external.dia/types/builder.hpp"
-#include "masd.dogen.external.dia/types/visitor.hpp"
-#include "masd.dogen.external.dia/types/processed_object.hpp"
-#include "masd.dogen.external.dia/types/processed_comment.hpp"
-#include "masd.dogen.external.dia/types/processed_object_factory.hpp"
-#include "masd.dogen.external.dia/types/decoding_transform.hpp"
+#include "masd.dogen.injection/types/transforms/context.hpp"
+#include "masd.dogen.injection/io/meta_model/model_io.hpp"
+#include "masd.dogen.injection/types/transforms/transformation_error.hpp"
+#include "masd.dogen.injection.dia/types/builder.hpp"
+#include "masd.dogen.injection.dia/types/visitor.hpp"
+#include "masd.dogen.injection.dia/types/processed_object.hpp"
+#include "masd.dogen.injection.dia/types/processed_comment.hpp"
+#include "masd.dogen.injection.dia/types/processed_object_factory.hpp"
+#include "masd.dogen.injection.dia/types/decoding_transform.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-const std::string transform_id("external.dia.decoding_transform");
+const std::string transform_id("injection.dia.decoding_transform");
 auto lg(logger_factory(transform_id));
 
 const std::string extension(".dia");
@@ -52,7 +52,7 @@ const std::string to_dia_support_unavailable(
 
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 inline bool is_not_relevant(const processed_object& po) {
     const auto ot(po.dia_object_type());
@@ -91,10 +91,10 @@ obtain_processed_objects(const masd::dogen::dia::diagram& d) const {
     return r;
 }
 
-external::meta_model::model
+injection::meta_model::model
 decoding_transform::obtain_model(const std::string& name,
     const std::list<processed_object>& pos) const {
-    BOOST_LOG_SEV(lg, debug) << "Generating external model.";
+    BOOST_LOG_SEV(lg, debug) << "Generating injection model.";
 
     /*
      * Create a dependency graph of the objects, and a map of children
@@ -104,7 +104,7 @@ decoding_transform::obtain_model(const std::string& name,
     g.generate(pos);
 
     /*
-     * Go through the dependency graph and build a external model from
+     * Go through the dependency graph and build a injection model from
      * it.
      */
     builder b(g.parent_id_to_child_ids());
@@ -113,7 +113,7 @@ decoding_transform::obtain_model(const std::string& name,
     auto r(b.build());
     r.name(name);
 
-    BOOST_LOG_SEV(lg, debug) << "Generated external model.";
+    BOOST_LOG_SEV(lg, debug) << "Generated injection model.";
     return r;
 }
 
@@ -121,8 +121,8 @@ std::string decoding_transform::extension() const {
     return ::extension;
 }
 
-external::meta_model::model decoding_transform::
-transform(const external::transforms::context& ctx,
+injection::meta_model::model decoding_transform::
+transform(const injection::transforms::context& ctx,
     const boost::filesystem::path& p) {
 
     BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
@@ -139,7 +139,7 @@ transform(const external::transforms::context& ctx,
     stp.end_transform(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished converting diagram into "
-                             << "an external model.";
+                             << "an injection model.";
     return r;
 }
 

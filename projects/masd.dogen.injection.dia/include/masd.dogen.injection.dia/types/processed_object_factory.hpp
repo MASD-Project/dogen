@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_OBJECT_FACTORY_HPP
-#define MASD_DOGEN_EXTERNAL_DIA_TYPES_PROCESSED_OBJECT_FACTORY_HPP
+#ifndef MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_OBJECT_FACTORY_HPP
+#define MASD_DOGEN_INJECTION_DIA_TYPES_PROCESSED_OBJECT_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,11 +31,11 @@
 #include "masd.dogen.dia/types/attribute_fwd.hpp"
 #include "masd.dogen.dia/types/composite_fwd.hpp"
 #include "masd.dogen.dia/types/diagram_fwd.hpp"
-#include "masd.dogen.external.dia/types/dia_object_types.hpp"
-#include "masd.dogen.external.dia/types/processed_object_fwd.hpp"
-#include "masd.dogen.external.dia/types/processed_comment_fwd.hpp"
+#include "masd.dogen.injection.dia/types/dia_object_types.hpp"
+#include "masd.dogen.injection.dia/types/processed_object_fwd.hpp"
+#include "masd.dogen.injection.dia/types/processed_comment_fwd.hpp"
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 /**
  * @brief Processes dia objects into an intermediate format.

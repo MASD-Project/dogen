@@ -23,15 +23,15 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.external.dia/types/traits.hpp"
-#include "masd.dogen.external.dia/types/building_error.hpp"
-#include "masd.dogen.external.dia/types/processed_comment_factory.hpp"
+#include "masd.dogen.injection.dia/types/traits.hpp"
+#include "masd.dogen.injection.dia/types/building_error.hpp"
+#include "masd.dogen.injection.dia/types/processed_comment_factory.hpp"
 
 using namespace masd::dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("external.dia.processed_comment_factory"));
+auto lg(logger_factory("injection.dia.processed_comment_factory"));
 
 const std::string empty;
 const std::string instruction_marker("#DOGEN ");
@@ -40,7 +40,7 @@ const std::string separator_not_found("Expected separator on KVP.");
 
 }
 
-namespace masd::dogen::external::dia {
+namespace masd::dogen::injection::dia {
 
 processed_comment processed_comment_factory::make(const std::string& c) {
     processed_comment r;
