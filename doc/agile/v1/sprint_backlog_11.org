@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-22 Thu 11:25]
+#+CAPTION: Clock summary at [2018-11-22 Thu 15:17]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *119:48* |        |        |   0.0 |
+| *Total time*                                                                | *121:51* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 119:48   |        |        |   0.0 |
-| Active                                                                      |          | 119:48 |        |   0.0 |
+| Stories                                                                     | 121:51   |        |        |   0.0 |
+| Active                                                                      |          | 121:51 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
 | Read up on framework and API design                                         |          |        |   0:57 |   0.0 |
+| Rename models to fit MASD architecture                                      |          |        |   2:03 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -229,7 +230,8 @@ names.
 
 *** STARTED Rename models to fit MASD architecture                    :story:
     :LOGBOOK:
-    CLOCK: [2018-11-22 Thu 13:14]
+    CLOCK: [2018-11-22 Thu 15:16]--[2018-11-22 Thu 15:17] =>  0:01
+    CLOCK: [2018-11-22 Thu 13:14]--[2018-11-22 Thu 15:16] =>  2:02
     :END:
 
 We now have the following top-level models:

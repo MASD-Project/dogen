@@ -50,7 +50,7 @@ public:
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const bool applicable_to_parent_object,
         const std::string& original_content,
-        const std::string& injection_modules);
+        const std::string& external_modules);
 
 public:
     /**
@@ -92,7 +92,7 @@ public:
     /**@}*/
 
     /**
-     * @brief The injection module path, if any was supplied.
+     * @brief The external module path, if any was supplied.
      */
     /**@{*/
     const std::string& external_modules() const;
