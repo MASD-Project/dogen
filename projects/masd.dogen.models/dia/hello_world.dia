@@ -235,8 +235,8 @@ property. You can see the use of comments at the class level and property
 level.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=dogen.hello_world
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=dogen.hello_world
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false

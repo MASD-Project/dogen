@@ -135,13 +135,13 @@
             <dia:string>#CPP is the C++ backend in the default generation kernel.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.generation.cpp
-#DOGEN yarn.reference=masd.dogen.options.dia
-#DOGEN yarn.reference=masd.dogen.coding.dia
-#DOGEN yarn.reference=masd.dogen.extraction.dia
-#DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.tracing.dia
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.generation.cpp
+#DOGEN masd.reference=masd.dogen.options.dia
+#DOGEN masd.reference=masd.dogen.coding.dia
+#DOGEN masd.reference=masd.dogen.extraction.dia
+#DOGEN masd.reference=masd.dogen.annotations.dia
+#DOGEN masd.reference=masd.dogen.tracing.dia
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -13136,7 +13136,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13317,7 +13317,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14033,7 +14033,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14952,7 +14952,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15190,7 +15190,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>#Houses the quilt.cpp extensions to yarn.
 
 #DOGEN dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen#</dia:string>
+#DOGEN masd.dia.external_modules=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -15306,7 +15306,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33016,7 +33016,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33840,7 +33840,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34390,7 +34390,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34571,7 +34571,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

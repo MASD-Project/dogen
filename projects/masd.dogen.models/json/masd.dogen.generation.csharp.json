@@ -2,14 +2,14 @@
   "documentation": "CSharp is the c# model in the default generation kernel.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "yarn.model_modules": "masd.dogen.generation.csharp",
-    "yarn.reference": "masd.dogen.generation.json",
-    "yarn.reference": "masd.dogen.options.json",
-    "yarn.reference": "masd.dogen.coding.json",
-    "yarn.reference": "masd.dogen.extraction.json",
-    "yarn.reference": "masd.dogen.annotations.json",
-    "yarn.reference": "masd.dogen.tracing.json",
-    "yarn.input_language": "cpp",
+    "masd.model_modules": "masd.dogen.generation.csharp",
+    "masd.reference": "masd.dogen.generation.json",
+    "masd.reference": "masd.dogen.options.json",
+    "masd.reference": "masd.dogen.coding.json",
+    "masd.reference": "masd.dogen.extraction.json",
+    "masd.reference": "masd.dogen.annotations.json",
+    "masd.reference": "masd.dogen.tracing.json",
+    "masd.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.standard": "c++-17",
     "quilt.cpp.msbuild.enabled": "false",
@@ -444,7 +444,7 @@
     {
       "name": "fabric::visual_studio_project",
       "tagged_values": {
-        "yarn.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -501,7 +501,7 @@
     {
       "name": "fabric::visual_studio_solution",
       "tagged_values": {
-        "yarn.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -540,7 +540,7 @@
     {
       "name": "fabric::assembly_info",
       "tagged_values": {
-        "yarn.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "masd::object"
     },
@@ -765,7 +765,7 @@
     {
       "name": "fabric::assistant",
       "tagged_values": {
-        "yarn.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "coding::meta_model::element"
       },
       "fallback_element_type": "masd::object"
     },

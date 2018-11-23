@@ -97,8 +97,8 @@
             <dia:string>#Provides the top-level API for the dogen product.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.cli
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.cli
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false

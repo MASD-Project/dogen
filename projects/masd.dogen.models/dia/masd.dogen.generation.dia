@@ -4891,12 +4891,12 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.generation
-#DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.coding.dia
-#DOGEN yarn.reference=masd.dogen.tracing.dia
-#DOGEN yarn.reference=masd.dogen.extraction.dia
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.generation
+#DOGEN masd.reference=masd.dogen.annotations.dia
+#DOGEN masd.reference=masd.dogen.coding.dia
+#DOGEN masd.reference=masd.dogen.tracing.dia
+#DOGEN masd.reference=masd.dogen.extraction.dia
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -5290,7 +5290,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Element properties related to code generation.
 
-#DOGEN yarn.generalization.parent=coding::meta_model::opaque_properties#</dia:string>
+#DOGEN masd.generalization.parent=coding::meta_model::opaque_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

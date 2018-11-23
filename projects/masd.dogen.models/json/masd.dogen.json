@@ -2,8 +2,8 @@
   "documentation": "Provides the top-level API for the dogen product.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "yarn.model_modules": "dogen",
-    "yarn.input_language": "cpp",
+    "masd.model_modules": "dogen",
+    "masd.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.standard": "c++-17",
     "quilt.cpp.msbuild.enabled": "false",

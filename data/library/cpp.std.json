@@ -1,9 +1,9 @@
 {
   "documentation": "C++ Standard Library types.",
   "tagged_values": {
-    "yarn.input_language": "cpp",
-    "yarn.is_proxy_model": true,
-    "yarn.model_modules": "std"
+    "masd.input_language": "cpp",
+    "masd.is_proxy_model": true,
+    "masd.model_modules": "std"
   },
   "elements": [
     {
@@ -125,7 +125,7 @@
       "name": "vector",
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<vector>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/vector.hpp>"
       }
@@ -134,7 +134,7 @@
       "name": "deque",
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<deque>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/deque.hpp>"
       }
@@ -143,7 +143,7 @@
       "name": "array",
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<array>"
       }
     },
@@ -151,7 +151,7 @@
       "name": "list",
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<list>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/list.hpp>"
       }
@@ -160,7 +160,7 @@
       "name": "forward_list",
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<forward_list>"
       }
     },
@@ -169,7 +169,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<set>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/set.hpp>"
       }
@@ -179,7 +179,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "SequenceContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<multiset>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multiset.hpp>"
       }
@@ -189,7 +189,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<unordered_set>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_set.hpp>"
       }
@@ -199,7 +199,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
-        "yarn.type_parameters.count": 2,
+        "masd.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<map>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/map.hpp>"
       }
@@ -209,7 +209,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
-        "yarn.type_parameters.count": 2,
+        "masd.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<multimap>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/multimap.hpp>"
       }
@@ -219,7 +219,7 @@
       "is_associative_container": true,
       "tagged_values": {
         "quilt.cpp.helper.family": "AssociativeContainer",
-        "yarn.type_parameters.count": 2,
+        "masd.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<unordered_map>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/unordered_map.hpp>"
       }
@@ -228,7 +228,7 @@
       "name": "pair",
       "tagged_values": {
         "quilt.cpp.helper.family": "Pair",
-        "yarn.type_parameters.count": 2,
+        "masd.type_parameters.count": 2,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<utility>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/utility.hpp>"
       }
@@ -237,8 +237,8 @@
       "name": "shared_ptr",
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": true,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<memory>"
       }
     },
@@ -246,8 +246,8 @@
       "name": "weak_ptr",
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": true,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<memory>"
       }
     },
@@ -255,8 +255,8 @@
       "name": "unique_ptr",
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": true,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<memory>"
       }
     },
@@ -270,7 +270,7 @@
       "name": "optional",
       "tagged_values": {
         "quilt.cpp.helper.family": "Optional",
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<functional>"
       }
     },

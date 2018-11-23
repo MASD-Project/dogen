@@ -1,9 +1,9 @@
 {
   "documentation": "Hardware-provided built-in types.",
   "tagged_values": {
-    "yarn.input_language": "cpp",
-    "yarn.is_proxy_model": true,
-    "yarn.model_modules": "cpp::builtins"
+    "masd.input_language": "cpp",
+    "masd.is_proxy_model": true,
+    "masd.model_modules": "cpp::builtins"
   },
   "elements": [
     {

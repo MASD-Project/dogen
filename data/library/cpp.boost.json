@@ -1,17 +1,17 @@
 {
   "documentation": "Boost Library types.",
   "tagged_values": {
-    "yarn.input_language": "cpp",
-    "yarn.is_proxy_model": true,
-    "yarn.model_modules": "boost"
+    "masd.input_language": "cpp",
+    "masd.is_proxy_model": true,
+    "masd.model_modules": "boost"
   },
   "elements": [
     {
       "name": "shared_ptr",
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": true,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>",
@@ -22,8 +22,8 @@
       "name": "weak_ptr",
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": true,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>",
@@ -34,8 +34,8 @@
       "name": "scoped_ptr",
       "tagged_values": {
         "quilt.cpp.helper.family": "SmartPointer",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": true,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>",
@@ -46,8 +46,8 @@
       "name": "optional",
       "tagged_values": {
         "quilt.cpp.helper.family": "Optional",
-        "yarn.type_parameters.count": 1,
-        "yarn.type_parameters.always_in_heap": false,
+        "masd.type_parameters.count": 1,
+        "masd.type_parameters.always_in_heap": false,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/optional.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/optional.hpp>",
@@ -59,7 +59,7 @@
       "name": "variant",
       "tagged_values": {
         "quilt.cpp.helper.family": "BoostVariant",
-        "yarn.type_parameters.variable_number_of_parameters": true,
+        "masd.type_parameters.variable_number_of_parameters": true,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/variant.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/variant.hpp>",

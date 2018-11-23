@@ -97,13 +97,13 @@
             <dia:string>#Provides file importing support for JSON.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.injection.json
-#DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.extraction.dia
-#DOGEN yarn.reference=masd.dogen.options.dia
-#DOGEN yarn.reference=masd.dogen.tracing.dia
-#DOGEN yarn.reference=masd.dogen.injection.dia
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.injection.json
+#DOGEN masd.reference=masd.dogen.annotations.dia
+#DOGEN masd.reference=masd.dogen.extraction.dia
+#DOGEN masd.reference=masd.dogen.options.dia
+#DOGEN masd.reference=masd.dogen.tracing.dia
+#DOGEN masd.reference=masd.dogen.injection.dia
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false

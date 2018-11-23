@@ -101,8 +101,8 @@ options for all the different Dogen applications, such as knitter,
 etc.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.options
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.options
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false

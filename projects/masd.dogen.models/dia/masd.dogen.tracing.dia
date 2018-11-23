@@ -97,8 +97,8 @@
             <dia:string>#Houses classes common to all transformations.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.tracing
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.tracing
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false

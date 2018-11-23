@@ -1,15 +1,15 @@
 {
   "documentation": "Basic generic collection types.",
   "tagged_values": {
-    "yarn.input_language": "csharp",
-    "yarn.is_proxy_model": true,
-    "yarn.model_modules": "System.Collections.Generic"
+    "masd.input_language": "csharp",
+    "masd.is_proxy_model": true,
+    "masd.model_modules": "System.Collections.Generic"
   },
   "elements": [
     {
       "name": "IEnumerable",
       "tagged_values": {
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.helper.family": "Enumerable"
       }
@@ -20,7 +20,7 @@
         "IEnumerable"
       ],
       "tagged_values": {
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.helper.family": "Enumerable"
       }
@@ -31,7 +31,7 @@
         "ICollection"
       ],
       "tagged_values": {
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.helper.family": "Enumerable"
       }
@@ -42,7 +42,7 @@
         "ICollection"
       ],
       "tagged_values": {
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.helper.family": "Enumerable"
       }
@@ -53,7 +53,7 @@
         "ICollection"
       ],
       "tagged_values": {
-        "yarn.type_parameters.count": 1,
+        "masd.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
         "quilt.csharp.helper.family": "Enumerable"
       }

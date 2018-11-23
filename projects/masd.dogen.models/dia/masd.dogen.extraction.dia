@@ -4397,8 +4397,8 @@ not language specific. Language-specific models can then make use of
 it.
 
 #DOGEN masd.injection.dia.comment=true
-#DOGEN yarn.model_modules=masd.dogen.extraction
-#DOGEN yarn.input_language=cpp
+#DOGEN masd.model_modules=masd.dogen.extraction
+#DOGEN masd.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
 #DOGEN quilt.cpp.msbuild.enabled=false

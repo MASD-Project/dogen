@@ -2,9 +2,9 @@
   "documentation": "Provides support for encoding and decoding exogenous models.\n\nAn exogenous model is defined as:\n\n- a third-party format that is not owned or controlled by\n  Dogen, such as Dia\n- a Dogen format designed for interoperability (JSON).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "yarn.model_modules": "masd.dogen.injection",
-    "yarn.input_language": "cpp",
-    "yarn.reference": "masd.dogen.tracing.json",
+    "masd.model_modules": "masd.dogen.injection",
+    "masd.input_language": "cpp",
+    "masd.reference": "masd.dogen.tracing.json",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.standard": "c++-17",
     "quilt.cpp.msbuild.enabled": "false",

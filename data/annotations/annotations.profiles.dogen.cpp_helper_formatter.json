@@ -11,10 +11,10 @@
     {
       "name": {
         "simple": "parent",
-        "qualified": "yarn.generalization.parent"
+        "qualified": "masd.generalization.parent"
       },
       "archetype_location": {
-        "kernel": "yarn"
+        "kernel": "masd"
       },
       "template_kind": "instance",
       "untyped_value": [

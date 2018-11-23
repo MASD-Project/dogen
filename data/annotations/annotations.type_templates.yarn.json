@@ -2,10 +2,10 @@
   {
     "name": {
       "simple": "external_modules",
-      "qualified": "yarn.external_modules"
+      "qualified": "masd.external_modules"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -14,10 +14,10 @@
   {
     "name": {
       "simple": "model_modules",
-      "qualified": "yarn.model_modules"
+      "qualified": "masd.model_modules"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -26,10 +26,10 @@
   {
     "name": {
       "simple": "variable_number_of_parameters",
-      "qualified": "yarn.type_parameters.variable_number_of_parameters"
+      "qualified": "masd.type_parameters.variable_number_of_parameters"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -39,10 +39,10 @@
   {
     "name": {
       "simple": "count",
-      "qualified": "yarn.type_parameters.count"
+      "qualified": "masd.type_parameters.count"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "number",
     "template_kind": "instance",
@@ -52,10 +52,10 @@
   {
     "name": {
       "simple": "always_in_heap",
-      "qualified": "yarn.type_parameters.always_in_heap"
+      "qualified": "masd.type_parameters.always_in_heap"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -65,10 +65,10 @@
   {
     "name": {
       "simple": "use_implementation_defined_underlying_element",
-      "qualified": "yarn.enumeration.use_implementation_defined_underlying_element"
+      "qualified": "masd.enumeration.use_implementation_defined_underlying_element"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -78,10 +78,10 @@
   {
     "name": {
       "simple": "underlying_element",
-      "qualified": "yarn.enumeration.underlying_element"
+      "qualified": "masd.enumeration.underlying_element"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -90,10 +90,10 @@
   {
     "name": {
       "simple": "use_implementation_defined_enumerator_values",
-      "qualified": "yarn.enumeration.use_implementation_defined_enumerator_values"
+      "qualified": "masd.enumeration.use_implementation_defined_enumerator_values"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -103,10 +103,10 @@
   {
     "name": {
       "simple": "add_invalid_enumerator",
-      "qualified": "yarn.enumeration.add_invalid_enumerator"
+      "qualified": "masd.enumeration.add_invalid_enumerator"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -116,10 +116,10 @@
   {
     "name": {
       "simple": "value",
-      "qualified": "yarn.enumerator.value"
+      "qualified": "masd.enumerator.value"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,10 +128,10 @@
   {
     "name": {
       "simple": "is_final",
-      "qualified": "yarn.generalization.is_final"
+      "qualified": "masd.generalization.is_final"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -140,10 +140,10 @@
   {
     "name": {
       "simple": "parent",
-      "qualified": "yarn.generalization.parent"
+      "qualified": "masd.generalization.parent"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -152,10 +152,10 @@
   {
     "name": {
       "simple": "is_proxy_model",
-      "qualified": "yarn.is_proxy_model"
+      "qualified": "masd.is_proxy_model"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -165,10 +165,10 @@
   {
     "name": {
       "simple": "reference",
-      "qualified": "yarn.reference"
+      "qualified": "masd.reference"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -177,10 +177,10 @@
   {
     "name": {
       "simple": "input_language",
-      "qualified": "yarn.input_language"
+      "qualified": "masd.input_language"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -190,10 +190,10 @@
   {
     "name": {
       "simple": "output_language",
-      "qualified": "yarn.output_language"
+      "qualified": "masd.output_language"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -202,10 +202,10 @@
   {
     "name": {
       "simple": "underlying_element",
-      "qualified": "yarn.primitive.underlying_element"
+      "qualified": "masd.primitive.underlying_element"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -214,10 +214,10 @@
   {
     "name": {
       "simple": "is_nullable",
-      "qualified": "yarn.primitive.is_nullable"
+      "qualified": "masd.primitive.is_nullable"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -227,10 +227,10 @@
   {
     "name": {
       "simple": "use_type_aliasing",
-      "qualified": "yarn.primitive.use_type_aliasing"
+      "qualified": "masd.primitive.use_type_aliasing"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -240,10 +240,10 @@
   {
     "name": {
       "simple": "database_system",
-      "qualified": "yarn.orm.database_system"
+      "qualified": "masd.orm.database_system"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -252,10 +252,10 @@
   {
     "name": {
       "simple": "table_name",
-      "qualified": "yarn.orm.table_name"
+      "qualified": "masd.orm.table_name"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -264,10 +264,10 @@
   {
     "name": {
       "simple": "schema_name",
-      "qualified": "yarn.orm.schema_name"
+      "qualified": "masd.orm.schema_name"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -276,10 +276,10 @@
   {
     "name": {
       "simple": "is_primary_key",
-      "qualified": "yarn.orm.is_primary_key"
+      "qualified": "masd.orm.is_primary_key"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -288,10 +288,10 @@
   {
     "name": {
       "simple": "column_name",
-      "qualified": "yarn.orm.column_name"
+      "qualified": "masd.orm.column_name"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -300,10 +300,10 @@
   {
     "name": {
       "simple": "is_nullable",
-      "qualified": "yarn.orm.is_nullable"
+      "qualified": "masd.orm.is_nullable"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -312,10 +312,10 @@
   {
     "name": {
       "simple": "is_composite",
-      "qualified": "yarn.orm.is_composite"
+      "qualified": "masd.orm.is_composite"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -324,10 +324,10 @@
   {
     "name": {
       "simple": "letter_case",
-      "qualified": "yarn.orm.letter_case"
+      "qualified": "masd.orm.letter_case"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -336,10 +336,10 @@
   {
     "name": {
       "simple": "type_override",
-      "qualified": "yarn.orm.type_override"
+      "qualified": "masd.orm.type_override"
     },
     "archetype_location": {
-      "kernel": "yarn"
+      "kernel": "masd"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
