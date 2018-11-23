@@ -38,7 +38,7 @@ target_link_libraries(${tests_target_name}
     masd.dogen.utility.lib
     masd.dogen.annotations.lib
     masd.dogen.options.lib
-    masd.dogen.formatting.lib
+    masd.dogen.extraction.lib
     masd.dogen.probing.lib
     masd.dogen.injection.lib
     masd.dogen.injection.dia.lib

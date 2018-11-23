@@ -31,7 +31,7 @@
 #include "masd.dogen.annotations/types/type.hpp"
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/text_model.hpp"
 #include "masd.dogen.coding/types/transforms/model_to_text_model_transform_registrar.hpp"
 #include "masd.dogen.coding/types/transforms/configuration.hpp"

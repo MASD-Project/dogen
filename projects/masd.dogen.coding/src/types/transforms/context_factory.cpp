@@ -26,7 +26,7 @@
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.probing/types/prober.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
@@ -121,7 +121,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     const auto atrp(atrpf.make(alrp, data_dirs));
     const auto ibsp(create_intra_backend_segment_properties(o, rg));
 
-    formatting::repository_factory frpf;
+    extraction::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
 
     probing::prober prober(alrp, atrp,

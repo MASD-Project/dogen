@@ -22,7 +22,7 @@
 #include "masd.dogen.coding/hash/meta_model/name_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/element_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/origin_types_hash.hpp"
-#include "masd.dogen.formatting/hash/decoration_properties_hash.hpp"
+#include "masd.dogen.extraction/hash/decoration_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/opaque_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/static_stereotypes_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/artefact_properties_hash.hpp"

@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.formatting/types/repository_factory.hpp"
-#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -49,10 +49,10 @@ dynamic_transform_registrar& dynamic_transforms_chain::registrar() {
     return *registrar_;
 }
 
-dogen::formatting::decoration_properties_factory
+dogen::extraction::decoration_properties_factory
 dynamic_transforms_chain::create_decoration_properties_factory(
     const context& ctx, const annotations::annotation& ra) {
-    using masd::dogen::formatting::decoration_properties_factory;
+    using masd::dogen::extraction::decoration_properties_factory;
     decoration_properties_factory
         r(ctx.type_repository(), ctx.formatting_repository(), ra);
     return r;

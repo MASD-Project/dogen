@@ -25,7 +25,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/element_io.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
-#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"

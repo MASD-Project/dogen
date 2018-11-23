@@ -31,7 +31,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("formatting.filesystem_writer"));
+static logger lg(logger_factory("extraction.filesystem_writer"));
 
 const std::string using_dir_message("Using directory: ");
 const std::string created_dir_message("Created directory: ");

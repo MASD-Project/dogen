@@ -25,7 +25,7 @@
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
-#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
 #include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
@@ -196,7 +196,7 @@ element::element(
     const std::list<std::string>& dynamic_stereotypes,
     const masd::dogen::coding::meta_model::name& meta_name,
     const bool is_element_extension,
-    const masd::dogen::formatting::decoration_properties& decoration_properties,
+    const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties)
@@ -412,19 +412,19 @@ void element::is_element_extension(const bool v) {
     is_element_extension_ = v;
 }
 
-const masd::dogen::formatting::decoration_properties& element::decoration_properties() const {
+const masd::dogen::extraction::decoration_properties& element::decoration_properties() const {
     return decoration_properties_;
 }
 
-masd::dogen::formatting::decoration_properties& element::decoration_properties() {
+masd::dogen::extraction::decoration_properties& element::decoration_properties() {
     return decoration_properties_;
 }
 
-void element::decoration_properties(const masd::dogen::formatting::decoration_properties& v) {
+void element::decoration_properties(const masd::dogen::extraction::decoration_properties& v) {
     decoration_properties_ = v;
 }
 
-void element::decoration_properties(const masd::dogen::formatting::decoration_properties&& v) {
+void element::decoration_properties(const masd::dogen::extraction::decoration_properties&& v) {
     decoration_properties_ = std::move(v);
 }
 

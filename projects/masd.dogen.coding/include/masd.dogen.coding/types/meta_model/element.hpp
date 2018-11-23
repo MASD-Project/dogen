@@ -35,7 +35,7 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor_fwd.hpp"
@@ -75,7 +75,7 @@ public:
         const std::list<std::string>& dynamic_stereotypes,
         const masd::dogen::coding::meta_model::name& meta_name,
         const bool is_element_extension,
-        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties);
@@ -189,10 +189,10 @@ public:
     void is_element_extension(const bool v);
     /**@}*/
 
-    const masd::dogen::formatting::decoration_properties& decoration_properties() const;
-    masd::dogen::formatting::decoration_properties& decoration_properties();
-    void decoration_properties(const masd::dogen::formatting::decoration_properties& v);
-    void decoration_properties(const masd::dogen::formatting::decoration_properties&& v);
+    const masd::dogen::extraction::decoration_properties& decoration_properties() const;
+    masd::dogen::extraction::decoration_properties& decoration_properties();
+    void decoration_properties(const masd::dogen::extraction::decoration_properties& v);
+    void decoration_properties(const masd::dogen::extraction::decoration_properties&& v);
 
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties() const;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties();
@@ -236,7 +236,7 @@ private:
     std::list<std::string> dynamic_stereotypes_;
     masd::dogen::coding::meta_model::name meta_name_;
     bool is_element_extension_;
-    masd::dogen::formatting::decoration_properties decoration_properties_;
+    masd::dogen::extraction::decoration_properties decoration_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties> archetype_location_properties_;
     std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> > opaque_properties_;
