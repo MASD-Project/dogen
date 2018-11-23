@@ -9,7 +9,7 @@
     {
       "name": "Int16",
       "stereotypes": [
-        "dogen::builtin"
+        "masd::builtin"
       ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
@@ -23,7 +23,7 @@
     {
       "name": "Int32",
       "stereotypes": [
-        "dogen::builtin"
+        "masd::builtin"
       ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
@@ -37,7 +37,7 @@
     {
       "name": "Int64",
       "stereotypes": [
-        "dogen::builtin"
+        "masd::builtin"
       ],
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
