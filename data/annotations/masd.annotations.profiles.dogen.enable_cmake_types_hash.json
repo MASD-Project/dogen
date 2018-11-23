@@ -8,11 +8,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "quilt.cpp.hash.enabled"
+        "qualified": "masd.cpp.hash.enabled"
       },
       "archetype_location": {
-        "kernel": "quilt",
-        "backend": "quilt.cpp"
+        "kernel": "masd",
+        "backend": "masd.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [

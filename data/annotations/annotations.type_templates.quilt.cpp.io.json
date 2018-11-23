@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "quilt.cpp.io.directory"
+      "qualified": "masd.cpp.io.directory"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.postfix"
+      "qualified": "masd.cpp.io.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.class_header.postfix"
+      "qualified": "masd.cpp.io.class_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.class_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.class_implementation.postfix"
+      "qualified": "masd.cpp.io.class_implementation.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.class_implementation"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.enum_header.postfix"
+      "qualified": "masd.cpp.io.enum_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.enum_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.enum_implementation.postfix"
+      "qualified": "masd.cpp.io.enum_implementation.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.enum_implementation"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.primitive_header.postfix"
+      "qualified": "masd.cpp.io.primitive_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.primitive_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -112,13 +112,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.primitive_implementation.postfix"
+      "qualified": "masd.cpp.io.primitive_implementation.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.primitive_implementation"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.primitive_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,13 +128,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.master_header.postfix"
+      "qualified": "masd.cpp.io.master_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.master_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -144,13 +144,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.io.builtin_header.postfix"
+      "qualified": "masd.cpp.io.builtin_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.io",
-      "archetype": "quilt.cpp.io.builtin_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.io",
+      "archetype": "masd.cpp.io.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

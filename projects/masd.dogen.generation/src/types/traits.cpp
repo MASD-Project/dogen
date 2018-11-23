@@ -79,7 +79,7 @@ std::string traits::model_modules() {
 
 std::string traits::enable_backend_directories() {
     // FIXME: rename to yarn
-    static std::string r("quilt.enable_backend_directories");
+    static std::string r("masd.enable_backend_directories");
     return r;
 }
 

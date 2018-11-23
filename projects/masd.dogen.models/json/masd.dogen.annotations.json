@@ -4,12 +4,12 @@
     "masd.injection.dia.comment": "true",
     "masd.model_modules": "masd.dogen.annotations",
     "masd.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.standard": "c++-17",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.standard": "c++-17",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false",
     "masd.annotations.profile": "dogen.disable_common_facets_temp"
   },
   "elements": [

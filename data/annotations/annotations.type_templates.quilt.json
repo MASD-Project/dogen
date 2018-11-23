@@ -4,7 +4,7 @@
       "simple": "enabled"
     },
     "archetype_location": {
-      "kernel": "quilt"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "recursive_template",
@@ -29,7 +29,7 @@
       "simple": "formatting_style"
     },
     "archetype_location": {
-      "kernel": "quilt"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "archetype_template",
@@ -40,7 +40,7 @@
       "simple": "formatting_input"
     },
     "archetype_location": {
-      "kernel": "quilt"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "archetype_template",

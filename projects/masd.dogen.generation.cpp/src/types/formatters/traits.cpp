@@ -35,42 +35,42 @@ master_header_archetype(const std::string& facet) {
 }
 
 std::string traits::cmake_facet() {
-    static std::string r("quilt.cpp.cmake");
+    static std::string r("masd.cpp.cmake");
     return r;
 }
 
 std::string traits::include_cmakelists_archetype() {
-    static std::string r("quilt.cpp.cmake.include_cmakelists");
+    static std::string r("masd.cpp.cmake.include_cmakelists");
     return r;
 }
 
 std::string traits::source_cmakelists_archetype() {
-    static std::string r("quilt.cpp.cmake.source_cmakelists");
+    static std::string r("masd.cpp.cmake.source_cmakelists");
     return r;
 }
 
 std::string traits::msbuild_facet() {
-    static std::string r("quilt.cpp.msbuild");
+    static std::string r("masd.cpp.msbuild");
     return r;
 }
 
 std::string traits::msbuild_targets_archetype() {
-    static std::string r("quilt.cpp.msbuild.targets");
+    static std::string r("masd.cpp.msbuild.targets");
     return r;
 }
 
 std::string traits::visual_studio_facet() {
-    static std::string r("quilt.cpp.visual_studio");
+    static std::string r("masd.cpp.visual_studio");
     return r;
 }
 
 std::string traits::visual_studio_project_archetype() {
-    static std::string r("quilt.cpp.visual_studio.project");
+    static std::string r("masd.cpp.visual_studio.project");
     return r;
 }
 
 std::string traits::visual_studio_solution_archetype() {
-    static std::string r("quilt.cpp.visual_studio.solution");
+    static std::string r("masd.cpp.visual_studio.solution");
     return r;
 }
 
@@ -79,12 +79,12 @@ std::string traits::canonical_archetype(const std::string& facet) {
 }
 
 std::string traits::visual_studio_project_solution_guid() {
-    static std::string r("quilt.cpp.visual_studio.project_solution_guid");
+    static std::string r("masd.cpp.visual_studio.project_solution_guid");
     return r;
 }
 
 std::string traits::visual_studio_project_guid() {
-    static std::string r("quilt.cpp.visual_studio.project_guid");
+    static std::string r("masd.cpp.visual_studio.project_guid");
     return r;
 }
 

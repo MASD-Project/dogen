@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "quilt.cpp.odb.directory"
+      "qualified": "masd.cpp.odb.directory"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.postfix"
+      "qualified": "masd.cpp.odb.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.class_header.postfix"
+      "qualified": "masd.cpp.odb.class_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.class_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.enum_header.postfix"
+      "qualified": "masd.cpp.odb.enum_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.enum_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.primitive_header.postfix"
+      "qualified": "masd.cpp.odb.primitive_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.primitive_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.common_odb_options.postfix"
+      "qualified": "masd.cpp.odb.common_odb_options.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.common_odb_options"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.common_odb_options"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.object_odb_options.postfix"
+      "qualified": "masd.cpp.odb.object_odb_options.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.object_odb_options"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.object_odb_options"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -112,13 +112,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.master_header.postfix"
+      "qualified": "masd.cpp.odb.master_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.master_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,12 +128,12 @@
   {
     "name": {
       "simple": "pragma",
-      "qualified": "quilt.cpp.odb.pragma"
+      "qualified": "masd.cpp.odb.pragma"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -142,13 +142,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.builtin_header.postfix"
+      "qualified": "masd.cpp.odb.builtin_header.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.cpp",
-      "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.builtin_header"
+      "kernel": "masd",
+      "backend": "masd.cpp",
+      "facet": "masd.cpp.odb",
+      "archetype": "masd.cpp.odb.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

@@ -53,7 +53,7 @@ namespace masd::dogen::coding::transforms {
 std::ostream&
 operator<<(std::ostream& s, const formatting_transform::type_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::quilt::cpp::formattables::"
+      << "\"__type__\": " << "\"masd::dogen::masd::cpp::formattables::"
       << "formatting_transform::type_group\"" << ", "
       << "\"formatting_style\": " << v.formatting_style << ", "
       << "\"formatting_input\": " << v.formatting_input

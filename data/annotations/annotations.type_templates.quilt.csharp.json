@@ -2,11 +2,11 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "quilt.csharp.directory"
+      "qualified": "masd.csharp.directory"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -18,8 +18,8 @@
       "simple": "supported"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -31,8 +31,8 @@
       "simple": "overwrite"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -44,8 +44,8 @@
       "simple": "overwrite"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "boolean",
     "template_kind": "archetype_template",
@@ -54,11 +54,11 @@
   {
     "name": {
       "simple": "requires_static_reference_equals",
-      "qualified": "quilt.csharp.aspect.requires_static_reference_equals"
+      "qualified": "masd.csharp.aspect.requires_static_reference_equals"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -68,12 +68,12 @@
   {
     "name": {
       "simple": "project_solution_guid",
-      "qualified": "quilt.csharp.visual_studio.project_solution_guid"
+      "qualified": "masd.csharp.visual_studio.project_solution_guid"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp",
-      "facet": "quilt.csharp.visual_studio"
+      "kernel": "masd",
+      "backend": "masd.csharp",
+      "facet": "masd.csharp.visual_studio"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -83,12 +83,12 @@
   {
     "name": {
       "simple": "project_guid",
-      "qualified": "quilt.csharp.visual_studio.project_guid"
+      "qualified": "masd.csharp.visual_studio.project_guid"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp",
-      "facet": "quilt.csharp.visual_studio"
+      "kernel": "masd",
+      "backend": "masd.csharp",
+      "facet": "masd.csharp.visual_studio"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -98,13 +98,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.visual_studio.solution.postfix"
+      "qualified": "masd.csharp.visual_studio.solution.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp",
-      "facet": "quilt.csharp.visual_studio",
-      "archetype": "quilt.csharp.visual_studio.solution.postfix"
+      "kernel": "masd",
+      "backend": "masd.csharp",
+      "facet": "masd.csharp.visual_studio",
+      "archetype": "masd.csharp.visual_studio.solution.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -114,13 +114,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.visual_studio.project.postfix"
+      "qualified": "masd.csharp.visual_studio.project.postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp",
-      "facet": "quilt.csharp.visual_studio",
-      "archetype": "quilt.csharp.visual_studio.project.postfix"
+      "kernel": "masd",
+      "backend": "masd.csharp",
+      "facet": "masd.csharp.visual_studio",
+      "archetype": "masd.csharp.visual_studio.project.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -130,11 +130,11 @@
   {
     "name": {
       "simple": "kernel",
-      "qualified": "quilt.csharp.helper.family"
+      "qualified": "masd.csharp.helper.family"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -144,11 +144,11 @@
   {
     "name": {
       "simple": "requires_assistance",
-      "qualified": "quilt.csharp.assistant.requires_assistance"
+      "qualified": "masd.csharp.assistant.requires_assistance"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -158,11 +158,11 @@
   {
     "name": {
       "simple": "assistant_method_postfix",
-      "qualified": "quilt.csharp.assistant.method_postfix"
+      "qualified": "masd.csharp.assistant.method_postfix"
     },
     "archetype_location": {
-      "kernel": "quilt",
-      "backend": "quilt.csharp"
+      "kernel": "masd",
+      "backend": "masd.csharp"
     },
     "value_type": "text",
     "template_kind": "instance",

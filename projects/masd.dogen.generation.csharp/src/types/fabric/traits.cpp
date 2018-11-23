@@ -23,12 +23,12 @@
 namespace masd::dogen::generation::csharp::fabric {
 
 std::string traits::visual_studio_project_solution_guid() {
-    static std::string r("quilt.csharp.visual_studio.project_solution_guid");
+    static std::string r("masd.csharp.visual_studio.project_solution_guid");
     return r;
 }
 
 std::string traits::visual_studio_project_guid() {
-    static std::string r("quilt.csharp.visual_studio.project_guid");
+    static std::string r("masd.csharp.visual_studio.project_guid");
     return r;
 }
 

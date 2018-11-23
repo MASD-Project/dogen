@@ -8,11 +8,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "quilt.cpp.cmake.enabled"
+        "qualified": "masd.cpp.cmake.enabled"
       },
       "archetype_location": {
-        "kernel": "quilt",
-        "backend": "quilt.cpp"
+        "kernel": "masd",
+        "backend": "masd.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -22,11 +22,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "quilt.cpp.odb.enabled"
+        "qualified": "masd.cpp.odb.enabled"
       },
       "archetype_location": {
-        "kernel": "quilt",
-        "backend": "quilt.cpp"
+        "kernel": "masd",
+        "backend": "masd.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -36,11 +36,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "quilt.cpp.test_data.enabled"
+        "qualified": "masd.cpp.test_data.enabled"
       },
       "archetype_location": {
-        "kernel": "quilt",
-        "backend": "quilt.cpp"
+        "kernel": "masd",
+        "backend": "masd.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -50,11 +50,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "quilt.cpp.hash.enabled"
+        "qualified": "masd.cpp.hash.enabled"
       },
       "archetype_location": {
-        "kernel": "quilt",
-        "backend": "quilt.cpp"
+        "kernel": "masd",
+        "backend": "masd.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [

@@ -4,12 +4,12 @@
     "masd.injection.dia.comment": "true",
     "masd.model_modules": "dogen.cli",
     "masd.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.standard": "c++-17",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.standard": "c++-17",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false",
     "masd.annotations.profile": "dogen.disable_odb_cmake"
   },
   "elements": [
@@ -58,8 +58,8 @@
         "handcrafted"
       ],
       "tagged_values": {
-        "quilt.cpp.types.class_header.enabled": "false",
-        "quilt.cpp.types.forward_declarations.enabled": "false"
+        "masd.cpp.types.class_header.enabled": "false",
+        "masd.cpp.types.forward_declarations.enabled": "false"
       },
       "fallback_element_type": "masd::object"
     },

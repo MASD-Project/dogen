@@ -10,8 +10,8 @@
         "simple": "enabled"
       },
       "archetype_location": {
-        "kernel": "quilt",
-        "backend": "quilt.cpp"
+        "kernel": "masd",
+        "backend": "masd.cpp"
       },
       "template_kind": "facet_template",
       "untyped_value": [

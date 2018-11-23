@@ -54,7 +54,7 @@ public:
 
     /**
      * @brief Initialise a new decoration configuration factory, with
-     * access to fallbacks. This constructor is used by quilt.cpp.
+     * access to fallbacks. This constructor is used by masd.cpp.
      *
      * @param rp where to look up reference data.
      * @param fallback object to use to construct defaults, if any.

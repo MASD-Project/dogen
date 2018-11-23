@@ -15,9 +15,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Byte"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Byte"
       }
     },
     {
@@ -29,9 +29,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "ShortByte"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "ShortByte"
       }
     },
     {
@@ -44,9 +44,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Int"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Int"
       }
     },
     {
@@ -58,9 +58,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "UInt"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "UInt"
       }
     },
     {
@@ -72,9 +72,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Short"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Short"
       }
     },
     {
@@ -86,9 +86,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "UShort"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "UShort"
       }
     },
     {
@@ -100,9 +100,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Long"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Long"
       }
     },
     {
@@ -114,9 +114,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "ULong"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "ULong"
       }
     },
     {
@@ -128,10 +128,10 @@
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.helper.family": "FloatingPointNumber",
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Float"
+        "masd.csharp.helper.family": "FloatingPointNumber",
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Float"
       }
     },
     {
@@ -143,10 +143,10 @@
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.helper.family": "FloatingPointNumber",
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Double"
+        "masd.csharp.helper.family": "FloatingPointNumber",
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Double"
       }
     },
     {
@@ -157,9 +157,9 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Char"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Char"
       }
     },
     {
@@ -170,17 +170,17 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Bool"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Bool"
       }
     },
     {
       "name": "object",
       "in_global_module": true,
       "tagged_values": {
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Object"
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Object"
       }
     },
     {
@@ -188,8 +188,8 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "String"
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "String"
       }
     },
     {
@@ -200,9 +200,9 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "quilt.csharp.aspect.requires_static_reference_equals": false,
-        "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Decimal"
+        "masd.csharp.aspect.requires_static_reference_equals": false,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Decimal"
       }
     }
   ]

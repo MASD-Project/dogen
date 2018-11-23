@@ -847,12 +847,12 @@ and to build it.
 #DOGEN masd.reference=masd.dogen.extraction.dia
 #DOGEN masd.reference=masd.dogen.tracing.dia
 #DOGEN masd.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.standard=c++-17
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.csharp.enabled=false
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.standard=c++-17
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false
 #DOGEN masd.annotations.profile=dogen.disable_common_facets_temp#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
