@@ -4833,7 +4833,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
 #DOGEN quilt.cpp.visual_studio.project.enabled=false
 #DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_common_facets_temp2#</dia:string>
+#DOGEN masd.annotations.profile=dogen.disable_common_facets_temp2#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
