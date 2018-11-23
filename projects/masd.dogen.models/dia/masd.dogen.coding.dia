@@ -4573,7 +4573,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
             <dia:string>#decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatting::decoration_properties#</dia:string>
+            <dia:string>#extraction::decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11697,7 +11697,7 @@ model.#</dia:string>
             <dia:string>#formatting_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatting::repository#</dia:string>
+            <dia:string>#extraction::repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -8773,7 +8773,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#style#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::extraction_styles#</dia:string>
+            <dia:string>#meta_model::formatting_styles#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10510,7 +10510,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#formatting_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatting::repository#</dia:string>
+            <dia:string>#extraction::repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
