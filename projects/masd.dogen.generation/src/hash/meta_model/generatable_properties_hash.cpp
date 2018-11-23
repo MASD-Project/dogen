@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.formatting/hash/decoration_properties_hash.hpp"
+#include "masd.dogen.extraction/hash/decoration_properties_hash.hpp"
 #include "masd.dogen.coding/hash/meta_model/opaque_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/artefact_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/generatable_properties_hash.hpp"

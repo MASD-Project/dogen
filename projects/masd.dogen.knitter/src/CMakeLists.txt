@@ -55,7 +55,7 @@ target_link_libraries(${exe_target_name}
     masd.dogen.utility.lib
     masd.dogen.options.lib
     masd.dogen.dia.lib
-    masd.dogen.formatting.lib
+    masd.dogen.extraction.lib
     masd.dogen.injection.lib
     masd.dogen.injection.json.lib
     masd.dogen.injection.dia.lib

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.generation/types/meta_model/generatable_properties.hpp"
@@ -73,7 +73,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace masd::dogen::generation::meta_model {
 
 generatable_properties::generatable_properties(
-    const masd::dogen::formatting::decoration_properties& decoration_properties,
+    const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties)
     : masd::dogen::coding::meta_model::opaque_properties(),
@@ -121,19 +121,19 @@ generatable_properties& generatable_properties::operator=(generatable_properties
     return *this;
 }
 
-const masd::dogen::formatting::decoration_properties& generatable_properties::decoration_properties() const {
+const masd::dogen::extraction::decoration_properties& generatable_properties::decoration_properties() const {
     return decoration_properties_;
 }
 
-masd::dogen::formatting::decoration_properties& generatable_properties::decoration_properties() {
+masd::dogen::extraction::decoration_properties& generatable_properties::decoration_properties() {
     return decoration_properties_;
 }
 
-void generatable_properties::decoration_properties(const masd::dogen::formatting::decoration_properties& v) {
+void generatable_properties::decoration_properties(const masd::dogen::extraction::decoration_properties& v) {
     decoration_properties_ = v;
 }
 
-void generatable_properties::decoration_properties(const masd::dogen::formatting::decoration_properties&& v) {
+void generatable_properties::decoration_properties(const masd::dogen::extraction::decoration_properties&& v) {
     decoration_properties_ = std::move(v);
 }
 

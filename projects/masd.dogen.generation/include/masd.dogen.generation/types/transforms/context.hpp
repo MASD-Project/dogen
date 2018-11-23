@@ -32,7 +32,7 @@
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.formatting/types/repository.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
 #include "masd.dogen.probing/types/prober.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.generation/types/helpers/artefact_writer_interface.hpp"
@@ -47,7 +47,7 @@ class context final {
         const std::vector<boost::filesystem::path>& data_directories,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const masd::dogen::formatting::repository& frp,
+        const masd::dogen::extraction::repository& frp,
         const probing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
@@ -76,7 +76,7 @@ public:
     /**
      * @brief Repository with formatter data.
      */
-    const masd::dogen::formatting::repository& formatting_repository() const;
+    const masd::dogen::extraction::repository& formatting_repository() const;
 
     /*
      * @brief Returns the transform probe.
@@ -100,7 +100,7 @@ private:
     archetype_location_repository_;
     const annotations::type_repository type_repository_;
         const annotations::annotation_factory annotation_factory_;
-    const masd::dogen::formatting::repository formatting_repository_;
+    const masd::dogen::extraction::repository formatting_repository_;
     const probing::prober prober_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>

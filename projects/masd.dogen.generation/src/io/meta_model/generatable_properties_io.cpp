@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"

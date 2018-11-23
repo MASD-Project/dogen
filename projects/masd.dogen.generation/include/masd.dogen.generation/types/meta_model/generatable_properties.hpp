@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
@@ -49,7 +49,7 @@ public:
 
 public:
     generatable_properties(
-        const masd::dogen::formatting::decoration_properties& decoration_properties,
+        const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties);
 
@@ -57,10 +57,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const masd::dogen::formatting::decoration_properties& decoration_properties() const;
-    masd::dogen::formatting::decoration_properties& decoration_properties();
-    void decoration_properties(const masd::dogen::formatting::decoration_properties& v);
-    void decoration_properties(const masd::dogen::formatting::decoration_properties&& v);
+    const masd::dogen::extraction::decoration_properties& decoration_properties() const;
+    masd::dogen::extraction::decoration_properties& decoration_properties();
+    void decoration_properties(const masd::dogen::extraction::decoration_properties& v);
+    void decoration_properties(const masd::dogen::extraction::decoration_properties&& v);
 
     const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties() const;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties();
@@ -86,7 +86,7 @@ public:
     generatable_properties& operator=(generatable_properties other);
 
 private:
-    masd::dogen::formatting::decoration_properties decoration_properties_;
+    masd::dogen::extraction::decoration_properties decoration_properties_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties> archetype_location_properties_;
 };

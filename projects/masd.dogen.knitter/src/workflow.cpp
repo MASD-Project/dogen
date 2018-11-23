@@ -25,7 +25,7 @@
 #include "masd.dogen.utility/log/life_cycle_manager.hpp"
 #include "masd.dogen.utility/log/severity_level.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.formatting/types/formatting_error.hpp"
+#include "masd.dogen.extraction/types/formatting_error.hpp"
 #include "masd.dogen.coding/types/transforms/options.hpp"
 #include "masd.dogen.coding/types/transforms/context_factory.hpp"
 #include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
@@ -123,7 +123,7 @@ void workflow::knit(const coding::transforms::options& o) const {
         using namespace coding::transforms;
         const auto ctx(context_factory::make(o));
         code_generation_chain::transform(ctx);
-    } catch(const masd::dogen::formatting::formatting_error& e) {
+    } catch(const masd::dogen::extraction::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));
     } catch (boost::exception& e) {
         e << errmsg_workflow(code_generation_failure);
