@@ -1,14 +1,14 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
-    "yarn.model_modules": "boost_model",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
+    "masd.injection.dia.comment": "true",
+    "masd.model_modules": "boost_model",
+    "masd.external_modules": "dogen::test_models",
+    "masd.input_language": "cpp",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false",
     "annotations.profile": "dogen"
   },
   "elements": [
@@ -215,7 +215,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "boost::posix_time::ptime"
+        "masd.primitive.underlying_element": "boost::posix_time::ptime"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -226,7 +226,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "boost::posix_time::time_duration"
+        "masd.primitive.underlying_element": "boost::posix_time::time_duration"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -237,7 +237,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "boost::gregorian::date"
+        "masd.primitive.underlying_element": "boost::gregorian::date"
       },
       "fallback_element_type": "dogen::object"
     },

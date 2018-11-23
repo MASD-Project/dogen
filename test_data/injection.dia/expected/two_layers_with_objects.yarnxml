@@ -7,39 +7,39 @@
 		<count>10</count>
 		<item_version>0</item_version>
 		<item class_id="15" tracking_level="0" version="0">
-			<first>yarn.dia.comment</first>
+			<first>masd.injection.dia.comment</first>
 			<second>true</second>
 		</item>
 		<item>
-			<first>yarn.model_modules</first>
+			<first>masd.model_modules</first>
 			<second>two_layers_with_objects</second>
 		</item>
 		<item>
-			<first>yarn.external_modules</first>
+			<first>masd.external_modules</first>
 			<second>dogen::test_models</second>
 		</item>
 		<item>
-			<first>yarn.input_language</first>
+			<first>masd.input_language</first>
 			<second>cpp</second>
 		</item>
 		<item>
-			<first>quilt.cpp.enabled</first>
+			<first>masd.cpp.enabled</first>
 			<second>true</second>
 		</item>
 		<item>
-			<first>quilt.cpp.msbuild.enabled</first>
+			<first>masd.cpp.msbuild.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>quilt.cpp.visual_studio.project.enabled</first>
+			<first>masd.cpp.visual_studio.project.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>quilt.cpp.visual_studio.solution.enabled</first>
+			<first>masd.cpp.visual_studio.solution.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>quilt.csharp.enabled</first>
+			<first>masd.csharp.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
@@ -76,7 +76,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -116,7 +116,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -143,7 +143,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -183,7 +183,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 	</elements>
 	<stereotypes>
@@ -192,4 +192,3 @@
 	</stereotypes>
 </entity>
 </boost_serialization>
-

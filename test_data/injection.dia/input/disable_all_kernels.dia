@@ -290,12 +290,12 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=disable_all_kernels
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=false
-#DOGEN quilt.csharp.enabled=false#</dia:string>
+            <dia:string>##DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=disable_all_kernels
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=false
+#DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

@@ -1,14 +1,14 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
-    "yarn.model_modules": "cpp_model",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
-    "quilt.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
-    "quilt.csharp.enabled": "false",
+    "masd.injection.dia.comment": "true",
+    "masd.model_modules": "cpp_model",
+    "masd.external_modules": "dogen::test_models",
+    "masd.input_language": "cpp",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
+    "masd.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
+    "masd.csharp.enabled": "false",
     "annotations.profile": "dogen"
   },
   "elements": [
@@ -182,7 +182,7 @@
       "name": "package_3",
       "documentation": "package\n",
       "tagged_values": {
-        "yarn.dia.comment": "true"
+        "masd.injection.dia.comment": "true"
       },
       "fallback_element_type": "dogen::module"
     },
@@ -190,7 +190,7 @@
       "name": "package_3::package_1",
       "documentation": "inner package\n",
       "tagged_values": {
-        "yarn.dia.comment": "true"
+        "masd.injection.dia.comment": "true"
       },
       "fallback_element_type": "dogen::module"
     },
@@ -268,7 +268,7 @@
         "dogen::enumeration"
       ],
       "tagged_values": {
-        "yarn.enumeration.underlying_element": "short"
+        "masd.enumeration.underlying_element": "short"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -288,9 +288,9 @@
         "dogen::enumeration"
       ],
       "tagged_values": {
-        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
-        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
-        "yarn.enumeration.add_invalid_enumerator": "false"
+        "masd.enumeration.use_implementation_defined_underlying_element": "true",
+        "masd.enumeration.use_implementation_defined_enumerator_values": "true",
+        "masd.enumeration.add_invalid_enumerator": "false"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -312,7 +312,7 @@
         "dogen::enumeration"
       ],
       "tagged_values": {
-        "yarn.enumeration.add_invalid_enumerator": "false"
+        "masd.enumeration.add_invalid_enumerator": "false"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -320,35 +320,35 @@
           "name": "none",
           "type": "",
           "tagged_values": {
-            "yarn.enumerator.value": "0x00"
+            "masd.enumerator.value": "0x00"
           }
         },
         {
           "name": "top",
           "type": "",
           "tagged_values": {
-            "yarn.enumerator.value": "0x01"
+            "masd.enumerator.value": "0x01"
           }
         },
         {
           "name": "bottom",
           "type": "",
           "tagged_values": {
-            "yarn.enumerator.value": "0x02"
+            "masd.enumerator.value": "0x02"
           }
         },
         {
           "name": "left",
           "type": "",
           "tagged_values": {
-            "yarn.enumerator.value": "0x04"
+            "masd.enumerator.value": "0x04"
           }
         },
         {
           "name": "right",
           "type": "",
           "tagged_values": {
-            "yarn.enumerator.value": "0x08"
+            "masd.enumerator.value": "0x08"
           }
         }
       ]
@@ -409,7 +409,7 @@
         "dogen::immutable"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "short"
+        "masd.primitive.underlying_element": "short"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -471,7 +471,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "short"
+        "masd.primitive.underlying_element": "short"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -482,7 +482,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "long"
+        "masd.primitive.underlying_element": "long"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -493,7 +493,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "int"
+        "masd.primitive.underlying_element": "int"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -504,7 +504,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "char"
+        "masd.primitive.underlying_element": "char"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -515,7 +515,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "unsigned char"
+        "masd.primitive.underlying_element": "unsigned char"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -526,7 +526,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "unsigned long"
+        "masd.primitive.underlying_element": "unsigned long"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -537,7 +537,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "unsigned int"
+        "masd.primitive.underlying_element": "unsigned int"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -548,7 +548,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "unsigned short"
+        "masd.primitive.underlying_element": "unsigned short"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -559,7 +559,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "double"
+        "masd.primitive.underlying_element": "double"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -570,7 +570,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "float"
+        "masd.primitive.underlying_element": "float"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -581,7 +581,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "bool"
+        "masd.primitive.underlying_element": "bool"
       },
       "fallback_element_type": "dogen::object"
     },
@@ -606,18 +606,18 @@
         "handcrafted"
       ],
       "tagged_values": {
-        "quilt.cpp.hash.enabled": "true",
-        "quilt.cpp.hash.overwrite": "false",
-        "quilt.cpp.io.enabled": "true",
-        "quilt.cpp.io.overwrite": "false",
-        "quilt.cpp.odb.enabled": "true",
-        "quilt.cpp.odb.overwrite": "false",
-        "quilt.cpp.serialization.enabled": "true",
-        "quilt.cpp.serialization.overwrite": "false",
-        "quilt.cpp.test_data.enabled": "true",
-        "quilt.cpp.test_data.overwrite": "false",
-        "quilt.cpp.types.forward_declarations.overwrite": "true",
-        "quilt.cpp.serialization.forward_declarations.overwrite": "true"
+        "masd.cpp.hash.enabled": "true",
+        "masd.cpp.hash.overwrite": "false",
+        "masd.cpp.io.enabled": "true",
+        "masd.cpp.io.overwrite": "false",
+        "masd.cpp.odb.enabled": "true",
+        "masd.cpp.odb.overwrite": "false",
+        "masd.cpp.serialization.enabled": "true",
+        "masd.cpp.serialization.overwrite": "false",
+        "masd.cpp.test_data.enabled": "true",
+        "masd.cpp.test_data.overwrite": "false",
+        "masd.cpp.types.forward_declarations.overwrite": "true",
+        "masd.cpp.serialization.forward_declarations.overwrite": "true"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1150,7 +1150,7 @@
     {
       "name": "child_via_settings",
       "tagged_values": {
-        "yarn.generalization.parent": "parent_with_members"
+        "masd.generalization.parent": "parent_with_members"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1166,7 +1166,7 @@
         "descendant1"
       ],
       "tagged_values": {
-        "yarn.generalization.is_final": "false"
+        "masd.generalization.is_final": "false"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1179,7 +1179,7 @@
     {
       "name": "non_final_orphan",
       "tagged_values": {
-        "yarn.generalization.is_final": "false"
+        "masd.generalization.is_final": "false"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1219,7 +1219,7 @@
     {
       "name": "package_6::child_via_settings",
       "tagged_values": {
-        "yarn.generalization.parent": "package_6::parent"
+        "masd.generalization.parent": "package_6::parent"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1263,7 +1263,7 @@
     {
       "name": "package_8::child_via_settings",
       "tagged_values": {
-        "yarn.generalization.parent": "package_7::parent"
+        "masd.generalization.parent": "package_7::parent"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -1280,7 +1280,7 @@
     {
       "name": "package_9::child_via_settings",
       "tagged_values": {
-        "yarn.generalization.parent": "parent_outside"
+        "masd.generalization.parent": "parent_outside"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [

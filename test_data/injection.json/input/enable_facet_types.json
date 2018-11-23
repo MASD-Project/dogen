@@ -1,14 +1,14 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
-    "yarn.model_modules": "enable_facet_types",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
+    "masd.injection.dia.comment": "true",
+    "masd.model_modules": "enable_facet_types",
+    "masd.external_modules": "dogen::test_models",
+    "masd.input_language": "cpp",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false",
     "annotations.profile": "dogen.enable_cmake_types"
   },
   "elements": [

@@ -1287,15 +1287,15 @@
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=class_without_name
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.csharp.enabled=false
+																<value>##DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=class_without_name
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>
@@ -1394,4 +1394,3 @@
 	</layers>
 </entity>
 </boost_serialization>
-

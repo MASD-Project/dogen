@@ -1,17 +1,17 @@
 {
   "documentation": "Tests support for C++ 98.\n",
   "tagged_values": {
-    "yarn.dia.comment": "true",
-    "yarn.model_modules": "cpp_98",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
-    "quilt.cpp.standard": "c++-98",
-    "quilt.cpp.hash.enabled": "false"
+    "masd.injection.dia.comment": "true",
+    "masd.model_modules": "cpp_98",
+    "masd.external_modules": "dogen::test_models",
+    "masd.input_language": "cpp",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false",
+    "masd.cpp.standard": "c++-98",
+    "masd.cpp.hash.enabled": "false"
   },
   "elements": [
     {

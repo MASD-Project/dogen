@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-23 Fri 16:56]
+#+CAPTION: Clock summary at [2018-11-23 Fri 21:49]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *126:02* |        |        |   0.0 |
+| *Total time*                                                                | *128:00* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 126:02   |        |        |   0.0 |
-| Active                                                                      |          | 126:02 |        |   0.0 |
+| Stories                                                                     | 128:00   |        |        |   0.0 |
+| Active                                                                      |          | 128:00 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
 | Read up on framework and API design                                         |          |        |   0:57 |   0.0 |
 | Rename models to fit MASD architecture                                      |          |        |   4:56 |   0.0 |
-| Great meta-data rename                                                      |          |        |   1:18 |   0.0 |
+| Great meta-data rename                                                      |          |        |   3:16 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -250,7 +250,8 @@ We need to update the models to match this.
 
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
-    CLOCK: [2018-11-23 Fri 16:57]
+    CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
+    CLOCK: [2018-11-23 Fri 16:57]--[2018-11-23 Fri 18:08] =>  1:11
     CLOCK: [2018-11-23 Fri 16:50]--[2018-11-23 Fri 16:56] =>  0:06
     CLOCK: [2018-11-23 Fri 15:37]--[2018-11-23 Fri 16:49] =>  1:12
     :END:
@@ -275,6 +276,8 @@ We should use the new names as part of this rename, e.g.:
 
 : masd.injection.dia.comment
 : masd.extraction.cpp.enabled
+
+Rename =is_proxy_model= to =platform_definition_model=.
 
 *** Create the =orchestration= model                                  :story:
 

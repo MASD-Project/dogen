@@ -1406,7 +1406,7 @@
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.dia.comment=true
+																<value>##DOGEN masd.injection.dia.comment=true
 #DOGEN licence_name=gpl_v3
 #DOGEN modeline_group_name=emacs
 #DOGEN copyright_notice=Copyright (C) 2012-2015 Marco Craveiro &lt;marco.craveiro@gmail.com&gt;#</value>
@@ -1507,4 +1507,3 @@
 	</layers>
 </entity>
 </boost_serialization>
-

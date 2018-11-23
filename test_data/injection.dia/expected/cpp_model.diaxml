@@ -2521,15 +2521,15 @@
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=cpp_model
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project_guid=876B2828-8A0B-495F-8340-0357690162E4
-#DOGEN quilt.cpp.visual_studio.project_solution_guid=3103CA57-FD70-4EC9-98BD-1C2C7360AF53
-#DOGEN quilt.csharp.enabled=false
+																<value>##DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=cpp_model
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project_guid=876B2828-8A0B-495F-8340-0357690162E4
+#DOGEN masd.cpp.visual_studio.project_solution_guid=3103CA57-FD70-4EC9-98BD-1C2C7360AF53
+#DOGEN masd.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>
@@ -10160,7 +10160,7 @@ it will be ignored.#</value>
 															<which>6</which>
 															<value>
 																<value>#package
-#DOGEN yarn.dia.comment=true#</value>
+#DOGEN masd.injection.dia.comment=true#</value>
 															</value>
 														</item>
 													</values>
@@ -10416,7 +10416,7 @@ it will be ignored.#</value>
 															<which>6</which>
 															<value>
 																<value>#inner package
-#DOGEN yarn.dia.comment=true#</value>
+#DOGEN masd.injection.dia.comment=true#</value>
 															</value>
 														</item>
 													</values>
@@ -13316,7 +13316,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.enumeration.underlying_element=short#</value>
+										<value>##DOGEN masd.enumeration.underlying_element=short#</value>
 									</value>
 								</item>
 							</values>
@@ -14056,9 +14056,9 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.enumeration.use_implementation_defined_underlying_element=true
-#DOGEN yarn.enumeration.use_implementation_defined_enumerator_values=true
-#DOGEN yarn.enumeration.add_invalid_enumerator=false#</value>
+										<value>##DOGEN masd.enumeration.use_implementation_defined_underlying_element=true
+#DOGEN masd.enumeration.use_implementation_defined_enumerator_values=true
+#DOGEN masd.enumeration.add_invalid_enumerator=false#</value>
 									</value>
 								</item>
 							</values>
@@ -14800,7 +14800,7 @@ this is a long comment#</value>
 									<value>
 										<value>#This is an example of an enumeration using hex flags.
 
-#DOGEN yarn.enumeration.add_invalid_enumerator=false#</value>
+#DOGEN masd.enumeration.add_invalid_enumerator=false#</value>
 									</value>
 								</item>
 							</values>
@@ -15221,7 +15221,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.enumerator.value=0x00#</value>
+																<value>##DOGEN masd.enumerator.value=0x00#</value>
 															</value>
 														</item>
 													</values>
@@ -15339,7 +15339,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.enumerator.value=0x01#</value>
+																<value>##DOGEN masd.enumerator.value=0x01#</value>
 															</value>
 														</item>
 													</values>
@@ -15457,7 +15457,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.enumerator.value=0x02#</value>
+																<value>##DOGEN masd.enumerator.value=0x02#</value>
 															</value>
 														</item>
 													</values>
@@ -15575,7 +15575,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.enumerator.value=0x04#</value>
+																<value>##DOGEN masd.enumerator.value=0x04#</value>
 															</value>
 														</item>
 													</values>
@@ -15693,7 +15693,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.enumerator.value=0x08#</value>
+																<value>##DOGEN masd.enumerator.value=0x08#</value>
 															</value>
 														</item>
 													</values>
@@ -18244,7 +18244,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test for a primitive which is also immutable.
 
-#DOGEN yarn.primitive.underlying_element=short#</value>
+#DOGEN masd.primitive.underlying_element=short#</value>
 									</value>
 								</item>
 							</values>
@@ -20552,7 +20552,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying short.
 
-#DOGEN yarn.primitive.underlying_element=short#</value>
+#DOGEN masd.primitive.underlying_element=short#</value>
 									</value>
 								</item>
 							</values>
@@ -21058,7 +21058,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying long.
 
-#DOGEN yarn.primitive.underlying_element=long#</value>
+#DOGEN masd.primitive.underlying_element=long#</value>
 									</value>
 								</item>
 							</values>
@@ -21564,7 +21564,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying int.
 
-#DOGEN yarn.primitive.underlying_element=int#</value>
+#DOGEN masd.primitive.underlying_element=int#</value>
 									</value>
 								</item>
 							</values>
@@ -22070,7 +22070,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying char.
 
-#DOGEN yarn.primitive.underlying_element=char#</value>
+#DOGEN masd.primitive.underlying_element=char#</value>
 									</value>
 								</item>
 							</values>
@@ -22576,7 +22576,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying unsigned char.
 
-#DOGEN yarn.primitive.underlying_element=unsigned char#</value>
+#DOGEN masd.primitive.underlying_element=unsigned char#</value>
 									</value>
 								</item>
 							</values>
@@ -23082,7 +23082,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying unsigned long.
 
-#DOGEN yarn.primitive.underlying_element=unsigned long#</value>
+#DOGEN masd.primitive.underlying_element=unsigned long#</value>
 									</value>
 								</item>
 							</values>
@@ -23588,7 +23588,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying unsigned int.
 
-#DOGEN yarn.primitive.underlying_element=unsigned int#</value>
+#DOGEN masd.primitive.underlying_element=unsigned int#</value>
 									</value>
 								</item>
 							</values>
@@ -24094,7 +24094,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying unsgined short.
 
-#DOGEN yarn.primitive.underlying_element=unsigned short#</value>
+#DOGEN masd.primitive.underlying_element=unsigned short#</value>
 									</value>
 								</item>
 							</values>
@@ -24600,7 +24600,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying double.
 
-#DOGEN yarn.primitive.underlying_element=double#</value>
+#DOGEN masd.primitive.underlying_element=double#</value>
 									</value>
 								</item>
 							</values>
@@ -25106,7 +25106,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying float.
 
-#DOGEN yarn.primitive.underlying_element=float#</value>
+#DOGEN masd.primitive.underlying_element=float#</value>
 									</value>
 								</item>
 							</values>
@@ -25612,7 +25612,7 @@ this is a long comment#</value>
 									<value>
 										<value>#Test a primitive with an underlying bool.
 
-#DOGEN yarn.primitive.underlying_element=bool#</value>
+#DOGEN masd.primitive.underlying_element=bool#</value>
 									</value>
 								</item>
 							</values>
@@ -26740,18 +26740,18 @@ this is a long comment#</value>
 									<value>
 										<value>#Type is non-generatable.
 
-#DOGEN quilt.cpp.hash.enabled=true
-#DOGEN quilt.cpp.hash.overwrite=false
-#DOGEN quilt.cpp.io.enabled=true
-#DOGEN quilt.cpp.io.overwrite=false
-#DOGEN quilt.cpp.odb.enabled=true
-#DOGEN quilt.cpp.odb.overwrite=false
-#DOGEN quilt.cpp.serialization.enabled=true
-#DOGEN quilt.cpp.serialization.overwrite=false
-#DOGEN quilt.cpp.test_data.enabled=true
-#DOGEN quilt.cpp.test_data.overwrite=false
-#DOGEN quilt.cpp.types.forward_declarations.overwrite=true
-#DOGEN quilt.cpp.serialization.forward_declarations.overwrite=true#</value>
+#DOGEN masd.cpp.hash.enabled=true
+#DOGEN masd.cpp.hash.overwrite=false
+#DOGEN masd.cpp.io.enabled=true
+#DOGEN masd.cpp.io.overwrite=false
+#DOGEN masd.cpp.odb.enabled=true
+#DOGEN masd.cpp.odb.overwrite=false
+#DOGEN masd.cpp.serialization.enabled=true
+#DOGEN masd.cpp.serialization.overwrite=false
+#DOGEN masd.cpp.test_data.enabled=true
+#DOGEN masd.cpp.test_data.overwrite=false
+#DOGEN masd.cpp.types.forward_declarations.overwrite=true
+#DOGEN masd.cpp.serialization.forward_declarations.overwrite=true#</value>
 									</value>
 								</item>
 							</values>
@@ -59824,7 +59824,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.generalization.parent=parent_with_members#</value>
+										<value>##DOGEN masd.generalization.parent=parent_with_members#</value>
 									</value>
 								</item>
 							</values>
@@ -60446,7 +60446,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.generalization.is_final=false#</value>
+										<value>##DOGEN masd.generalization.is_final=false#</value>
 									</value>
 								</item>
 							</values>
@@ -61261,7 +61261,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.generalization.is_final=false#</value>
+										<value>##DOGEN masd.generalization.is_final=false#</value>
 									</value>
 								</item>
 							</values>
@@ -63315,7 +63315,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.generalization.parent=package_6::parent#</value>
+										<value>##DOGEN masd.generalization.parent=package_6::parent#</value>
 									</value>
 								</item>
 							</values>
@@ -65937,7 +65937,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.generalization.parent=package_7::parent#</value>
+										<value>##DOGEN masd.generalization.parent=package_7::parent#</value>
 									</value>
 								</item>
 							</values>
@@ -66741,7 +66741,7 @@ of the object template instantiated by the base class.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>##DOGEN yarn.generalization.parent=parent_outside#</value>
+										<value>##DOGEN masd.generalization.parent=parent_outside#</value>
 									</value>
 								</item>
 							</values>
@@ -71304,4 +71304,3 @@ inside of a package.#</value>
 	</layers>
 </entity>
 </boost_serialization>
-

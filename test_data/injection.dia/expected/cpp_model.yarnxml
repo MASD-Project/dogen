@@ -7,39 +7,39 @@
 		<count>10</count>
 		<item_version>0</item_version>
 		<item class_id="15" tracking_level="0" version="0">
-			<first>yarn.dia.comment</first>
+			<first>masd.injection.dia.comment</first>
 			<second>true</second>
 		</item>
 		<item>
-			<first>yarn.model_modules</first>
+			<first>masd.model_modules</first>
 			<second>cpp_model</second>
 		</item>
 		<item>
-			<first>yarn.external_modules</first>
+			<first>masd.external_modules</first>
 			<second>dogen::test_models</second>
 		</item>
 		<item>
-			<first>yarn.input_language</first>
+			<first>masd.input_language</first>
 			<second>cpp</second>
 		</item>
 		<item>
-			<first>quilt.cpp.enabled</first>
+			<first>masd.cpp.enabled</first>
 			<second>true</second>
 		</item>
 		<item>
-			<first>quilt.cpp.msbuild.enabled</first>
+			<first>masd.cpp.msbuild.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>quilt.cpp.visual_studio.project_guid</first>
+			<first>masd.cpp.visual_studio.project_guid</first>
 			<second>876B2828-8A0B-495F-8340-0357690162E4</second>
 		</item>
 		<item>
-			<first>quilt.cpp.visual_studio.project_solution_guid</first>
+			<first>masd.cpp.visual_studio.project_solution_guid</first>
 			<second>3103CA57-FD70-4EC9-98BD-1C2C7360AF53</second>
 		</item>
 		<item>
-			<first>quilt.csharp.enabled</first>
+			<first>masd.csharp.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
@@ -245,7 +245,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -272,7 +272,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -312,7 +312,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -352,7 +352,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -392,7 +392,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -432,7 +432,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -472,7 +472,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -512,7 +512,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -539,7 +539,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -579,7 +579,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -606,7 +606,7 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>this is the brief comment
@@ -677,7 +677,7 @@ a second line
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>first line
@@ -708,7 +708,7 @@ third line with &quot;quote&quot;
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>package
@@ -717,7 +717,7 @@ third line with &quot;quote&quot;
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.dia.comment</first>
+					<first>masd.injection.dia.comment</first>
 					<second>true</second>
 				</item>
 			</tagged_values>
@@ -740,7 +740,7 @@ third line with &quot;quote&quot;
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation>inner package
@@ -749,7 +749,7 @@ third line with &quot;quote&quot;
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.dia.comment</first>
+					<first>masd.injection.dia.comment</first>
 					<second>true</second>
 				</item>
 			</tagged_values>
@@ -772,7 +772,7 @@ third line with &quot;quote&quot;
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation>this is a brief comment
@@ -840,9 +840,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::enumeration</item>
+				<item>masd::enumeration</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -923,9 +923,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::enumeration</item>
+				<item>masd::enumeration</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -991,7 +991,7 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -999,7 +999,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.enumeration.underlying_element</first>
+					<first>masd.enumeration.underlying_element</first>
 					<second>short</second>
 				</item>
 			</tagged_values>
@@ -1047,9 +1047,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::enumeration</item>
+				<item>masd::enumeration</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1057,15 +1057,15 @@ this is a long comment
 				<count>3</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.enumeration.use_implementation_defined_underlying_element</first>
+					<first>masd.enumeration.use_implementation_defined_underlying_element</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>yarn.enumeration.use_implementation_defined_enumerator_values</first>
+					<first>masd.enumeration.use_implementation_defined_enumerator_values</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>yarn.enumeration.add_invalid_enumerator</first>
+					<first>masd.enumeration.add_invalid_enumerator</first>
 					<second>false</second>
 				</item>
 			</tagged_values>
@@ -1114,9 +1114,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::enumeration</item>
+				<item>masd::enumeration</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This is an example of an enumeration using hex flags.
@@ -1125,7 +1125,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.enumeration.add_invalid_enumerator</first>
+					<first>masd.enumeration.add_invalid_enumerator</first>
 					<second>false</second>
 				</item>
 			</tagged_values>
@@ -1143,7 +1143,7 @@ this is a long comment
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<first>yarn.enumerator.value</first>
+							<first>masd.enumerator.value</first>
 							<second>0x00</second>
 						</item>
 					</tagged_values>
@@ -1160,7 +1160,7 @@ this is a long comment
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<first>yarn.enumerator.value</first>
+							<first>masd.enumerator.value</first>
 							<second>0x01</second>
 						</item>
 					</tagged_values>
@@ -1177,7 +1177,7 @@ this is a long comment
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<first>yarn.enumerator.value</first>
+							<first>masd.enumerator.value</first>
 							<second>0x02</second>
 						</item>
 					</tagged_values>
@@ -1194,7 +1194,7 @@ this is a long comment
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<first>yarn.enumerator.value</first>
+							<first>masd.enumerator.value</first>
 							<second>0x04</second>
 						</item>
 					</tagged_values>
@@ -1211,7 +1211,7 @@ this is a long comment
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<first>yarn.enumerator.value</first>
+							<first>masd.enumerator.value</first>
 							<second>0x08</second>
 						</item>
 					</tagged_values>
@@ -1232,9 +1232,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::enumeration</item>
+				<item>masd::enumeration</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1261,7 +1261,7 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1339,9 +1339,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::enumeration</item>
+				<item>masd::enumeration</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>this is an exception
@@ -1368,9 +1368,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::exception</item>
+				<item>masd::exception</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1397,7 +1397,7 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -1423,9 +1423,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::exception</item>
+				<item>masd::exception</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test for a primitive which is also immutable.
@@ -1434,7 +1434,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>short</second>
 				</item>
 			</tagged_values>
@@ -1456,10 +1456,10 @@ this is a long comment
 			<stereotypes>
 				<count>2</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
-				<item>yarn::immutable</item>
+				<item>masd::primitive</item>
+				<item>masd::immutable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This type makes use of all primitves in this test model.
@@ -1630,7 +1630,7 @@ this is a long comment
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying short.
@@ -1639,7 +1639,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>short</second>
 				</item>
 			</tagged_values>
@@ -1661,9 +1661,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying long.
@@ -1672,7 +1672,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>long</second>
 				</item>
 			</tagged_values>
@@ -1694,9 +1694,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying int.
@@ -1705,7 +1705,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>int</second>
 				</item>
 			</tagged_values>
@@ -1727,9 +1727,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying char.
@@ -1738,7 +1738,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>char</second>
 				</item>
 			</tagged_values>
@@ -1760,9 +1760,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsigned char.
@@ -1771,7 +1771,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>unsigned char</second>
 				</item>
 			</tagged_values>
@@ -1793,9 +1793,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsigned long.
@@ -1804,7 +1804,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>unsigned long</second>
 				</item>
 			</tagged_values>
@@ -1826,9 +1826,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsigned int.
@@ -1837,7 +1837,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>unsigned int</second>
 				</item>
 			</tagged_values>
@@ -1859,9 +1859,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying unsgined short.
@@ -1870,7 +1870,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>unsigned short</second>
 				</item>
 			</tagged_values>
@@ -1892,9 +1892,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying double.
@@ -1903,7 +1903,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>double</second>
 				</item>
 			</tagged_values>
@@ -1925,9 +1925,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying float.
@@ -1936,7 +1936,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>float</second>
 				</item>
 			</tagged_values>
@@ -1958,9 +1958,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Test a primitive with an underlying bool.
@@ -1969,7 +1969,7 @@ this is a long comment
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.primitive.underlying_element</first>
+					<first>masd.primitive.underlying_element</first>
 					<second>bool</second>
 				</item>
 			</tagged_values>
@@ -1991,9 +1991,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::primitive</item>
+				<item>masd::primitive</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Type is a service.
@@ -2035,7 +2035,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>handcrafted</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Type is non-generatable.
@@ -2044,51 +2044,51 @@ this is a long comment
 				<count>12</count>
 				<item_version>0</item_version>
 				<item>
-					<first>quilt.cpp.hash.enabled</first>
+					<first>masd.cpp.hash.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>quilt.cpp.hash.overwrite</first>
+					<first>masd.cpp.hash.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>quilt.cpp.io.enabled</first>
+					<first>masd.cpp.io.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>quilt.cpp.io.overwrite</first>
+					<first>masd.cpp.io.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>quilt.cpp.odb.enabled</first>
+					<first>masd.cpp.odb.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>quilt.cpp.odb.overwrite</first>
+					<first>masd.cpp.odb.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>quilt.cpp.serialization.enabled</first>
+					<first>masd.cpp.serialization.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>quilt.cpp.serialization.overwrite</first>
+					<first>masd.cpp.serialization.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>quilt.cpp.test_data.enabled</first>
+					<first>masd.cpp.test_data.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>quilt.cpp.test_data.overwrite</first>
+					<first>masd.cpp.test_data.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>quilt.cpp.types.forward_declarations.overwrite</first>
+					<first>masd.cpp.types.forward_declarations.overwrite</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>quilt.cpp.serialization.forward_declarations.overwrite</first>
+					<first>masd.cpp.serialization.forward_declarations.overwrite</first>
 					<second>true</second>
 				</item>
 			</tagged_values>
@@ -2125,7 +2125,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>handcrafted</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Tests the fluent scenario across the different types of properties.
@@ -2191,9 +2191,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::fluent</item>
+				<item>masd::fluent</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Immutable class with no properties.
@@ -2220,9 +2220,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::immutable</item>
+				<item>masd::immutable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -2274,9 +2274,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::immutable</item>
+				<item>masd::immutable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Immutable class with a built-in property.
@@ -2316,9 +2316,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::immutable</item>
+				<item>masd::immutable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Immutable class with one pod property
@@ -2358,9 +2358,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::immutable</item>
+				<item>masd::immutable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Immutable class with non-immutable and immutable pods as properties.
@@ -2439,9 +2439,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::immutable</item>
+				<item>masd::immutable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This is an example of an object template.
@@ -2496,9 +2496,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This class instantiates the simple object template.
@@ -2541,7 +2541,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>SimpleObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This is the base object template.
@@ -2582,9 +2582,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This object template inherits from BaseObjectTemplate.
@@ -2625,9 +2625,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This class instantiates the BaseObjectTemplate.
@@ -2656,7 +2656,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>BaseObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>This class instantiates the DescendantObjectTemplate obje.
@@ -2685,7 +2685,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>DescendantObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Base object template.
@@ -2726,9 +2726,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -2769,9 +2769,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Second descendant
@@ -2813,9 +2813,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Multiple parents object template
@@ -2858,9 +2858,9 @@ this is a long comment
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Second descendant instance
@@ -2903,7 +2903,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>SecondChildObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Instantiates object template MultipleParentsObjectTemplate.
@@ -2946,7 +2946,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>MultipleParentsObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Type that instantiates more than one object template.
@@ -2990,7 +2990,7 @@ this is a long comment
 				<item>FirstChildObjectTemplate</item>
 				<item>SecondChildObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Base class that instantiates a derived object template.
@@ -3019,7 +3019,7 @@ this is a long comment
 				<item_version>0</item_version>
 				<item>SecondChildObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Descendant class that instantiates an object template which is a descendant
@@ -3050,7 +3050,7 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 				<item>MultipleParentsObjectTemplate</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Type is a value.
@@ -3091,7 +3091,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3131,7 +3131,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3171,7 +3171,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3198,7 +3198,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3225,7 +3225,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3252,7 +3252,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3280,7 +3280,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3320,7 +3320,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3348,7 +3348,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3389,7 +3389,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3417,7 +3417,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3458,7 +3458,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3499,7 +3499,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3527,7 +3527,7 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 				<item>handcrafted</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3555,7 +3555,7 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 				<item>handcrafted</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3581,9 +3581,9 @@ of the object template instantiated by the base class.
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::visitable</item>
+				<item>masd::visitable</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3624,7 +3624,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3652,7 +3652,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3693,7 +3693,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Base class for scenario that tests code generated move contructors.
@@ -3735,7 +3735,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Descendant class for scenario that tests code generated move contructors.
@@ -3778,7 +3778,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation>Descendant class for scenario that tests code generated move contructors.
@@ -3807,7 +3807,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3815,7 +3815,7 @@ of the object template instantiated by the base class.
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.generalization.parent</first>
+					<first>masd.generalization.parent</first>
 					<second>parent_with_members</second>
 				</item>
 			</tagged_values>
@@ -3851,7 +3851,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3859,7 +3859,7 @@ of the object template instantiated by the base class.
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.generalization.is_final</first>
+					<first>masd.generalization.is_final</first>
 					<second>false</second>
 				</item>
 			</tagged_values>
@@ -3896,7 +3896,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3904,7 +3904,7 @@ of the object template instantiated by the base class.
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.generalization.is_final</first>
+					<first>masd.generalization.is_final</first>
 					<second>false</second>
 				</item>
 			</tagged_values>
@@ -3940,7 +3940,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -3967,7 +3967,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4007,7 +4007,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4048,7 +4048,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4056,7 +4056,7 @@ of the object template instantiated by the base class.
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.generalization.parent</first>
+					<first>masd.generalization.parent</first>
 					<second>package_6::parent</second>
 				</item>
 			</tagged_values>
@@ -4092,7 +4092,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4119,7 +4119,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4146,7 +4146,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4186,7 +4186,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4227,7 +4227,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4235,7 +4235,7 @@ of the object template instantiated by the base class.
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.generalization.parent</first>
+					<first>masd.generalization.parent</first>
 					<second>package_7::parent</second>
 				</item>
 			</tagged_values>
@@ -4271,7 +4271,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4298,7 +4298,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4306,7 +4306,7 @@ of the object template instantiated by the base class.
 				<count>1</count>
 				<item_version>0</item_version>
 				<item>
-					<first>yarn.generalization.parent</first>
+					<first>masd.generalization.parent</first>
 					<second>parent_outside</second>
 				</item>
 			</tagged_values>
@@ -4342,7 +4342,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4382,7 +4382,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4423,7 +4423,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4450,7 +4450,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4503,7 +4503,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4530,7 +4530,7 @@ of the object template instantiated by the base class.
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
-			<fallback_element_type>yarn::module</fallback_element_type>
+			<fallback_element_type>masd::module</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4569,9 +4569,9 @@ of the object template instantiated by the base class.
 			<stereotypes>
 				<count>1</count>
 				<item_version>0</item_version>
-				<item>yarn::object_template</item>
+				<item>masd::object_template</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 		<item>
 			<documentation></documentation>
@@ -4599,7 +4599,7 @@ of the object template instantiated by the base class.
 				<item_version>0</item_version>
 				<item>ObjectTemplateInAPackage</item>
 			</stereotypes>
-			<fallback_element_type>yarn::object</fallback_element_type>
+			<fallback_element_type>masd::object</fallback_element_type>
 		</item>
 	</elements>
 	<stereotypes>
@@ -4608,4 +4608,3 @@ of the object template instantiated by the base class.
 	</stereotypes>
 </entity>
 </boost_serialization>
-

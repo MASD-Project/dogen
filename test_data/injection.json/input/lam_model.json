@@ -1,16 +1,16 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
-    "yarn.model_modules": "lam_model",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.input_language": "language_agnostic",
-    "yarn.output_language": "csharp",
-    "yarn.output_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "true",
+    "masd.injection.dia.comment": "true",
+    "masd.model_modules": "lam_model",
+    "masd.external_modules": "dogen::test_models",
+    "masd.input_language": "language_agnostic",
+    "masd.output_language": "csharp",
+    "masd.output_language": "cpp",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "true",
     "annotations.profile": "dogen"
   },
   "elements": [

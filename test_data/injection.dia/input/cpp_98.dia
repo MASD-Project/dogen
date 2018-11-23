@@ -292,17 +292,17 @@
           <dia:attribute name="string">
             <dia:string>#Tests support for C++ 98.
 
-#DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=cpp_98
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.csharp.enabled=false
-#DOGEN quilt.cpp.standard=c++-98
-#DOGEN quilt.cpp.hash.enabled=false#</dia:string>
+#DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=cpp_98
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false
+#DOGEN masd.cpp.standard=c++-98
+#DOGEN masd.cpp.hash.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

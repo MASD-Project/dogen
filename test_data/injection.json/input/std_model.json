@@ -1,14 +1,14 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
-    "yarn.model_modules": "std_model",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
+    "masd.injection.dia.comment": "true",
+    "masd.model_modules": "std_model",
+    "masd.external_modules": "dogen::test_models",
+    "masd.input_language": "cpp",
+    "masd.cpp.enabled": "true",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false",
     "annotations.profile": "dogen"
   },
   "elements": [
@@ -283,7 +283,7 @@
         "dogen::enumeration"
       ],
       "tagged_values": {
-        "yarn.enumeration.underlying_element": "std::int8_t"
+        "masd.enumeration.underlying_element": "std::int8_t"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [
@@ -304,7 +304,7 @@
         "dogen::primitive"
       ],
       "tagged_values": {
-        "yarn.primitive.underlying_element": "std::string"
+        "masd.primitive.underlying_element": "std::string"
       },
       "fallback_element_type": "dogen::object"
     },

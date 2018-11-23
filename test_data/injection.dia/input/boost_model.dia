@@ -2085,15 +2085,15 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=boost_model
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.csharp.enabled=false
+            <dia:string>##DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=boost_model
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -2139,7 +2139,7 @@
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying ptime.
 
-#DOGEN yarn.primitive.underlying_element=boost::posix_time::ptime#</dia:string>
+#DOGEN masd.primitive.underlying_element=boost::posix_time::ptime#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2251,7 +2251,7 @@
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying time_duration.
 
-#DOGEN yarn.primitive.underlying_element=boost::posix_time::time_duration#</dia:string>
+#DOGEN masd.primitive.underlying_element=boost::posix_time::time_duration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2363,7 +2363,7 @@
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying time_duration.
 
-#DOGEN yarn.primitive.underlying_element=boost::gregorian::date#</dia:string>
+#DOGEN masd.primitive.underlying_element=boost::gregorian::date#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

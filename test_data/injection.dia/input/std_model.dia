@@ -2629,15 +2629,15 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=std_model
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.csharp.enabled=false
+            <dia:string>##DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=std_model
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -2681,7 +2681,7 @@
         <dia:string>#dogen::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.enumeration.underlying_element=std::int8_t#</dia:string>
+        <dia:string>##DOGEN masd.enumeration.underlying_element=std::int8_t#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2840,7 +2840,7 @@
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying string.
 
-#DOGEN yarn.primitive.underlying_element=std::string#</dia:string>
+#DOGEN masd.primitive.underlying_element=std::string#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

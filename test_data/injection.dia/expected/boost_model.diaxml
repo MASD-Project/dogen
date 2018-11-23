@@ -9942,15 +9942,15 @@
 														<item>
 															<which>6</which>
 															<value>
-																<value>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.model_modules=boost_model
-#DOGEN yarn.external_modules=dogen::test_models
-#DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
-#DOGEN quilt.csharp.enabled=false
+																<value>##DOGEN masd.injection.dia.comment=true
+#DOGEN masd.model_modules=boost_model
+#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.input_language=cpp
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>
@@ -10159,7 +10159,7 @@
 									<value>
 										<value>#Test a primitive with an underlying ptime.
 
-#DOGEN yarn.primitive.underlying_element=boost::posix_time::ptime#</value>
+#DOGEN masd.primitive.underlying_element=boost::posix_time::ptime#</value>
 									</value>
 								</item>
 							</values>
@@ -10665,7 +10665,7 @@
 									<value>
 										<value>#Test a primitive with an underlying time_duration.
 
-#DOGEN yarn.primitive.underlying_element=boost::posix_time::time_duration#</value>
+#DOGEN masd.primitive.underlying_element=boost::posix_time::time_duration#</value>
 									</value>
 								</item>
 							</values>
@@ -11171,7 +11171,7 @@
 									<value>
 										<value>#Test a primitive with an underlying time_duration.
 
-#DOGEN yarn.primitive.underlying_element=boost::gregorian::date#</value>
+#DOGEN masd.primitive.underlying_element=boost::gregorian::date#</value>
 									</value>
 								</item>
 							</values>
@@ -12425,4 +12425,3 @@
 	</layers>
 </entity>
 </boost_serialization>
-
