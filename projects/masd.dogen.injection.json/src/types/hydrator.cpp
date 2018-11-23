@@ -34,7 +34,7 @@ using namespace masd::dogen::utility::log;
 auto lg(logger_factory("injection.json.hydrator"));
 
 const std::string empty;
-const std::string object_element_type("dogen::object");
+const std::string object_element_type("masd::object");
 const std::string fallback_element_type_key("fallback_element_type");
 const std::string name_key("name");
 const std::string parents_key("parents");

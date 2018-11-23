@@ -149,7 +149,7 @@ yet imposing some constraints on the shape of the data.
         <dia:string>#value#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::visitable#</dia:string>
+        <dia:string>#masd::visitable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Base class of all value types.#</dia:string>
@@ -941,7 +941,7 @@ yet imposing some constraints on the shape of the data.
         <dia:string>#value_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#What values can a field hold.#</dia:string>
@@ -1573,7 +1573,7 @@ yet imposing some constraints on the shape of the data.
         <dia:string>#scope_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Where can a field appear.#</dia:string>
@@ -1845,7 +1845,7 @@ yet imposing some constraints on the shape of the data.
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred while the field factory was building.#</dia:string>
@@ -4060,7 +4060,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#selection_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred when attempting to select.#</dia:string>
@@ -4170,7 +4170,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#hydration_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst trying to hydrate field definitions.#</dia:string>
@@ -4805,7 +4805,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#template_kinds#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5400,7 +5400,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:string>#instantiation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst trying to instantiate a field definition template.#</dia:string>
@@ -9993,7 +9993,7 @@ associated properties.#</dia:string>
         <dia:string>#profiling_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

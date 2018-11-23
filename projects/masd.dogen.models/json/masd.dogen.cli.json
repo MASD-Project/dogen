@@ -17,23 +17,23 @@
       "name": "parser_validation_error",
       "documentation": "A fatal error has occurred during option parsing.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "orchestrator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "command_line_parser",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "program_options_parser",
@@ -43,14 +43,14 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "injector_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "main",
@@ -61,15 +61,15 @@
         "quilt.cpp.types.class_header.enabled": "false",
         "quilt.cpp.types.forward_declarations.enabled": "false"
       },
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "orchestration_error",
       "documentation": "A fatal error has occurred during orchestration.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     }
   ]
 }

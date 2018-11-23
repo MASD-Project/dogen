@@ -21,44 +21,44 @@
     {
       "name": "hydration_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "hydrator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "decoding_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "encoding_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "dehydrator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     }
   ]
 }

@@ -18,7 +18,7 @@
   "elements": [
     {
       "name": "meta_model",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "meta_model::model",
@@ -27,7 +27,7 @@
         "Nameable",
         "MetaNameable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "references",
@@ -88,7 +88,7 @@
     },
     {
       "name": "meta_model::artefact_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "enabled",
@@ -119,9 +119,9 @@
     {
       "name": "meta_model::formatting_styles",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stock",
@@ -139,7 +139,7 @@
     },
     {
       "name": "meta_model::element_archetype",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "element",
@@ -153,7 +153,7 @@
     },
     {
       "name": "meta_model::text_model",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "artefacts",
@@ -167,7 +167,7 @@
     },
     {
       "name": "meta_model::locator_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "directory_structure_style",
@@ -205,9 +205,9 @@
     {
       "name": "meta_model::directory_structure_styles",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "structured",
@@ -229,7 +229,7 @@
     {
       "name": "meta_model::model_segment_properties",
       "documentation": "Properties related to the model segment of the path.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "directory",
@@ -252,9 +252,9 @@
       "name": "meta_model::path_contribution_types",
       "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "none",
@@ -276,7 +276,7 @@
     {
       "name": "meta_model::backend_properties",
       "documentation": "Properties related to the backend.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "enabled",
@@ -292,7 +292,7 @@
     },
     {
       "name": "meta_model::intra_backend_segment_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "override_parent_path",
@@ -329,7 +329,7 @@
     {
       "name": "meta_model::archetype_family_properties",
       "documentation": "Properties pertaining to families of archetypes, related to the path computation.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "extension",
@@ -340,7 +340,7 @@
     },
     {
       "name": "meta_model::global_archetype_location_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "backend_properties",
@@ -362,7 +362,7 @@
     },
     {
       "name": "meta_model::local_archetype_location_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "facet_enabled",
@@ -384,7 +384,7 @@
     },
     {
       "name": "meta_model::denormalised_archetype_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "backend_enabled",
@@ -427,7 +427,7 @@
     {
       "name": "meta_model::artefact",
       "documentation": "Artefact in a text model.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "path",
@@ -453,7 +453,7 @@
     },
     {
       "name": "meta_model::facet_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "enabled",
@@ -479,7 +479,7 @@
     {
       "name": "meta_model::archetype_properties",
       "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "enabled",
@@ -500,9 +500,9 @@
     {
       "name": "meta_model::Nameable",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -513,9 +513,9 @@
     {
       "name": "meta_model::MetaNameable",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "meta_name",
@@ -529,7 +529,7 @@
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::opaque_properties"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "decoration_properties",
@@ -547,56 +547,56 @@
     },
     {
       "name": "transforms",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "transforms::generability_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::dynamic_transforms_chain",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::dynamic_transform_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::dynamic_transform_registrar",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_text_model_chain",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_text_model_transform_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_text_model_transform_registrar",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "transforms_by_language_",
@@ -606,7 +606,7 @@
     },
     {
       "name": "transforms::configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "enabled_backends",
@@ -623,25 +623,25 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::artefact_properties_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::formatting_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::formatting_configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "style",
@@ -658,42 +658,42 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_post_processing_chain",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::archetype_location_properties_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::locator_properties_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::text_model_generation_chain",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::context",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "type_repository",
@@ -722,18 +722,18 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "helpers::artefact_writer_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "helpers::filesystem_writer",
@@ -743,7 +743,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "force_write_",
@@ -759,7 +759,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stream_",
@@ -771,24 +771,24 @@
       "name": "helpers::writing_error",
       "documentation": "An error ocrurred whilst writing.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::transformation_error",
       "documentation": "An error occurred whilst applying a transformation.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     }
   ]
 }

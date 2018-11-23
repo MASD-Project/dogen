@@ -16,47 +16,47 @@
   "elements": [
     {
       "name": "transforms",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "transforms::encoding_transform_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::registrar",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::registrar_error",
       "documentation": "A registration error has occurred.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_generation_chain",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_model_chain",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "meta_model::model",
@@ -67,7 +67,7 @@
         "Taggable",
         "Stereotypable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "elements",
@@ -84,7 +84,7 @@
         "Taggable",
         "Stereotypable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "parents",
@@ -133,7 +133,7 @@
         "Taggable",
         "Stereotypable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "type",
@@ -145,9 +145,9 @@
       "name": "meta_model::Taggable",
       "documentation": "Ability to contain tagged values.\n",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "tagged_values",
@@ -159,9 +159,9 @@
       "name": "meta_model::Stereotypable",
       "documentation": "Ability to have stereotypes.\n",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stereotypes",
@@ -173,9 +173,9 @@
       "name": "meta_model::Documentable",
       "documentation": "Ability to provide documentation.\n",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "documentation",
@@ -188,9 +188,9 @@
       "name": "meta_model::Nameable",
       "documentation": "Ability to have a name.\n",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -203,7 +203,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "tracer",
@@ -214,16 +214,16 @@
     {
       "name": "transforms::transformation_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::decoding_transform_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     }
   ]
 }

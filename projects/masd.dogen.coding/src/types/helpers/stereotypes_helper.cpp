@@ -35,18 +35,18 @@ const std::string transform_id("yarn.transforms.stereotypes_transform");
 using namespace masd::dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string stereotype_object("dogen::object");
-const std::string stereotype_object_template("dogen::object_template");
-const std::string stereotype_exception("dogen::exception");
-const std::string stereotype_primitive("dogen::primitive");
-const std::string stereotype_enumeration("dogen::enumeration");
-const std::string stereotype_module("dogen::module");
-const std::string stereotype_builtin("dogen::builtin");
-const std::string stereotype_visitable("dogen::visitable");
-const std::string stereotype_fluent("dogen::fluent");
-const std::string stereotype_immutable("dogen::immutable");
-const std::string stereotype_orm_object("dogen::orm::object");
-const std::string stereotype_orm_value("dogen::orm::value");
+const std::string stereotype_object("masd::object");
+const std::string stereotype_object_template("masd::object_template");
+const std::string stereotype_exception("masd::exception");
+const std::string stereotype_primitive("masd::primitive");
+const std::string stereotype_enumeration("masd::enumeration");
+const std::string stereotype_module("masd::module");
+const std::string stereotype_builtin("masd::builtin");
+const std::string stereotype_visitable("masd::visitable");
+const std::string stereotype_fluent("masd::fluent");
+const std::string stereotype_immutable("masd::immutable");
+const std::string stereotype_orm_object("masd::orm::object");
+const std::string stereotype_orm_value("masd::orm::value");
 
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 

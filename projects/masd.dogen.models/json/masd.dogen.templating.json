@@ -15,11 +15,11 @@
   "elements": [
     {
       "name": "wale",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "wale::text_template",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "properties",
@@ -33,7 +33,7 @@
     },
     {
       "name": "wale::properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "template_path",
@@ -54,81 +54,81 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::workflow",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::formatter",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::validator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::validation_error",
       "documentation": "An error occurred whilst validating.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::extraction_error",
       "documentation": "An error occurred whilst extracting a key.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "stitch::workflow_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::workflow",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::parser",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::block",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "type",
@@ -143,7 +143,7 @@
     {
       "name": "stitch::text_template",
       "documentation": "Domain representation of a stitch template.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "input_path",
@@ -177,27 +177,27 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::parsing_error",
       "documentation": "An error occurred whilst parsing.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "decoration_properties",
@@ -211,7 +211,7 @@
     },
     {
       "name": "stitch::stitching_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stream_variable_name",
@@ -244,33 +244,33 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::building_error",
       "documentation": "An error occurred whilst building.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::properties_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::line",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "blocks",
@@ -281,9 +281,9 @@
     {
       "name": "stitch::block_types",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "text_block",
@@ -308,11 +308,11 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::text_template_body",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "tagged_values",
@@ -327,24 +327,24 @@
     {
       "name": "stitch::instantiation_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::resolver",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::resolution_error",
       "documentation": "An error occurred when trying to resolve a key.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     }
   ]
 }

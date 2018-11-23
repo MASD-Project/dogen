@@ -21,142 +21,142 @@
   "elements": [
     {
       "name": "formatters",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::types",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::types::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::artefact_formatter_interface",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "model_to_text_model_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::hash::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::exception_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::namespace_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::visitor_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::io::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enum_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::serialization::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::master_header_formatter",
@@ -167,143 +167,143 @@
         "quilt.cpp.types.class_implementation.formatting_style": "stitch",
         "quilt.cpp.types.class_implementation.overwrite": "true"
       },
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::test_data::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::enum_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::odb::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::common_odb_options_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::include_cmakelists_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::source_cmakelists_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::registrar",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::registrar_error",
       "documentation": "There was an error in the registrar.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "workflow_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::repository",
@@ -314,7 +314,7 @@
         "quilt.cpp.io.enabled": "true",
         "quilt.cpp.io.overwrite": "false"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stock_artefact_formatters_by_meta_name",
@@ -339,7 +339,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "registrar_",
@@ -352,121 +352,121 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formattables::workflow",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::inclusion_constants",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::locator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::forward_declarations_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::forward_declarations_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::dependencies_builder",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::building_error",
       "documentation": "An error occurred while the factory was building.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::artefact_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "file_path",
@@ -487,21 +487,21 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::assistant",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stream_",
@@ -514,28 +514,28 @@
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::registrar_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::enum_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::context",
@@ -543,7 +543,7 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "model",
@@ -564,19 +564,19 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::building_error",
       "documentation": "An error occurred whilst the factory was building.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::helper_descriptor",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "family",
@@ -626,7 +626,7 @@
     },
     {
       "name": "formattables::helper_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "current",
@@ -645,7 +645,7 @@
     {
       "name": "formattables::element_properties",
       "documentation": "All of the properties associated with an element.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "aspect_properties",
@@ -675,7 +675,7 @@
     },
     {
       "name": "formattables::aspect_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "requires_manual_default_constructor",
@@ -693,14 +693,14 @@
     },
     {
       "name": "fabric",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "fabric::registrar",
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "leaves",
@@ -724,7 +724,7 @@
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "is_enum",
@@ -747,21 +747,21 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::master_header",
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "inclusion_by_facet",
@@ -774,28 +774,28 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::registrar_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::forward_declarations_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::cmakelists",
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "include_directory_path",
@@ -824,7 +824,7 @@
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "sql_name_case",
@@ -839,9 +839,9 @@
     {
       "name": "formatters::inclusion_support_types",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "not_supported",
@@ -865,46 +865,46 @@
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::builtin_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::builtin_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::builtin_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::builtin_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::builtin_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::formattable",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "master_segment",
@@ -925,68 +925,68 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::inclusion_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::reducer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::model_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::file_path_and_guard_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::aspect_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::helper_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::adaptation_error",
       "documentation": "An error occurred during adaptation.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::expansion_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::odb_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "is_value",
@@ -1007,11 +1007,11 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::model",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -1049,7 +1049,7 @@
     },
     {
       "name": "formattables::facet_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "directory",
@@ -1066,32 +1066,32 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::canonical_archetype_resolver",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::canonical_archetype_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::resolution_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::streaming_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "requires_quoting",
@@ -1112,11 +1112,11 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::locator_configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "facet_configurations",
@@ -1154,7 +1154,7 @@
     },
     {
       "name": "formattables::locator_facet_configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "directory",
@@ -1168,7 +1168,7 @@
     },
     {
       "name": "formattables::locator_archetype_configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "facet_directory",
@@ -1189,273 +1189,273 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::stitch_formatter",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::smart_pointer_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::smart_pointer_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::time_duration_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::ptree_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::associative_container_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::date_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::optional_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::path_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::pair_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::sequence_container_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::ptime_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::variant_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::associative_container_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::smart_pointer_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::ptree_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::optional_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::pair_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::sequence_container_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::variant_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::string_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::path_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::associative_container_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::char_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::bool_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::date_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::domain_type_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::number_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::optional_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::pair_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::path_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::ptime_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::ptree_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::sequence_container_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::smart_pointer_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::string_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::time_duration_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::variant_helper",
       "stereotypes": [
         "C++ Helper Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::inserter_implementation_helper",
@@ -1466,19 +1466,19 @@
         "quilt.cpp.types.class_implementation.formatting_style": "stitch",
         "quilt.cpp.types.class_implementation.overwrite": "true"
       },
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::location_error",
       "documentation": "An error occurred while the locator was creating a path.\n",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::helper_configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "helper_families",
@@ -1495,81 +1495,81 @@
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::primitive_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::primitive_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::primitive_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::primitive_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::primitive_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::primitive_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::primitive_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::primitive_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::primitive_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::primitive_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::directive_group_repository",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "by_id",
@@ -1582,12 +1582,12 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::directive_group",
       "documentation": "Represents the group of inclusion directives associated with a name and an archetype.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "primary",
@@ -1606,35 +1606,35 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::building_error",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::build_files_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::build_files_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::cpp_standards",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "cpp_98",
@@ -1659,18 +1659,18 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::header_guard_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::odb_targets",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "main_target_name",
@@ -1688,7 +1688,7 @@
     },
     {
       "name": "fabric::odb_target",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -1721,14 +1721,14 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::object_odb_options",
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "epilogue",
@@ -1749,11 +1749,11 @@
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formattables::test_data_properties",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "maximum_size",
@@ -1770,14 +1770,14 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::msbuild_targets",
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "odb_targets",
@@ -1790,21 +1790,21 @@
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::visual_studio_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::visual_studio_project",
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "project_guid",
@@ -1825,7 +1825,7 @@
       "tagged_values": {
         "yarn.generalization.parent": "coding::meta_model::element"
       },
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "project_guid",
@@ -1847,7 +1847,7 @@
     },
     {
       "name": "fabric::visual_studio_configuration",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "project_solution_guid",
@@ -1864,74 +1864,74 @@
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::visual_studio_solution_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::rapidjson",
-      "fallback_element_type": "dogen::module"
+      "fallback_element_type": "masd::module"
     },
     {
       "name": "formatters::rapidjson::class_header_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::rapidjson::initializer",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::rapidjson::traits",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::rapidjson::class_implementation_formatter",
       "stereotypes": [
         "C++ Artefact Formatter"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::decoration_expander",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::dynamic_transform",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::meta_name_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::repository_factory",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     }
   ]
 }

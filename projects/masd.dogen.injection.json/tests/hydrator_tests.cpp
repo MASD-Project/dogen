@@ -71,7 +71,7 @@ const std::string one_object_model(R"({
             "name" : "a_type",
             "documentation" : "a_doc",
             "parents" : [ "a::b::c", "a" ],
-            "stereotypes" : [ "dogen::object", "some stereotype" ],
+            "stereotypes" : [ "masd::object", "some stereotype" ],
             "tagged_values" : {
                 "some_key" : "some_value"
             }
@@ -90,7 +90,7 @@ const std::string object_with_attribute_model(R"({
                     "name" : "some_attr",
                     "type" : "std::string",
                     "documentation" : "a_doc",
-                    "stereotypes" : [ "some stereotype", "dogen::fluent" ],
+                    "stereotypes" : [ "some stereotype", "masd::fluent" ],
                     "tagged_values" : {
                         "some_key" : "some_value"
                     }
@@ -163,7 +163,7 @@ BOOST_AUTO_TEST_CASE(one_object_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(e.stereotypes().size() == 2);
     BOOST_CHECK(e.stereotypes().back() == a_stereotype);
-    BOOST_CHECK(e.stereotypes().front() == "dogen::object");
+    BOOST_CHECK(e.stereotypes().front() == "masd::object");
 
     BOOST_CHECK(e.attributes().empty());
 }
@@ -200,7 +200,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(a.stereotypes().size() == 2);
     BOOST_CHECK(a.stereotypes().front() == a_stereotype);
-    BOOST_CHECK(a.stereotypes().back() == "dogen::fluent");
+    BOOST_CHECK(a.stereotypes().back() == "masd::fluent");
 }
 
 BOOST_AUTO_TEST_CASE(empty_elements_model_results_in_empty_model) {

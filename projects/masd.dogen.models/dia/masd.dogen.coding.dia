@@ -1329,7 +1329,7 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
         <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a name.#</dia:string>
@@ -1464,7 +1464,7 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
         <dia:string>#Documentable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to provide documentation.#</dia:string>
@@ -1603,7 +1603,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Annotatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have meta-data associated.#</dia:string>
@@ -1864,7 +1864,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A unit of coding that can be code generated.
@@ -3323,7 +3323,7 @@ languages, using the entire name structure.#</dia:string>
         <dia:string>#origin_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#What originated the model element.#</dia:string>
@@ -3603,7 +3603,7 @@ can make use of these types.#</dia:string>
         <dia:string>#Stateful#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a state.#</dia:string>
@@ -3843,7 +3843,7 @@ formatting.#</dia:string>
         <dia:string>#DeterminableOrigin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A unit of coding that can be code generated.#</dia:string>
@@ -4020,7 +4020,7 @@ formatting.#</dia:string>
         <dia:string>#Containable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The ability to be contained inside a module.#</dia:string>
@@ -4457,7 +4457,7 @@ that are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:string>#element#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::visitable, Element#</dia:string>
+        <dia:string>#masd::visitable, Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a generic coding construct.
@@ -5794,7 +5794,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#TraversalVisitor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6362,7 +6362,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Visitable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The ability to handle visitation.#</dia:string>
@@ -6566,7 +6566,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Associatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to associate itself with other elements.#</dia:string>
@@ -6727,7 +6727,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>#Generalizable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to be part of a generalization relationship.#</dia:string>
@@ -7046,7 +7046,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>#Relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Element has the ability to have relationships with other elements.#</dia:string>
@@ -7766,7 +7766,7 @@ space.#</dia:string>
         <dia:string>#Parameterisable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8415,7 +8415,7 @@ space.#</dia:string>
         <dia:string>#Stereotypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8616,7 +8616,7 @@ model.#</dia:string>
         <dia:string>#languages#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Models need to declare upfront the programming language they will target.#</dia:string>
@@ -9066,7 +9066,7 @@ model.#</dia:string>
         <dia:string>#orm_database_systems#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9474,7 +9474,7 @@ model.#</dia:string>
         <dia:string>#letter_cases#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11179,7 +11179,7 @@ model.#</dia:string>
         <dia:string>#formatting_styles#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19120,7 +19120,7 @@ model.#</dia:string>
         <dia:string>#transformation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst applying a transformation.#</dia:string>
@@ -20186,7 +20186,7 @@ model.#</dia:string>
         <dia:string>#validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred during validation.#</dia:string>
@@ -20828,7 +20828,7 @@ model.#</dia:string>
         <dia:string>#indexing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A fatal error has occurred while indexing.#</dia:string>
@@ -21591,7 +21591,7 @@ model.#</dia:string>
         <dia:string>#resolution_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred while trying to resolve a type.#</dia:string>
@@ -22095,7 +22095,7 @@ model.#</dia:string>
         <dia:string>#mapping_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error has occurred while mapping element names.#</dia:string>
@@ -24037,7 +24037,7 @@ another.#</dia:string>
         <dia:string>#mapping_actions#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -24499,7 +24499,7 @@ another.#</dia:string>
         <dia:string>#hydration_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25092,7 +25092,7 @@ another.#</dia:string>
         <dia:string>#printing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst pretty printing.#</dia:string>
@@ -25506,7 +25506,7 @@ another.#</dia:string>
         <dia:string>#separators#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Available separators to be used by the pretty printer.#</dia:string>
@@ -26174,7 +26174,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst building.#</dia:string>
@@ -27583,7 +27583,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#parsing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A fatal error has occurred while parsing.#</dia:string>
@@ -30487,7 +30487,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33435,7 +33435,7 @@ size limitations.#</dia:string>
         <dia:string>#validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred when validating options.#</dia:string>
@@ -35617,7 +35617,7 @@ backend enabled.#</dia:string>
         <dia:string>#directory_structure_styles#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -36053,7 +36053,7 @@ If not supplied the model path segment is computed from the remaining settings.#
         <dia:string>#path_contribution_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Different kinds of contributions that can be made to the final path computation.#</dia:string>
@@ -39888,7 +39888,7 @@ model directory.#</dia:string>
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst the factory was building.#</dia:string>
@@ -41004,7 +41004,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#writing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error ocrurred whilst writing.#</dia:string>
@@ -41343,7 +41343,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#static_stereotypes#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Lists all stereotypes defined in the yarn UML profile.#</dia:string>
@@ -42386,7 +42386,7 @@ defined stereotypes.#</dia:string>
         <dia:string>#adaptation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -42791,7 +42791,7 @@ defined stereotypes.#</dia:string>
         <dia:string>#registrar_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

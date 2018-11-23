@@ -662,7 +662,7 @@
         <dia:string>#registrar_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A registration error has occurred.#</dia:string>
@@ -1985,7 +1985,7 @@ main stereotypes.#</dia:string>
         <dia:string>#Taggable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to contain tagged values.#</dia:string>
@@ -2120,7 +2120,7 @@ main stereotypes.#</dia:string>
         <dia:string>#Stereotypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have stereotypes.#</dia:string>
@@ -2255,7 +2255,7 @@ main stereotypes.#</dia:string>
         <dia:string>#Documentable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to provide documentation.#</dia:string>
@@ -2394,7 +2394,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a name.#</dia:string>
@@ -2880,7 +2880,7 @@ for Java, etc.#</dia:string>
         <dia:string>#transformation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

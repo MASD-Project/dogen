@@ -145,7 +145,7 @@
         <dia:string>#parser_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A fatal error has occurred during option parsing.#</dia:string>
@@ -1354,7 +1354,7 @@
         <dia:string>#orchestration_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A fatal error has occurred during orchestration.#</dia:string>
@@ -1890,7 +1890,7 @@
         <dia:string>#command#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Available commands in the command line application.#</dia:string>

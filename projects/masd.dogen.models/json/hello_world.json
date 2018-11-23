@@ -15,7 +15,7 @@
     {
       "name": "one_property",
       "documentation": "Hello World class.\n",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "property",

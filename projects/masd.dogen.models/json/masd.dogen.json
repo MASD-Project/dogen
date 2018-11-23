@@ -15,7 +15,7 @@
   "elements": [
     {
       "name": "artefact",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -37,7 +37,7 @@
     },
     {
       "name": "artefact_container",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -56,16 +56,16 @@
     {
       "name": "generation_exception",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "configuration",
       "stereotypes": [
-        "dogen::fluent"
+        "masd::fluent"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "generation",
@@ -100,9 +100,9 @@
       "name": "tracing_level",
       "documentation": "Available levels for tracing transformation.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "detail",
@@ -118,11 +118,11 @@
       "name": "tracing_configuration",
       "documentation": "Configuration related to tracing.\n",
       "stereotypes": [
-        "dogen::fluent",
+        "masd::fluent",
         "Enablable",
         "Outputable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "level",
@@ -145,9 +145,9 @@
       "name": "tracing_format",
       "documentation": "Available formats for tracing transformations.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "org_mode",
@@ -165,11 +165,11 @@
       "name": "logging_configuration",
       "documentation": "Configuration related to logging.\n",
       "stereotypes": [
-        "dogen::fluent",
+        "masd::fluent",
         "Enablable",
         "Outputable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "level",
@@ -191,9 +191,9 @@
       "name": "log_level",
       "documentation": "Available levels for logging.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "trace",
@@ -219,24 +219,24 @@
     },
     {
       "name": "configuration_builder",
-      "documentation": "dogen::builder\n",
+      "documentation": "masd::builder\n",
       "stereotypes": [
         "handcrafted"
       ],
       "tagged_values": {
         "masd.builder.target": "configuration"
       },
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "generation_configuration",
       "documentation": "Configuration related to code generation.\n",
       "stereotypes": [
-        "dogen::fluent",
+        "masd::fluent",
         "Enablable",
         "Outputable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "reference_model_directories",
@@ -259,38 +259,38 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "in_memory_generator",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "in_memory_converter",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "diffing_configuration",
       "documentation": "Configuration for diff generation.\n",
       "stereotypes": [
-        "dogen::fluent",
+        "masd::fluent",
         "Enablable",
         "Outputable"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "artefact_group_type",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "tracing",
@@ -309,15 +309,15 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "Enablable",
       "documentation": "Element which can be enabled.\n",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "enabled",
@@ -330,9 +330,9 @@
       "name": "Outputable",
       "documentation": "Element which requires output information.\n",
       "stereotypes": [
-        "dogen::object_template"
+        "masd::object_template"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "output_directory",
@@ -345,9 +345,9 @@
       "name": "operation_type",
       "documentation": "Operation to perform to a given artefact.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "create",
@@ -371,9 +371,9 @@
       "name": "operation_reason",
       "documentation": "Reasons for performing an operation.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "new_generated_file",
@@ -395,7 +395,7 @@
     },
     {
       "name": "model",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "name",
@@ -416,43 +416,43 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "filesystem_weaver",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "in_memory_weaver",
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "weaving_exception",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "conversion_exception",
       "stereotypes": [
-        "dogen::exception"
+        "masd::exception"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "weaving_style",
       "documentation": "Style of the weaving to perform.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "stitch",
@@ -468,10 +468,10 @@
       "name": "weaving_configuration",
       "documentation": "Configuration for weaving.\n",
       "stereotypes": [
-        "dogen::fluent",
+        "masd::fluent",
         "Outputable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "style",
@@ -484,9 +484,9 @@
       "name": "activity",
       "documentation": "What activity should the configuration be validated against or build for.\n",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "generate",
@@ -507,16 +507,16 @@
       "stereotypes": [
         "handcrafted"
       ],
-      "fallback_element_type": "dogen::object"
+      "fallback_element_type": "masd::object"
     },
     {
       "name": "conversion_configuration",
       "documentation": "Configuration for the model conversion.\n",
       "stereotypes": [
-        "dogen::fluent",
+        "masd::fluent",
         "Outputable"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "destination_type",
@@ -532,7 +532,7 @@
     },
     {
       "name": "operation",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "type",
@@ -547,9 +547,9 @@
     {
       "name": "archive_type",
       "stereotypes": [
-        "dogen::enumeration"
+        "masd::enumeration"
       ],
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "zip",
@@ -563,7 +563,7 @@
     },
     {
       "name": "archive",
-      "fallback_element_type": "dogen::object",
+      "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "content",

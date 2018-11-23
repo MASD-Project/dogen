@@ -31,8 +31,8 @@ using namespace masd::dogen::utility::log;
 static logger lg(logger_factory("injection.dia.adapter"));
 
 const std::string name_delimiter("::");
-const std::string object_element("dogen::object");
-const std::string module_element("dogen::module");
+const std::string object_element("masd::object");
+const std::string module_element("masd::module");
 
 const std::string empty_dia_name("Dia name is empty.");
 

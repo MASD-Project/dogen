@@ -489,7 +489,7 @@
         <dia:string>#generation_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -670,7 +670,7 @@
         <dia:string>#configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent#</dia:string>
+        <dia:string>#masd::fluent#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -942,7 +942,7 @@
         <dia:string>#tracing_level#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Available levels for tracing transformation.#</dia:string>
@@ -1099,7 +1099,7 @@
         <dia:string>#tracing_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent, Enablable, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Enablable, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration related to tracing.#</dia:string>
@@ -1281,7 +1281,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#tracing_format#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Available formats for tracing transformations.#</dia:string>
@@ -1806,7 +1806,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#logging_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent, Enablable, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Enablable, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration related to logging.#</dia:string>
@@ -1986,7 +1986,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#log_level#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Available levels for logging.#</dia:string>
@@ -2286,7 +2286,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#dogen::builder#</dia:string>
+        <dia:string>#masd::builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2442,7 +2442,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#generation_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent, Enablable, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Enablable, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration related to code generation.#</dia:string>
@@ -3844,7 +3844,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#diffing_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent, Enablable, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Enablable, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration for diff generation.#</dia:string>
@@ -4023,7 +4023,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#artefact_group_type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4783,7 +4783,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#Enablable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Element which can be enabled.#</dia:string>
@@ -4917,7 +4917,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::object_template#</dia:string>
+        <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Element which requires output information.#</dia:string>
@@ -5051,7 +5051,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#operation_type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Operation to perform to a given artefact.#</dia:string>
@@ -5325,7 +5325,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#operation_reason#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Reasons for performing an operation.#</dia:string>
@@ -6853,7 +6853,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#weaving_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6963,7 +6963,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#conversion_exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::exception#</dia:string>
+        <dia:string>#masd::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7446,7 +7446,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#weaving_style#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Style of the weaving to perform.#</dia:string>
@@ -7603,7 +7603,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#weaving_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration for weaving.#</dia:string>
@@ -7879,7 +7879,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#activity#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#What activity should the configuration be validated against or build for.#</dia:string>
@@ -8535,7 +8535,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#conversion_configuration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::fluent, Outputable#</dia:string>
+        <dia:string>#masd::fluent, Outputable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration for the model conversion.#</dia:string>
@@ -9134,7 +9134,7 @@ for the destination type.#</dia:string>
         <dia:string>#archive_type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::enumeration#</dia:string>
+        <dia:string>#masd::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
