@@ -23,23 +23,23 @@
 			<second>cpp</second>
 		</item>
 		<item>
-			<first>masd.cpp.enabled</first>
+			<first>masd.extraction.cpp.enabled</first>
 			<second>true</second>
 		</item>
 		<item>
-			<first>masd.cpp.msbuild.enabled</first>
+			<first>masd.extraction.cpp.msbuild.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>masd.cpp.visual_studio.project.enabled</first>
+			<first>masd.extraction.cpp.visual_studio.project.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>masd.cpp.visual_studio.solution.enabled</first>
+			<first>masd.extraction.cpp.visual_studio.solution.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>masd.csharp.enabled</first>
+			<first>masd.extraction.csharp.enabled</first>
 			<second>false</second>
 		</item>
 		<item>

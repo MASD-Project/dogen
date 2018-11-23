@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.csharp.types.directory"
+      "qualified": "masd.extraction.csharp.types.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.csharp.types.postfix"
+      "qualified": "masd.extraction.csharp.types.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.csharp.types.class.postfix"
+      "qualified": "masd.extraction.csharp.types.class.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types",
-      "archetype": "masd.csharp.types.class"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types",
+      "archetype": "masd.extraction.csharp.types.class"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.csharp.types.enum.postfix"
+      "qualified": "masd.extraction.csharp.types.enum.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types",
-      "archetype": "masd.csharp.types.enum"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types",
+      "archetype": "masd.extraction.csharp.types.enum"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.csharp.types.primitive.postfix"
+      "qualified": "masd.extraction.csharp.types.primitive.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types",
-      "archetype": "masd.csharp.types.primitive"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types",
+      "archetype": "masd.extraction.csharp.types.primitive"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.csharp.types.builtin.postfix"
+      "qualified": "masd.extraction.csharp.types.builtin.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types",
-      "archetype": "masd.csharp.types.builtin"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types",
+      "archetype": "masd.extraction.csharp.types.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.csharp.types.exception.postfix"
+      "qualified": "masd.extraction.csharp.types.exception.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.csharp",
-      "facet": "masd.csharp.types",
-      "archetype": "masd.csharp.exception.builtin"
+      "backend": "masd.extraction.csharp",
+      "facet": "masd.extraction.csharp.types",
+      "archetype": "masd.extraction.csharp.exception.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",

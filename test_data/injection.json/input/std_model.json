@@ -4,11 +4,11 @@
     "masd.injection.model_modules": "std_model",
     "masd.injection.external_modules": "dogen::test_models",
     "masd.input_language": "cpp",
-    "masd.cpp.enabled": "true",
-    "masd.cpp.msbuild.enabled": "false",
-    "masd.cpp.visual_studio.project.enabled": "false",
-    "masd.cpp.visual_studio.solution.enabled": "false",
-    "masd.csharp.enabled": "false",
+    "masd.extraction.cpp.enabled": "true",
+    "masd.extraction.cpp.msbuild.enabled": "false",
+    "masd.extraction.cpp.visual_studio.project.enabled": "false",
+    "masd.extraction.cpp.visual_studio.solution.enabled": "false",
+    "masd.extraction.csharp.enabled": "false",
     "annotations.profile": "dogen"
   },
   "elements": [

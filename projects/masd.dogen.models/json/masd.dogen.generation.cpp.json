@@ -10,12 +10,12 @@
     "masd.injection.reference": "masd.dogen.annotations.json",
     "masd.injection.reference": "masd.dogen.tracing.json",
     "masd.injection.input_language": "cpp",
-    "masd.cpp.enabled": "true",
-    "masd.cpp.standard": "c++-17",
-    "masd.cpp.msbuild.enabled": "false",
-    "masd.cpp.visual_studio.project.enabled": "false",
-    "masd.cpp.visual_studio.solution.enabled": "false",
-    "masd.csharp.enabled": "false",
+    "masd.extraction.cpp.enabled": "true",
+    "masd.extraction.cpp.standard": "c++-17",
+    "masd.extraction.cpp.msbuild.enabled": "false",
+    "masd.extraction.cpp.visual_studio.project.enabled": "false",
+    "masd.extraction.cpp.visual_studio.solution.enabled": "false",
+    "masd.extraction.csharp.enabled": "false",
     "masd.annotations.profile": "dogen.disable_common_facets"
   },
   "elements": [
@@ -164,8 +164,8 @@
         "handcrafted"
       ],
       "tagged_values": {
-        "masd.cpp.types.class_implementation.formatting_style": "stitch",
-        "masd.cpp.types.class_implementation.overwrite": "true"
+        "masd.extraction.cpp.types.class_implementation.formatting_style": "stitch",
+        "masd.extraction.cpp.types.class_implementation.overwrite": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -311,8 +311,8 @@
         "handcrafted"
       ],
       "tagged_values": {
-        "masd.cpp.io.enabled": "true",
-        "masd.cpp.io.overwrite": "false"
+        "masd.extraction.cpp.io.enabled": "true",
+        "masd.extraction.cpp.io.overwrite": "false"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1463,8 +1463,8 @@
         "handcrafted"
       ],
       "tagged_values": {
-        "masd.cpp.types.class_implementation.formatting_style": "stitch",
-        "masd.cpp.types.class_implementation.overwrite": "true"
+        "masd.extraction.cpp.types.class_implementation.formatting_style": "stitch",
+        "masd.extraction.cpp.types.class_implementation.overwrite": "true"
       },
       "fallback_element_type": "masd::object"
     },

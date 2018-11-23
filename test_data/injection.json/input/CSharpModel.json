@@ -4,10 +4,10 @@
     "masd.injection.model_modules": "CSharpModel",
     "masd.injection.external_modules": "Dogen.TestModels",
     "masd.input_language": "csharp",
-    "masd.csharp.enabled": "true",
-    "masd.cpp.enabled": "false",
-    "masd.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",
-    "masd.csharp.visual_studio.project_solution_guid": "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
+    "masd.extraction.csharp.enabled": "true",
+    "masd.extraction.cpp.enabled": "false",
+    "masd.extraction.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",
+    "masd.extraction.csharp.visual_studio.project_solution_guid": "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
     "annotations.profile": "dogen"
   },
   "elements": [

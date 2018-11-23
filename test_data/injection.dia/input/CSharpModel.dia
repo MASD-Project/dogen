@@ -558,10 +558,10 @@ This is a remark.#</dia:string>
 #DOGEN masd.injection.model_modules=CSharpModel
 #DOGEN masd.injection.external_modules=Dogen.TestModels
 #DOGEN masd.input_language=csharp
-#DOGEN masd.csharp.enabled=true
-#DOGEN masd.cpp.enabled=false
-#DOGEN masd.csharp.visual_studio.project_guid=9E645ACD-C04A-4734-AB23-C3FCC0F7981B
-#DOGEN masd.csharp.visual_studio.project_solution_guid=FAE04EC0-301F-11D3-BF4B-00C04F79EFBC
+#DOGEN masd.extraction.csharp.enabled=true
+#DOGEN masd.extraction.cpp.enabled=false
+#DOGEN masd.extraction.csharp.visual_studio.project_guid=9E645ACD-C04A-4734-AB23-C3FCC0F7981B
+#DOGEN masd.extraction.csharp.visual_studio.project_solution_guid=FAE04EC0-301F-11D3-BF4B-00C04F79EFBC
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

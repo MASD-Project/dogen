@@ -294,8 +294,8 @@
 #DOGEN masd.injection.model_modules=disable_all_kernels
 #DOGEN masd.injection.external_modules=dogen::test_models
 #DOGEN masd.input_language=cpp
-#DOGEN masd.cpp.enabled=false
-#DOGEN masd.csharp.enabled=false#</dia:string>
+#DOGEN masd.extraction.cpp.enabled=false
+#DOGEN masd.extraction.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

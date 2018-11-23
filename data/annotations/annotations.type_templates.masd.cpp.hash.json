@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.cpp.hash.directory"
+      "qualified": "masd.extraction.cpp.hash.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.postfix"
+      "qualified": "masd.extraction.cpp.hash.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.class_header.postfix"
+      "qualified": "masd.extraction.cpp.hash.class_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.class_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.class_implementation.postfix"
+      "qualified": "masd.extraction.cpp.hash.class_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.class_implementation"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.enum_header.postfix"
+      "qualified": "masd.extraction.cpp.hash.enum_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.enum_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.enum_implementation.postfix"
+      "qualified": "masd.extraction.cpp.hash.enum_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.enum_implementation"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.primitive_header.postfix"
+      "qualified": "masd.extraction.cpp.hash.primitive_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.primitive_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -112,13 +112,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.primitive_implementation.postfix"
+      "qualified": "masd.extraction.cpp.hash.primitive_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.primitive_implementation"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.primitive_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,13 +128,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.master_header.postfix"
+      "qualified": "masd.extraction.cpp.hash.master_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.master_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -144,13 +144,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.hash.builtin_header.postfix"
+      "qualified": "masd.extraction.cpp.hash.builtin_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.hash",
-      "archetype": "masd.cpp.hash.builtin_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.hash",
+      "archetype": "masd.extraction.cpp.hash.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

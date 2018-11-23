@@ -23,17 +23,17 @@
 namespace masd::dogen::generation::csharp::formatters {
 
 std::string traits::visual_studio_facet() {
-    static std::string r("masd.csharp.visual_studio");
+    static std::string r("masd.extraction.csharp.visual_studio");
     return r;
 }
 
 std::string traits::visual_studio_project_archetype() {
-    static std::string r("masd.csharp.visual_studio.project");
+    static std::string r("masd.extraction.csharp.visual_studio.project");
     return r;
 }
 
 std::string traits::visual_studio_solution_archetype() {
-    static std::string r("masd.csharp.visual_studio.solution");
+    static std::string r("masd.extraction.csharp.visual_studio.solution");
     return r;
 }
 

@@ -23,23 +23,23 @@
 			<second>cpp</second>
 		</item>
 		<item>
-			<first>masd.cpp.enabled</first>
+			<first>masd.extraction.cpp.enabled</first>
 			<second>true</second>
 		</item>
 		<item>
-			<first>masd.cpp.msbuild.enabled</first>
+			<first>masd.extraction.cpp.msbuild.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
-			<first>masd.cpp.visual_studio.project_guid</first>
+			<first>masd.extraction.cpp.visual_studio.project_guid</first>
 			<second>876B2828-8A0B-495F-8340-0357690162E4</second>
 		</item>
 		<item>
-			<first>masd.cpp.visual_studio.project_solution_guid</first>
+			<first>masd.extraction.cpp.visual_studio.project_solution_guid</first>
 			<second>3103CA57-FD70-4EC9-98BD-1C2C7360AF53</second>
 		</item>
 		<item>
-			<first>masd.csharp.enabled</first>
+			<first>masd.extraction.csharp.enabled</first>
 			<second>false</second>
 		</item>
 		<item>
@@ -2044,51 +2044,51 @@ this is a long comment
 				<count>12</count>
 				<item_version>0</item_version>
 				<item>
-					<first>masd.cpp.hash.enabled</first>
+					<first>masd.extraction.cpp.hash.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>masd.cpp.hash.overwrite</first>
+					<first>masd.extraction.cpp.hash.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>masd.cpp.io.enabled</first>
+					<first>masd.extraction.cpp.io.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>masd.cpp.io.overwrite</first>
+					<first>masd.extraction.cpp.io.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>masd.cpp.odb.enabled</first>
+					<first>masd.extraction.cpp.odb.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>masd.cpp.odb.overwrite</first>
+					<first>masd.extraction.cpp.odb.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>masd.cpp.serialization.enabled</first>
+					<first>masd.extraction.cpp.serialization.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>masd.cpp.serialization.overwrite</first>
+					<first>masd.extraction.cpp.serialization.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>masd.cpp.test_data.enabled</first>
+					<first>masd.extraction.cpp.test_data.enabled</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>masd.cpp.test_data.overwrite</first>
+					<first>masd.extraction.cpp.test_data.overwrite</first>
 					<second>false</second>
 				</item>
 				<item>
-					<first>masd.cpp.types.forward_declarations.overwrite</first>
+					<first>masd.extraction.cpp.types.forward_declarations.overwrite</first>
 					<second>true</second>
 				</item>
 				<item>
-					<first>masd.cpp.serialization.forward_declarations.overwrite</first>
+					<first>masd.extraction.cpp.serialization.forward_declarations.overwrite</first>
 					<second>true</second>
 				</item>
 			</tagged_values>

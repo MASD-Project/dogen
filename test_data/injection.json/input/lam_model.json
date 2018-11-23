@@ -6,11 +6,11 @@
     "masd.input_language": "language_agnostic",
     "masd.extraction.output_language": "csharp",
     "masd.extraction.output_language": "cpp",
-    "masd.cpp.enabled": "true",
-    "masd.cpp.msbuild.enabled": "false",
-    "masd.cpp.visual_studio.project.enabled": "false",
-    "masd.cpp.visual_studio.solution.enabled": "false",
-    "masd.csharp.enabled": "true",
+    "masd.extraction.cpp.enabled": "true",
+    "masd.extraction.cpp.msbuild.enabled": "false",
+    "masd.extraction.cpp.visual_studio.project.enabled": "false",
+    "masd.extraction.cpp.visual_studio.solution.enabled": "false",
+    "masd.extraction.csharp.enabled": "true",
     "annotations.profile": "dogen"
   },
   "elements": [

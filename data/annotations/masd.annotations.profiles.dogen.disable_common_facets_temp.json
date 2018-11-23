@@ -8,11 +8,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.cpp.cmake.enabled"
+        "qualified": "masd.extraction.cpp.cmake.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.cpp"
+        "backend": "masd.extraction.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -22,11 +22,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.cpp.odb.enabled"
+        "qualified": "masd.extraction.cpp.odb.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.cpp"
+        "backend": "masd.extraction.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -36,11 +36,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.cpp.test_data.enabled"
+        "qualified": "masd.extraction.cpp.test_data.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.cpp"
+        "backend": "masd.extraction.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
@@ -50,11 +50,11 @@
     {
       "name": {
         "simple": "enabled",
-        "qualified": "masd.cpp.serialization.enabled"
+        "qualified": "masd.extraction.cpp.serialization.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.cpp"
+        "backend": "masd.extraction.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [

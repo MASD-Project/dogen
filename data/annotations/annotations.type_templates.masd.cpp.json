@@ -2,11 +2,11 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.cpp.directory"
+      "qualified": "masd.extraction.cpp.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -19,7 +19,7 @@
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -32,7 +32,7 @@
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "facet_template",
@@ -45,7 +45,7 @@
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "archetype_template",
@@ -54,11 +54,11 @@
   {
     "name": {
       "simple": "profile",
-      "qualified": "masd.cpp.profile"
+      "qualified": "masd.extraction.cpp.profile"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -68,11 +68,11 @@
   {
     "name": {
       "simple": "inclusion_required",
-      "qualified": "masd.cpp.inclusion_required"
+      "qualified": "masd.extraction.cpp.inclusion_required"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -82,11 +82,11 @@
   {
     "name": {
       "simple": "primary_inclusion_directive",
-      "formatter_group": "masd.cpp.header_files"
+      "formatter_group": "masd.extraction.cpp.header_files"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "archetype_template",
@@ -95,11 +95,11 @@
   {
     "name": {
       "simple": "secondary_inclusion_directive",
-      "formatter_group": "masd.cpp.header_files"
+      "formatter_group": "masd.extraction.cpp.header_files"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text_collection",
     "template_kind": "archetype_template",
@@ -108,11 +108,11 @@
   {
     "name": {
       "simple": "source_directory_name",
-      "qualified": "masd.cpp.source_directory_name"
+      "qualified": "masd.extraction.cpp.source_directory_name"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -122,11 +122,11 @@
   {
     "name": {
       "simple": "include_directory_name",
-      "qualified": "masd.cpp.include_directory_name"
+      "qualified": "masd.extraction.cpp.include_directory_name"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -136,11 +136,11 @@
   {
     "name": {
       "simple": "header_file_extension",
-      "qualified": "masd.cpp.header_file_extension"
+      "qualified": "masd.extraction.cpp.header_file_extension"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -150,11 +150,11 @@
   {
     "name": {
       "simple": "implementation_file_extension",
-      "qualified": "masd.cpp.implementation_file_extension"
+      "qualified": "masd.extraction.cpp.implementation_file_extension"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -164,11 +164,11 @@
   {
     "name": {
       "simple": "enable_unique_file_names",
-      "qualified": "masd.cpp.enable_unique_file_names"
+      "qualified": "masd.extraction.cpp.enable_unique_file_names"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -178,11 +178,11 @@
   {
     "name": {
       "simple": "requires_manual_default_constructor",
-      "qualified": "masd.cpp.aspect.requires_manual_default_constructor"
+      "qualified": "masd.extraction.cpp.aspect.requires_manual_default_constructor"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -192,11 +192,11 @@
   {
     "name": {
       "simple": "requires_manual_move_constructor",
-      "qualified": "masd.cpp.aspect.requires_manual_move_constructor"
+      "qualified": "masd.extraction.cpp.aspect.requires_manual_move_constructor"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -206,11 +206,11 @@
   {
     "name": {
       "simple": "requires_stream_manipulators",
-      "qualified": "masd.cpp.aspect.requires_stream_manipulators"
+      "qualified": "masd.extraction.cpp.aspect.requires_stream_manipulators"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -220,11 +220,11 @@
   {
     "name": {
       "simple": "disable_facet_directories",
-      "qualified": "masd.cpp.disable_facet_directories"
+      "qualified": "masd.extraction.cpp.disable_facet_directories"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -234,11 +234,11 @@
   {
     "name": {
       "simple": "standard",
-      "qualified": "masd.cpp.standard"
+      "qualified": "masd.extraction.cpp.standard"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -248,11 +248,11 @@
   {
     "name": {
       "simple": "kernel",
-      "qualified": "masd.cpp.helper.family"
+      "qualified": "masd.extraction.cpp.helper.family"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -262,11 +262,11 @@
   {
     "name": {
       "simple": "string_conversion_method",
-      "qualified": "masd.cpp.streaming.string_conversion_method"
+      "qualified": "masd.extraction.cpp.streaming.string_conversion_method"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -276,11 +276,11 @@
   {
     "name": {
       "simple": "requires_quoting",
-      "qualified": "masd.cpp.streaming.requires_quoting"
+      "qualified": "masd.extraction.cpp.streaming.requires_quoting"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -290,11 +290,11 @@
   {
     "name": {
       "simple": "remove_unprintable_characters",
-      "qualified": "masd.cpp.streaming.remove_unprintable_characters"
+      "qualified": "masd.extraction.cpp.streaming.remove_unprintable_characters"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp"
+      "backend": "masd.extraction.cpp"
     },
     "value_type": "boolean",
     "template_kind": "instance",
@@ -304,13 +304,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.cmake.source_cmakelists.postfix"
+      "qualified": "masd.extraction.cpp.cmake.source_cmakelists.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.cmake",
-      "archetype": "masd.cpp.cmake.source_cmakelists.postfix"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.cmake",
+      "archetype": "masd.extraction.cpp.cmake.source_cmakelists.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -320,13 +320,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.cmake.include_cmakelists.postfix"
+      "qualified": "masd.extraction.cpp.cmake.include_cmakelists.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.cmake",
-      "archetype": "masd.cpp.cmake.include_cmakelists.postfix"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.cmake",
+      "archetype": "masd.extraction.cpp.cmake.include_cmakelists.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -336,13 +336,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.msbuild.targets.postfix"
+      "qualified": "masd.extraction.cpp.msbuild.targets.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.cmake",
-      "archetype": "masd.cpp.msbuild.targets.postfix"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.cmake",
+      "archetype": "masd.extraction.cpp.msbuild.targets.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -352,12 +352,12 @@
   {
     "name": {
       "simple": "project_solution_guid",
-      "qualified": "masd.cpp.visual_studio.project_solution_guid"
+      "qualified": "masd.extraction.cpp.visual_studio.project_solution_guid"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.visual_studio"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.visual_studio"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -367,12 +367,12 @@
   {
     "name": {
       "simple": "project_guid",
-      "qualified": "masd.cpp.visual_studio.project_guid"
+      "qualified": "masd.extraction.cpp.visual_studio.project_guid"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.visual_studio"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.visual_studio"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -382,13 +382,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.visual_studio.solution.postfix"
+      "qualified": "masd.extraction.cpp.visual_studio.solution.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.visual_studio",
-      "archetype": "masd.cpp.visual_studio.solution.postfix"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.visual_studio",
+      "archetype": "masd.extraction.cpp.visual_studio.solution.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -398,13 +398,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.visual_studio.project.postfix"
+      "qualified": "masd.extraction.cpp.visual_studio.project.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.visual_studio",
-      "archetype": "masd.cpp.visual_studio.project.postfix"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.visual_studio",
+      "archetype": "masd.extraction.cpp.visual_studio.project.postfix"
     },
     "value_type": "text",
     "template_kind": "instance",

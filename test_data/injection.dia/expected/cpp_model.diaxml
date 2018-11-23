@@ -2525,11 +2525,11 @@
 #DOGEN masd.injection.model_modules=cpp_model
 #DOGEN masd.injection.external_modules=dogen::test_models
 #DOGEN masd.input_language=cpp
-#DOGEN masd.cpp.enabled=true
-#DOGEN masd.cpp.msbuild.enabled=false
-#DOGEN masd.cpp.visual_studio.project_guid=876B2828-8A0B-495F-8340-0357690162E4
-#DOGEN masd.cpp.visual_studio.project_solution_guid=3103CA57-FD70-4EC9-98BD-1C2C7360AF53
-#DOGEN masd.csharp.enabled=false
+#DOGEN masd.extraction.cpp.enabled=true
+#DOGEN masd.extraction.cpp.msbuild.enabled=false
+#DOGEN masd.extraction.cpp.visual_studio.project_guid=876B2828-8A0B-495F-8340-0357690162E4
+#DOGEN masd.extraction.cpp.visual_studio.project_solution_guid=3103CA57-FD70-4EC9-98BD-1C2C7360AF53
+#DOGEN masd.extraction.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>
@@ -26740,18 +26740,18 @@ this is a long comment#</value>
 									<value>
 										<value>#Type is non-generatable.
 
-#DOGEN masd.cpp.hash.enabled=true
-#DOGEN masd.cpp.hash.overwrite=false
-#DOGEN masd.cpp.io.enabled=true
-#DOGEN masd.cpp.io.overwrite=false
-#DOGEN masd.cpp.odb.enabled=true
-#DOGEN masd.cpp.odb.overwrite=false
-#DOGEN masd.cpp.serialization.enabled=true
-#DOGEN masd.cpp.serialization.overwrite=false
-#DOGEN masd.cpp.test_data.enabled=true
-#DOGEN masd.cpp.test_data.overwrite=false
-#DOGEN masd.cpp.types.forward_declarations.overwrite=true
-#DOGEN masd.cpp.serialization.forward_declarations.overwrite=true#</value>
+#DOGEN masd.extraction.cpp.hash.enabled=true
+#DOGEN masd.extraction.cpp.hash.overwrite=false
+#DOGEN masd.extraction.cpp.io.enabled=true
+#DOGEN masd.extraction.cpp.io.overwrite=false
+#DOGEN masd.extraction.cpp.odb.enabled=true
+#DOGEN masd.extraction.cpp.odb.overwrite=false
+#DOGEN masd.extraction.cpp.serialization.enabled=true
+#DOGEN masd.extraction.cpp.serialization.overwrite=false
+#DOGEN masd.extraction.cpp.test_data.enabled=true
+#DOGEN masd.extraction.cpp.test_data.overwrite=false
+#DOGEN masd.extraction.cpp.types.forward_declarations.overwrite=true
+#DOGEN masd.extraction.cpp.serialization.forward_declarations.overwrite=true#</value>
 									</value>
 								</item>
 							</values>

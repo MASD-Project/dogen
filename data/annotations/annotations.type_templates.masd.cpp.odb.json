@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.cpp.odb.directory"
+      "qualified": "masd.extraction.cpp.odb.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.postfix"
+      "qualified": "masd.extraction.cpp.odb.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.class_header.postfix"
+      "qualified": "masd.extraction.cpp.odb.class_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.class_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.enum_header.postfix"
+      "qualified": "masd.extraction.cpp.odb.enum_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.enum_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.primitive_header.postfix"
+      "qualified": "masd.extraction.cpp.odb.primitive_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.primitive_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.common_odb_options.postfix"
+      "qualified": "masd.extraction.cpp.odb.common_odb_options.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.common_odb_options"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.common_odb_options"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.object_odb_options.postfix"
+      "qualified": "masd.extraction.cpp.odb.object_odb_options.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.object_odb_options"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.object_odb_options"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -112,13 +112,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.master_header.postfix"
+      "qualified": "masd.extraction.cpp.odb.master_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.master_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,12 +128,12 @@
   {
     "name": {
       "simple": "pragma",
-      "qualified": "masd.cpp.odb.pragma"
+      "qualified": "masd.extraction.cpp.odb.pragma"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb"
     },
     "value_type": "text_collection",
     "template_kind": "instance",
@@ -142,13 +142,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.odb.builtin_header.postfix"
+      "qualified": "masd.extraction.cpp.odb.builtin_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.odb",
-      "archetype": "masd.cpp.odb.builtin_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.odb",
+      "archetype": "masd.extraction.cpp.odb.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

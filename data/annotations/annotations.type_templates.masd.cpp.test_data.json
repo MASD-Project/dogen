@@ -2,12 +2,12 @@
   {
     "name": {
       "simple": "directory",
-      "qualified": "masd.cpp.test_data.directory"
+      "qualified": "masd.extraction.cpp.test_data.directory"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -17,12 +17,12 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.postfix"
+      "qualified": "masd.extraction.cpp.test_data.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -32,13 +32,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.class_header.postfix"
+      "qualified": "masd.extraction.cpp.test_data.class_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.class_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.class_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.class_implementation.postfix"
+      "qualified": "masd.extraction.cpp.test_data.class_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.class_implementation"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.class_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.enum_header.postfix"
+      "qualified": "masd.extraction.cpp.test_data.enum_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.enum_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.enum_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -80,13 +80,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.enum_implementation.postfix"
+      "qualified": "masd.extraction.cpp.test_data.enum_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.enum_implementation"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.enum_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -96,13 +96,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.primitive_header.postfix"
+      "qualified": "masd.extraction.cpp.test_data.primitive_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.primitive_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.primitive_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -112,13 +112,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.primitive_implementation.postfix"
+      "qualified": "masd.extraction.cpp.test_data.primitive_implementation.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.primitive_implementation"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.primitive_implementation"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -128,13 +128,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.master_header.postfix"
+      "qualified": "masd.extraction.cpp.test_data.master_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.master_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.master_header"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -144,13 +144,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "masd.cpp.test_data.builtin_header.postfix"
+      "qualified": "masd.extraction.cpp.test_data.builtin_header.postfix"
     },
     "archetype_location": {
       "kernel": "masd",
-      "backend": "masd.cpp",
-      "facet": "masd.cpp.test_data",
-      "archetype": "masd.cpp.test_data.builtin_header"
+      "backend": "masd.extraction.cpp",
+      "facet": "masd.extraction.cpp.test_data",
+      "archetype": "masd.extraction.cpp.test_data.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

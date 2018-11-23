@@ -14,10 +14,10 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Boolean",
-        "masd.cpp.aspect.requires_stream_manipulators": true,
-        "masd.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
+        "masd.extraction.cpp.helper.family": "Boolean",
+        "masd.extraction.cpp.aspect.requires_stream_manipulators": true,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.extraction.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -28,11 +28,11 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Character",
-        "masd.cpp.streaming.remove_unprintable_characters": false,
-        "masd.cpp.streaming.requires_quoting": true,
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Character",
+        "masd.extraction.cpp.streaming.remove_unprintable_characters": false,
+        "masd.extraction.cpp.streaming.requires_quoting": true,
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -43,11 +43,11 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Character",
-        "masd.cpp.streaming.remove_unprintable_characters": false,
-        "masd.cpp.streaming.requires_quoting": true,
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Character",
+        "masd.extraction.cpp.streaming.remove_unprintable_characters": false,
+        "masd.extraction.cpp.streaming.requires_quoting": true,
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -59,9 +59,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -74,9 +74,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -88,9 +88,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -102,9 +102,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -116,9 +116,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -130,9 +130,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -142,9 +142,9 @@
       ],
       "in_global_module": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -154,9 +154,9 @@
       ],
       "in_global_module": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -168,9 +168,9 @@
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.extraction.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -182,10 +182,10 @@
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.aspect.requires_stream_manipulators": true,
-        "masd.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.aspect.requires_stream_manipulators": true,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.extraction.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -196,10 +196,10 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.cpp.helper.family": "Number",
-        "masd.cpp.inclusion_required": false,
-        "masd.cpp.aspect.requires_stream_manipulators": true,
-        "masd.cpp.aspect.requires_manual_default_constructor": true
+        "masd.extraction.cpp.helper.family": "Number",
+        "masd.extraction.cpp.inclusion_required": false,
+        "masd.extraction.cpp.aspect.requires_stream_manipulators": true,
+        "masd.extraction.cpp.aspect.requires_manual_default_constructor": true
       }
     }
   ]

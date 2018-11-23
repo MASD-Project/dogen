@@ -12606,11 +12606,11 @@
 #DOGEN masd.injection.model_modules=std_model
 #DOGEN masd.injection.external_modules=dogen::test_models
 #DOGEN masd.input_language=cpp
-#DOGEN masd.cpp.enabled=true
-#DOGEN masd.cpp.msbuild.enabled=false
-#DOGEN masd.cpp.visual_studio.project.enabled=false
-#DOGEN masd.cpp.visual_studio.solution.enabled=false
-#DOGEN masd.csharp.enabled=false
+#DOGEN masd.extraction.cpp.enabled=true
+#DOGEN masd.extraction.cpp.msbuild.enabled=false
+#DOGEN masd.extraction.cpp.visual_studio.project.enabled=false
+#DOGEN masd.extraction.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.extraction.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>
 														</item>

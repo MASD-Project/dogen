@@ -4,11 +4,11 @@
     "masd.injection.model_modules": "cpp_model",
     "masd.injection.external_modules": "dogen::test_models",
     "masd.input_language": "cpp",
-    "masd.cpp.enabled": "true",
-    "masd.cpp.msbuild.enabled": "false",
-    "masd.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
-    "masd.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
-    "masd.csharp.enabled": "false",
+    "masd.extraction.cpp.enabled": "true",
+    "masd.extraction.cpp.msbuild.enabled": "false",
+    "masd.extraction.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
+    "masd.extraction.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
+    "masd.extraction.csharp.enabled": "false",
     "annotations.profile": "dogen"
   },
   "elements": [
@@ -606,18 +606,18 @@
         "handcrafted"
       ],
       "tagged_values": {
-        "masd.cpp.hash.enabled": "true",
-        "masd.cpp.hash.overwrite": "false",
-        "masd.cpp.io.enabled": "true",
-        "masd.cpp.io.overwrite": "false",
-        "masd.cpp.odb.enabled": "true",
-        "masd.cpp.odb.overwrite": "false",
-        "masd.cpp.serialization.enabled": "true",
-        "masd.cpp.serialization.overwrite": "false",
-        "masd.cpp.test_data.enabled": "true",
-        "masd.cpp.test_data.overwrite": "false",
-        "masd.cpp.types.forward_declarations.overwrite": "true",
-        "masd.cpp.serialization.forward_declarations.overwrite": "true"
+        "masd.extraction.cpp.hash.enabled": "true",
+        "masd.extraction.cpp.hash.overwrite": "false",
+        "masd.extraction.cpp.io.enabled": "true",
+        "masd.extraction.cpp.io.overwrite": "false",
+        "masd.extraction.cpp.odb.enabled": "true",
+        "masd.extraction.cpp.odb.overwrite": "false",
+        "masd.extraction.cpp.serialization.enabled": "true",
+        "masd.extraction.cpp.serialization.overwrite": "false",
+        "masd.extraction.cpp.test_data.enabled": "true",
+        "masd.extraction.cpp.test_data.overwrite": "false",
+        "masd.extraction.cpp.types.forward_declarations.overwrite": "true",
+        "masd.extraction.cpp.serialization.forward_declarations.overwrite": "true"
       },
       "fallback_element_type": "dogen::object",
       "attributes": [

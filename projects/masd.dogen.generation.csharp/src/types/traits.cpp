@@ -28,7 +28,7 @@ std::string traits::kernel() {
 }
 
 std::string traits::backend() {
-    static std::string r("masd.csharp");
+    static std::string r("masd.extraction.csharp");
     return r;
 }
 
@@ -68,27 +68,27 @@ std::string traits::visual_studio_project_family() {
 }
 
 std::string traits::backend_directory_name() {
-    static std::string r("masd.csharp.directory");
+    static std::string r("masd.extraction.csharp.directory");
     return r;
 }
 
 std::string traits::csharp::helper::family() {
-    static std::string r("masd.csharp.helper.family");
+    static std::string r("masd.extraction.csharp.helper.family");
     return r;
 }
 
 std::string traits::csharp::aspect::requires_static_reference_equals() {
-    static std::string r("masd.csharp.aspect.requires_static_reference_equals");
+    static std::string r("masd.extraction.csharp.aspect.requires_static_reference_equals");
     return r;
 }
 
 std::string traits::csharp::assistant::requires_assistance() {
-    static std::string r("masd.csharp.assistant.requires_assistance");
+    static std::string r("masd.extraction.csharp.assistant.requires_assistance");
     return r;
 }
 
 std::string traits::csharp::assistant::method_postfix() {
-    static std::string r("masd.csharp.assistant.method_postfix");
+    static std::string r("masd.extraction.csharp.assistant.method_postfix");
     return r;
 }
 

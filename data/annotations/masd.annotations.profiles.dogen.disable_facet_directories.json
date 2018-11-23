@@ -8,11 +8,11 @@
     {
       "name": {
         "simple": "disable_facet_directories",
-        "qualified": "masd.cpp.disable_facet_directories"
+        "qualified": "masd.extraction.cpp.disable_facet_directories"
       },
       "archetype_location": {
         "kernel": "masd",
-        "backend": "masd.cpp"
+        "backend": "masd.extraction.cpp"
       },
       "template_kind": "instance",
       "untyped_value": [
