@@ -29,13 +29,11 @@ processed_comment::processed_comment(
     const std::string& documentation,
     const std::list<std::pair<std::string, std::string> >& tagged_values,
     const bool applicable_to_parent_object,
-    const std::string& original_content,
-    const std::string& external_modules)
+    const std::string& original_content)
     : documentation_(documentation),
       tagged_values_(tagged_values),
       applicable_to_parent_object_(applicable_to_parent_object),
-      original_content_(original_content),
-      external_modules_(external_modules) { }
+      original_content_(original_content) { }
 
 void processed_comment::swap(processed_comment& other) noexcept {
     using std::swap;
@@ -43,15 +41,13 @@ void processed_comment::swap(processed_comment& other) noexcept {
     swap(tagged_values_, other.tagged_values_);
     swap(applicable_to_parent_object_, other.applicable_to_parent_object_);
     swap(original_content_, other.original_content_);
-    swap(external_modules_, other.external_modules_);
 }
 
 bool processed_comment::operator==(const processed_comment& rhs) const {
     return documentation_ == rhs.documentation_ &&
         tagged_values_ == rhs.tagged_values_ &&
         applicable_to_parent_object_ == rhs.applicable_to_parent_object_ &&
-        original_content_ == rhs.original_content_ &&
-        external_modules_ == rhs.external_modules_;
+        original_content_ == rhs.original_content_;
 }
 
 processed_comment& processed_comment::operator=(processed_comment other) {
@@ -114,22 +110,6 @@ void processed_comment::original_content(const std::string& v) {
 
 void processed_comment::original_content(const std::string&& v) {
     original_content_ = std::move(v);
-}
-
-const std::string& processed_comment::external_modules() const {
-    return external_modules_;
-}
-
-std::string& processed_comment::external_modules() {
-    return external_modules_;
-}
-
-void processed_comment::external_modules(const std::string& v) {
-    external_modules_ = v;
-}
-
-void processed_comment::external_modules(const std::string&& v) {
-    external_modules_ = std::move(v);
 }
 
 }

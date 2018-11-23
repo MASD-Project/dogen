@@ -39,11 +39,6 @@ struct traits {
      * the meta-type's documentation.
      */
     static std::string comment();
-
-    /**
-     * @brief External module path for this diagram.
-     */
-    static std::string external_modules();
 };
 
 }

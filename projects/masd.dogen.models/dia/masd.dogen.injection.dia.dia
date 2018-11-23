@@ -2798,7 +2798,7 @@ and child relationships between objects.#</dia:string>
         <dia:point val="-71,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-71.05,74.95;-46.965,81.05"/>
+        <dia:rectangle val="-71.05,74.95;-46.965,80.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-71,75"/>
@@ -2807,7 +2807,7 @@ and child relationships between objects.#</dia:string>
         <dia:real val="23.984999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#processed_comment#</dia:string>
@@ -2978,29 +2978,6 @@ and child relationships between objects.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Content of the field as it was read from the dia object.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#external_modules#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#The external module path, if any was supplied.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3469,7 +3446,7 @@ manageable format.#</dia:string>
         <dia:point val="0.745,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.005,29.2;8.29569,34.8"/>
+        <dia:rectangle val="-0.005,29.2;8.29879,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3477,8 +3454,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="0.745,34"/>
         <dia:point val="0.745,30"/>
-        <dia:point val="8.08471,30"/>
-        <dia:point val="8.09569,33.9498"/>
+        <dia:point val="8.09569,30"/>
+        <dia:point val="8.09879,33.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3540,7 +3517,7 @@ manageable format.#</dia:string>
         <dia:point val="-12.43,84.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-59.0575,80.95;-11.68,88.05"/>
+        <dia:rectangle val="-59.0575,80.15;-11.68,88.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3549,7 +3526,7 @@ manageable format.#</dia:string>
         <dia:point val="-12.43,84.4"/>
         <dia:point val="-12.43,88"/>
         <dia:point val="-59.0075,88"/>
-        <dia:point val="-59.0075,81"/>
+        <dia:point val="-59.0075,80.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

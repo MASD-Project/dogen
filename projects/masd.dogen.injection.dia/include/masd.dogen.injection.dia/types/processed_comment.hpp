@@ -49,8 +49,7 @@ public:
         const std::string& documentation,
         const std::list<std::pair<std::string, std::string> >& tagged_values,
         const bool applicable_to_parent_object,
-        const std::string& original_content,
-        const std::string& external_modules);
+        const std::string& original_content);
 
 public:
     /**
@@ -91,16 +90,6 @@ public:
     void original_content(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief The external module path, if any was supplied.
-     */
-    /**@{*/
-    const std::string& external_modules() const;
-    std::string& external_modules();
-    void external_modules(const std::string& v);
-    void external_modules(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const processed_comment& rhs) const;
     bool operator!=(const processed_comment& rhs) const {
@@ -116,7 +105,6 @@ private:
     std::list<std::pair<std::string, std::string> > tagged_values_;
     bool applicable_to_parent_object_;
     std::string original_content_;
-    std::string external_modules_;
 };
 
 }

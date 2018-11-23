@@ -55,9 +55,20 @@ processed_comment processed_comment_factory::make(const std::string& c) {
     bool applicable_to_parent_object(false);
     bool previous_line_blank(false);
     while (std::getline(comments_stream, line)) {
+        /*
+         * Lines starting with the special market contain KVPs we're
+         * interested in.
+         */
         if (boost::starts_with(line, instruction_marker)) {
+            /*
+             * Remove the marker from the line. Only the KVP should
+             * remain.
+             */
             boost::replace_all(line, instruction_marker, empty);
 
+            /*
+             * Ensure the KVP is syntatically correct.
+             */
             const auto pos(line.find_first_of(equals));
             if (pos == std::string::npos) {
                 BOOST_LOG_SEV(lg, error) << separator_not_found;
@@ -67,9 +78,6 @@ processed_comment processed_comment_factory::make(const std::string& c) {
             const auto key(line.substr(0, pos));
             const auto value(line.substr(pos + 1));
             applicable_to_parent_object |= (key == traits::comment());
-            if (key == traits::external_modules())
-                r.external_modules(value);
-
             r.tagged_values().push_back(std::make_pair(key, value));
             continue;
         }
