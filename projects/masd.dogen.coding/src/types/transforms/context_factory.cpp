@@ -27,7 +27,7 @@
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
-#include "masd.dogen.tracing/types/prober.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
 #include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
@@ -124,7 +124,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     extraction::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
 
-    tracing::prober prober(alrp, atrp,
+    tracing::tracer tracer(alrp, atrp,
         o.log_level(), o.probe_all(), o.probe_all(),
         o.probe_all() || o.probe_stats(),
         o.probe_stats_disable_guids(),
@@ -135,7 +135,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     using helpers::filesystem_writer;
     auto writer(boost::make_shared<filesystem_writer>(o.force_write()));
 
-    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober,
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, tracer,
         ibsp, writer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";

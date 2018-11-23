@@ -23,7 +23,7 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
@@ -189,8 +189,8 @@ transform(const context& ctx, const meta_model::model& m) {
 
 meta_model::text_model model_to_text_model_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
-    tracing::scoped_chain_prober stp(lg, "code generation chain",
-        transform_id, ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "code generation chain",
+        transform_id, ctx.tracer());
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 

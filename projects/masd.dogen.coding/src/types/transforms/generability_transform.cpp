@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
@@ -59,8 +59,8 @@ has_generatable_types(const meta_model::model& m) {
 
 void generability_transform::
 transform(const context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_prober stp(lg, "generability transform",
-        transform_id, m.name().id(), ctx.prober(), m);
+    tracing::scoped_transform_tracer stp(lg, "generability transform",
+        transform_id, m.name().id(), ctx.tracer(), m);
     m.has_generatable_types(has_generatable_types(m));
     stp.end_transform(m);
 }

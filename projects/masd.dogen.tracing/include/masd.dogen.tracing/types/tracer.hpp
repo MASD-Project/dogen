@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TRACING_TYPES_PROBER_HPP
-#define MASD_DOGEN_TRACING_TYPES_PROBER_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_TRACER_HPP
+#define MASD_DOGEN_TRACING_TYPES_TRACER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,9 +36,9 @@
 
 namespace masd::dogen::tracing {
 
-class prober final {
+class tracer final {
 public:
-    prober(const annotations::archetype_location_repository& alrp,
+    tracer(const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const std::string log_level,
         const bool probe_all,

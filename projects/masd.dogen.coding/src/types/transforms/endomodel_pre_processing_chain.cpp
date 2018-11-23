@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"
@@ -99,8 +99,8 @@ apply_second_set_of_transforms(const context& ctx, meta_model::endomodel& em) {
 
 void endomodel_pre_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    tracing::scoped_chain_prober stp(lg, "pre-processing chain",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_chain_tracer stp(lg, "pre-processing chain",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     apply_first_set_of_transforms(ctx, em);
     apply_second_set_of_transforms(ctx, em);
@@ -111,8 +111,8 @@ transform(const context& ctx, meta_model::endomodel& em) {
 bool endomodel_pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
     meta_model::endomodel& em) {
-    tracing::scoped_chain_prober stp(lg, "pre-processing chain",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_chain_tracer stp(lg, "pre-processing chain",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     /*
      * We must apply the first set of transforms because language

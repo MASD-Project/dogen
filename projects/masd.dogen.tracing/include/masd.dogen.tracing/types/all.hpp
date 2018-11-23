@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "masd.dogen.tracing/types/prober.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.tracing/types/metrics.hpp"
 #include "masd.dogen.tracing/types/tracing.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.tracing/types/tracing_error.hpp"
 #include "masd.dogen.tracing/types/metrics_builder.hpp"
 #include "masd.dogen.tracing/types/metrics_printer.hpp"

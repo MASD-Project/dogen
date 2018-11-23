@@ -14,7 +14,7 @@
   },
   "elements": [
     {
-      "name": "prober",
+      "name": "tracer",
       "stereotypes": [
         "handcrafted"
       ],
@@ -73,7 +73,7 @@
       "fallback_element_type": "dogen::object"
     },
     {
-      "name": "scoped_prober",
+      "name": "scoped_tracer",
       "stereotypes": [
         "handcrafted"
       ],

@@ -23,7 +23,7 @@
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
@@ -97,8 +97,8 @@ language_transform::make_output_languages(const type_group& tg,
 
 void language_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    tracing::scoped_transform_prober stp(lg, "language transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_transform_tracer stp(lg, "language transform",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ra(em.root_module()->annotation());

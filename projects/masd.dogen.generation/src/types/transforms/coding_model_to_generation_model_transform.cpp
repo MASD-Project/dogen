@@ -23,7 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
@@ -187,8 +187,8 @@ transform(const coding::meta_model::endomodel& m) {
 std::list<meta_model::model> coding_model_to_generation_model_transform::
 transform(const context& ctx, const
     std::list<coding::meta_model::endomodel>& ms) {
-    tracing::scoped_transform_prober stp(lg, "endomodel to model transform",
-        transform_id, ctx.prober(), ms);
+    tracing::scoped_transform_tracer stp(lg, "endomodel to model transform",
+        transform_id, ctx.tracer(), ms);
 
     std::list<meta_model::model> r;
     for(const auto& m : ms)

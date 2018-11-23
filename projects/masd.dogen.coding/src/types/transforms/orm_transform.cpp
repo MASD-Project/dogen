@@ -25,7 +25,7 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -492,8 +492,8 @@ transform_modules(const type_group& tg, meta_model::endomodel& em) {
 
 void orm_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    tracing::scoped_transform_prober stp(lg, "orm transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_transform_tracer stp(lg, "orm transform",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto& rm(*em.root_module());

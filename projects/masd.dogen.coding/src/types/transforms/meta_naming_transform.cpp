@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/elements_traversal.hpp"
 #include "masd.dogen.coding/types/meta_model/endomodel.hpp"
@@ -93,8 +93,8 @@ public:
 
 void meta_naming_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    tracing::scoped_transform_prober stp(lg, "meta-naming transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_transform_tracer stp(lg, "meta-naming transform",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     em.meta_name(meta_name_factory::make_endomodel_name());
 

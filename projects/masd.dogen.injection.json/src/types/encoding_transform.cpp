@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection.json/types/dehydrator.hpp"
 #include "masd.dogen.injection.json/types/encoding_transform.hpp"
@@ -45,8 +45,8 @@ std::string encoding_transform::extension() const {
 void encoding_transform::
 transform(const transforms::context& ctx, const meta_model::model& m,
     const boost::filesystem::path& p) {
-    tracing::scoped_transform_prober stp(lg, "JSON encoding transform",
-        transform_id, m.name(), ctx.prober());
+    tracing::scoped_transform_tracer stp(lg, "JSON encoding transform",
+        transform_id, m.name(), ctx.tracer());
 
     dehydrator::dehydrate(m, p);
 }

@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/helpers/reference_paths_extractor.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -58,8 +58,8 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
 
 std::list<meta_model::endomodel> references_chain::
 transform(const context& ctx, const meta_model::endomodel& target) {
-    tracing::scoped_chain_prober stp(lg, "references chain",
-        transform_id, target.name().id(), ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "references chain",
+        transform_id, target.name().id(), ctx.tracer());
 
     /*
      * Obtain the absolute paths to all reference models - system and
@@ -86,7 +86,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * of the exogenous model.
          */
         // const auto em(exomodel_generation_chain::transform(ctx, rp));
-        const injection::transforms::context ext_ctx(ctx.prober());
+        const injection::transforms::context ext_ctx(ctx.tracer());
         const auto em(injection::transforms::model_generation_chain::transform(ext_ctx, rp));
 
         /*

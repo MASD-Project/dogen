@@ -142,7 +142,7 @@
         <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#prober#</dia:string>
+        <dia:string>#tracer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -232,7 +232,7 @@
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#prober#</dia:string>
+            <dia:string>#tracer#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -1759,7 +1759,7 @@
         <dia:point val="50.215,39.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.465,38.65;52.2847,48.7498"/>
+        <dia:rectangle val="49.465,38.65;52.2957,48.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1767,8 +1767,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="50.215,39.4"/>
         <dia:point val="50.215,44"/>
-        <dia:point val="52.0457,44"/>
-        <dia:point val="52.0847,47.9498"/>
+        <dia:point val="52.0847,44"/>
+        <dia:point val="52.0957,47.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1794,19 +1794,19 @@
         <dia:point val="12,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.95,47.95;19.165,51.05"/>
+        <dia:rectangle val="11.95,47.95;18.8675,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="12,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1150000000000002"/>
+        <dia:real val="6.8174999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#scoped_prober#</dia:string>
+        <dia:string>#scoped_tracer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -1937,17 +1937,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="15.5575,48"/>
+        <dia:point val="15.4087,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.8075,39.35;27.2,48.8"/>
+        <dia:rectangle val="14.6587,39.35;27.2,48.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="15.5575,48"/>
-        <dia:point val="15.5575,44"/>
+        <dia:point val="15.4087,48"/>
+        <dia:point val="15.4087,44"/>
         <dia:point val="27,44"/>
         <dia:point val="27,39.4"/>
       </dia:attribute>

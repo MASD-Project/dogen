@@ -26,19 +26,19 @@
 #endif
 
 #include <algorithm>
-#include "masd.dogen.tracing/types/prober.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
 
 namespace masd::dogen::injection::transforms {
 
 class context final {
 public:
-    explicit context(const masd::dogen::tracing::prober& prober);
+    explicit context(const masd::dogen::tracing::tracer& tracer);
 
 public:
-    const masd::dogen::tracing::prober& prober() const;
+    const masd::dogen::tracing::tracer& tracer() const;
 
 private:
-    masd::dogen::tracing::prober prober_;
+    masd::dogen::tracing::tracer tracer_;
 };
 
 }

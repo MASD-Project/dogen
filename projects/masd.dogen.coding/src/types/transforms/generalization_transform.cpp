@@ -24,7 +24,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -245,8 +245,8 @@ void generalization_transform::sort_leaves(meta_model::endomodel& em) {
 
 void generalization_transform::transform(const context& ctx,
     const helpers::indices& idx, meta_model::endomodel& em) {
-    tracing::scoped_transform_prober stp(lg, "generalization transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_transform_tracer stp(lg, "generalization transform",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     const auto parent_ids(update_and_collect_parent_ids(idx, em));
     const auto tg(make_type_group(ctx.type_repository()));

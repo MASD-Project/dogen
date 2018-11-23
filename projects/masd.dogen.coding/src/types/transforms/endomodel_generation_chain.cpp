@@ -25,7 +25,7 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
@@ -50,8 +50,8 @@ namespace masd::dogen::coding::transforms {
 std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
-    tracing::scoped_chain_prober stp(lg, "endomodel generation chain",
-        transform_id, model_name, ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "endomodel generation chain",
+        transform_id, model_name, ctx.tracer());
 
     /*
      * Obtain the initial target, given the user options. The initial

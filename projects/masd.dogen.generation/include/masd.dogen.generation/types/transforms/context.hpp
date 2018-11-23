@@ -33,7 +33,7 @@
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
 #include "masd.dogen.extraction/types/repository.hpp"
-#include "masd.dogen.tracing/types/prober.hpp"
+#include "masd.dogen.tracing/types/tracer.hpp"
 #include "masd.dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "masd.dogen.generation/types/helpers/artefact_writer_interface.hpp"
 
@@ -48,7 +48,7 @@ class context final {
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const masd::dogen::extraction::repository& frp,
-        const tracing::prober& prober,
+        const tracing::tracer& tracer,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
         intra_backend_segment_properties,
@@ -81,7 +81,7 @@ public:
     /*
      * @brief Returns the transform probe.
      */
-    const tracing::prober& prober() const;
+    const tracing::tracer& tracer() const;
 
     /**
      * @brief Returns all intra-backend segment properties.
@@ -101,7 +101,7 @@ private:
     const annotations::type_repository type_repository_;
         const annotations::annotation_factory annotation_factory_;
     const masd::dogen::extraction::repository formatting_repository_;
-    const tracing::prober prober_;
+    const tracing::tracer tracer_;
     const std::unordered_map<std::string,
                              meta_model::intra_backend_segment_properties>
     intra_backend_segment_properties_;

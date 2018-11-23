@@ -11717,10 +11717,10 @@ model.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#prober#</dia:string>
+            <dia:string>#tracer#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#tracing::prober#</dia:string>
+            <dia:string>#tracing::tracer#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

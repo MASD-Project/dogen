@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
@@ -48,8 +48,8 @@ std::string decoding_transform::extension() const {
 meta_model::model decoding_transform::transform(const transforms::context& ctx,
     const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
-    tracing::scoped_transform_prober stp(lg, "JSON decoding transform",
-        transform_id, model_name, ctx.prober());
+    tracing::scoped_transform_tracer stp(lg, "JSON decoding transform",
+        transform_id, model_name, ctx.tracer());
 
     hydrator h;
     const auto r(h.hydrate(p));

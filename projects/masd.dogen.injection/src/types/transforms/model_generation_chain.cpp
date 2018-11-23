@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/model_generation_chain.hpp"
@@ -57,8 +57,8 @@ transforms::registrar& model_generation_chain::registrar() {
 meta_model::model model_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.filename().generic_string());
-    tracing::scoped_chain_prober stp(lg, "injection model generation chain",
-        transform_id, model_name, ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "injection model generation chain",
+        transform_id, model_name, ctx.tracer());
 
     /*
      * Transform the exogenous model - in whatever supported exogenous

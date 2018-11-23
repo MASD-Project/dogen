@@ -206,8 +206,8 @@
       "fallback_element_type": "dogen::object",
       "attributes": [
         {
-          "name": "prober",
-          "type": "tracing::prober"
+          "name": "tracer",
+          "type": "tracing::tracer"
         }
       ]
     },

@@ -215,7 +215,7 @@ meta_model::name resolver::resolve_name_with_internal_modules(
      *
      * Note that this hack works at present by sheer luck: we are
      * using the model name as an internal module: e.g. for a
-     * reference to tracing::prober, we set tracing to the internal
+     * reference to tracing::tracer, we set tracing to the internal
      * module. Since the produced ID matches the string for the
      * correct type (even though its not in the model module as it
      * should be), we resolve it. Once we resolve it, we use the

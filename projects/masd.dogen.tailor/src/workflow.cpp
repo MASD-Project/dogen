@@ -120,7 +120,7 @@ void workflow::tailor(const masd::dogen::options::tailoring_options& to) const {
 
     using namespace masd::dogen::coding::transforms;
     const auto ctx(context_factory::make(o, false/*enable_validation*/));
-    const masd::dogen::injection::transforms::context ext_ctx(ctx.prober());
+    const masd::dogen::injection::transforms::context ext_ctx(ctx.tracer());
 
     using namespace masd::dogen::injection::transforms;
     model_to_model_chain::transform(ext_ctx, o.target(), to.output());

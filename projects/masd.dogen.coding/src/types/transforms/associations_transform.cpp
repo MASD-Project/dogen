@@ -24,7 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
@@ -130,8 +130,8 @@ expand_object(const meta_model::endomodel& em, meta_model::object& o) {
 
 void associations_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    tracing::scoped_transform_prober stp(lg, "associations transform",
-        transform_id, em.name().id(), ctx.prober(), em);
+    tracing::scoped_transform_tracer stp(lg, "associations transform",
+        transform_id, em.name().id(), ctx.tracer(), em);
 
     BOOST_LOG_SEV(lg, debug) << "Total objects: " << em.objects().size();
 

@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.injection/types/meta_model/model.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
@@ -63,8 +63,8 @@ model_to_model_chain::obtain_transforms(
 void model_to_model_chain::transform(const transforms::context& ctx,
     const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
-    tracing::scoped_chain_prober stp(lg, "exomodel to exomodel chain",
-        transform_id, ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "exomodel to exomodel chain",
+        transform_id, ctx.tracer());
 
     /*
      * Obtain a tuple containing the source and destination

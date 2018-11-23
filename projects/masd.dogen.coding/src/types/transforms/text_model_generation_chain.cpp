@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/text_model_io.hpp"
 #include "masd.dogen.coding/types/transforms/model_to_text_model_chain.hpp"
 #include "masd.dogen.coding/types/transforms/model_generation_chain.hpp"
@@ -40,8 +40,8 @@ namespace masd::dogen::coding::transforms {
 meta_model::text_model
 text_model_generation_chain::transform(const context& ctx) {
     const auto model_name(ctx.transform_options().target().filename().string());
-    tracing::scoped_chain_prober stp(lg, "text model generation chain",
-        transform_id, model_name, ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "text model generation chain",
+        transform_id, model_name, ctx.tracer());
 
     /*
      * Obtain the models.

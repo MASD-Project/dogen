@@ -708,8 +708,8 @@
           "type": "extraction::repository"
         },
         {
-          "name": "prober",
-          "type": "tracing::prober"
+          "name": "tracer",
+          "type": "tracing::tracer"
         },
         {
           "name": "intra_backend_segment_properties",

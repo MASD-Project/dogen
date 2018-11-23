@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_tracer.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.coding/types/transforms/mapping_transform.hpp"
@@ -40,8 +40,8 @@ namespace masd::dogen::coding::transforms {
 meta_model::endomodel endomodel_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-    tracing::scoped_chain_prober stp(lg, "model assembly chain",
-        transform_id, target.name().id(), ctx.prober());
+    tracing::scoped_chain_tracer stp(lg, "model assembly chain",
+        transform_id, target.name().id(), ctx.tracer());
 
     /*
      * Perform all the language mapping required for target and
