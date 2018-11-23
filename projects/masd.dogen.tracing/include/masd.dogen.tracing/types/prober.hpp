@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_PROBER_HPP
-#define MASD_DOGEN_PROBING_TYPES_PROBER_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_PROBER_HPP
+#define MASD_DOGEN_TRACING_TYPES_PROBER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,10 +31,10 @@
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository.hpp"
-#include "masd.dogen.probing/types/metrics.hpp"
-#include "masd.dogen.probing/types/metrics_builder.hpp"
+#include "masd.dogen.tracing/types/metrics.hpp"
+#include "masd.dogen.tracing/types/metrics_builder.hpp"
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 class prober final {
 public:
@@ -51,7 +51,7 @@ public:
 
 private:
     void validate() const;
-    bool probing_enabled() const;
+    bool tracing_enabled() const;
     void handle_probe_directory() const;
     void handle_current_directory() const;
     void ensure_transform_position_not_empty() const;
@@ -134,7 +134,7 @@ public:
         end_transform();
     }
 
-    void end_probing() const;
+    void end_tracing() const;
 
 private:
     mutable metrics_builder builder_;

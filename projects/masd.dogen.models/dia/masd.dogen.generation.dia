@@ -4894,7 +4894,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
 #DOGEN yarn.model_modules=masd.dogen.generation
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.coding.dia
-#DOGEN yarn.reference=masd.dogen.probing.dia
+#DOGEN yarn.reference=masd.dogen.tracing.dia
 #DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
@@ -10533,7 +10533,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#prober#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#probing::prober#</dia:string>
+            <dia:string>#tracing::prober#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "masd.dogen.probing")
+set(name "masd.dogen.tracing")
 set(lib_binary_name ${name})
 set(lib_target_name ${name}.lib)
 

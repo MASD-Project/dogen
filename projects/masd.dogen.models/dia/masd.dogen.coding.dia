@@ -845,7 +845,7 @@ and to build it.
 #DOGEN yarn.model_modules=masd.dogen.coding
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.extraction.dia
-#DOGEN yarn.reference=masd.dogen.probing.dia
+#DOGEN yarn.reference=masd.dogen.tracing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -11720,7 +11720,7 @@ model.#</dia:string>
             <dia:string>#prober#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#probing::prober#</dia:string>
+            <dia:string>#tracing::prober#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -32903,7 +32903,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Enable probing for statistics around transforms.#</dia:string>
+            <dia:string>#Enable tracing for statistics around transforms.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32972,7 +32972,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Enable all probing.#</dia:string>
+            <dia:string>#Enable all tracing.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_METRICS_PRINTER_HPP
-#define MASD_DOGEN_PROBING_TYPES_METRICS_PRINTER_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_METRICS_PRINTER_HPP
+#define MASD_DOGEN_TRACING_TYPES_METRICS_PRINTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <ostream>
 #include <boost/shared_ptr.hpp>
-#include "masd.dogen.probing/types/metrics.hpp"
+#include "masd.dogen.tracing/types/metrics.hpp"
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 class metrics_printer final {
 private:

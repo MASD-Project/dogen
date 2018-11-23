@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_SCOPED_PROBER_HPP
-#define MASD_DOGEN_PROBING_TYPES_SCOPED_PROBER_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_SCOPED_PROBER_HPP
+#define MASD_DOGEN_TRACING_TYPES_SCOPED_PROBER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <string>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/prober.hpp"
+#include "masd.dogen.tracing/types/prober.hpp"
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 class scoped_chain_prober final {
 public:

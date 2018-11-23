@@ -1194,7 +1194,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Dump all available probing information about transforms.#</dia:string>
+            <dia:string>#Dump all available tracing information about transforms.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

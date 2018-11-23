@@ -102,7 +102,7 @@
 #DOGEN yarn.reference=masd.dogen.coding.dia
 #DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.probing.dia
+#DOGEN yarn.reference=masd.dogen.tracing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17

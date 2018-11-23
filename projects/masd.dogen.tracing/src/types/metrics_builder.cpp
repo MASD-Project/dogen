@@ -27,14 +27,14 @@
 #include <boost/uuid/uuid_generators.hpp>
 #include "masd.dogen/version.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/metrics.hpp"
-#include "masd.dogen.probing/types/probing_error.hpp"
-#include "masd.dogen.probing/types/metrics_builder.hpp"
+#include "masd.dogen.tracing/types/metrics.hpp"
+#include "masd.dogen.tracing/types/tracing_error.hpp"
+#include "masd.dogen.tracing/types/metrics_builder.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("probing.metrics_builder"));
+auto lg(logger_factory("tracing.metrics_builder"));
 
 const std::string root_id("root");
 const std::string unexpected_empty(
@@ -44,7 +44,7 @@ const std::string unmatch_start_end(
 
 }
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 metrics_builder::
 metrics_builder(const std::string& log_level, const bool writing_probe_data) {
@@ -53,9 +53,9 @@ metrics_builder(const std::string& log_level, const bool writing_probe_data) {
     s << "version: v" << DOGEN_VERSION << ", "
       << "log: " << log_level;
     if (writing_probe_data)
-        s << ", probing: on";
+        s << ", tracing: on";
     else
-        s << ", probing: off";
+        s << ", tracing: off";
 
     stack_.push(create_metrics(root_id, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
@@ -64,7 +64,7 @@ metrics_builder(const std::string& log_level, const bool writing_probe_data) {
 void metrics_builder::ensure_stack_not_empty() const {
     if (stack_.empty()) {
         BOOST_LOG_SEV(lg, error) << unexpected_empty;
-        BOOST_THROW_EXCEPTION(probing_error(unexpected_empty));
+        BOOST_THROW_EXCEPTION(tracing_error(unexpected_empty));
     }
 }
 
@@ -126,7 +126,7 @@ boost::shared_ptr<metrics> metrics_builder::build() {
 
     if (stack_.size() != 1) {
         BOOST_LOG_SEV(lg, error) << unmatch_start_end;
-        BOOST_THROW_EXCEPTION(probing_error(unmatch_start_end));
+        BOOST_THROW_EXCEPTION(tracing_error(unmatch_start_end));
     }
 
     update_end();

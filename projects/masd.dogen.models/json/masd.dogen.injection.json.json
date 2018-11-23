@@ -6,7 +6,7 @@
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.extraction.json",
     "yarn.reference": "masd.dogen.options.json",
-    "yarn.reference": "masd.dogen.probing.json",
+    "yarn.reference": "masd.dogen.tracing.json",
     "yarn.reference": "masd.dogen.injection.json",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",

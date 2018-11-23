@@ -127,7 +127,7 @@
         {
           "name": "level",
           "type": "tracing_level",
-          "documentation": "Dump all available probing information about transforms.\n"
+          "documentation": "Dump all available tracing information about transforms.\n"
         },
         {
           "name": "format",

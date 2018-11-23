@@ -26,15 +26,15 @@
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.annotations/io/type_repository_io.hpp"
 #include "masd.dogen.annotations/io/archetype_location_repository_io.hpp"
-#include "masd.dogen.probing/types/probing_error.hpp"
-#include "masd.dogen.probing/types/metrics.hpp"
-#include "masd.dogen.probing/types/metrics_printer.hpp"
-#include "masd.dogen.probing/types/prober.hpp"
+#include "masd.dogen.tracing/types/tracing_error.hpp"
+#include "masd.dogen.tracing/types/metrics.hpp"
+#include "masd.dogen.tracing/types/metrics_printer.hpp"
+#include "masd.dogen.tracing/types/prober.hpp"
 
 namespace {
 
 using namespace masd::dogen::utility::log;
-auto lg(logger_factory("probing.prober"));
+auto lg(logger_factory("tracing.prober"));
 
 const char zero('0');
 const std::string empty;
@@ -50,7 +50,7 @@ const std::string unexpected_empty("The stack must not be empty.");
 
 }
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 prober::prober(const annotations::archetype_location_repository& alrp,
     const annotations::type_repository& atrp,
@@ -73,7 +73,7 @@ prober::prober(const annotations::archetype_location_repository& alrp,
 
     validate();
 
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     handle_probe_directory();
@@ -87,12 +87,12 @@ prober::prober(const annotations::archetype_location_repository& alrp,
 
 void prober::validate() const {
     /*
-     * If data probing was requested, we must have a directory in
+     * If data tracing was requested, we must have a directory in
      * which to place the data.
      */
     if (probe_data_ && probe_directory_.empty()) {
         BOOST_LOG_SEV(lg, error) << directory_missing;
-        BOOST_THROW_EXCEPTION(probing_error(directory_missing));
+        BOOST_THROW_EXCEPTION(tracing_error(directory_missing));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Prober initialised. Settings: "
@@ -102,7 +102,7 @@ void prober::validate() const {
                              << probe_directory_.generic_string();
 }
 
-bool prober::probing_enabled() const {
+bool prober::tracing_enabled() const {
     return probe_data_ || probe_stats_;
 }
 
@@ -117,7 +117,7 @@ void prober::handle_probe_directory() const {
         boost::filesystem::remove_all(probe_directory_, ec);
         if (ec) {
             BOOST_LOG_SEV(lg, error) << failed_delete;
-            BOOST_THROW_EXCEPTION(probing_error(failed_delete));
+            BOOST_THROW_EXCEPTION(tracing_error(failed_delete));
         }
         BOOST_LOG_SEV(lg, debug) << "Deleted prober data directory.";
     }
@@ -126,7 +126,7 @@ void prober::handle_probe_directory() const {
     boost::filesystem::create_directories(probe_directory_, ec);
     if (ec) {
         BOOST_LOG_SEV(lg, error) << failed_create;
-        BOOST_THROW_EXCEPTION(probing_error(failed_create));
+        BOOST_THROW_EXCEPTION(tracing_error(failed_create));
     }
     BOOST_LOG_SEV(lg, debug) << "Created prober data directory: "
                              << probe_directory_.generic_string();
@@ -150,14 +150,14 @@ void prober::handle_current_directory() const {
     if (boost::filesystem::exists(current_directory_)) {
         const auto gs(current_directory_.generic_string());
         BOOST_LOG_SEV(lg, error) << chain_directory_exists << gs;
-        BOOST_THROW_EXCEPTION(probing_error(chain_directory_exists + gs));
+        BOOST_THROW_EXCEPTION(tracing_error(chain_directory_exists + gs));
     }
 
     boost::system::error_code ec;
     boost::filesystem::create_directories(current_directory_, ec);
     if (ec) {
         BOOST_LOG_SEV(lg, error) << failed_create;
-        BOOST_THROW_EXCEPTION(probing_error(failed_create));
+        BOOST_THROW_EXCEPTION(tracing_error(failed_create));
     }
     BOOST_LOG_SEV(lg, debug) << "Created current directory: "
                              << current_directory_.generic_string();
@@ -166,7 +166,7 @@ void prober::handle_current_directory() const {
 void prober::ensure_transform_position_not_empty() const {
     if (transform_position_.empty()) {
         BOOST_LOG_SEV(lg, error) << unexpected_empty;
-        BOOST_THROW_EXCEPTION(probing_error(unexpected_empty));
+        BOOST_THROW_EXCEPTION(tracing_error(unexpected_empty));
     }
 }
 
@@ -222,14 +222,14 @@ void prober::write_initial_inputs(
 }
 
 void prober::start_transform(const std::string& transform_id) const {
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     start_transform(transform_id, empty);
 }
 
 void prober::start_chain(const std::string& transform_id) const {
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     start_chain(transform_id, empty);
@@ -237,7 +237,7 @@ void prober::start_chain(const std::string& transform_id) const {
 
 void prober::start_chain(const std::string& transform_id,
     const std::string& model_id) const {
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
@@ -254,7 +254,7 @@ void prober::start_chain(const std::string& transform_id,
 
 void prober::start_transform(const std::string& transform_id,
     const std::string& model_id) const {
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     builder_.start(transform_id, model_id);
@@ -263,7 +263,7 @@ void prober::start_transform(const std::string& transform_id,
 }
 
 void prober::end_chain() const {
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
@@ -281,7 +281,7 @@ void prober::end_chain() const {
 }
 
 void prober::end_transform() const {
-    if (!probing_enabled())
+    if (!tracing_enabled())
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
@@ -289,8 +289,8 @@ void prober::end_transform() const {
     builder_.end();
 }
 
-void prober::end_probing() const {
-    BOOST_LOG_SEV(lg, debug) << "Finished probing.";
+void prober::end_tracing() const {
+    BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
 
     if (!probe_stats_)
         return;
