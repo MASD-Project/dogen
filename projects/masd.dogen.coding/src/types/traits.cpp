@@ -48,42 +48,42 @@ std::string traits::overwrite() {
 }
 
 std::string traits::input_language() {
-    static std::string r("masd.input_language");
+    static std::string r("masd.injection.input_language");
     return r;
 }
 
 std::string traits::output_language() {
-    static std::string r("masd.output_language");
+    static std::string r("masd.extraction.output_language");
     return r;
 }
 
 std::string traits::is_proxy_model() {
-    static std::string r("masd.is_proxy_model");
+    static std::string r("masd.injection.is_proxy_model");
     return r;
 }
 
 std::string traits::reference() {
-    static std::string r("masd.reference");
+    static std::string r("masd.injection.reference");
     return r;
 }
 
 std::string traits::external_modules() {
-    static std::string r("masd.external_modules");
+    static std::string r("masd.injection.external_modules");
     return r;
 }
 
 std::string traits::model_modules() {
-    static std::string r("masd.model_modules");
+    static std::string r("masd.injection.model_modules");
     return r;
 }
 
 std::string traits::enable_backend_directories() {
-    static std::string r("masd.enable_backend_directories");
+    static std::string r("masd.extraction.enable_backend_directories");
     return r;
 }
 
 std::string traits::force_backend_directory() {
-    static std::string r("masd.force_backend_directory");
+    static std::string r("masd.extraction.force_backend_directory");
     return r;
 }
 

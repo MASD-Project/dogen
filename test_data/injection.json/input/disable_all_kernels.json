@@ -1,8 +1,8 @@
 {
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "disable_all_kernels",
-    "masd.external_modules": "dogen::test_models",
+    "masd.injection.model_modules": "disable_all_kernels",
+    "masd.injection.external_modules": "dogen::test_models",
     "masd.input_language": "cpp",
     "masd.cpp.enabled": "false",
     "masd.csharp.enabled": "false"

@@ -11,11 +11,11 @@
 			<second>true</second>
 		</item>
 		<item>
-			<first>masd.model_modules</first>
+			<first>masd.injection.model_modules</first>
 			<second>std_model</second>
 		</item>
 		<item>
-			<first>masd.external_modules</first>
+			<first>masd.injection.external_modules</first>
 			<second>dogen::test_models</second>
 		</item>
 		<item>

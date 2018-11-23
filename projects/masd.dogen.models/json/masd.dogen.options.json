@@ -2,8 +2,8 @@
   "documentation": "Stores the configuration options for Dogen applications.\n\nThe options model provides types to store general configuration\noptions for all the different Dogen applications, such as knitter,\netc.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "masd.dogen.options",
-    "masd.input_language": "cpp",
+    "masd.injection.model_modules": "masd.dogen.options",
+    "masd.injection.input_language": "cpp",
     "masd.cpp.enabled": "true",
     "masd.cpp.standard": "c++-17",
     "masd.cpp.msbuild.enabled": "false",

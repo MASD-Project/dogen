@@ -14,7 +14,7 @@
   {
     "name": {
       "simple": "enable_backend_directories",
-      "qualified": "masd.enable_backend_directories"
+      "qualified": "masd.extraction.enable_backend_directories"
     },
     "archetype_location": {
       "kernel": "masd"

@@ -1,8 +1,8 @@
 {
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "masd.dogen.dia",
-    "masd.input_language": "cpp",
+    "masd.injection.model_modules": "masd.dogen.dia",
+    "masd.injection.input_language": "cpp",
     "masd.cpp.enabled": "true",
     "masd.cpp.standard": "c++-17",
     "masd.cpp.msbuild.enabled": "false",

@@ -1,11 +1,11 @@
 {
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "lam_model",
-    "masd.external_modules": "dogen::test_models",
+    "masd.injection.model_modules": "lam_model",
+    "masd.injection.external_modules": "dogen::test_models",
     "masd.input_language": "language_agnostic",
-    "masd.output_language": "csharp",
-    "masd.output_language": "cpp",
+    "masd.extraction.output_language": "csharp",
+    "masd.extraction.output_language": "cpp",
     "masd.cpp.enabled": "true",
     "masd.cpp.msbuild.enabled": "false",
     "masd.cpp.visual_studio.project.enabled": "false",

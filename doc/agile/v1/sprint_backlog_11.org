@@ -250,6 +250,7 @@ We need to update the models to match this.
 
 *** STARTED Great meta-data rename                                    :story:
     :LOGBOOK:
+    CLOCK: [2018-11-23 Fri 21:43]
     CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
     CLOCK: [2018-11-23 Fri 16:57]--[2018-11-23 Fri 18:08] =>  1:11
     CLOCK: [2018-11-23 Fri 16:50]--[2018-11-23 Fri 16:56] =>  0:06

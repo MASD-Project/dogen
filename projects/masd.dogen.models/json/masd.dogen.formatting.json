@@ -2,8 +2,8 @@
   "documentation": "Provides the basic formatting primitives.\n\nThis model is the repository of all formatting related code\nwhich is not language specific. Language-specific models can\nthen make use of it.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "masd.dogen.extraction",
-    "masd.input_language": "cpp",
+    "masd.injection.model_modules": "masd.dogen.extraction",
+    "masd.injection.input_language": "cpp",
     "masd.cpp.enabled": "true",
     "masd.cpp.standard": "c++-17",
     "masd.cpp.msbuild.enabled": "false",

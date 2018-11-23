@@ -1,9 +1,9 @@
 {
   "documentation": "Basic generic collection types.",
   "tagged_values": {
-    "masd.input_language": "csharp",
-    "masd.is_proxy_model": true,
-    "masd.model_modules": "System.Collections.Generic"
+    "masd.injection.input_language": "csharp",
+    "masd.injection.is_proxy_model": true,
+    "masd.injection.model_modules": "System.Collections.Generic"
   },
   "elements": [
     {

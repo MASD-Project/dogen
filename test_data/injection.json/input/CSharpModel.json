@@ -1,8 +1,8 @@
 {
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "CSharpModel",
-    "masd.external_modules": "Dogen.TestModels",
+    "masd.injection.model_modules": "CSharpModel",
+    "masd.injection.external_modules": "Dogen.TestModels",
     "masd.input_language": "csharp",
     "masd.csharp.enabled": "true",
     "masd.cpp.enabled": "false",

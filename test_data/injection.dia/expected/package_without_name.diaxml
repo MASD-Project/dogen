@@ -1170,8 +1170,8 @@
 															<which>6</which>
 															<value>
 																<value>##DOGEN masd.injection.dia.comment=true
-#DOGEN masd.model_modules=package_without_name
-#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.injection.model_modules=package_without_name
+#DOGEN masd.injection.external_modules=dogen::test_models
 #DOGEN masd.input_language=cpp
 #DOGEN masd.cpp.enabled=true
 #DOGEN masd.cpp.msbuild.enabled=false

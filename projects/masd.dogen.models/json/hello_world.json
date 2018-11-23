@@ -2,8 +2,8 @@
   "documentation": "Welcome to Dogen!\n\nThis is one of the simplest models you can generate, a single class with one\nproperty. You can see the use of comments at the class level and property\nlevel.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "dogen.hello_world",
-    "masd.input_language": "cpp",
+    "masd.injection.model_modules": "dogen.hello_world",
+    "masd.injection.input_language": "cpp",
     "masd.cpp.enabled": "true",
     "masd.cpp.standard": "c++-17",
     "masd.cpp.msbuild.enabled": "false",

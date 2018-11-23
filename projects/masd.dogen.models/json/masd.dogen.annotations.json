@@ -2,8 +2,8 @@
   "documentation": "The Annotations model is responsible for managing run-time typed data.\n\nThe idea is to allow the meta-models to carry data over to the\nformatting process without necessarily knowing about this data, but\nyet imposing some constraints on the shape of the data.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
-    "masd.model_modules": "masd.dogen.annotations",
-    "masd.input_language": "cpp",
+    "masd.injection.model_modules": "masd.dogen.annotations",
+    "masd.injection.input_language": "cpp",
     "masd.cpp.enabled": "true",
     "masd.cpp.standard": "c++-17",
     "masd.cpp.msbuild.enabled": "false",

@@ -2,7 +2,7 @@
   {
     "name": {
       "simple": "external_modules",
-      "qualified": "masd.external_modules"
+      "qualified": "masd.injection.external_modules"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -14,7 +14,7 @@
   {
     "name": {
       "simple": "model_modules",
-      "qualified": "masd.model_modules"
+      "qualified": "masd.injection.model_modules"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -152,7 +152,7 @@
   {
     "name": {
       "simple": "is_proxy_model",
-      "qualified": "masd.is_proxy_model"
+      "qualified": "masd.injection.is_proxy_model"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -165,7 +165,7 @@
   {
     "name": {
       "simple": "reference",
-      "qualified": "masd.reference"
+      "qualified": "masd.injection.reference"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -177,7 +177,7 @@
   {
     "name": {
       "simple": "input_language",
-      "qualified": "masd.input_language"
+      "qualified": "masd.injection.input_language"
     },
     "archetype_location": {
       "kernel": "masd"
@@ -190,7 +190,7 @@
   {
     "name": {
       "simple": "output_language",
-      "qualified": "masd.output_language"
+      "qualified": "masd.extraction.output_language"
     },
     "archetype_location": {
       "kernel": "masd"

@@ -1,9 +1,9 @@
 {
   "documentation": "C++ Standard Library types.",
   "tagged_values": {
-    "masd.input_language": "cpp",
-    "masd.is_proxy_model": true,
-    "masd.model_modules": "std"
+    "masd.injection.input_language": "cpp",
+    "masd.injection.is_proxy_model": true,
+    "masd.injection.model_modules": "std"
   },
   "elements": [
     {

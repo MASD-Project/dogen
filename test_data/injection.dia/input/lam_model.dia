@@ -268,11 +268,11 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN masd.injection.dia.comment=true
-#DOGEN masd.model_modules=lam_model
-#DOGEN masd.external_modules=dogen::test_models
+#DOGEN masd.injection.model_modules=lam_model
+#DOGEN masd.injection.external_modules=dogen::test_models
 #DOGEN masd.input_language=language_agnostic
-#DOGEN masd.output_language=cpp
-#DOGEN masd.output_language=csharp
+#DOGEN masd.extraction.output_language=cpp
+#DOGEN masd.extraction.output_language=csharp
 #DOGEN masd.cpp.enabled=true
 #DOGEN masd.cpp.msbuild.enabled=false
 #DOGEN masd.cpp.visual_studio.project.enabled=false
