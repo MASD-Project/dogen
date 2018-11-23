@@ -48,157 +48,156 @@ std::string traits::overwrite() {
 }
 
 std::string traits::input_language() {
-    static std::string r("yarn.input_language");
+    static std::string r("masd.input_language");
     return r;
 }
 
 std::string traits::output_language() {
-    static std::string r("yarn.output_language");
+    static std::string r("masd.output_language");
     return r;
 }
 
 std::string traits::is_proxy_model() {
-    static std::string r("yarn.is_proxy_model");
+    static std::string r("masd.is_proxy_model");
     return r;
 }
 
 std::string traits::reference() {
-    static std::string r("yarn.reference");
+    static std::string r("masd.reference");
     return r;
 }
 
 std::string traits::external_modules() {
-    static std::string r("yarn.external_modules");
+    static std::string r("masd.external_modules");
     return r;
 }
 
 std::string traits::model_modules() {
-    static std::string r("yarn.model_modules");
+    static std::string r("masd.model_modules");
     return r;
 }
 
 std::string traits::enable_backend_directories() {
-    // FIXME: rename to yarn
-    static std::string r("quilt.enable_backend_directories");
+    static std::string r("masd.enable_backend_directories");
     return r;
 }
 
 std::string traits::force_backend_directory() {
-    static std::string r("yarn.force_backend_directory");
+    static std::string r("masd.force_backend_directory");
     return r;
 }
 
 std::string traits::type_parameters::variable_number_of_parameters() {
-    static std::string r("yarn.type_parameters.variable_number_of_parameters");
+    static std::string r("masd.type_parameters.variable_number_of_parameters");
     return r;
 }
 
 std::string traits::type_parameters::type_parameters_count() {
-    static std::string r("yarn.type_parameters.count");
+    static std::string r("masd.type_parameters.count");
     return r;
 }
 
 std::string traits::type_parameters::type_parameters_always_in_heap() {
-    static std::string r("yarn.type_parameters.always_in_heap");
+    static std::string r("masd.type_parameters.always_in_heap");
     return r;
 }
 
 std::string traits::generalization::is_final() {
-    static std::string r("yarn.generalization.is_final");
+    static std::string r("masd.generalization.is_final");
     return r;
 }
 
 std::string traits::generalization::parent() {
-    static std::string r("yarn.generalization.parent");
+    static std::string r("masd.generalization.parent");
     return r;
 }
 
 std::string traits::enumeration::
 use_implementation_defined_underlying_element() {
     static std::string r(
-        "yarn.enumeration.use_implementation_defined_underlying_element");
+        "masd.enumeration.use_implementation_defined_underlying_element");
     return r;
 }
 
 std::string traits::enumeration::underlying_element() {
-    static std::string r("yarn.enumeration.underlying_element");
+    static std::string r("masd.enumeration.underlying_element");
     return r;
 }
 
 std::string traits::enumeration::
 use_implementation_defined_enumerator_values() {
     static std::string r(
-        "yarn.enumeration.use_implementation_defined_enumerator_values");
+        "masd.enumeration.use_implementation_defined_enumerator_values");
     return r;
 }
 
 std::string traits::enumeration::add_invalid_enumerator() {
-    static std::string r("yarn.enumeration.add_invalid_enumerator");
+    static std::string r("masd.enumeration.add_invalid_enumerator");
     return r;
 }
 
 std::string traits::enumerator::value() {
-    static std::string r("yarn.enumerator.value");
+    static std::string r("masd.enumerator.value");
     return r;
 }
 
 std::string traits::primitive::underlying_element() {
-    static std::string r("yarn.primitive.underlying_element");
+    static std::string r("masd.primitive.underlying_element");
     return r;
 }
 
 std::string traits::primitive::is_nullable() {
-    static std::string r("yarn.primitive.is_nullable");
+    static std::string r("masd.primitive.is_nullable");
     return r;
 }
 
 std::string traits::primitive::use_type_aliasing() {
-    static std::string r("yarn.primitive.use_type_aliasing");
+    static std::string r("masd.primitive.use_type_aliasing");
     return r;
 }
 
 std::string traits::orm::database_system() {
-    static std::string r("yarn.orm.database_system");
+    static std::string r("masd.orm.database_system");
     return r;
 }
 
 std::string traits::orm::table_name() {
-    static std::string r("yarn.orm.table_name");
+    static std::string r("masd.orm.table_name");
     return r;
 }
 
 std::string traits::orm::schema_name() {
-    static std::string r("yarn.orm.schema_name");
+    static std::string r("masd.orm.schema_name");
     return r;
 }
 
 std::string traits::orm::is_primary_key() {
-    static std::string r("yarn.orm.is_primary_key");
+    static std::string r("masd.orm.is_primary_key");
     return r;
 }
 
 std::string traits::orm::column_name() {
-    static std::string r("yarn.orm.column_name");
+    static std::string r("masd.orm.column_name");
     return r;
 }
 
 std::string traits::orm::is_nullable() {
-    static std::string r("yarn.orm.is_nullable");
+    static std::string r("masd.orm.is_nullable");
     return r;
 }
 
 std::string traits::orm::letter_case() {
-    static std::string r("yarn.orm.letter_case");
+    static std::string r("masd.orm.letter_case");
     return r;
 }
 
 std::string traits::orm::type_override() {
-    static std::string r("yarn.orm.type_override");
+    static std::string r("masd.orm.type_override");
     return r;
 }
 
 std::string traits::orm::is_composite() {
-    static std::string r("yarn.orm.is_composite");
+    static std::string r("masd.orm.is_composite");
     return r;
 }
 
