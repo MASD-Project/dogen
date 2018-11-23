@@ -25,15 +25,15 @@
 #pragma once
 #endif
 
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
-#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 
 namespace masd::dogen::generation::cpp::fabric {
 
 class decoration_expander final {
 public:
-    void expand(const dogen::formatting::decoration_properties_factory& dpf,
+    void expand(const dogen::extraction::decoration_properties_factory& dpf,
         coding::meta_model::model& m) const;
 };
 

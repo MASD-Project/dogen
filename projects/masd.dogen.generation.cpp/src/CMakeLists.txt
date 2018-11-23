@@ -35,7 +35,7 @@ set_target_properties(${lib_target_name}
 
 target_link_libraries(${lib_target_name}
     masd.dogen.annotations.lib
-    masd.dogen.formatting.lib
+    masd.dogen.extraction.lib
     masd.dogen.coding.lib
     masd.dogen.templating.lib
     ${Boost_LIBRARIES})

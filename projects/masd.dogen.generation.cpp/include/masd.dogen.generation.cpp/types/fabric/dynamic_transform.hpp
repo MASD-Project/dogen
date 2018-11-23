@@ -40,13 +40,13 @@ private:
         coding::meta_model::model& m) const;
 
     void expand_decoration(
-        const dogen::formatting::decoration_properties_factory& dpf,
+        const dogen::extraction::decoration_properties_factory& dpf,
         coding::meta_model::model& m) const;
 
 public:
     std::string id() const override;
     void transform(const coding::transforms::context& ctx,
-        const dogen::formatting::decoration_properties_factory& dpf,
+        const dogen::extraction::decoration_properties_factory& dpf,
         coding::meta_model::model& m) const override;
 };
 

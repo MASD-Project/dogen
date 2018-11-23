@@ -1,7 +1,7 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/msbuild_targets.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
@@ -75,7 +75,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& c(a.as<fabric::msbuild_targets>(e));
 
     {
-        const auto cs(dogen::formatting::comment_styles::xml_style);
+        const auto cs(dogen::extraction::comment_styles::xml_style);
         a.make_decoration_preamble(cs, e);
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
@@ -99,7 +99,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     ]-->
     <Target Name="<#= targets.main_target_name() #>"
 <#+
-            dogen::formatting::sequence_formatter sf(targets.targets().size());
+            dogen::extraction::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
                                      .not_first("                            ");
             sf.postfix_configuration().last("\">");

@@ -34,9 +34,9 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "masd.dogen.annotations/types/archetype_location.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact.hpp"
-#include "masd.dogen.formatting/types/comment_styles.hpp"
-#include "masd.dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
-#include "masd.dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/comment_styles.hpp"
+#include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -270,20 +270,20 @@ private:
     /**
      * @brief Returns the decoration properties for a given yarn element.
      */
-    const dogen::formatting::decoration_properties&
+    const dogen::extraction::decoration_properties&
     get_decoration_properties(const coding::meta_model::element& e) const;
 
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
-    dogen::formatting::cpp::scoped_boilerplate_formatter
+    dogen::extraction::cpp::scoped_boilerplate_formatter
     make_scoped_boilerplate_formatter(const coding::meta_model::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.
      */
-    dogen::formatting::cpp::scoped_namespace_formatter
+    dogen::extraction::cpp::scoped_namespace_formatter
     make_scoped_namespace_formatter(const std::list<std::string>& ns);
 
     /**
@@ -291,11 +291,11 @@ public:
      */
     /**@{*/
     void make_decoration_preamble(
-        const dogen::formatting::comment_styles cs,
+        const dogen::extraction::comment_styles cs,
         const coding::meta_model::element& e);
     void make_decoration_preamble(
-        const dogen::formatting::comment_styles cs,
-        const boost::optional<dogen::formatting::decoration_properties> dc);
+        const dogen::extraction::comment_styles cs,
+        const boost::optional<dogen::extraction::decoration_properties> dc);
     /**@}*/
 
 public:

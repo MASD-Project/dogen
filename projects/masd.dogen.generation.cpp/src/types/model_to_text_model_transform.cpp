@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/filesystem/path.hpp"
-#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.probing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
@@ -84,7 +84,7 @@ std::list<coding::meta_model::artefact> model_to_text_model_transform::
 format(const std::unordered_set<coding::meta_model::element_archetype>&
     enabled_archetype_for_element, const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const dogen::formatting::repository& drp,
+    const dogen::extraction::repository& drp,
     const formattables::model& fm) const {
     formatters::workflow wf(atrp, af, drp);
     return wf.execute(enabled_archetype_for_element, fm);

@@ -24,10 +24,10 @@
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/unordered_set_io.hpp"
-#include "masd.dogen.formatting/types/indent_filter.hpp"
-#include "masd.dogen.formatting/types/comment_formatter.hpp"
-#include "masd.dogen.formatting/types/decoration_formatter.hpp"
-#include "masd.dogen.formatting/types/utility_formatter.hpp"
+#include "masd.dogen.extraction/types/indent_filter.hpp"
+#include "masd.dogen.extraction/types/comment_formatter.hpp"
+#include "masd.dogen.extraction/types/decoration_formatter.hpp"
+#include "masd.dogen.extraction/types/utility_formatter.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/letter_cases_io.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
@@ -111,7 +111,7 @@ assistant(const context& ctx, const coding::meta_model::element& e,
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_.name().id()
                              << " for archetype: " << al.archetype();
 
-    dogen::formatting::indent_filter::push(filtering_stream_, 4);
+    dogen::extraction::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
 
     validate();
@@ -361,43 +361,43 @@ bool assistant::is_odb_facet_enabled() const {
     return is_facet_enabled(traits::facet());
 }
 
-const dogen::formatting::decoration_properties& assistant::
+const dogen::extraction::decoration_properties& assistant::
 get_decoration_properties(const coding::meta_model::element& e) const {
     return e.decoration_properties();
 }
 
-dogen::formatting::cpp::scoped_boilerplate_formatter assistant::
+dogen::extraction::cpp::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.inclusion_dependencies());
     const auto& hg(art_props.header_guard());
 
-    using dogen::formatting::cpp::scoped_boilerplate_formatter;
+    using dogen::extraction::cpp::scoped_boilerplate_formatter;
     return scoped_boilerplate_formatter(stream(), dp, deps, hg);
 }
 
-dogen::formatting::cpp::scoped_namespace_formatter
+dogen::extraction::cpp::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
-    return dogen::formatting::cpp::scoped_namespace_formatter(
+    return dogen::extraction::cpp::scoped_namespace_formatter(
         stream(), ns, false/*create_anonymous_namespace*/,
         true/*add_new_line*/, requires_nested_namespaces());
 }
 
 void assistant::
-make_decoration_preamble(const dogen::formatting::comment_styles cs,
+make_decoration_preamble(const dogen::extraction::comment_styles cs,
     const coding::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     make_decoration_preamble(cs, dp);
 }
 
 void assistant::make_decoration_preamble(
-    const dogen::formatting::comment_styles cs,
-    const boost::optional<dogen::formatting::decoration_properties> dc) {
+    const dogen::extraction::comment_styles cs,
+    const boost::optional<dogen::extraction::decoration_properties> dc) {
     if (!dc)
         return;
 
-    dogen::formatting::decoration_formatter fmt;
+    dogen::extraction::decoration_formatter fmt;
     fmt.format_preamble(stream(), cs, *dc);
 }
 
@@ -405,11 +405,11 @@ void assistant::comment(const std::string& c) {
     if (c.empty())
         return;
 
-    dogen::formatting::comment_formatter f(
+    dogen::extraction::comment_formatter f(
         !start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        dogen::formatting::comment_styles::c_style,
+        dogen::extraction::comment_styles::c_style,
         !last_line_is_blank);
     f.format(stream(), c);
 }
@@ -421,12 +421,12 @@ comment_start_method_group(const std::string& documentation,
         return;
 
     {
-        dogen::formatting::positive_indenter_scope pis(stream());
-        dogen::formatting::comment_formatter f(
+        dogen::extraction::positive_indenter_scope pis(stream());
+        dogen::extraction::comment_formatter f(
             !start_on_first_line,
             use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::formatting::comment_styles::c_style,
+            dogen::extraction::comment_styles::c_style,
             !last_line_is_blank);
 
         f.format(stream(), documentation);
@@ -443,12 +443,12 @@ void assistant::comment_end_method_group(const std::string& documentation,
         return;
 
     {
-        dogen::formatting::positive_indenter_scope pis(stream());
-        dogen::formatting::comment_formatter f(
+        dogen::extraction::positive_indenter_scope pis(stream());
+        dogen::extraction::comment_formatter f(
             start_on_first_line,
             use_documentation_tool_markup,
             !documenting_previous_identifier,
-            dogen::formatting::comment_styles::c_style,
+            dogen::extraction::comment_styles::c_style,
             !last_line_is_blank);
 
         if (add_comment_blocks) {
@@ -464,11 +464,11 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     std::ostringstream s;
     s << " ";
-    dogen::formatting::comment_formatter f(
+    dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         documenting_previous_identifier,
-        dogen::formatting::comment_styles::cpp_style,
+        dogen::extraction::comment_styles::cpp_style,
         !last_line_is_blank);
 
     f.format(s, c);
@@ -571,7 +571,7 @@ streaming_for_type(const formattables::streaming_properties& sp,
     const std::string& s) const {
 
     std::ostringstream stream;
-    dogen::formatting::utility_formatter uf(stream);
+    dogen::extraction::utility_formatter uf(stream);
     BOOST_LOG_SEV(lg, debug) << "Streaming properties for type: " << sp;
     if (sp.remove_unprintable_characters())
         uf.insert_streamed("tidy_up_string(" + s + ")");

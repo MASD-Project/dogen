@@ -5,7 +5,7 @@
 <#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.coding/types/meta_model/object.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/object_odb_options.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/traits.hpp" #>
@@ -79,7 +79,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& ooo(a.as<fabric::object_odb_options>(e));
 
     {
-        const auto cs(dogen::formatting::comment_styles::shell_style);
+        const auto cs(dogen::extraction::comment_styles::shell_style);
         a.make_decoration_preamble(cs, e);
 #>
 # epilogue

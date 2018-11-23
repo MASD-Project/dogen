@@ -57,7 +57,7 @@ void dynamic_transform::expand_injection(
 }
 
 void dynamic_transform::expand_decoration(
-    const dogen::formatting::decoration_properties_factory& dpf,
+    const dogen::extraction::decoration_properties_factory& dpf,
     coding::meta_model::model& m) const {
     decoration_expander de;
     de.expand(dpf, m);
@@ -68,7 +68,7 @@ std::string dynamic_transform::id() const {
 }
 
 void dynamic_transform::transform(const coding::transforms::context& ctx,
-    const dogen::formatting::decoration_properties_factory& dpf,
+    const dogen::extraction::decoration_properties_factory& dpf,
     coding::meta_model::model& m) const {
 
     if (!requires_expansion(m))

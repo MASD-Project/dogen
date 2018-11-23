@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "masd.dogen.generation.cpp/types/formatters/traits.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.extraction/types/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/meta_name_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
@@ -170,7 +170,7 @@ a.stream() << "    return " << sn << "(" << std::endl;
                     if (o.local_attributes().empty())
 a.stream() << std::endl;
                     else {
-                        dogen::formatting::sequence_formatter sf(o.local_attributes().size());
+                        dogen::extraction::sequence_formatter sf(o.local_attributes().size());
                         for (const auto attr : o.local_attributes()) {
 a.stream() << "        create_" << attr.parsed_type().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();

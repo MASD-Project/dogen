@@ -28,7 +28,7 @@
 #include "masd.dogen.generation.cpp/types/traits.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "masd.dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.extraction/types/sequence_formatter.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
@@ -98,7 +98,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& o(a.as<fabric::common_odb_options>(e));
 
     {
-        const auto cs(dogen::formatting::comment_styles::shell_style);
+        const auto cs(dogen::extraction::comment_styles::shell_style);
         a.make_decoration_preamble(cs, e);
 
         if (!a.is_cpp_standard_98()) {

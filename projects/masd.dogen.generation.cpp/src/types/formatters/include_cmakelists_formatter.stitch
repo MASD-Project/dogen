@@ -3,7 +3,7 @@
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="masd.dogen.formatting/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/cmakelists.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>
@@ -76,7 +76,7 @@ format(const context& ctx, const coding::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        const auto cs(dogen::formatting::comment_styles::shell_style);
+        const auto cs(dogen::extraction::comment_styles::shell_style);
         a.make_decoration_preamble(cs, e);
 #>
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)

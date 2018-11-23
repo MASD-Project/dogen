@@ -40,7 +40,7 @@ namespace masd::dogen::generation::cpp::formatters {
 
 stitch_formatter::stitch_formatter(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const dogen::formatting::repository& frp)
+    const dogen::extraction::repository& frp)
     : instantiator_(atrp, af, frp) {}
 
 bool stitch_formatter::is_header(const inclusion_support_types ist) const {

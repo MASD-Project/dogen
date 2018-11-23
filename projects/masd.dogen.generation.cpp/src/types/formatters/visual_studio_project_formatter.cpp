@@ -26,7 +26,7 @@
 #include "masd.dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
 #include "masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "masd.dogen.generation.cpp/types/traits.hpp"
-#include "masd.dogen.formatting/types/sequence_formatter.hpp"
+#include "masd.dogen.extraction/types/sequence_formatter.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
 
