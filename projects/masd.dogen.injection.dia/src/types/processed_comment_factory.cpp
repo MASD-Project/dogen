@@ -49,11 +49,12 @@ processed_comment processed_comment_factory::make(const std::string& c) {
         return r;
 
     r.original_content(c);
+    std::string line;
+    bool previous_line_blank(false);
+    bool applicable_to_parent_object(false);
     std::istringstream comments_stream(c);
     std::ostringstream documentation_stream;
-    std::string line;
-    bool applicable_to_parent_object(false);
-    bool previous_line_blank(false);
+
     while (std::getline(comments_stream, line)) {
         /*
          * Lines starting with the special market contain KVPs we're

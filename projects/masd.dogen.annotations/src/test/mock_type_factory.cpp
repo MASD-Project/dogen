@@ -55,7 +55,7 @@ type mock_type_factory::licence_name() const {
 type mock_type_factory::create_comment() const {
     type r;
     r.name().simple("comment");
-    r.name().qualified("yarn.dia.comment");
+    r.name().qualified("masd.injection.dia.comment");
     r.archetype_location().backend("yarn.dia");
     r.value_type(value_types::text);
     r.scope(scope_types::not_applicable);

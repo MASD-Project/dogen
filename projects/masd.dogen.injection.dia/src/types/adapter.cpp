@@ -86,10 +86,8 @@ void adapter::process_stereotypes(const processed_object& po,
      * Split and copy across the user-supplied stereotypes.
      */
     using utility::string::splitter;
-    const auto st(splitter::split_csv(po.stereotypes()));
-    e.stereotypes(st);
-
-    BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << st;
+    e.stereotypes(splitter::split_csv(po.stereotypes()));
+    BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << e.stereotypes();
 }
 
 injection::meta_model::element adapter::

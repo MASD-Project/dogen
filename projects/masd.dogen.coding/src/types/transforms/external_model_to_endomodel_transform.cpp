@@ -169,10 +169,8 @@ compute_element_type(const std::list<meta_model::static_stereotypes>& st,
      * stereotype suggested by the frontend. If none was suggested
      * just return invalid.
      */
-    if (fallback_element_type.empty()) {
-        using meta_model::static_stereotypes;
+    if (fallback_element_type.empty())
         return meta_model::static_stereotypes::invalid;
-    }
 
     return h.from_string(fallback_element_type);
 }

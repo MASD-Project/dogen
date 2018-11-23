@@ -93,7 +93,7 @@
  * @li any type without any stereotype assumes a default stereotype, again
  * as per Dogen UML profile.
  *
- * @li any UML Note with the marker #DOGEN yarn.dia.comment=true will be
+ * @li any UML Note with the marker #DOGEN masd.injection.dia.comment=true will be
  * used as the documentation of the current package - or the model, if
  * place at the top-level. Only one such note is expected per containing
  * entity.

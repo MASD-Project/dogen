@@ -23,7 +23,7 @@
 namespace masd::dogen::injection::dia {
 
 std::string traits::comment() {
-    static std::string r("yarn.dia.comment");
+    static std::string r("masd.injection.dia.comment");
     return r;
 }
 

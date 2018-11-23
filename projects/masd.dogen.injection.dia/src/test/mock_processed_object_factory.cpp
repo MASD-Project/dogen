@@ -32,7 +32,7 @@ const std::string empty;
 const std::string object_prefix("O");
 const std::string doxygen_comment("this is a doxygen brief");
 const std::string note_text("this is a comment");
-const std::string instruction_key("yarn.dia.comment");
+const std::string instruction_key("masd.injection.dia.comment");
 const std::string instruction_value("true");
 const std::string uml_large_package("UML - LargePackage");
 const std::string uml_class("UML - Class");
@@ -111,7 +111,7 @@ processed_object mock_processed_object_factory::
 make_uml_note_with_marker(const unsigned int n) {
     processed_object r(create_object(dia_object_types::uml_note, n));
     std::ostringstream s;
-    s << "#DOGEN yarn.dia.comment=true" << std::endl << std::endl
+    s << "#DOGEN masd.injection.dia.comment=true" << std::endl << std::endl
       << doxygen_comment;
     r.comment().documentation(doxygen_comment);
     r.comment().original_content(s.str());
