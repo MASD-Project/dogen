@@ -61,7 +61,7 @@ std::string model_to_text_model_transform::id() const {
 std::list<coding::meta_model::artefact> model_to_text_model_transform::
 format(const annotations::type_repository& /*atrp*/,
     const annotations::annotation_factory& /*af*/,
-    const dogen::formatting::repository& /*drp*/,
+    const dogen::extraction::repository& /*drp*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);

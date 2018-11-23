@@ -34,8 +34,8 @@
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
 #include "masd.dogen.annotations/types/annotation_factory.hpp"
-#include "masd.dogen.formatting/types/repository.hpp"
-#include "masd.dogen.formatting/types/decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
+#include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
 #include "masd.dogen.coding/types/meta_model/model.hpp"
 #include "masd.dogen.coding/types/transforms/model_to_text_model_transform_interface.hpp"
 #include "masd.dogen.generation.csharp/types/formatters/repository.hpp"
@@ -68,7 +68,7 @@ private:
     std::list<coding::meta_model::artefact>
     format(const annotations::type_repository& atrp,
         const annotations::annotation_factory& af,
-        const dogen::formatting::repository& drp,
+        const dogen::extraction::repository& drp,
         const formattables::model& fm) const;
 
 public:

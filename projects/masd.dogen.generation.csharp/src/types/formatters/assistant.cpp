@@ -20,8 +20,8 @@
  */
 #include <cctype>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.formatting/types/indent_filter.hpp"
-#include "masd.dogen.formatting/types/comment_formatter.hpp"
+#include "masd.dogen.extraction/types/indent_filter.hpp"
+#include "masd.dogen.extraction/types/comment_formatter.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
@@ -90,7 +90,7 @@ assistant(const context& ctx, const annotations::archetype_location& al,
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
                              << " for archetype: " << al.archetype();
 
-    dogen::formatting::indent_filter::push(filtering_stream_, 4);
+    dogen::extraction::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
 }
 
@@ -115,24 +115,24 @@ obtain_artefact_properties(const std::string& archetype) const {
     return i->second;
 }
 
-const dogen::formatting::decoration_properties& assistant::
+const dogen::extraction::decoration_properties& assistant::
 get_decoration_properties(const coding::meta_model::element& e) const {
     return e.decoration_properties();
 }
 
-dogen::formatting::csharp::scoped_boilerplate_formatter assistant::
+dogen::extraction::csharp::scoped_boilerplate_formatter assistant::
 make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
     const auto& dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.using_dependencies());
 
-    using dogen::formatting::csharp::scoped_boilerplate_formatter;
+    using dogen::extraction::csharp::scoped_boilerplate_formatter;
     return scoped_boilerplate_formatter(stream(), dp, deps);
 }
 
-dogen::formatting::csharp::scoped_namespace_formatter
+dogen::extraction::csharp::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
-    return dogen::formatting::csharp::scoped_namespace_formatter(
+    return dogen::extraction::csharp::scoped_namespace_formatter(
         stream(), ns, true/*add_new_line*/);
 }
 
@@ -163,18 +163,18 @@ comment(const std::string& c, const unsigned int identation_level) {
         return;
 
     for (unsigned int i = 0; i < identation_level; ++i)
-        stream() << dogen::formatting::indent_in;
+        stream() << dogen::extraction::indent_in;
 
-    dogen::formatting::comment_formatter f(
+    dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         !documenting_previous_identifier,
-        dogen::formatting::comment_styles::csharp_style,
+        dogen::extraction::comment_styles::csharp_style,
         !last_line_is_blank);
     f.format(stream(), c);
 
     for (unsigned int i = 0; i < identation_level; ++i)
-        stream() << dogen::formatting::indent_out;
+        stream() << dogen::extraction::indent_out;
 }
 
 std::string assistant::comment_inline(const std::string& c) const {
@@ -183,11 +183,11 @@ std::string assistant::comment_inline(const std::string& c) const {
 
     std::ostringstream s;
     s << " ";
-    dogen::formatting::comment_formatter f(
+    dogen::extraction::comment_formatter f(
         start_on_first_line,
         use_documentation_tool_markup,
         documenting_previous_identifier,
-        dogen::formatting::comment_styles::csharp_style,
+        dogen::extraction::comment_styles::csharp_style,
         !last_line_is_blank);
 
     f.format(s, c);

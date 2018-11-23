@@ -48,7 +48,7 @@ namespace masd::dogen::generation::csharp::fabric {
 class decoration_updater : public element_visitor {
 public:
     decoration_updater(
-        const dogen::formatting::decoration_properties_factory& dpf)
+        const dogen::extraction::decoration_properties_factory& dpf)
         : factory_(dpf) {}
 
 private:
@@ -72,11 +72,11 @@ public:
     void visit(assistant& a) { update(a); }
 
 private:
-    const dogen::formatting::decoration_properties_factory& factory_;
+    const dogen::extraction::decoration_properties_factory& factory_;
 };
 
 void decoration_expander::
-expand(const dogen::formatting::decoration_properties_factory& dpf,
+expand(const dogen::extraction::decoration_properties_factory& dpf,
     coding::meta_model::model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";
