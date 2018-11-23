@@ -1,4 +1,4 @@
-<#@ annotations.profile=dogen.stitch #>
+<#@ masd.annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::test_data #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/test_data/smart_pointer_helper.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/formatters/assistant.hpp" #>

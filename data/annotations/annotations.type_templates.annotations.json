@@ -2,10 +2,10 @@
   {
     "name": {
       "simple": "profile",
-      "qualified": "annotations.profile"
+      "qualified": "masd.annotations.profile"
     },
     "archetype_location": {
-      "kernel": "masd.annotations"
+      "kernel": "masd"
     },
     "value_type": "text",
     "template_kind": "instance",

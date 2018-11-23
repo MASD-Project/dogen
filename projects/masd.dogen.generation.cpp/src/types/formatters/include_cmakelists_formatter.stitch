@@ -1,4 +1,4 @@
-<#@ annotations.profile=dogen.stitch #>
+<#@ masd.annotations.profile=dogen.stitch #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>

@@ -55,8 +55,8 @@ const std::string missing_profile(
 const std::string too_many_binds(
     "Too many candidate labels bind to a profile: ");
 
-const std::string kernel_name("annotations");
-const std::string type_name("profile");
+// const std::string kernel_name("masd");
+const std::string type_name("masd.annotations.profile");
 
 const std::string default_root("default.root_module");
 
@@ -90,7 +90,7 @@ annotation_factory::make_type_group() const {
 
     type_group r;
     const type_repository_selector s(type_repository_);
-    r.profile = s.select_type_by_name(kernel_name, type_name);
+    r.profile = s.select_type_by_name(type_name);
 
     BOOST_LOG_SEV(lg, debug) << "Created annotation types. Result: " << r;
     return r;

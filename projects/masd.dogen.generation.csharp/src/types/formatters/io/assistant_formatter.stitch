@@ -1,4 +1,4 @@
-<#@ annotations.profile=dogen.stitch #>
+<#@ masd.annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::csharp::formatters::io #>
 <#@ stitch.inclusion_dependency="masd.dogen.extraction/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.csharp/types/traits.hpp" #>

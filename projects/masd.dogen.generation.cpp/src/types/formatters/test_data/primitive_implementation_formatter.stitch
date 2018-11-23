@@ -1,4 +1,4 @@
-<#@ annotations.profile=dogen.stitch #>
+<#@ masd.annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::test_data #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency="masd.dogen.utility/log/logger.hpp" #>

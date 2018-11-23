@@ -1,4 +1,4 @@
-<#@ annotations.profile=dogen.stitch #>
+<#@ masd.annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=masd::dogen::generation::cpp::formatters::serialization #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/registrar.hpp" #>
 <#@ stitch.inclusion_dependency="masd.dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
