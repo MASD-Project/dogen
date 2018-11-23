@@ -22,10 +22,10 @@
 
 namespace masd::dogen::injection::transforms {
 
-context::context(const masd::dogen::probing::prober& prober)
+context::context(const masd::dogen::tracing::prober& prober)
     : prober_(prober) { }
 
-const masd::dogen::probing::prober& context::prober() const {
+const masd::dogen::tracing::prober& context::prober() const {
     return prober_;
 }
 

@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/object_template.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
@@ -262,7 +262,7 @@ object_templates_transform::expand_object_templates(meta_model::endomodel& em) {
 
 void object_templates_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    probing::scoped_transform_prober stp(lg, "object templates transform",
+    tracing::scoped_transform_prober stp(lg, "object templates transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
     /*

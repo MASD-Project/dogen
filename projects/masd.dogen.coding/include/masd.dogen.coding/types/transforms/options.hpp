@@ -150,7 +150,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Enable probing for statistics around transforms.
+     * @brief Enable tracing for statistics around transforms.
      */
     /**@{*/
     bool probe_stats() const;
@@ -174,7 +174,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Enable all probing.
+     * @brief Enable all tracing.
      */
     /**@{*/
     bool probe_all() const;

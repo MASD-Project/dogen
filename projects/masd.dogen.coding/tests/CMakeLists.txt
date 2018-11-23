@@ -39,7 +39,7 @@ target_link_libraries(${tests_target_name}
     masd.dogen.annotations.lib
     masd.dogen.options.lib
     masd.dogen.extraction.lib
-    masd.dogen.probing.lib
+    masd.dogen.tracing.lib
     masd.dogen.injection.lib
     masd.dogen.injection.dia.lib
     masd.dogen.injection.json.lib

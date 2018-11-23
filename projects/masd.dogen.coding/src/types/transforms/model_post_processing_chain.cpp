@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/generability_transform.hpp"
 #include "masd.dogen.coding/types/transforms/dynamic_transforms_chain.hpp"
@@ -44,7 +44,7 @@ namespace masd::dogen::coding::transforms {
 
 void model_post_processing_chain::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_chain_prober stp(lg, "model post-processing chain",
+    tracing::scoped_chain_prober stp(lg, "model post-processing chain",
         transform_id, m.name().id(), ctx.prober(), m);
 
     /*

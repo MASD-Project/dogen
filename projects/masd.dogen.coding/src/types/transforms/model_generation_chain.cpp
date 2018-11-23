@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/io/list_io.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_generation_chain.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_to_model_transform.hpp"
@@ -38,7 +38,7 @@ namespace masd::dogen::coding::transforms {
 
 std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {
-    probing::scoped_chain_prober stp(lg, "model generation chain",
+    tracing::scoped_chain_prober stp(lg, "model generation chain",
         transform_id, ctx.prober());
 
     /*

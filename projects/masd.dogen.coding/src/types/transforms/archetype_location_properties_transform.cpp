@@ -27,7 +27,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/optional_io.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
@@ -476,7 +476,7 @@ populate_local_archetype_location_properties(
 
 void archetype_location_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_transform_prober stp(lg,
+    tracing::scoped_transform_prober stp(lg,
         "archetype location properties transform",
         transform_id, m.name().id(), ctx.prober(), m);
 

@@ -28,7 +28,7 @@
 #include "masd.dogen.dia/types/persister.hpp"
 #include "masd.dogen.dia/io/diagram_io.hpp"
 #include "masd.dogen.dia/types/diagram.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
 #include "masd.dogen.injection/io/meta_model/model_io.hpp"
 #include "masd.dogen.injection/types/transforms/transformation_error.hpp"
@@ -131,7 +131,7 @@ transform(const injection::transforms::context& ctx,
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
     const auto model_name(p.filename().generic_string());
-    probing::scoped_transform_prober stp(lg, "dia exomodel transform",
+    tracing::scoped_transform_prober stp(lg, "dia exomodel transform",
         transform_id, model_name, ctx.prober(), diagram);
 
     const auto pos(obtain_processed_objects(diagram));

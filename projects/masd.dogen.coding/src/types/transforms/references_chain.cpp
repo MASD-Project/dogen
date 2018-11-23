@@ -20,7 +20,7 @@
  */
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/helpers/reference_paths_extractor.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -58,7 +58,7 @@ obtain_relevant_languages(const meta_model::endomodel& target) {
 
 std::list<meta_model::endomodel> references_chain::
 transform(const context& ctx, const meta_model::endomodel& target) {
-    probing::scoped_chain_prober stp(lg, "references chain",
+    tracing::scoped_chain_prober stp(lg, "references chain",
         transform_id, target.name().id(), ctx.prober());
 
     /*

@@ -24,7 +24,7 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/formatting_styles_io.hpp"
@@ -156,7 +156,7 @@ transform_element(const std::unordered_map<std::string, type_group> tgs,
 
 void formatting_transform::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_transform_prober stp(lg, "formatting transform",
+    tracing::scoped_transform_prober stp(lg, "formatting transform",
         transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& atrp(ctx.type_repository());

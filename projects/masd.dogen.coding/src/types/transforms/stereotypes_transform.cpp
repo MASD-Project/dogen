@@ -24,7 +24,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/list_io.hpp"
 #include "masd.dogen.utility/io/vector_io.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/name_io.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/types/helpers/resolver.hpp"
@@ -459,7 +459,7 @@ void stereotypes_transform::transform(meta_model::primitive& p) {
 
 void stereotypes_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    probing::scoped_transform_prober stp(lg, "stereotypes transform",
+    tracing::scoped_transform_prober stp(lg, "stereotypes transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
     for (auto& pair : em.objects())

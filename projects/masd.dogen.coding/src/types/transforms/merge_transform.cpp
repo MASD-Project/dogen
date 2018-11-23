@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/languages_io.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/transforms/merge_transform.hpp"
@@ -96,7 +96,7 @@ meta_model::endomodel
 merge_transform::transform(const context& ctx,
     const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
-    probing::scoped_transform_prober stp(lg, "merge transform",
+    tracing::scoped_transform_prober stp(lg, "merge transform",
         transform_id, target.name().id(), ctx.prober());
 
     /*

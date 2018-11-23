@@ -37,7 +37,7 @@ scoped_life_cycle_manager_factory(std::string test_module,
     std::string test_suite,
     std::string function_name);
 
-boost::filesystem::path probing_directory_path(std::string test_module,
+boost::filesystem::path tracing_directory_path(std::string test_module,
     std::string test_suite, std::string function_name);
 
 }
@@ -49,7 +49,7 @@ boost::filesystem::path probing_directory_path(std::string test_module,
     BOOST_TEST_CHECKPOINT(function_name);                                  \
     auto sl(masd::dogen::utility::test::scoped_life_cycle_manager_factory( \
             test_module, test_suite, function_name));                      \
-    const auto pd(masd::dogen::utility::test::probing_directory_path(      \
+    const auto pd(masd::dogen::utility::test::tracing_directory_path(      \
             test_module, test_suite, function_name));
 
 #ifdef SETUP_TEST_LOG_SOURCE

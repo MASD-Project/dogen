@@ -22,7 +22,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/io/unordered_set_io.hpp"
 #include "masd.dogen.utility/io/unordered_map_io.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/io/meta_model/facet_properties_io.hpp"
@@ -298,7 +298,7 @@ void enablement_transform::compute_enablement_for_element(
 
 void enablement_transform::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_transform_prober stp(lg, "enablement new_transform",
+    tracing::scoped_transform_prober stp(lg, "enablement new_transform",
         transform_id, m.name().id(), ctx.prober(), m);
 
     const auto& alrp(ctx.archetype_location_repository());

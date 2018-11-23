@@ -162,10 +162,10 @@ program_options_parser::make_transforms_options_description() const {
             "to make comparisons easier.")
         ("probe-stats-org-mode", "Use org-mode format for stats."
             " Requires enabling stats.")
-        ("probe-all", "Dump all available probing information "
+        ("probe-all", "Dump all available tracing information "
             "about transforms.")
         ("probe-directory", "Directory in which to dump probe data. "
-            "Only used if transforms probing is enabled.")
+            "Only used if transforms tracing is enabled.")
         ("probe-use-short-names", "Use short names for directories and files. "
             "Useful for Windows where long paths are not supported.");
 

@@ -21,7 +21,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.utility/filesystem/path.hpp"
 #include "masd.dogen.utility/filesystem/file.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/transforms/text_model_generation_chain.hpp"
 #include "masd.dogen.coding/types/helpers/file_linter.hpp"
 #include "masd.dogen.coding/types/transforms/code_generation_chain.hpp"
@@ -63,7 +63,7 @@ void code_generation_chain::transform(const context& ctx) {
 
     const auto& o(ctx.transform_options());
     const auto model_name(o.target().filename().string());
-    probing::scoped_chain_prober stp(lg, "code generation chain",
+    tracing::scoped_chain_prober stp(lg, "code generation chain",
         transform_id, model_name, ctx.prober());
 
     /*

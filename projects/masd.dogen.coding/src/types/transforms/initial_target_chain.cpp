@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
 #include "masd.dogen.injection/types/transforms/context.hpp"
@@ -45,7 +45,7 @@ meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {
     const auto tp(ctx.transform_options().target());
     const auto model_name(tp.filename().string());
-    probing::scoped_chain_prober stp(lg, "initial target chain",
+    tracing::scoped_chain_prober stp(lg, "initial target chain",
         transform_id, model_name, ctx.prober());
 
     /*

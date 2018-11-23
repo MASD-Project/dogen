@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/helpers/indexer.hpp"
 #include "masd.dogen.coding/types/helpers/endomodel_post_processing_validator.hpp"
@@ -50,7 +50,7 @@ namespace masd::dogen::coding::transforms {
 
 void endomodel_post_processing_chain::
 transform(const context& ctx, meta_model::endomodel& em) {
-    probing::scoped_chain_prober stp(lg, "endomodel post-processing chain",
+    tracing::scoped_chain_prober stp(lg, "endomodel post-processing chain",
         transform_id, em.name().id(), ctx.prober(), em);
 
     /*

@@ -37,7 +37,7 @@ target_link_libraries(${lib_target_name}
     masd.dogen.utility.lib
     masd.dogen.annotations.lib
     masd.dogen.extraction.lib
-    masd.dogen.probing.lib
+    masd.dogen.tracing.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 

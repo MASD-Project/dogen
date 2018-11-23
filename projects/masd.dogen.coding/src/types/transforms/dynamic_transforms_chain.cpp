@@ -22,7 +22,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.extraction/types/decoration_properties_factory.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -60,7 +60,7 @@ dynamic_transforms_chain::create_decoration_properties_factory(
 
 void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_chain_prober stp(lg, "dynamic transforms chain",
+    tracing::scoped_chain_prober stp(lg, "dynamic transforms chain",
         transform_id, m.name().id(), ctx.prober(), m);
 
     auto& rg(registrar());

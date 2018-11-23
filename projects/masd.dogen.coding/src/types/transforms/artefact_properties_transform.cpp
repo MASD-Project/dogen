@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
@@ -88,7 +88,7 @@ update_element(const context& ctx, meta_model::element& e) {
 
 void artefact_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_transform_prober stp(lg, "artefact properties transform",
+    tracing::scoped_transform_prober stp(lg, "artefact properties transform",
         transform_id, m.name().id(), ctx.prober(), m);
 
     for(auto& ptr : m.elements())

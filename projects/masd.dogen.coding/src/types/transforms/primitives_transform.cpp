@@ -23,7 +23,7 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/transforms/context.hpp"
@@ -81,7 +81,7 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 
 void primitives_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    probing::scoped_transform_prober stp(lg, "primitives transform",
+    tracing::scoped_transform_prober stp(lg, "primitives transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));

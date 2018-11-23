@@ -19,7 +19,7 @@
  *
  */
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/model_io.hpp"
 #include "masd.dogen.coding/types/transforms/locator_properties_transform.hpp"
 
@@ -36,7 +36,7 @@ namespace masd::dogen::coding::transforms {
 
 void locator_properties_transform::
 transform(const context& ctx, meta_model::model& m) {
-    probing::scoped_transform_prober stp(lg, "locator properties transform",
+    tracing::scoped_transform_prober stp(lg, "locator properties transform",
         transform_id, m.name().id(), ctx.prober(), m);
 }
 

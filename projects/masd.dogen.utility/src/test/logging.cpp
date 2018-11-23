@@ -48,7 +48,7 @@ scoped_life_cycle_manager_factory(std::string test_module,
     return scoped_life_cycle_manager(stream.str());
 }
 
-boost::filesystem::path probing_directory_path(std::string test_module,
+boost::filesystem::path tracing_directory_path(std::string test_module,
     std::string test_suite, std::string function_name){
     std::ostringstream s;
     s << "probe/" << test_module << "/" << test_suite

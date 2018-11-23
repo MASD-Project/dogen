@@ -29,7 +29,7 @@ context::context(
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const masd::dogen::extraction::repository& frp,
-        const probing::prober& prober,
+        const tracing::prober& prober,
         const std::unordered_map<std::string,
         meta_model::intra_backend_segment_properties>&
         intra_backend_segment_properties,
@@ -43,7 +43,7 @@ context::context(
     writer_(writer) {}
 
 context::~context() {
-    prober_.end_probing();
+    prober_.end_tracing();
 }
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
@@ -75,7 +75,7 @@ const masd::dogen::extraction::repository& context::formatting_repository() cons
     return formatting_repository_;
 }
 
-const probing::prober& context::prober() const {
+const tracing::prober& context::prober() const {
     return prober_;
 }
 

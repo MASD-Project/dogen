@@ -25,7 +25,7 @@
 #include "masd.dogen.annotations/io/type_io.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
@@ -218,7 +218,7 @@ process_element(const helpers::new_adapter& ad, const meta_model::location& l,
 
 meta_model::endomodel external_model_to_endomodel_transform::
 transform(const context& ctx, const injection::meta_model::model& m) {
-    probing::scoped_transform_prober stp(lg,
+    tracing::scoped_transform_prober stp(lg,
         "external model to endomodel transform", transform_id, m.name(),
         ctx.prober(), m);
 

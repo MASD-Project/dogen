@@ -27,7 +27,7 @@
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
 #include "masd.dogen.extraction/types/repository_factory.hpp"
-#include "masd.dogen.probing/types/prober.hpp"
+#include "masd.dogen.tracing/types/prober.hpp"
 #include "masd.dogen.coding/types/helpers/mapping_set_repository_factory.hpp"
 #include "masd.dogen.coding/types/helpers/artefact_writer_interface.hpp"
 #include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
@@ -124,7 +124,7 @@ context context_factory::make(const options& o, const bool enable_validation) {
     extraction::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
 
-    probing::prober prober(alrp, atrp,
+    tracing::prober prober(alrp, atrp,
         o.log_level(), o.probe_all(), o.probe_all(),
         o.probe_all() || o.probe_stats(),
         o.probe_stats_disable_guids(),

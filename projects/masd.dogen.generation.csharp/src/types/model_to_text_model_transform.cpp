@@ -20,7 +20,7 @@
  */
 #include <boost/algorithm/string/join.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
 #include "masd.dogen.generation.csharp/types/traits.hpp"
 #include "masd.dogen.generation.csharp/types/formattables/workflow.hpp"
@@ -116,7 +116,7 @@ coding::meta_model::text_model
 model_to_text_model_transform::transform(const coding::transforms::context& ctx,
     const bool enable_backend_directories,
     const coding::meta_model::model& m) const {
-    probing::scoped_transform_prober stp(lg,
+    tracing::scoped_transform_prober stp(lg,
         "C# model to text transform", transform_id, m.name().id(),
         ctx.prober());
 

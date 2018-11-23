@@ -22,7 +22,7 @@
 #include "masd.dogen.utility/log/logger.hpp"
 #include "masd.dogen.annotations/types/entry_selector.hpp"
 #include "masd.dogen.annotations/types/type_repository_selector.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/io/meta_model/endomodel_io.hpp"
 #include "masd.dogen.coding/types/traits.hpp"
 #include "masd.dogen.coding/types/meta_model/module.hpp"
@@ -120,7 +120,7 @@ origin_transform::compute_origin_types(const meta_model::endomodel& em,
 
 void origin_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    probing::scoped_transform_prober stp(lg, "origin transform",
+    tracing::scoped_transform_prober stp(lg, "origin transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
     const auto tg(make_type_group(ctx.type_repository()));

@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
 #include "masd.dogen.coding/types/meta_model/object.hpp"
 #include "masd.dogen.coding/types/meta_model/builtin.hpp"
 #include "masd.dogen.coding/types/meta_model/element.hpp"
@@ -101,7 +101,7 @@ inject_global_module(meta_model::endomodel& em) {
 
 void containment_transform::
 transform(const context& ctx, meta_model::endomodel& em) {
-    probing::scoped_transform_prober stp(lg, "containment transform",
+    tracing::scoped_transform_prober stp(lg, "containment transform",
         transform_id, em.name().id(), ctx.prober(), em);
 
     inject_global_module(em);

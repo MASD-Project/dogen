@@ -69,10 +69,10 @@ options_description make_tracing_options_description()  {
             "to make comparisons easier.")
         ("tracing-org-mode-format", "Use org-mode format for stats."
             " Requires enabling stats.")
-        ("tracing-all", "Dump all available probing information "
+        ("tracing-all", "Dump all available tracing information "
             "about transforms.")
         ("tracing-output-directory", "Directory in which to dump probe data. "
-            "Only used if transforms probing is enabled.")
+            "Only used if transforms tracing is enabled.")
         ("tracing-use-short-names", "Use short names for directories and "
             "files. Useful for Windows where long paths are not supported.");
 

@@ -74,7 +74,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Dump all available probing information about transforms.
+     * @brief Dump all available tracing information about transforms.
      */
     /**@{*/
     masd::dogen::tracing_level level() const;
