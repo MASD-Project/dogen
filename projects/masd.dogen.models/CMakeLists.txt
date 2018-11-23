@@ -92,7 +92,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(common_arguments ${common_arguments} ${other_options})
     set(common_arguments ${common_arguments} ${ignore_regexes})
 
-    # uncomment to enable probing.
+    # uncomment to enable tracing.
     # set(common_arguments ${common_arguments} "--probe-all")
     # set(common_arguments ${common_arguments} "--probe-stats-org-mode")
 
@@ -104,7 +104,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(models ${models} ${prefix}.dia)
     set(models ${models} ${prefix}.extraction)
     set(models ${models} ${prefix}.options)
-    set(models ${models} ${prefix}.probing)
+    set(models ${models} ${prefix}.tracing)
     set(models ${models} ${prefix}.injection)
     set(models ${models} ${prefix}.injection.dia)
     set(models ${models} ${prefix}.injection.json)

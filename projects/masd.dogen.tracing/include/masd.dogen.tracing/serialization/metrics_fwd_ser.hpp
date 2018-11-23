@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_SERIALIZATION_METRICS_FWD_SER_HPP
-#define MASD_DOGEN_PROBING_SERIALIZATION_METRICS_FWD_SER_HPP
+#ifndef MASD_DOGEN_TRACING_SERIALIZATION_METRICS_FWD_SER_HPP
+#define MASD_DOGEN_TRACING_SERIALIZATION_METRICS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.probing/types/metrics_fwd.hpp"
+#include "masd.dogen.tracing/types/metrics_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const masd::dogen::probing::metrics& v, unsigned int version);
+void save(Archive& ar, const masd::dogen::tracing::metrics& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, masd::dogen::probing::metrics& v, unsigned int version);
+void load(Archive& ar, masd::dogen::tracing::metrics& v, unsigned int version);
 
 } }
 

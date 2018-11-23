@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "masd.dogen.probing/io/metrics_io.hpp"
+#include "masd.dogen.tracing/io/metrics_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,7 +32,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::probing::metrics>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::tracing::metrics>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -48,7 +48,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::d
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<masd::dogen::probing::metrics> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<masd::dogen::tracing::metrics> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -60,11 +60,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_p
 
 }
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 std::ostream& operator<<(std::ostream& s, const metrics& v) {
     s << " { "
-      << "\"__type__\": " << "\"masd::dogen::probing::metrics\"" << ", "
+      << "\"__type__\": " << "\"masd::dogen::tracing::metrics\"" << ", "
       << "\"transform_id\": " << "\"" << tidy_up_string(v.transform_id()) << "\"" << ", "
       << "\"model_id\": " << "\"" << tidy_up_string(v.model_id()) << "\"" << ", "
       << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "

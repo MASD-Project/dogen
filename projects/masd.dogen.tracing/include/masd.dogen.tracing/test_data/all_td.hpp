@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TEST_DATA_ALL_TD_HPP
-#define MASD_DOGEN_PROBING_TEST_DATA_ALL_TD_HPP
+#ifndef MASD_DOGEN_TRACING_TEST_DATA_ALL_TD_HPP
+#define MASD_DOGEN_TRACING_TEST_DATA_ALL_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.probing/test_data/metrics_td.hpp"
+#include "masd.dogen.tracing/test_data/metrics_td.hpp"
 
 #endif

@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_ALL_HPP
-#define MASD_DOGEN_PROBING_TYPES_ALL_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_ALL_HPP
+#define MASD_DOGEN_TRACING_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.probing/types/prober.hpp"
-#include "masd.dogen.probing/types/metrics.hpp"
-#include "masd.dogen.probing/types/probing.hpp"
-#include "masd.dogen.probing/types/probing_error.hpp"
-#include "masd.dogen.probing/types/scoped_prober.hpp"
-#include "masd.dogen.probing/types/metrics_builder.hpp"
-#include "masd.dogen.probing/types/metrics_printer.hpp"
+#include "masd.dogen.tracing/types/prober.hpp"
+#include "masd.dogen.tracing/types/metrics.hpp"
+#include "masd.dogen.tracing/types/tracing.hpp"
+#include "masd.dogen.tracing/types/scoped_prober.hpp"
+#include "masd.dogen.tracing/types/tracing_error.hpp"
+#include "masd.dogen.tracing/types/metrics_builder.hpp"
+#include "masd.dogen.tracing/types/metrics_printer.hpp"
 
 #endif

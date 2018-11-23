@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_PROBING_ERROR_HPP
-#define MASD_DOGEN_PROBING_TYPES_PROBING_ERROR_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_TRACING_ERROR_HPP
+#define MASD_DOGEN_TRACING_TYPES_TRACING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,18 +28,18 @@
 #include <string>
 #include <boost/exception/info.hpp>
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 /**
- * @brief An error occurred when trying to generate probing data.
+ * @brief An error occurred when trying to generate tracing data.
  */
-class probing_error : public virtual std::exception, public virtual boost::exception {
+class tracing_error : public virtual std::exception, public virtual boost::exception {
 public:
-    probing_error() = default;
-    ~probing_error() noexcept = default;
+    tracing_error() = default;
+    ~tracing_error() noexcept = default;
 
 public:
-    explicit probing_error(const std::string& message) : message_(message) { }
+    explicit tracing_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

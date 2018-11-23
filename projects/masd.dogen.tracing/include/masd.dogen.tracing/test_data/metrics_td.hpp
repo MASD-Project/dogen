@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TEST_DATA_METRICS_TD_HPP
-#define MASD_DOGEN_PROBING_TEST_DATA_METRICS_TD_HPP
+#ifndef MASD_DOGEN_TRACING_TEST_DATA_METRICS_TD_HPP
+#define MASD_DOGEN_TRACING_TEST_DATA_METRICS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "masd.dogen.probing/types/metrics.hpp"
+#include "masd.dogen.tracing/types/metrics.hpp"
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
 class metrics_generator {
 public:
     metrics_generator();
 
 public:
-    typedef masd::dogen::probing::metrics result_type;
+    typedef masd::dogen::tracing::metrics result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

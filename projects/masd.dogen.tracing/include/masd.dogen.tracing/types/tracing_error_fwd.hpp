@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_PROBING_ERROR_FWD_HPP
-#define MASD_DOGEN_PROBING_TYPES_PROBING_ERROR_FWD_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_TRACING_ERROR_FWD_HPP
+#define MASD_DOGEN_TRACING_TYPES_TRACING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 
-class probing_error;
+class tracing_error;
 
 }
 

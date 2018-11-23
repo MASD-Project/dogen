@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_PROBING_TYPES_PROBING_HPP
-#define MASD_DOGEN_PROBING_TYPES_PROBING_HPP
+#ifndef MASD_DOGEN_TRACING_TYPES_TRACING_HPP
+#define MASD_DOGEN_TRACING_TYPES_TRACING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 /**
  * @brief Houses classes common to all transformations.
  */
-namespace masd::dogen::probing {
+namespace masd::dogen::tracing {
 }
 
 #endif
