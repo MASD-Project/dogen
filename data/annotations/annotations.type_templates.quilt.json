@@ -14,10 +14,10 @@
   {
     "name": {
       "simple": "enable_backend_directories",
-      "qualified": "quilt.enable_backend_directories"
+      "qualified": "masd.enable_backend_directories"
     },
     "archetype_location": {
-      "kernel": "quilt"
+      "kernel": "masd"
     },
     "value_type": "boolean",
     "template_kind": "instance",
