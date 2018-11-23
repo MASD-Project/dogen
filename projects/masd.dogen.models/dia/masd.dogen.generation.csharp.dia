@@ -100,7 +100,7 @@
 #DOGEN yarn.model_modules=masd.dogen.generation.csharp
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.coding.dia
-#DOGEN yarn.reference=masd.dogen.formatting.dia
+#DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
 #DOGEN yarn.input_language=cpp
@@ -1482,7 +1482,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#dogen::formatting::artefact#</dia:string>
+            <dia:string>#dogen::extraction::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6340,7 +6340,7 @@
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::extraction::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6795,7 +6795,7 @@
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::extraction::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16572,7 +16572,7 @@
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::extraction::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16837,7 +16837,7 @@
                 <dia:string>#dpf#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const dogen::formatting::decoration_properties_factory&amp;#</dia:string>
+                <dia:string>#const dogen::extraction::decoration_properties_factory&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

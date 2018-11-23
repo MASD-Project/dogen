@@ -6,7 +6,7 @@
     "yarn.reference": "masd.dogen.generation.json",
     "yarn.reference": "masd.dogen.options.json",
     "yarn.reference": "masd.dogen.coding.json",
-    "yarn.reference": "masd.dogen.formatting.json",
+    "yarn.reference": "masd.dogen.extraction.json",
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.probing.json",
     "yarn.input_language": "cpp",

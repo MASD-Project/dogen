@@ -844,7 +844,7 @@ and to build it.
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.coding
 #DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.formatting.dia
+#DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true

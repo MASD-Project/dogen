@@ -99,7 +99,7 @@
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.injection.json
 #DOGEN yarn.reference=masd.dogen.annotations.dia
-#DOGEN yarn.reference=masd.dogen.formatting.dia
+#DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
 #DOGEN yarn.reference=masd.dogen.injection.dia

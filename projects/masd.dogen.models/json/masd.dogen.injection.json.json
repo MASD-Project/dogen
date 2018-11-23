@@ -4,7 +4,7 @@
     "yarn.dia.comment": "true",
     "yarn.model_modules": "masd.dogen.injection.json",
     "yarn.reference": "masd.dogen.annotations.json",
-    "yarn.reference": "masd.dogen.formatting.json",
+    "yarn.reference": "masd.dogen.extraction.json",
     "yarn.reference": "masd.dogen.options.json",
     "yarn.reference": "masd.dogen.probing.json",
     "yarn.reference": "masd.dogen.injection.json",

@@ -5,7 +5,7 @@
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.coding.json",
     "yarn.reference": "masd.dogen.probing.json",
-    "yarn.reference": "masd.dogen.formatting.json",
+    "yarn.reference": "masd.dogen.extraction.json",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.standard": "c++-17",
@@ -533,7 +533,7 @@
       "attributes": [
         {
           "name": "decoration_properties",
-          "type": "formatting::decoration_properties"
+          "type": "extraction::decoration_properties"
         },
         {
           "name": "artefact_properties",
@@ -705,7 +705,7 @@
         },
         {
           "name": "formatting_repository",
-          "type": "formatting::repository"
+          "type": "extraction::repository"
         },
         {
           "name": "prober",

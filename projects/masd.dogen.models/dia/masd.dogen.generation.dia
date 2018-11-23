@@ -4895,7 +4895,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.coding.dia
 #DOGEN yarn.reference=masd.dogen.probing.dia
-#DOGEN yarn.reference=masd.dogen.formatting.dia
+#DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -5376,7 +5376,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatting::decoration_properties#</dia:string>
+            <dia:string>#extraction::decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -8773,7 +8773,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#style#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::formatting_styles#</dia:string>
+            <dia:string>#meta_model::extraction_styles#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

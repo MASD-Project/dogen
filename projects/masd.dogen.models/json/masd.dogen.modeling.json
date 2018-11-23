@@ -4,7 +4,7 @@
     "yarn.dia.comment": "true",
     "yarn.model_modules": "masd.dogen.coding",
     "yarn.reference": "masd.dogen.annotations.json",
-    "yarn.reference": "masd.dogen.formatting.json",
+    "yarn.reference": "masd.dogen.extraction.json",
     "yarn.reference": "masd.dogen.probing.json",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
@@ -119,7 +119,7 @@
         },
         {
           "name": "decoration_properties",
-          "type": "formatting::decoration_properties"
+          "type": "extraction::decoration_properties"
         },
         {
           "name": "artefact_properties",
@@ -1217,7 +1217,7 @@
         },
         {
           "name": "formatting_repository",
-          "type": "formatting::repository"
+          "type": "extraction::repository"
         },
         {
           "name": "prober",

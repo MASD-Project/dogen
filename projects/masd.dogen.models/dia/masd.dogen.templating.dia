@@ -134,7 +134,7 @@
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.templating
-#DOGEN yarn.reference=masd.dogen.formatting.dia
+#DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.standard=c++-17
@@ -3321,7 +3321,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatting::artefact#</dia:string>
+            <dia:string>#extraction::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3915,7 +3915,7 @@
             <dia:string>#decoration_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;formatting::decoration_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;extraction::decoration_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6061,7 +6061,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#formatting::artefact#</dia:string>
+            <dia:string>#extraction::artefact#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

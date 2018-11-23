@@ -2,7 +2,7 @@
   "documentation": "Provides the basic formatting primitives.\n\nThis model is the repository of all formatting related code\nwhich is not language specific. Language-specific models can\nthen make use of it.\n",
   "tagged_values": {
     "yarn.dia.comment": "true",
-    "yarn.model_modules": "masd.dogen.formatting",
+    "yarn.model_modules": "masd.dogen.extraction",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.standard": "c++-17",
