@@ -134,7 +134,7 @@
           <dia:attribute name="string">
             <dia:string>#CPP is the C++ backend in the default generation kernel.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.generation.cpp
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.coding.dia

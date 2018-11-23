@@ -132,7 +132,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>##DOGEN yarn.dia.comment=true
+            <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.templating
 #DOGEN yarn.reference=masd.dogen.extraction.dia
 #DOGEN yarn.input_language=cpp

@@ -100,7 +100,7 @@ The options model provides types to store general configuration
 options for all the different Dogen applications, such as knitter,
 etc.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.options
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true

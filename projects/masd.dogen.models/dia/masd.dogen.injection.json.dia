@@ -96,7 +96,7 @@
           <dia:attribute name="string">
             <dia:string>#Provides file importing support for JSON.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.injection.json
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.extraction.dia

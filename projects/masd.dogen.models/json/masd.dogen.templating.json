@@ -1,6 +1,6 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
+    "masd.injection.dia.comment": "true",
     "yarn.model_modules": "masd.dogen.templating",
     "yarn.reference": "masd.dogen.extraction.json",
     "yarn.input_language": "cpp",

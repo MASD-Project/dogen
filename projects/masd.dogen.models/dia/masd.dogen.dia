@@ -1757,7 +1757,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
           <dia:attribute name="string">
             <dia:string>#Provides the top-level API for the dogen product.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true

@@ -1,7 +1,7 @@
 {
   "documentation": "CPP is the C++ backend in the default generation kernel.\n",
   "tagged_values": {
-    "yarn.dia.comment": "true",
+    "masd.injection.dia.comment": "true",
     "yarn.model_modules": "masd.dogen.generation.cpp",
     "yarn.reference": "masd.dogen.generation.json",
     "yarn.reference": "masd.dogen.options.json",

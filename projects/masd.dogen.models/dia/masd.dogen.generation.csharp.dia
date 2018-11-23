@@ -96,7 +96,7 @@
           <dia:attribute name="string">
             <dia:string>#CSharp is the c# model in the default generation kernel.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.generation.csharp
 #DOGEN yarn.reference=masd.dogen.options.dia
 #DOGEN yarn.reference=masd.dogen.coding.dia

@@ -841,7 +841,7 @@ etc.).
 @li to provide all the information required to build the final model
 and to build it.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.coding
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.extraction.dia

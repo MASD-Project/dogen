@@ -1,7 +1,7 @@
 {
   "documentation": "Welcome to Dogen!\n\nThis is one of the simplest models you can generate, a single class with one\nproperty. You can see the use of comments at the class level and property\nlevel.\n",
   "tagged_values": {
-    "yarn.dia.comment": "true",
+    "masd.injection.dia.comment": "true",
     "yarn.model_modules": "dogen.hello_world",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",

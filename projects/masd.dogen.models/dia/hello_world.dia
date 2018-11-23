@@ -234,7 +234,7 @@ This is one of the simplest models you can generate, a single class with one
 property. You can see the use of comments at the class level and property
 level.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=dogen.hello_world
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true

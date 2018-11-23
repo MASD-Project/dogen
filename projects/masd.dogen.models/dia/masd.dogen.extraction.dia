@@ -4396,7 +4396,7 @@ This model is the repository of all extraction related code which is
 not language specific. Language-specific models can then make use of
 it.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.extraction
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true

@@ -1,6 +1,6 @@
 {
   "tagged_values": {
-    "yarn.dia.comment": "true",
+    "masd.injection.dia.comment": "true",
     "yarn.model_modules": "masd.dogen.generation",
     "yarn.reference": "masd.dogen.annotations.json",
     "yarn.reference": "masd.dogen.coding.json",

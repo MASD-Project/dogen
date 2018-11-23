@@ -4890,7 +4890,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>##DOGEN yarn.dia.comment=true
+            <dia:string>##DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.generation
 #DOGEN yarn.reference=masd.dogen.annotations.dia
 #DOGEN yarn.reference=masd.dogen.coding.dia

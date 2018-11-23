@@ -100,7 +100,7 @@ The idea is to allow the meta-models to carry data over to the
 formatting process without necessarily knowing about this data, but
 yet imposing some constraints on the shape of the data.
 
-#DOGEN yarn.dia.comment=true
+#DOGEN masd.injection.dia.comment=true
 #DOGEN yarn.model_modules=masd.dogen.annotations
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
