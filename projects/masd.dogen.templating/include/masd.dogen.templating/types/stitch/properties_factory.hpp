@@ -28,8 +28,8 @@
 #include <boost/optional.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.annotations/types/type_repository.hpp"
-#include "masd.dogen.formatting/types/repository.hpp"
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/repository.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
 #include "masd.dogen.templating/types/stitch/properties.hpp"
 
@@ -41,13 +41,13 @@ namespace masd::dogen::templating::stitch {
 class properties_factory {
 public:
     properties_factory(const annotations::type_repository& atrp,
-        const masd::dogen::formatting::repository& frp);
+        const masd::dogen::extraction::repository& frp);
 
 private:
     /**
      * @brief Create the decoration properties.
      */
-    boost::optional<formatting::decoration_properties>
+    boost::optional<extraction::decoration_properties>
     make_decoration_properties(const annotations::annotation& a) const;
 
     /**
@@ -64,7 +64,7 @@ public:
 
 private:
     const annotations::type_repository& annotations_repository_;
-    const masd::dogen::formatting::repository& formatting_repository_;
+    const masd::dogen::extraction::repository& formatting_repository_;
 };
 
 }

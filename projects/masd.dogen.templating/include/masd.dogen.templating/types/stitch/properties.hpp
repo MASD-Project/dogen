@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "masd.dogen.formatting/types/decoration_properties.hpp"
+#include "masd.dogen.extraction/types/decoration_properties.hpp"
 #include "masd.dogen.templating/types/stitch/stitching_properties.hpp"
 
 namespace masd::dogen::templating::stitch {
@@ -43,14 +43,14 @@ public:
 
 public:
     properties(
-        const boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties,
+        const boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties,
         const masd::dogen::templating::stitch::stitching_properties& stitching_properties);
 
 public:
-    const boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties() const;
-    boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties();
-    void decoration_properties(const boost::optional<masd::dogen::formatting::decoration_properties>& v);
-    void decoration_properties(const boost::optional<masd::dogen::formatting::decoration_properties>&& v);
+    const boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties() const;
+    boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties();
+    void decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>& v);
+    void decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>&& v);
 
     const masd::dogen::templating::stitch::stitching_properties& stitching_properties() const;
     masd::dogen::templating::stitch::stitching_properties& stitching_properties();
@@ -68,7 +68,7 @@ public:
     properties& operator=(properties other);
 
 private:
-    boost::optional<masd::dogen::formatting::decoration_properties> decoration_properties_;
+    boost::optional<masd::dogen::extraction::decoration_properties> decoration_properties_;
     masd::dogen::templating::stitch::stitching_properties stitching_properties_;
 };
 

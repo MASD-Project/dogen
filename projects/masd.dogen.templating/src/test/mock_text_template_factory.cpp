@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "masd.dogen.formatting/test/mock_decoration_properties_factory.hpp"
+#include "masd.dogen.extraction/test/mock_decoration_properties_factory.hpp"
 #include "masd.dogen.templating/test/mock_text_template_factory.hpp"
 
 namespace {
@@ -320,7 +320,7 @@ text_template mock_text_template_factory::make_complex_structure() const {
 
 text_template mock_text_template_factory::
 make_with_decoration_properties() const {
-    masd::dogen::formatting::test::mock_decoration_properties_factory factory_;
+    masd::dogen::extraction::test::mock_decoration_properties_factory factory_;
     const auto fp(factory_.make_decoration_properties());
 
     text_template r(make_text_template_with_trivial_properties());

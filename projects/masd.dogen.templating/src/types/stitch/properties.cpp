@@ -27,7 +27,7 @@ properties::properties(properties&& rhs)
       stitching_properties_(std::move(rhs.stitching_properties_)) { }
 
 properties::properties(
-    const boost::optional<masd::dogen::formatting::decoration_properties>& decoration_properties,
+    const boost::optional<masd::dogen::extraction::decoration_properties>& decoration_properties,
     const masd::dogen::templating::stitch::stitching_properties& stitching_properties)
     : decoration_properties_(decoration_properties),
       stitching_properties_(stitching_properties) { }
@@ -49,19 +49,19 @@ properties& properties::operator=(properties other) {
     return *this;
 }
 
-const boost::optional<masd::dogen::formatting::decoration_properties>& properties::decoration_properties() const {
+const boost::optional<masd::dogen::extraction::decoration_properties>& properties::decoration_properties() const {
     return decoration_properties_;
 }
 
-boost::optional<masd::dogen::formatting::decoration_properties>& properties::decoration_properties() {
+boost::optional<masd::dogen::extraction::decoration_properties>& properties::decoration_properties() {
     return decoration_properties_;
 }
 
-void properties::decoration_properties(const boost::optional<masd::dogen::formatting::decoration_properties>& v) {
+void properties::decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>& v) {
     decoration_properties_ = v;
 }
 
-void properties::decoration_properties(const boost::optional<masd::dogen::formatting::decoration_properties>&& v) {
+void properties::decoration_properties(const boost::optional<masd::dogen::extraction::decoration_properties>&& v) {
     decoration_properties_ = std::move(v);
 }
 

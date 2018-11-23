@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include "masd.dogen.templating/io/stitch/properties_io.hpp"
-#include "masd.dogen.formatting/io/decoration_properties_io.hpp"
+#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
 #include "masd.dogen.templating/io/stitch/stitching_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::formatting::decoration_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<masd::dogen::extraction::decoration_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

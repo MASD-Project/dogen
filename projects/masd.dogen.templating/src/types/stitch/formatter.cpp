@@ -21,9 +21,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "masd.dogen.utility/log/logger.hpp"
-#include "masd.dogen.formatting/types/utility_formatter.hpp"
-#include "masd.dogen.formatting/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "masd.dogen.formatting/types/cpp/scoped_namespace_formatter.hpp"
+#include "masd.dogen.extraction/types/utility_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/scoped_boilerplate_formatter.hpp"
+#include "masd.dogen.extraction/types/cpp/scoped_namespace_formatter.hpp"
 #include "masd.dogen.templating/io/stitch/block_types_io.hpp"
 #include "masd.dogen.templating/types/stitch/formatting_error.hpp"
 #include "masd.dogen.templating/types/stitch/formatter.hpp"
@@ -31,7 +31,7 @@
 namespace {
 
 using namespace masd::dogen::utility::log;
-static logger lg(logger_factory("templating.stitch.formatting"));
+static logger lg(logger_factory("templating.stitch.formatter"));
 
 const std::string empty_header_guard;
 /*
@@ -57,10 +57,10 @@ namespace masd::dogen::templating::stitch {
 
 void formatter::format_text_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
-    const auto spaces(formatting::spacing_types::left_and_right_space);
+    const auto spaces(extraction::spacing_types::left_and_right_space);
     s << stream_name;
 
-    const formatting::utility_formatter u(s);
+    const extraction::utility_formatter u(s);
     u.insert(inserter, spaces);
     if (!l.empty()) {
         u.insert_quoted(l, true/*escape_content*/);
@@ -75,8 +75,8 @@ format_expression_block_line(const std::string& stream_name,
     const std::string& l, std::ostream& s) const {
     s << stream_name;
 
-    const formatting::utility_formatter u(s);
-    const auto spaces(formatting::spacing_types::left_and_right_space);
+    const extraction::utility_formatter u(s);
+    const auto spaces(extraction::spacing_types::left_and_right_space);
     u.insert(inserter, spaces);
 
     s << l;
@@ -100,8 +100,8 @@ format_standard_control_block_line(
 
 void formatter::format_mixed_content_line(const std::string& stream_name,
     const line& l, std::ostream& s) const {
-    const auto spaces(formatting::spacing_types::left_and_right_space);
-    const formatting::utility_formatter u(s);
+    const auto spaces(extraction::spacing_types::left_and_right_space);
+    const extraction::utility_formatter u(s);
     bool is_first(true);
     for (const auto& b : l.blocks()) {
         if (is_first) {
@@ -166,11 +166,11 @@ coding::meta_model::artefact formatter::format(const text_template& tt) const {
     std::ostringstream s;
     {
         const auto& id(ss.inclusion_dependencies());
-        masd::dogen::formatting::cpp::scoped_boilerplate_formatter
+        masd::dogen::extraction::cpp::scoped_boilerplate_formatter
             sbf(s, tt.properties().decoration_properties(), id,
                 empty_header_guard);
 
-        masd::dogen::formatting::cpp::scoped_namespace_formatter snf(
+        masd::dogen::extraction::cpp::scoped_namespace_formatter snf(
             s, ss.containing_namespaces(), false/*create_anonymous_namespace*/,
             true/*add_new_line_*/, true/*nested_namespaces*/);
 

@@ -28,7 +28,7 @@
 #include "masd.dogen.utility/filesystem/file.hpp"
 #include "masd.dogen.annotations/types/type_repository_factory.hpp"
 #include "masd.dogen.annotations/types/archetype_location_repository_builder.hpp"
-#include "masd.dogen.formatting/types/repository_factory.hpp"
+#include "masd.dogen.extraction/types/repository_factory.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_io.hpp"
 #include "masd.dogen.coding/types/helpers/filesystem_writer.hpp"
 #include "masd.dogen.templating/types/stitch/parser.hpp"
@@ -106,9 +106,9 @@ workflow::obtain_archetype_location_repository() const {
     return b.build();
 }
 
-dogen::formatting::repository workflow::create_formatting_repository(
+dogen::extraction::repository workflow::create_formatting_repository(
     const std::vector<boost::filesystem::path>& data_dirs) const {
-    masd::dogen::formatting::repository_factory f;
+    masd::dogen::extraction::repository_factory f;
     return f.make(data_dirs);
 }
 
@@ -122,7 +122,7 @@ annotations::type_repository workflow::create_annotations_type_repository(
 std::list<coding::meta_model::artefact>
 workflow::create_artefacts(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const masd::dogen::formatting::repository& drp, const std::forward_list<
+    const masd::dogen::extraction::repository& drp, const std::forward_list<
     boost::filesystem::path>& text_template_paths) const {
 
     std::list<coding::meta_model::artefact> r;

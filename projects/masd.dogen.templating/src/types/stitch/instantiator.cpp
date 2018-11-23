@@ -49,7 +49,7 @@ namespace masd::dogen::templating::stitch {
 
 instantiator::instantiator(const annotations::type_repository& atrp,
     const annotations::annotation_factory& af,
-    const masd::dogen::formatting::repository& frp)
+    const masd::dogen::extraction::repository& frp)
     : annotation_factory_(af), properties_factory_(atrp, frp) {}
 
 boost::filesystem::path
