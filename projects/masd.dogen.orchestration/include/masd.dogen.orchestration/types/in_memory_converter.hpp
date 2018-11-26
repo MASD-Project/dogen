@@ -18,28 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
-#define MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_IN_MEMORY_CONVERTER_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_IN_MEMORY_CONVERTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
+#include "masd.dogen/types/in_memory_converter.hpp"
 
-namespace masd::dogen {
+namespace masd::dogen::orchestration {
 
-class filesystem_generator {
+class in_memory_converter final : public masd::dogen::in_memory_converter {
 public:
-    filesystem_generator() = default;
-    filesystem_generator(const filesystem_generator&) = default;
-    filesystem_generator(filesystem_generator&&) = default;
-    ~filesystem_generator() = default;
-    filesystem_generator& operator=(const filesystem_generator&) = default;
+    in_memory_converter() = default;
+    in_memory_converter(const in_memory_converter&) = default;
+    in_memory_converter(in_memory_converter&&) = default;
+    in_memory_converter& operator=(const in_memory_converter&) = default;
+
+    virtual ~in_memory_converter() noexcept { }
 
 public:
-    bool operator==(const filesystem_generator& rhs) const;
-    bool operator!=(const filesystem_generator& rhs) const {
+    bool operator==(const in_memory_converter& rhs) const;
+    bool operator!=(const in_memory_converter& rhs) const {
         return !this->operator==(rhs);
     }
 

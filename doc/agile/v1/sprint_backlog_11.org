@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-26 Mon 17:25]
+#+CAPTION: Clock summary at [2018-11-26 Mon 18:22]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *130:01* |        |        |   0.0 |
+| *Total time*                                                                | *130:57* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 130:01   |        |        |   0.0 |
-| Active                                                                      |          | 130:01 |        |   0.0 |
+| Stories                                                                     | 130:57   |        |        |   0.0 |
+| Active                                                                      |          | 130:57 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
 | Read up on framework and API design                                         |          |        |   0:57 |   0.0 |
 | Rename models to fit MASD architecture                                      |          |        |   4:56 |   0.0 |
 | Great meta-data rename                                                      |          |        |   4:54 |   0.0 |
-| Create the =orchestration= model                                            |          |        |   0:23 |   0.0 |
+| Create the =orchestration= model                                            |          |        |   1:19 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -284,10 +284,20 @@ Rename =is_proxy_model= to =platform_definition_model=.
 
 *** STARTED Create the =orchestration= model                          :story:
     :LOGBOOK:
+    CLOCK: [2018-11-26 Mon 17:26]--[2018-11-26 Mon 18:22] =>  0:56
     CLOCK: [2018-11-26 Mon 17:02]--[2018-11-26 Mon 17:25] =>  0:23
     :END:
 
 Create a model with the top-level transforms.
+
+*** Inheriting from oneself causes segfault                           :story:
+
+If you set an object to inherit from itself, say via metadata:
+
+: #DOGEN masd.generalization.parent=in_memory_weaver
+
+Dogen segfaults due to recursion. We need to test this via UML
+inheritance as well.
 
 *** Create a single binary for all of dogen                           :story:
 

@@ -18,33 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
-#define MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
+#ifndef MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
+#define MASD_DOGEN_ORCHESTRATION_TYPES_ALL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-
-namespace masd::dogen {
-
-class filesystem_generator {
-public:
-    filesystem_generator() = default;
-    filesystem_generator(const filesystem_generator&) = default;
-    filesystem_generator(filesystem_generator&&) = default;
-    ~filesystem_generator() = default;
-    filesystem_generator& operator=(const filesystem_generator&) = default;
-
-public:
-    bool operator==(const filesystem_generator& rhs) const;
-    bool operator!=(const filesystem_generator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
-
-}
+#include "masd.dogen.orchestration/types/orchestration.hpp"
+#include "masd.dogen.orchestration/types/in_memory_weaver.hpp"
+#include "masd.dogen.orchestration/types/filesystem_weaver.hpp"
+#include "masd.dogen.orchestration/types/in_memory_converter.hpp"
+#include "masd.dogen.orchestration/types/in_memory_generator.hpp"
+#include "masd.dogen.orchestration/types/filesystem_converter.hpp"
+#include "masd.dogen.orchestration/types/filesystem_generator.hpp"
 
 #endif

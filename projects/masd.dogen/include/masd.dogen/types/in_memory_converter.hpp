@@ -29,7 +29,7 @@
 
 namespace masd::dogen {
 
-class in_memory_converter final {
+class in_memory_converter {
 public:
     in_memory_converter() = default;
     in_memory_converter(const in_memory_converter&) = default;

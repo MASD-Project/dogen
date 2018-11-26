@@ -29,7 +29,7 @@
 
 namespace masd::dogen {
 
-class filesystem_converter final {
+class filesystem_converter {
 public:
     filesystem_converter() = default;
     filesystem_converter(const filesystem_converter&) = default;

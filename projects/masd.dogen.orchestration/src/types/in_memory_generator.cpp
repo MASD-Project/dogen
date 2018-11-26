@@ -18,33 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
-#define MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
+#include "masd.dogen.orchestration/types/in_memory_generator.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace masd::dogen::orchestration {
 
-#include <algorithm>
-
-namespace masd::dogen {
-
-class filesystem_generator {
-public:
-    filesystem_generator() = default;
-    filesystem_generator(const filesystem_generator&) = default;
-    filesystem_generator(filesystem_generator&&) = default;
-    ~filesystem_generator() = default;
-    filesystem_generator& operator=(const filesystem_generator&) = default;
-
-public:
-    bool operator==(const filesystem_generator& rhs) const;
-    bool operator!=(const filesystem_generator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
-
+bool in_memory_generator::operator==(const in_memory_generator& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

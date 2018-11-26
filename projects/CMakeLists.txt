@@ -222,6 +222,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.extraction/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.options/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.coding/include
+    ${CMAKE_SOURCE_DIR}/projects/masd.dogen.orchestration/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.templating/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.generation/include
     ${CMAKE_SOURCE_DIR}/projects/masd.dogen.knitter/include
@@ -245,6 +246,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.tracing)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.extraction)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.options)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.coding)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.orchestration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.templating)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/masd.dogen.generation)

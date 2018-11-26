@@ -29,7 +29,7 @@
 
 namespace masd::dogen {
 
-class in_memory_generator final {
+class in_memory_generator {
 public:
     in_memory_generator() = default;
     in_memory_generator(const in_memory_generator&) = default;

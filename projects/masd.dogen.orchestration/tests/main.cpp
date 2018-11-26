@@ -18,33 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
-#define MASD_DOGEN_TYPES_FILESYSTEM_GENERATOR_HPP
+#define BOOST_TEST_MODULE masd.dogen.cli.tests
+#include <boost/test/included/unit_test.hpp>
+#include "masd.dogen.utility/test/fixture.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <algorithm>
-
-namespace masd::dogen {
-
-class filesystem_generator {
-public:
-    filesystem_generator() = default;
-    filesystem_generator(const filesystem_generator&) = default;
-    filesystem_generator(filesystem_generator&&) = default;
-    ~filesystem_generator() = default;
-    filesystem_generator& operator=(const filesystem_generator&) = default;
-
-public:
-    bool operator==(const filesystem_generator& rhs) const;
-    bool operator!=(const filesystem_generator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
-
-}
-
-#endif
+using namespace masd::dogen::utility::test;
+BOOST_GLOBAL_FIXTURE(exception_fixture);

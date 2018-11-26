@@ -29,7 +29,7 @@
 
 namespace masd::dogen {
 
-class in_memory_weaver final {
+class in_memory_weaver {
 public:
     in_memory_weaver() = default;
     in_memory_weaver(const in_memory_weaver&) = default;

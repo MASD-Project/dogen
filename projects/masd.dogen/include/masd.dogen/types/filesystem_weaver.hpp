@@ -29,7 +29,7 @@
 
 namespace masd::dogen {
 
-class filesystem_weaver final {
+class filesystem_weaver {
 public:
     filesystem_weaver() = default;
     filesystem_weaver(const filesystem_weaver&) = default;
