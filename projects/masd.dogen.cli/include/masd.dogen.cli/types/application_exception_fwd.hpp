@@ -18,12 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "masd.dogen.cli/types/orchestrator.hpp"
+#ifndef MASD_DOGEN_CLI_TYPES_APPLICATION_EXCEPTION_FWD_HPP
+#define MASD_DOGEN_CLI_TYPES_APPLICATION_EXCEPTION_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace masd::dogen::cli {
 
-bool orchestrator::operator==(const orchestrator& /*rhs*/) const {
-    return true;
-}
+class application_exception;
 
 }
+
+#endif

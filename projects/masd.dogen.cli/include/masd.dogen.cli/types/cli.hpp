@@ -26,7 +26,7 @@
 #endif
 
 /**
- * @brief Provides the top-level API for the dogen product.
+ * @brief Implements the command-line interface for Dogen.
  */
 namespace masd::dogen::cli {
 }

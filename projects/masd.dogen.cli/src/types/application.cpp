@@ -18,36 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_ORCHESTRATION_EXCEPTION_HPP
-#define MASD_DOGEN_CLI_TYPES_ORCHESTRATION_EXCEPTION_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <string>
-#include <boost/exception/info.hpp>
+#include "masd.dogen.cli/types/application.hpp"
 
 namespace masd::dogen::cli {
 
-/**
- * @brief A fatal error has occurred during orchestration.
- */
-class orchestration_exception : public virtual std::exception, public virtual boost::exception {
-public:
-    orchestration_exception() = default;
-    ~orchestration_exception() noexcept = default;
-
-public:
-    explicit orchestration_exception(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
-
+bool application::operator==(const application& /*rhs*/) const {
+    return true;
 }
 
-#endif
+}

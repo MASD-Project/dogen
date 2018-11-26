@@ -18,16 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_ORCHESTRATION_EXCEPTION_FWD_HPP
-#define MASD_DOGEN_CLI_TYPES_ORCHESTRATION_EXCEPTION_FWD_HPP
+#ifndef MASD_DOGEN_CLI_TYPES_APPLICATION_HPP
+#define MASD_DOGEN_CLI_TYPES_APPLICATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
+
 namespace masd::dogen::cli {
 
-class orchestration_exception;
+class application final {
+public:
+    application() = default;
+    application(const application&) = default;
+    application(application&&) = default;
+    ~application() = default;
+    application& operator=(const application&) = default;
+
+public:
+    bool operator==(const application& rhs) const;
+    bool operator!=(const application& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
 

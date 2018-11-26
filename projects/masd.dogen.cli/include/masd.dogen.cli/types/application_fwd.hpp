@@ -18,32 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_CLI_TYPES_ORCHESTRATOR_HPP
-#define MASD_DOGEN_CLI_TYPES_ORCHESTRATOR_HPP
+#ifndef MASD_DOGEN_CLI_TYPES_APPLICATION_FWD_HPP
+#define MASD_DOGEN_CLI_TYPES_APPLICATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-
 namespace masd::dogen::cli {
 
-class orchestrator final {
-public:
-    orchestrator() = default;
-    orchestrator(const orchestrator&) = default;
-    orchestrator(orchestrator&&) = default;
-    ~orchestrator() = default;
-    orchestrator& operator=(const orchestrator&) = default;
-
-public:
-    bool operator==(const orchestrator& rhs) const;
-    bool operator!=(const orchestrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+class application;
 
 }
 
