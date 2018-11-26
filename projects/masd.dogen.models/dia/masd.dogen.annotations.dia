@@ -2390,7 +2390,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#value_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3013,7 +3013,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#entry_selector#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4351,7 +4351,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#type_templates_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4629,7 +4629,7 @@ formatter we must have a facet. We may not have any.#</dia:string>
         <dia:string>#type_repository_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5033,7 +5033,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:string>#template_instantiator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5510,7 +5510,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:string>#type_repository_selector#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6849,7 +6849,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:string>#profiler#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7025,7 +7025,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:string>#profile_hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7184,7 +7184,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:string>#merger#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9520,7 +9520,7 @@ associated properties.#</dia:string>
         <dia:string>#archetype_location_repository_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11181,7 +11181,7 @@ associated properties.#</dia:string>
         <dia:string>#archetype_location_repository_parts_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11509,7 +11509,7 @@ associated properties.#</dia:string>
         <dia:string>#annotation_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

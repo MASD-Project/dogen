@@ -24,14 +24,14 @@
     {
       "name": "orchestrator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "command_line_parser",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -41,21 +41,21 @@
         "command_line_parser"
       ],
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "injector_factory",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "main",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "tagged_values": {
         "masd.extraction.cpp.types.class_header.enabled": "false",

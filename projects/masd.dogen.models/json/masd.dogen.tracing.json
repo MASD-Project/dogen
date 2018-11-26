@@ -16,7 +16,7 @@
     {
       "name": "tracer",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -53,14 +53,14 @@
     {
       "name": "metrics_builder",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "metrics_printer",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -75,7 +75,7 @@
     {
       "name": "scoped_tracer",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     }

@@ -5794,7 +5794,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#generability_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5971,7 +5971,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#dynamic_transforms_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6178,7 +6178,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#dynamic_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6355,7 +6355,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#dynamic_transform_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6863,7 +6863,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#model_to_text_model_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7053,7 +7053,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#model_to_text_model_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7415,7 +7415,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#model_to_text_model_transform_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8081,7 +8081,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#enablement_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8330,7 +8330,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#artefact_properties_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8507,7 +8507,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#formatting_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8986,7 +8986,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#model_generation_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9163,7 +9163,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#model_post_processing_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9628,7 +9628,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#archetype_location_properties_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9949,7 +9949,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#locator_properties_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10198,7 +10198,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#text_model_generation_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10375,7 +10375,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#context#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10674,7 +10674,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#coding_model_to_generation_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10961,7 +10961,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#filesystem_writer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11241,7 +11241,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#stream_writer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11425,7 +11425,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#artefact_writer_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12065,7 +12065,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

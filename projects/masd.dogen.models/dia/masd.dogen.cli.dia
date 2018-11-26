@@ -255,7 +255,7 @@
         <dia:string>#command_line_parser#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -519,7 +519,7 @@
         <dia:string>#orchestrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -951,7 +951,7 @@
         <dia:string>#program_options_parser#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1102,7 +1102,7 @@
         <dia:string>#injector_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1243,7 +1243,7 @@
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.extraction.cpp.types.class_header.enabled=false

@@ -28,35 +28,35 @@
     {
       "name": "initializer",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "hydrator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "decoding_transform",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "encoding_transform",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "dehydrator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     }

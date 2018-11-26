@@ -593,7 +593,7 @@
         <dia:string>#key_extractor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -753,7 +753,7 @@
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -930,7 +930,7 @@
         <dia:string>#formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1306,7 +1306,7 @@
         <dia:string>#validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2307,7 +2307,7 @@
         <dia:string>#workflow#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2467,7 +2467,7 @@
         <dia:string>#parser#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3228,7 +3228,7 @@
         <dia:string>#formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4306,7 +4306,7 @@
         <dia:string>#stitching_properties_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4847,7 +4847,7 @@
         <dia:string>#properties_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5223,7 +5223,7 @@
         <dia:string>#traits#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5968,7 +5968,7 @@
         <dia:string>#instantiator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6918,7 +6918,7 @@
         <dia:string>#resolver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

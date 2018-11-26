@@ -52,28 +52,28 @@
     {
       "name": "wale::key_extractor",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::workflow",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::formatter",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "wale::validator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -115,14 +115,14 @@
     {
       "name": "stitch::workflow",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::parser",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -175,7 +175,7 @@
     {
       "name": "stitch::formatter",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -242,7 +242,7 @@
     {
       "name": "stitch::stitching_properties_factory",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -257,14 +257,14 @@
     {
       "name": "stitch::properties_factory",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "stitch::traits",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -306,7 +306,7 @@
     {
       "name": "stitch::instantiator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -334,7 +334,7 @@
     {
       "name": "stitch::resolver",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },

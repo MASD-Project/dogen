@@ -221,7 +221,7 @@
       "name": "configuration_builder",
       "documentation": "masd::builder\n",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "tagged_values": {
         "masd.builder.target": "configuration"
@@ -257,21 +257,21 @@
     {
       "name": "filesystem_generator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "in_memory_generator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "in_memory_converter",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -307,7 +307,7 @@
     {
       "name": "filesystem_converter",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -414,21 +414,21 @@
     {
       "name": "model_factory",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "filesystem_weaver",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "in_memory_weaver",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -505,7 +505,7 @@
     {
       "name": "configuration_validator",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },

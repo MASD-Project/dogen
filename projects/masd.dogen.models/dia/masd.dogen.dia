@@ -2283,7 +2283,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#configuration_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#masd::builder#</dia:string>
@@ -2693,7 +2693,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#filesystem_generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2982,7 +2982,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#in_memory_generator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3603,7 +3603,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#in_memory_converter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4251,7 +4251,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#filesystem_converter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -5921,7 +5921,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#model_factory#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6151,7 +6151,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#filesystem_weaver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6474,7 +6474,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#in_memory_weaver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8130,7 +8130,7 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:string>#configuration_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

@@ -21,14 +21,14 @@
     {
       "name": "transforms::encoding_transform_interface",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::registrar",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -43,14 +43,14 @@
     {
       "name": "transforms::model_generation_chain",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::model_to_model_chain",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -201,7 +201,7 @@
     {
       "name": "transforms::context",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -221,7 +221,7 @@
     {
       "name": "transforms::decoding_transform_interface",
       "stereotypes": [
-        "handcrafted"
+        "masd::handcrafted"
       ],
       "fallback_element_type": "masd::object"
     }

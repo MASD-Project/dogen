@@ -3944,7 +3944,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:string>#hydrator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Reads a Dia diagram and instatiates the dia model objects.#</dia:string>
@@ -4385,7 +4385,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:string>#persister#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#handcrafted#</dia:string>
+        <dia:string>#masd::handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

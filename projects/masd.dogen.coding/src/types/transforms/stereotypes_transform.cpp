@@ -46,7 +46,7 @@ auto lg(logger_factory(transform_id));
 const std::string stereotype_pretty_printable("dogen::pretty_printable");
 const std::string stereotype_serializable("dogen::serializable");
 const std::string stereotype_hashable("dogen::hashable");
-const std::string stereotype_handcrafted("handcrafted");
+const std::string stereotype_handcrafted("masd::handcrafted");
 const std::string stereotype_cpp_helper_formatter("C++ Helper Formatter");
 const std::string stereotype_cpp_artefact_formatter("C++ Artefact Formatter");
 const std::string stereotype_csharp_helper_formatter("C# Helper Formatter");

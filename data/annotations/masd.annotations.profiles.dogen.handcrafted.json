@@ -1,7 +1,7 @@
 {
   "name": "dogen.handcrafted",
   "labels": [
-    "handcrafted"
+    "masd::handcrafted"
   ],
   "parents": [
     "dogen.disable_all_facets"
