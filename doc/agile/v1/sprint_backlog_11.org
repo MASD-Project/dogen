@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-26 Mon 11:02]
+#+CAPTION: Clock summary at [2018-11-26 Mon 17:25]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *129:38* |        |        |   0.0 |
+| *Total time*                                                                | *130:01* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 129:38   |        |        |   0.0 |
-| Active                                                                      |          | 129:38 |        |   0.0 |
+| Stories                                                                     | 130:01   |        |        |   0.0 |
+| Active                                                                      |          | 130:01 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
 | Read up on framework and API design                                         |          |        |   0:57 |   0.0 |
 | Rename models to fit MASD architecture                                      |          |        |   4:56 |   0.0 |
 | Great meta-data rename                                                      |          |        |   4:54 |   0.0 |
+| Create the =orchestration= model                                            |          |        |   0:23 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,7 +282,10 @@ We should use the new names as part of this rename, e.g.:
 
 Rename =is_proxy_model= to =platform_definition_model=.
 
-*** Create the =orchestration= model                                  :story:
+*** STARTED Create the =orchestration= model                          :story:
+    :LOGBOOK:
+    CLOCK: [2018-11-26 Mon 17:02]--[2018-11-26 Mon 17:25] =>  0:23
+    :END:
 
 Create a model with the top-level transforms.
 
