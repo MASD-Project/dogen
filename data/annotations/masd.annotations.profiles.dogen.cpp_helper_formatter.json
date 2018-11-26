@@ -1,7 +1,7 @@
 {
   "name": "dogen.cpp_helper_formatter",
   "labels": [
-    "C++ Helper Formatter"
+    "masd::cpp_helper_formatter"
   ],
   "parents": [
     "dogen.handcrafted"

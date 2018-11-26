@@ -1,7 +1,7 @@
 {
   "name": "dogen.csharp_artefact_formatter",
   "labels": [
-    "C# Artefact Formatter"
+    "masd::csharp_artefact_formatter"
   ],
   "parents": [
     "dogen.handcrafted"

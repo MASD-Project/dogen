@@ -109,28 +109,28 @@
     {
       "name": "formatters::types::class_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::enum_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::namespace_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::visitor_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -141,14 +141,14 @@
     {
       "name": "formatters::io::class_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enum_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -159,28 +159,28 @@
     {
       "name": "formatters::test_data::class_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::enum_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::exception_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::visual_studio_project_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -547,7 +547,7 @@
     {
       "name": "formatters::visual_studio_solution_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -720,7 +720,7 @@
     {
       "name": "formatters::types::floating_point_number_helper",
       "stereotypes": [
-        "C# Helper Formatter"
+        "masd::csharp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -737,21 +737,21 @@
     {
       "name": "formatters::types::builtin_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::builtin_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::builtin_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -772,14 +772,14 @@
     {
       "name": "formatters::io::assistant_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::assistant_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -809,7 +809,7 @@
     {
       "name": "formatters::io::enumerable_helper",
       "stereotypes": [
-        "C# Helper Formatter"
+        "masd::csharp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -859,21 +859,21 @@
     {
       "name": "formatters::types::primitive_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::primitive_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::primitive_formatter",
       "stereotypes": [
-        "C# Artefact Formatter"
+        "masd::csharp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },

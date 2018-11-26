@@ -30,7 +30,7 @@
     {
       "name": "formatters::types::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -55,56 +55,56 @@
     {
       "name": "formatters::hash::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::class_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::exception_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::enum_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::namespace_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::visitor_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::class_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::enum_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -115,28 +115,28 @@
     {
       "name": "formatters::io::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::class_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enum_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::enum_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -147,14 +147,14 @@
     {
       "name": "formatters::serialization::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::class_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -176,28 +176,28 @@
     {
       "name": "formatters::test_data::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::class_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::enum_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::enum_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -208,28 +208,28 @@
     {
       "name": "formatters::odb::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::common_odb_options_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::include_cmakelists_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::source_cmakelists_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -431,14 +431,14 @@
     {
       "name": "formatters::types::forward_declarations_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::forward_declarations_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -512,28 +512,28 @@
     {
       "name": "formatters::serialization::registrar_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::registrar_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::enum_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::enum_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -863,42 +863,42 @@
     {
       "name": "formatters::types::builtin_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::builtin_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::builtin_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::builtin_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::builtin_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::builtin_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1201,259 +1201,259 @@
     {
       "name": "formatters::types::smart_pointer_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::smart_pointer_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::time_duration_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::ptree_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::associative_container_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::date_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::optional_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::path_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::pair_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::sequence_container_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::ptime_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::variant_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::associative_container_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::smart_pointer_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::ptree_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::optional_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::pair_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::sequence_container_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::variant_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::string_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::path_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::associative_container_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::char_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::bool_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::date_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::domain_type_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::number_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::optional_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::pair_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::path_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::ptime_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::ptree_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::sequence_container_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::smart_pointer_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::string_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::time_duration_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::variant_helper",
       "stereotypes": [
-        "C++ Helper Formatter"
+        "masd::cpp_helper_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1493,77 +1493,77 @@
     {
       "name": "formatters::types::primitive_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::primitive_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::primitive_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::odb::primitive_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::primitive_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::primitive_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::types::primitive_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::hash::primitive_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::io::primitive_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::test_data::primitive_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::serialization::primitive_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1747,7 +1747,7 @@
     {
       "name": "formatters::odb::object_odb_options_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1788,7 +1788,7 @@
     {
       "name": "formatters::msbuild_targets_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1862,14 +1862,14 @@
     {
       "name": "formatters::visual_studio_project_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "formatters::visual_studio_solution_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1880,7 +1880,7 @@
     {
       "name": "formatters::rapidjson::class_header_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1901,7 +1901,7 @@
     {
       "name": "formatters::rapidjson::class_implementation_formatter",
       "stereotypes": [
-        "C++ Artefact Formatter"
+        "masd::cpp_artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
