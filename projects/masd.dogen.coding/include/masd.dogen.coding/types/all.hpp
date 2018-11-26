@@ -64,6 +64,7 @@
 #include "masd.dogen.coding/types/helpers/writing_error.hpp"
 #include "masd.dogen.coding/types/meta_model/enumerator.hpp"
 #include "masd.dogen.coding/types/meta_model/text_model.hpp"
+#include "masd.dogen.coding/types/transforms/transforms.hpp"
 #include "masd.dogen.coding/types/helpers/building_error.hpp"
 #include "masd.dogen.coding/types/helpers/indexing_error.hpp"
 #include "masd.dogen.coding/types/helpers/name_flattener.hpp"
