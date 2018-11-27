@@ -1527,17 +1527,17 @@ Disabling GUIDs makes comparisons easier.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-19.1,-49"/>
+        <dia:point val="-19.485,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-23.565,-58.65;-18.35,-48.2"/>
+        <dia:rectangle val="-23.565,-58.65;-18.735,-48.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-19.1,-49"/>
-        <dia:point val="-19.1,-53"/>
+        <dia:point val="-19.485,-49"/>
+        <dia:point val="-19.485,-53"/>
         <dia:point val="-23.515,-53"/>
         <dia:point val="-23.515,-58.6"/>
       </dia:attribute>

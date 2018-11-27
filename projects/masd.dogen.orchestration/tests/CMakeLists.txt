@@ -35,21 +35,10 @@ set_target_properties(${tests_target_name}
 
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
-    masd.dogen.utility.lib
-    masd.dogen.options.lib
-    masd.dogen.dia.lib
-    masd.dogen.extraction.lib
-    masd.dogen.injection.lib
-    masd.dogen.injection.json.lib
-    masd.dogen.injection.dia.lib
-    masd.dogen.coding.lib
-    masd.dogen.generation.cpp.lib
-    masd.dogen.generation.csharp.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${PQXX_LIBRARIES}
-    ${CMAKE_REQUIRED_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT})
+    ${CMAKE_THREAD_LIBS_INIT}
+    ${CMAKE_REQUIRED_LIBRARIES})
 
 set(command $<TARGET_FILE:${tests_binary_name}> ${boost_test_parameters})
 
