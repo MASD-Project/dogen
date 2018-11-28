@@ -160,7 +160,6 @@
 #include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
 #include "masd.dogen.coding/types/transforms/text_model_generation_chain.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_to_model_transform.hpp"
-#include "masd.dogen.coding/types/transforms/locator_properties_transform.hpp"
 #include "masd.dogen.coding/types/transforms/artefact_properties_transform.hpp"
 #include "masd.dogen.coding/types/transforms/endomodel_pre_processing_chain.hpp"
 #include "masd.dogen.coding/types/helpers/endomodel_pre_processing_validator.hpp"

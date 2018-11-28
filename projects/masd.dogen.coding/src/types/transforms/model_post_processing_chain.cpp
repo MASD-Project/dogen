@@ -27,7 +27,6 @@
 #include "masd.dogen.coding/types/transforms/enablement_transform.hpp"
 #include "masd.dogen.coding/types/transforms/formatting_transform.hpp"
 #include "masd.dogen.coding/types/transforms/archetype_location_properties_transform.hpp"
-#include "masd.dogen.coding/types/transforms/locator_properties_transform.hpp"
 #include "masd.dogen.coding/types/transforms/model_post_processing_chain.hpp"
 
 namespace {
@@ -84,7 +83,6 @@ transform(const context& ctx, meta_model::model& m) {
      * have no dependencies in the post-processing chain.
      */
     formatting_transform::transform(ctx, m);
-    locator_properties_transform::transform(ctx, m);
 
     stp.end_chain(m);
 }
