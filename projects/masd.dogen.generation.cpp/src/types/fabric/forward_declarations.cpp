@@ -45,7 +45,6 @@ forward_declarations::forward_declarations(
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
     const bool is_enum,
     const masd::dogen::coding::meta_model::name& underlying_element,
     const bool is_exception)
@@ -62,8 +61,7 @@ forward_declarations::forward_declarations(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties,
-      opaque_properties),
+      archetype_location_properties),
       is_enum_(is_enum),
       underlying_element_(underlying_element),
       is_exception_(is_exception) { }

@@ -31,7 +31,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
 #include "masd.dogen.annotations/types/annotation.hpp"
 #include "masd.dogen.coding/types/meta_model/name.hpp"
 #include "masd.dogen.coding/types/meta_model/origin_types.hpp"
@@ -39,7 +38,6 @@
 #include "masd.dogen.coding/types/meta_model/static_stereotypes.hpp"
 #include "masd.dogen.coding/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.coding/types/meta_model/element_visitor_fwd.hpp"
-#include "masd.dogen.coding/types/meta_model/opaque_properties_fwd.hpp"
 #include "masd.dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
 
 namespace masd::dogen::coding::meta_model {
@@ -77,8 +75,7 @@ public:
         const bool is_element_extension,
         const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties);
+        const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties);
 
 public:
     virtual void accept(const element_visitor& v) const = 0;
@@ -204,19 +201,6 @@ public:
     void archetype_location_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& v);
     void archetype_location_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>&& v);
 
-    /**
-     * @brief Any opaque properties associated with this element, by key.
-     *
-     * The key is expected to be namespaced by owning model name, to avoid
-     * clashes.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties() const;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties();
-    void opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& v);
-    void opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >&& v);
-    /**@}*/
-
 protected:
     bool compare(const element& rhs) const;
 public:
@@ -239,7 +223,6 @@ private:
     masd::dogen::extraction::decoration_properties decoration_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties> archetype_location_properties_;
-    std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> > opaque_properties_;
 };
 
 inline element::~element() noexcept { }

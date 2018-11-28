@@ -62,7 +62,6 @@ common_odb_options::common_odb_options(
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
     const std::string& sql_name_case,
     const std::list<std::string>& databases)
     : masd::dogen::coding::meta_model::element(
@@ -78,8 +77,7 @@ common_odb_options::common_odb_options(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties,
-      opaque_properties),
+      archetype_location_properties),
       sql_name_case_(sql_name_case),
       databases_(databases) { }
 

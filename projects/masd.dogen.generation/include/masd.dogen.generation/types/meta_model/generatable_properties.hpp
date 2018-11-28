@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-#include <iosfwd>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
 #include "masd.dogen.extraction/types/decoration_properties.hpp"
-#include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/artefact_properties.hpp"
 #include "masd.dogen.generation/types/meta_model/local_archetype_location_properties.hpp"
 
@@ -39,22 +37,18 @@ namespace masd::dogen::generation::meta_model {
 /**
  * @brief Element properties related to code generation.
  */
-class generatable_properties final : public masd::dogen::coding::meta_model::opaque_properties {
+class generatable_properties final {
 public:
     generatable_properties() = default;
     generatable_properties(const generatable_properties&) = default;
     generatable_properties(generatable_properties&&) = default;
-
-    virtual ~generatable_properties() noexcept { }
+    ~generatable_properties() = default;
 
 public:
     generatable_properties(
         const masd::dogen::extraction::decoration_properties& decoration_properties,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& archetype_location_properties);
-
-public:
-    void to_stream(std::ostream& s) const override;
 
 public:
     const masd::dogen::extraction::decoration_properties& decoration_properties() const;
@@ -77,9 +71,6 @@ public:
     bool operator!=(const generatable_properties& rhs) const {
         return !this->operator==(rhs);
     }
-
-public:
-    bool equals(const masd::dogen::coding::meta_model::opaque_properties& other) const override;
 
 public:
     void swap(generatable_properties& other) noexcept;

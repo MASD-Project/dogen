@@ -19,7 +19,6 @@
  *
  */
 #include "masd.dogen.extraction/hash/decoration_properties_hash.hpp"
-#include "masd.dogen.coding/hash/meta_model/opaque_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/artefact_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/generatable_properties_hash.hpp"
 #include "masd.dogen.generation/hash/meta_model/local_archetype_location_properties_hash.hpp"
@@ -56,8 +55,6 @@ namespace masd::dogen::generation::meta_model {
 
 std::size_t generatable_properties_hasher::hash(const generatable_properties& v) {
     std::size_t seed(0);
-
-    combine(seed, dynamic_cast<const masd::dogen::coding::meta_model::opaque_properties&>(v));
 
     combine(seed, v.decoration_properties());
     combine(seed, hash_std_unordered_map_std_string_masd_dogen_generation_meta_model_artefact_properties(v.artefact_properties()));

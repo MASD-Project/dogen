@@ -21,15 +21,63 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "masd.dogen.extraction/io/decoration_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/generatable_properties_io.hpp"
 #include "masd.dogen.generation/io/meta_model/local_archetype_location_properties_io.hpp"
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::meta_model::artefact_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, masd::dogen::generation::meta_model::local_archetype_location_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace masd::dogen::generation::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const generatable_properties& v) {
-    v.to_stream(s);
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::generation::meta_model::generatable_properties\"" << ", "
+      << "\"decoration_properties\": " << v.decoration_properties() << ", "
+      << "\"artefact_properties\": " << v.artefact_properties() << ", "
+      << "\"archetype_location_properties\": " << v.archetype_location_properties()
+      << " }";
     return(s);
 }
 

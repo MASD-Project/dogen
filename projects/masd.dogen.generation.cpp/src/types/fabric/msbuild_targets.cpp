@@ -40,7 +40,6 @@ msbuild_targets::msbuild_targets(
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties,
     const masd::dogen::generation::cpp::fabric::odb_targets& odb_targets)
     : masd::dogen::coding::meta_model::element(
       name,
@@ -55,8 +54,7 @@ msbuild_targets::msbuild_targets(
       is_element_extension,
       decoration_properties,
       artefact_properties,
-      archetype_location_properties,
-      opaque_properties),
+      archetype_location_properties),
       odb_targets_(odb_targets) { }
 
 void msbuild_targets::accept(const masd::dogen::coding::meta_model::element_visitor& v) const {

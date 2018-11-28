@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-26 Mon 18:22]
+#+CAPTION: Clock summary at [2018-11-28 Wed 13:43]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *130:57* |        |        |   0.0 |
+| *Total time*                                                                | *134:41* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 130:57   |        |        |   0.0 |
-| Active                                                                      |          | 130:57 |        |   0.0 |
+| Stories                                                                     | 134:41   |        |        |   0.0 |
+| Active                                                                      |          | 134:41 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
 | Read up on framework and API design                                         |          |        |   0:57 |   0.0 |
 | Rename models to fit MASD architecture                                      |          |        |   4:56 |   0.0 |
 | Great meta-data rename                                                      |          |        |   4:54 |   0.0 |
-| Create the =orchestration= model                                            |          |        |   1:19 |   0.0 |
+| Create the =orchestration= model                                            |          |        |   4:15 |   0.0 |
+| Clean up the mess of refactors in dogen core                                |          |        |   0:48 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -284,11 +285,39 @@ Rename =is_proxy_model= to =platform_definition_model=.
 
 *** STARTED Create the =orchestration= model                          :story:
     :LOGBOOK:
+    CLOCK: [2018-11-27 Tue 08:51]--[2018-11-27 Tue 11:47] =>  2:56
     CLOCK: [2018-11-26 Mon 17:26]--[2018-11-26 Mon 18:22] =>  0:56
     CLOCK: [2018-11-26 Mon 17:02]--[2018-11-26 Mon 17:25] =>  0:23
     :END:
 
 Create a model with the top-level transforms.
+
+*** STARTED Clean up the mess of refactors in dogen core              :story:
+    :LOGBOOK:
+    CLOCK: [2018-11-28 Wed 13:10]--[2018-11-28 Wed 13:43] =>  0:33
+    CLOCK: [2018-11-27 Tue 11:48]--[2018-11-27 Tue 12:03] =>  0:15
+    :END:
+
+The first task is to try to abort the OOP refactors that we made in
+the past.
+
+Notes:
+
+- some properties were moved into element and are now being used. They
+  no longer exist in the formatters types.
+- some properties were moved into the generation model but are not
+  being used.
+- the best approach is to unwind *all* of the refactoring work. If we
+  can get to a place were generation space is again totally decoupled
+  from coding space, we can then at least start to work towards
+  finding commonalities between generation space models.
+
+Tasks:
+
+- delete all types that are not being used at present.
+- move all properties that were moved from formattables into element
+  back to formattables.
+- move dynamic transforms back to formattables / fabric transforms.
 
 *** Inheriting from oneself causes segfault                           :story:
 
@@ -353,11 +382,6 @@ fits in with other binaries such as =dogen.web=, =dogen.http=,
 *** Implement the new dogen product API                               :story:
 
 Now the API has been designed and generated, we need to implement it.
-
-*** Clean up the mess of refactors in dogen core                      :story:
-
-The first task is to try to abort the OOP refactors that we made in
-the past.
 
 *** Fix cmake emacs variable for tab width                            :story:
 

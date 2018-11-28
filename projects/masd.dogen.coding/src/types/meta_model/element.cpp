@@ -26,8 +26,6 @@
 #include "masd.dogen.coding/types/meta_model/element.hpp"
 #include "masd.dogen.coding/io/meta_model/origin_types_io.hpp"
 #include "masd.dogen.extraction/io/decoration_properties_io.hpp"
-#include "masd.dogen.coding/io/meta_model/opaque_properties_io.hpp"
-#include "masd.dogen.coding/types/meta_model/opaque_properties.hpp"
 #include "masd.dogen.coding/io/meta_model/static_stereotypes_io.hpp"
 #include "masd.dogen.coding/io/meta_model/artefact_properties_io.hpp"
 #include "masd.dogen.coding/io/meta_model/local_archetype_location_properties_io.hpp"
@@ -119,49 +117,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties>& lhs,
-const boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::meta_model {
 
 element::element()
@@ -182,8 +137,7 @@ element::element(element&& rhs)
       is_element_extension_(std::move(rhs.is_element_extension_)),
       decoration_properties_(std::move(rhs.decoration_properties_)),
       artefact_properties_(std::move(rhs.artefact_properties_)),
-      archetype_location_properties_(std::move(rhs.archetype_location_properties_)),
-      opaque_properties_(std::move(rhs.opaque_properties_)) { }
+      archetype_location_properties_(std::move(rhs.archetype_location_properties_)) { }
 
 element::element(
     const masd::dogen::coding::meta_model::name& name,
@@ -198,8 +152,7 @@ element::element(
     const bool is_element_extension,
     const masd::dogen::extraction::decoration_properties& decoration_properties,
     const std::unordered_map<std::string, masd::dogen::coding::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& opaque_properties)
+    const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties)
     : name_(name),
       documentation_(documentation),
       annotation_(annotation),
@@ -212,8 +165,7 @@ element::element(
       is_element_extension_(is_element_extension),
       decoration_properties_(decoration_properties),
       artefact_properties_(artefact_properties),
-      archetype_location_properties_(archetype_location_properties),
-      opaque_properties_(opaque_properties) { }
+      archetype_location_properties_(archetype_location_properties) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -236,8 +188,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"is_element_extension\": " << is_element_extension_ << ", "
       << "\"decoration_properties\": " << decoration_properties_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
-      << "\"archetype_location_properties\": " << archetype_location_properties_ << ", "
-      << "\"opaque_properties\": " << opaque_properties_
+      << "\"archetype_location_properties\": " << archetype_location_properties_
       << " }";
 }
 
@@ -256,7 +207,6 @@ void element::swap(element& other) noexcept {
     swap(decoration_properties_, other.decoration_properties_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(archetype_location_properties_, other.archetype_location_properties_);
-    swap(opaque_properties_, other.opaque_properties_);
 }
 
 bool element::compare(const element& rhs) const {
@@ -272,8 +222,7 @@ bool element::compare(const element& rhs) const {
         is_element_extension_ == rhs.is_element_extension_ &&
         decoration_properties_ == rhs.decoration_properties_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
-        archetype_location_properties_ == rhs.archetype_location_properties_ &&
-        opaque_properties_ == rhs.opaque_properties_;
+        archetype_location_properties_ == rhs.archetype_location_properties_;
 }
 
 const masd::dogen::coding::meta_model::name& element::name() const {
@@ -458,22 +407,6 @@ void element::archetype_location_properties(const std::unordered_map<std::string
 
 void element::archetype_location_properties(const std::unordered_map<std::string, masd::dogen::coding::meta_model::local_archetype_location_properties>&& v) {
     archetype_location_properties_ = std::move(v);
-}
-
-const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& element::opaque_properties() const {
-    return opaque_properties_;
-}
-
-std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& element::opaque_properties() {
-    return opaque_properties_;
-}
-
-void element::opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >& v) {
-    opaque_properties_ = v;
-}
-
-void element::opaque_properties(const std::unordered_map<std::string, boost::shared_ptr<masd::dogen::coding::meta_model::opaque_properties> >&& v) {
-    opaque_properties_ = std::move(v);
 }
 
 }
