@@ -32,20 +32,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace masd::dogen::coding::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
@@ -60,7 +46,6 @@ std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
       << "\"enabled\": " << v.enabled() << ", "
       << "\"overwrite\": " << v.overwrite() << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
-      << "\"dependencies\": " << v.dependencies() << ", "
       << "\"formatting_style\": " << v.formatting_style() << ", "
       << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\""
       << " }";

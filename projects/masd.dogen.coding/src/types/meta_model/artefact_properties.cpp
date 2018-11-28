@@ -31,7 +31,6 @@ artefact_properties::artefact_properties(artefact_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
       overwrite_(std::move(rhs.overwrite_)),
       file_path_(std::move(rhs.file_path_)),
-      dependencies_(std::move(rhs.dependencies_)),
       formatting_style_(std::move(rhs.formatting_style_)),
       formatting_input_(std::move(rhs.formatting_input_)) { }
 
@@ -39,13 +38,11 @@ artefact_properties::artefact_properties(
     const bool enabled,
     const bool overwrite,
     const boost::filesystem::path& file_path,
-    const std::list<std::string>& dependencies,
     const masd::dogen::coding::meta_model::formatting_styles formatting_style,
     const std::string& formatting_input)
     : enabled_(enabled),
       overwrite_(overwrite),
       file_path_(file_path),
-      dependencies_(dependencies),
       formatting_style_(formatting_style),
       formatting_input_(formatting_input) { }
 
@@ -54,7 +51,6 @@ void artefact_properties::swap(artefact_properties& other) noexcept {
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
     swap(file_path_, other.file_path_);
-    swap(dependencies_, other.dependencies_);
     swap(formatting_style_, other.formatting_style_);
     swap(formatting_input_, other.formatting_input_);
 }
@@ -63,7 +59,6 @@ bool artefact_properties::operator==(const artefact_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
         overwrite_ == rhs.overwrite_ &&
         file_path_ == rhs.file_path_ &&
-        dependencies_ == rhs.dependencies_ &&
         formatting_style_ == rhs.formatting_style_ &&
         formatting_input_ == rhs.formatting_input_;
 }
@@ -104,22 +99,6 @@ void artefact_properties::file_path(const boost::filesystem::path& v) {
 
 void artefact_properties::file_path(const boost::filesystem::path&& v) {
     file_path_ = std::move(v);
-}
-
-const std::list<std::string>& artefact_properties::dependencies() const {
-    return dependencies_;
-}
-
-std::list<std::string>& artefact_properties::dependencies() {
-    return dependencies_;
-}
-
-void artefact_properties::dependencies(const std::list<std::string>& v) {
-    dependencies_ = v;
-}
-
-void artefact_properties::dependencies(const std::list<std::string>&& v) {
-    dependencies_ = std::move(v);
 }
 
 masd::dogen::coding::meta_model::formatting_styles artefact_properties::formatting_style() const {

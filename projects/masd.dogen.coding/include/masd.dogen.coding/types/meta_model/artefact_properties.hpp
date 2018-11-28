@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
@@ -49,7 +48,6 @@ public:
         const bool enabled,
         const bool overwrite,
         const boost::filesystem::path& file_path,
-        const std::list<std::string>& dependencies,
         const masd::dogen::coding::meta_model::formatting_styles formatting_style,
         const std::string& formatting_input);
 
@@ -64,11 +62,6 @@ public:
     boost::filesystem::path& file_path();
     void file_path(const boost::filesystem::path& v);
     void file_path(const boost::filesystem::path&& v);
-
-    const std::list<std::string>& dependencies() const;
-    std::list<std::string>& dependencies();
-    void dependencies(const std::list<std::string>& v);
-    void dependencies(const std::list<std::string>&& v);
 
     masd::dogen::coding::meta_model::formatting_styles formatting_style() const;
     void formatting_style(const masd::dogen::coding::meta_model::formatting_styles v);
@@ -92,7 +85,6 @@ private:
     bool enabled_;
     bool overwrite_;
     boost::filesystem::path file_path_;
-    std::list<std::string> dependencies_;
     masd::dogen::coding::meta_model::formatting_styles formatting_style_;
     std::string formatting_input_;
 };

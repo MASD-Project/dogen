@@ -35,14 +35,6 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
     return seed;
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace masd::dogen::coding::meta_model {
@@ -53,7 +45,6 @@ std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     combine(seed, v.enabled());
     combine(seed, v.overwrite());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
-    combine(seed, hash_std_list_std_string(v.dependencies()));
     combine(seed, v.formatting_style());
     combine(seed, v.formatting_input());
 
