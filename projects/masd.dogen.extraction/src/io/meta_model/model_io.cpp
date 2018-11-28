@@ -18,27 +18,47 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef MASD_DOGEN_EXTRACTION_IO_ALL_IO_HPP
-#define MASD_DOGEN_EXTRACTION_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "masd.dogen.extraction/io/editors_io.hpp"
-#include "masd.dogen.extraction/io/licence_io.hpp"
-#include "masd.dogen.extraction/io/modeline_io.hpp"
-#include "masd.dogen.extraction/io/repository_io.hpp"
-#include "masd.dogen.extraction/io/quote_types_io.hpp"
-#include "masd.dogen.extraction/io/spacing_types_io.hpp"
-#include "masd.dogen.extraction/io/comment_styles_io.hpp"
-#include "masd.dogen.extraction/io/modeline_field_io.hpp"
-#include "masd.dogen.extraction/io/modeline_group_io.hpp"
+#include <ostream>
 #include "masd.dogen.extraction/io/meta_model/model_io.hpp"
-#include "masd.dogen.extraction/io/modeline_locations_io.hpp"
-#include "masd.dogen.extraction/io/infix_configuration_io.hpp"
 #include "masd.dogen.extraction/io/meta_model/artefact_io.hpp"
-#include "masd.dogen.extraction/io/decoration_properties_io.hpp"
-#include "masd.dogen.extraction/io/decoration_configuration_io.hpp"
 
-#endif
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<masd::dogen::extraction::meta_model::artefact>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << (*i).generic_string() << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace masd::dogen::extraction::meta_model {
+
+std::ostream& operator<<(std::ostream& s, const model& v) {
+    s << " { "
+      << "\"__type__\": " << "\"masd::dogen::extraction::meta_model::model\"" << ", "
+      << "\"artefacts\": " << v.artefacts() << ", "
+      << "\"managed_directories\": " << v.managed_directories()
+      << " }";
+    return(s);
+}
+
+}

@@ -34,8 +34,10 @@
 #include "masd.dogen.extraction/serialization/comment_styles_ser.hpp"
 #include "masd.dogen.extraction/serialization/modeline_field_ser.hpp"
 #include "masd.dogen.extraction/serialization/modeline_group_ser.hpp"
+#include "masd.dogen.extraction/serialization/meta_model/model_ser.hpp"
 #include "masd.dogen.extraction/serialization/modeline_locations_ser.hpp"
 #include "masd.dogen.extraction/serialization/infix_configuration_ser.hpp"
+#include "masd.dogen.extraction/serialization/meta_model/artefact_ser.hpp"
 #include "masd.dogen.extraction/serialization/decoration_properties_ser.hpp"
 #include "masd.dogen.extraction/serialization/decoration_configuration_ser.hpp"
 

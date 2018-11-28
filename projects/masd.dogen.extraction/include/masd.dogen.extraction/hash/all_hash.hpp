@@ -34,8 +34,10 @@
 #include "masd.dogen.extraction/hash/comment_styles_hash.hpp"
 #include "masd.dogen.extraction/hash/modeline_field_hash.hpp"
 #include "masd.dogen.extraction/hash/modeline_group_hash.hpp"
+#include "masd.dogen.extraction/hash/meta_model/model_hash.hpp"
 #include "masd.dogen.extraction/hash/modeline_locations_hash.hpp"
 #include "masd.dogen.extraction/hash/infix_configuration_hash.hpp"
+#include "masd.dogen.extraction/hash/meta_model/artefact_hash.hpp"
 #include "masd.dogen.extraction/hash/decoration_properties_hash.hpp"
 #include "masd.dogen.extraction/hash/decoration_configuration_hash.hpp"
 

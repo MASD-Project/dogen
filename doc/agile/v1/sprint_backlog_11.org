@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2018-11-28 Wed 13:43]
+#+CAPTION: Clock summary at [2018-11-28 Wed 16:22]
 | <75>                                                                        |          |        |        |       |
 | Headline                                                                    | Time     |        |        |     % |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                                                | *134:41* |        |        |   0.0 |
+| *Total time*                                                                | *136:32* |        |        |   0.0 |
 |-----------------------------------------------------------------------------+----------+--------+--------+-------|
-| Stories                                                                     | 134:41   |        |        |   0.0 |
-| Active                                                                      |          | 134:41 |        |   0.0 |
+| Stories                                                                     | 136:32   |        |        |   0.0 |
+| Active                                                                      |          | 136:32 |        |   0.0 |
 | Edit release notes for previous sprint                                      |          |        |   2:03 |   0.0 |
 | Sprint and product backlog grooming                                         |          |        |   3:10 |   0.0 |
 | Work on MASD theory                                                         |          |        | 113:38 |   0.0 |
@@ -28,7 +28,7 @@
 | Rename models to fit MASD architecture                                      |          |        |   4:56 |   0.0 |
 | Great meta-data rename                                                      |          |        |   4:54 |   0.0 |
 | Create the =orchestration= model                                            |          |        |   4:15 |   0.0 |
-| Clean up the mess of refactors in dogen core                                |          |        |   0:48 |   0.0 |
+| Clean up the mess of refactors in dogen core                                |          |        |   2:39 |   0.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -294,6 +294,7 @@ Create a model with the top-level transforms.
 
 *** STARTED Clean up the mess of refactors in dogen core              :story:
     :LOGBOOK:
+    CLOCK: [2018-11-28 Wed 14:55]--[2018-11-28 Wed 16:22] =>  1:27
     CLOCK: [2018-11-28 Wed 14:30]--[2018-11-28 Wed 14:54] =>  0:24
     CLOCK: [2018-11-28 Wed 13:10]--[2018-11-28 Wed 13:43] =>  0:33
     CLOCK: [2018-11-27 Tue 11:48]--[2018-11-27 Tue 12:03] =>  0:15
@@ -317,8 +318,28 @@ Tasks:
 
 - delete all types that are not being used at present.
 - move all properties that were moved from formattables into element
-  back to formattables.
+  back to formattables. Actually this cannot be done because we
+  refactored these types a fair bit. They are no longer compatible
+  with formatables without a lot of surgery.
 - move dynamic transforms back to formattables / fabric transforms.
+
+Important conclusions:
+
+- there is no such thing as "fabric". All metamodel elements that were
+  defined at the generation level are really coding entities. It does
+  not matter that some of them may be specific to a TS, because TSs
+  are cross-cutting concerns; they will appear at every point in the
+  pipeline. The key thing is the metamodel elements are not
+  "generational concepts". That is, they do not appear only after we
+  moved from coding space into generation space (facet expansion).
+- the generational model has a dependency on the coding model, but its
+  a "soft-dependency". Generational model deals with all concepts from
+  generational space. Some of these may require information from
+  coding space, but that's the only connection.
+- the extractional model takes the generational representation and
+  instantiates artefacts. Again, TSs are part of the extractional
+  model. There is a "conversion model" that takes us from generational
+  space to extractional space.
 
 *** Inheriting from oneself causes segfault                           :story:
 

@@ -34,8 +34,10 @@
 #include "masd.dogen.extraction/test_data/comment_styles_td.hpp"
 #include "masd.dogen.extraction/test_data/modeline_field_td.hpp"
 #include "masd.dogen.extraction/test_data/modeline_group_td.hpp"
+#include "masd.dogen.extraction/test_data/meta_model/model_td.hpp"
 #include "masd.dogen.extraction/test_data/modeline_locations_td.hpp"
 #include "masd.dogen.extraction/test_data/infix_configuration_td.hpp"
+#include "masd.dogen.extraction/test_data/meta_model/artefact_td.hpp"
 #include "masd.dogen.extraction/test_data/decoration_properties_td.hpp"
 #include "masd.dogen.extraction/test_data/decoration_configuration_td.hpp"
 
