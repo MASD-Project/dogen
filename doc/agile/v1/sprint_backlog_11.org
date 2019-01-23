@@ -294,6 +294,7 @@ Create a model with the top-level transforms.
 
 *** STARTED Clean up the mess of refactors in dogen core              :story:
     :LOGBOOK:
+    CLOCK: [2018-11-29 Thu 09:46]--[2018-11-29 Thu 10:02] =>  0:16
     CLOCK: [2018-11-28 Wed 14:55]--[2018-11-28 Wed 16:22] =>  1:27
     CLOCK: [2018-11-28 Wed 14:30]--[2018-11-28 Wed 14:54] =>  0:24
     CLOCK: [2018-11-28 Wed 13:10]--[2018-11-28 Wed 13:43] =>  0:33

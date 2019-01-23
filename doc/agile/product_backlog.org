@@ -2610,7 +2610,6 @@ Actually, we did find [[https://github.com/DomainDrivenConsulting/dogen/blob/mas
 In general, this is a variation of the problem of the graph of
 dependencies between facets at the element level.
 
-
 ** Required for V3
 
 Stories that need to be implemented in order to complete the V3
@@ -11478,6 +11477,7 @@ Links:
 - [[https://github.com/melpon/ginger][ginger]]
 - [[https://github.com/qicosmos/render][render]]
 - [[https://github.com/pantor/inja][inja]]
+- [[https://github.com/jrziviani/amps][amps]]
 
 *** Add support for XText                                             :story:
 
