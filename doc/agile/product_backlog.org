@@ -2724,17 +2724,13 @@ reference directories will become one and the same.
 
 We need to add support for JSON in C++. It will eventually have to
 roundtrip to JSON in C# but that will be handled as two separate
-stories.
-
-Libraries:
-
-- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
-- One interesting library is [[https://github.com/dropbox/json11][Json11]].
-
-When we implement this we should provide support for JSON with
-roundtripping tests.
+stories. We need to support multiple available backends because there
+are so many c++ libraries available. Different users may have
+different needs (e.g. if you are already using boost spirit it may
+make sense to use it, if you have casablanca you may want its support
+etc.). This does complicate things for testing. We should limit
+ourselves to libraries that have vcpkg ports. Tests can roundtrip
+between different implementations.
 
 We will not replace the current IO implementation; it should continue
 to exist as is, requiring no external dependencies.
@@ -2783,7 +2779,20 @@ Notes:
 - this wont work for the case of =doc << base=. For this we need a map
   that looks up on type_index.
 
+Links:
+
+- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
+- [[https://github.com/Tencent/rapidjson][RapidJSON]]
+- [[https://github.com/nlohmann/json][JSON]]
+- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
+- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
+- [[https://www.codeproject.com/Articles/20027/JSON-Spirit-A-C-JSON-Parser-Generator-Implemented][JSON Spirit]]
+- [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]: project comparing JSON libraries.
+- [[https://github.com/dropbox/json11][Json11]]
+
 Merged stories:
+
+*Rapid JSON support*
 
 For the previous attempt to integrate RapidJson see this commit:
 
@@ -2805,14 +2814,6 @@ this JSON mode.
 
 It seems we do not yet have a story for this. The idea is to have some
 basic JSON roundtripping support. The user can configure the backend.
-
-Links:
-
-- [[https://bitbucket.org/sobjectizerteam/json_dto-0.2/src/default/#markdown-header-what-is-json_dto][JSON DTO]]
-- [[https://github.com/Tencent/rapidjson][RapidJSON]]
-- [[https://github.com/nlohmann/json][JSON]]
-- [[https://github.com/open-source-parsers/jsoncpp][JSON CPP]]
-- [[https://github.com/Donerkebap13/DonerSerializer][DonerSerializer]]
 
 *** Investigate current implementation of the origin transform        :story:
 
