@@ -1,0 +1,167 @@
+#+title: Nerd Food: C++ Development in 2019
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+For a number of different reasons, I still find myself developing a
+lot of code in C++. I know, I know, its 2019 and pretty much every
+single developer friend of mine has moaned at me to "move on with the
+times" and adopt Rust, Go, Kotlin or whatever it is that the Kool Kids
+are hacking with nowadays. However, I have resisted change for several
+reasons, and not just because I wanted all the youngsters to "get out
+of my lawn". Partly, of course, but not entirely. There are a few
+other reasons too:
+
+- *Personal vs Commercial*. I use C++ mainly for personal/long term
+  projects, including my PhD work. For commercial projects I tend to
+  use Java (gee-whizz!), C# (not /too/ bad) and some (very) minor bits
+  of Javascript (I'm a backend kind of chap). So I'm not /entirely/
+  out of touch with the modern world. In fact, I haven't used C++ in
+  anger professionally for some 7 years or more.
+- *Language Interop*. A subset of my personal projects depend on a lot
+  on existing C++ code (quant libraries, risk engines). For these, its
+  just easy not to have to worry about interop between languages. As
+  someone who has been through it all in terms of interop - from
+  COM/CORBA, to managed C++ and C++/CLI, to SWIG, to HTTP - I just do
+  *not* like having to deal with more than one language. Call it the
+  "lowest common denominator" if you'd like but I just hate having to
+  spend hours on end debugging weird interop bugs, or finding that
+  some part of the API is not exposed half-way through the project and
+  so forth. The killer of interop is that the problems never manifest
+  at the beginning and in a clear manner either, they always seem to
+  appear half-way when you reached the point of no return and then
+  there is no way but to go forwards. Basically, I only take that pain
+  on when I really have to.
+- *Native*. Having spent some two decades on the JVM and the CLR, I
+  figured out that I actually /like/ writing native code. Maybe I'm
+  just old or something, but I guess I prefer less layers of
+  indirection where possible - even if it costs me. Having said that,
+  JVM and CLR are my tools of choice professionally. I will explain
+  later on in this article why it is not easy to justify C++ in a
+  professional environment these days.
+- *Modern C++*. C++ as a language has evolved a fair bit, and it seems
+  to be moving at a great pace towards the future - whatever that may
+  be exactly. It may be old but its not completely out of date. In
+  that light, I wanted to give modern C++ a fair old go. Its one thing
+  to write hello world programs and quite another to write real-world
+  applications. Before I decided one way or the other I wanted to have
+  a full experience on the matter.
+
+Anyways, all of this to say that I have been continuously coding in
+C++ in my spare time, and will continue to do so for the foreseeable
+future. However, this is not to say that all is well in the C++
+world. I decided to write this post because most of what I read on C++
+(in places such as reddit) is focused on library developers, build
+tool creators, and language lawyers. What seems to be lacking is a
+report from the trenches of an average developer doing average
+developer things. So without further ado, lets look at my experience.
+
+* Personal Experience
+
+After almost 10 years of personal projects, a few topics have
+emerged.
+
+** Choosing A C++ Standard
+
+Those of us starting a completely new project - i.e., those
+unencumbered by legacy code and compilers - may think that the choice
+of the C++ standard is a trivial one: always use latest and greatest
+(C++ 17 at the time of writing). Sadly, things are not quite so
+straightforward in practice.
+
+First, the good news. All key compilers have very up-to-date C++
+standard support: MSVC, Clang and GCC. So if you are not stuck on some
+ancient RHEL or Windows version, you should be OK. The bad news is
+that you need to be *very careful* about how you build your
+software. Just because you are on latest and greatest does not mean
+that the packages you will be using are too; and you may find some
+weird and wonderful surprises, such as strange ABI
+incompatibilities. You will be particularly susceptible to this
+problem if you rely on some old Linux distribution somewhere (like say
+the one Travis CI uses) and then start to mix old GLIBC versions with
+new, post-C++ 11 code. Before you know it, you will enter a world of
+pain.
+
+A second problem of these ever changing standards is how hard it is to
+keep up-to-date with the language and libraries (more on this
+below). I think my coding style continues to be legacy C++, with a
+sprinkling of modern C++ here and there - where it is most obvious
+like for loops, lambdas, and so on. There just isn't enough hours in
+the day to catch up with all the new developments.
+
+*** Approach
+
+My personal solution for the build problems was to use a VM with
+*exactly* the same version as Travis CI, and then do a build of all CI
+dependencies there. I also setup my projects with:
+
+#+begin_example
+    add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
+    set(CMAKE_CXX_STANDARD 17)
+#+end_example
+
+In addition, I rebuild all of my dependencies on each development
+machine rather than reuse any of the libraries built for different
+environments. In the end, it saves a lot of time from having to debug
+weird link errors. Finally, when targeting different distros such as
+alpine, there is nothing for it but to do fully static builds
+including the C runtime.
+
+In terms of language features, I occasionally read reddit and various
+blog posts to see what is about, but in general I am very conservative
+in adoption new approaches.
+
+** Third-Party Dependencies
+
+Once you've settled on a standard, the fun begins. You need to ensure
+you will build all of your dependencies with consistent settings. In
+the past, this was not a big problem - at list for those of us on
+Linux - as we could rely on package managers doing the right thing. In
+fact, until C++ 11 I guess I never thought that much about compilation
+options on distro packages. But, boy oh boy, did that change with a
+vengeance after that.
+
+** Cross-Platform Support
+
+C++ code /may/ be portable, but portability does not come for
+free. For my main project, I supported Windows, OSX and Linux from the
+start, using their native compilers. In summary, it has been nothing
+but pain to keep these builds going - but still, I wanted to have a
+good idea of how hard it is to build cross-platform code, so I've
+stuck to supporting all three operative systems.
+
+For starters, I care very little about OSX and Windows; I tend to use
+these for commercial projects when required, by my home is
+Linux. Which means that fighting XCode and Visual Studio is not
+/exactly/ my idea of a good time. But that is really what you end up
+doing, and a lot. As C++ went from C++ 11, to C++ 14 and then C++ 17 I
+ended up having to spend a considerable amount of time updating those
+environments. In some cases, updating the IDE required updating the
+operative system (!!!). Also, different compilers have different
+warnings, build errors and so forth and whilst it makes your code
+better to be tested from different angles, it is also a major pain in
+the backside to have to address warnings and errors on one platform
+when all works everywhere else. If your time is finite (e.g. open
+source project on the side), then cross-platform support with multiple
+compilers is really not a good idea.
+
+*** Approach
+
+I still maintain cross platform support for my main project, mainly
+because I've used it on other platforms and because the bulk of the
+effort was done at the beginning, so now it tends to be small and
+incremental changes. I do find that non-Linux platforms are always
+behind (more warnings, older libraries, etc), but it seems best to
+keep them around. However, for new projects I only worry about Linux
+support.
+
+* Choosing A Build System
+
+So I've been using CMake for a long time, and to be fair I have been
+more or
+
+
+
+Problems with C++
+
+
+
+The best thing about c++ versions is that there are so many to choose from
