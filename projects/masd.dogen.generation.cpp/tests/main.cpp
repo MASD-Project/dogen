@@ -19,7 +19,7 @@
  *
  */
 #define BOOST_TEST_MODULE masd.dogen.generation.cpp.tests
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include "masd.dogen.utility/test/fixture.hpp"
 
 using namespace masd::dogen::utility::test;
