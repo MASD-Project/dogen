@@ -65,6 +65,13 @@ if [ "$CXX" == "clang++" ]; then
     export CXX="clang++-${version}" CC="clang-${version}"
 fi
 
+
+#
+# Boost
+#
+cat /usr/include/boost/version.hpp
+sudo apt-get remove libboost-all-dev libboost-test-dev
+
 #
 # g++
 #
