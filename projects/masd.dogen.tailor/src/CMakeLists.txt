@@ -64,7 +64,7 @@ target_link_libraries(${exe_target_name}
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
+    ${CMAKE_THREAD_LIBS_INIT})
 
 install(TARGETS ${exe_target_name} RUNTIME
     DESTINATION bin COMPONENT applications)
