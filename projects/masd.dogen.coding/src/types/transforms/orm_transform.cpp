@@ -55,7 +55,7 @@ const std::string mysql("mysql");
 const std::string postgresql("postgresql");
 const std::string oracle("oracle");
 const std::string sql_server("sqlserver");
-const std::string sqllite("sqllite");
+const std::string sqlite("sqlite");
 
 const std::string upper_case("upper_case");
 const std::string lower_case("lower_case");
@@ -84,8 +84,8 @@ to_orm_database_system(const std::string& s) {
         return orm_database_systems::oracle;
     } else if (ls == sql_server) {
         return orm_database_systems::sql_server;
-    } else if (ls == sqllite) {
-        return orm_database_systems::sqllite;
+    } else if (ls == sqlite) {
+        return orm_database_systems::sqlite;
     }
 
     BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;

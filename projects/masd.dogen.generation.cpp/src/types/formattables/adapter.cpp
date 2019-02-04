@@ -38,7 +38,7 @@ const std::string mysql("mysql");
 const std::string postgresql("pgsql");
 const std::string oracle("oracle");
 const std::string sql_server("sqlserver");
-const std::string sqllite("sqllite");
+const std::string sqlite("sqlite");
 
 const std::string upper_case("upper");
 const std::string lower_case("lower");
@@ -63,7 +63,7 @@ adapter::to_odb_database(const coding::meta_model::orm_database_systems ds) {
     case orm_database_systems::postgresql: return postgresql;
     case orm_database_systems::oracle: return oracle;
     case orm_database_systems::sql_server: return sql_server;
-    case orm_database_systems::sqllite: return sqllite;
+    case orm_database_systems::sqlite: return sqlite;
     default: {
         const auto s(boost::lexical_cast<std::string>(ds));
         BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;

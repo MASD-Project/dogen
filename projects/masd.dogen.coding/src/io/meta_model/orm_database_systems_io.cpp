@@ -45,8 +45,8 @@ std::ostream& operator<<(std::ostream& s, const orm_database_systems& v) {
     case orm_database_systems::sql_server:
         attr = "\"sql_server\"";
         break;
-    case orm_database_systems::sqllite:
-        attr = "\"sqllite\"";
+    case orm_database_systems::sqlite:
+        attr = "\"sqlite\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for orm_database_systems");

@@ -33,7 +33,7 @@ enum class orm_database_systems : unsigned int {
     postgresql = 2,
     oracle = 3,
     sql_server = 4,
-    sqllite = 5
+    sqlite = 5
 };
 
 }
