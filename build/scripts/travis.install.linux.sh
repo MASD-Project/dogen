@@ -23,7 +23,6 @@
 # generate the dropbox link or else we will still point to the old
 # package. Update the link below as well as the folder name.
 #
-vcpkg-export-20190201-143349.zip
 vcpkg_dropbox_link="s/q7dauqmxqp214a8"
 vcpkg_folder="vcpkg-export-20190201-143349"
 vcpkg_package="${vcpkg_folder}.zip"
