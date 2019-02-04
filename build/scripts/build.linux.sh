@@ -111,6 +111,10 @@ if [[ ! -z "${CMAKE_TOOLCHAIN_FILE}" ]]; then
     cmake_defines="${cmake_defines} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}"
 fi
 
+if [[ ! -z "${CMAKE_PROGRAM_PATH}" ]]; then
+    cmake_defines="${cmake_defines} -DCMAKE_PROGRAM_PATH='${CMAKE_PROGRAM_PATH}'"
+fi
+
 #
 # Use minimal packaging in debug to preserve disk space.
 #
