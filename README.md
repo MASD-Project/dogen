@@ -116,9 +116,18 @@ Dogen has the following additional dependencies, across all operative systems:
 Though Dogen should build fine with package manager supplied
 libraries - or even with hand-built dependencies - the easiest way to
 setup a development environment on all supported platforms is by using
-[vcpkg](https://github.com/Microsoft/vcpkg). Compile it as per [vcpkg
+[vcpkg](https://github.com/Microsoft/vcpkg). We have a vcpkg fork
+with a [MASD
+Branch](https://github.com/MASD-Project/vcpkg/commits/masd) that is
+setup correctly to build both Dogen and the C++ Reference
+Implementation and is used/validated by our CI. If at all possible,
+please use this instead of the mainline vcpkg because it contains a
+few changes that cannot be easily mainlined (C++ 17 on all
+dependencies, ODB 2.5, etc).
+
+Either way, you can compile vcpkg as per [vcpkg
 documentation](https://github.com/Microsoft/vcpkg/blob/master/README.md),
-then run:
+and then install packages by running:
 
 ```
 ./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit
@@ -126,7 +135,6 @@ then run:
 
 ---
 **Notes**
-
 
 - The default vcpkg triplet on Windows [is 32-bit
 dynamic](https://github.com/Microsoft/vcpkg/issues/1254) whereas we
