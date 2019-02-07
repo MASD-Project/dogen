@@ -35,8 +35,8 @@ int application::run(const std::vector<std::string>& args,
             return EXIT_SUCCESS;
         }
 
-        info << "failure, no errors." << std::endl;
-        return EXIT_FAILURE;
+        info << "no errors, do nothing" << std::endl;
+        return EXIT_SUCCESS;
     } catch(const std::exception& e) {
         info << "failure, errors: " << e.what() << std::endl;
         return EXIT_FAILURE;
