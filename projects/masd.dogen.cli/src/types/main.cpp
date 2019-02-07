@@ -18,6 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-int main(void) {
+#include <iostream>
+#include <boost/di.hpp>
+#include "masd.dogen.cli/types/application.hpp"
+#include "masd.dogen.cli/types/program_options_parser.hpp"
+#include "masd.dogen.cli/types/command_line_parser.hpp"
+#include "masd.dogen.cli/types/injector_factory.hpp"
+
+using masd::dogen::cli::program_options_parser;
+using masd::dogen::cli::command_line_parser;
+using masd::dogen::cli::application;
+
+int main(const int /*argc*/, const char* /*argv*/[]) {
+    // const auto args(std::vector<std::string>(argv + 1, argv + argc));
+    // masd::dogen::cli::program_options_parser pop;
+    // masd::dogen::cli::application a(pop);
+    // a.run(args, std::cout, std::cerr);
+
+    // auto injector = masd::dogen::cli::injector_factory::make_injector();
+    // auto injector = boost::di::make_injector(
+    //     boost::di::bind<masd::dogen::cli::command_line_parser>.
+    //     to<masd::dogen::cli::program_options_parser>()
+    //     );
+
+    // const auto a(injector.create<masd::dogen::cli::application>());
+    // a.run(args, std::cout, std::cerr);
+    // auto injector = di::make_injector();
+    // injector.create<app>();
+    auto injector = boost::di::make_injector(
+        boost::di::bind<command_line_parser>.to<program_options_parser>());
+    auto app_ = injector.create<application>();
+    (void)app_;
     return 0;
 }

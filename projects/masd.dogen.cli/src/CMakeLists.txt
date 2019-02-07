@@ -53,6 +53,7 @@ set_target_properties(${exe_target_name} PROPERTIES
 
 target_link_libraries(${exe_target_name}
     ${lib_target_name}
+    masd.dogen.lib
     masd.dogen.utility.lib
     masd.dogen.options.lib
     masd.dogen.dia.lib

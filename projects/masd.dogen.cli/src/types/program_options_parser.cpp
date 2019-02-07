@@ -64,17 +64,15 @@ options_description make_logging_options_description() {
 options_description make_tracing_options_description()  {
     options_description r("Tracing");
     r.add_options()
-        ("tracing-enabled", "Generate stats about executed transforms.")
-        ("tracing-disable-guids", "Disable guids in probe stats, "
+        ("tracing-enabled", "Generate metrics about executed transforms.")
+        ("tracing-level", "Level at which to trace. "
+            "Valid levels: detail, summary.")
+        ("tracing-guids-enabled", "Use guids in tracing metrics, "
             "to make comparisons easier.")
-        ("tracing-org-mode-format", "Use org-mode format for stats."
-            " Requires enabling stats.")
-        ("tracing-all", "Dump all available tracing information "
-            "about transforms.")
+        ("tracing-format", "Format to use for tracing metrics. "
+            "Valid formts: org-mode, markdown")
         ("tracing-output-directory", "Directory in which to dump probe data. "
-            "Only used if transforms tracing is enabled.")
-        ("tracing-use-short-names", "Use short names for directories and "
-            "files. Useful for Windows where long paths are not supported.");
+            "Only used if transforms tracing is enabled.");
 
     return r;
 }
@@ -122,7 +120,7 @@ options_description make_transform_options_description() {
 }
 */
 variables_map
-create_first_stage_variables_map(std::vector<std::string> arguments) {
+create_first_stage_variables_map(const std::vector<std::string>& arguments) {
     options_description od;
     od.add(make_general_options_description());
     od.add(make_logging_options_description());
@@ -139,16 +137,21 @@ create_first_stage_variables_map(std::vector<std::string> arguments) {
 }
 
 bool is_command_valid(const std::string& command) {
-    return command == generate_command || command == transform_command;
+    return
+        command == generate_command ||
+        command == transform_command;
 }
 
 }
 
 namespace masd::dogen::cli {
 
-boost::optional<coding::transforms::options>
-program_options_parser::parse(std::vector<std::string> arguments,
-    std::ostream& /*out*/, std::ostream& /*err*/) const {
+program_options_parser::program_options_parser() {}
+
+boost::optional<masd::dogen::configuration>
+program_options_parser::parse(const std::vector<std::string>& arguments,
+    std::ostream& out, std::ostream& err) const {
+    out << "here" << std::endl;
 
     /*
      * Create the first stage command line options, parse them and
@@ -161,9 +164,12 @@ program_options_parser::parse(std::vector<std::string> arguments,
      */
     const auto cmd(first_vm["command"].as<std::string>());
     if (!is_command_valid(cmd)) {
+        out << "Chosen: " << cmd << std::endl;
+    } else {
+        err << "Error: " << cmd << std::endl;
     }
 
-    coding::transforms::options r;
+    masd::dogen::configuration r;
     return r;
 }
 

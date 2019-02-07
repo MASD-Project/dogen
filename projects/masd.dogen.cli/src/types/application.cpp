@@ -22,8 +22,12 @@
 
 namespace masd::dogen::cli {
 
-bool application::operator==(const application& /*rhs*/) const {
-    return true;
+application::application(const command_line_parser& clp)
+    : command_line_parser_(clp) { }
+
+void application::run(const std::vector<std::string>& args,
+    std::ostream& info_stream, std::ostream& error_stream) const {
+    command_line_parser_.parse(args, info_stream, error_stream);
 }
 
 }

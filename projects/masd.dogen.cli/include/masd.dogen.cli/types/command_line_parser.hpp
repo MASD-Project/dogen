@@ -29,7 +29,7 @@
 #include <vector>
 #include <string>
 #include <boost/optional.hpp>
-#include "masd.dogen.coding/types/transforms/options.hpp"
+#include "masd.dogen/types/configuration.hpp"
 
 namespace masd::dogen::cli {
 
@@ -38,7 +38,7 @@ namespace masd::dogen::cli {
  */
 class command_line_parser {
 public:
-    command_line_parser() = delete;
+    command_line_parser() = default;
     command_line_parser(const command_line_parser&) = delete;
     command_line_parser(command_line_parser&&) = delete;
     command_line_parser& operator=(const command_line_parser&) = delete;
@@ -49,9 +49,9 @@ public:
      * Transforms the supplied command line arguments into the
      * coding options.
      */
-    virtual boost::optional<coding::transforms::options>
-    parse(std::vector<std::string> arguments, std::ostream& out,
-        std::ostream& err) const = 0;
+    virtual boost::optional<masd::dogen::configuration>
+    parse(const std::vector<std::string>& arguments, std::ostream& info_stream,
+        std::ostream& error_stream) const = 0;
 };
 
 }

@@ -22,8 +22,4 @@
 
 namespace masd::dogen::cli {
 
-bool injector_factory::operator==(const injector_factory& /*rhs*/) const {
-    return true;
-}
-
 }

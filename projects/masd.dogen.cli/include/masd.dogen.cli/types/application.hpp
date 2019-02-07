@@ -25,24 +25,32 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <memory>
+#include <ostream>
+#include "masd.dogen.cli/types/command_line_parser.hpp"
 
 namespace masd::dogen::cli {
 
+/**
+ * Entry point for the dogen command line application.
+ */
 class application final {
 public:
-    application() = default;
+    application() = delete;
     application(const application&) = default;
     application(application&&) = default;
     ~application() = default;
-    application& operator=(const application&) = default;
+    application& operator=(const application&) = delete;
 
 public:
-    bool operator==(const application& rhs) const;
-    bool operator!=(const application& rhs) const {
-        return !this->operator==(rhs);
-    }
+    application(const command_line_parser& clp);
 
+public:
+    void run(const std::vector<std::string>& args,
+        std::ostream& info_stream, std::ostream& error_stream) const;
+
+private:
+    const command_line_parser& command_line_parser_;
 };
 
 }

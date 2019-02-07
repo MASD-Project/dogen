@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/di.hpp>
+#include "masd.dogen.cli/types/command_line_parser.hpp"
+#include "masd.dogen.cli/types/program_options_parser.hpp"
 
 namespace masd::dogen::cli {
 
 class injector_factory final {
 public:
-    injector_factory() = default;
-    injector_factory(const injector_factory&) = default;
-    injector_factory(injector_factory&&) = default;
-    ~injector_factory() = default;
-    injector_factory& operator=(const injector_factory&) = default;
-
-public:
-    bool operator==(const injector_factory& rhs) const;
-    bool operator!=(const injector_factory& rhs) const {
-        return !this->operator==(rhs);
+    static auto make_injector() {
+        using boost::di::bind;
+        using boost::di::make_injector;
+        return make_injector(
+            bind<command_line_parser>.to<program_options_parser>());
     }
-
 };
 
 }
