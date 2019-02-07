@@ -1,0 +1,26 @@
+{
+  "name": "dogen.interface",
+  "labels": [
+    "masd::interface"
+  ],
+  "parents": [
+    "dogen.handcrafted"
+  ],
+  "scope": "root_module",
+  "templates": [
+    {
+      "name": {
+        "simple": "overwrite",
+        "qualified": "masd.extraction.cpp.types.class_implementation.enabled"
+      },
+      "archetype_location": {
+        "kernel": "masd",
+        "backend": "masd.extraction.cpp"
+      },
+      "template_kind": "instance",
+      "untyped_value": [
+        "false"
+      ]
+    }
+  ]
+}

@@ -48,6 +48,7 @@ const std::string stereotype_serializable("dogen::serializable");
 const std::string stereotype_hashable("dogen::hashable");
 const std::string stereotype_entry_point("masd::entry_point");
 const std::string stereotype_header_only("masd::header_only");
+const std::string stereotype_interface("masd::interface");
 const std::string stereotype_handcrafted("masd::handcrafted");
 const std::string stereotype_cpp_helper_formatter("masd::cpp_helper_formatter");
 const std::string stereotype_cpp_artefact_formatter(
@@ -84,6 +85,7 @@ is_stereotype_handled_externally(const std::string& s) {
         s == stereotype_handcrafted ||
         s == stereotype_entry_point ||
         s == stereotype_header_only ||
+        s == stereotype_interface ||
         s == stereotype_cpp_helper_formatter ||
         s == stereotype_cpp_artefact_formatter ||
         s == stereotype_csharp_helper_formatter ||
