@@ -26,10 +26,8 @@ git:
   depth: 2
 
 matrix:
-  exclude:
-    #
-    # Linux Clang
-    #
+  allow_failures:
+    # clang build is failing at present
     - os: linux
       compiler: clang
       env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous"
@@ -58,6 +56,15 @@ matrix:
     - os: linux
       compiler: gcc
       env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"
+    #
+    # Linux Clang
+    #
+    - os: linux
+      compiler: clang
+      env: configuration=Release compiler="clang7" generator="Ninja" build_group="Continuous"
+    - os: linux
+      compiler: clang
+      env: coverage=1 configuration=Debug compiler="clang7" generator="Ninja" build_group="Continuous"
 
 addons:
   apt:
