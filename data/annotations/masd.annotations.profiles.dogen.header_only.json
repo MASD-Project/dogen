@@ -10,50 +10,8 @@
   "templates": [
     {
       "name": {
-        "simple": "enabled",
-        "qualified": "masd.extraction.cpp.types.enabled"
-      },
-      "archetype_location": {
-        "kernel": "masd",
-        "backend": "masd.extraction.cpp"
-      },
-      "template_kind": "instance",
-      "untyped_value": [
-        "true"
-      ]
-    },
-    {
-      "name": {
         "simple": "overwrite",
-        "qualified": "masd.extraction.cpp.types.overwrite"
-      },
-      "archetype_location": {
-        "kernel": "masd",
-        "backend": "masd.extraction.cpp"
-      },
-      "template_kind": "instance",
-      "untyped_value": [
-        "false"
-      ]
-    },
-    {
-      "name": {
-        "simple": "overwrite",
-        "qualified": "masd.extraction.cpp.types.forward_declarations.overwrite"
-      },
-      "archetype_location": {
-        "kernel": "masd",
-        "backend": "masd.extraction.cpp"
-      },
-      "template_kind": "instance",
-      "untyped_value": [
-        "true"
-      ]
-    },
-    {
-      "name": {
-        "simple": "overwrite",
-        "qualified": "masd.extraction.cpp.types.class_implementation"
+        "qualified": "masd.extraction.cpp.types.class_implementation.enabled"
       },
       "archetype_location": {
         "kernel": "masd",
