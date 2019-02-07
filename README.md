@@ -143,7 +143,7 @@ build with ```--triplet x64-windows-static```. If you are experiencing
 errors](https://github.com/Microsoft/vcpkg/issues/4447), check your
 triplet.
 - If you are on OSX, you probably should rely on the system's LibXML2
-(e.g. remove it from the vpkg list above) or else you may see [some
+(e.g. remove it from the vcpkg list above) or else you may see [some
 interesting linking
 errors](https://github.com/Microsoft/vcpkg/issues/4476) related to ```iconv```.
 - Remember that the recommended compiler for OSX is Homebrew's GCC. If
