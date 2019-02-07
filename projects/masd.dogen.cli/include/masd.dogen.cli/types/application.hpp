@@ -37,7 +37,7 @@ namespace masd::dogen::cli {
 class application final {
 public:
     application() = delete;
-    application(const application&) = default;
+    application(const application&) = delete;
     application(application&&) = default;
     ~application() = default;
     application& operator=(const application&) = delete;
@@ -46,7 +46,14 @@ public:
     application(const command_line_parser& clp);
 
 public:
-    void run(const std::vector<std::string>& args,
+    /**
+     * Executes the application and returns its exit code.
+     *
+     * @param args command line arguments.
+     * @param info_stream stream to use to output information.
+     * @param error_stream stream to use to output errors.
+     */
+    int run(const std::vector<std::string>& args,
         std::ostream& info_stream, std::ostream& error_stream) const;
 
 private:

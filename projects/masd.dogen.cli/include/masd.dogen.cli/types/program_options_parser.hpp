@@ -39,8 +39,8 @@ public:
 
 public:
     boost::optional<masd::dogen::configuration>
-    parse(const std::vector<std::string>& arguments, std::ostream& info_stream,
-        std::ostream& error_stream) const override;
+    parse(const std::vector<std::string>& arguments, std::ostream& info,
+        std::ostream& error) const override;
 };
 
 }

@@ -42,7 +42,7 @@ public:
     command_line_parser(const command_line_parser&) = delete;
     command_line_parser(command_line_parser&&) = delete;
     command_line_parser& operator=(const command_line_parser&) = delete;
-    virtual ~command_line_parser() noexcept = 0;
+    virtual ~command_line_parser() noexcept = default;
 
 public:
     /**
@@ -50,8 +50,8 @@ public:
      * coding options.
      */
     virtual boost::optional<masd::dogen::configuration>
-    parse(const std::vector<std::string>& arguments, std::ostream& info_stream,
-        std::ostream& error_stream) const = 0;
+    parse(const std::vector<std::string>& arguments, std::ostream& info,
+        std::ostream& error) const = 0;
 };
 
 }
