@@ -12485,6 +12485,15 @@ dump a size report and make it visualisable in a tool such as baobab
 a break down of where the objects are. Of course this would imply we
 need a top-level object that contains all objects.
 
+*** Add support for D-Bus                                             :story:
+
+[[https://en.wikipedia.org/wiki/D-Bus][D-Bus]] is an RPC mechanism used on Linux.
+
+Links:
+
+- [[https://github.com/dbus-asio/dbus-asio][dbus-asio]]: DBus C++ implementation based on boost asio. [[https://fosdem.org/2019/schedule/event/dbus_asio/][FOSDEM talk]].
+- [[https://gitlab.freedesktop.org/dbus/dbus][libdbus]]: original D-Bus C library.
+
 *** Add support for Microsoft Bond                                     :epic:
 
 More of a placeholder - will require further investigation. Seems like

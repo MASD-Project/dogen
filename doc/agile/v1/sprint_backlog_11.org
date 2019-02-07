@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-02-04 Mon 12:08]
-| <75>                                         |          |        |        |       |
-| Headline                                     | Time     |        |        |     % |
-|----------------------------------------------+----------+--------+--------+-------|
-| *Total time*                                 | *136:48* |        |        |   0.0 |
-|----------------------------------------------+----------+--------+--------+-------|
-| Stories                                      | 136:48   |        |        |   0.0 |
-| Active                                       |          | 136:48 |        |   0.0 |
-| Edit release notes for previous sprint       |          |        |   2:03 |   0.0 |
-| Sprint and product backlog grooming          |          |        |   3:10 |   0.0 |
-| Work on MASD theory                          |          |        | 113:38 |   0.0 |
-| Read up on framework and API design          |          |        |   0:57 |   0.0 |
-| Rename models to fit MASD architecture       |          |        |   4:56 |   0.0 |
-| Great meta-data rename                       |          |        |   4:54 |   0.0 |
-| Create the =orchestration= model             |          |        |   4:15 |   0.0 |
-| Clean up the mess of refactors in dogen core |          |        |   2:55 |   0.0 |
-#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+CAPTION: Clock summary at [2019-02-07 Thu 09:21]
+| <75>                                       |          |        |        |       |
+| Headline                                   | Time     |        |        |     % |
+|--------------------------------------------+----------+--------+--------+-------|
+| *Total time*                               | *144:25* |        |        | 100.0 |
+|--------------------------------------------+----------+--------+--------+-------|
+| Stories                                    | 144:25   |        |        | 100.0 |
+| Active                                     |          | 144:25 |        | 100.0 |
+| Edit release notes for previous sprint     |          |        |   2:03 |   1.4 |
+| Sprint and product backlog grooming        |          |        |   3:29 |   2.4 |
+| Work on MASD theory                        |          |        | 113:38 |  78.7 |
+| Rename models to fit MASD architecture     |          |        |   4:56 |   3.4 |
+| Read up on framework and API design        |          |        |   0:57 |   0.7 |
+| Analyse the state of the mess of refactors |          |        |   6:27 |   4.5 |
+| Create the =orchestration= model           |          |        |   4:15 |   2.9 |
+| Great meta-data rename                     |          |        |   4:54 |   3.4 |
+| Create a single binary for all of dogen    |          |        |   3:46 |   2.6 |
+#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
@@ -133,13 +134,14 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
-    :LOGBOOK:
-    CLOCK: [2018-11-22 Thu 10:21]--[2018-11-22 Thu 11:25] =>  1:01
-    CLOCK: [2018-11-19 Mon 09:10]--[2018-11-19 Mon 11:01] =>  1:51
-    CLOCK: [2018-10-29 Mon 08:30]--[2018-10-29 Mon 08:45] =>  0:15
-    :END:
+     :LOGBOOK:
+     CLOCK: [2019-02-06 Wed 11:51]--[2019-02-06 Wed 12:10] =>  0:19
+     CLOCK: [2018-11-22 Thu 10:21]--[2018-11-22 Thu 11:25] =>  1:01
+     CLOCK: [2018-11-19 Mon 09:10]--[2018-11-19 Mon 11:01] =>  1:51
+     CLOCK: [2018-10-29 Mon 08:30]--[2018-10-29 Mon 08:45] =>  0:15
+     :END:
 
-Updates to sprint and product backlog.
+ Updates to sprint and product backlog.
 
 *** COMPLETED Work on MASD theory                                     :story:
     CLOSED: [2018-11-19 Mon 11:35]
@@ -249,7 +251,28 @@ cases:
 
 At present we are calling SQLite =sqllite=. Fix this.
 
-*** STARTED Read up on framework and API design                       :story:
+*** COMPLETED Rename models to fit MASD architecture                  :story:
+    CLOSED: [2019-02-06 Wed 09:42]
+    :LOGBOOK:
+    CLOCK: [2018-11-23 Fri 11:40]--[2018-11-23 Fri 11:57] =>  0:17
+    CLOCK: [2018-11-23 Fri 10:19]--[2018-11-23 Fri 11:39] =>  1:20
+    CLOCK: [2018-11-23 Fri 09:02]--[2018-11-23 Fri 10:18] =>  1:16
+    CLOCK: [2018-11-22 Thu 15:16]--[2018-11-22 Thu 15:17] =>  0:01
+    CLOCK: [2018-11-22 Thu 13:14]--[2018-11-22 Thu 15:16] =>  2:02
+    :END:
+
+We now have the following top-level models:
+
+- injection
+- coding
+- generation
+- extraction
+- tracing
+
+We need to update the models to match this.
+
+*** COMPLETED Read up on framework and API design                     :story:
+    CLOSED: [2019-02-06 Wed 09:42]
     :LOGBOOK:
     CLOCK: [2018-11-22 Thu 09:55]--[2018-11-22 Thu 10:20] =>  0:25
     CLOCK: [2018-11-19 Mon 11:02]--[2018-11-19 Mon 11:34] =>  0:32
@@ -281,69 +304,11 @@ It seems we have several types of classes:
 These should be identifiable at the meta-model level, with appropriate
 names.
 
-*** STARTED Rename models to fit MASD architecture                    :story:
+*** COMPLETED Analyse the state of the mess of refactors              :story:
+    CLOSED: [2019-02-06 Wed 12:02]
     :LOGBOOK:
-    CLOCK: [2018-11-23 Fri 11:40]--[2018-11-23 Fri 11:57] =>  0:17
-    CLOCK: [2018-11-23 Fri 10:19]--[2018-11-23 Fri 11:39] =>  1:20
-    CLOCK: [2018-11-23 Fri 09:02]--[2018-11-23 Fri 10:18] =>  1:16
-    CLOCK: [2018-11-22 Thu 15:16]--[2018-11-22 Thu 15:17] =>  0:01
-    CLOCK: [2018-11-22 Thu 13:14]--[2018-11-22 Thu 15:16] =>  2:02
-    :END:
-
-We now have the following top-level models:
-
-- injection
-- coding
-- generation
-- extraction
-- tracing
-
-We need to update the models to match this.
-
-*** STARTED Great meta-data rename                                    :story:
-    :LOGBOOK:
-    CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
-    CLOCK: [2018-11-23 Fri 21:43]--[2018-11-23 Fri 22:20] =>  0:37
-    CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
-    CLOCK: [2018-11-23 Fri 16:57]--[2018-11-23 Fri 18:08] =>  1:11
-    CLOCK: [2018-11-23 Fri 16:50]--[2018-11-23 Fri 16:56] =>  0:06
-    CLOCK: [2018-11-23 Fri 15:37]--[2018-11-23 Fri 16:49] =>  1:12
-    :END:
-
-All of the existing stereotypes and meta-data need to be moved from
-the existing names (e.g. =quilt=, =yarn=, etc) into
-=masd=. Interestingly, we can take this opportunity to make dia
-diagrams a bit more readable. Instead of
-
-: #DOGEN a.b.c=d
-
-we can now just do:
-
-: masd.a.b.c=4
-
-It is very unlikely dia users will need lines starting with =masd.=.
-
-We should probably try to tackle this rename sooner rather than later
-since it badly breaks model-compatibility.
-
-We should use the new names as part of this rename, e.g.:
-
-: masd.injection.dia.comment
-: masd.extraction.cpp.enabled
-
-Rename =is_proxy_model= to =platform_definition_model=.
-
-*** STARTED Create the =orchestration= model                          :story:
-    :LOGBOOK:
-    CLOCK: [2018-11-27 Tue 08:51]--[2018-11-27 Tue 11:47] =>  2:56
-    CLOCK: [2018-11-26 Mon 17:26]--[2018-11-26 Mon 18:22] =>  0:56
-    CLOCK: [2018-11-26 Mon 17:02]--[2018-11-26 Mon 17:25] =>  0:23
-    :END:
-
-Create a model with the top-level transforms.
-
-*** STARTED Clean up the mess of refactors in dogen core              :story:
-    :LOGBOOK:
+    CLOCK: [2019-02-06 Wed 14:40]--[2019-02-06 Wed 16:01] =>  1:21
+    CLOCK: [2019-02-06 Wed 09:39]--[2019-02-06 Wed 11:50] =>  2:11
     CLOCK: [2018-11-29 Thu 09:46]--[2018-11-29 Thu 10:02] =>  0:16
     CLOCK: [2018-11-28 Wed 14:55]--[2018-11-28 Wed 16:22] =>  1:27
     CLOCK: [2018-11-28 Wed 14:30]--[2018-11-28 Wed 14:54] =>  0:24
@@ -392,16 +357,58 @@ Important conclusions:
   model. There is a "conversion model" that takes us from generational
   space to extractional space.
 
-*** Inheriting from oneself causes segfault                           :story:
+*** COMPLETED Create the =orchestration= model                        :story:
+    CLOSED: [2019-02-06 Wed 15:36]
+    :LOGBOOK:
+    CLOCK: [2018-11-27 Tue 08:51]--[2018-11-27 Tue 11:47] =>  3:56
+    CLOCK: [2018-11-26 Mon 17:26]--[2018-11-26 Mon 18:22] =>  0:56
+    CLOCK: [2018-11-26 Mon 17:02]--[2018-11-26 Mon 17:25] =>  0:23
+    :END:
 
-If you set an object to inherit from itself, say via metadata:
+Create a model with the top-level transforms.
 
-: #DOGEN masd.generalization.parent=in_memory_weaver
+*** STARTED Great meta-data rename                                    :story:
+    :LOGBOOK:
+    CLOCK: [2018-11-26 Mon 10:01]--[2018-11-26 Mon 11:02] =>  1:01
+    CLOCK: [2018-11-23 Fri 21:43]--[2018-11-23 Fri 22:20] =>  0:37
+    CLOCK: [2018-11-23 Fri 20:55]--[2018-11-23 Fri 21:42] =>  0:47
+    CLOCK: [2018-11-23 Fri 16:57]--[2018-11-23 Fri 18:08] =>  1:11
+    CLOCK: [2018-11-23 Fri 16:50]--[2018-11-23 Fri 16:56] =>  0:06
+    CLOCK: [2018-11-23 Fri 15:37]--[2018-11-23 Fri 16:49] =>  1:12
+    :END:
 
-Dogen segfaults due to recursion. We need to test this via UML
-inheritance as well.
+All of the existing stereotypes and meta-data need to be moved from
+the existing names (e.g. =quilt=, =yarn=, etc) into
+=masd=. Interestingly, we can take this opportunity to make dia
+diagrams a bit more readable. Instead of
 
-*** Create a single binary for all of dogen                           :story:
+: #DOGEN a.b.c=d
+
+we can now just do:
+
+: masd.a.b.c=4
+
+It is very unlikely dia users will need lines starting with =masd.=.
+
+We should probably try to tackle this rename sooner rather than later
+since it badly breaks model-compatibility.
+
+We should use the new names as part of this rename, e.g.:
+
+: masd.injection.dia.comment
+: masd.extraction.cpp.enabled
+
+Rename =is_proxy_model= to =platform_definition_model=.
+
+Notes:
+
+- decoration etc are still not using the =masd.= prefix.
+
+*** STARTED Create a single binary for all of dogen                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-02-07 Thu 08:36]--[2019-02-07 Thu 09:20] =>  0:44
+    CLOCK: [2019-02-06 Wed 16:01]--[2019-02-06 Wed 19:03] =>  3:02
+    :END:
 
 As per analysis, we need to create a single dogen binary, like so:
 
@@ -451,6 +458,99 @@ call it something allusive to the command line, such as cli. However,
 the final binary should be called dogen or perhaps, =dogen.cli=. This
 fits in with other binaries such as =dogen.web=, =dogen.http=,
 =dogen.gui= etc.
+
+*** Move top-level transforms into orchestration                      :story:
+
+- clear up the existing orchestration model We don't really know what
+  its current state is. Keep it as a backup as we may need to go back
+  to it.
+- copy the top-level chains into orchestration, into a well
+  defined namespace (say =dirty=). This must include the model to text
+  model and registration. Remove all of these types from coding. At
+  this point coding should only depend on injectors.
+
+*** Move generation model out of coding                               :story:
+
+- then copy the model from coding into generation and all associated
+  transforms.
+- then add support in each generation model (cpp, csharp) for
+  converting from the generation model to the formattables model.
+- then create a model generation chain that uses the generation model.
+- then delete the model and transforms from coding; delete the
+  adaptors from generation models (cpp, csharp).
+- then move the model to text model chain into generation.
+
+*** Move generation element properties back into formattables         :story:
+
+We moved a number of properties out of formattables. Move them
+back. By the end of this refactor we should end up with no references
+to facets in coding.
+
+*** Move injection processing out of coding                           :story:
+
+- add model source into injection
+- add model set into injection, with target and references
+- add workflow that takes in a string, path, etc and creates a model
+  set. It will need to read references and language from the model
+  annotations.
+- add model set into coding.
+- add a new model: coding.injection. Create a class that converts from
+  one model set to another.
+- add a chain in orchestration that does the new injection workflow
+  and passes the model set into coding.
+- delete injection related classes in coding.
+
+*** Move fabric types into generation                                 :story:
+
+- copy across the fabric types from cpp and csharp into generation.
+- update formatters to use the types from generation.
+- delete them from original models.
+
+*** Move formattables into generation                                 :story:
+
+- first, update the generation model with formattable properties from
+  cpp: add a formattable type to the generation model and container
+  for it, add the formattable population logic. Then remove the
+  formattable logic from cpp.
+- repeat the exercise with csharp. We should end up with two new
+  namespaces in generation handling the fabric meta-types and their
+  processing.
+- by the end of this refactor, cpp and csharp should contain only the
+  formatters.
+
+*** Add support for header-only types                                 :story:
+
+Sometimes we may just want to generate a simple header only class. By
+default we always get a cpp. We could suppress the cpp by having a
+stereotype:
+
+: masd::header_only
+
+This can be a simple profile like handcrafted. It can even be a
+superset of handcrafted.
+
+*** Create =generation.extraction= model                              :story:
+
+- rename =generation.cpp= to =generation.extraction=.
+- rename =formatters= namespace to =cpp=.
+- ensure the logic for processing one tech space will work for
+  multiple tech spaces. For example, we could move the existing
+  workflow into the =cpp= namespace and register the text generation
+  chain from there.
+- repeat the exercise with the csharp model.
+- by the end of this refactor we should end up with a single
+  =generation.extraction= containing both the csharp and cpp
+  formatters.
+- consider renaming formatters to model to text transforms.
+
+*** Inheriting from oneself causes segfault                           :story:
+
+If you set an object to inherit from itself, say via metadata:
+
+: #DOGEN masd.generalization.parent=in_memory_weaver
+
+Dogen segfaults due to recursion. We need to test this via UML
+inheritance as well.
 
 *** Implement the new dogen product API                               :story:
 
