@@ -31,63 +31,45 @@
 
 (require 'polymode)
 
-(defcustom pm-inner/stitch-standard-control-block
-  (pm-hbtchunkmode "c++" :mode 'c++-mode
-                   :head-reg "<#\\+"
-                   :tail-reg "#>"
-                   :font-lock-narrow t)
-  "Template code."
-  :group 'innermodes
-  :type 'object)
-
 (defcustom pm-inner/stitch-directive
-  (pm-hbtchunkmode "conf" :mode 'conf-unix-mode
-                   :head-reg "<#@"
-                   :tail-reg "#>"
-                   :font-lock-narrow t)
+  (pm-inner-auto-chunkmode :name "conf" :mode 'conf-unix-mode
+                           :head-matcher "<#@"
+                           :tail-matcher "#>")
   "Template code."
-  :group 'innermodes
+  :group 'poly-innermodes
   :type 'object)
 
 (defcustom pm-inner/stitch-expansion-block
-  (pm-hbtchunkmode "conf" :mode 'conf-unix-mode
-                   :head-reg "<#\\$"
-                   :tail-reg "#>"
-                   :font-lock-narrow t)
+  (pm-inner-auto-chunkmode :name "conf" :mode 'conf-unix-mode
+                           :head-matcher "<#\\$"
+                           :tail-matcher "#>")
   "Template code."
-  :group 'innermodes
+  :group 'poly-innermodes
   :type 'object)
 
 (defcustom pm-inner/stitch-expression-control-block
-  (pm-hbtchunkmode "c++" :mode 'c++-mode
-                   :head-reg "<#="
-                   :tail-reg "#>"
-                   :font-lock-narrow t)
+  (pm-inner-auto-chunkmode :name "c++" :mode 'c++-mode
+                           :head-matcher "<#="
+                           :tail-matcher "#>")
   "Template code."
-  :group 'innermodes
+  :group 'poly-innermodes
   :type 'object)
 
-(defcustom pm-poly/stitch
-  (pm-polymode-multi "stitch"
-                     :hostmode 'pm-host/fundamental
-                     :innermodes '(pm-inner/stitch-standard-control-block
-                                   pm-inner/stitch-directive
-                                   pm-inner/stitch-expression-control-block
-                                   pm-inner/stitch-expansion-block))
-  "Stitch typical polymode."
-  :group 'polymodes
-  :type 'object)
+(define-polymode stitch-mode
+  :hostmode 'pm-host/C++
+  :innermodes '(pm-inner/stitch-standard-control-block
+                pm-inner/stitch-directive
+                pm-inner/stitch-expression-control-block
+                pm-inner/stitch-expansion-block))
 
-(defcustom pm-weaver/stitcher
-  (pm-shell-weaver "stitcher"
-                   :from-to
-                   '(("stitch" "\\.\\(stitch\\|cpp\\)\\'" "stitch" "C++" "dogen.stitcher --target %i --log-directory /tmp")))
-  "Dogen stitcher weaver."
-  :group 'polymode-weave
-  :type 'object)
+;; (defcustom pm-weaver/stitcher
+;;   (pm-shell-weaver "stitcher"
+;;                    :from-to
+;;                    '(("stitch" "\\.\\(stitch\\|cpp\\)\\'" "stitch" "C++" "dogen.stitcher --target %i --log-directory /tmp")))
+;;   "Dogen stitcher weaver."
+;;   :group 'polymode-weave
+;;   :type 'object)
 
-(polymode-register-weaver pm-weaver/stitcher nil pm-poly/stitch)
+;; (polymode-register-weaver pm-weaver/stitcher nil pm-poly/stitch)
 
-(define-polymode poly-stitch-mode pm-poly/stitch)
-
-;; (add-to-list 'auto-mode-alist '("\\.stitch" . poly-stitch-mode))
+;; (add-to-list 'auto-mode-alist '("\\.stitch" . stitch-mode))
